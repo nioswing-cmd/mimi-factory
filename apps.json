@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-07",
+  "updated": "2026-07-08",
   "apps": [
     {
       "id": "삼체",
@@ -156,6 +156,18 @@
       "teaser": "apps/사피엔스_quiz.html",
       "premium": "apps/사피엔스_quiz.html",
       "desc": "인류 7만 년의 역사를 퀴즈 미션으로 정복"
+    },
+    {
+      "id": "나란_무엇인가",
+      "type": "quiz",
+      "title": "나란 무엇인가",
+      "author": "히라노게이치로",
+      "date": "2026-07-08",
+      "color1": "#5ee7d8",
+      "color2": "#7aa6ff",
+      "teaser": "apps/나란_무엇인가_teaser.html",
+      "premium": "apps/나란_무엇인가_quiz.html",
+      "desc": "히라노 게이치로의 『나란 무엇인가』(분인주의) 핵심을 30문항 반복 마스터 퀴즈와 완독 인포그래픽 리포트로 익히는 도파민 학습 웹앱(프리미엄·무"
     }
   ]
 }
