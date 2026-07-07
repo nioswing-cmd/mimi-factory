@@ -12,6 +12,138 @@
       "teaser": "apps/삼체_teaser.html",
       "premium": "apps/삼체_quiz.html",
       "desc": "류츠신의 하드SF 대서사 《삼체》(3부작 1권)를 문화대혁명의 상처부터 지자의 경고까지 30개의 반복 마스터 퀴즈와 완독 인포그래픽 리포트로 끝"
+    },
+    {
+      "id": "에덴의_용",
+      "type": "quiz",
+      "title": "에덴의 용",
+      "author": "칼 세이건",
+      "date": "2026-07-07",
+      "color1": "#5ee7d8",
+      "color2": "#7aa6ff",
+      "teaser": "apps/에덴의_용_quiz.html",
+      "premium": "apps/에덴의_용_quiz.html",
+      "desc": "칼 세이건이 밝히는 인간 지성의 진화, 반복 퀴즈로 완독"
+    },
+    {
+      "id": "총_균_쇠",
+      "type": "quiz",
+      "title": "총·균·쇠",
+      "author": "재레드 다이아몬드",
+      "date": "2026-07-07",
+      "color1": "#ff8ad0",
+      "color2": "#b78bf5",
+      "teaser": "apps/총_균_쇠_teaser.html",
+      "premium": "apps/총_균_쇠_quiz.html",
+      "desc": "문명 불평등의 기원을 꿰뚫는 대작, 퀴즈로 정복"
+    },
+    {
+      "id": "데미안",
+      "type": "quiz",
+      "title": "데미안",
+      "author": "헤르만 헤세",
+      "date": "2026-07-07",
+      "color1": "#ffd36e",
+      "color2": "#ff8a5c",
+      "teaser": "apps/데미안_quiz.html",
+      "premium": "apps/데미안_quiz.html",
+      "desc": "알을 깨고 나오는 자아의 여정, 반복 퀴즈로 완독"
+    },
+    {
+      "id": "5가지_사랑의_언어",
+      "type": "quiz",
+      "title": "5가지 사랑의 언어",
+      "author": "게리 채프먼",
+      "date": "2026-07-07",
+      "color1": "#8affc1",
+      "color2": "#5ee7d8",
+      "teaser": "apps/5가지_사랑의_언어_quiz.html",
+      "premium": "apps/5가지_사랑의_언어_quiz.html",
+      "desc": "게리 채프먼의 사랑의 언어, 퀴즈로 마스터"
+    },
+    {
+      "id": "상처받지_않는_영혼",
+      "type": "quiz",
+      "title": "상처받지 않는 영혼",
+      "author": "마이클 싱어",
+      "date": "2026-07-07",
+      "color1": "#c3a1ff",
+      "color2": "#ff8ad0",
+      "teaser": "apps/상처받지_않는_영혼_teaser.html",
+      "premium": "apps/상처받지_않는_영혼_quiz.html",
+      "desc": "마이클 싱어의 내면 자유 수업, 반복 퀴즈로 완독"
+    },
+    {
+      "id": "기브_앤_테이크",
+      "type": "quiz",
+      "title": "기브 앤 테이크",
+      "author": "애덤 그랜트",
+      "date": "2026-07-07",
+      "color1": "#7aa6ff",
+      "color2": "#b78bf5",
+      "teaser": "apps/기브_앤_테이크_quiz.html",
+      "premium": "apps/기브_앤_테이크_quiz.html",
+      "desc": "주는 사람이 성공하는 이유, 퀴즈로 마스터"
+    },
+    {
+      "id": "문명의_붕괴",
+      "type": "quiz",
+      "title": "문명의 붕괴",
+      "author": "재레드 다이아몬드",
+      "date": "2026-07-07",
+      "color1": "#5ee7d8",
+      "color2": "#7aa6ff",
+      "teaser": "apps/문명의_붕괴_quiz.html",
+      "premium": "apps/문명의_붕괴_quiz.html",
+      "desc": "문명은 왜 무너지는가, 도파민 퀴즈로 정복"
+    },
+    {
+      "id": "호모_데우스",
+      "type": "quiz",
+      "title": "호모 데우스",
+      "author": "유발 하라리",
+      "date": "2026-07-07",
+      "color1": "#ff8ad0",
+      "color2": "#b78bf5",
+      "teaser": "apps/호모_데우스_quiz.html",
+      "premium": "apps/호모_데우스_quiz.html",
+      "desc": "인류의 미래를 묻는 하라리의 대작, 퀴즈로 완독"
+    },
+    {
+      "id": "사랑의_언어_진단",
+      "type": "test",
+      "title": "사랑의 언어 진단",
+      "author": "미미팩토리 오리지널",
+      "date": "2026-07-07",
+      "color1": "#ffd36e",
+      "color2": "#ff8a5c",
+      "teaser": "apps/사랑의_언어_진단_test.html",
+      "premium": "apps/사랑의_언어_진단_test.html",
+      "desc": "나의 사랑 유형과 궁합, 5분 만에 확인"
+    },
+    {
+      "id": "옆자리_질문_카드",
+      "type": "test",
+      "title": "옆자리 질문 카드",
+      "author": "미미팩토리 오리지널",
+      "date": "2026-07-07",
+      "color1": "#8affc1",
+      "color2": "#5ee7d8",
+      "teaser": "apps/옆자리_질문_카드_test.html",
+      "premium": "apps/옆자리_질문_카드_test.html",
+      "desc": "둘이 나누는 대화 질문 카드, 관계가 깊어지는 시간"
+    },
+    {
+      "id": "밸런스_케미",
+      "type": "test",
+      "title": "밸런스 케미",
+      "author": "미미팩토리 오리지널",
+      "date": "2026-07-07",
+      "color1": "#c3a1ff",
+      "color2": "#ff8ad0",
+      "teaser": "apps/밸런스_케미_test.html",
+      "premium": "apps/밸런스_케미_test.html",
+      "desc": "둘의 취향 대결 밸런스 게임, 케미 지수 확인"
     }
   ]
 }

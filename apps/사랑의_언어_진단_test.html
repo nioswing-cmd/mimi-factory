@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사랑의 언어 — 나의 사랑 유형 & 궁합</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.3/confetti.browser.min.js"></script>
+<style>
+  :root{
+    --bg0:#170d33; --bg1:#241046; --bg2:#3a1761;
+    --ink:#f6f1ff; --ink-soft:#c2b2e6; --ink-dim:#9683c4;
+    --glass:rgba(255,255,255,.06); --glass-line:rgba(255,255,255,.14);
+    --W:#FFD166; --Q:#4ECDC4; --G:#FF6BAA; --S:#8BE06C; --T:#FF8C5A;
+    --shadow:0 18px 50px rgba(0,0,0,.45);
+    --r:24px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Noto Sans KR',system-ui,sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(900px 600px at 12% -8%, rgba(255,107,170,.20), transparent 60%),
+      radial-gradient(800px 600px at 110% 8%, rgba(78,205,196,.18), transparent 55%),
+      radial-gradient(700px 700px at 50% 120%, rgba(255,209,102,.14), transparent 60%),
+      linear-gradient(160deg,var(--bg0),var(--bg1) 55%,var(--bg2));
+    background-attachment:fixed;
+    min-height:100vh;
+    display:flex;align-items:flex-start;justify-content:center;
+    padding:28px 16px 60px;
+    overflow-x:hidden;
+  }
+  .app{width:100%;max-width:560px}
+  h1,h2,h3,.jua,.big{font-family:'Jua',sans-serif;font-weight:400;letter-spacing:.2px}
+
+  /* ---- screen system ---- */
+  .screen{display:none;animation:pop .45s cubic-bezier(.2,.9,.3,1.3)}
+  .screen.on{display:block}
+  @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+
+  .card{
+    background:var(--glass);
+    border:1px solid var(--glass-line);
+    border-radius:var(--r);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    box-shadow:var(--shadow);
+    padding:30px 24px;
+  }
+
+  /* ---- home ---- */
+  .hero-emoji{font-size:74px;text-align:center;line-height:1;filter:drop-shadow(0 8px 20px rgba(255,107,170,.4));animation:float 3.4s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+  .home h1{font-size:clamp(30px,8vw,44px);text-align:center;margin:14px 0 6px;line-height:1.15}
+  .home .grad{background:linear-gradient(92deg,var(--W),var(--G) 45%,var(--Q));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .home p.sub{text-align:center;color:var(--ink-soft);font-size:15px;line-height:1.6;margin-bottom:22px}
+  .lang-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:26px}
+  .chip{font-size:13px;padding:7px 12px;border-radius:999px;border:1px solid var(--glass-line);background:rgba(255,255,255,.05);display:flex;align-items:center;gap:5px}
+  .btn{
+    width:100%;border:0;cursor:pointer;font-family:'Jua',sans-serif;
+    font-size:19px;color:#1b0e36;padding:17px;border-radius:18px;
+    background:linear-gradient(92deg,var(--W),var(--G) 55%,var(--T));
+    box-shadow:0 12px 30px rgba(255,107,170,.35);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(255,107,170,.5)}
+  .btn:active{transform:translateY(1px) scale(.99)}
+  .btn.ghost{background:rgba(255,255,255,.08);color:var(--ink);box-shadow:none;border:1px solid var(--glass-line);font-size:16px;margin-top:12px}
+  .btn.ghost:hover{background:rgba(255,255,255,.14)}
+
+  /* ---- gauge ---- */
+  .gauge-wrap{margin-bottom:20px}
+  .gauge-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .gauge-top .q-count{font-family:'Jua';font-size:15px;color:var(--ink-soft)}
+  .gauge{height:12px;border-radius:999px;overflow:hidden;display:flex;background:rgba(255,255,255,.08)}
+  .gauge i{height:100%;transition:flex-grow .5s cubic-bezier(.2,.9,.3,1.3);flex-grow:0;flex-basis:0}
+  .gauge i.W{background:var(--W)} .gauge i.Q{background:var(--Q)} .gauge i.G{background:var(--G)} .gauge i.S{background:var(--S)} .gauge i.T{background:var(--T)}
+
+  /* ---- quiz ---- */
+  .q-num{font-family:'Jua';font-size:14px;color:var(--ink-dim);text-align:center;margin-bottom:6px}
+  .q-text{font-family:'Jua';font-size:clamp(20px,5.6vw,26px);text-align:center;line-height:1.4;margin-bottom:24px}
+  .opt{
+    width:100%;text-align:left;border:1px solid var(--glass-line);cursor:pointer;
+    background:rgba(255,255,255,.05);color:var(--ink);
+    padding:18px 18px;border-radius:18px;margin-bottom:12px;font-size:16px;line-height:1.5;
+    display:flex;gap:12px;align-items:center;
+    transition:transform .12s ease,background .2s ease,border-color .2s ease;
+  }
+  .opt:hover{background:rgba(255,255,255,.12);transform:translateX(3px)}
+  .opt .ic{font-size:24px;flex-shrink:0}
+  .opt.picked{animation:bump .35s ease}
+  @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
+
+  /* ---- result ---- */
+  .crown{text-align:center;font-size:13px;letter-spacing:3px;color:var(--ink-dim);margin-bottom:4px}
+  .res-emoji{font-size:72px;text-align:center;line-height:1;animation:float 3.4s ease-in-out infinite}
+  .res-title{font-family:'Jua';font-size:clamp(26px,7vw,36px);text-align:center;margin:8px 0 2px}
+  .res-tag{text-align:center;color:var(--ink-soft);font-size:15px;margin-bottom:22px}
+  .bars{margin:6px 0 22px}
+  .bar-row{margin-bottom:12px}
+  .bar-row .lab{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;color:var(--ink-soft)}
+  .bar-row .lab b{font-family:'Jua';color:var(--ink);font-weight:400}
+  .track{height:14px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+  .track i{display:block;height:100%;width:0;border-radius:999px;transition:width 1s cubic-bezier(.2,.9,.3,1.3)}
+  .sec{margin-top:18px;padding-top:16px;border-top:1px solid var(--glass-line)}
+  .sec h4{font-family:'Jua';font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:7px}
+  .sec p{font-size:14.5px;line-height:1.65;color:var(--ink-soft)}
+
+  /* ---- match ---- */
+  .match h2{font-size:26px;text-align:center;margin-bottom:4px}
+  .match .sub{text-align:center;color:var(--ink-soft);font-size:14px;margin-bottom:22px}
+  .picker{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin-bottom:18px}
+  .picker .vs{font-family:'Jua';font-size:22px;color:var(--ink-dim)}
+  .sel-box label{display:block;font-size:12px;color:var(--ink-dim);margin-bottom:6px;text-align:center}
+  select{
+    width:100%;font-family:'Noto Sans KR';font-size:14px;color:var(--ink);
+    background:rgba(255,255,255,.07);border:1px solid var(--glass-line);
+    border-radius:14px;padding:13px 12px;appearance:none;cursor:pointer;text-align:center;
+  }
+  select option{background:#2a1450;color:#fff}
+  .score-ring{text-align:center;margin:6px 0 14px}
+  .score-ring .pct{font-family:'Jua';font-size:54px;line-height:1;
+    background:linear-gradient(92deg,var(--W),var(--G),var(--Q));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .score-ring .label{font-family:'Jua';font-size:18px;margin-top:2px}
+  .heat{height:10px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden;margin:10px auto 0;max-width:240px}
+  .heat i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(92deg,var(--T),var(--G),var(--W));transition:width .9s ease}
+  .one-line{text-align:center;font-size:15px;color:var(--ink-soft);line-height:1.6;margin:14px 4px 0}
+  .check{list-style:none}
+  .check li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.55;color:var(--ink-soft);padding:9px 0;border-bottom:1px dashed rgba(255,255,255,.1)}
+  .check li:last-child{border-bottom:0}
+  .check li .bx{flex-shrink:0;width:22px;height:22px;border-radius:7px;background:rgba(255,255,255,.08);border:1px solid var(--glass-line);display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:1px;cursor:pointer;transition:.15s}
+  .check li .bx.done{background:linear-gradient(92deg,var(--S),var(--Q));color:#16331f;border-color:transparent}
+  .footnote{text-align:center;color:var(--ink-dim);font-size:12px;margin-top:24px;line-height:1.6}
+  .topbar{display:flex;justify-content:center;margin-bottom:14px}
+  .topbar button{background:none;border:1px solid var(--glass-line);color:var(--ink-soft);font-size:12.5px;border-radius:999px;padding:7px 14px;cursor:pointer}
+  .topbar button:hover{background:rgba(255,255,255,.08)}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+  /* ---- brand footer ---- */
+  .site-footer{margin-top:26px;text-align:center;padding:8px 0 4px;user-select:none}
+  .ff-dots{display:flex;gap:7px;justify-content:center;margin-bottom:14px}
+  .ff-dots span{width:8px;height:8px;border-radius:50%;display:block;animation:ffpulse 2.4s ease-in-out infinite}
+  .ff-dots span:nth-child(1){background:var(--W);animation-delay:0s}
+  .ff-dots span:nth-child(2){background:var(--Q);animation-delay:.24s}
+  .ff-dots span:nth-child(3){background:var(--G);animation-delay:.48s}
+  .ff-dots span:nth-child(4){background:var(--S);animation-delay:.72s}
+  .ff-dots span:nth-child(5){background:var(--T);animation-delay:.96s}
+  @keyframes ffpulse{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.5);opacity:1}}
+  .ff-tag{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:4px;
+    color:var(--ink-dim);margin-bottom:7px}
+  .ff-tag::before,.ff-tag::after{content:"";width:22px;height:1px;background:linear-gradient(90deg,transparent,var(--glass-line))}
+  .ff-tag::after{transform:scaleX(-1)}
+  .ff-brand{font-family:'Jua',sans-serif;font-size:26px;line-height:1;
+    background:linear-gradient(92deg,var(--W),var(--G) 50%,var(--T));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 4px 14px rgba(255,107,170,.3))}
+  .ff-sub{font-size:12px;color:var(--ink-dim);margin-top:9px;letter-spacing:.3px}
+  .ff-sub .colon{color:var(--Q);font-weight:700;padding:0 1px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HOME -->
+  <section id="home" class="screen on home">
+    <div class="card">
+      <div class="hero-emoji">💗</div>
+      <h1>당신의 <span class="grad">사랑의 언어</span>는<br>무엇인가요?</h1>
+      <p class="sub">10가지 선택으로 알아보는 나의 사랑 유형.<br>그리고 소중한 사람과의 다정한 궁합까지.</p>
+      <div class="lang-chips">
+        <span class="chip" style="color:var(--W)">🌟 인정하는 말</span>
+        <span class="chip" style="color:var(--Q)">⏳ 함께하는 시간</span>
+        <span class="chip" style="color:var(--G)">🎁 선물</span>
+        <span class="chip" style="color:var(--S)">🤲 헌신</span>
+        <span class="chip" style="color:var(--T)">🤗 스킨십</span>
+      </div>
+      <button class="btn" onclick="startQuiz()">나의 사랑 유형 찾기 →</button>
+      <button class="btn ghost" onclick="go('match'); buildMatchOptions()">바로 궁합 매칭하기</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="screen">
+    <div class="card">
+      <div class="gauge-wrap">
+        <div class="gauge-top">
+          <span class="q-count" id="qcount">1 / 10</span>
+          <span class="q-count" style="color:var(--ink-dim)">실시간 마음 게이지</span>
+        </div>
+        <div class="gauge" id="gauge">
+          <i class="W"></i><i class="Q"></i><i class="G"></i><i class="S"></i><i class="T"></i>
+        </div>
+      </div>
+      <div class="q-num" id="qnum"></div>
+      <div class="q-text" id="qtext"></div>
+      <div id="opts"></div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="screen">
+    <div class="card">
+      <div class="crown">YOUR LOVE LANGUAGE</div>
+      <div class="res-emoji" id="resEmoji">💗</div>
+      <div class="res-title" id="resTitle"></div>
+      <div class="res-tag" id="resTag"></div>
+      <div class="bars" id="bars"></div>
+      <div class="sec"><h4 id="h_you"></h4><p id="p_you"></p></div>
+      <div class="sec"><h4>💞 이렇게 사랑받으세요</h4><p id="p_recv"></p></div>
+      <div class="sec"><h4>🌿 살짝 주의해요</h4><p id="p_care"></p></div>
+      <button class="btn" style="margin-top:22px" onclick="go('match'); buildMatchOptions()">소중한 사람과 궁합 보기 →</button>
+      <button class="btn ghost" onclick="resetAll()">처음부터 다시</button>
+    </div>
+  </section>
+
+  <!-- MATCH -->
+  <section id="match" class="screen match">
+    <div class="card">
+      <div class="topbar"><button onclick="go('home')">← 홈으로</button></div>
+      <h2>💞 우리의 궁합</h2>
+      <p class="sub">두 사람의 1순위 사랑 언어를 골라보세요</p>
+      <div class="picker">
+        <div class="sel-box"><label>나</label><select id="selMe"></select></div>
+        <div class="vs">×</div>
+        <div class="sel-box"><label>상대</label><select id="selYou"></select></div>
+      </div>
+      <button class="btn" onclick="runMatch()">궁합 확인하기 ✨</button>
+
+      <div id="matchOut" style="display:none">
+        <div class="score-ring">
+          <div class="pct" id="mPct">0%</div>
+          <div class="label" id="mLabel"></div>
+          <div class="heat"><i id="mHeat"></i></div>
+        </div>
+        <p class="one-line" id="mOneline"></p>
+        <div class="sec"><h4>💌 다정한 조언</h4><p id="mAdvice"></p></div>
+        <div class="sec"><h4>✅ 우리가 노력해볼 것</h4><ul class="check" id="mChecklist"></ul></div>
+      </div>
+      <div class="footnote">재미로 보는 진단이에요. 진짜 답은 두 사람의 대화 속에 있답니다 🤍</div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="ff-dots"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="ff-tag">의미와재미공장</div>
+    <div class="ff-brand">미미팩토리</div>
+    <div class="ff-sub">주식회사 연<span class="colon">:</span>결 패밀리회사</div>
+  </footer>
+
+</div>
+
+<script>
+/* ============ DATA ============ */
+const LANG = {
+  W:{name:"인정하는 말", emoji:"🌟", color:"var(--W)", tag:"말 한마디에 온 하루가 살아나는 사람",
+     you:"진심 어린 말이 당신에겐 산소예요. \"잘했어\", \"고마워\" 한마디가 마음 깊은 곳까지 닿고, 칭찬과 응원이 당신을 더 빛나게 만들어요.",
+     recv:"구체적으로 칭찬해 주세요. \"멋지다\"보다 \"오늘 발표에서 그 부분이 정말 인상 깊었어\"처럼요. 문자 한 줄, 손편지도 큰 힘이 됩니다.",
+     care:"말이 없으면 사랑이 식었다고 느끼기 쉬워요. 상대가 표현이 서툰 유형일 수도 있다는 걸 기억해 주세요."},
+  Q:{name:"함께하는 시간", emoji:"⏳", color:"var(--Q)", tag:"곁에 있어야 비로소 사랑인 사람",
+     you:"온전히 함께한 시간이 당신에겐 가장 큰 사랑의 증거예요. 휴대폰을 내려놓고 눈을 맞추는 그 순간, 마음이 가득 채워집니다.",
+     recv:"짧아도 방해받지 않는 둘만의 시간을 청하세요. 산책 한 바퀴, 마주 앉은 저녁 식사면 충분해요.",
+     care:"바쁜 상대에게 서운함이 쌓이기 쉬워요. 시간의 양보다 '집중의 질'을 함께 약속해 보세요."},
+  G:{name:"선물", emoji:"🎁", color:"var(--G)", tag:"마음의 증표를 소중히 간직하는 사람",
+     you:"당신에게 선물은 물건이 아니라 '나를 생각했다는 증거'예요. 작은 것이라도 그 안에 담긴 마음을 정확히 알아봅니다.",
+     recv:"가격이 아니라 '나를 떠올린 흔적'이 핵심이라고 말해 주세요. 길에서 본 작은 것도 큰 감동이 됩니다.",
+     care:"선물이 없을 때 사랑을 의심하지 마세요. 상대는 다른 언어로 이미 사랑을 주고 있을 수 있어요."},
+  S:{name:"헌신", emoji:"🤲", color:"var(--S)", tag:"행동으로 증명받을 때 안심하는 사람",
+     you:"\"내가 할게\" 한마디와 실제 도움이 당신에겐 가장 깊은 사랑이에요. 말보다 행동, 약속보다 실천에 마음이 움직입니다.",
+     recv:"필요한 도움을 구체적으로 부탁하세요. 부탁은 약함이 아니라 친밀함의 초대랍니다.",
+     care:"상대가 도와주지 않으면 '날 사랑하지 않나'로 비약하기 쉬워요. 먼저 구체적으로 요청해 보세요."},
+  T:{name:"스킨십", emoji:"🤗", color:"var(--T)", tag:"온기로 마음을 확인하는 사람",
+     you:"손을 잡고, 안아주는 따뜻한 접촉이 당신을 안심시켜요. 곁의 온기가 그 어떤 말보다 빠르게 마음을 가라앉힙니다.",
+     recv:"가벼운 접촉을 자연스럽게 청하세요. 어깨를 기대거나 손을 잡는 작은 신호가 큰 위로가 됩니다.",
+     care:"접촉이 줄면 멀어졌다고 느끼기 쉬워요. 상대의 컨디션과 상황도 다정하게 살펴주세요."}
+};
+const ORDER = ["W","Q","G","S","T"];
+
+/* 10 forced-choice questions = every pair once */
+const QUESTIONS = [
+  {t:"기분이 푹 가라앉은 날, 더 위로가 되는 건?", a:{k:"W",ic:"🌟",txt:"\"넌 충분히 잘하고 있어\"라는 진심 어린 말"}, b:{k:"Q",ic:"⏳",txt:"아무 말 없이 옆에 함께 있어주는 시간"}},
+  {t:"특별한 날, 더 설레는 건?", a:{k:"W",ic:"🌟",txt:"나를 향해 또박또박 적어준 손편지"}, b:{k:"G",ic:"🎁",txt:"마음을 담아 고른 작은 선물"}},
+  {t:"고단한 하루 끝, 더 고마운 건?", a:{k:"W",ic:"🌟",txt:"\"오늘 정말 고생했어, 자랑스러워\" 한마디"}, b:{k:"S",ic:"🤲",txt:"말없이 차려진 따뜻한 밥 한 끼"}},
+  {t:"사랑을 확인받고 싶을 때, 더 와닿는 건?", a:{k:"W",ic:"🌟",txt:"\"사랑해\"라는 다정한 말"}, b:{k:"T",ic:"🤗",txt:"꼭 안아주는 포옹"}},
+  {t:"데이트의 하이라이트는?", a:{k:"Q",ic:"⏳",txt:"둘만 오롯이 보낸 깊은 대화의 시간"}, b:{k:"G",ic:"🎁",txt:"깜짝 준비된 선물"}},
+  {t:"상대가 바쁠 때, 더 마음에 남는 건?", a:{k:"Q",ic:"⏳",txt:"잠깐이라도 짬을 내 함께해주는 것"}, b:{k:"S",ic:"🤲",txt:"내 일을 대신 처리해주는 도움"}},
+  {t:"여유로운 주말 오후, 가장 행복한 장면은?", a:{k:"Q",ic:"⏳",txt:"마주 앉아 끝없이 이야기 나누기"}, b:{k:"T",ic:"🤗",txt:"소파에서 꼭 붙어 뒹굴기"}},
+  {t:"기념일에 더 감동인 건?", a:{k:"G",ic:"🎁",txt:"내 취향을 저격한 선물"}, b:{k:"S",ic:"🤲",txt:"하루 종일 나를 챙겨준 정성"}},
+  {t:"보고 싶었던 마음, 어떻게 받고 싶어요?", a:{k:"G",ic:"🎁",txt:"손에 쥐어주는 작은 선물로"}, b:{k:"T",ic:"🤗",txt:"보자마자 와락 안기는 포옹으로"}},
+  {t:"몸이 아플 때 가장 위로되는 건?", a:{k:"S",ic:"🤲",txt:"약 챙기고 죽 끓여주는 손길"}, b:{k:"T",ic:"🤗",txt:"이마 짚어주고 손 잡아주는 온기"}},
+  {t:"다툰 뒤 화해할 때, 마음이 더 풀리는 건?", a:{k:"W",ic:"🌟",txt:"진심 어린 사과와 다정한 말"}, b:{k:"Q",ic:"⏳",txt:"곁에 머물며 다시 함께하는 시간"}},
+  {t:"무언가 해냈을 때, 더 기쁜 건?", a:{k:"W",ic:"🌟",txt:"\"네가 해낼 줄 알았어\" 축하 메시지"}, b:{k:"G",ic:"🎁",txt:"축하의 마음을 담은 선물"}},
+  {t:"자신감이 떨어진 날, 더 힘이 되는 건?", a:{k:"W",ic:"🌟",txt:"\"넌 충분히 잘하고 있어\" 격려"}, b:{k:"S",ic:"🤲",txt:"부담을 덜어주는 실질적인 도움"}},
+  {t:"잠들기 전, 더 포근한 건?", a:{k:"W",ic:"🌟",txt:"\"사랑해, 잘 자\" 다정한 인사"}, b:{k:"T",ic:"🤗",txt:"등을 토닥여주는 따뜻한 손길"}},
+  {t:"기념일을 보낼 때, 더 의미 있는 건?", a:{k:"Q",ic:"⏳",txt:"둘만의 여행처럼 함께한 시간"}, b:{k:"G",ic:"🎁",txt:"오래 간직할 기념 선물"}},
+  {t:"잔뜩 지쳐 있을 때, 더 위로되는 건?", a:{k:"Q",ic:"⏳",txt:"옆에서 함께 쉬어주는 것"}, b:{k:"S",ic:"🤲",txt:"내 할 일을 척척 해결해주는 것"}},
+  {t:"같이 영화를 볼 때, 더 좋은 건?", a:{k:"Q",ic:"⏳",txt:"끝나고 감상을 나누는 대화 시간"}, b:{k:"T",ic:"🤗",txt:"보는 내내 어깨에 기대기"}},
+  {t:"생일에 더 감동인 건?", a:{k:"G",ic:"🎁",txt:"정성껏 고른 깜짝 선물"}, b:{k:"S",ic:"🤲",txt:"하루를 통째로 챙겨주는 손길"}},
+  {t:"스트레스로 잔뜩 지친 날, 더 풀리는 건?", a:{k:"S",ic:"🤲",txt:"집안일을 대신 해주는 도움"}, b:{k:"T",ic:"🤗",txt:"아무 말 없이 안아주는 포옹"}},
+];
+
+/* 15 symmetric match combos */
+function key(x,y){return [x,y].sort().join("");}
+const MATCH = {
+  WW:{pct:88,label:"말로 피어나는 사이",one:"같은 언어를 쓰는 두 사람. 칭찬이 칭찬을 부르는 선순환이 일어나요.",
+      advice:"서로의 말에 진심을 담는 데 능숙한 커플이에요. 다만 칭찬에 익숙해지면 무뎌질 수 있으니, 새로운 표현과 구체적인 디테일로 신선함을 지켜주세요.",
+      checks:["하루 한 번 '구체적인' 칭찬 한 문장 주고받기","서운할 땐 침묵 대신 말로 풀기","당연한 것에도 '고마워' 표현하기"]},
+  WQ:{pct:78,label:"대화로 깊어지는 사이",one:"말하는 사랑과 함께하는 사랑. 깊은 대화 속에서 둘 다 채워집니다.",
+      advice:"한 사람은 말을, 한 사람은 시간을 원해요. 다행히 '함께하는 대화'는 둘을 동시에 만족시키는 마법의 접점이에요. 그 시간을 의식적으로 확보하세요.",
+      checks:["방해 없는 '대화 타임' 정해두기","칭찬은 함께 있을 때 눈 보며 전하기","바쁜 주에도 짧은 통화로 안부 잇기"]},
+  WG:{pct:74,label:"마음을 표현하는 사이",one:"말과 선물, 둘 다 '표현'을 사랑하는 로맨틱한 조합이에요.",
+      advice:"표현이 풍부한 커플이라 겉으로 사랑이 잘 드러나요. 선물에는 짧은 메시지를 함께 곁들이면, 두 사람의 언어가 한 번에 전해집니다.",
+      checks:["선물에 손글씨 카드 한 줄 더하기","고마움은 말로 한 번 더 확인하기","빈손인 날엔 다정한 말로 채우기"]},
+  WS:{pct:70,label:"말과 행동이 만나는 사이",one:"말로 표현하는 사람과 행동으로 보여주는 사람의 균형이에요.",
+      advice:"한 사람은 들려주고 싶고, 한 사람은 해주고 싶어요. 헌신형은 도움 뒤에 \"사랑해서 했어\" 한마디를, 표현형은 도움에 \"정말 고마워\" 한마디를 더해보세요.",
+      checks:["행동한 뒤 마음도 말로 전하기","받은 도움엔 구체적으로 감사 표현","서로의 사랑 방식 다름을 인정하기"]},
+  WT:{pct:79,label:"말과 온기가 흐르는 사이",one:"다정한 말과 따뜻한 접촉. 안정감이 가득한 조합이에요.",
+      advice:"말과 스킨십은 함께 쓰면 효과가 배가돼요. 안아주며 \"사랑해\"라고 말하는 한순간이, 두 사람을 동시에 가장 행복하게 만듭니다.",
+      checks:["안아줄 때 다정한 말 함께 건네기","스킨십이 부담인 날은 말로 보완하기","아침/잠들기 전 짧은 애정 표현 루틴"]},
+  QQ:{pct:90,label:"시간을 나누는 사이",one:"함께 있는 것만으로 충만한, 잔잔하고 깊은 커플이에요.",
+      advice:"둘 다 시간을 가장 소중히 여겨 충돌이 적어요. 다만 '같이 있는 시간'이 각자 폰만 보는 시간이 되지 않게, 함께하는 활동의 질을 챙겨주세요.",
+      checks:["폰 내려놓는 '온전한 30분' 만들기","함께할 새로운 취미 하나 시작하기","주 1회 둘만의 약속 고정하기"]},
+  QG:{pct:69,label:"순간을 선물하는 사이",one:"함께한 시간과 그 안의 작은 선물이 어우러져요.",
+      advice:"시간형은 '함께'를, 선물형은 '증표'를 원해요. 데이트의 추억을 담은 작은 기념품을 주고받으면 두 언어가 자연스럽게 이어집니다.",
+      checks:["함께한 날의 작은 기념품 남기기","선물보다 '같이 고르는 시간'도 즐기기","바쁠 때 작은 메모로 마음 전하기"]},
+  QS:{pct:76,label:"곁에서 돕는 사이",one:"함께 있어주고, 손 걷어붙여 돕는 든든한 조합이에요.",
+      advice:"헌신형의 도움이 때론 '혼자 처리'가 되어 시간형을 외롭게 할 수 있어요. 일을 '같이' 하면 도움과 시간을 한 번에 채울 수 있습니다.",
+      checks:["집안일도 '함께' 하는 방식으로","도움 전에 '같이 할까?' 먼저 묻기","바쁜 날엔 짧아도 함께 앉아있기"]},
+  QT:{pct:84,label:"붙어있는 사이",one:"함께하는 시간과 따뜻한 접촉, 가장 포근한 조합 중 하나예요.",
+      advice:"같이 있으면서 자연스럽게 스킨십이 더해지니 둘 다 충만해요. 다만 활동 없이 붙어만 있으면 시간형이 아쉬울 수 있으니 함께하는 '경험'도 챙기세요.",
+      checks:["함께 걷거나 요리하며 손 맞잡기","나란히 있는 조용한 시간 즐기기","스킨십 빈도는 서로 편하게 맞추기"]},
+  GG:{pct:80,label:"마음을 주고받는 사이",one:"서로에게 증표를 건네는, 설렘이 끊이지 않는 커플이에요.",
+      advice:"선물의 기쁨을 잘 아는 두 사람. 비용 부담이 쌓이지 않게 '작고 자주'를 규칙으로 삼으면 설렘을 오래 지킬 수 있어요.",
+      checks:["가격 대신 '의미' 위주로 주고받기","선물 부담 줄이는 우리만의 규칙 정하기","받은 선물에 기뻐하는 모습 충분히 보이기"]},
+  GS:{pct:72,label:"정성을 나누는 사이",one:"선물이라는 증표와 행동이라는 헌신, 둘 다 정성형이에요.",
+      advice:"한 사람은 물건으로, 한 사람은 도움으로 정성을 보여요. 서로의 정성 '언어'가 다름을 알아채면 오해가 사라집니다.",
+      checks:["상대의 도움을 '선물'처럼 귀하게 여기기","선물에 실용적 정성 더하기","무엇이 고마운지 구체적으로 말하기"]},
+  GT:{pct:75,label:"설렘과 온기의 사이",one:"선물의 설렘에 따뜻한 접촉이 더해지는 다정한 조합이에요.",
+      advice:"선물을 건넬 때 포옹을 곁들이면 두 사람의 마음이 한순간에 전해져요. 표현이 풍부한 만큼 사랑이 눈에 잘 보이는 커플입니다.",
+      checks:["선물은 안아주며 손에서 손으로 건네기","스킨십이 어색한 날은 작은 선물로","서로의 표현 방식 자주 칭찬하기"]},
+  SS:{pct:86,label:"서로를 돌보는 사이",one:"말없이 챙겨주는 두 사람. 깊고 단단한 신뢰가 쌓여요.",
+      advice:"행동으로 사랑하는 커플이라 든든해요. 다만 둘 다 표현이 적어 '알아주겠지' 하다 서운함이 쌓일 수 있으니, 도움 뒤 마음도 말로 확인하세요.",
+      checks:["도와준 뒤 '사랑해서 했어' 덧붙이기","상대의 헌신을 당연히 여기지 않기","가끔은 말로도 사랑 표현해보기"]},
+  ST:{pct:81,label:"돌봄과 온기의 사이",one:"챙겨주는 손길과 따뜻한 접촉이 만나 포근함이 넘쳐요.",
+      advice:"헌신형의 돌봄에 스킨형의 온기가 더해지면 안정감이 최고예요. 도와줄 때 가볍게 어깨를 두드리는 접촉 하나로 둘 다 만족합니다.",
+      checks:["챙겨줄 때 따뜻한 접촉 함께하기","피곤한 날엔 안아주는 것만으로 충분","말 대신 행동·온기로 위로 전하기"]},
+  TT:{pct:89,label:"온기로 충만한 사이",one:"맞닿는 온기로 사랑을 확인하는, 가장 포근한 커플이에요.",
+      advice:"접촉만으로 빠르게 안심하는 두 사람. 다만 다툼 뒤엔 스킨십만으로 덮지 말고, 무엇이 서운했는지 말로도 풀어주면 더 단단해져요.",
+      checks:["갈등은 화해 포옹 + 대화 함께","바쁜 날도 짧은 스킨십 인사 잊지 않기","상대가 지칠 땐 접촉 강도 배려하기"]},
+};
+
+/* ============ STATE ============ */
+let qi = 0;
+let score = {W:0,Q:0,G:0,S:0,T:0};
+let myTop = null;
+
+/* ============ NAV ============ */
+function go(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ============ QUIZ ============ */
+function startQuiz(){
+  qi=0; score={W:0,Q:0,G:0,S:0,T:0}; updateGauge();
+  go('quiz'); renderQ();
+}
+function renderQ(){
+  const q = QUESTIONS[qi];
+  document.getElementById('qcount').textContent = (qi+1)+" / "+QUESTIONS.length;
+  document.getElementById('qnum').textContent = "Q"+(qi+1);
+  document.getElementById('qtext').textContent = q.t;
+  const wrap = document.getElementById('opts');
+  wrap.innerHTML = "";
+  [q.a,q.b].forEach(o=>{
+    const b=document.createElement('button');
+    b.className="opt";
+    b.innerHTML = `<span class="ic">${o.ic}</span><span>${o.txt}</span>`;
+    b.style.borderColor = `color-mix(in srgb, ${LANG[o.k].color} 45%, transparent)`;
+    b.onclick=()=>pick(o.k,b);
+    wrap.appendChild(b);
+  });
+}
+function pick(k,el){
+  score[k]++;
+  el.classList.add('picked');
+  if(window.confetti){
+    const rect=el.getBoundingClientRect();
+    confetti({particleCount:18,spread:55,startVelocity:24,scalar:.8,
+      origin:{x:(rect.left+rect.width/2)/window.innerWidth, y:(rect.top+rect.height/2)/window.innerHeight}});
+  }
+  updateGauge();
+  setTimeout(()=>{
+    qi++;
+    if(qi>=QUESTIONS.length){ showResult(); }
+    else { renderQ(); }
+  },340);
+}
+function updateGauge(){
+  const total = Math.max(1, Object.values(score).reduce((a,b)=>a+b,0));
+  ORDER.forEach(k=>{
+    const bar = document.querySelector('.gauge i.'+k);
+    bar.style.flexGrow = score[k];
+  });
+}
+
+/* ============ RESULT ============ */
+function showResult(){
+  const sorted = [...ORDER].sort((a,b)=>score[b]-score[a]);
+  myTop = sorted[0];
+  const L = LANG[myTop];
+  document.getElementById('resEmoji').textContent = L.emoji;
+  document.getElementById('resTitle').textContent = L.name;
+  document.getElementById('resTitle').style.color = L.color;
+  document.getElementById('resTag').textContent = L.tag;
+  document.getElementById('h_you').textContent = "💫 당신은 이런 사람";
+  document.getElementById('p_you').textContent = L.you;
+  document.getElementById('p_recv').textContent = L.recv;
+  document.getElementById('p_care').textContent = L.care;
+
+  // bars
+  const max = Math.max(...Object.values(score),1);
+  const bars = document.getElementById('bars');
+  bars.innerHTML="";
+  sorted.forEach(k=>{
+    const pct = Math.round(score[k]/8*100); // each lang max 8
+    const row=document.createElement('div');
+    row.className="bar-row";
+    row.innerHTML=`<div class="lab"><b>${LANG[k].emoji} ${LANG[k].name}</b><span>${score[k]}점</span></div>
+      <div class="track"><i style="background:${LANG[k].color}"></i></div>`;
+    bars.appendChild(row);
+    requestAnimationFrame(()=>{ setTimeout(()=>{ row.querySelector('i').style.width = (score[k]/max*100)+"%"; },80); });
+  });
+
+  go('result');
+  // big celebration
+  if(window.confetti){
+    const colors=['#FFD166','#4ECDC4','#FF6BAA','#8BE06C','#FF8C5A'];
+    confetti({particleCount:120,spread:90,origin:{y:.3},colors});
+    setTimeout(()=>confetti({particleCount:80,spread:120,startVelocity:35,origin:{y:.4},colors}),250);
+  }
+}
+
+/* ============ MATCH ============ */
+function buildMatchOptions(){
+  const opts = ORDER.map(k=>`<option value="${k}">${LANG[k].emoji} ${LANG[k].name}</option>`).join("");
+  const selMe=document.getElementById('selMe'), selYou=document.getElementById('selYou');
+  selMe.innerHTML=opts; selYou.innerHTML=opts;
+  if(myTop){ selMe.value=myTop; }
+  selYou.value = ORDER.find(k=>k!==selMe.value);
+  document.getElementById('matchOut').style.display="none";
+}
+function runMatch(){
+  const me=document.getElementById('selMe').value;
+  const you=document.getElementById('selYou').value;
+  const m = MATCH[key(me,you)];
+  const out=document.getElementById('matchOut');
+  out.style.display="block";
+
+  // animated percent
+  document.getElementById('mLabel').textContent = m.label;
+  document.getElementById('mOneline').textContent = m.one;
+  document.getElementById('mAdvice').textContent = m.advice;
+  const ul=document.getElementById('mChecklist');
+  ul.innerHTML="";
+  m.checks.forEach(c=>{
+    const li=document.createElement('li');
+    li.innerHTML=`<span class="bx" role="checkbox" tabindex="0"></span><span>${c}</span>`;
+    const bx=li.querySelector('.bx');
+    const toggle=()=>{bx.classList.toggle('done'); bx.textContent=bx.classList.contains('done')?'✓':'';};
+    bx.onclick=toggle;
+    bx.onkeydown=(e)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}};
+    ul.appendChild(li);
+  });
+
+  // count up animation
+  const target=m.pct; let cur=0;
+  const pctEl=document.getElementById('mPct');
+  const heat=document.getElementById('mHeat');
+  const step=()=>{ cur+=Math.ceil((target-cur)/6); if(cur>=target)cur=target; pctEl.textContent=cur+"%"; if(cur<target)requestAnimationFrame(step); };
+  pctEl.textContent="0%"; step();
+  setTimeout(()=>{heat.style.width=target+"%";},120);
+
+  if(window.confetti && target>=80){
+    confetti({particleCount:90,spread:80,origin:{y:.35},colors:['#FF6BAA','#FFD166','#4ECDC4','#FF8C5A','#8BE06C']});
+  }
+  out.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* ============ RESET ============ */
+function resetAll(){ myTop=null; go('home'); }
+</script>
+</body>
+</html>
