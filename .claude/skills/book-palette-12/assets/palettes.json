@@ -1,0 +1,94 @@
+{
+  "version": "1.0",
+  "css_vars": ["bg", "bg2", "card", "line", "ink", "sub", "accent", "accent2", "point", "ok", "bad"],
+  "semantic_fixed": {
+    "ok": "정답·성공 — 항상 초록 계열 유지(팔레트별 미세 튜닝만 허용)",
+    "bad": "오답·경고 — 항상 붉은 계열 유지"
+  },
+  "palettes": [
+    {
+      "id": "civilization",
+      "name": "문명의 청동",
+      "mood": "역사 · 문명 · 대서사",
+      "books": ["총·균·쇠", "사피엔스(대안)", "문명 이야기"],
+      "vars": { "bg": "#10141f", "bg2": "#1a2233", "card": "#1e2740", "line": "#2e3a57", "ink": "#f2ecdf", "sub": "#a9b3c9", "accent": "#d9a441", "accent2": "#c96f3b", "point": "#ffd166", "ok": "#4cc38a", "bad": "#e5534b" }
+    },
+    {
+      "id": "parchment",
+      "name": "잉크와 양피지",
+      "mood": "철학 · 고전 · 성장서사",
+      "books": ["데미안", "싯다르타", "니체 입문서"],
+      "vars": { "bg": "#161311", "bg2": "#221d18", "card": "#2a231c", "line": "#41372c", "ink": "#efe6d4", "sub": "#b3a893", "accent": "#b0413e", "accent2": "#7d5a3c", "point": "#e0b13e", "ok": "#5cb87a", "bad": "#d8544c" }
+    },
+    {
+      "id": "neon-horizon",
+      "name": "네온 지평선",
+      "mood": "과학 · 미래 · 기술",
+      "books": ["호모 데우스", "특이점이 온다", "AI 관련서"],
+      "vars": { "bg": "#0a0e1a", "bg2": "#101a2e", "card": "#14203a", "line": "#22335a", "ink": "#e8f2ff", "sub": "#8fa5c9", "accent": "#38d6f5", "accent2": "#8a63ff", "point": "#6ef2c3", "ok": "#3ddc97", "bad": "#ff5d6c" }
+    },
+    {
+      "id": "still-water",
+      "name": "고요한 물",
+      "mood": "심리 · 마음 · 내면",
+      "books": ["상처받지 않는 영혼", "삶이 당신보다 더 잘 안다"],
+      "vars": { "bg": "#0d1a1c", "bg2": "#12262a", "card": "#173036", "line": "#254750", "ink": "#eaf5f3", "sub": "#94b8b4", "accent": "#5fd0c7", "accent2": "#3a8fa3", "point": "#e8c98d", "ok": "#57c489", "bad": "#e06055" }
+    },
+    {
+      "id": "rose-dusk",
+      "name": "장미의 황혼",
+      "mood": "사랑 · 관계 · 감정",
+      "books": ["5가지 사랑의 언어", "관계 심리서"],
+      "vars": { "bg": "#1a1016", "bg2": "#271722", "card": "#301c2b", "line": "#4a2c42", "ink": "#f8ecf1", "sub": "#c9a3b4", "accent": "#f0708f", "accent2": "#b04a7a", "point": "#ffc2a8", "ok": "#5abf8b", "bad": "#e4574f" }
+    },
+    {
+      "id": "sunrise",
+      "name": "새벽의 추진력",
+      "mood": "자기계발 · 습관 · 타이밍",
+      "books": ["언제 할 것인가", "아침형 인간", "습관서"],
+      "vars": { "bg": "#131126", "bg2": "#1c1836", "card": "#241f45", "line": "#383063", "ink": "#f4f0ff", "sub": "#a9a3cd", "accent": "#ff9f45", "accent2": "#ff6b6b", "point": "#ffd93d", "ok": "#4fc98d", "bad": "#e85850" }
+    },
+    {
+      "id": "market-green",
+      "name": "시장의 초록",
+      "mood": "경제 · 경영 · 성장",
+      "books": ["기브 앤 테이크", "부의 추월차선", "투자서"],
+      "vars": { "bg": "#0e1613", "bg2": "#14221c", "card": "#1a2c24", "line": "#2b4437", "ink": "#eef7f0", "sub": "#9bbcaa", "accent": "#3ecf8e", "accent2": "#1f9d6b", "point": "#e6c454", "ok": "#3ecf8e", "bad": "#e0564e" }
+    },
+    {
+      "id": "terra-verde",
+      "name": "흙과 이끼",
+      "mood": "자연 · 환경 · 생태",
+      "books": ["문명의 붕괴", "이야기숲 관련", "생태서"],
+      "vars": { "bg": "#15130d", "bg2": "#1e1c12", "card": "#272417", "line": "#3d3a25", "ink": "#f0eddc", "sub": "#b1ac8c", "accent": "#8fbb4f", "accent2": "#b3762f", "point": "#dfc26a", "ok": "#6fbf62", "bad": "#d95c49" }
+    },
+    {
+      "id": "sapiens-ochre",
+      "name": "사피엔스 황토",
+      "mood": "인문 · 사회 · 인류학",
+      "books": ["사피엔스", "인류학·사회학서"],
+      "vars": { "bg": "#171008", "bg2": "#231a0e", "card": "#2d2214", "line": "#463623", "ink": "#f5ecda", "sub": "#c0ab8a", "accent": "#e2a24a", "accent2": "#a85f2a", "point": "#f3cf6e", "ok": "#5cbb7e", "bad": "#dd5346" }
+    },
+    {
+      "id": "midnight-story",
+      "name": "자정의 이야기",
+      "mood": "소설 · 서사 · 미스터리",
+      "books": ["장편소설", "추리·서사물"],
+      "vars": { "bg": "#0c1020", "bg2": "#121732", "card": "#181f42", "line": "#293264", "ink": "#eef0fb", "sub": "#9aa3cc", "accent": "#93a8ff", "accent2": "#5f6fd6", "point": "#f4c66f", "ok": "#52c48f", "bad": "#e2584f" }
+    },
+    {
+      "id": "lotus-calm",
+      "name": "연꽃의 고요",
+      "mood": "영성 · 명상 · 수행",
+      "books": ["명상서", "티베트의 지혜", "마음챙김"],
+      "vars": { "bg": "#150f1c", "bg2": "#1f1629", "card": "#281d35", "line": "#3f2f52", "ink": "#f3edfa", "sub": "#b3a4c9", "accent": "#b78ef0", "accent2": "#7d5bb8", "point": "#e9cf8f", "ok": "#58c48c", "bad": "#e05a52" }
+    },
+    {
+      "id": "citrus-joy",
+      "name": "시트러스 조이",
+      "mood": "행복 · 웰빙 · 긍정심리",
+      "books": ["행복의 조건", "웰빙·긍정심리서"],
+      "vars": { "bg": "#141507", "bg2": "#1e2010", "card": "#272a15", "line": "#3e4224", "ink": "#f6f7e4", "sub": "#b8bd93", "accent": "#d3e14a", "accent2": "#8fae2e", "point": "#ffd166", "ok": "#69c46a", "bad": "#e05a4c" }
+    }
+  ]
+}

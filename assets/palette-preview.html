@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12색 북 팔레트 — 미리보기</title>
+<style>
+:root{--bg:#10141f;--bg2:#1a2233;--card:#1e2740;--line:#2e3a57;--ink:#f2ecdf;--sub:#a9b3c9;--accent:#d9a441;--accent2:#c96f3b;--point:#ffd166;--ok:#4cc38a;--bad:#e5534b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);min-height:100vh;transition:background .5s,color .5s}
+.wrap{max-width:960px;margin:0 auto;padding:40px 20px 60px}
+h1{font-size:28px;text-align:center;margin-bottom:6px}
+.sub{text-align:center;color:var(--sub);margin-bottom:28px;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-bottom:34px}
+.pal{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:transform .15s,border-color .2s}
+.pal:hover{transform:translateY(-3px)}
+.pal.on{border-color:var(--point);box-shadow:0 0 0 2px var(--point)}
+.pal .nm{font-weight:700;font-size:15px;margin-bottom:2px}
+.pal .md{font-size:12px;color:var(--sub);margin-bottom:10px}
+.sw{display:flex;gap:4px}
+.sw span{flex:1;height:22px;border-radius:6px}
+.demo{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;transition:background .5s}
+.demo .eyebrow{font-size:12px;letter-spacing:.1em;color:var(--sub);margin-bottom:8px}
+.demo h2{font-size:22px;margin-bottom:4px}
+.demo h2 b{color:var(--point)}
+.demo .q{margin:18px 0 14px;font-size:16px}
+.gauge{height:10px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:18px}
+.gauge i{display:block;height:100%;width:62%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px;transition:background .5s}
+.opts{display:grid;gap:9px;margin-bottom:16px}
+.opt{padding:12px 16px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink);text-align:left;font-size:14px;cursor:pointer;transition:border-color .2s}
+.opt:hover{border-color:var(--accent)}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,transparent)}
+.opt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap}
+.btn{padding:11px 20px;border-radius:12px;border:none;font-weight:700;cursor:pointer;font-size:14px}
+.btn-p{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#111}
+.btn-g{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.score{color:var(--point);font-weight:800}
+.footer{text-align:center;margin-top:44px;font-size:13px;color:var(--sub);line-height:1.7}
+.footer .factory{font-weight:700;color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📚 12색 북 팔레트</h1>
+  <p class="sub">팔레트를 탭하면 아래 퀴즈 카드가 그 책의 정서로 물듭니다 — 정답·오답 색은 어떤 팔레트에서도 고정</p>
+  <div class="grid" id="grid"></div>
+
+  <div class="demo">
+    <div class="eyebrow" id="dMood">역사 · 문명 · 대서사</div>
+    <h2 id="dName">문명의 청동 <b>· 미리보기</b></h2>
+    <div class="q">Q. 이 팔레트가 어울리는 책은? <span class="score">+120점</span></div>
+    <div class="gauge"><i></i></div>
+    <div class="opts">
+      <button class="opt ok">✅ 정답 상태 — 어떤 팔레트든 초록 (--ok)</button>
+      <button class="opt bad">❌ 오답 상태 — 어떤 팔레트든 붉은색 (--bad)</button>
+      <button class="opt">기본 보기 — 호버 시 --accent 테두리</button>
+    </div>
+    <div class="btnrow">
+      <button class="btn btn-p">주 버튼 (--accent → --accent2)</button>
+      <button class="btn btn-g">보조 버튼</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="factory">“의미와재미공장” 미미팩토리</div>
+    <div>(주식회사 연:결 패밀리회사)</div>
+  </div>
+</div>
+<script>
+const PALETTES = [{"id": "civilization", "name": "문명의 청동", "mood": "역사 · 문명 · 대서사", "books": ["총·균·쇠", "사피엔스(대안)", "문명 이야기"], "vars": {"bg": "#10141f", "bg2": "#1a2233", "card": "#1e2740", "line": "#2e3a57", "ink": "#f2ecdf", "sub": "#a9b3c9", "accent": "#d9a441", "accent2": "#c96f3b", "point": "#ffd166", "ok": "#4cc38a", "bad": "#e5534b"}}, {"id": "parchment", "name": "잉크와 양피지", "mood": "철학 · 고전 · 성장서사", "books": ["데미안", "싯다르타", "니체 입문서"], "vars": {"bg": "#161311", "bg2": "#221d18", "card": "#2a231c", "line": "#41372c", "ink": "#efe6d4", "sub": "#b3a893", "accent": "#b0413e", "accent2": "#7d5a3c", "point": "#e0b13e", "ok": "#5cb87a", "bad": "#d8544c"}}, {"id": "neon-horizon", "name": "네온 지평선", "mood": "과학 · 미래 · 기술", "books": ["호모 데우스", "특이점이 온다", "AI 관련서"], "vars": {"bg": "#0a0e1a", "bg2": "#101a2e", "card": "#14203a", "line": "#22335a", "ink": "#e8f2ff", "sub": "#8fa5c9", "accent": "#38d6f5", "accent2": "#8a63ff", "point": "#6ef2c3", "ok": "#3ddc97", "bad": "#ff5d6c"}}, {"id": "still-water", "name": "고요한 물", "mood": "심리 · 마음 · 내면", "books": ["상처받지 않는 영혼", "삶이 당신보다 더 잘 안다"], "vars": {"bg": "#0d1a1c", "bg2": "#12262a", "card": "#173036", "line": "#254750", "ink": "#eaf5f3", "sub": "#94b8b4", "accent": "#5fd0c7", "accent2": "#3a8fa3", "point": "#e8c98d", "ok": "#57c489", "bad": "#e06055"}}, {"id": "rose-dusk", "name": "장미의 황혼", "mood": "사랑 · 관계 · 감정", "books": ["5가지 사랑의 언어", "관계 심리서"], "vars": {"bg": "#1a1016", "bg2": "#271722", "card": "#301c2b", "line": "#4a2c42", "ink": "#f8ecf1", "sub": "#c9a3b4", "accent": "#f0708f", "accent2": "#b04a7a", "point": "#ffc2a8", "ok": "#5abf8b", "bad": "#e4574f"}}, {"id": "sunrise", "name": "새벽의 추진력", "mood": "자기계발 · 습관 · 타이밍", "books": ["언제 할 것인가", "아침형 인간", "습관서"], "vars": {"bg": "#131126", "bg2": "#1c1836", "card": "#241f45", "line": "#383063", "ink": "#f4f0ff", "sub": "#a9a3cd", "accent": "#ff9f45", "accent2": "#ff6b6b", "point": "#ffd93d", "ok": "#4fc98d", "bad": "#e85850"}}, {"id": "market-green", "name": "시장의 초록", "mood": "경제 · 경영 · 성장", "books": ["기브 앤 테이크", "부의 추월차선", "투자서"], "vars": {"bg": "#0e1613", "bg2": "#14221c", "card": "#1a2c24", "line": "#2b4437", "ink": "#eef7f0", "sub": "#9bbcaa", "accent": "#3ecf8e", "accent2": "#1f9d6b", "point": "#e6c454", "ok": "#3ecf8e", "bad": "#e0564e"}}, {"id": "terra-verde", "name": "흙과 이끼", "mood": "자연 · 환경 · 생태", "books": ["문명의 붕괴", "이야기숲 관련", "생태서"], "vars": {"bg": "#15130d", "bg2": "#1e1c12", "card": "#272417", "line": "#3d3a25", "ink": "#f0eddc", "sub": "#b1ac8c", "accent": "#8fbb4f", "accent2": "#b3762f", "point": "#dfc26a", "ok": "#6fbf62", "bad": "#d95c49"}}, {"id": "sapiens-ochre", "name": "사피엔스 황토", "mood": "인문 · 사회 · 인류학", "books": ["사피엔스", "인류학·사회학서"], "vars": {"bg": "#171008", "bg2": "#231a0e", "card": "#2d2214", "line": "#463623", "ink": "#f5ecda", "sub": "#c0ab8a", "accent": "#e2a24a", "accent2": "#a85f2a", "point": "#f3cf6e", "ok": "#5cbb7e", "bad": "#dd5346"}}, {"id": "midnight-story", "name": "자정의 이야기", "mood": "소설 · 서사 · 미스터리", "books": ["장편소설", "추리·서사물"], "vars": {"bg": "#0c1020", "bg2": "#121732", "card": "#181f42", "line": "#293264", "ink": "#eef0fb", "sub": "#9aa3cc", "accent": "#93a8ff", "accent2": "#5f6fd6", "point": "#f4c66f", "ok": "#52c48f", "bad": "#e2584f"}}, {"id": "lotus-calm", "name": "연꽃의 고요", "mood": "영성 · 명상 · 수행", "books": ["명상서", "티베트의 지혜", "마음챙김"], "vars": {"bg": "#150f1c", "bg2": "#1f1629", "card": "#281d35", "line": "#3f2f52", "ink": "#f3edfa", "sub": "#b3a4c9", "accent": "#b78ef0", "accent2": "#7d5bb8", "point": "#e9cf8f", "ok": "#58c48c", "bad": "#e05a52"}}, {"id": "citrus-joy", "name": "시트러스 조이", "mood": "행복 · 웰빙 · 긍정심리", "books": ["행복의 조건", "웰빙·긍정심리서"], "vars": {"bg": "#141507", "bg2": "#1e2010", "card": "#272a15", "line": "#3e4224", "ink": "#f6f7e4", "sub": "#b8bd93", "accent": "#d3e14a", "accent2": "#8fae2e", "point": "#ffd166", "ok": "#69c46a", "bad": "#e05a4c"}}];
+const grid = document.getElementById('grid');
+PALETTES.forEach((p,i)=>{
+  const d = document.createElement('div');
+  d.className = 'pal' + (i===0?' on':'');
+  d.innerHTML = '<div class="nm">'+(i+1)+'. '+p.name+'</div><div class="md">'+p.mood+'</div>'
+    + '<div class="sw">'+['bg2','card','accent','accent2','point'].map(k=>'<span style="background:'+p.vars[k]+'"></span>').join('')+'</div>';
+  d.onclick = ()=>{
+    document.querySelectorAll('.pal').forEach(x=>x.classList.remove('on'));
+    d.classList.add('on');
+    Object.entries(p.vars).forEach(([k,v])=>document.documentElement.style.setProperty('--'+k, v));
+    document.getElementById('dName').innerHTML = p.name + ' <b>· ' + (p.books[0]||'') + '</b>';
+    document.getElementById('dMood').textContent = p.mood;
+  };
+  grid.appendChild(d);
+});
+</script>
+</body>
+</html>

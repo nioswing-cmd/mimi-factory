@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>미미팩토리 — 의미와재미공장</title>
+<meta name="description" content="AI시대 인간에게 꼭 필요한 깊이 있는 지식을 도파민 터지게. 퀴즈로 읽는 책 · 도파민 테스트 모음">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#12101f; --bg2:#1a1730; --card:#221e3d;
+    --ink:#f0edff; --sub:#9a8fc0; --line:rgba(255,255,255,.08);
+    --grad:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+    --pop:cubic-bezier(.34,1.56,.64,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Noto Sans KR',sans-serif; background:var(--bg); color:var(--ink);
+    min-height:100dvh; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:520px;margin:0 auto;padding:28px 18px 40px}
+
+  /* ── 히어로 ── */
+  .hero{text-align:center;padding:14px 0 22px}
+  .hero .eyebrow{font-size:11px;letter-spacing:.42em;text-indent:.42em;color:var(--sub);margin-bottom:10px}
+  .hero h1{
+    font-family:'Jua',sans-serif;font-size:38px;line-height:1.15;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .hero p{font-size:13.5px;color:var(--sub);margin-top:10px;line-height:1.7}
+
+  /* ── 오늘의 신작 ── */
+  .today{
+    position:relative;border-radius:20px;padding:22px 20px;margin:6px 0 20px;
+    background:var(--card);border:1px solid var(--line);overflow:hidden;
+    cursor:pointer;transition:transform .35s var(--pop),box-shadow .35s;
+  }
+  .today:active{transform:scale(.97)}
+  .today::before{
+    content:"";position:absolute;inset:0;opacity:.16;
+    background:var(--tc,var(--grad));
+  }
+  .today .badge{
+    position:relative;display:inline-block;font-size:11px;font-weight:700;letter-spacing:.14em;
+    padding:4px 12px;border-radius:999px;background:var(--grad);color:#12101f;
+    animation:pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(122,166,255,.5)}50%{box-shadow:0 0 0 9px rgba(122,166,255,0)}}
+  .today h2{position:relative;font-family:'Jua',sans-serif;font-size:26px;margin-top:12px}
+  .today .meta{position:relative;font-size:12.5px;color:var(--sub);margin-top:5px}
+  .today .desc{position:relative;font-size:13.5px;color:#cfc8ec;margin-top:10px;line-height:1.65}
+  .today .go{
+    position:relative;display:inline-block;margin-top:14px;font-size:13px;font-weight:700;
+    padding:9px 18px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid var(--line);
+  }
+
+  /* ── 필터 탭 + 검색 ── */
+  .tabs{display:flex;gap:8px;margin-bottom:12px}
+  .tab{
+    flex:1;text-align:center;font-size:13px;font-weight:500;color:var(--sub);
+    padding:10px 0;border-radius:12px;background:var(--bg2);border:1px solid var(--line);
+    cursor:pointer;transition:all .3s var(--pop);user-select:none;
+  }
+  .tab.on{color:#12101f;background:var(--grad);font-weight:700;transform:scale(1.04)}
+  .search{
+    width:100%;padding:11px 16px;margin-bottom:16px;font-size:14px;font-family:inherit;
+    color:var(--ink);background:var(--bg2);border:1px solid var(--line);border-radius:12px;outline:none;
+  }
+  .search:focus{border-color:#7aa6ff}
+  .count{font-size:12px;color:var(--sub);margin-bottom:10px}
+
+  /* ── 카드 그리드 ── */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .card{
+    position:relative;border-radius:16px;padding:16px 14px;min-height:150px;
+    background:var(--card);border:1px solid var(--line);overflow:hidden;cursor:pointer;
+    display:flex;flex-direction:column;justify-content:flex-end;
+    transition:transform .35s var(--pop);
+    animation:up .5s var(--pop) backwards;
+  }
+  .card:nth-child(odd){animation-delay:.05s}.card:nth-child(even){animation-delay:.12s}
+  @keyframes up{from{opacity:0;transform:translateY(14px)}}
+  .card:active{transform:scale(.94) rotate(-1deg)}
+  .card::before{content:"";position:absolute;inset:0;opacity:.2;background:var(--tc)}
+  .card .tag{
+    position:relative;align-self:flex-start;font-size:10px;font-weight:700;letter-spacing:.1em;
+    padding:3px 9px;border-radius:999px;background:rgba(255,255,255,.12);color:#e6e0ff;margin-bottom:auto;
+  }
+  .card h3{position:relative;font-family:'Jua',sans-serif;font-size:18px;line-height:1.25;margin-top:20px}
+  .card .a{position:relative;font-size:11.5px;color:var(--sub);margin-top:4px}
+  .card .d{position:relative;font-size:10.5px;color:var(--sub);margin-top:7px;opacity:.8}
+  .empty{grid-column:1/-1;text-align:center;color:var(--sub);font-size:13px;padding:36px 0;line-height:1.8}
+
+  /* ── 푸터 (브랜드 규칙: 수정 금지) ── */
+  .footer{text-align:center;margin-top:36px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}
+  .mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px}
+  .mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(167,139,250,.6))}
+  .mf-eyebrow::after{transform:scaleX(-1)}
+  .mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#9a8fc0;font-weight:500;white-space:nowrap}
+  .mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;letter-spacing:.01em;
+    background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .mf-caption{font-size:11.5px;letter-spacing:.1em;color:#9a8fc0}
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">의 미 와 재 미 공 장</div>
+    <h1>미미팩토리</h1>
+    <p>AI시대, 인간에게 꼭 필요한 깊이 있는 지식을<br>도파민 터지게 즐기는 곳</p>
+  </div>
+
+  <div id="today"></div>
+
+  <div class="tabs">
+    <div class="tab on" data-f="all">전체</div>
+    <div class="tab" data-f="quiz">📚 퀴즈로읽는책</div>
+    <div class="tab" data-f="test">🎯 도파민 테스트</div>
+  </div>
+  <input class="search" id="q" type="search" placeholder="책 제목, 작가 검색…">
+  <div class="count" id="count"></div>
+  <div class="grid" id="grid"></div>
+
+  <div class="footer">
+    <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+    <div class="mf-logo">미미팩토리</div>
+    <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+  </div>
+</div>
+
+<script>
+/* ──────────────────────────────────────────────
+   허브의 심장: apps.json 하나만 읽어 모든 카드를 자동 생성.
+   새 앱이 나오면 apps.json에 한 항목만 추가되면 끝. (자동화가 해줌)
+────────────────────────────────────────────── */
+const FALLBACK = {apps:[
+  {id:"demian",type:"quiz",title:"데미안",author:"헤르만 헤세",date:"2026-07-06",
+   color1:"#7aa6ff",color2:"#b78bf5",teaser:"apps/demian_teaser.html",premium:"apps/demian_quiz.html",
+   desc:"알을 깨고 나오는 자아의 여정, 10분 반복 퀴즈로 완독"},
+  {id:"sapiens",type:"quiz",title:"사피엔스",author:"유발 하라리",date:"2026-07-05",
+   color1:"#5ee7d8",color2:"#7aa6ff",teaser:"apps/sapiens_teaser.html",premium:"apps/sapiens_quiz.html",
+   desc:"인류 7만 년의 역사를 퀴즈 미션으로 정복"},
+  {id:"love-language",type:"test",title:"사랑의 언어 진단",author:"미미팩토리 오리지널",date:"2026-07-04",
+   color1:"#ff8ad0",color2:"#b78bf5",teaser:"apps/love_language_test.html",premium:"apps/love_language_test.html",
+   desc:"나의 사랑 표현 방식, 5분 만에 실시간 게이지로 확인"}
+]};
+
+let APPS=[], filter="all", query="";
+
+async function load(){
+  try{
+    const r = await fetch("apps.json?v="+Date.now());
+    const j = await r.json();
+    APPS = j.apps || [];
+  }catch(e){ APPS = FALLBACK.apps; } /* 미리보기·로컬 열람 시 대비 */
+  APPS.sort((a,b)=> (b.date||"").localeCompare(a.date||""));
+  renderToday(); render();
+}
+
+function grad(a){return `linear-gradient(135deg,${a.color1||"#7aa6ff"},${a.color2||"#b78bf5"})`}
+function typeLabel(t){return t==="quiz" ? "퀴즈로읽는책" : "도파민 테스트"}
+function open(a){ if(navigator.vibrate) navigator.vibrate(28); location.href = a.teaser || a.premium; }
+
+function renderToday(){
+  const a = APPS[0]; if(!a) return;
+  const el = document.getElementById("today");
+  el.innerHTML = `
+    <div class="today" style="--tc:${grad(a)}">
+      <span class="badge">✨ 오늘의 신작</span>
+      <h2>${a.title}</h2>
+      <div class="meta">${a.author} · ${typeLabel(a.type)} · ${a.date||""}</div>
+      <div class="desc">${a.desc||""}</div>
+      <span class="go">지금 바로 도전 →</span>
+    </div>`;
+  el.querySelector(".today").onclick = ()=>open(a);
+}
+
+function render(){
+  const grid = document.getElementById("grid");
+  const list = APPS.filter(a =>
+    (filter==="all" || a.type===filter) &&
+    (query==="" || (a.title+a.author).toLowerCase().includes(query))
+  );
+  document.getElementById("count").textContent = `총 ${list.length}개의 앱`;
+  grid.innerHTML = list.length ? "" :
+    `<div class="empty">아직 여기엔 앱이 없어요.<br>내일 아침, 공장이 새 앱을 구워올 거예요 🏭</div>`;
+  list.forEach(a=>{
+    const c = document.createElement("div");
+    c.className="card"; c.style.setProperty("--tc",grad(a));
+    c.innerHTML = `
+      <span class="tag">${a.type==="quiz"?"📚":"🎯"} ${typeLabel(a.type)}</span>
+      <h3>${a.title}</h3>
+      <div class="a">${a.author}</div>
+      <div class="d">${a.date||""}</div>`;
+    c.onclick = ()=>open(a);
+    grid.appendChild(c);
+  });
+}
+
+document.querySelectorAll(".tab").forEach(t=>{
+  t.onclick = ()=>{
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("on"));
+    t.classList.add("on"); filter = t.dataset.f;
+    if(navigator.vibrate) navigator.vibrate(20);
+    render();
+  };
+});
+document.getElementById("q").oninput = e=>{ query = e.target.value.trim().toLowerCase(); render(); };
+
+load();
+</script>
+</body>
+</html>

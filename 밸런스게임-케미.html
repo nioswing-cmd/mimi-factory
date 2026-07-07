@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>밸런스 케미 · 둘의 취향 대결</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1:#161227; --bg2:#241640;
+    --warm1:#ff8a5b; --warm2:#ff5e6c;   /* A 진영 */
+    --cool1:#5b8aff; --cool2:#3fd6e0;   /* B 진영 */
+    --gold:#ffd56b;
+    --cream:#fff6ec; --muted:#cdbfe0; --card:#221a3a;
+  }
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{
+    font-family:'Noto Sans KR',sans-serif; color:var(--cream);
+    background:
+      radial-gradient(120% 80% at 82% -10%, rgba(255,138,91,.10), transparent 55%),
+      radial-gradient(120% 90% at 12% 110%, rgba(91,138,255,.12), transparent 55%),
+      linear-gradient(160deg,var(--bg1),var(--bg2));
+    background-attachment:fixed; min-height:100dvh; overflow-x:hidden;
+  }
+  .wrap{max-width:520px; margin:0 auto; min-height:100dvh; display:flex; flex-direction:column; padding:22px 20px 16px;}
+  .screen{display:none; flex:1; flex-direction:column; animation:fadeIn .5s ease;}
+  .screen.on{display:flex;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+  /* ---------- HOME ---------- */
+  .eyebrow{font-size:13px; letter-spacing:.26em; color:var(--gold); text-align:center; margin-top:16px; font-weight:500; opacity:.85;}
+  .title{
+    font-family:'Jua'; font-size:clamp(40px,13vw,58px); line-height:1.05; text-align:center; margin:10px 0 6px;
+    background:linear-gradient(105deg,#ff8a5b,#ff5e6c 40%,#5b8aff 78%);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .sub{text-align:center; color:var(--muted); font-size:15px; line-height:1.6; margin-bottom:22px;}
+  .sub b{color:var(--cream); font-weight:700;}
+  .names{display:flex; gap:10px; margin:0 0 22px;}
+  .names input{
+    flex:1; min-width:0; border:1.5px solid rgba(255,255,255,.16); background:rgba(255,255,255,.05);
+    color:var(--cream); border-radius:14px; padding:14px; font-size:15px; font-family:inherit; text-align:center; transition:border-color .2s;
+  }
+  .names input::placeholder{color:rgba(255,255,255,.4);}
+  .names input:focus{outline:none; border-color:var(--warm1);}
+  .names .vs{align-self:center; color:var(--gold); font-family:'Jua'; font-size:20px;}
+  .startbtn{
+    border:none; cursor:pointer; font-family:'Jua'; font-size:21px; color:#1a1230; padding:18px; border-radius:18px;
+    background:linear-gradient(100deg,var(--warm1),var(--cool1)); box-shadow:0 16px 40px -14px rgba(120,120,255,.5);
+    transition:transform .14s ease;
+  }
+  .startbtn:active{transform:scale(.96);}
+  .home-tip{margin-top:auto; padding-top:20px; text-align:center; color:var(--muted); font-size:12.5px; line-height:1.6; opacity:.85;}
+  .home-tip b{color:var(--cream);}
+  .qcount-label{text-align:center; font-size:13px; color:var(--muted); margin-bottom:10px;}
+  .qcounts{display:flex; gap:8px; justify-content:center; margin-bottom:22px; flex-wrap:wrap;}
+  .qc{border:1.5px solid rgba(255,255,255,.16); background:rgba(255,255,255,.05); color:var(--cream); font-family:'Jua'; font-size:16px; min-width:54px; padding:11px 14px; border-radius:14px; cursor:pointer; transition:transform .12s, background .2s, color .2s, border-color .2s, box-shadow .2s;}
+  .qc.on{background:linear-gradient(100deg,var(--warm1),var(--cool1)); color:#1a1230; border-color:transparent; box-shadow:0 8px 20px -8px var(--cool1);}
+  .qc:active{transform:scale(.93);}
+  .handoff-inner{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;}
+  .ho-emoji{font-size:64px; margin-bottom:14px; animation:pop .6s ease;}
+  .ho-done{font-family:'Jua'; font-size:26px; margin-bottom:14px;}
+  .ho-msg{color:var(--muted); font-size:15px; line-height:1.75; margin-bottom:28px; max-width:330px; word-break:keep-all;}
+  .ho-msg b{color:var(--cream);}
+  .handoff-inner .startbtn{width:100%; max-width:300px;}
+
+  /* ---------- PLAY topbar ---------- */
+  .topbar{display:flex; align-items:center; gap:12px; margin-bottom:14px;}
+  .homebtn{
+    display:flex; align-items:center; gap:5px; flex-shrink:0; border:none; cursor:pointer; height:40px;
+    padding:0 14px 0 11px; border-radius:12px; font-family:'Jua'; font-size:14px; color:var(--cream);
+    background:rgba(255,255,255,.09); transition:background .2s, transform .12s;
+  }
+  .homebtn:active{transform:scale(.93); background:rgba(255,255,255,.2);}
+  .homebtn .hicon{font-size:16px;}
+  .gaugewrap{flex:1;}
+  .gaugelabel{display:flex; justify-content:space-between; font-size:12px; color:var(--muted); margin-bottom:6px;}
+  .gaugelabel .chemi{color:var(--gold); font-weight:700; font-family:'Jua';}
+  .gauge{height:9px; border-radius:99px; background:rgba(255,255,255,.1); overflow:hidden;}
+  .gaugefill{height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg,#ff5e8a,var(--gold)); box-shadow:0 0 14px 1px var(--gold); transition:width .55s cubic-bezier(.22,1,.36,1);}
+  .endbtn{
+    flex-shrink:0; border:1.5px solid rgba(255,255,255,.16); background:transparent; color:var(--muted);
+    height:40px; padding:0 12px; border-radius:12px; font-family:inherit; font-size:13px; cursor:pointer; transition:background .2s;
+  }
+  .endbtn:active{background:rgba(255,255,255,.08);}
+
+  .turn{text-align:center; font-size:14px; margin:4px 0 14px; color:var(--muted); min-height:22px;}
+  .turn b{color:var(--cream); font-family:'Jua'; font-size:17px;
+    background:linear-gradient(100deg,var(--warm1),var(--cool1)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+
+  /* ---------- CARD (balance split) ---------- */
+  .cardzone{flex:1; display:flex; align-items:center; justify-content:center; min-height:0;}
+  .card{
+    width:100%; border-radius:28px; position:relative; overflow:hidden; cursor:pointer;
+    background:var(--card); border:1.5px solid rgba(255,255,255,.12);
+    box-shadow:0 28px 70px -30px rgba(0,0,0,.85), inset 0 1px 0 rgba(255,255,255,.08);
+    min-height:420px; display:flex; flex-direction:column;
+  }
+  .bqlabel{
+    position:absolute; top:0; left:0; right:0; z-index:3; text-align:center;
+    padding:12px; font-size:12px; letter-spacing:.16em; color:var(--gold); font-weight:500;
+    pointer-events:none;
+  }
+  .bsplit{flex:1; display:flex; flex-direction:column; position:relative;}
+  .opt{
+    flex:1; border:none; cursor:pointer; color:var(--cream); font-family:inherit; position:relative;
+    display:flex; align-items:center; justify-content:center; text-align:center; padding:30px 22px;
+    transition:flex .35s ease, filter .25s ease, opacity .25s; overflow:hidden;
+  }
+  .opt:disabled{cursor:default;}
+  .optA{background:linear-gradient(150deg,var(--warm1),var(--warm2));}
+  .optB{background:linear-gradient(150deg,var(--cool1),var(--cool2));}
+  .opt .optlabel{
+    position:absolute; top:14px; left:16px; font-family:'Jua'; font-size:22px; opacity:.55;
+  }
+  .optA .optlabel{top:auto; bottom:14px;}
+  .opttext{font-family:'Jua'; font-size:clamp(20px,5.6vw,27px); line-height:1.35; word-break:keep-all; max-width:90%; text-shadow:0 2px 8px rgba(0,0,0,.25);}
+  .opt .picks{position:absolute; right:14px; display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; max-width:60%;}
+  .optA .picks{top:14px;}
+  .optB .picks{bottom:14px;}
+  .pickchip{
+    font-size:12px; font-weight:700; padding:4px 10px; border-radius:99px;
+    background:rgba(255,255,255,.92); color:#222; font-family:'Noto Sans KR';
+    animation:pop .4s cubic-bezier(.34,1.56,.64,1);
+  }
+  .opt.win{flex:1.9; filter:saturate(1.15) brightness(1.05);}
+  .opt.lose{flex:.7; filter:grayscale(.4) brightness(.7); opacity:.85;}
+  .opt.pressed{animation:flash .4s ease;}
+  @keyframes flash{0%{filter:brightness(1.4);}100%{filter:brightness(1);}}
+
+  .vsbadge{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:4;
+    width:60px; height:60px; border-radius:50%; background:var(--card); border:3px solid rgba(255,255,255,.9);
+    display:flex; align-items:center; justify-content:center; font-family:'Jua'; font-size:22px; color:#fff;
+    box-shadow:0 8px 22px rgba(0,0,0,.4); transition:transform .3s;
+  }
+  .bsplit.decided .vsbadge{transform:translate(-50%,-50%) scale(.7); opacity:.6;}
+
+  .bresult{
+    position:absolute; bottom:0; left:0; right:0; z-index:5; text-align:center;
+    padding:14px; font-family:'Jua'; font-size:18px; transform:translateY(120%); transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+    background:linear-gradient(0deg, rgba(20,12,30,.92), transparent);
+    pointer-events:none;
+  }
+  .bresult.show{transform:translateY(0);}
+
+  .tapcue{
+    position:absolute; bottom:64px; left:0; right:0; text-align:center; z-index:5;
+    font-size:12.5px; color:var(--cream); opacity:0; transition:opacity .4s; pointer-events:none;
+  }
+  .tapcue.show{opacity:.85; animation:cuePulse 1.7s ease-in-out infinite;}
+  @keyframes cuePulse{0%,100%{opacity:.5;}50%{opacity:.95;}}
+
+  /* ---------- envelope ---------- */
+  .envelope{position:absolute; inset:0; z-index:8; border-radius:28px; display:flex; align-items:center; justify-content:center; perspective:1000px; overflow:hidden;}
+  .envelope.gone{opacity:0; transform:scale(1.05); pointer-events:none; transition:opacity .45s ease, transform .45s ease;}
+  .env-pocket{position:absolute; inset:0; border-radius:28px; background:linear-gradient(150deg,#a06bff,#ff6bd0);}
+  .env-pocket::after{content:""; position:absolute; left:0; right:0; top:34%; bottom:0; background:linear-gradient(170deg, rgba(255,255,255,.13), rgba(0,0,0,.10)); clip-path:polygon(0 14%, 50% 64%, 100% 14%, 100% 100%, 0 100%);}
+  .env-flap{position:absolute; top:0; left:0; right:0; height:48%; background:linear-gradient(165deg,#b07bff,#ff7bd6); clip-path:polygon(0 0, 100% 0, 50% 100%); transform-origin:top center; transform:rotateX(0deg); transition:transform .55s cubic-bezier(.6,-0.28,.34,1.4), filter .5s; z-index:4; backface-visibility:hidden; filter:brightness(1.07);}
+  .envelope.open .env-flap{transform:rotateX(179deg); filter:brightness(.78);}
+  .env-seal{position:relative; z-index:5; width:58px; height:58px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,.95); color:#c44ec4; font-family:'Jua'; font-size:24px; box-shadow:0 8px 22px rgba(0,0,0,.28); transition:transform .35s ease, opacity .3s;}
+  .envelope.open .env-seal{transform:scale(0) rotate(45deg); opacity:0;}
+  .env-hint{position:absolute; left:0; right:0; bottom:24px; text-align:center; color:rgba(34,16,52,.85); font-family:'Jua'; font-size:14px; animation:hintPulse 1.5s ease-in-out infinite;}
+  .envelope.open .env-hint{opacity:0; transition:opacity .2s;}
+  @keyframes hintPulse{0%,100%{transform:translateY(0); opacity:.7;}50%{transform:translateY(-4px); opacity:1;}}
+  .envelope.incoming{animation:envIn .42s cubic-bezier(.34,1.4,.5,1);}
+  @keyframes envIn{0%{transform:translateY(44px) scale(.92); opacity:0;}100%{transform:translateY(0) scale(1); opacity:1;}}
+  @keyframes pop{0%{transform:scale(.9); opacity:.4;}60%{transform:scale(1.04);}100%{transform:scale(1); opacity:1;}}
+
+  /* ---------- toast ---------- */
+  .toast{position:fixed; left:50%; top:84px; transform:translateX(-50%) translateY(-20px); background:rgba(34,26,58,.96); border:1.5px solid var(--gold); color:var(--cream); padding:13px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none; transition:opacity .4s, transform .4s; z-index:50; max-width:90vw;}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  /* ---------- DONE ---------- */
+  .done-inner{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;}
+  .done-emoji{font-size:60px; margin-bottom:6px; animation:pop .6s ease;}
+  .chemi-big{font-family:'Jua'; font-size:84px; line-height:1; margin:4px 0;
+    background:linear-gradient(105deg,#ff5e8a,var(--gold) 60%,#5b8aff); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+  .grade{font-family:'Jua'; font-size:26px; margin-bottom:10px;}
+  .done-inner p{color:var(--muted); font-size:15px; line-height:1.7; margin-bottom:24px; max-width:330px; word-break:keep-all;}
+  .done-inner .startbtn{width:100%; max-width:300px;}
+  .subrow{display:flex; gap:10px; width:100%; max-width:300px; margin-top:10px;}
+  .subrow .ghost{flex:1; border:1.5px solid rgba(255,255,255,.16); background:transparent; color:var(--muted); font-family:inherit; font-size:14px; padding:12px; border-radius:14px; cursor:pointer;}
+  .subrow .ghost:active{background:rgba(255,255,255,.08);}
+
+  /* ---------- 궁합 리포트 ---------- */
+  #done .done-inner{justify-content:flex-start; padding-top:8px;}
+  .rep-title{font-family:'Jua'; font-size:22px; margin-bottom:8px;}
+  .rep-title span{color:#ff5e8a;}
+  .donut{position:relative; width:180px; height:180px; margin:2px auto 2px;}
+  .donut-center{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;}
+  .dc-emoji{font-size:34px; line-height:1;}
+  .dc-pct{font-family:'Jua'; font-size:36px; line-height:1.1; background:linear-gradient(105deg,#ff5e8a,#ffd56b 60%,#5b8aff); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+  .repbox{width:100%; max-width:360px; background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.1); border-radius:18px; padding:16px; margin-top:14px;}
+  .repbox-h{font-family:'Jua'; font-size:15px; margin-bottom:12px; text-align:left; color:var(--gold);}
+  .catrow{display:flex; align-items:center; gap:10px; margin-bottom:9px;}
+  .catname{font-size:12.5px; width:98px; text-align:left; flex-shrink:0; color:var(--cream);}
+  .catbar{flex:1; height:9px; border-radius:99px; background:rgba(255,255,255,.12); overflow:hidden;}
+  .catfill{height:100%; border-radius:99px;}
+  .catpct{font-size:12px; width:36px; text-align:right; color:var(--muted); flex-shrink:0; font-weight:700;}
+  .catnote{font-size:12px; color:var(--muted); line-height:1.6; margin-top:10px; text-align:left;}
+  .catnote b{color:var(--cream);}
+  .hi{text-align:left; font-size:14px; line-height:1.5; padding:9px 0;}
+  .hi+.hi{border-top:1px solid rgba(255,255,255,.08);}
+  .hi-tag{font-family:'Jua'; font-size:13px; margin-bottom:3px; color:var(--gold);}
+  .hi b{color:var(--cream);}
+  .diffitem{padding:10px 0; border-top:1px solid rgba(255,255,255,.08); text-align:left;}
+  .diffitem:first-of-type{border-top:none;}
+  .di-row{font-size:13.5px; line-height:1.5; display:flex; gap:7px; align-items:baseline; word-break:keep-all; color:var(--cream);}
+  .di-row+.di-row{margin-top:4px;}
+  .who{font-size:11px; font-weight:700; padding:2px 9px; border-radius:99px; flex-shrink:0;}
+  .di-a .who{background:rgba(255,138,91,.28); color:#ffcdb0;}
+  .di-b .who{background:rgba(91,138,255,.28); color:#bcd0ff;}
+  .alltogether{text-align:center; color:var(--gold); font-size:14px; padding:6px 0;}
+
+  /* ---------- FOOTER ---------- */
+  .footer{text-align:center; margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+  .mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+  .mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+  .mf-eyebrow::after{transform:scaleX(-1);}
+  .mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+  .mf-logo{font-family:'Jua'; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em; background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+  .mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+  @media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ HOME ============ -->
+  <section class="screen on" id="home">
+    <div class="eyebrow">긴 여행, 둘의 취향 대결</div>
+    <h1 class="title">밸런스 케미</h1>
+    <p class="sub">둘 다 몰래 고르고 <b>동시에 공개!</b><br>분야별 케미로 <b>궁합</b>까지 알려줘요.</p>
+
+    <div class="names">
+      <input id="nameA" type="text" maxlength="6" placeholder="나" aria-label="첫 번째 사람 이름">
+      <span class="vs">&amp;</span>
+      <input id="nameB" type="text" maxlength="6" placeholder="너" aria-label="두 번째 사람 이름">
+    </div>
+
+    <div class="qcount-label">몇 문항 풀까요?</div>
+    <div class="qcounts" id="qcounts">
+      <button class="qc" data-n="5">5</button>
+      <button class="qc on" data-n="10">10</button>
+      <button class="qc" data-n="20">20</button>
+      <button class="qc" data-n="30">30</button>
+      <button class="qc" data-n="50">50</button>
+      <button class="qc" data-n="100">100</button>
+      <button class="qc" data-n="300">전체</button>
+    </div>
+
+    <button class="startbtn" id="startBtn">⚔️ 궁합 대결 시작</button>
+
+    <div class="home-tip">한 사람이 먼저 다 풀고 → 폰을 넘겨 → 다른 사람이 풀면 → <b>궁합 공개!</b> 🎉</div>
+  </section>
+
+  <!-- ============ PLAY ============ -->
+  <section class="screen" id="play">
+    <div class="topbar">
+      <button class="homebtn" id="backHome" aria-label="홈으로"><span class="hicon">🏠</span>홈</button>
+      <div class="gaugewrap">
+        <div class="gaugelabel"><span class="chemi" id="roundLabel">—</span><span id="countLabel">0/0</span></div>
+        <div class="gauge"><div class="gaugefill" id="gaugeFill"></div></div>
+      </div>
+    </div>
+
+    <div class="turn" id="turnLine">화면을 톡 쳐서 첫 봉투를 열어요 ✉️</div>
+
+    <div class="cardzone">
+      <div class="card" id="card">
+        <div class="bqlabel" id="bqlabel">당신의 선택은?</div>
+        <div class="bsplit" id="bsplit">
+          <button class="opt optA" id="optA">
+            <span class="optlabel">A</span>
+            <span class="opttext" id="optAtext"></span>
+            <span class="picks" id="picksA"></span>
+          </button>
+          <button class="opt optB" id="optB">
+            <span class="optlabel">B</span>
+            <span class="opttext" id="optBtext"></span>
+            <span class="picks" id="picksB"></span>
+          </button>
+          <div class="vsbadge">VS</div>
+        </div>
+        <div class="bresult" id="bresult"></div>
+        <div class="tapcue" id="tapcue">화면을 톡 치면 다음 봉투 ✉️</div>
+
+        <div class="envelope" id="envelope">
+          <div class="env-pocket"></div>
+          <div class="env-flap"></div>
+          <div class="env-seal">⚔</div>
+          <div class="env-hint" id="envHint">여기를 톡! 첫 대결 개봉 ✉️</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HANDOFF ============ -->
+  <section class="screen" id="handoff">
+    <div class="handoff-inner">
+      <div class="ho-emoji">🤝</div>
+      <div class="ho-done" id="hoDone"></div>
+      <div class="ho-msg" id="hoMsg"></div>
+      <button class="startbtn" id="hoBtn"></button>
+    </div>
+  </section>
+
+  <!-- ============ DONE ============ -->
+  <section class="screen" id="done">
+    <div class="done-inner" id="doneInner"></div>
+  </section>
+
+  <div class="footer">
+    <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+    <div class="mf-logo">미미팩토리</div>
+    <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------------- DATA: 밸런스 100문항 ---------------- */
+const BAL=[
+ {a:"평생 한식만 먹기",b:"평생 양식만 먹기",c:"food"},
+ {a:"치킨",b:"피자",c:"food"},
+ {a:"짜장면",b:"짬뽕",c:"food"},
+ {a:"탕수육 부먹",b:"탕수육 찍먹",c:"food"},
+ {a:"평생 단 음식만",b:"평생 매운 음식만",c:"food"},
+ {a:"라면은 면 먼저",b:"라면은 국물 먼저",c:"food"},
+ {a:"평생 고기 못 먹기",b:"평생 과일 못 먹기",c:"food"},
+ {a:"뜨거운 아메리카노",b:"아이스 아메리카노",c:"food"},
+ {a:"평생 아침 거르기",b:"평생 야식 끊기",c:"food"},
+ {a:"민트초코 인정",b:"민트초코 반대",c:"food"},
+ {a:"다정한데 능력 없는 사람",b:"능력 있는데 무뚝뚝한 사람",c:"love"},
+ {a:"연락 자주 하는 연애",b:"연락 가끔 하는 연애",c:"love"},
+ {a:"키 크고 평범한 외모",b:"키 작고 잘생긴/예쁜 외모",c:"love"},
+ {a:"첫사랑과 재회",b:"새로운 인연 만나기",c:"love"},
+ {a:"평생 솔로",b:"평생 짝사랑",c:"love"},
+ {a:"매일 붙어 있는 사이",b:"적당히 거리 두는 사이",c:"love"},
+ {a:"띠동갑 연상",b:"띠동갑 연하",c:"love"},
+ {a:"하늘을 나는 능력",b:"투명인간이 되는 능력",c:"power"},
+ {a:"순간이동",b:"시간정지",c:"power"},
+ {a:"과거로 가기",b:"미래로 가기",c:"power"},
+ {a:"남의 마음 읽기",b:"미래 예지하기",c:"power"},
+ {a:"모든 언어 통하기",b:"모든 동물과 대화하기",c:"power"},
+ {a:"기억을 지우는 능력",b:"기억을 되살리는 능력",c:"power"},
+ {a:"복권 1등 한 번",b:"평생 안 아프기",c:"power"},
+ {a:"월급 1000만원에 주 6일",b:"월급 300만원에 주 3일",c:"work"},
+ {a:"좋아하는 일 박봉",b:"싫은 일 고소득",c:"work"},
+ {a:"로또 10억 한 번",b:"매달 500만원 평생",c:"work"},
+ {a:"평생 재택근무",b:"평생 출근근무",c:"work"},
+ {a:"무능한 상사",b:"무능한 동료",c:"work"},
+ {a:"야근 없지만 점심 30분",b:"야근 많지만 점심 2시간",c:"work"},
+ {a:"건물주 되기",b:"유명인 되기",c:"work"},
+ {a:"여름에 패딩 입기",b:"겨울에 반팔 입기",c:"daily"},
+ {a:"평생 양치 안 하기",b:"평생 샤워 안 하기",c:"daily"},
+ {a:"모기 100마리 있는 방",b:"바퀴벌레 10마리 있는 방",c:"daily"},
+ {a:"평생 같은 옷만",b:"평생 같은 음식만",c:"daily"},
+ {a:"폰 없이 일주일",b:"잠 없이 3일",c:"daily"},
+ {a:"방귀 소리 엄청 크기",b:"방귀 냄새 엄청 독하기",c:"daily"},
+ {a:"평생 음치",b:"평생 몸치",c:"daily"},
+ {a:"내 발냄새 심하기",b:"내 입냄새 심하기",c:"daily"},
+ {a:"모두가 내 일기 읽기",b:"내가 모두의 일기 읽기",c:"value"},
+ {a:"내 죽는 날 알기",b:"끝까지 모르기",c:"value"},
+ {a:"평생 진실만 말하기",b:"평생 거짓만 말하기",c:"value"},
+ {a:"흑역사가 싹 사라지기",b:"미래 1년 미리 보기",c:"value"},
+ {a:"평생 존댓말만",b:"평생 반말만",c:"daily"},
+ {a:"평생 겨울 나라",b:"평생 여름 나라",c:"daily"},
+ {a:"즉흥 여행",b:"계획 여행",c:"travel"},
+ {a:"해외 한 달 살기",b:"국내 1년 무한 여행",c:"travel"},
+ {a:"호캉스",b:"캠핑",c:"travel"},
+ {a:"비행기 창가석",b:"비행기 통로석",c:"travel"},
+ {a:"여행 가면 맛집 위주",b:"여행 가면 명소 위주",c:"travel"},
+ {a:"혼자 떠나는 여행",b:"다 같이 가는 여행",c:"travel"},
+ {a:"짐 바리바리 챙기기",b:"짐 최소로 가볍게",c:"travel"},
+ {a:"좋았던 곳 또 가기",b:"매번 새로운 곳 가기",c:"travel"},
+ {a:"에버랜드",b:"롯데월드",c:"travel"},
+ {a:"여행 사진 잔뜩 남기기",b:"눈에만 담아오기",c:"travel"},
+ {a:"다 날 좋아하는데 다 가짜",b:"다 날 싫어하는데 진짜 친구 한 명",c:"value"},
+ {a:"부자인데 외로움",b:"가난한데 화목함",c:"value"},
+ {a:"천재인데 단명",b:"평범한데 장수",c:"value"},
+ {a:"인기 많은데 실력 없음",b:"실력 있는데 무명",c:"value"},
+ {a:"10년 젊어지기",b:"통장에 10억",c:"value"},
+ {a:"모든 시험 100점",b:"모든 운동 1등",c:"daily"},
+ {a:"잘생김/예쁨",b:"똑똑함",c:"value"},
+ {a:"키 190",b:"아이큐 190",c:"value"},
+ {a:"평생 칭찬만 듣기",b:"평생 진실만 듣기",c:"value"},
+ {a:"인스타 팔로워 100만",b:"통장에 1억",c:"value"},
+ {a:"좋아요 많은데 악플도 많음",b:"아무 반응 없음",c:"daily"},
+ {a:"카톡 읽씹 당하기",b:"카톡 안읽씹 당하기",c:"daily"},
+ {a:"내 검색기록 공개",b:"내 통화기록 공개",c:"daily"},
+ {a:"유튜브 평생 광고 없음",b:"넷플릭스 평생 무료",c:"daily"},
+ {a:"평생 와이파이 느림",b:"평생 폰 배터리 50%",c:"daily"},
+ {a:"평생 라면만",b:"평생 빵만",c:"food"},
+ {a:"여름 바다",b:"겨울 산",c:"travel"},
+ {a:"아침형 인간",b:"저녁형 인간",c:"daily"},
+ {a:"계획대로 사는 삶",b:"즉흥적으로 사는 삶",c:"value"},
+ {a:"미니멀 라이프",b:"맥시멀 라이프",c:"daily"},
+ {a:"강아지",b:"고양이",c:"daily"},
+ {a:"매운 떡볶이",b:"안 매운 떡볶이",c:"food"},
+ {a:"콜라",b:"사이다",c:"food"},
+ {a:"물냉면",b:"비빔냉면",c:"food"},
+ {a:"여행은 동행이 중요",b:"여행은 장소가 중요",c:"travel"},
+ {a:"평생 같은 직업",b:"5년마다 새 직업",c:"work"},
+ {a:"돈 많은데 시간 없음",b:"시간 많은데 돈 없음",c:"value"},
+ {a:"유명 맛집 2시간 웨이팅",b:"바로 가는 평범한 집",c:"food"},
+ {a:"비 오는 날 드라이브",b:"맑은 날 산책",c:"daily"},
+ {a:"노래방에서 신곡",b:"노래방에서 18번",c:"daily"},
+ {a:"낯선 사람과 모험",b:"친한 사람과 익숙함",c:"value"},
+ {a:"엄청 더운 휴양지",b:"엄청 추운 설경지",c:"travel"},
+ {a:"새벽 감성",b:"노을 감성",c:"daily"},
+ {a:"영화관 맨 앞자리",b:"영화관 맨 뒷자리",c:"daily"},
+ {a:"길찾기 잘하는 능력",b:"요리 잘하는 능력",c:"daily"},
+ {a:"과거의 나에게 편지",b:"미래의 나에게 편지",c:"value"},
+ {a:"세계여행 1년",b:"한 도시 깊게 1년",c:"travel"},
+ {a:"즉석 복권 긁기",b:"로또 번호 고르기",c:"daily"},
+ {a:"평생 음악 없이",b:"평생 영화 없이",c:"daily"},
+ {a:"첫눈에 반하는 사랑",b:"서서히 스며드는 사랑",c:"love"},
+ {a:"말 안 해도 통하는 사이",b:"다 말해주는 사이",c:"love"},
+ {a:"든든한 평생 친구",b:"설레는 평생 연인",c:"love"},
+ {a:"추억 전부 간직",b:"나쁜 기억만 삭제",c:"value"},
+ {a:"지금 이 순간 멈추기",b:"계속 앞으로 나아가기",c:"value"},
+ {a:"이 여행이 영원히 계속",b:"더 멋진 여행을 또 떠나기",c:"travel"},
+ {a:"발라드 가수",b:"힙합 래퍼",c:"celeb"},
+ {a:"아이돌",b:"밴드",c:"celeb"},
+ {a:"K-드라마 정주행",b:"할리우드 영화 정주행",c:"celeb"},
+ {a:"예능 보기",b:"다큐 보기",c:"celeb"},
+ {a:"콘서트 스탠딩석",b:"콘서트 지정석",c:"celeb"},
+ {a:"최애 콘서트 평생 무료",b:"최애 굿즈 평생 무료",c:"celeb"},
+ {a:"연예인이랑 친구 되기",b:"내가 연예인 되기",c:"celeb"},
+ {a:"인기 많은 연예인",b:"실력파 연예인",c:"celeb"},
+ {a:"로맨스 영화",b:"액션 영화",c:"celeb"},
+ {a:"잔잔한 시트콤",b:"긴장감 스릴러",c:"celeb"},
+ {a:"멜로디 좋은 곡",b:"가사 좋은 곡",c:"celeb"},
+ {a:"라이브 무대",b:"뮤직비디오",c:"celeb"},
+ {a:"트로트",b:"발라드",c:"celeb"},
+ {a:"춤 잘 추는 댄스가수",b:"노래 잘하는 보컬리스트",c:"celeb"},
+ {a:"영화관에서 보기",b:"OTT로 집관",c:"celeb"},
+ {a:"자막으로 보기",b:"더빙으로 보기",c:"celeb"},
+ {a:"시즌제 미드 정주행",b:"여운 남는 단편 영화",c:"celeb"},
+ {a:"아이돌 덕질",b:"배우 덕질",c:"celeb"},
+ {a:"음악 페스티벌",b:"단독 콘서트",c:"celeb"},
+ {a:"빌보드 1위 곡",b:"나만 아는 숨은 명곡",c:"celeb"},
+ {a:"웃기는 코미디언",b:"노래하는 가수",c:"celeb"},
+ {a:"연예인 닮았다는 말",b:"천재 같다는 말",c:"celeb"},
+ {a:"라디오 DJ",b:"유튜브 크리에이터",c:"celeb"},
+ {a:"옛날 명작",b:"요즘 화제작",c:"celeb"},
+ {a:"케이팝",b:"팝송",c:"celeb"},
+ {a:"화려한 뮤지컬",b:"진한 연극",c:"celeb"},
+ {a:"결말 미리 알고 보기",b:"끝까지 모르고 보기",c:"celeb"},
+ {a:"최애의 셀카",b:"최애의 직캠",c:"celeb"},
+ {a:"화려한 무대 의상",b:"자연스러운 일상룩",c:"celeb"},
+ {a:"콘서트 직관 평생",b:"음원 스트리밍 평생 무료",c:"celeb"},
+ {a:"그림 그리기",b:"글쓰기",c:"hobby"},
+ {a:"독서",b:"영화 감상",c:"hobby"},
+ {a:"등산",b:"러닝",c:"hobby"},
+ {a:"직접 요리하기",b:"맛집 찾아다니기",c:"hobby"},
+ {a:"사진 찍기",b:"영상 찍기",c:"hobby"},
+ {a:"악기 연주",b:"노래 부르기",c:"hobby"},
+ {a:"비디오 게임",b:"보드게임",c:"hobby"},
+ {a:"손으로 만드는 취미",b:"디지털로 만드는 취미",c:"hobby"},
+ {a:"식물 키우기",b:"반려동물 키우기",c:"hobby"},
+ {a:"혼자 카페 가기",b:"친구랑 수다 떨기",c:"hobby"},
+ {a:"전시·박물관 관람",b:"놀이공원 가기",c:"hobby"},
+ {a:"클래식 음악",b:"재즈",c:"hobby"},
+ {a:"이것저것 수집하기",b:"미니멀하게 비우기",c:"hobby"},
+ {a:"방탈출·퍼즐",b:"몸 쓰는 스포츠",c:"hobby"},
+ {a:"일기 쓰기",b:"브이로그 찍기",c:"hobby"},
+ {a:"베이킹",b:"칵테일 만들기",c:"hobby"},
+ {a:"러닝",b:"요가",c:"hobby"},
+ {a:"작품 분석하며 보기",b:"그냥 편하게 즐기기",c:"hobby"},
+ {a:"새벽 운동",b:"밤 산책",c:"hobby"},
+ {a:"캘리그라피",b:"드로잉",c:"hobby"},
+ {a:"노래방",b:"PC방",c:"hobby"},
+ {a:"정상 정복 등산",b:"둘레길 산책",c:"hobby"},
+ {a:"음악 페스티벌",b:"조용한 미술관",c:"hobby"},
+ {a:"빈티지샵 구경",b:"대형몰 쇼핑",c:"hobby"},
+ {a:"드라이브",b:"자전거 타기",c:"hobby"},
+ {a:"향수 모으기",b:"차(tea) 모으기",c:"hobby"},
+ {a:"다이어리 꾸미기",b:"폰 꾸미기",c:"hobby"},
+ {a:"클라이밍",b:"수영",c:"hobby"},
+ {a:"밤하늘 별 보기",b:"모닥불 불멍",c:"hobby"},
+ {a:"레고 조립",b:"프라모델 조립",c:"hobby"},
+ {a:"카페 투어",b:"맛집 투어",c:"hobby"},
+ {a:"코인노래방",b:"인생네컷",c:"hobby"},
+ {a:"집에서 홈트",b:"헬스장 가기",c:"hobby"},
+ {a:"미술 배우기",b:"악기 배우기",c:"hobby"},
+ {a:"편한 글램핑",b:"진짜 백패킹",c:"hobby"},
+ {a:"세종대왕과 점심 한 끼",b:"이순신과 저녁 한 끼",c:"hero"},
+ {a:"아인슈타인의 두뇌",b:"모차르트의 재능",c:"hero"},
+ {a:"역사 속 위인 만나기",b:"미래의 위인 되기",c:"hero"},
+ {a:"다빈치에게 그림 배우기",b:"셰익스피어에게 글 배우기",c:"hero"},
+ {a:"위대한 과학자 되기",b:"위대한 예술가 되기",c:"hero"},
+ {a:"잡스 같은 혁신가",b:"버핏 같은 투자가",c:"hero"},
+ {a:"나폴레옹의 추진력",b:"간디의 평정심",c:"hero"},
+ {a:"역사에 이름 남기기",b:"조용히 행복하게 살기",c:"hero"},
+ {a:"노벨상 받기",b:"올림픽 금메달 따기",c:"hero"},
+ {a:"발명가 에디슨",b:"탐험가 콜럼버스",c:"hero"},
+ {a:"소크라테스와 토론",b:"베토벤의 연주 감상",c:"hero"},
+ {a:"위인전 주인공 되기",b:"사랑받는 평범한 사람",c:"hero"},
+ {a:"천재형 위인",b:"노력형 위인",c:"hero"},
+ {a:"한 분야의 전설",b:"여러 분야의 만능",c:"hero"},
+ {a:"큰 업적 남기고 외로움",b:"업적 없이 행복",c:"hero"},
+ {a:"다빈치처럼 다재다능",b:"한 분야 최고 장인",c:"hero"},
+ {a:"위대한 스승 되기",b:"위대한 제자 되기",c:"hero"},
+ {a:"역사를 바꾼 영웅",b:"역사를 기록한 작가",c:"hero"},
+ {a:"퀴리 부인의 끈기",b:"피카소의 창의력",c:"hero"},
+ {a:"위인의 명언 외우기",b:"나만의 명언 만들기",c:"hero"},
+ {a:"능력으로 평가받기",b:"노력으로 평가받기",c:"value"},
+ {a:"과정이 중요",b:"결과가 중요",c:"value"},
+ {a:"자유롭지만 불안정",b:"안정적이지만 구속",c:"value"},
+ {a:"정의로운 세상",b:"평화로운 세상",c:"value"},
+ {a:"솔직한 독설",b:"다정한 거짓말",c:"value"},
+ {a:"모두에게 공평하게",b:"내 사람에게 특별하게",c:"value"},
+ {a:"빠른 실패",b:"느린 성공",c:"value"},
+ {a:"머리로 결정",b:"가슴으로 결정",c:"value"},
+ {a:"평생 배우며 살기",b:"평생 가르치며 살기",c:"value"},
+ {a:"후회 없는 도전",b:"안전한 선택",c:"value"},
+ {a:"많은 사람과 얕게",b:"적은 사람과 깊게",c:"value"},
+ {a:"칭찬받는 삶",b:"존경받는 삶",c:"value"},
+ {a:"1등이지만 외로움",b:"2등이지만 동료가 많음",c:"value"},
+ {a:"옳은 길 어렵게",b:"쉬운 길 적당히",c:"value"},
+ {a:"진실을 아는 고통",b:"모르는 행복",c:"value"},
+ {a:"베푸는 사람",b:"받는 사람",c:"value"},
+ {a:"변화를 만드는 사람",b:"변화에 잘 적응하는 사람",c:"value"},
+ {a:"큰 꿈 작은 확률",b:"작은 꿈 큰 확률",c:"value"},
+ {a:"기억되는 삶",b:"잊혀지는 삶",c:"value"},
+ {a:"원칙을 지키기",b:"상황에 맞추기",c:"value"},
+ {a:"혼자 빛나기",b:"함께 빛나기",c:"value"},
+ {a:"미움받을 용기",b:"사랑받는 안정",c:"value"},
+ {a:"도전하다 실패하기",b:"도전 안 하고 후회하기",c:"value"},
+ {a:"정직해서 손해",b:"거짓말로 이득",c:"value"},
+ {a:"내 신념 지키기",b:"다수 의견 따르기",c:"value"},
+ {a:"깊이 있는 한 길",b:"넓게 아는 여러 길",c:"value"},
+ {a:"결과가 좋으면 다 좋다",b:"과정이 떳떳해야 한다",c:"value"},
+ {a:"세상을 바꾸기",b:"나를 바꾸기",c:"value"},
+ {a:"영향력 있는 사람",b:"영향받지 않는 사람",c:"value"},
+ {a:"빨리 가려면 혼자",b:"멀리 가려면 함께",c:"value"},
+ {a:"완벽한 계획",b:"빠른 실행",c:"value"},
+ {a:"인정받기 위해 살기",b:"스스로 만족하려 살기",c:"value"},
+ {a:"다름을 인정하기",b:"같음을 추구하기",c:"value"},
+ {a:"손해 봐도 옳게",b:"이득 보되 적당히",c:"value"},
+ {a:"끝까지 책임지기",b:"빠르게 접고 새 시작",c:"value"},
+ {a:"의미 있는 고생",b:"편안한 무의미",c:"value"},
+ {a:"신중한 거북이",b:"빠른 토끼",c:"value"},
+ {a:"비밀 지켜주기",b:"진실 말해주기",c:"value"},
+ {a:"꿈을 좇기",b:"현실을 택하기",c:"value"},
+ {a:"모두를 위한 선택",b:"나를 위한 선택",c:"value"},
+ {a:"과거의 추억으로 살기",b:"미래의 희망으로 살기",c:"value"},
+ {a:"알면서 속아주기",b:"모르고 진심으로 믿기",c:"value"},
+ {a:"천천히 확실하게",b:"빠르게 도전적으로",c:"value"},
+ {a:"정 때문에 손해 보기",b:"냉정해서 이득 보기",c:"value"},
+ {a:"마음의 평화",b:"뜨거운 열정",c:"value"},
+ {a:"평생 디저트 무료",b:"평생 커피 무료",c:"food"},
+ {a:"매운맛 끝판왕",b:"단맛 끝판왕",c:"food"},
+ {a:"회",b:"초밥",c:"food"},
+ {a:"곱창",b:"막창",c:"food"},
+ {a:"떡볶이",b:"순대",c:"food"},
+ {a:"삼겹살",b:"소고기",c:"food"},
+ {a:"평생 배달음식",b:"평생 집밥",c:"food"},
+ {a:"김치찌개",b:"된장찌개",c:"food"},
+ {a:"빵으로 아침",b:"밥으로 아침",c:"food"},
+ {a:"과일",b:"채소",c:"food"},
+ {a:"맥주",b:"소주",c:"food"},
+ {a:"한식 디저트",b:"양식 디저트",c:"food"},
+ {a:"뜨거운 국물",b:"시원한 냉국",c:"food"},
+ {a:"치즈 듬뿍",b:"매운 양념",c:"food"},
+ {a:"아이스크림",b:"빙수",c:"food"},
+ {a:"매일 연락하기",b:"만날 때만 집중하기",c:"love"},
+ {a:"깜짝 이벤트",b:"잔잔한 일상",c:"love"},
+ {a:"표현 많은 연인",b:"묵묵한 연인",c:"love"},
+ {a:"나랑 비슷한 사람",b:"나랑 정반대인 사람",c:"love"},
+ {a:"취미 같이하는 연인",b:"각자 시간 존중하는 연인",c:"love"},
+ {a:"첫인상이 강렬한 사람",b:"알수록 매력인 사람",c:"love"},
+ {a:"리드하는 연인",b:"맞춰주는 연인",c:"love"},
+ {a:"장거리라도 진심",b:"가까이서 자주",c:"love"},
+ {a:"SNS 공개 연애",b:"비밀 연애",c:"love"},
+ {a:"데이트는 맛집",b:"데이트는 액티비티",c:"love"},
+ {a:"사랑은 말로 표현",b:"사랑은 행동으로 표현",c:"love"},
+ {a:"기념일 크게 챙기기",b:"평소에 잘하기",c:"love"},
+ {a:"다정한 메시지",b:"깜짝 선물",c:"love"},
+ {a:"함께 성장하는 사랑",b:"있는 그대로의 사랑",c:"love"},
+ {a:"솔직한 연인",b:"배려하는 연인",c:"love"},
+ {a:"손편지",b:"음성메시지",c:"love"},
+ {a:"같이 여행 가기",b:"같이 집콕하기",c:"love"},
+ {a:"질투하는 연인",b:"쿨한 연인",c:"love"},
+ {a:"계획적인 데이트",b:"즉흥적인 데이트",c:"love"},
+ {a:"평생 한 사람만",b:"여러 인연 경험하기",c:"love"},
+ {a:"시간 되돌리기",b:"미래 엿보기",c:"power"},
+ {a:"모든 상처 치유하기",b:"모든 병 예방하기",c:"power"},
+ {a:"동물과 대화하기",b:"식물과 대화하기",c:"power"},
+ {a:"꿈을 조종하기",b:"기억을 저장하기",c:"power"},
+ {a:"날씨 조종하기",b:"감정 조종하기",c:"power"},
+ {a:"무엇이든 복제하기",b:"무엇이든 없애기",c:"power"},
+ {a:"순간 학습 능력",b:"영원한 기억력",c:"power"},
+ {a:"투시 능력",b:"천리안",c:"power"},
+ {a:"변신 능력",b:"분신 능력",c:"power"},
+ {a:"시간 빨리감기",b:"시간 일시정지",c:"power"},
+ {a:"아침잠 챙기기",b:"밤샘하기",c:"daily"},
+ {a:"정리정돈파",b:"어질러도 편한파",c:"daily"},
+ {a:"미리미리 준비",b:"닥쳐서 몰아치기",c:"daily"},
+ {a:"알람 한 번에 기상",b:"스누즈 다섯 번",c:"daily"},
+ {a:"계획표대로 살기",b:"그날 기분대로 살기",c:"daily"},
+ {a:"더운 게 나아",b:"추운 게 나아",c:"daily"},
+ {a:"아침 샤워",b:"밤 샤워",c:"daily"},
+ {a:"메모광",b:"머리로 기억",c:"daily"},
+ {a:"빨래 바로바로",b:"몰아서 한 번에",c:"daily"},
+ {a:"집에 있는 게 좋아",b:"밖에 나가는 게 좋아",c:"daily"},
+ {a:"빠른 결정",b:"신중한 고민",c:"daily"},
+ {a:"많이 자야 함",b:"적게 자도 됨",c:"daily"},
+ {a:"새것이 좋아",b:"손때 묻은 게 좋아",c:"daily"},
+ {a:"단톡 알림 켜두기",b:"단톡 무음",c:"daily"},
+ {a:"폰 배경은 사진",b:"폰 배경은 단색",c:"daily"},
+ {a:"빡빡한 일정",b:"여유로운 일정",c:"travel"},
+ {a:"도시 여행",b:"자연 여행",c:"travel"},
+ {a:"미식 여행",b:"액티비티 여행",c:"travel"},
+ {a:"익숙한 곳 또 가기",b:"처음 가는 곳 도전",c:"travel"},
+ {a:"럭셔리 호텔",b:"감성 게스트하우스",c:"travel"},
+ {a:"단체 패키지여행",b:"자유 배낭여행",c:"travel"},
+ {a:"따뜻한 휴양지",b:"이국적인 도시",c:"travel"},
+ {a:"미리 짜는 여행 계획",b:"현지에서 즉흥",c:"travel"},
+ {a:"기차 여행",b:"자동차 여행",c:"travel"},
+ {a:"유명 사진 명소",b:"현지인 골목",c:"travel"}
+];
+
+/* ---------------- STATE ---------------- */
+const CAT_LABELS={food:'🍽️ 먹는 취향',love:'💕 연애 스타일',power:'✨ 상상력',work:'💰 돈과 일',daily:'🎲 일상 감각',travel:'✈️ 여행 스타일',value:'🌿 인생 가치관',celeb:'🌟 대중문화 취향',hobby:'🎨 취미·취향',hero:'🏛️ 인물·위인'};
+let order=[], names=["나","너"];
+let nQ=10;                      // 선택한 문항 수
+let round=0;                    // 0: 첫 사람, 1: 둘째 사람
+let pos=0;                      // 라운드 내 현재 위치
+let answers=[[],[]];            // answers[round][i] = 'A' | 'B'
+let phase='closed';             // 'closed' | 'choosing' | 'moving'
+let isOpen=false;
+
+const $=id=>document.getElementById(id);
+function vibrate(ms){ if(navigator.vibrate) try{navigator.vibrate(ms);}catch(e){} }
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function show(scr){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); $(scr).classList.add('on'); }
+let _tt; function toast(m){ const t=$('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2000); }
+
+/* ---------------- 문항 수 선택 ---------------- */
+$('qcounts').addEventListener('click',e=>{
+ const b=e.target.closest('.qc'); if(!b) return;
+ document.querySelectorAll('.qc').forEach(x=>x.classList.remove('on'));
+ b.classList.add('on'); nQ=parseInt(b.dataset.n,10);
+});
+
+/* ---------------- 시작 / 라운드 ---------------- */
+$('startBtn').addEventListener('click',()=>{
+ const a=$('nameA').value.trim(), b=$('nameB').value.trim();
+ names=[a||"나", b||"너"];
+ startGame();
+});
+
+function startGame(){
+ order=shuffle(BAL.map((_,i)=>i)).slice(0, Math.min(nQ, BAL.length));
+ round=0; pos=0; answers=[[],[]];
+ beginRound();
+}
+
+function beginRound(){
+ pos=0; isOpen=false;
+ prepareQuestion();
+ resetEnvelope(false);
+ $('roundLabel').textContent=names[round]+' 차례';
+ $('countLabel').textContent='0/'+order.length;
+ $('gaugeFill').style.width='0%';
+ $('envHint').textContent='여기를 톡! 첫 문항 개봉 ✉️';
+ $('turnLine').innerHTML='<b>'+names[round]+'</b>, 화면을 톡 쳐서 시작!';
+ show('play');
+}
+
+/* ---------------- 봉투 / 질문 ---------------- */
+function prepareQuestion(){
+ const q=BAL[order[pos]];
+ phase='closed';
+ $('optAtext').textContent=q.a;
+ $('optBtext').textContent=q.b;
+ $('picksA').innerHTML=''; $('picksB').innerHTML='';
+ $('optA').className='opt optA'; $('optB').className='opt optB';
+ $('optA').disabled=false; $('optB').disabled=false;
+ $('bsplit').classList.remove('decided');
+ $('bresult').classList.remove('show'); $('bresult').textContent='';
+ $('tapcue').classList.remove('show');
+ $('bqlabel').textContent='당신의 선택은?';
+}
+
+function resetEnvelope(incoming){
+ const env=$('envelope');
+ env.classList.remove('open','gone','incoming');
+ void env.offsetWidth;
+ if(incoming) env.classList.add('incoming');
+ isOpen=false;
+}
+
+function openEnvelope(){
+ if(isOpen) return;
+ const env=$('envelope');
+ env.classList.add('open'); vibrate(28);
+ setTimeout(()=>{
+   env.classList.add('gone');
+   isOpen=true; phase='choosing';
+   $('bqlabel').textContent='Q'+(pos+1)+'. 당신의 선택은?';
+   $('turnLine').innerHTML='<b>'+names[round]+'</b> — 마음에 드는 쪽을 탭!';
+ },360);
+}
+
+function pick(side){
+ if(phase!=='choosing') return;
+ phase='moving';
+ answers[round][pos]=side;
+ vibrate(20);
+ const win = side==='A'?$('optA'):$('optB');
+ const lose= side==='A'?$('optB'):$('optA');
+ win.classList.add('pressed','win'); lose.classList.add('lose');
+ $('optA').disabled=true; $('optB').disabled=true;
+ $('bsplit').classList.add('decided');
+ $('countLabel').textContent=(pos+1)+'/'+order.length;
+ $('gaugeFill').style.width=((pos+1)/order.length*100)+'%';
+ setTimeout(()=>{
+   pos++;
+   if(pos<order.length){
+     prepareQuestion();
+     resetEnvelope(true);
+     $('envHint').textContent='✉️';
+     $('turnLine').innerHTML='다음 봉투가 열리는 중…';
+     setTimeout(openEnvelope, 430);   // 두 번째부터는 자동으로 개봉
+   }else if(round===0){
+     handoff();
+   }else{
+     finish();
+   }
+ },540);
+}
+
+/* ---------------- 이벤트 ---------------- */
+$('card').addEventListener('click',()=>{ if(phase==='closed' && !isOpen) openEnvelope(); });
+$('optA').addEventListener('click',(e)=>{ e.stopPropagation(); pick('A'); });
+$('optB').addEventListener('click',(e)=>{ e.stopPropagation(); pick('B'); });
+$('backHome').addEventListener('click',()=>{ show('home'); });
+
+/* ---------------- 핸드오프(폰 넘기기) ---------------- */
+function handoff(){
+ $('hoDone').textContent='✓ '+names[0]+' 완료!';
+ $('hoMsg').innerHTML='이제 폰을 <b>'+names[1]+'</b>님에게 넘겨주세요.<br>같은 '+order.length+'문항을 풀면 궁합이 공개돼요.<br><span style="opacity:.65">(앞사람 답은 비밀이에요 🤫)</span>';
+ $('hoBtn').textContent='내가 '+names[1]+' — 시작!';
+ show('handoff');
+ vibrate([20,40,20]);
+}
+$('hoBtn').addEventListener('click',()=>{ round=1; beginRound(); });
+
+/* ---------------- 궁합 리포트 ---------------- */
+function gradeOf(pct){
+ if(pct>=90) return {e:'💞',g:'운명의 소울메이트',d:'취향이 거의 똑같아요. 이 정도면 텔레파시 수준!'};
+ if(pct>=70) return {e:'🧡',g:'찰떡궁합',d:'손발이 척척 맞는 사이. 같이 다니면 편하겠어요.'};
+ if(pct>=50) return {e:'😊',g:'그럭저럭 케미',d:'맞을 땐 맞고 갈릴 땐 갈리고. 딱 적당한 밸런스!'};
+ if(pct>=30) return {e:'😆',g:'티격태격 밀당',d:'취향이 자주 갈리네요. 그래서 더 안 질리는 사이?'};
+ return {e:'⚡',g:'정반대의 매력',d:'완전 다른 취향! 서로에게서 배울 게 많겠어요.'};
+}
+
+function finish(){
+ // 두 사람의 답 비교
+ let matched=0; const history=[];
+ for(let i=0;i<order.length;i++){
+   const q=BAL[order[i]];
+   const p0=answers[0][i], p1=answers[1][i];
+   const same=(p0===p1); if(same) matched++;
+   history.push({c:q.c, same, p0, p1, q});
+ }
+ const answered=order.length;
+ const pct=answered?Math.round(matched/answered*100):0;
+ const G=gradeOf(pct);
+
+ // 카테고리별 집계
+ const byCat={};
+ history.forEach(h=>{ (byCat[h.c]=byCat[h.c]||{t:0,m:0}); byCat[h.c].t++; if(h.same) byCat[h.c].m++; });
+ const cats=Object.keys(byCat).map(c=>({c, pct:Math.round(byCat[c].m/byCat[c].t*100), t:byCat[c].t})).sort((x,y)=>y.pct-x.pct);
+ const catRows=cats.map(o=>{
+   const col=o.pct>=67?'#ffd56b':(o.pct>=34?'#ff8a5b':'#5b8aff');
+   return '<div class="catrow"><span class="catname">'+CAT_LABELS[o.c]+'</span><div class="catbar"><div class="catfill" style="width:'+o.pct+'%;background:'+col+';box-shadow:0 0 10px '+col+'aa;"></div></div><span class="catpct">'+o.pct+'%</span></div>';
+ }).join('');
+ const topCat=cats[0], lowCat=cats[cats.length-1];
+
+ // 베스트 케미 + 갈린 문항 전체
+ const sames=history.filter(h=>h.same), diffs=history.filter(h=>!h.same);
+ let highlight='';
+ if(sames.length){
+   const s=sames[Math.floor(Math.random()*sames.length)];
+   const t=s.p0==='A'?s.q.a:s.q.b;
+   highlight='<div class="hi hi-same"><div class="hi-tag">💞 둘 다 똑같이 골랐어요</div><b>“'+t+'”</b></div>';
+ }
+ let diffList='';
+ if(diffs.length){
+   diffList=diffs.map(d=>{
+     const t0=d.p0==='A'?d.q.a:d.q.b, t1=d.p1==='A'?d.q.a:d.q.b;
+     return '<div class="diffitem"><div class="di-row di-a"><span class="who">'+names[0]+'</span>'+t0+'</div><div class="di-row di-b"><span class="who">'+names[1]+'</span>'+t1+'</div></div>';
+   }).join('');
+ }else{
+   diffList='<div class="alltogether">완벽 일치! 갈린 문항이 하나도 없어요 💞</div>';
+ }
+
+ const R=72, C=2*Math.PI*R, off=C*(1-pct/100);
+ $('doneInner').innerHTML=
+   '<div class="rep-title">'+names[0]+' <span>❤</span> '+names[1]+' 궁합</div>'+
+   '<div class="donut"><svg width="180" height="180" viewBox="0 0 180 180">'+
+     '<defs><linearGradient id="dg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ff5e8a"/><stop offset="55%" stop-color="#ffd56b"/><stop offset="100%" stop-color="#5b8aff"/></linearGradient></defs>'+
+     '<circle cx="90" cy="90" r="'+R+'" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="13"/>'+
+     '<circle cx="90" cy="90" r="'+R+'" fill="none" stroke="url(#dg)" stroke-width="13" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" transform="rotate(-90 90 90)" id="donutFg"/>'+
+   '</svg><div class="donut-center"><div class="dc-emoji">'+G.e+'</div><div class="dc-pct">'+pct+'%</div></div></div>'+
+   '<div class="grade">'+G.g+'</div>'+
+   '<p>'+answered+'문항 중 <b style="color:var(--cream)">'+matched+'번</b> 같은 선택!<br>'+G.d+'</p>'+
+   '<div class="repbox"><div class="repbox-h">분야별 궁합</div>'+catRows+
+     '<div class="catnote">가장 잘 맞는 분야는 <b>'+CAT_LABELS[topCat.c]+'</b>'+(cats.length>1?', 가장 갈리는 건 <b>'+CAT_LABELS[lowCat.c]+'</b>':'')+' 🌟</div></div>'+
+   (highlight?'<div class="repbox">'+highlight+'</div>':'')+
+   '<div class="repbox"><div class="repbox-h">⚡ 의견이 갈린 '+diffs.length+'개 문항</div>'+diffList+'</div>'+
+   '<button class="startbtn" id="againBtn">🔀 새 문제로 다시</button>'+
+   '<div class="subrow"><button class="ghost" id="homeBtn2">홈으로</button></div>';
+ show('done');
+ requestAnimationFrame(()=>{ const fg=$('donutFg'); if(fg){ fg.style.transition='stroke-dashoffset 1.1s cubic-bezier(.22,1,.36,1)'; fg.style.strokeDashoffset=off; } });
+ vibrate([20,40,20]);
+ $('againBtn').onclick=startGame;
+ $('homeBtn2').onclick=()=>show('home');
+}
+
+</script>
+</body>
+</html>

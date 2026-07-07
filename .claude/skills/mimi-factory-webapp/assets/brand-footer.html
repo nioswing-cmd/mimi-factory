@@ -1,0 +1,48 @@
+<!--
+  미미팩토리 브랜드 푸터 — 모든 미미팩토리 웹앱 하단에 그대로 삽입.
+  사용법:
+   1) 아래 <style> 안의 .footer / .mf-* 규칙을 페이지 CSS에 복사
+   2) 아래 footer HTML 블록을 </body> 직전(콘텐츠 맨 아래)에 배치
+  주의: 색·자간·그라디언트는 임의로 바꾸지 않는다. 다크 배경 위 사용 기준.
+-->
+
+<style>
+  .footer{
+    text-align:center; margin-top:24px; padding-top:18px;
+    border-top:1px solid rgba(255,255,255,.08);
+  }
+  .mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+  .mf-eyebrow::before,.mf-eyebrow::after{
+    content:""; height:1px; width:38px;
+    background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));
+  }
+  .mf-eyebrow::after{transform:scaleX(-1);}
+  .mf-eyebrow span{
+    font-size:10px; letter-spacing:.42em; text-indent:.42em;
+    color:#9a8fc0; font-weight:500; white-space:nowrap;
+  }
+  .mf-logo{
+    font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px;
+    letter-spacing:.01em;
+    background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+</style>
+
+<!-- ↓ </body> 직전에 배치 -->
+<div class="footer">
+  <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+  <div class="mf-logo">미미팩토리</div>
+  <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+</div>
+
+<!--
+  폰트 의존성: Jua (디스플레이). 페이지 <head>에 아래가 없으면 추가한다.
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+
+  밝은 배경에 올릴 때: .mf-eyebrow span / .mf-caption 색을 #6b5b8f 정도로 낮추고,
+  .footer border-top을 rgba(0,0,0,.08)로 바꾼다. 워드마크 그라디언트는 유지.
+-->
