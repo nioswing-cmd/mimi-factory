@@ -76,10 +76,16 @@
   .hall .in{font-size:13px;font-weight:700;padding:8px 16px;border-radius:999px}
 
   /* 독서퀴즈관 미니 프리뷰: 밤의 서재 */
-  .hall.quiz{background:#0d1526;color:#f2ead8}
+  .hall.quiz{
+    background:linear-gradient(140deg,#2a3f6e,#122341 45%,#0d1526);color:#f2ead8;
+    border-color:rgba(232,180,95,.5);
+    box-shadow:0 0 26px rgba(232,180,95,.22), inset 0 0 40px rgba(232,180,95,.06);
+  }
   .hall.quiz::before{
     content:"";position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(300px 150px at 82% -20px, rgba(232,180,95,.28), transparent 70%);
+    background:
+      radial-gradient(320px 170px at 82% -20px, rgba(232,180,95,.5), transparent 70%),
+      radial-gradient(200px 120px at 0% 110%, rgba(232,180,95,.16), transparent 70%);
   }
   .hall.quiz .k{color:#8fa1c0}
   .hall.quiz h2{font-family:'Gowun Batang',serif;color:#f5d491;text-shadow:0 0 20px rgba(232,180,95,.3)}
@@ -88,13 +94,17 @@
   .hall.quiz .deco{position:absolute;right:18px;top:20px;font-size:26px}
 
   /* 테스트관 미니 프리뷰: 도파민 실험실 */
-  .hall.test{background:#0a0a0f;color:#eef2ff;border-color:rgba(0,240,255,.25)}
+  .hall.test{
+    background:linear-gradient(140deg,#003a44,#0c1030 55%,#26073a);color:#eef2ff;
+    border-color:rgba(0,240,255,.6);
+    box-shadow:0 0 26px rgba(0,240,255,.28), inset 0 0 40px rgba(255,46,196,.07);
+  }
   .hall.test::before{
-    content:"";position:absolute;inset:0;pointer-events:none;opacity:.6;
+    content:"";position:absolute;inset:0;pointer-events:none;
     background:
-      radial-gradient(240px 130px at 10% -20px, rgba(0,240,255,.2), transparent 70%),
-      radial-gradient(240px 130px at 95% 110%, rgba(255,46,196,.18), transparent 70%),
-      repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.02) 3px 4px);
+      radial-gradient(260px 150px at 10% -20px, rgba(0,240,255,.4), transparent 70%),
+      radial-gradient(260px 150px at 95% 110%, rgba(255,46,196,.38), transparent 70%),
+      repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.03) 3px 4px);
   }
   .hall.test .k{font-family:'IBM Plex Mono',monospace;color:#b6ff3d}
   .hall.test h2{text-shadow:0 0 14px rgba(0,240,255,.5), 1.5px 0 0 rgba(255,46,196,.5), -1.5px 0 0 rgba(0,240,255,.5)}
@@ -103,7 +113,10 @@
   .hall.test .deco{position:absolute;right:18px;top:20px;font-size:26px}
 
   /* 친해지기관 미니 프리뷰: 둘의 피크닉 */
-  .hall.friend{background:#fdf6ec;color:#4a3f35;border-color:rgba(74,63,53,.1)}
+  .hall.friend{
+    background:#fdf6ec;color:#4a3f35;border-color:rgba(255,143,112,.55);
+    box-shadow:0 0 26px rgba(255,181,158,.3);
+  }
   .hall.friend::before{
     content:"";position:absolute;inset:0;pointer-events:none;
     background:

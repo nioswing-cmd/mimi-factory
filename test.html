@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0a0a0f; --panel:#101018; --panel2:#15151f;
+    --bg:#071726; --panel:#0e1a2c; --panel2:#131736;
     --ink:#eef2ff; --sub:#7d84a3;
     --cyan:#00f0ff; --mag:#ff2ec4; --lime:#b6ff3d;
     --line:rgba(0,240,255,.18);
@@ -18,16 +18,17 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   body{
-    font-family:'Noto Sans KR',sans-serif; background:var(--bg); color:var(--ink);
+    font-family:'Noto Sans KR',sans-serif; color:var(--ink);
+    background:linear-gradient(180deg,#04303a,#0c1030 46%,#26073a) fixed;
     min-height:100dvh; -webkit-font-smoothing:antialiased;
   }
   /* 스캔라인 + 네온 안개 */
   body::before{
-    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.65;
     background:
-      radial-gradient(440px 280px at 85% -40px, rgba(255,46,196,.14), transparent 70%),
-      radial-gradient(440px 280px at 6% 16%, rgba(0,240,255,.12), transparent 70%),
-      repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.014) 3px 4px);
+      radial-gradient(440px 280px at 85% -40px, rgba(255,46,196,.22), transparent 70%),
+      radial-gradient(440px 280px at 6% 16%, rgba(0,240,255,.2), transparent 70%),
+      repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.02) 3px 4px);
   }
   .wrap{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:24px 18px 40px}
 
