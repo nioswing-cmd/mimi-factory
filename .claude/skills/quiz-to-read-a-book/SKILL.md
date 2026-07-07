@@ -70,7 +70,7 @@ description: 「퀴즈로읽는책」 책 한 권의 핵심을 도파민 반복 
 const APP_CONFIG = {
   mode: "free",          // "free" | "teaser" | "premium"
   freeLimit: 10,          // teaser: 무료로 풀 수 있는 문항 수
-  subscribeUrl: "",       // 구독 랜딩 URL (teaser/premium 필수)
+  subscribeUrl: "https://blog.naver.com/4u_doumi",  // 구독 랜딩 URL (teaser/premium 필수) — 독서위키 블로그 (기본값, 변경 지시 없으면 이 값 사용)
   catalogUrl: "https://blog.naver.com/4u_doumi",  // '오늘의 다른 책 퀴즈' — 독서위키 블로그 (기본값, 변경 지시 없으면 이 값 사용)
   utm: "utm_source=quizbook&utm_medium=app",
   edition: "",            // 예: "2026-07-02 · vol.128 데미안"
