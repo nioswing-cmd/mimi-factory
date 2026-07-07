@@ -144,6 +144,18 @@
       "teaser": "apps/밸런스_케미_test.html",
       "premium": "apps/밸런스_케미_test.html",
       "desc": "둘의 취향 대결 밸런스 게임, 케미 지수 확인"
+    },
+    {
+      "id": "사피엔스",
+      "type": "quiz",
+      "title": "사피엔스",
+      "author": "유발 하라리",
+      "date": "2026-07-07",
+      "color1": "#7aa6ff",
+      "color2": "#b78bf5",
+      "teaser": "apps/사피엔스_quiz.html",
+      "premium": "apps/사피엔스_quiz.html",
+      "desc": "인류 7만 년의 역사를 퀴즈 미션으로 정복"
     }
   ]
 }
