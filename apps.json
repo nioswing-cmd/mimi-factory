@@ -134,15 +134,15 @@
       "desc": "둘이 나누는 대화 질문 카드, 관계가 깊어지는 시간"
     },
     {
-      "id": "밸런스_케미",
+      "id": "밸런스_게임",
       "type": "friend",
-      "title": "밸런스 케미",
+      "title": "밸런스 게임",
       "author": "미미팩토리 오리지널",
       "date": "2026-07-07",
       "color1": "#c3a1ff",
       "color2": "#ff8ad0",
-      "teaser": "apps/밸런스_케미_test.html",
-      "premium": "apps/밸런스_케미_test.html",
+      "teaser": "apps/밸런스_게임_test.html",
+      "premium": "apps/밸런스_게임_test.html",
       "desc": "둘의 취향 대결 밸런스 게임, 케미 지수 확인"
     },
     {
