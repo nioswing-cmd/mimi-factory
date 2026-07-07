@@ -66,7 +66,8 @@ def main():
     ap.add_argument("--title", help="앱 제목")
     ap.add_argument("--author", help="작가/설명")
     ap.add_argument("--desc", help="카드에 표시할 한 줄 소개")
-    ap.add_argument("--type", choices=["quiz", "test"], help="quiz(독서퀴즈) 또는 test(진단테스트)")
+    ap.add_argument("--type", choices=["quiz", "test", "friend"],
+                    help="quiz(독서퀴즈) / test(진단테스트) / friend(친해지기)")
     ap.add_argument("--no-push", action="store_true", help="GitHub 업로드 생략 (로컬 등록만)")
     args = ap.parse_args()
 
@@ -82,7 +83,8 @@ def main():
     if not title:
         print("❌ 제목은 필수입니다."); sys.exit(1)
 
-    atype = args.type or (ask("종류 — 1: 독서퀴즈, 2: 진단테스트", "1") == "2" and "test" or "quiz")
+    atype = args.type or {"2": "test", "3": "friend"}.get(
+        ask("종류 — 1: 독서퀴즈, 2: 진단테스트, 3: 친해지기", "1"), "quiz")
     author = args.author or ask("작가/설명 (예: 헤르만 헤세)", "미미팩토리 오리지널")
     desc = args.desc or ask("카드 한 줄 소개 (엔터 = 자동)", f"{title} — 미미팩토리")
 

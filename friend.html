@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>친해지기관 · 둘의 피크닉 — 미미팩토리</title>
+<meta name="description" content="둘이 함께 하면 더 가까워지는 질문 카드와 밸런스 게임. 미미팩토리 친해지기관">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fdf6ec; --ink:#4a3f35; --sub:#a08d7a;
+    --peach:#ffb59e; --peach2:#ff8f70; --mint:#a8e6cf; --lemon:#ffe3a3;
+    --card:#ffffff; --line:rgba(74,63,53,.1);
+    --pop:cubic-bezier(.34,1.56,.64,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Noto Sans KR',sans-serif; background:var(--bg); color:var(--ink);
+    min-height:100dvh; -webkit-font-smoothing:antialiased;
+  }
+  /* 파스텔 블롭 */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(300px 240px at 88% -30px, rgba(255,181,158,.4), transparent 70%),
+      radial-gradient(260px 220px at -30px 22%, rgba(168,230,207,.45), transparent 70%),
+      radial-gradient(300px 260px at 105% 68%, rgba(255,227,163,.5), transparent 70%);
+  }
+  .wrap{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:24px 18px 40px}
+
+  .nav{display:flex;gap:6px;font-size:11px;margin-bottom:20px;flex-wrap:wrap}
+  .nav a{color:var(--sub);text-decoration:none;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.6)}
+  .nav a.here{color:#fff;background:var(--peach2);border-color:var(--peach2);font-weight:700}
+
+  .hero{text-align:center;padding:8px 0 20px}
+  .hero .eyebrow{font-size:10.5px;letter-spacing:.4em;text-indent:.4em;color:var(--sub);margin-bottom:8px}
+  .hero h1{
+    font-family:'Gaegu',cursive;font-weight:700;font-size:44px;line-height:1.1;color:var(--peach2);
+    text-shadow:2px 2px 0 rgba(168,230,207,.6);
+  }
+  .hero p{font-size:13px;color:var(--sub);margin-top:8px;line-height:1.75}
+  .hero .doodle{font-size:17px;margin-top:10px;letter-spacing:.35em;text-indent:.35em}
+
+  /* 오늘의 돗자리 (최신작) */
+  .picnic{
+    position:relative;margin:10px 0 26px;padding:20px 18px 22px;cursor:pointer;
+    background:var(--card);border-radius:4px;
+    box-shadow:0 10px 26px rgba(74,63,53,.14);
+    transform:rotate(-1.2deg);
+    transition:transform .35s var(--pop);
+  }
+  .picnic:hover{transform:rotate(0deg) translateY(-3px)}
+  .picnic:active{transform:scale(.97)}
+  .picnic::before{ /* 마스킹테이프 */
+    content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(2deg);
+    width:92px;height:22px;background:var(--tp,var(--mint));opacity:.85;border-radius:2px;
+  }
+  .picnic .badge{
+    display:inline-block;font-family:'Gaegu',cursive;font-size:15px;font-weight:700;color:#fff;
+    background:var(--peach2);padding:2px 13px;border-radius:999px;transform:rotate(-2deg);
+  }
+  .picnic h2{font-family:'Gaegu',cursive;font-size:30px;margin-top:9px;line-height:1.2}
+  .picnic .meta{font-size:11.5px;color:var(--sub);margin-top:3px}
+  .picnic .desc{font-size:12.5px;color:#7a6a5b;margin-top:9px;line-height:1.65}
+  .picnic .go{
+    display:inline-block;margin-top:12px;font-family:'Gaegu',cursive;font-size:16px;font-weight:700;
+    color:var(--ink);background:var(--lemon);padding:7px 18px;border-radius:999px;
+    box-shadow:0 3px 0 rgba(74,63,53,.15);
+  }
+
+  .search{
+    width:100%;padding:11px 16px;margin-bottom:6px;font-size:14px;font-family:inherit;
+    color:var(--ink);background:#fff;border:2px dashed rgba(255,143,112,.4);border-radius:14px;outline:none;
+  }
+  .search:focus{border-color:var(--peach2);border-style:solid}
+  .count{font-family:'Gaegu',cursive;font-size:14px;color:var(--sub);margin:8px 2px 16px}
+
+  /* 폴라로이드 카드 */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 14px}
+  .polaroid{
+    position:relative;background:#fff;padding:10px 10px 14px;cursor:pointer;border-radius:3px;
+    box-shadow:0 8px 20px rgba(74,63,53,.16);
+    transition:transform .35s var(--pop),box-shadow .35s;
+    animation:drop .5s var(--pop) backwards;
+  }
+  .polaroid:nth-child(odd){transform:rotate(-2deg);animation-delay:.05s}
+  .polaroid:nth-child(even){transform:rotate(1.6deg);animation-delay:.12s}
+  @keyframes drop{from{opacity:0;transform:translateY(-14px) rotate(0deg)}}
+  .polaroid:hover{transform:rotate(0deg) translateY(-5px);box-shadow:0 14px 28px rgba(74,63,53,.2)}
+  .polaroid:active{transform:scale(.94)}
+  .polaroid .photo{
+    position:relative;aspect-ratio:1/1;border-radius:2px;overflow:hidden;
+    background:var(--pc,linear-gradient(135deg,#ffb59e,#a8e6cf));
+    display:flex;align-items:center;justify-content:center;
+  }
+  .polaroid .photo .emoji{font-size:40px;filter:drop-shadow(0 3px 5px rgba(0,0,0,.16))}
+  .polaroid .sticker{
+    position:absolute;top:4px;right:4px;font-family:'Gaegu',cursive;font-size:12px;font-weight:700;
+    color:#fff;background:var(--peach2);padding:1px 9px;border-radius:999px;transform:rotate(6deg);
+  }
+  .polaroid h3{font-family:'Gaegu',cursive;font-size:19px;font-weight:700;line-height:1.2;margin-top:9px;text-align:center}
+  .polaroid .a{font-size:10.5px;color:var(--sub);margin-top:2px;text-align:center}
+  .empty{grid-column:1/-1;text-align:center;color:var(--sub);font-size:13px;padding:36px 0;line-height:1.8}
+
+  /* 푸터 (브랜드 규칙: 수정 금지) */
+  .footer{text-align:center;margin-top:36px;padding-top:18px;border-top:1px solid rgba(74,63,53,.12)}
+  .mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px}
+  .mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(167,139,250,.6))}
+  .mf-eyebrow::after{transform:scaleX(-1)}
+  .mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#9a8fc0;font-weight:500;white-space:nowrap}
+  .mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;letter-spacing:.01em;
+    background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .mf-caption{font-size:11.5px;letter-spacing:.1em;color:#9a8fc0}
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="nav">
+    <a href="index.html">🏭 미미팩토리</a>
+    <a href="quiz.html">📚 독서퀴즈관</a>
+    <a href="test.html">🎯 테스트관</a>
+    <a class="here" href="friend.html">💞 친해지기관</a>
+  </div>
+
+  <div class="hero">
+    <div class="eyebrow">미 미 팩 토 리 · 친 해 지 기 관</div>
+    <h1>둘의 피크닉</h1>
+    <p>같이 하면 더 재밌고, 하고 나면 더 가까워지는<br>둘만의 놀이 돗자리를 펼쳐 보세요.</p>
+    <div class="doodle">🧺 🌼 🍑</div>
+  </div>
+
+  <div id="picnic"></div>
+
+  <input class="search" id="q" type="search" placeholder="놀이 검색…">
+  <div class="count" id="count"></div>
+  <div class="grid" id="grid"></div>
+
+  <div class="footer">
+    <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+    <div class="mf-logo">미미팩토리</div>
+    <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+  </div>
+</div>
+
+<script>
+let APPS=[], query="";
+const EMOJIS=["💌","🎈","🍀","🌷","🧸","🍰"];
+
+async function load(){
+  try{
+    const r = await fetch("apps.json?v="+Date.now());
+    const j = await r.json();
+    APPS = (j.apps||[]).filter(a=>a.type==="friend");
+  }catch(e){ APPS = []; }
+  APPS.sort((a,b)=> (b.date||"").localeCompare(a.date||""));
+  renderPicnic(); render();
+}
+
+function grad(a){return `linear-gradient(135deg,${a.color1||"#ffb59e"},${a.color2||"#a8e6cf"})`}
+function open(a){ if(navigator.vibrate) navigator.vibrate(28); location.href = a.teaser || a.premium; }
+
+function renderPicnic(){
+  const a = APPS[0]; if(!a) return;
+  const el = document.getElementById("picnic");
+  el.innerHTML = `
+    <div class="picnic" style="--tp:${a.color2||"#a8e6cf"}">
+      <span class="badge">오늘의 돗자리 🧺</span>
+      <h2>${a.title}</h2>
+      <div class="meta">${a.author} · ${a.date||""}</div>
+      <div class="desc">${a.desc||""}</div>
+      <span class="go">같이 놀러 가기 →</span>
+    </div>`;
+  el.querySelector(".picnic").onclick = ()=>open(a);
+}
+
+function render(){
+  const grid = document.getElementById("grid");
+  const list = APPS.filter(a =>
+    query==="" || (a.title+a.author).toLowerCase().includes(query)
+  );
+  document.getElementById("count").textContent = `돗자리 위 놀이 ${list.length}개`;
+  grid.innerHTML = list.length ? "" :
+    `<div class="empty">아직 돗자리가 비어 있어요.<br>곧 새 놀이가 도착할 거예요 🧺</div>`;
+  list.forEach((a,i)=>{
+    const c = document.createElement("div");
+    c.className="polaroid"; c.style.setProperty("--pc",grad(a));
+    c.innerHTML = `
+      <div class="photo">
+        <span class="emoji">${EMOJIS[i%EMOJIS.length]}</span>
+        <span class="sticker">둘이서!</span>
+      </div>
+      <h3>${a.title}</h3>
+      <div class="a">${a.author}</div>`;
+    c.onclick = ()=>open(a);
+    grid.appendChild(c);
+  });
+}
+
+document.getElementById("q").oninput = e=>{ query = e.target.value.trim().toLowerCase(); render(); };
+load();
+</script>
+</body>
+</html>

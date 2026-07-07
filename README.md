@@ -6,7 +6,8 @@
 
 | 위치 | 역할 |
 |---|---|
-| `index.html` | 허브 홈페이지 (apps.json을 읽어 카드 자동 렌더링) |
+| `index.html` | 관문 랜딩 (오늘의 신작 + 3개 주제관 입구) |
+| `quiz.html` / `test.html` / `friend.html` | 주제관 3곳 — 독서퀴즈관(밤의 서재) · 테스트관(도파민 실험실) · 친해지기관(둘의 피크닉) |
 | `apps.json` | 앱 목록 매니페스트 — **홈페이지의 유일한 데이터 소스** |
 | `apps/` | 완성된 퀴즈/테스트 HTML 파일들 |
 | `.claude/skills/` | 스킬 4종 폴더를 여기에 복사 (quiz-to-read-a-book, book-palette-12, mimi-factory-webapp, dopamine-assessment-builder) |
@@ -20,6 +21,7 @@
 |---|---|---|---|---|---|---|---|
 | 독서퀴즈 | 데미안 | 헤르만 헤세 | (선택) | 프리미엄+티저 | 대기 | (자동) | (자동) |
 | 테스트 | 사랑의 언어 진단 | 5가지 사랑의 언어 | | 무료 | 대기 | (자동) | (자동) |
+| 친해지기 | 첫만남 질문 카드 | 아이스브레이킹 30문 | | 무료 | 대기 | (자동) | (자동) |
 
 ## GitHub Secrets (Settings → Secrets and variables → Actions)
 

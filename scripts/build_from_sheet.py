@@ -65,9 +65,19 @@ def pick_waiting(rows):
 
 
 # ── 2. 프롬프트 구성 ──────────────────────────────────────
+def category_of(ytype):
+    """시트 유형(A열) → 카테고리: 독서퀴즈→quiz, 친해지기→friend, 그 외→test"""
+    if ytype.startswith("독서") or ytype == "quiz":
+        return "quiz"
+    if "친해" in ytype or ytype == "friend":
+        return "friend"
+    return "test"
+
+
 def make_prompt(item):
     slug = slugify(item["title"])
-    if item["type"].startswith("독서") or item["type"] == "quiz":
+    cat = category_of(item["type"])
+    if cat == "quiz":
         p = (
             f"quiz-to-read-a-book 스킬을 사용해서 『{item['title']}』({item['author']}) "
             f"독서퀴즈 웹앱을 만들어줘. "
@@ -81,6 +91,13 @@ def make_prompt(item):
             f"(티저는 {OUT_DIR}/{slug}_teaser.html) 경로에 저장하고, "
             f"스킬의 verify_quiz.py 검증을 반드시 통과시켜. "
             f"마지막에 앱 설명 한 줄을 {OUT_DIR}/{slug}_desc.txt 에 저장해."
+        )
+    elif cat == "friend":
+        p = (
+            f"mimi-factory-webapp 스킬로 '{item['title']}' 웹앱을 만들어줘. "
+            f"둘이 함께(친구·연인·가족) 나란히 보면서 즐기는 '친해지기' 앱이다. 컨셉: {item['author']}. "
+            f"완성 파일은 반드시 {OUT_DIR}/{slug}_friend.html 에 저장하고, "
+            f"앱 설명 한 줄을 {OUT_DIR}/{slug}_desc.txt 에 저장해."
         )
     else:
         p = (
@@ -119,8 +136,8 @@ def run_claude(prompt):
 
 # ── 4. 산출물 수거 + apps.json 갱신 ──────────────────────
 def collect(item, slug):
-    is_quiz = item["type"].startswith("독서") or item["type"] == "quiz"
-    main = os.path.join(OUT_DIR, f"{slug}_{'quiz' if is_quiz else 'test'}.html")
+    cat = category_of(item["type"])
+    main = os.path.join(OUT_DIR, f"{slug}_{cat}.html")
     teaser = os.path.join(OUT_DIR, f"{slug}_teaser.html")
     desc_f = os.path.join(OUT_DIR, f"{slug}_desc.txt")
 
@@ -144,7 +161,7 @@ def collect(item, slug):
     c1, c2 = PALETTES[len(m["apps"]) % len(PALETTES)]
     entry = {
         "id": slug,
-        "type": "quiz" if is_quiz else "test",
+        "type": cat,
         "title": item["title"],
         "author": item["author"],
         "date": TODAY,
