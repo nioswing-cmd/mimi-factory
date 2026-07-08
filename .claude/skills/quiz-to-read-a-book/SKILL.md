@@ -71,7 +71,7 @@ const APP_CONFIG = {
   mode: "free",          // "free" | "teaser" | "premium"
   freeLimit: 10,          // teaser: 무료로 풀 수 있는 문항 수
   subscribeUrl: "https://blog.naver.com/4u_doumi",  // 구독 랜딩 URL (teaser/premium 필수) — 독서위키 블로그 (기본값, 변경 지시 없으면 이 값 사용)
-  catalogUrl: "https://blog.naver.com/4u_doumi",  // '오늘의 다른 책 퀴즈' — 독서위키 블로그 (기본값, 변경 지시 없으면 이 값 사용)
+  catalogUrl: "https://nioswing-cmd.github.io/mimi-factory/quiz.html",  // '다른 책 퀴즈 보기' — 밤의 서재(독서퀴즈관) 메인 (기본값, 변경 지시 없으면 이 값 사용)
   utm: "utm_source=quizbook&utm_medium=app",
   edition: "",            // 예: "2026-07-02 · vol.128 데미안"
   accessCodeHash: ""      // premium 간이 게이트용 SHA-256 해시 (선택)
@@ -107,7 +107,7 @@ const APP_CONFIG = {
 ### 전환·바이럴 장치 (teaser/premium 공통)
 
 - **결과 공유 카드**: 결과 화면에 '🖼 결과 카드 저장' 버튼. canvas API로 자체 렌더(외부 CDN 0) — 책 표지풍 타이포 + 점수/등급 + 브랜드 푸터 + `subscribeUrl` 짧은 표기. `toBlob` → `<a download>` 저장.
-- **시리즈 내비**: 푸터 바로 위에 `📚 오늘의 다른 책 퀴즈` 링크(`catalogUrl`+utm). 매일 1권 컨셉의 회유 동선.
+- **시리즈 내비**: 푸터 바로 위에 `📚 다른 책 퀴즈 보기` 링크(`catalogUrl`+utm, 기본 목적지는 밤의 서재 quiz.html). 매일 1권 컨셉의 회유 동선.
 - **에디션 표기**: 홈 화면 상단에 `edition` 문구(발행일·호수) — "매일 새 책" 컨셉의 수집 욕구 자극.
 
 ### 저작권 안전 규칙 (유료화 시 필수)
