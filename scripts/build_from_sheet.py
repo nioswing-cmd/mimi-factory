@@ -238,7 +238,10 @@ def make_prompt(item):
         f" 그리고 홍보 초안을 {OUT_DIR}/{slug}_promo.md 에 저장해. 구성: "
         f"① 네이버 블로그 포스트 초안 — 제목 3안, 본문 600자 내외(소개 + 맛보기 문항 3개 + "
         f"앱 링크 {app_link}?utm_source=blog&utm_medium=post + 해시태그 5개), "
-        f"② 인스타그램 캡션 — 2줄 훅 + 해시태그 10개."
+        f"② 인스타그램 캡션 — 2줄 훅 + 해시태그 10개, "
+        f"③ 페이스북 짧은 글 2안 — 핵심 통찰 하나를 3~5줄의 여운 있는 단문으로, "
+        f"광고 문구·링크 금지, 마지막 줄은 독자에게 던지는 질문 "
+        f"(댓글에 달 링크는 별도 1줄로: {app_link}?utm_source=fb&utm_medium=comment)."
     )
 
     mat = load_material(item, slug)
