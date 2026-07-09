@@ -41,6 +41,6 @@ jobs:
         run: |
           git config user.name "mimi-factory-bot"
           git config user.email "bot@mimifactory.local"
-          git add apps/ apps.json
+          git add apps/ apps.json 홍보초안/
           git diff --cached --quiet && echo "변경 없음" || git commit -m "🏭 오늘의 신작 자동 생산 ($(date +%Y-%m-%d))"
           git push

@@ -228,6 +228,19 @@ def make_prompt(item):
     if item.get("extra"):
         p += f" 추가 지시: {item['extra']}"
 
+    # 홍보 초안 (블로그 포스트 + 인스타 캡션) — 채널 운영 반자동화
+    site = os.environ.get("SITE_URL", "https://nioswing-cmd.github.io/mimi-factory").rstrip("/")
+    if cat == "quiz" and "티저" in item["edition"]:
+        app_link = f"{site}/apps/{slug}_teaser.html"
+    else:
+        app_link = f"{site}/apps/{slug}_{cat}.html"
+    p += (
+        f" 그리고 홍보 초안을 {OUT_DIR}/{slug}_promo.md 에 저장해. 구성: "
+        f"① 네이버 블로그 포스트 초안 — 제목 3안, 본문 600자 내외(소개 + 맛보기 문항 3개 + "
+        f"앱 링크 {app_link}?utm_source=blog&utm_medium=post + 해시태그 5개), "
+        f"② 인스타그램 캡션 — 2줄 훅 + 해시태그 10개."
+    )
+
     mat = load_material(item, slug)
     if mat:
         p += (
@@ -286,6 +299,14 @@ def collect(item, slug):
     desc = ""
     if os.path.exists(desc_f):
         desc = open(desc_f, encoding="utf-8").read().strip()[:80]
+
+    # 홍보 초안 수거 (선택 산출물 — 없어도 실패 아님)
+    promo = os.path.join(OUT_DIR, f"{slug}_promo.md")
+    if os.path.exists(promo):
+        promo_dir = os.path.join(ROOT, "홍보초안")
+        os.makedirs(promo_dir, exist_ok=True)
+        os.replace(promo, os.path.join(promo_dir, f"{slug}_promo.md"))
+        log(f"홍보 초안 저장: 홍보초안/{slug}_promo.md")
 
     with open(MANIFEST, encoding="utf-8") as f:
         m = json.load(f)

@@ -12,6 +12,7 @@
 | `apps/` | 완성된 퀴즈/테스트 HTML 파일들 |
 | `.claude/skills/` | 스킬 4종 폴더를 여기에 복사 (quiz-to-read-a-book, book-palette-12, mimi-factory-webapp, dopamine-assessment-builder) |
 | `scripts/build_from_sheet.py` | 자동 생산 스크립트 (시트 → Claude → 검증 → 배포) |
+| `홍보초안/` | 매일 생산 시 블로그 포스트·인스타 캡션 초안 자동 저장 |
 | `scripts/apps_script_webhook.gs` | 시트 상태 기록 + 텔레그램 알림 (구글 시트에 설치) |
 | `.github/workflows/daily-build.yml` | 매일 06:00 KST 자동 실행 스케줄 |
 
