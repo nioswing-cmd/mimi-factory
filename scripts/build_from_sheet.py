@@ -53,13 +53,21 @@ def read_sheet():
 
 
 def pick_waiting(rows):
-    """상태(F열)가 '대기'인 첫 행을 찾는다. 1행은 머리글이므로 건너뜀."""
+    """생산 대상 행을 찾는다. 1행은 머리글이므로 건너뜀.
+    - 상태(F열)가 '대기'인 줄, 또는
+    - 상태·URL(G열)·완료일(H열)이 모두 빈칸인 신규 줄(제목 필수)을 고른다.
+      → 제목·작가만 적어도 생산된다. 보류하려면 상태에 '보류' 등 아무 글자나 쓴다.
+    - 유형(A열)이 빈칸이면 '독서퀴즈'로 간주한다.
+    """
     for i, row in enumerate(rows[1:], start=2):  # i = 시트 기준 행 번호
         row = row + [""] * (8 - len(row))
-        cells = [c.strip() for c in row[:6]]
-        ytype, title, author, palette, edition, status = cells
-        if status == "대기" and title:
-            return {"row": i, "type": ytype, "title": title, "author": author,
+        cells = [c.strip() for c in row[:8]]
+        ytype, title, author, palette, edition, status, url, done = cells
+        if not title:
+            continue
+        fresh = status == "" and url == "" and done == ""
+        if status == "대기" or fresh:
+            return {"row": i, "type": ytype or "독서퀴즈", "title": title, "author": author,
                     "palette": palette, "edition": edition or "프리미엄+티저"}
     return None
 
