@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>내 감정 해상도 — 나는 몇 픽셀로 느끼는 사람일까</title>
+<meta name="description" content="같은 순간을 뭉뚱그려 느끼는 사람과 미세한 결까지 느끼는 사람이 있다. 12개 장면으로 재는 내 감정 해상도. 나는 몇 픽셀로 느끼는 사람일까?">
+<meta property="og:title" content="내 감정 해상도 — 나는 몇 픽셀로 느끼는 사람일까">
+<meta property="og:description" content="12개 장면으로 재는 나의 감정 해상도. 모자이크부터 4K까지, 당신은 몇 픽셀?">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#141024; --bg2:#241a3d;
+  --accent1:#8fd0ff; --accent2:#6c7bff;
+  --cream:#f4f0ff; --muted:#c3b9e0;
+  --card:#211a3a;
+  --neutral:#2e2650;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 80% -10%, rgba(120,160,255,.12), transparent 55%),
+    radial-gradient(120% 90% at 10% 110%, rgba(180,110,255,.14), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  transition:background .9s ease;
+  min-height:100dvh;
+}
+.wrap{max-width:520px; margin:0 auto; padding:22px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(105deg,var(--accent1),#b78bf5 55%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1{font-family:'Jua',sans-serif; font-weight:400; line-height:1.28; margin:0;}
+.mono{font-variant-numeric:tabular-nums; font-feature-settings:"tnum";}
+
+/* ---------- 화면 전환 ---------- */
+.screen{display:none; animation:fadeIn .5s ease both; flex:1; flex-direction:column;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+/* ---------- 홈 ---------- */
+.home{justify-content:center; text-align:center; gap:6px;}
+.eyebrow{font-size:12.5px; letter-spacing:.28em; color:var(--muted); text-indent:.28em; margin-bottom:10px;}
+.home h1{font-size:31px;}
+.home .sub{color:var(--muted); font-size:15px; line-height:1.7; margin:16px 4px 6px; word-break:keep-all;}
+.chips{display:flex; gap:7px; justify-content:center; flex-wrap:wrap; margin:18px 0 8px;}
+.chip{font-size:12px; padding:7px 12px; border-radius:99px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1); color:var(--muted);}
+.previewbox{margin:22px auto 6px; width:120px; height:120px; border-radius:26px; display:grid; place-items:center; font-size:60px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);}
+
+/* ---------- 버튼 ---------- */
+.btn{
+  font-family:'Jua',sans-serif; font-size:19px; color:#161028;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2));
+  border:none; border-radius:18px; padding:17px 22px; width:100%;
+  cursor:pointer; box-shadow:0 10px 26px -8px var(--accent2);
+  transition:transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
+}
+.btn:active{transform:scale(.96);}
+.btn.ghost{background:transparent; color:var(--muted); box-shadow:none; border:1px solid rgba(255,255,255,.16); font-size:15px; padding:13px;}
+.btn:focus-visible{outline:3px solid #fff; outline-offset:2px;}
+
+/* ---------- 진단 상단 ---------- */
+.topbar{margin-bottom:16px;}
+.metaRow{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:9px;}
+.metaRow .qn{font-size:13px; color:var(--muted); letter-spacing:.04em;}
+.metaRow .live{font-family:'Jua',sans-serif; font-size:15px;}
+.gauge{height:12px; border-radius:99px; background:rgba(255,255,255,.09); overflow:hidden; position:relative;}
+.gaugefill{
+  height:100%; width:0%; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  box-shadow:0 0 16px 1px var(--accent2);
+  transition:width .55s cubic-bezier(.22,1,.36,1), box-shadow .6s;
+}
+.resline{display:flex; align-items:center; gap:13px; margin-top:15px;}
+.thumb{
+  width:66px; height:66px; border-radius:16px; flex:none; overflow:hidden; position:relative;
+  background:radial-gradient(circle at 40% 35%, #ff8ad0, #6c7bff 70%);
+  display:grid; place-items:center; font-size:34px;
+  filter:blur(13px); transform:scale(1.05);
+  transition:filter .6s ease, transform .6s ease;
+}
+.thumbcap{font-size:12px; color:var(--muted); line-height:1.55; word-break:keep-all;}
+.thumbcap b{color:var(--cream); font-weight:700;}
+
+/* ---------- 질문 ---------- */
+.qbody{flex:1; display:flex; flex-direction:column; justify-content:center;}
+.scene{font-size:12.5px; letter-spacing:.06em; color:var(--accent1); font-weight:700; margin-bottom:9px;}
+.question{font-family:'Jua',sans-serif; font-size:22px; line-height:1.45; margin:0 0 22px; word-break:keep-all;}
+.opts{display:flex; flex-direction:column; gap:11px;}
+.opt{
+  text-align:left; background:var(--neutral); color:var(--cream);
+  border:1.5px solid rgba(255,255,255,.08); border-radius:15px;
+  padding:16px 16px 16px 15px; font-size:15.5px; line-height:1.5; cursor:pointer;
+  display:flex; align-items:flex-start; gap:12px; word-break:keep-all;
+  transition:transform .16s cubic-bezier(.34,1.56,.64,1), border-color .2s, background .2s;
+}
+.opt:active{transform:scale(.98);}
+.opt:hover{border-color:rgba(255,255,255,.22);}
+.opt:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+.opt .lab{
+  font-family:'Jua',sans-serif; font-size:15px; color:var(--muted);
+  background:rgba(255,255,255,.08); border-radius:9px; width:30px; height:30px;
+  display:grid; place-items:center; flex:none;
+}
+.opt.picked{border-color:var(--accent1); background:#332a56;}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1deg); opacity:.4;} 60%{transform:scale(1.02);} 100%{transform:scale(1); opacity:1;}}
+
+/* ---------- 결과 ---------- */
+.result{text-align:center;}
+.rtier{font-family:'Jua',sans-serif; font-size:15px; letter-spacing:.16em; color:var(--muted); margin-top:8px;}
+.remoji{font-size:70px; margin:6px 0 2px; line-height:1;}
+.rname{font-family:'Jua',sans-serif; font-size:30px; margin:2px 0;}
+.rpx{font-family:'Jua',sans-serif; font-size:46px; margin:8px 0 2px;}
+.rpx small{font-size:19px; color:var(--muted);}
+.rdesc{color:var(--muted); font-size:15px; line-height:1.75; margin:14px 6px 4px; word-break:keep-all;}
+.meter{margin:22px 4px 6px; text-align:left;}
+.meterhead{display:flex; justify-content:space-between; font-size:13px; color:var(--muted); margin-bottom:7px;}
+.rbar{height:16px; border-radius:99px; background:rgba(255,255,255,.09); overflow:hidden;}
+.rbarfill{height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg,var(--accent1),#ff8ad0); box-shadow:0 0 16px 1px var(--accent2); transition:width 1.1s cubic-bezier(.22,1,.36,1);}
+.scale4{display:flex; justify-content:space-between; font-size:10.5px; color:var(--muted); margin-top:6px; opacity:.8;}
+.rcards{text-align:left; margin:20px 0 6px; display:flex; flex-direction:column; gap:11px;}
+.rcard{background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:15px; padding:14px 16px;}
+.rcard h4{margin:0 0 6px; font-size:13.5px; letter-spacing:.03em; color:var(--accent1); font-weight:700;}
+.rcard p{margin:0; font-size:14.5px; line-height:1.65; color:var(--cream); word-break:keep-all;}
+.rcard.hint h4{color:#ff8ad0;}
+.actions{display:flex; flex-direction:column; gap:10px; margin-top:20px;}
+.share{display:flex; gap:10px;}
+.share .btn{flex:1;}
+
+/* ---------- 토스트 ---------- */
+.toast{
+  position:fixed; left:50%; top:22px; transform:translateX(-50%) translateY(-24px);
+  background:rgba(30,22,52,.97); border:1.5px solid var(--accent1); color:var(--cream);
+  padding:12px 20px; border-radius:99px; font-size:14px; font-family:'Jua',sans-serif;
+  opacity:0; pointer-events:none; transition:opacity .35s, transform .35s; z-index:60; max-width:90vw;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+/* ---------- 푸터 ---------- */
+.footer{text-align:center; margin-top:30px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<canvas id="fx" style="position:fixed; inset:0; pointer-events:none; z-index:55;"></canvas>
+
+<div class="wrap">
+
+  <!-- ===== 홈 ===== -->
+  <section class="screen on home" id="home">
+    <div class="eyebrow">감정 해상도 테스트</div>
+    <h1>나는 몇 픽셀로<br><span class="grad">느끼는 사람</span>일까?</h1>
+    <div class="previewbox" id="homePrev">🫥</div>
+    <p class="sub">
+      누군가는 감정을 <b style="color:var(--cream)">'좋다·나쁘다'</b> 두 칸으로 느끼고,<br>
+      누군가는 <b style="color:var(--cream)">'서운한데 부러운, 그런데 편안한'</b> 미세한 결까지 느낀다.<br>
+      같은 순간, 당신의 마음은 몇 픽셀로 찍힐까?
+    </p>
+    <div class="chips">
+      <span class="chip">12장면</span>
+      <span class="chip">약 2분</span>
+      <span class="chip">모자이크→4K</span>
+    </div>
+    <div style="margin-top:16px;">
+      <button class="btn" id="startBtn">해상도 측정 시작 📷</button>
+    </div>
+  </section>
+
+  <!-- ===== 진단 ===== -->
+  <section class="screen" id="quiz">
+    <div class="topbar">
+      <div class="metaRow">
+        <span class="qn mono" id="qn">장면 1 / 12</span>
+        <span class="live grad" id="liveLabel">측정 중…</span>
+      </div>
+      <div class="gauge"><div class="gaugefill" id="gauge"></div></div>
+      <div class="resline">
+        <div class="thumb" id="thumb">💗</div>
+        <div class="thumbcap">지금까지의 감정 해상도<br><b id="livePct" class="mono">0%</b> — 답할수록 마음이 선명해져요</div>
+      </div>
+    </div>
+    <div class="qbody">
+      <div class="scene mono" id="scene">SCENE 01</div>
+      <h2 class="question" id="question">질문</h2>
+      <div class="opts" id="opts"></div>
+    </div>
+  </section>
+
+  <!-- ===== 결과 ===== -->
+  <section class="screen result" id="res">
+    <div class="rtier" id="rtier">YOUR RESOLUTION</div>
+    <div class="remoji" id="remoji">🖼️</div>
+    <div class="rname grad" id="rname">고해상도</div>
+    <div class="rpx mono" id="rpx">1080<small>px</small></div>
+    <p class="rdesc" id="rdesc"></p>
+
+    <div class="meter">
+      <div class="meterhead"><span>감정 해상도</span><span class="mono" id="rpctText">0%</span></div>
+      <div class="rbar"><div class="rbarfill" id="rbar"></div></div>
+      <div class="scale4"><span>모자이크</span><span>SD</span><span>HD</span><span>4K</span></div>
+    </div>
+
+    <div class="rcards">
+      <div class="rcard"><h4>🔍 이런 사람이에요</h4><p id="rc1"></p></div>
+      <div class="rcard"><h4>💎 당신의 강점</h4><p id="rc2"></p></div>
+      <div class="rcard hint"><h4>✨ 한 단계 더 선명해지려면</h4><p id="rc3"></p></div>
+    </div>
+
+    <div class="actions">
+      <div class="share">
+        <button class="btn" id="shareBtn">결과 공유 🔗</button>
+        <button class="btn ghost" id="retryBtn">다시 하기 ↺</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 브랜드 푸터 ===== -->
+  <div class="footer">
+    <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+    <div class="mf-logo">미미팩토리</div>
+    <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script>
+/* ---------------- 데이터 ---------------- */
+// 각 선택지 v = 해상도 점수(0~3). 라벨/순서는 표시용으로 섞고, 채점은 v로 한다.
+const QUESTIONS=[
+ {s:"오랜만에 만난 친구가 자기 얘기만 했다. 돌아오는 길, 내 마음은?",
+  o:[{t:"그냥 좀 별로였다.",v:0},{t:"기분이 안 좋았다. 피곤했나 보다.",v:1.5},{t:"서운함 반, 나도 얘길 못 꺼낸 아쉬움 반. 살짝 외로웠다.",v:3}]},
+ {s:"큰 발표 직전, 심장이 빠르게 뛴다. 이걸 뭐라고 부를까?",
+  o:[{t:"그냥 컨디션이 안 좋은 것 같다.",v:0},{t:"불안하다.",v:1.5},{t:"긴장 반 설렘 반. 잘하고 싶은 마음이 몸에 먼저 왔다.",v:3}]},
+ {s:"SNS에서 친구의 좋은 소식을 봤다. 축하 댓글을 다는 속마음은?",
+  o:[{t:"좋네, 하고 넘겼다.",v:0},{t:"기쁘면서도 살짝 부러웠다.",v:1.5},{t:"축하·옅은 질투·나도 조급해지는 초조함까지 세 겹이 겹쳤다.",v:3}]},
+ {s:"하루를 마치고 누웠는데 이유 없이 마음이 무겁다. 나는?",
+  o:[{t:"그냥 잔다. 그런 날도 있으니까.",v:0},{t:"왜 그런지 잠깐 떠올려 본다.",v:1.5},{t:"무거움의 정체를 찾는다. 아까 그 말? 미뤄둔 일? 하나씩 이름을 붙여 본다.",v:3}]},
+ {s:"\"지금 기분 어때?\"라는 질문을 받으면 보통?",
+  o:[{t:"좋아 / 그냥 그래 / 별로, 중 하나로 답한다.",v:0},{t:"좋아·나빠에 이유를 한 줄 붙인다.",v:1.5},{t:"'설레는데 조금 불안한' 식으로 두세 단어를 섞어 답한다.",v:3}]},
+ {s:"화가 났다. 그 화를 가만히 들여다보면?",
+  o:[{t:"화는 화다. 그냥 화났다.",v:0},{t:"짜증인지 분노인지 정도는 구분된다.",v:1.5},{t:"무시당한 느낌인지, 억울함인지, 실망인지 결이 보인다.",v:3}]},
+ {s:"좋아하는 음악을 들을 때 내 감정은?",
+  o:[{t:"좋다, 그거면 충분.",v:0},{t:"신나는 곡 / 슬픈 곡 정도로 나뉜다.",v:1.5},{t:"'그리운데 따뜻한', '쓸쓸하지만 편안한' 같은 미묘한 색이 느껴진다.",v:3}]},
+ {s:"감정을 나타내는 단어를 평소 얼마나 쓰나?",
+  o:[{t:"기쁨·슬픔·화남·놀람 정도.",v:0},{t:"서운함, 뿌듯함, 후련함 정도는 자주 쓴다.",v:1.5},{t:"먹먹함, 아련함, 애틋함, 겸연쩍음… 미세한 단어를 골라 쓴다.",v:3}]},
+ {s:"누군가 \"왜 그래?\"라고 물으면 나는?",
+  o:[{t:"'몰라, 그냥.'이라고 답할 때가 많다.",v:0},{t:"설명하려 애쓰지만 단어가 잘 안 떠오른다.",v:1.5},{t:"내 상태를 비교적 정확한 단어로 짚어 말할 수 있다.",v:3}]},
+ {s:"슬픈 영화를 봤다. 끝나고 나서 남는 건?",
+  o:[{t:"울었거나 안 울었거나, 둘 중 하나.",v:0},{t:"슬펐다 / 감동받았다 정도로 남는다.",v:1.5},{t:"어느 장면의 어떤 결이 나를 건드렸는지 떠올릴 수 있다.",v:3}]},
+ {s:"몸의 신호(가슴 답답함, 목 메임)를 감정과 연결하나?",
+  o:[{t:"몸은 몸, 마음은 마음. 잘 안 엮는다.",v:0},{t:"가끔 '아, 스트레스구나' 정도로 연결한다.",v:1.5},{t:"가슴이 죄이면 불안, 목이 메면 서러움… 몸으로 감정을 읽는다.",v:3}]},
+ {s:"복잡했던 하루를 일기나 메모로 정리한다면?",
+  o:[{t:"쓸 말이 없다. '오늘 힘들었음.' 정도.",v:0},{t:"무슨 일이 있었는지 사건 위주로 적는다.",v:1.5},{t:"그때그때 느낀 감정의 결을 문장으로 풀어낼 수 있다.",v:3}]}
+];
+
+const TIERS=[
+ {min:0, key:"모자이크 해상도", tier:"8-BIT · MOSAIC", emoji:"🟫", px:240,
+  a1:"#c9a06b", a2:"#a5794b", bg1:"#1c1526", bg2:"#2c2033",
+  desc:"당신은 감정을 큰 픽셀로 느낍니다. '좋다 / 나쁘다'의 두세 칸으로 세상을 담아요. 대신 결정이 빠르고, 사소한 감정에 오래 흔들리지 않습니다.",
+  c1:"복잡한 감정도 '괜찮아' 혹은 '별로야'로 요약하는 편이에요. 마음이 심플해서 뒤끝이 적습니다.",
+  c2:"감정에 잡아먹히지 않는 힘. 남들이 세세한 기분에 휘둘릴 때, 당신은 큰 그림을 봅니다.",
+  c3:"'안 좋다'가 올라올 때 딱 한 단어만 더 붙여보세요. 화? 서운함? 지침? 픽셀 하나만 늘려도 세상이 조금 선명해집니다."},
+ {min:31, key:"표준 해상도", tier:"SD · STANDARD", emoji:"📺", px:480,
+  a1:"#ffb56b", a2:"#ff8a5b", bg1:"#221530", bg2:"#3a1f3a",
+  desc:"기본 감정은 또렷하게 구분합니다. 기쁨·슬픔·화남·불안 정도는 정확히 짚어요. 아직 미묘한 중간색은 뭉개지지만, 충분히 또렷한 화면입니다.",
+  c1:"'오늘 좀 서운했어'처럼 감정에 이름은 붙이지만, 여러 감정이 겹칠 땐 하나로 뭉뚱그리는 편이에요.",
+  c2:"자기 감정을 말로 옮길 줄 아는 사람. 관계에서 오해가 적고, 필요할 때 솔직하게 표현합니다.",
+  c3:"한 순간에 감정이 하나만 있을 거란 생각을 내려놓아 보세요. '기쁜데 아쉬운' 같은 *겹감정*을 찾는 순간 해상도가 확 올라갑니다."},
+ {min:56, key:"고해상도", tier:"HD · HIGH-DEF", emoji:"🖼️", px:1080,
+  a1:"#8fd0ff", a2:"#6c7bff", bg1:"#141024", bg2:"#241a3d",
+  desc:"당신의 마음은 선명합니다. 겹쳐진 감정의 결을 알아채고, 왜 그런지도 대체로 설명할 수 있어요. 자신과 타인의 미묘함을 잘 읽는 사람입니다.",
+  c1:"'서운한데 그래도 고마운' 같은 이중감정을 자연스럽게 느낍니다. 감정의 원인까지 되짚는 편이에요.",
+  c2:"섬세한 공감력. 상대가 말 안 해도 결을 읽고, 자기 감정도 정교하게 다룰 줄 압니다. 갈등을 부드럽게 푸는 힘이 있어요.",
+  c3:"느낀 결을 *기록*으로 남겨보세요. 순간의 미묘함을 문장으로 붙잡는 습관이 당신을 4K로 데려갑니다."},
+ {min:81, key:"초고해상도", tier:"4K · ULTRA HD", emoji:"💎", px:2160,
+  a1:"#ff9ecb", a2:"#c46bff", bg1:"#1c0f2a", bg2:"#33143f",
+  desc:"당신은 감정을 초고해상도로 느낍니다. 미세한 그라데이션까지 언어로 붙잡는 사람. 아련함·먹먹함·겸연쩍음의 차이를 알고, 몸의 신호까지 감정으로 번역합니다.",
+  c1:"한 순간에 서너 겹의 감정이 겹쳐 있어도 각각을 알아채고 이름 붙입니다. 감정의 지도가 아주 촘촘해요.",
+  c2:"깊은 자기이해와 공감력. 예술적 감수성과 섬세한 관계력의 원천입니다. 당신 곁의 사람은 '이해받는다'고 느낄 거예요.",
+  c3:"너무 선명한 화면은 때로 피곤합니다. 모든 감정을 다 해석하려 하지 말고, 가끔은 *그냥 느끼고 흘려보내는* 저해상도 모드도 허락해 주세요."}
+];
+
+/* ---------------- 상태 ---------------- */
+let idx=0, total=0, answered=0, order=[];
+const MAXPER=3;
+const HUES=[["#8fd0ff","#6c7bff"],["#ffd56b","#ffb347"],["#a0f0c0","#4fd1a0"],["#ff9ecb","#ff6b9e"],["#ffb38a","#ff7a5b"],["#c9a0ff","#8a5bff"]];
+
+/* ---------------- 유틸 ---------------- */
+function $(id){return document.getElementById(id);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt; function toast(m){const t=$('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),1900);}
+function tierFor(pct){let r=TIERS[0]; for(const t of TIERS){ if(pct>=t.min) r=t; } return r;}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); $(id).classList.add('on'); window.scrollTo(0,0);}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+// *강조* 마커 → 색 볼드. (esc는 &,<,>만 건드리므로 *는 안전)
+function fmt(s,color){return esc(s).replace(/\*([^*]+)\*/g,'<b style="color:'+color+'">$1</b>');}
+
+// 폭죽
+function burst(x,y,big){
+  if(typeof confetti!=='function') return;
+  const opt={particleCount:big?70:18, spread:big?90:55, startVelocity:big?42:26,
+    origin:{x:x/innerWidth, y:y/innerHeight}, scalar:big?1:.8,
+    colors:['#8fd0ff','#c46bff','#ff9ecb','#ffd56b','#6c7bff']};
+  confetti(opt);
+  if(big) setTimeout(()=>confetti(Object.assign({},opt,{angle:120})),180);
+}
+
+/* ---------------- 흐름 ---------------- */
+function start(){
+  idx=0; total=0; answered=0;
+  order=QUESTIONS.map((q,i)=>i); // 문항 순서는 고정(장면 몰입), 선택지만 셔플
+  applyTheme(TIERS[2]); // HD 기본 톤으로 리셋
+  $('gauge').style.width='0%'; $('livePct').textContent='0%'; $('liveLabel').textContent='측정 중…';
+  $('thumb').style.filter='blur(13px)';
+  show('quiz'); render();
+}
+function applyTheme(t){
+  const r=document.documentElement.style;
+  r.setProperty('--accent1',t.a1); r.setProperty('--accent2',t.a2);
+  r.setProperty('--bg1',t.bg1); r.setProperty('--bg2',t.bg2);
+}
+function render(){
+  const q=QUESTIONS[idx];
+  $('qn').textContent=`장면 ${idx+1} / ${QUESTIONS.length}`;
+  $('scene').textContent='SCENE '+String(idx+1).padStart(2,'0');
+  const qEl=$('question'); qEl.textContent=q.s;
+  qEl.classList.remove('pop'); void qEl.offsetWidth; qEl.classList.add('pop');
+
+  const opts=shuffle(q.o.map(o=>Object.assign({},o)));
+  const box=$('opts'); box.innerHTML='';
+  const labs=['A','B','C','D'];
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt'; b.type='button';
+    b.innerHTML=`<span class="lab">${labs[i]}</span><span>${esc(o.t)}</span>`;
+    b.addEventListener('click',ev=>pick(o.v,b,ev));
+    box.appendChild(b);
+  });
+}
+function pick(v,btn,ev){
+  btn.classList.add('picked');
+  document.querySelectorAll('.opt').forEach(o=>o.style.pointerEvents='none');
+  total+=v; answered++;
+  const pct=Math.round((total/(answered*MAXPER))*100);
+  // 실시간 게이지 + 라이브 라벨 + 디블러
+  $('gauge').style.width=pct+'%';
+  $('livePct').textContent=pct+'%';
+  const lt=tierFor(pct);
+  $('liveLabel').textContent='지금까지 '+lt.key;
+  $('thumb').style.filter='blur('+(13*(1-pct/100)).toFixed(1)+'px)';
+  $('thumb').textContent=lt.emoji;
+
+  // 색 변주 + 촉각
+  const h=HUES[answered%HUES.length];
+  document.documentElement.style.setProperty('--accent1',h[0]);
+  document.documentElement.style.setProperty('--accent2',h[1]);
+  vibrate(24);
+  const r=btn.getBoundingClientRect(); burst(r.left+r.width/2, r.top+r.height/2, false);
+
+  if(answered===6){ toast('절반 통과! 화면이 또렷해지는 중 🔍'); vibrate([18,40,18]); }
+
+  setTimeout(()=>{
+    idx++;
+    if(idx>=QUESTIONS.length) finish();
+    else render();
+  },430);
+}
+function finish(){
+  const pct=Math.round((total/(QUESTIONS.length*MAXPER))*100);
+  const t=tierFor(pct);
+  applyTheme(t);
+  $('rtier').textContent=t.tier;
+  $('remoji').textContent=t.emoji;
+  $('rname').textContent=t.key;
+  // 체감 픽셀: 티어 기준 픽셀 폭 근처에서 점수로 미세 조정
+  const px=t.px;
+  $('rpx').innerHTML=px.toLocaleString()+'<small>px</small>';
+  $('rdesc').textContent=t.desc;
+  $('rc1').innerHTML=fmt(t.c1,'var(--cream)');
+  $('rc2').innerHTML=fmt(t.c2,'var(--cream)');
+  $('rc3').innerHTML=fmt(t.c3,'#ff8ad0');
+  $('rpctText').textContent=pct+'%';
+  show('res');
+  vibrate([50,70,50,70,110]);
+  setTimeout(()=>{ $('rbar').style.width=pct+'%'; },120);
+  setTimeout(()=>burst(innerWidth/2, innerHeight*0.32, true),260);
+  toast(t.emoji+' '+t.key+'로 측정 완료!');
+}
+function share(){
+  const t=tierFor(Math.round((total/(QUESTIONS.length*MAXPER))*100));
+  const text=`나는 '${t.key}'로 느끼는 사람 ${t.emoji} 내 감정 해상도는 몇 픽셀일까?`;
+  const url=location.href.split('?')[0];
+  if(navigator.share){ navigator.share({title:'내 감정 해상도',text,url}).catch(()=>{}); }
+  else {
+    const done=()=>toast('결과 문구가 복사됐어요 📋');
+    if(navigator.clipboard) navigator.clipboard.writeText(text+' '+url).then(done).catch(done);
+    else done();
+  }
+  burst(innerWidth/2, innerHeight*0.5, true);
+}
+
+/* ---------------- 바인딩 ---------------- */
+$('startBtn').addEventListener('click',start);
+$('retryBtn').addEventListener('click',()=>{show('home'); $('homePrev').textContent='🫥';});
+$('shareBtn').addEventListener('click',share);
+
+// 홈 프리뷰: 흐릿→선명 살짝 반복
+(function(){
+  const faces=['🫥','😐','🙂','🥹'];
+  let i=0; const el=$('homePrev');
+  setInterval(()=>{ if(document.getElementById('home').classList.contains('on')){ i=(i+1)%faces.length; el.textContent=faces[i]; } },1200);
+})();
+
+// 캔버스 확인용(confetti가 자체 캔버스를 생성하므로 fx는 예비)
+const fx=$('fx'); function sizeFx(){fx.width=innerWidth; fx.height=innerHeight;} sizeFx(); addEventListener('resize',sizeFx);
+</script>
+</body>
+</html>
