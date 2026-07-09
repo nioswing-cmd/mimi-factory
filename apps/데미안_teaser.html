@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>데미안 도파민 마스터 퀴즈</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+<script>
+/* html2pdf bundle removed for preview performance */
+window.html2pdf = function() {
+  return {
+    set: function() { return this; },
+    from: function() { return this; },
+    outputPdf: function() { return Promise.resolve(new Blob()); },
+    save: function() { return Promise.resolve(); }
+  };
+};
+</script>
+<style>
+  :root{
+    --bg:#0b1722; --bg2:#0e2031; --panel:#15293b; --panel2:#1b3148;
+    --edge:#2c455c;
+    --ink:#f1e8d4; --body:#bccadb; --muted:#7d92a7;
+    --gold:#e3b34e; --gold-deep:#bd8a2c;
+    --green:#5cc28d; --green-deep:#2f6f4d;
+    --rust:#d96a4a; --rust-deep:#9b3f27;
+    --steelblue:#8fb0cc;
+    --shadow:0 18px 45px rgba(0,0,0,.45);
+    --r:18px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:"Noto Sans KR",sans-serif;
+    color:var(--body);
+    background:
+      repeating-linear-gradient(0deg, rgba(227,179,78,.045) 0 1px, transparent 1px 46px),
+      radial-gradient(1200px 600px at 80% -10%, rgba(143,176,204,.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(217,106,74,.10), transparent 55%),
+      linear-gradient(160deg, var(--bg) 0%, var(--bg2) 100%);
+    background-attachment:fixed;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:22px 18px 40px;}
+  h1,h2,h3{font-family:"Noto Serif KR",serif;color:var(--ink);margin:0;}
+  .eyebrow{font-size:12px;letter-spacing:.32em;color:var(--gold);font-weight:700;text-transform:uppercase;}
+
+  /* ---------- HOME ---------- */
+  .hero{
+    text-align:center;padding:46px 24px 38px;border-radius:24px;
+    background:linear-gradient(170deg, rgba(27,49,72,.9), rgba(15,32,49,.92));
+    border:1px solid rgba(227,179,78,.22);box-shadow:var(--shadow);position:relative;overflow:hidden;
+  }
+  .hero::after{content:"";position:absolute;inset:0;background:
+    repeating-linear-gradient(0deg, rgba(227,179,78,.05) 0 1px, transparent 1px 30px);pointer-events:none;}
+  .pillars{display:flex;justify-content:center;gap:10px;margin:6px 0 18px;}
+  .pillars span{
+    font-family:"Noto Serif KR",serif;font-weight:900;font-size:30px;
+    width:62px;height:62px;line-height:62px;border-radius:14px;display:inline-block;
+    border:1px solid rgba(255,255,255,.10);
+  }
+  .pillars .p1{color:var(--steelblue);background:rgba(143,176,204,.12);}
+  .pillars .p2{color:var(--rust);background:rgba(217,106,74,.14);}
+  .pillars .p3{color:var(--gold);background:rgba(227,179,78,.14);}
+  .hero h1{font-size:clamp(30px,7vw,46px);font-weight:900;line-height:1.18;letter-spacing:-.01em;}
+  .hero h1 small{display:block;font-size:15px;font-weight:500;color:var(--muted);letter-spacing:.18em;margin-bottom:10px;font-family:"Noto Sans KR";}
+  .hero p{color:var(--body);font-size:15px;line-height:1.7;max-width:460px;margin:16px auto 0;position:relative;}
+  .quote{
+    margin:22px auto 4px;max-width:500px;font-family:"Noto Serif KR",serif;
+    font-size:15px;color:var(--ink);font-style:italic;line-height:1.7;
+    border-left:3px solid var(--gold);padding:10px 0 10px 16px;text-align:left;position:relative;
+  }
+  .quote b{color:var(--gold);font-style:normal;}
+  .btn{
+    appearance:none;border:none;cursor:pointer;font-family:"Noto Sans KR";font-weight:700;
+    border-radius:14px;padding:16px 30px;font-size:16px;transition:transform .12s ease, box-shadow .2s ease, filter .2s ease;
+  }
+  .btn-primary{
+    color:#23160a;background:linear-gradient(180deg, #f0c560, var(--gold-deep));
+    box-shadow:0 10px 26px rgba(227,179,78,.32);
+  }
+  .btn-primary:hover{transform:translateY(-2px);filter:brightness(1.05);}
+  .btn-ghost{background:rgba(255,255,255,.06);color:var(--body);border:1px solid rgba(255,255,255,.14);}
+  .btn-ghost:hover{background:rgba(255,255,255,.12);}
+  .start-row{margin-top:26px;position:relative;}
+  .meta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px;position:relative;}
+  .chip{font-size:12.5px;color:var(--muted);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);padding:7px 13px;border-radius:999px;}
+  .chip b{color:var(--gold);}
+
+  /* ---------- QUIZ HUD ---------- */
+  .hud{
+    background:linear-gradient(170deg, rgba(27,49,72,.92), rgba(15,32,49,.92));
+    border:1px solid rgba(227,179,78,.20);border-radius:20px;padding:18px 18px 20px;box-shadow:var(--shadow);
+    position:sticky;top:10px;z-index:5;backdrop-filter:blur(6px);
+  }
+  .hud-top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:12px;}
+  .stat{display:flex;flex-direction:column;}
+  .stat .label{font-size:11px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;}
+  .stat .val{font-family:"Noto Serif KR",serif;font-weight:900;font-size:24px;color:var(--ink);line-height:1.1;}
+  .stat .val.gold{color:var(--gold);}
+  .combo{font-size:12px;color:var(--rust);font-weight:700;min-height:16px;transition:opacity .2s;}
+  .combo.show{animation:pop .35s ease;}
+
+  /* east-west axis journey bar (signature) */
+  .axis{position:relative;margin-top:6px;}
+  .axis-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:6px;}
+  .axis-label b{color:var(--gold);}
+  .track{position:relative;height:14px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden;border:1px solid rgba(255,255,255,.08);}
+  .fill{position:absolute;left:0;top:0;bottom:0;width:0%;
+    background:linear-gradient(90deg, var(--green-deep), var(--green), var(--gold));
+    border-radius:999px;transition:width .6s cubic-bezier(.22,1,.36,1);}
+  .milestones{display:flex;justify-content:space-between;margin-top:8px;}
+  .ms{font-size:10px;color:var(--muted);text-align:center;flex:1;line-height:1.25;transition:color .4s;}
+  .ms.reached{color:var(--gold);font-weight:700;}
+  .ms .dot{display:block;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.18);margin:0 auto 4px;transition:.4s;}
+  .ms.reached .dot{background:var(--gold);box-shadow:0 0 10px rgba(227,179,78,.7);}
+
+  /* ---------- QUESTION CARD ---------- */
+  .card{
+    margin-top:16px;background:var(--panel);border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;padding:24px 22px;box-shadow:var(--shadow);
+  }
+  .qhead{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+  .diff{font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:999px;letter-spacing:.05em;}
+  .diff.l1{color:var(--green);background:rgba(92,194,141,.14);}
+  .diff.l2{color:var(--gold);background:rgba(227,179,78,.14);}
+  .diff.l3{color:var(--rust);background:rgba(217,106,74,.16);}
+  .qno{font-size:12px;color:var(--muted);}
+  .qtag{font-size:11.5px;color:var(--steelblue);background:rgba(143,176,204,.12);padding:5px 11px;border-radius:999px;margin-left:auto;}
+  .question{font-family:"Noto Serif KR",serif;font-weight:700;font-size:20px;line-height:1.5;color:var(--ink);margin:2px 0 18px;}
+  .opts{display:flex;flex-direction:column;gap:10px;}
+  .opt{
+    text-align:left;cursor:pointer;font-family:"Noto Sans KR";font-size:15px;line-height:1.5;color:var(--body);
+    background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.10);border-radius:13px;
+    padding:14px 15px;display:flex;gap:12px;align-items:flex-start;transition:.16s;
+  }
+  .opt:hover:not(:disabled){border-color:rgba(227,179,78,.5);background:rgba(227,179,78,.06);transform:translateX(2px);}
+  .opt .key{flex:none;width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.08);
+    color:var(--muted);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;}
+  .opt:disabled{cursor:default;}
+  .opt.correct{border-color:var(--green);background:rgba(92,194,141,.14);color:#dff3e8;}
+  .opt.correct .key{background:var(--green);color:#0b2417;}
+  .opt.wrong{border-color:var(--rust);background:rgba(217,106,74,.14);color:#f6ddd3;}
+  .opt.wrong .key{background:var(--rust);color:#2b0f06;}
+  .opt.dim{opacity:.45;}
+
+  /* explanation */
+  .explain{margin-top:16px;border-radius:14px;padding:16px 16px 14px;border:1px solid;visibility:hidden;opacity:0;transition:opacity .22s ease;min-height:0;max-height:0;overflow:hidden;margin-top:0;padding:0;border-width:0;}
+  .explain.ok{background:rgba(92,194,141,.08);border-color:rgba(92,194,141,.35);visibility:visible;opacity:1;max-height:600px;min-height:0;padding:16px 16px 14px;margin-top:16px;border-width:1px;}
+  .explain.no{background:rgba(217,106,74,.08);border-color:rgba(217,106,74,.35);visibility:visible;opacity:1;max-height:600px;min-height:0;padding:16px 16px 14px;margin-top:16px;border-width:1px;}
+  .explain .verdict{font-family:"Noto Serif KR",serif;font-weight:900;font-size:16px;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+  .explain.ok .verdict{color:var(--green);}
+  .explain.no .verdict{color:var(--rust);}
+  .explain .ctx{font-size:14.5px;line-height:1.75;color:var(--body);}
+  .explain .ctx b{color:var(--ink);}
+  .next-row{display:flex;justify-content:flex-end;margin-top:16px;visibility:hidden;opacity:0;transition:opacity .18s ease;}
+  .requeue{font-size:12.5px;color:var(--rust);margin-right:auto;align-self:center;}
+
+  /* ---------- RESULT ---------- */
+  .result{text-align:center;}
+  .badge{
+    width:120px;height:120px;border-radius:50%;margin:6px auto 14px;display:flex;align-items:center;justify-content:center;
+    font-size:54px;background:radial-gradient(circle at 35% 30%, #f3cd72, var(--gold-deep));
+    box-shadow:0 0 0 8px rgba(227,179,78,.12), 0 16px 40px rgba(227,179,78,.35);
+  }
+  .rank{font-family:"Noto Serif KR",serif;font-weight:900;font-size:30px;color:var(--ink);}
+  .rank-sub{color:var(--gold);font-weight:700;margin-top:4px;font-size:14px;letter-spacing:.05em;}
+  .scoreboard{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0 8px;}
+  .sb{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:15px;padding:16px;}
+  .sb .label{font-size:11.5px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;}
+  .sb .num{font-family:"Noto Serif KR",serif;font-weight:900;font-size:30px;color:var(--ink);margin-top:5px;}
+  .sb .num.gold{color:var(--gold);}
+  .sb .num.green{color:var(--green);}
+  .best-note{font-size:13px;color:var(--muted);margin-top:10px;min-height:18px;}
+  .best-note b{color:var(--gold);}
+  .res-btns{display:flex;gap:12px;justify-content:center;margin-top:22px;flex-wrap:wrap;}
+
+  /* ---------- REPORT ---------- */
+  .rep-hero{text-align:center;padding:30px 20px 8px;}
+  .rep-hero h2{font-size:clamp(26px,6vw,36px);font-weight:900;margin:6px 0;}
+  .rep-hero p{color:var(--body);font-size:14.5px;line-height:1.7;max-width:480px;margin:8px auto 0;}
+  .rep-hero p b,.deepen b{color:var(--gold);}
+  .rep-h3{font-family:"Noto Serif KR",serif;color:var(--ink);font-size:20px;margin:34px 4px 14px;font-weight:900;
+    border-left:4px solid var(--gold);padding-left:12px;}
+  .rep-h3 span{font-size:13px;color:var(--rust);font-weight:700;margin-left:6px;}
+  .rep-h3 span.hint{color:var(--muted);font-weight:400;}
+
+  /* 목차 아코디언 */
+  .toc{display:flex;flex-direction:column;gap:8px;}
+  .toc-item{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:13px;overflow:hidden;}
+  .toc-head{width:100%;text-align:left;cursor:pointer;background:none;border:none;color:var(--ink);
+    font-family:"Noto Sans KR";padding:14px 16px;display:flex;align-items:center;gap:10px;font-size:15px;transition:background .15s;}
+  .toc-head:hover{background:rgba(255,255,255,.04);}
+  .toc-head .nn{font-size:11.5px;font-weight:700;color:var(--gold);background:rgba(227,179,78,.14);
+    padding:4px 9px;border-radius:999px;flex:none;}
+  .toc-head .tt{font-family:"Noto Serif KR",serif;font-weight:700;}
+  .toc-head .chev{margin-left:auto;color:var(--muted);transition:transform .25s;}
+  .toc-item.open .toc-head .chev{transform:rotate(180deg);}
+  .toc-panel{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+  .toc-panel .inner{margin:0 16px 15px;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);
+    color:var(--body);font-size:13.5px;line-height:1.75;}
+  .toc-panel .beat{display:flex;gap:10px;align-items:flex-start;padding:9px 0;
+    border-bottom:1px solid rgba(255,255,255,.05);}
+  .toc-panel .beat:last-child{border-bottom:none;}
+  .toc-panel .beat .be{flex:none;font-size:18px;line-height:1.5;width:24px;text-align:center;}
+  .toc-panel .beat .bx{font-size:14px;line-height:1.65;color:var(--body);}
+
+  /* 생각해볼 사례 */
+  .cases{display:grid;grid-template-columns:1fr;gap:12px;}
+  .case{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:15px;padding:16px;}
+  .case .ct{font-family:"Noto Serif KR",serif;color:var(--ink);font-weight:700;font-size:15.5px;
+    display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+  .case .ct .ci{font-size:20px;}
+  .case .cd{color:var(--body);font-size:13.5px;line-height:1.65;margin-bottom:11px;}
+  .case .cw{font-size:12.5px;color:var(--gold);background:rgba(227,179,78,.08);
+    border:1px solid rgba(227,179,78,.22);border-radius:11px;padding:10px 12px;line-height:1.6;}
+  .case .cw b{color:var(--ink);font-weight:700;}
+
+  /* 던지는 질문 */
+  .qs{display:flex;flex-direction:column;gap:12px;}
+  .qcard{background:rgba(143,176,204,.07);border:1px solid rgba(143,176,204,.28);border-radius:15px;padding:16px;}
+  .qcard .qq{font-family:"Noto Serif KR",serif;color:var(--ink);font-weight:700;font-size:15.5px;
+    line-height:1.5;margin-bottom:8px;display:flex;gap:9px;}
+  .qcard .qq .qnum{color:var(--steelblue);flex:none;}
+  .qcard .qh{color:var(--muted);font-size:13px;line-height:1.65;}
+
+  .chain{display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:18px;}
+  .chain .step{width:100%;max-width:560px;border-radius:15px;padding:15px 18px;text-align:center;border:1px solid;position:relative;}
+  .chain .cn{display:inline-block;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+    padding:3px 9px;border-radius:999px;margin-bottom:7px;}
+  .chain b{display:block;font-family:"Noto Serif KR",serif;font-size:17px;color:var(--ink);line-height:1.4;}
+  .chain small{display:block;color:var(--muted);font-size:12.5px;margin-top:5px;}
+  .chain .arrow{color:var(--gold);font-size:20px;line-height:1;font-weight:700;opacity:.8;}
+  .s0{background:rgba(143,176,204,.10);border-color:rgba(143,176,204,.4);}
+  .s0 .cn{background:rgba(143,176,204,.2);color:var(--steelblue);}
+  .s1{background:rgba(92,194,141,.09);border-color:rgba(92,194,141,.35);}
+  .s1 .cn{background:rgba(92,194,141,.18);color:var(--green);}
+  .s2{background:rgba(227,179,78,.08);border-color:rgba(227,179,78,.32);}
+  .s2 .cn{background:rgba(227,179,78,.18);color:var(--gold);}
+  .s3{background:rgba(217,106,74,.10);border-color:rgba(217,106,74,.4);}
+  .s3 .cn{background:rgba(217,106,74,.2);color:var(--rust);}
+  .s4{background:linear-gradient(180deg,rgba(227,179,78,.16),rgba(217,106,74,.12));border-color:rgba(227,179,78,.5);}
+  .s4 .cn{background:var(--gold);color:#23160a;}
+
+  .concepts{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .concept{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:15px;padding:16px;}
+  .concept .ic{font-size:24px;}
+  .concept h4{font-family:"Noto Serif KR",serif;color:var(--ink);font-size:15.5px;margin:8px 0 6px;font-weight:700;}
+  .concept p{color:var(--body);font-size:13px;line-height:1.6;margin:0 0 10px;}
+  .src{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--gold);text-decoration:none;
+    border:1px solid rgba(227,179,78,.35);padding:5px 10px;border-radius:999px;transition:.15s;}
+  .src:hover{background:rgba(227,179,78,.12);}
+  .src::before{content:"🔗";font-size:11px;}
+
+  .weak{display:flex;flex-direction:column;gap:12px;}
+  .weak-item{background:rgba(217,106,74,.07);border:1px solid rgba(217,106,74,.3);border-radius:15px;padding:16px;}
+  .weak-item .wq{font-family:"Noto Serif KR",serif;color:var(--ink);font-weight:700;font-size:15px;line-height:1.5;margin-bottom:8px;}
+  .weak-item .wans{font-size:13.5px;color:var(--green);font-weight:700;margin-bottom:8px;}
+  .weak-item .wans b{color:#dff3e8;font-weight:700;}
+  .weak-item .wnote{font-size:13.5px;color:var(--body);line-height:1.65;margin-bottom:6px;}
+  .weak-item .wnote b{color:var(--ink);}
+  .weak-item .wctx{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:10px;}
+  .perfect{text-align:center;padding:22px;background:rgba(92,194,141,.08);border:1px solid rgba(92,194,141,.35);
+    border-radius:15px;color:var(--green);font-weight:700;}
+  .perfect span{display:block;color:var(--body);font-weight:400;font-size:13px;margin-top:6px;}
+
+  .deepen{margin:26px 0 4px;text-align:center;font-size:13.5px;color:var(--body);line-height:1.7;
+    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;}
+  .deepen a{color:var(--gold);font-weight:700;text-decoration:underline;}
+
+  /* footer */
+  .footer{text-align:center;margin-top:30px;font-size:12px;color:var(--muted);line-height:1.7;}
+  .footer b{color:var(--gold);font-weight:700;}
+  .footer .factory{font-family:"Noto Serif KR",serif;color:var(--ink);font-weight:700;letter-spacing:.01em;}
+  .footer .affil{color:var(--gold);font-size:11.5px;margin-top:2px;}
+  .footer .tagline{margin-top:6px;color:var(--muted);}
+
+  .hidden{display:none !important;}
+
+  @keyframes pop{0%{transform:scale(.7);opacity:0;}60%{transform:scale(1.12);}100%{transform:scale(1);opacity:1;}}
+  @keyframes rise{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  .card,.hero,.result{animation:rise .4s ease;}
+
+  @media (max-width:560px){
+    .pillars span{width:52px;height:52px;line-height:52px;font-size:25px;}
+    .question{font-size:18px;}
+    .scoreboard{grid-template-columns:1fr 1fr;}
+    .concepts{grid-template-columns:1fr;}
+    .ms{font-size:9px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+
+  /* ===== 인쇄(PDF 저장)용: 라이트 테마로 전환, 리포트만 출력 ===== */
+  @media print {
+    @page { margin: 14mm; }
+    :root{
+      --bg:#fff; --bg2:#fff; --panel:#fff; --panel2:#fff; --edge:#cfcfcf;
+      --ink:#15110f; --body:#2c2c2c; --muted:#666;
+      --gold:#b23a64; --gold-deep:#b23a64;
+      --green:#1f7a4d; --rust:#c0392b; --steelblue:#6c4f9e;
+    }
+    body{ background:#fff !important; color:#222 !important; }
+    .wrap{ max-width:100% !important; padding:0 !important; }
+    #home, #quiz, #result, .res-btns, .hud, .combo, .badge { display:none !important; }
+    #report{ display:block !important; }
+    .rep-hero, .card{ box-shadow:none !important; }
+    .concept,.case,.qcard,.toc-item,.weak-item,.ch.step,.deepen{
+      background:#fff !important; box-shadow:none !important; border:1px solid #ddd !important;
+      break-inside:avoid; page-break-inside:avoid;
+    }
+    .toc-panel{ max-height:none !important; overflow:visible !important; }
+    .toc-item .chev{ display:none !important; }
+    .rep-h3{ break-after:avoid; page-break-after:avoid; }
+    .chain .arrow{ color:#999 !important; }
+    .src, a{ color:#0a58ca !important; border-color:#9bb !important; }
+    .footer{ display:block !important; color:#555 !important; margin-top:14px; }
+  }
+
+  /* ===== 화면에서 PDF로 캡처할 때 라이트 테마로 전환 ===== */
+  body.pdf-export #report{
+    --bg:#fff; --bg2:#fff; --panel:#fff; --panel2:#fff; --edge:#cfcfcf;
+    --ink:#15110f; --body:#2c2c2c; --muted:#666;
+    --gold:#b23a64; --gold-deep:#b23a64; --green:#1f7a4d; --rust:#c0392b; --steelblue:#6c4f9e;
+    background:#fff; color:#2c2c2c; padding:16px; border-radius:0;
+  }
+  body.pdf-export #report .res-btns,
+  body.pdf-export #report .toc-head .chev{ display:none !important; }
+  body.pdf-export #report .toc-panel{ max-height:none !important; overflow:visible !important; }
+  body.pdf-export #report .concept,
+  body.pdf-export #report .case,
+  body.pdf-export #report .qcard,
+  body.pdf-export #report .toc-item,
+  body.pdf-export #report .weak-item,
+  body.pdf-export #report .ch.step,
+  body.pdf-export #report .deepen{
+    box-shadow:none !important; border:1px solid #ddd !important;
+    break-inside:avoid; page-break-inside:avoid;
+  }
+  body.pdf-export #report .src{ border-color:#bcd !important; }
+
+  /* ===== 수익화/전환 UI (teaser) ===== */
+  .edition{ display:inline-block; margin:0 auto 14px; padding:5px 12px; border-radius:999px;
+    font-size:12px; letter-spacing:.4px; color:var(--gold); position:relative;
+    background:rgba(227,179,78,.10); border:1px solid rgba(227,179,78,.35); }
+  .lock-overlay{ margin:18px auto 0; max-width:760px; padding:26px 22px; border-radius:20px; text-align:center;
+    background:linear-gradient(160deg, rgba(27,49,72,.96), rgba(15,32,49,.98));
+    border:1px solid rgba(227,179,78,.35); box-shadow:0 18px 50px rgba(0,0,0,.4); }
+  .lock-overlay .lk-ic{ font-size:40px; }
+  .lock-overlay h3{ margin:10px 0 6px; font-size:20px; color:var(--ink); }
+  .lock-overlay p{ margin:0 0 16px; color:var(--body); font-size:14.5px; line-height:1.7; }
+  .lock-overlay .lk-btns{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+  .cta{ display:inline-block; padding:13px 22px; border-radius:14px; font-weight:700;
+    font-size:15px; text-decoration:none; cursor:pointer; border:none; font-family:"Noto Sans KR";
+    background:linear-gradient(135deg,#e3b34e,#f0c560); color:#231a08;
+    box-shadow:0 8px 22px rgba(227,179,78,.35); }
+  .cta.ghost{ background:transparent; color:var(--gold); border:1px solid rgba(227,179,78,.5); box-shadow:none; }
+  .blurred{ filter:blur(6px); pointer-events:none; user-select:none; opacity:.55; }
+  .rep-lock{ margin:6px 0 22px; padding:24px 20px; border-radius:20px; text-align:center;
+    background:linear-gradient(160deg, rgba(27,49,72,.96), rgba(15,32,49,.98));
+    border:1px solid rgba(227,179,78,.4); box-shadow:0 18px 50px rgba(0,0,0,.4); }
+  .rep-lock .lk-ic{ font-size:36px; }
+  .rep-lock h3{ margin:8px 0 6px; font-size:19px; color:var(--ink); }
+  .rep-lock p{ margin:0 0 16px; color:var(--body); font-size:14px; line-height:1.7; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ HOME ============ -->
+  <section id="home">
+    <div class="hero">
+      <div class="edition" id="editionTag"></div>
+      <div class="eyebrow">헤르만 헤세 · 1919 · 청년 운동의 성경</div>
+      <div class="pillars"><span class="p1">새</span><span class="p2">알</span><span class="p3">날다</span></div>
+      <h1><small>진정한 자아를 찾아 비상하는 영혼의 여정</small>데미안 마스터 퀴즈</h1>
+      <div class="quote">
+        "새는 알에서 나오려고 투쟁한다. 알은 세계다.<br>태어나려는 자는 하나의 세계를 깨뜨려야 한다."<br>
+        <b>— 막스 데미안의 깨우침</b>
+      </div>
+      <p>싱클레어의 개성화 여정 속 <b>핵심 질문·상징·철학을 30개의 퀴즈</b>로 완전히 익힙니다.
+        밝은 세계에서 어두운 세계로, 그리고 통합으로. <b>틀린 문제는 맞힐 때까지 마스터하세요.</b></p>
+      <div class="meta-row">
+        <span class="chip">총 <b>30문항</b></span>
+        <span class="chip">쉬움 → 어려움</span>
+        <span class="chip"><b>실시간</b> 성장도 게이지</span>
+        <span class="chip">문제마다 <b>깊이 있는 해설</b></span>
+      </div>
+      <div class="start-row">
+        <button class="btn btn-primary" onclick="startQuiz()">알을 깨고 시작하기 →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section id="quiz" class="hidden">
+    <div class="hud">
+      <div class="hud-top">
+        <div class="stat"><span class="label">점수</span><span class="val gold" id="score">0</span></div>
+        <div class="stat" style="text-align:center;align-items:center;"><span class="label">연속 정답</span><span class="val" id="streak">0</span></div>
+        <div class="stat" style="text-align:right;align-items:flex-end;"><span class="label">마스터</span><span class="val" id="mastered">0 / 30</span></div>
+      </div>
+      <div class="combo" id="combo"></div>
+      <div class="axis">
+        <div class="axis-label"><span>서 ←</span><span>영혼의 여정 · <b id="pctTxt">0%</b></span><span>→ 동</span></div>
+        <div class="track"><div class="fill" id="fill"></div></div>
+        <div class="milestones" id="milestones"></div>
+      </div>
+    </div>
+
+    <div class="card" id="qcard">
+      <div class="qhead">
+        <span class="diff" id="diff">쉬움</span>
+        <span class="qno" id="qno"></span>
+        <span class="qtag" id="qtag"></span>
+      </div>
+      <div class="question" id="question"></div>
+      <div class="opts" id="opts"></div>
+
+      <div class="explain" id="explain">
+        <div class="verdict" id="verdict"></div>
+        <div class="ctx" id="ctx"></div>
+      </div>
+
+      <div class="next-row" id="nextRow">
+        <span class="requeue" id="requeue"></span>
+        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">다음 →</button>
+      </div>
+    </div>
+  </section>
+
+    <div class="lock-overlay hidden" id="lockOverlay">
+      <div class="lk-ic">🔒</div>
+      <h3>여기까지가 무료 미리보기예요</h3>
+      <p id="lockMsg"></p>
+      <div class="lk-btns">
+        <a class="cta" id="lockSubBtn" href="#" target="_blank" rel="noopener">🔑 구독하고 전체 열기</a>
+        <button class="cta ghost" onclick="openReport()">요약 리포트 미리보기 →</button>
+      </div>
+    </div>
+
+  <!-- ============ RESULT ============ -->
+  <section id="result" class="hidden">
+    <div class="result">
+      <div class="badge">🏛️</div>
+      <div class="rank" id="rankTitle">압락사스의 눈</div>
+      <div class="rank-sub" id="rankSub"></div>
+      <div class="scoreboard">
+        <div class="sb"><div class="label">최종 점수</div><div class="num gold" id="rScore">0</div></div>
+        <div class="sb"><div class="label">첫 시도 정답률</div><div class="num green" id="rAcc">0%</div></div>
+        <div class="sb"><div class="label">최고 연속 정답</div><div class="num" id="rStreak">0</div></div>
+        <div class="sb"><div class="label">총 도전 횟수</div><div class="num" id="rTries">0</div></div>
+      </div>
+      <div class="best-note" id="bestNote"></div>
+      <div class="res-btns">
+        <button class="btn btn-primary" onclick="openReport()">📖 전체 요약 리포트 보기</button>
+        <button class="btn btn-ghost" onclick="startQuiz()">다시 도전 ↻</button>
+        <button class="btn btn-ghost" onclick="goHome()">처음으로</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REPORT (인포그래픽 요약) ============ -->
+  <section id="report" class="hidden">
+    <div class="rep-hero">
+      <div class="eyebrow">완독 리포트 · INFOGRAPHIC</div>
+      <h2>데미안 한눈에 보기</h2>
+      <p>책 전체를 <b>‘인과의 사슬’</b> 하나로 꿰면 절대 안 잊습니다. 모든 출발점은 <b>나를 둘러싼 두 세계의 분열</b>입니다.</p>
+    </div>
+
+    <!-- 인과의 사슬 -->
+    <div class="chain">
+      <div class="ch step s0"><span class="cn">궁극 원인</span><b>🥚 두 세계의 분열</b><small>밝은 세계 vs 어두운 세계</small></div>
+      <div class="arrow">↓</div>
+      <div class="ch step s1"><span class="cn">1단계</span><b>😰 악의 세계로의 추락</b><small>크로머의 괴롭힘 · 죄책감</small></div>
+      <div class="arrow">↓</div>
+      <div class="ch step s2"><span class="cn">2단계</span><b>✨ 데미안과의 만남 · 자아 각성</b><small>카인의 재해석 · 스스로 생각하기</small></div>
+      <div class="arrow">↓</div>
+      <div class="ch step s3">
+        <span class="cn">근접 원인</span><b>👁️ 압락사스 · 내면의 목소리</b>
+        <small>선과 악을 초월한 통합의 신</small>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="ch step s4"><span class="cn">결과</span><b>🦋 진정한 자아의 완성(개성화)</b><small>“내 안에서 솟아나오려는 것을 살다”</small></div>
+    </div>
+
+    <h3 class="rep-h3">핵심 개념</h3>
+    <div class="concepts" id="concepts"></div>
+
+    <h3 class="rep-h3">목차 한눈에 보기 <span class="hint">탭하면 요약이 열립니다</span></h3>
+    <div class="toc" id="toc"></div>
+
+    <h3 class="rep-h3">책 속, 생각해볼 사례 3</h3>
+    <div class="cases" id="cases"></div>
+
+    <h3 class="rep-h3">이 책이 우리에게 던지는 질문 3</h3>
+    <div class="qs" id="asks"></div>
+
+    <!-- 약점 집중 복습 -->
+    <div id="weakWrap">
+      <h3 class="rep-h3">내가 틀린 부분 집중 복습 <span id="weakCount"></span></h3>
+      <div class="weak" id="weakList"></div>
+    </div>
+
+    <div class="deepen">
+      <b>📺 더 깊이 알고 싶다면</b>
+      <a id="ebsLink" href="#" target="_blank" rel="noopener"></a> 에서 헤르만 헤세의 삶과 문학 세계를 만나볼 수 있습니다.
+    </div>
+
+    <div class="res-btns">
+      <button class="btn btn-primary" id="pdfBtn" onclick="downloadReportPDF()">📄 PDF로 저장</button>
+      <button class="btn btn-ghost" onclick="startQuiz()">다시 도전 ↻</button>
+      <button class="btn btn-ghost" onclick="show('result')">결과로</button>
+      <button class="btn btn-ghost" onclick="goHome()">처음으로</button>
+    </div>
+  </section>
+
+  <div class="footer">
+    <div class="factory">“의미와재미공장” 미미팩토리</div>
+    <div class="affil">(주식회사 연:결 패밀리회사)</div>
+    <div class="tagline">책의 핵심을 도파민으로 익히는 반복 마스터 퀴즈</div>
+  </div>
+
+</div>
+
+<script>
+const APP_CONFIG = {
+  mode: "teaser",            // "free" | "teaser" | "premium"
+  freeLimit: 10,             // teaser: 무료로 풀 수 있는 문항 수
+  subscribeUrl: "https://blog.naver.com/4u_doumi",
+  catalogUrl: "https://nioswing-cmd.github.io/mimi-factory/quiz.html",
+  utm: "utm_source=quizbook&utm_medium=app&utm_campaign=demian",
+  edition: "2026-07-09 · 데미안",
+  accessCodeHash: ""
+};
+function _sub(){ const u=APP_CONFIG.subscribeUrl; if(!u) return '#';
+  return u + (u.includes('?')?'&':'?') + APP_CONFIG.utm; }
+function _cat(){ const u=APP_CONFIG.catalogUrl; if(!u) return '#';
+  return u + (u.includes('?')?'&':'?') + APP_CONFIG.utm; }
+/* ===================== 문항 데이터 (난이도 1=쉬움 2=보통 3=어려움) ===================== */
+const QUESTIONS = [{id:1,level:1,tag:"인물",q:"《데미안》의 주인공 이름은?",options:[{t:"에밀 싱클레어",ok:true},{t:"막스 데미안"},{t:"프란츠 크로머"},{t:"카를 피스토리우스"}],
+   ctx:"<b>에밀 싱클레어</b>는 자신의 성장 과정을 회고하는 형식으로 책을 시작합니다. 처음에는 헤르만 헤세의 실명 대신 싱클레어라는 필명으로 출판되었어요."},{id:2,level:1,tag:"인물",q:"싱클레어를 심리적으로 깨우고 가르치는 신비로운 친구의 이름은?",options:[{t:"막스 데미안",ok:true},{t:"제롬 피스토리우스"},{t:"베아트리체"},{t:"에바 부인"}],
+   ctx:"<b>막스 데미안</b>은 싱클레어의 영적 멘토이자 스승입니다. 그는 카인과 아벨의 이야기를 새롭게 해석해주며 싱클레어의 눈을 떠줍니다."},{id:3,level:1,tag:"사건",q:"싱클레어를 악의 세계로 처음 끌어당기는 불량배의 이름은?",options:[{t:"프란츠 크로머",ok:true},{t:"제롬 피스토리우스"},{t:"막스 데미안"},{t:"헨켈"}],
+   ctx:"<b>프란츠 크로머</b>는 양털점 주인의 아들로, 어린 싱클레어를 괴롭히고 선과 악의 경계선을 흐리게 만듭니다. 하지만 데미안의 등장으로 갑자기 사라집니다."},{id:4,level:1,tag:"개념",q:"다음 중 데미안이 새롭게 해석해주는 성서 속 인물은?",options:[{t:"카인",ok:true},{t:"솔로몬"},{t:"욥"},{t:"다윗"}],
+   ctx:"<b>카인</b>은 일반적으로 형 아벨을 죽인 악인이지만, 데미안은 카인을 강인한 내적 힘을 가진 인물로 재해석합니다. 누군가 그를 질시했다는 것은 그가 평범하지 않았다는 의미라고요."},{id:5,level:1,tag:"상징",q:"책에서 반복적으로 나타나는 \"새가 알에서 나오려고 투쟁한다\"는 문구가 담은 뜻은?",options:[{t:"기존의 틀을 깨고 진정한 자신으로 성장하기",ok:true},{t:"안전한 환경에 머물러야 한다는 충고"},{t:"타인에 대한 저항은 무조건 옳다는 의미"},{t:"어린 시절의 행복을 되찾아야 한다는 메시지"}],
+   ctx:"새가 알을 깨고 나온다는 것은 <b>자신의 세계를 극복하고 새로운 존재가 되어야 한다</b>는 의미입니다. 이는 개인의 성장과 개성화의 과정을 상징해요."},{id:6,level:1,tag:"배경",q:"데미안의 배경이 되는 시대 상황은?",options:[{t:"제1차 세계 대전 전후",ok:true},{t:"제2차 세계 대전 중"},{t:"중세 종교 분쟁 시기"},{t:"산업혁명 초기"}],
+   ctx:"헤르만 헤세가 42세에 쓴 이 소설은 <b>제1차 세계 대전으로 피폐해진 독일의 청년들</b>에게 정신적 위안과 방향을 제시했습니다."},{id:7,level:1,tag:"인물",q:"음악가이면서 신비주의에 빠져 싱클레어에게 영적 영향을 끼치는 인물은?",options:[{t:"피스토리우스",ok:true},{t:"크나우어"},{t:"헨켈"},{t:"싱클레어의 라틴어 교사"}],
+   ctx:"<b>피스토리우스</b>는 교회 오르간 연주자로, 처음엔 신학을 공부했으나 신비주의적 종교 사념에 빠져 새로운 길을 걷습니다. 싱클레어는 그를 통해 고대 종교와 영지주의를 알게 됩니다."},{id:8,level:1,tag:"인물",q:"싱클레어가 자신의 이상으로 삼아 도덕적 삶을 되찾으려 했던 여인 베아트리체의 특징은?",options:[{t:"실제로는 존재하지 않는 싱클레어가 그려낸 이상적 존재",ok:true},{t:"싱클레어의 현실 친구"},{t:"데미안의 여동생"},{t:"피스토리우스의 제자"}],
+   ctx:"베아트리체는 <b>싱클레어가 마음속에 그려낸 이상적 여인</b>입니다. 그는 베아트리체를 향한 사랑과 존경을 통해 무너진 자신의 내면을 다시 세우려 애씁니다."},{id:9,level:1,tag:"개념",q:"싱클레어의 어린 시절을 지배했던 두 세계는?",options:[{t:"밝음의 세계와 어두움의 세계",ok:true},{t:"물질적으로 부유한 세계와 가난한 세계"},{t:"도시와 시골"},{t:"기독교와 이슬람교"}],
+   ctx:"부모의 품은 <b>밝고 도덕적인 세계</b>, 그 바깥은 <b>어둡고 금지된 악의 세계</b>로 구분됩니다. 성장하면서 싱클레어는 이 이분법적 구분을 극복해야 합니다."},{id:10,level:1,tag:"인물",q:"신학 공부를 하던 중 자살 위기에 처한 동급생으로, 싱클레어의 도움을 받은 인물은?",options:[{t:"크나우어",ok:true},{t:"헨켈"},{t:"데미안의 사촌 마크스"},{t:"베르너"}],
+   ctx:"<b>크나우어</b>는 싱클레어가 데미안으로부터 받은 도움을 이제는 다른 사람에게 줄 수 있는 어른이 되었음을 보여줍니다. 마치 데미안이 싱클레어의 스승이었듯이요."}];
+
+/* ===================== 출처 (실제 확인된 URL) ===================== */
+const SOURCES = {wiki:{label:"위키백과: 데미안",url:"https://ko.wikipedia.org/wiki/%EB%8D%B0%EB%AF%B8%EC%95%88"},ebs:{label:"EBS 다큐 프라임: 헤르만 헤세",url:"https://www.ebs.co.kr/tv/show?prodId=348"},brunch1:{label:"Brunch: 데미안의 진정한 의미",url:"https://brunch.co.kr/@jooshine/181"},brunch2:{label:"Brunch: 헤르만 헤세와 정신분석",url:"https://brunch.co.kr/@bookrenam/67"}};
+
+/* 문항별 부연설명(틀렸을 때 집중 복습용) + 관련 출처 키 */
+const EXTRA = {1:{src:"wiki",note:"헤세가 이 소설을 싱클레어라는 필명으로 처음 발표한 것은 자전적 고백의 거리를 두려는 의도였습니다."},2:{src:"wiki",note:"데미안은 책 속에서 극히 신비로운 인물로만 등장하며, 그의 정체는 모호하고 상징적입니다."},3:{src:"wiki",note:"크로머와의 관계는 싱클레어의 내적 약함을 외화한 것으로 볼 수 있습니다."},4:{src:"wiki",note:"카인의 재해석은 기독교 정통 해석과 크게 어긋나며, 이것이 데미안의 혁신적 사고를 보여줍니다."},5:{src:"wiki",note:"이 문구는 영지주의 전통의 상징체계와도 연결되며, 새의 도상학은 영혼 상승을 나타냅니다."},6:{src:"wiki",note:"헤세가 제1차 세계 대전을 비판할 때 이 소설은 그의 용기 있는 목소리였으며, 이후 명예 회복으로 이어집니다."},7:{src:"wiki",note:"피스토리우스는 신학과 신비주의의 경계에 선 인물로, 도그마를 거부하는 영혼의 표상입니다."},8:{src:"wiki",note:"베아트리체는 단테의 신곡에 나오는 이상적 여인에서 영감을 받은 이름입니다."},9:{src:"wiki",note:"이 이원론적 구분은 개인 발달뿐 아니라 문명사 전체의 패턴이기도 합니다."},10:{src:"wiki",note:"크나우어는 싱클레어가 성장했음을 보여주는 중요한 거울 역할을 합니다."}};
+
+/* 데미안 영혼의 여정 마일스톤 */
+const MILESTONES = [{at:0,label:"새, 알을 깨다",msg:"시작합니다!"},{at:7,label:"밝음의 세계",msg:"어린 싱클레어의 도덕적 삶"},{at:15,label:"어둠의 세계",msg:"악과 욕망의 경험"},{at:22,label:"베아트리체의 이상",msg:"도덕적 삶으로의 복귀 시도"},{at:30,label:"압락사스로의 비행",msg:"완성! 진정한 자아를 찾았습니다."}];
+const DIFF_LABEL = {1:["쉬움","l1"],2:["보통","l2"],3:["어려움","l3"]};
+const BASE_PTS = {1:10, 2:20, 3:30};
+const TOTAL_Q = (APP_CONFIG.mode==='teaser') ? 30 : QUESTIONS.length;
+
+/* ===================== 상태 ===================== */
+let pending = [];          // 아직 ‘처음으로 정답’을 못 낸 문항 큐 (앞에서 꺼냄)
+let masteredIds = new Set();
+let attempts = {};         // id -> 시도 횟수
+let score = 0, streak = 0, bestStreak = 0;
+let totalTries = 0, firstTryCorrect = 0;
+let firstWrongIds = new Set();   // 첫 시도에 틀린 문항 = 약점(집중 복습 대상)
+let answered = false;
+let cur = null;
+let bestScore = 0;         // 세션 내 최고 점수 (재도전 비교용, localStorage 미사용)
+let hasPlayed = false;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ===================== 화면 전환 ===================== */
+function show(id){
+  ['home','quiz','result','report'].forEach(s=>document.getElementById(s).classList.toggle('hidden', s!==id));
+  window.scrollTo({top:0, behavior: reduceMotion ? 'auto':'smooth'});
+}
+function goHome(){ show('home'); }
+
+/* ===================== 시작 / 재시작 ===================== */
+function startQuiz(){
+  // 난이도 오름차순 정렬 (쉬움→어려움), 같은 레벨은 원래 순서 유지
+  const ordered = [...QUESTIONS].sort((a,b)=> a.level - b.level || a.id - b.id);
+  pending = ordered.map(q=>q.id);
+  masteredIds = new Set();
+  attempts = {};
+  score = 0; streak = 0; bestStreak = 0;
+  totalTries = 0; firstTryCorrect = 0;
+  firstWrongIds = new Set();
+  buildMilestones();
+  updateHUD();
+  show('quiz');
+  loadNext();
+}
+
+function buildMilestones(){
+  const box = document.getElementById('milestones');
+  box.innerHTML = MILESTONES.map(m=>`<div class="ms" data-at="${m.at}"><span class="dot"></span>${m.label}</div>`).join('');
+}
+
+/* ===================== 문항 로딩 ===================== */
+function loadNext(){
+  if(_teaserLocked()){ showLock(); return; }
+  if(pending.length === 0){ finish(); return; }
+  const id = pending[0];
+  cur = QUESTIONS.find(q=>q.id===id);
+  answered = false;
+
+  const [dl, dc] = DIFF_LABEL[cur.level];
+  const diffEl = document.getElementById('diff');
+  diffEl.textContent = dl; diffEl.className = 'diff '+dc;
+  document.getElementById('qtag').textContent = '# '+cur.tag;
+  document.getElementById('qno').textContent =
+    '마스터 '+masteredIds.size+' / '+TOTAL_Q + (attempts[id] ? ' · 복습' : '');
+  document.getElementById('question').textContent = cur.q;
+
+  // 선택지 셔플 (위치 학습 차단) — 정답은 ok 플래그로 채점
+  const shuffled = shuffle([...cur.options]);
+  const keys = ['A','B','C','D','E'];
+  const opts = document.getElementById('opts');
+  opts.innerHTML = '';
+  shuffled.forEach((o,i)=>{
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.innerHTML = `<span class="key">${keys[i]}</span><span>${o.t}</span>`;
+    b.onclick = ()=>answer(b, o.ok);
+    opts.appendChild(b);
+  });
+
+  // 해설/다음 숨김 초기화
+  const ex2=document.getElementById('explain'); ex2.className='explain'; ex2.style.cssText='';
+  document.getElementById('nextRow').style.cssText='visibility:hidden;opacity:0';
+  document.getElementById('requeue').textContent='';
+}
+
+/* ===================== 답안 처리 ===================== */
+function answer(btn, isCorrect){
+  if(answered) return;
+  answered = true;
+  const id = cur.id;
+  attempts[id] = (attempts[id]||0) + 1;
+  totalTries++;
+  const firstTry = attempts[id] === 1;
+
+  // 모든 선택지 비활성화 + 정답 표시
+  const opts = document.getElementById('opts').querySelectorAll('.opt');
+  opts.forEach(o=>{
+    o.disabled = true;
+    const label = o.querySelector('span:last-child').textContent;
+    const opt = cur.options.find(x=>x.t===label);
+    if(opt && opt.ok) o.classList.add('correct');
+    else o.classList.add('dim');
+  });
+  if(!isCorrect) btn.classList.add('wrong');
+
+  // 채점 / 점수
+  const explain = document.getElementById('explain');
+  const verdict = document.getElementById('verdict');
+  const ctx = document.getElementById('ctx');
+  const comboEl = document.getElementById('combo');
+
+  if(isCorrect){
+    streak++;
+    if(streak > bestStreak) bestStreak = streak;
+    let gain = BASE_PTS[cur.level];
+    if(!firstTry) gain = Math.round(gain/2);          // 복습 정답은 절반 점수
+    const bonus = (streak>=2) ? (streak-1)*3 : 0;     // 콤보 보너스
+    gain += bonus;
+    score += gain;
+
+    if(firstTry) firstTryCorrect++;
+    masteredIds.add(id);          // ‘처음으로’가 아니어도 최종적으로 익힌 것으로 카운트
+    pending.shift();              // 큐에서 제거 (마스터)
+
+    verdict.textContent = firstTry ? '🎯 정답!' : '✅ 이제 익혔어요!';
+    explain.className = 'explain ok';
+    if(bonus>0){
+      comboEl.textContent = `🔥 ${streak}연속 정답! +${bonus} 보너스`;
+      comboEl.classList.remove('show'); void comboEl.offsetWidth; comboEl.classList.add('show');
+    } else comboEl.textContent = '';
+    if(!reduceMotion) burst(btn);
+  } else {
+    streak = 0;
+    comboEl.textContent = '';
+    if(firstTry) firstWrongIds.add(id);   // 약점으로 기록
+    // 틀리면 큐 맨 뒤로 재투입 → 맞힐 때까지 다시 등장
+    pending.shift();
+    pending.push(id);
+    verdict.textContent = '❌ 다시 도전!';
+    explain.className = 'explain no';
+    document.getElementById('requeue').textContent = '↻ 이 문제는 뒤에서 다시 나옵니다';
+  }
+
+  ctx.innerHTML = cur.ctx;
+  /* explain visibility controlled by CSS class */
+  document.getElementById('nextRow').style.cssText='visibility:visible;opacity:1';
+  updateHUD();
+}
+
+function nextQuestion(){ loadNext(); }
+
+/* ===================== 리포트 (인포그래픽 + 약점 복습 + 출처) ===================== */
+const CONCEPTS = [{ic:"🦋",h:"개성화(Individuation)",p:"다양한 모습의 자신을 인정하고 포용하여 진정한 개별적 자아를 형성하는 과정",src:"wiki"},{ic:"☯️",h:"이원론의 극복",p:"선과 악, 밝음과 어둠의 이분법을 넘어 양자를 포용하는 통합된 의식으로 나아가기",src:"wiki"},{ic:"✨",h:"표식(Mal)",p:"영혼의 차원에 도달한 사람들이 느끼는 신비로운 인식의 표시이자 연결의 신호",src:"brunch2"},{ic:"👁️",h:"압락사스",p:"선과 악, 신과 악마를 모두 포용하는 절대적 신성, 모든 모순의 초월",src:"wiki"},{ic:"🗣️",h:"영혼의 목소리",p:"사회적 기대와 도덕 규범을 넘어, 자신 안에서 솟아나오는 진정한 욕구와 소명",src:"brunch1"},{ic:"🙏",h:"영적 멘토",p:"외부의 스승은 결국 자신의 영혼 안에 있으며, 진정한 성장은 내적 지혜 찾기에서 비롯",src:"wiki"},{ic:"🐦",h:"새와 알",p:"기존의 틀을 깨고 새로운 차원으로 비상하려는 영혼의 투쟁과 성장",src:"wiki"},{ic:"⚠️",h:"집단무의식의 위험",p:"개인의 독립성을 위협하는 집단의 광기와 몰개성화된 순종의 위험성 경고",src:"brunch2"}];
+
+function srcLink(key){
+  const s = SOURCES[key];
+  return `<a class="src" href="${s.url}" target="_blank" rel="noopener">${s.label}</a>`;
+}
+
+/* 목차(클릭하면 요약 오픈) */
+const TOC = [{n:"1장",t:"밝은 세계",beats:[{e:"👶",x:"어린 싱클레어, 부모의 품 안에서 도덕적으로 밝은 세계 경험"},{e:"🚶",x:"프란츠 크로머와의 만남으로 처음 악의 세계에 끌려감"},{e:"😰",x:"크로머의 괴롭힘에 시달리며 죄책감과 수치심에 휩싸임"},{e:"🆘",x:"영혼의 진실성 호소 기도로 구원을 외침"}]},{n:"2장",t:"구원자의 출현",beats:[{e:"✨",x:"신비로운 전학생 막스 데미안 등장"},{e:"💬",x:"데미안이 카인과 아벨 이야기를 새롭게 해석해줌"},{e:"🧠",x:"싱클레어의 자아 인식 깨어남, 비판적 사고 시작"},{e:"🔓",x:"크로머의 괴롭힘에서 해방되는 신비로운 해방"}]},{n:"3장",t:"어두운 세계",beats:[{e:"🌙",x:"신학생 피스토리우스를 만나 신비주의와 영지주의 접함"},{e:"🍷",x:"술, 음악, 쾌락의 세계에 빠져 영혼이 타락함"},{e:"💔",x:"이상적 존재 베아트리체를 마음에 그리며 도덕적 삶 추구"},{e:"🎨",x:"새가 알을 깨고 나오는 그림을 그려 데미안에게 보냄"}]},{n:"4장",t:"영혼의 만남",beats:[{e:"🌟",x:"신비한 영혼의 만남 속에서 데미안과 에바 부인 재등장"},{e:"❤️",x:"에바 부인으로부터 영혼의 깊이 있는 위안과 성찰 받음"},{e:"🪞",x:"자신의 모순과 그림자를 마주하며 통합의 길 시작"},{e:"🚀",x:"진정한 자아로의 비상, 압락사스로의 영혼의 비행"}]},{n:"5장",t:"완성과 성장",beats:[{e:"⚡",x:"전쟁의 시대, 수많은 표식을 가진 청년들의 각성 목격"},{e:"🔄",x:"데미안의 마지막 가르침: 스승은 자신의 영혼 안에 있음"},{e:"🌍",x:"개성화의 길이 어렵지만 동시에 아름다움을 깨달음"},{e:"🌅",x:"새로운 존재로 거듭난 싱클레어, 자신을 살아가기로 결단"}]}];
+
+/* 책 속, 생각해볼 사례 3 */
+const CASES = [{ic:"🥊",t:"크로머와의 대면",d:"어린 싱클레어가 크로머의 괴롭힘에서 벗어나는 과정은 우리가 어떻게 자신의 내적 힘을 회복할 수 있는지 보여줍니다.",why:"외부의 악은 우리 내면의 약함을 반영하는 거울일 수 있다는 깨달음을 주기 때문"},{ic:"🕊️",t:"베아트리체의 이상과 그 한계",d:"싱클레어가 도덕적 이상을 추구했지만 결국 통합의 길을 가야 했던 이유를 생각해봅시다.",why:"한쪽(선)만 추구하는 것으로는 진정한 성장이 불가능하며, 우리의 모든 면을 인정해야 한다는 보편적 진리를 담고 있습니다."},{ic:"🚂",t:"전쟁 전 기차 안의 청년들",d:"싱클레어가 표식을 가진 수많은 청년들을 보며 느낀 연결감은 어떤 의미를 가질까요?",why:"개인의 영혼의 목소리는 시대와 문화를 초월해 모두에게 존재하며, 우리는 그 보편성 속에서 혼자가 아님을 알게 되기 때문입니다."}];
+
+/* 이 책이 우리에게 던지는 질문 3 */
+const ASKS = [{q:"내 삶에서 '크로머'처럼 나를 억누르고 있는 것은 무엇일까요?",h:"그것이 외부의 것인지, 아니면 나 자신의 약함을 반영한 것인지 차분히 살펴보세요."},{q:"내가 추구하는 도덕성이나 이상이 나의 진정한 자아를 억누르고 있지는 않을까요?",h:"사회가 정한 '올바른 모습'이 정말 나의 영혼이 원하는 방향과 일치하는지 확인해봅시다."},{q:"내 안의 '밝은 면'과 '어두운 면' 중 어느 쪽을 더 거부하고 있으며, 둘을 어떻게 통합할 수 있을까요?",h:"완벽한 사람이 되려는 노력보다, 자신의 모든 모습을 받아들이는 것이 더 큰 힘을 가져올 수 있습니다."}];
+
+function toggleToc(i){
+  const item = document.querySelectorAll('.toc-item')[i];
+  const panel = item.querySelector('.toc-panel');
+  const opening = !item.classList.contains('open');
+  item.classList.toggle('open');
+  item.querySelector('.toc-head').setAttribute('aria-expanded', opening ? 'true':'false');
+  panel.style.maxHeight = opening ? (panel.scrollHeight + 8) + 'px' : '0px';
+}
+
+function openReport(){
+  // 개념 카드
+  document.getElementById('concepts').innerHTML = CONCEPTS.map(c=>`
+    <div class="concept">
+      <div class="ic">${c.ic}</div>
+      <h4>${c.h}</h4>
+      <p>${c.p}</p>
+      ${srcLink(c.src)}
+    </div>`).join('');
+
+  // 목차(클릭 시 요약 오픈)
+  document.getElementById('toc').innerHTML = TOC.map((t,i)=>`
+    <div class="toc-item">
+      <button class="toc-head" onclick="toggleToc(${i})" aria-expanded="false">
+        <span class="nn">${t.n}</span><span class="tt">${t.t}</span>
+        <span class="chev">▾</span>
+      </button>
+      <div class="toc-panel"><div class="inner">${t.beats.map(b=>`<div class="beat"><span class="be">${b.e}</span><span class="bx">${b.x}</span></div>`).join('')}</div></div>
+    </div>`).join('');
+
+  // 책 속, 생각해볼 사례 3
+  document.getElementById('cases').innerHTML = CASES.map(c=>`
+    <div class="case">
+      <div class="ct"><span class="ci">${c.ic}</span>${c.t}</div>
+      <div class="cd">${c.d}</div>
+      <div class="cw">💭 <b>왜 생각해볼 만한가</b> — ${c.why}</div>
+    </div>`).join('');
+
+  // 우리에게 던지는 질문 3
+  document.getElementById('asks').innerHTML = ASKS.map((a,i)=>`
+    <div class="qcard">
+      <div class="qq"><span class="qnum">Q${i+1}.</span><span>${a.q}</span></div>
+      <div class="qh">${a.h}</div>
+    </div>`).join('');
+
+  // 약점(첫 시도 오답) 집중 복습
+  const ids = [...firstWrongIds].sort((a,b)=>a-b);
+  const wrap = document.getElementById('weakWrap');
+  const cnt = document.getElementById('weakCount');
+  const list = document.getElementById('weakList');
+  if(ids.length === 0){
+    cnt.textContent = '';
+    list.innerHTML = `<div class="perfect">🌟 첫 시도에 모두 정답!<span>약점이 없어 따로 복습할 항목이 없습니다. 멋져요.</span></div>`;
+  } else {
+    cnt.textContent = `(${ids.length}개)`;
+    list.innerHTML = ids.map(id=>{
+      const q = QUESTIONS.find(x=>x.id===id);
+      const ans = q.options.find(o=>o.ok).t;
+      const ex = EXTRA[id];
+      return `<div class="weak-item">
+        <div class="wq">Q. ${q.q}</div>
+        <div class="wans">정답 → <b>${ans}</b></div>
+        <div class="wnote">💡 ${ex.note}</div>
+        <div class="wctx">${q.ctx}</div>
+        ${srcLink(ex.src)}
+      </div>`;
+    }).join('');
+  }
+
+  // EBS 심화 링크
+  const ebs = SOURCES.ebs;
+  const a = document.getElementById('ebsLink');
+  a.href = ebs.url; a.textContent = ebs.label;
+
+  applyReportLock();
+  show('report');
+}
+
+/* ===================== teaser 잠금/전환 ===================== */
+function _teaserLocked(){
+  return APP_CONFIG.mode === 'teaser' && masteredIds.size >= APP_CONFIG.freeLimit;
+}
+function showLock(){
+  var qc = document.getElementById('qcard');
+  qc.style.filter = 'blur(5px)';
+  qc.style.pointerEvents = 'none';
+  document.getElementById('lockOverlay').classList.remove('hidden');
+  window.scrollTo({ top: document.getElementById('lockOverlay').offsetTop - 80,
+    behavior: reduceMotion ? 'auto' : 'smooth' });
+}
+function applyReportLock(){
+  if(APP_CONFIG.mode !== 'teaser') return;
+  document.querySelectorAll('#concepts .concept').forEach(function(el,i){
+    if(i >= 3) el.classList.add('blurred');
+  });
+  ['toc','cases','asks','weakWrap'].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.classList.add('blurred');
+  });
+  var deep = document.querySelector('#report .deepen'); if(deep) deep.classList.add('blurred');
+  if(!document.getElementById('reportLock')){
+    var lock = document.createElement('div');
+    lock.id = 'reportLock'; lock.className = 'rep-lock';
+    lock.innerHTML = '<div class="lk-ic">🔒</div>' +
+      '<h3>완독 리포트 전체는 구독자 전용이에요</h3>' +
+      '<p>인과의 사슬과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>' +
+      '목차 요약 · 생각해볼 사례 · 던지는 질문 · 약점 복습 · PDF 저장은 구독하면 모두 열립니다.</p>' +
+      '<a class="cta" href="' + _sub() + '" target="_blank" rel="noopener">🔑 구독하고 완독 리포트 전체 열기</a>';
+    var concepts = document.getElementById('concepts');
+    concepts.parentNode.insertBefore(lock, concepts.nextSibling);
+  }
+  var pdf = document.getElementById('pdfBtn'); if(pdf) pdf.style.display = 'none';
+}
+(function(){
+  var ed = document.getElementById('editionTag');
+  if(ed && APP_CONFIG.edition){ ed.textContent = '🗓 ' + APP_CONFIG.edition; }
+  else if(ed){ ed.style.display='none'; }
+  var sb = document.getElementById('lockSubBtn'); if(sb) sb.href = _sub();
+  var cn = document.getElementById('catBtn'); if(cn) cn.href = _cat();
+  if(APP_CONFIG.mode === 'teaser'){
+    var fl = APP_CONFIG.freeLimit;
+    var msg = document.getElementById('lockMsg');
+    if(msg){
+      var rest = TOTAL_Q - fl;
+      msg.innerHTML = '무료로는 <b>'+fl+'문항</b>까지 풀 수 있어요. ' +
+        '나머지 <b>'+rest+'문항</b>과 <b>완독 요약 리포트</b>는 구독자 전용입니다. ' +
+        '지금까지 쌓은 <b>영혼의 여정</b>은 위 게이지에 그대로 남아 있어요.';
+    }
+  }
+})();
+
+/* ===================== HUD 갱신 ===================== */
+function updateHUD(){
+  document.getElementById('score').textContent = score;
+  document.getElementById('streak').textContent = streak;
+  document.getElementById('mastered').textContent = masteredIds.size + ' / ' + TOTAL_Q;
+  const pct = Math.round(masteredIds.size / TOTAL_Q * 100);
+  document.getElementById('fill').style.width = pct + '%';
+  document.getElementById('pctTxt').textContent = pct + '%';
+  // 마일스톤 점등
+  document.querySelectorAll('.ms').forEach(el=>{
+    el.classList.toggle('reached', masteredIds.size >= +el.dataset.at);
+  });
+}
+
+/* ===================== 종료 / 결과 ===================== */
+function finish(){
+  hasPlayed = true;
+  const acc = Math.round(firstTryCorrect / QUESTIONS.length * 100);
+  let rank, sub;
+  if(acc>=90){ rank='압락사스의 눈'; sub='데미안을 완벽히 꿰뚫었습니다'; }
+  else if(acc>=75){ rank='표식을 지닌 자'; sub='핵심 통찰을 거의 다 잡았어요'; }
+  else if(acc>=55){ rank='알을 깨는 중'; sub='뼈대를 익혔습니다 — 한 번 더!'; }
+  else { rank='호기심 가득한 싱클레어'; sub='반복할수록 통찰이 깊어집니다'; }
+
+  document.getElementById('rankTitle').textContent = rank;
+  document.getElementById('rankSub').textContent = sub;
+  document.getElementById('rScore').textContent = score;
+  document.getElementById('rAcc').textContent = acc + '%';
+  document.getElementById('rStreak').textContent = bestStreak;
+  document.getElementById('rTries').textContent = totalTries;
+
+  const note = document.getElementById('bestNote');
+  if(score > bestScore){
+    const prev = bestScore;
+    bestScore = score;
+    note.innerHTML = prev>0 ? `🏆 <b>최고 점수 경신!</b> (이전 ${prev}점)` : `🏆 첫 기록 <b>${score}점</b> — 다시 도전해 깨보세요!`;
+  } else {
+    note.innerHTML = `현재 최고 점수 <b>${bestScore}점</b> · 이번엔 ${score}점`;
+  }
+
+  show('result');
+  if(!reduceMotion) finale();
+}
+
+/* ===================== 유틸 / 효과 ===================== */
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+/* ===================== 자체 폭죽 구현 (위로 솟구치는 캐논) ===================== */
+(function(){
+  const COLORS=['#e3b34e','#5cc28d','#8fb0cc','#d96a4a','#f0c560','#ff6b9d','#a78bfa','#34d399'];
+  let cvs=null, ctx2d=null, particles=[], raf=null;
+
+  function ensureCanvas(){
+    if(cvs) return;
+    cvs=document.createElement('canvas');
+    cvs.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999';
+    document.body.appendChild(cvs);
+    resize();
+    window.addEventListener('resize', resize);
+    ctx2d=cvs.getContext('2d');
+  }
+  function resize(){ if(cvs){ cvs.width=window.innerWidth; cvs.height=window.innerHeight; } }
+
+  /* 위쪽 부채꼴로 발사 (angle: 라디안, spread: 퍼짐 각도) */
+  function spawn(ox, oy, count, speedMin, speedMax, spreadDeg){
+    const half = spreadDeg * Math.PI/180 / 2;
+    for(let i=0;i<count;i++){
+      const angle = -Math.PI/2 + (Math.random()*2-1)*half;  /* 위쪽 ±spread */
+      const speed = speedMin + Math.random()*(speedMax-speedMin);
+      particles.push({
+        x: ox, y: oy,
+        vx: Math.cos(angle)*speed,
+        vy: Math.sin(angle)*speed,
+        color: COLORS[Math.floor(Math.random()*COLORS.length)],
+        w: 5+Math.random()*7,
+        h: 3+Math.random()*4,
+        life: 1,
+        decay: 0.010 + Math.random()*0.016,
+        gravity: 0.20 + Math.random()*0.08,
+        drag: 0.97,
+        rot: Math.random()*Math.PI*2,
+        rotV: (Math.random()-.5)*0.28,
+        shape: Math.random()<.65 ? 'rect' : 'circle'
+      });
+    }
+  }
+
+  function loop(){
+    ctx2d.clearRect(0,0,cvs.width,cvs.height);
+    particles=particles.filter(p=>p.life>0.02);
+    if(!particles.length){ raf=null; return; }
+    particles.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      p.vy+=p.gravity;
+      p.vx*=p.drag; p.vy*=p.drag;
+      p.life-=p.decay;
+      p.rot+=p.rotV;
+      ctx2d.save();
+      ctx2d.globalAlpha=Math.pow(Math.max(0,p.life), 0.6);
+      ctx2d.fillStyle=p.color;
+      ctx2d.translate(p.x, p.y);
+      ctx2d.rotate(p.rot);
+      if(p.shape==='rect'){
+        ctx2d.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      } else {
+        ctx2d.beginPath();
+        ctx2d.ellipse(0,0,p.w/2,p.h/2,0,0,Math.PI*2);
+        ctx2d.fill();
+      }
+      ctx2d.restore();
+    });
+    raf=requestAnimationFrame(loop);
+  }
+
+  function fire(ox, oy, count, speedMin, speedMax, spreadDeg){
+    ensureCanvas();
+    spawn(ox, oy, count, speedMin, speedMax, spreadDeg);
+    if(!raf) raf=requestAnimationFrame(loop);
+  }
+
+  /* 정답 버튼에서 위로 솟구치는 소형 버스트 */
+  window._confettiBurst=function(el){
+    const r=el.getBoundingClientRect();
+    const cx=r.left+r.width/2, cy=r.top+r.height/2;
+    fire(cx, cy, 45, 8, 18, 90);               /* 메인: 위로 넓게 */
+    setTimeout(()=>fire(cx, cy, 20, 5, 12, 50), 80); /* 후폭풍 */
+  };
+
+  /* 완료 화면 대형 3연발 */
+  window._confettiFinale=function(){
+    const w=window.innerWidth, h=window.innerHeight;
+    /* 좌측 캐논 */
+    fire(w*.2, h*.75, 100, 12, 24, 70);
+    /* 우측 캐논 */
+    setTimeout(()=>fire(w*.8, h*.75, 100, 12, 24, 70), 250);
+    /* 중앙 대폭발 */
+    setTimeout(()=>{
+      fire(w*.5, h*.65, 130, 14, 28, 110);
+      fire(w*.35, h*.7, 60, 10, 20, 60);
+      fire(w*.65, h*.7, 60, 10, 20, 60);
+    }, 500);
+    /* 마지막 샤워 */
+    setTimeout(()=>fire(w*.5, h*.5, 80, 8, 18, 140), 900);
+  };
+})();
+
+function burst(el){ if(!reduceMotion) window._confettiBurst(el); }
+function finale(){ if(!reduceMotion) window._confettiFinale(); }
+
+/* ===================== 리포트 PDF 저장 (파일 다운로드) ===================== */
+function downloadReportPDF(){
+  // 목차 요약을 모두 펼쳐 PDF에 포함
+  document.querySelectorAll('.toc-panel').forEach(p=>{ p.style.maxHeight='none'; });
+  const el = document.getElementById('report');
+  const btn = document.getElementById('pdfBtn');
+  const h2 = document.querySelector('#report .rep-hero h2');
+  const fname = ((h2 && h2.textContent) || '완독 리포트').replace('한눈에 보기','').trim() + ' 리포트.pdf';
+
+  // 라이브러리가 안 떴으면 인쇄로 폴백(다운로드한 파일에서는 인쇄 가능)
+  if(typeof html2pdf === 'undefined'){ window.print(); return; }
+
+  document.body.classList.add('pdf-export');
+  if(btn){ btn.disabled=true; btn.textContent='📄 PDF 만드는 중…'; }
+  const opt = {
+    margin:[8,8,10,8],
+    filename:fname,
+    image:{type:'jpeg', quality:0.96},
+    html2canvas:{scale:2, backgroundColor:'#ffffff', useCORS:true, windowWidth:760, scrollY:0},
+    jsPDF:{unit:'mm', format:'a4', orientation:'portrait'},
+    pagebreak:{mode:['css','legacy']}
+  };
+  html2pdf().set(opt).from(el).outputPdf('blob').then(function(blob){
+    var url = URL.createObjectURL(blob);
+    try{
+      var a = document.createElement('a');
+      a.href = url; a.download = fname;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+    }catch(e){
+      // 자동 다운로드가 막히면 새 탭으로 열어 사용자가 저장하도록
+      window.open(url, '_blank');
+    }
+  }).catch(function(){
+    alert('PDF 생성 중 문제가 발생했어요. 이 HTML 파일을 내려받아 브라우저에서 직접 열고 다시 눌러 주세요.');
+  }).then(function(){
+    document.body.classList.remove('pdf-export');
+    if(btn){ btn.disabled=false; btn.textContent='📄 PDF로 저장'; }
+  });
+}
+</script>
+
+<div style="text-align:center;margin:30px 16px 36px">
+  <a id="catBtn" href="https://nioswing-cmd.github.io/mimi-factory/quiz.html?utm_source=quizbook&utm_medium=app" target="_blank" rel="noopener" style="display:inline-block;padding:11px 22px;border-radius:999px;background:rgba(127,127,127,.14);border:1px solid rgba(127,127,127,.35);color:inherit;text-decoration:none;font-weight:700;font-size:14px">📚 다른 책 퀴즈 보기 →</a>
+</div>
+</body>
+</html>

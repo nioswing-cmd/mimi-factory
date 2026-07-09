@@ -21,7 +21,7 @@
       "date": "2026-07-07",
       "color1": "#5ee7d8",
       "color2": "#7aa6ff",
-      "teaser": "apps/에덴의_용_quiz.html",
+      "teaser": "apps/에덴의_용_teaser.html",
       "premium": "apps/에덴의_용_quiz.html",
       "desc": "칼 세이건이 밝히는 인간 지성의 진화, 반복 퀴즈로 완독"
     },
@@ -33,7 +33,7 @@
       "date": "2026-07-07",
       "color1": "#ff8ad0",
       "color2": "#b78bf5",
-      "teaser": "apps/총_균_쇠_quiz.html",
+      "teaser": "apps/총_균_쇠_teaser.html",
       "premium": "apps/총_균_쇠_quiz.html",
       "desc": "문명 불평등의 기원을 꿰뚫는 대작, 퀴즈로 정복"
     },
@@ -45,7 +45,7 @@
       "date": "2026-07-07",
       "color1": "#ffd36e",
       "color2": "#ff8a5c",
-      "teaser": "apps/데미안_quiz.html",
+      "teaser": "apps/데미안_teaser.html",
       "premium": "apps/데미안_quiz.html",
       "desc": "알을 깨고 나오는 자아의 여정, 반복 퀴즈로 완독"
     },
@@ -57,7 +57,7 @@
       "date": "2026-07-07",
       "color1": "#8affc1",
       "color2": "#5ee7d8",
-      "teaser": "apps/5가지_사랑의_언어_quiz.html",
+      "teaser": "apps/5가지_사랑의_언어_teaser.html",
       "premium": "apps/5가지_사랑의_언어_quiz.html",
       "desc": "게리 채프먼의 사랑의 언어, 퀴즈로 마스터"
     },
@@ -81,7 +81,7 @@
       "date": "2026-07-07",
       "color1": "#7aa6ff",
       "color2": "#b78bf5",
-      "teaser": "apps/기브_앤_테이크_quiz.html",
+      "teaser": "apps/기브_앤_테이크_teaser.html",
       "premium": "apps/기브_앤_테이크_quiz.html",
       "desc": "주는 사람이 성공하는 이유, 퀴즈로 마스터"
     },
@@ -93,7 +93,7 @@
       "date": "2026-07-07",
       "color1": "#5ee7d8",
       "color2": "#7aa6ff",
-      "teaser": "apps/문명의_붕괴_quiz.html",
+      "teaser": "apps/문명의_붕괴_teaser.html",
       "premium": "apps/문명의_붕괴_quiz.html",
       "desc": "문명은 왜 무너지는가, 도파민 퀴즈로 정복"
     },
@@ -105,7 +105,7 @@
       "date": "2026-07-07",
       "color1": "#ff8ad0",
       "color2": "#b78bf5",
-      "teaser": "apps/호모_데우스_quiz.html",
+      "teaser": "apps/호모_데우스_teaser.html",
       "premium": "apps/호모_데우스_quiz.html",
       "desc": "인류의 미래를 묻는 하라리의 대작, 퀴즈로 완독"
     },
@@ -153,7 +153,7 @@
       "date": "2026-07-07",
       "color1": "#7aa6ff",
       "color2": "#b78bf5",
-      "teaser": "apps/사피엔스_quiz.html",
+      "teaser": "apps/사피엔스_teaser.html",
       "premium": "apps/사피엔스_quiz.html",
       "desc": "인류 7만 년의 역사를 퀴즈 미션으로 정복"
     },
