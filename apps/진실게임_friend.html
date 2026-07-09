@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>진실게임 · 둘이 함께 친해지기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#1a1230; --bg2:#2d1b4e;
+  --accent1:#ffd56b; --accent2:#ffb347;
+  --cream:#fff6ec; --muted:#cdbfe0;
+  --card:#241a3d;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 80% -10%, rgba(255,180,90,.12), transparent 55%),
+    radial-gradient(120% 90% at 10% 110%, rgba(255,94,138,.13), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  transition:background .9s ease;
+  min-height:100dvh;
+}
+.wrap{max-width:520px; margin:0 auto; padding:22px 18px calc(22px + env(safe-area-inset-bottom)); min-height:100dvh; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(105deg,var(--accent1),#ff8a5b 50%,#ff5e8a);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
+
+/* ---- 화면 전환 ---- */
+.screen{display:none; animation:fadeIn .5s ease; flex:1; flex-direction:column;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+/* ---- 시작 화면 ---- */
+.hero{text-align:center; margin-top:6px;}
+.badge{display:inline-block; font-size:12px; letter-spacing:.14em; color:var(--muted); border:1px solid rgba(255,255,255,.15); padding:6px 14px; border-radius:99px; margin-bottom:16px;}
+.hero h1{font-size:40px; margin:.1em 0 .12em; line-height:1.12;}
+.hero p{color:var(--muted); font-size:14.5px; line-height:1.7; word-break:keep-all; margin:0 auto; max-width:340px;}
+.rule{
+  margin:22px 0 4px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);
+  border-radius:18px; padding:16px 18px; text-align:left;
+}
+.rule h3{font-size:16px; margin:0 0 10px;}
+.rule ul{margin:0; padding-left:2px; list-style:none;}
+.rule li{font-size:13.5px; color:var(--muted); line-height:1.6; margin:8px 0; padding-left:26px; position:relative; word-break:keep-all;}
+.rule li b{color:var(--cream);}
+.rule li .ic{position:absolute; left:0; top:-1px; font-size:16px;}
+
+.names{display:flex; gap:10px; margin:20px 0 6px;}
+.names .field{flex:1;}
+.names label{display:block; font-size:12px; color:var(--muted); margin:0 0 6px 4px; letter-spacing:.02em;}
+.names input{
+  width:100%; padding:13px 14px; border-radius:14px; border:1.5px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.05); color:var(--cream); font-size:16px; font-family:inherit; text-align:center;
+  transition:border-color .25s;
+}
+.names input:focus{outline:none; border-color:var(--accent2);}
+
+.pick-title{text-align:center; font-size:13.5px; color:var(--muted); margin:22px 0 12px; letter-spacing:.02em;}
+.picks{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+.pick{
+  border:1.5px solid rgba(255,255,255,.14); background:rgba(255,255,255,.05); color:var(--cream);
+  border-radius:16px; padding:16px 8px 13px; cursor:pointer; font-family:'Jua',sans-serif;
+  transition:transform .18s cubic-bezier(.34,1.56,.64,1), border-color .2s, background .2s; text-align:center;
+}
+.pick:hover,.pick:focus-visible{border-color:var(--accent2); outline:none;}
+.pick:active{transform:scale(.94);}
+.pick.sel{border-color:var(--accent2); background:linear-gradient(160deg,rgba(255,213,107,.22),rgba(255,94,138,.14)); box-shadow:0 6px 20px -8px var(--accent2);}
+.pick .n{font-size:26px; line-height:1; display:block;}
+.pick .u{font-size:11px; color:var(--muted); letter-spacing:.04em; margin-top:5px; display:block;}
+.pick.full{grid-column:span 3;}
+.pick.full .n{font-size:22px;}
+
+.btn{
+  width:100%; border:none; cursor:pointer; font-family:'Jua',sans-serif; font-size:19px; color:#2a1533;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2)); border-radius:16px; padding:16px;
+  box-shadow:0 10px 26px -10px var(--accent2); transition:transform .18s cubic-bezier(.34,1.56,.64,1), filter .2s;
+  margin-top:18px; letter-spacing:.02em;
+}
+.btn:active{transform:scale(.97);}
+.btn:disabled{filter:grayscale(.6) brightness(.7); cursor:not-allowed; box-shadow:none;}
+.btn.ghost{background:transparent; color:var(--muted); border:1.5px solid rgba(255,255,255,.15); box-shadow:none; font-size:16px;}
+
+/* ---- 게임 화면 ---- */
+.topbar{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:14px;}
+.player{flex:1; background:rgba(255,255,255,.04); border:1.5px solid rgba(255,255,255,.08); border-radius:14px; padding:9px 10px; transition:border-color .3s, background .3s;}
+.player.active{border-color:var(--accent2); background:linear-gradient(160deg,rgba(255,213,107,.16),transparent);}
+.player .pn{font-size:13px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:5px;}
+.player .pn .dot{width:7px; height:7px; border-radius:50%; background:var(--accent2); opacity:0; transition:opacity .3s;}
+.player.active .pn .dot{opacity:1;}
+.player .passes{margin-top:5px; display:flex; gap:5px; align-items:center;}
+.pdot{width:9px; height:9px; border-radius:50%; background:var(--accent2); box-shadow:0 0 8px -1px var(--accent2); transition:transform .3s, background .3s, box-shadow .3s;}
+.pdot.used{background:rgba(255,255,255,.13); box-shadow:none; transform:scale(.8);}
+.player .plabel{font-size:9.5px; color:var(--muted); letter-spacing:.06em; margin-left:auto;}
+.vs{font-family:'Jua',sans-serif; font-size:15px; color:var(--muted); flex:0 0 auto;}
+
+.progline{display:flex; align-items:center; justify-content:space-between; margin:2px 2px 8px; font-size:12px; color:var(--muted);}
+.depthtag{font-family:'Jua',sans-serif; color:var(--cream); font-size:13px;}
+.gauge{height:9px; border-radius:99px; background:rgba(255,255,255,.1); overflow:hidden; margin-bottom:20px;}
+.gaugefill{height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg,var(--accent1),var(--accent2)); box-shadow:0 0 14px 1px var(--accent2); transition:width .55s cubic-bezier(.22,1,.36,1), box-shadow .6s;}
+
+.cardarea{flex:1; display:flex; align-items:center; justify-content:center; perspective:1200px; min-height:300px;}
+.card{
+  width:100%; max-width:400px; aspect-ratio:3/3.55; border-radius:26px; position:relative; cursor:pointer;
+  transform-style:preserve-3d; transition:transform .6s cubic-bezier(.4,.9,.3,1);
+}
+.card.flip{transform:rotateY(180deg);}
+.face{position:absolute; inset:0; border-radius:26px; backface-visibility:hidden; -webkit-backface-visibility:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:26px; text-align:center; overflow:hidden;}
+.back{
+  background:linear-gradient(160deg,var(--card),#1b1330); border:1.6px solid rgba(255,255,255,.1);
+  box-shadow:0 24px 60px -24px #000;
+}
+.back .qmark{font-family:'Jua',sans-serif; font-size:88px; line-height:1; background:linear-gradient(140deg,var(--accent1),var(--accent2)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px;}
+.back .tap{color:var(--muted); font-size:14px; letter-spacing:.03em;}
+.back .tap b{color:var(--cream);}
+.back::after{content:""; position:absolute; inset:0; background:radial-gradient(circle at 50% 30%, rgba(255,180,90,.14), transparent 60%); pointer-events:none;}
+.front{
+  transform:rotateY(180deg);
+  background:linear-gradient(160deg,var(--card),#20163a); border:1.6px solid var(--accent2);
+  box-shadow:0 24px 60px -22px #000, inset 0 0 60px -30px var(--accent2);
+}
+.front .lv{font-size:12px; letter-spacing:.1em; color:var(--accent2); font-weight:700; margin-bottom:auto; padding-top:4px;}
+.front .qnum{font-family:'Jua',sans-serif; font-size:15px; color:var(--muted); margin-bottom:14px;}
+.front .q{font-family:'Jua',sans-serif; font-size:25px; line-height:1.42; word-break:keep-all;}
+.front .who{margin-top:auto; padding-bottom:4px; font-size:13px; color:var(--muted);}
+.front .who b{color:var(--accent1);}
+@media (max-height:720px){ .front .q{font-size:22px;} .back .qmark{font-size:70px;} }
+
+.actions{display:flex; gap:11px; margin-top:20px; min-height:56px;}
+.actions.hide{visibility:hidden;}
+.act{flex:1; border:none; cursor:pointer; font-family:'Jua',sans-serif; font-size:17px; border-radius:15px; padding:15px 8px; transition:transform .16s cubic-bezier(.34,1.56,.64,1), filter .2s;}
+.act:active{transform:scale(.95);}
+.act.answered{flex:1.7; color:#2a1533; background:linear-gradient(100deg,var(--accent1),var(--accent2)); box-shadow:0 10px 24px -12px var(--accent2);}
+.act.pass{color:var(--cream); background:rgba(255,255,255,.06); border:1.5px solid rgba(255,255,255,.16);}
+.act.pass:disabled{filter:grayscale(.6) opacity(.45); cursor:not-allowed;}
+.act.pass .sub{display:block; font-size:10.5px; font-family:'Noto Sans KR'; color:var(--muted); margin-top:2px; letter-spacing:.02em;}
+
+/* ---- 결과 화면 ---- */
+.result{text-align:center;}
+.result .big{font-size:34px; margin:6px 0 4px;}
+.result .sub{color:var(--muted); font-size:14px; line-height:1.7; word-break:keep-all; margin-bottom:18px;}
+.stats{display:flex; gap:10px; margin-bottom:16px;}
+.stat{flex:1; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); border-radius:16px; padding:15px 8px;}
+.stat .v{font-family:'Jua',sans-serif; font-size:30px; line-height:1;}
+.stat .k{font-size:11.5px; color:var(--muted); margin-top:6px; letter-spacing:.03em;}
+.passbox{background:linear-gradient(160deg,rgba(255,94,138,.12),rgba(255,213,107,.06)); border:1px solid rgba(255,120,150,.28); border-radius:18px; padding:16px 18px; text-align:left; margin-bottom:14px;}
+.passbox h3{font-size:15px; margin:0 0 4px;}
+.passbox .note{font-size:12.5px; color:var(--muted); line-height:1.6; margin:0 0 12px; word-break:keep-all;}
+.passbox ul{margin:0; padding:0; list-style:none;}
+.passbox li{font-size:13px; line-height:1.55; padding:8px 12px; background:rgba(0,0,0,.18); border-radius:11px; margin:7px 0; word-break:keep-all;}
+.passbox li .tag{font-size:10.5px; color:var(--accent1); font-weight:700; display:block; margin-bottom:2px; letter-spacing:.04em;}
+.passbox .none{font-size:13px; color:var(--muted); text-align:center; padding:10px;}
+
+/* ---- 토스트 ---- */
+.toast{position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-24px); background:rgba(36,26,61,.97); border:1.5px solid var(--accent2); color:var(--cream); padding:13px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none; transition:opacity .4s, transform .4s; z-index:50; max-width:90vw; text-align:center; box-shadow:0 12px 30px -12px #000;}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1.5deg); opacity:.4;} 60%{transform:scale(1.02) rotate(.5deg);} 100%{transform:scale(1) rotate(0); opacity:1;}}
+
+/* ---- 푸터 ---- */
+.footer{text-align:center; margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em; background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} .card.flip{transition:none;} }
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="wrap">
+
+  <!-- ============ 시작 ============ -->
+  <section class="screen on" id="startScreen">
+    <div class="hero">
+      <span class="badge">둘이 함께 · 친해지기</span>
+      <h1>진실<span class="grad">게임</span></h1>
+      <p>나란히 앉아 카드를 뽑고, 번갈아 대답해요.<br>가벼운 질문에서 시작해 <b style="color:var(--cream)">점점 깊은 진심</b>으로 내려갑니다.</p>
+    </div>
+
+    <div class="rule">
+      <h3>🃏 규칙</h3>
+      <ul>
+        <li><span class="ic">🔥</span><b>점점 깊어져요.</b> 워밍업 → 취향 → 가치관 → 감정 → 깊은 진심. 카드 색이 뜨거워질수록 마음도 가까워져요.</li>
+        <li><span class="ic">🔄</span><b>번갈아 대답해요.</b> 뽑은 사람이 대답하고, 다음 카드는 상대에게 넘어가요.</li>
+        <li><span class="ic">🤫</span><b>패스는 평생 3번뿐.</b> 정말 답하기 어려울 때만. — <b style="color:var(--accent1)">패스가 곧 정보예요.</b> 어떤 질문에서 멈췄는지, 게임 끝에 다 드러나거든요.</li>
+      </ul>
+    </div>
+
+    <div class="names">
+      <div class="field"><label>왼쪽 사람</label><input id="nameA" maxlength="6" placeholder="나" value=""></div>
+      <div class="field"><label>오른쪽 사람</label><input id="nameB" maxlength="6" placeholder="너" value=""></div>
+    </div>
+
+    <div class="pick-title">몇 개의 질문을 나눌까요?</div>
+    <div class="picks" id="picks">
+      <button class="pick" data-n="5"><span class="n">5</span><span class="u">가볍게 맛보기</span></button>
+      <button class="pick" data-n="10"><span class="n">10</span><span class="u">티타임</span></button>
+      <button class="pick" data-n="20"><span class="n">20</span><span class="u">제대로</span></button>
+      <button class="pick" data-n="30"><span class="n">30</span><span class="u">깊게</span></button>
+      <button class="pick full" data-n="100"><span class="n">100 · 완전 정복</span><span class="u">우리, 끝까지 가보자</span></button>
+    </div>
+
+    <button class="btn" id="startBtn" disabled>질문 개수를 골라주세요</button>
+  </section>
+
+  <!-- ============ 게임 ============ -->
+  <section class="screen" id="gameScreen">
+    <div class="topbar">
+      <div class="player" id="pA">
+        <div class="pn"><span class="dot"></span><span class="pname"></span></div>
+        <div class="passes"><span class="plabel">패스</span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span></div>
+      </div>
+      <div class="vs">VS</div>
+      <div class="player" id="pB">
+        <div class="pn"><span class="dot"></span><span class="pname"></span></div>
+        <div class="passes"><span class="plabel">패스</span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span></div>
+      </div>
+    </div>
+
+    <div class="progline">
+      <span id="progText">1 / 5</span>
+      <span class="depthtag" id="depthTag">🌱 워밍업</span>
+    </div>
+    <div class="gauge"><div class="gaugefill" id="gaugeFill"></div></div>
+
+    <div class="cardarea">
+      <div class="card" id="card" role="button" tabindex="0" aria-label="카드 뽑기">
+        <div class="face back">
+          <div class="qmark">?</div>
+          <div class="tap"><b id="turnHint">나</b> 차례 · <b>탭</b>해서 카드 뽑기</div>
+        </div>
+        <div class="face front">
+          <div class="lv" id="frontLv">LV.1 워밍업</div>
+          <div class="qnum" id="frontNum">Q1</div>
+          <div class="q" id="frontQ"></div>
+          <div class="who">지금은 <b id="frontWho">나</b>의 차례</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions hide" id="actions">
+      <button class="act answered" id="answeredBtn">답했어! 다음 카드 →</button>
+      <button class="act pass" id="passBtn">패스<span class="sub">남은 3번</span></button>
+    </div>
+  </section>
+
+  <!-- ============ 결과 ============ -->
+  <section class="screen" id="endScreen">
+    <div class="result">
+      <div class="hero" style="margin-top:0">
+        <span class="badge">우리, 조금 더 가까워졌어요</span>
+        <h2 class="big grad" id="endTitle">서로를 알아가는 시간 끝!</h2>
+        <p class="sub" id="endSub"></p>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="stAnswered">0</div><div class="k">함께 나눈 진심</div></div>
+        <div class="stat"><div class="v grad" id="stDepth">🌱</div><div class="k">가장 깊이 내려간 곳</div></div>
+        <div class="stat"><div class="v" id="stPass">0</div><div class="k">패스 (=정보)</div></div>
+      </div>
+
+      <div class="passbox">
+        <h3>🤫 패스가 남긴 정보</h3>
+        <p class="note">멈춘 질문은 그 사람의 마음이 머문 자리예요. 오늘 말고, 언젠가 다시 물어봐 주세요.</p>
+        <ul id="passList"></ul>
+      </div>
+
+      <button class="btn" id="againBtn">다시 뽑기 🔄</button>
+      <button class="btn ghost" id="homeBtn">처음으로</button>
+    </div>
+
+    <div class="footer">
+      <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+      <div class="mf-logo">미미팩토리</div>
+      <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* ============ 질문 풀 (쉬움→깊음, 5단계 × 20문) ============ */
+const LEVELS = [
+  { key:1, tag:"🌱 워밍업", name:"워밍업", theme:{a1:"#ffd56b",a2:"#ffb347",bg1:"#1a1230",bg2:"#2d1b4e",card:"#241a3d"},
+    qs:[
+    "지금 기분을 이모지 하나로 표현한다면?",
+    "오늘 가장 맛있게 먹은 건 뭐야?",
+    "요즘 자꾸 손이 가는 노래나 영상은?",
+    "나는 아침형 인간일까, 저녁형 인간일까?",
+    "마지막으로 크게 웃은 순간은 언제였어?",
+    "지금 가방이나 주머니 속에 뭐가 들어있어?",
+    "휴대폰 배경화면은 뭐야? 왜 그걸로 했어?",
+    "최근에 산 것 중 제일 잘 샀다 싶은 건?",
+    "나를 색깔 하나로 표현하면 무슨 색일까?",
+    "오늘 하루를 한 단어로 요약하면?",
+    "커피 vs 차, 그리고 그 이유는?",
+    "요즘 제일 자주 여는 앱은 뭐야?",
+    "제일 좋아하는 계절과 그 계절의 냄새는?",
+    "어릴 때 별명은 뭐였어?",
+    "지금 당장 여행 갈 수 있다면 어디로 가고 싶어?",
+    "포기 못 하는 최애 간식 3가지는?",
+    "나만 아는 소소한 취미가 있어?",
+    "완벽한 주말 하루는 어떤 모습이야?",
+    "최근에 본 것 중 유독 기억에 남는 장면은?",
+    "스트레스 풀 때 나만의 방법은 뭐야?"]},
+  { key:2, tag:"☕ 취향 탐색", name:"취향 탐색", theme:{a1:"#ffb35b",a2:"#ff8a5b",bg1:"#201232",bg2:"#351a45",card:"#2a1740"},
+    qs:[
+    "남들은 별로래도 나는 좋아하는 것은?",
+    "절대 양보 못 하는 사소한 고집이 있다면?",
+    "다시 태어난다면 어떤 사람이 되고 싶어?",
+    "돈 걱정이 없다면 제일 먼저 뭘 하고 싶어?",
+    "요즘 나의 가장 큰 관심사는 뭐야?",
+    "내가 생각하는 나의 매력 포인트는?",
+    "은근히 자신 있는 능력이 하나 있다면?",
+    "최근에 새로 도전해보고 싶어진 것은?",
+    "나를 가장 나답게 만드는 순간은 언제야?",
+    "남들이 잘 모르는 나의 반전이 있다면?",
+    "어떤 칭찬을 들을 때 제일 기분이 좋아?",
+    "요즘 자주 하는 생각이나 고민은 뭐야?",
+    "나에게 완벽한 친구·파트너란 어떤 모습일까?",
+    "내가 닮고 싶은 사람이 있어?",
+    "시간을 되돌릴 수 있다면 언제로 가고 싶어?",
+    "버리지 못하고 간직하는 물건이 있어?",
+    "요즘 나를 설레게 하는 건 뭐야?",
+    "혼자 있을 때 주로 뭘 하며 시간을 보내?",
+    "내가 세상에서 제일 편하게 느끼는 장소는?",
+    "요즘 배우거나 시작하고 싶은 게 있다면?"]},
+  { key:3, tag:"🧭 가치관", name:"가치관", theme:{a1:"#ff8a5b",a2:"#ff6b6b",bg1:"#25102e",bg2:"#3a1840",card:"#311536"},
+    qs:[
+    "인생에서 가장 중요하게 생각하는 가치는 뭐야?",
+    "성공이란 나에게 어떤 의미야?",
+    "용서하기 가장 어려운 건 어떤 걸까?",
+    "돈과 시간 중 나에게 더 소중한 건?",
+    "'좋은 어른'이란 어떤 사람일까?",
+    "나는 어떤 사람으로 기억되고 싶어?",
+    "절대 타협할 수 없는 나만의 원칙은?",
+    "사랑과 우정, 뭐가 더 어렵다고 생각해?",
+    "요즘 세상에서 제일 안타깝게 느끼는 건?",
+    "행복은 크기일까, 빈도일까?",
+    "나에게 '가족'은 어떤 의미야?",
+    "실패를 대하는 나만의 태도가 있어?",
+    "거짓말을 해도 되는 순간이 있을까?",
+    "어떤 사람과는 절대 가까워지고 싶지 않아?",
+    "나이 드는 것에 대해 어떻게 생각해?",
+    "지금 내 삶의 우선순위 3가지를 꼽는다면?",
+    "인간관계에서 가장 중요하게 보는 건 뭐야?",
+    "나를 화나게 하는 건 대체로 어떤 상황이야?",
+    "혼자의 시간과 함께의 시간, 나의 균형은?",
+    "죽기 전에 꼭 이루고 싶은 한 가지는?"]},
+  { key:4, tag:"🌊 감정과 기억", name:"감정과 기억", theme:{a1:"#ff6b8a",a2:"#ff4d6d",bg1:"#260c2c",bg2:"#3d1238",card:"#331134"},
+    qs:[
+    "최근에 몰래 운 적 있어? 이유를 말할 수 있어?",
+    "지금까지 가장 외로웠던 순간은 언제였어?",
+    "가장 크게 후회하는 일이 있다면?",
+    "누군가에게 아직 못 한 말이 있어?",
+    "어릴 때 가장 상처받은 기억은?",
+    "요즘 가장 두려운 건 뭐야?",
+    "나 자신이 가장 실망스러웠던 순간은?",
+    "겉으론 괜찮은 척했지만 사실 힘들었던 때는?",
+    "누구에게 가장 미안한 마음을 품고 있어?",
+    "최근에 가장 고마웠던 사람과 그 이유는?",
+    "내가 감추고 싶어 하는 약한 모습은?",
+    "사랑받고 있다고 느낀 가장 최근의 순간은?",
+    "지금 마음의 짐이 되는 게 있다면?",
+    "가장 그리운 사람이나 시절이 있어?",
+    "나를 울컥하게 만드는 말이나 상황은?",
+    "인생에서 가장 무너졌던 시기는 언제야?",
+    "아직도 가끔 떠오르는, 미안한 사람이 있어?",
+    "남에게 들키고 싶지 않은 감정이 있다면?",
+    "최근에 마음이 크게 흔들린 일은 뭐였어?",
+    "지금 스스로에게 해주고 싶은 위로의 말은?"]},
+  { key:5, tag:"🔥 깊은 진심", name:"깊은 진심", theme:{a1:"#ff5e9a",a2:"#c44ec4",bg1:"#220a2a",bg2:"#380f3a",card:"#2f0f34"},
+    qs:[
+    "나의 어떤 점을 가장 좋아해 주면 좋겠어?",
+    "우리가 처음 가까워졌던 순간, 기억나?",
+    "나에게 서운했지만 말 못 했던 적 있어?",
+    "내가 너에게 어떤 존재인지 한마디로 말해줄래?",
+    "우리 사이에서 더 솔직해지고 싶은 부분이 있어?",
+    "너에게만은 보여주고 싶은 나의 모습이 있어?",
+    "우리가 오래오래 함께이려면 뭐가 필요할까?",
+    "나에게 꼭 한 번 듣고 싶은 말이 있다면?",
+    "내가 힘들 때 네가 어떻게 해주면 좋겠어?",
+    "서로에게 가장 고마운 점을 하나씩 말해볼까?",
+    "내가 너에게 바라는 딱 한 가지가 있다면?",
+    "우리 관계에서 가장 소중한 기억은 뭐야?",
+    "내가 변하지 않았으면 하는 점은?",
+    "지금 이 사람에게 가장 하고 싶은 말은?",
+    "나를 처음 봤을 때의 솔직한 인상은 어땠어?",
+    "우리가 함께 꼭 해보고 싶은 게 있어?",
+    "혹시 내가 너에게 상처 준 적이 있을까?",
+    "앞으로 우리가 어떤 사이가 되길 바라?",
+    "지금 서로의 눈을 보고 딱 한마디 한다면?",
+    "이 게임을 하며 나에 대해 새롭게 알게 된 점은?"]}
+];
+
+/* ============ 유틸 ============ */
+function vibrate(ms){ if(navigator.vibrate) try{ navigator.vibrate(ms); }catch(e){} }
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+let _tt;
+function toast(msg){ const t=document.getElementById('toast'); t.innerHTML=msg; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2400); }
+function applyTheme(t){
+  const r=document.documentElement.style;
+  r.setProperty('--accent1',t.a1); r.setProperty('--accent2',t.a2);
+  r.setProperty('--bg1',t.bg1); r.setProperty('--bg2',t.bg2); r.setProperty('--card',t.card);
+}
+function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); document.getElementById(id).classList.add('on'); window.scrollTo(0,0); }
+
+/* ============ 상태 ============ */
+let deck=[];        // {level, tag, name, q, theme}
+let idx=0;
+let curLevelKey=0;
+let flipped=false;
+let players=[];     // [{name, passes, answered}]
+let passedQs=[];    // {who, q, tag}
+
+/* 선택 개수 → 5단계 균등 분배(항상 깊이가 점층) */
+function buildDeck(total){
+  const per = total/5;      // 5,10,20,30,100 모두 5의 배수 → 정수
+  const d=[];
+  LEVELS.forEach(L=>{
+    const picked = shuffle(L.qs.slice()).slice(0, per);
+    picked.forEach(q=> d.push({level:L.key, tag:L.tag, name:L.name, q, theme:L.theme}));
+  });
+  return d; // 이미 레벨 순서 = 얕음→깊음
+}
+
+/* ============ 시작 화면 로직 ============ */
+let chosen=0;
+const startBtn=document.getElementById('startBtn');
+document.querySelectorAll('.pick').forEach(p=>{
+  p.addEventListener('click',()=>{
+    document.querySelectorAll('.pick').forEach(x=>x.classList.remove('sel'));
+    p.classList.add('sel'); chosen=+p.dataset.n;
+    startBtn.disabled=false; startBtn.textContent=`${chosen}개 질문으로 시작하기 →`;
+    vibrate(14);
+  });
+});
+startBtn.addEventListener('click', startGame);
+
+function startGame(){
+  if(!chosen) return;
+  const nA=(document.getElementById('nameA').value.trim()||'나').slice(0,6);
+  const nB=(document.getElementById('nameB').value.trim()||'너').slice(0,6);
+  players=[{name:nA,passes:3,answered:0},{name:nB,passes:3,answered:0}];
+  deck=buildDeck(chosen); idx=0; passedQs=[]; curLevelKey=0;
+  document.querySelector('#pA .pname').textContent=nA;
+  document.querySelector('#pB .pname').textContent=nB;
+  renderPasses();
+  show('gameScreen');
+  loadCard();
+  vibrate([20,40,20]);
+}
+
+/* ============ 게임 로직 ============ */
+const card=document.getElementById('card');
+const actions=document.getElementById('actions');
+
+function turnIndex(){ return idx % 2; }
+
+function loadCard(){
+  flipped=false;
+  card.classList.remove('flip');
+  actions.classList.add('hide');
+  const c=deck[idx];
+  const who=players[turnIndex()].name;
+
+  // 레벨 진입 시 테마 전환 + 축하
+  if(c.level!==curLevelKey){
+    curLevelKey=c.level;
+    applyTheme(c.theme);
+    if(idx!==0){ toast(`${c.tag} 단계로 내려갑니다`); vibrate([20,40,20]); }
+  }
+
+  // 프로그레스
+  document.getElementById('progText').textContent=`${idx+1} / ${deck.length}`;
+  document.getElementById('depthTag').textContent=c.tag;
+  document.getElementById('gaugeFill').style.width=((idx)/deck.length*100)+'%';
+
+  // 뒷면 안내
+  document.getElementById('turnHint').textContent=who;
+
+  // 앞면(뒤집으면 보임)
+  document.getElementById('frontLv').textContent=`LV.${c.level} ${c.name}`;
+  document.getElementById('frontNum').textContent=`Q${idx+1} · ${deck.length}`;
+  document.getElementById('frontQ').textContent=c.q;
+  document.getElementById('frontWho').textContent=who;
+
+  // 차례 하이라이트
+  document.getElementById('pA').classList.toggle('active', turnIndex()===0);
+  document.getElementById('pB').classList.toggle('active', turnIndex()===1);
+
+  // 패스 버튼 상태
+  const passBtn=document.getElementById('passBtn');
+  const left=players[turnIndex()].passes;
+  passBtn.querySelector('.sub').textContent = left>0 ? `남은 ${left}번` : '모두 소진';
+  passBtn.disabled = left<=0;
+
+  card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
+}
+
+function flipCard(){
+  if(flipped) return;
+  flipped=true;
+  card.classList.add('flip');
+  vibrate(28);
+  setTimeout(()=>actions.classList.remove('hide'),320);
+}
+card.addEventListener('click',flipCard);
+card.addEventListener('keydown',e=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); flipCard(); }});
+
+document.getElementById('answeredBtn').addEventListener('click',()=>{
+  players[turnIndex()].answered++;
+  advance();
+});
+document.getElementById('passBtn').addEventListener('click',()=>{
+  const p=players[turnIndex()];
+  if(p.passes<=0) return;
+  p.passes--;
+  passedQs.push({who:p.name, q:deck[idx].q, tag:deck[idx].tag});
+  renderPasses();
+  vibrate([15,30,60]);
+  const msgs=[`${p.name}, 패스 ${p.passes}번 남았어요 🤫`,`괜찮아요. 패스도 곧 정보예요.`,`이 질문은 마음에 담아둘게요.`];
+  toast(msgs[Math.floor((3-p.passes-1+3)%msgs.length)] || msgs[0]);
+  advance();
+});
+
+function advance(){
+  document.getElementById('gaugeFill').style.width=((idx+1)/deck.length*100)+'%';
+  idx++;
+  if(idx>=deck.length){ setTimeout(endGame,400); return; }
+  setTimeout(loadCard,380);
+}
+
+function renderPasses(){
+  [['#pA',0],['#pB',1]].forEach(([sel,i])=>{
+    const dots=document.querySelectorAll(sel+' .pdot');
+    const used=3-players[i].passes;
+    dots.forEach((d,k)=> d.classList.toggle('used', k>=3-used));
+  });
+}
+
+/* ============ 결과 ============ */
+function endGame(){
+  const totalAns=players[0].answered+players[1].answered;
+  const totalPass=passedQs.length;
+  const deepest=deck.reduce((m,c)=>Math.max(m,c.level),0);
+  const deepTag=LEVELS.find(L=>L.key===deepest).tag;
+  const deepEmoji=deepTag.split(' ')[0];
+
+  applyTheme(LEVELS.find(L=>L.key===deepest).theme);
+
+  document.getElementById('stAnswered').textContent=totalAns;
+  document.getElementById('stDepth').textContent=deepEmoji;
+  document.getElementById('stPass').textContent=totalPass;
+
+  document.getElementById('endSub').innerHTML =
+    `${players[0].name} · ${players[1].name}, ${deck.length}장의 카드를 함께 넘겼어요.<br>`+
+    (deepest>=5 ? '깊은 진심까지 서로에게 닿았네요. 🔥' :
+     deepest>=4 ? '감정의 깊은 곳까지 나눴어요. 🌊' :
+     deepest>=3 ? '서로의 가치관을 들여다봤어요. 🧭' : '가볍게, 그러나 다정하게 시작했어요. 🌱');
+
+  const list=document.getElementById('passList');
+  if(passedQs.length===0){
+    list.innerHTML=`<div class="none">패스가 한 번도 없었어요. 오늘 두 사람, 정말 솔직했네요. 💛</div>`;
+  }else{
+    list.innerHTML=passedQs.map(p=>
+      `<li><span class="tag">${p.who} · ${p.tag}</span>“${p.q}”</li>`).join('');
+  }
+
+  show('endScreen');
+  vibrate([60,80,60,80,120]);
+}
+
+document.getElementById('againBtn').addEventListener('click',()=>{
+  // 같은 인원·같은 개수로 새 덱
+  deck=buildDeck(deck.length); idx=0; passedQs=[]; curLevelKey=0;
+  players.forEach(p=>{p.passes=3; p.answered=0;});
+  renderPasses();
+  applyTheme(LEVELS[0].theme);
+  show('gameScreen');
+  loadCard();
+  vibrate([20,40,20]);
+});
+document.getElementById('homeBtn').addEventListener('click',()=>{
+  applyTheme(LEVELS[0].theme);
+  chosen=0; startBtn.disabled=true; startBtn.textContent='질문 개수를 골라주세요';
+  document.querySelectorAll('.pick').forEach(x=>x.classList.remove('sel'));
+  show('startScreen');
+});
+</script>
+</body>
+</html>
