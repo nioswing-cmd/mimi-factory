@@ -78,7 +78,7 @@ def header_map(header):
     m = {}
     fields = (("제목", "title"), ("작가", "author"), ("팔레트", "palette"),
               ("에디션", "edition"), ("상태", "status"), ("url", "url"),
-              ("완료일", "done"), ("자료", "material"))
+              ("완료일", "done"), ("자료", "material"), ("프롬프트", "extra"))
     for j, cell in enumerate(header):
         c = str(cell).strip().lower()
         for key, field in fields:
@@ -119,6 +119,7 @@ def pick_waiting(tabs):
                            "palette": cell(row, "palette"),
                            "edition": cell(row, "edition") or "프리미엄+티저",
                            "material_url": cell(row, "material"),
+                           "extra": cell(row, "extra"),
                            "_status": cell(row, "status"),
                            "_url": cell(row, "url"), "_done": cell(row, "done")})
 
@@ -208,19 +209,24 @@ def make_prompt(item):
             f"마지막에 앱 설명 한 줄을 {OUT_DIR}/{slug}_desc.txt 에 저장해."
         )
     elif cat == "friend":
+        concept = f"컨셉: {item['author']}. " if item["author"] else ""
         p = (
             f"mimi-factory-webapp 스킬로 '{item['title']}' 웹앱을 만들어줘. "
-            f"둘이 함께(친구·연인·가족) 나란히 보면서 즐기는 '친해지기' 앱이다. 컨셉: {item['author']}. "
+            f"둘이 함께(친구·연인·가족) 나란히 보면서 즐기는 '친해지기' 앱이다. {concept}"
             f"완성 파일은 반드시 {OUT_DIR}/{slug}_friend.html 에 저장하고, "
             f"앱 설명 한 줄을 {OUT_DIR}/{slug}_desc.txt 에 저장해."
         )
     else:
+        concept = f"컨셉: {item['author']}. " if item["author"] else ""
         p = (
             f"mimi-factory-webapp 스킬(필요시 dopamine-assessment-builder 스킬 병용)로 "
-            f"'{item['title']}' 테스트 웹앱을 만들어줘. 컨셉: {item['author']}. "
+            f"'{item['title']}' 테스트 웹앱을 만들어줘. {concept}"
             f"완성 파일은 반드시 {OUT_DIR}/{slug}_test.html 에 저장하고, "
             f"앱 설명 한 줄을 {OUT_DIR}/{slug}_desc.txt 에 저장해."
         )
+
+    if item.get("extra"):
+        p += f" 추가 지시: {item['extra']}"
 
     mat = load_material(item, slug)
     if mat:
@@ -288,7 +294,7 @@ def collect(item, slug):
         "id": slug,
         "type": cat,
         "title": item["title"],
-        "author": item["author"],
+        "author": item["author"] or "미미팩토리 오리지널",
         "date": TODAY,
         "color1": c1, "color2": c2,
         "teaser": f"apps/{os.path.basename(final_teaser)}" if final_teaser
