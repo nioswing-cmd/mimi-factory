@@ -1,0 +1,17 @@
+{
+  "name": "둘의 피크닉",
+  "short_name": "둘의피크닉",
+  "description": "같이 놀수록 가까워지는 둘만의 돗자리. 질문 카드와 밸런스 게임.",
+  "start_url": "./friend.html?app=1",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fdf6ec",
+  "theme_color": "#ff8f70",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23fdf6ec'/><text x='50' y='66' font-size='52' text-anchor='middle'>🧺</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

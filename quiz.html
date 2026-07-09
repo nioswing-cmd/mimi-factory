@@ -3,8 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>독서퀴즈관 · 밤의 서재 — 미미팩토리</title>
-<meta name="description" content="책 한 권을 도파민 터지는 반복 퀴즈로 완독하는 곳. 미미팩토리 독서퀴즈관">
+<title>퀴즈로읽는책 · 밤의 서재</title>
+<meta name="description" content="하루 10분, 퀴즈로 한 권을 완독하는 서재. 매일 밤 새 책이 꽂힙니다.">
+<meta name="theme-color" content="#0d1526">
+<meta property="og:title" content="퀴즈로읽는책 · 밤의 서재">
+<meta property="og:description" content="하루 10분, 퀴즈로 한 권을 완독하는 서재. 매일 밤 새 책이 꽂힙니다.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nioswing-cmd.github.io/mimi-factory/quiz.html">
+<meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest-quiz.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
@@ -47,7 +54,22 @@
     text-shadow:0 0 26px rgba(232,180,95,.25);
   }
   .hero p{font-size:13px;color:var(--sub);margin-top:10px;line-height:1.75}
-  .hero .rule{width:74px;height:1px;margin:16px auto 0;background:linear-gradient(90deg,transparent,var(--amber),transparent)}
+  .hero .cta{
+    display:inline-block;margin-top:16px;font-size:14.5px;font-weight:700;text-decoration:none;
+    color:#0d1526;background:linear-gradient(120deg,var(--amber2),var(--amber));
+    padding:12px 26px;border-radius:999px;
+    box-shadow:0 4px 18px rgba(232,180,95,.35);
+    transition:transform .35s var(--pop);
+  }
+  .hero .cta:active{transform:scale(.95)}
+  .feats{display:flex;gap:8px;margin-top:20px}
+  .feat{
+    flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:12px 6px;font-size:10.5px;color:var(--sub);line-height:1.4;text-align:center;
+  }
+  .feat span{font-size:20px}
+  .hero .rule{width:74px;height:1px;margin:20px auto 0;background:linear-gradient(90deg,transparent,var(--amber),transparent)}
 
   /* 이 달의 신간 */
   .newbook{
@@ -117,6 +139,13 @@
   }
   .empty{text-align:center;color:var(--sub);font-size:13px;padding:38px 0;line-height:1.8}
 
+  .subscribe{
+    display:block;text-align:center;margin-top:26px;padding:15px;
+    font-size:13.5px;color:var(--ink);text-decoration:none;
+    background:var(--panel);border:1px dashed var(--amber);border-radius:14px;
+  }
+  .subscribe b{color:var(--amber2)}
+
   /* 푸터 (브랜드 규칙: 수정 금지) */
   .footer{text-align:center;margin-top:36px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}
   .mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px}
@@ -142,9 +171,15 @@
   </div>
 
   <div class="hero">
-    <div class="eyebrow">미 미 팩 토 리 · 독 서 퀴 즈 관</div>
+    <div class="eyebrow">퀴 즈 로 읽 는 책</div>
     <h1>밤의 서재</h1>
-    <p>촛불 아래, 책 한 권이 퀴즈가 되는 곳.<br>오늘 밤엔 어떤 책을 완독해 볼까요?</p>
+    <p>하루 10분, 퀴즈로 한 권을 완독하는 서재.<br>매일 밤, 새 책이 꽂힙니다.</p>
+    <a class="cta" id="heroCta" href="#">🕯️ 오늘의 책 펼치기 →</a>
+    <div class="feats">
+      <div class="feat"><span>📖</span>매일 새 책<br>한 권</div>
+      <div class="feat"><span>🔁</span>도파민 반복<br>마스터 퀴즈</div>
+      <div class="feat"><span>📜</span>완독 인포그래픽<br>리포트</div>
+    </div>
     <div class="rule"></div>
   </div>
 
@@ -153,6 +188,10 @@
   <input class="search" id="q" type="search" placeholder="책 제목, 작가 검색…">
   <div class="count" id="count"></div>
   <div class="shelf" id="shelf"></div>
+
+  <a class="subscribe" href="https://blog.naver.com/4u_doumi?utm_source=quizbook&utm_medium=landing" target="_blank" rel="noopener">
+    🕯️ 매일 밤 새 책 소식 받기 — <b>독서위키</b> →
+  </a>
 
   <div class="footer">
     <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
@@ -163,6 +202,10 @@
 
 <script>
 let APPS=[], query="";
+
+/* ?app=1 → 스토어 등록판(단일 앱 모드): 다른 관으로 가는 내비 숨김 */
+if (new URLSearchParams(location.search).get("app")==="1") localStorage.setItem("mf_app_quiz","1");
+if (localStorage.getItem("mf_app_quiz")==="1") document.querySelector(".nav").style.display="none";
 
 async function load(){
   try{
@@ -192,6 +235,8 @@ function renderNew(){
       </div>
     </div>`;
   el.querySelector(".newbook").onclick = ()=>open(a);
+  const cta = document.getElementById("heroCta");
+  if (cta) cta.onclick = ev=>{ ev.preventDefault(); open(a); };
 }
 
 function render(){

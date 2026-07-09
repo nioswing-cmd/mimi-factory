@@ -1,0 +1,17 @@
+{
+  "name": "퀴즈로읽는책 · 밤의 서재",
+  "short_name": "밤의 서재",
+  "description": "하루 10분, 퀴즈로 한 권을 완독하는 서재. 매일 밤 새 책이 꽂힙니다.",
+  "start_url": "./quiz.html?app=1",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0d1526",
+  "theme_color": "#0d1526",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230d1526'/><text x='50' y='66' font-size='52' text-anchor='middle'>🕯️</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

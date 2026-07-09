@@ -1,0 +1,17 @@
+{
+  "name": "도파민 실험실",
+  "short_name": "도파민랩",
+  "description": "나도 몰랐던 나를 측정하는 3분 실험. 도파민 터지는 진단·유형 테스트.",
+  "start_url": "./test.html?app=1",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#071726",
+  "theme_color": "#071726",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23071726'/><text x='50' y='66' font-size='52' text-anchor='middle'>⚗️</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
