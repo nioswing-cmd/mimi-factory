@@ -265,11 +265,15 @@ def slugify(title):
 def run_claude(prompt):
     os.makedirs(OUT_DIR, exist_ok=True)
     log("Claude Code 실행 시작 (수 분 소요)…")
+    cmd = ["claude", "-p", prompt, "--dangerously-skip-permissions",
+           "--max-turns", "150"]
+    model = os.environ.get("CLAUDE_MODEL", "").strip()
+    if model:
+        cmd += ["--model", model]
+        log(f"생산 모델: {model}")
     try:
         r = subprocess.run(
-            ["claude", "-p", prompt, "--dangerously-skip-permissions",
-             "--max-turns", "150"],
-            cwd=ROOT, capture_output=True, text=True, timeout=3600,
+            cmd, cwd=ROOT, capture_output=True, text=True, timeout=3600,
         )
     except subprocess.TimeoutExpired:
         log("Claude 실행이 1시간을 초과해 중단되었습니다.")
