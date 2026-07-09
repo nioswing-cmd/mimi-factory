@@ -60,29 +60,30 @@ def pick_waiting(rows):
          → 제목·작가만 적어도 생산된다.
     '중지'(또는 그 외 임의 텍스트)가 상태에 있으면 건너뛴다.
     유형(A열)이 빈칸이면 '독서퀴즈'로 간주한다.
+    I열(자료)에 구글독스 URL이 있으면 자료 기반 생산에 사용한다.
     """
     parsed = []
     for i, row in enumerate(rows[1:], start=2):  # i = 시트 기준 행 번호
-        row = row + [""] * (8 - len(row))
-        cells = [c.strip() for c in row[:8]]
-        ytype, title, author, palette, edition, status, url, done = cells
+        row = row + [""] * (9 - len(row))
+        cells = [c.strip() for c in row[:9]]
+        ytype, title, author, palette, edition, status, url, done, material = cells
         if not title:
             continue
-        parsed.append((i, ytype, title, author, palette, edition, status, url, done))
-
-    def entry(i, ytype, title, author, palette, edition):
-        return {"row": i, "type": ytype or "독서퀴즈", "title": title, "author": author,
-                "palette": palette, "edition": edition or "프리미엄+티저"}
+        parsed.append({"row": i, "type": ytype or "독서퀴즈", "title": title,
+                       "author": author, "palette": palette,
+                       "edition": edition or "프리미엄+티저",
+                       "material_url": material,
+                       "_status": status, "_url": url, "_done": done})
 
     # 1차: 긴급
-    for i, ytype, title, author, palette, edition, status, url, done in parsed:
-        if status == "긴급":
-            return entry(i, ytype, title, author, palette, edition)
+    for it in parsed:
+        if it["_status"] == "긴급":
+            return it
     # 2차: 대기 또는 빈칸 신규
-    for i, ytype, title, author, palette, edition, status, url, done in parsed:
-        fresh = status == "" and url == "" and done == ""
-        if status == "대기" or fresh:
-            return entry(i, ytype, title, author, palette, edition)
+    for it in parsed:
+        fresh = it["_status"] == "" and it["_url"] == "" and it["_done"] == ""
+        if it["_status"] == "대기" or fresh:
+            return it
     return None
 
 
@@ -97,18 +98,47 @@ def category_of(ytype):
 
 
 MATERIAL_DIR = os.path.join(ROOT, "자료")
+MATERIAL_MAX = 20000
 
 
-def load_material(title, slug):
-    """자료/{제목}.md → 자료/{제목}.txt → 자료/{슬러그}.md 순으로 찾아 앞 20,000자를 반환.
-    정보가 적은 신간은 여기에 책소개·목차 등을 넣어두면 자료 기반으로 출제된다."""
+def fetch_gdoc(url):
+    """링크 공유(뷰어)된 구글독스 본문을 텍스트로 받아온다. 실패 시 RuntimeError."""
+    m = re.search(r"docs\.google\.com/document/d/([\w-]+)", url)
+    if not m:
+        raise RuntimeError("구글독스 문서 주소가 아닙니다 (docs.google.com/document/... 만 지원)")
+    export = f"https://docs.google.com/document/d/{m.group(1)}/export?format=txt"
+    req = urllib.request.Request(export, headers={"User-Agent": "Mozilla/5.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            text = r.read().decode("utf-8", errors="replace")
+    except Exception as e:
+        raise RuntimeError(f"문서 다운로드 실패 — 공유 설정(링크 있는 모든 사용자·뷰어)을 확인하세요: {e}")
+    text = text.lstrip("﻿").strip()
+    if not text or text[:1] == "<":
+        raise RuntimeError("문서 대신 로그인 페이지가 왔습니다 — 공유 설정(링크 있는 모든 사용자·뷰어)을 확인하세요")
+    return text[:MATERIAL_MAX]
+
+
+def load_material(item, slug):
+    """자료 우선순위: ① 시트 I열의 구글독스 URL ② 자료/ 폴더 파일.
+    URL이 있는데 읽지 못하면 근거 없는 생산을 막기 위해 즉시 중단한다."""
+    murl = item.get("material_url", "")
+    if murl:
+        try:
+            text = fetch_gdoc(murl)
+        except RuntimeError as e:
+            log(f"자료 URL 읽기 실패 — 생산 중단: {e}")
+            sys.exit(1)
+        log(f"제공 자료(구글독스) 사용: {len(text)}자")
+        return text
+    title = item["title"]
     for name in (f"{title}.md", f"{title}.txt", f"{slug}.md"):
         path = os.path.join(MATERIAL_DIR, name)
         if os.path.isfile(path):
             text = open(path, encoding="utf-8").read().strip()
             if text:
                 log(f"제공 자료 사용: {name} ({len(text)}자)")
-                return text[:20000]
+                return text[:MATERIAL_MAX]
     return ""
 
 
@@ -145,7 +175,7 @@ def make_prompt(item):
             f"앱 설명 한 줄을 {OUT_DIR}/{slug}_desc.txt 에 저장해."
         )
 
-    mat = load_material(item["title"], slug)
+    mat = load_material(item, slug)
     if mat:
         p += (
             " 아래 [제공 자료]가 이 책(주제)에 대해 확인된 전부다. "
