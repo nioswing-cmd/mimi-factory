@@ -96,6 +96,22 @@ def category_of(ytype):
     return "test"
 
 
+MATERIAL_DIR = os.path.join(ROOT, "자료")
+
+
+def load_material(title, slug):
+    """자료/{제목}.md → 자료/{제목}.txt → 자료/{슬러그}.md 순으로 찾아 앞 20,000자를 반환.
+    정보가 적은 신간은 여기에 책소개·목차 등을 넣어두면 자료 기반으로 출제된다."""
+    for name in (f"{title}.md", f"{title}.txt", f"{slug}.md"):
+        path = os.path.join(MATERIAL_DIR, name)
+        if os.path.isfile(path):
+            text = open(path, encoding="utf-8").read().strip()
+            if text:
+                log(f"제공 자료 사용: {name} ({len(text)}자)")
+                return text[:20000]
+    return ""
+
+
 def make_prompt(item):
     slug = slugify(item["title"])
     cat = category_of(item["type"])
@@ -127,6 +143,16 @@ def make_prompt(item):
             f"'{item['title']}' 테스트 웹앱을 만들어줘. 컨셉: {item['author']}. "
             f"완성 파일은 반드시 {OUT_DIR}/{slug}_test.html 에 저장하고, "
             f"앱 설명 한 줄을 {OUT_DIR}/{slug}_desc.txt 에 저장해."
+        )
+
+    mat = load_material(item["title"], slug)
+    if mat:
+        p += (
+            " 아래 [제공 자료]가 이 책(주제)에 대해 확인된 전부다. "
+            "문제·해설·리포트는 반드시 이 자료에 명시된 내용만 근거로 만들고, "
+            "자료에 없는 세부 내용을 창작하지 마라. "
+            "자료가 얇으면 문항 수를 줄이는 대신 자료 내 핵심을 반복 변형해 출제하라.\n\n"
+            f"[제공 자료]\n{mat}"
         )
     return p, slug
 
