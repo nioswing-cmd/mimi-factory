@@ -42,38 +42,85 @@ def log(msg):
 
 
 # ── 1. 시트 읽기 ──────────────────────────────────────────
-def read_sheet():
-    url = os.environ.get("SHEET_CSV_URL")
-    if not url:
-        log("SHEET_CSV_URL이 없습니다. GitHub Secrets를 확인하세요."); sys.exit(1)
+def sheet_tabs():
+    """SHEET_TABS 환경변수 파싱: 'quiz=0,test=123,friend=456' → [(카테고리, gid), ...]
+    미설정 시 첫 탭(gid=0)을 독서퀴즈로만 읽는다 (하위 호환)."""
+    spec = os.environ.get("SHEET_TABS", "quiz=0")
+    tabs = []
+    for part in spec.split(","):
+        part = part.strip()
+        if not part:
+            continue
+        cat, _, gid = part.partition("=")
+        tabs.append((cat.strip(), gid.strip() or "0"))
+    return tabs
+
+
+def fetch_rows(gid):
+    base = os.environ.get("SHEET_CSV_URL")
+    if not base:
+        log("SHEET_CSV_URL이 없습니다. 환경변수를 확인하세요."); sys.exit(1)
+    url = re.sub(r"([?&]gid=)\d+", r"\g<1>" + gid, base)
+    if f"gid={gid}" not in url:
+        url += ("&" if "?" in url else "?") + "gid=" + gid
     with urllib.request.urlopen(url) as r:
         text = r.read().decode("utf-8")
-    rows = list(csv.reader(io.StringIO(text)))
-    return rows
+    return list(csv.reader(io.StringIO(text)))
 
 
-def pick_waiting(rows):
-    """생산 대상 행을 찾는다. 1행은 머리글이므로 건너뜀.
+def read_sheet():
+    """모든 탭을 읽어 [(카테고리, gid, rows), ...] 반환."""
+    return [(cat, gid, fetch_rows(gid)) for cat, gid in sheet_tabs()]
+
+
+def header_map(header):
+    """1행 머리글에서 각 필드의 열 위치를 찾는다 — 열 순서가 바뀌어도 동작."""
+    m = {}
+    fields = (("제목", "title"), ("작가", "author"), ("팔레트", "palette"),
+              ("에디션", "edition"), ("상태", "status"), ("url", "url"),
+              ("완료일", "done"), ("자료", "material"))
+    for j, cell in enumerate(header):
+        c = str(cell).strip().lower()
+        for key, field in fields:
+            if key in c and field not in m:
+                m[field] = j
+    return m
+
+
+def pick_waiting(tabs):
+    """생산 대상 행을 찾는다. 탭이 곧 유형(quiz/test/friend)이다.
     우선순위:
-      1) 상태(F열)가 '긴급'인 첫 줄 — 대기보다 먼저 생산
-      2) 상태가 '대기'인 줄, 또는 상태·URL(G열)·완료일(H열)이 모두 빈칸인 신규 줄(제목 필수)
+      1) 모든 탭에서 상태가 '긴급'인 첫 줄 (탭 순서: SHEET_TABS 정의 순)
+      2) 상태가 '대기'인 줄, 또는 상태·URL·완료일이 모두 빈칸인 신규 줄(제목 필수)
          → 제목·작가만 적어도 생산된다.
     '중지'(또는 그 외 임의 텍스트)가 상태에 있으면 건너뛴다.
-    유형(A열)이 빈칸이면 '독서퀴즈'로 간주한다.
-    I열(자료)에 구글독스 URL이 있으면 자료 기반 생산에 사용한다.
+    열 위치는 1행 머리글 이름으로 찾으므로 열을 추가·삭제해도 동작한다.
+    자료 열에 구글독스 URL이 있으면 자료 기반 생산에 사용한다.
     """
     parsed = []
-    for i, row in enumerate(rows[1:], start=2):  # i = 시트 기준 행 번호
-        row = row + [""] * (9 - len(row))
-        cells = [c.strip() for c in row[:9]]
-        ytype, title, author, palette, edition, status, url, done, material = cells
-        if not title:
+    for cat, gid, rows in tabs:
+        if not rows:
             continue
-        parsed.append({"row": i, "type": ytype or "독서퀴즈", "title": title,
-                       "author": author, "palette": palette,
-                       "edition": edition or "프리미엄+티저",
-                       "material_url": material,
-                       "_status": status, "_url": url, "_done": done})
+        cm = header_map(rows[0])
+        if "title" not in cm:
+            log(f"탭(gid={gid}): '제목' 머리글이 없어 건너뜁니다.")
+            continue
+
+        def cell(row, field):
+            j = cm.get(field, -1)
+            return row[j].strip() if 0 <= j < len(row) else ""
+
+        for i, row in enumerate(rows[1:], start=2):  # i = 시트 기준 행 번호
+            title = cell(row, "title")
+            if not title:
+                continue
+            parsed.append({"row": i, "gid": gid, "type": cat, "title": title,
+                           "author": cell(row, "author"),
+                           "palette": cell(row, "palette"),
+                           "edition": cell(row, "edition") or "프리미엄+티저",
+                           "material_url": cell(row, "material"),
+                           "_status": cell(row, "status"),
+                           "_url": cell(row, "url"), "_done": cell(row, "done")})
 
     # 1차: 긴급
     for it in parsed:
@@ -263,7 +310,8 @@ def notify(item, status, url=""):
     if not hook:
         return
     data = urllib.parse.urlencode({
-        "row": item["row"], "status": status, "url": url, "date": TODAY,
+        "row": item["row"], "gid": item.get("gid", "0"),
+        "status": status, "url": url, "date": TODAY,
         "title": item["title"],
     }).encode()
     try:
@@ -275,8 +323,8 @@ def notify(item, status, url=""):
 
 # ── 메인 ─────────────────────────────────────────────────
 def main():
-    rows = read_sheet()
-    item = pick_waiting(rows)
+    tabs = read_sheet()
+    item = pick_waiting(tabs)
     if not item:
         log("오늘 만들 '대기' 항목이 없습니다. 시트에 등록해 주세요. (정상 종료)")
         return
