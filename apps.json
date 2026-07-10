@@ -348,6 +348,18 @@
       "teaser": "apps/비문전쟁_teaser.html",
       "premium": "apps/비문전쟁_quiz.html",
       "desc": "일제가 변조한 광개토태왕릉비·진경대사탑비의 진실을 파헤치는 도명 스님의 『비문전쟁』을, 끊어 읽기 한 번이 역사를 바꾸는 30문항 도파민 반복 "
+    },
+    {
+      "id": "예민함_계기판_hsp_감각_민감도",
+      "type": "test",
+      "title": "예민함 계기판 (\tHSP 감각 민감도)",
+      "author": "미미팩토리 오리지널",
+      "date": "2026-07-11",
+      "color1": "#c3a1ff",
+      "color2": "#ff8ad0",
+      "teaser": "apps/예민함_계기판_hsp_감각_민감도_test.html",
+      "premium": "apps/예민함_계기판_hsp_감각_민감도_test.html",
+      "desc": "예민함 계기판 — 내 감각 볼륨은 몇일까"
     }
   ]
 }
