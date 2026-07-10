@@ -47,7 +47,10 @@ function doPost(e) {
 
   var cs = colOf_(sheet, "상태"), cu = colOf_(sheet, "url"), cd = colOf_(sheet, "완료일");
   if (cs > 0) sheet.getRange(row, cs).setValue(p.status);
-  if (p.url && cu > 0) sheet.getRange(row, cu).setValue(p.url);
+  if (p.url && cu > 0) {
+    // 클릭하면 바로 열리는 하이퍼링크로 기록
+    sheet.getRange(row, cu).setFormula('=HYPERLINK("' + p.url + '","🔗 열기")');
+  }
   if (p.date && cd > 0) sheet.getRange(row, cd).setValue(p.date);
 
   if (TELEGRAM_TOKEN && CHAT_ID) {
@@ -72,6 +75,23 @@ function setupStatusDropdown() {
   SpreadsheetApp.getActiveSpreadsheet().getSheets().forEach(function (sheet) {
     var cs = colOf_(sheet, "상태");
     if (cs > 0) sheet.getRange(2, cs, 999).setDataValidation(rule);
+  });
+}
+
+/** 기존에 텍스트로 적힌 URL들을 클릭 가능한 링크로 일괄 변환 — 1회만 실행하면 됨 */
+function linkifyExistingUrls() {
+  SpreadsheetApp.getActiveSpreadsheet().getSheets().forEach(function (sheet) {
+    var cu = colOf_(sheet, "url");
+    if (cu < 1) return;
+    var last = sheet.getLastRow();
+    if (last < 2) return;
+    var vals = sheet.getRange(2, cu, last - 1, 1).getValues();
+    for (var i = 0; i < vals.length; i++) {
+      var v = String(vals[i][0]).trim();
+      if (v.indexOf("http") === 0) {  // 이미 링크(🔗 열기)로 바뀐 셀은 건너뜀
+        sheet.getRange(i + 2, cu).setFormula('=HYPERLINK("' + v + '","🔗 열기")');
+      }
+    }
   });
 }
 
