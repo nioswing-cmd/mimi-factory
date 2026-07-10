@@ -136,7 +136,7 @@ def main():
         subprocess.run(["git", "commit", "-m", f"📦 수동 등록: {title}"], cwd=ROOT, check=True)
         subprocess.run(["git", "push"], cwd=ROOT, check=True)
         print("🚀 GitHub 업로드 완료! 1~2분 뒤 홈페이지에 카드가 나타납니다.")
-        print("   https://nioswing-cmd.github.io/mimi-factory/")
+        print("   https://mimifactory.vibekr.com/")
     except subprocess.CalledProcessError as e:
         print(f"❌ git 업로드 실패: {e}\n   등록 자체는 완료됐으니 나중에 commit/push만 하면 됩니다.")
         sys.exit(1)

@@ -16,7 +16,7 @@ Q3. 인플루언서가 세상을 못 바꾸는 이유는 무엇일까요?
 
 30개 문항을 반복해서 풀며 개념을 완전히 내 것으로 만들고, 마지막엔 책 전체를 한눈에 정리한 인포그래픽 리포트까지 받아보세요.
 
-👉 앱으로 확인하기: https://nioswing-cmd.github.io/mimi-factory/apps/변화는_어떻게_일어나는가_teaser.html?utm_source=blog&utm_medium=post
+👉 앱으로 확인하기: https://mimifactory.vibekr.com/apps/변화는_어떻게_일어나는가_teaser.html?utm_source=blog&utm_medium=post
 
 #변화는어떻게일어나는가 #데이먼센톨라 #티핑포인트 #네트워크과학 #독서퀴즈
 
@@ -48,4 +48,4 @@ Q3. 인플루언서가 세상을 못 바꾸는 이유는 무엇일까요?
 당신 주변에서, 그 25%는 이미 존재할까요?
 
 (댓글에 달 링크)
-https://nioswing-cmd.github.io/mimi-factory/apps/변화는_어떻게_일어나는가_teaser.html?utm_source=fb&utm_medium=comment
+https://mimifactory.vibekr.com/apps/변화는_어떻게_일어나는가_teaser.html?utm_source=fb&utm_medium=comment

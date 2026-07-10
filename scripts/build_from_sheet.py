@@ -229,7 +229,7 @@ def make_prompt(item):
         p += f" 추가 지시: {item['extra']}"
 
     # 홍보 초안 (블로그 포스트 + 인스타 캡션) — 채널 운영 반자동화
-    site = os.environ.get("SITE_URL", "https://nioswing-cmd.github.io/mimi-factory").rstrip("/")
+    site = os.environ.get("SITE_URL", "https://mimifactory.vibekr.com").rstrip("/")
     if cat == "quiz" and "티저" in item["edition"]:
         app_link = f"{site}/apps/{slug}_teaser.html"
     else:

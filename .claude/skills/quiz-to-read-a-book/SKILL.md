@@ -71,7 +71,7 @@ const APP_CONFIG = {
   mode: "free",          // "free" | "teaser" | "premium"
   freeLimit: 10,          // teaser: 무료로 풀 수 있는 문항 수
   subscribeUrl: "https://blog.naver.com/4u_doumi",  // 구독 랜딩 URL (teaser/premium 필수) — 독서위키 블로그 (기본값, 변경 지시 없으면 이 값 사용)
-  catalogUrl: "https://nioswing-cmd.github.io/mimi-factory/quiz.html",  // '다른 책 퀴즈 보기' — 밤의 서재(독서퀴즈관) 메인 (기본값, 변경 지시 없으면 이 값 사용)
+  catalogUrl: "https://mimifactory.vibekr.com/quiz.html",  // '다른 책 퀴즈 보기' — 밤의 서재(독서퀴즈관) 메인 (기본값, 변경 지시 없으면 이 값 사용)
   utm: "utm_source=quizbook&utm_medium=app",
   edition: "",            // 예: "2026-07-02 · vol.128 데미안"
   accessCodeHash: ""      // premium 간이 게이트용 SHA-256 해시 (선택)

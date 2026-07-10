@@ -1,6 +1,6 @@
 # 홍보 초안 — 내 감정 해상도 (4단계 해상도)
 
-앱 링크(공용): https://nioswing-cmd.github.io/mimi-factory/apps/내_감정_해상도_4단계_해상도_test.html
+앱 링크(공용): https://mimifactory.vibekr.com/apps/내_감정_해상도_4단계_해상도_test.html
 
 ---
 
@@ -24,7 +24,7 @@
 
 2분이면 끝나고, 결과 화면에는 강점과 '한 단계 더 선명해지는 법'까지 담았어요. 아래 링크에서 바로 측정해 보세요.
 
-👉 https://nioswing-cmd.github.io/mimi-factory/apps/내_감정_해상도_4단계_해상도_test.html?utm_source=blog&utm_medium=post
+👉 https://mimifactory.vibekr.com/apps/내_감정_해상도_4단계_해상도_test.html?utm_source=blog&utm_medium=post
 
 #감정해상도 #감정입자도 #심리테스트 #감정공부 #자기이해
 
@@ -48,7 +48,7 @@
 한 사람은 2픽셀로, 한 사람은 수천 픽셀로 그 하루를 기억한다.
 당신의 오늘은 몇 픽셀로 저장되고 있나요?
 
-(댓글 링크) https://nioswing-cmd.github.io/mimi-factory/apps/내_감정_해상도_4단계_해상도_test.html?utm_source=fb&utm_medium=comment
+(댓글 링크) https://mimifactory.vibekr.com/apps/내_감정_해상도_4단계_해상도_test.html?utm_source=fb&utm_medium=comment
 
 ### 2안
 '화났다'와 '무시당한 것 같아 서러웠다'는 완전히 다른 말이다.
@@ -57,4 +57,4 @@
 그 감정은 나를 덜 흔든다.
 당신은 마음에 얼마나 정확한 이름을 붙이며 살고 있나요?
 
-(댓글 링크) https://nioswing-cmd.github.io/mimi-factory/apps/내_감정_해상도_4단계_해상도_test.html?utm_source=fb&utm_medium=comment
+(댓글 링크) https://mimifactory.vibekr.com/apps/내_감정_해상도_4단계_해상도_test.html?utm_source=fb&utm_medium=comment

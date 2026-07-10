@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($c = Get-NetTCPConnection -LocalPort 8749 -State Listen -ErrorAction SilentlyContinue; if \\($c\\) { Stop-Process -Id $c.OwningProcess -Force -Confirm:$false; \"서버 종료\" } else { \"이미 종료\" })",
+      "Bash(\"/c/Program Files/PuTTY/plink.exe\" -batch -ssh root@187.77.155.20 -hostkey \"SHA256:Dx9sVh9vwj51FskZzhWSxhKdGhZZ/XY8fCEWz44NaT8\" -pw \",z,H01VetFzgIn'n\" 'sed -i \"s|git add apps/ apps.json|git add apps/ apps.json 홍보초안/|\" /home/mimi/run_daily.sh && grep \"git add\" /home/mimi/run_daily.sh')",
+      "Bash(bash -n /c/Users/넥사05/AppData/Local/Temp/claude/g------------------------/234f8481-ae5a-45cf-a385-74203cb897f5/scratchpad/run_daily.sh)",
+      "PowerShell($scratch = \"C:\\\\Users\\\\넥사05\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\g------------------------\\\\234f8481-ae5a-45cf-a385-74203cb897f5\\\\scratchpad\"; & \"C:\\\\Program Files\\\\PuTTY\\\\pscp.exe\" -batch -hostkey \"SHA256:Dx9sVh9vwj51FskZzhWSxhKdGhZZ/XY8fCEWz44NaT8\" -pw \",z,H01VetFzgIn'n\" \"$scratch\\\\run_daily.sh\" root@187.77.155.20:/home/mimi/run_daily.sh)",
+      "Bash(\"/c/Program Files/PuTTY/plink.exe\" -batch -ssh root@187.77.155.20 -hostkey \"SHA256:Dx9sVh9vwj51FskZzhWSxhKdGhZZ/XY8fCEWz44NaT8\" -pw \",z,H01VetFzgIn'n\" 'chmod +x /home/mimi/run_daily.sh && chown mimi:mimi /home/mimi/run_daily.sh && bash -n /home/mimi/run_daily.sh && printf \"%s\\\\n%s\\\\n%s\\\\n\" \"0 16 * * * /home/mimi/run_daily.sh \\\\\"quiz=0\\\\\" >> /home/mimi/mimi-build.log 2>&1\" \"0 17 * * * /home/mimi/run_daily.sh \\\\\"test=1685710097\\\\\" >> /home/mimi/mimi-build.log 2>&1\" \"0 18 * * * /home/mimi/run_daily.sh \\\\\"friend=1897719380\\\\\" >> /home/mimi/mimi-build.log 2>&1\" | crontab -u mimi - && echo \"=== 새 crontab ===\" && crontab -u mimi -l')",
+      "PowerShell(\\(Get-Content \"$env:USERPROFILE\\\\.claude\\\\.credentials.json\" -Raw | ConvertFrom-Json\\).claudeAiOauth | Select-Object subscriptionType | Format-List)",
+      "Bash(\"/c/Program Files/PuTTY/plink.exe\" -batch -ssh root@187.77.155.20 -hostkey \"SHA256:Dx9sVh9vwj51FskZzhWSxhKdGhZZ/XY8fCEWz44NaT8\" -pw \",z,H01VetFzgIn'n\" 'su - mimi -c \"set -a; source /home/mimi/mimi-factory.env; set +a; claude -p \\\\\"너의 정확한 모델 이름과 ID를 한 줄로만 출력해\\\\\" 2>&1 | tail -2\"')"
+    ]
+  }
+}

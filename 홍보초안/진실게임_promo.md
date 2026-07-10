@@ -1,6 +1,6 @@
 # 진실게임 · 홍보 초안
 
-앱 링크(공통): https://nioswing-cmd.github.io/mimi-factory/apps/진실게임_friend.html
+앱 링크(공통): https://mimifactory.vibekr.com/apps/진실게임_friend.html
 
 ---
 
@@ -27,7 +27,7 @@
 
 설치 없이 링크만 열면 바로 시작돼요. 오늘 저녁, 소중한 사람과 나란히 앉아보세요.
 
-👉 지금 해보기: https://nioswing-cmd.github.io/mimi-factory/apps/진실게임_friend.html?utm_source=blog&utm_medium=post
+👉 지금 해보기: https://mimifactory.vibekr.com/apps/진실게임_friend.html?utm_source=blog&utm_medium=post
 
 #진실게임 #관계앱 #친해지기 #질문카드 #커플놀이
 
@@ -64,4 +64,4 @@
 
 ---
 *(댓글에 달 링크)*
-https://nioswing-cmd.github.io/mimi-factory/apps/진실게임_friend.html?utm_source=fb&utm_medium=comment
+https://mimifactory.vibekr.com/apps/진실게임_friend.html?utm_source=fb&utm_medium=comment
