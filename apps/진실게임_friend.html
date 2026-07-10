@@ -204,7 +204,7 @@ h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
       <div class="field"><label>오른쪽 사람</label><input id="nameB" maxlength="6" placeholder="너" value=""></div>
     </div>
 
-    <div class="pick-title">몇 개의 질문을 나눌까요?</div>
+    <div class="pick-title">몇 개의 질문을 나눌까요? — 모든 질문에 <b>둘 다</b> 답해요</div>
     <div class="picks" id="picks">
       <button class="pick" data-n="5"><span class="n">5</span><span class="u">가볍게 맛보기</span></button>
       <button class="pick" data-n="10"><span class="n">10</span><span class="u">티타임</span></button>
@@ -422,6 +422,7 @@ function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.r
 /* ============ 상태 ============ */
 let deck=[];        // {level, tag, name, q, theme}
 let idx=0;
+let phase=0;        // 0=첫 답변자, 1=두 번째 답변자 — 같은 질문에 둘 다 답해야 다음 카드
 let curLevelKey=0;
 let flipped=false;
 let players=[];     // [{name, passes, answered}]
@@ -445,7 +446,7 @@ document.querySelectorAll('.pick').forEach(p=>{
   p.addEventListener('click',()=>{
     document.querySelectorAll('.pick').forEach(x=>x.classList.remove('sel'));
     p.classList.add('sel'); chosen=+p.dataset.n;
-    startBtn.disabled=false; startBtn.textContent=`${chosen}개 질문으로 시작하기 →`;
+    startBtn.disabled=false; startBtn.textContent=`질문 ${chosen}개, 각자 ${chosen}번 답하기 →`;
     vibrate(14);
   });
 });
@@ -469,14 +470,27 @@ function startGame(){
 const card=document.getElementById('card');
 const actions=document.getElementById('actions');
 
-function turnIndex(){ return idx % 2; }
+/* 카드마다 선공을 번갈아, 같은 카드 안에서는 phase로 교대 → 모두가 모든 질문에 답한다 */
+function turnIndex(){ return (idx + phase) % 2; }
+
+function updateTurnUI(){
+  const who=players[turnIndex()].name;
+  document.getElementById('turnHint').textContent=who;
+  document.getElementById('frontWho').textContent=who;
+  document.getElementById('pA').classList.toggle('active', turnIndex()===0);
+  document.getElementById('pB').classList.toggle('active', turnIndex()===1);
+  const passBtn=document.getElementById('passBtn');
+  const left=players[turnIndex()].passes;
+  passBtn.querySelector('.sub').textContent = left>0 ? `남은 ${left}번` : '모두 소진';
+  passBtn.disabled = left<=0;
+}
 
 function loadCard(){
   flipped=false;
+  phase=0;
   card.classList.remove('flip');
   actions.classList.add('hide');
   const c=deck[idx];
-  const who=players[turnIndex()].name;
 
   // 레벨 진입 시 테마 전환 + 축하
   if(c.level!==curLevelKey){
@@ -490,24 +504,13 @@ function loadCard(){
   document.getElementById('depthTag').textContent=c.tag;
   document.getElementById('gaugeFill').style.width=((idx)/deck.length*100)+'%';
 
-  // 뒷면 안내
-  document.getElementById('turnHint').textContent=who;
-
   // 앞면(뒤집으면 보임)
   document.getElementById('frontLv').textContent=`LV.${c.level} ${c.name}`;
   document.getElementById('frontNum').textContent=`Q${idx+1} · ${deck.length}`;
   document.getElementById('frontQ').textContent=c.q;
-  document.getElementById('frontWho').textContent=who;
 
-  // 차례 하이라이트
-  document.getElementById('pA').classList.toggle('active', turnIndex()===0);
-  document.getElementById('pB').classList.toggle('active', turnIndex()===1);
-
-  // 패스 버튼 상태
-  const passBtn=document.getElementById('passBtn');
-  const left=players[turnIndex()].passes;
-  passBtn.querySelector('.sub').textContent = left>0 ? `남은 ${left}번` : '모두 소진';
-  passBtn.disabled = left<=0;
+  // 차례 표시 (뒷면 안내 + 앞면 이름 + 하이라이트 + 패스 버튼)
+  updateTurnUI();
 
   card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
 }
@@ -524,7 +527,7 @@ card.addEventListener('keydown',e=>{ if(e.key===' '||e.key==='Enter'){ e.prevent
 
 document.getElementById('answeredBtn').addEventListener('click',()=>{
   players[turnIndex()].answered++;
-  advance();
+  nextTurn();
 });
 document.getElementById('passBtn').addEventListener('click',()=>{
   const p=players[turnIndex()];
@@ -535,11 +538,25 @@ document.getElementById('passBtn').addEventListener('click',()=>{
   vibrate([15,30,60]);
   const msgs=[`${p.name}, 패스 ${p.passes}번 남았어요 🤫`,`괜찮아요. 패스도 곧 정보예요.`,`이 질문은 마음에 담아둘게요.`];
   toast(msgs[Math.floor((3-p.passes-1+3)%msgs.length)] || msgs[0]);
-  advance();
+  nextTurn();
 });
+
+/* 같은 질문에 둘 다 답해야 다음 카드로 — 한 명 끝나면 상대 차례 */
+function nextTurn(){
+  if(phase===0){
+    phase=1;
+    updateTurnUI();
+    toast(`같은 질문, 이번엔 ${players[turnIndex()].name} 차례! 🔁`);
+    card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
+    vibrate(20);
+  }else{
+    advance();
+  }
+}
 
 function advance(){
   document.getElementById('gaugeFill').style.width=((idx+1)/deck.length*100)+'%';
+  phase=0;
   idx++;
   if(idx>=deck.length){ setTimeout(endGame,400); return; }
   setTimeout(loadCard,380);
@@ -568,10 +585,10 @@ function endGame(){
   document.getElementById('stPass').textContent=totalPass;
 
   document.getElementById('endSub').innerHTML =
-    `${players[0].name} · ${players[1].name}, ${deck.length}장의 카드를 함께 넘겼어요.<br>`+
-    (deepest>=5 ? '깊은 진심까지 서로에게 닿았네요. 🔥' :
-     deepest>=4 ? '감정의 깊은 곳까지 나눴어요. 🌊' :
-     deepest>=3 ? '서로의 가치관을 들여다봤어요. 🧭' : '가볍게, 그러나 다정하게 시작했어요. 🌱');
+    `${players[0].name} · ${players[1].name}, ${deck.length}개의 질문에 둘 다 답했어요.<br>`+
+    (deepest>=5 ? '서로를 향한 진실까지 전부 꺼냈네요. ❤️‍🔥' :
+     deepest>=4 ? '비밀 금고까지 열어 보였어요. 🤫' :
+     deepest>=3 ? '설렘의 역사를 서로 나눴어요. 💘' : '가볍게, 그러나 솔직하게 시작했어요. 🎬');
 
   const list=document.getElementById('passList');
   if(passedQs.length===0){
