@@ -122,18 +122,6 @@
       "desc": "나의 사랑 유형과 궁합, 5분 만에 확인"
     },
     {
-      "id": "옆자리_질문_카드",
-      "type": "friend",
-      "title": "옆자리 질문 카드",
-      "author": "미미팩토리 오리지널",
-      "date": "2026-07-07",
-      "color1": "#8affc1",
-      "color2": "#5ee7d8",
-      "teaser": "apps/옆자리_질문_카드_test.html",
-      "premium": "apps/옆자리_질문_카드_test.html",
-      "desc": "둘이 나누는 대화 질문 카드, 관계가 깊어지는 시간"
-    },
-    {
       "id": "밸런스_게임",
       "type": "friend",
       "title": "밸런스 게임",
@@ -216,6 +204,30 @@
       "teaser": "apps/진실게임_friend.html",
       "premium": "apps/진실게임_friend.html",
       "desc": "추억·비밀·설렘을 캐내는 둘만의 진실게임 — 답은 숫자·날짜·단답으로 명쾌하게, 패스는 평생 3번뿐"
+    },
+    {
+      "id": "옆자리_질문_100가지",
+      "type": "friend",
+      "title": "옆자리 질문 100가지",
+      "author": "미미팩토리 오리지널",
+      "date": "2026-07-10",
+      "color1": "#8affc1",
+      "color2": "#5ee7d8",
+      "teaser": "apps/옆자리_질문_100가지_friend.html",
+      "premium": "apps/옆자리_질문_100가지_friend.html",
+      "desc": "여행길·카페·차 안에서 부담 없이 주고받는 랜덤 대화 질문 100 — 한 질문에 둘 다 답하기"
+    },
+    {
+      "id": "마음을_여는_36가지_질문",
+      "type": "friend",
+      "title": "마음을 여는 36가지 질문",
+      "author": "아서 아론 (1997 연구)",
+      "date": "2026-07-10",
+      "color1": "#ffd36e",
+      "color2": "#ff8a5c",
+      "teaser": "apps/마음을_여는_36가지_질문_friend.html",
+      "premium": "apps/마음을_여는_36가지_질문_friend.html",
+      "desc": "심리학자 아서 아론의 1997년 실험에서 나온 36가지 질문 — 3세트로 깊어지고, 마지막엔 4분"
     }
   ]
 }
