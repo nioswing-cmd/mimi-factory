@@ -1,0 +1,68 @@
+# ─────────────────────────────────────────────
+# 케미클라우드 자동 배포
+# main에 push될 때마다(새벽 자동 생산 포함) 서비스 파일만 FTP로 미러링.
+# GitHub Secrets 필요: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD,
+#                      FTP_SERVER_DIR (예: public_html/ — 슬래시로 끝나야 함)
+# 시크릿이 없으면 조용히 건너뛴다 (실패 아님).
+# ─────────────────────────────────────────────
+name: 케미클라우드 자동 배포
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-chemicloud
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 시크릿 확인
+        id: check
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+        run: |
+          if [ -z "$FTP_SERVER" ]; then
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::FTP 시크릿 미등록 — 배포를 건너뜁니다 (Settings → Secrets에 FTP_SERVER 등 등록)"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 리포 체크아웃
+        if: steps.check.outputs.ready == 'true'
+        uses: actions/checkout@v4
+
+      - name: FTP 미러링 (서비스 파일만)
+        if: steps.check.outputs.ready == 'true'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .claude/**
+            .github/**
+            scripts/**
+            docs/**
+            독서퀴즈/**
+            강의퀴즈/**
+            기타 앱/**
+            자료/**
+            홍보초안/**
+            output/**
+            **/*.zip
+            **/*.pdf
+            **/*.md
+            **/*.tsv
+            love-language.html
+            nextseat.html
+            밸런스게임-케미.html
+            mimi_factory_hub_index.html
