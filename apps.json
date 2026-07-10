@@ -336,6 +336,18 @@
       "teaser": "apps/통계와_나_test.html",
       "premium": "apps/통계와_나_test.html",
       "desc": "고르는 순간 진짜 통계가 공개된다 — 짜장 vs 짬뽕부터 100문항, 나는 국민 대세일까 희귀템일까"
+    },
+    {
+      "id": "비문전쟁",
+      "type": "quiz",
+      "title": "비문전쟁",
+      "author": "도명 스님",
+      "date": "2026-07-11",
+      "color1": "#8affc1",
+      "color2": "#5ee7d8",
+      "teaser": "apps/비문전쟁_teaser.html",
+      "premium": "apps/비문전쟁_quiz.html",
+      "desc": "일제가 변조한 광개토태왕릉비·진경대사탑비의 진실을 파헤치는 도명 스님의 『비문전쟁』을, 끊어 읽기 한 번이 역사를 바꾸는 30문항 도파민 반복 "
     }
   ]
 }
