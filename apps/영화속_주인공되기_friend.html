@@ -958,6 +958,7 @@ function goRate(){
 function reDraw(){
   document.getElementById('footerActions').style.display='none';
   show('scDraw');
+  drawScene(); // 대기 없이 바로 롤링 시작
 }
 
 function rate(pts, emoji){
