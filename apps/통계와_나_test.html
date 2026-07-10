@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>통계와 나 — 나는 대세일까, 유니크일까</title>
+<meta name="description" content="고르는 순간, 진짜 통계가 공개된다. 짜장이냐 짬뽕이냐 — 나는 국민 대세일까, 희귀템일까?">
+<meta name="theme-color" content="#141024">
+<meta property="og:title" content="통계와 나 — 나는 대세일까, 유니크일까">
+<meta property="og:description" content="고르는 순간, 진짜 통계가 공개된다. 나는 국민 대세일까, 희귀템일까?">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mimifactory.vibekr.com/apps/통계와_나_test.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#141024; --bg2:#241a44; --card:#1e1738; --line:rgba(255,255,255,.1);
+  --ink:#f4efff; --muted:#a99cc9; --cream:#ffe9c9;
+  --a1:#ffd56b; --a2:#ff8a5b; --pink:#ff6b9e; --uniq:#8fd3ff;
+  --pop:cubic-bezier(.34,1.56,.64,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 85% -10%,rgba(255,138,91,.14),transparent 55%),
+             radial-gradient(110% 80% at 5% 110%,rgba(143,211,255,.10),transparent 55%),
+             linear-gradient(165deg,var(--bg1),var(--bg2));background-attachment:fixed}
+.wrap{max-width:520px;margin:0 auto;padding:26px 18px 40px}
+.screen{display:none}.screen.on{display:block;animation:fade .4s var(--pop)}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}}
+
+/* 홈 */
+.eyebrow{font-size:11px;letter-spacing:.4em;text-indent:.4em;color:var(--muted);text-align:center;margin-bottom:10px}
+h1.title{font-family:'Jua',sans-serif;font-size:40px;text-align:center;line-height:1.15;
+  background:linear-gradient(95deg,var(--a1),var(--pink));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{font-size:13.5px;color:var(--muted);text-align:center;margin-top:12px;line-height:1.8}
+.sub b{color:var(--cream)}
+.pick-title{text-align:center;font-size:13px;color:var(--muted);margin:24px 0 12px}
+.picks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pick{background:var(--card);border:1.6px solid var(--line);border-radius:16px;padding:14px 6px;
+  color:var(--ink);font-family:inherit;cursor:pointer;transition:all .3s var(--pop)}
+.pick:active{transform:scale(.94)}
+.pick.sel{border-color:var(--a1);background:linear-gradient(160deg,rgba(255,213,107,.2),rgba(255,107,158,.12))}
+.pick .n{font-family:'Jua';font-size:24px;display:block}
+.pick .u{font-size:10.5px;color:var(--muted);display:block;margin-top:4px}
+.pick.full{grid-column:span 3}.pick.full .n{font-size:20px}
+.btn{width:100%;margin-top:18px;padding:16px;border:none;border-radius:16px;font-family:'Jua';font-size:18px;
+  color:#241a44;background:linear-gradient(95deg,var(--a1),var(--a2));cursor:pointer;transition:transform .3s var(--pop)}
+.btn:disabled{opacity:.4}.btn:active{transform:scale(.96)}
+.srcbox{margin-top:16px;padding:12px 14px;background:rgba(255,255,255,.05);border:1px solid var(--line);
+  border-radius:12px;font-size:11px;line-height:1.7;color:var(--muted);text-align:left}
+
+/* 플레이 */
+.topbar{margin-bottom:14px}
+.prog{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:8px}
+.prog b{font-family:'Jua';color:var(--cream)}
+.meter{height:10px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.meter .mf{display:block;height:100%;width:0;border-radius:99px;transition:width .8s var(--pop);
+  background:linear-gradient(90deg,var(--a1),var(--pink))}
+.meterlb{font-size:11px;color:var(--muted);margin-top:5px;text-align:right}
+.meterlb b{color:var(--cream)}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 18px;margin-top:8px;
+  animation:fade .35s var(--pop)}
+.qtag{display:inline-block;font-size:11px;padding:4px 12px;border-radius:99px;background:rgba(255,255,255,.08);color:var(--muted)}
+.qtext{font-family:'Jua';font-size:22px;line-height:1.4;margin-top:12px}
+.opts{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+.opt{position:relative;overflow:hidden;text-align:left;padding:15px 16px;border-radius:14px;border:1.6px solid var(--line);
+  background:rgba(255,255,255,.04);color:var(--ink);font-family:inherit;font-size:15px;font-weight:500;cursor:pointer;
+  transition:all .3s var(--pop)}
+.opt:active{transform:scale(.97)}
+.opt .obar{position:absolute;left:0;top:0;bottom:0;width:0;transition:width .9s var(--pop);z-index:0;opacity:.28}
+.opt .otxt{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.opt .opct{font-family:'Jua';font-size:17px;opacity:0;transition:opacity .4s}
+.opt.revealed{cursor:default}
+.opt.revealed .opct{opacity:1}
+.opt.mine{border-color:var(--a1)}
+.opt.mine .obar{background:linear-gradient(90deg,var(--a1),var(--a2))}
+.opt:not(.mine) .obar{background:rgba(255,255,255,.5)}
+.verdict{margin-top:16px;text-align:center;display:none}
+.verdict.show{display:block;animation:popin .45s var(--pop)}
+@keyframes popin{from{opacity:0;transform:scale(.8)}}
+.vchip{display:inline-block;font-family:'Jua';font-size:17px;padding:9px 20px;border-radius:99px}
+.vchip.main{background:rgba(255,213,107,.16);color:var(--a1);border:1.5px solid var(--a1)}
+.vchip.uniq{background:rgba(143,211,255,.14);color:var(--uniq);border:1.5px solid var(--uniq)}
+.vsub{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.6}
+.vsub b{color:var(--cream)}
+.vsrc{font-size:10.5px;color:var(--muted);opacity:.75;margin-top:7px}
+.nextbtn{margin-top:14px}
+
+/* 결과 */
+.rhead{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px 20px;text-align:center}
+.rem{font-size:52px}
+.rname{font-family:'Jua';font-size:30px;margin-top:8px;
+  background:linear-gradient(95deg,var(--a1),var(--pink));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.rsub{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.75}
+.bignum{margin-top:18px}
+.bignum .pct{font-family:'Jua';font-size:54px;color:var(--cream)}
+.bignum .cap{font-size:12px;color:var(--muted);margin-top:2px}
+.rstats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.rstat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
+.rstat .v{font-family:'Jua';font-size:22px;color:var(--cream)}
+.rstat .k{font-size:11px;color:var(--muted);margin-top:4px}
+.sect{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:12px;font-size:13px;line-height:1.8;color:#d9d0ee}
+.sect h3{font-family:'Jua';font-size:15px;color:var(--cream);margin-bottom:8px}
+.ghost{width:100%;margin-top:10px;padding:14px;border-radius:14px;border:1.5px solid var(--line);
+  background:transparent;color:var(--muted);font-family:'Jua';font-size:15px;cursor:pointer}
+
+/* 푸터 (브랜드 규칙: 수정 금지) */
+.footer{text-align:center;margin-top:36px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(167,139,250,.6))}
+.mf-eyebrow::after{transform:scaleX(-1)}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#9a8fc0;font-weight:500;white-space:nowrap}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#9a8fc0}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);background:rgba(30,23,56,.97);
+  border:1px solid var(--line);color:var(--ink);font-size:13px;padding:11px 20px;border-radius:99px;transition:transform .4s var(--pop);z-index:9}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="screen on" id="home">
+    <div class="eyebrow">국 민 통 계 &nbsp;V S&nbsp; 나</div>
+    <h1 class="title">통계와 나</h1>
+    <p class="sub">짜장이냐 짬뽕이냐, 부먹이냐 찍먹이냐 —<br>고르는 순간 <b>진짜 통계</b>가 공개됩니다.<br>나는 <b>국민 대세</b>일까, <b>희귀템</b>일까?</p>
+
+    <div class="pick-title">몇 문제 해볼까요?</div>
+    <div class="picks" id="picks">
+      <button class="pick" data-n="5"><span class="n">5</span><span class="u">간 보기</span></button>
+      <button class="pick" data-n="10"><span class="n">10</span><span class="u">한 판</span></button>
+      <button class="pick" data-n="20"><span class="n">20</span><span class="u">제대로</span></button>
+      <button class="pick full" data-n="100"><span class="n">100 · 완전정복</span><span class="u">무인도 난파된다면..</span></button>
+    </div>
+    <button class="btn" id="startBtn" disabled>문제 수를 골라주세요</button>
+
+    <div class="srcbox">📊 <b style="color:var(--cream)">통계 안내</b> — 표시되는 수치는 공개된 국내 설문조사·기관 리서치·대규모 온라인 투표 결과를 참고해 종합·반올림한 값입니다. 조사 기관과 시점에 따라 실제 수치는 달라질 수 있어요. 개별 문항에 확인된 출처가 있는 경우 결과 공개 시 함께 표시됩니다.</div>
+  </section>
+
+  <section class="screen" id="play">
+    <div class="topbar">
+      <div class="prog"><span><b id="qNow">1</b> / <span id="qTotal">10</span></span><span id="streakLb"></span></div>
+      <div class="meter"><span class="mf" id="meterFill"></span></div>
+      <div class="meterlb">지금까지 나의 대세율 <b id="meterPct">—</b></div>
+    </div>
+    <div class="qcard">
+      <span class="qtag" id="qTag">🏠 일상</span>
+      <div class="qtext" id="qText"></div>
+      <div class="opts" id="opts"></div>
+      <div class="verdict" id="verdict">
+        <span class="vchip" id="vChip"></span>
+        <div class="vsub" id="vSub"></div>
+        <div class="vsrc" id="vSrc"></div>
+        <button class="btn nextbtn" id="nextBtn">다음 →</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="done">
+    <div class="rhead">
+      <div class="rem" id="rEm">🌊</div>
+      <div class="rname" id="rName"></div>
+      <div class="rsub" id="rSub"></div>
+      <div class="bignum"><div class="pct" id="rPct">0%</div><div class="cap">나의 대세율</div></div>
+    </div>
+    <div class="rstats">
+      <div class="rstat"><div class="v" id="rSame">—</div><div class="k">평균적으로 나와 같은 국민</div></div>
+      <div class="rstat"><div class="v" id="rUniq">—</div><div class="k">유니크픽 횟수</div></div>
+    </div>
+    <div class="sect"><h3>🔎 이 결과의 의미</h3><p id="rMean"></p></div>
+    <button class="btn" id="shareBtn">결과 카드 저장 📷</button>
+    <button class="ghost" id="againBtn">다시 하기 ↻ (새 문제로)</button>
+    <button class="ghost" id="homeBtn">처음으로</button>
+  </section>
+
+  <div class="footer">
+    <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+    <div class="mf-logo">미미팩토리</div>
+    <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ 데이터: [카테고리, 질문, [[선택지, %],...], 출처(선택)] ============ */
+const BANK=[
+ ["🏠 일상","아침에 일어나 이불을 갠다",[["갠다",34],["안 갠다",66]]],
+ ["🏠 일상","치약은 끝에서부터 짠다",[["끝부터 야무지게",39],["아무 데나",61]]],
+ ["🍜 입맛","탕수육은 부먹 vs 찍먹",[["부먹",43],["찍먹",57]]],
+ ["🍜 입맛","민트초코, 맛있다",[["맛있다",37],["치약맛…",63]]],
+ ["🍜 입맛","라면에 계란을 넣는다면",[["풀어서",46],["통으로",34],["안 넣는다",20]]],
+ ["📱 디지털","카톡 읽고 씹은(읽씹) 적 있다",[["있다",78],["없다",22]]],
+ ["📱 디지털","화장실에 폰을 들고 간다",[["들고 간다",73],["안 간다",27]]],
+ ["🧠 성향","나는 계획형이다",[["계획형",44],["즉흥형",56]]],
+ ["🌙 은밀","자면서 침 흘린 적 있다",[["있다",64],["없다",36]]],
+ ["💗 관계","첫눈에 반한 적 있다",[["있다",51],["없다",49]]],
+ ["🏠 일상","양말은 벗은 그대로 둔다",[["뒤집힌 채로",58],["바로 펴서",42]]],
+ ["🍜 입맛","회식은 역시 고기가 최고다",[["고기지",61],["아니다",39]]],
+ ["🍜 입맛","아침을 거의 안 먹는다",[["안 먹는다",54],["챙겨 먹는다",46]]],
+ ["💸 소비","택배 오면 그날 바로 뜯는다",[["바로 뜯음",82],["묵혀둠",18]]],
+ ["🧠 성향","MBTI 첫 글자는 E다",[["E (외향)",43],["I (내향)",57]]],
+ ["📱 디지털","영상을 1.5배속 이상으로 본다",[["빨리 감기",49],["정속파",51]]],
+ ["🌙 은밀","가위 눌린 적 있다",[["있다",56],["없다",44]]],
+ ["💗 관계","옛 연인 SNS를 몰래 본 적 있다",[["있다",67],["없다",33]]],
+ ["🏠 일상","집에서 실내화를 신는다",[["신는다",41],["맨발파",59]]],
+ ["🍜 입맛","파인애플 피자, 인정한다",[["인정",45],["절대 반대",55]]],
+ ["🧠 성향","혼밥이 아무렇지 않다",[["편하다",62],["부담된다",38]]],
+ ["💸 소비","충동구매하고 후회한 적 많다",[["많다",71],["별로",29]]],
+ ["📱 디지털","알람을 여러 개 맞춰둔다",[["여러 개",66],["하나면 충분",34]]],
+ ["🌙 은밀","샤워하며 노래를 부른다",[["부른다",53],["안 부른다",47]]],
+ ["💗 관계","연락은 내가 먼저 하는 편이다",[["내가 먼저",48],["상대가 먼저",52]]],
+ ["🏠 일상","설거지를 바로 하는 편이다",[["바로",39],["쌓아둠",61]]],
+ ["🍜 입맛","매운 음식을 잘 먹는다",[["잘 먹음",57],["약함",43]]],
+ ["🧠 성향","결정 장애가 있는 편이다",[["있다",64],["없다",36]]],
+ ["📱 디지털","인스타보다 유튜브를 더 본다",[["유튜브",58],["인스타",42]]],
+ ["🌙 은밀","몰래 뀌고 모른 척한 적 있다",[["있다",81],["없다",19]]],
+ ["💗 관계","썸만 타다 끝난 적 있다",[["있다",69],["없다",31]]],
+ ["🏠 일상","겨울에 양말 신고 잔다",[["신고 잠",42],["벗고 잠",58]]],
+ ["🍜 입맛","커피 없이는 못 산다",[["못 산다",55],["괜찮다",45]]],
+ ["💸 소비","가계부를 쓴다",[["쓴다",27],["안 쓴다",73]]],
+ ["🧠 성향","낯가림이 심한 편이다",[["심하다",51],["아니다",49]]],
+ ["📱 디지털","잠들기 직전까지 폰을 본다",[["본다",79],["아니다",21]]],
+ ["🌙 은밀","거울 보며 표정 연습한 적 있다",[["있다",58],["없다",42]]],
+ ["💗 관계","고백은 남자가 해야 한다",[["그렇다",34],["아니다",66]]],
+ ["🏠 일상","물건을 제자리에 잘 둔다",[["잘 둠",45],["아무 데나",55]]],
+ ["🍜 입맛","치킨은 순살보다 뼈다",[["뼈치킨",47],["순살",53]]],
+ ["🧠 성향","감정 기복이 있는 편이다",[["있다",59],["없다",41]]],
+ ["💸 소비","명품 하나쯤은 갖고 싶다",[["갖고 싶다",63],["관심 없다",37]]],
+ ["📱 디지털","안 쓰는 앱 알림을 방치한다",[["방치함",61],["바로 정리",39]]],
+ ["🌙 은밀","혼자 있을 때 혼잣말을 한다",[["한다",66],["안 한다",34]]],
+ ["💗 관계","친구보다 연인이 우선이다",[["연인 우선",38],["친구 우선",62]]],
+ ["🏠 일상","빨래를 개서 바로 넣는다",[["바로 넣음",36],["의자에 쌓음",64]]],
+ ["🍜 입맛","국물을 마지막 한 방울까지 마신다",[["다 마심",44],["남김",56]]],
+ ["🧠 성향","남 눈치를 많이 본다",[["많이 봄",57],["아니다",43]]],
+ ["📱 디지털","스팸 문자에 답장해본 적 있다",[["있다",23],["없다",77]]],
+ ["🌙 은밀","코 곤다는 말을 들은 적 있다",[["있다",52],["없다",48]]],
+ ["💗 관계","짝사랑을 오래 해본 적 있다",[["있다",68],["없다",32]]],
+ ["🏠 일상","이어폰 줄을 잘 감아 둔다",[["잘 감음",38],["엉킨 채",62]]],
+ ["🍜 입맛","회를 좋아한다",[["좋아함",58],["별로",42]]],
+ ["🧠 성향","나는 아침형 인간이다",[["아침형",36],["저녁형",64]]],
+ ["💸 소비","세일하면 필요 없어도 산다",[["산다",54],["아니다",46]]],
+ ["📱 디지털","전화보다 문자가 편하다",[["문자파",71],["전화파",29]]],
+ ["🌙 은밀","울면서 잠든 적 있다",[["있다",61],["없다",39]]],
+ ["💗 관계","연애할 때 질투가 심한 편이다",[["심하다",49],["아니다",51]]],
+ ["🏠 일상","쓰레기를 미루다 넘치게 한 적 있다",[["있다",66],["없다",34]]],
+ ["🍜 입맛","고수(향채)를 좋아한다",[["좋아함",33],["못 먹음",67]]],
+ ["🧠 성향","완벽주의 성향이 있다",[["있다",55],["없다",45]]],
+ ["💸 소비","월급 받으면 며칠 만에 텅장 된다",[["금방 텅장",58],["잘 아낀다",42]]],
+ ["📱 디지털","안 읽은 메일이 100통 넘는다",[["넘는다",47],["정리한다",53]]],
+ ["🌙 은밀","야식의 유혹에 자주 진다",[["자주 짐",72],["참는다",28]]],
+ ["💗 관계","첫 데이트 비용은 더치페이가 맞다",[["더치",57],["한 명이",43]]],
+ ["🏠 일상","택배 상자를 안 버리고 쌓아둔다",[["쌓아둠",51],["바로 버림",49]]],
+ ["🍜 입맛","라면 국물에 밥 말아 먹는다",[["말아 먹음",74],["안 그럼",26]]],
+ ["🧠 성향","혼자만의 시간이 꼭 필요하다",[["꼭 필요",78],["아니다",22]]],
+ ["📱 디지털","사진첩에 스크린샷이 수백 장 있다",[["수백 장",63],["정리함",37]]],
+ ["🌙 은밀","짝사랑 상대 이름을 검색해본 적 있다",[["있다",59],["없다",41]]],
+ ["💗 관계","연애보다 일이 중요한 시기가 있었다",[["있다",64],["없다",36]]],
+ ["🏠 일상","창문 열고 자는 걸 좋아한다",[["좋아함",31],["싫음",69]]],
+ ["🍜 입맛","달달한 디저트를 자주 찾는다",[["자주",61],["별로",39]]],
+ ["🧠 성향","화가 나도 잘 표현 못 한다",[["못 함",58],["표현함",42]]],
+ ["💸 소비","커피값이 아깝다 느낀 적 있다",[["있다",53],["없다",47]]],
+ ["📱 디지털","일하다 딴짓으로 폰 본 적 있다",[["있다",89],["없다",11]]],
+ ["🌙 은밀","이불킥할 흑역사가 있다",[["있다",84],["없다",16]]],
+ ["💗 관계","연애 초반이 제일 설렌다",[["그렇다",67],["아니다",33]]],
+ ["🏠 일상","물을 자주 안 마시는 편이다",[["안 마심",56],["잘 마심",44]]],
+ ["🍜 입맛","혼술을 즐긴다",[["즐김",41],["아니다",59]]],
+ ["🧠 성향","칭찬을 받으면 어색하다",[["어색함",62],["좋음",38]]],
+ ["💸 소비","구독 서비스를 3개 이상 쓴다",[["3개 이상",48],["아니다",52]]],
+ ["📱 디지털","모르는 번호는 안 받는다",[["안 받음",69],["받음",31]]],
+ ["🌙 은밀","혼자 짠 음식이 당길 때가 있다",[["있다",57],["없다",43]]],
+ ["💗 관계","연인과 취미가 같아야 한다",[["그렇다",39],["아니다",61]]],
+ ["🏠 일상","주말에 하루 종일 안 나간 적 있다",[["있다",76],["없다",24]]],
+ ["🍜 입맛","냉면은 물냉 vs 비냉",[["물냉면",46],["비빔냉면",54]]],
+ ["🧠 성향","쉽게 싫증을 내는 편이다",[["그렇다",47],["아니다",53]]],
+ ["💸 소비","비상금을 따로 숨겨둔다",[["숨겨둠",44],["없음",56]]],
+ ["📱 디지털","SNS를 며칠 끊어본 적 있다",[["있다",51],["없다",49]]],
+ ["🌙 은밀","샤워를 저녁에 한다",[["저녁파",63],["아침파",37]]],
+ ["💗 관계","결혼은 꼭 해야 한다",[["그렇다",41],["아니다",59]]],
+ ["🏠 일상","리모컨·충전기 위치로 다퉈본 적 있다",[["있다",52],["없다",48]]],
+ ["🍜 입맛","편의점 음식으로 한 끼 자주 때운다",[["자주",58],["아니다",42]]],
+ ["🧠 성향","지나간 일을 오래 곱씹는다",[["곱씹음",61],["금방 잊음",39]]],
+ ["💸 소비","포인트·쿠폰을 꼼꼼히 챙긴다",[["챙김",49],["귀찮음",51]]],
+ ["📱 디지털","배터리를 자주 20% 밑으로 떨군다",[["자주",57],["미리 충전",43]]],
+ ["🌙 은밀","가끔 내가 특별한 사람 같다",[["느낀다",66],["아니다",34]]],
+ ["💗 관계","사랑한다는 말을 자주 하는 편이다",[["자주",43],["아끼는 편",57]]],
+ ["🧠 성향","혼자 영화관·식당을 잘 간다",[["잘 감",47],["못 감",53]]]
+];
+
+/* ============ 유형 ============ */
+const TYPES=[
+ {min:80, em:"🌊", name:"국민픽 마스터", sub:"당신의 취향이 곧 여론조사 결과. 대한민국 평균의 살아있는 표본!",
+  mean:"당신의 선택은 놀라울 만큼 다수와 일치합니다. 신제품 기획자들이 당신을 모셔가야 해요 — 당신이 좋으면 국민이 좋아합니다. 다만 가끔은 소수의 길에서 새로운 재미를 발견해 보세요."},
+ {min:60, em:"🍚", name:"믿고 가는 대세형", sub:"대체로 다수와 통하지만, 몇 가지엔 나만의 고집이 있는 타입.",
+  mean:"편안한 다수의 감각과 자기 취향의 균형이 좋은 편이에요. 처음 만난 사람과도 취향 얘기로 쉽게 통하는 사교형 입맛·성향의 소유자."},
+ {min:40, em:"⚖️", name:"반반 밸런스형", sub:"대세 반, 유니크 반 — 어디로도 치우치지 않는 균형 감각.",
+  mean:"다수를 따를 땐 따르고, 아닐 땐 과감히 내 길을 갑니다. 유행을 즐기되 휩쓸리지 않는 타입 — 균형 감각이 당신의 무기예요."},
+ {min:20, em:"🦄", name:"유니크 감성형", sub:"다수보다 내 취향. 남들과 다른 선택이 오히려 자연스러운 타입.",
+  mean:"당신의 선택은 자주 소수의 편에 섭니다. 자기 기준이 뚜렷하고, 유행보다 취향을 믿는 사람 — 주변에서 '너 특이하다'는 말, 칭찬으로 들으셔도 됩니다."},
+ {min:0, em:"🛸", name:"희귀템 청개구리형", sub:"국민 통계가 못 담는 사람. 당신 같은 사람, 정말 드뭅니다.",
+  mean:"거의 모든 선택에서 소수의 길을 걷는 진짜 희귀템. 세상이 다 A라고 할 때 B의 매력을 아는 사람이죠. 당신의 시선이 곧 남들이 못 보는 기회입니다."}
+];
+
+/* ============ 상태 ============ */
+let deck=[], idx=0, chosen=0, mainCnt=0, uniqCnt=0, sameSum=0, streak=0, streakKind=null, answered=0;
+const $=id=>document.getElementById(id);
+function vibrate(ms){if(navigator.vibrate)try{navigator.vibrate(ms)}catch(e){}}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function show(s){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('on'));$(s).classList.add('on');window.scrollTo(0,0)}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2200)}
+
+/* ============ 홈 ============ */
+document.querySelectorAll('#picks .pick').forEach(p=>{
+  p.addEventListener('click',()=>{
+    document.querySelectorAll('#picks .pick').forEach(x=>x.classList.remove('sel'));
+    p.classList.add('sel');chosen=+p.dataset.n;
+    $('startBtn').disabled=false;$('startBtn').textContent=chosen+'문제 시작 →';
+    vibrate(14);
+  });
+});
+$('startBtn').addEventListener('click',()=>{
+  if(!chosen)return;
+  startRound();
+});
+
+function startRound(){
+  deck=shuffle(BANK.slice()).slice(0,chosen);
+  idx=0;mainCnt=0;uniqCnt=0;sameSum=0;streak=0;streakKind=null;answered=0;
+  $('qTotal').textContent=deck.length;
+  $('streakLb').textContent='';
+  updateMeter();
+  show('play');loadQ();vibrate([20,40,20]);
+}
+
+/* ============ 진행 ============ */
+function loadQ(){
+  const item=deck[idx];
+  $('qNow').textContent=idx+1;
+  $('qTag').textContent=item[0];
+  $('qText').textContent=item[1];
+  $('verdict').classList.remove('show');
+  const opts=item[2];
+  const box=$('opts');box.innerHTML='';
+  shuffle(opts.map((o,i)=>i)).forEach(oi=>{
+    const b=document.createElement('button');b.className='opt';b.dataset.oi=oi;
+    b.innerHTML='<span class="obar"></span><span class="otxt"><span>'+opts[oi][0]+'</span><span class="opct"></span></span>';
+    b.addEventListener('click',()=>reveal(oi));
+    box.appendChild(b);
+  });
+}
+
+function reveal(myOi){
+  const item=deck[idx], opts=item[2], src=item[3];
+  const buttons=[...document.querySelectorAll('.opt')];
+  if(buttons[0].classList.contains('revealed'))return;
+  const myPct=opts[myOi][1];
+  const maxPct=Math.max.apply(null,opts.map(o=>o[1]));
+  const isMain=myPct>=maxPct;
+
+  buttons.forEach(b=>{
+    const oi=+b.dataset.oi, pct=opts[oi][1];
+    b.classList.add('revealed');b.disabled=true;
+    if(oi===myOi)b.classList.add('mine');
+    b.querySelector('.opct').textContent=pct+'%';
+    setTimeout(()=>{b.querySelector('.obar').style.width=pct+'%';},60);
+  });
+
+  answered++;sameSum+=myPct;
+  if(isMain){mainCnt++; if(streakKind==='m'){streak++;}else{streak=1;streakKind='m';}}
+  else{uniqCnt++; if(streakKind==='u'){streak++;}else{streak=1;streakKind='u';}}
+
+  const chip=$('vChip');
+  if(isMain){chip.className='vchip main';chip.textContent='🌊 대세픽!';}
+  else{chip.className='vchip uniq';chip.textContent='🦄 유니크픽!';}
+  $('vSub').innerHTML='국민 <b>'+myPct+'%</b>가 당신과 같은 선택을 했어요'+
+    (streak>=3?('<br>'+(streakKind==='m'?'🔥 대세 '+streak+'연속!':'🛸 유니크 '+streak+'연속!')):'');
+  $('vSrc').textContent=src?('출처: '+src):'※ 공개 설문·투표 종합 참고치';
+  $('verdict').classList.add('show');
+  $('streakLb').textContent=streak>=2?((streakKind==='m'?'🌊':'🦄')+' x'+streak):'';
+  updateMeter();
+  vibrate(isMain?[20,30,20]:[40,60,40]);
+}
+
+function updateMeter(){
+  const pct=answered?Math.round(mainCnt/answered*100):0;
+  $('meterFill').style.width=pct+'%';
+  $('meterPct').textContent=answered?pct+'%':'—';
+}
+
+$('nextBtn').addEventListener('click',()=>{
+  idx++;
+  if(idx>=deck.length){finish();return;}
+  loadQ();
+});
+
+/* ============ 결과 ============ */
+function finish(){
+  const rate=Math.round(mainCnt/deck.length*100);
+  const T=TYPES.find(t=>rate>=t.min);
+  $('rEm').textContent=T.em;$('rName').textContent=T.name;$('rSub').textContent=T.sub;
+  $('rMean').textContent=T.mean;
+  $('rSame').textContent=Math.round(sameSum/deck.length)+'%';
+  $('rUniq').textContent=uniqCnt+'회';
+  show('done');
+  const el=$('rPct');let v=0;const step=Math.max(1,Math.round(rate/30));
+  const iv=setInterval(()=>{v+=step;if(v>=rate){v=rate;clearInterval(iv);}el.textContent=v+'%';},30);
+  vibrate([60,80,60,80,120]);
+}
+
+$('againBtn').addEventListener('click',startRound);
+$('homeBtn').addEventListener('click',()=>{show('home')});
+
+/* 결과 카드 (canvas, 외부 의존 0) */
+$('shareBtn').addEventListener('click',()=>{
+  const rate=Math.round(mainCnt/deck.length*100);
+  const T=TYPES.find(t=>rate>=t.min);
+  const c=document.createElement('canvas');c.width=720;c.height=900;
+  const x=c.getContext('2d');
+  const g=x.createLinearGradient(0,0,720,900);g.addColorStop(0,'#141024');g.addColorStop(1,'#2b1c50');
+  x.fillStyle=g;x.fillRect(0,0,720,900);
+  x.textAlign='center';
+  x.fillStyle='#a99cc9';x.font='22px "Noto Sans KR",sans-serif';x.fillText('국 민 통 계  V S  나',360,120);
+  x.fillStyle='#ffe9c9';x.font='64px Jua,"Noto Sans KR",sans-serif';x.fillText('통계와 나',360,200);
+  x.font='110px serif';x.fillText(T.em,360,370);
+  x.fillStyle='#ffd56b';x.font='58px Jua,"Noto Sans KR",sans-serif';x.fillText(T.name,360,470);
+  x.fillStyle='#f4efff';x.font='90px Jua,"Noto Sans KR",sans-serif';x.fillText('대세율 '+rate+'%',360,600);
+  x.fillStyle='#a99cc9';x.font='24px "Noto Sans KR",sans-serif';
+  x.fillText('평균 '+Math.round(sameSum/deck.length)+'%의 국민이 나와 같은 선택',360,660);
+  x.fillStyle='#9a8fc0';x.font='20px "Noto Sans KR",sans-serif';
+  x.fillText('"의미와재미공장" 미미팩토리',360,810);
+  x.fillText('mimifactory.vibekr.com',360,845);
+  c.toBlob(function(b){
+    const a=document.createElement('a');a.href=URL.createObjectURL(b);
+    a.download='통계와나_결과.png';a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href)},4000);
+    toast('결과 카드가 저장됐어요 📷');
+  });
+});
+</script>
+</body>
+</html>
