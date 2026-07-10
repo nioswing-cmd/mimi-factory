@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>너, 나 알아? — 친해지기 게임</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#1a1230; --bg2:#2d1b4e;
+  --accent1:#ffd56b; --accent2:#ffb347;
+  --cream:#fff6ec; --muted:#cdbfe0;
+  --card:#241a3d;
+  --ok:#4fd1a0; --no:#ff7a9c;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 80% -10%, rgba(255,180,90,.10), transparent 55%),
+    radial-gradient(120% 90% at 10% 110%, rgba(255,94,138,.12), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  transition:background .9s ease;
+  min-height:100dvh;
+}
+.wrap{max-width:520px; margin:0 auto; padding:22px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(105deg,var(--accent1),#ff8a5b 55%,#ff5e8a);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1{font-family:'Jua',sans-serif; font-weight:400;}
+.screen{display:none; flex:1; flex-direction:column; animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1.5deg); opacity:.4;}60%{transform:scale(1.02) rotate(.5deg);}100%{transform:scale(1) rotate(0); opacity:1;}}
+
+/* ---------- intro ---------- */
+.badge{display:inline-block; font-size:12px; letter-spacing:.14em; color:var(--muted);
+  border:1px solid rgba(255,255,255,.16); border-radius:99px; padding:6px 14px; margin:8px auto 0;}
+.intro-hero{text-align:center; margin-top:6vh;}
+.intro-hero h1{font-size:52px; line-height:1.08; margin:16px 0 6px;}
+.intro-sub{color:var(--muted); font-size:15.5px; line-height:1.6; word-break:keep-all; margin:10px 0 0;}
+.intro-pitch{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09);
+  border-radius:18px; padding:15px 16px; margin:22px 0 0; font-size:14px; color:var(--cream);
+  line-height:1.65; word-break:keep-all;}
+.intro-pitch b{color:var(--accent1);}
+.section-label{font-size:13px; color:var(--muted); margin:26px 0 10px; letter-spacing:.03em; text-align:center;}
+.rel-row{display:flex; gap:10px;}
+.rel{flex:1; background:var(--card); border:2px solid rgba(255,255,255,.10); border-radius:18px;
+  padding:16px 8px 13px; text-align:center; cursor:pointer; transition:transform .25s cubic-bezier(.34,1.56,.64,1),border-color .25s,background .25s;}
+.rel:active{transform:scale(.95);}
+.rel.sel{border-color:var(--accent2); background:linear-gradient(160deg,rgba(255,180,90,.18),rgba(255,94,138,.12));}
+.rel .emo{font-size:32px; display:block; line-height:1;}
+.rel .nm{font-family:'Jua',sans-serif; font-size:17px; margin-top:8px; display:block;}
+.name-in{width:100%; margin-top:20px; background:rgba(255,255,255,.06); border:2px solid rgba(255,255,255,.12);
+  border-radius:14px; padding:14px 16px; color:var(--cream); font-size:16px; font-family:inherit; text-align:center;}
+.name-in::placeholder{color:#8f82ad;}
+.name-in:focus{outline:none; border-color:var(--accent2);}
+
+/* ---------- buttons ---------- */
+.btn{display:block; width:100%; border:none; cursor:pointer; font-family:'Jua',sans-serif;
+  font-size:19px; color:#2a1533; padding:17px; border-radius:16px; margin-top:auto;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2));
+  box-shadow:0 10px 26px -8px var(--accent2); transition:transform .2s, filter .2s, opacity .2s;}
+.btn:active{transform:scale(.97);}
+.btn:disabled{opacity:.4; filter:grayscale(.4); box-shadow:none; cursor:default;}
+.btn.ghost{background:transparent; color:var(--muted); box-shadow:none; border:1.5px solid rgba(255,255,255,.16); font-size:16px; margin-top:12px;}
+.btn:focus-visible,.rel:focus-visible,.opt:focus-visible{outline:3px solid var(--accent1); outline-offset:3px;}
+
+/* ---------- progress ---------- */
+.topbar{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
+.gauge{flex:1; height:10px; border-radius:99px; background:rgba(255,255,255,.10); overflow:hidden;}
+.gaugefill{height:100%; width:0%; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  box-shadow:0 0 14px 1px var(--accent2);
+  transition:width .5s cubic-bezier(.22,1,.36,1), box-shadow .6s;}
+.count{font-family:'Jua',sans-serif; font-size:15px; color:var(--muted); white-space:nowrap;}
+.stage-tag{font-size:12px; letter-spacing:.05em; color:var(--accent1); text-align:center; margin-bottom:6px; height:16px;}
+
+/* ---------- question ---------- */
+.qcard{background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:22px;
+  padding:24px 20px; margin-bottom:16px;}
+.qnum{font-family:'Jua',sans-serif; font-size:14px; color:var(--accent1); letter-spacing:.04em;}
+.qtext{font-size:22px; font-weight:700; line-height:1.4; margin:8px 0 2px; word-break:keep-all;}
+.qhint{font-size:13px; color:var(--muted); margin-top:8px;}
+.opts{display:flex; flex-direction:column; gap:11px;}
+.opt{background:var(--card); border:2px solid rgba(255,255,255,.11); border-radius:15px;
+  padding:15px 16px; font-size:16px; color:var(--cream); text-align:left; cursor:pointer; font-family:inherit;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1), border-color .2s, background .2s; line-height:1.4; word-break:keep-all;}
+.opt:active{transform:scale(.97);}
+.opt.sel{border-color:var(--accent2); background:linear-gradient(160deg,rgba(255,180,90,.16),rgba(255,94,138,.10));}
+.opt.ok{border-color:var(--ok); background:rgba(79,209,160,.16);}
+.opt.no{border-color:var(--no); background:rgba(255,122,156,.14);}
+.opt.dim{opacity:.42;}
+.opt[disabled]{cursor:default;}
+.custom-chip{display:inline-flex; align-items:center; gap:6px; margin-top:12px; font-size:14px;
+  color:var(--muted); background:rgba(255,255,255,.05); border:1.5px dashed rgba(255,255,255,.18);
+  border-radius:12px; padding:11px 14px; cursor:pointer; width:100%; justify-content:center;}
+.custom-box{display:none; margin-top:12px; gap:8px;}
+.custom-box.on{display:flex;}
+.custom-box input{flex:1; background:rgba(255,255,255,.06); border:2px solid var(--accent2);
+  border-radius:12px; padding:13px 14px; color:var(--cream); font-size:15px; font-family:inherit;}
+.custom-box input:focus{outline:none;}
+.custom-box button{background:var(--accent2); border:none; color:#2a1533; font-family:'Jua',sans-serif;
+  font-size:15px; padding:0 18px; border-radius:12px; cursor:pointer;}
+
+/* reveal after answer (play) */
+.reveal{margin-top:4px; border-radius:16px; padding:16px 16px; font-size:15px; line-height:1.6;
+  word-break:keep-all; animation:pop .42s cubic-bezier(.34,1.56,.64,1); display:none;}
+.reveal.on{display:block;}
+.reveal.good{background:rgba(79,209,160,.14); border:1px solid rgba(79,209,160,.4);}
+.reveal.talk{background:rgba(255,122,156,.12); border:1px solid rgba(255,122,156,.42);}
+.reveal .rtitle{font-family:'Jua',sans-serif; font-size:17px; margin-bottom:6px;}
+.reveal .real{color:var(--accent1); font-weight:700;}
+.reveal .nudge{margin-top:10px; font-size:14px; color:var(--cream); background:rgba(0,0,0,.18);
+  border-radius:10px; padding:10px 12px;}
+
+/* ---------- handoff ---------- */
+.hand{text-align:center; margin:auto 0; padding:30px 6px;}
+.hand .ico{font-size:64px;}
+.hand h1{font-size:34px; margin:14px 0 6px;}
+.hand p{color:var(--muted); font-size:15.5px; line-height:1.7; word-break:keep-all;}
+
+/* ---------- result ---------- */
+.res-head{text-align:center; margin-top:8px;}
+.score-ring{position:relative; width:172px; height:172px; margin:14px auto 4px;}
+.score-ring svg{transform:rotate(-90deg);}
+.score-num{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;}
+.score-num .pct{font-family:'Jua',sans-serif; font-size:46px; line-height:1;}
+.score-num .of{font-size:13px; color:var(--muted); margin-top:4px;}
+.rank{font-family:'Jua',sans-serif; font-size:26px; margin:6px 0 2px;}
+.rank-sub{color:var(--muted); font-size:14.5px; line-height:1.6; word-break:keep-all; margin-bottom:8px;}
+.talk-head{display:flex; align-items:center; gap:8px; margin:22px 0 12px; font-family:'Jua',sans-serif; font-size:19px;}
+.talk-head .pill{font-size:12px; background:var(--accent2); color:#2a1533; border-radius:99px; padding:3px 10px; font-family:'Noto Sans KR'; font-weight:700;}
+.talk-item{background:var(--card); border:1px solid rgba(255,255,255,.09); border-left:4px solid var(--no);
+  border-radius:14px; padding:15px 16px; margin-bottom:11px; animation:fadeIn .5s ease;}
+.talk-item .tq{font-size:15px; font-weight:700; margin-bottom:9px; word-break:keep-all;}
+.talk-item .trow{font-size:14px; line-height:1.5; color:var(--muted);}
+.talk-item .trow b{color:var(--cream);}
+.talk-item .real{color:var(--accent1);}
+.allright{background:rgba(79,209,160,.12); border:1px solid rgba(79,209,160,.4); border-radius:16px;
+  padding:20px; text-align:center; font-size:15px; line-height:1.7; word-break:keep-all;}
+
+/* ---------- toast ---------- */
+.toast{position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-20px);
+  background:rgba(36,26,61,.96); border:1.5px solid var(--accent2); color:var(--cream);
+  padding:13px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none;
+  transition:opacity .4s, transform .4s; z-index:50; max-width:90vw; text-align:center;}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+/* ---------- footer ---------- */
+.footer{text-align:center; margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  <!-- ===== INTRO ===== -->
+  <section id="screen-intro" class="screen on">
+    <div class="intro-hero">
+      <span class="badge">둘이 나란히 · 친해지기 게임</span>
+      <h1>너, <span class="grad">나</span> 알아?</h1>
+      <p class="intro-sub">나에 대한 10문제를 상대가 풉니다.<br>맞히면 짜릿, <b class="grad">틀리면 바로 대화</b>가 시작돼요.</p>
+    </div>
+    <div class="intro-pitch">
+      <b>① 내가 먼저</b> 나에 대한 답을 정하고 →
+      <b>② 폰을 상대에게</b> 넘겨 문제를 풀게 하고 →
+      <b>③ 틀린 문제는</b> 곧 오늘의 대화 소재가 됩니다.
+    </div>
+
+    <div class="section-label">누구와 함께 하나요?</div>
+    <div class="rel-row" id="relRow">
+      <div class="rel" data-rel="친구" tabindex="0"><span class="emo">🧑‍🤝‍🧑</span><span class="nm">친구</span></div>
+      <div class="rel" data-rel="연인" tabindex="0"><span class="emo">💞</span><span class="nm">연인</span></div>
+      <div class="rel" data-rel="가족" tabindex="0"><span class="emo">🏡</span><span class="nm">가족</span></div>
+    </div>
+    <input id="myName" class="name-in" maxlength="8" placeholder="문제를 낼 '나'의 이름 (선택)">
+
+    <button id="toSetup" class="btn" disabled>내 문제 만들러 가기 →</button>
+  </section>
+
+  <!-- ===== SETUP ===== -->
+  <section id="screen-setup" class="screen">
+    <div class="stage-tag" id="setupStage"></div>
+    <div class="topbar">
+      <div class="gauge"><div class="gaugefill" id="setupGauge"></div></div>
+      <div class="count" id="setupCount">1 / 10</div>
+    </div>
+    <div class="qcard">
+      <div class="qnum" id="setupQnum">나에 대한 질문</div>
+      <div class="qtext" id="setupQ">질문</div>
+      <div class="qhint">👉 진짜 내 답을 골라주세요 (상대는 못 보게!)</div>
+    </div>
+    <div class="opts" id="setupOpts"></div>
+    <div class="custom-chip" id="setupCustomChip">✏️ 딱 맞는 게 없어요 — 직접 쓰기</div>
+    <div class="custom-box" id="setupCustomBox">
+      <input id="setupCustomInput" maxlength="24" placeholder="나만의 진짜 답을 입력">
+      <button id="setupCustomOk">확인</button>
+    </div>
+  </section>
+
+  <!-- ===== HANDOFF ===== -->
+  <section id="screen-handoff" class="screen">
+    <div class="hand">
+      <div class="ico">🤝📱</div>
+      <h1>이제 <span class="grad">폰을 넘겨</span>주세요</h1>
+      <p id="handText">내 답은 다 숨겼어요.<br>상대가 나를 얼마나 아는지, 지금부터 맞혀볼 차례!</p>
+    </div>
+    <button id="toPlay" class="btn">문제 풀기 시작 →</button>
+  </section>
+
+  <!-- ===== PLAY ===== -->
+  <section id="screen-play" class="screen">
+    <div class="stage-tag" id="playStage"></div>
+    <div class="topbar">
+      <div class="gauge"><div class="gaugefill" id="playGauge"></div></div>
+      <div class="count" id="playScore">💯 0</div>
+    </div>
+    <div class="qcard">
+      <div class="qnum" id="playQnum">Q1 / 10</div>
+      <div class="qtext" id="playQ">질문</div>
+      <div class="qhint" id="playHint">👉 <span id="playHintName">이 사람</span>의 진짜 답은 무엇일까요?</div>
+    </div>
+    <div class="opts" id="playOpts"></div>
+    <div class="reveal" id="playReveal"></div>
+    <button id="toNext" class="btn" style="display:none;">다음 →</button>
+  </section>
+
+  <!-- ===== RESULT ===== -->
+  <section id="screen-result" class="screen">
+    <div class="res-head">
+      <div class="score-ring">
+        <svg width="172" height="172" viewBox="0 0 172 172">
+          <circle cx="86" cy="86" r="76" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="13"/>
+          <circle id="ringFill" cx="86" cy="86" r="76" fill="none" stroke="url(#rg)" stroke-width="13" stroke-linecap="round"/>
+          <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#ffd56b"/><stop offset="1" stop-color="#ff5e8a"/>
+          </linearGradient></defs>
+        </svg>
+        <div class="score-num"><div class="pct" id="resPct">0%</div><div class="of" id="resOf">0 / 10 정답</div></div>
+      </div>
+      <div class="rank" id="resRank">—</div>
+      <div class="rank-sub" id="resRankSub"></div>
+    </div>
+
+    <div id="talkWrap">
+      <div class="talk-head">💬 오늘의 대화 소재 <span class="pill" id="talkCount">0개</span></div>
+      <div id="talkList"></div>
+    </div>
+
+    <button id="playAgainSwap" class="btn">역할 바꿔서 다시 하기 🔄</button>
+    <button id="playAgain" class="btn ghost">처음부터 다시</button>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <div class="footer">
+    <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+    <div class="mf-logo">미미팩토리</div>
+    <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+  </div>
+</div>
+
+<script>
+/* ---------------- data ---------------- */
+const QUESTIONS = [
+  {lv:1, q:"내가 제일 좋아하는 음식 종류는?", opts:["매콤한 분식·떡볶이","든든한 고기·구이","뜨끈한 국물·면 요리","달콤한 빵·디저트"]},
+  {lv:1, q:"주말에 아무 약속이 없으면 나는?", opts:["집에서 뒹굴뒹굴","밖에 나가 사람들 만남","밀린 취미·작업 몰입","훌쩍 여행·드라이브"]},
+  {lv:1, q:"스트레스를 풀 때 나는 주로?", opts:["맛있는 거 먹기","일단 잠으로 리셋","운동·산책하기","수다·통화로 풀기"]},
+  {lv:1, q:"내가 가장 듣고 싶은 칭찬은?", opts:["\"센스 있다\"","\"든든하고 믿음직해\"","\"같이 있으면 재밌어\"","\"참 따뜻하고 다정해\""]},
+  {lv:2, q:"나를 한마디로 표현하면?", opts:["겉바속촉(강한 척, 실은 여림)","은근한 낭만파","계획형 리더 스타일","자유로운 영혼"]},
+  {lv:2, q:"요즘 내가 가장 자주 하는 생각은?", opts:["아, 좀 쉬고 싶다","뭔가 새로 시작하고 싶다","돈·미래가 걱정된다","소중한 사람들 생각"]},
+  {lv:2, q:"어릴 때 내 꿈은?", opts:["예술가(가수·화가 등)","선생님·공무원","사장님·부자","과학자·탐험가"]},
+  {lv:3, q:"내가 은근히 서운했던 순간은?", opts:["내 말을 흘려들을 때","약속을 자꾸 미룰 때","남과 나를 비교할 때","힘들 때 곁에 없을 때"]},
+  {lv:3, q:"사람들이 나를 자주 오해하는 점은?", opts:["차가워 보이지만 정 많음","세 보이지만 실은 소심","편해 보이지만 예민함","무심한 듯 다 기억함"]},
+  {lv:3, q:"너에게 내가 가장 고마운 점은?", opts:["있는 그대로 봐주는 것","힘들 때 곁에 있어준 것","나를 자꾸 웃게 하는 것","나를 믿고 응원해준 것"]},
+];
+const THEMES={
+ 1:{a1:"#ffd56b",a2:"#ffb347",bg1:"#1a1230",bg2:"#2d1b4e",card:"#241a3d"},
+ 2:{a1:"#ff8a5b",a2:"#ff6b6b",bg1:"#221031",bg2:"#3a1840",card:"#2c1838"},
+ 3:{a1:"#ff5e8a",a2:"#c44ec4",bg1:"#250d2e",bg2:"#3d1240",card:"#311236"}
+};
+const LV_TAG={1:"🌤 가볍게 몸풀기",2:"🔥 조금 더 깊게",3:"💗 진짜 속마음"};
+const NUDGES=[
+ "지금 물어보세요 — \"왜 이렇게 생각했어?\"",
+ "이유를 들어보세요. 의외의 이야기가 나올지도!",
+ "\"난 이럴 줄 알았는데\" 서로 말해보세요.",
+ "이 답에 얽힌 사연, 지금이 물어볼 타이밍!",
+ "여기서 대화 한 스푼 — 서로 진짜 이유를 나눠봐요."
+];
+
+/* ---------------- state ---------------- */
+let rel="", myName="", setupIdx=0, playIdx=0, score=0;
+let myAnswers=[];        // 세팅한 진짜 답(텍스트)
+let playOptions=[];      // 각 문제의 셔플된 보기
+let results=[];          // {q, real, guess, correct}
+let answeredThis=false;
+
+/* ---------------- utils ---------------- */
+function $(id){return document.getElementById(id);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt; function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2000);}
+function applyTheme(lv){const t=THEMES[lv],r=document.documentElement.style;
+  r.setProperty('--accent1',t.a1);r.setProperty('--accent2',t.a2);
+  r.setProperty('--bg1',t.bg1);r.setProperty('--bg2',t.bg2);r.setProperty('--card',t.card);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function popEl(el){el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');}
+
+/* ---------------- intro ---------------- */
+$('relRow').addEventListener('click',e=>{
+  const el=e.target.closest('.rel'); if(!el)return;
+  document.querySelectorAll('.rel').forEach(r=>r.classList.remove('sel'));
+  el.classList.add('sel'); rel=el.dataset.rel; vibrate(15);
+  $('toSetup').disabled=false;
+});
+$('relRow').addEventListener('keydown',e=>{
+  if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('rel')){e.preventDefault();e.target.click();}
+});
+$('toSetup').addEventListener('click',()=>{
+  if(!rel)return;
+  myName=($('myName').value||"").trim();
+  setupIdx=0; myAnswers=[];
+  show('screen-setup'); renderSetup();
+});
+
+/* ---------------- setup ---------------- */
+function renderSetup(){
+  const Q=QUESTIONS[setupIdx];
+  applyTheme(Q.lv);
+  $('setupStage').textContent=LV_TAG[Q.lv];
+  $('setupCount').textContent=(setupIdx+1)+" / "+QUESTIONS.length;
+  $('setupGauge').style.width=(setupIdx/QUESTIONS.length*100)+"%";
+  $('setupQnum').textContent="나에 대한 질문 "+(setupIdx+1);
+  const qEl=$('setupQ'); qEl.textContent=Q.q; popEl(qEl);
+  const box=$('setupOpts'); box.innerHTML="";
+  Q.opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button"; b.textContent=o;
+    b.addEventListener('click',()=>pickSetup(o));
+    box.appendChild(b);
+  });
+  // reset custom
+  $('setupCustomBox').classList.remove('on');
+  $('setupCustomInput').value="";
+}
+function pickSetup(text){
+  vibrate(22);
+  myAnswers[setupIdx]=text;
+  $('setupGauge').style.width=((setupIdx+1)/QUESTIONS.length*100)+"%";
+  setTimeout(nextSetup,240);
+}
+function nextSetup(){
+  setupIdx++;
+  if(setupIdx>=QUESTIONS.length){
+    // build play options
+    buildPlay();
+    $('handText').innerHTML = myName
+      ? ("<b class='grad'>"+escapeHtml(myName)+"</b>님의 답은 다 숨겼어요.<br>상대가 나를 얼마나 아는지 지금부터 맞혀볼 차례!")
+      : "내 답은 다 숨겼어요.<br>상대가 나를 얼마나 아는지, 지금부터 맞혀볼 차례!";
+    applyTheme(1);
+    show('screen-handoff');
+    return;
+  }
+  renderSetup();
+}
+$('setupCustomChip').addEventListener('click',()=>{
+  const b=$('setupCustomBox'); b.classList.add('on'); $('setupCustomInput').focus();
+});
+$('setupCustomOk').addEventListener('click',submitCustom);
+$('setupCustomInput').addEventListener('keydown',e=>{if(e.key==='Enter')submitCustom();});
+function submitCustom(){
+  const v=$('setupCustomInput').value.trim();
+  if(!v){toast("답을 입력해주세요");return;}
+  pickSetup(v);
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+/* ---------------- build play ---------------- */
+function buildPlay(){
+  playOptions=[];
+  QUESTIONS.forEach((Q,i)=>{
+    let opts=[...Q.opts];
+    const real=myAnswers[i];
+    if(!opts.includes(real)) opts[0]=real; // custom 대체(첫 보기 자리에)
+    playOptions[i]=shuffle([...opts]);
+  });
+}
+
+/* ---------------- handoff -> play ---------------- */
+$('toPlay').addEventListener('click',()=>{
+  playIdx=0; score=0; results=[];
+  $('playHintName').textContent = myName ? escapeHtml(myName) : "이 사람";
+  show('screen-play'); renderPlay();
+});
+
+/* ---------------- play ---------------- */
+function renderPlay(){
+  answeredThis=false;
+  const Q=QUESTIONS[playIdx];
+  applyTheme(Q.lv);
+  $('playStage').textContent=LV_TAG[Q.lv];
+  $('playGauge').style.width=(playIdx/QUESTIONS.length*100)+"%";
+  $('playScore').textContent="💯 "+score;
+  $('playQnum').textContent="Q"+(playIdx+1)+" / "+QUESTIONS.length;
+  const qEl=$('playQ'); qEl.textContent=Q.q; popEl(qEl);
+  $('playHint').style.display="block";
+  const box=$('playOpts'); box.innerHTML="";
+  playOptions[playIdx].forEach(o=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button"; b.textContent=o;
+    b.addEventListener('click',()=>pickPlay(o,b));
+    box.appendChild(b);
+  });
+  const rv=$('playReveal'); rv.className="reveal"; rv.innerHTML="";
+  $('toNext').style.display="none";
+}
+function pickPlay(guess,btn){
+  if(answeredThis)return;
+  answeredThis=true;
+  const real=myAnswers[playIdx];
+  const correct=(guess===real);
+  results.push({q:QUESTIONS[playIdx].q, real:real, guess:guess, correct:correct});
+  // mark options
+  document.querySelectorAll('#playOpts .opt').forEach(b=>{
+    b.disabled=true;
+    if(b.textContent===real) b.classList.add('ok');
+    else if(b===btn) b.classList.add('no');
+    else b.classList.add('dim');
+  });
+  $('playHint').style.display="none";
+  const rv=$('playReveal');
+  if(correct){
+    score++; vibrate([20,40,20]);
+    $('playScore').textContent="💯 "+score;
+    rv.className="reveal good on";
+    rv.innerHTML="<div class='rtitle'>정답! 🎉 통했다</div>서로를 잘 아는 사이네요.";
+    $('playGauge').style.setProperty('--x','');
+    toast("정답! 🎉");
+  }else{
+    vibrate(30);
+    const nudge=NUDGES[playIdx%NUDGES.length];
+    rv.className="reveal talk on";
+    rv.innerHTML="<div class='rtitle'>💬 여기서 대화 시작!</div>진짜 답은 → <span class='real'>"+escapeHtml(real)+"</span>"
+      +"<div class='nudge'>"+escapeHtml(nudge)+"</div>";
+  }
+  $('playGauge').style.width=((playIdx+1)/QUESTIONS.length*100)+"%";
+  const nx=$('toNext');
+  nx.textContent = (playIdx>=QUESTIONS.length-1) ? "결과 보기 →" : "다음 →";
+  nx.style.display="block"; popEl(nx);
+}
+$('toNext').addEventListener('click',()=>{
+  playIdx++;
+  if(playIdx>=QUESTIONS.length){ showResult(); return; }
+  renderPlay();
+});
+
+/* ---------------- result ---------------- */
+function showResult(){
+  applyTheme(3);
+  const total=QUESTIONS.length;
+  const pct=Math.round(score/total*100);
+  show('screen-result');
+  // ring
+  const R=76, C=2*Math.PI*R, ring=$('ringFill');
+  ring.style.strokeDasharray=C; ring.style.strokeDashoffset=C;
+  $('resPct').textContent="0%";
+  setTimeout(()=>{
+    ring.style.transition="stroke-dashoffset 1.1s cubic-bezier(.22,1,.36,1)";
+    ring.style.strokeDashoffset=C*(1-pct/100);
+    animateNum($('resPct'),pct,"%");
+  },200);
+  $('resOf').textContent=score+" / "+total+" 정답";
+  const rk=rankOf(pct);
+  $('resRank').textContent=rk.title;
+  $('resRankSub').textContent=rk.sub;
+  vibrate([60,80,60,80,120]);
+  // talk list
+  const wrong=results.filter(r=>!r.correct);
+  const tw=$('talkWrap');
+  if(wrong.length===0){
+    tw.innerHTML="<div class='allright'>🌟 전부 정답!<br>서로를 정말 잘 아는군요.<br>그래도 오늘, \"이건 왜 이럴까?\" 한 가지쯤은 더 물어보기!</div>";
+  }else{
+    $('talkCount').textContent=wrong.length+"개";
+    const list=$('talkList'); list.innerHTML="";
+    wrong.forEach(w=>{
+      const d=document.createElement('div'); d.className="talk-item";
+      d.innerHTML="<div class='tq'>"+escapeHtml(w.q)+"</div>"
+        +"<div class='trow'>상대의 추측: <b>"+escapeHtml(w.guess)+"</b></div>"
+        +"<div class='trow'>진짜 내 답: <b class='real'>"+escapeHtml(w.real)+"</b></div>";
+      list.appendChild(d);
+    });
+    $('talkCount').textContent=wrong.length+"개";
+  }
+}
+function animateNum(el,target,suf){
+  let cur=0; const step=Math.max(1,Math.round(target/28));
+  const t=setInterval(()=>{cur+=step; if(cur>=target){cur=target;clearInterval(t);} el.textContent=cur+suf;},28);
+}
+function rankOf(p){
+  if(p>=100) return {title:"소울메이트 💞",sub:"완벽해요. 말 안 해도 통하는 사이!"};
+  if(p>=80)  return {title:"찰떡 케미 🍡",sub:"거의 다 아는 사이. 남은 건 오늘 채워봐요."};
+  if(p>=60)  return {title:"제법 아는 사이 😎",sub:"꽤 알지만, 몰랐던 면이 아직 있네요."};
+  if(p>=40)  return {title:"알아가는 중 🌱",sub:"틀린 만큼 이야깃거리가 생겼어요. 지금부터!"};
+  return {title:"대화가 필요해 ☕",sub:"몰랐던 게 많다는 건, 나눌 이야기가 많다는 뜻!"};
+}
+
+/* ---------------- replay ---------------- */
+$('playAgain').addEventListener('click',()=>{
+  rel=""; myName=""; $('myName').value="";
+  document.querySelectorAll('.rel').forEach(r=>r.classList.remove('sel'));
+  $('toSetup').disabled=true; applyTheme(1); show('screen-intro');
+});
+$('playAgainSwap').addEventListener('click',()=>{
+  // 역할 바꾸기: 이번엔 상대가 문제를 낼 차례 → 세팅부터 다시
+  toast("이번엔 상대가 문제를 낼 차례!");
+  setupIdx=0; myAnswers=[]; myName="";
+  applyTheme(1); show('screen-setup'); renderSetup();
+});
+</script>
+</body>
+</html>

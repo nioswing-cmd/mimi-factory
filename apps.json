@@ -360,6 +360,18 @@
       "teaser": "apps/예민함_계기판_hsp_감각_민감도_test.html",
       "premium": "apps/예민함_계기판_hsp_감각_민감도_test.html",
       "desc": "예민함 계기판 — 내 감각 볼륨은 몇일까"
+    },
+    {
+      "id": "너_나_알아",
+      "type": "friend",
+      "title": "너 나 알아?",
+      "author": "미미팩토리 오리지널",
+      "date": "2026-07-11",
+      "color1": "#7aa6ff",
+      "color2": "#b78bf5",
+      "teaser": "apps/너_나_알아_friend.html",
+      "premium": "apps/너_나_알아_friend.html",
+      "desc": "나에 대한 10문제를 상대가 풀고, 틀린 답이 곧 우리의 대화 소재가 되는 둘이서 친해지기 게임."
     }
   ]
 }
