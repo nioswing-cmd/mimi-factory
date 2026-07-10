@@ -300,6 +300,18 @@
       "teaser": "apps/그_사람_손절할까_말까_test.html",
       "premium": "apps/그_사람_손절할까_말까_test.html",
       "desc": "마음속 그 사람 한 명을 정해 15가지 실제 행동으로 진단하는 '손절 신호등' 테스트 — 상단 신호등 게이지가 실시간으로 🟢→🟡→🔴 차오르고, "
+    },
+    {
+      "id": "mbt_검사",
+      "type": "test",
+      "title": "MBT 검사",
+      "author": "미미팩토리 오리지널",
+      "date": "2026-07-10",
+      "color1": "#5ee7d8",
+      "color2": "#7aa6ff",
+      "teaser": "apps/mbt_검사_test.html",
+      "premium": "apps/mbt_검사_test.html",
+      "desc": "누를 때마다 정체불명의 코드가 요동치다 마지막에 단 하나로 잠금 해제되는, 점수·수치는 숨기고 유형의 '결'만 보여주는 도파민 터지는 MBT 성"
     }
   ]
 }

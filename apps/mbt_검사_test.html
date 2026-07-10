@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MBT 검사 — 나의 성격 코드 해독</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.3/confetti.browser.min.js"></script>
+<style>
+  :root{
+    --bg0:#140a2e; --bg1:#1f0f45; --bg2:#33165c;
+    --ink:#f4efff; --ink-soft:#c7b8ec; --ink-dim:#9a8bc8;
+    --glass:rgba(255,255,255,.06); --glass-line:rgba(255,255,255,.14);
+    --nt:#b78bf5; --nf:#4ade9b; --sj:#5b9dff; --sp:#ffb454;
+    --a1:#9b7bff; --a2:#7ac0ff;
+    --shadow:0 18px 50px rgba(0,0,0,.45);
+    --r:24px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Noto Sans KR',system-ui,sans-serif;color:var(--ink);
+    background:
+      radial-gradient(900px 620px at 12% -8%, rgba(155,123,255,.22), transparent 60%),
+      radial-gradient(820px 620px at 110% 6%, rgba(122,192,255,.16), transparent 55%),
+      radial-gradient(760px 720px at 50% 122%, rgba(255,122,192,.14), transparent 60%),
+      linear-gradient(160deg,var(--bg0),var(--bg1) 55%,var(--bg2));
+    background-attachment:fixed;min-height:100vh;
+    display:flex;align-items:flex-start;justify-content:center;
+    padding:26px 15px 56px;overflow-x:hidden;
+    transition:background .9s ease;
+  }
+  .app{width:100%;max-width:560px}
+  h1,h2,h3,.jua{font-family:'Jua',sans-serif;font-weight:400;letter-spacing:.2px}
+
+  .screen{display:none;animation:pop .45s cubic-bezier(.2,.9,.3,1.3)}
+  .screen.on{display:block}
+  @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+
+  .card{
+    background:var(--glass);border:1px solid var(--glass-line);border-radius:var(--r);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    box-shadow:var(--shadow);padding:30px 24px;
+  }
+
+  /* ---- home ---- */
+  .hero-emoji{font-size:70px;text-align:center;line-height:1;filter:drop-shadow(0 8px 20px rgba(155,123,255,.45));animation:float 3.4s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+  .home h1{font-size:clamp(30px,8vw,44px);text-align:center;margin:14px 0 6px;line-height:1.15}
+  .grad{background:linear-gradient(92deg,var(--a1),var(--nf) 45%,var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .home p.sub{text-align:center;color:var(--ink-soft);font-size:15px;line-height:1.65;margin-bottom:20px}
+  .lock-note{display:flex;gap:8px;align-items:flex-start;justify-content:center;text-align:center;
+    font-size:12.5px;color:var(--ink-dim);background:rgba(255,255,255,.04);border:1px dashed var(--glass-line);
+    border-radius:14px;padding:11px 14px;margin-bottom:22px;line-height:1.55}
+  .len-label{text-align:center;font-size:12.5px;color:var(--ink-dim);margin-bottom:9px;letter-spacing:.4px}
+  .lens{display:flex;gap:9px;margin-bottom:24px}
+  .lenbtn{flex:1;cursor:pointer;border:1.5px solid var(--glass-line);background:rgba(255,255,255,.04);
+    color:var(--ink-soft);border-radius:16px;padding:13px 6px 11px;text-align:center;font-family:'Jua';
+    transition:transform .14s ease,border-color .2s,background .2s}
+  .lenbtn b{display:block;font-size:22px;line-height:1;color:var(--ink)}
+  .lenbtn small{display:block;font-size:11px;color:var(--ink-dim);margin-top:4px;font-family:'Noto Sans KR'}
+  .lenbtn:hover{transform:translateY(-2px);background:rgba(255,255,255,.09)}
+  .lenbtn.sel{border-color:var(--a1);background:linear-gradient(180deg,rgba(155,123,255,.22),rgba(155,123,255,.06));box-shadow:0 8px 24px rgba(155,123,255,.28)}
+  .lenbtn.sel b{color:#fff}
+  .btn{
+    width:100%;border:0;cursor:pointer;font-family:'Jua',sans-serif;font-size:19px;color:#160a33;
+    padding:17px;border-radius:18px;background:linear-gradient(92deg,var(--a1),var(--a2));
+    box-shadow:0 12px 30px rgba(155,123,255,.4);transition:transform .15s,box-shadow .15s;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(155,123,255,.55)}
+  .btn:active{transform:translateY(1px) scale(.99)}
+  .btn.ghost{background:rgba(255,255,255,.08);color:var(--ink);box-shadow:none;border:1px solid var(--glass-line);font-size:16px;margin-top:12px}
+  .btn.ghost:hover{background:rgba(255,255,255,.14)}
+
+  /* ---- quiz : decoder ---- */
+  .qtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .qtop .qc{font-family:'Jua';font-size:15px;color:var(--ink-soft)}
+  .qtop .tag{font-size:12px;color:var(--ink-dim);display:flex;align-items:center;gap:6px}
+  .tag .dot{width:7px;height:7px;border-radius:50%;background:var(--a2);box-shadow:0 0 10px var(--a2);animation:blip 1s ease-in-out infinite}
+  @keyframes blip{0%,100%{opacity:.4;transform:scale(.9)}50%{opacity:1;transform:scale(1.25)}}
+  .decoder{display:flex;gap:10px;justify-content:center;margin:2px 0 14px}
+  .slot{width:58px;height:70px;border-radius:16px;background:rgba(255,255,255,.05);border:1.5px solid var(--glass-line);
+    display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .slot .g{font-family:'Jua';font-size:34px;color:var(--a1);opacity:.55}
+  .slot.scan::after{content:"";position:absolute;left:0;right:0;height:45%;top:-45%;
+    background:linear-gradient(180deg,transparent,rgba(155,123,255,.28),transparent);animation:scan 1.3s linear infinite}
+  @keyframes scan{to{top:120%}}
+  .slot.locked{border-color:var(--a1);box-shadow:0 0 22px rgba(155,123,255,.55);animation:pop .5s cubic-bezier(.2,.9,.3,1.3)}
+  .slot.locked .g{opacity:1}
+  .energy{height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:22px}
+  .energy i{display:block;height:100%;width:0;border-radius:999px;
+    background:linear-gradient(90deg,var(--a1),var(--a2));box-shadow:0 0 16px 1px var(--a2);
+    transition:width .55s cubic-bezier(.2,.9,.3,1.3),box-shadow .6s}
+  .q-num{font-family:'Jua';font-size:14px;color:var(--ink-dim);text-align:center;margin-bottom:6px}
+  .q-text{font-family:'Jua';font-size:clamp(20px,5.6vw,25px);text-align:center;line-height:1.42;margin-bottom:22px;word-break:keep-all}
+  .opt{
+    width:100%;text-align:left;border:1px solid var(--glass-line);cursor:pointer;
+    background:rgba(255,255,255,.05);color:var(--ink);padding:17px 16px;border-radius:18px;margin-bottom:12px;
+    font-size:16px;line-height:1.5;display:flex;gap:13px;align-items:center;word-break:keep-all;
+    transition:transform .12s,background .2s,border-color .2s}
+  .opt:hover{background:rgba(255,255,255,.12);transform:translateX(3px)}
+  .opt .badge{flex-shrink:0;width:30px;height:30px;border-radius:10px;background:rgba(255,255,255,.09);
+    border:1px solid var(--glass-line);display:flex;align-items:center;justify-content:center;
+    font-family:'Jua';font-size:16px;color:var(--ink-soft)}
+  .opt.picked{animation:bump .35s ease}
+  @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
+
+  /* ---- result ---- */
+  .crown{text-align:center;font-size:12px;letter-spacing:4px;color:var(--ink-dim);margin-bottom:6px}
+  .code{display:flex;gap:8px;justify-content:center;margin-bottom:12px}
+  .code span{font-family:'Jua';font-size:30px;width:48px;height:56px;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);
+    border:1.5px solid var(--rc);color:var(--rc);box-shadow:0 0 18px -2px var(--rc)}
+  .res-emoji{font-size:66px;text-align:center;line-height:1;animation:float 3.4s ease-in-out infinite}
+  .res-title{font-family:'Jua';font-size:clamp(24px,6.6vw,34px);text-align:center;margin:6px 0 2px}
+  .res-tag{text-align:center;color:var(--ink-soft);font-size:15px;margin-bottom:16px;word-break:keep-all}
+  .axis-chips{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-bottom:8px}
+  .axis-chips .ac{font-size:13px;padding:7px 12px;border-radius:999px;border:1px solid var(--glass-line);
+    background:rgba(255,255,255,.05);display:flex;align-items:center;gap:5px}
+  .sec{margin-top:16px;padding-top:15px;border-top:1px solid var(--glass-line)}
+  .sec h4{font-family:'Jua';font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:7px}
+  .sec p{font-size:14.5px;line-height:1.68;color:var(--ink-soft);word-break:keep-all}
+  .hide-note{text-align:center;color:var(--ink-dim);font-size:12px;margin:18px 2px 2px;line-height:1.6}
+  .footnote{text-align:center;color:var(--ink-dim);font-size:12px;margin-top:22px;line-height:1.6}
+  .topbar{display:flex;justify-content:center;margin-bottom:14px}
+  .topbar button{background:none;border:1px solid var(--glass-line);color:var(--ink-soft);font-size:12.5px;border-radius:999px;padding:7px 14px;cursor:pointer}
+  .topbar button:hover{background:rgba(255,255,255,.08)}
+
+  .toast{position:fixed;left:50%;top:22px;transform:translateX(-50%) translateY(-20px);
+    background:rgba(31,15,69,.96);border:1.5px solid var(--a2);color:var(--ink);
+    padding:12px 20px;border-radius:999px;font-size:14px;font-family:'Jua';opacity:0;pointer-events:none;
+    transition:opacity .4s,transform .4s;z-index:60;max-width:90vw}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+  /* ---- brand footer ---- */
+  .site-footer{margin-top:26px;text-align:center;padding:8px 0 4px;user-select:none}
+  .ff-dots{display:flex;gap:7px;justify-content:center;margin-bottom:14px}
+  .ff-dots span{width:8px;height:8px;border-radius:50%;display:block;animation:ffpulse 2.4s ease-in-out infinite}
+  .ff-dots span:nth-child(1){background:var(--nt);animation-delay:0s}
+  .ff-dots span:nth-child(2){background:var(--nf);animation-delay:.24s}
+  .ff-dots span:nth-child(3){background:var(--sj);animation-delay:.48s}
+  .ff-dots span:nth-child(4){background:var(--sp);animation-delay:.72s}
+  .ff-dots span:nth-child(5){background:var(--a2);animation-delay:.96s}
+  @keyframes ffpulse{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.5);opacity:1}}
+  .ff-tag{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:4px;color:var(--ink-dim);margin-bottom:7px}
+  .ff-tag::before,.ff-tag::after{content:"";width:22px;height:1px;background:linear-gradient(90deg,transparent,var(--glass-line))}
+  .ff-tag::after{transform:scaleX(-1)}
+  .ff-brand{font-family:'Jua',sans-serif;font-size:26px;line-height:1;
+    background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+    -webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 14px rgba(155,123,255,.3))}
+  .ff-sub{font-size:12px;color:var(--ink-dim);margin-top:9px;letter-spacing:.3px}
+  .ff-sub .colon{color:var(--nf);font-weight:700;padding:0 1px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HOME -->
+  <section id="home" class="screen on home">
+    <div class="card">
+      <div class="hero-emoji">🧬</div>
+      <h1>당신의 <span class="grad">성격 코드</span>를<br>해독합니다</h1>
+      <p class="sub">누를 때마다 알 수 없는 코드가 요동치는<br>도파민 터지는 MBT 검사.<br>마지막에 단 하나, 당신의 유형이 잠금 해제돼요.</p>
+      <div class="lock-note">🔒 조작 방지를 위해 <b>점수·수치는 비공개</b>예요. 어느 선택이 어디로 가는지 알 수 없게 숨겨, 오직 솔직한 답만 나옵니다.</div>
+      <div class="len-label">문항 수를 골라주세요</div>
+      <div class="lens" id="lens">
+        <div class="lenbtn" data-n="12"><b>12</b><small>빠르게</small></div>
+        <div class="lenbtn sel" data-n="20"><b>20</b><small>기본</small></div>
+        <div class="lenbtn" data-n="36"><b>36</b><small>정밀하게</small></div>
+      </div>
+      <button class="btn" onclick="startQuiz()">해독 시작하기 →</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="screen">
+    <div class="card">
+      <div class="qtop">
+        <span class="qc" id="qcount">1 / 20</span>
+        <span class="tag"><span class="dot"></span> 코드 해독 중…</span>
+      </div>
+      <div class="decoder" id="decoder">
+        <div class="slot"><span class="g">?</span></div>
+        <div class="slot"><span class="g">?</span></div>
+        <div class="slot"><span class="g">?</span></div>
+        <div class="slot"><span class="g">?</span></div>
+      </div>
+      <div class="energy"><i id="energy"></i></div>
+      <div class="q-num" id="qnum"></div>
+      <div class="q-text" id="qtext"></div>
+      <div id="opts"></div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="screen">
+    <div class="card">
+      <div class="crown">YOUR PERSONALITY CODE</div>
+      <div class="code" id="resCode"></div>
+      <div class="res-emoji" id="resEmoji">🧬</div>
+      <div class="res-title" id="resTitle"></div>
+      <div class="res-tag" id="resTag"></div>
+      <div class="axis-chips" id="axisChips"></div>
+      <div class="sec"><h4>💫 당신은 이런 사람</h4><p id="p_you"></p></div>
+      <div class="sec"><h4>✨ 빛나는 강점</h4><p id="p_str"></p></div>
+      <div class="sec"><h4>🌿 살짝 주의해요</h4><p id="p_care"></p></div>
+      <div class="hide-note">🔒 정확한 축별 수치는 공개하지 않아요.<br>숫자에 흔들리지 말고, 당신 유형의 '결'에 집중해 보세요.</div>
+      <button class="btn" style="margin-top:20px" onclick="shareResult()">결과 문구 복사하기 📋</button>
+      <button class="btn ghost" onclick="resetAll()">처음부터 다시</button>
+      <div class="footnote">재미로 보는 진단이에요. 어떤 코드든, 당신은 그 이상으로 입체적인 사람이랍니다 🤍</div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="ff-dots"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="ff-tag">의미와재미공장</div>
+    <div class="ff-brand">미미팩토리</div>
+    <div class="ff-sub">주식회사 연<span class="colon">:</span>결 패밀리회사</div>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ AXIS META ============ */
+const AX = {
+  E:{w:"외향",e:"🗣️"}, I:{w:"내향",e:"🧘"},
+  S:{w:"감각",e:"🔍"}, N:{w:"직관",e:"🔮"},
+  T:{w:"사고",e:"⚖️"}, F:{w:"감정",e:"💗"},
+  J:{w:"계획",e:"🗂️"}, P:{w:"탐색",e:"🧭"}
+};
+
+/* ============ QUESTION BANK (9 per axis) ============ */
+const QBANK = {
+  EI:[
+    {a:{k:"E",txt:"사람들과 어울리며 북적일 때 힘이 난다"}, b:{k:"I",txt:"혼자 조용히 보내는 시간에 힘이 난다"}},
+    {a:{k:"E",txt:"처음 보는 자리에서 먼저 말을 건넨다"}, b:{k:"I",txt:"상대가 다가올 때까지 지켜본다"}},
+    {a:{k:"E",txt:"고민은 누군가에게 털어놓으며 정리한다"}, b:{k:"I",txt:"고민은 혼자 곱씹으며 정리한다"}},
+    {a:{k:"E",txt:"지친 날엔 친구를 만나 수다로 충전한다"}, b:{k:"I",txt:"지친 날엔 집에서 혼자 쉬며 충전한다"}},
+    {a:{k:"E",txt:"모임에선 여러 사람과 두루 이야기한다"}, b:{k:"I",txt:"모임에선 한두 명과 깊게 이야기한다"}},
+    {a:{k:"E",txt:"생각은 일단 말하면서 발전시킨다"}, b:{k:"I",txt:"충분히 생각을 정리한 뒤 말한다"}},
+    {a:{k:"E",txt:"관심의 중심에 서면 신이 난다"}, b:{k:"I",txt:"관심의 중심은 부담스러워 벗어나고 싶다"}},
+    {a:{k:"E",txt:"전화가 오면 반가워서 바로 받는다"}, b:{k:"I",txt:"전화가 오면 용건을 짐작하며 잠시 망설인다"}},
+    {a:{k:"E",txt:"여행지에선 즉흥적으로 사람들과 어울린다"}, b:{k:"I",txt:"여행지에선 나만의 페이스로 조용히 둘러본다"}}
+  ],
+  SN:[
+    {a:{k:"S",txt:"구체적인 사실과 예시가 더 와닿는다"}, b:{k:"N",txt:"전체 그림과 숨은 의미가 더 와닿는다"}},
+    {a:{k:"S",txt:"지금 눈앞의 현실에 집중하는 편이다"}, b:{k:"N",txt:"앞날의 가능성을 상상하는 편이다"}},
+    {a:{k:"S",txt:"새 정보는 '실제로 어떻게 쓸까'로 본다"}, b:{k:"N",txt:"새 정보는 '숨은 패턴과 연결'로 본다"}},
+    {a:{k:"S",txt:"직접 경험한 사실을 더 신뢰한다"}, b:{k:"N",txt:"번뜩이는 직감을 더 신뢰한다"}},
+    {a:{k:"S",txt:"있었던 일을 사실 그대로 전한다"}, b:{k:"N",txt:"비유와 상상을 곁들여 이야기한다"}},
+    {a:{k:"S",txt:"단계별 방법을 차근차근 익힌다"}, b:{k:"N",txt:"핵심 원리를 먼저 이해하려 한다"}},
+    {a:{k:"S",txt:"현실적이고 구체적인 대화가 편하다"}, b:{k:"N",txt:"추상적이고 상상력 있는 대화가 편하다"}},
+    {a:{k:"S",txt:"디테일을 놓치지 않는 편이다"}, b:{k:"N",txt:"큰 그림을 먼저 보는 편이다"}},
+    {a:{k:"S",txt:"미래를 떠올리면 현실적인 계획이 그려진다"}, b:{k:"N",txt:"미래를 떠올리면 무한한 가능성이 펼쳐진다"}}
+  ],
+  TF:[
+    {a:{k:"T",txt:"결정은 논리와 객관적 사실이 우선이다"}, b:{k:"F",txt:"결정은 사람의 마음과 관계가 우선이다"}},
+    {a:{k:"T",txt:"고민을 들으면 해결책을 함께 찾는다"}, b:{k:"F",txt:"고민을 들으면 먼저 마음에 공감한다"}},
+    {a:{k:"T",txt:"비판을 받으면 내용이 맞는지 따져본다"}, b:{k:"F",txt:"비판을 받으면 말투와 감정이 먼저 느껴진다"}},
+    {a:{k:"T",txt:"판단은 일관된 원칙을 따른다"}, b:{k:"F",txt:"판단은 상황과 사람을 살핀다"}},
+    {a:{k:"T",txt:"나는 이성적이고 냉철한 편이다"}, b:{k:"F",txt:"나는 따뜻하고 공감을 잘하는 편이다"}},
+    {a:{k:"T",txt:"갈등에선 사실을 짚어 바로잡는다"}, b:{k:"F",txt:"갈등에선 모두의 감정을 다독인다"}},
+    {a:{k:"T",txt:"칭찬은 잘한 점을 정확히 짚어준다"}, b:{k:"F",txt:"칭찬은 마음을 담아 기운을 북돋는다"}},
+    {a:{k:"T",txt:"비논리적인 주장이 더 참기 힘들다"}, b:{k:"F",txt:"차가운 무관심이 더 참기 힘들다"}},
+    {a:{k:"T",txt:"결정 후 '합리적이었나'를 돌아본다"}, b:{k:"F",txt:"결정 후 '누가 상처받지 않았나'를 돌아본다"}}
+  ],
+  JP:[
+    {a:{k:"J",txt:"여행은 일정을 미리 촘촘히 짠다"}, b:{k:"P",txt:"여행은 그때그때 흐름에 맡긴다"}},
+    {a:{k:"J",txt:"할 일은 미리 끝내야 마음이 편하다"}, b:{k:"P",txt:"마감이 닥쳐야 집중이 잘 된다"}},
+    {a:{k:"J",txt:"내 공간은 정돈돼 있어야 편하다"}, b:{k:"P",txt:"조금 어질러져도 크게 불편하지 않다"}},
+    {a:{k:"J",txt:"계획이 갑자기 바뀌면 당황스럽다"}, b:{k:"P",txt:"계획이 바뀌면 오히려 새롭고 흥미롭다"}},
+    {a:{k:"J",txt:"결정을 빨리 내리고 마무리한다"}, b:{k:"P",txt:"선택지를 열어두고 여유 있게 미룬다"}},
+    {a:{k:"J",txt:"체크리스트대로 착착 진행한다"}, b:{k:"P",txt:"내키는 대로 유연하게 진행한다"}},
+    {a:{k:"J",txt:"약속 장소엔 늘 미리 도착한다"}, b:{k:"P",txt:"약속 시간이 종종 아슬아슬하다"}},
+    {a:{k:"J",txt:"정해진 틀이 안정감을 준다"}, b:{k:"P",txt:"틀은 상황 따라 바꿀 수 있다고 본다"}},
+    {a:{k:"J",txt:"주말은 계획대로 움직인다"}, b:{k:"P",txt:"주말은 기분 따라 즉흥적으로 보낸다"}}
+  ]
+};
+const AXES = ["EI","SN","TF","JP"];
+
+/* ============ 16 TYPES ============ */
+const TYPE = {
+  INTJ:{e:"🦉",g:"nt",name:"용의주도한 전략가",tag:"머릿속에 이미 세 수 앞을 그리는 사람",
+    you:"당신은 큰 그림을 설계하고 조용히 실행에 옮기는 전략가예요. 복잡한 문제 앞에서 오히려 차분해지고, 남들이 못 보는 장기적 흐름을 읽어냅니다.",
+    str:"통찰력과 추진력. 목표가 정해지면 필요한 길을 스스로 설계하고 끝까지 밀어붙여요.",
+    care:"완벽한 계획에 몰두하다 사람의 감정을 놓칠 수 있어요. 가끔은 논리보다 마음을 먼저 물어봐 주세요."},
+  INTP:{e:"🔬",g:"nt",name:"논리적인 사색가",tag:"세상 모든 것에 '왜?'를 붙이는 사람",
+    you:"당신은 원리를 파고들어 이해할 때 가장 살아있는 사람이에요. 호기심이 끝이 없고, 익숙한 것도 늘 새로운 각도로 뜯어봅니다.",
+    str:"독창적 분석력. 복잡한 개념을 명쾌한 논리로 풀어내는 데 탁월해요.",
+    care:"생각에 오래 머무르다 실행이 늦어질 수 있어요. 완벽한 답보다 '일단 시작'이 필요할 때가 있어요."},
+  ENTJ:{e:"👑",g:"nt",name:"대담한 통솔자",tag:"흩어진 사람들을 목표로 이끄는 사람",
+    you:"당신은 비전을 세우고 사람들을 움직여 현실로 만드는 리더예요. 비효율을 못 견디고, 언제나 더 나은 방법을 찾습니다.",
+    str:"결단력과 조직력. 큰 목표도 잘게 쪼개 팀을 앞으로 이끌어요.",
+    care:"속도를 내다 보면 주변이 벅찰 수 있어요. 함께 가는 사람의 페이스도 살펴주세요."},
+  ENTP:{e:"💡",g:"nt",name:"뜨거운 변론가",tag:"고인 물에 돌을 던지는 아이디어 뱅크",
+    you:"당신은 새로운 가능성과 토론을 사랑하는 사람이에요. 상식에 도전하고, 순식간에 기발한 대안을 쏟아냅니다.",
+    str:"순발력과 창의력. 어떤 주제든 흥미로운 관점으로 뒤집어 봐요.",
+    care:"흥미가 식으면 마무리가 약해질 수 있어요. 벌인 일을 끝까지 데려가는 힘을 길러보세요."},
+  INFJ:{e:"🕊️",g:"nf",name:"선의의 옹호자",tag:"말없이 사람의 속마음을 읽는 사람",
+    you:"당신은 깊은 통찰과 따뜻한 신념을 지닌 사람이에요. 조용하지만 확고한 가치가 있고, 사람의 진심을 놀랍도록 잘 알아챕니다.",
+    str:"공감과 통찰. 사람과 의미를 잇는 데 남다른 힘이 있어요.",
+    care:"모두를 품으려다 스스로를 소진하기 쉬워요. 당신의 마음도 돌볼 시간을 남겨두세요."},
+  INFP:{e:"🌙",g:"nf",name:"열정적인 중재자",tag:"마음속에 자기만의 우주를 품은 사람",
+    you:"당신은 진정성과 이상을 소중히 여기는 사람이에요. 겉은 잔잔해도 안에는 뜨거운 신념과 풍부한 감성이 흐릅니다.",
+    str:"깊은 공감과 상상력. 사람의 가능성을 믿고 다정하게 지지해요.",
+    care:"이상과 현실의 간극에 지칠 수 있어요. 작은 실천 하나가 큰 이상을 살립니다."},
+  ENFJ:{e:"🌟",g:"nf",name:"정의로운 선도자",tag:"사람들의 가능성에 불을 켜는 사람",
+    you:"당신은 사람을 북돋아 함께 성장시키는 사람이에요. 따뜻한 카리스마로 주변을 하나로 모으고, 모두의 잠재력을 알아봅니다.",
+    str:"영향력과 공감. 사람을 이끌면서도 마음을 챙기는 균형이 있어요.",
+    care:"남을 챙기다 정작 자신을 뒤로 미룰 수 있어요. 당신의 욕구도 당당히 말해도 돼요."},
+  ENFP:{e:"🎈",g:"nf",name:"재기발랄한 활동가",tag:"어디서든 반짝이는 에너지의 사람",
+    you:"당신은 호기심과 열정이 넘치는 사람이에요. 사람과 아이디어에서 에너지를 얻고, 세상을 가능성으로 가득 찬 놀이터로 봅니다.",
+    str:"열정과 연결력. 사람의 마음을 열고 분위기를 살아나게 해요.",
+    care:"관심이 여기저기 튀어 집중이 흩어질 수 있어요. 좋아하는 것 하나를 깊게 파보세요."},
+  ISTJ:{e:"📘",g:"sj",name:"청렴결백한 현실주의자",tag:"맡은 일은 반드시 끝내는 사람",
+    you:"당신은 책임감과 성실함의 대명사예요. 약속을 지키고, 사실과 원칙에 근거해 묵묵히 신뢰를 쌓아갑니다.",
+    str:"신뢰와 꼼꼼함. 맡은 일을 빈틈없이 완수해요.",
+    care:"익숙한 방식만 고집하다 변화를 놓칠 수 있어요. 새로운 시도에도 문을 살짝 열어두세요."},
+  ISFJ:{e:"🛡️",g:"sj",name:"용감한 수호자",tag:"티 안 나게 모두를 챙기는 사람",
+    you:"당신은 헌신적이고 따뜻한 사람이에요. 주변의 필요를 먼저 알아채고, 조용히 실질적인 도움을 건넵니다.",
+    str:"세심함과 헌신. 사람을 편안하게 하고 든든하게 지켜요.",
+    care:"거절을 어려워해 부담을 떠안기 쉬워요. '아니오'도 사랑의 표현이 될 수 있어요."},
+  ESTJ:{e:"📊",g:"sj",name:"엄격한 경영자",tag:"혼란을 질서로 바꾸는 사람",
+    you:"당신은 체계와 실행의 달인이에요. 목표를 정하고 현실적인 방법으로 사람과 일을 착착 정리해 나갑니다.",
+    str:"조직력과 책임감. 원칙과 실행으로 결과를 만들어요.",
+    care:"효율을 앞세우다 사람의 사정을 지나칠 수 있어요. 규칙만큼 마음도 살펴주세요."},
+  ESFJ:{e:"🤝",g:"sj",name:"사교적인 외교관",tag:"모두가 어울리게 다리를 놓는 사람",
+    you:"당신은 따뜻하고 배려 깊은 사람이에요. 사람들의 조화를 소중히 여기고, 분위기와 관계를 세심하게 살핍니다.",
+    str:"친화력과 배려. 사람을 편안히 이어주고 챙겨요.",
+    care:"타인의 인정에 마음이 흔들릴 수 있어요. 당신의 기준을 먼저 믿어도 괜찮아요."},
+  ISTP:{e:"🛠️",g:"sp",name:"만능 재주꾼",tag:"손으로 문제를 푸는 조용한 해결사",
+    you:"당신은 침착하고 실용적인 사람이에요. 말보다 행동으로 문제를 뜯어보고, 위기에서 오히려 냉정하게 길을 찾습니다.",
+    str:"문제 해결력과 침착함. 어떤 상황도 손수 다뤄내요.",
+    care:"감정 표현이 적어 오해를 살 수 있어요. 가끔은 속마음을 한마디 꺼내보세요."},
+  ISFP:{e:"🎨",g:"sp",name:"호기심 많은 예술가",tag:"자기만의 감각으로 세상을 느끼는 사람",
+    you:"당신은 온화하고 감각적인 사람이에요. 지금 이 순간의 아름다움을 느끼고, 자유롭고 진솔하게 자신을 표현합니다.",
+    str:"감수성과 유연함. 조용히 자기만의 색을 지녀요.",
+    care:"갈등을 피하려다 마음을 삼킬 수 있어요. 원하는 것을 부드럽게 말해도 좋아요."},
+  ESTP:{e:"🔥",g:"sp",name:"모험을 즐기는 사업가",tag:"지금 당장 뛰어드는 행동파",
+    you:"당신은 대담하고 에너지 넘치는 사람이에요. 현장에서 빠르게 판단하고, 스릴과 도전 속에서 가장 살아있음을 느낍니다.",
+    str:"순발력과 실행력. 망설임 없이 지금을 붙잡아요.",
+    care:"속도가 빨라 뒷일을 놓칠 수 있어요. 뛰기 전 한 박자만 살펴도 든든해져요."},
+  ESFP:{e:"🎉",g:"sp",name:"자유로운 영혼의 연예인",tag:"함께 있으면 축제가 되는 사람",
+    you:"당신은 밝고 활기찬 분위기 메이커예요. 사람들과 지금을 즐기고, 어디서든 웃음과 생기를 퍼뜨립니다.",
+    str:"활력과 친화력. 순간을 즐겁게 만드는 재능이 있어요.",
+    care:"즐거움을 좇다 중요한 일을 미룰 수 있어요. 신나는 일과 해야 할 일의 균형을 잡아보세요."}
+};
+const GCOLOR = {nt:"var(--nt)", nf:"var(--nf)", sj:"var(--sj)", sp:"var(--sp)"};
+
+/* ============ HELPERS ============ */
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(v){if(navigator.vibrate)try{navigator.vibrate(v);}catch(e){}}
+let _tt;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2000);}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});}
+
+/* ============ STATE ============ */
+let LEN = 20;
+let quiz = [], qi = 0, score = {}, myType = null;
+let decodeTimer = null;
+const GLYPH = "EINSTFJP◆◇▲△●○★☆✦※";
+
+/* length selector */
+document.getElementById('lens').addEventListener('click',e=>{
+  const b=e.target.closest('.lenbtn'); if(!b)return;
+  document.querySelectorAll('.lenbtn').forEach(x=>x.classList.remove('sel'));
+  b.classList.add('sel'); LEN=+b.dataset.n; vibrate(12);
+});
+
+/* ============ QUIZ ============ */
+function buildQuiz(){
+  const per = LEN/4;
+  let list=[];
+  AXES.forEach(ax=>{ QBANK[ax].slice(0,per).forEach(q=> list.push({a:{...q.a},b:{...q.b}})); });
+  return shuffle(list);
+}
+function startQuiz(){
+  quiz=buildQuiz(); qi=0;
+  score={E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};
+  go('quiz'); startDecoder(); updateEnergy(); renderQ();
+}
+function startDecoder(){
+  document.querySelectorAll('.slot').forEach(s=>{s.classList.add('scan');s.classList.remove('locked');});
+  clearInterval(decodeTimer);
+  decodeTimer=setInterval(()=>{
+    document.querySelectorAll('.slot .g').forEach(g=>{g.textContent=GLYPH[Math.floor(Math.random()*GLYPH.length)];});
+  },95);
+}
+function stopDecoder(){clearInterval(decodeTimer);decodeTimer=null;document.querySelectorAll('.slot').forEach(s=>s.classList.remove('scan'));}
+function renderQ(){
+  const q=quiz[qi];
+  document.getElementById('qcount').textContent=(qi+1)+" / "+quiz.length;
+  document.getElementById('qnum').textContent="Q"+(qi+1);
+  document.getElementById('qtext').textContent="다음 중 더 '나' 같은 쪽은?";
+  const opts=shuffle([q.a,q.b]);
+  const labels=["A","B"];
+  const wrap=document.getElementById('opts');
+  wrap.innerHTML="";
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt";
+    b.innerHTML=`<span class="badge">${labels[i]}</span><span>${o.txt}</span>`;
+    b.onclick=()=>pick(o.k,b);
+    wrap.appendChild(b);
+  });
+}
+function pick(k,el){
+  score[k]++;
+  el.classList.add('picked');
+  if(window.confetti){
+    const r=el.getBoundingClientRect();
+    confetti({particleCount:16,spread:52,startVelocity:22,scalar:.8,
+      origin:{x:(r.left+r.width/2)/window.innerWidth,y:(r.top+r.height/2)/window.innerHeight},
+      colors:['#9b7bff','#7ac0ff','#4ade9b','#ffb454','#ff7ac0']});
+  }
+  vibrate(26);
+  updateEnergy();
+  // 색 점층 (진행할수록 뜨겁게)
+  const frac=(qi+1)/quiz.length;
+  const r=document.documentElement.style;
+  if(frac>=.67){r.setProperty('--a1','#ff6ba6');r.setProperty('--a2','#ffb454');}
+  else if(frac>=.34){r.setProperty('--a1','#c07bff');r.setProperty('--a2','#ff7ac0');}
+  if(qi+1===Math.floor(quiz.length/2)){toast('🔥 절반 돌파!');vibrate([20,40,20]);}
+  setTimeout(()=>{
+    qi++;
+    if(qi>=quiz.length) revealCode();
+    else renderQ();
+  },330);
+}
+function updateEnergy(){
+  const done=Object.values(score).reduce((a,b)=>a+b,0);
+  document.getElementById('energy').style.width=(done/quiz.length*100)+"%";
+}
+
+/* ============ RESULT ============ */
+function computeType(){
+  const p=(a,b)=> score[a]>=score[b]?a:b;
+  return p("E","I")+p("S","N")+p("T","F")+p("J","P");
+}
+function revealCode(){
+  stopDecoder();
+  myType=computeType();
+  const letters=myType.split('');
+  const slots=document.querySelectorAll('.slot');
+  const col=GCOLOR[TYPE[myType].g];
+  document.documentElement.style.setProperty('--rc',col);
+  toast('🧬 코드 잠금 해제 중…');
+  letters.forEach((L,i)=>{
+    setTimeout(()=>{
+      const g=slots[i].querySelector('.g');
+      g.textContent=L; g.style.color=col;
+      slots[i].classList.add('locked'); slots[i].style.borderColor=col;
+      vibrate(34);
+      if(window.confetti){
+        const r=slots[i].getBoundingClientRect();
+        confetti({particleCount:22,spread:60,startVelocity:26,scalar:.9,
+          origin:{x:(r.left+r.width/2)/window.innerWidth,y:(r.top+r.height/2)/window.innerHeight}});
+      }
+      if(i===3) setTimeout(showResult,700);
+    }, 360*i+300);
+  });
+}
+function showResult(){
+  const T=TYPE[myType], col=GCOLOR[T.g];
+  document.documentElement.style.setProperty('--rc',col);
+  const code=document.getElementById('resCode'); code.innerHTML="";
+  myType.split('').forEach(L=>{const s=document.createElement('span');s.textContent=L;code.appendChild(s);});
+  document.getElementById('resEmoji').textContent=T.e;
+  const ti=document.getElementById('resTitle');
+  ti.textContent=myType+" · "+T.name; ti.style.color=col;
+  document.getElementById('resTag').textContent="“"+T.tag+"”";
+  const chips=document.getElementById('axisChips'); chips.innerHTML="";
+  myType.split('').forEach(L=>{
+    const c=document.createElement('span'); c.className="ac";
+    c.innerHTML=`${AX[L].e} ${AX[L].w}`;
+    chips.appendChild(c);
+  });
+  document.getElementById('p_you').textContent=T.you;
+  document.getElementById('p_str').textContent=T.str;
+  document.getElementById('p_care').textContent=T.care;
+  go('result');
+  if(window.confetti){
+    const colors=['#9b7bff','#7ac0ff','#4ade9b','#ffb454','#ff7ac0'];
+    confetti({particleCount:130,spread:95,origin:{y:.3},colors});
+    setTimeout(()=>confetti({particleCount:90,spread:120,startVelocity:36,origin:{y:.4},colors}),260);
+  }
+  vibrate([60,80,60,80,120]);
+}
+function shareResult(){
+  const T=TYPE[myType];
+  const txt=`나의 성격 코드는 ${myType} · ${T.name} ${T.e}\n"${T.tag}"\n\nMBT 검사 하러 가기 → https://mimifactory.vibekr.com/apps/mbt_검사_test.html`;
+  const done=()=>toast('📋 결과 문구를 복사했어요!');
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done));}
+  else fallbackCopy(txt,done);
+  vibrate(20);
+}
+function fallbackCopy(txt,cb){
+  const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();try{document.execCommand('copy');cb();}catch(e){}document.body.removeChild(ta);
+}
+function resetAll(){
+  myType=null;
+  const r=document.documentElement.style;
+  r.setProperty('--a1','#9b7bff'); r.setProperty('--a2','#7ac0ff');
+  document.querySelectorAll('.slot').forEach(s=>{s.classList.remove('locked');s.style.borderColor='';const g=s.querySelector('.g');g.textContent='?';g.style.color='';});
+  go('home');
+}
+</script>
+</body>
+</html>
