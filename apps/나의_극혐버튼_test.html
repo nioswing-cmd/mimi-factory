@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>나의 손절버튼 — 인간관계 손절 성향 진단</title>
+<title>나의 극혐버튼 — 인간관계 손절 성향 진단</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
@@ -173,8 +173,8 @@ h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em; li
   <section id="home" class="screen on">
     <div class="home-center">
       <div class="btn-emoji">🔴</div>
-      <h1>나의 <span class="grad">손절버튼</span></h1>
-      <p class="tagline word-break">나는 사람을 얼마나 쉽게, 혹은 어렵게 끊어내는가.<br>내 안의 손절버튼 감도를 측정합니다.</p>
+      <h1>나의 <span class="grad">극혐버튼</span></h1>
+      <p class="tagline word-break">나는 사람을 얼마나 쉽게, 혹은 어렵게 끊어내는가.<br>내 안의 극혐버튼 감도를 측정합니다.</p>
       <div class="pill-row">
         <span class="pill">약속 파기</span><span class="pill">뒷담화</span><span class="pill">연락 두절</span>
         <span class="pill">돈 문제</span><span class="pill">무례함</span><span class="pill">재접근</span>
@@ -202,7 +202,7 @@ h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em; li
   <section id="result" class="screen">
     <div id="revealStage" class="reveal-stage">
       <h2 style="font-size:24px; margin:0 0 4px;">모든 반응이 기록됐습니다</h2>
-      <p style="color:var(--muted); font-size:15px; margin:0 0 30px;" class="word-break">이제 버튼을 눌러 <b>손절버튼 감도</b>를 확인하세요.</p>
+      <p style="color:var(--muted); font-size:15px; margin:0 0 30px;" class="word-break">이제 버튼을 눌러 <b>극혐버튼 감도</b>를 확인하세요.</p>
       <button class="measure-btn" id="measureBtn" onclick="runReveal()">감도 측정</button>
       <p class="measure-hint">딱 한 번, 지금 공개됩니다.</p>
 
@@ -215,7 +215,7 @@ h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em; li
             <stop offset="0" stop-color="#ff9f45"/><stop offset="1" stop-color="#ff5e6c"/>
           </linearGradient></defs>
         </svg>
-        <div class="ring-num"><b id="ringNum">0</b><small>손절버튼 감도</small></div>
+        <div class="ring-num"><b id="ringNum">0</b><small>극혐버튼 감도</small></div>
       </div>
       <div class="ring-label" id="ringLabel"></div>
     </div>
@@ -225,7 +225,7 @@ h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em; li
         <div class="type-emoji" id="tEmoji"></div>
         <h2 class="type-name" id="tName"></h2>
         <p class="type-catch" id="tCatch"></p>
-        <div class="sens-line">손절버튼 감도 <b id="tSens">0</b> / 100</div>
+        <div class="sens-line">극혐버튼 감도 <b id="tSens">0</b> / 100</div>
       </div>
 
       <div class="sect">
@@ -249,7 +249,7 @@ h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em; li
           <button class="cta" onclick="downloadCard()">결과 카드 저장</button>
           <button class="cta ghost" onclick="restart()">다시 진단</button>
         </div>
-        <p class="mini-note">카드를 캡처해 친구에게 물어보세요. "넌 손절버튼 감도 몇일 것 같아?"</p>
+        <p class="mini-note">카드를 캡처해 친구에게 물어보세요. "넌 극혐버튼 감도 몇일 것 같아?"</p>
       </div>
     </div>
   </section>
@@ -366,7 +366,7 @@ const FEEDBACK = [
 
 const TYPES = {
  steel:{key:"steel", emoji:"🛡️", name:"강철 인내형", color:"#5b8dff", catch:"웬만해선 끊지 않는, 관계의 방파제",
-   desc:"당신의 손절버튼은 아주 깊은 곳에 있습니다. 실망스러운 일이 있어도 '사정이 있겠지'로 먼저 이해하고, 웬만한 상처는 품고 넘어갑니다. 사람을 끝까지 믿어주는 힘이 있지만, 그 인내가 때로는 나를 갉아먹기도 합니다.",
+   desc:"당신의 극혐버튼은 아주 깊은 곳에 있습니다. 실망스러운 일이 있어도 '사정이 있겠지'로 먼저 이해하고, 웬만한 상처는 품고 넘어갑니다. 사람을 끝까지 믿어주는 힘이 있지만, 그 인내가 때로는 나를 갉아먹기도 합니다.",
    pro:"쉽게 사람을 버리지 않아 관계가 오래갑니다. 갈등 앞에서 침착하고, 곁에 있으면 안정감을 줍니다.",
    con:"참는 게 습관이 되어 내 상처를 뒤로 미룹니다. 나를 함부로 대하는 사람에게도 문이 계속 열려 있어 소진되기 쉽습니다.",
    adv:["‘이해’와 ‘허용’을 구분하세요. 이해하되, 반복되는 상처는 허용하지 않아도 됩니다.",
@@ -401,7 +401,7 @@ const TYPES = {
         "룰을 사람마다 조금 유연하게. 실수의 무게는 다 다릅니다.",
         "‘아웃’을 결정했다면 담담하게 실행하세요. 죄책감은 당신 몫이 아닙니다."]},
  onestrike:{key:"onestrike", emoji:"⚡", name:"원스트라이크 아웃형", color:"#ff5e6c", catch:"단 한 번의 선을 넘으면 끝",
-   desc:"당신의 손절버튼은 손끝에 있습니다. 신뢰를 깨는 결정적 행동 하나면, 아무리 오래된 사이라도 뒤돌아보지 않죠. 나를 지키는 힘이 강하고 결단이 빠르지만, 그 단호함이 때로는 풀 수 있었던 오해까지 함께 잘라냅니다.",
+   desc:"당신의 극혐버튼은 손끝에 있습니다. 신뢰를 깨는 결정적 행동 하나면, 아무리 오래된 사이라도 뒤돌아보지 않죠. 나를 지키는 힘이 강하고 결단이 빠르지만, 그 단호함이 때로는 풀 수 있었던 오해까지 함께 잘라냅니다.",
    pro:"나를 해치는 관계를 빠르게 정리합니다. 자기 존중이 뚜렷하고, 나쁜 관계에 오래 붙잡히지 않습니다.",
    con:"한 번의 실수를 회복 불가로 판단해 좋은 사람도 잃을 수 있습니다. 곁의 사람들이 ‘한 번이면 끝’이라는 긴장을 느끼기도 합니다.",
    adv:["끊기 전에 ‘실수인가, 본성인가’를 한 번만 구분해 보세요. 결과가 달라질 수 있습니다.",
@@ -578,7 +578,7 @@ function drawCard(type,sens){
   x.strokeStyle=ga; x.lineCap='round';
   x.beginPath(); x.arc(W/2,590,110,-Math.PI/2, -Math.PI/2 + Math.PI*2*(sens/100)); x.stroke();
   x.fillStyle='#fff4ee'; x.font='90px "Jua", sans-serif'; x.fillText(sens, W/2, 615);
-  x.fillStyle='#c7b8c6'; x.font='20px "Noto Sans KR", sans-serif'; x.fillText('손절버튼 감도 / 100', W/2, 655);
+  x.fillStyle='#c7b8c6'; x.font='20px "Noto Sans KR", sans-serif'; x.fillText('극혐버튼 감도 / 100', W/2, 655);
   // 브랜드
   x.fillStyle='#9a8fc0'; x.font='22px "Jua", sans-serif'; x.fillText('미미팩토리 · 의미와재미공장', W/2, 800);
 }
@@ -591,7 +591,7 @@ function wrapText(ctx,text,cx,y,maxW,lh){
 function downloadCard(){
   try{
     const a=document.createElement('a');
-    a.download='나의_손절버튼_'+curResult.type.name+'.png';
+    a.download='나의_극혐버튼_'+curResult.type.name+'.png';
     a.href=$('shareCanvas').toDataURL('image/png'); a.click();
     toast('카드를 저장했어요 📎');
   }catch(e){ toast('길게 눌러 이미지를 저장하세요'); }
