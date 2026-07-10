@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MBT 검사 — 나의 성격 코드 해독</title>
+<title>MBTI 검사 — 나의 성격 코드 해독</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -164,7 +164,7 @@
     <div class="card">
       <div class="hero-emoji">🧬</div>
       <h1>당신의 <span class="grad">성격 코드</span>를<br>해독합니다</h1>
-      <p class="sub">누를 때마다 알 수 없는 코드가 요동치는<br>도파민 터지는 MBT 검사.<br>마지막에 단 하나, 당신의 유형이 잠금 해제돼요.</p>
+      <p class="sub">누를 때마다 알 수 없는 코드가 요동치는<br>도파민 터지는 MBTI 검사.<br>마지막에 단 하나, 당신의 유형이 잠금 해제돼요.</p>
       <div class="lock-note">🔒 조작 방지를 위해 <b>점수·수치는 비공개</b>예요. 어느 선택이 어디로 가는지 알 수 없게 숨겨, 오직 솔직한 답만 나옵니다.</div>
       <div class="len-label">문항 수를 골라주세요</div>
       <div class="lens" id="lens">
@@ -494,7 +494,7 @@ function showResult(){
 }
 function shareResult(){
   const T=TYPE[myType];
-  const txt=`나의 성격 코드는 ${myType} · ${T.name} ${T.e}\n"${T.tag}"\n\nMBT 검사 하러 가기 → https://mimifactory.vibekr.com/apps/mbt_검사_test.html`;
+  const txt=`나의 성격 코드는 ${myType} · ${T.name} ${T.e}\n"${T.tag}"\n\nMBTI 검사 하러 가기 → https://mimifactory.vibekr.com/apps/mbti_검사_test.html`;
   const done=()=>toast('📋 결과 문구를 복사했어요!');
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done));}
   else fallbackCopy(txt,done);
