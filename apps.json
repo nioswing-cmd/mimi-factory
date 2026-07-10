@@ -230,18 +230,6 @@
       "desc": "심리학자 아서 아론의 1997년 실험에서 나온 36가지 질문 — 3세트로 깊어지고, 마지막엔 4분"
     },
     {
-      "id": "mbti_궁합",
-      "type": "test",
-      "title": "MBTI 궁합",
-      "author": "미미팩토리 오리지널",
-      "date": "2026-07-10",
-      "color1": "#5ee7d8",
-      "color2": "#7aa6ff",
-      "teaser": "apps/mbti_궁합_test.html",
-      "premium": "apps/mbti_궁합_test.html",
-      "desc": "12문항으로 내 MBTI를 실시간 게이지로 진단하고, 좋아하는 사람과의 궁합 %와 관계 조언까지 확인하는 도파민 궁합 테스트."
-    },
-    {
       "id": "번아웃_신호등",
       "type": "test",
       "title": "번아웃 신호등",
@@ -264,6 +252,18 @@
       "teaser": "apps/인간관계_손절_신호등_test.html",
       "premium": "apps/인간관계_손절_신호등_test.html",
       "desc": "나를 관계에서 손 떼게 만드는 손절 트리거 6종 중 내 '손절 버튼'을 찾고, 지금 그 사람이 몇 번 신호인지 진단해 손절 타이밍을 짚어주는 인"
+    },
+    {
+      "id": "mbti_궁합",
+      "type": "friend",
+      "title": "MBTI 궁합",
+      "author": "미미팩토리 오리지널",
+      "date": "2026-07-10",
+      "color1": "#8affc1",
+      "color2": "#5ee7d8",
+      "teaser": "apps/mbti_궁합_friend.html",
+      "premium": "apps/mbti_궁합_friend.html",
+      "desc": "폰 하나로 둘이 번갈아 MBTI를 진단하고, 친구·연인·가족 관계에 맞춘 궁합 %와 오늘부터 친해지는 실천 미션까지 함께 즐기는 도파민 궁합 앱"
     }
   ]
 }

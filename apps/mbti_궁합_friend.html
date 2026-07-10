@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>둘이 함께 MBTI 궁합 · 미미팩토리</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#1a1230; --bg2:#2d1b4e;
+  --accent1:#ffd56b; --accent2:#ffb347;
+  --cream:#fff6ec; --muted:#cdbfe0;
+  --card:#241a3d;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 80% -10%, rgba(255,180,90,.10), transparent 55%),
+    radial-gradient(120% 90% at 10% 110%, rgba(255,94,138,.12), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed; min-height:100dvh;
+  transition:background .9s ease;
+}
+.wrap{max-width:520px; margin:0 auto; padding:20px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; margin:0; line-height:1.25;}
+.grad{
+  background:linear-gradient(105deg,var(--accent1),#ff8a5b 45%,#ff5e8a);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+button{font-family:inherit; cursor:pointer; border:none; color:inherit;}
+.screen{display:none; animation:fadeIn .5s ease;}
+.screen.active{display:block;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1.5deg); opacity:.4;}60%{transform:scale(1.02) rotate(.5deg);}100%{transform:scale(1) rotate(0); opacity:1;}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.06);}}
+
+/* ---- 홈 ---- */
+.hero{text-align:center; margin:auto 0; padding:6px 0;}
+.hero .emoji{font-size:60px; display:inline-block; animation:float 3.2s ease-in-out infinite;}
+.hero h1{font-size:32px; margin:12px 0 6px;}
+.hero p{color:var(--muted); font-size:15px; line-height:1.7; margin:0 0 4px; word-break:keep-all;}
+.hero .sub{font-size:12.5px; color:#9a8fc0; margin-top:12px; line-height:1.6;}
+.btn{
+  display:block; width:100%; padding:17px; border-radius:18px; font-size:18px;
+  font-family:'Jua',sans-serif; color:#2a1636; margin-top:13px;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2));
+  box-shadow:0 10px 26px -8px var(--accent2); transition:transform .15s, box-shadow .3s;
+}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:rgba(255,255,255,.07); color:var(--cream); box-shadow:none; border:1.5px solid rgba(255,255,255,.14);}
+.btn:focus-visible{outline:3px solid var(--accent1); outline-offset:3px;}
+
+/* 관계 선택 세그먼트 */
+.rellabel{font-size:13px; color:#9a8fc0; text-align:center; margin:20px 0 8px;}
+.relseg{display:flex; gap:8px;}
+.relseg button{
+  flex:1; padding:14px 6px; border-radius:16px; background:rgba(255,255,255,.05);
+  border:1.6px solid rgba(255,255,255,.12); color:var(--muted); font-family:'Jua'; font-size:15px;
+  transition:transform .12s, background .25s, border-color .25s, color .25s;
+}
+.relseg button .re{display:block; font-size:26px; margin-bottom:4px;}
+.relseg button:active{transform:scale(.96);}
+.relseg button.on{
+  color:#2a1636; border-color:transparent;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2));
+  box-shadow:0 8px 22px -10px var(--accent2);
+}
+/* 이름 입력 */
+.namerow{display:flex; gap:10px; margin-top:14px;}
+.namerow .nb{flex:1;}
+.namerow label{display:block; font-size:11.5px; color:#9a8fc0; margin:0 0 5px 4px;}
+.namerow input{
+  width:100%; padding:12px 13px; border-radius:13px; background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(255,255,255,.14); color:var(--cream); font-family:'Jua'; font-size:16px; text-align:center;
+}
+.namerow input:focus{outline:2px solid var(--accent1); outline-offset:1px; border-color:var(--accent2);}
+.chips{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:16px 0 2px;}
+.chip{font-size:12px; color:var(--muted); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); padding:6px 12px; border-radius:99px;}
+
+/* ---- 차례 안내(핸드오프) ---- */
+.turn{text-align:center; margin:auto 0; padding:10px 0;}
+.turn .who{font-size:58px; display:inline-block; animation:pulse 1.8s ease-in-out infinite;}
+.turn h2{font-size:30px; margin:14px 0 8px;}
+.turn h2 b{font-family:'Jua';}
+.turn p{color:var(--muted); font-size:14.5px; line-height:1.7; word-break:keep-all;}
+.turn .pill{display:inline-block; margin-top:14px; font-size:12.5px; color:var(--accent1);
+  background:rgba(255,181,71,.14); border:1px solid var(--accent2); padding:6px 15px; border-radius:99px;}
+
+/* ---- 진단 게이지 ---- */
+.topbar{position:sticky; top:0; z-index:10; padding:10px 0 12px; margin-bottom:6px;
+  background:linear-gradient(180deg,var(--bg1) 65%,transparent);}
+.count{display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--muted); margin-bottom:8px;}
+.count b{font-family:'Jua'; color:var(--cream); font-size:15px;}
+.count .nowwho{font-family:'Jua'; color:var(--accent1); font-size:13.5px;}
+.livecode{font-family:'Jua'; font-size:24px; letter-spacing:.14em;}
+.livecode span{opacity:.35; transition:opacity .3s;}
+.livecode span.on{opacity:1;}
+.axes{display:flex; flex-direction:column; gap:9px;}
+.axis{display:grid; grid-template-columns:20px 1fr 20px; align-items:center; gap:8px; font-size:11px; color:#9a8fc0;}
+.axis .lbl{font-family:'Jua'; font-size:13px; color:var(--muted); text-align:center;}
+.axis .lbl.win{color:var(--cream);}
+.track{position:relative; height:8px; border-radius:99px; background:rgba(255,255,255,.09); overflow:hidden;}
+.track .mid{position:absolute; left:50%; top:0; bottom:0; width:2px; background:rgba(255,255,255,.18); transform:translateX(-50%);}
+.track .fill{position:absolute; top:0; bottom:0; left:50%; width:0%; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2)); box-shadow:0 0 12px var(--accent2);
+  transition:left .45s cubic-bezier(.22,1,.36,1), width .45s cubic-bezier(.22,1,.36,1);}
+
+/* ---- 질문 ---- */
+.qcard{background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:22px; padding:24px 20px; margin-top:14px;
+  box-shadow:0 18px 40px -22px rgba(0,0,0,.7);}
+.qnum{font-size:12px; color:var(--accent1); font-weight:700; letter-spacing:.05em;}
+.qtext{font-size:20px; font-family:'Jua'; line-height:1.45; margin:8px 0 20px; word-break:keep-all;}
+.opt{display:flex; align-items:center; gap:13px; width:100%; text-align:left; padding:16px 16px; margin-top:11px;
+  border-radius:15px; background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.12);
+  font-size:15.5px; line-height:1.5; transition:transform .12s, background .2s, border-color .2s; color:var(--cream); word-break:keep-all;}
+.opt:hover{background:rgba(255,255,255,.09);}
+.opt:active{transform:scale(.98);}
+.opt .key{flex:0 0 30px; height:30px; border-radius:9px; display:grid; place-items:center; font-family:'Jua'; font-size:16px;
+  background:rgba(255,255,255,.1); color:var(--muted);}
+.opt.sel{border-color:var(--accent2); background:rgba(255,181,71,.14);}
+.opt:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+
+/* ---- 결과(공용 카드) ---- */
+.rescard{background:var(--card); border:1px solid rgba(255,255,255,.1); border-radius:26px; padding:26px 20px; text-align:center;
+  box-shadow:0 20px 50px -24px rgba(0,0,0,.75);}
+.block{background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:16px 17px; margin-top:12px; text-align:left;}
+.block h3{font-size:15px; margin-bottom:7px; display:flex; align-items:center; gap:7px;}
+.block p{font-size:14px; line-height:1.72; color:#e7ddf2; margin:0; word-break:keep-all;}
+
+/* ---- 둘이 결과(페어) ---- */
+.pairtop{text-align:center; margin-top:2px;}
+.pairtop .rel{font-size:13px; color:var(--accent1); font-family:'Jua'; letter-spacing:.04em;}
+.pairtop h2{font-size:25px; margin-top:4px;}
+.pair{display:flex; gap:10px; align-items:stretch; margin-top:16px;}
+.pcard{flex:1; background:var(--card); border:1px solid rgba(255,255,255,.1); border-radius:20px; padding:16px 10px; text-align:center;
+  box-shadow:0 16px 40px -26px rgba(0,0,0,.8);}
+.pcard .pe{font-size:44px; display:inline-block; animation:float 3.4s ease-in-out infinite;}
+.pcard .pn{font-size:13px; color:#9a8fc0; margin-top:2px;}
+.pcard .pcode{font-family:'Jua'; font-size:26px; letter-spacing:.05em; margin-top:3px;}
+.pcard .pnick{font-size:11.5px; color:var(--muted); margin-top:2px; word-break:keep-all; min-height:28px;}
+.pairmid{align-self:center; text-align:center; padding:0 2px;}
+.pairmid .hh{font-size:26px; animation:pulse 1.8s ease-in-out infinite;}
+
+.scorewrap{text-align:center; margin-top:20px;}
+.scorewrap .heart{font-size:30px; margin-bottom:2px;}
+.scorewrap .pct{font-family:'Jua'; font-size:64px; line-height:1;}
+.scorewrap .head{font-size:16px; color:var(--muted); margin-top:6px; font-family:'Jua';}
+.matchbadge{display:inline-block; font-size:12px; padding:5px 13px; border-radius:99px; margin-top:10px;
+  background:rgba(255,181,71,.16); border:1px solid var(--accent2); color:var(--accent1);}
+.oneline{font-size:14.5px; color:var(--muted); margin-top:14px; line-height:1.7; word-break:keep-all;}
+
+/* 친밀도 체크리스트 */
+.intiwrap{margin-top:6px;}
+.intitop{display:flex; justify-content:space-between; align-items:center; font-size:12px; color:#9a8fc0; margin-bottom:6px;}
+.intitop b{font-family:'Jua'; color:var(--cream); font-size:14px;}
+.intibar{height:10px; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden;}
+.intifill{height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  box-shadow:0 0 12px var(--accent2); transition:width .5s cubic-bezier(.22,1,.36,1);}
+.check{display:flex; align-items:flex-start; gap:12px; width:100%; text-align:left; padding:14px 15px; margin-top:10px;
+  border-radius:14px; background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.12);
+  font-size:14.5px; line-height:1.5; color:var(--cream); transition:transform .12s, background .25s, border-color .25s; word-break:keep-all;}
+.check:active{transform:scale(.98);}
+.check .box{flex:0 0 24px; height:24px; border-radius:8px; border:2px solid rgba(255,255,255,.3); display:grid; place-items:center;
+  font-size:14px; color:transparent; transition:background .2s, border-color .2s, color .2s; margin-top:1px;}
+.check.done{background:rgba(255,181,71,.13); border-color:var(--accent2);}
+.check.done .box{background:var(--accent2); border-color:var(--accent2); color:#2a1636;}
+.check.done .ctxt{opacity:.72;}
+.check:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+
+.toast{position:fixed; left:50%; top:74px; transform:translateX(-50%) translateY(-20px);
+  background:rgba(36,26,61,.96); border:1.5px solid var(--accent2); color:var(--cream);
+  padding:13px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none;
+  transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; text-align:center;}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+.mini{font-size:12.5px; color:#9a8fc0; text-align:center; margin-top:16px; line-height:1.6;}
+.linkbtn{background:none; text-decoration:underline; color:var(--muted); font-size:13px; padding:8px; margin:6px auto 0; display:block;}
+#confetti{position:fixed; inset:0; pointer-events:none; z-index:55;}
+
+/* 빠른 궁합 셀렉트 */
+.selrow{display:flex; gap:10px; margin-top:16px;}
+.selbox{flex:1; background:var(--card); border:1px solid rgba(255,255,255,.1); border-radius:18px; padding:14px 12px; text-align:center;}
+.selbox label{display:block; font-size:12px; color:#9a8fc0; margin-bottom:8px;}
+.selbox select{width:100%; padding:11px 8px; border-radius:12px; background:rgba(255,255,255,.06); color:var(--cream);
+  border:1.5px solid rgba(255,255,255,.16); font-family:'Jua'; font-size:16px; text-align:center; text-align-last:center;}
+.selbox .face{font-size:34px; margin-bottom:4px; height:40px;}
+.vs{align-self:center; font-family:'Jua'; font-size:20px; color:var(--accent1);}
+
+/* 푸터 */
+.footer{text-align:center; margin-top:28px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  <!-- ===== 홈 ===== -->
+  <section id="home" class="screen active">
+    <div class="hero">
+      <div class="emoji">💞</div>
+      <h1>둘이 함께 <span class="grad">MBTI 궁합</span></h1>
+      <p>폰 하나로 <b>번갈아 진단</b>하고,<br>우리 둘의 <b>궁합 %</b>와 친해지는 <b>실천 미션</b>까지!</p>
+      <div class="chips">
+        <span class="chip">👫 함께 2분 컷</span>
+        <span class="chip">🎯 실시간 게이지</span>
+        <span class="chip">✅ 친밀도 미션</span>
+      </div>
+
+      <div class="rellabel">우리는 어떤 사이인가요?</div>
+      <div class="relseg" id="relseg">
+        <button data-rel="friend" onclick="pickRel('friend',event)"><span class="re">🤝</span>친구</button>
+        <button data-rel="lover" class="on" onclick="pickRel('lover',event)"><span class="re">💘</span>연인</button>
+        <button data-rel="family" onclick="pickRel('family',event)"><span class="re">🏡</span>가족</button>
+      </div>
+
+      <div class="namerow">
+        <div class="nb"><label>첫 번째 사람</label><input id="nameA" maxlength="6" placeholder="나" autocomplete="off"></div>
+        <div class="nb"><label>두 번째 사람</label><input id="nameB" maxlength="6" placeholder="너" autocomplete="off"></div>
+      </div>
+      <p class="sub">선택지엔 정답 단서를 숨겼어요. 서로 훔쳐보지 말고 마음 가는 대로!</p>
+    </div>
+    <div>
+      <button class="btn" onclick="startTogether()">🚀 둘이 함께 진단 시작</button>
+      <button class="btn ghost" onclick="go('quick')">⚡ 유형 알아요 · 바로 궁합</button>
+    </div>
+  </section>
+
+  <!-- ===== 차례 안내 ===== -->
+  <section id="turn" class="screen">
+    <div class="turn">
+      <div class="who" id="turnEmoji">🙋</div>
+      <h2 id="turnTitle"><b>나</b>의 차례!</h2>
+      <p id="turnDesc">폰을 넘겨받았다면, 지금부터는 <b>당신</b>이 답할 차례예요.<br>12문항, 마음 가는 대로 솔직하게.</p>
+      <div class="pill" id="turnPill">👀 상대는 잠깐 화면을 보지 마세요</div>
+    </div>
+    <button class="btn" onclick="beginTurn()">✏️ 내 진단 시작하기</button>
+  </section>
+
+  <!-- ===== 진단 ===== -->
+  <section id="test" class="screen">
+    <div class="topbar">
+      <div class="count">
+        <span><span class="nowwho" id="nowWho">나</span> · <b id="qcount">1</b> / 12</span>
+        <span class="livecode" id="livecode"></span></div>
+      <div class="axes" id="axes"></div>
+    </div>
+    <div id="qholder"></div>
+  </section>
+
+  <!-- ===== 페어 결과 ===== -->
+  <section id="pair" class="screen">
+    <div class="pairtop">
+      <div class="rel" id="relTag">💘 연애 궁합</div>
+      <h2><span class="grad">우리 둘</span>의 케미</h2>
+    </div>
+
+    <div class="pair" id="pairCards"></div>
+
+    <div class="rescard" style="margin-top:16px; padding:22px 18px">
+      <div class="scorewrap">
+        <div class="heart">💓</div>
+        <div class="pct" id="pct">--%</div>
+        <div class="head" id="matchhead">계산 중…</div>
+        <div class="matchbadge" id="matchbadge" style="display:none"></div>
+        <div class="oneline" id="oneline"></div>
+      </div>
+    </div>
+
+    <div class="block"><h3>🧩 우리가 닮은 점</h3><p id="m-sim"></p></div>
+    <div class="block"><h3>🎚️ 이렇게 조율해요</h3><p id="m-adj"></p></div>
+
+    <div class="block" style="background:rgba(255,181,71,.07); border-color:rgba(255,181,71,.25)">
+      <h3>💡 관계를 위한 조언</h3><p id="m-advice"></p>
+    </div>
+
+    <!-- 친밀도 실천 미션 -->
+    <div class="rescard" style="margin-top:14px; padding:20px 17px; text-align:left">
+      <h3 style="font-size:16px; margin-bottom:4px">✅ 오늘부터 친해지기 미션</h3>
+      <p style="font-size:12.5px; color:#9a8fc0; margin:0 0 12px">하나씩 실천할 때마다 <b>친밀도</b>가 차올라요. 둘이 같이 눌러봐요!</p>
+      <div class="intiwrap">
+        <div class="intitop"><span>친밀도</span><b id="intiPct">0%</b></div>
+        <div class="intibar"><div class="intifill" id="intiFill"></div></div>
+      </div>
+      <div id="checklist" style="margin-top:6px"></div>
+    </div>
+
+    <button class="btn" style="margin-top:16px" onclick="cheer()">💖 우리 궁합 축하하기</button>
+    <button class="btn ghost" onclick="go('home')">🔄 다른 둘이서 다시</button>
+    <p class="mini">캡처해서 서로에게 공유해봐요 📸</p>
+  </section>
+
+  <!-- ===== 빠른 궁합 ===== -->
+  <section id="quick" class="screen">
+    <div style="text-align:center; margin-top:6px">
+      <h2 style="font-size:25px">⚡ <span class="grad">바로 궁합</span> 보기</h2>
+      <p style="color:var(--muted); font-size:13px; margin-top:6px">이미 유형을 안다면 골라서 바로 확인</p>
+    </div>
+    <div class="selrow">
+      <div class="selbox">
+        <div class="face" id="qfaceA">🙂</div>
+        <label id="qlabelA">나</label>
+        <select id="selA" onchange="quickCalc()"></select>
+      </div>
+      <div class="vs">💗</div>
+      <div class="selbox">
+        <div class="face" id="qfaceB">🙂</div>
+        <label id="qlabelB">상대</label>
+        <select id="selB" onchange="quickCalc()"></select>
+      </div>
+    </div>
+    <button class="btn" style="margin-top:18px" onclick="quickToPair()">💞 이 조합으로 궁합 보기</button>
+    <button class="linkbtn" onclick="go('home')">처음으로</button>
+  </section>
+
+  <!-- 푸터 -->
+  <div class="footer">
+    <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+    <div class="mf-logo">미미팩토리</div>
+    <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script>
+/* ============ 유틸 ============ */
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt; function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2200);}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+function pop(el){el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+/* confetti */
+const cvs=document.getElementById('confetti');
+const myConfetti=(typeof confetti==='function')?confetti.create(cvs,{resize:true,useWorker:true}):null;
+function boom(x,y,big){
+  if(!myConfetti)return;
+  const o={particleCount:big?90:24,spread:big?90:55,startVelocity:big?45:32,scalar:.9,
+    origin:{x:x/window.innerWidth,y:y/window.innerHeight},
+    colors:['#ffd56b','#ffb347','#ff5e8a','#7aa6ff','#5ee7d8','#b78bf5']};
+  myConfetti(o);
+  if(big)setTimeout(()=>myConfetti(Object.assign({},o,{angle:120,origin:{x:.7,y:.4}})),160);
+}
+
+/* ============ 관계 데이터 ============ */
+const REL={
+  friend:{emoji:'🤝', tag:'우정 궁합', word:'친구', bond:'우정',
+    heads:[[92,'평생 단짝 🌈'],[84,'환상의 짝꿍 ✨'],[76,'잘 통하는 사이 💛'],[68,'알아갈수록 찰떡 🧡'],[0,'서로를 배우는 사이 🌱']],
+    missions:[
+      '한 달에 한 번은 꼭 얼굴 보고 수다 떨기',
+      '상대의 요즘 관심사 하나를 기억했다가 물어보기',
+      '고마운 순간엔 "고마워"를 미루지 않기',
+      '힘든 얘기는 판단 말고 끝까지 들어주기',
+      '작은 약속도 지켜서 신뢰 쌓기'],
+    advice:{
+      close:'말이 잘 통하는 만큼 서로를 당연하게 여기기 쉬워요. 가까울수록 "고마워"와 "미안해"를 아끼지 말아요.',
+      far:'성향이 달라 오해가 생겨도 그건 틀림이 아니라 다름이에요. 다른 점을 놀리기보다 신기해하면 우정이 더 단단해져요.'}},
+  lover:{emoji:'💘', tag:'연애 궁합', word:'연인', bond:'사랑',
+    heads:[[92,'천생연분 🌈'],[84,'환상의 케미 ✨'],[76,'설레는 사이 💛'],[68,'노력하면 찰떡 🧡'],[0,'서로를 배우는 사이 🌱']],
+    missions:[
+      '하루 한 번 애정 표현 한마디 건네기',
+      '서운함은 쌓지 말고 그날 부드럽게 말하기',
+      '일주일에 한 번 둘만의 시간 예약하기',
+      '상대가 좋아하는 방식으로 사랑 표현해보기',
+      '고마운 점을 구체적으로 콕 집어 말하기'],
+    advice:{
+      close:'닮아서 편한 만큼 설렘이 익숙함에 묻히기 쉬워요. 가끔은 새로운 걸 함께 시도하며 처음의 두근거림을 되살려봐요.',
+      far:'다른 점이 지금은 매력이지만 언젠간 다툼의 씨앗이 되기도 해요. "왜 저래"보다 "저래서 좋아"로 바라보면 오래 뜨거워요.'}},
+  family:{emoji:'🏡', tag:'가족 궁합', word:'가족', bond:'우리 사이',
+    heads:[[92,'천생 가족 🌈'],[84,'든든한 한 팀 ✨'],[76,'따뜻한 사이 💛'],[68,'서로 배려하면 찰떡 🧡'],[0,'다름을 품는 사이 🌱']],
+    missions:[
+      '하루 한 번 안부 한마디 나누기',
+      '잔소리 대신 마음을 먼저 물어보기',
+      '작은 도움에도 "고맙다"고 말하기',
+      '서로의 다름을 고치려 말고 인정하기',
+      '한 달에 한 번 함께 밥 먹는 시간 만들기'],
+    advice:{
+      close:'가족이라 편한 만큼 말이 거칠어지기 쉬워요. 가장 가까운 사이에도 예의와 존중은 필요해요.',
+      far:'세대나 성향이 달라 부딪혀도, 그건 애정이 없어서가 아니에요. 바꾸려 하기보다 있는 그대로 인정할 때 집이 편안해져요.'}}
+};
+let rel='lover';
+function pickRel(r,ev){
+  rel=r;
+  document.querySelectorAll('#relseg button').forEach(b=>b.classList.toggle('on', b.dataset.rel===r));
+  const R=REL[r];
+  document.documentElement.style.setProperty('--accent1', r==='friend'?'#7fdfff':r==='family'?'#a0f0a0':'#ffd56b');
+  document.documentElement.style.setProperty('--accent2', r==='friend'?'#5b8aff':r==='family'?'#4fd1a0':'#ffb347');
+  vibrate(18);
+  if(ev){const t=ev.currentTarget.getBoundingClientRect(); boom(t.left+t.width/2, t.top+t.height/2, false);}
+}
+
+/* ============ 유형 데이터 ============ */
+const TYPES={
+ INTJ:{e:'🦉',nick:'용의주도한 전략가'},
+ INTP:{e:'🔬',nick:'논리적인 사색가'},
+ ENTJ:{e:'🦁',nick:'대담한 지휘관'},
+ ENTP:{e:'🎇',nick:'뜨거운 논쟁가'},
+ INFJ:{e:'🌙',nick:'선의의 옹호자'},
+ INFP:{e:'🍃',nick:'열정적인 중재자'},
+ ENFJ:{e:'🌟',nick:'정의로운 선도자'},
+ ENFP:{e:'🎈',nick:'재기발랄한 활동가'},
+ ISTJ:{e:'🧱',nick:'청렴결백한 현실주의자'},
+ ISFJ:{e:'🧸',nick:'용감한 수호자'},
+ ESTJ:{e:'📋',nick:'엄격한 관리자'},
+ ESFJ:{e:'🍰',nick:'사교적인 외교관'},
+ ISTP:{e:'🛠️',nick:'만능 재주꾼'},
+ ISFP:{e:'🎨',nick:'호기심 많은 예술가'},
+ ESTP:{e:'🔥',nick:'모험을 즐기는 사업가'},
+ ESFP:{e:'🎤',nick:'자유로운 연예인'}
+};
+const ORDER=['INTJ','INTP','ENTJ','ENTP','INFJ','INFP','ENFJ','ENFP','ISTJ','ISFJ','ESTJ','ESFJ','ISTP','ISFP','ESTP','ESFP'];
+
+/* ============ 문항 (A/B에 결과 단서 숨김, 표시 순서는 셔플) ============ */
+const QS=[
+ {ax:'EI', q:'주말에 에너지가 채워지는 쪽은?', a:{t:'사람들과 왁자지껄 어울릴 때',k:'E'}, b:{t:'혼자 조용히 내 시간을 보낼 때',k:'I'}},
+ {ax:'EI', q:'처음 만난 자리에서 나는?', a:{t:'먼저 말을 걸며 분위기를 띄운다',k:'E'}, b:{t:'상대가 다가올 때까지 살피며 기다린다',k:'I'}},
+ {ax:'EI', q:'고민이 생기면?', a:{t:'사람들에게 이야기하며 정리한다',k:'E'}, b:{t:'혼자 곱씹으며 정리한다',k:'I'}},
+ {ax:'SN', q:'새로운 걸 보면 더 궁금한 건?', a:{t:'지금 어떻게 쓰는지 구체적인 방법',k:'S'}, b:{t:'이게 앞으로 뭘 바꿀지 큰 그림',k:'N'}},
+ {ax:'SN', q:'대화할 때 나는 주로?', a:{t:'실제 있었던 일과 사실 위주로',k:'S'}, b:{t:'아이디어와 가능성, 의미 위주로',k:'N'}},
+ {ax:'SN', q:'길을 설명할 때 나는?', a:{t:'랜드마크와 순서를 정확하게',k:'S'}, b:{t:'대략의 방향과 느낌으로',k:'N'}},
+ {ax:'TF', q:'상대가 힘들다고 하면 먼저?', a:{t:'문제를 어떻게 풀지 방법을 찾는다',k:'T'}, b:{t:'마음에 공감하며 위로부터 한다',k:'F'}},
+ {ax:'TF', q:'결정할 때 더 믿는 건?', a:{t:'객관적인 근거와 논리',k:'T'}, b:{t:'나와 사람들의 감정',k:'F'}},
+ {ax:'TF', q:'솔직한 말을 전할 때 나는?', a:{t:'있는 그대로 사실대로 말한다',k:'T'}, b:{t:'상처받지 않게 부드럽게 말한다',k:'F'}},
+ {ax:'JP', q:'약속이나 여행을 잡으면?', a:{t:'일정을 미리 촘촘히 짠다',k:'J'}, b:{t:'그때그때 끌리는 대로 움직인다',k:'P'}},
+ {ax:'JP', q:'할 일이 생기면 나는?', a:{t:'빨리 끝내야 마음이 편하다',k:'J'}, b:{t:'마감이 다가올 때 몰입이 잘 된다',k:'P'}},
+ {ax:'JP', q:'내 공간은?', a:{t:'정돈돼 있어야 편하다',k:'J'}, b:{t:'조금 어질러도 내 나름의 질서가 있다',k:'P'}}
+];
+const AXDEF=[['EI','E','I'],['SN','S','N'],['TF','T','F'],['JP','J','P']];
+
+/* ============ 상태 ============ */
+let players=[ {name:'나', score:null, type:null}, {name:'너', score:null, type:null} ];
+let cur=0;            // 현재 진단 중인 사람 (0/1)
+let qIdx=0, score={}, locked=false;
+
+function freshScore(){return {E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};}
+
+/* ---- 게이지 렌더 ---- */
+function renderAxes(){
+  const box=document.getElementById('axes'); box.innerHTML='';
+  AXDEF.forEach(([ax,p1,p2])=>{
+    const el=document.createElement('div'); el.className='axis'; el.dataset.ax=ax;
+    el.innerHTML=`<div class="lbl l1">${p1}</div>
+      <div class="track"><div class="mid"></div><div class="fill" data-ax="${ax}"></div></div>
+      <div class="lbl l2">${p2}</div>`;
+    box.appendChild(el);
+  });
+  updateAxes();
+}
+function updateAxes(){
+  AXDEF.forEach(([ax,p1,p2])=>{
+    const a=score[p1], b=score[p2], tot=a+b;
+    const fill=document.querySelector(`.fill[data-ax="${ax}"]`);
+    const axEl=document.querySelector(`.axis[data-ax="${ax}"]`);
+    if(!fill) return;
+    if(tot===0){ fill.style.left='50%'; fill.style.width='0%'; }
+    else if(a>=b){ const w=(a/tot)*50; fill.style.left=(50-w)+'%'; fill.style.width=w+'%'; }
+    else { const w=(b/tot)*50; fill.style.left='50%'; fill.style.width=w+'%'; }
+    if(axEl){
+      axEl.querySelector('.l1').classList.toggle('win', a>b);
+      axEl.querySelector('.l2').classList.toggle('win', b>a);
+    }
+  });
+  const lc=document.getElementById('livecode');
+  lc.innerHTML=AXDEF.map(([ax,p1,p2])=>{
+    const a=score[p1], b=score[p2];
+    const ch = a===b?'·':(a>b?p1:p2);
+    const on = a!==b?'on':'';
+    return `<span class="${on}">${ch}</span>`;
+  }).join('');
+}
+
+/* ---- 함께 진단 시작 ---- */
+function startTogether(){
+  const nA=(document.getElementById('nameA').value||'').trim().slice(0,6);
+  const nB=(document.getElementById('nameB').value||'').trim().slice(0,6);
+  players=[ {name:nA||'나', score:null, type:null}, {name:nB||'너', score:null, type:null} ];
+  cur=0;
+  showTurn();
+}
+function showTurn(){
+  const p=players[cur];
+  document.getElementById('turnEmoji').textContent = cur===0?'🙋':'🙋‍♀️';
+  document.getElementById('turnTitle').innerHTML = `<b>${esc(p.name)}</b>의 차례!`;
+  if(cur===0){
+    document.getElementById('turnDesc').innerHTML='먼저 진단할 사람이 답해주세요.<br>12문항, 마음 가는 대로 솔직하게 🙂';
+    document.getElementById('turnPill').textContent='👀 상대는 잠깐 화면을 보지 마세요';
+  }else{
+    document.getElementById('turnDesc').innerHTML=`이제 폰을 <b>${esc(p.name)}</b>에게 넘겨주세요!<br>같은 12문항, 이번엔 당신 차례예요 ✨`;
+    document.getElementById('turnPill').textContent='🔄 폰을 넘겨받았나요? 시작!';
+  }
+  go('turn');
+}
+function beginTurn(){
+  qIdx=0; score=freshScore(); locked=false;
+  document.getElementById('nowWho').textContent=players[cur].name;
+  renderAxes(); go('test'); renderQ();
+}
+function renderQ(){
+  const q=QS[qIdx];
+  document.getElementById('qcount').textContent=qIdx+1;
+  const opts=shuffle([{...q.a},{...q.b}]);
+  const h=document.getElementById('qholder');
+  h.innerHTML=`<div class="qcard pop">
+    <div class="qnum">Q${qIdx+1}</div>
+    <div class="qtext">${esc(q.q)}</div>
+    <button class="opt" data-k="${opts[0].k}"><span class="key">A</span><span>${esc(opts[0].t)}</span></button>
+    <button class="opt" data-k="${opts[1].k}"><span class="key">B</span><span>${esc(opts[1].t)}</span></button>
+  </div>`;
+  h.querySelectorAll('.opt').forEach((b,i)=>{
+    b.querySelector('.key').textContent = i===0?'A':'B';
+    b.addEventListener('click',ev=>pick(b.dataset.k, ev));
+  });
+  locked=false;
+}
+function pick(k, ev){
+  if(locked) return;   // 같은 문항 중복 탭 방지(축이 밀려 잘못 채점되는 것 차단)
+  locked=true;
+  score[k]++;
+  updateAxes(); vibrate(22);
+  const r=ev.currentTarget.getBoundingClientRect();
+  boom(r.left+r.width/2, r.top+r.height/2, false);
+  ev.currentTarget.classList.add('sel');
+  if(qIdx===5){ toast('절반 통과! 유형이 만들어지는 중 ✨'); vibrate([18,40,18]); }
+  qIdx++;
+  if(qIdx>=QS.length){ setTimeout(finishTurn,320); }
+  else setTimeout(renderQ,240);
+}
+function finishTurn(){
+  const type=AXDEF.map(([ax,p1,p2])=>score[p1]>=score[p2]?p1:p2).join('');
+  players[cur].type=type; players[cur].score={...score};
+  toast(`${players[cur].name} → ${type} · ${TYPES[type].nick}!`);
+  vibrate([40,60,40]);
+  if(cur===0){ cur=1; setTimeout(showTurn,650); }
+  else { setTimeout(showPair,650); }
+}
+
+/* ============ 궁합 계산 ============ */
+const AXTXT={
+ EI:{same:{E:'둘 다 활발해서 만나면 대화와 웃음이 끊이지 않아요.',
+          I:'둘 다 차분해서 말없이 나란히 있어도 편안한 사이예요.'},
+     diff:'한 명은 밖에서, 한 명은 안에서 충전해요. 함께 논 뒤엔 각자 쉬는 시간을 주면 지치지 않아요.'},
+ SN:{same:{S:'둘 다 현실 감각이 좋아 계획이 착착 맞아요.',
+          N:'둘 다 상상과 의미를 좋아해 대화가 깊고 넓어져요.'},
+     diff:'한 명은 사실을, 한 명은 가능성을 봐요. "무슨 뜻이야?"를 자주 물으면 오해가 줄어요.'},
+ TF:{same:{T:'둘 다 논리적이라 부딪혀도 문제 중심으로 빨리 풀어요.',
+          F:'둘 다 마음을 살펴 서로 다치지 않게 배려해요.'},
+     diff:'한 명은 해결을, 한 명은 공감을 원해요. "조언 필요해, 아니면 그냥 들어줄까?"를 먼저 물어보세요.'},
+ JP:{same:{J:'둘 다 계획적이라 약속과 일정이 잘 맞아요.',
+          P:'둘 다 자유로워서 즉흥적으로 움직여도 신나게 즐겨요.'},
+     diff:'한 명은 계획을, 한 명은 즉흥을 좋아해요. 큰 틀은 정하고 세부는 열어두면 둘 다 편해요.'}
+};
+function compat(A,B){
+  const axes=[['EI','E','I'],['SN','S','N'],['TF','T','F'],['JP','J','P']];
+  let base=72, sim=[], adj=[], diffCount=0;
+  const wSame={EI:3,SN:11,TF:4,JP:4}, wDiff={EI:6,SN:2,TF:6,JP:6};
+  axes.forEach(([ax,p1,p2],i)=>{
+    const a=A[i], b=B[i], same=a===b;
+    base += same? wSame[ax] : wDiff[ax];
+    if(same){ sim.push(AXTXT[ax].same[a]); }
+    else{ adj.push(AXTXT[ax].diff); diffCount++; }
+  });
+  if(A===B) base+=4;
+  let pct=Math.max(60,Math.min(99,base));
+  if(sim.length===0) sim.push('겉보기엔 정반대! 그래서 서로에게 없는 걸 채워주는 자석 같은 사이예요.');
+  if(adj.length===0) adj.push('네 축이 모두 닮은 소울메이트형. 편안한 만큼, 새로운 자극을 함께 찾으면 더 오래 즐거워요.');
+  const R=REL[rel];
+  let head=R.heads[R.heads.length-1][1];
+  for(const [th,label] of R.heads){ if(pct>=th){ head=label; break; } }
+  const advice = diffCount<=1 ? R.advice.close : R.advice.far;
+  return {pct, head, sim, adj, advice, diffCount};
+}
+
+/* ============ 페어 결과 화면 ============ */
+let _cntTimer=null;
+function showPair(){
+  const R=REL[rel];
+  const A=players[0], B=players[1];
+  pickRel(rel); // 관계 테마색 확정
+  document.getElementById('relTag').textContent = `${R.emoji} ${R.tag}`;
+
+  // 카드
+  const cards=document.getElementById('pairCards');
+  cards.innerHTML=[A,B].map(p=>{
+    const t=TYPES[p.type];
+    return `<div class="pcard pop">
+      <div class="pe">${t.e}</div>
+      <div class="pn">${esc(p.name)}</div>
+      <div class="pcode grad">${p.type}</div>
+      <div class="pnick">${t.nick}</div></div>`;
+  }).join('<div class="pairmid"><div class="hh">💞</div></div>');
+
+  const r=compat(A.type,B.type);
+  document.getElementById('matchhead').textContent=r.head;
+  const badge=document.getElementById('matchbadge');
+  badge.style.display='inline-block';
+  badge.textContent=`${A.type} × ${B.type}`;
+  document.getElementById('oneline').textContent =
+    `${A.name}(${A.type})와 ${B.name}(${B.type}), ${r.diffCount<=1?'닮은 구석이 많은':r.diffCount>=3?'서로 다른 매력이 큰':'적당히 닮고 적당히 다른'} ${R.word} 사이예요.`;
+  document.getElementById('m-sim').innerHTML=r.sim.map(s=>'· '+esc(s)).join('<br>');
+  document.getElementById('m-adj').innerHTML=r.adj.map(s=>'· '+esc(s)).join('<br>');
+  document.getElementById('m-advice').textContent=r.advice;
+
+  buildChecklist();
+  go('pair');
+  // %는 0부터 카운트업
+  const el=document.getElementById('pct'); clearInterval(_cntTimer);
+  let cnt=0; const target=r.pct; el.textContent='0%';
+  requestAnimationFrame(()=>{
+    _cntTimer=setInterval(()=>{ cnt+=Math.max(1,Math.ceil((target-cnt)/6)); if(cnt>=target){cnt=target;clearInterval(_cntTimer);} el.textContent=cnt+'%'; },30);
+  });
+  pop(el);
+  vibrate([50,70,50,70,120]);
+  setTimeout(()=>boom(window.innerWidth/2, window.innerHeight*0.30, true),260);
+}
+
+/* ---- 친밀도 체크리스트 ---- */
+let checkState=[];
+function buildChecklist(){
+  const R=REL[rel];
+  checkState=R.missions.map(()=>false);
+  const box=document.getElementById('checklist'); box.innerHTML='';
+  R.missions.forEach((m,i)=>{
+    const b=document.createElement('button');
+    b.className='check'; b.type='button';
+    b.innerHTML=`<span class="box">✓</span><span class="ctxt">${esc(m)}</span>`;
+    b.addEventListener('click',ev=>toggleCheck(i,b,ev));
+    box.appendChild(b);
+  });
+  updateInti();
+}
+function toggleCheck(i,el,ev){
+  checkState[i]=!checkState[i];
+  el.classList.toggle('done',checkState[i]);
+  vibrate(checkState[i]?26:14);
+  if(checkState[i]){
+    const r=el.getBoundingClientRect();
+    boom(r.left+30, r.top+r.height/2, false);
+  }
+  updateInti();
+}
+function updateInti(){
+  const done=checkState.filter(Boolean).length, tot=checkState.length||1;
+  const pct=Math.round(done/tot*100);
+  document.getElementById('intiFill').style.width=pct+'%';
+  document.getElementById('intiPct').textContent=pct+'%';
+  if(done===tot && tot>0){
+    toast('친밀도 100%! 오늘부터 진짜 시작이에요 💖');
+    vibrate([30,50,30,50,120]);
+    setTimeout(()=>boom(window.innerWidth/2, window.innerHeight*0.5, true),120);
+  }
+}
+
+function cheer(){
+  const A=players[0], B=players[1];
+  const r=compat(A.type||document.getElementById('selA').value, B.type||document.getElementById('selB').value);
+  toast(`${A.name||'나'} × ${B.name||'너'} = ${r.pct}% · ${r.head}`);
+  vibrate([30,50,30,50,120]);
+  boom(window.innerWidth/2, window.innerHeight*0.4, true);
+  setTimeout(()=>boom(window.innerWidth*0.3, window.innerHeight*0.5, false),180);
+  setTimeout(()=>boom(window.innerWidth*0.7, window.innerHeight*0.5, false),300);
+}
+
+/* ============ 빠른 궁합 ============ */
+function fillSelects(){
+  ['selA','selB'].forEach(id=>{
+    const s=document.getElementById(id);
+    s.innerHTML=ORDER.map(t=>`<option value="${t}">${t} · ${TYPES[t].nick}</option>`).join('');
+  });
+  document.getElementById('selA').value='ENFP';
+  document.getElementById('selB').value='INFJ';
+}
+function quickCalc(){
+  const A=document.getElementById('selA').value, B=document.getElementById('selB').value;
+  document.getElementById('qfaceA').textContent=TYPES[A].e;
+  document.getElementById('qfaceB').textContent=TYPES[B].e;
+  vibrate(16);
+}
+function quickToPair(){
+  const A=document.getElementById('selA').value, B=document.getElementById('selB').value;
+  const nA=(document.getElementById('nameA').value||'').trim().slice(0,6);
+  const nB=(document.getElementById('nameB').value||'').trim().slice(0,6);
+  players=[ {name:nA||'나', type:A, score:null}, {name:nB||'너', type:B, score:null} ];
+  showPair();
+}
+
+/* init */
+fillSelects();
+quickCalc();
+pickRel('lover');
+</script>
+</body>
+</html>
