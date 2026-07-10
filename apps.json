@@ -312,6 +312,18 @@
       "teaser": "apps/mbt_검사_test.html",
       "premium": "apps/mbt_검사_test.html",
       "desc": "누를 때마다 정체불명의 코드가 요동치다 마지막에 단 하나로 잠금 해제되는, 점수·수치는 숨기고 유형의 '결'만 보여주는 도파민 터지는 MBT 성"
+    },
+    {
+      "id": "나의_애착유형",
+      "type": "test",
+      "title": "나의 애착유형",
+      "author": "미미팩토리 오리지널",
+      "date": "2026-07-10",
+      "color1": "#ff8ad0",
+      "color2": "#b78bf5",
+      "teaser": "apps/나의_애착유형_test.html",
+      "premium": "apps/나의_애착유형_test.html",
+      "desc": "안정·불안·회피·혼란 — 가까워질 때 나오는 나를 레이더 위에서 찾아가는 애착 유형 테스트."
     }
   ]
 }

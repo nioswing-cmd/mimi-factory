@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>나의 애착유형 — 가까워질 때 나오는 나</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.3/confetti.browser.min.js"></script>
+<style>
+  :root{
+    --bg0:#140a2e; --bg1:#221046; --bg2:#38175e;
+    --ink:#f5eeff; --ink-soft:#cabbee; --ink-dim:#9a8bc8;
+    --glass:rgba(255,255,255,.06); --glass-line:rgba(255,255,255,.14);
+    --secure:#4ade9b; --anxious:#ff6b9e; --avoid:#6aa8ff; --chaos:#b78bf5;
+    --a1:#b98bff; --a2:#ff9ecb;
+    --tc:#b98bff;
+    --shadow:0 18px 50px rgba(0,0,0,.45);
+    --r:24px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Noto Sans KR',system-ui,sans-serif;color:var(--ink);
+    background:
+      radial-gradient(900px 620px at 12% -8%, rgba(185,139,255,.22), transparent 60%),
+      radial-gradient(820px 620px at 110% 6%, rgba(255,158,203,.16), transparent 55%),
+      radial-gradient(760px 720px at 50% 122%, rgba(106,168,255,.14), transparent 60%),
+      linear-gradient(160deg,var(--bg0),var(--bg1) 55%,var(--bg2));
+    background-attachment:fixed;min-height:100vh;
+    display:flex;align-items:flex-start;justify-content:center;
+    padding:26px 15px 56px;overflow-x:hidden;
+    transition:background .9s ease;
+  }
+  .app{width:100%;max-width:560px}
+  h1,h2,h3,.jua{font-family:'Jua',sans-serif;font-weight:400;letter-spacing:.2px}
+
+  .screen{display:none;animation:pop .45s cubic-bezier(.2,.9,.3,1.3)}
+  .screen.on{display:block}
+  @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+
+  .card{
+    background:var(--glass);border:1px solid var(--glass-line);border-radius:var(--r);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    box-shadow:var(--shadow);padding:30px 24px;
+  }
+
+  /* ---- home ---- */
+  .hero-emoji{font-size:66px;text-align:center;line-height:1;filter:drop-shadow(0 8px 20px rgba(185,139,255,.45));animation:float 3.6s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+  .home h1{font-size:clamp(29px,7.6vw,42px);text-align:center;margin:14px 0 6px;line-height:1.16}
+  .grad{background:linear-gradient(92deg,var(--secure),var(--anxious) 40%,var(--avoid) 72%,var(--chaos));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .home p.sub{text-align:center;color:var(--ink-soft);font-size:15px;line-height:1.65;margin-bottom:20px}
+  .lock-note{display:flex;gap:8px;align-items:flex-start;justify-content:center;text-align:center;
+    font-size:12.5px;color:var(--ink-dim);background:rgba(255,255,255,.04);border:1px dashed var(--glass-line);
+    border-radius:14px;padding:11px 14px;margin-bottom:22px;line-height:1.55}
+  .types-peek{display:flex;gap:7px;justify-content:center;margin-bottom:22px;flex-wrap:wrap}
+  .types-peek .tp{font-size:12.5px;padding:7px 12px;border-radius:999px;border:1px solid var(--glass-line);
+    background:rgba(255,255,255,.04);color:var(--ink-soft);display:flex;align-items:center;gap:5px}
+  .len-label{text-align:center;font-size:12.5px;color:var(--ink-dim);margin-bottom:9px;letter-spacing:.4px}
+  .lens{display:flex;gap:9px;margin-bottom:24px}
+  .lenbtn{flex:1;cursor:pointer;border:1.5px solid var(--glass-line);background:rgba(255,255,255,.04);
+    color:var(--ink-soft);border-radius:16px;padding:13px 6px 11px;text-align:center;font-family:'Jua';
+    transition:transform .14s ease,border-color .2s,background .2s}
+  .lenbtn b{display:block;font-size:22px;line-height:1;color:var(--ink)}
+  .lenbtn small{display:block;font-size:11px;color:var(--ink-dim);margin-top:4px;font-family:'Noto Sans KR'}
+  .lenbtn:hover{transform:translateY(-2px);background:rgba(255,255,255,.09)}
+  .lenbtn.sel{border-color:var(--a1);background:linear-gradient(180deg,rgba(185,139,255,.22),rgba(185,139,255,.06));box-shadow:0 8px 24px rgba(185,139,255,.28)}
+  .lenbtn.sel b{color:#fff}
+  .btn{
+    width:100%;border:0;cursor:pointer;font-family:'Jua',sans-serif;font-size:19px;color:#1c0d33;
+    padding:17px;border-radius:18px;background:linear-gradient(92deg,var(--a1),var(--a2));
+    box-shadow:0 12px 30px rgba(185,139,255,.4);transition:transform .15s,box-shadow .15s;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(185,139,255,.55)}
+  .btn:active{transform:translateY(1px) scale(.99)}
+  .btn.ghost{background:rgba(255,255,255,.08);color:var(--ink);box-shadow:none;border:1px solid var(--glass-line);font-size:16px;margin-top:12px}
+  .btn.ghost:hover{background:rgba(255,255,255,.14)}
+
+  /* ---- quiz ---- */
+  .qtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .qtop .qc{font-family:'Jua';font-size:15px;color:var(--ink-soft)}
+  .qtop .tag{font-size:12px;color:var(--ink-dim);display:flex;align-items:center;gap:6px}
+  .tag .dot-blip{width:7px;height:7px;border-radius:50%;background:var(--a2);box-shadow:0 0 10px var(--a2);animation:blip 1s ease-in-out infinite}
+  @keyframes blip{0%,100%{opacity:.4;transform:scale(.9)}50%{opacity:1;transform:scale(1.25)}}
+
+  /* quadrant radar */
+  .quad{position:relative;width:100%;max-width:260px;margin:2px auto 10px;aspect-ratio:1/1;
+    border-radius:20px;background:
+      radial-gradient(circle at 26% 74%, rgba(74,222,155,.10), transparent 46%),
+      radial-gradient(circle at 26% 26%, rgba(255,107,158,.10), transparent 46%),
+      radial-gradient(circle at 74% 26%, rgba(183,139,245,.10), transparent 46%),
+      radial-gradient(circle at 74% 74%, rgba(106,168,255,.10), transparent 46%),
+      rgba(255,255,255,.03);
+    border:1px solid var(--glass-line);overflow:hidden}
+  .quad .axv,.quad .axh{position:absolute;background:rgba(255,255,255,.12)}
+  .quad .axv{left:50%;top:7%;bottom:7%;width:1.5px;transform:translateX(-50%)}
+  .quad .axh{top:50%;left:7%;right:7%;height:1.5px;transform:translateY(-50%)}
+  .quad .lab{position:absolute;font-size:10.5px;color:var(--ink-dim);font-family:'Jua';letter-spacing:.3px;white-space:nowrap}
+  .lab.t{top:8px;left:50%;transform:translateX(-50%)}
+  .lab.b{bottom:8px;left:50%;transform:translateX(-50%)}
+  .lab.l{left:9px;top:50%;transform:translateY(-50%);writing-mode:vertical-rl}
+  .lab.r{right:9px;top:50%;transform:translateY(-50%);writing-mode:vertical-rl}
+  .zone{position:absolute;font-family:'Jua';font-size:12px;opacity:0;transition:opacity .5s;pointer-events:none}
+  .zone.z-anxious{top:14%;left:14%;color:var(--anxious)}
+  .zone.z-chaos{top:14%;right:14%;color:var(--chaos)}
+  .zone.z-secure{bottom:14%;left:14%;color:var(--secure)}
+  .zone.z-avoid{bottom:14%;right:14%;color:var(--avoid)}
+  .zone.show{opacity:1}
+  .dot{position:absolute;width:24px;height:24px;border-radius:50%;left:50%;top:50%;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle at 35% 30%,#fff,var(--a2));
+    box-shadow:0 0 20px 4px var(--a2);z-index:4;
+    transition:left .6s cubic-bezier(.22,1,.36,1),top .6s cubic-bezier(.22,1,.36,1),background .5s,box-shadow .5s}
+  .dot::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--a2);opacity:.5;animation:ping 1.8s ease-out infinite}
+  @keyframes ping{0%{transform:scale(.8);opacity:.6}100%{transform:scale(2.1);opacity:0}}
+  .quad-hint{text-align:center;font-size:11.5px;color:var(--ink-dim);margin-bottom:14px}
+
+  .energy{height:9px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:22px}
+  .energy i{display:block;height:100%;width:0;border-radius:999px;
+    background:linear-gradient(90deg,var(--a1),var(--a2));box-shadow:0 0 16px 1px var(--a2);
+    transition:width .55s cubic-bezier(.2,.9,.3,1.3),box-shadow .6s}
+  .q-num{font-family:'Jua';font-size:14px;color:var(--ink-dim);text-align:center;margin-bottom:6px}
+  .q-text{font-family:'Jua';font-size:clamp(19px,5.4vw,24px);text-align:center;line-height:1.4;margin-bottom:22px;word-break:keep-all}
+  .opt{
+    width:100%;text-align:left;border:1px solid var(--glass-line);cursor:pointer;
+    background:rgba(255,255,255,.05);color:var(--ink);padding:17px 16px;border-radius:18px;margin-bottom:12px;
+    font-size:16px;line-height:1.5;display:flex;gap:13px;align-items:center;word-break:keep-all;
+    transition:transform .12s,background .2s,border-color .2s}
+  .opt:hover{background:rgba(255,255,255,.12);transform:translateX(3px)}
+  .opt:focus-visible{outline:3px solid var(--a2);outline-offset:2px}
+  .opt .badge{flex-shrink:0;width:30px;height:30px;border-radius:10px;background:rgba(255,255,255,.09);
+    border:1px solid var(--glass-line);display:flex;align-items:center;justify-content:center;
+    font-family:'Jua';font-size:16px;color:var(--ink-soft)}
+  .opt.picked{animation:bump .35s ease}
+  @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
+
+  /* ---- result ---- */
+  .crown{text-align:center;font-size:12px;letter-spacing:4px;color:var(--ink-dim);margin-bottom:8px}
+  .res-emoji{font-size:66px;text-align:center;line-height:1;animation:float 3.6s ease-in-out infinite;filter:drop-shadow(0 8px 20px rgba(0,0,0,.4))}
+  .res-title{font-family:'Jua';font-size:clamp(26px,7vw,36px);text-align:center;margin:8px 0 2px;color:var(--tc)}
+  .res-tag{text-align:center;color:var(--ink-soft);font-size:15.5px;margin-bottom:16px;word-break:keep-all}
+  .bars{margin:6px 0 4px}
+  .bar-row{margin-bottom:11px}
+  .bar-row .bl{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink-soft);margin-bottom:5px}
+  .bar-row .bl b{font-family:'Jua';color:var(--ink)}
+  .bar{height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+  .bar i{display:block;height:100%;width:0;border-radius:999px;transition:width 1.1s cubic-bezier(.22,1,.36,1)}
+  .sec{margin-top:16px;padding-top:15px;border-top:1px solid var(--glass-line)}
+  .sec h4{font-family:'Jua';font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:7px}
+  .sec p{font-size:14.5px;line-height:1.68;color:var(--ink-soft);word-break:keep-all}
+  .hide-note{text-align:center;color:var(--ink-dim);font-size:12px;margin:18px 2px 2px;line-height:1.6}
+  .footnote{text-align:center;color:var(--ink-dim);font-size:12px;margin-top:22px;line-height:1.6}
+
+  .toast{position:fixed;left:50%;top:22px;transform:translateX(-50%) translateY(-20px);
+    background:rgba(34,16,70,.96);border:1.5px solid var(--a2);color:var(--ink);
+    padding:12px 20px;border-radius:999px;font-size:14px;font-family:'Jua';opacity:0;pointer-events:none;
+    transition:opacity .4s,transform .4s;z-index:60;max-width:90vw}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+  /* ---- brand footer ---- */
+  .site-footer{margin-top:26px;text-align:center;padding:8px 0 4px;user-select:none}
+  .ff-dots{display:flex;gap:7px;justify-content:center;margin-bottom:14px}
+  .ff-dots span{width:8px;height:8px;border-radius:50%;display:block;animation:ffpulse 2.4s ease-in-out infinite}
+  .ff-dots span:nth-child(1){background:var(--secure);animation-delay:0s}
+  .ff-dots span:nth-child(2){background:var(--anxious);animation-delay:.24s}
+  .ff-dots span:nth-child(3){background:var(--avoid);animation-delay:.48s}
+  .ff-dots span:nth-child(4){background:var(--chaos);animation-delay:.72s}
+  .ff-dots span:nth-child(5){background:var(--a2);animation-delay:.96s}
+  @keyframes ffpulse{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.5);opacity:1}}
+  .ff-tag{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:4px;color:var(--ink-dim);margin-bottom:7px}
+  .ff-tag::before,.ff-tag::after{content:"";width:22px;height:1px;background:linear-gradient(90deg,transparent,var(--glass-line))}
+  .ff-tag::after{transform:scaleX(-1)}
+  .ff-brand{font-family:'Jua',sans-serif;font-size:26px;line-height:1;
+    background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+    -webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 14px rgba(155,123,255,.3))}
+  .ff-sub{font-size:12px;color:var(--ink-dim);margin-top:9px;letter-spacing:.3px}
+  .ff-sub .colon{color:var(--secure);font-weight:700;padding:0 1px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HOME -->
+  <section id="home" class="screen on home">
+    <div class="card">
+      <div class="hero-emoji">💞</div>
+      <h1>가까워질 때<br>나오는 <span class="grad">나의 애착유형</span></h1>
+      <p class="sub">누군가와 가까워질 때, 나도 모르게 튀어나오는<br>마음의 습관이 있어요.<br>레이더 위 점이 실시간으로 움직이며<br>당신의 애착 좌표를 찾아갑니다.</p>
+      <div class="types-peek">
+        <span class="tp">🌳 안정</span>
+        <span class="tp">💗 불안</span>
+        <span class="tp">🕊️ 회피</span>
+        <span class="tp">🌗 혼란</span>
+      </div>
+      <div class="lock-note">🔒 조작 방지를 위해 <b>어느 선택이 어느 유형으로 가는지 숨겨</b> 놓았어요. 오직 솔직한 마음으로만 답해 주세요.</div>
+      <div class="len-label">문항 수를 골라주세요</div>
+      <div class="lens" id="lens">
+        <div class="lenbtn" data-n="12"><b>12</b><small>빠르게</small></div>
+        <div class="lenbtn sel" data-n="20"><b>20</b><small>기본</small></div>
+        <div class="lenbtn" data-n="28"><b>28</b><small>정밀하게</small></div>
+      </div>
+      <button class="btn" onclick="startQuiz()">애착 좌표 찾기 →</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="screen">
+    <div class="card">
+      <div class="qtop">
+        <span class="qc" id="qcount">1 / 20</span>
+        <span class="tag"><span class="dot-blip"></span> 마음 좌표 추적 중…</span>
+      </div>
+      <div class="quad" id="quad">
+        <div class="axv"></div><div class="axh"></div>
+        <div class="lab t">불안 ↑</div>
+        <div class="lab b">안심 ↓</div>
+        <div class="lab l">밀착·친밀</div>
+        <div class="lab r">거리·회피</div>
+        <div class="zone z-secure" id="z-secure">🌳 안정</div>
+        <div class="zone z-anxious" id="z-anxious">💗 불안</div>
+        <div class="zone z-avoid" id="z-avoid">🕊️ 회피</div>
+        <div class="zone z-chaos" id="z-chaos">🌗 혼란</div>
+        <div class="dot" id="dot"></div>
+      </div>
+      <div class="quad-hint">점이 움직이는 방향은 결과의 힌트일 뿐, 정답은 없어요.</div>
+      <div class="energy"><i id="energy"></i></div>
+      <div class="q-num" id="qnum"></div>
+      <div class="q-text" id="qtext">다음 중 더 ‘나’ 같은 쪽은?</div>
+      <div id="opts"></div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="screen">
+    <div class="card">
+      <div class="crown">YOUR ATTACHMENT TYPE</div>
+      <div class="res-emoji" id="resEmoji">💞</div>
+      <div class="res-title" id="resTitle"></div>
+      <div class="res-tag" id="resTag"></div>
+      <div class="bars">
+        <div class="bar-row">
+          <div class="bl"><span>안심 ↔ 불안 (불안 민감도)</span><b id="anxPct">0%</b></div>
+          <div class="bar"><i id="anxBar" style="background:linear-gradient(90deg,#8ad0b0,var(--anxious))"></i></div>
+        </div>
+        <div class="bar-row">
+          <div class="bl"><span>친밀 ↔ 회피 (거리두기)</span><b id="avoPct">0%</b></div>
+          <div class="bar"><i id="avoBar" style="background:linear-gradient(90deg,#8ab0d0,var(--avoid))"></i></div>
+        </div>
+      </div>
+      <div class="sec"><h4>💫 가까워질 때 나오는 나</h4><p id="p_you"></p></div>
+      <div class="sec"><h4>✨ 관계에서 빛나는 점</h4><p id="p_str"></p></div>
+      <div class="sec"><h4>🌿 조금만 살펴봐요</h4><p id="p_care"></p></div>
+      <div class="sec"><h4>💌 이렇게 사랑하면 더 편안해요</h4><p id="p_love"></p></div>
+      <div class="hide-note">🔒 애착유형은 고정된 운명이 아니에요.<br>안전한 관계 안에서 우리는 언제든 더 안정된 쪽으로 자랄 수 있어요.</div>
+      <button class="btn" style="margin-top:20px" onclick="shareResult()">결과 문구 복사하기 📋</button>
+      <button class="btn ghost" onclick="resetAll()">처음부터 다시</button>
+      <div class="footnote">재미로 보는 진단이에요. 어떤 유형이든, 당신의 사랑엔 저마다의 온도가 있답니다 🤍</div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="ff-dots"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="ff-tag">의미와재미공장</div>
+    <div class="ff-brand">미미팩토리</div>
+    <div class="ff-sub">주식회사 연<span class="colon">:</span>결 패밀리회사</div>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ QUESTION BANK ============
+   두 개의 숨은 축으로 애착을 측정한다.
+   ANX 축: SE(안심·불안낮음) vs AX(불안 높음)
+   AVO 축: CO(친밀·연결추구) vs AV(회피·거리두기)
+   각 문항은 한 축의 두 문장을 강제선택으로 제시한다. */
+const QBANK = {
+  ANX:[
+    {a:{k:"SE",txt:"상대의 연락이 좀 늦어도 별일 아니겠거니 하고 넘긴다"}, b:{k:"AX",txt:"상대의 연락이 늦으면 무슨 일 있나 싶어 자꾸 신경이 쓰인다"}},
+    {a:{k:"SE",txt:"사랑받고 있다는 걸 대체로 의심 없이 믿는다"}, b:{k:"AX",txt:"사랑받고 있는지 종종 확인하고 싶어진다"}},
+    {a:{k:"SE",txt:"다툰 뒤에도 우리 관계는 괜찮을 거라 믿는다"}, b:{k:"AX",txt:"다툰 뒤엔 이대로 멀어질까 봐 마음이 조인다"}},
+    {a:{k:"SE",txt:"상대가 바빠 시간을 못 내도 서운하지만 이해한다"}, b:{k:"AX",txt:"상대가 시간을 못 내면 나를 덜 좋아하나 싶다"}},
+    {a:{k:"SE",txt:"떨어져 있어도 관계가 흔들린다고 느끼지 않는다"}, b:{k:"AX",txt:"떨어져 있으면 마음이 멀어질까 봐 걱정된다"}},
+    {a:{k:"SE",txt:"속마음을 말해도 관계가 상하지 않는다고 느낀다"}, b:{k:"AX",txt:"속마음을 말하면 상대가 부담스러워할까 조심스럽다"}},
+    {a:{k:"SE",txt:"상대의 사소한 말투 변화에 크게 흔들리지 않는다"}, b:{k:"AX",txt:"상대의 말투가 조금만 달라져도 촉각이 곤두선다"}},
+    {a:{k:"SE",txt:"관계가 좋을 땐 그저 그 시간을 편히 누린다"}, b:{k:"AX",txt:"좋을 때도 언젠가 끝날까 봐 마음 한켠이 불안하다"}},
+    {a:{k:"SE",txt:"상대를 믿고 어느 정도 자유를 준다"}, b:{k:"AX",txt:"상대가 뭘 하는지 자꾸 알고 싶고 확인하게 된다"}},
+    {a:{k:"SE",txt:"내가 먼저 연락하지 않아도 초조하지 않다"}, b:{k:"AX",txt:"연락하지 않으면 잊힐까 봐 내가 먼저 연락하게 된다"}},
+    {a:{k:"SE",txt:"사랑을 굳이 증명받지 않아도 편안하다"}, b:{k:"AX",txt:"'사랑한다'는 말을 자주 들어야 안심이 된다"}},
+    {a:{k:"SE",txt:"질투가 나도 크게 휘둘리지는 않는다"}, b:{k:"AX",txt:"질투나 비교로 마음이 자주 요동친다"}},
+    {a:{k:"SE",txt:"대화가 좀 뜸해져도 편안하게 받아들인다"}, b:{k:"AX",txt:"대화가 뜸해지면 뭔가 잘못됐나 싶어 조마조마하다"}},
+    {a:{k:"SE",txt:"이별을 상상해도 나는 결국 괜찮을 거라 생각한다"}, b:{k:"AX",txt:"버림받는 상상만 해도 견디기 힘들다"}}
+  ],
+  AVO:[
+    {a:{k:"CO",txt:"힘든 일이 있으면 상대에게 털어놓고 기댄다"}, b:{k:"AV",txt:"힘든 일은 혼자 삭이며 스스로 해결하는 편이다"}},
+    {a:{k:"CO",txt:"점점 가까워지고 깊어지는 관계가 좋다"}, b:{k:"AV",txt:"너무 가까워지면 답답해서 거리가 필요하다"}},
+    {a:{k:"CO",txt:"감정을 상대와 자주 나누는 편이다"}, b:{k:"AV",txt:"감정은 잘 드러내지 않고 속에 담아둔다"}},
+    {a:{k:"CO",txt:"둘이 함께 많은 시간을 보내고 싶다"}, b:{k:"AV",txt:"혼자만의 시간이 충분해야 마음이 편하다"}},
+    {a:{k:"CO",txt:"상대에게 도움을 청하는 게 자연스럽다"}, b:{k:"AV",txt:"누군가에게 의지하는 게 어색하고 불편하다"}},
+    {a:{k:"CO",txt:"관계가 깊어질수록 안정감을 느낀다"}, b:{k:"AV",txt:"관계가 깊어지면 자유를 잃는 것 같다"}},
+    {a:{k:"CO",txt:"속마음을 먼저 열어 보이는 편이다"}, b:{k:"AV",txt:"속마음은 웬만해선 잘 열지 않는다"}},
+    {a:{k:"CO",txt:"함께 미래를 그려보는 게 설렌다"}, b:{k:"AV",txt:"미래를 약속하는 건 부담스럽게 느껴진다"}},
+    {a:{k:"CO",txt:"애정 표현을 주고받는 게 좋다"}, b:{k:"AV",txt:"지나친 애정 표현은 낯간지럽고 버겁다"}},
+    {a:{k:"CO",txt:"갈등이 생기면 마주 앉아 풀려고 한다"}, b:{k:"AV",txt:"갈등이 생기면 일단 거리를 두고 싶다"}},
+    {a:{k:"CO",txt:"상대가 내 일상에 들어오는 게 반갑다"}, b:{k:"AV",txt:"내 영역에 너무 들어오면 방어적이 된다"}},
+    {a:{k:"CO",txt:"약한 모습도 상대에게 보여줄 수 있다"}, b:{k:"AV",txt:"약한 모습은 혼자 감당하고 보이지 않으려 한다"}},
+    {a:{k:"CO",txt:"떨어져 있어도 자주 연락하며 이어지고 싶다"}, b:{k:"AV",txt:"떨어져 있을 땐 각자 지내는 게 편하다"}},
+    {a:{k:"CO",txt:"'우리'라는 느낌이 따뜻하고 좋다"}, b:{k:"AV",txt:"무엇보다 '나'의 독립이 가장 중요하다"}}
+  ]
+};
+const AXES = ["ANX","AVO"];
+
+/* ============ 4 TYPES ============ */
+const TYPE = {
+  secure:{key:"secure",e:"🌳",color:"var(--secure)",a1:"#4ade9b",a2:"#7ce0c0",name:"안정형",
+    tag:"“가까워질수록 편안해지는 사람”",
+    you:"당신은 나도 상대도 믿을 수 있는 사람이에요. 가까워지는 걸 두려워하지 않으면서, 혼자 있는 시간도 편안하게 누립니다. 갈등이 생겨도 도망치거나 매달리지 않고, 마음을 솔직하게 꺼내 함께 풀어가요.",
+    str:"안정된 신뢰. 상대에게 '안전한 항구'가 되어주고, 사랑을 요란하지 않지만 꾸준하게 전합니다.",
+    care:"모두가 당신처럼 편안하진 않아요. 불안해하거나 거리를 두는 상대의 속도를 기다려주면 관계가 훨씬 깊어져요.",
+    love:"지금처럼 솔직하고 따뜻하게. 다만 상대가 다른 애착을 가졌다면, 안심시키는 말 한마디를 아끼지 마세요."},
+  anxious:{key:"anxious",e:"💗",color:"var(--anxious)",a1:"#ff6b9e",a2:"#ffb3cf",name:"불안형",
+    tag:"“가까워질수록 더 확인하고 싶은 사람”",
+    you:"당신은 사랑을 깊고 뜨겁게 하는 사람이에요. 마음이 이어질 때 가장 살아있지만, 연락이 뜸하거나 반응이 미지근하면 금세 불안해집니다. 버림받을까 봐 자꾸 확인하고, 더 많이 주고 더 많이 받고 싶어 해요.",
+    str:"뜨거운 헌신과 공감. 상대의 감정을 예민하게 읽어내고, 관계에 온 마음을 쏟습니다.",
+    care:"불안이 커지면 나도 모르게 상대를 밀어붙이게 돼요. 흔들릴 때는 '이건 지금이 아니라 옛 습관일 수 있어'라고 한 박자 쉬어보세요.",
+    love:"확인 대신 표현으로. '나 지금 불안해'라고 담백하게 말하면, 상대는 밀려남이 아니라 신뢰로 받아들여요."},
+  avoid:{key:"avoid",e:"🕊️",color:"var(--avoid)",a1:"#6aa8ff",a2:"#a9cbff",name:"회피형",
+    tag:"“가까워질수록 한 발 물러서는 사람”",
+    you:"당신은 독립적이고 스스로를 지킬 줄 아는 사람이에요. 혼자서도 단단하고, 지나치게 밀착되는 관계는 숨이 막힙니다. 힘들 때 기대기보다 혼자 해결하려 하고, 감정을 드러내는 데 시간이 필요해요.",
+    str:"자립심과 침착함. 상대에게 여백과 자유를 존중해주고, 위기에도 흔들림이 적습니다.",
+    care:"거리를 두는 게 상대에겐 '밀어냄'으로 느껴질 수 있어요. 속마음 한 조각을 먼저 꺼내는 것만으로 관계가 훨씬 가까워집니다.",
+    love:"완벽히 정리한 뒤 말하려 미루지 말기. 정리되지 않은 마음이라도 조금 나누면, 그게 곧 친밀함이 돼요."},
+  chaos:{key:"chaos",e:"🌗",color:"var(--chaos)",a1:"#b78bf5",a2:"#d4b6ff",name:"혼란형",
+    tag:"“가까이 오면 두렵고, 멀어지면 그리운 사람”",
+    you:"당신은 사랑을 간절히 원하면서도 동시에 두려워하는 사람이에요. 가까워지고 싶은 마음과 상처받기 싫어 물러서는 마음이 함께 있어, 다가갔다 멀어지길 반복하곤 합니다. 그만큼 관계를 온몸으로 깊이 느끼는 사람이에요.",
+    str:"깊은 감수성과 진심. 사랑의 밝은 면도 어두운 면도 예민하게 느끼고, 관계에 진짜로 몰입합니다.",
+    care:"밀고 당기는 나를 자책하지 마세요. 그건 결함이 아니라, 한때 마음을 지키려던 습관이에요. 안전하다고 느껴지는 사람과 천천히 신뢰를 쌓는 연습이 큰 힘이 됩니다.",
+    love:"혼란스러울 땐 도망 대신 한 문장. '지금 마음이 복잡해, 조금 시간이 필요해'라고 말해두면 오해와 후회를 크게 줄일 수 있어요."}
+};
+
+/* ============ HELPERS ============ */
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(v){if(navigator.vibrate)try{navigator.vibrate(v);}catch(e){}}
+let _tt;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2000);}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});}
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+
+/* ============ STATE ============ */
+let LEN = 20;
+let quiz = [], qi = 0, score = {}, myType = null;
+
+/* length selector */
+document.getElementById('lens').addEventListener('click',e=>{
+  const b=e.target.closest('.lenbtn'); if(!b)return;
+  document.querySelectorAll('.lenbtn').forEach(x=>x.classList.remove('sel'));
+  b.classList.add('sel'); LEN=+b.dataset.n; vibrate(12);
+});
+
+/* ============ QUIZ ============ */
+function buildQuiz(){
+  const per = LEN/2;
+  let list=[];
+  AXES.forEach(ax=>{ shuffle(QBANK[ax].slice()).slice(0,per).forEach(q=> list.push({a:{...q.a},b:{...q.b}})); });
+  return shuffle(list);
+}
+function startQuiz(){
+  quiz=buildQuiz(); qi=0;
+  score={SE:0,AX:0,CO:0,AV:0};
+  document.querySelectorAll('.zone').forEach(z=>z.classList.remove('show'));
+  const r=document.documentElement.style; r.setProperty('--a1','#b98bff'); r.setProperty('--a2','#ff9ecb');
+  go('quiz'); updateDot(); updateEnergy(); renderQ();
+}
+function renderQ(){
+  const q=quiz[qi];
+  document.getElementById('qcount').textContent=(qi+1)+" / "+quiz.length;
+  document.getElementById('qnum').textContent="Q"+(qi+1);
+  const opts=shuffle([q.a,q.b]);
+  const labels=["A","B"];
+  const wrap=document.getElementById('opts');
+  wrap.innerHTML="";
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt";
+    b.innerHTML=`<span class="badge">${labels[i]}</span><span>${o.txt}</span>`;
+    b.onclick=()=>pick(o.k,b);
+    wrap.appendChild(b);
+  });
+}
+function pick(k,el){
+  score[k]++;
+  el.classList.add('picked');
+  if(window.confetti){
+    const r=el.getBoundingClientRect();
+    confetti({particleCount:16,spread:52,startVelocity:22,scalar:.8,
+      origin:{x:(r.left+r.width/2)/window.innerWidth,y:(r.top+r.height/2)/window.innerHeight},
+      colors:['#4ade9b','#ff6b9e','#6aa8ff','#b78bf5','#ff9ecb']});
+  }
+  vibrate(26);
+  updateDot();
+  updateEnergy();
+  if(qi+1===Math.floor(quiz.length/2)){toast('💓 절반 왔어요!');vibrate([20,40,20]);}
+  setTimeout(()=>{
+    qi++;
+    if(qi>=quiz.length) reveal();
+    else renderQ();
+  },330);
+}
+function updateEnergy(){
+  const done=score.SE+score.AX+score.CO+score.AV;
+  document.getElementById('energy').style.width=(done/quiz.length*100)+"%";
+}
+function ratios(){
+  const anxT=score.SE+score.AX, avoT=score.CO+score.AV;
+  const anxR = anxT? score.AX/anxT : .5;   // 1 = 불안
+  const avoR = avoT? score.AV/avoT : .5;   // 1 = 회피
+  return {anxR,avoR};
+}
+function updateDot(){
+  const {anxR,avoR}=ratios();
+  const dot=document.getElementById('dot');
+  dot.style.left = (8 + avoR*84) + "%";          // 좌=친밀 우=회피
+  dot.style.top  = (8 + (1-anxR)*84) + "%";       // 위=불안 아래=안심
+}
+
+/* ============ RESULT ============ */
+function computeType(){
+  const anxious = score.AX>score.SE;   // 동점은 안심 쪽으로
+  const avoidant = score.AV>score.CO;  // 동점은 친밀 쪽으로
+  if(!anxious && !avoidant) return "secure";
+  if(anxious && !avoidant) return "anxious";
+  if(!anxious && avoidant) return "avoid";
+  return "chaos";
+}
+function reveal(){
+  myType=computeType();
+  const T=TYPE[myType];
+  const r=document.documentElement.style;
+  r.setProperty('--a1',T.a1); r.setProperty('--a2',T.a2); r.setProperty('--tc',T.color);
+  // 레이더 위 유형 존 점등 + 점을 유형색으로
+  document.getElementById('z-'+myType).classList.add('show');
+  const dot=document.getElementById('dot');
+  dot.style.background=`radial-gradient(circle at 35% 30%,#fff,${T.a1})`;
+  dot.style.boxShadow=`0 0 26px 6px ${T.a1}`;
+  toast(T.e+' 애착 좌표 확정!');
+  vibrate([40,60,40]);
+  if(window.confetti){
+    const rc=document.getElementById('quad').getBoundingClientRect();
+    confetti({particleCount:60,spread:70,startVelocity:26,scalar:.9,
+      origin:{x:(rc.left+rc.width/2)/window.innerWidth,y:(rc.top+rc.height/2)/window.innerHeight}});
+  }
+  setTimeout(showResult,780);
+}
+function showResult(){
+  const T=TYPE[myType];
+  document.getElementById('resEmoji').textContent=T.e;
+  document.getElementById('resTitle').textContent=T.name;
+  document.getElementById('resTag').textContent=T.tag;
+  document.getElementById('p_you').textContent=T.you;
+  document.getElementById('p_str').textContent=T.str;
+  document.getElementById('p_care').textContent=T.care;
+  document.getElementById('p_love').textContent=T.love;
+  go('result');
+  // 막대 애니메이션 (0 → 목표치)
+  const {anxR,avoR}=ratios();
+  const anxPct=Math.round(anxR*100), avoPct=Math.round(avoR*100);
+  requestAnimationFrame(()=>setTimeout(()=>{
+    document.getElementById('anxBar').style.width=anxPct+"%";
+    document.getElementById('avoBar').style.width=avoPct+"%";
+  },120));
+  animateCount('anxPct',anxPct); animateCount('avoPct',avoPct);
+  if(window.confetti){
+    const colors=['#4ade9b','#ff6b9e','#6aa8ff','#b78bf5','#ff9ecb'];
+    confetti({particleCount:130,spread:95,origin:{y:.3},colors});
+    setTimeout(()=>confetti({particleCount:90,spread:120,startVelocity:36,origin:{y:.4},colors}),260);
+  }
+  vibrate([60,80,60,80,120]);
+}
+function animateCount(id,target){
+  const el=document.getElementById(id); let v=0;
+  const step=Math.max(1,Math.round(target/26));
+  const t=setInterval(()=>{v+=step; if(v>=target){v=target;clearInterval(t);} el.textContent=v+"%";},34);
+}
+function shareResult(){
+  const T=TYPE[myType];
+  const txt=`나의 애착유형은 ${T.e} ${T.name}\n${T.tag}\n\n가까워질 때 나오는 나, 애착유형 테스트 →\nhttps://mimifactory.vibekr.com/apps/나의_애착유형_test.html`;
+  const done=()=>toast('📋 결과 문구를 복사했어요!');
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done));}
+  else fallbackCopy(txt,done);
+  vibrate(20);
+}
+function fallbackCopy(txt,cb){
+  const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();try{document.execCommand('copy');cb();}catch(e){}document.body.removeChild(ta);
+}
+function resetAll(){
+  myType=null;
+  const r=document.documentElement.style;
+  r.setProperty('--a1','#b98bff'); r.setProperty('--a2','#ff9ecb'); r.setProperty('--tc','#b98bff');
+  const dot=document.getElementById('dot');
+  dot.style.background='radial-gradient(circle at 35% 30%,#fff,var(--a2))';
+  dot.style.boxShadow='0 0 20px 4px var(--a2)';
+  document.querySelectorAll('.zone').forEach(z=>z.classList.remove('show'));
+  document.getElementById('anxBar').style.width='0';
+  document.getElementById('avoBar').style.width='0';
+  go('home');
+}
+</script>
+</body>
+</html>
