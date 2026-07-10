@@ -78,6 +78,9 @@ h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
 .pick .u{font-size:11px; color:var(--muted); letter-spacing:.04em; margin-top:5px; display:block;}
 .pick.full{grid-column:span 3;}
 .pick.full .n{font-size:22px;}
+.picks.tastes{margin-bottom:18px;}
+.picks.tastes .n{font-size:19px;}
+.picks.tastes .u{line-height:1.45;}
 
 .btn{
   width:100%; border:none; cursor:pointer; font-family:'Jua',sans-serif; font-size:19px; color:#2a1533;
@@ -202,6 +205,13 @@ h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
     <div class="names">
       <div class="field"><label>왼쪽 사람</label><input id="nameA" maxlength="6" placeholder="나" value=""></div>
       <div class="field"><label>오른쪽 사람</label><input id="nameB" maxlength="6" placeholder="너" value=""></div>
+    </div>
+
+    <div class="pick-title">오늘의 맛은?</div>
+    <div class="picks tastes" id="tastes">
+      <button class="pick taste" data-taste="mild"><span class="n">🥛</span><span class="u">순한맛<br>웃으면서 할 수 있는</span></button>
+      <button class="pick taste" data-taste="hot"><span class="n">🌶️🌶️</span><span class="u">매운맛<br>바로 본론부터</span></button>
+      <button class="pick taste sel" data-taste="mix"><span class="n">🥛→🌶️</span><span class="u">순하다가 매운맛<br>점점 아찔하게</span></button>
     </div>
 
     <div class="pick-title">몇 개의 질문을 나눌까요? — 모든 질문에 <b>둘 다</b> 답해요</div>
@@ -428,13 +438,25 @@ let flipped=false;
 let players=[];     // [{name, passes, answered}]
 let passedQs=[];    // {who, q, tag}
 
-/* 선택 개수 → 5단계 균등 분배(항상 깊이가 점층) */
+/* 맛 선택 → 어떤 단계에서 질문을 뽑을지 결정 */
+const TASTES={
+  mild:{levels:[1,2]},        // 🥛 순한맛: 몸풀기·사생활
+  hot: {levels:[3,4,5]},      // 🌶️🌶️ 매운맛: 설렘史·비밀금고·너와나 직행
+  mix: {levels:[1,2,3,4,5]},  // 🥛→🌶️ 순하다가 매운맛: 전체 점층 (기본)
+};
+let taste='mix';
+function tasteCap(){ return TASTES[taste].levels.length*20; }
+
+/* 선택 개수 → 해당 맛의 단계들에 균등 분배(항상 깊이가 점층, 나머지는 앞 단계부터) */
 function buildDeck(total){
-  const per = total/5;      // 5,10,20,100 모두 5의 배수 → 정수
+  const lvs = TASTES[taste].levels.map(k=>LEVELS.find(L=>L.key===k));
+  const n = lvs.length;
+  const base = Math.floor(total/n), extra = total%n;
   const d=[];
-  LEVELS.forEach(L=>{
-    const picked = shuffle(L.qs.slice()).slice(0, per);
-    picked.forEach(q=> d.push({level:L.key, tag:L.tag, name:L.name, q, theme:L.theme}));
+  lvs.forEach((L,i)=>{
+    const take = Math.min(base + (i<extra?1:0), L.qs.length);
+    shuffle(L.qs.slice()).slice(0, take)
+      .forEach(q=> d.push({level:L.key, tag:L.tag, name:L.name, q, theme:L.theme}));
   });
   return d; // 이미 레벨 순서 = 얕음→깊음
 }
@@ -442,11 +464,35 @@ function buildDeck(total){
 /* ============ 시작 화면 로직 ============ */
 let chosen=0;
 const startBtn=document.getElementById('startBtn');
-document.querySelectorAll('.pick').forEach(p=>{
+
+function refreshStartBtn(){
+  if(!chosen){ startBtn.disabled=true; startBtn.textContent='질문 개수를 골라주세요'; return; }
+  startBtn.disabled=false; startBtn.textContent=`질문 ${chosen}개, 각자 ${chosen}번 답하기 →`;
+}
+
+/* 완전정복 버튼 = 선택한 맛의 전체 질문 수 (순한맛 40 · 매운맛 60 · 순→매 100) */
+function refreshFullPick(){
+  const fb=document.querySelector('#picks .pick.full');
+  const cap=tasteCap();
+  fb.dataset.n=cap;
+  fb.querySelector('.n').textContent=`${cap} · 완전정복`;
+  if(fb.classList.contains('sel')){ chosen=cap; }
+  refreshStartBtn();
+}
+
+document.querySelectorAll('#tastes .pick').forEach(p=>{
   p.addEventListener('click',()=>{
-    document.querySelectorAll('.pick').forEach(x=>x.classList.remove('sel'));
+    document.querySelectorAll('#tastes .pick').forEach(x=>x.classList.remove('sel'));
+    p.classList.add('sel'); taste=p.dataset.taste;
+    refreshFullPick();
+    vibrate(14);
+  });
+});
+document.querySelectorAll('#picks .pick').forEach(p=>{
+  p.addEventListener('click',()=>{
+    document.querySelectorAll('#picks .pick').forEach(x=>x.classList.remove('sel'));
     p.classList.add('sel'); chosen=+p.dataset.n;
-    startBtn.disabled=false; startBtn.textContent=`질문 ${chosen}개, 각자 ${chosen}번 답하기 →`;
+    refreshStartBtn();
     vibrate(14);
   });
 });
@@ -615,7 +661,7 @@ document.getElementById('againBtn').addEventListener('click',()=>{
 document.getElementById('homeBtn').addEventListener('click',()=>{
   applyTheme(LEVELS[0].theme);
   chosen=0; startBtn.disabled=true; startBtn.textContent='질문 개수를 골라주세요';
-  document.querySelectorAll('.pick').forEach(x=>x.classList.remove('sel'));
+  document.querySelectorAll('#picks .pick').forEach(x=>x.classList.remove('sel')); // 맛 선택은 유지
   show('startScreen');
 });
 </script>
