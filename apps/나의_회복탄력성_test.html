@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>무너진 다음 날의 나 — 회복 속도 테스트</title>
+<meta name="description" content="무너진 다음 날, 나는 어떻게 다시 일어설까? 12문항으로 알아보는 나의 회복 속도 4종 유형 테스트.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+<style>
+:root{
+  --bg1:#0f1330; --bg2:#241a44;
+  --accent1:#ffd56b; --accent2:#ff8a5b;
+  --cream:#fff6ec; --muted:#c3b9dd;
+  --card:#1d1a3d;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  color:var(--cream);
+  min-height:100dvh;
+  background:
+    radial-gradient(120% 80% at 82% -12%, rgba(255,180,90,.13), transparent 55%),
+    radial-gradient(120% 90% at 8% 112%, rgba(120,140,255,.16), transparent 55%),
+    linear-gradient(165deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  transition:background .9s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.wrap{max-width:520px; margin:0 auto; padding:22px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(105deg,#ffd56b,#ff8a5b 45%,#ff6b9e);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em; margin:0;}
+.screen{display:none; animation:fadeIn .5s ease both;}
+.screen.on{display:block;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1.2deg); opacity:.4;}60%{transform:scale(1.02) rotate(.5deg);}100%{transform:scale(1) rotate(0); opacity:1;}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+
+/* ---------- HOME ---------- */
+.hero{flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; gap:16px; padding:14px 4px 30px;}
+.eyebrow{font-size:12.5px; letter-spacing:.32em; color:var(--muted); text-indent:.32em;}
+.hero .big{font-size:37px; line-height:1.24;}
+.moon{font-size:64px; animation:float 4s ease-in-out infinite; filter:drop-shadow(0 8px 22px rgba(255,180,90,.35));}
+.lede{font-size:15px; color:var(--muted); line-height:1.75; word-break:keep-all; max-width:400px; margin:0 auto;}
+.pill4{display:flex; gap:7px; justify-content:center; flex-wrap:wrap; margin-top:2px;}
+.pill4 span{font-size:12.5px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); padding:7px 12px; border-radius:99px;}
+.btn{
+  font-family:'Jua',sans-serif; font-size:20px; color:#2a1330; border:none; cursor:pointer;
+  padding:17px 22px; border-radius:18px; width:100%;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2));
+  box-shadow:0 10px 28px -8px rgba(255,138,91,.6); transition:transform .15s, box-shadow .3s;
+}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent; color:var(--cream); border:1.5px solid rgba(255,255,255,.22); box-shadow:none; font-size:16px; padding:14px;}
+.hint{font-size:12px; color:var(--muted); margin-top:4px;}
+
+/* ---------- QUIZ ---------- */
+.topbar{position:sticky; top:0; z-index:5; padding:10px 0 12px; margin-bottom:6px;
+  background:linear-gradient(180deg, rgba(15,19,48,.96) 70%, transparent);}
+.axis{margin-bottom:11px;}
+.axisrow{display:flex; align-items:center; gap:9px; font-size:11.5px; color:var(--muted); margin-bottom:5px;}
+.axisrow b{color:var(--cream); font-family:'Jua'; font-weight:400; font-size:12.5px;}
+.axisrow .mid{flex:1; text-align:center; letter-spacing:.14em; opacity:.6;}
+.slider{position:relative; height:11px; border-radius:99px; background:rgba(255,255,255,.09); overflow:hidden;}
+.sliderfill{position:absolute; top:0; bottom:0; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  box-shadow:0 0 14px 1px var(--accent2); transition:left .5s cubic-bezier(.22,1,.36,1), width .5s cubic-bezier(.22,1,.36,1);}
+.counter{display:flex; justify-content:space-between; align-items:center; margin-top:9px; font-size:12.5px; color:var(--muted);}
+.livetype{font-family:'Jua'; font-size:15px;}
+.livetype .em{font-size:19px;}
+.qcard{background:var(--card); border:1px solid rgba(255,255,255,.09); border-radius:22px; padding:26px 20px 22px; margin-top:6px;
+  box-shadow:0 18px 44px -22px rgba(0,0,0,.7);}
+.qnum{font-size:12.5px; color:var(--accent1); letter-spacing:.06em; margin-bottom:10px; font-family:'Jua';}
+.qtext{font-size:20px; line-height:1.5; word-break:keep-all; min-height:60px;}
+.opts{margin-top:20px; display:flex; flex-direction:column; gap:12px;}
+.opt{
+  text-align:left; cursor:pointer; width:100%; color:var(--cream);
+  background:rgba(255,255,255,.045); border:1.5px solid rgba(255,255,255,.14);
+  border-radius:15px; padding:17px 16px 17px 52px; font-size:15.5px; line-height:1.5; position:relative;
+  font-family:'Noto Sans KR'; transition:transform .12s, border-color .2s, background .2s; word-break:keep-all;
+}
+.opt:hover{border-color:rgba(255,255,255,.34); background:rgba(255,255,255,.075);}
+.opt:active{transform:scale(.985);}
+.opt .tag{position:absolute; left:15px; top:50%; transform:translateY(-50%);
+  width:26px; height:26px; border-radius:50%; display:grid; place-items:center;
+  font-family:'Jua'; font-size:13px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); color:var(--cream);}
+.opt:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+.back{background:none; border:none; color:var(--muted); font-size:13px; cursor:pointer; margin-top:16px; padding:8px; font-family:'Noto Sans KR';}
+
+/* ---------- RESULT ---------- */
+.rcard{background:var(--card); border:1px solid rgba(255,255,255,.1); border-radius:26px; padding:30px 22px 26px; text-align:center;
+  box-shadow:0 22px 60px -26px rgba(0,0,0,.8); position:relative; overflow:hidden;}
+.rcard::before{content:""; position:absolute; inset:0; background:radial-gradient(90% 60% at 50% 0%, rgba(255,180,90,.16), transparent 70%); pointer-events:none;}
+.rEm{font-size:70px; animation:float 4s ease-in-out infinite; filter:drop-shadow(0 8px 20px rgba(255,180,90,.4));}
+.rKind{font-size:14px; letter-spacing:.2em; color:var(--accent1); margin-top:6px;}
+.rName{font-size:32px; margin-top:4px; line-height:1.2;}
+.rSub{font-size:14.5px; color:var(--muted); margin-top:10px; line-height:1.7; word-break:keep-all;}
+.speedbox{margin:22px auto 4px; max-width:340px;}
+.speedhead{display:flex; justify-content:space-between; align-items:baseline; font-size:13px; color:var(--muted); margin-bottom:7px;}
+.speedhead b{font-family:'Jua'; font-size:26px; color:var(--cream);}
+.speedbar{height:16px; border-radius:99px; background:rgba(255,255,255,.09); overflow:hidden;}
+.speedfill{height:100%; width:0; border-radius:99px; background:linear-gradient(90deg,var(--accent1),var(--accent2)); box-shadow:0 0 16px 1px var(--accent2); transition:width 1.1s cubic-bezier(.22,1,.36,1);}
+.sect{text-align:left; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); border-radius:16px; padding:16px 17px; margin-top:14px;}
+.sect h3{font-size:15px; margin-bottom:8px; display:flex; align-items:center; gap:7px;}
+.sect p,.sect li{font-size:14px; line-height:1.72; color:#efe6f5; word-break:keep-all;}
+.sect ul{margin:0; padding-left:18px;}
+.map{margin-top:16px;}
+.maprow{display:flex; align-items:center; gap:10px; margin:9px 0; font-size:13px;}
+.maprow .lb{width:92px; flex-shrink:0; color:var(--muted);}
+.maprow .lb b{color:var(--cream); font-family:'Jua'; font-weight:400;}
+.mbar{flex:1; height:10px; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden;}
+.mfill{height:100%; width:0; border-radius:99px; transition:width .9s cubic-bezier(.22,1,.36,1);}
+.actions{display:flex; flex-direction:column; gap:10px; margin-top:22px;}
+
+.toast{position:fixed; left:50%; top:16px; transform:translateX(-50%) translateY(-24px);
+  background:rgba(29,26,61,.97); border:1.5px solid var(--accent2); color:var(--cream);
+  padding:12px 20px; border-radius:99px; font-size:13.5px; opacity:0; pointer-events:none;
+  transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; box-shadow:0 10px 30px -10px rgba(0,0,0,.6);}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center; margin-top:26px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  <!-- ======= HOME ======= -->
+  <section id="home" class="screen on">
+    <div class="hero">
+      <div class="eyebrow">회복 속도 테스트</div>
+      <div class="moon">🌙</div>
+      <h1 class="big">무너진 다음 날의 나,<br><span class="grad">어떻게 다시 일어설까?</span></h1>
+      <p class="lede">누구나 무너지는 날이 있다. 중요한 건 <b>그 다음 날.</b><br>12개의 질문으로 당신의 <b>회복 속도 4종</b> 유형을 찾아드려요.</p>
+      <div class="pill4">
+        <span>⚡ 번쩍 회복</span><span>🛡️ 계획 회복</span><span>🌊 파도 회복</span><span>🌙 심해 회복</span>
+      </div>
+      <div style="margin-top:14px;">
+        <button class="btn" onclick="start()">나의 회복 속도 알아보기 →</button>
+        <div class="hint">약 1분 · 12문항 · 정답은 없어요</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= QUIZ ======= -->
+  <section id="quiz" class="screen">
+    <div class="topbar">
+      <div class="axis">
+        <div class="axisrow"><b>🌙 혼자</b><span class="mid">충전 방식</span><b>함께 👥</b></div>
+        <div class="slider"><div class="sliderfill" id="fillA"></div></div>
+      </div>
+      <div class="axis">
+        <div class="axisrow"><b>💗 느끼며</b><span class="mid">회복 동력</span><b>움직이며 🏃</b></div>
+        <div class="slider"><div class="sliderfill" id="fillB"></div></div>
+      </div>
+      <div class="counter">
+        <span id="cprog">1 / 12</span>
+        <span class="livetype" id="clive"><span class="em">🌫️</span> 유형 채워지는 중…</span>
+      </div>
+    </div>
+
+    <div class="qcard" id="qcard">
+      <div class="qnum" id="qnum">Q1</div>
+      <div class="qtext" id="qtext">—</div>
+      <div class="opts" id="opts"></div>
+    </div>
+    <button class="back" id="backBtn" onclick="back()">← 이전 문항</button>
+  </section>
+
+  <!-- ======= RESULT ======= -->
+  <section id="result" class="screen">
+    <div class="rcard">
+      <div class="rEm" id="rEm">⚡</div>
+      <div class="rKind" id="rKind">회복 속도 유형</div>
+      <h2 class="rName" id="rName">—</h2>
+      <p class="rSub" id="rSub">—</p>
+
+      <div class="speedbox">
+        <div class="speedhead"><span>나의 회복 속도</span><b id="rSpeedNum">0%</b></div>
+        <div class="speedbar"><div class="speedfill" id="rSpeedFill"></div></div>
+      </div>
+    </div>
+
+    <div class="sect"><h3>🌱 이렇게 회복하는 사람</h3><p id="rYou">—</p></div>
+    <div class="sect"><h3>🧭 다음 날, 이렇게 해보세요</h3><ul id="rDo"></ul></div>
+    <div class="sect"><h3>⚠️ 이것만 조심</h3><p id="rWatch">—</p></div>
+
+    <div class="sect map">
+      <h3>📊 나의 회복 성향 지도</h3>
+      <div id="mapRows"></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" onclick="shareResult()">결과 공유하기 📷</button>
+      <button class="btn ghost" onclick="restart()">다시 하기 ↻</button>
+    </div>
+  </section>
+
+  <!-- ======= BRAND FOOTER ======= -->
+  <div class="footer">
+    <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+    <div class="mf-logo">미미팩토리</div>
+    <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+  </div>
+
+</div>
+
+<script>
+/* ---------- 데이터 ---------- */
+// 축 A: L(혼자) ↔ T(함께)   |   축 B: F(느끼며) ↔ D(움직이며)
+const QUESTIONS=[
+  {q:"힘든 하루의 끝, 나를 다시 채우는 스위치는?", a:{t:"누군가에게 전화해 오늘 있었던 일을 털어놓는다", k:"T"}, b:{t:"방문을 닫고 오롯이 나만의 시간을 갖는다", k:"L"}},
+  {q:"속상한 일이 생기면 가장 먼저 드는 생각은?", a:{t:"\"이거 누구한테 얘기하지?\"", k:"T"}, b:{t:"\"일단 혼자 좀 삭이자.\"", k:"L"}},
+  {q:"완전히 방전된 주말, 나의 충전법은?", a:{t:"친구나 가족을 만나 실컷 수다 떨기", k:"T"}, b:{t:"혼자 산책하거나 집에서 조용히 있기", k:"L"}},
+  {q:"무너진 다음 날 아침, 눈을 뜬 나는?", a:{t:"기분이 가라앉을 때까지 감정을 충분히 느낀다", k:"F"}, b:{t:"일단 몸을 일으켜 뭐라도 하나 해치운다", k:"D"}},
+  {q:"마음이 복잡할 때 더 끌리는 쪽은?", a:{t:"음악·일기·눈물로 감정을 흘려보내기", k:"F"}, b:{t:"할 일 리스트를 짜서 하나씩 처리하기", k:"D"}},
+  {q:"진짜 위로가 되는 순간은?", a:{t:"내 얘기에 \"맞아, 그럴 만해\" 공감받을 때", k:"T"}, b:{t:"아무 방해 없이 나를 혼자 돌볼 때", k:"L"}},
+  {q:"나에게 회복은 이렇게 찾아온다.", a:{t:"충분히 슬퍼하고 나면 스르륵 풀린다", k:"F"}, b:{t:"문제를 하나 해결하고 나면 확 가벼워진다", k:"D"}},
+  {q:"단톡방에 오늘의 고민, 올릴까 말까?", a:{t:"올려서 사람들 반응을 들어보는 편", k:"T"}, b:{t:"혼자 삭이고 굳이 올리지 않는 편", k:"L"}},
+  {q:"힘든 일을 마주한 나의 첫 태도는?", a:{t:"\"내가 왜 이런 기분이지?\" 마음을 들여다본다", k:"F"}, b:{t:"\"그래서 뭘 하지?\" 대책부터 세운다", k:"D"}},
+  {q:"더 와닿는 위로의 말은?", a:{t:"\"많이 힘들었겠다.\"", k:"F"}, b:{t:"\"자, 이렇게 한번 해보자.\"", k:"D"}},
+  {q:"다시 일어설 때 나를 밀어주는 동력은?", a:{t:"마음이 차분히 정리되는 느낌", k:"F"}, b:{t:"상황이 실제로 바뀌는 성취감", k:"D"}},
+  {q:"회복이 끝난 마지막 장면 속 나는?", a:{t:"사람들 속에서 다시 웃고 있는 모습", k:"T"}, b:{t:"조용한 곳에서 평온을 되찾은 모습", k:"L"}},
+];
+
+const TYPES={
+  TD:{em:"⚡", kind:"함께 · 움직이며", name:"번쩍 회복형", speed:92,
+    sub:"감정을 오래 붙들지 않아요. 사람들과 부딪히고 곧장 행동으로 털어내며 가장 빠르게 리셋되는 타입.",
+    you:"당신은 무너져도 오래 누워있지 않습니다. 누군가에게 털어놓고, 곧바로 \"그래서 뭘 하지\"로 넘어가 몸을 움직이죠. 함께의 에너지 + 실행력이 만나 회복 속도가 가장 빠른 유형입니다.",
+    doList:["믿을 사람에게 5분만 상황을 브리핑하고 바로 작은 행동 하나 실행하기","'오늘 할 수 있는 가장 작은 한 걸음'을 정해 바로 해치우기","함께 땀 흘리는 활동(운동·산책·같이 요리)으로 감정 태우기"],
+    watch:"너무 빨리 넘어가려다 감정을 '건너뛰는' 게 함정. 가끔은 해결 대신 그냥 느껴도 됩니다. 빠른 게 늘 깊은 건 아니에요."},
+  LD:{em:"🛡️", kind:"혼자 · 움직이며", name:"계획 회복형", speed:74,
+    sub:"혼자 조용히, 그러나 착착. 감정에 휩쓸리기보다 계획을 세워 상황을 바꾸며 단단하게 일어서는 타입.",
+    you:"당신은 무너진 다음 날, 혼자 책상 앞에 앉아 '무엇부터 정리할까'를 적는 사람입니다. 남에게 기대기보다 스스로 대책을 세워 실행하죠. 조용하지만 누구보다 단단하게 회복합니다.",
+    doList:["감정이 아니라 '해결 가능한 문제'와 '아닌 문제'를 종이에 나눠 적기","가장 통제 가능한 것 하나부터 실행해 통제감 되찾기","계획을 세운 뒤엔 의도적으로 '아무것도 안 하는 시간'도 넣기"],
+    watch:"혼자 다 처리하려다 감정을 억눌러 두는 게 위험 신호. 해결됐다고 다 괜찮은 건 아닙니다. 가끔은 도움을 청하는 것도 실력이에요."},
+  TF:{em:"🌊", kind:"함께 · 느끼며", name:"파도 회복형", speed:56,
+    sub:"오르락내리락 파도치며, 사람들과 감정을 나누는 사이 서서히 회복하는 따뜻하고 깊은 타입.",
+    you:"당신은 감정을 충분히 느끼고, 그걸 사람들과 나누며 회복합니다. 어떤 날은 무너지고 어떤 날은 괜찮고—파도처럼 오르내리지만, 그 나눔 속에서 마음이 진짜로 치유되는 사람이에요.",
+    doList:["안전한 사람에게 '해결책 말고 그냥 들어만 줘'라고 부탁하고 털어놓기","오늘의 감정을 이름 붙여 적어보기(예: 서운함 70%, 불안 30%)","기복이 있는 날엔 자책 대신 \"파도 치는 중\"이라고 인정하기"],
+    watch:"타인의 반응에 회복이 좌우되는 게 약점. 아무도 못 받아줄 때를 대비해 '혼자서도 나를 달래는 법' 하나쯤 준비해두세요."},
+  LF:{em:"🌙", kind:"혼자 · 느끼며", name:"심해 회복형", speed:38,
+    sub:"깊이 가라앉았다가 천천히 떠오르는 타입. 느리지만 가장 깊고 완전하게, 혼자만의 시간 속에서 회복합니다.",
+    you:"당신은 무너지면 깊은 바다 밑까지 가라앉습니다. 하지만 그 고요 속에서 혼자 감정을 곱씹고 정리하며, 시간이 지나면 누구보다 단단하고 깊은 통찰과 함께 떠오르죠. 느린 게 아니라 깊은 겁니다.",
+    doList:["회복에 시간이 걸리는 나를 재촉하지 않기—'느린 게 정상'이라고 허락하기","혼자만의 리추얼(차 한 잔·필사·산책) 하나를 회복 신호로 정해두기","가라앉은 날엔 큰 결정 미루고, 떠오른 뒤에 판단하기"],
+    watch:"혼자 너무 오래 잠기면 고립이 될 수 있어요. 가라앉는 건 괜찮지만, 딱 한 사람에게는 '나 지금 좀 깊다'고 신호를 보내두세요."},
+};
+const ORDER=["TD","LD","TF","LF"];
+const BARCOLOR={TD:"linear-gradient(90deg,#ffd56b,#ff8a5b)",LD:"linear-gradient(90deg,#8fd3ff,#5b8aff)",TF:"linear-gradient(90deg,#7fe3d0,#4fb0d1)",LF:"linear-gradient(90deg,#c09bff,#7a6bff)"};
+
+/* ---------- 상태 ---------- */
+let idx=0, order=[], picks=[], tally={T:0,L:0,F:0,D:0};
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(m){if(navigator.vibrate)try{navigator.vibrate(m);}catch(e){}}
+let _tt; function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2000);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');window.scrollTo(0,0);}
+function burst(x,y,n){if(reduce||!window.confetti)return;confetti({particleCount:n||20,spread:58,startVelocity:34,origin:{x,y},scalar:.85,colors:['#ffd56b','#ff8a5b','#ff6b9e','#8fd3ff','#c09bff'],disableForReducedMotion:true});}
+
+function start(){
+  idx=0; picks=[]; tally={T:0,L:0,F:0,D:0};
+  order=shuffle([...Array(QUESTIONS.length).keys()]);
+  show('quiz'); render();
+}
+
+function render(){
+  const qi=order[idx], Q=QUESTIONS[qi];
+  document.getElementById('qnum').textContent="Q"+(idx+1);
+  document.getElementById('cprog').textContent=(idx+1)+" / "+QUESTIONS.length;
+  document.getElementById('qtext').textContent=Q.q;
+  const card=document.getElementById('qcard');
+  card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
+  // 중립 라벨 A/B + 순서 무작위 셔플 (단서 숨김)
+  const opts=shuffle([{t:Q.a.t,k:Q.a.k},{t:Q.b.t,k:Q.b.k}]);
+  const box=document.getElementById('opts'); box.innerHTML="";
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt'; b.type='button';
+    b.innerHTML='<span class="tag">'+(i===0?'A':'B')+'</span>'+o.t;
+    b.onclick=(ev)=>choose(o.k,ev);
+    box.appendChild(b);
+  });
+  document.getElementById('backBtn').style.visibility= idx>0 ? 'visible':'hidden';
+  updateGauge();
+}
+
+function choose(key,ev){
+  picks[idx]=key; tally[key]++;
+  vibrate(24);
+  if(ev&&ev.clientX){burst(ev.clientX/innerWidth, ev.clientY/innerHeight,18);}
+  updateGauge();
+  if(idx+1===Math.ceil(QUESTIONS.length/2)) toast("절반 통과! 유형이 보이기 시작해요 ✨");
+  if(idx+1>=QUESTIONS.length){ setTimeout(finish,240); return; }
+  idx++; setTimeout(render,160);
+}
+
+function back(){
+  if(idx===0)return;
+  idx--;
+  const prev=picks[idx];
+  if(prev){tally[prev]--; picks[idx]=undefined;}
+  render();
+}
+
+function updateGauge(){
+  // 축 A: L↔T, 축 B: F↔D  (현재까지 tally 기준)
+  const aT=tally.T, aL=tally.L, bF=tally.F, bD=tally.D;
+  setSlider('fillA', aL, aT);
+  setSlider('fillB', bF, bD);
+  // 실시간 우세 유형 미리보기
+  const answered=picks.filter(Boolean).length;
+  const live=document.getElementById('clive');
+  if(answered<3){ live.innerHTML='<span class="em">🌫️</span> 유형 채워지는 중…'; return; }
+  const t=typeKey();
+  live.innerHTML='<span class="em">'+TYPES[t].em+'</span> '+TYPES[t].name+'?';
+}
+function setSlider(id,left,right){
+  const total=left+right, el=document.getElementById(id);
+  if(total===0){el.style.left='42%'; el.style.width='16%'; return;}
+  const rRatio=right/total; // 오른쪽(T 또는 D)으로 갈수록
+  // 중앙 기준 한쪽으로 채워지는 막대
+  if(rRatio>=.5){ el.style.left='50%'; el.style.width=((rRatio-.5)*100)+'%'; }
+  else{ const w=(.5-rRatio)*100; el.style.left=(50-w)+'%'; el.style.width=w+'%'; }
+}
+
+function typeKey(){
+  const A = tally.T>=tally.L ? 'T':'L';
+  const B = tally.D>=tally.F ? 'D':'F';
+  // key 형식 TD/LD/TF/LF
+  return A+B;
+}
+
+function finish(){
+  const t=typeKey(), T=TYPES[t];
+  show('result');
+  document.getElementById('rEm').textContent=T.em;
+  document.getElementById('rKind').textContent=T.kind;
+  document.getElementById('rName').textContent=T.name;
+  document.getElementById('rSub').textContent=T.sub;
+  document.getElementById('rYou').textContent=T.you;
+  const ul=document.getElementById('rDo'); ul.innerHTML='';
+  T.doList.forEach(d=>{const li=document.createElement('li'); li.textContent=d; ul.appendChild(li);});
+  document.getElementById('rWatch').textContent=T.watch;
+
+  // 속도 카운트업 + 막대
+  setTimeout(()=>{document.getElementById('rSpeedFill').style.width=T.speed+'%';},120);
+  countUp(document.getElementById('rSpeedNum'), T.speed, '%');
+
+  // 성향 지도
+  const scores={
+    TD: tally.T+tally.D, LD: tally.L+tally.D, TF: tally.T+tally.F, LF: tally.L+tally.F
+  };
+  const maxS=Math.max(...Object.values(scores),1);
+  const rows=document.getElementById('mapRows'); rows.innerHTML='';
+  ORDER.forEach(k=>{
+    const row=document.createElement('div'); row.className='maprow';
+    row.innerHTML='<span class="lb">'+TYPES[k].em+' <b>'+TYPES[k].name.replace('회복형','').trim()+'</b></span>'+
+      '<span class="mbar"><span class="mfill" style="background:'+BARCOLOR[k]+'"></span></span>';
+    rows.appendChild(row);
+    const fill=row.querySelector('.mfill');
+    setTimeout(()=>{fill.style.width=Math.round(scores[k]/maxS*100)+'%';},200);
+  });
+
+  // 완주 보상 폭죽 2연발
+  vibrate([30,50,30,50,120]);
+  if(!reduce&&window.confetti){
+    confetti({particleCount:120,spread:75,origin:{y:.35},scalar:1,colors:['#ffd56b','#ff8a5b','#ff6b9e','#8fd3ff','#c09bff']});
+    setTimeout(()=>confetti({particleCount:80,spread:100,startVelocity:45,origin:{y:.5}}),260);
+  }
+}
+
+function countUp(el,target,suf){
+  if(reduce){el.textContent=target+suf; return;}
+  let v=0; const step=Math.max(1,Math.round(target/28));
+  const iv=setInterval(()=>{v+=step; if(v>=target){v=target; clearInterval(iv);} el.textContent=v+suf;},26);
+}
+
+function shareResult(){
+  const t=typeKey(), T=TYPES[t];
+  const url="https://mimifactory.vibekr.com/apps/나의_회복탄력성_test.html";
+  const txt="무너진 다음 날의 나, 회복 속도 유형은 "+T.em+" "+T.name+" (회복 속도 "+T.speed+"%)!\n"+T.sub+"\n\n나의 회복 속도 테스트 👉 "+url;
+  if(navigator.share){navigator.share({title:'나의 회복탄력성 테스트',text:txt,url:url}).catch(()=>{});}
+  else if(navigator.clipboard){navigator.clipboard.writeText(txt).then(()=>toast('결과가 복사됐어요! 붙여넣기로 공유하세요 📋')).catch(()=>toast(T.name));}
+  else toast(T.name);
+}
+function restart(){show('home');}
+</script>
+</body>
+</html>
