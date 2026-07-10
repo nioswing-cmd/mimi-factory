@@ -228,6 +228,18 @@
       "teaser": "apps/마음을_여는_36가지_질문_friend.html",
       "premium": "apps/마음을_여는_36가지_질문_friend.html",
       "desc": "심리학자 아서 아론의 1997년 실험에서 나온 36가지 질문 — 3세트로 깊어지고, 마지막엔 4분"
+    },
+    {
+      "id": "mbti_궁합",
+      "type": "test",
+      "title": "MBTI 궁합",
+      "author": "미미팩토리 오리지널",
+      "date": "2026-07-10",
+      "color1": "#5ee7d8",
+      "color2": "#7aa6ff",
+      "teaser": "apps/mbti_궁합_test.html",
+      "premium": "apps/mbti_궁합_test.html",
+      "desc": "12문항으로 내 MBTI를 실시간 게이지로 진단하고, 좋아하는 사람과의 궁합 %와 관계 조언까지 확인하는 도파민 궁합 테스트."
     }
   ]
 }
