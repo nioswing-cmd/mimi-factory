@@ -1,0 +1,5 @@
+# 미미팩토리 캐시 정책
+# 앱이 매일 갱신되므로 HTML/JSON은 브라우저가 항상 서버와 대조(304면 빠르게 재사용)
+<FilesMatch "\.(html|json)$">
+  Header set Cache-Control "no-cache, must-revalidate"
+</FilesMatch>
