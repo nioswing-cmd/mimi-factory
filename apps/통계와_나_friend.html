@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>통계와 나 · 몇 %가 나와 같을까 · 미미팩토리</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#141a30; --bg2:#241b4e;
+  --accent1:#6be3ff; --accent2:#7a8bff;
+  --cream:#f3f7ff; --muted:#c3c8e8;
+  --card:#1e2144;
+  --ok:#54e39b; --hot:#ff6b9e;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 82% -10%, rgba(107,227,255,.12), transparent 55%),
+    radial-gradient(120% 90% at 8% 110%, rgba(255,107,158,.12), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed; min-height:100dvh;
+  transition:background .9s ease;
+}
+.wrap{max-width:520px; margin:0 auto; padding:20px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; margin:0; line-height:1.28;}
+.grad{
+  background:linear-gradient(105deg,var(--accent1),#7a8bff 48%,#ff6b9e);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+button{font-family:inherit; cursor:pointer; border:none; color:inherit;}
+button:focus-visible, .chip:focus-visible, input:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+.screen{display:none; animation:fadeIn .5s ease;}
+.screen.active{display:flex; flex-direction:column; flex:1;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1.2deg); opacity:.4;}60%{transform:scale(1.02) rotate(.4deg);}100%{transform:scale(1) rotate(0); opacity:1;}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+
+/* ---------- START ---------- */
+.hero{text-align:center; margin-top:6vh;}
+.badge{display:inline-block; font-size:12px; letter-spacing:.14em; color:var(--muted);
+  border:1px solid rgba(255,255,255,.16); padding:6px 14px; border-radius:99px; margin-bottom:18px;}
+.hero h1{font-size:40px;}
+.hero .sub{color:var(--muted); margin-top:14px; font-size:15px; line-height:1.7; word-break:keep-all;}
+.emoji-big{font-size:52px; animation:float 3.4s ease-in-out infinite; margin-bottom:6px;}
+.panel{background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:20px; padding:18px 16px; margin-top:18px;}
+.panel .lbl{font-size:13px; color:var(--muted); margin-bottom:10px; font-weight:500;}
+.names{display:flex; gap:10px;}
+.names input{flex:1; width:100%; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
+  color:var(--cream); border-radius:13px; padding:13px 12px; font-size:16px; text-align:center;}
+.names input::placeholder{color:#8c92bd;}
+.vs{align-self:center; font-family:'Jua'; color:var(--accent1); font-size:15px;}
+.counts{display:flex; flex-wrap:wrap; gap:9px; justify-content:center;}
+.count-btn{flex:1 1 80px; background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.12);
+  border-radius:14px; padding:14px 6px; text-align:center; transition:transform .25s cubic-bezier(.34,1.56,.64,1), border-color .2s, background .2s;}
+.count-btn b{font-family:'Jua'; font-size:23px; display:block;}
+.count-btn small{font-size:11px; color:var(--muted);}
+.count-btn.sel{border-color:var(--accent1); background:rgba(107,227,255,.14); transform:scale(1.05);}
+.big-btn{margin-top:20px; width:100%; padding:17px; border-radius:16px; font-family:'Jua'; font-size:20px;
+  color:#101322; background:linear-gradient(100deg,var(--accent1),var(--accent2)); box-shadow:0 10px 26px -8px var(--accent2);
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1);}
+.big-btn:active{transform:scale(.97);}
+.big-btn.ghost{background:transparent; color:var(--cream); border:1.5px solid rgba(255,255,255,.2); box-shadow:none;}
+.tip{font-size:12px; color:#8c92bd; text-align:center; margin-top:14px; line-height:1.6;}
+
+/* ---------- GAME ---------- */
+.topbar{display:flex; align-items:center; gap:10px; margin-bottom:4px;}
+.gauge{flex:1; height:9px; border-radius:99px; background:rgba(255,255,255,.09); overflow:hidden;}
+.gaugefill{height:100%; width:0%; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  box-shadow:0 0 14px 1px var(--accent2); transition:width .5s cubic-bezier(.22,1,.36,1);}
+.qnum{font-family:'Jua'; font-size:14px; color:var(--muted); white-space:nowrap;}
+.scoretag{font-size:12px; color:var(--accent1); font-weight:700; white-space:nowrap;}
+.qcard{background:var(--card); border:1px solid rgba(255,255,255,.09); border-radius:22px; padding:22px 18px; margin-top:16px;}
+.cat{font-size:12px; color:var(--muted); letter-spacing:.05em; margin-bottom:10px;}
+.qtext{font-family:'Jua'; font-size:25px; line-height:1.4; word-break:keep-all;}
+
+.stage{margin-top:16px;}
+.stage-lbl{font-size:13px; font-weight:700; color:var(--accent1); margin-bottom:12px; display:flex; align-items:center; gap:7px;}
+.stage-lbl .n{background:var(--accent1); color:#101322; width:20px; height:20px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-family:'Jua';}
+.player-block{margin-bottom:14px;}
+.player-name{font-size:13px; color:var(--muted); margin-bottom:8px; font-weight:500;}
+.player-name b{color:var(--cream);}
+.chips{display:flex; flex-direction:column; gap:9px;}
+.chip{width:100%; text-align:left; background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.12);
+  border-radius:14px; padding:14px 15px; font-size:16px; color:var(--cream);
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1), border-color .18s, background .18s;}
+.chip:active{transform:scale(.98);}
+.chip.selA{border-color:var(--accent1); background:rgba(107,227,255,.16);}
+.chip.selB{border-color:var(--hot); background:rgba(255,107,158,.16);}
+.match-note{text-align:center; font-family:'Jua'; font-size:16px; margin-top:6px; min-height:22px;}
+.match-note.yes{color:var(--ok);}
+.match-note.no{color:var(--muted);}
+
+/* predict */
+.predict-target{background:rgba(107,227,255,.1); border:1px solid rgba(107,227,255,.25); border-radius:14px; padding:13px 14px; font-size:14px; line-height:1.6; margin-bottom:16px; word-break:keep-all;}
+.predict-target b{color:var(--accent1);}
+.slider-val{text-align:center; font-family:'Jua'; font-size:48px; line-height:1; margin:6px 0 2px;}
+.slider-val small{font-size:20px;}
+.slider-hint{text-align:center; font-size:12px; color:var(--muted); margin-bottom:14px;}
+input[type=range]{-webkit-appearance:none; width:100%; height:12px; border-radius:99px; background:linear-gradient(90deg,var(--accent1),var(--accent2)); outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:30px; height:30px; border-radius:50%; background:#fff; border:4px solid var(--accent2); box-shadow:0 3px 10px rgba(0,0,0,.4); cursor:pointer;}
+input[type=range]::-moz-range-thumb{width:30px; height:30px; border-radius:50%; background:#fff; border:4px solid var(--accent2); cursor:pointer;}
+
+/* reveal */
+.reveal-head{text-align:center; margin-bottom:14px;}
+.reveal-head .big{font-family:'Jua'; font-size:20px;}
+.reveal-head .tier{font-family:'Jua'; font-size:30px; margin-top:4px;}
+.reveal-head .gained{color:var(--accent1); font-size:14px; font-weight:700; margin-top:4px;}
+.dist{margin-top:6px;}
+.dist-row{margin-bottom:11px;}
+.dist-row .rowtop{display:flex; justify-content:space-between; font-size:14px; margin-bottom:5px;}
+.dist-row .rowtop .who{font-size:11px; color:var(--muted);}
+.bar{height:26px; border-radius:9px; background:rgba(255,255,255,.07); overflow:hidden; position:relative;}
+.barfill{height:100%; width:0%; border-radius:9px; background:linear-gradient(90deg,rgba(255,255,255,.25),rgba(255,255,255,.4)); transition:width .9s cubic-bezier(.22,1,.36,1);}
+.dist-row.tgt .barfill{background:linear-gradient(90deg,var(--accent1),var(--accent2));}
+.bar .pct{position:absolute; right:9px; top:50%; transform:translateY(-50%); font-family:'Jua'; font-size:14px; color:#fff;}
+.guessline{text-align:center; font-size:13px; color:var(--muted); margin-top:6px;}
+.btnrow{display:flex; gap:10px; margin-top:auto; padding-top:18px;}
+.btnrow .big-btn{margin-top:0;}
+
+/* ---------- RESULT ---------- */
+.res-hero{text-align:center; margin-top:2vh;}
+.res-hero .emoji-big{font-size:58px;}
+.res-hero h2{font-size:30px; margin-top:4px;}
+.stat-grid{display:flex; gap:12px; margin-top:20px;}
+.stat-card{flex:1; background:var(--card); border:1px solid rgba(255,255,255,.09); border-radius:18px; padding:18px 10px; text-align:center;}
+.stat-card .k{font-size:12px; color:var(--muted);}
+.stat-card .v{font-family:'Jua'; font-size:34px; margin:6px 0 2px;}
+.stat-card .g{font-size:12px; color:var(--accent1); font-weight:700;}
+.res-msg{background:var(--card); border:1px solid rgba(255,255,255,.09); border-radius:18px; padding:18px 16px; margin-top:16px; text-align:center; line-height:1.7; word-break:keep-all;}
+.res-msg .title{font-family:'Jua'; font-size:20px;}
+.hl{background:rgba(255,255,255,.04); border-radius:14px; padding:13px 14px; margin-top:12px; font-size:13.5px; line-height:1.6; word-break:keep-all;}
+.hl b{color:var(--accent1);}
+
+/* footer */
+.footer{text-align:center; margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+.toast{position:fixed; left:50%; top:70px; transform:translateX(-50%) translateY(-20px);
+  background:rgba(30,33,68,.97); border:1.5px solid var(--accent1); color:var(--cream);
+  padding:13px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none;
+  transition:opacity .4s, transform .4s; z-index:50; max-width:90vw; text-align:center;}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+.hidden{display:none !important;}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="wrap">
+
+  <!-- ================= START ================= -->
+  <section class="screen active" id="startScreen">
+    <div class="hero">
+      <div class="emoji-big">📊</div>
+      <div class="badge">둘이 함께 · 친해지기</div>
+      <h1>통계와 <span class="grad">나</span></h1>
+      <p class="sub">전체 유저 중 <b>몇 %가 나와 같을까?</b><br>답을 고르고 → 비율을 예측하고 → 통계를 공개!<br>옆 사람과 나란히 하며 얼마나 통하는지 확인해요.</p>
+    </div>
+
+    <div class="panel">
+      <div class="lbl">👥 누구랑 하나요?</div>
+      <div class="names">
+        <input id="nameA" maxlength="6" placeholder="나">
+        <span class="vs">&amp;</span>
+        <input id="nameB" maxlength="6" placeholder="너">
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="lbl">🎯 몇 문항으로 할까요?</div>
+      <div class="counts" id="counts">
+        <button class="count-btn sel" data-n="5"><b>5</b><small>가볍게</small></button>
+        <button class="count-btn" data-n="10"><b>10</b><small>기본</small></button>
+        <button class="count-btn" data-n="20"><b>20</b><small>깊게</small></button>
+        <button class="count-btn" data-n="30"><b>30</b><small>찐친각</small></button>
+        <button class="count-btn" data-n="100"><b>100</b><small>끝까지</small></button>
+      </div>
+    </div>
+
+    <button class="big-btn" id="startBtn">시작하기 🚀</button>
+    <p class="tip">한 기기를 나란히 보며 번갈아 눌러요.<br>정답은 없어요 — 서로를 알아가는 게 목적!</p>
+  </section>
+
+  <!-- ================= GAME ================= -->
+  <section class="screen" id="gameScreen">
+    <div class="topbar">
+      <div class="qnum" id="qnum">1 / 5</div>
+      <div class="gauge"><div class="gaugefill" id="gaugefill"></div></div>
+      <div class="scoretag" id="scoretag">0점</div>
+    </div>
+
+    <div class="qcard pop" id="qcard">
+      <div class="cat" id="cat">🏠 일상</div>
+      <div class="qtext" id="qtext">질문</div>
+
+      <!-- STAGE 1: answer -->
+      <div class="stage" id="stageAnswer">
+        <div class="stage-lbl"><span class="n">1</span> 각자 솔직하게 골라요</div>
+        <div class="player-block">
+          <div class="player-name">🔵 <b id="pnA">나</b>의 답</div>
+          <div class="chips" id="chipsA"></div>
+        </div>
+        <div class="player-block">
+          <div class="player-name">🔴 <b id="pnB">너</b>의 답</div>
+          <div class="chips" id="chipsB"></div>
+        </div>
+        <div class="match-note" id="matchNote"></div>
+        <button class="big-btn" id="toPredictBtn" disabled style="opacity:.5">둘 다 고르면 예측하기 →</button>
+      </div>
+
+      <!-- STAGE 2: predict -->
+      <div class="stage hidden" id="stagePredict">
+        <div class="stage-lbl"><span class="n">2</span> 함께 예측해요</div>
+        <div class="predict-target" id="predictTarget"></div>
+        <div class="slider-val" id="sliderVal">50<small>%</small></div>
+        <div class="slider-hint">전체 유저 중 이 답을 고른 비율은?</div>
+        <input type="range" id="slider" min="1" max="99" value="50">
+        <button class="big-btn" id="revealBtn" style="margin-top:20px">통계 공개! 🎉</button>
+      </div>
+
+      <!-- STAGE 3: reveal -->
+      <div class="stage hidden" id="stageReveal">
+        <div class="reveal-head">
+          <div class="big" id="revealBig"></div>
+          <div class="tier" id="revealTier"></div>
+          <div class="gained" id="revealGained"></div>
+        </div>
+        <div class="dist" id="dist"></div>
+        <div class="guessline" id="guessline"></div>
+      </div>
+    </div>
+
+    <div class="btnrow" id="nextRow" style="display:none">
+      <button class="big-btn" id="nextBtn">다음 문항 →</button>
+    </div>
+  </section>
+
+  <!-- ================= RESULT ================= -->
+  <section class="screen" id="resultScreen">
+    <div class="res-hero">
+      <div class="emoji-big" id="resEmoji">🎊</div>
+      <div class="badge">결과 리포트</div>
+      <h2 id="resTitle">우리, 이만큼 통했어요</h2>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="k">🤝 우리 궁합</div>
+        <div class="v grad" id="matchPct">0%</div>
+        <div class="g" id="matchSub">0/0 문항 일치</div>
+      </div>
+      <div class="stat-card">
+        <div class="k">🧠 통계 감각</div>
+        <div class="v grad" id="senseScore">0</div>
+        <div class="g" id="senseSub">점</div>
+      </div>
+    </div>
+
+    <div class="res-msg">
+      <div class="title" id="gradeTitle">🎯</div>
+      <div id="gradeMsg"></div>
+    </div>
+
+    <div class="hl" id="hlBox"></div>
+
+    <div class="btnrow">
+      <button class="big-btn" id="shareBtn">결과 복사 📋</button>
+      <button class="big-btn ghost" id="againBtn">다시하기 🔁</button>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <div class="footer">
+    <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+    <div class="mf-logo">미미팩토리</div>
+    <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+  </div>
+
+</div>
+
+<script>
+/* ===== 데이터: 100 문항. 각 옵션 p = 전체 유저 중 그 답을 고른 비율(%) ===== */
+const BANK=[
+ ["🏠 일상","아침에 일어나 이불을 갠다",[["갠다",34],["안 갠다",66]]],
+ ["🏠 일상","치약은 끝에서부터 짠다",[["끝부터 야무지게",39],["아무 데나",61]]],
+ ["🍜 입맛","탕수육은 부먹 vs 찍먹",[["부먹",43],["찍먹",57]]],
+ ["🍜 입맛","민트초코, 맛있다",[["맛있다",37],["치약맛…",63]]],
+ ["🍜 입맛","라면에 계란을 넣는다면",[["풀어서",46],["통으로",34],["안 넣는다",20]]],
+ ["📱 디지털","카톡 읽고 씹은(읽씹) 적 있다",[["있다",78],["없다",22]]],
+ ["📱 디지털","화장실에 폰을 들고 간다",[["들고 간다",73],["안 간다",27]]],
+ ["🧠 성향","나는 계획형이다",[["계획형",44],["즉흥형",56]]],
+ ["🌙 은밀","자면서 침 흘린 적 있다",[["있다",64],["없다",36]]],
+ ["💗 관계","첫눈에 반한 적 있다",[["있다",51],["없다",49]]],
+ ["🏠 일상","양말은 벗은 그대로 둔다",[["뒤집힌 채로",58],["바로 펴서",42]]],
+ ["🍜 입맛","회식은 역시 고기가 최고다",[["고기지",61],["아니다",39]]],
+ ["🍜 입맛","아침을 거의 안 먹는다",[["안 먹는다",54],["챙겨 먹는다",46]]],
+ ["💸 소비","택배 오면 그날 바로 뜯는다",[["바로 뜯음",82],["묵혀둠",18]]],
+ ["🧠 성향","MBTI 첫 글자는 E다",[["E (외향)",43],["I (내향)",57]]],
+ ["📱 디지털","영상을 1.5배속 이상으로 본다",[["빨리 감기",49],["정속파",51]]],
+ ["🌙 은밀","가위 눌린 적 있다",[["있다",56],["없다",44]]],
+ ["💗 관계","옛 연인 SNS를 몰래 본 적 있다",[["있다",67],["없다",33]]],
+ ["🏠 일상","집에서 실내화를 신는다",[["신는다",41],["맨발파",59]]],
+ ["🍜 입맛","파인애플 피자, 인정한다",[["인정",45],["절대 반대",55]]],
+ ["🧠 성향","혼밥이 아무렇지 않다",[["편하다",62],["부담된다",38]]],
+ ["💸 소비","충동구매하고 후회한 적 많다",[["많다",71],["별로",29]]],
+ ["📱 디지털","알람을 여러 개 맞춰둔다",[["여러 개",66],["하나면 충분",34]]],
+ ["🌙 은밀","샤워하며 노래를 부른다",[["부른다",53],["안 부른다",47]]],
+ ["💗 관계","연락은 내가 먼저 하는 편이다",[["내가 먼저",48],["상대가 먼저",52]]],
+ ["🏠 일상","설거지를 바로 하는 편이다",[["바로",39],["쌓아둠",61]]],
+ ["🍜 입맛","매운 음식을 잘 먹는다",[["잘 먹음",57],["약함",43]]],
+ ["🧠 성향","결정 장애가 있는 편이다",[["있다",64],["없다",36]]],
+ ["📱 디지털","인스타보다 유튜브를 더 본다",[["유튜브",58],["인스타",42]]],
+ ["🌙 은밀","몰래 뀌고 모른 척한 적 있다",[["있다",81],["없다",19]]],
+ ["💗 관계","썸만 타다 끝난 적 있다",[["있다",69],["없다",31]]],
+ ["🏠 일상","겨울에 양말 신고 잔다",[["신고 잠",42],["벗고 잠",58]]],
+ ["🍜 입맛","커피 없이는 못 산다",[["못 산다",55],["괜찮다",45]]],
+ ["💸 소비","가계부를 쓴다",[["쓴다",27],["안 쓴다",73]]],
+ ["🧠 성향","낯가림이 심한 편이다",[["심하다",51],["아니다",49]]],
+ ["📱 디지털","잠들기 직전까지 폰을 본다",[["본다",79],["아니다",21]]],
+ ["🌙 은밀","거울 보며 표정 연습한 적 있다",[["있다",58],["없다",42]]],
+ ["💗 관계","고백은 남자가 해야 한다",[["그렇다",34],["아니다",66]]],
+ ["🏠 일상","물건을 제자리에 잘 둔다",[["잘 둠",45],["아무 데나",55]]],
+ ["🍜 입맛","치킨은 순살보다 뼈다",[["뼈치킨",47],["순살",53]]],
+ ["🧠 성향","감정 기복이 있는 편이다",[["있다",59],["없다",41]]],
+ ["💸 소비","명품 하나쯤은 갖고 싶다",[["갖고 싶다",63],["관심 없다",37]]],
+ ["📱 디지털","안 쓰는 앱 알림을 방치한다",[["방치함",61],["바로 정리",39]]],
+ ["🌙 은밀","혼자 있을 때 혼잣말을 한다",[["한다",66],["안 한다",34]]],
+ ["💗 관계","친구보다 연인이 우선이다",[["연인 우선",38],["친구 우선",62]]],
+ ["🏠 일상","빨래를 개서 바로 넣는다",[["바로 넣음",36],["의자에 쌓음",64]]],
+ ["🍜 입맛","국물을 마지막 한 방울까지 마신다",[["다 마심",44],["남김",56]]],
+ ["🧠 성향","남 눈치를 많이 본다",[["많이 봄",57],["아니다",43]]],
+ ["📱 디지털","스팸 문자에 답장해본 적 있다",[["있다",23],["없다",77]]],
+ ["🌙 은밀","코 곤다는 말을 들은 적 있다",[["있다",52],["없다",48]]],
+ ["💗 관계","짝사랑을 오래 해본 적 있다",[["있다",68],["없다",32]]],
+ ["🏠 일상","이어폰 줄을 잘 감아 둔다",[["잘 감음",38],["엉킨 채",62]]],
+ ["🍜 입맛","회를 좋아한다",[["좋아함",58],["별로",42]]],
+ ["🧠 성향","나는 아침형 인간이다",[["아침형",36],["저녁형",64]]],
+ ["💸 소비","세일하면 필요 없어도 산다",[["산다",54],["아니다",46]]],
+ ["📱 디지털","전화보다 문자가 편하다",[["문자파",71],["전화파",29]]],
+ ["🌙 은밀","울면서 잠든 적 있다",[["있다",61],["없다",39]]],
+ ["💗 관계","연애할 때 질투가 심한 편이다",[["심하다",49],["아니다",51]]],
+ ["🏠 일상","쓰레기를 미루다 넘치게 한 적 있다",[["있다",66],["없다",34]]],
+ ["🍜 입맛","고수(향채)를 좋아한다",[["좋아함",33],["못 먹음",67]]],
+ ["🧠 성향","완벽주의 성향이 있다",[["있다",55],["없다",45]]],
+ ["💸 소비","월급 받으면 며칠 만에 텅장 된다",[["금방 텅장",58],["잘 아낀다",42]]],
+ ["📱 디지털","안 읽은 메일이 100통 넘는다",[["넘는다",47],["정리한다",53]]],
+ ["🌙 은밀","야식의 유혹에 자주 진다",[["자주 짐",72],["참는다",28]]],
+ ["💗 관계","첫 데이트 비용은 더치페이가 맞다",[["더치",57],["한 명이",43]]],
+ ["🏠 일상","택배 상자를 안 버리고 쌓아둔다",[["쌓아둠",51],["바로 버림",49]]],
+ ["🍜 입맛","라면 국물에 밥 말아 먹는다",[["말아 먹음",74],["안 그럼",26]]],
+ ["🧠 성향","혼자만의 시간이 꼭 필요하다",[["꼭 필요",78],["아니다",22]]],
+ ["📱 디지털","사진첩에 스크린샷이 수백 장 있다",[["수백 장",63],["정리함",37]]],
+ ["🌙 은밀","짝사랑 상대 이름을 검색해본 적 있다",[["있다",59],["없다",41]]],
+ ["💗 관계","연애보다 일이 중요한 시기가 있었다",[["있다",64],["없다",36]]],
+ ["🏠 일상","창문 열고 자는 걸 좋아한다",[["좋아함",31],["싫음",69]]],
+ ["🍜 입맛","달달한 디저트를 자주 찾는다",[["자주",61],["별로",39]]],
+ ["🧠 성향","화가 나도 잘 표현 못 한다",[["못 함",58],["표현함",42]]],
+ ["💸 소비","커피값이 아깝다 느낀 적 있다",[["있다",53],["없다",47]]],
+ ["📱 디지털","일하다 딴짓으로 폰 본 적 있다",[["있다",89],["없다",11]]],
+ ["🌙 은밀","이불킥할 흑역사가 있다",[["있다",84],["없다",16]]],
+ ["💗 관계","연애 초반이 제일 설렌다",[["그렇다",67],["아니다",33]]],
+ ["🏠 일상","물을 자주 안 마시는 편이다",[["안 마심",56],["잘 마심",44]]],
+ ["🍜 입맛","혼술을 즐긴다",[["즐김",41],["아니다",59]]],
+ ["🧠 성향","칭찬을 받으면 어색하다",[["어색함",62],["좋음",38]]],
+ ["💸 소비","구독 서비스를 3개 이상 쓴다",[["3개 이상",48],["아니다",52]]],
+ ["📱 디지털","모르는 번호는 안 받는다",[["안 받음",69],["받음",31]]],
+ ["🌙 은밀","혼자 짠 음식이 당길 때가 있다",[["있다",57],["없다",43]]],
+ ["💗 관계","연인과 취미가 같아야 한다",[["그렇다",39],["아니다",61]]],
+ ["🏠 일상","주말에 하루 종일 안 나간 적 있다",[["있다",76],["없다",24]]],
+ ["🍜 입맛","냉면은 물냉 vs 비냉",[["물냉면",46],["비빔냉면",54]]],
+ ["🧠 성향","쉽게 싫증을 내는 편이다",[["그렇다",47],["아니다",53]]],
+ ["💸 소비","비상금을 따로 숨겨둔다",[["숨겨둠",44],["없음",56]]],
+ ["📱 디지털","SNS를 며칠 끊어본 적 있다",[["있다",51],["없다",49]]],
+ ["🌙 은밀","샤워를 저녁에 한다",[["저녁파",63],["아침파",37]]],
+ ["💗 관계","결혼은 꼭 해야 한다",[["그렇다",41],["아니다",59]]],
+ ["🏠 일상","리모컨·충전기 위치로 다퉈본 적 있다",[["있다",52],["없다",48]]],
+ ["🍜 입맛","편의점 음식으로 한 끼 자주 때운다",[["자주",58],["아니다",42]]],
+ ["🧠 성향","지나간 일을 오래 곱씹는다",[["곱씹음",61],["금방 잊음",39]]],
+ ["💸 소비","포인트·쿠폰을 꼼꼼히 챙긴다",[["챙김",49],["귀찮음",51]]],
+ ["📱 디지털","배터리를 자주 20% 밑으로 떨군다",[["자주",57],["미리 충전",43]]],
+ ["🌙 은밀","가끔 내가 특별한 사람 같다",[["느낀다",66],["아니다",34]]],
+ ["💗 관계","사랑한다는 말을 자주 하는 편이다",[["자주",43],["아끼는 편",57]]],
+ ["🧠 성향","혼자 영화관·식당을 잘 간다",[["잘 감",47],["못 감",53]]]
+];
+
+/* ===== 상태 ===== */
+let S={};
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(x){if(navigator.vibrate)try{navigator.vibrate(x);}catch(e){}}
+let _tt;
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2000);}
+function $(id){return document.getElementById(id);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');window.scrollTo(0,0);}
+
+/* ===== 시작 화면 ===== */
+let chosenN=5;
+$('counts').addEventListener('click',e=>{
+  const b=e.target.closest('.count-btn'); if(!b)return;
+  document.querySelectorAll('.count-btn').forEach(x=>x.classList.remove('sel'));
+  b.classList.add('sel'); chosenN=+b.dataset.n; vibrate(12);
+});
+$('startBtn').addEventListener('click',startGame);
+
+function startGame(){
+  const nameA=($('nameA').value.trim()||'나').slice(0,6);
+  const nameB=($('nameB').value.trim()||'너').slice(0,6);
+  const qs=shuffle(BANK.slice()).slice(0,Math.min(chosenN,BANK.length));
+  S={nameA,nameB,qs,i:0,ansA:[],ansB:[],guess:[],score:[],matches:0,total:qs.length};
+  show('gameScreen');
+  renderQ();
+}
+
+/* ===== 문항 렌더 ===== */
+function renderQ(){
+  const q=S.qs[S.i];
+  S.curA=null; S.curB=null;
+  $('qnum').textContent=`${S.i+1} / ${S.total}`;
+  $('scoretag').textContent=`${S.score.reduce((a,b)=>a+b,0)}점`;
+  $('gaugefill').style.width=(S.i/S.total*100)+'%';
+  $('cat').textContent=q[0];
+  $('qtext').textContent=q[1];
+  $('pnA').textContent=S.nameA; $('pnB').textContent=S.nameB;
+
+  // 옵션 순서 섞기(변주) — 표시용 인덱스와 원본 매핑
+  const opts=q[2].map((o,idx)=>({t:o[0],p:o[1],idx}));
+  S.opts=opts;
+  buildChips('chipsA','A',opts);
+  buildChips('chipsB','B',opts);
+  $('matchNote').textContent=''; $('matchNote').className='match-note';
+  $('toPredictBtn').disabled=true; $('toPredictBtn').style.opacity=.5; $('toPredictBtn').textContent='둘 다 고르면 예측하기 →';
+
+  $('stageAnswer').classList.remove('hidden');
+  $('stagePredict').classList.add('hidden');
+  $('stageReveal').classList.add('hidden');
+  $('nextRow').style.display='none';
+  const c=$('qcard'); c.classList.remove('pop'); void c.offsetWidth; c.classList.add('pop');
+}
+
+function buildChips(cid,who,opts){
+  const box=$(cid); box.innerHTML='';
+  opts.forEach(o=>{
+    const b=document.createElement('button');
+    b.className='chip'; b.textContent=o.t;
+    b.addEventListener('click',()=>pick(who,o.idx,b,box));
+    box.appendChild(b);
+  });
+}
+function pick(who,idx,btn,box){
+  box.querySelectorAll('.chip').forEach(c=>c.classList.remove('selA','selB'));
+  btn.classList.add(who==='A'?'selA':'selB');
+  if(who==='A')S.curA=idx; else S.curB=idx;
+  vibrate(16);
+  if(S.curA!==null && S.curB!==null){
+    const same=S.curA===S.curB;
+    const mn=$('matchNote');
+    mn.className='match-note '+(same?'yes':'no');
+    mn.textContent=same?'💞 통했다! 둘 다 같은 답':'🌗 서로 다른 답이네요';
+    const btn2=$('toPredictBtn'); btn2.disabled=false; btn2.style.opacity=1; btn2.textContent='함께 예측하기 →';
+  }
+}
+
+$('toPredictBtn').addEventListener('click',()=>{
+  if(S.curA===null||S.curB===null)return;
+  // 궁합 집계
+  S.ansA[S.i]=S.curA; S.ansB[S.i]=S.curB;
+  // 예측 대상: 문항 번갈아 A/B 답 기준
+  const targetWho=(S.i%2===0)?'A':'B';
+  const tIdx=targetWho==='A'?S.curA:S.curB;
+  S.tWho=targetWho; S.tIdx=tIdx;
+  const name=targetWho==='A'?S.nameA:S.nameB;
+  const optText=S.qs[S.i][2][tIdx][0];
+  $('predictTarget').innerHTML=`<b>${escapeHtml(name)}</b>님은 「<b>${escapeHtml(optText)}</b>」을(를) 골랐어요.<br>전체 유저 중 이 답을 고른 사람은 <b>몇 %</b>일까요?`;
+  $('slider').value=50; $('sliderVal').innerHTML='50<small>%</small>';
+  $('stageAnswer').classList.add('hidden');
+  $('stagePredict').classList.remove('hidden');
+  vibrate(16); window.scrollTo({top:0,behavior:'smooth'});
+});
+
+$('slider').addEventListener('input',e=>{
+  $('sliderVal').innerHTML=e.target.value+'<small>%</small>';
+});
+
+$('revealBtn').addEventListener('click',reveal);
+
+function reveal(){
+  const guess=+$('slider').value;
+  const actual=S.qs[S.i][2][S.tIdx][1];
+  const diff=Math.abs(guess-actual);
+  S.guess[S.i]=guess;
+  let pts,tier,big;
+  if(diff<=4){pts=100;tier='🎯 통계 요정!';big='감각 미쳤다';}
+  else if(diff<=10){pts=70;tier='👏 좋은 감각';big='꽤 정확해요';}
+  else if(diff<=20){pts=45;tier='🙂 무난';big='살짝 빗나감';}
+  else{pts=15;tier='😵 반전!';big='의외의 결과';}
+  S.score[S.i]=pts;
+  if(S.curA===S.curB)S.matches++;
+
+  $('revealBig').textContent=big;
+  $('revealTier').textContent=tier;
+  $('revealGained').textContent=`+${pts}점  ·  예측 ${guess}% / 실제 ${actual}%`;
+
+  // 분포 바
+  const distBox=$('dist'); distBox.innerHTML='';
+  const q=S.qs[S.i];
+  q[2].forEach((o,idx)=>{
+    const row=document.createElement('div');
+    row.className='dist-row'+(idx===S.tIdx?' tgt':'');
+    let who='';
+    if(S.curA===idx)who+='🔵'+escapeHtml(S.nameA)+' ';
+    if(S.curB===idx)who+='🔴'+escapeHtml(S.nameB);
+    row.innerHTML=`<div class="rowtop"><span>${escapeHtml(o[0])}</span><span class="who">${who}</span></div>
+      <div class="bar"><div class="barfill"></div><span class="pct">${o[1]}%</span></div>`;
+    distBox.appendChild(row);
+    requestAnimationFrame(()=>{setTimeout(()=>{row.querySelector('.barfill').style.width=o[1]+'%';},60);});
+  });
+  $('guessline').textContent=`예측 ${guess}%  →  실제 ${actual}%  (오차 ${diff}%p)`;
+
+  $('scoretag').textContent=`${S.score.reduce((a,b)=>a+b,0)}점`;
+  $('gaugefill').style.width=((S.i+1)/S.total*100)+'%';
+  $('stagePredict').classList.add('hidden');
+  $('stageReveal').classList.remove('hidden');
+  $('nextRow').style.display='flex';
+  $('nextBtn').textContent=(S.i+1>=S.total)?'결과 보기 🎊':'다음 문항 →';
+  if(diff<=4){toast('🎯 통계 요정 등장!');vibrate([20,40,20]);}else if(diff<=10){vibrate(24);}else{vibrate(16);}
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+$('nextBtn').addEventListener('click',()=>{
+  S.i++;
+  if(S.i>=S.total){finish();}
+  else{renderQ();}
+});
+
+/* ===== 결과 ===== */
+function finish(){
+  const totalScore=S.score.reduce((a,b)=>a+b,0);
+  const maxScore=S.total*100;
+  const matchPct=Math.round(S.matches/S.total*100);
+  const avg=Math.round(totalScore/S.total);
+
+  $('matchPct').textContent=matchPct+'%';
+  $('matchSub').textContent=`${S.matches}/${S.total} 문항 일치`;
+  $('senseScore').textContent=totalScore;
+  $('senseSub').textContent=`평균 ${avg}점 / 100`;
+
+  // 궁합 등급
+  let gt,gm,emoji;
+  if(matchPct>=75){emoji='💞';gt='소울메이트급';gm='이 정도면 전생에 한 몸? 취향도 습관도 놀랍도록 닮았어요. 서로 말 안 해도 통하는 사이!';}
+  else if(matchPct>=55){emoji='🤝';gt='찐친 케미';gm='꽤 잘 맞는 편! 다른 점은 오히려 대화거리가 되는 딱 좋은 궁합이에요.';}
+  else if(matchPct>=35){emoji='🌗';gt='서로 다른 매력';gm='닮은 듯 다른 두 사람. 다른 점에서 새로운 걸 배우는 관계예요. 오늘 서로를 조금 더 알았죠?';}
+  else{emoji='🌈';gt='정반대의 끌림';gm='취향은 극과 극! 그래서 함께 있으면 지루할 틈이 없어요. 다름을 즐기는 사이가 되어봐요.';}
+  $('resEmoji').textContent=emoji;
+  $('gradeTitle').textContent=emoji+' '+gt;
+  $('gradeMsg').textContent=gm;
+
+  // 통계 감각 코멘트 + 하이라이트
+  let senseComment;
+  if(avg>=75)senseComment='세상 물정에 훤한 <b>통계 요정</b> 콤비!';
+  else if(avg>=50)senseComment='제법 눈치 빠른 <b>감각파</b> 콤비네요.';
+  else senseComment='세상은 늘 예상 밖 — <b>반전에 약한</b> 순수 콤비 😆';
+
+  // 가장 통한 / 가장 놀란 순간
+  let bestMatchQ=null, biggestSurprise=null, maxDiff=-1;
+  for(let k=0;k<S.total;k++){
+    if(S.ansA[k]===S.ansB[k] && bestMatchQ===null)bestMatchQ=k;
+    const g=S.guess[k], act=S.qs[k][2][ (k%2===0?S.ansA[k]:S.ansB[k]) ][1];
+    const d=Math.abs(g-act);
+    if(d>maxDiff){maxDiff=d;biggestSurprise=k;}
+  }
+  let hl='';
+  hl+=`🧠 ${senseComment}<br>`;
+  if(bestMatchQ!==null){
+    hl+=`<br>💞 <b>가장 통한 순간</b><br>“${escapeHtml(S.qs[bestMatchQ][1])}” — 둘 다 같은 답!`;
+  }
+  if(biggestSurprise!==null){
+    const k=biggestSurprise;
+    const act=S.qs[k][2][ (k%2===0?S.ansA[k]:S.ansB[k]) ][1];
+    hl+=`<br><br>😵 <b>가장 놀란 통계</b><br>“${escapeHtml(S.qs[k][1])}” — 예측 ${S.guess[k]}% vs 실제 ${act}%`;
+  }
+  $('hlBox').innerHTML=hl;
+
+  S.finalText=`📊 통계와 나 — ${S.nameA} & ${S.nameB}\n`+
+    `🤝 우리 궁합 ${matchPct}% (${S.matches}/${S.total} 일치)\n`+
+    `🧠 통계 감각 ${totalScore}점 (평균 ${avg}/100)\n`+
+    `${emoji} ${gt}\n👉 https://mimifactory.vibekr.com/apps/통계와_나_friend.html`;
+
+  show('resultScreen');
+  vibrate([60,80,60,80,120]);
+}
+
+$('shareBtn').addEventListener('click',()=>{
+  const txt=S.finalText||'통계와 나';
+  if(navigator.share){navigator.share({text:txt}).catch(()=>{});}
+  else if(navigator.clipboard){navigator.clipboard.writeText(txt).then(()=>toast('결과를 복사했어요! 📋')).catch(()=>toast(txt));}
+  else{toast('복사가 지원되지 않아요');}
+});
+$('againBtn').addEventListener('click',()=>{show('startScreen');window.scrollTo(0,0);});
+
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+</script>
+</body>
+</html>

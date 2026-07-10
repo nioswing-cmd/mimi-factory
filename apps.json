@@ -264,6 +264,18 @@
       "teaser": "apps/mbti_궁합_friend.html",
       "premium": "apps/mbti_궁합_friend.html",
       "desc": "폰 하나로 둘이 번갈아 MBTI를 진단하고, 친구·연인·가족 관계에 맞춘 궁합 %와 오늘부터 친해지는 실천 미션까지 함께 즐기는 도파민 궁합 앱"
+    },
+    {
+      "id": "통계와_나",
+      "type": "friend",
+      "title": "통계와 나",
+      "author": "미미팩토리 오리지널",
+      "date": "2026-07-10",
+      "color1": "#8affc1",
+      "color2": "#5ee7d8",
+      "teaser": "apps/통계와_나_friend.html",
+      "premium": "apps/통계와_나_friend.html",
+      "desc": "전체 유저 중 몇 %가 나와 같을까? 답을 고르고 비율을 예측한 뒤 통계를 공개하며, 옆 사람과 나란히 얼마나 통하는지 확인하는 둘이 함께 친해"
     }
   ]
 }
