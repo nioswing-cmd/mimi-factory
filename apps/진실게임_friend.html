@@ -209,8 +209,7 @@ h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
       <button class="pick" data-n="5"><span class="n">5</span><span class="u">가볍게 맛보기</span></button>
       <button class="pick" data-n="10"><span class="n">10</span><span class="u">티타임</span></button>
       <button class="pick" data-n="20"><span class="n">20</span><span class="u">제대로</span></button>
-      <button class="pick" data-n="30"><span class="n">30</span><span class="u">깊게</span></button>
-      <button class="pick full" data-n="100"><span class="n">100 · 완전 정복</span><span class="u">우리, 끝까지 가보자</span></button>
+      <button class="pick full" data-n="100"><span class="n">100 · 완전정복</span><span class="u">무인도 난파된다면..</span></button>
     </div>
 
     <button class="btn" id="startBtn" disabled>질문 개수를 골라주세요</button>
@@ -430,7 +429,7 @@ let passedQs=[];    // {who, q, tag}
 
 /* 선택 개수 → 5단계 균등 분배(항상 깊이가 점층) */
 function buildDeck(total){
-  const per = total/5;      // 5,10,20,30,100 모두 5의 배수 → 정수
+  const per = total/5;      // 5,10,20,100 모두 5의 배수 → 정수
   const d=[];
   LEVELS.forEach(L=>{
     const picked = shuffle(L.qs.slice()).slice(0, per);
