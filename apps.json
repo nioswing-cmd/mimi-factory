@@ -240,6 +240,18 @@
       "teaser": "apps/mbti_궁합_test.html",
       "premium": "apps/mbti_궁합_test.html",
       "desc": "12문항으로 내 MBTI를 실시간 게이지로 진단하고, 좋아하는 사람과의 궁합 %와 관계 조언까지 확인하는 도파민 궁합 테스트."
+    },
+    {
+      "id": "번아웃_신호등",
+      "type": "test",
+      "title": "번아웃 신호등",
+      "author": "미미팩토리 오리지널",
+      "date": "2026-07-10",
+      "color1": "#ff8ad0",
+      "color2": "#b78bf5",
+      "teaser": "apps/번아웃_신호등_test.html",
+      "premium": "apps/번아웃_신호등_test.html",
+      "desc": "12문항 1분, 답할 때마다 실시간으로 켜지는 신호등으로 지금 내 번아웃이 초록·노랑·빨강 어느 단계인지 확인하고 영역별 맞춤 처방까지 받는 자"
     }
   ]
 }

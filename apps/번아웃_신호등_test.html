@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>번아웃 신호등 — 지금 내 신호는 무슨 색?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#141727; --bg2:#20243a;
+  --accent1:#5be48a; --accent2:#37c46e;      /* 현재 신호색(초록 시작) */
+  --cream:#f3f6ff; --muted:#a7b0cf;
+  --card:#1c2138;
+  --green1:#5be48a; --green2:#37c46e;
+  --yellow1:#ffd764; --yellow2:#f7ad2e;
+  --red1:#ff6b6b; --red2:#e23a4e;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 82% -10%, rgba(91,228,138,.10), transparent 55%),
+    radial-gradient(120% 90% at 8% 112%, rgba(226,58,78,.12), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  min-height:100dvh;
+  transition:background .9s ease;
+}
+.wrap{max-width:520px; margin:0 auto; padding:20px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(100deg,var(--green1),var(--yellow1) 50%,var(--red1));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
+.hidden{display:none !important;}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1.2deg); opacity:.4;}60%{transform:scale(1.02) rotate(.4deg);}100%{transform:scale(1) rotate(0); opacity:1;}}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+.fade{animation:fadeIn .5s ease both;}
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+
+/* ===== 홈 ===== */
+.home{flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; gap:18px;}
+.sig-emoji{font-size:64px; line-height:1; animation:floaty 3.4s ease-in-out infinite;}
+.home h1{font-size:34px; margin:6px 0 0;}
+.home .sub{color:var(--muted); font-size:15px; line-height:1.7; word-break:keep-all;}
+.chips{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:4px;}
+.chip{font-size:12.5px; padding:7px 13px; border-radius:99px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); color:var(--muted);}
+.btn{
+  font-family:'Jua',sans-serif; font-size:19px; border:none; cursor:pointer;
+  color:#10131f; padding:17px 20px; border-radius:18px; width:100%;
+  background:linear-gradient(95deg,var(--accent1),var(--accent2));
+  box-shadow:0 10px 26px -8px var(--accent2); transition:transform .15s, box-shadow .4s, background .6s;
+}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:rgba(255,255,255,.07); color:var(--cream); box-shadow:none; border:1px solid rgba(255,255,255,.14);}
+.note{font-size:12px; color:var(--muted); opacity:.8; line-height:1.6;}
+
+/* ===== 신호등 게이지 ===== */
+.topbar{position:sticky; top:0; z-index:5; padding:6px 0 12px; background:linear-gradient(180deg,var(--bg1) 70%,transparent);}
+.tl-row{display:flex; align-items:center; gap:16px;}
+.lights{
+  display:flex; flex-direction:column; gap:9px; padding:11px 10px; border-radius:20px;
+  background:linear-gradient(180deg,#0c0e18,#151827); border:1px solid rgba(255,255,255,.09);
+  box-shadow:inset 0 2px 8px rgba(0,0,0,.5);
+}
+.lamp{width:30px; height:30px; border-radius:50%; background:#2a2f45; position:relative; transition:all .45s cubic-bezier(.34,1.56,.64,1); opacity:.28;}
+.lamp.on{opacity:1;}
+.lamp.red.on{background:radial-gradient(circle at 35% 30%,#ff9a9a,var(--red2)); box-shadow:0 0 20px 3px rgba(255,80,90,.75);}
+.lamp.yellow.on{background:radial-gradient(circle at 35% 30%,#ffe79c,var(--yellow2)); box-shadow:0 0 20px 3px rgba(247,173,46,.7);}
+.lamp.green.on{background:radial-gradient(circle at 35% 30%,#b5f7c9,var(--green2)); box-shadow:0 0 20px 3px rgba(55,196,110,.7);}
+.lamp.pulse{animation:lampPulse 1.4s ease-in-out infinite;}
+@keyframes lampPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
+.tl-meta{flex:1; min-width:0;}
+.tl-label{font-family:'Jua',sans-serif; font-size:20px; margin-bottom:3px; transition:color .5s;}
+.tl-count{font-size:12.5px; color:var(--muted); margin-bottom:9px;}
+.gauge{height:12px; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden; position:relative;}
+.gaugefill{height:100%; width:0%; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  box-shadow:0 0 14px 1px var(--accent2);
+  transition:width .55s cubic-bezier(.22,1,.36,1), box-shadow .6s, background .6s;}
+.ticks{display:flex; justify-content:space-between; font-size:9.5px; color:var(--muted); margin-top:5px; opacity:.7;}
+
+/* ===== 문항 ===== */
+.qcard{flex:1; display:flex; flex-direction:column; justify-content:center; padding:8px 2px;}
+.qidx{font-family:'Jua',sans-serif; font-size:14px; color:var(--accent1); transition:color .5s; margin-bottom:8px;}
+.qtext{font-size:22px; line-height:1.5; font-weight:700; word-break:keep-all; margin-bottom:8px;}
+.qhint{font-size:13px; color:var(--muted); margin-bottom:22px;}
+.opts{display:flex; flex-direction:column; gap:11px;}
+.opt{
+  font-family:'Noto Sans KR',sans-serif; font-size:16.5px; font-weight:500; text-align:left;
+  cursor:pointer; color:var(--cream); padding:16px 18px; border-radius:15px;
+  background:var(--card); border:1.5px solid rgba(255,255,255,.1);
+  display:flex; align-items:center; gap:13px; transition:transform .12s, border-color .2s, background .2s;
+}
+.opt:active{transform:scale(.98);}
+.opt:hover{border-color:var(--accent2);}
+.opt:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+.dot{width:13px; height:13px; border-radius:50%; border:2px solid var(--muted); flex:none;}
+.backline{margin-top:16px; text-align:center;}
+.backline button{background:none; border:none; color:var(--muted); font-size:13px; cursor:pointer; text-decoration:underline; padding:8px;}
+
+/* ===== 결과 ===== */
+.result{flex:1; display:flex; flex-direction:column; gap:16px;}
+.rlight{
+  text-align:center; padding:26px 18px; border-radius:24px; position:relative; overflow:hidden;
+  border:1.5px solid rgba(255,255,255,.12);
+}
+.rlight .big{font-size:70px; line-height:1;}
+.rlight h2{font-family:'Jua',sans-serif; font-weight:400; font-size:30px; margin:8px 0 4px;}
+.rlight .pct{font-family:'Jua',sans-serif; font-size:16px; opacity:.9;}
+.rblock{background:var(--card); border:1px solid rgba(255,255,255,.09); border-radius:18px; padding:17px 18px;}
+.rblock h3{font-family:'Jua',sans-serif; font-weight:400; font-size:16px; margin:0 0 7px; display:flex; align-items:center; gap:7px;}
+.rblock p{margin:0; font-size:14.5px; line-height:1.72; color:#e4e8f7; word-break:keep-all;}
+.dims{display:flex; flex-direction:column; gap:12px;}
+.dim{}
+.dim .dhead{display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:6px; color:var(--muted);}
+.dim .dbar{height:10px; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden;}
+.dim .dfill{height:100%; width:0; border-radius:99px; transition:width 1s cubic-bezier(.22,1,.36,1);}
+.ractions{display:flex; flex-direction:column; gap:10px; margin-top:4px;}
+.disclaim{font-size:11.5px; color:var(--muted); opacity:.8; line-height:1.6; text-align:center; padding:0 6px;}
+
+/* 토스트 */
+.toast{
+  position:fixed; left:50%; top:16px; transform:translateX(-50%) translateY(-20px);
+  background:rgba(28,33,56,.97); border:1.5px solid var(--accent2); color:var(--cream);
+  padding:12px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none;
+  transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; text-align:center;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+/* 푸터 */
+.footer{text-align:center; margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<canvas id="fx" style="position:fixed; inset:0; pointer-events:none; z-index:55;"></canvas>
+
+<div class="wrap">
+
+  <!-- ===== 홈 ===== -->
+  <section id="home" class="home fade">
+    <div class="sig-emoji">🚦</div>
+    <h1>번아웃 <span class="grad">신호등</span></h1>
+    <p class="sub">번아웃은 어느 날 갑자기 무너지는 게 아니라,<br>신호등처럼 <b>초록 → 노랑 → 빨강</b>으로 옵니다.<br>지금 내 신호는 무슨 색일까요?</p>
+    <div class="chips">
+      <span class="chip">⏱ 1분 · 12문항</span>
+      <span class="chip">📊 실시간 신호등</span>
+      <span class="chip">🔒 저장 안 함</span>
+    </div>
+    <button class="btn" onclick="start()">내 신호 확인하기 🚦</button>
+    <p class="note">답할 때마다 위쪽 신호등이 실시간으로 켜집니다.<br>정답은 없어요. 지금의 나에게 솔직하게만.</p>
+  </section>
+
+  <!-- ===== 진단 ===== -->
+  <section id="quiz" class="hidden">
+    <div class="topbar">
+      <div class="tl-row">
+        <div class="lights">
+          <div class="lamp red" id="lampR"></div>
+          <div class="lamp yellow" id="lampY"></div>
+          <div class="lamp green on" id="lampG"></div>
+        </div>
+        <div class="tl-meta">
+          <div class="tl-label" id="tlLabel">초록불 · 안전 신호</div>
+          <div class="tl-count" id="tlCount">0 / 12 문항</div>
+          <div class="gauge"><div class="gaugefill" id="gfill"></div></div>
+          <div class="ticks"><span>초록</span><span>노랑</span><span>빨강</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="qcard">
+      <div class="qidx" id="qidx">Q1</div>
+      <div class="qtext" id="qtext">—</div>
+      <div class="qhint">최근 <b>2~3주</b>를 떠올리면, 이건 얼마나 자주였나요?</div>
+      <div class="opts" id="opts"></div>
+      <div class="backline"><button onclick="goBack()" id="backBtn">← 이전 문항</button></div>
+    </div>
+  </section>
+
+  <!-- ===== 결과 ===== -->
+  <section id="result" class="result hidden"></section>
+
+  <!-- ===== 푸터 ===== -->
+  <div class="footer">
+    <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+    <div class="mf-logo">미미팩토리</div>
+    <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+  </div>
+</div>
+
+<script>
+/* ---------- 데이터 ---------- */
+// dim: E 정서적 소진 / C 냉소·거리두기 / A 성취감 저하 / B 신체·회복
+const DIMS = {
+  E:{name:"정서적 소진", emo:"🫠", advice:"지금 가장 필요한 건 '목적 없는 진짜 쉼'이에요. 아무것도 안 해도 되는 시간을 스스로에게 허락하세요."},
+  C:{name:"냉소·거리두기", emo:"🧱", advice:"마음이 닫힌 건 나를 지키려는 방어예요. 안전한 한 사람과의 연결부터 아주 조금씩 회복해요."},
+  A:{name:"성취감 저하", emo:"📉", advice:"큰 성취 대신 아주 작은 '해냈다'를 매일 하나씩 세어보세요. 효능감은 그렇게 다시 붙습니다."},
+  B:{name:"신체·회복", emo:"🩺", advice:"번아웃은 몸이 먼저 무너져요. 잠·물·끼니, 기본 세 가지부터 되돌리는 게 가장 빠릅니다."}
+};
+const QUESTIONS = [
+  {d:"E", t:"아침에 눈을 뜨면 ‘또 하루가 시작되네’ 하고 벌써 지친다."},
+  {d:"E", t:"하루를 마치면 감정까지 텅 비어서 아무것도 하기 싫다."},
+  {d:"E", t:"쉬어도 쉰 것 같지 않고, 피로가 계속 몸에 쌓여 있다."},
+  {d:"C", t:"사람을 대하는 게 점점 귀찮고, 형식적으로만 대하게 된다."},
+  {d:"C", t:"예전엔 중요했던 일이 이제는 ‘아무래도 상관없다’ 싶다."},
+  {d:"C", t:"마음의 문을 닫고, 딱 최소한만 하며 버티는 중이다."},
+  {d:"A", t:"내가 하는 일이 별 가치가 없는 것처럼 느껴진다."},
+  {d:"A", t:"뭔가 해내도 뿌듯함보다 ‘겨우 끝냈다’는 안도만 남는다."},
+  {d:"A", t:"예전만큼 집중이 안 되고, 실수나 깜빡함이 잦아졌다."},
+  {d:"B", t:"두통·소화불량·어깨 결림 같은 몸의 신호가 잦아졌다."},
+  {d:"B", t:"잠들기 어렵거나, 자고 나도 개운하지 않다."},
+  {d:"B", t:"커피·단것·야식·술 같은 걸로 겨우 하루를 버틴다."}
+];
+const SCALE = [
+  {t:"거의 없었다", v:0},
+  {t:"가끔 그랬다", v:1},
+  {t:"꽤 자주 그랬다", v:2},
+  {t:"거의 늘 그랬다", v:3}
+];
+const MAX = QUESTIONS.length * 3; // 36
+
+const LEVELS = {
+  green:{key:"green", emoji:"🟢", name:"초록불", tag:"잘 지나가는 중", a1:"#5be48a", a2:"#37c46e",
+    now:"지금은 에너지가 돌고 있어요. 신호는 <b>초록</b>. 큰 문제 없이 잘 달리고 있는 상태예요.",
+    do:"지금의 좋은 루틴(잠·거리두기·작은 기쁨)을 그대로 지키세요. 번아웃은 예방이 가장 쉬운 회복이에요.",
+    care:"초록이라고 무리하면 노랑은 순식간이에요. 주 1회 ‘나 요즘 어때?’ 하고 스스로에게 물어봐 주세요."},
+  yellow:{key:"yellow", emoji:"🟡", name:"노랑불", tag:"속도를 줄일 때", a1:"#ffd764", a2:"#f7ad2e",
+    now:"몸과 마음이 <b>‘속도 줄여’</b>라는 신호를 보내는 중이에요. 아직 늦지 않았지만, 지금이 손볼 타이밍이에요.",
+    do:"이번 주에 뺄 수 있는 일 하나를 지우세요. 그리고 회복 시간을 ‘해야 할 일’이 아니라 <b>약속</b>으로 캘린더에 넣으세요.",
+    care:"노랑을 ‘아직 괜찮아’로 넘기면 빨강으로 갑니다. 가장 많이 소진된 영역부터 먼저 돌보세요."},
+  red:{key:"red", emoji:"🔴", name:"빨강불", tag:"지금 멈춰야 할 때", a1:"#ff6b6b", a2:"#e23a4e",
+    now:"이미 오래 버텨왔어요. 이건 의지가 약해서가 아니라, <b>너무 오래 달렸다는 몸의 신호</b>예요.",
+    do:"지금 멈출 수 있는 걸 멈추세요. 그리고 혼자 참지 말고, 신뢰하는 사람이나 전문가에게 지금 상태를 말로 꺼내 보세요.",
+    care:"빨강은 더 참는 단계가 아니라, <b>도움을 받는 단계</b>예요. 잠·식사·기분이 2주 넘게 힘들다면 전문가 상담을 권해요."}
+};
+
+/* ---------- 상태 ---------- */
+let idx=0, answers=[]; // answers[i] = value 0..3
+
+/* ---------- 유틸 ---------- */
+function vibrate(ms){ if(navigator.vibrate) try{navigator.vibrate(ms);}catch(e){} }
+let _tt; function toast(m){ const t=document.getElementById('toast'); t.innerHTML=m; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2100); }
+function repop(el){ el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+function show(id){ ['home','quiz','result'].forEach(s=>document.getElementById(s).classList.toggle('hidden', s!==id)); }
+function levelOf(pct){ return pct<34?'green':(pct<67?'yellow':'red'); }
+
+/* ---------- 신호등 실시간 갱신 ---------- */
+let curLevel='green';
+function currentPct(){ // 지금까지 답한 문항 기준 누적 비율
+  const answered = answers.filter(a=>a!=null);
+  const sum = answered.reduce((s,v)=>s+v,0);
+  const maxSoFar = answered.length*3;
+  return maxSoFar? Math.round(sum/maxSoFar*100) : 0;
+}
+function updateSignal(){
+  const answeredCount = answers.filter(a=>a!=null).length;
+  const pct = currentPct();
+  const lv = answeredCount? levelOf(pct) : 'green';
+  const L = LEVELS[lv];
+  // 게이지
+  const g=document.getElementById('gfill');
+  g.style.width = (answeredCount? pct:0) + '%';
+  document.documentElement.style.setProperty('--accent1', L.a1);
+  document.documentElement.style.setProperty('--accent2', L.a2);
+  // 램프
+  const R=document.getElementById('lampR'), Y=document.getElementById('lampY'), G=document.getElementById('lampG');
+  [R,Y,G].forEach(x=>x.classList.remove('on','pulse'));
+  if(lv==='green'){ G.classList.add('on','pulse'); }
+  else if(lv==='yellow'){ Y.classList.add('on','pulse'); }
+  else { R.classList.add('on','pulse'); }
+  // 라벨
+  const lab=document.getElementById('tlLabel');
+  lab.innerHTML = L.emoji+' '+L.name+' · '+L.tag;
+  lab.style.color = L.a1;
+  document.getElementById('tlCount').textContent = answeredCount+' / '+QUESTIONS.length+' 문항';
+  // 레벨 상승 시 축하
+  if(answeredCount>0 && lv!==curLevel){
+    if(lv==='yellow'){ toast('🟡 신호가 노랑으로 바뀌었어요'); vibrate([20,40,20]); }
+    else if(lv==='red'){ toast('🔴 빨강 신호 — 몸이 보내는 SOS'); vibrate([30,50,30]); }
+    else if(lv==='green' && curLevel!=='green'){ toast('🟢 초록으로 돌아왔어요'); }
+    repop(lab);
+  }
+  curLevel = lv;
+}
+
+/* ---------- 진행 ---------- */
+function start(){ idx=0; answers=new Array(QUESTIONS.length).fill(null); show('quiz'); curLevel='green'; render(); }
+function render(){
+  const q=QUESTIONS[idx];
+  document.getElementById('qidx').textContent = 'Q'+(idx+1);
+  const qt=document.getElementById('qtext'); qt.textContent=q.t; repop(qt);
+  const box=document.getElementById('opts'); box.innerHTML='';
+  SCALE.forEach(s=>{
+    const b=document.createElement('button');
+    b.className='opt'; b.type='button';
+    b.innerHTML='<span class="dot"></span>'+s.t;
+    if(answers[idx]===s.v){ b.style.borderColor='var(--accent2)'; b.querySelector('.dot').style.background='var(--accent2)'; b.querySelector('.dot').style.borderColor='var(--accent2)'; }
+    b.onclick=(e)=>choose(s.v, e);
+    box.appendChild(b);
+  });
+  document.getElementById('backBtn').style.visibility = idx===0? 'hidden':'visible';
+  document.getElementById('qidx').style.color='var(--accent1)';
+  updateSignal();
+}
+function choose(v, e){
+  answers[idx]=v;
+  vibrate(24);
+  burst(e);
+  updateSignal();
+  setTimeout(()=>{
+    if(idx < QUESTIONS.length-1){ idx++; render(); }
+    else finish();
+  }, 300);
+}
+function goBack(){ if(idx>0){ idx--; render(); } }
+
+/* ---------- 결과 ---------- */
+function finish(){
+  const total = answers.reduce((s,v)=>s+v,0);
+  const pct = Math.round(total/MAX*100);
+  const lv = levelOf(pct);
+  const L = LEVELS[lv];
+  // 영역별 점수
+  const dimScore={E:0,C:0,A:0,B:0}, dimCount={E:0,C:0,A:0,B:0};
+  QUESTIONS.forEach((q,i)=>{ dimScore[q.d]+=answers[i]; dimCount[q.d]++; });
+  const dimPct={}; Object.keys(dimScore).forEach(k=>dimPct[k]=Math.round(dimScore[k]/(dimCount[k]*3)*100));
+  const topDim = Object.keys(dimPct).sort((a,b)=>dimPct[b]-dimPct[a])[0];
+
+  document.documentElement.style.setProperty('--accent1', L.a1);
+  document.documentElement.style.setProperty('--accent2', L.a2);
+
+  const dimBars = Object.keys(DIMS).map(k=>{
+    const p=dimPct[k]; const dl=levelOf(p); const c=LEVELS[dl];
+    return `<div class="dim">
+      <div class="dhead"><span>${DIMS[k].emo} ${DIMS[k].name}</span><span>${p}%</span></div>
+      <div class="dbar"><div class="dfill" data-w="${p}" style="background:linear-gradient(90deg,${c.a1},${c.a2});"></div></div>
+    </div>`;
+  }).join('');
+
+  const topInfo = (lv==='green')
+    ? `가장 신호가 큰 영역은 <b>${DIMS[topDim].name}</b>이에요. 아직 초록이지만 이 영역만 살짝 챙겨두면 오래 건강할 수 있어요.`
+    : `가장 소진된 영역은 <b>${DIMS[topDim].emo} ${DIMS[topDim].name}</b>이에요. ${DIMS[topDim].advice}`;
+
+  const bg = lv==='green'
+    ? 'radial-gradient(120% 120% at 50% 0%, rgba(91,228,138,.22), rgba(28,33,56,.4))'
+    : lv==='yellow'
+    ? 'radial-gradient(120% 120% at 50% 0%, rgba(247,173,46,.22), rgba(28,33,56,.4))'
+    : 'radial-gradient(120% 120% at 50% 0%, rgba(226,58,78,.24), rgba(28,33,56,.4))';
+
+  document.getElementById('result').innerHTML = `
+    <div class="rlight fade" style="background:${bg}; border-color:${L.a2}55;">
+      <div class="big">${L.emoji}</div>
+      <h2 style="color:${L.a1}">${L.name} · ${L.tag}</h2>
+      <div class="pct">번아웃 지수 ${pct}점 / 100</div>
+    </div>
+    <div class="rblock fade"><h3>🔎 지금 당신은</h3><p>${L.now}</p></div>
+    <div class="rblock fade"><h3>📊 영역별 신호</h3><div class="dims">${dimBars}</div>
+      <p style="margin-top:13px; font-size:13.5px; color:var(--muted);">${topInfo}</p></div>
+    <div class="rblock fade"><h3>✅ 이렇게 해보세요</h3><p>${L.do}</p></div>
+    <div class="rblock fade"><h3>⚠️ 주의점</h3><p>${L.care}</p></div>
+    <div class="ractions">
+      <button class="btn" onclick="shareResult('${L.name}',${pct})">결과 공유하기 📤</button>
+      <button class="btn ghost" onclick="restart()">다시 진단하기 🔄</button>
+    </div>
+    <p class="disclaim">이 테스트는 의학적 진단이 아니라 나를 돌아보는 자기점검 도구예요.<br>2주 이상 힘든 상태가 이어진다면 전문가의 도움을 받아보세요. 정신건강 상담전화 ☎ 1577-0199</p>
+  `;
+  show('result');
+  // 영역 막대 애니메이션
+  requestAnimationFrame(()=>setTimeout(()=>{
+    document.querySelectorAll('.dfill').forEach(el=>el.style.width=el.dataset.w+'%');
+  },120));
+  // 축하/케어 연출
+  vibrate([60,80,60]);
+  if(lv==='green'){ toast('🟢 지금은 건강한 초록불!'); cannon(L.a1,L.a2); setTimeout(()=>cannon(L.a1,L.a2),260); }
+  else if(lv==='yellow'){ toast('🟡 알아챈 것만으로 반은 회복이에요'); cannon(L.a1,L.a2); }
+  else { toast('🔴 여기까지 버텨온 당신, 정말 애썼어요'); softGlow(); }
+}
+function restart(){ show('home'); document.documentElement.style.setProperty('--accent1','#5be48a'); document.documentElement.style.setProperty('--accent2','#37c46e'); }
+
+function shareResult(name, pct){
+  const url='https://mimifactory.vibekr.com/apps/번아웃_신호등_test.html';
+  const text=`🚦 번아웃 신호등 결과: ${name} (지수 ${pct}점)\n지금 내 신호는 무슨 색? 나도 확인하기 👉`;
+  if(navigator.share){ navigator.share({title:'번아웃 신호등', text, url}).catch(()=>{}); }
+  else{
+    const t=text+'\n'+url;
+    if(navigator.clipboard){ navigator.clipboard.writeText(t).then(()=>toast('📋 결과가 복사됐어요!')).catch(()=>toast(t)); }
+    else toast('👉 '+url);
+  }
+}
+
+/* ---------- 폭죽 ---------- */
+const cv=document.getElementById('fx'); const ctx=cv.getContext('2d');
+let parts=[]; function fitCanvas(){ cv.width=innerWidth; cv.height=innerHeight; } fitCanvas(); addEventListener('resize',fitCanvas);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function burst(e){ // 클릭 위치 작은 폭죽
+  if(reduce||!e) return;
+  const x=e.clientX||innerWidth/2, y=e.clientY||innerHeight/2;
+  const cs=getComputedStyle(document.documentElement);
+  const c1=cs.getPropertyValue('--accent1').trim(), c2=cs.getPropertyValue('--accent2').trim();
+  for(let i=0;i<16;i++){ parts.push({x,y,vx:(Math.random()-.5)*6,vy:(Math.random()-.7)*6-2,r:Math.random()*3+2,c:Math.random()<.5?c1:c2,life:1}); }
+  run();
+}
+function cannon(c1,c2){
+  if(reduce) return;
+  for(let i=0;i<90;i++){ parts.push({x:innerWidth/2,y:innerHeight*.4,vx:(Math.random()-.5)*13,vy:(Math.random()-.5)*13-3,r:Math.random()*4+2,c:Math.random()<.5?c1:c2,life:1}); }
+  run();
+}
+function softGlow(){ // 빨강일 땐 조용한 케어 연출
+  if(reduce) return;
+  for(let i=0;i<40;i++){ parts.push({x:Math.random()*innerWidth,y:innerHeight+10,vx:(Math.random()-.5)*.6,vy:-(Math.random()*1.5+.6),r:Math.random()*2.5+1.5,c:'#ff9aa5',life:1,soft:true}); }
+  run();
+}
+let raf=null;
+function run(){ if(raf) return; const loop=()=>{ ctx.clearRect(0,0,cv.width,cv.height); parts.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; if(!p.soft) p.vy+=.22; p.life-=p.soft?.012:.02; ctx.globalAlpha=Math.max(p.life,0); ctx.fillStyle=p.c; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,7); ctx.fill(); }); parts=parts.filter(p=>p.life>0 && p.y<cv.height+20); ctx.globalAlpha=1; if(parts.length) raf=requestAnimationFrame(loop); else raf=null; }; raf=requestAnimationFrame(loop); }
+</script>
+</body>
+</html>
