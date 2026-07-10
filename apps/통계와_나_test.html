@@ -138,7 +138,7 @@ h1.title{font-family:'Jua',sans-serif;font-size:40px;text-align:center;line-heig
     </div>
     <button class="btn" id="startBtn" disabled>문제 수를 골라주세요</button>
 
-    <div class="srcbox">📊 <b style="color:var(--cream)">통계 안내</b> — 표시되는 수치는 공개된 국내 설문조사·기관 리서치·대규모 온라인 투표 결과를 참고해 종합·반올림한 값입니다. 조사 기관과 시점에 따라 실제 수치는 달라질 수 있어요. 개별 문항에 확인된 출처가 있는 경우 결과 공개 시 함께 표시됩니다.</div>
+    <div class="srcbox">📊 <b style="color:var(--cream)">통계 안내</b> — 이 앱은 <b style="color:var(--cream)">유저들의 실제 선택을 집계</b>합니다. 문항별 참여가 쌓이면(30명+) "미미팩토리 유저 N명 중 X%" <b style="color:var(--cream)">실측 통계</b>로 자동 전환돼요. 그 전까지는 공개 설문·투표를 참고한 종합 참고치가 표시되고, 실제 조사 출처가 확인된 문항은 기관명을 함께 보여드립니다. 당신의 선택 하나하나가 진짜 통계가 됩니다.</div>
   </section>
 
   <section class="screen" id="play">
@@ -304,6 +304,24 @@ const TYPES=[
   mean:"거의 모든 선택에서 소수의 길을 걷는 진짜 희귀템. 세상이 다 A라고 할 때 B의 매력을 아는 사람이죠. 당신의 시선이 곧 남들이 못 보는 기회입니다."}
 ];
 
+/* ============ 실측 통계 (미미팩토리 유저 집계) ============
+   같은 도메인의 stats-api.php로 투표를 보내고 집계를 받는다.
+   문항별 참여가 LIVE_MIN명 이상 쌓이면 참고치 대신 실측 %를 표시.
+   API 실패 시엔 조용히 참고치로 폴백 — 앱은 항상 동작한다. */
+const API='/stats-api.php';
+const LIVE_MIN=30;
+let LIVE={};
+/* qid = 질문 텍스트의 djb2 해시 — 문항 순서가 바뀌어도 안정 (문구를 고치면 그 문항 집계는 새로 시작) */
+function qidOf(q){let h=5381;for(let i=0;i<q.length;i++){h=((h<<5)+h+q.charCodeAt(i))>>>0;}return 'q'+h.toString(36);}
+fetch(API+'?action=get').then(r=>r.json()).then(j=>{if(j&&typeof j==='object')LIVE=j;}).catch(()=>{});
+function sendVote(qid,opt){
+  try{
+    const fd=new FormData();fd.append('action','vote');fd.append('qid',qid);fd.append('opt',opt);
+    fetch(API,{method:'POST',body:fd,keepalive:true})
+      .then(r=>r.json()).then(j=>{if(j&&j[qid])LIVE[qid]=j[qid];}).catch(()=>{});
+  }catch(e){}
+}
+
 /* ============ 상태 ============ */
 let deck=[], idx=0, chosen=0, mainCnt=0, uniqCnt=0, sameSum=0, streak=0, streakKind=null, answered=0;
 const $=id=>document.getElementById(id);
@@ -356,12 +374,24 @@ function reveal(myOi){
   const item=deck[idx], opts=item[2], src=item[3];
   const buttons=[...document.querySelectorAll('.opt')];
   if(buttons[0].classList.contains('revealed'))return;
-  const myPct=opts[myOi][1];
-  const maxPct=Math.max.apply(null,opts.map(o=>o[1]));
+
+  // 실측 집계 확인: LIVE_MIN명 이상 쌓였으면 실측 %, 아니면 참고치
+  const qid=qidOf(item[1]);
+  const live=LIVE[qid];
+  const liveN=live?live.slice(0,opts.length).reduce((a,b)=>a+(+b||0),0):0;
+  const isLive=liveN>=LIVE_MIN;
+  const pcts=isLive
+    ? opts.map((o,i)=>Math.round((+live[i]||0)/liveN*100))
+    : opts.map(o=>o[1]);
+
+  sendVote(qid,myOi);  // 내 선택도 집계에 기여 (비동기, 실패 무시)
+
+  const myPct=pcts[myOi];
+  const maxPct=Math.max.apply(null,pcts);
   const isMain=myPct>=maxPct;
 
   buttons.forEach(b=>{
-    const oi=+b.dataset.oi, pct=opts[oi][1];
+    const oi=+b.dataset.oi, pct=pcts[oi];
     b.classList.add('revealed');b.disabled=true;
     if(oi===myOi)b.classList.add('mine');
     b.querySelector('.opct').textContent=pct+'%';
@@ -375,9 +405,15 @@ function reveal(myOi){
   const chip=$('vChip');
   if(isMain){chip.className='vchip main';chip.textContent='🌊 대세픽!';}
   else{chip.className='vchip uniq';chip.textContent='🦄 유니크픽!';}
-  $('vSub').innerHTML='국민 <b>'+myPct+'%</b>가 당신과 같은 선택을 했어요'+
+  const whoTxt=isLive
+    ? '미미팩토리 유저 <b>'+liveN.toLocaleString()+'명</b> 중 <b>'+myPct+'%</b>가 당신과 같은 선택을 했어요'
+    : '국민 <b>'+myPct+'%</b>가 당신과 같은 선택을 했어요';
+  $('vSub').innerHTML=whoTxt+
     (streak>=3?('<br>'+(streakKind==='m'?'🔥 대세 '+streak+'연속!':'🛸 유니크 '+streak+'연속!')):'');
-  $('vSrc').textContent=src?('출처: '+src):'※ 공개 설문·투표 종합 참고치';
+  const srcTxt=src?('출처: '+src):'※ 공개 설문·투표 종합 참고치';
+  $('vSrc').textContent=isLive
+    ? (src?('미미팩토리 실측 통계 · 참고 '+srcTxt):'미미팩토리 실측 통계')
+    : srcTxt+(liveN>0?(' · 실측 집계 중 '+liveN+'명 참여'):'');
   $('verdict').classList.add('show');
   $('streakLb').textContent=streak>=2?((streakKind==='m'?'🌊':'🦄')+' x'+streak):'';
   updateMeter();

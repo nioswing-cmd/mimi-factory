@@ -1,0 +1,2 @@
+# 집계 원본(stats.json)은 API를 통해서만 — 직접 접근 차단
+Require all denied
