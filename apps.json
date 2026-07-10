@@ -276,6 +276,18 @@
       "teaser": "apps/통계와_나_friend.html",
       "premium": "apps/통계와_나_friend.html",
       "desc": "전체 유저 중 몇 %가 나와 같을까? 답을 고르고 비율을 예측한 뒤 통계를 공개하며, 옆 사람과 나란히 얼마나 통하는지 확인하는 둘이 함께 친해"
+    },
+    {
+      "id": "영화속_주인공되기",
+      "type": "friend",
+      "title": "영화속 주인공되기",
+      "author": "미미팩토리 오리지널",
+      "date": "2026-07-10",
+      "color1": "#c3a1ff",
+      "color2": "#ff8ad0",
+      "teaser": "apps/영화속_주인공되기_friend.html",
+      "premium": "apps/영화속_주인공되기_friend.html",
+      "desc": "한국 영화 110개 명장면의 남녀 배역을 랜덤으로 뽑아, 둘이 나란히 앉아 대사와 지문을 즉흥 연기하며 케미를 쌓는 친해지기 게임."
     }
   ]
 }
