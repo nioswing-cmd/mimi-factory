@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>다중지능 검사 — 도파민 실험실</title>
+<meta property="og:title" content="다중지능 검사 — 나의 8가지 지능 지도">
+<meta property="og:description" content="IQ 하나로는 나를 설명할 수 없다. 가드너의 8가지 지능 이론으로 그리는 내 두뇌 지도.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#131126; --bg2:#1c1836; --card:#241f45; --line:#383063;
+  --ink:#f4f0ff; --sub:#a9a3cd; --accent:#ff9f45; --accent2:#ff6b6b;
+  --point:#ffd93d; --ok:#4fc98d; --bad:#e85850;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 85% -10%, rgba(255,159,69,.12), transparent 55%),
+             radial-gradient(100% 80% at 5% 110%, rgba(255,107,107,.10), transparent 50%),
+             linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--point),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:5vh;}
+.hero h1{font-size:44px;line-height:1.15;margin:16px 0 8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;word-break:keep-all;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;word-break:keep-all;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;word-break:keep-all;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#231409;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--point),var(--accent));
+  box-shadow:0 10px 26px -8px rgba(255,159,69,.5);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+/* 8기둥 게이지 (정체 숨김) */
+.pillars{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 14px 10px;margin-bottom:16px;}
+.prow{display:flex;justify-content:space-between;align-items:flex-end;height:66px;gap:6px;}
+.pcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end;}
+.pbar{width:100%;max-width:26px;height:0%;border-radius:7px 7px 3px 3px;transition:height .5s cubic-bezier(.22,1,.36,1);min-height:4px;}
+.pcol .plab{font-family:'Jua',sans-serif;font-size:11px;color:var(--sub);}
+.pillars .cap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:9px;opacity:.8;}
+.count{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);text-align:center;margin-bottom:8px;}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent);}
+.qtext{font-size:21px;font-weight:700;line-height:1.5;margin-top:8px;word-break:keep-all;}
+.qhint{font-size:13px;color:var(--sub);margin-top:8px;}
+.opts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:16px 8px;
+  font-size:15px;color:var(--ink);text-align:center;cursor:pointer;font-family:inherit;line-height:1.4;word-break:keep-all;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.opt:active{transform:scale(.94);}
+.opt .em{display:block;font-size:22px;margin-bottom:5px;}
+
+/* 결과 */
+.res-hero{text-align:center;margin-top:10px;}
+.res-emo{font-size:64px;}
+.res-type{font-family:'Jua',sans-serif;font-size:30px;margin:10px 0 4px;line-height:1.3;}
+.res-tag{color:var(--sub);font-size:14.5px;line-height:1.7;word-break:keep-all;}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:20px;}
+.chart .ct{font-family:'Jua',sans-serif;font-size:16px;margin-bottom:6px;}
+.crow{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:13.5px;}
+.crow .cl{width:104px;}
+.cbar{flex:1;height:11px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;}
+.cfill{height:100%;width:0;border-radius:99px;transition:width .9s cubic-bezier(.22,1,.36,1);}
+.crow .cv{width:34px;text-align:right;font-family:'Jua',sans-serif;color:var(--point);}
+.tips{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px 18px;margin-top:14px;font-size:14.5px;line-height:1.75;word-break:keep-all;}
+.tips b{color:var(--point);}
+.tips .row{margin-top:11px;}
+.tips .row:first-child{margin-top:0;}
+.srcbox{font-size:12px;color:var(--sub);line-height:1.65;margin-top:14px;background:rgba(255,255,255,.04);
+  border:1px solid var(--line);border-radius:14px;padding:12px 14px;word-break:keep-all;}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(36,31,69,.97);border:1.5px solid var(--point);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(255,159,69,.5));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#948dbb;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#948dbb;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  <!-- 홈 -->
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 도파민 실험실 · 두뇌 시리즈</span>
+      <h1>🗺️ <span class="grad">다중지능</span> 검사</h1>
+      <p class="sub">IQ 점수 하나로 나를 설명할 수 없습니다.<br>사람에게는 <b>8가지 종류의 지능</b>이 있고,<br>누구나 자기만의 지능 지도를 갖고 있어요.</p>
+    </div>
+    <div class="pitch">
+      <b>측정하는 8가지 지능</b><br>
+      💬 언어 · 🔢 논리수학 · 🧭 공간 · 🎵 음악<br>
+      🏃 신체운동 · 🤝 대인 · 🪞 자기이해 · 🌿 자연친화<br>
+      24문항이 끝나면 <b>대표 지능 조합과 어울리는 활동</b>까지 알려드립니다.
+    </div>
+    <button class="btn" onclick="startQuiz()">🗺️ 내 지능 지도 그리기</button>
+    <p class="note">※ 하버드대 하워드 가드너의 다중지능 이론(1983, 『Frames of Mind』)의 분류를 빌린
+    자기보고식 참고 검사입니다. 능력 측정이 아니라 <b>성향 지도</b>에 가깝습니다.</p>
+  </section>
+
+  <!-- 검사 -->
+  <section id="scQuiz" class="screen">
+    <div class="pillars">
+      <div class="prow" id="prow"></div>
+      <div class="cap">여덟 개의 지능 기둥이 자랍니다 — 어떤 기둥이 무엇인지는 결과에서 공개!</div>
+    </div>
+    <div class="count" id="qCount">1 / 24</div>
+    <div class="qcard">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qhint">👉 나와 얼마나 비슷한가요?</div>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  <!-- 결과 -->
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="res-emo" id="resEmo"></div>
+      <div class="res-type" id="resType"></div>
+      <p class="res-tag" id="resTag"></p>
+    </div>
+    <div class="chart">
+      <div class="ct">🗺️ 나의 8가지 지능 지도</div>
+      <div id="chart"></div>
+    </div>
+    <div class="tips" id="tips"></div>
+    <div class="srcbox">📖 <b>이론 출처</b> — 하워드 가드너(Howard Gardner), 『Frames of Mind: The Theory of Multiple Intelligences』(1983).
+    "지능은 하나가 아니라 여러 개이며, 사람마다 조합이 다르다"는 이론으로, 이 검사는 그 8가지 분류를 성향 관찰에 빌려 썼습니다.</div>
+    <button class="btn" onclick="copyResult()">📋 결과 복사해서 공유</button>
+    <button class="btn ghost" onclick="location.reload()">다시 검사하기</button>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 도파민 실험실 — 다른 테스트 보러가기 →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+    <div class="mf-logo">미미팩토리</div>
+    <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+  </div>
+</div>
+
+<script>
+/* 8지능 × 3문항 = 24. 완전 나야 +2 / 조금 +1 / 아니야 0 → 지능별 만점 6 */
+const QUESTIONS=[
+ {k:"L",q:"말장난·언어유희를 즐기고, 마음에 드는 문장은 저장해둔다"},
+ {k:"L",q:"복잡한 내용도 말이나 글로 풀어 설명하면 사람들이 잘 알아듣는다"},
+ {k:"L",q:"새로 들은 단어나 표현을 잘 기억했다가 써먹는 편이다"},
+ {k:"M",q:"숫자 속 패턴이나 이상한 통계가 눈에 잘 들어온다"},
+ {k:"M",q:"'왜 그렇지?' 하고 원인과 결과를 따져보는 게 재밌다"},
+ {k:"M",q:"계획표·가계부·엑셀처럼 체계적으로 정리하는 일이 은근히 즐겁다"},
+ {k:"S",q:"한 번 가본 길은 지도 없이도 대략 다시 찾아간다"},
+ {k:"S",q:"머릿속으로 가구 배치를 바꾸거나 물체를 돌려볼 수 있다"},
+ {k:"S",q:"그림·사진·디자인 감각이 있다는 말을 들어봤다"},
+ {k:"U",q:"노래를 한두 번 들으면 멜로디를 흥얼거릴 수 있다"},
+ {k:"U",q:"음정이나 박자가 틀리면 바로 귀에 거슬린다"},
+ {k:"U",q:"기분에 따라 듣는 플레이리스트가 세분화되어 있다"},
+ {k:"B",q:"머리보다 몸으로 부딪히며 배우는 게 빠르다 (운동·요리·조립 등)"},
+ {k:"B",q:"오래 가만히 앉아 있으면 몸이 근질거린다"},
+ {k:"B",q:"손으로 만들고 고치는 일에 자신이 있다"},
+ {k:"P",q:"친구들 사이에 갈등이 생기면 중간에서 푸는 역할을 맡곤 한다"},
+ {k:"P",q:"처음 만난 사람과도 금방 편해진다는 말을 듣는다"},
+ {k:"P",q:"상대의 기분 변화를 빨리 알아채는 편이다"},
+ {k:"I",q:"혼자 생각을 정리하는 시간이 반드시 필요하다"},
+ {k:"I",q:"내 감정이나 생각을 일기·메모로 남기는 편이다"},
+ {k:"I",q:"내 강점과 약점을 꽤 구체적으로 말할 수 있다"},
+ {k:"N",q:"동물·식물을 관찰하거나 돌보는 일이 좋다"},
+ {k:"N",q:"계절과 날씨의 변화를 남들보다 민감하게 느낀다"},
+ {k:"N",q:"산·바다·숲에 가면 확실히 충전되는 걸 느낀다"},
+];
+const INTEL={
+ L:{emo:"💬",name:"언어 지능",color:"#ff9f45",desc:"말과 글로 세상을 다루는 힘",
+    act:"글쓰기·블로그, 스토리텔링, 외국어, 강의·발표"},
+ M:{emo:"🔢",name:"논리수학 지능",color:"#ffd93d",desc:"패턴과 원리를 꿰뚫는 힘",
+    act:"데이터 분석, 전략 게임, 코딩, 재테크 설계"},
+ S:{emo:"🧭",name:"공간 지능",color:"#5ee7d8",desc:"머릿속에 그림을 그리는 힘",
+    act:"디자인, 사진·영상, 인테리어, 지도 없는 여행"},
+ U:{emo:"🎵",name:"음악 지능",color:"#b78bf5",desc:"소리와 리듬을 읽는 힘",
+    act:"악기, 플레이리스트 큐레이션, 작곡, 공연 감상"},
+ B:{emo:"🏃",name:"신체운동 지능",color:"#ff6b6b",desc:"몸으로 생각하는 힘",
+    act:"운동·댄스, 요리, 목공·DIY, 손으로 하는 취미"},
+ P:{emo:"🤝",name:"대인 지능",color:"#7aa6ff",desc:"사람 사이를 읽고 잇는 힘",
+    act:"모임 운영, 멘토링, 상담·중재, 협업 리드"},
+ I:{emo:"🪞",name:"자기이해 지능",color:"#ff8ad0",desc:"나를 관찰하고 다루는 힘",
+    act:"일기·회고, 명상, 1인 프로젝트, 커리어 설계"},
+ N:{emo:"🌿",name:"자연친화 지능",color:"#4fc98d",desc:"자연과 생명을 감지하는 힘",
+    act:"가드닝, 등산·캠핑, 반려동물, 환경 활동"},
+};
+const KEYS=["L","M","S","U","B","P","I","N"];
+
+let idx=0, score={}, pillarMap=[], deck=[];
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1800);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function startQuiz(){
+  idx=0; score={}; KEYS.forEach(k=>score[k]=0);
+  deck=shuffle([...QUESTIONS]);
+  pillarMap=shuffle([...KEYS]);
+  const pr=$('prow'); pr.innerHTML="";
+  pillarMap.forEach((k,i)=>{
+    pr.innerHTML+="<div class='pcol'><div class='pbar' id='pb"+i+"' style='background:linear-gradient(180deg,"+INTEL[k].color+",rgba(255,255,255,.05))'></div><div class='plab'>?</div></div>";
+  });
+  show('scQuiz'); render();
+}
+function render(){
+  const Q=deck[idx];
+  $('qCount').textContent=(idx+1)+" / "+deck.length;
+  $('qNum').textContent="Q"+(idx+1);
+  const qt=$('qText'); qt.textContent=Q.q;
+  qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const box=$('opts'); box.innerHTML="";
+  [["😆","완전 나야",2],["🙂","조금?",1],["🙅","아니야",0]].forEach(([em,t,pt])=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button";
+    b.innerHTML="<span class='em'>"+em+"</span>"+t;
+    b.addEventListener('click',()=>pick(Q.k,pt));
+    box.appendChild(b);
+  });
+}
+function pick(k,pt){
+  vibrate(22); score[k]+=pt;
+  pillarMap.forEach((e,i)=>{ $('pb'+i).style.height=(score[e]/6*100)+"%"; });
+  idx++;
+  if(idx>=deck.length){ setTimeout(showResult,450); return; }
+  setTimeout(render,240);
+}
+function showResult(){
+  const sorted=[...KEYS].sort((a,b)=>score[b]-score[a]);
+  const t1=INTEL[sorted[0]], t2=INTEL[sorted[1]], low=INTEL[sorted[7]];
+  show('scResult'); vibrate([30,50,30,50,90]);
+  $('resEmo').textContent=t1.emo+t2.emo;
+  $('resType').innerHTML="<span class='grad'>"+t1.name+"</span> × "+t2.name;
+  $('resTag').textContent="당신의 지도에서 가장 높은 봉우리는 '"+t1.desc+"', 그 옆의 든든한 능선은 '"+t2.desc+"'입니다.";
+  const ch=$('chart'); ch.innerHTML="";
+  KEYS.forEach((k,i)=>{
+    const e=INTEL[k], pct=Math.round(score[k]/6*100);
+    ch.innerHTML+="<div class='crow'><span class='cl'>"+e.emo+" "+e.name.replace(' 지능','')+"</span><div class='cbar'><div class='cfill' id='cf"+i+"' data-w='"+pct+"' style='background:linear-gradient(90deg,"+e.color+"cc,"+e.color+")'></div></div><span class='cv'>"+score[k]+"/6</span></div>";
+  });
+  setTimeout(()=>{KEYS.forEach((k,i)=>{const f=$('cf'+i);f.style.width=f.dataset.w+"%";});},150);
+  $('tips').innerHTML=
+    "<div class='row'><b>"+t1.emo+" 대표 지능 살리기</b> — "+t1.name+"이 빛나는 활동: "+t1.act+".</div>"+
+    "<div class='row'><b>"+t2.emo+" 조합의 힘</b> — "+t2.name+"과 함께 쓰면 시너지가 큽니다. 두 지능이 만나는 활동을 찾는 게 최고의 성장 전략이에요.</div>"+
+    "<div class='row'><b>"+low.emo+" 낮다고 약점은 아님</b> — "+low.name+"이 낮은 건 결핍이 아니라 '에너지를 안 쓰는 곳'이라는 뜻. 필요할 때만 빌려 쓰면 됩니다.</div>";
+  window._resText="🗺️ 다중지능 검사 (가드너 8지능)\n대표 지능: "+t1.name+" "+t1.emo+" × "+t2.name+" "+t2.emo+"\n지도: "+KEYS.map(k=>INTEL[k].emo+score[k]).join(" ")+"\n\n내 지능 지도 그리기 → https://mimifactory.vibekr.com/apps/다중지능_검사_test.html";
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("복사 완료! 어디든 붙여넣기 📋")); }
+  else toast("길게 눌러 복사해주세요");
+  vibrate(20);
+}
+</script>
+</body>
+</html>

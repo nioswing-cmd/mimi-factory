@@ -456,6 +456,18 @@
    "teaser": "apps/sq_사회지능_테스트_test.html",
    "premium": "apps/sq_사회지능_테스트_test.html",
    "desc": "눈치·대화·선긋기·화해 — 관계머리 4종 진단"
+  },
+  {
+   "id": "다중지능_검사",
+   "type": "test",
+   "title": "다중지능 검사",
+   "author": "미미팩토리 오리지널",
+   "date": "2026-07-11",
+   "color1": "#ffd93d",
+   "color2": "#ff6b6b",
+   "teaser": "apps/다중지능_검사_test.html",
+   "premium": "apps/다중지능_검사_test.html",
+   "desc": "가드너 8가지 지능 이론으로 그리는 내 두뇌 지도 — 대표 지능 조합 찾기"
   }
  ]
 }
