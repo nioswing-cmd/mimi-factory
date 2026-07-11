@@ -480,6 +480,18 @@
       "teaser": "apps/when_teaser.html",
       "premium": "apps/when_quiz.html",
       "desc": "『언제 할 것인가(WHEN·대니얼 핑크)』의 타이밍 과학 — 정점·저점·회복, 크로노타입, 시작·중간·끝 —을 30문항 반복 마스터 퀴즈와 완독"
+    },
+    {
+      "id": "ai_신인류_테스트",
+      "type": "test",
+      "title": "AI 신인류 테스트",
+      "author": "미미팩토리 오리지널",
+      "date": "2026-07-12",
+      "color1": "#8affc1",
+      "color2": "#5ee7d8",
+      "teaser": "apps/ai_신인류_테스트_test.html",
+      "premium": "apps/ai_신인류_테스트_test.html",
+      "desc": "AI가 일을 삼키는 시대, 그래도 살아남는 사람은 8종류 — 24문항으로 찾는 나의 AI 시대 생존 캐릭터(대표 유형·생존 전략·베스트 파트너까"
     }
   ]
 }
