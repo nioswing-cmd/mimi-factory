@@ -193,7 +193,7 @@ h1{font-family:'Jua',sans-serif; font-weight:400;}
     </div>
     <input id="myName" class="name-in" maxlength="8" placeholder="문제를 낼 '나'의 이름 (선택)">
 
-    <button id="toSetup" class="btn" disabled>내 문제 만들러 가기 →</button>
+    <button id="toSetup" class="btn">내 문제 만들러 가기 →</button>
   </section>
 
   <!-- ===== SETUP ===== -->
@@ -269,6 +269,8 @@ h1{font-family:'Jua',sans-serif; font-weight:400;}
     <button id="playAgain" class="btn ghost">처음부터 다시</button>
   </section>
 
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/friend.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧺 둘의 피크닉 — 다른 게임 보러가기 →</a></div>
+
   <!-- ===== FOOTER ===== -->
   <div class="footer">
     <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
@@ -328,13 +330,12 @@ $('relRow').addEventListener('click',e=>{
   const el=e.target.closest('.rel'); if(!el)return;
   document.querySelectorAll('.rel').forEach(r=>r.classList.remove('sel'));
   el.classList.add('sel'); rel=el.dataset.rel; vibrate(15);
-  $('toSetup').disabled=false;
 });
 $('relRow').addEventListener('keydown',e=>{
   if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('rel')){e.preventDefault();e.target.click();}
 });
 $('toSetup').addEventListener('click',()=>{
-  if(!rel)return;
+  if(!rel){ toast('먼저 누구와 함께 하는지 골라주세요 👆'); popEl($('relRow')); window.scrollTo({top:0,behavior:'smooth'}); return; }
   myName=($('myName').value||"").trim();
   setupIdx=0; myAnswers=[];
   show('screen-setup'); renderSetup();
@@ -525,7 +526,7 @@ function rankOf(p){
 $('playAgain').addEventListener('click',()=>{
   rel=""; myName=""; $('myName').value="";
   document.querySelectorAll('.rel').forEach(r=>r.classList.remove('sel'));
-  $('toSetup').disabled=true; applyTheme(1); show('screen-intro');
+  applyTheme(1); show('screen-intro');
 });
 $('playAgainSwap').addEventListener('click',()=>{
   // 역할 바꾸기: 이번엔 상대가 문제를 낼 차례 → 세팅부터 다시
