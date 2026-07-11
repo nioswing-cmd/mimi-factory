@@ -372,6 +372,54 @@
    "teaser": "apps/너_나_알아_friend.html",
    "premium": "apps/너_나_알아_friend.html",
    "desc": "나에 대한 10문제를 상대가 풀고, 틀린 답이 곧 우리의 대화 소재가 되는 둘이서 친해지기 게임."
+  },
+  {
+   "id": "퍼스널컬러_자가진단",
+   "type": "test",
+   "title": "퍼스널컬러 자가진단",
+   "author": "미미팩토리 오리지널",
+   "date": "2026-07-11",
+   "color1": "#ffc2a8",
+   "color2": "#f0708f",
+   "teaser": "apps/퍼스널컬러_자가진단_test.html",
+   "premium": "apps/퍼스널컬러_자가진단_test.html",
+   "desc": "거울 한 번, 12문항 — 봄웜·여쿨·갈웜·겨쿨 내 계절 찾기"
+  },
+  {
+   "id": "타로_심리카드",
+   "type": "test",
+   "title": "타로 심리카드",
+   "author": "미미팩토리 오리지널",
+   "date": "2026-07-11",
+   "color1": "#f4c66f",
+   "color2": "#93a8ff",
+   "teaser": "apps/타로_심리카드_test.html",
+   "premium": "apps/타로_심리카드_test.html",
+   "desc": "점이 아니라 질문을 뽑는다 — 22장 상징의 심리학적 재해석"
+  },
+  {
+   "id": "오행_밸런스",
+   "type": "test",
+   "title": "오행 밸런스 테스트",
+   "author": "미미팩토리 오리지널",
+   "date": "2026-07-11",
+   "color1": "#e0b13e",
+   "color2": "#b0413e",
+   "teaser": "apps/오행_밸런스_test.html",
+   "premium": "apps/오행_밸런스_test.html",
+   "desc": "내 안의 木火土金水 — 나를 움직이는 다섯 에너지의 균형"
+  },
+  {
+   "id": "진짜_별자리_테스트",
+   "type": "test",
+   "title": "진짜 별자리 테스트",
+   "author": "미미팩토리 오리지널",
+   "date": "2026-07-11",
+   "color1": "#38d6f5",
+   "color2": "#8a63ff",
+   "teaser": "apps/진짜_별자리_테스트_test.html",
+   "premium": "apps/진짜_별자리_테스트_test.html",
+   "desc": "성향으로 찾는 영혼의 별자리 — 생일 별자리와 싱크로율 비교"
   }
  ]
 }

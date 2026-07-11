@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>진짜 별자리 테스트 — 도파민 실험실</title>
+<meta property="og:title" content="진짜 별자리 테스트 — 성향으로 찾는 내 영혼의 별자리">
+<meta property="og:description" content="생일 별자리 말고, 성향이 말해주는 진짜 별자리는? 12문항으로 확인하고 생일과 비교해보세요.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0e1a; --bg2:#101a2e; --card:#14203a; --line:#22335a;
+  --ink:#e8f2ff; --sub:#8fa5c9; --accent:#38d6f5; --accent2:#8a63ff;
+  --point:#6ef2c3; --ok:#3ddc97; --bad:#ff5d6c;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 80% -10%, rgba(138,99,255,.14), transparent 55%),
+             radial-gradient(100% 80% at 10% 110%, rgba(56,214,245,.10), transparent 50%),
+             linear-gradient(165deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:5vh;}
+.hero h1{font-size:42px;line-height:1.18;margin:16px 0 8px;}
+.hero .stars{font-size:22px;letter-spacing:8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;word-break:keep-all;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;word-break:keep-all;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;word-break:keep-all;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#0a1120;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--accent),var(--point));
+  box-shadow:0 10px 26px -8px rgba(56,214,245,.5);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+/* 진단 상단: 원소 오브 4 + 모드 점 3 (정체 숨김) */
+.cosmo{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px 11px;margin-bottom:16px;}
+.orbs{display:flex;justify-content:center;gap:14px;}
+.orb{width:52px;height:52px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;
+  font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);
+  background:rgba(255,255,255,.05);border:1.5px solid var(--line);transition:box-shadow .5s,transform .5s;}
+.orb .fillc{position:absolute;inset:3px;border-radius:50%;opacity:0;transform:scale(.4);transition:opacity .5s,transform .5s cubic-bezier(.34,1.56,.64,1);}
+.orb span{position:relative;z-index:1;}
+.modedots{display:flex;justify-content:center;gap:10px;margin-top:12px;}
+.mdot{width:34px;height:10px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;position:relative;}
+.mdot i{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .5s cubic-bezier(.22,1,.36,1);}
+.cosmo .cap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:10px;opacity:.8;}
+.count{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);text-align:center;margin-bottom:8px;}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent);}
+.qtext{font-size:21px;font-weight:700;line-height:1.45;margin-top:8px;word-break:keep-all;}
+.qhint{font-size:13px;color:var(--sub);margin-top:8px;}
+.opts{display:flex;flex-direction:column;gap:11px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:15px 16px;
+  font-size:15.5px;color:var(--ink);text-align:left;cursor:pointer;font-family:inherit;line-height:1.5;word-break:keep-all;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.opt:active{transform:scale(.97);}
+.opt .ab{display:inline-block;font-family:'Jua',sans-serif;color:var(--sub);margin-right:8px;}
+
+/* 결과 */
+.res-hero{text-align:center;margin-top:10px;}
+.res-sym{font-size:70px;line-height:1;}
+.res-type{font-family:'Jua',sans-serif;font-size:34px;margin:12px 0 4px;}
+.res-kw{color:var(--point);font-size:14px;letter-spacing:.06em;}
+.res-tag{color:var(--sub);font-size:14.5px;line-height:1.7;word-break:keep-all;margin-top:10px;}
+.combo{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin-top:18px;font-size:14px;line-height:1.7;word-break:keep-all;}
+.combo b{color:var(--point);}
+.bday{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:14px;text-align:center;}
+.bday .t{font-family:'Jua',sans-serif;font-size:17px;margin-bottom:12px;}
+.bday select{background:var(--bg2);border:1.5px solid var(--line);color:var(--ink);border-radius:12px;
+  padding:12px 10px;font-size:15px;font-family:inherit;margin:0 4px;}
+.bday select:focus{outline:none;border-color:var(--accent);}
+.bday .cta{margin-top:12px;}
+.match{margin-top:14px;border-radius:14px;padding:15px;font-size:14.5px;line-height:1.65;word-break:keep-all;display:none;animation:pop .5s cubic-bezier(.34,1.56,.64,1);}
+.match.on{display:block;}
+.match.same{background:rgba(61,220,151,.12);border:1px solid rgba(61,220,151,.45);}
+.match.diff{background:rgba(138,99,255,.12);border:1px solid rgba(138,99,255,.45);}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(20,32,58,.97);border:1.5px solid var(--accent);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(56,214,245,.5));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#7f93b8;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#7f93b8;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  <!-- 홈 -->
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 도파민 실험실 · 미신의 재해석</span>
+      <h1>진짜 <span class="grad">별자리</span> 테스트</h1>
+      <div class="stars">✨🌟✨</div>
+      <p class="sub">생일이 정해준 별자리 말고,<br><b>성향이 말해주는 내 영혼의 별자리</b>는 따로 있을지도.<br>12문항 뒤, 생일 별자리와 비교해보세요.</p>
+    </div>
+    <div class="pitch">
+      <b>어떻게 찾나요?</b><br>
+      점성술의 분류 틀을 빌립니다 — 나를 움직이는 <b>기질(4원소)</b>과
+      일하는 <b>리듬(3모드)</b>을 측정하면, 그 조합이 12별자리 중 하나를 가리켜요.
+    </div>
+    <button class="btn" onclick="startQuiz()">🔭 내 진짜 별자리 찾기</button>
+    <p class="note">※ 별자리는 과학적 예측 도구가 아닙니다. 이 테스트는 점성술의 분류 체계를
+    성향 이해의 <b>은유</b>로 빌린 재미 + 자기관찰용입니다.</p>
+  </section>
+
+  <!-- 진단 -->
+  <section id="scQuiz" class="screen">
+    <div class="cosmo">
+      <div class="orbs" id="orbs"></div>
+      <div class="modedots" id="mdots"></div>
+      <div class="cap">네 개의 별과 세 개의 궤도가 채워집니다 — 정체는 결과에서 공개!</div>
+    </div>
+    <div class="count" id="qCount">1 / 12</div>
+    <div class="qcard">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qhint">👉 가장 나다운 쪽을 골라주세요</div>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  <!-- 결과 -->
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="res-sym" id="resSym"></div>
+      <div class="res-type" id="resType"></div>
+      <div class="res-kw" id="resKw"></div>
+      <p class="res-tag" id="resTag"></p>
+    </div>
+    <div class="combo" id="combo"></div>
+    <div class="bday">
+      <div class="t">🎂 생일 별자리와 비교해보기</div>
+      <select id="bMonth"></select>
+      <select id="bDay"></select>
+      <button class="btn cta" style="margin-top:12px;font-size:16px;padding:13px;" onclick="compare()">우주 싱크로율 확인 →</button>
+      <div class="match" id="match"></div>
+    </div>
+    <button class="btn" onclick="copyResult()">📋 결과 복사해서 공유</button>
+    <button class="btn ghost" onclick="location.reload()">다시 테스트하기</button>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 도파민 실험실 — 다른 테스트 보러가기 →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+    <div class="mf-logo">미미팩토리</div>
+    <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+  </div>
+</div>
+
+<script>
+/* 원소 F불 E흙 A공기 W물 (6문항 4택) + 모드 C활동 X고정 M변통 (6문항 3택) */
+const EQ=[
+ {q:"스트레스가 확 몰려오면 나는?", o:[
+   {t:"몸을 움직여서 태워버린다",k:"F"},{t:"맛있는 걸 먹고 푹 잔다",k:"E"},
+   {t:"친구를 불러 수다로 푼다",k:"A"},{t:"혼자 음악·영화로 흘려보낸다",k:"W"}]},
+ {q:"누가 새로운 아이디어를 들고 오면?", o:[
+   {t:"\"오 당장 해보자!\"",k:"F"},{t:"\"현실적으로 가능해?\"",k:"E"},
+   {t:"\"재밌다, 더 얘기해봐\"",k:"A"},{t:"\"그게 우리에게 어떤 의미지?\"",k:"W"}]},
+ {q:"내가 충전되는 순간은?", o:[
+   {t:"도전해서 이겨냈을 때",k:"F"},{t:"잘 정돈된 하루의 끝",k:"E"},
+   {t:"새로운 사람과의 대화",k:"A"},{t:"깊은 감정을 나눈 밤",k:"W"}]},
+ {q:"친구들이 말하는 나는?", o:[
+   {t:"\"화끈하다\"",k:"F"},{t:"\"든든하다\"",k:"E"},
+   {t:"\"재치있다\"",k:"A"},{t:"\"속이 깊다\"",k:"W"}]},
+ {q:"갈등이 생기면 나는?", o:[
+   {t:"정면 돌파, 바로 부딪친다",k:"F"},{t:"시간을 두고 현실적으로 푼다",k:"E"},
+   {t:"말로 풀어야 한다, 대화 요청",k:"A"},{t:"상대의 감정부터 살핀다",k:"W"}]},
+ {q:"여행 전날 밤의 나는?", o:[
+   {t:"설레서 잠이 안 온다, 일단 떠나자",k:"F"},{t:"체크리스트 최종 점검 완료",k:"E"},
+   {t:"거기서 만날 사람·일들이 기대",k:"A"},{t:"그곳의 공기와 분위기를 상상",k:"W"}]},
+];
+const MQ=[
+ {q:"프로젝트에서 나의 포지션은?", o:[
+   {t:"판을 짜고 시작하는 사람",k:"C"},{t:"꾸준히 밀고 가는 사람",k:"X"},{t:"상황 따라 조율하는 사람",k:"M"}]},
+ {q:"계획이 틀어지면?", o:[
+   {t:"새 계획을 그 자리에서 다시 짠다",k:"C"},{t:"원래 계획을 최대한 사수한다",k:"X"},{t:"흐름에 맞춰 유연하게 바꾼다",k:"M"}]},
+ {q:"내 에너지 스타일은?", o:[
+   {t:"점화형 — 초반에 폭발한다",k:"C"},{t:"지구력형 — 끝까지 한결같다",k:"X"},{t:"변속형 — 필요할 때 확 낸다",k:"M"}]},
+ {q:"익숙함과 새로움 중에서?", o:[
+   {t:"새 판을 벌이는 게 좋다",k:"C"},{t:"익숙한 걸 깊게 파는 게 좋다",k:"X"},{t:"둘 사이를 오가는 게 좋다",k:"M"}]},
+ {q:"결정을 내리는 방식은?", o:[
+   {t:"빠르게 정하고 바로 추진",k:"C"},{t:"한번 정하면 잘 안 바꿈",k:"X"},{t:"정한 뒤에도 계속 업데이트",k:"M"}]},
+ {q:"사람들 사이에서 나는?", o:[
+   {t:"이끄는 사람 · 추진자",k:"C"},{t:"기둥 같은 사람 · 지킴이",k:"X"},{t:"잇는 사람 · 해결사",k:"M"}]},
+];
+
+const SIGNS={
+ FC:{sym:"♈",name:"양자리",kw:"개척 · 직진 · 첫 번째",date:[3,21,4,19],tag:"생각과 동시에 몸이 나가는 우주의 선봉장. 시작의 에너지가 당신의 재능입니다. 다만 마무리 담당 친구를 곁에 두세요."},
+ FX:{sym:"♌",name:"사자자리",kw:"주인공 · 자부심 · 온기",date:[7,23,8,22],tag:"무대 중앙이 어울리는 사람. 당신의 자신감은 주변까지 따뜻하게 데웁니다. 박수가 없어도 빛나는 법을 배우면 무적."},
+ FM:{sym:"♐",name:"사수자리",kw:"모험 · 낙관 · 자유",date:[11,22,12,21],tag:"더 넓은 세계를 향해 화살을 쏘는 탐험가. 낙관과 이동이 산소 같은 사람. 얽매는 것만이 당신의 유일한 천적입니다."},
+ EC:{sym:"♑",name:"염소자리",kw:"목표 · 인내 · 정상",date:[12,22,1,19],tag:"산 정상에 깃발을 꽂을 때까지 멈추지 않는 등반가. 묵묵한 성실이 최강의 무기. 가끔은 베이스캠프에서 쉬어가세요."},
+ EX:{sym:"♉",name:"황소자리",kw:"안정 · 감각 · 뚝심",date:[4,20,5,20],tag:"좋은 것을 알아보는 감각과 지키는 뚝심의 소유자. 서두르지 않지만 반드시 도착합니다. 변화도 가끔은 선물이에요."},
+ EM:{sym:"♍",name:"처녀자리",kw:"디테일 · 분석 · 개선",date:[8,23,9,22],tag:"남들이 못 보는 1%를 보는 눈. 세상을 조금씩 더 낫게 고치는 사람. 그 현미경을 자신에게만은 너무 들이대지 말기."},
+ AC:{sym:"♎",name:"천칭자리",kw:"균형 · 조화 · 연결",date:[9,23,10,22],tag:"기울어진 곳을 못 지나치는 우주의 조율사. 사람과 사람을 잇는 감각이 탁월합니다. 당신 자신의 편도 들어주세요."},
+ AX:{sym:"♒",name:"물병자리",kw:"독창 · 미래 · 소신",date:[1,20,2,18],tag:"남들과 같은 답에 만족 못 하는 미래인. 엉뚱함이 아니라 시대를 앞선 것뿐. 이해받지 못해도 그 소신이 맞을 때가 많아요."},
+ AM:{sym:"♊",name:"쌍둥이자리",kw:"호기심 · 재치 · 변화",date:[5,21,6,21],tag:"두 개의 관심사도 부족한 호기심 만렙. 말과 아이디어가 반짝이는 사람. 얕고 넓음은 약점이 아니라 연결의 재능입니다."},
+ WC:{sym:"♋",name:"게자리",kw:"돌봄 · 직감 · 내 사람",date:[6,22,7,22],tag:"단단한 껍질 안에 가장 부드러운 마음을 가진 수호자. '내 사람'을 위해선 집게발도 불사합니다. 그 돌봄, 자신에게도."},
+ WX:{sym:"♏",name:"전갈자리",kw:"몰입 · 통찰 · 진심",date:[10,23,11,21],tag:"얕은 관계엔 흥미 없는 깊이의 승부사. 한번 마음을 주면 끝까지 갑니다. 그 강렬함은 아무나 못 가진 재능이에요."},
+ WM:{sym:"♓",name:"물고기자리",kw:"공감 · 상상 · 흐름",date:[2,19,3,20],tag:"타인의 감정이 자막처럼 읽히는 공감형 몽상가. 예술과 위로가 당신의 언어. 가끔은 현실에 닻 하나 내려두기."},
+};
+const ELEM_NAME={F:"🔥 불",E:"🌿 흙",A:"💨 공기",W:"💧 물"};
+const MODE_NAME={C:"⚡ 활동형(시작하는 힘)",X:"🗿 고정형(지키는 힘)",M:"🌀 변통형(조율하는 힘)"};
+
+let phase=0, idx=0, eScore={F:0,E:0,A:0,W:0}, mScore={C:0,X:0,M:0};
+let orbMap=[], myKey="";
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1900);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+const ORB_COLORS={F:"#ff7a5c",E:"#8fbb4f",A:"#38d6f5",W:"#8a63ff"};
+function startQuiz(){
+  phase=0; idx=0; eScore={F:0,E:0,A:0,W:0}; mScore={C:0,X:0,M:0};
+  orbMap=shuffle(["F","E","A","W"]);
+  const ob=$('orbs'); ob.innerHTML="";
+  orbMap.forEach((k,i)=>{ ob.innerHTML+="<div class='orb' id='orb"+i+"'><div class='fillc' style='background:radial-gradient(circle at 35% 30%, #fff5, transparent 40%),"+ORB_COLORS[k]+"'></div><span>?</span></div>"; });
+  const md=$('mdots'); md.innerHTML="";
+  for(let i=0;i<3;i++) md.innerHTML+="<div class='mdot'><i id='md"+i+"'></i></div>";
+  show('scQuiz'); render();
+}
+function render(){
+  const total=EQ.length+MQ.length;
+  const n=phase===0?idx:EQ.length+idx;
+  const Q=phase===0?EQ[idx]:MQ[idx];
+  $('qCount').textContent=(n+1)+" / "+total;
+  $('qNum').textContent="Q"+(n+1);
+  const qt=$('qText'); qt.textContent=Q.q;
+  qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const opts=shuffle([...Q.o]);
+  const box=$('opts'); box.innerHTML="";
+  const AB=["A","B","C","D"];
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button";
+    b.innerHTML="<span class='ab'>"+AB[i]+"</span>"+o.t;
+    b.addEventListener('click',()=>pick(o.k));
+    box.appendChild(b);
+  });
+}
+function pick(k){
+  vibrate(22);
+  if(phase===0){
+    eScore[k]++;
+    orbMap.forEach((e,i)=>{
+      const f=document.querySelector('#orb'+i+' .fillc');
+      const r=eScore[e]/EQ.length;
+      f.style.opacity=r>0? (0.35+r*0.65) :0;
+      f.style.transform="scale("+(0.4+r*0.6)+")";
+    });
+    idx++;
+    if(idx>=EQ.length){ phase=1; idx=0; toast("🌟 이제 궤도의 리듬을 볼 차례!"); }
+  }else{
+    mScore[k]++;
+    ["C","X","M"].forEach((m,i)=>{ $('md'+i).style.width=(mScore[m]/MQ.length*100)+"%"; });
+    idx++;
+    if(idx>=MQ.length){ setTimeout(showResult,450); return; }
+  }
+  setTimeout(render,240);
+}
+function showResult(){
+  const e=["F","E","A","W"].sort((a,b)=>eScore[b]-eScore[a])[0];
+  const m=["C","X","M"].sort((a,b)=>mScore[b]-mScore[a])[0];
+  myKey=e+m;
+  const S=SIGNS[myKey];
+  show('scResult'); vibrate([30,50,30,50,90]);
+  $('resSym').textContent=S.sym;
+  $('resType').innerHTML="내 영혼의 별자리는 <span class='grad'>"+S.name+"</span>";
+  $('resKw').textContent=S.kw;
+  $('resTag').textContent=S.tag;
+  $('combo').innerHTML="<b>🧬 조합 공개</b> — 당신의 기질은 <b>"+ELEM_NAME[e]+"</b>("+eScore[e]+"/"+EQ.length+"), 리듬은 <b>"+MODE_NAME[m]+"</b>("+mScore[m]+"/"+MQ.length+"). 점성술에서 이 조합이 가리키는 별자리가 바로 "+S.name+"입니다.";
+  const bm=$('bMonth'), bd=$('bDay');
+  if(!bm.options.length){
+    for(let i=1;i<=12;i++) bm.innerHTML+="<option value='"+i+"'>"+i+"월</option>";
+    for(let i=1;i<=31;i++) bd.innerHTML+="<option value='"+i+"'>"+i+"일</option>";
+  }
+  window._resText="🔭 진짜 별자리 테스트\n내 영혼의 별자리: "+S.name+" "+S.sym+" ("+S.kw+")\n"+S.tag+"\n\n내 진짜 별자리 찾기 → https://mimifactory.vibekr.com/apps/진짜_별자리_테스트_test.html";
+}
+function zodiacOf(m,d){
+  const Z=[["CP",1,19],["AX",2,18],["WM",3,20],["FC",4,19],["EX",5,20],["AM",6,21],["WC",7,22],["FX",8,22],["EM",9,22],["AC",10,22],["WX",11,21],["FM",12,21],["CP",12,31]];
+  const map={CP:"EC"};
+  for(const [k,mm,dd] of Z){
+    if(m<mm||(m===mm&&d<=dd)) return SIGNS[map[k]||k];
+  }
+  return SIGNS.EC;
+}
+function compare(){
+  const m=parseInt($('bMonth').value), d=parseInt($('bDay').value);
+  const born=zodiacOf(m,d), mine=SIGNS[myKey];
+  const el=$('match'); vibrate([20,40,20]);
+  if(born.name===mine.name){
+    el.className="match same on";
+    el.innerHTML="🌌 <b>우주 싱크로율 100%!</b><br>생일 별자리도 <b>"+born.sym+" "+born.name+"</b> — 타고난 별과 살아가는 성향이 완벽히 일치하는, 흔치 않은 케이스예요.";
+  }else{
+    el.className="match diff on";
+    el.innerHTML="🌠 <b>반전 발견!</b> 생일 별자리는 <b>"+born.sym+" "+born.name+"</b>이지만, 지금의 당신은 <b>"+mine.sym+" "+mine.name+"</b>의 기운으로 살아가는 중.<br>태어난 별을 떠나 스스로 별자리를 만들어온 사람이라는 뜻 — 꽤 멋진 반전이죠.";
+  }
+  window._resText="🔭 진짜 별자리 테스트\n생일 별자리: "+born.name+" "+born.sym+" → 영혼의 별자리: "+mine.name+" "+mine.sym+"\n"+(born.name===mine.name?"우주 싱크로율 100%!":"스스로 별자리를 만들어온 타입!")+"\n\n내 진짜 별자리 찾기 → https://mimifactory.vibekr.com/apps/진짜_별자리_테스트_test.html";
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("복사 완료! 어디든 붙여넣기 📋")); }
+  else toast("길게 눌러 복사해주세요");
+  vibrate(20);
+}
+</script>
+</body>
+</html>

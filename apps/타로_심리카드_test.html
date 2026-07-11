@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>타로 심리카드 — 도파민 실험실</title>
+<meta property="og:title" content="타로 심리카드 — 오늘 내 마음을 비추는 3장">
+<meta property="og:description" content="점이 아니라 질문을 뽑습니다. 22장의 상징을 심리학의 거울로 — 3장을 골라보세요.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c1020; --bg2:#121732; --card:#181f42; --line:#293264;
+  --ink:#eef0fb; --sub:#9aa3cc; --accent:#93a8ff; --accent2:#5f6fd6;
+  --point:#f4c66f; --ok:#52c48f; --bad:#e2584f;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 80% -10%, rgba(147,168,255,.13), transparent 55%),
+             radial-gradient(100% 80% at 10% 110%, rgba(244,198,111,.08), transparent 50%),
+             linear-gradient(165deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--point),var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:4vh;}
+.hero h1{font-size:44px;line-height:1.15;margin:16px 0 8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;word-break:keep-all;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;word-break:keep-all;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;word-break:keep-all;opacity:.85;}
+
+.theme-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;}
+.theme{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px 10px;
+  text-align:center;cursor:pointer;transition:transform .25s cubic-bezier(.34,1.56,.64,1),border-color .25s;}
+.theme:active{transform:scale(.95);}
+.theme.sel{border-color:var(--point);background:linear-gradient(160deg,rgba(244,198,111,.14),rgba(147,168,255,.08));}
+.theme .emo{font-size:30px;display:block;}
+.theme .nm{font-family:'Jua',sans-serif;font-size:15.5px;margin-top:7px;display:block;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#141021;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--point),var(--accent));
+  box-shadow:0 10px 26px -8px var(--accent2);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.theme:focus-visible,.cardback:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+/* 스프레드 */
+.spread-head{text-align:center;margin-bottom:14px;}
+.spread-head .t{font-family:'Jua',sans-serif;font-size:22px;}
+.spread-head .s{color:var(--sub);font-size:13.5px;margin-top:6px;}
+.picked-row{display:flex;justify-content:center;gap:10px;margin-bottom:16px;}
+.slot{width:64px;height:92px;border-radius:10px;border:2px dashed var(--line);display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--sub);text-align:center;line-height:1.3;}
+.slot.filled{border-style:solid;border-color:var(--point);background:linear-gradient(150deg,#232b5c,#161c40);
+  color:var(--point);font-size:26px;box-shadow:0 0 16px -2px rgba(244,198,111,.4);animation:pop .45s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.85);}60%{transform:scale(1.06);}100%{transform:scale(1);}}
+.deck{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
+.cardback{aspect-ratio:2/3;border-radius:9px;cursor:pointer;position:relative;border:1px solid #38418a;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(244,198,111,.55) 0 8%, transparent 9%),
+    radial-gradient(circle at 50% 42%, transparent 0 13%, rgba(244,198,111,.28) 14% 15.5%, transparent 16.5%),
+    linear-gradient(150deg,#2a3374,#151b45);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),opacity .3s;}
+.cardback:active{transform:scale(.92);}
+.cardback.gone{opacity:0;transform:scale(.6) rotate(8deg);pointer-events:none;}
+.deck-cap{font-size:12px;color:var(--sub);text-align:center;margin-top:14px;}
+
+/* 리빌 */
+.pos-label{font-family:'Jua',sans-serif;font-size:14px;color:var(--point);letter-spacing:.08em;text-align:center;margin:18px 0 8px;}
+.flipwrap{perspective:1000px;width:190px;margin:0 auto;}
+.flip{position:relative;width:100%;aspect-ratio:2/3;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.4,.1,.2,1);cursor:pointer;}
+.flip.flipped{transform:rotateY(180deg);}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;}
+.face.back{border:1px solid #38418a;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(244,198,111,.55) 0 8%, transparent 9%),
+    radial-gradient(circle at 50% 42%, transparent 0 13%, rgba(244,198,111,.28) 14% 15.5%, transparent 16.5%),
+    linear-gradient(150deg,#2a3374,#151b45);
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:12px;color:var(--sub);font-size:12px;}
+.face.front{transform:rotateY(180deg);background:linear-gradient(165deg,#222b63,#141a3e);
+  border:1.5px solid var(--point);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 0 30px -6px rgba(244,198,111,.45);}
+.face.front .no{font-size:11px;letter-spacing:.2em;color:var(--sub);}
+.face.front .emo{font-size:52px;}
+.face.front .nm{font-family:'Jua',sans-serif;font-size:19px;color:var(--point);}
+.face.front .kw{font-size:12px;color:var(--sub);}
+.meaning{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 17px;margin-top:14px;
+  font-size:14.5px;line-height:1.7;word-break:keep-all;display:none;animation:fadeIn .5s ease;}
+.meaning.on{display:block;}
+.meaning .q{margin-top:10px;background:rgba(244,198,111,.1);border-left:3px solid var(--point);border-radius:8px;
+  padding:10px 12px;font-size:14px;}
+.meaning .q b{color:var(--point);}
+.tap-hint{text-align:center;color:var(--sub);font-size:13px;margin-top:10px;}
+
+.summary{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:24px;font-size:14.5px;line-height:1.75;word-break:keep-all;}
+.summary b{color:var(--point);}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(24,31,66,.97);border:1.5px solid var(--point);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(147,168,255,.55));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#8d94bd;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#8d94bd;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  <!-- 홈 -->
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 도파민 실험실 · 미신의 재해석</span>
+      <h1>🔮 <span class="grad">타로 심리카드</span></h1>
+      <p class="sub">점이 아니라 <b>질문</b>을 뽑습니다.<br>22장의 오래된 상징을, 내 마음을 비추는 거울로.</p>
+    </div>
+    <div class="pitch">
+      <b>이렇게 씁니다</b><br>
+      ① 지금 마음에 걸리는 주제를 하나 고르고<br>
+      ② 22장 중 <b>끌리는 3장</b>을 뽑으면<br>
+      ③ 「지금의 나 → 마주할 것 → 나아갈 길」 순서로 카드가 열립니다.
+    </div>
+    <div class="theme-row" id="themeRow">
+      <div class="theme" data-t="마음" tabindex="0"><span class="emo">🌙</span><span class="nm">요즘 내 마음</span></div>
+      <div class="theme" data-t="관계" tabindex="0"><span class="emo">💞</span><span class="nm">그 사람과 나</span></div>
+      <div class="theme" data-t="일" tabindex="0"><span class="emo">🎯</span><span class="nm">일 · 목표</span></div>
+      <div class="theme" data-t="오늘" tabindex="0"><span class="emo">☀️</span><span class="nm">그냥 오늘 하루</span></div>
+    </div>
+    <button class="btn" onclick="goSpread()">🃏 카드 섞고 뽑으러 가기</button>
+    <p class="note">※ 타로는 미래를 맞히는 도구가 아닙니다. 이 앱은 전통 상징을 심리학적으로
+    재해석한 <b>셀프 코칭 카드</b>로, 답은 카드가 아니라 당신 안에서 나옵니다.</p>
+  </section>
+
+  <!-- 스프레드 -->
+  <section id="scSpread" class="screen">
+    <div class="spread-head">
+      <div class="t">끌리는 카드 <span class="grad">3장</span>을 뽑으세요</div>
+      <div class="s" id="spreadTheme">주제: 요즘 내 마음</div>
+    </div>
+    <div class="picked-row">
+      <div class="slot" id="slot0">① 지금의<br>나</div>
+      <div class="slot" id="slot1">② 마주할<br>것</div>
+      <div class="slot" id="slot2">③ 나아갈<br>길</div>
+    </div>
+    <div class="deck" id="deck"></div>
+    <div class="deck-cap">너무 고민하지 마세요 — 처음 눈이 간 카드가 내 카드입니다 ✨</div>
+  </section>
+
+  <!-- 리빌 -->
+  <section id="scReveal" class="screen">
+    <div id="revealArea"></div>
+    <div class="summary" id="summary" style="display:none;"></div>
+    <button class="btn" id="copyBtn" style="display:none;" onclick="copyResult()">📋 오늘의 질문 3개 저장하기</button>
+    <button class="btn ghost" id="againBtn" style="display:none;" onclick="location.reload()">🔄 다른 주제로 다시 뽑기</button>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 도파민 실험실 — 다른 테스트 보러가기 →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+    <div class="mf-logo">미미팩토리</div>
+    <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+  </div>
+</div>
+
+<script>
+/* 22 메이저 아르카나 — 심리학적 재해석 (전통 상징 → 자기성찰 키워드) */
+const CARDS=[
+ {n:0,name:"바보",emo:"🎒",kw:"시작 · 순수",mean:"계산이 서기 전에 발을 떼는 힘. '준비 부족'은 종종 '시작할 용기'의 다른 이름입니다.",q:"실패해도 괜찮다면, 지금 무엇을 시작하고 싶나요?"},
+ {n:1,name:"마법사",emo:"🪄",kw:"실행 · 재능",mean:"필요한 도구는 이미 책상 위에 있습니다. 부족한 건 능력이 아니라 '쓰기로 한 결심'일 때가 많아요.",q:"이미 갖고 있는데 안 쓰고 있는 능력은 무엇인가요?"},
+ {n:2,name:"여사제",emo:"🌒",kw:"직관 · 침묵",mean:"머리로는 복잡해도, 마음은 이미 답을 알고 있는 상태. 소음을 줄이면 그 목소리가 들립니다.",q:"사실 이미 알고 있는 답은 무엇인가요?"},
+ {n:3,name:"여황제",emo:"🌾",kw:"돌봄 · 풍요",mean:"채워야 흘러넘칩니다. 나를 돌보는 일은 사치가 아니라 모든 관계의 밑천이에요.",q:"요즘 나를 무엇으로 채우고 있나요?"},
+ {n:4,name:"황제",emo:"🏛️",kw:"질서 · 책임",mean:"규칙은 나를 지키는 울타리도, 가두는 담장도 됩니다. 지금 그 경계를 점검할 때.",q:"나를 지키는 규칙과 가두는 규칙, 각각 하나씩 꼽는다면?"},
+ {n:5,name:"은사",emo:"📿",kw:"배움 · 조언",mean:"혼자 뚫는 시대는 없습니다. 앞서 걸은 사람의 지도 한 장이 몇 달을 아껴줘요.",q:"지금 조언을 구해야 할 사람은 누구인가요?"},
+ {n:6,name:"연인",emo:"💘",kw:"선택 · 가치",mean:"선택이 어려운 건 답이 없어서가 아니라, 무엇을 포기할지 정하지 못해서입니다.",q:"솔직히, 마음이 이미 기운 쪽은 어디인가요?"},
+ {n:7,name:"전차",emo:"🏇",kw:"추진 · 집중",mean:"방향이 잡혔다면 이제 속도의 시간. 흩어진 에너지를 한 곳에 모으세요.",q:"지금 액셀을 밟아야 할 한 가지는 무엇인가요?"},
+ {n:8,name:"힘",emo:"🦁",kw:"부드러운 용기",mean:"진짜 힘은 억누르는 게 아니라 길들이는 것. 내 안의 사자와 싸우지 말고 협상하세요.",q:"내 안의 사자(욕구·화)는 지금 무엇을 원하나요?"},
+ {n:9,name:"은둔자",emo:"🏮",kw:"성찰 · 고독",mean:"등불은 어두워야 보입니다. 접속을 끊는 시간이 오히려 방향을 알려줘요.",q:"온전히 혼자였던 시간, 마지막이 언제였나요?"},
+ {n:10,name:"운명의 수레바퀴",emo:"🎡",kw:"흐름 · 변화",mean:"모든 것을 통제할 순 없습니다. 돌릴 수 있는 바퀴와 돌아가는 바퀴를 구분하는 게 지혜.",q:"붙잡을 것과 흘려보낼 것, 하나씩 정한다면?"},
+ {n:11,name:"정의",emo:"⚖️",kw:"균형 · 공정",mean:"저울은 남에게만 쓰라고 있는 게 아닙니다. 나에게만 가혹한 판결을 내리고 있진 않은지.",q:"남에게는 관대하면서 나에게만 엄격한 부분은 없나요?"},
+ {n:12,name:"매달린 사람",emo:"🙃",kw:"관점 전환",mean:"멈춤은 후퇴가 아닙니다. 거꾸로 매달려야만 보이는 풍경이 있어요.",q:"지금 상황을 거꾸로 보면, 무엇이 기회로 보이나요?"},
+ {n:13,name:"죽음",emo:"🍂",kw:"끝 · 재생",mean:"무언가 끝나야 다음이 시작됩니다. 이 카드는 상실이 아니라 '자리 비우기'의 상징이에요.",q:"끝난 걸 알면서도 붙잡고 있는 것은 무엇인가요?"},
+ {n:14,name:"절제",emo:"🏺",kw:"조율 · 회복",mean:"두 잔의 물을 섞듯, 삶은 배합의 기술입니다. 과한 것은 덜고 부족한 것은 채우기.",q:"요즘 내 삶에서 과한 것 하나, 부족한 것 하나는?"},
+ {n:15,name:"악마",emo:"⛓️",kw:"집착 · 습관",mean:"그 사슬, 자세히 보면 잠겨 있지 않습니다. 끊지 못하는 게 아니라 놓기 싫은 걸 수도.",q:"알면서 못 끊는 그것 — 나에게 주는 진짜 보상은 뭘까요?"},
+ {n:16,name:"탑",emo:"🌩️",kw:"붕괴 · 해방",mean:"공들여 쌓은 것이 무너질 때, 비로소 기초가 보입니다. 무너짐은 때로 가장 빠른 리모델링.",q:"무너진(무너지는) 자리에서 건질 한 가지는 무엇인가요?"},
+ {n:17,name:"별",emo:"⭐",kw:"희망 · 치유",mean:"별은 손에 잡히지 않지만 방향이 됩니다. 지금 필요한 건 큰 성취가 아니라 작은 믿음.",q:"내가 다시 믿어보고 싶은 것은 무엇인가요?"},
+ {n:18,name:"달",emo:"🌕",kw:"불안 · 무의식",mean:"불안은 고장이 아니라 신호입니다. 달빛 아래 그림자가 커 보일 뿐, 실체는 생각보다 작아요.",q:"그 불안이 나에게 알려주려는 것은 무엇일까요?"},
+ {n:19,name:"태양",emo:"🌞",kw:"긍정 · 성취",mean:"잘 보이려 애쓰지 않아도 빛나는 상태. 오늘의 작은 좋음을 그냥 지나치지 마세요.",q:"오늘 나를 잠깐이라도 웃게 한 것은 무엇이었나요?"},
+ {n:20,name:"심판",emo:"📯",kw:"부름 · 재기",mean:"지난 일을 다시 평가할 기회가 왔습니다. 과거는 바꿀 수 없지만 의미는 바꿀 수 있어요.",q:"한 번 더 기회가 온다면, 무엇을 다르게 하겠어요?"},
+ {n:21,name:"세계",emo:"🌍",kw:"완성 · 통합",mean:"한 바퀴가 완성됐습니다. 다음 여정을 위해, 끝난 것에게 제대로 작별 인사를 건네세요.",q:"잘 끝낸 것에게 어떤 작별 인사를 하고 싶나요?"},
+];
+const POS=["① 지금의 나","② 마주할 것","③ 나아갈 길"];
+const POS_INTRO=["지금 당신의 상태를 비추는 카드","넘어가려면 마주해야 할 것","앞으로 나아갈 실마리"];
+
+let theme="마음", deck=[], picked=[], revealIdx=0;
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1900);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+$('themeRow').addEventListener('click',e=>{
+  const el=e.target.closest('.theme'); if(!el)return;
+  document.querySelectorAll('.theme').forEach(t=>t.classList.remove('sel'));
+  el.classList.add('sel'); theme=el.dataset.t; vibrate(15);
+});
+document.querySelector('.theme').classList.add('sel');
+
+function goSpread(){
+  deck=shuffle([...Array(22).keys()]); picked=[];
+  $('spreadTheme').textContent="주제: "+({마음:"요즘 내 마음",관계:"그 사람과 나",일:"일 · 목표",오늘:"그냥 오늘 하루"})[theme];
+  const d=$('deck'); d.innerHTML="";
+  for(let i=0;i<22;i++){
+    const c=document.createElement('div');
+    c.className="cardback"; c.tabIndex=0; c.dataset.i=i;
+    c.addEventListener('click',()=>pickCard(c,i));
+    c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();c.click();}});
+    d.appendChild(c);
+  }
+  show('scSpread');
+  toast("🔮 마음속으로 주제를 떠올리며 골라보세요");
+}
+function pickCard(el,i){
+  if(picked.length>=3||el.classList.contains('gone'))return;
+  vibrate(28);
+  el.classList.add('gone');
+  const card=CARDS[deck[i]];
+  picked.push(card);
+  const slot=$('slot'+(picked.length-1));
+  slot.classList.add('filled'); slot.textContent="🂠";
+  if(picked.length===3){ setTimeout(startReveal,650); }
+}
+function startReveal(){
+  revealIdx=0;
+  $('revealArea').innerHTML="";
+  show('scReveal');
+  addFlip();
+}
+function addFlip(){
+  const card=picked[revealIdx];
+  const area=$('revealArea');
+  const wrap=document.createElement('div');
+  wrap.innerHTML=
+    "<div class='pos-label'>"+POS[revealIdx]+" — "+POS_INTRO[revealIdx]+"</div>"+
+    "<div class='flipwrap'><div class='flip' id='flip"+revealIdx+"'>"+
+      "<div class='face back'>탭해서 열기</div>"+
+      "<div class='face front'><span class='no'>"+roman(card.n)+"</span><span class='emo'>"+card.emo+"</span><span class='nm'>"+card.name+"</span><span class='kw'>"+card.kw+"</span></div>"+
+    "</div></div>"+
+    "<div class='tap-hint' id='hint"+revealIdx+"'>👆 카드를 탭하면 뒤집힙니다</div>"+
+    "<div class='meaning' id='mean"+revealIdx+"'></div>";
+  area.appendChild(wrap);
+  const f=$('flip'+revealIdx);
+  const myIdx=revealIdx;
+  f.addEventListener('click',()=>flipCard(myIdx),{once:true});
+  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+}
+function roman(n){const R=["0","I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV","XVI","XVII","XVIII","XIX","XX","XXI"];return R[n];}
+function flipCard(i){
+  const card=picked[i];
+  $('flip'+i).classList.add('flipped');
+  $('hint'+i).style.display="none";
+  vibrate([20,40,20]);
+  setTimeout(()=>{
+    const m=$('mean'+i);
+    m.innerHTML=card.mean+"<div class='q'><b>나에게 묻기</b> — "+card.q+"</div>";
+    m.classList.add('on');
+    revealIdx++;
+    if(revealIdx<3){ setTimeout(addFlip,500); }
+    else{ setTimeout(finish,600); }
+    window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+  },820);
+}
+function finish(){
+  vibrate([30,50,30,50,90]);
+  const s=$('summary');
+  s.innerHTML="<b>🌙 오늘의 리딩 정리</b><br>"+
+    picked.map((c,i)=>POS[i]+" · <b>"+c.name+"</b> ("+c.kw+")").join("<br>")+
+    "<br><br>카드는 답을 주지 않았습니다 — 대신 <b>질문 3개</b>를 줬어요. 오늘 그중 하나에만 스스로 답해보세요. 그게 오늘의 리딩입니다.";
+  s.style.display="block";
+  $('copyBtn').style.display="block";
+  $('againBtn').style.display="block";
+  window._resText="🔮 타로 심리카드 — 오늘 나에게 던지는 질문 3\n"+
+    picked.map((c,i)=>(i+1)+". ["+c.name+" "+c.emo+"] "+c.q).join("\n")+
+    "\n\n나도 뽑아보기 → https://mimifactory.vibekr.com/apps/타로_심리카드_test.html";
+  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("복사 완료! 메모장에 붙여두세요 📋")); }
+  else toast("길게 눌러 복사해주세요");
+  vibrate(20);
+}
+</script>
+</body>
+</html>

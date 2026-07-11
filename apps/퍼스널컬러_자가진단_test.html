@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>퍼스널컬러 자가진단 — 도파민 실험실</title>
+<meta property="og:title" content="퍼스널컬러 자가진단 — 나는 무슨 계절일까?">
+<meta property="og:description" content="거울 한 번, 12문항. 봄웜·여쿨·갈웜·겨쿨 — 내 얼굴이 사는 색을 찾아드립니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1a1016; --bg2:#271722; --card:#301c2b; --line:#4a2c42;
+  --ink:#f8ecf1; --sub:#c9a3b4; --accent:#f0708f; --accent2:#b04a7a;
+  --point:#ffc2a8; --ok:#5abf8b; --bad:#e4574f;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif; color:var(--ink); min-height:100dvh;
+  background:radial-gradient(120% 80% at 85% -10%, rgba(240,112,143,.14), transparent 55%),
+             radial-gradient(110% 90% at 5% 110%, rgba(255,194,168,.10), transparent 50%),
+             linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px; margin:0 auto; padding:22px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--point),var(--accent) 60%,var(--accent2));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif; font-weight:400;}
+.screen{display:none; flex:1; flex-direction:column; animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:5vh;}
+.hero h1{font-size:44px;line-height:1.15;margin:16px 0 8px;}
+.hero .dots{font-size:26px;letter-spacing:6px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;word-break:keep-all;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;word-break:keep-all;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;word-break:keep-all;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#2a1018;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--point),var(--accent));
+  box-shadow:0 10px 26px -8px var(--accent);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+/* 진단 상단: 숨겨진 두 축 게이지 */
+.axes{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 16px 15px;margin-bottom:16px;}
+.axis{display:flex;align-items:center;gap:10px;margin-top:8px;}
+.axis:first-child{margin-top:0;}
+.axis .end{font-family:'Jua',sans-serif;font-size:15px;color:var(--sub);width:18px;text-align:center;}
+.track{flex:1;height:12px;border-radius:99px;background:rgba(255,255,255,.09);position:relative;overflow:visible;}
+.knob{position:absolute;top:50%;left:50%;width:22px;height:22px;border-radius:50%;transform:translate(-50%,-50%);
+  background:linear-gradient(140deg,var(--point),var(--accent));box-shadow:0 0 14px 2px rgba(240,112,143,.5);
+  transition:left .45s cubic-bezier(.22,1,.36,1);}
+.axes .cap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:10px;opacity:.8;}
+.count{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);text-align:center;margin-bottom:8px;}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent);}
+.qtext{font-size:21px;font-weight:700;line-height:1.45;margin-top:8px;word-break:keep-all;}
+.qhint{font-size:13px;color:var(--sub);margin-top:8px;}
+.opts{display:flex;flex-direction:column;gap:11px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:16px;
+  font-size:16px;color:var(--ink);text-align:left;cursor:pointer;font-family:inherit;line-height:1.5;word-break:keep-all;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.opt:active{transform:scale(.97);}
+.opt .ab{display:inline-block;font-family:'Jua',sans-serif;color:var(--sub);margin-right:8px;}
+
+/* 결과 */
+.res-hero{text-align:center;margin-top:10px;}
+.res-emo{font-size:64px;}
+.res-type{font-family:'Jua',sans-serif;font-size:34px;margin:10px 0 4px;}
+.res-tag{color:var(--sub);font-size:14.5px;line-height:1.6;word-break:keep-all;}
+.swatch-label{font-family:'Jua',sans-serif;font-size:17px;margin:22px 0 10px;}
+.swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;}
+.sw{border-radius:13px;height:64px;position:relative;border:1px solid rgba(255,255,255,.14);animation:pop .5s cubic-bezier(.34,1.56,.64,1);}
+.sw span{position:absolute;left:0;right:0;bottom:5px;text-align:center;font-size:10.5px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.75);}
+.sw.badx::after{content:"✕";position:absolute;top:4px;right:7px;color:rgba(255,255,255,.85);font-size:13px;text-shadow:0 1px 2px rgba(0,0,0,.6);}
+.tips{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px 18px;margin-top:20px;font-size:14.5px;line-height:1.75;word-break:keep-all;}
+.tips b{color:var(--point);}
+.tips .row{margin-top:9px;}
+.tips .row:first-child{margin-top:0;}
+.axis-report{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin-top:14px;}
+.ar-row{display:flex;align-items:center;gap:10px;font-size:13.5px;margin-top:10px;}
+.ar-row:first-child{margin-top:0;}
+.ar-row .lab{width:74px;color:var(--sub);}
+.ar-bar{flex:1;height:9px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden;}
+.ar-fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--point),var(--accent));transition:width .9s cubic-bezier(.22,1,.36,1);}
+.ar-val{width:44px;text-align:right;font-family:'Jua',sans-serif;color:var(--point);}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(48,28,43,.97);border:1.5px solid var(--accent);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(240,112,143,.55));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#b18b9c;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#b18b9c;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  <!-- 홈 -->
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 도파민 실험실 · 유행 테스트</span>
+      <h1><span class="grad">퍼스널컬러</span><br>자가진단</h1>
+      <div class="dots">🌸☀️🍂❄️</div>
+      <p class="sub">거울 한 번이면 준비 끝.<br>12문항으로 <b>내 얼굴이 사는 색</b>을 찾아드립니다.</p>
+    </div>
+    <div class="pitch">
+      <b>진단 전 30초 준비</b><br>
+      ① 자연광(창가)에서 거울 또는 셀카를 준비하세요.<br>
+      ② 화장기 없는 맨 얼굴·손목이 가장 정확해요.<br>
+      ③ 헷갈리면 "그나마 더 가까운 쪽"을 고르면 됩니다.
+    </div>
+    <button class="btn" onclick="startQuiz()">🎨 12문항 진단 시작</button>
+    <p class="note">※ 자가관찰 기반 참고용 진단입니다. 조명·화면 설정에 따라 달라질 수 있으며,
+    정확한 진단은 전문가의 드레이핑 테스트를 권합니다.</p>
+  </section>
+
+  <!-- 진단 -->
+  <section id="scQuiz" class="screen">
+    <div class="axes">
+      <div class="axis"><span class="end">?</span><div class="track"><div class="knob" id="knobT"></div></div><span class="end">?</span></div>
+      <div class="axis"><span class="end">?</span><div class="track"><div class="knob" id="knobD"></div></div><span class="end">?</span></div>
+      <div class="cap">두 개의 비밀 축이 실시간으로 움직입니다 — 무엇의 축인지는 결과에서 공개!</div>
+    </div>
+    <div class="count" id="qCount">1 / 12</div>
+    <div class="qcard">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qhint">👉 더 가까운 쪽을 골라주세요</div>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  <!-- 결과 -->
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="res-emo" id="resEmo">🌸</div>
+      <div class="res-type" id="resType"></div>
+      <p class="res-tag" id="resTag"></p>
+    </div>
+    <div class="axis-report">
+      <div class="ar-row"><span class="lab">🌡 온도감</span><div class="ar-bar"><div class="ar-fill" id="barT"></div></div><span class="ar-val" id="valT"></span></div>
+      <div class="ar-row"><span class="lab">🎚 깊이감</span><div class="ar-bar"><div class="ar-fill" id="barD"></div></div><span class="ar-val" id="valD"></span></div>
+    </div>
+    <div class="swatch-label">✨ 나를 살리는 베스트 컬러</div>
+    <div class="swatches" id="bestSw"></div>
+    <div class="swatch-label">🙅 얼굴을 죽이는 컬러 (피하기)</div>
+    <div class="swatches" id="worstSw"></div>
+    <div class="tips" id="tips"></div>
+    <button class="btn" onclick="copyResult()">📋 결과 복사해서 공유</button>
+    <button class="btn ghost" onclick="location.reload()">다시 진단하기</button>
+    <p class="note">※ 자가진단 참고용 결과입니다. 같은 계절 안에서도 사람마다 세부 톤이 달라요.</p>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 도파민 실험실 — 다른 테스트 보러가기 →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+    <div class="mf-logo">미미팩토리</div>
+    <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+  </div>
+</div>
+
+<script>
+/* 문항 — axis T(온도: W웜/C쿨) 7개, D(깊이: L라이트/P딥) 5개.
+   채점은 키로만, 표시는 중립(A/B 셔플). */
+const QUESTIONS = [
+ {ax:"T", q:"자연광에서 손목 안쪽 혈관을 보면?", a:{t:"초록빛이 도는 것 같다",k:"W"}, b:{t:"파랑·보라빛이 도는 것 같다",k:"C"}},
+ {ax:"T", q:"골드 vs 실버 액세서리, 내 얼굴이 더 사는 쪽은?", a:{t:"골드 — 혈색이 좋아 보인다",k:"W"}, b:{t:"실버 — 피부가 깨끗해 보인다",k:"C"}},
+ {ax:"T", q:"흰 옷을 고른다면 더 잘 받는 쪽은?", a:{t:"아이보리·크림빛 흰색",k:"W"}, b:{t:"형광기 도는 순백색",k:"C"}},
+ {ax:"T", q:"햇볕을 오래 쬐면 내 피부는?", a:{t:"노릇하게 잘 탄다",k:"W"}, b:{t:"빨갛게 익고 잘 안 탄다",k:"C"}},
+ {ax:"T", q:"립 컬러 중 생기 있어 보인다는 말을 듣는 쪽은?", a:{t:"코랄·오렌지 계열",k:"W"}, b:{t:"핑크·베리 계열",k:"C"}},
+ {ax:"T", q:"옷장에서 유난히 '잘 어울린다' 소리 듣는 색은?", a:{t:"카멜·베이지·브라운",k:"W"}, b:{t:"네이비·그레이·블랙",k:"C"}},
+ {ax:"T", q:"블러셔(볼터치)를 바른다면?", a:{t:"피치·살구색이 자연스럽다",k:"W"}, b:{t:"로즈핑크·라벤더가 화사하다",k:"C"}},
+ {ax:"D", q:"내 눈동자 색과 인상은?", a:{t:"밝은 갈색 — 부드러운 인상",k:"L"}, b:{t:"짙은 흑갈색 — 또렷한 인상",k:"P"}},
+ {ax:"D", q:"내 자연 모발(염색 전)은?", a:{t:"갈색기가 도는 밝은 편",k:"L"}, b:{t:"진한 흑발·다크브라운",k:"P"}},
+ {ax:"D", q:"버건디·다크네이비처럼 진한 색 옷을 입으면?", a:{t:"옷만 둥둥 떠 보인다",k:"L"}, b:{t:"얼굴이 더 또렷해진다",k:"P"}},
+ {ax:"D", q:"파스텔톤 옷을 입으면?", a:{t:"얼굴이 화사해진다",k:"L"}, b:{t:"어쩐지 심심하고 흐릿해 보인다",k:"P"}},
+ {ax:"D", q:"처음 만난 사람이 말하는 내 인상은?", a:{t:"순하고 부드러워 보인대",k:"L"}, b:{t:"강렬하고 카리스마 있대",k:"P"}},
+];
+
+const TYPES = {
+ WL:{emo:"🌸", name:"봄 웜 라이트", tag:"맑고 화사한 '생기 요정' — 밝은 웜톤이 얼굴에 조명을 켭니다.",
+   best:[["코랄","#FF7F66"],["피치","#FFCBA4"],["살구","#FFB347"],["아이보리","#FFF3DC"],["연두","#9ACD32"],["웜핑크","#FF9E9E"],["골드","#F5C542"],["카멜","#C19A6B"]],
+   worst:[["블랙","#15151a"],["버건디","#701429"],["쿨그레이","#8C92AC"],["네이비","#1b2a5e"]],
+   tip:"<div class='row'><b>스타일링</b> — 무겁고 어두운 색이 얼굴을 잡아먹는 타입. 상의는 무조건 밝게, 어두운 색은 하의로 내리세요.</div><div class='row'><b>메이크업</b> — 코랄 립 + 피치 블러셔가 공식. 매트보단 촉촉한 광이 어울려요.</div><div class='row'><b>머리색</b> — 밝은 브라운·애쉬 없는 오렌지브라운 추천.</div>"},
+ CL:{emo:"🌊", name:"여름 쿨 라이트", tag:"맑고 시원한 '수채화 인간' — 뽀얀 쿨톤이 파스텔 위에서 빛납니다.",
+   best:[["라벤더","#B57EDC"],["베이비핑크","#F4C2C2"],["스카이블루","#87CEEB"],["민트","#98E8C8"],["라이트그레이","#C8CDD6"],["로즈","#E8A0B4"],["소프트화이트","#F6F8FA"],["실버","#C0C6CF"]],
+   worst:[["오렌지","#E8722C"],["카키","#6B6B2A"],["골드","#C9A22E"],["브라운","#6E4423"]],
+   tip:"<div class='row'><b>스타일링</b> — 쨍한 원색보다 물 탄 듯 부드러운 파스텔이 정답. 회색이 섞인 색이 유독 잘 받아요.</div><div class='row'><b>메이크업</b> — 로즈핑크 립 + 라벤더 하이라이터. 오렌지 계열만 피해도 절반은 성공.</div><div class='row'><b>머리색</b> — 애쉬브라운·애쉬퍼플 추천, 노란기 도는 염색은 피하기.</div>"},
+ WP:{emo:"🍂", name:"가을 웜 딥", tag:"깊고 그윽한 '분위기 장인' — 농익은 어스톤이 고급스러움을 끌어올립니다.",
+   best:[["머스타드","#D9A404"],["테라코타","#E2725B"],["카키","#7A7042"],["브라운","#8B5A2B"],["올리브","#708238"],["벽돌","#B0413E"],["크림","#F2E3C4"],["딥골드","#B8860B"]],
+   worst:[["네온핑크","#FF3E96"],["아이스블루","#B8E2F2"],["실버","#C0C6CF"],["푸른 순백","#F2F8FF"]],
+   tip:"<div class='row'><b>스타일링</b> — 낙엽 색은 다 내 색. 채도 낮고 노란기 도는 깊은 색으로 레이어드하면 분위기가 폭발합니다.</div><div class='row'><b>메이크업</b> — MLBB 브라운 립 + 브론즈 섀도. 펄보다 매트가 어울려요.</div><div class='row'><b>머리색</b> — 초콜릿브라운·다크카퍼 추천.</div>"},
+ CP:{emo:"❄️", name:"겨울 쿨 딥", tag:"선명하고 강렬한 '고대비 주인공' — 쨍한 색을 소화하는 흔치 않은 타입.",
+   best:[["블랙","#15151a"],["퓨어화이트","#FAFBFF"],["로열블루","#4169E1"],["버건디","#800020"],["에메랄드","#2FBF8F"],["마젠타","#D02090"],["아이시핑크","#F3C6E0"],["실버","#C9CFDA"]],
+   worst:[["머스타드","#D9A404"],["오렌지브라운","#B06018"],["카멜","#C19A6B"],["올리브","#708238"]],
+   tip:"<div class='row'><b>스타일링</b> — 어중간한 색이 오히려 독. 블랙&화이트 고대비, 또는 원색 포인트 하나로 승부하세요.</div><div class='row'><b>메이크업</b> — 레드·베리 립이 인생템. 흐린 MLBB는 아파 보일 수 있어요.</div><div class='row'><b>머리색</b> — 블루블랙·다크애쉬 추천, 밝은 갈색 탈색은 피하기.</div>"},
+};
+
+let idx=0, score={W:0,C:0,L:0,P:0};
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1800);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+
+function startQuiz(){ idx=0; score={W:0,C:0,L:0,P:0}; show('scQuiz'); render(); }
+
+function render(){
+  const Q=QUESTIONS[idx];
+  $('qCount').textContent=(idx+1)+" / "+QUESTIONS.length;
+  $('qNum').textContent="Q"+(idx+1);
+  const qt=$('qText'); qt.textContent=Q.q; qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const pair=Math.random()<.5?[Q.a,Q.b]:[Q.b,Q.a];
+  const box=$('opts'); box.innerHTML="";
+  pair.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button";
+    b.innerHTML="<span class='ab'>"+(i===0?"A":"B")+"</span>"+o.t;
+    b.addEventListener('click',()=>pick(o.k));
+    box.appendChild(b);
+  });
+}
+function pick(k){
+  vibrate(22); score[k]++;
+  updateKnobs();
+  idx++;
+  if(idx>=QUESTIONS.length){ setTimeout(showResult,420); return; }
+  setTimeout(render,240);
+}
+function updateKnobs(){
+  const tTot=score.W+score.C, dTot=score.L+score.P;
+  const tPos=tTot? (score.W/(tTot))*100 : 50;
+  const dPos=dTot? (score.L/(dTot))*100 : 50;
+  $('knobT').style.left=(100-tPos)+"%";
+  $('knobD').style.left=(100-dPos)+"%";
+}
+function showResult(){
+  const temp=score.W>=score.C?"W":"C";
+  const depth=score.L>=score.P?"L":"P";
+  const T=TYPES[temp+depth];
+  show('scResult'); vibrate([30,50,30,50,90]);
+  $('resEmo').textContent=T.emo;
+  $('resType').innerHTML="<span class='grad'>"+T.name+"</span>";
+  $('resTag').textContent=T.tag;
+  const tPct=Math.round(Math.max(score.W,score.C)/(score.W+score.C)*100);
+  const dPct=Math.round(Math.max(score.L,score.P)/(score.L+score.P)*100);
+  $('valT').textContent=tPct+"%";
+  $('valD').textContent=dPct+"%";
+  setTimeout(()=>{ $('barT').style.width=tPct+"%"; $('barD').style.width=dPct+"%"; },150);
+  document.querySelector('.ar-row:nth-child(1) .lab').textContent = temp==="W"?"🌡 웜톤":"🌡 쿨톤";
+  document.querySelector('.ar-row:nth-child(2) .lab').textContent = depth==="L"?"🎚 라이트":"🎚 딥";
+  const bs=$('bestSw'); bs.innerHTML="";
+  T.best.forEach(([n,c],i)=>{ const d=document.createElement('div'); d.className="sw"; d.style.background=c; d.style.animationDelay=(i*.05)+"s"; d.innerHTML="<span>"+n+"</span>"; bs.appendChild(d); });
+  const ws=$('worstSw'); ws.innerHTML="";
+  T.worst.forEach(([n,c],i)=>{ const d=document.createElement('div'); d.className="sw badx"; d.style.background=c; d.style.opacity=".8"; d.style.animationDelay=(i*.05)+"s"; d.innerHTML="<span>"+n+"</span>"; ws.appendChild(d); });
+  $('tips').innerHTML=T.tip;
+  window._resText="🎨 퍼스널컬러 자가진단 결과\n나는 「"+T.name+"」 "+T.emo+"\n"+T.tag+"\n\n내 계절 찾으러 가기 → https://mimifactory.vibekr.com/apps/퍼스널컬러_자가진단_test.html";
+}
+function copyResult(){
+  const t=window._resText||"";
+  if(navigator.clipboard){ navigator.clipboard.writeText(t).then(()=>toast("복사 완료! 어디든 붙여넣기 📋")); }
+  else{ toast("길게 눌러 복사해주세요"); }
+  vibrate(20);
+}
+</script>
+</body>
+</html>
