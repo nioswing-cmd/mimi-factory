@@ -19,7 +19,8 @@
   WEBHOOK_URL          Apps Script 웹앱 주소 (선택 — 시트 상태/URL 자동 기록용)
 """
 
-import csv, io, json, os, re, subprocess, sys, urllib.request, urllib.parse
+import csv, html, http.cookiejar, io, json, os, re, subprocess, sys, tempfile
+import urllib.request, urllib.parse
 from datetime import datetime, timezone, timedelta
 
 KST = timezone(timedelta(hours=9))
@@ -167,18 +168,69 @@ def fetch_gdoc(url):
     return text[:MATERIAL_MAX]
 
 
+# PDF·이미지 자료 지원 — Claude가 Read 도구로 직접 읽으므로 텍스트 추출 불필요
+MATERIAL_FILE_EXTS = (".pdf", ".png", ".jpg", ".jpeg", ".webp")
+MAGIC_EXT = ((b"%PDF", ".pdf"), (b"\x89PNG", ".png"),
+             (b"\xff\xd8", ".jpg"), (b"RIFF", ".webp"))
+
+_opener = urllib.request.build_opener(
+    urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
+
+
+def _http_get(url):
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    with _opener.open(req, timeout=60) as r:
+        return r.read()
+
+
+def fetch_drive_file(url, slug):
+    """링크 공유(뷰어)된 구글 드라이브 파일(PDF/이미지)을 임시 폴더에 내려받아 경로 반환.
+    실패 시 RuntimeError — 근거 없는 생산을 막기 위해 호출부에서 중단한다."""
+    m = re.search(r"drive\.google\.com/(?:file/d/([\w-]+)|(?:open|uc)\?[^\s\"]*?id=([\w-]+))", url)
+    if not m:
+        raise RuntimeError("드라이브 파일 주소가 아닙니다 (drive.google.com/file/d/… 만 지원)")
+    fid = m.group(1) or m.group(2)
+    data = _http_get(f"https://drive.google.com/uc?export=download&id={fid}")
+    if data[:200].lstrip()[:1] == b"<":  # HTML — 대용량 확인 페이지 또는 공유설정 오류
+        page = data.decode("utf-8", "replace")
+        fm = re.search(r'action="(https://drive\.usercontent\.google\.com/download[^"]*)"', page)
+        if fm:
+            base = html.unescape(fm.group(1))
+            hidden = re.findall(r'<input type="hidden" name="([^"]+)" value="([^"]*)"', page)
+            q = urllib.parse.urlencode(dict(hidden))
+            data = _http_get(base + ("&" if "?" in base else "?") + q)
+    ext = next((e for magic, e in MAGIC_EXT if data[:8].startswith(magic)), None)
+    if ext is None:
+        raise RuntimeError("PDF/이미지가 아닌 응답이 왔습니다 — 공유 설정(링크 있는 모든 사용자·뷰어)과 파일 형식(PDF/PNG/JPG/WEBP)을 확인하세요")
+    dl_dir = os.path.join(tempfile.gettempdir(), "mimi_material")
+    os.makedirs(dl_dir, exist_ok=True)
+    path = os.path.join(dl_dir, slug + ext)
+    with open(path, "wb") as f:
+        f.write(data)
+    return path
+
+
 def load_material(item, slug):
-    """자료 우선순위: ① 시트 I열의 구글독스 URL ② 자료/ 폴더 파일.
-    URL이 있는데 읽지 못하면 근거 없는 생산을 막기 위해 즉시 중단한다."""
+    """자료 우선순위: ① 시트 자료 열 URL(구글독스→텍스트, 드라이브 파일→PDF/이미지)
+    ② 자료/ 폴더 파일(제목.md/.txt → 텍스트, 제목.pdf/이미지 또는 자료/제목/ 폴더 → 파일).
+    URL이 있는데 읽지 못하면 근거 없는 생산을 막기 위해 즉시 중단한다.
+    반환: {"text": str} | {"files": [경로, …]} | None"""
     murl = item.get("material_url", "")
     if murl:
         try:
-            text = fetch_gdoc(murl)
+            if "docs.google.com/document" in murl:
+                text = fetch_gdoc(murl)
+                log(f"제공 자료(구글독스) 사용: {len(text)}자")
+                return {"text": text}
+            if "drive.google.com" in murl:
+                path = fetch_drive_file(murl, slug)
+                log(f"제공 자료(드라이브 파일) 사용: {os.path.basename(path)} "
+                    f"({os.path.getsize(path)//1024}KB)")
+                return {"files": [path]}
+            raise RuntimeError("지원하지 않는 주소입니다 (구글독스 문서 또는 드라이브 파일 링크만 지원)")
         except RuntimeError as e:
             log(f"자료 URL 읽기 실패 — 생산 중단: {e}")
             sys.exit(1)
-        log(f"제공 자료(구글독스) 사용: {len(text)}자")
-        return text
     title = item["title"]
     for name in (f"{title}.md", f"{title}.txt", f"{slug}.md"):
         path = os.path.join(MATERIAL_DIR, name)
@@ -186,8 +238,20 @@ def load_material(item, slug):
             text = open(path, encoding="utf-8").read().strip()
             if text:
                 log(f"제공 자료 사용: {name} ({len(text)}자)")
-                return text[:MATERIAL_MAX]
-    return ""
+                return {"text": text[:MATERIAL_MAX]}
+    for ext in MATERIAL_FILE_EXTS:
+        path = os.path.join(MATERIAL_DIR, title + ext)
+        if os.path.isfile(path):
+            log(f"제공 자료 파일 사용: {title}{ext}")
+            return {"files": [path]}
+    folder = os.path.join(MATERIAL_DIR, title)
+    if os.path.isdir(folder):
+        files = sorted(os.path.join(folder, n) for n in os.listdir(folder)
+                       if n.lower().endswith(MATERIAL_FILE_EXTS))
+        if files:
+            log(f"제공 자료 폴더 사용: {title}/ ({len(files)}개 파일)")
+            return {"files": files}
+    return None
 
 
 def make_prompt(item):
@@ -245,13 +309,25 @@ def make_prompt(item):
     )
 
     mat = load_material(item, slug)
-    if mat:
+    ground_rule = (
+        "문제·해설·리포트는 반드시 이 자료에 명시된 내용만 근거로 만들고, "
+        "자료에 없는 세부 내용을 창작하지 마라. "
+        "자료가 얇으면 문항 수를 줄이는 대신 자료 내 핵심을 반복 변형해 출제하라."
+    )
+    if mat and mat.get("text"):
         p += (
             " 아래 [제공 자료]가 이 책(주제)에 대해 확인된 전부다. "
-            "문제·해설·리포트는 반드시 이 자료에 명시된 내용만 근거로 만들고, "
-            "자료에 없는 세부 내용을 창작하지 마라. "
-            "자료가 얇으면 문항 수를 줄이는 대신 자료 내 핵심을 반복 변형해 출제하라.\n\n"
-            f"[제공 자료]\n{mat}"
+            + ground_rule
+            + f"\n\n[제공 자료]\n{mat['text']}"
+        )
+    elif mat and mat.get("files"):
+        flist = "\n".join(mat["files"])
+        p += (
+            " 아래 [제공 자료 파일]이 이 책(주제)에 대해 확인된 전부다. "
+            "작업을 시작하기 전에 이 파일들을 Read 도구로 반드시 전부 읽어라. "
+            "PDF는 pages 파라미터로 20쪽씩 나눠 끝까지 읽고, 이미지는 한 장씩 읽어라. "
+            + ground_rule
+            + f"\n\n[제공 자료 파일]\n{flist}"
         )
     return p, slug
 
