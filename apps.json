@@ -420,6 +420,42 @@
    "teaser": "apps/진짜_별자리_테스트_test.html",
    "premium": "apps/진짜_별자리_테스트_test.html",
    "desc": "성향으로 찾는 영혼의 별자리 — 생일 별자리와 싱크로율 비교"
+  },
+  {
+   "id": "iq_두뇌_테스트",
+   "type": "test",
+   "title": "IQ 두뇌 테스트",
+   "author": "미미팩토리 오리지널",
+   "date": "2026-07-11",
+   "color1": "#ffd166",
+   "color2": "#c96f3b",
+   "teaser": "apps/iq_두뇌_테스트_test.html",
+   "premium": "apps/iq_두뇌_테스트_test.html",
+   "desc": "수열·논리·패턴·언어 15문항 — 두뇌 풀가동 + 강점 영역 분석"
+  },
+  {
+   "id": "eq_감정지능_테스트",
+   "type": "test",
+   "title": "EQ 감정지능 테스트",
+   "author": "미미팩토리 오리지널",
+   "date": "2026-07-11",
+   "color1": "#5fd0c7",
+   "color2": "#e8c98d",
+   "teaser": "apps/eq_감정지능_테스트_test.html",
+   "premium": "apps/eq_감정지능_테스트_test.html",
+   "desc": "자기인식·조절·공감·표현 — 마음을 다루는 기술 4종 진단"
+  },
+  {
+   "id": "sq_사회지능_테스트",
+   "type": "test",
+   "title": "SQ 사회지능 테스트",
+   "author": "미미팩토리 오리지널",
+   "date": "2026-07-11",
+   "color1": "#d3e14a",
+   "color2": "#ffd166",
+   "teaser": "apps/sq_사회지능_테스트_test.html",
+   "premium": "apps/sq_사회지능_테스트_test.html",
+   "desc": "눈치·대화·선긋기·화해 — 관계머리 4종 진단"
   }
  ]
 }
