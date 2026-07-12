@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-12",
+  "updated": "2026-07-13",
   "apps": [
     {
       "id": "삼체",
@@ -492,6 +492,18 @@
       "teaser": "apps/ai_신인류_테스트_test.html",
       "premium": "apps/ai_신인류_테스트_test.html",
       "desc": "AI가 일을 삼키는 시대, 그래도 살아남는 사람은 8종류 — 24문항으로 찾는 나의 AI 시대 생존 캐릭터(대표 유형·생존 전략·베스트 파트너까"
+    },
+    {
+      "id": "원씽",
+      "type": "quiz",
+      "title": "원씽",
+      "author": "미미팩토리 오리지널",
+      "date": "2026-07-13",
+      "color1": "#c3a1ff",
+      "color2": "#ff8ad0",
+      "teaser": "apps/원씽_teaser.html",
+      "premium": "apps/원씽_quiz.html",
+      "desc": "게리 켈러 『원씽(The ONE Thing)』의 핵심 — 단 하나에 집중하는 성공 원리를 도파민 반복 마스터 퀴즈 30문항과 완독 인포그래픽 리"
     }
   ]
 }
