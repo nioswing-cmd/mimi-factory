@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-13",
+  "updated": "2026-07-14",
   "apps": [
     {
       "id": "삼체",
@@ -504,6 +504,18 @@
       "teaser": "apps/원씽_teaser.html",
       "premium": "apps/원씽_quiz.html",
       "desc": "게리 켈러 『원씽(The ONE Thing)』의 핵심 — 단 하나에 집중하는 성공 원리를 도파민 반복 마스터 퀴즈 30문항과 완독 인포그래픽 리"
+    },
+    {
+      "id": "퓨처셀프",
+      "type": "quiz",
+      "title": "퓨처셀프",
+      "author": "미미팩토리 오리지널",
+      "date": "2026-07-14",
+      "color1": "#7aa6ff",
+      "color2": "#b78bf5",
+      "teaser": "apps/퓨처셀프_teaser.html",
+      "premium": "apps/퓨처셀프_quiz.html",
+      "desc": "벤저민 하디 『퓨처 셀프(Be Your Future Self Now)』의 핵심 — 과거가 아니라 미래의 내가 현재를 이끈다는 원리(역사의 종말 "
     }
   ]
 }
