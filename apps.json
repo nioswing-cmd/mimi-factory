@@ -552,6 +552,18 @@
       "teaser": "apps/기버_1_teaser.html",
       "premium": "apps/기버_1_quiz.html",
       "desc": "『기버 1』(밥 버그·존 데이비드 만)의 ‘주는 사람이 성공한다’는 다섯 법칙을 30문항 도파민 반복 퀴즈와 완독 인포그래픽 리포트로 익히는 단"
+    },
+    {
+      "id": "adhd_테스트",
+      "type": "test",
+      "title": "ADHD 테스트",
+      "author": "미미팩토리 오리지널",
+      "date": "2026-07-15",
+      "color1": "#8affc1",
+      "color2": "#5ee7d8",
+      "teaser": "apps/adhd_테스트_test.html",
+      "premium": "apps/adhd_테스트_test.html",
+      "desc": "10·20·30문항 중 골라 푸는 성인 ADHD 성향 자가진단 — 답할 때마다 실시간 게이지가 차오르고, 부주의·과잉행동·충동성·실행기능 4영역"
     }
   ]
 }
