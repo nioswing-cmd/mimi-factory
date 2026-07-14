@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-14",
+  "updated": "2026-07-15",
   "apps": [
     {
       "id": "삼체",
@@ -516,6 +516,18 @@
       "teaser": "apps/퓨처셀프_teaser.html",
       "premium": "apps/퓨처셀프_quiz.html",
       "desc": "벤저민 하디 『퓨처 셀프(Be Your Future Self Now)』의 핵심 — 과거가 아니라 미래의 내가 현재를 이끈다는 원리(역사의 종말 "
+    },
+    {
+      "id": "진성리더십",
+      "type": "quiz",
+      "title": "진성리더십",
+      "author": "윤정구",
+      "date": "2026-07-15",
+      "color1": "#5ee7d8",
+      "color2": "#7aa6ff",
+      "teaser": "apps/진성리더십_teaser.html",
+      "premium": "apps/진성리더십_quiz.html",
+      "desc": "윤정구 『진성리더십』의 핵심(진북·사명·진정성 4요소·진성리더 vs 유사리더)을 30문항 도파민 반복 마스터 퀴즈와 완독 인포그래픽 리포트로 익"
     }
   ]
 }
