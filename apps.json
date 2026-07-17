@@ -648,6 +648,18 @@
       "teaser": "apps/82년생_김지영_teaser.html",
       "premium": "apps/82년생_김지영_quiz.html",
       "desc": "『82년생 김지영』(조남주)의 핵심을 30문항 도파민 반복 퀴즈와 완독 인포그래픽 리포트로 익히는 단일 HTML 학습 웹앱 — 평범한 한 여성의"
+    },
+    {
+      "id": "아몬드",
+      "type": "quiz",
+      "title": "아몬드",
+      "author": "손원평",
+      "date": "2026-07-17",
+      "color1": "#7aa6ff",
+      "color2": "#b78bf5",
+      "teaser": "apps/아몬드_teaser.html",
+      "premium": "apps/아몬드_quiz.html",
+      "desc": "손원평 장편소설 『아몬드』의 핵심 인물·주제·상징을 도파민 반복 퀴즈 30문항과 완독 인포그래픽 리포트로 익히는 단일 HTML 독서 학습 웹앱 "
     }
   ]
 }
