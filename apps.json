@@ -852,6 +852,18 @@
       "teaser": "apps/정의란_무엇인가_teaser.html",
       "premium": "apps/정의란_무엇인가_quiz.html",
       "desc": "마이클 샌델 『정의란 무엇인가』의 핵심을 트롤리 딜레마부터 공리주의·칸트·롤스·아리스토텔레스·공동선까지 30문항 도파민 반복 퀴즈와 완독 리포트"
+    },
+    {
+      "id": "논어",
+      "type": "quiz",
+      "title": "논어",
+      "author": "공자",
+      "date": "2026-07-17",
+      "color1": "#c3a1ff",
+      "color2": "#ff8ad0",
+      "teaser": "apps/논어_teaser.html",
+      "premium": "apps/논어_quiz.html",
+      "desc": "공자의 『논어』 핵심 사상(인·예·군자·정명·덕치)을 쉬운 것부터 어려운 것까지 30문항 도파민 반복 퀴즈로 익히고, 완독 인포그래픽 리포트로 "
     }
   ]
 }
