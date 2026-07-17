@@ -828,6 +828,18 @@
       "teaser": "apps/팡세_teaser.html",
       "premium": "apps/팡세_quiz.html",
       "desc": "블레즈 파스칼 『팡세』의 핵심 — ‘생각하는 갈대’, 파스칼의 내기, 기분전환, 두 무한, 숨은 신을 30문항 도파민 반복 퀴즈와 완독 인포그래"
+    },
+    {
+      "id": "명상록",
+      "type": "quiz",
+      "title": "명상록",
+      "author": "마르쿠스 아우렐리우스",
+      "date": "2026-07-17",
+      "color1": "#ffd36e",
+      "color2": "#ff8a5c",
+      "teaser": "apps/명상록_teaser.html",
+      "premium": "apps/명상록_quiz.html",
+      "desc": "로마 황제 마르쿠스 아우렐리우스의 『명상록』 핵심 사상을 통제의 이분법·내면의 성채·무상과 죽음까지 30개의 도파민 반복 퀴즈와 완독 인포그래픽"
     }
   ]
 }
