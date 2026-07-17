@@ -672,6 +672,18 @@
       "teaser": "apps/토지_teaser.html",
       "premium": "apps/토지_quiz.html",
       "desc": "박경리의 대하소설 『토지』를 구한말 평사리에서 광복까지, 최참판가와 민중의 삶을 30문항 도파민 반복 퀴즈와 완독 인포그래픽 리포트로 익히는 인"
+    },
+    {
+      "id": "1984",
+      "type": "quiz",
+      "title": "1984",
+      "author": "조지 오웰",
+      "date": "2026-07-17",
+      "color1": "#ff8ad0",
+      "color2": "#b78bf5",
+      "teaser": "apps/1984_teaser.html",
+      "premium": "apps/1984_quiz.html",
+      "desc": "조지 오웰 『1984』의 빅브라더·텔레스크린·뉴스피크·이중사고부터 101호실 결말까지, 감시 전체주의의 핵심을 30개의 도파민 반복 퀴즈와 완독"
     }
   ]
 }
