@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-17",
+  "updated": "2026-07-18",
   "apps": [
     {
       "id": "삼체",
@@ -900,6 +900,18 @@
       "teaser": "apps/몰입_flow_teaser.html",
       "premium": "apps/몰입_flow_quiz.html",
       "desc": "미하이 칙센트미하이 『몰입 FLOW』의 핵심 — 최적 경험, 도전과 역량의 균형, 주의(심리적 에너지), 자기목적적 경험, 심리적 엔트로피, 인"
+    },
+    {
+      "id": "죄와_벌",
+      "type": "quiz",
+      "title": "죄와 벌",
+      "author": "표도르 도스토옙스키",
+      "date": "2026-07-18",
+      "color1": "#ffd36e",
+      "color2": "#ff8a5c",
+      "teaser": "apps/죄와_벌_teaser.html",
+      "premium": "apps/죄와_벌_quiz.html",
+      "desc": "표도르 도스토옙스키 『죄와 벌』의 라스콜니코프·비범인 사상·소냐·포르피리의 심리전부터 시베리아 유형과 부활까지, 죄와 구원의 핵심을 30개의 도"
     }
   ]
 }
