@@ -864,6 +864,18 @@
       "teaser": "apps/논어_teaser.html",
       "premium": "apps/논어_quiz.html",
       "desc": "공자의 『논어』 핵심 사상(인·예·군자·정명·덕치)을 쉬운 것부터 어려운 것까지 30문항 도파민 반복 퀴즈로 익히고, 완독 인포그래픽 리포트로 "
+    },
+    {
+      "id": "월든",
+      "type": "quiz",
+      "title": "월든",
+      "author": "헨리 데이비드 소로",
+      "date": "2026-07-17",
+      "color1": "#7aa6ff",
+      "color2": "#b78bf5",
+      "teaser": "apps/월든_teaser.html",
+      "premium": "apps/월든_quiz.html",
+      "desc": "헨리 데이비드 소로 『월든』의 핵심 사상·사건·상징을 30문항 도파민 반복 퀴즈와 완독 리포트로 익히는 단일 HTML 학습 웹앱 — 숲으로 간 "
     }
   ]
 }
