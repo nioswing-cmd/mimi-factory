@@ -876,6 +876,18 @@
       "teaser": "apps/월든_teaser.html",
       "premium": "apps/월든_quiz.html",
       "desc": "헨리 데이비드 소로 『월든』의 핵심 사상·사건·상징을 30문항 도파민 반복 퀴즈와 완독 리포트로 익히는 단일 HTML 학습 웹앱 — 숲으로 간 "
+    },
+    {
+      "id": "생각에_관한_생각",
+      "type": "quiz",
+      "title": "생각에 관한 생각",
+      "author": "대니얼 카너먼",
+      "date": "2026-07-17",
+      "color1": "#5ee7d8",
+      "color2": "#7aa6ff",
+      "teaser": "apps/생각에_관한_생각_teaser.html",
+      "premium": "apps/생각에_관한_생각_quiz.html",
+      "desc": "노벨 경제학상 심리학자 대니얼 카너먼의 『생각에 관한 생각』 핵심 개념(시스템 1·2, 앵커링, 손실 회피, 전망 이론, 두 자아)과 인지 편향"
     }
   ]
 }
