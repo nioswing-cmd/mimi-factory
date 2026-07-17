@@ -888,6 +888,18 @@
       "teaser": "apps/생각에_관한_생각_teaser.html",
       "premium": "apps/생각에_관한_생각_quiz.html",
       "desc": "노벨 경제학상 심리학자 대니얼 카너먼의 『생각에 관한 생각』 핵심 개념(시스템 1·2, 앵커링, 손실 회피, 전망 이론, 두 자아)과 인지 편향"
+    },
+    {
+      "id": "몰입_flow",
+      "type": "quiz",
+      "title": "몰입 FLOW",
+      "author": "미하이 칙센트미하이",
+      "date": "2026-07-17",
+      "color1": "#ff8ad0",
+      "color2": "#b78bf5",
+      "teaser": "apps/몰입_flow_teaser.html",
+      "premium": "apps/몰입_flow_quiz.html",
+      "desc": "미하이 칙센트미하이 『몰입 FLOW』의 핵심 — 최적 경험, 도전과 역량의 균형, 주의(심리적 에너지), 자기목적적 경험, 심리적 엔트로피, 인"
     }
   ]
 }
