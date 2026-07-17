@@ -660,6 +660,18 @@
       "teaser": "apps/아몬드_teaser.html",
       "premium": "apps/아몬드_quiz.html",
       "desc": "손원평 장편소설 『아몬드』의 핵심 인물·주제·상징을 도파민 반복 퀴즈 30문항과 완독 인포그래픽 리포트로 익히는 단일 HTML 독서 학습 웹앱 "
+    },
+    {
+      "id": "토지",
+      "type": "quiz",
+      "title": "토지",
+      "author": "박경리",
+      "date": "2026-07-17",
+      "color1": "#5ee7d8",
+      "color2": "#7aa6ff",
+      "teaser": "apps/토지_teaser.html",
+      "premium": "apps/토지_quiz.html",
+      "desc": "박경리의 대하소설 『토지』를 구한말 평사리에서 광복까지, 최참판가와 민중의 삶을 30문항 도파민 반복 퀴즈와 완독 인포그래픽 리포트로 익히는 인"
     }
   ]
 }
