@@ -1175,5 +1175,25 @@ if(typeof window.confetti === 'undefined'){
 <div style="text-align:center;margin:30px 16px 36px">
   <a href="https://mimifactory.vibekr.com/quiz.html?utm_source=quizbook&utm_medium=app" target="_blank" rel="noopener" style="display:inline-block;padding:11px 22px;border-radius:999px;background:rgba(127,127,127,.14);border:1px solid rgba(127,127,127,.35);color:inherit;text-decoration:none;font-weight:700;font-size:14px">📚 다른 책 퀴즈 보기 →</a>
 </div>
+<script id="promoBanner">
+/* 프로모션/VIP 풀버전 오픈 배너 (관리실 admin.html에서 토글) */
+(function(){
+  function full(){ try{ return localStorage.getItem("mf_vip")==="1"; }catch(e){ return false; } }
+  function show(vip){
+    if(document.getElementById("promoBar")) return;
+    var full_url = location.pathname.replace("_teaser.html","_quiz.html");
+    var d=document.createElement("div");
+    d.id="promoBar";
+    d.style.cssText="position:sticky;top:0;z-index:99;text-align:center;padding:10px 14px;font-size:13.5px;font-weight:700;color:#241505;background:linear-gradient(100deg,#ffd166,#e8b45f);cursor:pointer;";
+    d.textContent=(vip?"💌 VIP 초대 — ":"🎁 지금 풀버전 무료 오픈 중! ")+"전체판(잠금 없음)으로 이동 →";
+    d.onclick=function(){ location.href=full_url; };
+    document.body.prepend(d);
+  }
+  if(full()){ show(true); return; }
+  try{
+    fetch("../promo-api.php?action=get&t="+Date.now()).then(function(r){return r.json();}).then(function(j){ if(j&&j.open) show(false); }).catch(function(){});
+  }catch(e){}
+})();
+</script>
 </body>
 </html>

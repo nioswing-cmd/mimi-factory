@@ -49,6 +49,7 @@ jobs:
             **/.git*
             **/.git*/**
             data/stats.json
+            data/promo.json
             .claude/**
             .github/**
             scripts/**

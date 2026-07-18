@@ -362,6 +362,45 @@ def run_claude(prompt):
 
 
 # ── 4. 산출물 수거 + apps.json 갱신 ──────────────────────
+PROMO_SNIPPET = '''<script id="promoBanner">
+/* 프로모션/VIP 풀버전 오픈 배너 (관리실 admin.html에서 토글) */
+(function(){
+  function full(){ try{ return localStorage.getItem("mf_vip")==="1"; }catch(e){ return false; } }
+  function show(vip){
+    if(document.getElementById("promoBar")) return;
+    var full_url = location.pathname.replace("_teaser.html","_quiz.html");
+    var d=document.createElement("div");
+    d.id="promoBar";
+    d.style.cssText="position:sticky;top:0;z-index:99;text-align:center;padding:10px 14px;font-size:13.5px;font-weight:700;color:#241505;background:linear-gradient(100deg,#ffd166,#e8b45f);cursor:pointer;";
+    d.textContent=(vip?"\\ud83d\\udc8c VIP \\ucd08\\ub300 \\u2014 ":"\\ud83c\\udf81 \\uc9c0\\uae08 \\ud480\\ubc84\\uc804 \\ubb34\\ub8cc \\uc624\\ud508 \\uc911! ")+"\\uc804\\uccb4\\ud310(\\uc7a0\\uae08 \\uc5c6\\uc74c)\\uc73c\\ub85c \\uc774\\ub3d9 \\u2192";
+    d.onclick=function(){ location.href=full_url; };
+    document.body.prepend(d);
+  }
+  if(full()){ show(true); return; }
+  try{
+    fetch("../promo-api.php?action=get&t="+Date.now()).then(function(r){return r.json();}).then(function(j){ if(j&&j.open) show(false); }).catch(function(){});
+  }catch(e){}
+})();
+</script>
+'''
+
+
+def inject_promo_banner(path):
+    """티저 파일에 프로모션 배너 스니펫 주입 (멱등 — 이미 있으면 스킵)."""
+    try:
+        t = open(path, encoding="utf-8").read()
+        if "promoBanner" in t:
+            return
+        i = t.rfind("</body>")
+        if i < 0:
+            return
+        with open(path, "w", encoding="utf-8", newline="") as f:
+            f.write(t[:i] + PROMO_SNIPPET + t[i:])
+        log("티저에 프로모션 배너 주입 완료")
+    except Exception as e:
+        log(f"프로모션 배너 주입 실패(무시): {e}")
+
+
 def collect(item, slug):
     cat = category_of(item["type"])
     main = os.path.join(OUT_DIR, f"{slug}_{cat}.html")
@@ -378,6 +417,7 @@ def collect(item, slug):
     if os.path.exists(teaser):
         final_teaser = os.path.join(APPS_DIR, os.path.basename(teaser))
         os.replace(teaser, final_teaser)
+        inject_promo_banner(final_teaser)
 
     desc = ""
     if os.path.exists(desc_f):
