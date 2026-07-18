@@ -43,13 +43,15 @@ if (($action === 'set' || $action === 'setbook') && $_SERVER['REQUEST_METHOD'] =
     } else {  /* setbook */
       $slug = isset($_POST['slug']) ? (string)$_POST['slug'] : '';
       $slug = preg_replace('/[\/\\\\\s\.]+/u', '', $slug);
-      if ($slug === '' || mb_strlen($slug) > 60) {
+      if ($slug === null) $slug = '';   /* 잘못된 인코딩이면 preg가 null 반환 */
+      if ($slug === '' || strlen($slug) > 180) {
         flock($fp, LOCK_UN); fclose($fp);
         echo '{"error":"slug"}'; exit;
       }
       if ($open) $data['books'][$slug] = $until;
       else unset($data['books'][$slug]);
     }
+    unset($data['books']['']);   /* 과거 잘못 저장된 빈 키 자동 정리 */
     $data['set_at'] = time();
     ftruncate($fp, 0);
     rewind($fp);
