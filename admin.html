@@ -67,6 +67,14 @@ input:focus,select:focus{outline:none;border-color:var(--accent);}
   </div>
 
   <div class="card">
+    <h2>📚 특정 책만 오픈</h2>
+    <p style="font-size:13.5px;color:var(--sub);line-height:1.65;margin:0 0 10px;">
+      전체 토글과 별개로, 켜둔 책만 풀버전으로 열립니다. 기간은 위의 <b>기간 선택</b>을 따르고, PIN도 위 칸의 값을 사용해요.</p>
+    <input type="text" id="bookFilter" placeholder="책 제목 검색…" style="margin-bottom:10px;">
+    <div id="bookList" style="max-height:340px;overflow-y:auto;">불러오는 중…</div>
+  </div>
+
+  <div class="card">
     <h2>💌 특정 개인에게만 오픈 (VIP 링크)</h2>
     <p style="font-size:13.5px;color:var(--sub);line-height:1.65;margin:0 0 6px;">
       아래 링크로 들어온 사람의 브라우저만 항상 풀버전으로 열립니다. 전체 토글과 무관하게 동작해요.</p>
@@ -90,9 +98,13 @@ async function refresh(){
   try{
     const r=await fetch(API+'?action=get&t='+Date.now());
     const j=await r.json();
+    OPEN_BOOKS=new Set(j.books||[]);
+    const bk=OPEN_BOOKS.size? '<br><span style="font-size:13px;">📚 책별 오픈: '+OPEN_BOOKS.size+'권</span>' : '';
     const b=$('stateBox');
-    if(j.open){ b.className='state open'; b.innerHTML='🎁 <b>전관 풀버전 오픈 중</b><br>'+(j.until? '만료: '+fmt(j.until) : '무기한 (직접 끌 때까지)'); }
+    if(j.open){ b.className='state open'; b.innerHTML='🎁 <b>전관 풀버전 오픈 중</b><br>'+(j.until? '만료: '+fmt(j.until) : '무기한 (직접 끌 때까지)')+bk; }
+    else if(OPEN_BOOKS.size){ b.className='state open'; b.innerHTML='📚 <b>책별 오픈 중: '+OPEN_BOOKS.size+'권</b><br>나머지는 티저 모드'; }
     else{ b.className='state closed'; b.innerHTML='🔒 <b>티저 모드</b> (10문항 무료 + 잠금)'; }
+    if(typeof renderBooks==='function') renderBooks();
   }catch(e){ $('stateBox').textContent='상태 조회 실패 — 새로고침 해보세요'; }
 }
 async function setPromo(open){
@@ -115,7 +127,54 @@ function copyVip(){
   const t=$('vipUrl').textContent;
   if(navigator.clipboard){ navigator.clipboard.writeText(t).then(()=>{ $('msg').className='msg okc'; $('msg').textContent='VIP 링크 복사 완료!'; }); }
 }
-refresh();
+
+/* ── 책별 오픈 ── */
+let QUIZ_BOOKS=[], OPEN_BOOKS=new Set(), bookQuery='';
+async function loadBooks(){
+  try{
+    const r=await fetch('apps.json?v='+Date.now());
+    const j=await r.json();
+    QUIZ_BOOKS=(j.apps||[]).filter(a=>a.type==='quiz').sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+  }catch(e){ QUIZ_BOOKS=[]; }
+  renderBooks();
+}
+function renderBooks(){
+  const box=$('bookList');
+  const list=QUIZ_BOOKS.filter(b=>bookQuery===''||b.title.toLowerCase().includes(bookQuery));
+  if(!list.length){ box.innerHTML='<div style="color:var(--sub);font-size:13px;text-align:center;padding:12px;">책이 없습니다</div>'; return; }
+  box.innerHTML='';
+  list.forEach(b=>{
+    const on=OPEN_BOOKS.has(b.id);
+    const row=document.createElement('div');
+    row.style.cssText='display:flex;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px solid var(--line);';
+    row.innerHTML='<span style="flex:1;font-size:14px;line-height:1.4;">'+(on?'🎁 ':'')+b.title+'</span>'
+      +'<button style="border:none;cursor:pointer;font-family:Jua,sans-serif;font-size:13.5px;padding:8px 14px;border-radius:99px;'
+      +(on?'background:linear-gradient(100deg,#4fc98d,#3aa373);color:#0c1f16;':'background:rgba(255,255,255,.08);color:var(--sub);border:1px solid var(--line);')
+      +'">'+(on?'오픈 중 · 끄기':'풀버전 켜기')+'</button>';
+    row.querySelector('button').onclick=()=>setBook(b.id, !on);
+    box.appendChild(row);
+  });
+}
+async function setBook(slug, open){
+  const pin=$('pin').value.trim();
+  const m=$('msg'); m.className='msg';
+  if(pin.length<4){ m.className='msg err'; m.textContent='위 칸에 PIN을 먼저 입력해주세요'; window.scrollTo({top:0,behavior:'smooth'}); return; }
+  m.textContent='적용 중…';
+  try{
+    const fd=new FormData();
+    fd.append('action','setbook'); fd.append('slug',slug);
+    fd.append('open',open?'1':'0'); fd.append('hours',$('hours').value); fd.append('pin',pin);
+    const r=await fetch(API,{method:'POST',body:fd});
+    if(r.status===403){ m.className='msg err'; m.textContent='PIN이 올바르지 않습니다'; return; }
+    const j=await r.json();
+    OPEN_BOOKS=new Set(j.books||[]);
+    m.className='msg okc'; m.textContent=open?('🎁 「'+slug+'」 풀버전 오픈!'):('🔒 「'+slug+'」 티저 모드로');
+    renderBooks(); refresh();
+  }catch(e){ m.className='msg err'; m.textContent='요청 실패 — 네트워크를 확인해주세요'; }
+}
+$('bookFilter').oninput=e=>{ bookQuery=e.target.value.trim().toLowerCase(); renderBooks(); };
+
+refresh(); loadBooks();
 </script>
 </body>
 </html>

@@ -201,7 +201,7 @@
 </div>
 
 <script>
-let APPS=[], query="", PROMO=false;
+let APPS=[], query="", PROMO=false, BOOKS=new Set();
 
 /* ?app=1 → 스토어 등록판(단일 앱 모드): 다른 관으로 가는 내비 숨김 */
 if (new URLSearchParams(location.search).get("app")==="1") localStorage.setItem("mf_app_quiz","1");
@@ -214,6 +214,7 @@ if (vipParam===VIP_CODE) localStorage.setItem("mf_vip","1");
 if (vipParam==="off") localStorage.removeItem("mf_vip");
 const VIP = localStorage.getItem("mf_vip")==="1";
 function fullOpen(){ return PROMO || VIP; }
+function bookOpen(a){ return fullOpen() || BOOKS.has(a.id); }
 function showPromoBadge(){
   if(!fullOpen() || document.getElementById("promoBadge")) return;
   const d=document.createElement("div");
@@ -228,7 +229,8 @@ async function load(){
     const pr = await fetch("promo-api.php?action=get&t="+Date.now());
     const pj = await pr.json();
     PROMO = !!pj.open;
-  }catch(e){ PROMO = false; }
+    BOOKS = new Set(pj.books || []);
+  }catch(e){ PROMO = false; BOOKS = new Set(); }
   showPromoBadge();
   try{
     const r = await fetch("apps.json?v="+Date.now());
@@ -240,7 +242,7 @@ async function load(){
 }
 
 function grad(a){return `linear-gradient(160deg,${a.color1||"#e8b45f"},${a.color2||"#a06b2a"})`}
-function open(a){ if(navigator.vibrate) navigator.vibrate(28); location.href = fullOpen() ? (a.premium || a.teaser) : (a.teaser || a.premium); }
+function open(a){ if(navigator.vibrate) navigator.vibrate(28); location.href = bookOpen(a) ? (a.premium || a.teaser) : (a.teaser || a.premium); }
 
 function renderNew(){
   const a = APPS[0]; if(!a) return;
@@ -249,7 +251,7 @@ function renderNew(){
     <div class="newbook" style="--nc:${grad(a)}">
       <div class="cover"><div class="ct">${a.title}</div></div>
       <div class="info">
-        <span class="badge">🕯️ 이 달의 신간</span>
+        <span class="badge">${bookOpen(a)?'🎁 지금 풀버전 무료':'🕯️ 이 달의 신간'}</span>
         <h2>${a.title}</h2>
         <div class="meta">${a.author} · ${a.date||""}</div>
         <div class="desc">${a.desc||""}</div>
@@ -273,7 +275,7 @@ function render(){
     const b = document.createElement("div");
     b.className="book"; b.style.setProperty("--bc",grad(a));
     b.innerHTML = `
-      <span class="tape">QUIZ</span>
+      <span class="tape"${bookOpen(a)?' style="background:linear-gradient(100deg,#ffd166,#e8b45f);color:#241505;font-weight:700;"':''}>${bookOpen(a)?'🎁 풀버전':'QUIZ'}</span>
       <div class="bt"><h3>${a.title}</h3><div class="a">${a.author}</div></div>`;
     b.onclick = ()=>open(a);
     shelf.appendChild(b);
