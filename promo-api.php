@@ -9,7 +9,7 @@
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
 
-$PIN_HASH = '1f9f53d0acb2304704e08e764d6b94252a37d89f9d086499f68aa46db1e194bc';
+$PIN_HASH = '808d1459fa2520d6477d37deb547d27b2e0483b96e01e476b16c1288f9b09662';
 
 $dir  = __DIR__ . '/data';
 $file = $dir . '/promo.json';
