@@ -107,6 +107,18 @@
    "teaser": "apps/dealbreaker-button.html",
    "premium": "apps/dealbreaker-button.html",
    "desc": "你把一個人切得多容易？測量你的地雷按鈕靈敏度。"
+  },
+  {
+   "id": "attachment-style",
+   "type": "test",
+   "title": "我的依附類型",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/attachment-style.html",
+   "premium": "apps/attachment-style.html",
+   "desc": "越靠近越會冒出來的我 — 4 種依附類型測驗"
   }
  ],
  "updated": "2026-07-19"

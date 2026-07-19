@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的依附類型 — 一靠近就冒出來的我</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.3/confetti.browser.min.js"></script>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+  :root{
+    --bg0:#140a2e; --bg1:#221046; --bg2:#38175e;
+    --ink:#f5eeff; --ink-soft:#cabbee; --ink-dim:#9a8bc8;
+    --glass:rgba(255,255,255,.06); --glass-line:rgba(255,255,255,.14);
+    --secure:#4ade9b; --anxious:#ff6b9e; --avoid:#6aa8ff; --chaos:#b78bf5;
+    --a1:#b98bff; --a2:#ff9ecb;
+    --tc:#b98bff;
+    --shadow:0 18px 50px rgba(0,0,0,.45);
+    --r:24px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Noto Sans KR',system-ui,sans-serif;color:var(--ink);
+    background:
+      radial-gradient(900px 620px at 12% -8%, rgba(185,139,255,.22), transparent 60%),
+      radial-gradient(820px 620px at 110% 6%, rgba(255,158,203,.16), transparent 55%),
+      radial-gradient(760px 720px at 50% 122%, rgba(106,168,255,.14), transparent 60%),
+      linear-gradient(160deg,var(--bg0),var(--bg1) 55%,var(--bg2));
+    background-attachment:fixed;min-height:100vh;
+    display:flex;align-items:flex-start;justify-content:center;
+    padding:26px 15px 56px;overflow-x:hidden;
+    transition:background .9s ease;
+  }
+  .app{width:100%;max-width:560px}
+  h1,h2,h3,.jua{font-family:'Jua',sans-serif;font-weight:400;letter-spacing:.2px}
+
+  .screen{display:none;animation:pop .45s cubic-bezier(.2,.9,.3,1.3)}
+  .screen.on{display:block}
+  @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+
+  .card{
+    background:var(--glass);border:1px solid var(--glass-line);border-radius:var(--r);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    box-shadow:var(--shadow);padding:30px 24px;
+  }
+
+  /* ---- home ---- */
+  .hero-emoji{font-size:66px;text-align:center;line-height:1;filter:drop-shadow(0 8px 20px rgba(185,139,255,.45));animation:float 3.6s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+  .home h1{font-size:clamp(29px,7.6vw,42px);text-align:center;margin:14px 0 6px;line-height:1.16}
+  .grad{background:linear-gradient(92deg,var(--secure),var(--anxious) 40%,var(--avoid) 72%,var(--chaos));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .home p.sub{text-align:center;color:var(--ink-soft);font-size:15px;line-height:1.65;margin-bottom:20px}
+  .lock-note{display:flex;gap:8px;align-items:flex-start;justify-content:center;text-align:center;
+    font-size:12.5px;color:var(--ink-dim);background:rgba(255,255,255,.04);border:1px dashed var(--glass-line);
+    border-radius:14px;padding:11px 14px;margin-bottom:22px;line-height:1.55}
+  .types-peek{display:flex;gap:7px;justify-content:center;margin-bottom:22px;flex-wrap:wrap}
+  .types-peek .tp{font-size:12.5px;padding:7px 12px;border-radius:999px;border:1px solid var(--glass-line);
+    background:rgba(255,255,255,.04);color:var(--ink-soft);display:flex;align-items:center;gap:5px}
+  .len-label{text-align:center;font-size:12.5px;color:var(--ink-dim);margin-bottom:9px;letter-spacing:.4px}
+  .lens{display:flex;gap:9px;margin-bottom:24px}
+  .lenbtn{flex:1;cursor:pointer;border:1.5px solid var(--glass-line);background:rgba(255,255,255,.04);
+    color:var(--ink-soft);border-radius:16px;padding:13px 6px 11px;text-align:center;font-family:'Jua';
+    transition:transform .14s ease,border-color .2s,background .2s}
+  .lenbtn b{display:block;font-size:22px;line-height:1;color:var(--ink)}
+  .lenbtn small{display:block;font-size:11px;color:var(--ink-dim);margin-top:4px;font-family:'Noto Sans KR'}
+  .lenbtn:hover{transform:translateY(-2px);background:rgba(255,255,255,.09)}
+  .lenbtn.sel{border-color:var(--a1);background:linear-gradient(180deg,rgba(185,139,255,.22),rgba(185,139,255,.06));box-shadow:0 8px 24px rgba(185,139,255,.28)}
+  .lenbtn.sel b{color:#fff}
+  .btn{
+    width:100%;border:0;cursor:pointer;font-family:'Jua',sans-serif;font-size:19px;color:#1c0d33;
+    padding:17px;border-radius:18px;background:linear-gradient(92deg,var(--a1),var(--a2));
+    box-shadow:0 12px 30px rgba(185,139,255,.4);transition:transform .15s,box-shadow .15s;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(185,139,255,.55)}
+  .btn:active{transform:translateY(1px) scale(.99)}
+  .btn.ghost{background:rgba(255,255,255,.08);color:var(--ink);box-shadow:none;border:1px solid var(--glass-line);font-size:16px;margin-top:12px}
+  .btn.ghost:hover{background:rgba(255,255,255,.14)}
+
+  /* ---- quiz ---- */
+  .qtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .qtop .qc{font-family:'Jua';font-size:15px;color:var(--ink-soft)}
+  .qtop .tag{font-size:12px;color:var(--ink-dim);display:flex;align-items:center;gap:6px}
+  .tag .dot-blip{width:7px;height:7px;border-radius:50%;background:var(--a2);box-shadow:0 0 10px var(--a2);animation:blip 1s ease-in-out infinite}
+  @keyframes blip{0%,100%{opacity:.4;transform:scale(.9)}50%{opacity:1;transform:scale(1.25)}}
+
+  /* quadrant radar */
+  .quad{position:relative;width:100%;max-width:260px;margin:2px auto 10px;aspect-ratio:1/1;
+    border-radius:20px;background:
+      radial-gradient(circle at 26% 74%, rgba(74,222,155,.10), transparent 46%),
+      radial-gradient(circle at 26% 26%, rgba(255,107,158,.10), transparent 46%),
+      radial-gradient(circle at 74% 26%, rgba(183,139,245,.10), transparent 46%),
+      radial-gradient(circle at 74% 74%, rgba(106,168,255,.10), transparent 46%),
+      rgba(255,255,255,.03);
+    border:1px solid var(--glass-line);overflow:hidden}
+  .quad .axv,.quad .axh{position:absolute;background:rgba(255,255,255,.12)}
+  .quad .axv{left:50%;top:7%;bottom:7%;width:1.5px;transform:translateX(-50%)}
+  .quad .axh{top:50%;left:7%;right:7%;height:1.5px;transform:translateY(-50%)}
+  .quad .lab{position:absolute;font-size:10.5px;color:var(--ink-dim);font-family:'Jua';letter-spacing:.3px;white-space:nowrap}
+  .lab.t{top:8px;left:50%;transform:translateX(-50%)}
+  .lab.b{bottom:8px;left:50%;transform:translateX(-50%)}
+  .lab.l{left:9px;top:50%;transform:translateY(-50%);writing-mode:vertical-rl}
+  .lab.r{right:9px;top:50%;transform:translateY(-50%);writing-mode:vertical-rl}
+  .zone{position:absolute;font-family:'Jua';font-size:12px;opacity:0;transition:opacity .5s;pointer-events:none}
+  .zone.z-anxious{top:14%;left:14%;color:var(--anxious)}
+  .zone.z-chaos{top:14%;right:14%;color:var(--chaos)}
+  .zone.z-secure{bottom:14%;left:14%;color:var(--secure)}
+  .zone.z-avoid{bottom:14%;right:14%;color:var(--avoid)}
+  .zone.show{opacity:1}
+  .dot{position:absolute;width:24px;height:24px;border-radius:50%;left:50%;top:50%;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle at 35% 30%,#fff,var(--a2));
+    box-shadow:0 0 20px 4px var(--a2);z-index:4;
+    transition:left .6s cubic-bezier(.22,1,.36,1),top .6s cubic-bezier(.22,1,.36,1),background .5s,box-shadow .5s}
+  .dot::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--a2);opacity:.5;animation:ping 1.8s ease-out infinite}
+  @keyframes ping{0%{transform:scale(.8);opacity:.6}100%{transform:scale(2.1);opacity:0}}
+  .quad-hint{text-align:center;font-size:11.5px;color:var(--ink-dim);margin-bottom:14px}
+
+  .energy{height:9px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:22px}
+  .energy i{display:block;height:100%;width:0;border-radius:999px;
+    background:linear-gradient(90deg,var(--a1),var(--a2));box-shadow:0 0 16px 1px var(--a2);
+    transition:width .55s cubic-bezier(.2,.9,.3,1.3),box-shadow .6s}
+  .q-num{font-family:'Jua';font-size:14px;color:var(--ink-dim);text-align:center;margin-bottom:6px}
+  .q-text{font-family:'Jua';font-size:clamp(19px,5.4vw,24px);text-align:center;line-height:1.4;margin-bottom:22px;}
+  .opt{
+    width:100%;text-align:left;border:1px solid var(--glass-line);cursor:pointer;
+    background:rgba(255,255,255,.05);color:var(--ink);padding:17px 16px;border-radius:18px;margin-bottom:12px;
+    font-size:16px;line-height:1.5;display:flex;gap:13px;align-items:center;
+    transition:transform .12s,background .2s,border-color .2s}
+  .opt:hover{background:rgba(255,255,255,.12);transform:translateX(3px)}
+  .opt:focus-visible{outline:3px solid var(--a2);outline-offset:2px}
+  .opt .badge{flex-shrink:0;width:30px;height:30px;border-radius:10px;background:rgba(255,255,255,.09);
+    border:1px solid var(--glass-line);display:flex;align-items:center;justify-content:center;
+    font-family:'Jua';font-size:16px;color:var(--ink-soft)}
+  .opt.picked{animation:bump .35s ease}
+  @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
+
+  /* ---- result ---- */
+  .crown{text-align:center;font-size:12px;letter-spacing:4px;color:var(--ink-dim);margin-bottom:8px}
+  .res-emoji{font-size:66px;text-align:center;line-height:1;animation:float 3.6s ease-in-out infinite;filter:drop-shadow(0 8px 20px rgba(0,0,0,.4))}
+  .res-title{font-family:'Jua';font-size:clamp(26px,7vw,36px);text-align:center;margin:8px 0 2px;color:var(--tc)}
+  .res-tag{text-align:center;color:var(--ink-soft);font-size:15.5px;margin-bottom:16px;}
+  .bars{margin:6px 0 4px}
+  .bar-row{margin-bottom:11px}
+  .bar-row .bl{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink-soft);margin-bottom:5px}
+  .bar-row .bl b{font-family:'Jua';color:var(--ink)}
+  .bar{height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+  .bar i{display:block;height:100%;width:0;border-radius:999px;transition:width 1.1s cubic-bezier(.22,1,.36,1)}
+  .sec{margin-top:16px;padding-top:15px;border-top:1px solid var(--glass-line)}
+  .sec h4{font-family:'Jua';font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:7px}
+  .sec p{font-size:14.5px;line-height:1.68;color:var(--ink-soft);}
+  .hide-note{text-align:center;color:var(--ink-dim);font-size:12px;margin:18px 2px 2px;line-height:1.6}
+  .footnote{text-align:center;color:var(--ink-dim);font-size:12px;margin-top:22px;line-height:1.6}
+
+  .toast{position:fixed;left:50%;top:22px;transform:translateX(-50%) translateY(-20px);
+    background:rgba(34,16,70,.96);border:1.5px solid var(--a2);color:var(--ink);
+    padding:12px 20px;border-radius:999px;font-size:14px;font-family:'Jua';opacity:0;pointer-events:none;
+    transition:opacity .4s,transform .4s;z-index:60;max-width:90vw}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+  /* ---- brand footer ---- */
+  .site-footer{margin-top:26px;text-align:center;padding:8px 0 4px;user-select:none}
+  .ff-dots{display:flex;gap:7px;justify-content:center;margin-bottom:14px}
+  .ff-dots span{width:8px;height:8px;border-radius:50%;display:block;animation:ffpulse 2.4s ease-in-out infinite}
+  .ff-dots span:nth-child(1){background:var(--secure);animation-delay:0s}
+  .ff-dots span:nth-child(2){background:var(--anxious);animation-delay:.24s}
+  .ff-dots span:nth-child(3){background:var(--avoid);animation-delay:.48s}
+  .ff-dots span:nth-child(4){background:var(--chaos);animation-delay:.72s}
+  .ff-dots span:nth-child(5){background:var(--a2);animation-delay:.96s}
+  @keyframes ffpulse{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.5);opacity:1}}
+  .ff-tag{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:4px;color:var(--ink-dim);margin-bottom:7px}
+  .ff-tag::before,.ff-tag::after{content:"";width:22px;height:1px;background:linear-gradient(90deg,transparent,var(--glass-line))}
+  .ff-tag::after{transform:scaleX(-1)}
+  .mf-logo{font-family:'Jua',sans-serif;font-size:26px;line-height:1;
+    background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+    -webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 14px rgba(155,123,255,.3))}
+  .ff-sub{font-size:12px;color:var(--ink-dim);margin-top:9px;letter-spacing:.3px}
+  .ff-sub .colon{color:var(--secure);font-weight:700;padding:0 1px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HOME -->
+  <section id="home" class="screen on home">
+    <div class="card">
+      <div class="hero-emoji">💞</div>
+      <h1>靠近時<br>會冒出來的 <span class="grad">我的依附類型</span></h1>
+      <p class="sub">和某個人靠近時，總會不知不覺跑出來的<br>一種心的習慣。<br>雷達上的點會即時移動，<br>一步步找出你的依附座標。</p>
+      <div class="types-peek">
+        <span class="tp">🌳 安全</span>
+        <span class="tp">💗 焦慮</span>
+        <span class="tp">🕊️ 逃避</span>
+        <span class="tp">🌗 混亂</span>
+      </div>
+      <div class="lock-note">🔒 為了防止操弄， <b>我們把哪個選項會通往哪種類型藏了起來</b> 。請只憑最誠實的心作答。</div>
+      <div class="len-label">選擇題數</div>
+      <div class="lens" id="lens">
+        <div class="lenbtn" data-n="12"><b>12</b><small>快速</small></div>
+        <div class="lenbtn sel" data-n="20"><b>20</b><small>標準</small></div>
+        <div class="lenbtn" data-n="28"><b>28</b><small>精準</small></div>
+      </div>
+      <button class="btn" onclick="startQuiz()">找出依附座標 →</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="screen">
+    <div class="card">
+      <div class="qtop">
+        <span class="qc" id="qcount">1 / 20</span>
+        <span class="tag"><span class="dot-blip"></span> 追蹤心的座標中…</span>
+      </div>
+      <div class="quad" id="quad">
+        <div class="axv"></div><div class="axh"></div>
+        <div class="lab t">焦慮 ↑</div>
+        <div class="lab b">安心 ↓</div>
+        <div class="lab l">緊貼・親密</div>
+        <div class="lab r">距離・逃避</div>
+        <div class="zone z-secure" id="z-secure">🌳 安全</div>
+        <div class="zone z-anxious" id="z-anxious">💗 焦慮</div>
+        <div class="zone z-avoid" id="z-avoid">🕊️ 逃避</div>
+        <div class="zone z-chaos" id="z-chaos">🌗 混亂</div>
+        <div class="dot" id="dot"></div>
+      </div>
+      <div class="quad-hint">點移動的方向只是結果的提示，沒有標準答案。</div>
+      <div class="energy"><i id="energy"></i></div>
+      <div class="q-num" id="qnum"></div>
+      <div class="q-text" id="qtext">下面哪一個更像「你」？</div>
+      <div id="opts"></div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="screen">
+    <div class="card">
+      <div class="crown">YOUR ATTACHMENT TYPE</div>
+      <div class="res-emoji" id="resEmoji">💞</div>
+      <div class="res-title" id="resTitle"></div>
+      <div class="res-tag" id="resTag"></div>
+      <div class="bars">
+        <div class="bar-row">
+          <div class="bl"><span>安心 ↔ 焦慮（焦慮敏感度）</span><b id="anxPct">0%</b></div>
+          <div class="bar"><i id="anxBar" style="background:linear-gradient(90deg,#8ad0b0,var(--anxious))"></i></div>
+        </div>
+        <div class="bar-row">
+          <div class="bl"><span>親密 ↔ 逃避（保持距離）</span><b id="avoPct">0%</b></div>
+          <div class="bar"><i id="avoBar" style="background:linear-gradient(90deg,#8ab0d0,var(--avoid))"></i></div>
+        </div>
+      </div>
+      <div class="sec"><h4>💫 靠近時冒出來的我</h4><p id="p_you"></p></div>
+      <div class="sec"><h4>✨ 你在關係裡發光的地方</h4><p id="p_str"></p></div>
+      <div class="sec"><h4>🌿 稍微留意一下</h4><p id="p_care"></p></div>
+      <div class="sec"><h4>💌 這樣去愛，會更自在</h4><p id="p_love"></p></div>
+      <div class="hide-note">🔒 依附類型不是固定的命運。<br>在安全的關係裡，我們隨時都能往更安穩的方向長大。</div>
+      <button class="btn" style="margin-top:20px" onclick="shareResult()">複製結果文字 📋</button>
+      <button class="btn ghost" onclick="resetAll()">從頭再來</button>
+      <div class="footnote">只是好玩的測驗。無論是哪種類型，你的愛都有屬於自己的溫度 🤍</div>
+    </div>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/zh-tw/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 多巴胺實驗室 — 看看其他測驗 →</a></div>
+  <footer class="site-footer">
+    <div class="ff-dots"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="ff-tag">意義與趣味工廠</div>
+    <div class="mf-logo">咪咪工廠 MIMI FACTORY</div>
+    <div class="ff-sub">YEON<span class="colon">:</span>GYEOL股份有限公司 家族公司</div>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+const QBANK = {
+  ANX:[
+    {a:{k:"SE",txt:"對方回訊息晚了一點，也覺得沒什麼大不了，就過去了"}, b:{k:"AX",txt:"對方回訊息一慢，就忍不住擔心是不是出了什麼事"}},
+    {a:{k:"SE",txt:"大致上會毫不懷疑地相信自己是被愛的"}, b:{k:"AX",txt:"常常會想確認一下，自己是不是還被愛著"}},
+    {a:{k:"SE",txt:"就算吵過架，也相信我們的關係會沒事"}, b:{k:"AX",txt:"吵完架後，會害怕就這樣疏遠，心揪成一團"}},
+    {a:{k:"SE",txt:"對方忙到抽不出時間，雖然失落但能理解"}, b:{k:"AX",txt:"對方抽不出時間，就會懷疑他是不是沒那麼喜歡我了"}},
+    {a:{k:"SE",txt:"就算分隔兩地，也不覺得關係會動搖"}, b:{k:"AX",txt:"分開時，會擔心心也跟著愈走愈遠"}},
+    {a:{k:"SE",txt:"覺得就算說出真心話，也不會傷到彼此的關係"}, b:{k:"AX",txt:"一說出真心話，就擔心會不會讓對方覺得有壓力"}},
+    {a:{k:"SE",txt:"對方語氣有點小變化，我也不太會被影響"}, b:{k:"AX",txt:"對方語氣只要稍微不一樣，我就整個神經緊繃"}},
+    {a:{k:"SE",txt:"關係好的時候，就單純好好享受那段時光"}, b:{k:"AX",txt:"就算在好的時候，心裡也有一角擔心總有一天會結束"}},
+    {a:{k:"SE",txt:"會信任對方，給他一定程度的自由"}, b:{k:"AX",txt:"會一直想知道對方在做什麼，忍不住去確認"}},
+    {a:{k:"SE",txt:"就算不是我先聯絡，也不會焦躁不安"}, b:{k:"AX",txt:"怕不聯絡就會被忘記，總是我先傳訊息"}},
+    {a:{k:"SE",txt:"就算不特地被證明被愛，也覺得安心"}, b:{k:"AX",txt:"要常常聽到「我愛你」，才會安心"}},
+    {a:{k:"SE",txt:"就算吃醋，也不太會被牽著走"}, b:{k:"AX",txt:"常常因為嫉妒或比較，心情起起伏伏"}},
+    {a:{k:"SE",txt:"就算對話變少了一點，也能自在接受"}, b:{k:"AX",txt:"對話一變少，就會擔心是不是哪裡出錯了，忐忑不安"}},
+    {a:{k:"SE",txt:"就算想像分手，也覺得自己最後還是會沒事"}, b:{k:"AX",txt:"光是想像被拋下，就難以承受"}}
+  ],
+  AVO:[
+    {a:{k:"CO",txt:"遇到難過的事，會向對方傾訴、靠著他"}, b:{k:"AV",txt:"難過的事往往自己吞下來，靠自己解決"}},
+    {a:{k:"CO",txt:"喜歡愈來愈靠近、愈來愈深的關係"}, b:{k:"AV",txt:"太靠近就覺得喘不過氣，需要一點距離"}},
+    {a:{k:"CO",txt:"算是會常常和對方分享情緒的人"}, b:{k:"AV",txt:"情緒不太表露出來，都收在心裡"}},
+    {a:{k:"CO",txt:"想和對方兩個人一起度過很多時間"}, b:{k:"AV",txt:"要有足夠的獨處時間，心裡才自在"}},
+    {a:{k:"CO",txt:"向對方求助，對我來說很自然"}, b:{k:"AV",txt:"要依賴別人，總覺得彆扭又不自在"}},
+    {a:{k:"CO",txt:"關係愈深，愈能感受到安定感"}, b:{k:"AV",txt:"關係一深，就覺得好像失去了自由"}},
+    {a:{k:"CO",txt:"算是會主動先敞開真心的人"}, b:{k:"AV",txt:"真心話一般來說不太會輕易打開"}},
+    {a:{k:"CO",txt:"一起描繪未來，會讓我心動"}, b:{k:"AV",txt:"要約定未來，總覺得是種負擔"}},
+    {a:{k:"CO",txt:"喜歡彼此來往地表達愛意"}, b:{k:"AV",txt:"太over的愛意表達，讓我渾身不自在、招架不住"}},
+    {a:{k:"CO",txt:"起衝突時，會想坐下來面對面把它解開"}, b:{k:"AV",txt:"起衝突時，會想先拉開一點距離"}},
+    {a:{k:"CO",txt:"對方走進我的日常，我會覺得開心"}, b:{k:"AV",txt:"有人太過進到我的領域，我就會變得防備"}},
+    {a:{k:"CO",txt:"連脆弱的一面，也能讓對方看見"}, b:{k:"AV",txt:"脆弱的一面會自己扛，盡量不讓人看到"}},
+    {a:{k:"CO",txt:"就算分開，也想常常聯絡、保持連結"}, b:{k:"AV",txt:"分開的時候，各自過各自的反而比較自在"}},
+    {a:{k:"CO",txt:"「我們」這種感覺，讓我覺得溫暖又美好"}, b:{k:"AV",txt:"比起什麼，「自己」的獨立最重要"}}
+  ]
+};
+const AXES = ["ANX","AVO"];
+
+/* ============ 4 TYPES ============ */
+const TYPE = {
+  secure:{key:"secure",e:"🌳",color:"var(--secure)",a1:"#4ade9b",a2:"#7ce0c0",name:"安全型",
+    tag:"「越靠近，越自在的人」",
+    you:"你是一個既能相信自己、也能相信對方的人。你不害怕靠近，同時也能自在地享受獨處。就算起了衝突，你不會逃走也不會死纏，而是坦然說出心裡的話，一起把它解開。",
+    str:"安定的信任。你會成為對方的「安全港灣」，把愛用不張揚卻穩定的方式，持續傳遞出去。",
+    care:"不是每個人都像你這樣自在。如果你能等一等那些會不安、會保持距離的對方的步調，關係會深得多。",
+    love:"就像現在這樣，坦率又溫暖。只是，如果對方是不同的依附類型，別吝嗇給他一句安心的話。"},
+  anxious:{key:"anxious",e:"💗",color:"var(--anxious)",a1:"#ff6b9e",a2:"#ffb3cf",name:"焦慮型",
+    tag:"「越靠近，越想確認的人」",
+    you:"你是一個把愛愛得又深又熱的人。心與心相連時，你最有活力；但只要聯絡一少、反應一冷淡，你很快就會不安。你怕被拋下，於是一再確認，想給得更多、也想收到更多。",
+    str:"熾熱的付出與共感。你能敏銳地讀出對方的情緒，把整顆心都投進關係裡。",
+    care:"不安一放大，你會不知不覺開始逼迫對方。快要動搖時，試著告訴自己「這也許不是現在，而是以前的舊習慣」，先停一拍。",
+    love:"用表達代替確認。坦白說一句「我現在有點不安」，對方接收到的不是被推開，而是信任。"},
+  avoid:{key:"avoid",e:"🕊️",color:"var(--avoid)",a1:"#6aa8ff",a2:"#a9cbff",name:"逃避型",
+    tag:"「越靠近，越往後退一步的人」",
+    you:"你是一個獨立、懂得守護自己的人。你一個人也很堅強，太過緊貼的關係會讓你喘不過氣。難過時你寧可自己解決，也不太靠人；要把情緒表露出來，你需要一點時間。",
+    str:"獨立與沉著。你會尊重對方的留白與自由，就算面對危機，也不太動搖。",
+    care:"保持距離，對對方來說可能像是「推開」。光是先掏出一小塊真心，關係就會近上許多。",
+    love:"別為了想「整理得完美再說」而一直拖。就算是還沒整理好的心情，稍微分享一點，那本身就成了親密。"},
+  chaos:{key:"chaos",e:"🌗",color:"var(--chaos)",a1:"#b78bf5",a2:"#d4b6ff",name:"混亂型",
+    tag:"「靠近就害怕、走遠又想念的人」",
+    you:"你是一個既深深渴望愛、又同時害怕愛的人。想靠近的心，和怕受傷而後退的心並存，於是你常常靠近了又走遠、反反覆覆。也正因如此，你是用整個身心去深深感受關係的人。",
+    str:"深刻的感受力與真心。愛的明亮面與陰暗面，你都敏銳地感覺得到，也真正地投入其中。",
+    care:"別為了自己的忽近忽遠責怪自己。那不是缺陷，而是曾經想保護心的習慣。和一個讓你感到安全的人，慢慢練習累積信任，會成為很大的力量。",
+    love:"混亂時，用一句話代替逃跑。先說一句「我現在心情很複雜，需要一點時間」，就能大大減少誤會和後悔。"}
+};
+
+/* ============ HELPERS ============ */
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(v){if(navigator.vibrate)try{navigator.vibrate(v);}catch(e){}}
+let _tt;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2000);}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});}
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+
+/* ============ STATE ============ */
+let LEN = 20;
+let quiz = [], qi = 0, score = {}, myType = null;
+
+/* length selector */
+document.getElementById('lens').addEventListener('click',e=>{
+  const b=e.target.closest('.lenbtn'); if(!b)return;
+  document.querySelectorAll('.lenbtn').forEach(x=>x.classList.remove('sel'));
+  b.classList.add('sel'); LEN=+b.dataset.n; vibrate(12);
+});
+
+/* ============ QUIZ ============ */
+function buildQuiz(){
+  const per = LEN/2;
+  let list=[];
+  AXES.forEach(ax=>{ shuffle(QBANK[ax].slice()).slice(0,per).forEach(q=> list.push({a:{...q.a},b:{...q.b}})); });
+  return shuffle(list);
+}
+function startQuiz(){
+  quiz=buildQuiz(); qi=0;
+  score={SE:0,AX:0,CO:0,AV:0};
+  document.querySelectorAll('.zone').forEach(z=>z.classList.remove('show'));
+  const r=document.documentElement.style; r.setProperty('--a1','#b98bff'); r.setProperty('--a2','#ff9ecb');
+  go('quiz'); updateDot(); updateEnergy(); renderQ();
+}
+function renderQ(){
+  const q=quiz[qi];
+  document.getElementById('qcount').textContent=(qi+1)+" / "+quiz.length;
+  document.getElementById('qnum').textContent="Q"+(qi+1);
+  const opts=shuffle([q.a,q.b]);
+  const labels=["A","B"];
+  const wrap=document.getElementById('opts');
+  wrap.innerHTML="";
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt";
+    b.innerHTML=`<span class="badge">${labels[i]}</span><span>${o.txt}</span>`;
+    b.onclick=()=>pick(o.k,b);
+    wrap.appendChild(b);
+  });
+}
+function pick(k,el){
+  score[k]++;
+  el.classList.add('picked');
+  if(window.confetti){
+    const r=el.getBoundingClientRect();
+    confetti({particleCount:16,spread:52,startVelocity:22,scalar:.8,
+      origin:{x:(r.left+r.width/2)/window.innerWidth,y:(r.top+r.height/2)/window.innerHeight},
+      colors:['#4ade9b','#ff6b9e','#6aa8ff','#b78bf5','#ff9ecb']});
+  }
+  vibrate(26);
+  updateDot();
+  updateEnergy();
+  if(qi+1===Math.floor(quiz.length/2)){toast('💓 已經走到一半了！');vibrate([20,40,20]);}
+  setTimeout(()=>{
+    qi++;
+    if(qi>=quiz.length) reveal();
+    else renderQ();
+  },330);
+}
+function updateEnergy(){
+  const done=score.SE+score.AX+score.CO+score.AV;
+  document.getElementById('energy').style.width=(done/quiz.length*100)+"%";
+}
+function ratios(){
+  const anxT=score.SE+score.AX, avoT=score.CO+score.AV;
+  const anxR = anxT? score.AX/anxT : .5;   // 1 = 焦慮
+  const avoR = avoT? score.AV/avoT : .5;   // 1 = 逃避
+  return {anxR,avoR};
+}
+function updateDot(){
+  const {anxR,avoR}=ratios();
+  const dot=document.getElementById('dot');
+  dot.style.left = (8 + avoR*84) + "%";          // 左=親密 右=逃避
+  dot.style.top  = (8 + (1-anxR)*84) + "%";       // 上=焦慮 下=安心
+}
+
+/* ============ RESULT ============ */
+function computeType(){
+  const anxious = score.AX>score.SE;   // 平手時歸安心那邊
+  const avoidant = score.AV>score.CO;  // 平手時歸親密那邊
+  if(!anxious && !avoidant) return "secure";
+  if(anxious && !avoidant) return "anxious";
+  if(!anxious && avoidant) return "avoid";
+  return "chaos";
+}
+function reveal(){
+  myType=computeType();
+  const T=TYPE[myType];
+  const r=document.documentElement.style;
+  r.setProperty('--a1',T.a1); r.setProperty('--a2',T.a2); r.setProperty('--tc',T.color);
+
+  document.getElementById('z-'+myType).classList.add('show');
+  const dot=document.getElementById('dot');
+  dot.style.background=`radial-gradient(circle at 35% 30%,#fff,${T.a1})`;
+  dot.style.boxShadow=`0 0 26px 6px ${T.a1}`;
+  toast(T.e+' 依附座標確定！');
+  vibrate([40,60,40]);
+  if(window.confetti){
+    const rc=document.getElementById('quad').getBoundingClientRect();
+    confetti({particleCount:60,spread:70,startVelocity:26,scalar:.9,
+      origin:{x:(rc.left+rc.width/2)/window.innerWidth,y:(rc.top+rc.height/2)/window.innerHeight}});
+  }
+  setTimeout(showResult,780);
+}
+function showResult(){
+  const T=TYPE[myType];
+  document.getElementById('resEmoji').textContent=T.e;
+  document.getElementById('resTitle').textContent=T.name;
+  document.getElementById('resTag').textContent=T.tag;
+  document.getElementById('p_you').textContent=T.you;
+  document.getElementById('p_str').textContent=T.str;
+  document.getElementById('p_care').textContent=T.care;
+  document.getElementById('p_love').textContent=T.love;
+  go('result');
+
+  const {anxR,avoR}=ratios();
+  const anxPct=Math.round(anxR*100), avoPct=Math.round(avoR*100);
+  requestAnimationFrame(()=>setTimeout(()=>{
+    document.getElementById('anxBar').style.width=anxPct+"%";
+    document.getElementById('avoBar').style.width=avoPct+"%";
+  },120));
+  animateCount('anxPct',anxPct); animateCount('avoPct',avoPct);
+  if(window.confetti){
+    const colors=['#4ade9b','#ff6b9e','#6aa8ff','#b78bf5','#ff9ecb'];
+    confetti({particleCount:130,spread:95,origin:{y:.3},colors});
+    setTimeout(()=>confetti({particleCount:90,spread:120,startVelocity:36,origin:{y:.4},colors}),260);
+  }
+  vibrate([60,80,60,80,120]);
+}
+function animateCount(id,target){
+  const el=document.getElementById(id); let v=0;
+  const step=Math.max(1,Math.round(target/26));
+  const t=setInterval(()=>{v+=step; if(v>=target){v=target;clearInterval(t);} el.textContent=v+"%";},34);
+}
+function shareResult(){
+  const T=TYPE[myType];
+  const txt=`我的依附類型是 ${T.e} ${T.name}\n${T.tag}\n\n靠近時冒出來的我，依附類型測驗 →\nhttps://mimifactory.vibekr.com/apps/attachment_style_test.html`;
+  const done=()=>toast('📋 結果文字已複製！');
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done));}
+  else fallbackCopy(txt,done);
+  vibrate(20);
+}
+function fallbackCopy(txt,cb){
+  const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();try{document.execCommand('copy');cb();}catch(e){}document.body.removeChild(ta);
+}
+function resetAll(){
+  myType=null;
+  const r=document.documentElement.style;
+  r.setProperty('--a1','#b98bff'); r.setProperty('--a2','#ff9ecb'); r.setProperty('--tc','#b98bff');
+  const dot=document.getElementById('dot');
+  dot.style.background='radial-gradient(circle at 35% 30%,#fff,var(--a2))';
+  dot.style.boxShadow='0 0 20px 4px var(--a2)';
+  document.querySelectorAll('.zone').forEach(z=>z.classList.remove('show'));
+  document.getElementById('anxBar').style.width='0';
+  document.getElementById('avoBar').style.width='0';
+  go('home');
+}
+</script>
+</body>
+</html>

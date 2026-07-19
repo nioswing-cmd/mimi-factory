@@ -107,6 +107,18 @@
    "teaser": "apps/dealbreaker-button.html",
    "premium": "apps/dealbreaker-button.html",
    "desc": "人をどれだけ簡単に、あるいは難しく切るのか — 関係の損切り感度を測る診断"
+  },
+  {
+   "id": "attachment-style",
+   "type": "test",
+   "title": "私の愛着タイプ",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/attachment-style.html",
+   "premium": "apps/attachment-style.html",
+   "desc": "親しくなると出てくる私 — 4つの愛着タイプ診断"
   }
  ],
  "updated": "2026-07-19"

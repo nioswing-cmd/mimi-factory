@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Attachment Style — Who You Become When You Get Close</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.3/confetti.browser.min.js"></script>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+  :root{
+    --bg0:#140a2e; --bg1:#221046; --bg2:#38175e;
+    --ink:#f5eeff; --ink-soft:#cabbee; --ink-dim:#9a8bc8;
+    --glass:rgba(255,255,255,.06); --glass-line:rgba(255,255,255,.14);
+    --secure:#4ade9b; --anxious:#ff6b9e; --avoid:#6aa8ff; --chaos:#b78bf5;
+    --a1:#b98bff; --a2:#ff9ecb;
+    --tc:#b98bff;
+    --shadow:0 18px 50px rgba(0,0,0,.45);
+    --r:24px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Noto Sans KR',system-ui,sans-serif;color:var(--ink);
+    background:
+      radial-gradient(900px 620px at 12% -8%, rgba(185,139,255,.22), transparent 60%),
+      radial-gradient(820px 620px at 110% 6%, rgba(255,158,203,.16), transparent 55%),
+      radial-gradient(760px 720px at 50% 122%, rgba(106,168,255,.14), transparent 60%),
+      linear-gradient(160deg,var(--bg0),var(--bg1) 55%,var(--bg2));
+    background-attachment:fixed;min-height:100vh;
+    display:flex;align-items:flex-start;justify-content:center;
+    padding:26px 15px 56px;overflow-x:hidden;
+    transition:background .9s ease;
+  }
+  .app{width:100%;max-width:560px}
+  h1,h2,h3,.jua{font-family:'Jua',sans-serif;font-weight:400;letter-spacing:.2px}
+
+  .screen{display:none;animation:pop .45s cubic-bezier(.2,.9,.3,1.3)}
+  .screen.on{display:block}
+  @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+
+  .card{
+    background:var(--glass);border:1px solid var(--glass-line);border-radius:var(--r);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    box-shadow:var(--shadow);padding:30px 24px;
+  }
+
+  /* ---- home ---- */
+  .hero-emoji{font-size:66px;text-align:center;line-height:1;filter:drop-shadow(0 8px 20px rgba(185,139,255,.45));animation:float 3.6s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+  .home h1{font-size:clamp(29px,7.6vw,42px);text-align:center;margin:14px 0 6px;line-height:1.16}
+  .grad{background:linear-gradient(92deg,var(--secure),var(--anxious) 40%,var(--avoid) 72%,var(--chaos));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .home p.sub{text-align:center;color:var(--ink-soft);font-size:15px;line-height:1.65;margin-bottom:20px}
+  .lock-note{display:flex;gap:8px;align-items:flex-start;justify-content:center;text-align:center;
+    font-size:12.5px;color:var(--ink-dim);background:rgba(255,255,255,.04);border:1px dashed var(--glass-line);
+    border-radius:14px;padding:11px 14px;margin-bottom:22px;line-height:1.55}
+  .types-peek{display:flex;gap:7px;justify-content:center;margin-bottom:22px;flex-wrap:wrap}
+  .types-peek .tp{font-size:12.5px;padding:7px 12px;border-radius:999px;border:1px solid var(--glass-line);
+    background:rgba(255,255,255,.04);color:var(--ink-soft);display:flex;align-items:center;gap:5px}
+  .len-label{text-align:center;font-size:12.5px;color:var(--ink-dim);margin-bottom:9px;letter-spacing:.4px}
+  .lens{display:flex;gap:9px;margin-bottom:24px}
+  .lenbtn{flex:1;cursor:pointer;border:1.5px solid var(--glass-line);background:rgba(255,255,255,.04);
+    color:var(--ink-soft);border-radius:16px;padding:13px 6px 11px;text-align:center;font-family:'Jua';
+    transition:transform .14s ease,border-color .2s,background .2s}
+  .lenbtn b{display:block;font-size:22px;line-height:1;color:var(--ink)}
+  .lenbtn small{display:block;font-size:11px;color:var(--ink-dim);margin-top:4px;font-family:'Noto Sans KR'}
+  .lenbtn:hover{transform:translateY(-2px);background:rgba(255,255,255,.09)}
+  .lenbtn.sel{border-color:var(--a1);background:linear-gradient(180deg,rgba(185,139,255,.22),rgba(185,139,255,.06));box-shadow:0 8px 24px rgba(185,139,255,.28)}
+  .lenbtn.sel b{color:#fff}
+  .btn{
+    width:100%;border:0;cursor:pointer;font-family:'Jua',sans-serif;font-size:19px;color:#1c0d33;
+    padding:17px;border-radius:18px;background:linear-gradient(92deg,var(--a1),var(--a2));
+    box-shadow:0 12px 30px rgba(185,139,255,.4);transition:transform .15s,box-shadow .15s;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(185,139,255,.55)}
+  .btn:active{transform:translateY(1px) scale(.99)}
+  .btn.ghost{background:rgba(255,255,255,.08);color:var(--ink);box-shadow:none;border:1px solid var(--glass-line);font-size:16px;margin-top:12px}
+  .btn.ghost:hover{background:rgba(255,255,255,.14)}
+
+  /* ---- quiz ---- */
+  .qtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .qtop .qc{font-family:'Jua';font-size:15px;color:var(--ink-soft)}
+  .qtop .tag{font-size:12px;color:var(--ink-dim);display:flex;align-items:center;gap:6px}
+  .tag .dot-blip{width:7px;height:7px;border-radius:50%;background:var(--a2);box-shadow:0 0 10px var(--a2);animation:blip 1s ease-in-out infinite}
+  @keyframes blip{0%,100%{opacity:.4;transform:scale(.9)}50%{opacity:1;transform:scale(1.25)}}
+
+  /* quadrant radar */
+  .quad{position:relative;width:100%;max-width:260px;margin:2px auto 10px;aspect-ratio:1/1;
+    border-radius:20px;background:
+      radial-gradient(circle at 26% 74%, rgba(74,222,155,.10), transparent 46%),
+      radial-gradient(circle at 26% 26%, rgba(255,107,158,.10), transparent 46%),
+      radial-gradient(circle at 74% 26%, rgba(183,139,245,.10), transparent 46%),
+      radial-gradient(circle at 74% 74%, rgba(106,168,255,.10), transparent 46%),
+      rgba(255,255,255,.03);
+    border:1px solid var(--glass-line);overflow:hidden}
+  .quad .axv,.quad .axh{position:absolute;background:rgba(255,255,255,.12)}
+  .quad .axv{left:50%;top:7%;bottom:7%;width:1.5px;transform:translateX(-50%)}
+  .quad .axh{top:50%;left:7%;right:7%;height:1.5px;transform:translateY(-50%)}
+  .quad .lab{position:absolute;font-size:10.5px;color:var(--ink-dim);font-family:'Jua';letter-spacing:.3px;white-space:nowrap}
+  .lab.t{top:8px;left:50%;transform:translateX(-50%)}
+  .lab.b{bottom:8px;left:50%;transform:translateX(-50%)}
+  .lab.l{left:9px;top:50%;transform:translateY(-50%);writing-mode:vertical-rl}
+  .lab.r{right:9px;top:50%;transform:translateY(-50%);writing-mode:vertical-rl}
+  .zone{position:absolute;font-family:'Jua';font-size:12px;opacity:0;transition:opacity .5s;pointer-events:none}
+  .zone.z-anxious{top:14%;left:14%;color:var(--anxious)}
+  .zone.z-chaos{top:14%;right:14%;color:var(--chaos)}
+  .zone.z-secure{bottom:14%;left:14%;color:var(--secure)}
+  .zone.z-avoid{bottom:14%;right:14%;color:var(--avoid)}
+  .zone.show{opacity:1}
+  .dot{position:absolute;width:24px;height:24px;border-radius:50%;left:50%;top:50%;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle at 35% 30%,#fff,var(--a2));
+    box-shadow:0 0 20px 4px var(--a2);z-index:4;
+    transition:left .6s cubic-bezier(.22,1,.36,1),top .6s cubic-bezier(.22,1,.36,1),background .5s,box-shadow .5s}
+  .dot::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--a2);opacity:.5;animation:ping 1.8s ease-out infinite}
+  @keyframes ping{0%{transform:scale(.8);opacity:.6}100%{transform:scale(2.1);opacity:0}}
+  .quad-hint{text-align:center;font-size:11.5px;color:var(--ink-dim);margin-bottom:14px}
+
+  .energy{height:9px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:22px}
+  .energy i{display:block;height:100%;width:0;border-radius:999px;
+    background:linear-gradient(90deg,var(--a1),var(--a2));box-shadow:0 0 16px 1px var(--a2);
+    transition:width .55s cubic-bezier(.2,.9,.3,1.3),box-shadow .6s}
+  .q-num{font-family:'Jua';font-size:14px;color:var(--ink-dim);text-align:center;margin-bottom:6px}
+  .q-text{font-family:'Jua';font-size:clamp(19px,5.4vw,24px);text-align:center;line-height:1.4;margin-bottom:22px;overflow-wrap:break-word;}
+  .opt{
+    width:100%;text-align:left;border:1px solid var(--glass-line);cursor:pointer;
+    background:rgba(255,255,255,.05);color:var(--ink);padding:17px 16px;border-radius:18px;margin-bottom:12px;
+    font-size:16px;line-height:1.5;display:flex;gap:13px;align-items:center;overflow-wrap:break-word;
+    transition:transform .12s,background .2s,border-color .2s}
+  .opt:hover{background:rgba(255,255,255,.12);transform:translateX(3px)}
+  .opt:focus-visible{outline:3px solid var(--a2);outline-offset:2px}
+  .opt .badge{flex-shrink:0;width:30px;height:30px;border-radius:10px;background:rgba(255,255,255,.09);
+    border:1px solid var(--glass-line);display:flex;align-items:center;justify-content:center;
+    font-family:'Jua';font-size:16px;color:var(--ink-soft)}
+  .opt.picked{animation:bump .35s ease}
+  @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
+
+  /* ---- result ---- */
+  .crown{text-align:center;font-size:12px;letter-spacing:4px;color:var(--ink-dim);margin-bottom:8px}
+  .res-emoji{font-size:66px;text-align:center;line-height:1;animation:float 3.6s ease-in-out infinite;filter:drop-shadow(0 8px 20px rgba(0,0,0,.4))}
+  .res-title{font-family:'Jua';font-size:clamp(26px,7vw,36px);text-align:center;margin:8px 0 2px;color:var(--tc)}
+  .res-tag{text-align:center;color:var(--ink-soft);font-size:15.5px;margin-bottom:16px;overflow-wrap:break-word;}
+  .bars{margin:6px 0 4px}
+  .bar-row{margin-bottom:11px}
+  .bar-row .bl{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink-soft);margin-bottom:5px}
+  .bar-row .bl b{font-family:'Jua';color:var(--ink)}
+  .bar{height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+  .bar i{display:block;height:100%;width:0;border-radius:999px;transition:width 1.1s cubic-bezier(.22,1,.36,1)}
+  .sec{margin-top:16px;padding-top:15px;border-top:1px solid var(--glass-line)}
+  .sec h4{font-family:'Jua';font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:7px}
+  .sec p{font-size:14.5px;line-height:1.68;color:var(--ink-soft);overflow-wrap:break-word;}
+  .hide-note{text-align:center;color:var(--ink-dim);font-size:12px;margin:18px 2px 2px;line-height:1.6}
+  .footnote{text-align:center;color:var(--ink-dim);font-size:12px;margin-top:22px;line-height:1.6}
+
+  .toast{position:fixed;left:50%;top:22px;transform:translateX(-50%) translateY(-20px);
+    background:rgba(34,16,70,.96);border:1.5px solid var(--a2);color:var(--ink);
+    padding:12px 20px;border-radius:999px;font-size:14px;font-family:'Jua';opacity:0;pointer-events:none;
+    transition:opacity .4s,transform .4s;z-index:60;max-width:90vw}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+  /* ---- brand footer ---- */
+  .site-footer{margin-top:26px;text-align:center;padding:8px 0 4px;user-select:none}
+  .ff-dots{display:flex;gap:7px;justify-content:center;margin-bottom:14px}
+  .ff-dots span{width:8px;height:8px;border-radius:50%;display:block;animation:ffpulse 2.4s ease-in-out infinite}
+  .ff-dots span:nth-child(1){background:var(--secure);animation-delay:0s}
+  .ff-dots span:nth-child(2){background:var(--anxious);animation-delay:.24s}
+  .ff-dots span:nth-child(3){background:var(--avoid);animation-delay:.48s}
+  .ff-dots span:nth-child(4){background:var(--chaos);animation-delay:.72s}
+  .ff-dots span:nth-child(5){background:var(--a2);animation-delay:.96s}
+  @keyframes ffpulse{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.5);opacity:1}}
+  .ff-tag{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:4px;color:var(--ink-dim);margin-bottom:7px}
+  .ff-tag::before,.ff-tag::after{content:"";width:22px;height:1px;background:linear-gradient(90deg,transparent,var(--glass-line))}
+  .ff-tag::after{transform:scaleX(-1)}
+  .mf-logo{font-family:'Jua',sans-serif;font-size:26px;line-height:1;
+    background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+    -webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 14px rgba(155,123,255,.3))}
+  .ff-sub{font-size:12px;color:var(--ink-dim);margin-top:9px;letter-spacing:.3px}
+  .ff-sub .colon{color:var(--secure);font-weight:700;padding:0 1px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HOME -->
+  <section id="home" class="screen on home">
+    <div class="card">
+      <div class="hero-emoji">💞</div>
+      <h1>When you get close,<br>out comes <span class="grad">your attachment style</span></h1>
+      <p class="sub">When you get close to someone, there’s a habit of the heart<br>that slips out before you even notice.<br>A dot moves across the radar in real time,<br>finding your attachment coordinates.</p>
+      <div class="types-peek">
+        <span class="tp">🌳 Secure</span>
+        <span class="tp">💗 Anxious</span>
+        <span class="tp">🕊️ Avoidant</span>
+        <span class="tp">🌗 Fearful</span>
+      </div>
+      <div class="lock-note">🔒 To keep it honest, <b>we’ve hidden which choice leads to which type</b> . Just answer from the heart.</div>
+      <div class="len-label">Pick how many questions</div>
+      <div class="lens" id="lens">
+        <div class="lenbtn" data-n="12"><b>12</b><small>Quick</small></div>
+        <div class="lenbtn sel" data-n="20"><b>20</b><small>Standard</small></div>
+        <div class="lenbtn" data-n="28"><b>28</b><small>Deep dive</small></div>
+      </div>
+      <button class="btn" onclick="startQuiz()">Find my attachment coordinates →</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="screen">
+    <div class="card">
+      <div class="qtop">
+        <span class="qc" id="qcount">1 / 20</span>
+        <span class="tag"><span class="dot-blip"></span> Tracking your heart’s coordinates…</span>
+      </div>
+      <div class="quad" id="quad">
+        <div class="axv"></div><div class="axh"></div>
+        <div class="lab t">Anxious ↑</div>
+        <div class="lab b">Secure ↓</div>
+        <div class="lab l">Close · Intimate</div>
+        <div class="lab r">Distant · Avoidant</div>
+        <div class="zone z-secure" id="z-secure">🌳 Secure</div>
+        <div class="zone z-anxious" id="z-anxious">💗 Anxious</div>
+        <div class="zone z-avoid" id="z-avoid">🕊️ Avoidant</div>
+        <div class="zone z-chaos" id="z-chaos">🌗 Fearful</div>
+        <div class="dot" id="dot"></div>
+      </div>
+      <div class="quad-hint">The way the dot drifts is just a hint — there are no right answers.</div>
+      <div class="energy"><i id="energy"></i></div>
+      <div class="q-num" id="qnum"></div>
+      <div class="q-text" id="qtext">Which one feels more like ‘you’?</div>
+      <div id="opts"></div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="screen">
+    <div class="card">
+      <div class="crown">YOUR ATTACHMENT TYPE</div>
+      <div class="res-emoji" id="resEmoji">💞</div>
+      <div class="res-title" id="resTitle"></div>
+      <div class="res-tag" id="resTag"></div>
+      <div class="bars">
+        <div class="bar-row">
+          <div class="bl"><span>Secure ↔ Anxious (how sensitive to worry)</span><b id="anxPct">0%</b></div>
+          <div class="bar"><i id="anxBar" style="background:linear-gradient(90deg,#8ad0b0,var(--anxious))"></i></div>
+        </div>
+        <div class="bar-row">
+          <div class="bl"><span>Close ↔ Avoidant (how much distance)</span><b id="avoPct">0%</b></div>
+          <div class="bar"><i id="avoBar" style="background:linear-gradient(90deg,#8ab0d0,var(--avoid))"></i></div>
+        </div>
+      </div>
+      <div class="sec"><h4>💫 The you that comes out when you get close</h4><p id="p_you"></p></div>
+      <div class="sec"><h4>✨ Where you shine in love</h4><p id="p_str"></p></div>
+      <div class="sec"><h4>🌿 One thing to watch</h4><p id="p_care"></p></div>
+      <div class="sec"><h4>💌 Love like this and it gets easier</h4><p id="p_love"></p></div>
+      <div class="hide-note">🔒 Your attachment style isn’t a fixed fate.<br>Inside a safe relationship, we can always grow toward something more secure.</div>
+      <button class="btn" style="margin-top:20px" onclick="shareResult()">Copy my result 📋</button>
+      <button class="btn ghost" onclick="resetAll()">Start over</button>
+      <div class="footnote">Just a fun little quiz. Whatever your type, your love has a temperature all its own 🤍</div>
+    </div>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/en/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 Dopamine Lab — more tests this way →</a></div>
+  <footer class="site-footer">
+    <div class="ff-dots"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="ff-tag">The Meaning & Fun Factory</div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="ff-sub">YEON<span class="colon">:</span>GYEOL Inc. Family Company</div>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+const QBANK = {
+  ANX:[
+    {a:{k:"SE",txt:"Even if their reply is a little late, I shrug it off as no big deal"}, b:{k:"AX",txt:"When their reply is late, I can’t stop wondering if something’s wrong"}},
+    {a:{k:"SE",txt:"I mostly trust that I’m loved, without second-guessing it"}, b:{k:"AX",txt:"I often catch myself wanting to check that I’m still loved"}},
+    {a:{k:"SE",txt:"Even after a fight, I trust we’ll be okay"}, b:{k:"AX",txt:"After a fight, my chest tightens, afraid this is how we drift apart"}},
+    {a:{k:"SE",txt:"If they’re too busy to make time, I’m let down but I get it"}, b:{k:"AX",txt:"If they can’t make time, I wonder if they like me less"}},
+    {a:{k:"SE",txt:"Being apart doesn’t make me feel the relationship is shaky"}, b:{k:"AX",txt:"When we’re apart, I worry our hearts will drift too"}},
+    {a:{k:"SE",txt:"I feel I can say what’s really on my mind without hurting us"}, b:{k:"AX",txt:"If I say what I really feel, I worry it’ll be too much for them"}},
+    {a:{k:"SE",txt:"A small shift in their tone doesn’t really rattle me"}, b:{k:"AX",txt:"The slightest change in their tone puts me on high alert"}},
+    {a:{k:"SE",txt:"When things are good, I just enjoy the moment"}, b:{k:"AX",txt:"Even when things are good, part of me fears it’ll end someday"}},
+    {a:{k:"SE",txt:"I trust them and give them plenty of space"}, b:{k:"AX",txt:"I keep wanting to know what they’re up to, and end up checking"}},
+    {a:{k:"SE",txt:"I don’t get anxious even if I’m not the one to reach out first"}, b:{k:"AX",txt:"Afraid of being forgotten, I end up messaging first"}},
+    {a:{k:"SE",txt:"I feel secure even without constant proof of love"}, b:{k:"AX",txt:"I need to hear ‘I love you’ often to feel at ease"}},
+    {a:{k:"SE",txt:"Even when I’m jealous, it doesn’t really throw me"}, b:{k:"AX",txt:"Jealousy and comparison rock me pretty often"}},
+    {a:{k:"SE",txt:"If we talk a little less for a while, I take it in stride"}, b:{k:"AX",txt:"When we talk less, I get jittery that something’s wrong"}},
+    {a:{k:"SE",txt:"Even picturing a breakup, I believe I’d be okay in the end"}, b:{k:"AX",txt:"Just imagining being left behind is unbearable"}}
+  ],
+  AVO:[
+    {a:{k:"CO",txt:"When things are hard, I open up and lean on them"}, b:{k:"AV",txt:"I tend to swallow the hard stuff and handle it on my own"}},
+    {a:{k:"CO",txt:"I love a relationship that keeps getting closer and deeper"}, b:{k:"AV",txt:"When it gets too close, I feel boxed in and need some distance"}},
+    {a:{k:"CO",txt:"I tend to share my feelings often"}, b:{k:"AV",txt:"I keep my feelings tucked away rather than show them"}},
+    {a:{k:"CO",txt:"I want to spend lots of time together, just the two of us"}, b:{k:"AV",txt:"I need enough time to myself to feel at ease"}},
+    {a:{k:"CO",txt:"Asking them for help comes naturally to me"}, b:{k:"AV",txt:"Leaning on anyone feels awkward and uncomfortable"}},
+    {a:{k:"CO",txt:"The deeper the relationship, the more grounded I feel"}, b:{k:"AV",txt:"When it gets deep, I feel like I’m losing my freedom"}},
+    {a:{k:"CO",txt:"I tend to open up and show my inner world first"}, b:{k:"AV",txt:"I rarely open up about what’s really inside"}},
+    {a:{k:"CO",txt:"Picturing a future together gives me butterflies"}, b:{k:"AV",txt:"Promising a future feels like a weight on me"}},
+    {a:{k:"CO",txt:"I love trading little gestures of affection"}, b:{k:"AV",txt:"Over-the-top affection makes me squirm and feels like too much"}},
+    {a:{k:"CO",txt:"When conflict comes up, I sit down and try to work it out"}, b:{k:"AV",txt:"When conflict comes up, I just want some space first"}},
+    {a:{k:"CO",txt:"I’m glad when they step into my everyday life"}, b:{k:"AV",txt:"When someone gets too far into my space, I get defensive"}},
+    {a:{k:"CO",txt:"I can let them see me at my most vulnerable"}, b:{k:"AV",txt:"I carry my weak moments alone and try not to show them"}},
+    {a:{k:"CO",txt:"Even apart, I want to stay connected with frequent messages"}, b:{k:"AV",txt:"When we’re apart, I’m comfortable doing our own thing"}},
+    {a:{k:"CO",txt:"The feeling of ‘us’ is warm and lovely to me"}, b:{k:"AV",txt:"Above all, my own independence matters most"}}
+  ]
+};
+const AXES = ["ANX","AVO"];
+
+/* ============ 4 TYPES ============ */
+const TYPE = {
+  secure:{key:"secure",e:"🌳",color:"var(--secure)",a1:"#4ade9b",a2:"#7ce0c0",name:"Secure",
+    tag:"“The one who grows calmer the closer you get”",
+    you:"You’re someone who can trust both yourself and your partner. You don’t fear closeness, yet you’re just as at ease with time alone. When conflict comes, you neither run nor cling — you say what you feel and work through it together.",
+    str:"Steady trust. You become a ‘safe harbor’ for your partner, giving love in a quiet, steady way rather than a loud one.",
+    care:"Not everyone is as at ease as you are. If you can wait for a partner who worries or keeps their distance, your bond will grow far deeper.",
+    love:"Keep loving as honestly and warmly as you do. Just know — if your partner has a different style, don’t hold back that one reassuring word."},
+  anxious:{key:"anxious",e:"💗",color:"var(--anxious)",a1:"#ff6b9e",a2:"#ffb3cf",name:"Anxious",
+    tag:"“The one who wants more reassurance the closer you get”",
+    you:"You love deeply and fiercely. You feel most alive when hearts are connected, but a quiet phone or a lukewarm reply can unsettle you fast. Afraid of being left, you check in again and again, wanting to give more and receive more.",
+    str:"Fierce devotion and empathy. You read your partner’s feelings keenly and pour your whole heart into the relationship.",
+    care:"When anxiety swells, you can end up pushing your partner. When you feel yourself wobble, pause a beat and tell yourself, ‘this may be an old habit, not this moment.’",
+    love:"Express instead of check. Say it plainly — ‘I’m feeling anxious right now’ — and your partner hears trust, not pressure."},
+  avoid:{key:"avoid",e:"🕊️",color:"var(--avoid)",a1:"#6aa8ff",a2:"#a9cbff",name:"Avoidant",
+    tag:"“The one who steps back the closer you get”",
+    you:"You’re independent and know how to protect yourself. You stand firm on your own, and a relationship that clings too tightly leaves you breathless. You’d rather solve things alone than lean, and you need time to show what you feel.",
+    str:"Self-reliance and calm. You respect your partner’s space and freedom, and you stay steady even in a crisis.",
+    care:"Keeping distance can feel like ‘pushing away’ to your partner. Just offering one small piece of your inner world first brings you much closer.",
+    love:"Don’t put off talking until you’ve got it perfectly sorted. Sharing even an unsorted heart, just a little, becomes intimacy itself."},
+  chaos:{key:"chaos",e:"🌗",color:"var(--chaos)",a1:"#b78bf5",a2:"#d4b6ff",name:"Fearful",
+    tag:"“The one who’s scared up close, and longing from afar”",
+    you:"You long for love desperately and fear it at the same time. The wish to get close and the pull to retreat from hurt live side by side, so you often move in and back away again. That’s also how deeply, how fully, you feel a relationship.",
+    str:"Deep sensitivity and sincerity. You feel love’s bright side and its shadows alike, and you truly immerse yourself in a relationship.",
+    care:"Don’t blame yourself for the push and pull. It isn’t a flaw — it’s a habit that once kept your heart safe. Slowly building trust with someone who feels safe becomes a real source of strength.",
+    love:"When you feel scattered, one sentence instead of running. Saying ‘my heart’s tangled right now, I need a little time’ can spare you a lot of misunderstanding and regret."}
+};
+
+/* ============ HELPERS ============ */
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(v){if(navigator.vibrate)try{navigator.vibrate(v);}catch(e){}}
+let _tt;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2000);}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});}
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+
+/* ============ STATE ============ */
+let LEN = 20;
+let quiz = [], qi = 0, score = {}, myType = null;
+
+/* length selector */
+document.getElementById('lens').addEventListener('click',e=>{
+  const b=e.target.closest('.lenbtn'); if(!b)return;
+  document.querySelectorAll('.lenbtn').forEach(x=>x.classList.remove('sel'));
+  b.classList.add('sel'); LEN=+b.dataset.n; vibrate(12);
+});
+
+/* ============ QUIZ ============ */
+function buildQuiz(){
+  const per = LEN/2;
+  let list=[];
+  AXES.forEach(ax=>{ shuffle(QBANK[ax].slice()).slice(0,per).forEach(q=> list.push({a:{...q.a},b:{...q.b}})); });
+  return shuffle(list);
+}
+function startQuiz(){
+  quiz=buildQuiz(); qi=0;
+  score={SE:0,AX:0,CO:0,AV:0};
+  document.querySelectorAll('.zone').forEach(z=>z.classList.remove('show'));
+  const r=document.documentElement.style; r.setProperty('--a1','#b98bff'); r.setProperty('--a2','#ff9ecb');
+  go('quiz'); updateDot(); updateEnergy(); renderQ();
+}
+function renderQ(){
+  const q=quiz[qi];
+  document.getElementById('qcount').textContent=(qi+1)+" / "+quiz.length;
+  document.getElementById('qnum').textContent="Q"+(qi+1);
+  const opts=shuffle([q.a,q.b]);
+  const labels=["A","B"];
+  const wrap=document.getElementById('opts');
+  wrap.innerHTML="";
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt";
+    b.innerHTML=`<span class="badge">${labels[i]}</span><span>${o.txt}</span>`;
+    b.onclick=()=>pick(o.k,b);
+    wrap.appendChild(b);
+  });
+}
+function pick(k,el){
+  score[k]++;
+  el.classList.add('picked');
+  if(window.confetti){
+    const r=el.getBoundingClientRect();
+    confetti({particleCount:16,spread:52,startVelocity:22,scalar:.8,
+      origin:{x:(r.left+r.width/2)/window.innerWidth,y:(r.top+r.height/2)/window.innerHeight},
+      colors:['#4ade9b','#ff6b9e','#6aa8ff','#b78bf5','#ff9ecb']});
+  }
+  vibrate(26);
+  updateDot();
+  updateEnergy();
+  if(qi+1===Math.floor(quiz.length/2)){toast('💓 Halfway there!');vibrate([20,40,20]);}
+  setTimeout(()=>{
+    qi++;
+    if(qi>=quiz.length) reveal();
+    else renderQ();
+  },330);
+}
+function updateEnergy(){
+  const done=score.SE+score.AX+score.CO+score.AV;
+  document.getElementById('energy').style.width=(done/quiz.length*100)+"%";
+}
+function ratios(){
+  const anxT=score.SE+score.AX, avoT=score.CO+score.AV;
+  const anxR = anxT? score.AX/anxT : .5;   // 1 = Anxious
+  const avoR = avoT? score.AV/avoT : .5;   // 1 = Avoidant
+  return {anxR,avoR};
+}
+function updateDot(){
+  const {anxR,avoR}=ratios();
+  const dot=document.getElementById('dot');
+  dot.style.left = (8 + avoR*84) + "%";          // left=Close = right=Avoidant
+  dot.style.top  = (8 + (1-anxR)*84) + "%";       // top=Anxious = bottom=Secure
+}
+
+/* ============ RESULT ============ */
+function computeType(){
+  const anxious = score.AX>score.SE;   // ties go to Secure
+  const avoidant = score.AV>score.CO;  // ties go to Close
+  if(!anxious && !avoidant) return "secure";
+  if(anxious && !avoidant) return "anxious";
+  if(!anxious && avoidant) return "avoid";
+  return "chaos";
+}
+function reveal(){
+  myType=computeType();
+  const T=TYPE[myType];
+  const r=document.documentElement.style;
+  r.setProperty('--a1',T.a1); r.setProperty('--a2',T.a2); r.setProperty('--tc',T.color);
+
+  document.getElementById('z-'+myType).classList.add('show');
+  const dot=document.getElementById('dot');
+  dot.style.background=`radial-gradient(circle at 35% 30%,#fff,${T.a1})`;
+  dot.style.boxShadow=`0 0 26px 6px ${T.a1}`;
+  toast(T.e+' Attachment coordinates locked in!');
+  vibrate([40,60,40]);
+  if(window.confetti){
+    const rc=document.getElementById('quad').getBoundingClientRect();
+    confetti({particleCount:60,spread:70,startVelocity:26,scalar:.9,
+      origin:{x:(rc.left+rc.width/2)/window.innerWidth,y:(rc.top+rc.height/2)/window.innerHeight}});
+  }
+  setTimeout(showResult,780);
+}
+function showResult(){
+  const T=TYPE[myType];
+  document.getElementById('resEmoji').textContent=T.e;
+  document.getElementById('resTitle').textContent=T.name;
+  document.getElementById('resTag').textContent=T.tag;
+  document.getElementById('p_you').textContent=T.you;
+  document.getElementById('p_str').textContent=T.str;
+  document.getElementById('p_care').textContent=T.care;
+  document.getElementById('p_love').textContent=T.love;
+  go('result');
+
+  const {anxR,avoR}=ratios();
+  const anxPct=Math.round(anxR*100), avoPct=Math.round(avoR*100);
+  requestAnimationFrame(()=>setTimeout(()=>{
+    document.getElementById('anxBar').style.width=anxPct+"%";
+    document.getElementById('avoBar').style.width=avoPct+"%";
+  },120));
+  animateCount('anxPct',anxPct); animateCount('avoPct',avoPct);
+  if(window.confetti){
+    const colors=['#4ade9b','#ff6b9e','#6aa8ff','#b78bf5','#ff9ecb'];
+    confetti({particleCount:130,spread:95,origin:{y:.3},colors});
+    setTimeout(()=>confetti({particleCount:90,spread:120,startVelocity:36,origin:{y:.4},colors}),260);
+  }
+  vibrate([60,80,60,80,120]);
+}
+function animateCount(id,target){
+  const el=document.getElementById(id); let v=0;
+  const step=Math.max(1,Math.round(target/26));
+  const t=setInterval(()=>{v+=step; if(v>=target){v=target;clearInterval(t);} el.textContent=v+"%";},34);
+}
+function shareResult(){
+  const T=TYPE[myType];
+  const txt=`My attachment style is ${T.e} ${T.name}\n${T.tag}\n\nThe you that comes out when you get close — Attachment Style Test →\nhttps://mimifactory.vibekr.com/apps/attachment_style_test.html`;
+  const done=()=>toast('📋 Result copied!');
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done));}
+  else fallbackCopy(txt,done);
+  vibrate(20);
+}
+function fallbackCopy(txt,cb){
+  const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();try{document.execCommand('copy');cb();}catch(e){}document.body.removeChild(ta);
+}
+function resetAll(){
+  myType=null;
+  const r=document.documentElement.style;
+  r.setProperty('--a1','#b98bff'); r.setProperty('--a2','#ff9ecb'); r.setProperty('--tc','#b98bff');
+  const dot=document.getElementById('dot');
+  dot.style.background='radial-gradient(circle at 35% 30%,#fff,var(--a2))';
+  dot.style.boxShadow='0 0 20px 4px var(--a2)';
+  document.querySelectorAll('.zone').forEach(z=>z.classList.remove('show'));
+  document.getElementById('anxBar').style.width='0';
+  document.getElementById('avoBar').style.width='0';
+  go('home');
+}
+</script>
+</body>
+</html>
