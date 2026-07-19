@@ -11,3 +11,4 @@ __pycache__/
 
 # i18n 원본 폰트 (재다운로드 가능한 대용량 바이너리)
 i18n/fonts_src/*.ttf
+i18n_batch.log
