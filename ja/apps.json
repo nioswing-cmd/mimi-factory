@@ -155,6 +155,18 @@
    "teaser": "apps/multiple-intelligences.html",
    "premium": "apps/multiple-intelligences.html",
    "desc": "IQひとつでは語れない — ガードナーの8つの知能であなたの地図を描く。"
+  },
+  {
+   "id": "burnout-traffic-light",
+   "type": "test",
+   "title": "バーンアウト信号機",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/burnout-traffic-light.html",
+   "premium": "apps/burnout-traffic-light.html",
+   "desc": "いまのあなたの信号は何色？12問で心の消耗をセルフチェック。"
   }
  ],
  "updated": "2026-07-19"

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Burnout Traffic Light — What color is your signal right now?</title>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#141727; --bg2:#20243a;
+  --accent1:#5be48a; --accent2:#37c46e;      
+  --cream:#f3f6ff; --muted:#a7b0cf;
+  --card:#1c2138;
+  --green1:#5be48a; --green2:#37c46e;
+  --yellow1:#ffd764; --yellow2:#f7ad2e;
+  --red1:#ff6b6b; --red2:#e23a4e;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 82% -10%, rgba(91,228,138,.10), transparent 55%),
+    radial-gradient(120% 90% at 8% 112%, rgba(226,58,78,.12), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  min-height:100dvh;
+  transition:background .9s ease;
+}
+.wrap{max-width:520px; margin:0 auto; padding:20px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(100deg,var(--green1),var(--yellow1) 50%,var(--red1));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
+.hidden{display:none !important;}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1.2deg); opacity:.4;}60%{transform:scale(1.02) rotate(.4deg);}100%{transform:scale(1) rotate(0); opacity:1;}}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+.fade{animation:fadeIn .5s ease both;}
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+
+
+.home{flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; gap:18px;}
+.sig-emoji{font-size:64px; line-height:1; animation:floaty 3.4s ease-in-out infinite;}
+.home h1{font-size:34px; margin:6px 0 0;}
+.home .sub{color:var(--muted); font-size:15px; line-height:1.7; overflow-wrap:break-word;}
+.chips{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:4px;}
+.chip{font-size:12.5px; padding:7px 13px; border-radius:99px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); color:var(--muted);}
+.btn{
+  font-family:'Jua',sans-serif; font-size:19px; border:none; cursor:pointer;
+  color:#10131f; padding:17px 20px; border-radius:18px; width:100%;
+  background:linear-gradient(95deg,var(--accent1),var(--accent2));
+  box-shadow:0 10px 26px -8px var(--accent2); transition:transform .15s, box-shadow .4s, background .6s;
+}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:rgba(255,255,255,.07); color:var(--cream); box-shadow:none; border:1px solid rgba(255,255,255,.14);}
+.note{font-size:12px; color:var(--muted); opacity:.8; line-height:1.6;}
+
+
+.topbar{position:sticky; top:0; z-index:5; padding:6px 0 12px; background:linear-gradient(180deg,var(--bg1) 70%,transparent);}
+.tl-row{display:flex; align-items:center; gap:16px;}
+.lights{
+  display:flex; flex-direction:column; gap:9px; padding:11px 10px; border-radius:20px;
+  background:linear-gradient(180deg,#0c0e18,#151827); border:1px solid rgba(255,255,255,.09);
+  box-shadow:inset 0 2px 8px rgba(0,0,0,.5);
+}
+.lamp{width:30px; height:30px; border-radius:50%; background:#2a2f45; position:relative; transition:all .45s cubic-bezier(.34,1.56,.64,1); opacity:.28;}
+.lamp.on{opacity:1;}
+.lamp.red.on{background:radial-gradient(circle at 35% 30%,#ff9a9a,var(--red2)); box-shadow:0 0 20px 3px rgba(255,80,90,.75);}
+.lamp.yellow.on{background:radial-gradient(circle at 35% 30%,#ffe79c,var(--yellow2)); box-shadow:0 0 20px 3px rgba(247,173,46,.7);}
+.lamp.green.on{background:radial-gradient(circle at 35% 30%,#b5f7c9,var(--green2)); box-shadow:0 0 20px 3px rgba(55,196,110,.7);}
+.lamp.pulse{animation:lampPulse 1.4s ease-in-out infinite;}
+@keyframes lampPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
+.tl-meta{flex:1; min-width:0;}
+.tl-label{font-family:'Jua',sans-serif; font-size:20px; margin-bottom:3px; transition:color .5s;}
+.tl-count{font-size:12.5px; color:var(--muted); margin-bottom:9px;}
+.gauge{height:12px; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden; position:relative;}
+.gaugefill{height:100%; width:0%; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  box-shadow:0 0 14px 1px var(--accent2);
+  transition:width .55s cubic-bezier(.22,1,.36,1), box-shadow .6s, background .6s;}
+.ticks{display:flex; justify-content:space-between; font-size:9.5px; color:var(--muted); margin-top:5px; opacity:.7;}
+
+/* =====  questions ===== */
+.qcard{flex:1; display:flex; flex-direction:column; justify-content:center; padding:8px 2px;}
+.qidx{font-family:'Jua',sans-serif; font-size:14px; color:var(--accent1); transition:color .5s; margin-bottom:8px;}
+.qtext{font-size:22px; line-height:1.5; font-weight:700; overflow-wrap:break-word; margin-bottom:8px;}
+.qhint{font-size:13px; color:var(--muted); margin-bottom:22px;}
+.opts{display:flex; flex-direction:column; gap:11px;}
+.opt{
+  font-family:'Noto Sans KR',sans-serif; font-size:16.5px; font-weight:500; text-align:left;
+  cursor:pointer; color:var(--cream); padding:16px 18px; border-radius:15px;
+  background:var(--card); border:1.5px solid rgba(255,255,255,.1);
+  display:flex; align-items:center; gap:13px; transition:transform .12s, border-color .2s, background .2s;
+}
+.opt:active{transform:scale(.98);}
+.opt:hover{border-color:var(--accent2);}
+.opt:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+.dot{width:13px; height:13px; border-radius:50%; border:2px solid var(--muted); flex:none;}
+.backline{margin-top:16px; text-align:center;}
+.backline button{background:none; border:none; color:var(--muted); font-size:13px; cursor:pointer; text-decoration:underline; padding:8px;}
+
+
+.result{flex:1; display:flex; flex-direction:column; gap:16px;}
+.rlight{
+  text-align:center; padding:26px 18px; border-radius:24px; position:relative; overflow:hidden;
+  border:1.5px solid rgba(255,255,255,.12);
+}
+.rlight .big{font-size:70px; line-height:1;}
+.rlight h2{font-family:'Jua',sans-serif; font-weight:400; font-size:30px; margin:8px 0 4px;}
+.rlight .pct{font-family:'Jua',sans-serif; font-size:16px; opacity:.9;}
+.rblock{background:var(--card); border:1px solid rgba(255,255,255,.09); border-radius:18px; padding:17px 18px;}
+.rblock h3{font-family:'Jua',sans-serif; font-weight:400; font-size:16px; margin:0 0 7px; display:flex; align-items:center; gap:7px;}
+.rblock p{margin:0; font-size:14.5px; line-height:1.72; color:#e4e8f7; overflow-wrap:break-word;}
+.dims{display:flex; flex-direction:column; gap:12px;}
+.dim{}
+.dim .dhead{display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:6px; color:var(--muted);}
+.dim .dbar{height:10px; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden;}
+.dim .dfill{height:100%; width:0; border-radius:99px; transition:width 1s cubic-bezier(.22,1,.36,1);}
+.ractions{display:flex; flex-direction:column; gap:10px; margin-top:4px;}
+.disclaim{font-size:11.5px; color:var(--muted); opacity:.8; line-height:1.6; text-align:center; padding:0 6px;}
+
+
+.toast{
+  position:fixed; left:50%; top:16px; transform:translateX(-50%) translateY(-20px);
+  background:rgba(28,33,56,.97); border:1.5px solid var(--accent2); color:var(--cream);
+  padding:12px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none;
+  transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; text-align:center;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+
+.footer{text-align:center; margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<canvas id="fx" style="position:fixed; inset:0; pointer-events:none; z-index:55;"></canvas>
+
+<div class="wrap">
+
+  
+  <section id="home" class="home fade">
+    <div class="sig-emoji">🚦</div>
+    <h1>Burnout <span class="grad">Traffic Light</span></h1>
+    <p class="sub">Burnout doesn’t hit you out of nowhere —<br>it comes on like a traffic light: <b>green → yellow → red</b>.<br>What color is your signal right now?</p>
+    <div class="chips">
+      <span class="chip">⏱ 1 min · 12 questions</span>
+      <span class="chip">📊 Live signal</span>
+      <span class="chip">🔒 Nothing saved</span>
+    </div>
+    <button class="btn" onclick="start()">Check my signal 🚦</button>
+    <p class="note">Every answer lights up the signal at the top in real time.<br>There are no right answers — just be honest with yourself right now.</p>
+  </section>
+
+  
+  <section id="quiz" class="hidden">
+    <div class="topbar">
+      <div class="tl-row">
+        <div class="lights">
+          <div class="lamp red" id="lampR"></div>
+          <div class="lamp yellow" id="lampY"></div>
+          <div class="lamp green on" id="lampG"></div>
+        </div>
+        <div class="tl-meta">
+          <div class="tl-label" id="tlLabel">Green light · All clear</div>
+          <div class="tl-count" id="tlCount">0 / 12 questions</div>
+          <div class="gauge"><div class="gaugefill" id="gfill"></div></div>
+          <div class="ticks"><span>Green</span><span>Yellow</span><span>Red</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="qcard">
+      <div class="qidx" id="qidx">Q1</div>
+      <div class="qtext" id="qtext">—</div>
+      <div class="qhint">Over the past <b>2–3 weeks</b>, how often has this been true for you?</div>
+      <div class="opts" id="opts"></div>
+      <div class="backline"><button onclick="goBack()" id="backBtn">← Previous</button></div>
+    </div>
+  </section>
+
+  
+  <section id="result" class="result hidden"></section>
+
+  
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/en/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 Dopamine Lab — see more tests →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>The Meaning & Fun Factory</span></div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+  </div>
+</div>
+
+<script>
+
+// dim: E Emotional Exhaustion / C Cynicism & Distance / A Reduced Accomplishment / B Body & Recovery
+const DIMS = {
+  E:{name:"Emotional Exhaustion", emo:"🫠", advice:"What you need most right now is real, purposeless rest. Give yourself permission to do nothing at all."},
+  C:{name:"Cynicism & Distance", emo:"🧱", advice:"A closed-off heart is just armor to protect you. Start rebuilding with one safe person, a little at a time."},
+  A:{name:"Reduced Accomplishment", emo:"📉", advice:"Instead of big wins, count one tiny “I did it” every day. That’s how your sense of efficacy comes back."},
+  B:{name:"Body & Recovery", emo:"🩺", advice:"Burnout hits the body first. The fastest fix is the basics — sleep, water, meals — in that order."}
+};
+const QUESTIONS = [
+  {d:"E", t:"The moment I wake up, I already think “here goes another day” and feel drained."},
+  {d:"E", t:"By the end of the day I feel emotionally empty and don’t want to do anything."},
+  {d:"E", t:"Even after resting I don’t feel rested — the tiredness just keeps piling up."},
+  {d:"C", t:"Dealing with people feels more and more like a chore, so I just go through the motions."},
+  {d:"C", t:"Things that used to matter now feel like “whatever, who cares.”"},
+  {d:"C", t:"I’ve shut the door on my feelings and I’m just doing the bare minimum to get by."},
+  {d:"A", t:"What I do feels like it doesn’t really matter."},
+  {d:"A", t:"Even when I finish something, there’s no pride — just relief that it’s “finally over.”"},
+  {d:"A", t:"I can’t focus like I used to, and I slip up or forget things more often."},
+  {d:"B", t:"Body signals like headaches, an upset stomach, or stiff shoulders show up more often."},
+  {d:"B", t:"I struggle to fall asleep, or I wake up still not feeling refreshed."},
+  {d:"B", t:"I’m barely getting through the day on coffee, sugar, late-night snacks, or a drink."}
+];
+const SCALE = [
+  {t:"Almost never", v:0},
+  {t:"Sometimes", v:1},
+  {t:"Pretty often", v:2},
+  {t:"Almost always", v:3}
+];
+const MAX = QUESTIONS.length * 3; // 36
+
+const LEVELS = {
+  green:{key:"green", emoji:"🟢", name:"Green light", tag:"Cruising just fine", a1:"#5be48a", a2:"#37c46e",
+    now:"Your energy is flowing right now. The signal is <b>green</b> — you’re running smoothly, no major issues.",
+    do:"Keep the good routines you’ve got — sleep, healthy distance, small joys. With burnout, prevention is the easiest cure.",
+    care:"Push too hard just because you’re green, and yellow shows up in no time. Once a week, ask yourself: “How am I really doing lately?”"},
+  yellow:{key:"yellow", emoji:"🟡", name:"Yellow light", tag:"Time to ease off", a1:"#ffd764", a2:"#f7ad2e",
+    now:"Your body and mind are signaling <b>“slow down.”</b> It’s not too late — but now is the time to adjust.",
+    do:"Delete one thing you can drop this week. Then put recovery time on your calendar — not as a “to-do,” but as an <b>appointment</b>.",
+    care:"Wave off yellow as “I’m still fine” and it turns red. Start by tending to whichever area is most drained."},
+  red:{key:"red", emoji:"🔴", name:"Red light", tag:"Time to stop, now", a1:"#ff6b6b", a2:"#e23a4e",
+    now:"You’ve been holding on for a long time. This isn’t weak willpower — it’s <b>your body’s signal that you’ve run too long</b>.",
+    do:"Stop whatever you can stop right now. And don’t carry it alone — put your current state into words to someone you trust, or a professional.",
+    care:"Red isn’t the stage for enduring more — it’s the stage for <b>getting help</b>. If sleep, appetite, or mood have been hard for over two weeks, please talk to a professional."}
+};
+
+
+let idx=0, answers=[]; // answers[i] = value 0..3
+
+
+function vibrate(ms){ if(navigator.vibrate) try{navigator.vibrate(ms);}catch(e){} }
+let _tt; function toast(m){ const t=document.getElementById('toast'); t.innerHTML=m; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2100); }
+function repop(el){ el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+function show(id){ ['home','quiz','result'].forEach(s=>document.getElementById(s).classList.toggle('hidden', s!==id)); }
+function levelOf(pct){ return pct<34?'green':(pct<67?'yellow':'red'); }
+
+
+let curLevel='green';
+function currentPct(){ // Cumulative ratio based on the questions answered so far
+  const answered = answers.filter(a=>a!=null);
+  const sum = answered.reduce((s,v)=>s+v,0);
+  const maxSoFar = answered.length*3;
+  return maxSoFar? Math.round(sum/maxSoFar*100) : 0;
+}
+function updateSignal(){
+  const answeredCount = answers.filter(a=>a!=null).length;
+  const pct = currentPct();
+  const lv = answeredCount? levelOf(pct) : 'green';
+  const L = LEVELS[lv];
+
+  const g=document.getElementById('gfill');
+  g.style.width = (answeredCount? pct:0) + '%';
+  document.documentElement.style.setProperty('--accent1', L.a1);
+  document.documentElement.style.setProperty('--accent2', L.a2);
+
+  const R=document.getElementById('lampR'), Y=document.getElementById('lampY'), G=document.getElementById('lampG');
+  [R,Y,G].forEach(x=>x.classList.remove('on','pulse'));
+  if(lv==='green'){ G.classList.add('on','pulse'); }
+  else if(lv==='yellow'){ Y.classList.add('on','pulse'); }
+  else { R.classList.add('on','pulse'); }
+
+  const lab=document.getElementById('tlLabel');
+  lab.innerHTML = L.emoji+' '+L.name+' · '+L.tag;
+  lab.style.color = L.a1;
+  document.getElementById('tlCount').textContent = answeredCount+' / '+QUESTIONS.length+'  questions';
+
+  if(answeredCount>0 && lv!==curLevel){
+    if(lv==='yellow'){ toast('🟡 Your signal just turned yellow'); vibrate([20,40,20]); }
+    else if(lv==='red'){ toast('🔴 Red signal — your body’s SOS'); vibrate([30,50,30]); }
+    else if(lv==='green' && curLevel!=='green'){ toast('🟢 Back to green'); }
+    repop(lab);
+  }
+  curLevel = lv;
+}
+
+
+function start(){ idx=0; answers=new Array(QUESTIONS.length).fill(null); show('quiz'); curLevel='green'; render(); }
+function render(){
+  const q=QUESTIONS[idx];
+  document.getElementById('qidx').textContent = 'Q'+(idx+1);
+  const qt=document.getElementById('qtext'); qt.textContent=q.t; repop(qt);
+  const box=document.getElementById('opts'); box.innerHTML='';
+  SCALE.forEach(s=>{
+    const b=document.createElement('button');
+    b.className='opt'; b.type='button';
+    b.innerHTML='<span class="dot"></span>'+s.t;
+    if(answers[idx]===s.v){ b.style.borderColor='var(--accent2)'; b.querySelector('.dot').style.background='var(--accent2)'; b.querySelector('.dot').style.borderColor='var(--accent2)'; }
+    b.onclick=(e)=>choose(s.v, e);
+    box.appendChild(b);
+  });
+  document.getElementById('backBtn').style.visibility = idx===0? 'hidden':'visible';
+  document.getElementById('qidx').style.color='var(--accent1)';
+  updateSignal();
+}
+function choose(v, e){
+  answers[idx]=v;
+  vibrate(24);
+  burst(e);
+  updateSignal();
+  setTimeout(()=>{
+    if(idx < QUESTIONS.length-1){ idx++; render(); }
+    else finish();
+  }, 300);
+}
+function goBack(){ if(idx>0){ idx--; render(); } }
+
+
+function finish(){
+  const total = answers.reduce((s,v)=>s+v,0);
+  const pct = Math.round(total/MAX*100);
+  const lv = levelOf(pct);
+  const L = LEVELS[lv];
+
+  const dimScore={E:0,C:0,A:0,B:0}, dimCount={E:0,C:0,A:0,B:0};
+  QUESTIONS.forEach((q,i)=>{ dimScore[q.d]+=answers[i]; dimCount[q.d]++; });
+  const dimPct={}; Object.keys(dimScore).forEach(k=>dimPct[k]=Math.round(dimScore[k]/(dimCount[k]*3)*100));
+  const topDim = Object.keys(dimPct).sort((a,b)=>dimPct[b]-dimPct[a])[0];
+
+  document.documentElement.style.setProperty('--accent1', L.a1);
+  document.documentElement.style.setProperty('--accent2', L.a2);
+
+  const dimBars = Object.keys(DIMS).map(k=>{
+    const p=dimPct[k]; const dl=levelOf(p); const c=LEVELS[dl];
+    return `<div class="dim">
+      <div class="dhead"><span>${DIMS[k].emo} ${DIMS[k].name}</span><span>${p}%</span></div>
+      <div class="dbar"><div class="dfill" data-w="${p}" style="background:linear-gradient(90deg,${c.a1},${c.a2});"></div></div>
+    </div>`;
+  }).join('');
+
+  const topInfo = (lv==='green')
+    ? `The area sending the strongest signal is <b>${DIMS[topDim].name}</b>. You’re still green, but keep a gentle eye on just this area and you can stay healthy for the long run.`
+    : `The most drained area is <b>${DIMS[topDim].emo} ${DIMS[topDim].name}</b>. ${DIMS[topDim].advice}`;
+
+  const bg = lv==='green'
+    ? 'radial-gradient(120% 120% at 50% 0%, rgba(91,228,138,.22), rgba(28,33,56,.4))'
+    : lv==='yellow'
+    ? 'radial-gradient(120% 120% at 50% 0%, rgba(247,173,46,.22), rgba(28,33,56,.4))'
+    : 'radial-gradient(120% 120% at 50% 0%, rgba(226,58,78,.24), rgba(28,33,56,.4))';
+
+  document.getElementById('result').innerHTML = `
+    <div class="rlight fade" style="background:${bg}; border-color:${L.a2}55;">
+      <div class="big">${L.emoji}</div>
+      <h2 style="color:${L.a1}">${L.name} · ${L.tag}</h2>
+      <div class="pct">Burnout index ${pct} pts / 100</div>
+    </div>
+    <div class="rblock fade"><h3>🔎 Where you are right now</h3><p>${L.now}</p></div>
+    <div class="rblock fade"><h3>📊 Signals by area</h3><div class="dims">${dimBars}</div>
+      <p style="margin-top:13px; font-size:13.5px; color:var(--muted);">${topInfo}</p></div>
+    <div class="rblock fade"><h3>✅ Try this</h3><p>${L.do}</p></div>
+    <div class="rblock fade"><h3>⚠️ Watch out for</h3><p>${L.care}</p></div>
+    <div class="ractions">
+      <button class="btn" onclick="shareResult('${L.name}',${pct})">Share my result 📤</button>
+      <button class="btn ghost" onclick="restart()">Take it again 🔄</button>
+    </div>
+    <p class="disclaim">This isn’t a medical diagnosis — it’s a self-check to help you reflect.<br>2 weeks or more of feeling this low, please reach out to a professional. Mental-health helpline ☎ 1577-0199</p>
+  `;
+  show('result');
+
+  requestAnimationFrame(()=>setTimeout(()=>{
+    document.querySelectorAll('.dfill').forEach(el=>el.style.width=el.dataset.w+'%');
+  },120));
+
+  vibrate([60,80,60]);
+  if(lv==='green'){ toast('🟢 You’re in a healthy green right now!'); cannon(L.a1,L.a2); setTimeout(()=>cannon(L.a1,L.a2),260); }
+  else if(lv==='yellow'){ toast('🟡 Just noticing is already half the recovery'); cannon(L.a1,L.a2); }
+  else { toast('🔴 You’ve made it this far — that took real strength'); softGlow(); }
+}
+function restart(){ show('home'); document.documentElement.style.setProperty('--accent1','#5be48a'); document.documentElement.style.setProperty('--accent2','#37c46e'); }
+
+function shareResult(name, pct){
+  const url='https://mimifactory.vibekr.com/en/apps/burnout-traffic-light.html';
+  const text=`🚦 Burnout Traffic Light result: ${name} (index ${pct} pts)\nWhat color is your signal? Check yours too 👉`;
+  if(navigator.share){ navigator.share({title:'Burnout Traffic Light', text, url}).catch(()=>{}); }
+  else{
+    const t=text+'\n'+url;
+    if(navigator.clipboard){ navigator.clipboard.writeText(t).then(()=>toast('📋 Result copied!')).catch(()=>toast(t)); }
+    else toast('👉 '+url);
+  }
+}
+
+
+const cv=document.getElementById('fx'); const ctx=cv.getContext('2d');
+let parts=[]; function fitCanvas(){ cv.width=innerWidth; cv.height=innerHeight; } fitCanvas(); addEventListener('resize',fitCanvas);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function burst(e){ // Small confetti burst at the click position
+  if(reduce||!e) return;
+  const x=e.clientX||innerWidth/2, y=e.clientY||innerHeight/2;
+  const cs=getComputedStyle(document.documentElement);
+  const c1=cs.getPropertyValue('--accent1').trim(), c2=cs.getPropertyValue('--accent2').trim();
+  for(let i=0;i<16;i++){ parts.push({x,y,vx:(Math.random()-.5)*6,vy:(Math.random()-.7)*6-2,r:Math.random()*3+2,c:Math.random()<.5?c1:c2,life:1}); }
+  run();
+}
+function cannon(c1,c2){
+  if(reduce) return;
+  for(let i=0;i<90;i++){ parts.push({x:innerWidth/2,y:innerHeight*.4,vx:(Math.random()-.5)*13,vy:(Math.random()-.5)*13-3,r:Math.random()*4+2,c:Math.random()<.5?c1:c2,life:1}); }
+  run();
+}
+function softGlow(){ // A quiet, caring effect when red
+  if(reduce) return;
+  for(let i=0;i<40;i++){ parts.push({x:Math.random()*innerWidth,y:innerHeight+10,vx:(Math.random()-.5)*.6,vy:-(Math.random()*1.5+.6),r:Math.random()*2.5+1.5,c:'#ff9aa5',life:1,soft:true}); }
+  run();
+}
+let raf=null;
+function run(){ if(raf) return; const loop=()=>{ ctx.clearRect(0,0,cv.width,cv.height); parts.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; if(!p.soft) p.vy+=.22; p.life-=p.soft?.012:.02; ctx.globalAlpha=Math.max(p.life,0); ctx.fillStyle=p.c; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,7); ctx.fill(); }); parts=parts.filter(p=>p.life>0 && p.y<cv.height+20); ctx.globalAlpha=1; if(parts.length) raf=requestAnimationFrame(loop); else raf=null; }; raf=requestAnimationFrame(loop); }
+</script>
+</body>
+</html>

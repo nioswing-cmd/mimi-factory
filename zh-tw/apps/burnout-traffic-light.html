@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>倦怠紅綠燈 — 現在你的燈號是什麼顏色？</title>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#141727; --bg2:#20243a;
+  --accent1:#5be48a; --accent2:#37c46e;      
+  --cream:#f3f6ff; --muted:#a7b0cf;
+  --card:#1c2138;
+  --green1:#5be48a; --green2:#37c46e;
+  --yellow1:#ffd764; --yellow2:#f7ad2e;
+  --red1:#ff6b6b; --red2:#e23a4e;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 82% -10%, rgba(91,228,138,.10), transparent 55%),
+    radial-gradient(120% 90% at 8% 112%, rgba(226,58,78,.12), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  min-height:100dvh;
+  transition:background .9s ease;
+}
+.wrap{max-width:520px; margin:0 auto; padding:20px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(100deg,var(--green1),var(--yellow1) 50%,var(--red1));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
+.hidden{display:none !important;}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1.2deg); opacity:.4;}60%{transform:scale(1.02) rotate(.4deg);}100%{transform:scale(1) rotate(0); opacity:1;}}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+.fade{animation:fadeIn .5s ease both;}
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+
+
+.home{flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; gap:18px;}
+.sig-emoji{font-size:64px; line-height:1; animation:floaty 3.4s ease-in-out infinite;}
+.home h1{font-size:34px; margin:6px 0 0;}
+.home .sub{color:var(--muted); font-size:15px; line-height:1.7; }
+.chips{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:4px;}
+.chip{font-size:12.5px; padding:7px 13px; border-radius:99px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); color:var(--muted);}
+.btn{
+  font-family:'Jua',sans-serif; font-size:19px; border:none; cursor:pointer;
+  color:#10131f; padding:17px 20px; border-radius:18px; width:100%;
+  background:linear-gradient(95deg,var(--accent1),var(--accent2));
+  box-shadow:0 10px 26px -8px var(--accent2); transition:transform .15s, box-shadow .4s, background .6s;
+}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:rgba(255,255,255,.07); color:var(--cream); box-shadow:none; border:1px solid rgba(255,255,255,.14);}
+.note{font-size:12px; color:var(--muted); opacity:.8; line-height:1.6;}
+
+
+.topbar{position:sticky; top:0; z-index:5; padding:6px 0 12px; background:linear-gradient(180deg,var(--bg1) 70%,transparent);}
+.tl-row{display:flex; align-items:center; gap:16px;}
+.lights{
+  display:flex; flex-direction:column; gap:9px; padding:11px 10px; border-radius:20px;
+  background:linear-gradient(180deg,#0c0e18,#151827); border:1px solid rgba(255,255,255,.09);
+  box-shadow:inset 0 2px 8px rgba(0,0,0,.5);
+}
+.lamp{width:30px; height:30px; border-radius:50%; background:#2a2f45; position:relative; transition:all .45s cubic-bezier(.34,1.56,.64,1); opacity:.28;}
+.lamp.on{opacity:1;}
+.lamp.red.on{background:radial-gradient(circle at 35% 30%,#ff9a9a,var(--red2)); box-shadow:0 0 20px 3px rgba(255,80,90,.75);}
+.lamp.yellow.on{background:radial-gradient(circle at 35% 30%,#ffe79c,var(--yellow2)); box-shadow:0 0 20px 3px rgba(247,173,46,.7);}
+.lamp.green.on{background:radial-gradient(circle at 35% 30%,#b5f7c9,var(--green2)); box-shadow:0 0 20px 3px rgba(55,196,110,.7);}
+.lamp.pulse{animation:lampPulse 1.4s ease-in-out infinite;}
+@keyframes lampPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
+.tl-meta{flex:1; min-width:0;}
+.tl-label{font-family:'Jua',sans-serif; font-size:20px; margin-bottom:3px; transition:color .5s;}
+.tl-count{font-size:12.5px; color:var(--muted); margin-bottom:9px;}
+.gauge{height:12px; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden; position:relative;}
+.gaugefill{height:100%; width:0%; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  box-shadow:0 0 14px 1px var(--accent2);
+  transition:width .55s cubic-bezier(.22,1,.36,1), box-shadow .6s, background .6s;}
+.ticks{display:flex; justify-content:space-between; font-size:9.5px; color:var(--muted); margin-top:5px; opacity:.7;}
+
+/* ===== 題 ===== */
+.qcard{flex:1; display:flex; flex-direction:column; justify-content:center; padding:8px 2px;}
+.qidx{font-family:'Jua',sans-serif; font-size:14px; color:var(--accent1); transition:color .5s; margin-bottom:8px;}
+.qtext{font-size:22px; line-height:1.5; font-weight:700;  margin-bottom:8px;}
+.qhint{font-size:13px; color:var(--muted); margin-bottom:22px;}
+.opts{display:flex; flex-direction:column; gap:11px;}
+.opt{
+  font-family:'Noto Sans KR',sans-serif; font-size:16.5px; font-weight:500; text-align:left;
+  cursor:pointer; color:var(--cream); padding:16px 18px; border-radius:15px;
+  background:var(--card); border:1.5px solid rgba(255,255,255,.1);
+  display:flex; align-items:center; gap:13px; transition:transform .12s, border-color .2s, background .2s;
+}
+.opt:active{transform:scale(.98);}
+.opt:hover{border-color:var(--accent2);}
+.opt:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+.dot{width:13px; height:13px; border-radius:50%; border:2px solid var(--muted); flex:none;}
+.backline{margin-top:16px; text-align:center;}
+.backline button{background:none; border:none; color:var(--muted); font-size:13px; cursor:pointer; text-decoration:underline; padding:8px;}
+
+
+.result{flex:1; display:flex; flex-direction:column; gap:16px;}
+.rlight{
+  text-align:center; padding:26px 18px; border-radius:24px; position:relative; overflow:hidden;
+  border:1.5px solid rgba(255,255,255,.12);
+}
+.rlight .big{font-size:70px; line-height:1;}
+.rlight h2{font-family:'Jua',sans-serif; font-weight:400; font-size:30px; margin:8px 0 4px;}
+.rlight .pct{font-family:'Jua',sans-serif; font-size:16px; opacity:.9;}
+.rblock{background:var(--card); border:1px solid rgba(255,255,255,.09); border-radius:18px; padding:17px 18px;}
+.rblock h3{font-family:'Jua',sans-serif; font-weight:400; font-size:16px; margin:0 0 7px; display:flex; align-items:center; gap:7px;}
+.rblock p{margin:0; font-size:14.5px; line-height:1.72; color:#e4e8f7; }
+.dims{display:flex; flex-direction:column; gap:12px;}
+.dim{}
+.dim .dhead{display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:6px; color:var(--muted);}
+.dim .dbar{height:10px; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden;}
+.dim .dfill{height:100%; width:0; border-radius:99px; transition:width 1s cubic-bezier(.22,1,.36,1);}
+.ractions{display:flex; flex-direction:column; gap:10px; margin-top:4px;}
+.disclaim{font-size:11.5px; color:var(--muted); opacity:.8; line-height:1.6; text-align:center; padding:0 6px;}
+
+
+.toast{
+  position:fixed; left:50%; top:16px; transform:translateX(-50%) translateY(-20px);
+  background:rgba(28,33,56,.97); border:1.5px solid var(--accent2); color:var(--cream);
+  padding:12px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none;
+  transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; text-align:center;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+
+.footer{text-align:center; margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<canvas id="fx" style="position:fixed; inset:0; pointer-events:none; z-index:55;"></canvas>
+
+<div class="wrap">
+
+  
+  <section id="home" class="home fade">
+    <div class="sig-emoji">🚦</div>
+    <h1>倦怠 <span class="grad">紅綠燈</span></h1>
+    <p class="sub">倦怠不是某天突然崩潰，<br>而是像紅綠燈， <b>綠 → 黃 → 紅</b>一路亮過來。<br>現在你的燈號，是什麼顏色？</p>
+    <div class="chips">
+      <span class="chip">⏱ 1分鐘 · 12題</span>
+      <span class="chip">📊 即時燈號</span>
+      <span class="chip">🔒 不儲存</span>
+    </div>
+    <button class="btn" onclick="start()">看看我的燈號 🚦</button>
+    <p class="note">每答一題，上方的燈號就即時亮起。<br>沒有標準答案，只要對現在的自己誠實就好。</p>
+  </section>
+
+  
+  <section id="quiz" class="hidden">
+    <div class="topbar">
+      <div class="tl-row">
+        <div class="lights">
+          <div class="lamp red" id="lampR"></div>
+          <div class="lamp yellow" id="lampY"></div>
+          <div class="lamp green on" id="lampG"></div>
+        </div>
+        <div class="tl-meta">
+          <div class="tl-label" id="tlLabel">綠燈 · 安全訊號</div>
+          <div class="tl-count" id="tlCount">0 / 12 題</div>
+          <div class="gauge"><div class="gaugefill" id="gfill"></div></div>
+          <div class="ticks"><span>綠</span><span>黃</span><span>紅</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="qcard">
+      <div class="qidx" id="qidx">Q1</div>
+      <div class="qtext" id="qtext">—</div>
+      <div class="qhint">最近 <b>2〜3 週</b>，這種情況出現得有多頻繁？</div>
+      <div class="opts" id="opts"></div>
+      <div class="backline"><button onclick="goBack()" id="backBtn">← 上一題</button></div>
+    </div>
+  </section>
+
+  
+  <section id="result" class="result hidden"></section>
+
+  
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/zh-tw/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 多巴胺實驗室 — 看看其他測驗 →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意義與趣味工廠</span></div>
+    <div class="mf-logo">咪咪工廠 MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL股份有限公司 家族公司</div>
+  </div>
+</div>
+
+<script>
+
+// dim: E 情緒耗竭 / C 冷漠 · 抽離 / A 成就感低落 / B 身體 · 修復
+const DIMS = {
+  E:{name:"情緒耗竭", emo:"🫠", advice:"你現在最需要的，是『沒有目的的真正休息』。允許自己擁有一段什麼都不用做的時間。"},
+  C:{name:"冷漠 · 抽離", emo:"🧱", advice:"把心關起來，是保護自己的防禦。從一個讓你安心的人開始，一點一點重新連結。"},
+  A:{name:"成就感低落", emo:"📉", advice:"別追求大成就，每天數一個小小的『我做到了』。效能感就是這樣一點一點回來的。"},
+  B:{name:"身體 · 修復", emo:"🩺", advice:"倦怠往往是身體先垮。睡眠、喝水、好好吃飯，先把這三個基本找回來最快。"}
+};
+const QUESTIONS = [
+  {d:"E", t:"早上一睜開眼，就想「又要開始新的一天了」，然後已經覺得累。"},
+  {d:"E", t:"一天結束時，連情緒都被掏空，什麼都不想做。"},
+  {d:"E", t:"就算休息了也不覺得有休息到，疲勞一直堆在身上。"},
+  {d:"C", t:"跟人相處越來越覺得麻煩，只剩下應付了事。"},
+  {d:"C", t:"以前很在乎的事，現在覺得「都無所謂了」。"},
+  {d:"C", t:"把心門關上，只做最低限度，硬撐著。"},
+  {d:"A", t:"覺得自己做的事好像沒什麼價值。"},
+  {d:"A", t:"就算完成了什麼，剩下的不是成就感，而是「總算結束了」的鬆一口氣。"},
+  {d:"A", t:"沒辦法像以前那樣專心，出錯或忘東忘西變多了。"},
+  {d:"B", t:"頭痛、消化不良、肩頸僵硬這類身體訊號變多了。"},
+  {d:"B", t:"難以入睡，或睡了也不覺得神清氣爽。"},
+  {d:"B", t:"靠咖啡、甜食、宵夜、喝酒才勉強撐過一天。"}
+];
+const SCALE = [
+  {t:"幾乎沒有", v:0},
+  {t:"偶爾會", v:1},
+  {t:"滿常的", v:2},
+  {t:"幾乎總是", v:3}
+];
+const MAX = QUESTIONS.length * 3; // 36
+
+const LEVELS = {
+  green:{key:"green", emoji:"🟢", name:"綠燈", tag:"順利前進中", a1:"#5be48a", a2:"#37c46e",
+    now:"現在你的能量正在流動。燈號是<b>綠</b>，沒有大問題，跑得很順。",
+    do:"把現在的好習慣（睡眠、保持距離、小小的快樂）繼續守住。倦怠這件事，預防就是最輕鬆的復原。",
+    care:"以為是綠燈就硬撐，黃燈馬上就到。每週一次，問問自己「我最近還好嗎？」。"},
+  yellow:{key:"yellow", emoji:"🟡", name:"黃燈", tag:"該放慢的時候", a1:"#ffd764", a2:"#f7ad2e",
+    now:"身心正在發出<b>「放慢速度」</b>的訊號。還來得及，但現在就是該調整的時機。",
+    do:"把這週可以拿掉的一件事刪掉。然後把恢復時間排進行事曆 — 不是當成『待辦』，而是當成一個<b>約定</b>。",
+    care:"把黃燈當成『還好啦』放過去，就會變紅燈。從最消耗的那一塊先開始照顧。"},
+  red:{key:"red", emoji:"🔴", name:"紅燈", tag:"現在該停下來了", a1:"#ff6b6b", a2:"#e23a4e",
+    now:"你已經撐很久了。這不是因為你意志力不夠，而是<b>身體在告訴你，你跑太久了</b>。",
+    do:"現在能停的就先停下來。而且別自己一個人硬撐，把現在的狀態說出來，告訴你信任的人或專業人士。",
+    care:"紅燈不是要你再忍下去，而是<b>該尋求協助的階段</b>。如果睡眠、食慾、情緒已經難受超過兩週，建議尋求專業諮商。"}
+};
+
+
+let idx=0, answers=[]; // answers[i] = value 0..3
+
+
+function vibrate(ms){ if(navigator.vibrate) try{navigator.vibrate(ms);}catch(e){} }
+let _tt; function toast(m){ const t=document.getElementById('toast'); t.innerHTML=m; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2100); }
+function repop(el){ el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+function show(id){ ['home','quiz','result'].forEach(s=>document.getElementById(s).classList.toggle('hidden', s!==id)); }
+function levelOf(pct){ return pct<34?'green':(pct<67?'yellow':'red'); }
+
+
+let curLevel='green';
+function currentPct(){ // 以目前已回答的題目為基準的累積比例
+  const answered = answers.filter(a=>a!=null);
+  const sum = answered.reduce((s,v)=>s+v,0);
+  const maxSoFar = answered.length*3;
+  return maxSoFar? Math.round(sum/maxSoFar*100) : 0;
+}
+function updateSignal(){
+  const answeredCount = answers.filter(a=>a!=null).length;
+  const pct = currentPct();
+  const lv = answeredCount? levelOf(pct) : 'green';
+  const L = LEVELS[lv];
+
+  const g=document.getElementById('gfill');
+  g.style.width = (answeredCount? pct:0) + '%';
+  document.documentElement.style.setProperty('--accent1', L.a1);
+  document.documentElement.style.setProperty('--accent2', L.a2);
+
+  const R=document.getElementById('lampR'), Y=document.getElementById('lampY'), G=document.getElementById('lampG');
+  [R,Y,G].forEach(x=>x.classList.remove('on','pulse'));
+  if(lv==='green'){ G.classList.add('on','pulse'); }
+  else if(lv==='yellow'){ Y.classList.add('on','pulse'); }
+  else { R.classList.add('on','pulse'); }
+
+  const lab=document.getElementById('tlLabel');
+  lab.innerHTML = L.emoji+' '+L.name+' · '+L.tag;
+  lab.style.color = L.a1;
+  document.getElementById('tlCount').textContent = answeredCount+' / '+QUESTIONS.length+' 題';
+
+  if(answeredCount>0 && lv!==curLevel){
+    if(lv==='yellow'){ toast('🟡 燈號變成黃燈了'); vibrate([20,40,20]); }
+    else if(lv==='red'){ toast('🔴 紅燈 — 身體發出的求救訊號'); vibrate([30,50,30]); }
+    else if(lv==='green' && curLevel!=='green'){ toast('🟢 回到綠燈了'); }
+    repop(lab);
+  }
+  curLevel = lv;
+}
+
+
+function start(){ idx=0; answers=new Array(QUESTIONS.length).fill(null); show('quiz'); curLevel='green'; render(); }
+function render(){
+  const q=QUESTIONS[idx];
+  document.getElementById('qidx').textContent = 'Q'+(idx+1);
+  const qt=document.getElementById('qtext'); qt.textContent=q.t; repop(qt);
+  const box=document.getElementById('opts'); box.innerHTML='';
+  SCALE.forEach(s=>{
+    const b=document.createElement('button');
+    b.className='opt'; b.type='button';
+    b.innerHTML='<span class="dot"></span>'+s.t;
+    if(answers[idx]===s.v){ b.style.borderColor='var(--accent2)'; b.querySelector('.dot').style.background='var(--accent2)'; b.querySelector('.dot').style.borderColor='var(--accent2)'; }
+    b.onclick=(e)=>choose(s.v, e);
+    box.appendChild(b);
+  });
+  document.getElementById('backBtn').style.visibility = idx===0? 'hidden':'visible';
+  document.getElementById('qidx').style.color='var(--accent1)';
+  updateSignal();
+}
+function choose(v, e){
+  answers[idx]=v;
+  vibrate(24);
+  burst(e);
+  updateSignal();
+  setTimeout(()=>{
+    if(idx < QUESTIONS.length-1){ idx++; render(); }
+    else finish();
+  }, 300);
+}
+function goBack(){ if(idx>0){ idx--; render(); } }
+
+
+function finish(){
+  const total = answers.reduce((s,v)=>s+v,0);
+  const pct = Math.round(total/MAX*100);
+  const lv = levelOf(pct);
+  const L = LEVELS[lv];
+
+  const dimScore={E:0,C:0,A:0,B:0}, dimCount={E:0,C:0,A:0,B:0};
+  QUESTIONS.forEach((q,i)=>{ dimScore[q.d]+=answers[i]; dimCount[q.d]++; });
+  const dimPct={}; Object.keys(dimScore).forEach(k=>dimPct[k]=Math.round(dimScore[k]/(dimCount[k]*3)*100));
+  const topDim = Object.keys(dimPct).sort((a,b)=>dimPct[b]-dimPct[a])[0];
+
+  document.documentElement.style.setProperty('--accent1', L.a1);
+  document.documentElement.style.setProperty('--accent2', L.a2);
+
+  const dimBars = Object.keys(DIMS).map(k=>{
+    const p=dimPct[k]; const dl=levelOf(p); const c=LEVELS[dl];
+    return `<div class="dim">
+      <div class="dhead"><span>${DIMS[k].emo} ${DIMS[k].name}</span><span>${p}%</span></div>
+      <div class="dbar"><div class="dfill" data-w="${p}" style="background:linear-gradient(90deg,${c.a1},${c.a2});"></div></div>
+    </div>`;
+  }).join('');
+
+  const topInfo = (lv==='green')
+    ? `訊號最強烈的領域是 <b>${DIMS[topDim].name}</b>。雖然還是綠燈，只要稍微顧好這一塊，就能健康得長久。`
+    : `最消耗的領域是 <b>${DIMS[topDim].emo} ${DIMS[topDim].name}</b>。 ${DIMS[topDim].advice}`;
+
+  const bg = lv==='green'
+    ? 'radial-gradient(120% 120% at 50% 0%, rgba(91,228,138,.22), rgba(28,33,56,.4))'
+    : lv==='yellow'
+    ? 'radial-gradient(120% 120% at 50% 0%, rgba(247,173,46,.22), rgba(28,33,56,.4))'
+    : 'radial-gradient(120% 120% at 50% 0%, rgba(226,58,78,.24), rgba(28,33,56,.4))';
+
+  document.getElementById('result').innerHTML = `
+    <div class="rlight fade" style="background:${bg}; border-color:${L.a2}55;">
+      <div class="big">${L.emoji}</div>
+      <h2 style="color:${L.a1}">${L.name} · ${L.tag}</h2>
+      <div class="pct">倦怠指數 ${pct}分 / 100</div>
+    </div>
+    <div class="rblock fade"><h3>🔎 現在的你</h3><p>${L.now}</p></div>
+    <div class="rblock fade"><h3>📊 各領域的燈號</h3><div class="dims">${dimBars}</div>
+      <p style="margin-top:13px; font-size:13.5px; color:var(--muted);">${topInfo}</p></div>
+    <div class="rblock fade"><h3>✅ 試著這樣做</h3><p>${L.do}</p></div>
+    <div class="rblock fade"><h3>⚠️ 要注意的地方</h3><p>${L.care}</p></div>
+    <div class="ractions">
+      <button class="btn" onclick="shareResult('${L.name}',${pct})">分享結果 📤</button>
+      <button class="btn ghost" onclick="restart()">重新測一次 🔄</button>
+    </div>
+    <p class="disclaim">這個測驗不是醫學診斷，而是幫你回頭看看自己的自我檢視工具。<br>2週以上一直很難受的話，請尋求專業協助。心理健康諮詢專線 ☎ 1577-0199</p>
+  `;
+  show('result');
+
+  requestAnimationFrame(()=>setTimeout(()=>{
+    document.querySelectorAll('.dfill').forEach(el=>el.style.width=el.dataset.w+'%');
+  },120));
+
+  vibrate([60,80,60]);
+  if(lv==='green'){ toast('🟢 現在是健康的綠燈！'); cannon(L.a1,L.a2); setTimeout(()=>cannon(L.a1,L.a2),260); }
+  else if(lv==='yellow'){ toast('🟡 光是察覺，就已經復原一半了'); cannon(L.a1,L.a2); }
+  else { toast('🔴 撐到現在的你，真的辛苦了'); softGlow(); }
+}
+function restart(){ show('home'); document.documentElement.style.setProperty('--accent1','#5be48a'); document.documentElement.style.setProperty('--accent2','#37c46e'); }
+
+function shareResult(name, pct){
+  const url='https://mimifactory.vibekr.com/zh-tw/apps/burnout-traffic-light.html';
+  const text=`🚦 倦怠紅綠燈結果: ${name} (指數 ${pct}分)\n現在你的燈號是什麼顏色？你也來測測看 👉`;
+  if(navigator.share){ navigator.share({title:'倦怠紅綠燈', text, url}).catch(()=>{}); }
+  else{
+    const t=text+'\n'+url;
+    if(navigator.clipboard){ navigator.clipboard.writeText(t).then(()=>toast('📋 結果複製好了！')).catch(()=>toast(t)); }
+    else toast('👉 '+url);
+  }
+}
+
+
+const cv=document.getElementById('fx'); const ctx=cv.getContext('2d');
+let parts=[]; function fitCanvas(){ cv.width=innerWidth; cv.height=innerHeight; } fitCanvas(); addEventListener('resize',fitCanvas);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function burst(e){ // 在點擊位置放小煙火
+  if(reduce||!e) return;
+  const x=e.clientX||innerWidth/2, y=e.clientY||innerHeight/2;
+  const cs=getComputedStyle(document.documentElement);
+  const c1=cs.getPropertyValue('--accent1').trim(), c2=cs.getPropertyValue('--accent2').trim();
+  for(let i=0;i<16;i++){ parts.push({x,y,vx:(Math.random()-.5)*6,vy:(Math.random()-.7)*6-2,r:Math.random()*3+2,c:Math.random()<.5?c1:c2,life:1}); }
+  run();
+}
+function cannon(c1,c2){
+  if(reduce) return;
+  for(let i=0;i<90;i++){ parts.push({x:innerWidth/2,y:innerHeight*.4,vx:(Math.random()-.5)*13,vy:(Math.random()-.5)*13-3,r:Math.random()*4+2,c:Math.random()<.5?c1:c2,life:1}); }
+  run();
+}
+function softGlow(){ // 紅燈時呈現安靜的關懷效果
+  if(reduce) return;
+  for(let i=0;i<40;i++){ parts.push({x:Math.random()*innerWidth,y:innerHeight+10,vx:(Math.random()-.5)*.6,vy:-(Math.random()*1.5+.6),r:Math.random()*2.5+1.5,c:'#ff9aa5',life:1,soft:true}); }
+  run();
+}
+let raf=null;
+function run(){ if(raf) return; const loop=()=>{ ctx.clearRect(0,0,cv.width,cv.height); parts.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; if(!p.soft) p.vy+=.22; p.life-=p.soft?.012:.02; ctx.globalAlpha=Math.max(p.life,0); ctx.fillStyle=p.c; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,7); ctx.fill(); }); parts=parts.filter(p=>p.life>0 && p.y<cv.height+20); ctx.globalAlpha=1; if(parts.length) raf=requestAnimationFrame(loop); else raf=null; }; raf=requestAnimationFrame(loop); }
+</script>
+</body>
+</html>

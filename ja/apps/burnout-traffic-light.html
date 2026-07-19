@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>バーンアウト信号機 — いま、あなたの信号は何色？</title>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansJP-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/MPLUSRounded1c-Bold-sub.woff2') format('woff2');font-weight:400;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#141727; --bg2:#20243a;
+  --accent1:#5be48a; --accent2:#37c46e;      
+  --cream:#f3f6ff; --muted:#a7b0cf;
+  --card:#1c2138;
+  --green1:#5be48a; --green2:#37c46e;
+  --yellow1:#ffd764; --yellow2:#f7ad2e;
+  --red1:#ff6b6b; --red2:#e23a4e;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 82% -10%, rgba(91,228,138,.10), transparent 55%),
+    radial-gradient(120% 90% at 8% 112%, rgba(226,58,78,.12), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  min-height:100dvh;
+  transition:background .9s ease;
+}
+.wrap{max-width:520px; margin:0 auto; padding:20px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(100deg,var(--green1),var(--yellow1) 50%,var(--red1));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
+.hidden{display:none !important;}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1.2deg); opacity:.4;}60%{transform:scale(1.02) rotate(.4deg);}100%{transform:scale(1) rotate(0); opacity:1;}}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+.fade{animation:fadeIn .5s ease both;}
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+
+
+.home{flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; gap:18px;}
+.sig-emoji{font-size:64px; line-height:1; animation:floaty 3.4s ease-in-out infinite;}
+.home h1{font-size:34px; margin:6px 0 0;}
+.home .sub{color:var(--muted); font-size:15px; line-height:1.7; }
+.chips{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:4px;}
+.chip{font-size:12.5px; padding:7px 13px; border-radius:99px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); color:var(--muted);}
+.btn{
+  font-family:'Jua',sans-serif; font-size:19px; border:none; cursor:pointer;
+  color:#10131f; padding:17px 20px; border-radius:18px; width:100%;
+  background:linear-gradient(95deg,var(--accent1),var(--accent2));
+  box-shadow:0 10px 26px -8px var(--accent2); transition:transform .15s, box-shadow .4s, background .6s;
+}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:rgba(255,255,255,.07); color:var(--cream); box-shadow:none; border:1px solid rgba(255,255,255,.14);}
+.note{font-size:12px; color:var(--muted); opacity:.8; line-height:1.6;}
+
+
+.topbar{position:sticky; top:0; z-index:5; padding:6px 0 12px; background:linear-gradient(180deg,var(--bg1) 70%,transparent);}
+.tl-row{display:flex; align-items:center; gap:16px;}
+.lights{
+  display:flex; flex-direction:column; gap:9px; padding:11px 10px; border-radius:20px;
+  background:linear-gradient(180deg,#0c0e18,#151827); border:1px solid rgba(255,255,255,.09);
+  box-shadow:inset 0 2px 8px rgba(0,0,0,.5);
+}
+.lamp{width:30px; height:30px; border-radius:50%; background:#2a2f45; position:relative; transition:all .45s cubic-bezier(.34,1.56,.64,1); opacity:.28;}
+.lamp.on{opacity:1;}
+.lamp.red.on{background:radial-gradient(circle at 35% 30%,#ff9a9a,var(--red2)); box-shadow:0 0 20px 3px rgba(255,80,90,.75);}
+.lamp.yellow.on{background:radial-gradient(circle at 35% 30%,#ffe79c,var(--yellow2)); box-shadow:0 0 20px 3px rgba(247,173,46,.7);}
+.lamp.green.on{background:radial-gradient(circle at 35% 30%,#b5f7c9,var(--green2)); box-shadow:0 0 20px 3px rgba(55,196,110,.7);}
+.lamp.pulse{animation:lampPulse 1.4s ease-in-out infinite;}
+@keyframes lampPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
+.tl-meta{flex:1; min-width:0;}
+.tl-label{font-family:'Jua',sans-serif; font-size:20px; margin-bottom:3px; transition:color .5s;}
+.tl-count{font-size:12.5px; color:var(--muted); margin-bottom:9px;}
+.gauge{height:12px; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden; position:relative;}
+.gaugefill{height:100%; width:0%; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  box-shadow:0 0 14px 1px var(--accent2);
+  transition:width .55s cubic-bezier(.22,1,.36,1), box-shadow .6s, background .6s;}
+.ticks{display:flex; justify-content:space-between; font-size:9.5px; color:var(--muted); margin-top:5px; opacity:.7;}
+
+/* ===== 問 ===== */
+.qcard{flex:1; display:flex; flex-direction:column; justify-content:center; padding:8px 2px;}
+.qidx{font-family:'Jua',sans-serif; font-size:14px; color:var(--accent1); transition:color .5s; margin-bottom:8px;}
+.qtext{font-size:22px; line-height:1.5; font-weight:700;  margin-bottom:8px;}
+.qhint{font-size:13px; color:var(--muted); margin-bottom:22px;}
+.opts{display:flex; flex-direction:column; gap:11px;}
+.opt{
+  font-family:'Noto Sans KR',sans-serif; font-size:16.5px; font-weight:500; text-align:left;
+  cursor:pointer; color:var(--cream); padding:16px 18px; border-radius:15px;
+  background:var(--card); border:1.5px solid rgba(255,255,255,.1);
+  display:flex; align-items:center; gap:13px; transition:transform .12s, border-color .2s, background .2s;
+}
+.opt:active{transform:scale(.98);}
+.opt:hover{border-color:var(--accent2);}
+.opt:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+.dot{width:13px; height:13px; border-radius:50%; border:2px solid var(--muted); flex:none;}
+.backline{margin-top:16px; text-align:center;}
+.backline button{background:none; border:none; color:var(--muted); font-size:13px; cursor:pointer; text-decoration:underline; padding:8px;}
+
+
+.result{flex:1; display:flex; flex-direction:column; gap:16px;}
+.rlight{
+  text-align:center; padding:26px 18px; border-radius:24px; position:relative; overflow:hidden;
+  border:1.5px solid rgba(255,255,255,.12);
+}
+.rlight .big{font-size:70px; line-height:1;}
+.rlight h2{font-family:'Jua',sans-serif; font-weight:400; font-size:30px; margin:8px 0 4px;}
+.rlight .pct{font-family:'Jua',sans-serif; font-size:16px; opacity:.9;}
+.rblock{background:var(--card); border:1px solid rgba(255,255,255,.09); border-radius:18px; padding:17px 18px;}
+.rblock h3{font-family:'Jua',sans-serif; font-weight:400; font-size:16px; margin:0 0 7px; display:flex; align-items:center; gap:7px;}
+.rblock p{margin:0; font-size:14.5px; line-height:1.72; color:#e4e8f7; }
+.dims{display:flex; flex-direction:column; gap:12px;}
+.dim{}
+.dim .dhead{display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:6px; color:var(--muted);}
+.dim .dbar{height:10px; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden;}
+.dim .dfill{height:100%; width:0; border-radius:99px; transition:width 1s cubic-bezier(.22,1,.36,1);}
+.ractions{display:flex; flex-direction:column; gap:10px; margin-top:4px;}
+.disclaim{font-size:11.5px; color:var(--muted); opacity:.8; line-height:1.6; text-align:center; padding:0 6px;}
+
+
+.toast{
+  position:fixed; left:50%; top:16px; transform:translateX(-50%) translateY(-20px);
+  background:rgba(28,33,56,.97); border:1.5px solid var(--accent2); color:var(--cream);
+  padding:12px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none;
+  transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; text-align:center;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+
+.footer{text-align:center; margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<canvas id="fx" style="position:fixed; inset:0; pointer-events:none; z-index:55;"></canvas>
+
+<div class="wrap">
+
+  
+  <section id="home" class="home fade">
+    <div class="sig-emoji">🚦</div>
+    <h1>バーンアウト <span class="grad">信号機</span></h1>
+    <p class="sub">バーンアウトはある日突然崩れるのではなく、<br>信号のように <b>緑 → 黄 → 赤</b>の順にやってきます。<br>いまのあなたの信号は、何色でしょう？</p>
+    <div class="chips">
+      <span class="chip">⏱ 1分 · 12問</span>
+      <span class="chip">📊 リアルタイム信号機</span>
+      <span class="chip">🔒 保存なし</span>
+    </div>
+    <button class="btn" onclick="start()">私の信号をチェック 🚦</button>
+    <p class="note">答えるたびに、上の信号機がリアルタイムで点きます。<br>正解はありません。いまの自分に正直に。</p>
+  </section>
+
+  
+  <section id="quiz" class="hidden">
+    <div class="topbar">
+      <div class="tl-row">
+        <div class="lights">
+          <div class="lamp red" id="lampR"></div>
+          <div class="lamp yellow" id="lampY"></div>
+          <div class="lamp green on" id="lampG"></div>
+        </div>
+        <div class="tl-meta">
+          <div class="tl-label" id="tlLabel">緑信号 · 安全サイン</div>
+          <div class="tl-count" id="tlCount">0 / 12 問</div>
+          <div class="gauge"><div class="gaugefill" id="gfill"></div></div>
+          <div class="ticks"><span>緑</span><span>黄</span><span>赤</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="qcard">
+      <div class="qidx" id="qidx">Q1</div>
+      <div class="qtext" id="qtext">—</div>
+      <div class="qhint">最近の <b>2〜3週間</b>を思い返すと、これはどのくらいの頻度でしたか？</div>
+      <div class="opts" id="opts"></div>
+      <div class="backline"><button onclick="goBack()" id="backBtn">← 前の問題</button></div>
+    </div>
+  </section>
+
+  
+  <section id="result" class="result hidden"></section>
+
+  
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/ja/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 ドーパミン実験室 — ほかのテストを見る →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意味と面白さの工場</span></div>
+    <div class="mf-logo">ミミファクトリー</div>
+    <div class="mf-caption">株式会社ヨンギョル ファミリーカンパニー</div>
+  </div>
+</div>
+
+<script>
+
+// dim: E 情緒的な消耗 / C 冷笑 · 距離を置く / A 達成感の低下 / B からだ · 回復
+const DIMS = {
+  E:{name:"情緒的な消耗", emo:"🫠", advice:"いま一番必要なのは「目的のない、本当の休み」です。何もしなくていい時間を、自分に許してあげてください。"},
+  C:{name:"冷笑 · 距離を置く", emo:"🧱", advice:"心を閉じるのは、自分を守るための防御です。安心できる一人とのつながりから、少しずつ取り戻していきましょう。"},
+  A:{name:"達成感の低下", emo:"📉", advice:"大きな成果ではなく、小さな「できた」を毎日ひとつずつ数えてみてください。効力感は、そうやって戻ってきます。"},
+  B:{name:"からだ · 回復", emo:"🩺", advice:"バーンアウトは、からだから先に崩れます。睡眠・水分・食事、この基本の三つから戻すのが一番の近道です。"}
+};
+const QUESTIONS = [
+  {d:"E", t:"朝、目を覚ますと「また一日が始まるのか」と、もう疲れている。"},
+  {d:"E", t:"一日が終わると感情まで空っぽになって、何もしたくない。"},
+  {d:"E", t:"休んでも休んだ気がせず、疲れがずっと体にたまっている。"},
+  {d:"C", t:"人と関わるのがだんだん面倒になり、形だけの対応になってしまう。"},
+  {d:"C", t:"以前は大切だったことが、いまは「どうでもいい」と思えてくる。"},
+  {d:"C", t:"心の扉を閉じて、必要最低限だけをこなして耐えている。"},
+  {d:"A", t:"自分のしていることに、たいした価値がないように感じる。"},
+  {d:"A", t:"何かをやり遂げても、達成感より「やっと終わった」という安堵しか残らない。"},
+  {d:"A", t:"以前ほど集中できず、ミスや物忘れが増えた。"},
+  {d:"B", t:"頭痛・胃もたれ・肩こりのような、からだのサインが増えた。"},
+  {d:"B", t:"寝つきが悪かったり、寝てもすっきりしない。"},
+  {d:"B", t:"コーヒー・甘いもの・夜食・お酒でなんとか一日を乗り切っている。"}
+];
+const SCALE = [
+  {t:"ほとんどなかった", v:0},
+  {t:"たまにあった", v:1},
+  {t:"けっこう頻繁に", v:2},
+  {t:"ほぼいつも", v:3}
+];
+const MAX = QUESTIONS.length * 3; // 36
+
+const LEVELS = {
+  green:{key:"green", emoji:"🟢", name:"緑信号", tag:"うまく乗り切れている", a1:"#5be48a", a2:"#37c46e",
+    now:"いまはエネルギーが巡っています。信号は<b>緑</b>。大きな問題なく、順調に走れている状態です。",
+    do:"いまの良い習慣（睡眠・距離のとり方・小さな喜び）をそのまま守ってください。バーンアウトは、予防が一番かんたんな回復です。",
+    care:"緑だからと無理をすれば、黄はあっという間です。週に一度「最近、私はどう？」と自分に聞いてあげてください。"},
+  yellow:{key:"yellow", emoji:"🟡", name:"黄信号", tag:"スピードを落とすとき", a1:"#ffd764", a2:"#f7ad2e",
+    now:"からだと心が<b>「スピードを落として」</b>という信号を送っています。まだ遅くはありませんが、いまが手を打つタイミングです。",
+    do:"今週、減らせる用事をひとつ消してください。そして回復の時間を「やるべきこと」ではなく<b>約束</b>としてカレンダーに入れましょう。",
+    care:"黄を「まだ大丈夫」と見過ごすと、赤に進みます。いちばん消耗している領域から、先にケアしてください。"},
+  red:{key:"red", emoji:"🔴", name:"赤信号", tag:"いま止まるべきとき", a1:"#ff6b6b", a2:"#e23a4e",
+    now:"もう長いあいだ耐えてきました。これは意志が弱いからではなく、<b>走りすぎたというからだの信号</b>です。",
+    do:"いま止められることを止めてください。そして一人で抱え込まず、信頼できる人や専門家に、いまの状態を言葉にして伝えてみてください。",
+    care:"赤は、もっと我慢する段階ではなく、<b>助けを受ける段階</b>です。睡眠・食事・気分のつらさが2週間以上続くなら、専門家への相談をおすすめします。"}
+};
+
+
+let idx=0, answers=[]; // answers[i] = value 0..3
+
+
+function vibrate(ms){ if(navigator.vibrate) try{navigator.vibrate(ms);}catch(e){} }
+let _tt; function toast(m){ const t=document.getElementById('toast'); t.innerHTML=m; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2100); }
+function repop(el){ el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+function show(id){ ['home','quiz','result'].forEach(s=>document.getElementById(s).classList.toggle('hidden', s!==id)); }
+function levelOf(pct){ return pct<34?'green':(pct<67?'yellow':'red'); }
+
+
+let curLevel='green';
+function currentPct(){ // これまで答えた問題を基準にした累積の割合
+  const answered = answers.filter(a=>a!=null);
+  const sum = answered.reduce((s,v)=>s+v,0);
+  const maxSoFar = answered.length*3;
+  return maxSoFar? Math.round(sum/maxSoFar*100) : 0;
+}
+function updateSignal(){
+  const answeredCount = answers.filter(a=>a!=null).length;
+  const pct = currentPct();
+  const lv = answeredCount? levelOf(pct) : 'green';
+  const L = LEVELS[lv];
+
+  const g=document.getElementById('gfill');
+  g.style.width = (answeredCount? pct:0) + '%';
+  document.documentElement.style.setProperty('--accent1', L.a1);
+  document.documentElement.style.setProperty('--accent2', L.a2);
+
+  const R=document.getElementById('lampR'), Y=document.getElementById('lampY'), G=document.getElementById('lampG');
+  [R,Y,G].forEach(x=>x.classList.remove('on','pulse'));
+  if(lv==='green'){ G.classList.add('on','pulse'); }
+  else if(lv==='yellow'){ Y.classList.add('on','pulse'); }
+  else { R.classList.add('on','pulse'); }
+
+  const lab=document.getElementById('tlLabel');
+  lab.innerHTML = L.emoji+' '+L.name+' · '+L.tag;
+  lab.style.color = L.a1;
+  document.getElementById('tlCount').textContent = answeredCount+' / '+QUESTIONS.length+' 問';
+
+  if(answeredCount>0 && lv!==curLevel){
+    if(lv==='yellow'){ toast('🟡 信号が黄に変わりました'); vibrate([20,40,20]); }
+    else if(lv==='red'){ toast('🔴 赤信号 — からだが出すSOS'); vibrate([30,50,30]); }
+    else if(lv==='green' && curLevel!=='green'){ toast('🟢 緑に戻りました'); }
+    repop(lab);
+  }
+  curLevel = lv;
+}
+
+
+function start(){ idx=0; answers=new Array(QUESTIONS.length).fill(null); show('quiz'); curLevel='green'; render(); }
+function render(){
+  const q=QUESTIONS[idx];
+  document.getElementById('qidx').textContent = 'Q'+(idx+1);
+  const qt=document.getElementById('qtext'); qt.textContent=q.t; repop(qt);
+  const box=document.getElementById('opts'); box.innerHTML='';
+  SCALE.forEach(s=>{
+    const b=document.createElement('button');
+    b.className='opt'; b.type='button';
+    b.innerHTML='<span class="dot"></span>'+s.t;
+    if(answers[idx]===s.v){ b.style.borderColor='var(--accent2)'; b.querySelector('.dot').style.background='var(--accent2)'; b.querySelector('.dot').style.borderColor='var(--accent2)'; }
+    b.onclick=(e)=>choose(s.v, e);
+    box.appendChild(b);
+  });
+  document.getElementById('backBtn').style.visibility = idx===0? 'hidden':'visible';
+  document.getElementById('qidx').style.color='var(--accent1)';
+  updateSignal();
+}
+function choose(v, e){
+  answers[idx]=v;
+  vibrate(24);
+  burst(e);
+  updateSignal();
+  setTimeout(()=>{
+    if(idx < QUESTIONS.length-1){ idx++; render(); }
+    else finish();
+  }, 300);
+}
+function goBack(){ if(idx>0){ idx--; render(); } }
+
+
+function finish(){
+  const total = answers.reduce((s,v)=>s+v,0);
+  const pct = Math.round(total/MAX*100);
+  const lv = levelOf(pct);
+  const L = LEVELS[lv];
+
+  const dimScore={E:0,C:0,A:0,B:0}, dimCount={E:0,C:0,A:0,B:0};
+  QUESTIONS.forEach((q,i)=>{ dimScore[q.d]+=answers[i]; dimCount[q.d]++; });
+  const dimPct={}; Object.keys(dimScore).forEach(k=>dimPct[k]=Math.round(dimScore[k]/(dimCount[k]*3)*100));
+  const topDim = Object.keys(dimPct).sort((a,b)=>dimPct[b]-dimPct[a])[0];
+
+  document.documentElement.style.setProperty('--accent1', L.a1);
+  document.documentElement.style.setProperty('--accent2', L.a2);
+
+  const dimBars = Object.keys(DIMS).map(k=>{
+    const p=dimPct[k]; const dl=levelOf(p); const c=LEVELS[dl];
+    return `<div class="dim">
+      <div class="dhead"><span>${DIMS[k].emo} ${DIMS[k].name}</span><span>${p}%</span></div>
+      <div class="dbar"><div class="dfill" data-w="${p}" style="background:linear-gradient(90deg,${c.a1},${c.a2});"></div></div>
+    </div>`;
+  }).join('');
+
+  const topInfo = (lv==='green')
+    ? `いちばん信号が強い領域は <b>${DIMS[topDim].name}</b>です。まだ緑ですが、この領域だけ少し気にかけておけば、長く健康でいられます。`
+    : `いちばん消耗している領域は <b>${DIMS[topDim].emo} ${DIMS[topDim].name}</b>です。 ${DIMS[topDim].advice}`;
+
+  const bg = lv==='green'
+    ? 'radial-gradient(120% 120% at 50% 0%, rgba(91,228,138,.22), rgba(28,33,56,.4))'
+    : lv==='yellow'
+    ? 'radial-gradient(120% 120% at 50% 0%, rgba(247,173,46,.22), rgba(28,33,56,.4))'
+    : 'radial-gradient(120% 120% at 50% 0%, rgba(226,58,78,.24), rgba(28,33,56,.4))';
+
+  document.getElementById('result').innerHTML = `
+    <div class="rlight fade" style="background:${bg}; border-color:${L.a2}55;">
+      <div class="big">${L.emoji}</div>
+      <h2 style="color:${L.a1}">${L.name} · ${L.tag}</h2>
+      <div class="pct">バーンアウト指数 ${pct}点 / 100</div>
+    </div>
+    <div class="rblock fade"><h3>🔎 いまのあなたは</h3><p>${L.now}</p></div>
+    <div class="rblock fade"><h3>📊 領域別の信号</h3><div class="dims">${dimBars}</div>
+      <p style="margin-top:13px; font-size:13.5px; color:var(--muted);">${topInfo}</p></div>
+    <div class="rblock fade"><h3>✅ こうしてみましょう</h3><p>${L.do}</p></div>
+    <div class="rblock fade"><h3>⚠️ 気をつけたいこと</h3><p>${L.care}</p></div>
+    <div class="ractions">
+      <button class="btn" onclick="shareResult('${L.name}',${pct})">結果をシェア 📤</button>
+      <button class="btn ghost" onclick="restart()">もう一度診断する 🔄</button>
+    </div>
+    <p class="disclaim">このテストは医学的な診断ではなく、自分を振り返るためのセルフチェックです。<br>2週間以上つらい状態が続くなら、専門家の力を借りてください。こころの健康相談ダイヤル ☎ 1577-0199</p>
+  `;
+  show('result');
+
+  requestAnimationFrame(()=>setTimeout(()=>{
+    document.querySelectorAll('.dfill').forEach(el=>el.style.width=el.dataset.w+'%');
+  },120));
+
+  vibrate([60,80,60]);
+  if(lv==='green'){ toast('🟢 いまは健康な緑信号！'); cannon(L.a1,L.a2); setTimeout(()=>cannon(L.a1,L.a2),260); }
+  else if(lv==='yellow'){ toast('🟡 気づけたこと自体が、もう半分の回復です'); cannon(L.a1,L.a2); }
+  else { toast('🔴 ここまで耐えてきたあなた、本当によく頑張りました'); softGlow(); }
+}
+function restart(){ show('home'); document.documentElement.style.setProperty('--accent1','#5be48a'); document.documentElement.style.setProperty('--accent2','#37c46e'); }
+
+function shareResult(name, pct){
+  const url='https://mimifactory.vibekr.com/ja/apps/burnout-traffic-light.html';
+  const text=`🚦 バーンアウト信号機の結果: ${name} (指数 ${pct}点)\nいまの私の信号は何色？あなたもチェック 👉`;
+  if(navigator.share){ navigator.share({title:'バーンアウト信号機', text, url}).catch(()=>{}); }
+  else{
+    const t=text+'\n'+url;
+    if(navigator.clipboard){ navigator.clipboard.writeText(t).then(()=>toast('📋 結果をコピーしました！')).catch(()=>toast(t)); }
+    else toast('👉 '+url);
+  }
+}
+
+
+const cv=document.getElementById('fx'); const ctx=cv.getContext('2d');
+let parts=[]; function fitCanvas(){ cv.width=innerWidth; cv.height=innerHeight; } fitCanvas(); addEventListener('resize',fitCanvas);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function burst(e){ // クリック位置に小さな花火
+  if(reduce||!e) return;
+  const x=e.clientX||innerWidth/2, y=e.clientY||innerHeight/2;
+  const cs=getComputedStyle(document.documentElement);
+  const c1=cs.getPropertyValue('--accent1').trim(), c2=cs.getPropertyValue('--accent2').trim();
+  for(let i=0;i<16;i++){ parts.push({x,y,vx:(Math.random()-.5)*6,vy:(Math.random()-.7)*6-2,r:Math.random()*3+2,c:Math.random()<.5?c1:c2,life:1}); }
+  run();
+}
+function cannon(c1,c2){
+  if(reduce) return;
+  for(let i=0;i<90;i++){ parts.push({x:innerWidth/2,y:innerHeight*.4,vx:(Math.random()-.5)*13,vy:(Math.random()-.5)*13-3,r:Math.random()*4+2,c:Math.random()<.5?c1:c2,life:1}); }
+  run();
+}
+function softGlow(){ // 赤のときは静かなケアの演出
+  if(reduce) return;
+  for(let i=0;i<40;i++){ parts.push({x:Math.random()*innerWidth,y:innerHeight+10,vx:(Math.random()-.5)*.6,vy:-(Math.random()*1.5+.6),r:Math.random()*2.5+1.5,c:'#ff9aa5',life:1,soft:true}); }
+  run();
+}
+let raf=null;
+function run(){ if(raf) return; const loop=()=>{ ctx.clearRect(0,0,cv.width,cv.height); parts.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; if(!p.soft) p.vy+=.22; p.life-=p.soft?.012:.02; ctx.globalAlpha=Math.max(p.life,0); ctx.fillStyle=p.c; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,7); ctx.fill(); }); parts=parts.filter(p=>p.life>0 && p.y<cv.height+20); ctx.globalAlpha=1; if(parts.length) raf=requestAnimationFrame(loop); else raf=null; }; raf=requestAnimationFrame(loop); }
+</script>
+</body>
+</html>

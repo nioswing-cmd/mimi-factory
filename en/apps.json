@@ -155,6 +155,18 @@
    "teaser": "apps/multiple-intelligences.html",
    "premium": "apps/multiple-intelligences.html",
    "desc": "One IQ score can’t sum you up — map your 8 intelligences with Gardner."
+  },
+  {
+   "id": "burnout-traffic-light",
+   "type": "test",
+   "title": "Burnout Traffic Light",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/burnout-traffic-light.html",
+   "premium": "apps/burnout-traffic-light.html",
+   "desc": "What color is your signal right now? A 12-question self-check for burnout."
   }
  ],
  "updated": "2026-07-19"
