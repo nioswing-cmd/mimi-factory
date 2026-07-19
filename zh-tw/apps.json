@@ -1,0 +1,17 @@
+{
+ "apps": [
+  {
+   "id": "tarot",
+   "type": "test",
+   "title": "塔羅心理卡",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-11",
+   "color1": "#f4c66f",
+   "color2": "#93a8ff",
+   "teaser": "apps/tarot.html",
+   "premium": "apps/tarot.html",
+   "desc": "抽的不是命運，是問題 — 22張象徵變成心理學的鏡子"
+  }
+ ],
+ "updated": "2026-07-20"
+}

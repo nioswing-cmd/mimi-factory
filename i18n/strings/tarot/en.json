@@ -1,5 +1,8 @@
 {
- "_meta": { "lang": "en", "note": "BuzzFeed quiz tone · curly apostrophes only · glossary locked" },
+ "_meta": {
+  "lang": "en",
+  "note": "BuzzFeed quiz tone · curly apostrophes only · glossary locked"
+ },
  "title_001": "Tarot Mind Cards — Dopamine Lab",
  "meta_001": "Tarot Mind Cards — 3 cards that mirror your mind today",
  "meta_002": "You don’t draw fortunes here — you draw questions. 22 ancient symbols, one honest mirror. Pick your 3.",
@@ -148,5 +151,11 @@
  "js_106": "Press and hold to copy",
  "manual_001": "bond",
  "manual_002": "work",
- "manual_003": "today"
+ "manual_003": "today",
+ "_app": {
+  "id": "타로_심리카드",
+  "file": "tarot",
+  "title": "Tarot Mind Cards",
+  "desc": "Not fortunes — questions. 22 symbols, one honest mirror."
+ }
 }

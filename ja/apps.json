@@ -1,0 +1,17 @@
+{
+ "apps": [
+  {
+   "id": "tarot",
+   "type": "test",
+   "title": "タロット心理カード",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-11",
+   "color1": "#f4c66f",
+   "color2": "#93a8ff",
+   "teaser": "apps/tarot.html",
+   "premium": "apps/tarot.html",
+   "desc": "占いではなく問いを引く — 22枚の象徴を心理学の鏡に"
+  }
+ ],
+ "updated": "2026-07-20"
+}

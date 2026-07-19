@@ -1,0 +1,102 @@
+{
+ "_meta": {
+  "source": "test.html",
+  "slug": "hall_test"
+ },
+ "title_001": {
+  "t": "도파민 실험실",
+  "ctx": "<title>"
+ },
+ "meta_001": {
+  "t": "나도 몰랐던 나를 측정하는 3분 실험. 도파민 터지는 진단·유형 테스트.",
+  "ctx": "<meta name=\"description\" content=\"나도 몰랐던 나를 측정하는 3"
+ },
+ "html_001": {
+  "t": "🏭 미미팩토리",
+  "ctx": "iv class=\"nav\">     <a href=\"index.html\""
+ },
+ "html_002": {
+  "t": "📚 독서퀴즈관",
+  "ctx": "tml\">🏭 미미팩토리</a>     <a href=\"quiz.html\""
+ },
+ "html_003": {
+  "t": "🎯 테스트관",
+  "ctx": "/a>     <a class=\"here\" href=\"test.html\""
+ },
+ "html_004": {
+  "t": "💞 친해지기관",
+  "ctx": "ml\">🎯 테스트관</a>     <a href=\"friend.html\""
+ },
+ "html_005": {
+  "t": "나도 몰랐던 나를 측정하는 3분 실험.",
+  "ctx": "VISION</div>     <h1>도파민 실험실</h1>     <p"
+ },
+ "html_006": {
+  "t": "피실험자: 당신.",
+  "ctx": "실험실</h1>     <p>나도 몰랐던 나를 측정하는 3분 실험.<br"
+ },
+ "html_007": {
+  "t": "⚗️ 실험 시작 →",
+  "ctx": "    <a class=\"cta\" id=\"heroCta\" href=\"#\""
+ },
+ "html_008": {
+  "t": "3분 완성",
+  "ctx": "\">       <div class=\"feat\"><span>🧪</span"
+ },
+ "html_009": {
+  "t": "진단 실험",
+  "ctx": "<div class=\"feat\"><span>🧪</span>3분 완성<br"
+ },
+ "html_010": {
+  "t": "실시간 게이지",
+  "ctx": "v>       <div class=\"feat\"><span>📊</span"
+ },
+ "html_011": {
+  "t": "도파민 리듬",
+  "ctx": "iv class=\"feat\"><span>📊</span>실시간 게이지<br"
+ },
+ "html_012": {
+  "t": "결과 카드",
+  "ctx": "v>       <div class=\"feat\"><span>🃏</span"
+ },
+ "html_013": {
+  "t": "공유·비교",
+  "ctx": "<div class=\"feat\"><span>🃏</span>결과 카드<br"
+ },
+ "html_014": {
+  "t": "⚗️ 새 실험 소식 받기 —",
+  "ctx": "=landing\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_015": {
+  "t": "독서위키",
+  "ctx": "\" rel=\"noopener\">     ⚗️ 새 실험 소식 받기 — <b"
+ },
+ "html_016": {
+  "t": "의 미 와 재 미 공 장",
+  "ctx": "oter\">     <div class=\"mf-eyebrow\"><span"
+ },
+ "html_017": {
+  "t": "미미팩토리",
+  "ctx": " 장</span></div>     <div class=\"mf-logo\""
+ },
+ "html_018": {
+  "t": "주식회사 연:결 패밀리회사",
+  "ctx": ">미미팩토리</div>     <div class=\"mf-caption\""
+ },
+ "attr_001": {
+  "t": "테스트 검색…",
+  "ctx": "placeholder=\"테스트 검색…\""
+ },
+ "jst_001": {
+  "t": "실험 개시",
+  "ctx": ">${a.desc|| }</div>       <span class= >"
+ },
+ "jst_002": {
+  "t": "실험실이 비어 있어요.",
+  "ctx": "L = list.length ?   :     `<div class= >"
+ },
+ "jst_003": {
+  "t": "새로운 실험이 곧 시작됩니다",
+  "ctx": "?   :     `<div class= >실험실이 비어 있어요.<br>"
+ }
+}

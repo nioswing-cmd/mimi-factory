@@ -58,6 +58,15 @@ def extract(html):
     for s in scripts:
         for mm in strlit.finditer(s):
             add("js", mm.group(2), s[max(0, mm.start() - 40):mm.start()])
+
+    # 5) JS 백틱 템플릿 리터럴 등 나머지 한글 런(run) — 따옴표 문자열 제거 후 스캔
+    run = re.compile(r"[가-힣][가-힣0-9 ,.!?…·%~—\-]*")
+    for s in scripts:
+        cleaned = strlit.sub(" ", s)
+        cleaned = re.sub(r"/\*[\s\S]*?\*/", " ", cleaned)      # 블록 주석 제외
+        cleaned = re.sub(r"(?m)^\s*//[^\n]*", " ", cleaned)    # 행 주석 제외
+        for mm in run.finditer(cleaned):
+            add("jst", mm.group(0), cleaned[max(0, mm.start() - 40):mm.start()])
     return found
 
 

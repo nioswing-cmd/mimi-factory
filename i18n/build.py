@@ -16,18 +16,18 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FONT_FACE = {
     "ja": """<style id="i18nFonts">
 /* self-hosted subset fonts (OFL) — reuse original family names */
-@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansJP-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
-@font-face{font-family:'Jua';src:url('../fonts/MPLUSRounded1c-Bold-sub.woff2') format('woff2');font-weight:400;font-display:swap;}
+@font-face{font-family:'Noto Sans KR';src:url('{FP}NotoSansJP-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('{FP}MPLUSRounded1c-Bold-sub.woff2') format('woff2');font-weight:400;font-display:swap;}
 </style>""",
     "en": """<style id="i18nFonts">
 /* self-hosted subset fonts (OFL) — reuse original family names */
-@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
-@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Noto Sans KR';src:url('{FP}NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('{FP}Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
 </style>""",
     "zh-tw": """<style id="i18nFonts">
 /* self-hosted subset fonts (OFL) — reuse original family names */
-@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
-@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+@font-face{font-family:'Noto Sans KR';src:url('{FP}NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('{FP}NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
 </style>""",
 }
 
@@ -95,17 +95,27 @@ def build(slug, lang, outname=None):
     elif lang == "en":
         html = re.sub(r"word-break:\s*keep-all;?", "overflow-wrap:break-word;", html)
 
-    # 4) 구글폰트 CDN 제거 → 자체 호스팅 서브셋 @font-face
+    # 4-0) 앱/랜딩 구분 — 랜딩(리포 루트 html)은 /{lang}/ 바로 아래로
+    is_landing = "apps/" not in ko["_meta"]["source"]
+    font_prefix = "fonts/" if is_landing else "../fonts/"
+
+    # 4-1) 내부 랜딩 절대링크를 언어 경로로 재작성 (앱 hall-nav 등)
+    for hall in ("test", "quiz", "friend", "index"):
+        html = html.replace(f"mimifactory.vibekr.com/{hall}.html",
+                            f"mimifactory.vibekr.com/{lang}/{hall}.html")
+
+    # 4-2) 구글폰트 CDN 제거 → 자체 호스팅 서브셋 @font-face
     html = re.sub(r'<link rel="preconnect"[^>]*>\s*', "", html)
     html = re.sub(r'<link href="https://fonts\.googleapis\.com[^"]*"[^>]*>\s*', "", html)
     face = FONT_FACE.get(lang)
     if face:
+        face = face.replace("{FP}", font_prefix)
         i = html.find("<style>")
         assert i > 0, "<style> 블록을 찾지 못함"
         html = html[:i] + face + "\n" + html[i:]
 
-    # 5) 출력 (repo /{lang}/apps/ = 배포 경로)
-    out_dir = os.path.join(ROOT, lang, "apps")
+    # 5) 출력 (repo /{lang}/... = 배포 경로)
+    out_dir = os.path.join(ROOT, lang) if is_landing else os.path.join(ROOT, lang, "apps")
     os.makedirs(out_dir, exist_ok=True)
     out = os.path.join(out_dir, f"{outname}.html")
     with open(out, "w", encoding="utf-8", newline="") as f:
