@@ -1,0 +1,134 @@
+{
+ "_meta": {
+  "source": "index.html",
+  "slug": "hall_index"
+ },
+ "title_001": {
+  "t": "미미팩토리 — 의미와재미공장",
+  "ctx": "<title>"
+ },
+ "meta_001": {
+  "t": "AI시대 인간에게 꼭 필요한 깊이 있는 지식을 도파민 터지게. 독서퀴즈관 · 테스트관 · 친해지기관",
+  "ctx": "<meta name=\"description\" content=\"AI시대 인간에게 꼭 필요한 "
+ },
+ "html_001": {
+  "t": "의 미 와 재 미 공 장",
+  "ctx": "v class=\"hero\">     <div class=\"eyebrow\""
+ },
+ "html_002": {
+  "t": "미미팩토리",
+  "ctx": "ss=\"eyebrow\">의 미 와 재 미 공 장</div>     <h1"
+ },
+ "html_003": {
+  "t": "AI시대, 인간에게 꼭 필요한 깊이 있는 지식을",
+  "ctx": " 재 미 공 장</div>     <h1>미미팩토리</h1>     <p"
+ },
+ "html_004": {
+  "t": "도파민 터지게 즐기는 곳",
+  "ctx": "h1>     <p>AI시대, 인간에게 꼭 필요한 깊이 있는 지식을<br"
+ },
+ "html_005": {
+  "t": "— 세 개의 관, 세 가지 재미 —",
+  "ctx": "oday\"></div>    <div class=\"halls-label\""
+ },
+ "html_006": {
+  "t": "퀴 즈 로 읽 는 책",
+  "ctx": "ass=\"deco\">🕯️</span>     <span class=\"k\""
+ },
+ "html_007": {
+  "t": "밤의 서재",
+  "ctx": "pan class=\"k\">퀴 즈 로 읽 는 책</span>     <h2"
+ },
+ "html_008": {
+  "t": "책 한 권을 도파민 반복 퀴즈로 완독.",
+  "ctx": "n>     <h2>밤의 서재</h2>     <div class=\"d\""
+ },
+ "html_009": {
+  "t": "매일 새벽, 서가에 새 책이 꽂힙니다.",
+  "ctx": " <div class=\"d\">책 한 권을 도파민 반복 퀴즈로 완독.<br"
+ },
+ "html_010": {
+  "t": "입장하기 →",
+  "ctx": " data-cnt=\"quiz\"></span><span class=\"in\""
+ },
+ "html_011": {
+  "t": "도파민 실험실",
+  "ctx": "span class=\"k\">TEST · LAB</span>     <h2"
+ },
+ "html_012": {
+  "t": "나도 몰랐던 나를 측정하는 진단·유형 테스트.",
+  "ctx": "     <h2>도파민 실험실</h2>     <div class=\"d\""
+ },
+ "html_013": {
+  "t": "피실험자: 당신.",
+  "ctx": "v class=\"d\">나도 몰랐던 나를 측정하는 진단·유형 테스트.<br"
+ },
+ "html_014": {
+  "t": "실험 개시 →",
+  "ctx": " data-cnt=\"test\"></span><span class=\"in\""
+ },
+ "html_015": {
+  "t": "친 해 지 기 관",
+  "ctx": "lass=\"deco\">🧺</span>     <span class=\"k\""
+ },
+ "html_016": {
+  "t": "둘의 피크닉",
+  "ctx": "<span class=\"k\">친 해 지 기 관</span>     <h2"
+ },
+ "html_017": {
+  "t": "같이 하면 더 재밌고, 하고 나면 더 가까워지는",
+  "ctx": ">     <h2>둘의 피크닉</h2>     <div class=\"d\""
+ },
+ "html_018": {
+  "t": "둘만의 놀이 돗자리.",
+  "ctx": " class=\"d\">같이 하면 더 재밌고, 하고 나면 더 가까워지는<br"
+ },
+ "html_019": {
+  "t": "놀러가기 →",
+  "ctx": "ata-cnt=\"friend\"></span><span class=\"in\""
+ },
+ "html_020": {
+  "t": "주식회사 연:결 패밀리회사",
+  "ctx": ">미미팩토리</div>     <div class=\"mf-caption\""
+ },
+ "js_001": {
+  "t": "📚 독서퀴즈관",
+  "ctx": "─────────── */ const HALL_LABEL = {quiz:"
+ },
+ "js_002": {
+  "t": "🎯 테스트관",
+  "ctx": "onst HALL_LABEL = {quiz:\"📚 독서퀴즈관\", test:"
+ },
+ "js_003": {
+  "t": "💞 친해지기관",
+  "ctx": " {quiz:\"📚 독서퀴즈관\", test:\"🎯 테스트관\", friend:"
+ },
+ "js_004": {
+  "t": "권의 책",
+  "ctx": "iend:\"💞 친해지기관\"}; const CNT_UNIT = {quiz:"
+ },
+ "js_005": {
+  "t": "개의 실험",
+  "ctx": "\"}; const CNT_UNIT = {quiz:\"권의 책\", test:"
+ },
+ "js_006": {
+  "t": "개의 놀이",
+  "ctx": "IT = {quiz:\"권의 책\", test:\"개의 실험\", friend:"
+ },
+ "js_007": {
+  "t": "곧 문을 열어요",
+  "ctx": "Content = n ? `지금 ${n}${CNT_UNIT[t]}` : "
+ },
+ "jst_001": {
+  "t": "지금",
+  "ctx": "= ]`);     if(el) el.textContent = n ? `"
+ },
+ "jst_002": {
+  "t": "오늘의 신작",
+  "ctx": " class=  style= >       <span class= >✨ "
+ },
+ "jst_003": {
+  "t": "지금 바로 도전",
+  "ctx": ">${a.desc|| }</div>       <span class= >"
+ }
+}

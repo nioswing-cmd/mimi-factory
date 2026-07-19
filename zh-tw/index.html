@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>咪咪工廠 — 意義與趣味工廠</title>
+<meta name="description" content="為 AI 時代的人準備的深度知識，用多巴胺的方式體驗。讀書測驗館 · 測驗館 · 變親近館">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+  :root{
+    --bg:#12101f; --bg2:#1a1730; --card:#221e3d;
+    --ink:#f0edff; --sub:#9a8fc0; --line:rgba(255,255,255,.08);
+    --grad:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+    --pop:cubic-bezier(.34,1.56,.64,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Noto Sans KR',sans-serif; background:var(--bg); color:var(--ink);
+    min-height:100dvh; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:520px;margin:0 auto;padding:28px 18px 40px}
+
+  
+  .hero{text-align:center;padding:14px 0 22px}
+  .hero .eyebrow{font-size:11px;letter-spacing:.42em;text-indent:.42em;color:var(--sub);margin-bottom:10px}
+  .hero h1{
+    font-family:'Jua',sans-serif;font-size:38px;line-height:1.15;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .hero p{font-size:13.5px;color:var(--sub);margin-top:10px;line-height:1.7}
+
+  /* ── 今日新作 ── */
+  .today{
+    position:relative;border-radius:20px;padding:22px 20px;margin:6px 0 26px;
+    background:var(--card);border:1px solid var(--line);overflow:hidden;
+    cursor:pointer;transition:transform .35s var(--pop),box-shadow .35s;
+  }
+  .today:active{transform:scale(.97)}
+  .today::before{
+    content:"";position:absolute;inset:0;opacity:.16;
+    background:var(--tc,var(--grad));
+  }
+  .today .badge{
+    position:relative;display:inline-block;font-size:11px;font-weight:700;letter-spacing:.14em;
+    padding:4px 12px;border-radius:999px;background:var(--grad);color:#12101f;
+    animation:pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(122,166,255,.5)}50%{box-shadow:0 0 0 9px rgba(122,166,255,0)}}
+  .today h2{position:relative;font-family:'Jua',sans-serif;font-size:26px;margin-top:12px}
+  .today .meta{position:relative;font-size:12.5px;color:var(--sub);margin-top:5px}
+  .today .desc{position:relative;font-size:13.5px;color:#cfc8ec;margin-top:10px;line-height:1.65}
+  .today .go{
+    position:relative;display:inline-block;margin-top:14px;font-size:13px;font-weight:700;
+    padding:9px 18px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid var(--line);
+  }
+
+  
+  .halls-label{font-size:12px;color:var(--sub);letter-spacing:.2em;text-indent:.2em;text-align:center;margin-bottom:14px}
+  .hall{
+    position:relative;display:block;text-decoration:none;border-radius:20px;overflow:hidden;
+    padding:24px 22px;margin-bottom:14px;border:1px solid var(--line);
+    transition:transform .35s var(--pop),box-shadow .35s;
+    animation:up .5s var(--pop) backwards;
+  }
+  .hall:nth-of-type(1){animation-delay:.05s}.hall:nth-of-type(2){animation-delay:.12s}.hall:nth-of-type(3){animation-delay:.19s}
+  @keyframes up{from{opacity:0;transform:translateY(16px)}}
+  .hall:hover{transform:translateY(-4px)}
+  .hall:active{transform:scale(.97)}
+  .hall .k{font-size:10.5px;letter-spacing:.3em;text-indent:.3em;opacity:.75}
+  .hall h2{font-size:29px;margin-top:8px;line-height:1.15}
+  .hall .d{font-size:12.5px;margin-top:8px;line-height:1.6;opacity:.85}
+  .hall .row{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+  .hall .cnt{font-size:11.5px;opacity:.8}
+  .hall .in{font-size:13px;font-weight:700;padding:8px 16px;border-radius:999px}
+
+  
+  .hall.quiz{
+    background:linear-gradient(140deg,#2a3f6e,#122341 45%,#0d1526);color:#f2ead8;
+    border-color:rgba(232,180,95,.5);
+    box-shadow:0 0 26px rgba(232,180,95,.22), inset 0 0 40px rgba(232,180,95,.06);
+  }
+  .hall.quiz::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(320px 170px at 82% -20px, rgba(232,180,95,.5), transparent 70%),
+      radial-gradient(200px 120px at 0% 110%, rgba(232,180,95,.16), transparent 70%);
+  }
+  .hall.quiz .k{color:#8fa1c0}
+  .hall.quiz h2{font-family:'Gowun Batang',serif;color:#f5d491;text-shadow:0 0 20px rgba(232,180,95,.3)}
+  .hall.quiz .d,.hall.quiz .cnt{color:#8fa1c0}
+  .hall.quiz .in{background:#e8b45f;color:#0d1526}
+  .hall.quiz .deco{position:absolute;right:18px;top:20px;font-size:26px}
+
+  
+  .hall.test{
+    background:linear-gradient(140deg,#003a44,#0c1030 55%,#26073a);color:#eef2ff;
+    border-color:rgba(0,240,255,.6);
+    box-shadow:0 0 26px rgba(0,240,255,.28), inset 0 0 40px rgba(255,46,196,.07);
+  }
+  .hall.test::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(260px 150px at 10% -20px, rgba(0,240,255,.4), transparent 70%),
+      radial-gradient(260px 150px at 95% 110%, rgba(255,46,196,.38), transparent 70%),
+      repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.03) 3px 4px);
+  }
+  .hall.test .k{font-family:'IBM Plex Mono',monospace;color:#b6ff3d}
+  .hall.test h2{text-shadow:0 0 14px rgba(0,240,255,.5), 1.5px 0 0 rgba(255,46,196,.5), -1.5px 0 0 rgba(0,240,255,.5)}
+  .hall.test .d,.hall.test .cnt{color:#7d84a3}
+  .hall.test .in{background:transparent;color:#00f0ff;border:1px solid #00f0ff;box-shadow:0 0 12px rgba(0,240,255,.25)}
+  .hall.test .deco{position:absolute;right:18px;top:20px;font-size:26px}
+
+  
+  .hall.friend{
+    background:#fdf6ec;color:#4a3f35;border-color:rgba(255,143,112,.55);
+    box-shadow:0 0 26px rgba(255,181,158,.3);
+  }
+  .hall.friend::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(200px 120px at 90% -10px, rgba(255,181,158,.5), transparent 70%),
+      radial-gradient(180px 110px at -10px 110%, rgba(168,230,207,.55), transparent 70%);
+  }
+  .hall.friend .k{color:#a08d7a}
+  .hall.friend h2{font-family:'Gaegu',cursive;font-size:34px;color:#ff8f70;text-shadow:1.5px 1.5px 0 rgba(168,230,207,.6)}
+  .hall.friend .d,.hall.friend .cnt{color:#a08d7a}
+  .hall.friend .in{background:#ff8f70;color:#fff}
+  .hall.friend .deco{position:absolute;right:18px;top:20px;font-size:26px;transform:rotate(8deg)}
+
+  
+  .footer{text-align:center;margin-top:36px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}
+  .mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px}
+  .mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(167,139,250,.6))}
+  .mf-eyebrow::after{transform:scaleX(-1)}
+  .mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#9a8fc0;font-weight:500;white-space:nowrap}
+  .mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;letter-spacing:.01em;
+    background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .mf-caption{font-size:11.5px;letter-spacing:.1em;color:#9a8fc0}
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">意 義 與 趣 味 工 廠</div>
+    <h1>咪咪工廠</h1>
+    <p>AI 時代裡，人最需要的深度知識，<br>在這裡玩到多巴胺爆發。</p>
+  </div>
+
+  <div id="today"></div>
+
+  <div class="halls-label">— 三個館，三種樂趣 —</div>
+
+  <a class="hall quiz" href="quiz.html">
+    <span class="deco">🕯️</span>
+    <span class="k">用 測 驗 讀 一 本 書</span>
+    <h2>夜之書齋</h2>
+    <div class="d">用多巴胺反覆測驗，讀完一整本書。<br>每天清晨，書架上都會擺上一本新書。</div>
+    <div class="row"><span class="cnt" data-cnt="quiz"></span><span class="in">進場 →</span></div>
+  </a>
+
+  <a class="hall test" href="test.html">
+    <span class="deco">⚗️</span>
+    <span class="k">TEST · LAB</span>
+    <h2>多巴胺實驗室</h2>
+    <div class="d">測量連自己都不知道的自己，診斷 · 類型測驗。<br>受試者: 你。</div>
+    <div class="row"><span class="cnt" data-cnt="test"></span><span class="in">開始實驗 →</span></div>
+  </a>
+
+  <a class="hall friend" href="friend.html">
+    <span class="deco">🧺</span>
+    <span class="k">變 親 近 館</span>
+    <h2>兩人的野餐</h2>
+    <div class="d">一起玩更好玩，玩完之後更靠近的<br>只屬於兩人的遊戲野餐墊。</div>
+    <div class="row"><span class="cnt" data-cnt="friend"></span><span class="in">去玩 →</span></div>
+  </a>
+
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意 義 與 趣 味 工 廠</span></div>
+    <div class="mf-logo">咪咪工廠</div>
+    <div class="mf-caption">YEON:GYEOL股份有限公司 家族公司</div>
+  </div>
+</div>
+
+<script>
+
+const HALL_LABEL = {quiz:"📚 讀書測驗館", test:"🎯 測驗館", friend:"💞 變親近館"};
+const CNT_UNIT = {quiz:"本書", test:"個實驗", friend:"個遊戲"};
+
+async function load(){
+  let apps = [];
+  try{
+    const r = await fetch("apps.json?v="+Date.now());
+    const j = await r.json();
+    apps = j.apps || [];
+  }catch(e){  }
+  apps.sort((a,b)=> (b.date||"").localeCompare(a.date||""));
+  renderToday(apps[0]);
+  ["quiz","test","friend"].forEach(t=>{
+    const n = apps.filter(a=>a.type===t).length;
+    const el = document.querySelector(`[data-cnt="${t}"]`);
+    if(el) el.textContent = n ? `現在 ${n}${CNT_UNIT[t]}` : "即將開館";
+  });
+}
+
+function grad(a){return `linear-gradient(135deg,${a.color1||"#7aa6ff"},${a.color2||"#b78bf5"})`}
+
+function renderToday(a){
+  if(!a) return;
+  const el = document.getElementById("today");
+  el.innerHTML = `
+    <div class="today" style="--tc:${grad(a)}">
+      <span class="badge">✨ 今日新作</span>
+      <h2>${a.title}</h2>
+      <div class="meta">${a.author} · ${HALL_LABEL[a.type]||""} · ${a.date||""}</div>
+      <div class="desc">${a.desc||""}</div>
+      <span class="go">立即挑戰 →</span>
+    </div>`;
+  el.querySelector(".today").onclick = ()=>{
+    if(navigator.vibrate) navigator.vibrate(28);
+    location.href = a.teaser || a.premium;
+  };
+}
+
+load();
+</script>
+</body>
+</html>
