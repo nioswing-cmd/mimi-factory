@@ -83,6 +83,18 @@
    "teaser": "apps/tarot.html",
    "premium": "apps/tarot.html",
    "desc": "Not fortunes — questions. 22 symbols, one honest mirror."
+  },
+  {
+   "id": "cut-them-off",
+   "type": "test",
+   "title": "Should I Cut Them Off?",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/cut-them-off.html",
+   "premium": "apps/cut-them-off.html",
+   "desc": "Read that one person through 15 real behaviors — a walk-away traffic light."
   }
  ],
  "updated": "2026-07-19"

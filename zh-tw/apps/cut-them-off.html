@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>那個人，該斷捨離嗎？ — 關係紅綠燈測驗</title>
+<meta name="description" content="選出心裡的那個人，用 15 個行為診斷這段關係的斷捨離號誌測驗。">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+  :root{
+    --bg1:#16111f; --bg2:#221830;
+    --cream:#fff6ec; --muted:#c8bcda;
+    --card:#241a3a;
+    --green:#3ddc84; --greenD:#25b76a;
+    --yellow:#ffce4a; --yellowD:#f0a92a;
+    --red:#ff5b6e; --redD:#e23a55;
+    --accent1:var(--green); --accent2:var(--greenD);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0; padding:0;}
+  body{
+    font-family:'Noto Sans KR',sans-serif;
+    color:var(--cream);
+    min-height:100dvh;
+    background:
+      radial-gradient(120% 80% at 82% -10%, rgba(255,120,120,.10), transparent 55%),
+      radial-gradient(120% 90% at 8% 112%, rgba(90,220,150,.10), transparent 55%),
+      linear-gradient(160deg,var(--bg1),var(--bg2));
+    background-attachment:fixed;
+    transition:background .9s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .wrap{max-width:520px; margin:0 auto; padding:22px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+  .grad{
+    background:linear-gradient(100deg,var(--green),var(--yellow) 50%,var(--red));
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
+  .screen{display:none; animation:fadeIn .5s ease; flex:1; flex-direction:column;}
+  .screen.active{display:flex;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+  .pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+  @keyframes pop{0%{transform:scale(.92) rotate(-1deg); opacity:.5;} 60%{transform:scale(1.02);} 100%{transform:scale(1) rotate(0); opacity:1;}}
+
+  /* ---------- HOME ---------- */
+  .home-top{text-align:center; margin-top:8vh;}
+  .signal-emojis{font-size:40px; letter-spacing:6px; margin-bottom:14px; filter:drop-shadow(0 3px 8px rgba(0,0,0,.4));}
+  .home-top h1{font-size:34px; line-height:1.28; margin:0 0 12px;}
+  .home-top p{color:var(--muted); font-size:15px; line-height:1.7; margin:0 auto; max-width:22em; }
+  .namebox{margin:30px 0 8px; background:var(--card); border:1.5px solid rgba(255,255,255,.09); border-radius:20px; padding:20px 18px; box-shadow:0 12px 34px rgba(0,0,0,.28);}
+  .namebox label{display:block; font-family:'Jua'; font-size:16px; margin-bottom:4px;}
+  .namebox .hint{color:var(--muted); font-size:12.5px; margin-bottom:13px; }
+  #nameInput{
+    width:100%; border:none; outline:none; border-radius:14px;
+    background:rgba(255,255,255,.07); color:var(--cream);
+    font-family:'Jua'; font-size:20px; text-align:center; padding:14px 12px;
+    border:1.5px solid rgba(255,255,255,.12); transition:border .2s, box-shadow .2s;
+  }
+  #nameInput:focus{border-color:var(--green); box-shadow:0 0 0 3px rgba(61,220,132,.22);}
+  #nameInput::placeholder{color:#8f83a8;}
+  .btn{
+    display:block; width:100%; border:none; cursor:pointer; color:#241a10;
+    font-family:'Jua'; font-size:19px; padding:17px; border-radius:16px; margin-top:14px;
+    background:linear-gradient(100deg,var(--accent1),var(--accent2));
+    box-shadow:0 10px 26px rgba(0,0,0,.32); transition:transform .12s, filter .2s;
+  }
+  .btn:active{transform:scale(.97);}
+  .btn.ghost{background:transparent; color:var(--muted); border:1.5px solid rgba(255,255,255,.16); box-shadow:none; font-size:16px;}
+  .btn:disabled{opacity:.45; cursor:not-allowed;}
+  .disc{color:#8f83a8; font-size:11.5px; text-align:center; margin-top:16px; line-height:1.6; }
+
+  
+  .meter-card{position:sticky; top:8px; z-index:5; background:rgba(28,20,44,.86); backdrop-filter:blur(8px); border:1.5px solid rgba(255,255,255,.08); border-radius:20px; padding:15px 16px 13px; box-shadow:0 8px 24px rgba(0,0,0,.3); margin-bottom:20px;}
+  .meter-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;}
+  .meter-head .who{font-family:'Jua'; font-size:15px; max-width:60%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .meter-head .cnt{font-size:12.5px; color:var(--muted);}
+  .meter-track{position:relative; height:16px; border-radius:99px; background:linear-gradient(90deg,var(--green),var(--yellow) 50%,var(--red)); box-shadow:inset 0 1px 3px rgba(0,0,0,.35);}
+  .meter-track::before{content:""; position:absolute; left:34%; top:-3px; bottom:-3px; width:1.5px; background:rgba(0,0,0,.18);}
+  .meter-track::after{content:""; position:absolute; left:60%; top:-3px; bottom:-3px; width:1.5px; background:rgba(0,0,0,.18);}
+  .needle{position:absolute; top:50%; left:0%; width:30px; height:30px; border-radius:50%; background:#fff; border:2.5px solid rgba(0,0,0,.15); box-shadow:0 3px 10px rgba(0,0,0,.4); transform:translate(-50%,-50%); display:flex; align-items:center; justify-content:center; font-size:15px; transition:left .55s cubic-bezier(.34,1.4,.5,1);}
+  .zones{display:flex; justify-content:space-between; margin-top:9px; font-size:11px; color:var(--muted);}
+  .zones span{flex:1; text-align:center;}
+  .zones span.on{color:var(--cream); font-weight:700; transform:scale(1.06);}
+  .live-verdict{text-align:center; margin-top:10px; font-family:'Jua'; font-size:15px;}
+
+  /* ---------- QUESTION ---------- */
+  .qwrap{flex:1; display:flex; flex-direction:column;}
+  .qcard{background:var(--card); border:1.5px solid rgba(255,255,255,.08); border-radius:22px; padding:26px 20px; box-shadow:0 14px 34px rgba(0,0,0,.28); margin-bottom:18px;}
+  .qtag{display:inline-block; font-size:11.5px; color:#241a10; background:var(--yellow); padding:4px 11px; border-radius:99px; font-weight:700; margin-bottom:14px;}
+  .qtext{font-family:'Jua'; font-size:22px; line-height:1.5; }
+  .qsub{color:var(--muted); font-size:13px; margin-top:12px;}
+  .opts{display:flex; flex-direction:column; gap:11px;}
+  .opt{
+    border:1.6px solid rgba(255,255,255,.13); background:rgba(255,255,255,.045);
+    color:var(--cream); font-family:'Noto Sans KR'; font-weight:500; font-size:16.5px;
+    padding:16px 18px; border-radius:15px; cursor:pointer; text-align:left;
+    transition:transform .12s, border-color .2s, background .2s;
+  }
+  .opt:hover{border-color:rgba(255,255,255,.3);}
+  .opt:active{transform:scale(.98); background:rgba(255,255,255,.09);}
+  .opt .dot{display:inline-block; width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,.35); margin-right:11px; vertical-align:middle;}
+  .navrow{display:flex; justify-content:center; margin-top:4px;}
+  .backbtn{background:none; border:none; color:#8f83a8; font-size:13px; cursor:pointer; padding:8px 14px; font-family:'Noto Sans KR';}
+
+  /* ---------- RESULT ---------- */
+  .verdict-hero{text-align:center; margin-top:6px;}
+  .verdict-emoji{font-size:74px; line-height:1; filter:drop-shadow(0 5px 14px rgba(0,0,0,.4)); animation:pop .5s cubic-bezier(.34,1.56,.64,1);}
+  .verdict-label{font-family:'Jua'; font-size:34px; margin:10px 0 2px;}
+  .verdict-sub{font-family:'Jua'; font-size:17px; color:var(--muted);}
+  .verdict-line{font-size:15.5px; line-height:1.7; margin:16px auto 0; max-width:24em; }
+  .risk-badge{display:inline-flex; align-items:center; gap:8px; margin-top:18px; background:rgba(255,255,255,.06); border:1.5px solid rgba(255,255,255,.12); border-radius:99px; padding:8px 18px; font-family:'Jua'; font-size:16px;}
+  .block{background:var(--card); border:1.5px solid rgba(255,255,255,.08); border-radius:20px; padding:20px 18px; margin-top:18px; box-shadow:0 10px 26px rgba(0,0,0,.24);}
+  .block h3{font-size:17px; margin:0 0 4px; display:flex; align-items:center; gap:8px;}
+  .block .bsub{color:var(--muted); font-size:12.5px; margin:0 0 14px;}
+  .basis{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:9px;}
+  .basis li{display:flex; gap:10px; align-items:flex-start; font-size:15px; line-height:1.5; }
+  .basis li .ic{flex:0 0 auto; margin-top:1px;}
+  .steps{list-style:none; padding:0; margin:0; counter-reset:s; display:flex; flex-direction:column; gap:14px;}
+  .steps li{display:flex; gap:13px; align-items:flex-start;}
+  .steps li .num{flex:0 0 auto; width:28px; height:28px; border-radius:50%; background:linear-gradient(120deg,var(--accent1),var(--accent2)); color:#241a10; font-family:'Jua'; font-size:15px; display:flex; align-items:center; justify-content:center;}
+  .steps li .txt{font-size:15px; line-height:1.6; }
+  .steps li .txt b{font-family:'Jua'; font-weight:400; display:block; margin-bottom:2px; font-size:15.5px;}
+  .cardshare{text-align:center; margin-top:18px;}
+  #shareImg{width:100%; max-width:340px; border-radius:18px; box-shadow:0 14px 34px rgba(0,0,0,.4); display:block; margin:0 auto 14px;}
+  .btnrow{display:flex; gap:10px;}
+  .btnrow .btn{margin-top:0;}
+  .btn.sm{font-size:15.5px; padding:14px;}
+
+  /* footer */
+  .footer{text-align:center; margin-top:28px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+  .mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+  .mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+  .mf-eyebrow::after{transform:scaleX(-1);}
+  .mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+  .mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em; background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+  .mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+  .toast{position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-24px); background:rgba(36,26,61,.97); border:1.5px solid var(--accent2); color:var(--cream); padding:12px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none; transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; text-align:center;}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+  :focus-visible{outline:3px solid rgba(122,166,255,.7); outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="wrap">
+
+  <!-- ===== HOME ===== -->
+  <section class="screen active" id="home">
+    <div class="home-top">
+      <div class="signal-emojis">🟢🟡🔴</div>
+      <h1>那個人，<br><span class="grad">該斷，還是不該斷？</span></h1>
+      <p>腦海裡 <b>一直浮現的那一個人</b>.<br>用他真實的 15 個行為，<br>替現在這段關係亮起紅綠燈。</p>
+    </div>
+    <div class="namebox">
+      <label>要診斷誰？</label>
+      <div class="hint">寫下那個人的暱稱、縮寫或你對他的稱呼。接下來的題目和結果都會出現這個名字。</div>
+      <input id="nameInput" type="text" maxlength="12" autocomplete="off" placeholder="例: J、那位學長、小美…" />
+    </div>
+    <button class="btn" id="startBtn" disabled>開始診斷</button>
+    <div class="disc">🔒 你輸入的名字只在這個畫面裡使用，不會儲存或傳送到任何地方。<br>只是好玩的關係體檢。心的方向，最後還是你自己決定。</div>
+  </section>
+
+  <!-- ===== QUIZ ===== -->
+  <section class="screen" id="quiz">
+    <div class="meter-card">
+      <div class="meter-head">
+        <div class="who" id="mWho">那個人</div>
+        <div class="cnt" id="mCnt">1 / 15</div>
+      </div>
+      <div class="meter-track">
+        <div class="needle" id="needle">🟢</div>
+      </div>
+      <div class="zones">
+        <span id="z0">🟢 維持</span>
+        <span id="z1">🟡 警戒</span>
+        <span id="z2">🔴 斷捨離</span>
+      </div>
+      <div class="live-verdict" id="liveV">目前還算平靜 🟢</div>
+    </div>
+
+    <div class="qwrap">
+      <div class="qcard" id="qcard">
+        <span class="qtag" id="qtag">檢查 1</span>
+        <div class="qtext" id="qtext"></div>
+        <div class="qsub">想著那個人的 <b>實際行為</b>，誠實回答。</div>
+      </div>
+      <div class="opts" id="opts"></div>
+      <div class="navrow"><button class="backbtn" id="backBtn" style="visibility:hidden">← 上一題</button></div>
+    </div>
+  </section>
+
+  <!-- ===== RESULT ===== -->
+  <section class="screen" id="result">
+    <div class="verdict-hero">
+      <div class="verdict-emoji" id="rEmoji">🟢</div>
+      <div class="verdict-label" id="rLabel">維持</div>
+      <div class="verdict-sub" id="rSub">健康的關係</div>
+      <div class="verdict-line" id="rLine"></div>
+      <div class="risk-badge">危險訊號 <span id="rPct" class="grad" style="font-size:20px;">0%</span></div>
+    </div>
+
+    <div class="block" id="basisBlock">
+      <h3 id="basisTitle">🔎 我們是這樣判定的</h3>
+      <p class="bsub" id="basisSub"></p>
+      <ul class="basis" id="basisList"></ul>
+    </div>
+
+    <div class="block" id="adviceBlock">
+      <h3 id="adviceTitle"></h3>
+      <p class="bsub" id="adviceSub"></p>
+      <ol class="steps" id="adviceList"></ol>
+    </div>
+
+    <div class="cardshare">
+      <img id="shareImg" alt="結果分享卡" />
+      <div class="btnrow">
+        <button class="btn sm" id="saveBtn">📸 儲存結果卡</button>
+        <button class="btn sm ghost" id="shareBtn" style="color:var(--muted)">分享</button>
+      </div>
+    </div>
+
+    <button class="btn ghost" id="againBtn" style="margin-top:16px;">🔁 換個人再測一次</button>
+    <canvas id="cardCanvas" width="1080" height="1350" style="display:none"></canvas>
+  </section>
+
+  
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/zh-tw/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 多巴胺實驗室 — 看看其他測驗 →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意義與趣味工廠</span></div>
+    <div class="mf-logo">咪咪工廠 MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL股份有限公司 家族公司</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+<script>
+const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+
+const Q = [
+  {t:"NAME 常常臨時取消跟我的約，或經常遲到。", green:false, tag:"約定", bad:"把約定看得很輕", good:"算守約的人"},
+  {t:"當我說起難過的事，NAME 會從頭到尾好好聽我說。", green:true, tag:"傾聽", bad:"不太聽我說話", good:"會好好聽我說"},
+  {t:"在金錢問題上（借錢、算帳），NAME 會不動聲色地把負擔推給我。", green:false, tag:"金錢", bad:"把金錢負擔推給我", good:"在金錢上很乾脆"},
+  {t:"NAME 覺得自己拜託別人理所當然，我一拒絕就鬧脾氣或不開心。", green:false, tag:"拜託", bad:"拜託理所當然，拒絕就不爽", good:"互相拜託都很自在"},
+  {t:"NAME 常說別人壞話，或曾把我的事傳出去。", green:false, tag:"八卦", bad:"說壞話又亂傳話", good:"不會在背後亂講"},
+  {t:"每次見完 NAME 回到家，我就莫名其妙地累、心情沉重。", green:false, tag:"能量", bad:"見面後很耗電", good:"見面後心情變輕鬆"},
+  {t:"當我有好事發生，NAME 會真心替我高興。", green:true, tag:"支持", bad:"不會替我高興", good:"會替我一起高興"},
+  {t:"NAME 做錯事之後，也不好好道歉就這樣帶過。", green:false, tag:"道歉", bad:"不會好好道歉", good:"做錯會道歉"},
+  {t:"NAME 會不著痕跡地瞧不起我，或說些貶低我的話。", green:false, tag:"尊重", bad:"暗暗貶低我", good:"很尊重我"},
+  {t:"NAME 只有需要時才聯絡，平常對我的訊息不讀不回或敷衍回應。", green:false, tag:"聯絡", bad:"只有需要時才聯絡", good:"平常也聯絡得上"},
+  {t:'就算我劃了線說「這樣我不要」，NAME 還是一直硬要。', green:false, tag:"警戒", bad:"硬闖我的界線", good:"尊重我的界線"},
+  {t:"跟 NAME 在一起時，我不用看臉色，可以自在地做自己。", green:true, tag:"自在", bad:"在一起時不自在", good:"在一起時很自在"},
+  {t:"NAME 會拿我跟別人比較，或暗暗看輕我的選擇。", green:false, tag:"比較", bad:"拿我比較又看輕我", good:"尊重我的選擇"},
+  {t:"在我真的很辛苦的時候，NAME 曾經陪在身邊守著我。", green:true, tag:"陪伴", bad:"辛苦時不在身邊", good:"辛苦時會陪在身邊"},
+  {t:"跟 NAME 的對話總是繞著對方打轉，我的事永遠排在後面。", green:false, tag:"對話", bad:"對話都以對方為中心", good:"對話有來有往"}
+];
+const OPTS = ["完全不會","偶爾會","滿常的","總是這樣"]; // value 0~3
+
+const V = {
+  green:  {key:'green',  emoji:'🟢', label:'維持',  sub:'健康的關係',      color:'#3ddc84', word:'維持'},
+  yellow: {key:'yellow', emoji:'🟡', label:'警戒',  sub:'需要調整一下距離', color:'#ffce4a', word:'警戒'},
+  red:    {key:'red',    emoji:'🔴', label:'斷捨離',  sub:'斷捨離的訊號亮了', color:'#ff5b6e', word:'斷捨離'}
+};
+function verdictOf(ratio){ return ratio < 0.34 ? V.green : ratio < 0.60 ? V.yellow : V.red; }
+
+// ----- state -----
+let name = "";
+let idx = 0;
+let risks = []; // 每一題 risk 貢獻度(0~3)
+
+// ----- helpers -----
+function $(id){ return document.getElementById(id); }
+function vibrate(p){ if(!RM && navigator.vibrate) try{ navigator.vibrate(p); }catch(e){} }
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+let _tt; function toast(m){ const t=$('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),1900); }
+function popEl(el){ if(RM)return; el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+
+function josa(w, kind){
+  if(!w) return kind==='eun'?'eun':kind==='eul'?'eul':kind==='gwa'?'gwa':'i';
+  const c = w.charCodeAt(w.length-1);
+  let bat=false;
+  if(c>=0xAC00 && c<=0xD7A3) bat=((c-0xAC00)%28)!==0;
+  const m={eun:['eun','neun'],eul:['eul','reul'],gwa:['gwa','wa'],i:['i','ga']};
+  return m[kind][bat?0:1];
+}
+function fill(t){
+  return t.replace(/\[(.)\]/g,(_,k)=>josa(name,k)).replace(/NAME/g, name);
+}
+
+function show(screen){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  $(screen).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+
+function setTheme(v){
+  const r=document.documentElement.style;
+  const map={green:['#3ddc84','#25b76a'], yellow:['#ffce4a','#f0a92a'], red:['#ff5b6e','#e23a55']};
+  r.setProperty('--accent1', map[v][0]); r.setProperty('--accent2', map[v][1]);
+}
+
+
+$('nameInput').addEventListener('input', e=>{
+  $('startBtn').disabled = e.target.value.trim().length===0;
+});
+$('nameInput').addEventListener('keydown', e=>{ if(e.key==='Enter' && e.target.value.trim()) start(); });
+$('startBtn').addEventListener('click', start);
+
+function start(){
+  const v=$('nameInput').value.trim();
+  if(!v) return;
+  name = v;
+  idx = 0; risks = [];
+  $('mWho').textContent = name;
+  setTheme('green');
+  show('quiz');
+  renderQ();
+  updateMeter();
+}
+
+function renderQ(){
+  const q=Q[idx];
+  $('qtag').textContent = "檢查 "+(idx+1);
+  $('qtext').textContent = fill(q.t);
+  popEl($('qcard'));
+  $('mCnt').textContent = (idx+1)+" / "+Q.length;
+
+  const box=$('opts'); box.innerHTML="";
+  OPTS.forEach((label,val)=>{
+    const b=document.createElement('button');
+    b.className='opt';
+    b.innerHTML='<span class="dot"></span>'+label;
+    b.addEventListener('click', e=>choose(val, e));
+    box.appendChild(b);
+  });
+  $('backBtn').style.visibility = idx>0 ? 'visible':'hidden';
+}
+$('backBtn').addEventListener('click', ()=>{
+  if(idx>0){ idx--; risks.pop(); renderQ(); updateMeter(); }
+});
+
+function choose(val, e){
+  const q=Q[idx];
+  const risk = q.green ? (3-val) : val;
+  risks[idx] = risk;
+
+
+  vibrate(22);
+  const ratioNow = curRatio();
+  const vv = verdictOf(ratioNow);
+  setTheme(vv.key);
+  burst(e, vv.color);
+
+  updateMeter();
+
+  if(idx < Q.length-1){
+    idx++;
+    setTimeout(renderQ, 150);
+  } else {
+    setTimeout(finish, 280);
+  }
+}
+
+function curRatio(){
+  const answered = risks.filter(r=>r!==undefined).length;
+  if(answered===0) return 0;
+  const sum = risks.reduce((a,b)=>a+(b||0),0);
+  return sum/(answered*3);
+}
+
+function updateMeter(){
+  const ratio = curRatio();
+  const pct = Math.max(3, Math.min(97, ratio*100));
+  $('needle').style.left = pct+"%";
+  const v = verdictOf(ratio);
+  $('needle').textContent = v.emoji;
+  // zone highlight
+  ['z0','z1','z2'].forEach(z=>$(z).classList.remove('on'));
+  $({green:'z0',yellow:'z1',red:'z2'}[v.key]).classList.add('on');
+  const answered = risks.filter(r=>r!==undefined).length;
+  const lv=$('liveV');
+  if(answered===0){ lv.textContent="目前還算平靜 🟢"; }
+  else {
+    const msg={green:"目前訊號：偏向維持 🟢", yellow:"目前訊號：警戒區 🟡", red:"目前訊號：偏向斷捨離 🔴"}[v.key];
+    lv.textContent = msg;
+  }
+}
+
+
+function burst(e, color){
+  if(RM || typeof confetti!=='function') return;
+  let x=.5,y=.4;
+  if(e && e.clientX){ x=e.clientX/window.innerWidth; y=e.clientY/window.innerHeight; }
+  confetti({particleCount:16, spread:52, startVelocity:24, gravity:.9, scalar:.8, ticks:80,
+    origin:{x,y}, colors:[color,'#ffffff']});
+}
+
+
+function finish(){
+  const total = risks.reduce((a,b)=>a+(b||0),0);
+  const maxR = Q.length*3;               // 45
+  const ratio = total/maxR;
+  const pct = Math.round(ratio*100);
+  const v = verdictOf(ratio);
+  setTheme(v.key);
+
+  $('rEmoji').textContent = v.emoji;
+  $('rLabel').textContent = v.label;
+  $('rLabel').style.color = v.color;
+  $('rSub').textContent = v.sub;
+  $('rPct').textContent = pct+"%";
+
+  const line = {
+    green:  `現在的 ${name}, 這段關係值得守下去，你們是互相滋養的關係。`,
+    yellow: `${name}, 不是壞人，但你們現在需要拉開一點距離。`,
+    red:    `${name}跟你的這段關係，正在一點一點消耗你。是時候放手了。`
+  }[v.key];
+  $('rLine').textContent = line;
+
+  renderBasis(v);
+  renderAdvice(v);
+
+  show('result');
+
+
+  if(v.key==='green'){
+    vibrate([20,40,20]);
+    if(!RM && typeof confetti==='function'){
+      confetti({particleCount:120, spread:75, origin:{y:.35}, colors:['#3ddc84','#8affc0','#ffffff']});
+      setTimeout(()=>confetti({particleCount:80, spread:100, origin:{y:.3}, colors:['#3ddc84','#ffce4a']}),260);
+    }
+  } else if(v.key==='yellow'){
+    vibrate(40);
+    if(!RM && typeof confetti==='function') confetti({particleCount:60, spread:70, origin:{y:.35}, colors:['#ffce4a','#ffe08a','#ffffff']});
+  } else {
+    vibrate([30,60,30]);
+  }
+
+  drawCard(v, pct, line);
+}
+
+function renderBasis(v){
+  const items = Q.map((q,i)=>({q, i, risk:risks[i]||0}));
+  const list=$('basisList'); list.innerHTML="";
+  if(v.key==='green'){
+    $('basisTitle').textContent = "💚 是這些讓這段關係活著";
+    $('basisSub').textContent = "這些是你給了好評的行為。";
+    const good = items.filter(x=>x.risk<=1).sort((a,b)=>a.risk-b.risk).slice(0,4);
+    (good.length?good:items.sort((a,b)=>a.risk-b.risk).slice(0,3)).forEach(x=>{
+      addBasis('✅', x.q.good);
+    });
+  } else {
+    $('basisTitle').textContent = "🔎 讓你在意的是這些";
+    $('basisSub').textContent = v.key==='red'
+      ? "在你的回答裡，這些訊號一旦重複，就會拖垮一段關係。"
+      : "還能調整，但值得多留意的訊號。";
+    const bad = items.filter(x=>x.risk>=2).sort((a,b)=>b.risk-a.risk).slice(0,4);
+    if(bad.length===0){
+      addBasis('•', "沒有太嚴重的行為，但那些曖昧的瞬間一直在累積。");
+    } else {
+      bad.forEach(x=> addBasis(x.risk>=3?'🚨':'⚠️', x.q.bad));
+    }
+
+    const oneGood = items.filter(x=>x.risk===0)[0];
+    if(oneGood) addBasis('💚', "不過 "+oneGood.q.good+".");
+  }
+}
+function addBasis(ic, text){
+  const li=document.createElement('li');
+  li.innerHTML='<span class="ic">'+ic+'</span><span>'+text+'</span>';
+  $('basisList').appendChild(li);
+}
+
+const ADVICE = {
+  green: {
+    title:"🌱 讓這段關係更穩固",
+    sub:"越是好的關係，表達越能把它養大。",
+    steps:[
+      ["把感謝說出口","別當成理所當然，偶爾把「有你在真好」大聲說出來。"],
+      ["我也守在你身邊","收到多少就回饋多少，在那個人辛苦時先開口問候。"],
+      ["偶爾的檢查繼續做","再好的關係也會變。別把現在的自在當成理所當然，時常回頭看看。"]
+    ]
+  },
+  yellow: {
+    title:"🟡 在斷捨離之前，先試試這 3 件事",
+    sub:"在結束之前，還有把關係改變的空間。",
+    steps:[
+      ["來一次坦白的對話","只挑一件讓你委屈的行為，用「我」開頭說「那時候這件事讓我很難受」。對方的反應，就是這段關係的答案。"],
+      ["立一個小小的界線","別什麼都配合，把一個有壓力的請求用「這次我沒辦法」回絕，觀察對方的反應。"],
+      ["拉開距離觀察","把聯絡頻率減少 2〜3 週。這段期間你是變得比較輕鬆，還是會想念，才是真正的訊號。"]
+    ]
+  },
+  red: {
+    title:"🔴 沒有罪惡感、健康地遠離的 3 個步驟",
+    sub:"離開不是因為你壞，而是為了守護你自己。",
+    steps:[
+      ["承認","「這不是因為我不夠好，而是這段關係在消耗我。」罪惡感只證明你善良，並不是該留下的理由。"],
+      ["慢慢淡出","不要爆炸式絕交，而是逐步減少聯絡與見面。回訊慢一點、短一點，不再約新的行程。"],
+      ["把空出來的位子填滿","把花在那個人身上的時間和精力，移到能填滿你的關係與活動上。讓遠離變成復原，而不是失去。"]
+    ]
+  }
+};
+function renderAdvice(v){
+  const a=ADVICE[v.key];
+  $('adviceTitle').textContent = a.title;
+  $('adviceSub').textContent = a.sub;
+  const ol=$('adviceList'); ol.innerHTML="";
+  a.steps.forEach((s,i)=>{
+    const li=document.createElement('li');
+    li.innerHTML='<span class="num">'+(i+1)+'</span><span class="txt"><b>'+s[0]+'</b>'+s[1]+'</span>';
+    ol.appendChild(li);
+  });
+}
+
+
+function roundRect(ctx,x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+function wrap(ctx,text,x,y,maxW,lh){
+  const words=text.split(' '); let line=''; let yy=y;
+  for(const w of words){
+    const test=line?line+' '+w:w;
+    if(ctx.measureText(test).width>maxW && line){ ctx.fillText(line,x,yy); line=w; yy+=lh; }
+    else line=test;
+  }
+  ctx.fillText(line,x,yy); return yy;
+}
+function drawCard(v, pct, line){
+  const cv=$('cardCanvas'), ctx=cv.getContext('2d');
+  const W=cv.width, H=cv.height;
+  const bg=ctx.createLinearGradient(0,0,W,H);
+  bg.addColorStop(0,'#16111f'); bg.addColorStop(1,'#241830');
+  ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+
+  const g=ctx.createRadialGradient(W/2,360,60,W/2,360,620);
+  g.addColorStop(0, v.color+'55'); g.addColorStop(1,'transparent');
+  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+
+  ctx.strokeStyle='rgba(255,255,255,.10)'; ctx.lineWidth=3;
+  roundRect(ctx,60,60,W-120,H-120,44); ctx.stroke();
+
+  ctx.textAlign='center';
+  ctx.fillStyle='#c8bcda'; ctx.font='34px "Noto Sans KR", sans-serif';
+  ctx.fillText('那個人，該斷捨離嗎？', W/2, 175);
+
+  ctx.font='200px "Jua", sans-serif';
+  ctx.fillText(v.emoji, W/2, 470);
+
+  ctx.fillStyle=v.color; ctx.font='120px "Jua", sans-serif';
+  ctx.fillText(v.label, W/2, 640);
+  ctx.fillStyle='#fff6ec'; ctx.font='44px "Jua", sans-serif';
+  ctx.fillText(v.sub, W/2, 710);
+
+
+  ctx.fillStyle='#fff6ec'; ctx.font='52px "Jua", sans-serif';
+  const who = name.length>10 ? name.slice(0,10)+'…' : name;
+  ctx.fillText('『'+who+'』 危險訊號 '+pct+'%', W/2, 830);
+
+
+  const bx=140, by=880, bw=W-280, bh=34;
+  const grad=ctx.createLinearGradient(bx,0,bx+bw,0);
+  grad.addColorStop(0,'#3ddc84'); grad.addColorStop(.5,'#ffce4a'); grad.addColorStop(1,'#ff5b6e');
+  ctx.fillStyle=grad; roundRect(ctx,bx,by,bw,bh,17); ctx.fill();
+  const nx=bx+bw*Math.max(.03,Math.min(.97,pct/100));
+  ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(nx,by+bh/2,30,0,7); ctx.fill();
+  ctx.fillStyle=v.color; ctx.beginPath(); ctx.arc(nx,by+bh/2,15,0,7); ctx.fill();
+
+
+  ctx.fillStyle='#e8dcf2'; ctx.font='38px "Noto Sans KR", sans-serif';
+  wrap(ctx, line, W/2, 1010, W-260, 56);
+
+
+  ctx.fillStyle='#9a8fc0'; ctx.font='24px "Noto Sans KR", sans-serif';
+  ctx.fillText('意義與趣味工廠', W/2, 1225);
+  const lg=ctx.createLinearGradient(W/2-160,0,W/2+160,0);
+  lg.addColorStop(0,'#5ee7d8'); lg.addColorStop(.4,'#7aa6ff'); lg.addColorStop(.7,'#b78bf5'); lg.addColorStop(1,'#ff8ad0');
+  ctx.fillStyle=lg; ctx.font='60px "Jua", sans-serif';
+  ctx.fillText('咪咪工廠 MIMI FACTORY', W/2, 1290);
+
+  try{ $('shareImg').src = cv.toDataURL('image/png'); }catch(e){}
+}
+
+if(document.fonts && document.fonts.ready){
+  document.fonts.ready.then(()=>{ if($('result').classList.contains('active')){ /* redraw if needed */ } });
+}
+
+$('saveBtn').addEventListener('click', ()=>{
+  const url=$('cardCanvas').toDataURL('image/png');
+  const a=document.createElement('a');
+  a.href=url; a.download='斷捨離診斷_'+name+'.png'; a.click();
+  toast('已儲存結果卡 📸');
+  vibrate(30);
+});
+$('shareBtn').addEventListener('click', async ()=>{
+  const cv=$('cardCanvas');
+  try{
+    if(navigator.canShare && cv.toBlob){
+      cv.toBlob(async b=>{
+        const file=new File([b],'斷捨離診斷.png',{type:'image/png'});
+        if(navigator.canShare({files:[file]})){
+          await navigator.share({files:[file], title:'那個人，該斷捨離嗎？', text:'我也測了 🚦'});
+        } else { fallbackShare(); }
+      });
+    } else fallbackShare();
+  }catch(e){  }
+});
+function fallbackShare(){
+  $('saveBtn').click();
+  toast('圖片已儲存！隨你分享到哪都行 🚦');
+}
+
+$('againBtn').addEventListener('click', ()=>{
+  name=""; idx=0; risks=[];
+  $('nameInput').value=""; $('startBtn').disabled=true;
+  setTheme('green');
+  show('home');
+  setTimeout(()=>$('nameInput').focus(),200);
+});
+
+
+window.addEventListener('load', ()=>{ setTimeout(()=>$('nameInput').focus(),300); });
+</script>
+</body>
+</html>

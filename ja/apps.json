@@ -83,6 +83,18 @@
    "teaser": "apps/tarot.html",
    "premium": "apps/tarot.html",
    "desc": "占いではなく問いを引く — 22枚の象徴を心理学の鏡に"
+  },
+  {
+   "id": "cut-them-off",
+   "type": "test",
+   "title": "あの人、切るべき？",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/cut-them-off.html",
+   "premium": "apps/cut-them-off.html",
+   "desc": "心に引っかかるあの人を、15の行動で損切り信号診断。"
   }
  ],
  "updated": "2026-07-19"

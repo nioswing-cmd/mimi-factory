@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>あの人、切るべき？ — 損切り信号診断</title>
+<meta name="description" content="心に引っかかるあの人をひとり決めて、15の行動で診断する損切り信号テスト。">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansJP-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/MPLUSRounded1c-Bold-sub.woff2') format('woff2');font-weight:400;font-display:swap;}
+</style>
+<style>
+  :root{
+    --bg1:#16111f; --bg2:#221830;
+    --cream:#fff6ec; --muted:#c8bcda;
+    --card:#241a3a;
+    --green:#3ddc84; --greenD:#25b76a;
+    --yellow:#ffce4a; --yellowD:#f0a92a;
+    --red:#ff5b6e; --redD:#e23a55;
+    --accent1:var(--green); --accent2:var(--greenD);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0; padding:0;}
+  body{
+    font-family:'Noto Sans KR',sans-serif;
+    color:var(--cream);
+    min-height:100dvh;
+    background:
+      radial-gradient(120% 80% at 82% -10%, rgba(255,120,120,.10), transparent 55%),
+      radial-gradient(120% 90% at 8% 112%, rgba(90,220,150,.10), transparent 55%),
+      linear-gradient(160deg,var(--bg1),var(--bg2));
+    background-attachment:fixed;
+    transition:background .9s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .wrap{max-width:520px; margin:0 auto; padding:22px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+  .grad{
+    background:linear-gradient(100deg,var(--green),var(--yellow) 50%,var(--red));
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
+  .screen{display:none; animation:fadeIn .5s ease; flex:1; flex-direction:column;}
+  .screen.active{display:flex;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+  .pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+  @keyframes pop{0%{transform:scale(.92) rotate(-1deg); opacity:.5;} 60%{transform:scale(1.02);} 100%{transform:scale(1) rotate(0); opacity:1;}}
+
+  /* ---------- HOME ---------- */
+  .home-top{text-align:center; margin-top:8vh;}
+  .signal-emojis{font-size:40px; letter-spacing:6px; margin-bottom:14px; filter:drop-shadow(0 3px 8px rgba(0,0,0,.4));}
+  .home-top h1{font-size:34px; line-height:1.28; margin:0 0 12px;}
+  .home-top p{color:var(--muted); font-size:15px; line-height:1.7; margin:0 auto; max-width:22em; }
+  .namebox{margin:30px 0 8px; background:var(--card); border:1.5px solid rgba(255,255,255,.09); border-radius:20px; padding:20px 18px; box-shadow:0 12px 34px rgba(0,0,0,.28);}
+  .namebox label{display:block; font-family:'Jua'; font-size:16px; margin-bottom:4px;}
+  .namebox .hint{color:var(--muted); font-size:12.5px; margin-bottom:13px; }
+  #nameInput{
+    width:100%; border:none; outline:none; border-radius:14px;
+    background:rgba(255,255,255,.07); color:var(--cream);
+    font-family:'Jua'; font-size:20px; text-align:center; padding:14px 12px;
+    border:1.5px solid rgba(255,255,255,.12); transition:border .2s, box-shadow .2s;
+  }
+  #nameInput:focus{border-color:var(--green); box-shadow:0 0 0 3px rgba(61,220,132,.22);}
+  #nameInput::placeholder{color:#8f83a8;}
+  .btn{
+    display:block; width:100%; border:none; cursor:pointer; color:#241a10;
+    font-family:'Jua'; font-size:19px; padding:17px; border-radius:16px; margin-top:14px;
+    background:linear-gradient(100deg,var(--accent1),var(--accent2));
+    box-shadow:0 10px 26px rgba(0,0,0,.32); transition:transform .12s, filter .2s;
+  }
+  .btn:active{transform:scale(.97);}
+  .btn.ghost{background:transparent; color:var(--muted); border:1.5px solid rgba(255,255,255,.16); box-shadow:none; font-size:16px;}
+  .btn:disabled{opacity:.45; cursor:not-allowed;}
+  .disc{color:#8f83a8; font-size:11.5px; text-align:center; margin-top:16px; line-height:1.6; }
+
+  
+  .meter-card{position:sticky; top:8px; z-index:5; background:rgba(28,20,44,.86); backdrop-filter:blur(8px); border:1.5px solid rgba(255,255,255,.08); border-radius:20px; padding:15px 16px 13px; box-shadow:0 8px 24px rgba(0,0,0,.3); margin-bottom:20px;}
+  .meter-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;}
+  .meter-head .who{font-family:'Jua'; font-size:15px; max-width:60%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .meter-head .cnt{font-size:12.5px; color:var(--muted);}
+  .meter-track{position:relative; height:16px; border-radius:99px; background:linear-gradient(90deg,var(--green),var(--yellow) 50%,var(--red)); box-shadow:inset 0 1px 3px rgba(0,0,0,.35);}
+  .meter-track::before{content:""; position:absolute; left:34%; top:-3px; bottom:-3px; width:1.5px; background:rgba(0,0,0,.18);}
+  .meter-track::after{content:""; position:absolute; left:60%; top:-3px; bottom:-3px; width:1.5px; background:rgba(0,0,0,.18);}
+  .needle{position:absolute; top:50%; left:0%; width:30px; height:30px; border-radius:50%; background:#fff; border:2.5px solid rgba(0,0,0,.15); box-shadow:0 3px 10px rgba(0,0,0,.4); transform:translate(-50%,-50%); display:flex; align-items:center; justify-content:center; font-size:15px; transition:left .55s cubic-bezier(.34,1.4,.5,1);}
+  .zones{display:flex; justify-content:space-between; margin-top:9px; font-size:11px; color:var(--muted);}
+  .zones span{flex:1; text-align:center;}
+  .zones span.on{color:var(--cream); font-weight:700; transform:scale(1.06);}
+  .live-verdict{text-align:center; margin-top:10px; font-family:'Jua'; font-size:15px;}
+
+  /* ---------- QUESTION ---------- */
+  .qwrap{flex:1; display:flex; flex-direction:column;}
+  .qcard{background:var(--card); border:1.5px solid rgba(255,255,255,.08); border-radius:22px; padding:26px 20px; box-shadow:0 14px 34px rgba(0,0,0,.28); margin-bottom:18px;}
+  .qtag{display:inline-block; font-size:11.5px; color:#241a10; background:var(--yellow); padding:4px 11px; border-radius:99px; font-weight:700; margin-bottom:14px;}
+  .qtext{font-family:'Jua'; font-size:22px; line-height:1.5; }
+  .qsub{color:var(--muted); font-size:13px; margin-top:12px;}
+  .opts{display:flex; flex-direction:column; gap:11px;}
+  .opt{
+    border:1.6px solid rgba(255,255,255,.13); background:rgba(255,255,255,.045);
+    color:var(--cream); font-family:'Noto Sans KR'; font-weight:500; font-size:16.5px;
+    padding:16px 18px; border-radius:15px; cursor:pointer; text-align:left;
+    transition:transform .12s, border-color .2s, background .2s;
+  }
+  .opt:hover{border-color:rgba(255,255,255,.3);}
+  .opt:active{transform:scale(.98); background:rgba(255,255,255,.09);}
+  .opt .dot{display:inline-block; width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,.35); margin-right:11px; vertical-align:middle;}
+  .navrow{display:flex; justify-content:center; margin-top:4px;}
+  .backbtn{background:none; border:none; color:#8f83a8; font-size:13px; cursor:pointer; padding:8px 14px; font-family:'Noto Sans KR';}
+
+  /* ---------- RESULT ---------- */
+  .verdict-hero{text-align:center; margin-top:6px;}
+  .verdict-emoji{font-size:74px; line-height:1; filter:drop-shadow(0 5px 14px rgba(0,0,0,.4)); animation:pop .5s cubic-bezier(.34,1.56,.64,1);}
+  .verdict-label{font-family:'Jua'; font-size:34px; margin:10px 0 2px;}
+  .verdict-sub{font-family:'Jua'; font-size:17px; color:var(--muted);}
+  .verdict-line{font-size:15.5px; line-height:1.7; margin:16px auto 0; max-width:24em; }
+  .risk-badge{display:inline-flex; align-items:center; gap:8px; margin-top:18px; background:rgba(255,255,255,.06); border:1.5px solid rgba(255,255,255,.12); border-radius:99px; padding:8px 18px; font-family:'Jua'; font-size:16px;}
+  .block{background:var(--card); border:1.5px solid rgba(255,255,255,.08); border-radius:20px; padding:20px 18px; margin-top:18px; box-shadow:0 10px 26px rgba(0,0,0,.24);}
+  .block h3{font-size:17px; margin:0 0 4px; display:flex; align-items:center; gap:8px;}
+  .block .bsub{color:var(--muted); font-size:12.5px; margin:0 0 14px;}
+  .basis{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:9px;}
+  .basis li{display:flex; gap:10px; align-items:flex-start; font-size:15px; line-height:1.5; }
+  .basis li .ic{flex:0 0 auto; margin-top:1px;}
+  .steps{list-style:none; padding:0; margin:0; counter-reset:s; display:flex; flex-direction:column; gap:14px;}
+  .steps li{display:flex; gap:13px; align-items:flex-start;}
+  .steps li .num{flex:0 0 auto; width:28px; height:28px; border-radius:50%; background:linear-gradient(120deg,var(--accent1),var(--accent2)); color:#241a10; font-family:'Jua'; font-size:15px; display:flex; align-items:center; justify-content:center;}
+  .steps li .txt{font-size:15px; line-height:1.6; }
+  .steps li .txt b{font-family:'Jua'; font-weight:400; display:block; margin-bottom:2px; font-size:15.5px;}
+  .cardshare{text-align:center; margin-top:18px;}
+  #shareImg{width:100%; max-width:340px; border-radius:18px; box-shadow:0 14px 34px rgba(0,0,0,.4); display:block; margin:0 auto 14px;}
+  .btnrow{display:flex; gap:10px;}
+  .btnrow .btn{margin-top:0;}
+  .btn.sm{font-size:15.5px; padding:14px;}
+
+  /* footer */
+  .footer{text-align:center; margin-top:28px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+  .mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+  .mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+  .mf-eyebrow::after{transform:scaleX(-1);}
+  .mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+  .mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em; background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+  .mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+  .toast{position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-24px); background:rgba(36,26,61,.97); border:1.5px solid var(--accent2); color:var(--cream); padding:12px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none; transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; text-align:center;}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+  :focus-visible{outline:3px solid rgba(122,166,255,.7); outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="wrap">
+
+  <!-- ===== HOME ===== -->
+  <section class="screen active" id="home">
+    <div class="home-top">
+      <div class="signal-emojis">🟢🟡🔴</div>
+      <h1>あの人、<br><span class="grad">切る？ 切らない？</span></h1>
+      <p>ふと頭に浮かぶ <b>あの人ひとり</b>.<br>その人の本当の行動15個で、<br>いまのこの関係に信号をともしてみる。</p>
+    </div>
+    <div class="namebox">
+      <label>だれを診断する？</label>
+      <div class="hint">あの人のあだ名・イニシャル・呼び名を書いてね。このあと質問と結果に、この名前が出てきます。</div>
+      <input id="nameInput" type="text" maxlength="12" autocomplete="off" placeholder="例: J、あの先輩、ミナ…" />
+    </div>
+    <button class="btn" id="startBtn" disabled>診断をはじめる</button>
+    <div class="disc">🔒 入力した名前はこの画面の中だけで使われ、どこにも保存・送信されません。<br>遊び感覚の関係チェックです。心の向きは、最後はあなたが決めます。</div>
+  </section>
+
+  <!-- ===== QUIZ ===== -->
+  <section class="screen" id="quiz">
+    <div class="meter-card">
+      <div class="meter-head">
+        <div class="who" id="mWho">あの人</div>
+        <div class="cnt" id="mCnt">1 / 15</div>
+      </div>
+      <div class="meter-track">
+        <div class="needle" id="needle">🟢</div>
+      </div>
+      <div class="zones">
+        <span id="z0">🟢 継続</span>
+        <span id="z1">🟡 警戒</span>
+        <span id="z2">🔴 損切り</span>
+      </div>
+      <div class="live-verdict" id="liveV">まだ穏やかです 🟢</div>
+    </div>
+
+    <div class="qwrap">
+      <div class="qcard" id="qcard">
+        <span class="qtag" id="qtag">チェック 1</span>
+        <div class="qtext" id="qtext"></div>
+        <div class="qsub">あの人の <b>実際の行動</b>を思い浮かべて、正直に。</div>
+      </div>
+      <div class="opts" id="opts"></div>
+      <div class="navrow"><button class="backbtn" id="backBtn" style="visibility:hidden">← 前の質問</button></div>
+    </div>
+  </section>
+
+  <!-- ===== RESULT ===== -->
+  <section class="screen" id="result">
+    <div class="verdict-hero">
+      <div class="verdict-emoji" id="rEmoji">🟢</div>
+      <div class="verdict-label" id="rLabel">継続</div>
+      <div class="verdict-sub" id="rSub">健やかな関係</div>
+      <div class="verdict-line" id="rLine"></div>
+      <div class="risk-badge">危険サイン <span id="rPct" class="grad" style="font-size:20px;">0%</span></div>
+    </div>
+
+    <div class="block" id="basisBlock">
+      <h3 id="basisTitle">🔎 こう判定しました</h3>
+      <p class="bsub" id="basisSub"></p>
+      <ul class="basis" id="basisList"></ul>
+    </div>
+
+    <div class="block" id="adviceBlock">
+      <h3 id="adviceTitle"></h3>
+      <p class="bsub" id="adviceSub"></p>
+      <ol class="steps" id="adviceList"></ol>
+    </div>
+
+    <div class="cardshare">
+      <img id="shareImg" alt="結果シェアカード" />
+      <div class="btnrow">
+        <button class="btn sm" id="saveBtn">📸 結果カードを保存</button>
+        <button class="btn sm ghost" id="shareBtn" style="color:var(--muted)">シェア</button>
+      </div>
+    </div>
+
+    <button class="btn ghost" id="againBtn" style="margin-top:16px;">🔁 別の人でもう一度</button>
+    <canvas id="cardCanvas" width="1080" height="1350" style="display:none"></canvas>
+  </section>
+
+  
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/ja/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 ドーパミン実験室 — ほかのテストを見る →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意味と面白さの工場</span></div>
+    <div class="mf-logo">ミミファクトリー</div>
+    <div class="mf-caption">株式会社ヨンギョル ファミリーカンパニー</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+<script>
+const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+
+const Q = [
+  {t:"NAMEは私との約束を急にキャンセルしたり、よく遅れてくる。", green:false, tag:"約束", bad:"約束を軽く見る", good:"約束を守るほう"},
+  {t:"私がつらい話をするとき、NAMEは最後まで耳を傾けて聞いてくれる。", green:true, tag:"傾聴", bad:"私の話をあまり聞かない", good:"私の話をちゃんと聞いてくれる"},
+  {t:"お金のこと（貸し借り・会計）で、NAMEはさりげなく私に負担を押しつける。", green:false, tag:"お金", bad:"お金の負担を押しつける", good:"お金にはきれい"},
+  {t:"NAMEは自分の頼みは当然のようにするのに、私が断ると不機嫌になったりすねる。", green:false, tag:"頼み", bad:"頼みは当然、断ると不満", good:"頼みごともお互い気楽"},
+  {t:"NAMEは他人の悪口をよく言ったり、私の話を別のところに漏らしたことがある。", green:false, tag:"陰口", bad:"悪口を言い、話を漏らす", good:"陰で言いふらさない"},
+  {t:"NAMEに会って家に帰ると、なぜか気力が抜けて心が重くなる。", green:false, tag:"エネルギー", bad:"会うと気力が抜ける", good:"会うと心が軽くなる"},
+  {t:"私にいいことがあったとき、NAMEは心から一緒に喜んでくれる。", green:true, tag:"応援", bad:"私の喜びを一緒に喜ばない", good:"私の喜びを一緒に喜ぶ"},
+  {t:"NAMEは間違いをしても、きちんと謝らずに流してしまう。", green:false, tag:"謝罪", bad:"謝ることを知らない", good:"間違いは謝る"},
+  {t:"NAMEはそれとなく私を見下したり、けなすような言い方をする。", green:false, tag:"尊重", bad:"そっと私をけなす", good:"私を尊重してくれる"},
+  {t:"NAMEは必要なときだけ連絡してきて、普段は私の連絡を既読スルーしたり、そっけなく返す。", green:false, tag:"連絡", bad:"必要なときだけ連絡", good:"普段から連絡が取れる"},
+  {t:'私が「それは嫌」と線を引いても、NAMEは押し続けてくる。', green:false, tag:"警戒", bad:"私の境界を押してくる", good:"私の線を尊重する"},
+  {t:"NAMEと一緒にいるとき、私は顔色をうかがわず、楽に自分でいられる。", green:true, tag:"安心", bad:"一緒だと落ち着かない", good:"一緒だと落ち着く"},
+  {t:"NAMEは私を他人と比べたり、私の選択をそれとなく軽んじる。", green:false, tag:"比較", bad:"私を比べて軽んじる", good:"私の選択を尊重する"},
+  {t:"私が本当につらいとき、NAMEはそばで私を守ってくれたことがある。", green:true, tag:"そば", bad:"つらいときそばにいなかった", good:"つらいときそばにいてくれる"},
+  {t:"NAMEとの会話はいつも相手の話ばかりで、私の話は後回しだ。", green:false, tag:"会話", bad:"会話が自分中心", good:"会話がお互いに行き交う"}
+];
+const OPTS = ["まったくない","たまにある","けっこうある","いつもそう"]; // value 0~3
+
+const V = {
+  green:  {key:'green',  emoji:'🟢', label:'継続',  sub:'健やかな関係',      color:'#3ddc84', word:'継続'},
+  yellow: {key:'yellow', emoji:'🟡', label:'警戒',  sub:'少し距離が必要です', color:'#ffce4a', word:'警戒'},
+  red:    {key:'red',    emoji:'🔴', label:'損切り',  sub:'損切りのサインが灯りました', color:'#ff5b6e', word:'損切り'}
+};
+function verdictOf(ratio){ return ratio < 0.34 ? V.green : ratio < 0.60 ? V.yellow : V.red; }
+
+// ----- state -----
+let name = "";
+let idx = 0;
+let risks = []; // 各設問 risk 寄与度(0~3)
+
+// ----- helpers -----
+function $(id){ return document.getElementById(id); }
+function vibrate(p){ if(!RM && navigator.vibrate) try{ navigator.vibrate(p); }catch(e){} }
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+let _tt; function toast(m){ const t=$('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),1900); }
+function popEl(el){ if(RM)return; el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+
+function josa(w, kind){
+  if(!w) return kind==='eun'?'eun':kind==='eul'?'eul':kind==='gwa'?'gwa':'i';
+  const c = w.charCodeAt(w.length-1);
+  let bat=false;
+  if(c>=0xAC00 && c<=0xD7A3) bat=((c-0xAC00)%28)!==0;
+  const m={eun:['eun','neun'],eul:['eul','reul'],gwa:['gwa','wa'],i:['i','ga']};
+  return m[kind][bat?0:1];
+}
+function fill(t){
+  return t.replace(/\[(.)\]/g,(_,k)=>josa(name,k)).replace(/NAME/g, name);
+}
+
+function show(screen){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  $(screen).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+
+function setTheme(v){
+  const r=document.documentElement.style;
+  const map={green:['#3ddc84','#25b76a'], yellow:['#ffce4a','#f0a92a'], red:['#ff5b6e','#e23a55']};
+  r.setProperty('--accent1', map[v][0]); r.setProperty('--accent2', map[v][1]);
+}
+
+
+$('nameInput').addEventListener('input', e=>{
+  $('startBtn').disabled = e.target.value.trim().length===0;
+});
+$('nameInput').addEventListener('keydown', e=>{ if(e.key==='Enter' && e.target.value.trim()) start(); });
+$('startBtn').addEventListener('click', start);
+
+function start(){
+  const v=$('nameInput').value.trim();
+  if(!v) return;
+  name = v;
+  idx = 0; risks = [];
+  $('mWho').textContent = name;
+  setTheme('green');
+  show('quiz');
+  renderQ();
+  updateMeter();
+}
+
+function renderQ(){
+  const q=Q[idx];
+  $('qtag').textContent = "チェック "+(idx+1);
+  $('qtext').textContent = fill(q.t);
+  popEl($('qcard'));
+  $('mCnt').textContent = (idx+1)+" / "+Q.length;
+
+  const box=$('opts'); box.innerHTML="";
+  OPTS.forEach((label,val)=>{
+    const b=document.createElement('button');
+    b.className='opt';
+    b.innerHTML='<span class="dot"></span>'+label;
+    b.addEventListener('click', e=>choose(val, e));
+    box.appendChild(b);
+  });
+  $('backBtn').style.visibility = idx>0 ? 'visible':'hidden';
+}
+$('backBtn').addEventListener('click', ()=>{
+  if(idx>0){ idx--; risks.pop(); renderQ(); updateMeter(); }
+});
+
+function choose(val, e){
+  const q=Q[idx];
+  const risk = q.green ? (3-val) : val;
+  risks[idx] = risk;
+
+
+  vibrate(22);
+  const ratioNow = curRatio();
+  const vv = verdictOf(ratioNow);
+  setTheme(vv.key);
+  burst(e, vv.color);
+
+  updateMeter();
+
+  if(idx < Q.length-1){
+    idx++;
+    setTimeout(renderQ, 150);
+  } else {
+    setTimeout(finish, 280);
+  }
+}
+
+function curRatio(){
+  const answered = risks.filter(r=>r!==undefined).length;
+  if(answered===0) return 0;
+  const sum = risks.reduce((a,b)=>a+(b||0),0);
+  return sum/(answered*3);
+}
+
+function updateMeter(){
+  const ratio = curRatio();
+  const pct = Math.max(3, Math.min(97, ratio*100));
+  $('needle').style.left = pct+"%";
+  const v = verdictOf(ratio);
+  $('needle').textContent = v.emoji;
+  // zone highlight
+  ['z0','z1','z2'].forEach(z=>$(z).classList.remove('on'));
+  $({green:'z0',yellow:'z1',red:'z2'}[v.key]).classList.add('on');
+  const answered = risks.filter(r=>r!==undefined).length;
+  const lv=$('liveV');
+  if(answered===0){ lv.textContent="まだ穏やかです 🟢"; }
+  else {
+    const msg={green:"いまのサイン: 継続より 🟢", yellow:"いまのサイン: 警戒ゾーン 🟡", red:"いまのサイン: 損切りへ 🔴"}[v.key];
+    lv.textContent = msg;
+  }
+}
+
+
+function burst(e, color){
+  if(RM || typeof confetti!=='function') return;
+  let x=.5,y=.4;
+  if(e && e.clientX){ x=e.clientX/window.innerWidth; y=e.clientY/window.innerHeight; }
+  confetti({particleCount:16, spread:52, startVelocity:24, gravity:.9, scalar:.8, ticks:80,
+    origin:{x,y}, colors:[color,'#ffffff']});
+}
+
+
+function finish(){
+  const total = risks.reduce((a,b)=>a+(b||0),0);
+  const maxR = Q.length*3;               // 45
+  const ratio = total/maxR;
+  const pct = Math.round(ratio*100);
+  const v = verdictOf(ratio);
+  setTheme(v.key);
+
+  $('rEmoji').textContent = v.emoji;
+  $('rLabel').textContent = v.label;
+  $('rLabel').style.color = v.color;
+  $('rSub').textContent = v.sub;
+  $('rPct').textContent = pct+"%";
+
+  const line = {
+    green:  `今の ${name}, この関係は守る価値があります。おたがいを生かし合う仲です。`,
+    yellow: `${name}, 悪い人ではないけれど、今は少し距離が必要な相手です。`,
+    red:    `${name}との今の関係は、あなたを少しずつすり減らしています。もう手放すときです。`
+  }[v.key];
+  $('rLine').textContent = line;
+
+  renderBasis(v);
+  renderAdvice(v);
+
+  show('result');
+
+
+  if(v.key==='green'){
+    vibrate([20,40,20]);
+    if(!RM && typeof confetti==='function'){
+      confetti({particleCount:120, spread:75, origin:{y:.35}, colors:['#3ddc84','#8affc0','#ffffff']});
+      setTimeout(()=>confetti({particleCount:80, spread:100, origin:{y:.3}, colors:['#3ddc84','#ffce4a']}),260);
+    }
+  } else if(v.key==='yellow'){
+    vibrate(40);
+    if(!RM && typeof confetti==='function') confetti({particleCount:60, spread:70, origin:{y:.35}, colors:['#ffce4a','#ffe08a','#ffffff']});
+  } else {
+    vibrate([30,60,30]);
+  }
+
+  drawCard(v, pct, line);
+}
+
+function renderBasis(v){
+  const items = Q.map((q,i)=>({q, i, risk:risks[i]||0}));
+  const list=$('basisList'); list.innerHTML="";
+  if(v.key==='green'){
+    $('basisTitle').textContent = "💚 この関係を生かしているのは、こんな点";
+    $('basisSub').textContent = "あなたが良いと答えた行動です。";
+    const good = items.filter(x=>x.risk<=1).sort((a,b)=>a.risk-b.risk).slice(0,4);
+    (good.length?good:items.sort((a,b)=>a.risk-b.risk).slice(0,3)).forEach(x=>{
+      addBasis('✅', x.q.good);
+    });
+  } else {
+    $('basisTitle').textContent = "🔎 引っかかったのは、こんな点";
+    $('basisSub').textContent = v.key==='red'
+      ? "あなたの答えの中で、くり返されると関係を壊していくサインです。"
+      : "まだ調整できる、気に留めておきたいサインです。";
+    const bad = items.filter(x=>x.risk>=2).sort((a,b)=>b.risk-a.risk).slice(0,4);
+    if(bad.length===0){
+      addBasis('•', "大きな問題行動はなかったけれど、あいまいな瞬間が積み重なっています。");
+    } else {
+      bad.forEach(x=> addBasis(x.risk>=3?'🚨':'⚠️', x.q.bad));
+    }
+
+    const oneGood = items.filter(x=>x.risk===0)[0];
+    if(oneGood) addBasis('💚', "それでも "+oneGood.q.good+".");
+  }
+}
+function addBasis(ic, text){
+  const li=document.createElement('li');
+  li.innerHTML='<span class="ic">'+ic+'</span><span>'+text+'</span>';
+  $('basisList').appendChild(li);
+}
+
+const ADVICE = {
+  green: {
+    title:"🌱 この関係をもっと確かに",
+    sub:"良い仲ほど、伝えることが関係を育てます。",
+    steps:[
+      ["感謝を言葉に","当たり前と思わずに、「あなたがいてくれてよかった」をときどき声に出してみて。"],
+      ["私もそばで支える","受け取った分、あの人がつらいときは先に声をかけて。"],
+      ["ときどきの点検は続ける","良い関係も変わります。いまの心地よさを当然と思わず、ときどき振り返って。"]
+    ]
+  },
+  yellow: {
+    title:"🟡 損切りの前に、まず試したい3つ",
+    sub:"切る前に、関係を変える余地はまだあります。",
+    steps:[
+      ["正直な話を一度","つらかった行動をひとつだけ選んで、「あのときこれが苦しかった」とアイメッセージで伝えて。その反応が関係の答えです。"],
+      ["小さな境界をひとつ","すべてに合わせず、負担な頼みをひとつ「今回は難しい」と断ってみて。その反応を観察して。"],
+      ["距離を置いて観察","2〜3週間、連絡の頻度を減らしてみて。その間に心が軽くなるか、それとも恋しくなるかが本当のサインです。"]
+    ]
+  },
+  red: {
+    title:"🔴 罪悪感なく、健やかに離れる3ステップ",
+    sub:"離れるのはあなたが悪いからではなく、あなたを守るためです。",
+    steps:[
+      ["認める","「これは私が足りないからではなく、この関係が私をすり減らすからだ」。罪悪感はあなたが優しい証拠であって、とどまる理由ではありません。"],
+      ["少しずつフェードアウト","爆発的な絶縁ではなく、連絡・会う回数を段階的に減らして。返信はゆっくり短く、新しい約束はつくらない。"],
+      ["空いた場所を満たす","あの人に使っていた時間とエネルギーを、自分を満たす関係・活動へ移して。離れることが喪失ではなく回復になるように。"]
+    ]
+  }
+};
+function renderAdvice(v){
+  const a=ADVICE[v.key];
+  $('adviceTitle').textContent = a.title;
+  $('adviceSub').textContent = a.sub;
+  const ol=$('adviceList'); ol.innerHTML="";
+  a.steps.forEach((s,i)=>{
+    const li=document.createElement('li');
+    li.innerHTML='<span class="num">'+(i+1)+'</span><span class="txt"><b>'+s[0]+'</b>'+s[1]+'</span>';
+    ol.appendChild(li);
+  });
+}
+
+
+function roundRect(ctx,x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+function wrap(ctx,text,x,y,maxW,lh){
+  const words=text.split(' '); let line=''; let yy=y;
+  for(const w of words){
+    const test=line?line+' '+w:w;
+    if(ctx.measureText(test).width>maxW && line){ ctx.fillText(line,x,yy); line=w; yy+=lh; }
+    else line=test;
+  }
+  ctx.fillText(line,x,yy); return yy;
+}
+function drawCard(v, pct, line){
+  const cv=$('cardCanvas'), ctx=cv.getContext('2d');
+  const W=cv.width, H=cv.height;
+  const bg=ctx.createLinearGradient(0,0,W,H);
+  bg.addColorStop(0,'#16111f'); bg.addColorStop(1,'#241830');
+  ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+
+  const g=ctx.createRadialGradient(W/2,360,60,W/2,360,620);
+  g.addColorStop(0, v.color+'55'); g.addColorStop(1,'transparent');
+  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+
+  ctx.strokeStyle='rgba(255,255,255,.10)'; ctx.lineWidth=3;
+  roundRect(ctx,60,60,W-120,H-120,44); ctx.stroke();
+
+  ctx.textAlign='center';
+  ctx.fillStyle='#c8bcda'; ctx.font='34px "Noto Sans KR", sans-serif';
+  ctx.fillText('あの人、切るべき？', W/2, 175);
+
+  ctx.font='200px "Jua", sans-serif';
+  ctx.fillText(v.emoji, W/2, 470);
+
+  ctx.fillStyle=v.color; ctx.font='120px "Jua", sans-serif';
+  ctx.fillText(v.label, W/2, 640);
+  ctx.fillStyle='#fff6ec'; ctx.font='44px "Jua", sans-serif';
+  ctx.fillText(v.sub, W/2, 710);
+
+
+  ctx.fillStyle='#fff6ec'; ctx.font='52px "Jua", sans-serif';
+  const who = name.length>10 ? name.slice(0,10)+'…' : name;
+  ctx.fillText('『'+who+'』 危険サイン '+pct+'%', W/2, 830);
+
+
+  const bx=140, by=880, bw=W-280, bh=34;
+  const grad=ctx.createLinearGradient(bx,0,bx+bw,0);
+  grad.addColorStop(0,'#3ddc84'); grad.addColorStop(.5,'#ffce4a'); grad.addColorStop(1,'#ff5b6e');
+  ctx.fillStyle=grad; roundRect(ctx,bx,by,bw,bh,17); ctx.fill();
+  const nx=bx+bw*Math.max(.03,Math.min(.97,pct/100));
+  ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(nx,by+bh/2,30,0,7); ctx.fill();
+  ctx.fillStyle=v.color; ctx.beginPath(); ctx.arc(nx,by+bh/2,15,0,7); ctx.fill();
+
+
+  ctx.fillStyle='#e8dcf2'; ctx.font='38px "Noto Sans KR", sans-serif';
+  wrap(ctx, line, W/2, 1010, W-260, 56);
+
+
+  ctx.fillStyle='#9a8fc0'; ctx.font='24px "Noto Sans KR", sans-serif';
+  ctx.fillText('意味と面白さの工場', W/2, 1225);
+  const lg=ctx.createLinearGradient(W/2-160,0,W/2+160,0);
+  lg.addColorStop(0,'#5ee7d8'); lg.addColorStop(.4,'#7aa6ff'); lg.addColorStop(.7,'#b78bf5'); lg.addColorStop(1,'#ff8ad0');
+  ctx.fillStyle=lg; ctx.font='60px "Jua", sans-serif';
+  ctx.fillText('ミミファクトリー', W/2, 1290);
+
+  try{ $('shareImg').src = cv.toDataURL('image/png'); }catch(e){}
+}
+
+if(document.fonts && document.fonts.ready){
+  document.fonts.ready.then(()=>{ if($('result').classList.contains('active')){ /* redraw if needed */ } });
+}
+
+$('saveBtn').addEventListener('click', ()=>{
+  const url=$('cardCanvas').toDataURL('image/png');
+  const a=document.createElement('a');
+  a.href=url; a.download='損切り診断_'+name+'.png'; a.click();
+  toast('結果カードを保存しました 📸');
+  vibrate(30);
+});
+$('shareBtn').addEventListener('click', async ()=>{
+  const cv=$('cardCanvas');
+  try{
+    if(navigator.canShare && cv.toBlob){
+      cv.toBlob(async b=>{
+        const file=new File([b],'損切り診断.png',{type:'image/png'});
+        if(navigator.canShare({files:[file]})){
+          await navigator.share({files:[file], title:'あの人、切るべき？', text:'私も診断してみた 🚦'});
+        } else { fallbackShare(); }
+      });
+    } else fallbackShare();
+  }catch(e){  }
+});
+function fallbackShare(){
+  $('saveBtn').click();
+  toast('画像を保存しました！どこにでもシェアしてね 🚦');
+}
+
+$('againBtn').addEventListener('click', ()=>{
+  name=""; idx=0; risks=[];
+  $('nameInput').value=""; $('startBtn').disabled=true;
+  setTheme('green');
+  show('home');
+  setTimeout(()=>$('nameInput').focus(),200);
+});
+
+
+window.addEventListener('load', ()=>{ setTimeout(()=>$('nameInput').focus(),300); });
+</script>
+</body>
+</html>

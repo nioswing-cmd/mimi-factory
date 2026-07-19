@@ -83,6 +83,18 @@
    "teaser": "apps/tarot.html",
    "premium": "apps/tarot.html",
    "desc": "抽的不是命運，是問題 — 22張象徵變成心理學的鏡子"
+  },
+  {
+   "id": "cut-them-off",
+   "type": "test",
+   "title": "那個人，該斷捨離嗎？",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/cut-them-off.html",
+   "premium": "apps/cut-them-off.html",
+   "desc": "用 15 個行為，替心裡那個人亮起關係紅綠燈。"
   }
  ],
  "updated": "2026-07-19"
