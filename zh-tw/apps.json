@@ -119,6 +119,18 @@
    "teaser": "apps/attachment-style.html",
    "premium": "apps/attachment-style.html",
    "desc": "越靠近越會冒出來的我 — 4 種依附類型測驗"
+  },
+  {
+   "id": "recovery-speed",
+   "type": "test",
+   "title": "回復速度測驗",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/recovery-speed.html",
+   "premium": "apps/recovery-speed.html",
+   "desc": "崩潰隔天，你會怎麼重新站起來？12 題測出回復速度 4 種類型"
   }
  ],
  "updated": "2026-07-19"

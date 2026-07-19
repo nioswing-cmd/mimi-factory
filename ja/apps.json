@@ -119,6 +119,18 @@
    "teaser": "apps/attachment-style.html",
    "premium": "apps/attachment-style.html",
    "desc": "親しくなると出てくる私 — 4つの愛着タイプ診断"
+  },
+  {
+   "id": "recovery-speed",
+   "type": "test",
+   "title": "回復スピードテスト",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/recovery-speed.html",
+   "premium": "apps/recovery-speed.html",
+   "desc": "崩れた翌日、どう立ち直る？ 12問でわかる回復スピード4タイプ"
   }
  ],
  "updated": "2026-07-19"

@@ -119,6 +119,18 @@
    "teaser": "apps/attachment-style.html",
    "premium": "apps/attachment-style.html",
    "desc": "The you that comes out when you get close — 4 attachment types"
+  },
+  {
+   "id": "recovery-speed",
+   "type": "test",
+   "title": "Recovery Speed Test",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/recovery-speed.html",
+   "premium": "apps/recovery-speed.html",
+   "desc": "The morning after you fall apart — how fast do you bounce back? 12 questions, 4 types."
   }
  ],
  "updated": "2026-07-19"

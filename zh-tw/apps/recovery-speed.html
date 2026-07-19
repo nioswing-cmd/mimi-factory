@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>崩潰隔天的我 — 回復速度測驗</title>
+<meta name="description" content="崩潰的隔天，我會怎麼重新站起來？12 題測出你的回復速度，共 4 種類型。">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#0f1330; --bg2:#241a44;
+  --accent1:#ffd56b; --accent2:#ff8a5b;
+  --cream:#fff6ec; --muted:#c3b9dd;
+  --card:#1d1a3d;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  color:var(--cream);
+  min-height:100dvh;
+  background:
+    radial-gradient(120% 80% at 82% -12%, rgba(255,180,90,.13), transparent 55%),
+    radial-gradient(120% 90% at 8% 112%, rgba(120,140,255,.16), transparent 55%),
+    linear-gradient(165deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  transition:background .9s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.wrap{max-width:520px; margin:0 auto; padding:22px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(105deg,#ffd56b,#ff8a5b 45%,#ff6b9e);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em; margin:0;}
+.screen{display:none; animation:fadeIn .5s ease both;}
+.screen.on{display:block;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1.2deg); opacity:.4;}60%{transform:scale(1.02) rotate(.5deg);}100%{transform:scale(1) rotate(0); opacity:1;}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+
+/* ---------- HOME ---------- */
+.hero{flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; gap:16px; padding:14px 4px 30px;}
+.eyebrow{font-size:12.5px; letter-spacing:.32em; color:var(--muted); text-indent:.32em;}
+.hero .big{font-size:37px; line-height:1.24;}
+.moon{font-size:64px; animation:float 4s ease-in-out infinite; filter:drop-shadow(0 8px 22px rgba(255,180,90,.35));}
+.lede{font-size:15px; color:var(--muted); line-height:1.75;  max-width:400px; margin:0 auto;}
+.pill4{display:flex; gap:7px; justify-content:center; flex-wrap:wrap; margin-top:2px;}
+.pill4 span{font-size:12.5px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); padding:7px 12px; border-radius:99px;}
+.btn{
+  font-family:'Jua',sans-serif; font-size:20px; color:#2a1330; border:none; cursor:pointer;
+  padding:17px 22px; border-radius:18px; width:100%;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2));
+  box-shadow:0 10px 28px -8px rgba(255,138,91,.6); transition:transform .15s, box-shadow .3s;
+}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent; color:var(--cream); border:1.5px solid rgba(255,255,255,.22); box-shadow:none; font-size:16px; padding:14px;}
+.hint{font-size:12px; color:var(--muted); margin-top:4px;}
+
+/* ---------- QUIZ ---------- */
+.topbar{position:sticky; top:0; z-index:5; padding:10px 0 12px; margin-bottom:6px;
+  background:linear-gradient(180deg, rgba(15,19,48,.96) 70%, transparent);}
+.axis{margin-bottom:11px;}
+.axisrow{display:flex; align-items:center; gap:9px; font-size:11.5px; color:var(--muted); margin-bottom:5px;}
+.axisrow b{color:var(--cream); font-family:'Jua'; font-weight:400; font-size:12.5px;}
+.axisrow .mid{flex:1; text-align:center; letter-spacing:.14em; opacity:.6;}
+.slider{position:relative; height:11px; border-radius:99px; background:rgba(255,255,255,.09); overflow:hidden;}
+.sliderfill{position:absolute; top:0; bottom:0; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  box-shadow:0 0 14px 1px var(--accent2); transition:left .5s cubic-bezier(.22,1,.36,1), width .5s cubic-bezier(.22,1,.36,1);}
+.counter{display:flex; justify-content:space-between; align-items:center; margin-top:9px; font-size:12.5px; color:var(--muted);}
+.livetype{font-family:'Jua'; font-size:15px;}
+.livetype .em{font-size:19px;}
+.qcard{background:var(--card); border:1px solid rgba(255,255,255,.09); border-radius:22px; padding:26px 20px 22px; margin-top:6px;
+  box-shadow:0 18px 44px -22px rgba(0,0,0,.7);}
+.qnum{font-size:12.5px; color:var(--accent1); letter-spacing:.06em; margin-bottom:10px; font-family:'Jua';}
+.qtext{font-size:20px; line-height:1.5;  min-height:60px;}
+.opts{margin-top:20px; display:flex; flex-direction:column; gap:12px;}
+.opt{
+  text-align:left; cursor:pointer; width:100%; color:var(--cream);
+  background:rgba(255,255,255,.045); border:1.5px solid rgba(255,255,255,.14);
+  border-radius:15px; padding:17px 16px 17px 52px; font-size:15.5px; line-height:1.5; position:relative;
+  font-family:'Noto Sans KR'; transition:transform .12s, border-color .2s, background .2s; 
+}
+.opt:hover{border-color:rgba(255,255,255,.34); background:rgba(255,255,255,.075);}
+.opt:active{transform:scale(.985);}
+.opt .tag{position:absolute; left:15px; top:50%; transform:translateY(-50%);
+  width:26px; height:26px; border-radius:50%; display:grid; place-items:center;
+  font-family:'Jua'; font-size:13px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); color:var(--cream);}
+.opt:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+.back{background:none; border:none; color:var(--muted); font-size:13px; cursor:pointer; margin-top:16px; padding:8px; font-family:'Noto Sans KR';}
+
+/* ---------- RESULT ---------- */
+.rcard{background:var(--card); border:1px solid rgba(255,255,255,.1); border-radius:26px; padding:30px 22px 26px; text-align:center;
+  box-shadow:0 22px 60px -26px rgba(0,0,0,.8); position:relative; overflow:hidden;}
+.rcard::before{content:""; position:absolute; inset:0; background:radial-gradient(90% 60% at 50% 0%, rgba(255,180,90,.16), transparent 70%); pointer-events:none;}
+.rEm{font-size:70px; animation:float 4s ease-in-out infinite; filter:drop-shadow(0 8px 20px rgba(255,180,90,.4));}
+.rKind{font-size:14px; letter-spacing:.2em; color:var(--accent1); margin-top:6px;}
+.rName{font-size:32px; margin-top:4px; line-height:1.2;}
+.rSub{font-size:14.5px; color:var(--muted); margin-top:10px; line-height:1.7; }
+.speedbox{margin:22px auto 4px; max-width:340px;}
+.speedhead{display:flex; justify-content:space-between; align-items:baseline; font-size:13px; color:var(--muted); margin-bottom:7px;}
+.speedhead b{font-family:'Jua'; font-size:26px; color:var(--cream);}
+.speedbar{height:16px; border-radius:99px; background:rgba(255,255,255,.09); overflow:hidden;}
+.speedfill{height:100%; width:0; border-radius:99px; background:linear-gradient(90deg,var(--accent1),var(--accent2)); box-shadow:0 0 16px 1px var(--accent2); transition:width 1.1s cubic-bezier(.22,1,.36,1);}
+.sect{text-align:left; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); border-radius:16px; padding:16px 17px; margin-top:14px;}
+.sect h3{font-size:15px; margin-bottom:8px; display:flex; align-items:center; gap:7px;}
+.sect p,.sect li{font-size:14px; line-height:1.72; color:#efe6f5; }
+.sect ul{margin:0; padding-left:18px;}
+.map{margin-top:16px;}
+.maprow{display:flex; align-items:center; gap:10px; margin:9px 0; font-size:13px;}
+.maprow .lb{width:92px; flex-shrink:0; color:var(--muted);}
+.maprow .lb b{color:var(--cream); font-family:'Jua'; font-weight:400;}
+.mbar{flex:1; height:10px; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden;}
+.mfill{display:block; height:100%; width:0; border-radius:99px; transition:width .9s cubic-bezier(.22,1,.36,1);}
+.actions{display:flex; flex-direction:column; gap:10px; margin-top:22px;}
+
+.toast{position:fixed; left:50%; top:16px; transform:translateX(-50%) translateY(-24px);
+  background:rgba(29,26,61,.97); border:1.5px solid var(--accent2); color:var(--cream);
+  padding:12px 20px; border-radius:99px; font-size:13.5px; opacity:0; pointer-events:none;
+  transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; box-shadow:0 10px 30px -10px rgba(0,0,0,.6);}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center; margin-top:26px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  <!-- ======= HOME ======= -->
+  <section id="home" class="screen on">
+    <div class="hero">
+      <div class="eyebrow">回復速度測驗</div>
+      <div class="moon">🌙</div>
+      <h1 class="big">崩潰隔天的我，<br><span class="grad">會怎麼重新站起來？</span></h1>
+      <p class="lede">每個人都有崩潰的一天。重要的是 <b>隔天。</b><br>用 12 個問題，找出你的 <b>回復速度 4 種</b> 類型。</p>
+      <div class="pill4">
+        <span>⚡ 閃電回復</span><span>🛡️ 計畫回復</span><span>🌊 浪潮回復</span><span>🌙 深海回復</span>
+      </div>
+      <div style="margin-top:14px;">
+        <button class="btn" onclick="start()">測出我的回復速度 →</button>
+        <div class="hint">約 1 分鐘 · 12 題 · 沒有標準答案</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= QUIZ ======= -->
+  <section id="quiz" class="screen">
+    <div class="topbar">
+      <div class="axis">
+        <div class="axisrow"><b>🌙 獨自</b><span class="mid">充電方式</span><b>一起 👥</b></div>
+        <div class="slider"><div class="sliderfill" id="fillA"></div></div>
+      </div>
+      <div class="axis">
+        <div class="axisrow"><b>💗 感受</b><span class="mid">回復動力</span><b>行動 🏃</b></div>
+        <div class="slider"><div class="sliderfill" id="fillB"></div></div>
+      </div>
+      <div class="counter">
+        <span id="cprog">1 / 12</span>
+        <span class="livetype" id="clive"><span class="em">🌫️</span> 類型逐漸浮現中…</span>
+      </div>
+    </div>
+
+    <div class="qcard" id="qcard">
+      <div class="qnum" id="qnum">Q1</div>
+      <div class="qtext" id="qtext">—</div>
+      <div class="opts" id="opts"></div>
+    </div>
+    <button class="back" id="backBtn" onclick="back()">← 上一題</button>
+  </section>
+
+  <!-- ======= RESULT ======= -->
+  <section id="result" class="screen">
+    <div class="rcard">
+      <div class="rEm" id="rEm">⚡</div>
+      <div class="rKind" id="rKind">回復速度類型</div>
+      <h2 class="rName" id="rName">—</h2>
+      <p class="rSub" id="rSub">—</p>
+
+      <div class="speedbox">
+        <div class="speedhead"><span>我的回復速度</span><b id="rSpeedNum">0%</b></div>
+        <div class="speedbar"><div class="speedfill" id="rSpeedFill"></div></div>
+      </div>
+    </div>
+
+    <div class="sect"><h3>🌱 你是這樣回復的人</h3><p id="rYou">—</p></div>
+    <div class="sect"><h3>🧭 隔天，試試這樣做</h3><ul id="rDo"></ul></div>
+    <div class="sect"><h3>⚠️ 只要小心這個</h3><p id="rWatch">—</p></div>
+
+    <div class="sect map">
+      <h3>📊 我的回復傾向地圖</h3>
+      <div id="mapRows"></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" onclick="shareResult()">分享結果 📷</button>
+      <button class="btn ghost" onclick="restart()">再玩一次 ↻</button>
+    </div>
+  </section>
+
+  <!-- ======= BRAND FOOTER ======= -->
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/zh-tw/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 多巴胺實驗室 — 看看其他測驗 →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意義與趣味工廠</span></div>
+    <div class="mf-logo">咪咪工廠 MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL股份有限公司 家族公司</div>
+  </div>
+
+</div>
+
+<script>
+
+
+const QUESTIONS=[
+  {q:"辛苦的一天結束，重新充滿你的開關是？", a:{t:"打給某個人，把今天發生的事一吐為快", k:"T"}, b:{t:"關上房門，好好擁有屬於自己的時間", k:"L"}},
+  {q:"遇到不順心的事，最先冒出的念頭是？", a:{t:"「這個要跟誰說？」", k:"T"}, b:{t:"「先自己一個人消化一下。」", k:"L"}},
+  {q:"完全沒電的週末，你的充電方法是？", a:{t:"跟朋友或家人見面，聊個過癮", k:"T"}, b:{t:"自己去散步，或在家安靜待著", k:"L"}},
+  {q:"崩潰隔天早上，睜開眼的你會？", a:{t:"好好感受情緒，直到心情沉澱下來", k:"F"}, b:{t:"先起身，隨便先解決掉一件事", k:"D"}},
+  {q:"心情複雜時，你更被哪一邊吸引？", a:{t:"用音樂、日記、眼淚把情緒流掉", k:"F"}, b:{t:"列出待辦清單，一項一項處理", k:"D"}},
+  {q:"真正被安慰到的瞬間是？", a:{t:"說出來時，有人回「對啊，難怪你會這樣」", k:"T"}, b:{t:"沒人打擾，能獨自好好照顧自己時", k:"L"}},
+  {q:"對我來說，回復是這樣到來的。", a:{t:"好好難過完之後，就慢慢鬆開了", k:"F"}, b:{t:"解決掉一個問題後，整個人就輕鬆了", k:"D"}},
+  {q:"今天的煩惱要不要發到群組裡？", a:{t:"會發出去，聽聽大家的反應", k:"T"}, b:{t:"自己消化，不會特地發出去", k:"L"}},
+  {q:"面對難關時，你的第一個態度是？", a:{t:"「我為什麼會這樣？」往內心探看", k:"F"}, b:{t:"「那要怎麼辦？」先想對策", k:"D"}},
+  {q:"更打中你的安慰話是？", a:{t:"「你一定很難受吧。」", k:"F"}, b:{t:"「來，我們這樣試試看。」", k:"D"}},
+  {q:"重新站起來時，推你一把的動力是？", a:{t:"心情慢慢平靜整理好的感覺", k:"F"}, b:{t:"情況真的有所改變的成就感", k:"D"}},
+  {q:"回復結束的最後一幕，你是？", a:{t:"在人群裡，再次露出笑容的樣子", k:"T"}, b:{t:"在安靜的地方，重新找回平靜的樣子", k:"L"}},
+];
+
+const TYPES={
+  TD:{em:"⚡", kind:"一起 · 行動", name:"閃電回復型", speed:92,
+    sub:"不會把情緒抓著不放。跟人碰撞、馬上用行動宣洩，是回復最快的類型。",
+    you:"你就算崩潰，也不會躺很久。先跟人傾訴，馬上切換到「那要怎麼辦」，然後動起來。人群的能量加上執行力，讓你成為回復最快的類型。",
+    doList:["花五分鐘跟信任的人說明狀況，接著馬上做一件小事","決定一個『今天能做的最小一步』，馬上完成它","用一起流汗的活動（運動、散步、一起做菜）把情緒燒掉"],
+    watch:"太快想跳過去，反而會『略過』情緒，這就是陷阱。有時候不用解決，只要感受就好。快，不代表就深。"},
+  LD:{em:"🛡️", kind:"獨自 · 行動", name:"計畫回復型", speed:74,
+    sub:"獨自安靜，卻穩紮穩打。不被情緒沖走，而是擬定計畫改變狀況，扎實地站起來的類型。",
+    you:"崩潰的隔天，你會獨自坐在書桌前，寫下『先從哪裡整理起』。比起依賴別人，你更會自己擬對策並執行。安靜，卻比誰都扎實地回復。",
+    doList:["在紙上分開寫『能解決的問題』和『不能解決的問題』，而不是情緒","從最能掌控的一件事開始做，找回掌控感","擬好計畫後，也刻意排進『什麼都不做的時間』"],
+    watch:"想一個人搞定一切、卻把情緒壓下去，就是警訊。解決了不代表就沒事。有時候，求助也是一種能力。"},
+  TF:{em:"🌊", kind:"一起 · 感受", name:"浪潮回復型", speed:56,
+    sub:"起起伏伏像波浪，在跟人分享情緒之間慢慢回復，溫暖又深刻的類型。",
+    you:"你會好好感受情緒，並在跟人分享中回復。有些日子崩潰、有些日子沒事——像波浪一樣起落，但正是在那份分享裡，你的心真正被療癒。",
+    doList:["跟讓你安心的人說『不用給建議，聽我說就好』，然後傾訴","幫今天的情緒取名字寫下來（例如：委屈 70%、不安 30%）","起伏大的日子，別自責，承認「我正在浪頭上」"],
+    watch:"回復被別人的反應左右，是你的弱點。為了沒人接住你的時刻，先準備一個『就算一個人也能安撫自己的方法』。"},
+  LF:{em:"🌙", kind:"獨自 · 感受", name:"深海回復型", speed:38,
+    sub:"深深沉下去，再慢慢浮上來的類型。雖然慢，卻是最深、最完整地，在獨處的時間裡回復。",
+    you:"你一崩潰，就沉到深海底。但在那份寂靜裡，你獨自反覆咀嚼、整理情緒，時間過去後，會帶著比誰都深的洞察浮上來。你不是慢，是深。",
+    doList:["別催促回復得慢的自己——允許自己『慢才是正常』","把一個專屬自己的儀式（一杯茶、抄寫、散步）定為回復的信號","下沉的日子先擱著重大決定，浮上來之後再判斷"],
+    watch:"一個人沉太久，可能會變成孤立。下沉沒關係，但至少對一個人發出『我現在有點深』的信號。"},
+};
+const ORDER=["TD","LD","TF","LF"];
+const BARCOLOR={TD:"linear-gradient(90deg,#ffd56b,#ff8a5b)",LD:"linear-gradient(90deg,#8fd3ff,#5b8aff)",TF:"linear-gradient(90deg,#7fe3d0,#4fb0d1)",LF:"linear-gradient(90deg,#c09bff,#7a6bff)"};
+
+
+let idx=0, order=[], picks=[], tally={T:0,L:0,F:0,D:0};
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(m){if(navigator.vibrate)try{navigator.vibrate(m);}catch(e){}}
+let _tt; function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2000);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');window.scrollTo(0,0);}
+function burst(x,y,n){if(reduce||!window.confetti)return;confetti({particleCount:n||20,spread:58,startVelocity:34,origin:{x,y},scalar:.85,colors:['#ffd56b','#ff8a5b','#ff6b9e','#8fd3ff','#c09bff'],disableForReducedMotion:true});}
+
+function start(){
+  idx=0; picks=[]; tally={T:0,L:0,F:0,D:0};
+  order=shuffle([...Array(QUESTIONS.length).keys()]);
+  show('quiz'); render();
+}
+
+function render(){
+  const qi=order[idx], Q=QUESTIONS[qi];
+  document.getElementById('qnum').textContent="Q"+(idx+1);
+  document.getElementById('cprog').textContent=(idx+1)+" / "+QUESTIONS.length;
+  document.getElementById('qtext').textContent=Q.q;
+  const card=document.getElementById('qcard');
+  card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
+
+  const opts=shuffle([{t:Q.a.t,k:Q.a.k},{t:Q.b.t,k:Q.b.k}]);
+  const box=document.getElementById('opts'); box.innerHTML="";
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt'; b.type='button';
+    b.innerHTML='<span class="tag">'+(i===0?'A':'B')+'</span>'+o.t;
+    b.onclick=(ev)=>choose(o.k,ev);
+    box.appendChild(b);
+  });
+  document.getElementById('backBtn').style.visibility= idx>0 ? 'visible':'hidden';
+  updateGauge();
+}
+
+function choose(key,ev){
+  picks[idx]=key; tally[key]++;
+  vibrate(24);
+  if(ev&&ev.clientX){burst(ev.clientX/innerWidth, ev.clientY/innerHeight,18);}
+  updateGauge();
+  if(idx+1===Math.ceil(QUESTIONS.length/2)) toast("過半啦！類型開始浮現了 ✨");
+  if(idx+1>=QUESTIONS.length){ setTimeout(finish,240); return; }
+  idx++; setTimeout(render,160);
+}
+
+function back(){
+  if(idx===0)return;
+  idx--;
+  const prev=picks[idx];
+  if(prev){tally[prev]--; picks[idx]=undefined;}
+  render();
+}
+
+function updateGauge(){
+
+  const aT=tally.T, aL=tally.L, bF=tally.F, bD=tally.D;
+  setSlider('fillA', aL, aT);
+  setSlider('fillB', bF, bD);
+
+  const answered=picks.filter(Boolean).length;
+  const live=document.getElementById('clive');
+  if(answered<3){ live.innerHTML='<span class="em">🌫️</span> 類型逐漸浮現中…'; return; }
+  const t=typeKey();
+  live.innerHTML='<span class="em">'+TYPES[t].em+'</span> '+TYPES[t].name+'?';
+}
+function setSlider(id,left,right){
+  const total=left+right, el=document.getElementById(id);
+  if(total===0){el.style.left='42%'; el.style.width='16%'; return;}
+  const rRatio=right/total; // 右(T 或 D)越靠近
+
+  if(rRatio>=.5){ el.style.left='50%'; el.style.width=((rRatio-.5)*100)+'%'; }
+  else{ const w=(.5-rRatio)*100; el.style.left=(50-w)+'%'; el.style.width=w+'%'; }
+}
+
+function typeKey(){
+  const A = tally.T>=tally.L ? 'T':'L';
+  const B = tally.D>=tally.F ? 'D':'F';
+
+  return A+B;
+}
+
+function finish(){
+  const t=typeKey(), T=TYPES[t];
+  show('result');
+  document.getElementById('rEm').textContent=T.em;
+  document.getElementById('rKind').textContent=T.kind;
+  document.getElementById('rName').textContent=T.name;
+  document.getElementById('rSub').textContent=T.sub;
+  document.getElementById('rYou').textContent=T.you;
+  const ul=document.getElementById('rDo'); ul.innerHTML='';
+  T.doList.forEach(d=>{const li=document.createElement('li'); li.textContent=d; ul.appendChild(li);});
+  document.getElementById('rWatch').textContent=T.watch;
+
+
+  setTimeout(()=>{document.getElementById('rSpeedFill').style.width=T.speed+'%';},120);
+  countUp(document.getElementById('rSpeedNum'), T.speed, '%');
+
+
+  const scores={
+    TD: tally.T+tally.D, LD: tally.L+tally.D, TF: tally.T+tally.F, LF: tally.L+tally.F
+  };
+  const maxS=Math.max(...Object.values(scores),1);
+  const rows=document.getElementById('mapRows'); rows.innerHTML='';
+  ORDER.forEach(k=>{
+    const row=document.createElement('div'); row.className='maprow';
+    row.innerHTML='<span class="lb">'+TYPES[k].em+' <b>'+TYPES[k].name.replace('回復型','').trim()+'</b></span>'+
+      '<span class="mbar"><span class="mfill" style="background:'+BARCOLOR[k]+'"></span></span>';
+    rows.appendChild(row);
+    const fill=row.querySelector('.mfill');
+    setTimeout(()=>{fill.style.width=Math.round(scores[k]/maxS*100)+'%';},200);
+  });
+
+
+  vibrate([30,50,30,50,120]);
+  if(!reduce&&window.confetti){
+    confetti({particleCount:120,spread:75,origin:{y:.35},scalar:1,colors:['#ffd56b','#ff8a5b','#ff6b9e','#8fd3ff','#c09bff']});
+    setTimeout(()=>confetti({particleCount:80,spread:100,startVelocity:45,origin:{y:.5}}),260);
+  }
+}
+
+function countUp(el,target,suf){
+  if(reduce){el.textContent=target+suf; return;}
+  let v=0; const step=Math.max(1,Math.round(target/28));
+  const iv=setInterval(()=>{v+=step; if(v>=target){v=target; clearInterval(iv);} el.textContent=v+suf;},26);
+}
+
+function shareResult(){
+  const t=typeKey(), T=TYPES[t];
+  const url="https://mimifactory.vibekr.com/zh-tw/apps/recovery-speed.html";
+  const txt="崩潰隔天的我，回復速度類型是 "+T.em+" "+T.name+" (回復速度 "+T.speed+"%)!\n"+T.sub+"\n\n我的回復速度測驗 👉 "+url;
+  if(navigator.share){navigator.share({title:'我的回復力測驗',text:txt,url:url}).catch(()=>{});}
+  else if(navigator.clipboard){navigator.clipboard.writeText(txt).then(()=>toast('結果複製好了！貼上就能分享 📋')).catch(()=>toast(T.name));}
+  else toast(T.name);
+}
+function restart(){show('home');}
+</script>
+</body>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Morning After You Fall Apart — Recovery Speed Test</title>
+<meta name="description" content="The day after you fall apart, how do you get back up? 12 questions reveal your recovery speed, in 4 types.">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#0f1330; --bg2:#241a44;
+  --accent1:#ffd56b; --accent2:#ff8a5b;
+  --cream:#fff6ec; --muted:#c3b9dd;
+  --card:#1d1a3d;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  color:var(--cream);
+  min-height:100dvh;
+  background:
+    radial-gradient(120% 80% at 82% -12%, rgba(255,180,90,.13), transparent 55%),
+    radial-gradient(120% 90% at 8% 112%, rgba(120,140,255,.16), transparent 55%),
+    linear-gradient(165deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  transition:background .9s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.wrap{max-width:520px; margin:0 auto; padding:22px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(105deg,#ffd56b,#ff8a5b 45%,#ff6b9e);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em; margin:0;}
+.screen{display:none; animation:fadeIn .5s ease both;}
+.screen.on{display:block;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1.2deg); opacity:.4;}60%{transform:scale(1.02) rotate(.5deg);}100%{transform:scale(1) rotate(0); opacity:1;}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+
+/* ---------- HOME ---------- */
+.hero{flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; gap:16px; padding:14px 4px 30px;}
+.eyebrow{font-size:12.5px; letter-spacing:.32em; color:var(--muted); text-indent:.32em;}
+.hero .big{font-size:37px; line-height:1.24;}
+.moon{font-size:64px; animation:float 4s ease-in-out infinite; filter:drop-shadow(0 8px 22px rgba(255,180,90,.35));}
+.lede{font-size:15px; color:var(--muted); line-height:1.75; overflow-wrap:break-word; max-width:400px; margin:0 auto;}
+.pill4{display:flex; gap:7px; justify-content:center; flex-wrap:wrap; margin-top:2px;}
+.pill4 span{font-size:12.5px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); padding:7px 12px; border-radius:99px;}
+.btn{
+  font-family:'Jua',sans-serif; font-size:20px; color:#2a1330; border:none; cursor:pointer;
+  padding:17px 22px; border-radius:18px; width:100%;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2));
+  box-shadow:0 10px 28px -8px rgba(255,138,91,.6); transition:transform .15s, box-shadow .3s;
+}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent; color:var(--cream); border:1.5px solid rgba(255,255,255,.22); box-shadow:none; font-size:16px; padding:14px;}
+.hint{font-size:12px; color:var(--muted); margin-top:4px;}
+
+/* ---------- QUIZ ---------- */
+.topbar{position:sticky; top:0; z-index:5; padding:10px 0 12px; margin-bottom:6px;
+  background:linear-gradient(180deg, rgba(15,19,48,.96) 70%, transparent);}
+.axis{margin-bottom:11px;}
+.axisrow{display:flex; align-items:center; gap:9px; font-size:11.5px; color:var(--muted); margin-bottom:5px;}
+.axisrow b{color:var(--cream); font-family:'Jua'; font-weight:400; font-size:12.5px;}
+.axisrow .mid{flex:1; text-align:center; letter-spacing:.14em; opacity:.6;}
+.slider{position:relative; height:11px; border-radius:99px; background:rgba(255,255,255,.09); overflow:hidden;}
+.sliderfill{position:absolute; top:0; bottom:0; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  box-shadow:0 0 14px 1px var(--accent2); transition:left .5s cubic-bezier(.22,1,.36,1), width .5s cubic-bezier(.22,1,.36,1);}
+.counter{display:flex; justify-content:space-between; align-items:center; margin-top:9px; font-size:12.5px; color:var(--muted);}
+.livetype{font-family:'Jua'; font-size:15px;}
+.livetype .em{font-size:19px;}
+.qcard{background:var(--card); border:1px solid rgba(255,255,255,.09); border-radius:22px; padding:26px 20px 22px; margin-top:6px;
+  box-shadow:0 18px 44px -22px rgba(0,0,0,.7);}
+.qnum{font-size:12.5px; color:var(--accent1); letter-spacing:.06em; margin-bottom:10px; font-family:'Jua';}
+.qtext{font-size:20px; line-height:1.5; overflow-wrap:break-word; min-height:60px;}
+.opts{margin-top:20px; display:flex; flex-direction:column; gap:12px;}
+.opt{
+  text-align:left; cursor:pointer; width:100%; color:var(--cream);
+  background:rgba(255,255,255,.045); border:1.5px solid rgba(255,255,255,.14);
+  border-radius:15px; padding:17px 16px 17px 52px; font-size:15.5px; line-height:1.5; position:relative;
+  font-family:'Noto Sans KR'; transition:transform .12s, border-color .2s, background .2s; overflow-wrap:break-word;
+}
+.opt:hover{border-color:rgba(255,255,255,.34); background:rgba(255,255,255,.075);}
+.opt:active{transform:scale(.985);}
+.opt .tag{position:absolute; left:15px; top:50%; transform:translateY(-50%);
+  width:26px; height:26px; border-radius:50%; display:grid; place-items:center;
+  font-family:'Jua'; font-size:13px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); color:var(--cream);}
+.opt:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+.back{background:none; border:none; color:var(--muted); font-size:13px; cursor:pointer; margin-top:16px; padding:8px; font-family:'Noto Sans KR';}
+
+/* ---------- RESULT ---------- */
+.rcard{background:var(--card); border:1px solid rgba(255,255,255,.1); border-radius:26px; padding:30px 22px 26px; text-align:center;
+  box-shadow:0 22px 60px -26px rgba(0,0,0,.8); position:relative; overflow:hidden;}
+.rcard::before{content:""; position:absolute; inset:0; background:radial-gradient(90% 60% at 50% 0%, rgba(255,180,90,.16), transparent 70%); pointer-events:none;}
+.rEm{font-size:70px; animation:float 4s ease-in-out infinite; filter:drop-shadow(0 8px 20px rgba(255,180,90,.4));}
+.rKind{font-size:14px; letter-spacing:.2em; color:var(--accent1); margin-top:6px;}
+.rName{font-size:32px; margin-top:4px; line-height:1.2;}
+.rSub{font-size:14.5px; color:var(--muted); margin-top:10px; line-height:1.7; overflow-wrap:break-word;}
+.speedbox{margin:22px auto 4px; max-width:340px;}
+.speedhead{display:flex; justify-content:space-between; align-items:baseline; font-size:13px; color:var(--muted); margin-bottom:7px;}
+.speedhead b{font-family:'Jua'; font-size:26px; color:var(--cream);}
+.speedbar{height:16px; border-radius:99px; background:rgba(255,255,255,.09); overflow:hidden;}
+.speedfill{height:100%; width:0; border-radius:99px; background:linear-gradient(90deg,var(--accent1),var(--accent2)); box-shadow:0 0 16px 1px var(--accent2); transition:width 1.1s cubic-bezier(.22,1,.36,1);}
+.sect{text-align:left; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); border-radius:16px; padding:16px 17px; margin-top:14px;}
+.sect h3{font-size:15px; margin-bottom:8px; display:flex; align-items:center; gap:7px;}
+.sect p,.sect li{font-size:14px; line-height:1.72; color:#efe6f5; overflow-wrap:break-word;}
+.sect ul{margin:0; padding-left:18px;}
+.map{margin-top:16px;}
+.maprow{display:flex; align-items:center; gap:10px; margin:9px 0; font-size:13px;}
+.maprow .lb{width:92px; flex-shrink:0; color:var(--muted);}
+.maprow .lb b{color:var(--cream); font-family:'Jua'; font-weight:400;}
+.mbar{flex:1; height:10px; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden;}
+.mfill{display:block; height:100%; width:0; border-radius:99px; transition:width .9s cubic-bezier(.22,1,.36,1);}
+.actions{display:flex; flex-direction:column; gap:10px; margin-top:22px;}
+
+.toast{position:fixed; left:50%; top:16px; transform:translateX(-50%) translateY(-24px);
+  background:rgba(29,26,61,.97); border:1.5px solid var(--accent2); color:var(--cream);
+  padding:12px 20px; border-radius:99px; font-size:13.5px; opacity:0; pointer-events:none;
+  transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; box-shadow:0 10px 30px -10px rgba(0,0,0,.6);}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center; margin-top:26px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  <!-- ======= HOME ======= -->
+  <section id="home" class="screen on">
+    <div class="hero">
+      <div class="eyebrow">Recovery Speed Test</div>
+      <div class="moon">🌙</div>
+      <h1 class="big">The morning after I fall apart,<br><span class="grad">how do I get back up?</span></h1>
+      <p class="lede">Everyone has a day they fall apart. What matters is <b>the day after.</b><br>12 questions reveal your <b>recovery-speed type</b> , one of 4.</p>
+      <div class="pill4">
+        <span>⚡ Flash</span><span>🛡️ Strategic</span><span>🌊 Wave</span><span>🌙 Deep</span>
+      </div>
+      <div style="margin-top:14px;">
+        <button class="btn" onclick="start()">Find my recovery speed →</button>
+        <div class="hint">About 1 min · 12 questions · No wrong answers</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= QUIZ ======= -->
+  <section id="quiz" class="screen">
+    <div class="topbar">
+      <div class="axis">
+        <div class="axisrow"><b>🌙 Solo</b><span class="mid">How you recharge</span><b>Together 👥</b></div>
+        <div class="slider"><div class="sliderfill" id="fillA"></div></div>
+      </div>
+      <div class="axis">
+        <div class="axisrow"><b>💗 Feeling</b><span class="mid">What drives recovery</span><b>Doing 🏃</b></div>
+        <div class="slider"><div class="sliderfill" id="fillB"></div></div>
+      </div>
+      <div class="counter">
+        <span id="cprog">1 / 12</span>
+        <span class="livetype" id="clive"><span class="em">🌫️</span> Finding your type…</span>
+      </div>
+    </div>
+
+    <div class="qcard" id="qcard">
+      <div class="qnum" id="qnum">Q1</div>
+      <div class="qtext" id="qtext">—</div>
+      <div class="opts" id="opts"></div>
+    </div>
+    <button class="back" id="backBtn" onclick="back()">← Previous</button>
+  </section>
+
+  <!-- ======= RESULT ======= -->
+  <section id="result" class="screen">
+    <div class="rcard">
+      <div class="rEm" id="rEm">⚡</div>
+      <div class="rKind" id="rKind">Recovery Speed Type</div>
+      <h2 class="rName" id="rName">—</h2>
+      <p class="rSub" id="rSub">—</p>
+
+      <div class="speedbox">
+        <div class="speedhead"><span>My recovery speed</span><b id="rSpeedNum">0%</b></div>
+        <div class="speedbar"><div class="speedfill" id="rSpeedFill"></div></div>
+      </div>
+    </div>
+
+    <div class="sect"><h3>🌱 How you recover</h3><p id="rYou">—</p></div>
+    <div class="sect"><h3>🧭 The day after, try this</h3><ul id="rDo"></ul></div>
+    <div class="sect"><h3>⚠️ Just watch out for this</h3><p id="rWatch">—</p></div>
+
+    <div class="sect map">
+      <h3>📊 My recovery-style map</h3>
+      <div id="mapRows"></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn" onclick="shareResult()">Share my result 📷</button>
+      <button class="btn ghost" onclick="restart()">Try again ↻</button>
+    </div>
+  </section>
+
+  <!-- ======= BRAND FOOTER ======= -->
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/en/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 Dopamine Lab — more tests this way →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>The Meaning & Fun Factory</span></div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+  </div>
+
+</div>
+
+<script>
+
+
+const QUESTIONS=[
+  {q:"At the end of a hard day, what switch refills you?", a:{t:"Call someone and pour out how your day went", k:"T"}, b:{t:"Close the door and take time that’s all your own", k:"L"}},
+  {q:"When something upsets you, what’s your first thought?", a:{t:"“Who do I even tell about this?”", k:"T"}, b:{t:"“Let me sit with this alone for a bit.”", k:"L"}},
+  {q:"A totally drained weekend — how do you recharge?", a:{t:"Meet friends or family and talk it all out", k:"T"}, b:{t:"Walk alone or stay home in the quiet", k:"L"}},
+  {q:"The morning after you fall apart, you wake up and…", a:{t:"Let yourself feel it fully until the mood settles", k:"F"}, b:{t:"Get up first and knock out one thing, anything", k:"D"}},
+  {q:"When your mind’s a mess, which pulls you more?", a:{t:"Letting it out through music, journaling, tears", k:"F"}, b:{t:"Making a to-do list and clearing it one by one", k:"D"}},
+  {q:"What moment actually comforts you?", a:{t:"When someone hears you and says “Yeah, that’s fair”", k:"T"}, b:{t:"When you can tend to yourself, alone, undisturbed", k:"L"}},
+  {q:"For me, recovery arrives like this.", a:{t:"Once I’ve grieved enough, it quietly loosens", k:"F"}, b:{t:"Solve one problem and suddenly it feels lighter", k:"D"}},
+  {q:"Post today’s worry in the group chat — or not?", a:{t:"I’d post it and see how people react", k:"T"}, b:{t:"I’d keep it in and not post it", k:"L"}},
+  {q:"Facing something hard, what’s your first stance?", a:{t:"“Why do I feel this way?” — I look inward", k:"F"}, b:{t:"“So what do I do?” — I plan the fix first", k:"D"}},
+  {q:"Which words of comfort land harder?", a:{t:"“That must have been so hard.”", k:"F"}, b:{t:"“Okay — let’s try it this way.”", k:"D"}},
+  {q:"What pushes you as you get back up?", a:{t:"The feeling of my mind settling into order", k:"F"}, b:{t:"The sense of things actually changing", k:"D"}},
+  {q:"In the final scene of your recovery, you’re…", a:{t:"Laughing again, surrounded by people", k:"T"}, b:{t:"Back to calm, somewhere quiet", k:"L"}},
+];
+
+const TYPES={
+  TD:{em:"⚡", kind:"Together · Doing", name:"Flash Recovery", speed:92,
+    sub:"You don’t hold feelings for long. You bump into people, blow it off through action, and reset faster than anyone.",
+    you:"When you fall, you don’t stay down long. You vent to someone, then flip straight to “so what do I do” and get moving. Other-people energy plus follow-through makes you the fastest to bounce back.",
+    doList:["Brief someone you trust for five minutes, then do one small thing right away","Pick ‘the smallest step you can take today’ and knock it out","Burn off the emotion with something active together (a workout, a walk, cooking with someone)"],
+    watch:"The trap is ‘skipping’ your feelings by rushing past them. Sometimes you don’t need to fix it — just feel it. Fast isn’t always deep."},
+  LD:{em:"🛡️", kind:"Solo · Doing", name:"Strategic Recovery", speed:74,
+    sub:"Quiet and solo, but step by step. Instead of getting swept up in feelings, you plan, change the situation, and rise back up solidly.",
+    you:"The day after you fall apart, you’re the one sitting alone at your desk, writing out ‘what do I sort first’. Rather than lean on others, you build your own plan and act on it. Quiet — but you recover more solidly than anyone.",
+    doList:["Split it on paper — ‘problems I can solve’ vs ‘problems I can’t’ — not the emotions","Start with the one thing you can control most, and win back a sense of control","After planning, deliberately block out ‘time to do nothing’ too"],
+    watch:"The warning sign is bottling up feelings while you handle it all alone. Solved doesn’t mean fine. Sometimes asking for help is a skill too."},
+  TF:{em:"🌊", kind:"Together · Feeling", name:"Wave Recovery", speed:56,
+    sub:"Up and down like waves, you recover slowly as you share feelings with people — warm and deep.",
+    you:"You feel your emotions fully, and heal by sharing them with people. Some days you crumble, some days you’re fine — you rise and fall like waves, but it’s in that sharing that your heart truly mends.",
+    doList:["Ask a safe person ‘just listen, don’t fix it’ — then let it out","Name today’s feelings and jot them down (e.g. hurt 70%, anxiety 30%)","On up-and-down days, instead of blaming yourself, admit “I’m mid-wave right now”"],
+    watch:"Your weak spot: your recovery hinges on how others respond. For the times no one can catch you, keep one ‘way to soothe myself, alone’ ready."},
+  LF:{em:"🌙", kind:"Solo · Feeling", name:"Deep Recovery", speed:38,
+    sub:"You sink deep, then slowly rise. Slow, but the deepest and most complete — you recover in time that’s all your own.",
+    you:"When you fall, you sink to the bottom of a deep ocean. But in that stillness you chew over your feelings alone and sort them out, and in time you surface with a deeper insight than anyone. You’re not slow — you’re deep.",
+    doList:["Don’t rush yourself for taking time to recover — give yourself the ‘slow is normal’ permission","Set one solo ritual (a cup of tea, journaling, a walk) as your recovery signal","On sunken days, postpone big decisions — judge after you’ve resurfaced"],
+    watch:"Sink alone too long and it can turn into isolation. Sinking is fine — but send just one person the signal ‘I’m a bit deep right now’."},
+};
+const ORDER=["TD","LD","TF","LF"];
+const BARCOLOR={TD:"linear-gradient(90deg,#ffd56b,#ff8a5b)",LD:"linear-gradient(90deg,#8fd3ff,#5b8aff)",TF:"linear-gradient(90deg,#7fe3d0,#4fb0d1)",LF:"linear-gradient(90deg,#c09bff,#7a6bff)"};
+
+
+let idx=0, order=[], picks=[], tally={T:0,L:0,F:0,D:0};
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(m){if(navigator.vibrate)try{navigator.vibrate(m);}catch(e){}}
+let _tt; function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2000);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');window.scrollTo(0,0);}
+function burst(x,y,n){if(reduce||!window.confetti)return;confetti({particleCount:n||20,spread:58,startVelocity:34,origin:{x,y},scalar:.85,colors:['#ffd56b','#ff8a5b','#ff6b9e','#8fd3ff','#c09bff'],disableForReducedMotion:true});}
+
+function start(){
+  idx=0; picks=[]; tally={T:0,L:0,F:0,D:0};
+  order=shuffle([...Array(QUESTIONS.length).keys()]);
+  show('quiz'); render();
+}
+
+function render(){
+  const qi=order[idx], Q=QUESTIONS[qi];
+  document.getElementById('qnum').textContent="Q"+(idx+1);
+  document.getElementById('cprog').textContent=(idx+1)+" / "+QUESTIONS.length;
+  document.getElementById('qtext').textContent=Q.q;
+  const card=document.getElementById('qcard');
+  card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
+
+  const opts=shuffle([{t:Q.a.t,k:Q.a.k},{t:Q.b.t,k:Q.b.k}]);
+  const box=document.getElementById('opts'); box.innerHTML="";
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt'; b.type='button';
+    b.innerHTML='<span class="tag">'+(i===0?'A':'B')+'</span>'+o.t;
+    b.onclick=(ev)=>choose(o.k,ev);
+    box.appendChild(b);
+  });
+  document.getElementById('backBtn').style.visibility= idx>0 ? 'visible':'hidden';
+  updateGauge();
+}
+
+function choose(key,ev){
+  picks[idx]=key; tally[key]++;
+  vibrate(24);
+  if(ev&&ev.clientX){burst(ev.clientX/innerWidth, ev.clientY/innerHeight,18);}
+  updateGauge();
+  if(idx+1===Math.ceil(QUESTIONS.length/2)) toast("Halfway there! Your type is starting to show ✨");
+  if(idx+1>=QUESTIONS.length){ setTimeout(finish,240); return; }
+  idx++; setTimeout(render,160);
+}
+
+function back(){
+  if(idx===0)return;
+  idx--;
+  const prev=picks[idx];
+  if(prev){tally[prev]--; picks[idx]=undefined;}
+  render();
+}
+
+function updateGauge(){
+
+  const aT=tally.T, aL=tally.L, bF=tally.F, bD=tally.D;
+  setSlider('fillA', aL, aT);
+  setSlider('fillB', bF, bD);
+
+  const answered=picks.filter(Boolean).length;
+  const live=document.getElementById('clive');
+  if(answered<3){ live.innerHTML='<span class="em">🌫️</span> Finding your type…'; return; }
+  const t=typeKey();
+  live.innerHTML='<span class="em">'+TYPES[t].em+'</span> '+TYPES[t].name+'?';
+}
+function setSlider(id,left,right){
+  const total=left+right, el=document.getElementById(id);
+  if(total===0){el.style.left='42%'; el.style.width='16%'; return;}
+  const rRatio=right/total; // right(T or D)the more it leans toward
+
+  if(rRatio>=.5){ el.style.left='50%'; el.style.width=((rRatio-.5)*100)+'%'; }
+  else{ const w=(.5-rRatio)*100; el.style.left=(50-w)+'%'; el.style.width=w+'%'; }
+}
+
+function typeKey(){
+  const A = tally.T>=tally.L ? 'T':'L';
+  const B = tally.D>=tally.F ? 'D':'F';
+
+  return A+B;
+}
+
+function finish(){
+  const t=typeKey(), T=TYPES[t];
+  show('result');
+  document.getElementById('rEm').textContent=T.em;
+  document.getElementById('rKind').textContent=T.kind;
+  document.getElementById('rName').textContent=T.name;
+  document.getElementById('rSub').textContent=T.sub;
+  document.getElementById('rYou').textContent=T.you;
+  const ul=document.getElementById('rDo'); ul.innerHTML='';
+  T.doList.forEach(d=>{const li=document.createElement('li'); li.textContent=d; ul.appendChild(li);});
+  document.getElementById('rWatch').textContent=T.watch;
+
+
+  setTimeout(()=>{document.getElementById('rSpeedFill').style.width=T.speed+'%';},120);
+  countUp(document.getElementById('rSpeedNum'), T.speed, '%');
+
+
+  const scores={
+    TD: tally.T+tally.D, LD: tally.L+tally.D, TF: tally.T+tally.F, LF: tally.L+tally.F
+  };
+  const maxS=Math.max(...Object.values(scores),1);
+  const rows=document.getElementById('mapRows'); rows.innerHTML='';
+  ORDER.forEach(k=>{
+    const row=document.createElement('div'); row.className='maprow';
+    row.innerHTML='<span class="lb">'+TYPES[k].em+' <b>'+TYPES[k].name.replace('Recovery','').trim()+'</b></span>'+
+      '<span class="mbar"><span class="mfill" style="background:'+BARCOLOR[k]+'"></span></span>';
+    rows.appendChild(row);
+    const fill=row.querySelector('.mfill');
+    setTimeout(()=>{fill.style.width=Math.round(scores[k]/maxS*100)+'%';},200);
+  });
+
+
+  vibrate([30,50,30,50,120]);
+  if(!reduce&&window.confetti){
+    confetti({particleCount:120,spread:75,origin:{y:.35},scalar:1,colors:['#ffd56b','#ff8a5b','#ff6b9e','#8fd3ff','#c09bff']});
+    setTimeout(()=>confetti({particleCount:80,spread:100,startVelocity:45,origin:{y:.5}}),260);
+  }
+}
+
+function countUp(el,target,suf){
+  if(reduce){el.textContent=target+suf; return;}
+  let v=0; const step=Math.max(1,Math.round(target/28));
+  const iv=setInterval(()=>{v+=step; if(v>=target){v=target; clearInterval(iv);} el.textContent=v+suf;},26);
+}
+
+function shareResult(){
+  const t=typeKey(), T=TYPES[t];
+  const url="https://mimifactory.vibekr.com/en/apps/recovery-speed.html";
+  const txt="The morning after I fall apart, my recovery-speed type is "+T.em+" "+T.name+" (recovery speed "+T.speed+"%)!\n"+T.sub+"\n\nMy recovery-speed test 👉 "+url;
+  if(navigator.share){navigator.share({title:'My Resilience Test',text:txt,url:url}).catch(()=>{});}
+  else if(navigator.clipboard){navigator.clipboard.writeText(txt).then(()=>toast('Result copied! Paste it to share 📋')).catch(()=>toast(T.name));}
+  else toast(T.name);
+}
+function restart(){show('home');}
+</script>
+</body>
+</html>
