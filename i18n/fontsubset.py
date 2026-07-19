@@ -19,6 +19,13 @@ FONTS = {
         ("NotoSansJP[wght].ttf", "NotoSansJP-sub.woff2"),
         ("MPLUSRounded1c-Bold.ttf", "MPLUSRounded1c-Bold-sub.woff2"),
     ],
+    "en": [
+        ("NotoSans[wght].ttf", "NotoSans-sub.woff2"),
+        ("Fredoka[wght].ttf", "Fredoka-sub.woff2"),
+    ],
+    "zh-tw": [
+        ("NotoSansTC[wght].ttf", "NotoSansTC-sub.woff2"),
+    ],
 }
 
 

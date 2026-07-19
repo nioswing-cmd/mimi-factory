@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Tarot Mind Cards — Dopamine Lab</title>
+<meta property="og:title" content="Tarot Mind Cards — 3 cards that mirror your mind today">
+<meta property="og:description" content="You don’t draw fortunes here — you draw questions. 22 ancient symbols, one honest mirror. Pick your 3.">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#0c1020; --bg2:#121732; --card:#181f42; --line:#293264;
+  --ink:#eef0fb; --sub:#9aa3cc; --accent:#93a8ff; --accent2:#5f6fd6;
+  --point:#f4c66f; --ok:#52c48f; --bad:#e2584f;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 80% -10%, rgba(147,168,255,.13), transparent 55%),
+             radial-gradient(100% 80% at 10% 110%, rgba(244,198,111,.08), transparent 50%),
+             linear-gradient(165deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--point),var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:4vh;}
+.hero h1{font-size:44px;line-height:1.15;margin:16px 0 8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;overflow-wrap:break-word;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;overflow-wrap:break-word;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;overflow-wrap:break-word;opacity:.85;}
+
+.theme-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;}
+.theme{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px 10px;
+  text-align:center;cursor:pointer;transition:transform .25s cubic-bezier(.34,1.56,.64,1),border-color .25s;}
+.theme:active{transform:scale(.95);}
+.theme.sel{border-color:var(--point);background:linear-gradient(160deg,rgba(244,198,111,.14),rgba(147,168,255,.08));}
+.theme .emo{font-size:30px;display:block;}
+.theme .nm{font-family:'Jua',sans-serif;font-size:15.5px;margin-top:7px;display:block;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#141021;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--point),var(--accent));
+  box-shadow:0 10px 26px -8px var(--accent2);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.theme:focus-visible,.cardback:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+
+.spread-head{text-align:center;margin-bottom:14px;}
+.spread-head .t{font-family:'Jua',sans-serif;font-size:22px;}
+.spread-head .s{color:var(--sub);font-size:13.5px;margin-top:6px;}
+.picked-row{display:flex;justify-content:center;gap:10px;margin-bottom:16px;}
+.slot{width:64px;height:92px;border-radius:10px;border:2px dashed var(--line);display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--sub);text-align:center;line-height:1.3;}
+.slot.filled{border-style:solid;border-color:var(--point);background:linear-gradient(150deg,#232b5c,#161c40);
+  color:var(--point);font-size:26px;box-shadow:0 0 16px -2px rgba(244,198,111,.4);animation:pop .45s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.85);}60%{transform:scale(1.06);}100%{transform:scale(1);}}
+.deck{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
+.cardback{aspect-ratio:2/3;border-radius:9px;cursor:pointer;position:relative;border:1px solid #38418a;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(244,198,111,.55) 0 8%, transparent 9%),
+    radial-gradient(circle at 50% 42%, transparent 0 13%, rgba(244,198,111,.28) 14% 15.5%, transparent 16.5%),
+    linear-gradient(150deg,#2a3374,#151b45);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),opacity .3s;}
+.cardback:active{transform:scale(.92);}
+.cardback.gone{opacity:0;transform:scale(.6) rotate(8deg);pointer-events:none;}
+.deck-cap{font-size:12px;color:var(--sub);text-align:center;margin-top:14px;}
+
+
+.pos-label{font-family:'Jua',sans-serif;font-size:14px;color:var(--point);letter-spacing:.08em;text-align:center;margin:18px 0 8px;}
+.flipwrap{perspective:1000px;width:190px;margin:0 auto;}
+.flip{position:relative;width:100%;aspect-ratio:2/3;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.4,.1,.2,1);cursor:pointer;}
+.flip.flipped{transform:rotateY(180deg);}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;}
+.face.back{border:1px solid #38418a;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(244,198,111,.55) 0 8%, transparent 9%),
+    radial-gradient(circle at 50% 42%, transparent 0 13%, rgba(244,198,111,.28) 14% 15.5%, transparent 16.5%),
+    linear-gradient(150deg,#2a3374,#151b45);
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:12px;color:var(--sub);font-size:12px;}
+.face.front{transform:rotateY(180deg);background:linear-gradient(165deg,#222b63,#141a3e);
+  border:1.5px solid var(--point);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 0 30px -6px rgba(244,198,111,.45);}
+.face.front .no{font-size:11px;letter-spacing:.2em;color:var(--sub);}
+.face.front .emo{font-size:52px;}
+.face.front .nm{font-family:'Jua',sans-serif;font-size:19px;color:var(--point);}
+.face.front .kw{font-size:12px;color:var(--sub);}
+.meaning{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 17px;margin-top:14px;
+  font-size:14.5px;line-height:1.7;overflow-wrap:break-word;display:none;animation:fadeIn .5s ease;}
+.meaning.on{display:block;}
+.meaning .q{margin-top:10px;background:rgba(244,198,111,.1);border-left:3px solid var(--point);border-radius:8px;
+  padding:10px 12px;font-size:14px;}
+.meaning .q b{color:var(--point);}
+.tap-hint{text-align:center;color:var(--sub);font-size:13px;margin-top:10px;}
+
+.summary{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:24px;font-size:14.5px;line-height:1.75;overflow-wrap:break-word;}
+.summary b{color:var(--point);}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(24,31,66,.97);border:1.5px solid var(--point);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(147,168,255,.55));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#8d94bd;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#8d94bd;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 Dopamine Lab · Superstition, Remixed</span>
+      <h1>🔮 <span class="grad">Tarot Mind Cards</span></h1>
+      <p class="sub">You don’t draw fortunes — <b>questions</b> are what you draw here.<br>22 ancient symbols, turned into a mirror for your mind.</p>
+    </div>
+    <div class="pitch">
+      <b>How it works</b><br>
+      ① Pick the theme that’s been sitting on your mind<br>
+      ② Out of 22 cards, choose the <b>3 that pull you in</b><br>
+      ③ They open in order: Where I Am → What I Face → The Way Forward.
+    </div>
+    <div class="theme-row" id="themeRow">
+      <div class="theme" data-t="mind" tabindex="0"><span class="emo">🌙</span><span class="nm">What’s on my mind</span></div>
+      <div class="theme" data-t="bond" tabindex="0"><span class="emo">💞</span><span class="nm">Me and that person</span></div>
+      <div class="theme" data-t="work" tabindex="0"><span class="emo">🎯</span><span class="nm">Work · Goals</span></div>
+      <div class="theme" data-t="today" tabindex="0"><span class="emo">☀️</span><span class="nm">Just today</span></div>
+    </div>
+    <button class="btn" onclick="goSpread()">🃏 Shuffle the deck and pick</button>
+    <p class="note">※ Tarot won’t predict your future — and it’s not supposed to. This app reworks the old symbols into <b>self-coaching cards</b>. The answers come from you, not the cards.</p>
+  </section>
+
+  
+  <section id="scSpread" class="screen">
+    <div class="spread-head">
+      <div class="t">Pick the <span class="grad">3 cards</span> calling to you</div>
+      <div class="s" id="spreadTheme">Theme: What’s on my mind</div>
+    </div>
+    <div class="picked-row">
+      <div class="slot" id="slot0">① Where<br>I am</div>
+      <div class="slot" id="slot1">② What I<br>face</div>
+      <div class="slot" id="slot2">③ The way<br>forward</div>
+    </div>
+    <div class="deck" id="deck"></div>
+    <div class="deck-cap">Don’t overthink it — the first card that catches your eye is yours ✨</div>
+  </section>
+
+  
+  <section id="scReveal" class="screen">
+    <div id="revealArea"></div>
+    <div class="summary" id="summary" style="display:none;"></div>
+    <button class="btn" id="copyBtn" style="display:none;" onclick="copyResult()">📋 Save my 3 questions for today</button>
+    <button class="btn ghost" id="againBtn" style="display:none;" onclick="location.reload()">🔄 Draw again with a new theme</button>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 Dopamine Lab — more tests this way →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>The Meaning & Fun Factory</span></div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+  </div>
+</div>
+
+<script>
+
+const CARDS=[
+ {n:0,name:"The Fool",emo:"🎒",kw:"Beginnings · Innocence",mean:"The power to step before the math works out. ‘Not ready’ is often just another name for ‘brave enough to start’.",q:"If failing were totally fine, what would you start today?"},
+ {n:1,name:"The Magician",emo:"🪄",kw:"Action · Talent",mean:"Every tool you need is already on your desk. What’s missing usually isn’t skill — it’s deciding to use it.",q:"What’s one ability you have but never use?"},
+ {n:2,name:"The High Priestess",emo:"🌒",kw:"Intuition · Silence",mean:"Your head says it’s complicated. Your gut already knows. Turn down the noise and you’ll hear it.",q:"What’s the answer you secretly already know?"},
+ {n:3,name:"The Empress",emo:"🌾",kw:"Care · Abundance",mean:"You can’t pour from an empty cup. Taking care of yourself isn’t a luxury — it’s the capital behind every relationship you have.",q:"What have you been filling yourself with lately?"},
+ {n:4,name:"The Emperor",emo:"🏛️",kw:"Order · Responsibility",mean:"Rules can be the fence that protects you — or the wall that cages you. Time to inspect the boundary.",q:"Name one rule that protects you, and one that cages you."},
+ {n:5,name:"The Hierophant",emo:"📿",kw:"Learning · Guidance",mean:"Nobody wins alone anymore. One map from someone who walked the road first can save you months.",q:"Who should you be asking for advice right now?"},
+ {n:6,name:"The Lovers",emo:"💘",kw:"Choice · Values",mean:"Choosing feels hard not because there’s no answer — but because you haven’t decided what you’re willing to give up.",q:"Honestly — which way is your heart already leaning?"},
+ {n:7,name:"The Chariot",emo:"🏇",kw:"Drive · Focus",mean:"The direction is set. Now it’s about speed. Gather your scattered energy into one lane.",q:"What’s the one thing you should hit the gas on right now?"},
+ {n:8,name:"Strength",emo:"🦁",kw:"Gentle Courage",mean:"Real strength isn’t suppressing the lion inside — it’s taming it. Stop fighting yourself. Start negotiating.",q:"What does the lion inside you (that urge, that anger) actually want?"},
+ {n:9,name:"The Hermit",emo:"🏮",kw:"Reflection · Solitude",mean:"A lantern only shows up in the dark. Sometimes going offline is what points you in the right direction.",q:"When was the last time you were completely, truly alone?"},
+ {n:10,name:"Wheel of Fortune",emo:"🎡",kw:"Flow · Change",mean:"You can’t control everything — the wisdom is knowing which wheels you can turn, and which ones turn on their own.",q:"One thing to hold on to, one thing to let flow — what are they?"},
+ {n:11,name:"Justice",emo:"⚖️",kw:"Balance · Fairness",mean:"The scales aren’t just for judging other people. Have you been handing yourself the harshest verdicts?",q:"Where are you generous with everyone — except yourself?"},
+ {n:12,name:"The Hanged Man",emo:"🙃",kw:"New Perspective",mean:"Pausing isn’t falling behind. Some views only appear when you’re hanging upside down.",q:"Flip your situation upside down — what suddenly looks like an opportunity?"},
+ {n:13,name:"Death",emo:"🍂",kw:"Endings · Renewal",mean:"Something has to end for the next thing to begin. This card isn’t about loss — it’s about clearing the seat.",q:"What do you keep holding, even though you know it’s over?"},
+ {n:14,name:"Temperance",emo:"🏺",kw:"Balance · Recovery",mean:"Life is a mixing art — like blending two cups of water. Pour off the excess, top up what’s running low.",q:"In your life right now: one thing that’s too much, one that’s not enough?"},
+ {n:15,name:"The Devil",emo:"⛓️",kw:"Attachment · Habit",mean:"Look closer at that chain — it isn’t actually locked. Maybe you’re not unable to quit. Maybe you don’t want to let go.",q:"That thing you can’t quit — what’s the real reward it gives you?"},
+ {n:16,name:"The Tower",emo:"🌩️",kw:"Collapse · Release",mean:"When what you built comes down, you finally see the foundation. Sometimes collapse is the fastest renovation.",q:"From the rubble — what’s the one thing worth picking up?"},
+ {n:17,name:"The Star",emo:"⭐",kw:"Hope · Healing",mean:"You can’t touch a star, but it still gives you direction. Right now you don’t need a big win — just a small thing to believe in.",q:"What’s one thing you’d like to believe in again?"},
+ {n:18,name:"The Moon",emo:"🌕",kw:"Anxiety · The Unconscious",mean:"Anxiety isn’t a malfunction — it’s a signal. Shadows look huge in moonlight, but the real thing is smaller than you think.",q:"What is that anxiety trying to tell you?"},
+ {n:19,name:"The Sun",emo:"🌞",kw:"Joy · Achievement",mean:"This is you shining without trying. Don’t let today’s small good things walk past unnoticed.",q:"What made you smile today, even for a second?"},
+ {n:20,name:"Judgement",emo:"📯",kw:"The Call · Comeback",mean:"A chance to re-score the past has arrived. You can’t change what happened — but you can change what it means.",q:"If you got one more shot, what would you do differently?"},
+ {n:21,name:"The World",emo:"🌍",kw:"Completion · Wholeness",mean:"One full cycle, complete. Before the next journey, give what’s finished a proper goodbye.",q:"What farewell would you like to give the thing you finished well?"},
+];
+const POS=["① Where I Am","② What I Face","③ The Way Forward"];
+const POS_INTRO=["The card mirroring where you are right now","What you’ll need to face to move on","A clue for the road ahead"];
+
+let theme="mind", deck=[], picked=[], revealIdx=0;
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1900);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+$('themeRow').addEventListener('click',e=>{
+  const el=e.target.closest('.theme'); if(!el)return;
+  document.querySelectorAll('.theme').forEach(t=>t.classList.remove('sel'));
+  el.classList.add('sel'); theme=el.dataset.t; vibrate(15);
+});
+document.querySelector('.theme').classList.add('sel');
+
+function goSpread(){
+  deck=shuffle([...Array(22).keys()]); picked=[];
+  $('spreadTheme').textContent="Theme: "+({mind:"What’s on my mind",bond:"Me and that person",work:"Work · Goals",today:"Just today"})[theme];
+  const d=$('deck'); d.innerHTML="";
+  for(let i=0;i<22;i++){
+    const c=document.createElement('div');
+    c.className="cardback"; c.tabIndex=0; c.dataset.i=i;
+    c.addEventListener('click',()=>pickCard(c,i));
+    c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();c.click();}});
+    d.appendChild(c);
+  }
+  show('scSpread');
+  toast("🔮 Hold your theme in mind while you choose");
+}
+function pickCard(el,i){
+  if(picked.length>=3||el.classList.contains('gone'))return;
+  vibrate(28);
+  el.classList.add('gone');
+  const card=CARDS[deck[i]];
+  picked.push(card);
+  const slot=$('slot'+(picked.length-1));
+  slot.classList.add('filled'); slot.textContent="🂠";
+  if(picked.length===3){ setTimeout(startReveal,650); }
+}
+function startReveal(){
+  revealIdx=0;
+  $('revealArea').innerHTML="";
+  show('scReveal');
+  addFlip();
+}
+function addFlip(){
+  const card=picked[revealIdx];
+  const area=$('revealArea');
+  const wrap=document.createElement('div');
+  wrap.innerHTML=
+    "<div class='pos-label'>"+POS[revealIdx]+" — "+POS_INTRO[revealIdx]+"</div>"+
+    "<div class='flipwrap'><div class='flip' id='flip"+revealIdx+"'>"+
+      "<div class='face back'>Tap to open</div>"+
+      "<div class='face front'><span class='no'>"+roman(card.n)+"</span><span class='emo'>"+card.emo+"</span><span class='nm'>"+card.name+"</span><span class='kw'>"+card.kw+"</span></div>"+
+    "</div></div>"+
+    "<div class='tap-hint' id='hint"+revealIdx+"'>👆 Tap a card to flip it</div>"+
+    "<div class='meaning' id='mean"+revealIdx+"'></div>";
+  area.appendChild(wrap);
+  const f=$('flip'+revealIdx);
+  const myIdx=revealIdx;
+  f.addEventListener('click',()=>flipCard(myIdx),{once:true});
+  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+}
+function roman(n){const R=["0","I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV","XVI","XVII","XVIII","XIX","XX","XXI"];return R[n];}
+function flipCard(i){
+  const card=picked[i];
+  $('flip'+i).classList.add('flipped');
+  $('hint'+i).style.display="none";
+  vibrate([20,40,20]);
+  setTimeout(()=>{
+    const m=$('mean'+i);
+    m.innerHTML=card.mean+"<div class='q'><b>Ask yourself</b> — "+card.q+"</div>";
+    m.classList.add('on');
+    revealIdx++;
+    if(revealIdx<3){ setTimeout(addFlip,500); }
+    else{ setTimeout(finish,600); }
+    window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+  },820);
+}
+function finish(){
+  vibrate([30,50,30,50,90]);
+  const s=$('summary');
+  s.innerHTML="<b>🌙 Today’s reading, wrapped up</b><br>"+
+    picked.map((c,i)=>POS[i]+" · <b>"+c.name+"</b> ("+c.kw+")").join("<br>")+
+    "<br><br>The cards didn’t give you answers — they left you <b>3 questions</b> instead. Answer just one of them yourself today. That’s the real reading.";
+  s.style.display="block";
+  $('copyBtn').style.display="block";
+  $('againBtn').style.display="block";
+  window._resText="🔮 Tarot Mind Cards — 3 questions to ask myself today\n"+
+    picked.map((c,i)=>(i+1)+". ["+c.name+" "+c.emo+"] "+c.q).join("\n")+
+    "\n\nDraw yours → https://mimifactory.vibekr.com/en/apps/tarot.html";
+  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("Copied! Paste it somewhere you’ll see it 📋")); }
+  else toast("Press and hold to copy");
+  vibrate(20);
+}
+</script>
+</body>
+</html>

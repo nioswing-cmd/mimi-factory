@@ -11,7 +11,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HANGUL = re.compile(r"[가-힣]")
 
 # 간체 전용 한자 샘플 (zh-TW 혼입 검사용 — 대표 고빈도)
-SIMPLIFIED = set("么这为说读书电视软视频后发国过时门问题东车马乐买卖点长")
+# '后'는 번체 정자(皇后 등)에서도 쓰이므로 제외
+SIMPLIFIED = set("么这为说读书电视软视频发国过时门问题东车马乐买卖点长")
 
 
 def check(slug, lang, html_path):

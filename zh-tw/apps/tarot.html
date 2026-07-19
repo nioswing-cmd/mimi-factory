@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>塔羅心理卡 — 多巴胺實驗室</title>
+<meta property="og:title" content="塔羅心理卡 — 映照今天心情的 3 張牌">
+<meta property="og:description" content="抽的不是命運，是問題。把 22 張古老象徵變成心理學的鏡子 — 來選你的 3 張吧。">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#0c1020; --bg2:#121732; --card:#181f42; --line:#293264;
+  --ink:#eef0fb; --sub:#9aa3cc; --accent:#93a8ff; --accent2:#5f6fd6;
+  --point:#f4c66f; --ok:#52c48f; --bad:#e2584f;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 80% -10%, rgba(147,168,255,.13), transparent 55%),
+             radial-gradient(100% 80% at 10% 110%, rgba(244,198,111,.08), transparent 50%),
+             linear-gradient(165deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--point),var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:4vh;}
+.hero h1{font-size:44px;line-height:1.15;margin:16px 0 8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;opacity:.85;}
+
+.theme-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;}
+.theme{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px 10px;
+  text-align:center;cursor:pointer;transition:transform .25s cubic-bezier(.34,1.56,.64,1),border-color .25s;}
+.theme:active{transform:scale(.95);}
+.theme.sel{border-color:var(--point);background:linear-gradient(160deg,rgba(244,198,111,.14),rgba(147,168,255,.08));}
+.theme .emo{font-size:30px;display:block;}
+.theme .nm{font-family:'Jua',sans-serif;font-size:15.5px;margin-top:7px;display:block;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#141021;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--point),var(--accent));
+  box-shadow:0 10px 26px -8px var(--accent2);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.theme:focus-visible,.cardback:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+
+.spread-head{text-align:center;margin-bottom:14px;}
+.spread-head .t{font-family:'Jua',sans-serif;font-size:22px;}
+.spread-head .s{color:var(--sub);font-size:13.5px;margin-top:6px;}
+.picked-row{display:flex;justify-content:center;gap:10px;margin-bottom:16px;}
+.slot{width:64px;height:92px;border-radius:10px;border:2px dashed var(--line);display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--sub);text-align:center;line-height:1.3;}
+.slot.filled{border-style:solid;border-color:var(--point);background:linear-gradient(150deg,#232b5c,#161c40);
+  color:var(--point);font-size:26px;box-shadow:0 0 16px -2px rgba(244,198,111,.4);animation:pop .45s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.85);}60%{transform:scale(1.06);}100%{transform:scale(1);}}
+.deck{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
+.cardback{aspect-ratio:2/3;border-radius:9px;cursor:pointer;position:relative;border:1px solid #38418a;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(244,198,111,.55) 0 8%, transparent 9%),
+    radial-gradient(circle at 50% 42%, transparent 0 13%, rgba(244,198,111,.28) 14% 15.5%, transparent 16.5%),
+    linear-gradient(150deg,#2a3374,#151b45);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),opacity .3s;}
+.cardback:active{transform:scale(.92);}
+.cardback.gone{opacity:0;transform:scale(.6) rotate(8deg);pointer-events:none;}
+.deck-cap{font-size:12px;color:var(--sub);text-align:center;margin-top:14px;}
+
+
+.pos-label{font-family:'Jua',sans-serif;font-size:14px;color:var(--point);letter-spacing:.08em;text-align:center;margin:18px 0 8px;}
+.flipwrap{perspective:1000px;width:190px;margin:0 auto;}
+.flip{position:relative;width:100%;aspect-ratio:2/3;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.4,.1,.2,1);cursor:pointer;}
+.flip.flipped{transform:rotateY(180deg);}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;}
+.face.back{border:1px solid #38418a;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(244,198,111,.55) 0 8%, transparent 9%),
+    radial-gradient(circle at 50% 42%, transparent 0 13%, rgba(244,198,111,.28) 14% 15.5%, transparent 16.5%),
+    linear-gradient(150deg,#2a3374,#151b45);
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:12px;color:var(--sub);font-size:12px;}
+.face.front{transform:rotateY(180deg);background:linear-gradient(165deg,#222b63,#141a3e);
+  border:1.5px solid var(--point);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 0 30px -6px rgba(244,198,111,.45);}
+.face.front .no{font-size:11px;letter-spacing:.2em;color:var(--sub);}
+.face.front .emo{font-size:52px;}
+.face.front .nm{font-family:'Jua',sans-serif;font-size:19px;color:var(--point);}
+.face.front .kw{font-size:12px;color:var(--sub);}
+.meaning{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 17px;margin-top:14px;
+  font-size:14.5px;line-height:1.7;display:none;animation:fadeIn .5s ease;}
+.meaning.on{display:block;}
+.meaning .q{margin-top:10px;background:rgba(244,198,111,.1);border-left:3px solid var(--point);border-radius:8px;
+  padding:10px 12px;font-size:14px;}
+.meaning .q b{color:var(--point);}
+.tap-hint{text-align:center;color:var(--sub);font-size:13px;margin-top:10px;}
+
+.summary{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:24px;font-size:14.5px;line-height:1.75;}
+.summary b{color:var(--point);}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(24,31,66,.97);border:1.5px solid var(--point);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(147,168,255,.55));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#8d94bd;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#8d94bd;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 多巴胺實驗室 · 迷信的心理學新解</span>
+      <h1>🔮 <span class="grad">塔羅心理卡</span></h1>
+      <p class="sub">抽的不是命運，是 <b>問題</b>。<br>把 22 張古老的象徵，變成映照內心的鏡子。</p>
+    </div>
+    <div class="pitch">
+      <b>怎麼玩</b><br>
+      ① 選一個最近卡在心裡的主題<br>
+      ② 從 22 張牌中選出 <b>最有感覺的 3 張</b><br>
+      ③ 牌會依「現在的我 → 要面對的 → 前進的路」順序翻開。
+    </div>
+    <div class="theme-row" id="themeRow">
+      <div class="theme" data-t="心情" tabindex="0"><span class="emo">🌙</span><span class="nm">最近的心情</span></div>
+      <div class="theme" data-t="關係" tabindex="0"><span class="emo">💞</span><span class="nm">那個人與我</span></div>
+      <div class="theme" data-t="工作" tabindex="0"><span class="emo">🎯</span><span class="nm">工作 · 目標</span></div>
+      <div class="theme" data-t="今天" tabindex="0"><span class="emo">☀️</span><span class="nm">就是今天</span></div>
+    </div>
+    <button class="btn" onclick="goSpread()">🃏 洗牌，去抽卡</button>
+    <p class="note">※ 塔羅不是預測未來的工具。這個 App 把傳統象徵用心理學重新詮釋成 <b>自我教練卡</b>，答案不在牌裡，而在你心裡。</p>
+  </section>
+
+  
+  <section id="scSpread" class="screen">
+    <div class="spread-head">
+      <div class="t">選出 <span class="grad">3 張</span>最吸引你的牌</div>
+      <div class="s" id="spreadTheme">主題: 最近的心情</div>
+    </div>
+    <div class="picked-row">
+      <div class="slot" id="slot0">① 現在<br>的我</div>
+      <div class="slot" id="slot1">② 要面<br>對的</div>
+      <div class="slot" id="slot2">③ 前進<br>的路</div>
+    </div>
+    <div class="deck" id="deck"></div>
+    <div class="deck-cap">不用想太多 — 第一眼對到的那張，就是你的牌 ✨</div>
+  </section>
+
+  
+  <section id="scReveal" class="screen">
+    <div id="revealArea"></div>
+    <div class="summary" id="summary" style="display:none;"></div>
+    <button class="btn" id="copyBtn" style="display:none;" onclick="copyResult()">📋 保存今天的 3 個問題</button>
+    <button class="btn ghost" id="againBtn" style="display:none;" onclick="location.reload()">🔄 換個主題再抽一次</button>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 多巴胺實驗室 — 看看其他測驗 →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意義與趣味工廠</span></div>
+    <div class="mf-logo">咪咪工廠 MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL股份有限公司 家族公司</div>
+  </div>
+</div>
+
+<script>
+
+const CARDS=[
+ {n:0,name:"愚者",emo:"🎒",kw:"開始 · 純粹",mean:"在算清楚之前就先跨出一步的力量。『還沒準備好』常常是『敢開始』的另一個名字。",q:"如果失敗也沒關係，你今天想開始什麼？"},
+ {n:1,name:"魔術師",emo:"🪄",kw:"行動 · 才能",mean:"需要的工具其實都已經在你桌上了。缺的往往不是能力，而是『決定拿起來用』。",q:"你擁有卻一直沒用的能力，是什麼？"},
+ {n:2,name:"女祭司",emo:"🌒",kw:"直覺 · 靜默",mean:"腦子覺得很複雜，但心其實早就知道答案了。把雜訊調小，就聽得見那個聲音。",q:"其實你早就知道的答案，是什麼？"},
+ {n:3,name:"皇后",emo:"🌾",kw:"滋養 · 豐盛",mean:"先被填滿，才能滿出來。照顧自己不是奢侈，是你所有關係的本錢。",q:"最近，你都用什麼填滿自己？"},
+ {n:4,name:"皇帝",emo:"🏛️",kw:"秩序 · 責任",mean:"規則可以是保護你的圍籬，也可以是困住你的高牆。該檢查那條界線了。",q:"保護你的規則、困住你的規則，各舉一個？"},
+ {n:5,name:"教皇",emo:"📿",kw:"學習 · 指引",mean:"已經不是單打獨鬥的時代了。走過那條路的人給的一張地圖，能幫你省下好幾個月。",q:"現在最該去請教的人，是誰？"},
+ {n:6,name:"戀人",emo:"💘",kw:"選擇 · 價值觀",mean:"選擇困難不是因為沒有答案，而是因為還沒決定要放棄什麼。",q:"老實說，你的心已經偏向哪一邊了？"},
+ {n:7,name:"戰車",emo:"🏇",kw:"推進 · 專注",mean:"方向定了，接下來是速度的時間。把散掉的能量收回到同一條車道上。",q:"現在最該踩油門的那件事，是什麼？"},
+ {n:8,name:"力量",emo:"🦁",kw:"溫柔的勇氣",mean:"真正的強大不是壓抑，而是馴服。別再跟心裡的獅子打架了，跟牠談判吧。",q:"你心裡的那頭獅子（慾望、怒氣），現在想要什麼？"},
+ {n:9,name:"隱者",emo:"🏮",kw:"內省 · 獨處",mean:"提燈要在黑暗裡才看得見。有時候斷線離線，反而讓你找到方向。",q:"上一次完完全全獨處，是什麼時候？"},
+ {n:10,name:"命運之輪",emo:"🎡",kw:"流轉 · 變化",mean:"沒有人能掌控一切。分得清哪些輪子你能轉、哪些輪子自己會轉，就是智慧。",q:"要抓住的、要放手的，各選一樣的話？"},
+ {n:11,name:"正義",emo:"⚖️",kw:"平衡 · 公正",mean:"天秤不是只拿來衡量別人的。你是不是只對自己下了最嚴厲的判決？",q:"對別人很寬容、卻只對自己嚴格的地方，有嗎？"},
+ {n:12,name:"倒吊人",emo:"🙃",kw:"換個角度",mean:"停下來不是退步。有些風景，要倒著掛才看得見。",q:"把現在的處境倒過來看，什麼突然變成了機會？"},
+ {n:13,name:"死神",emo:"🍂",kw:"結束 · 重生",mean:"有些事要先結束，下一件事才能開始。這張牌講的不是失去，是『把位子空出來』。",q:"明知道已經結束、卻還抓著不放的，是什麼？"},
+ {n:14,name:"節制",emo:"🏺",kw:"調和 · 修復",mean:"人生像調配兩杯水，是一門混合的藝術。太多的倒掉一些，不夠的補上一些。",q:"最近的生活裡，太多的一樣、不夠的一樣，是什麼？"},
+ {n:15,name:"惡魔",emo:"⛓️",kw:"執著 · 習慣",mean:"仔細看那條鎖鏈 — 其實沒有上鎖。也許不是戒不掉，是捨不得放手。",q:"那件明知道卻戒不掉的事 — 它給你的真正獎勵是什麼？"},
+ {n:16,name:"高塔",emo:"🌩️",kw:"崩塌 · 解放",mean:"辛苦堆起來的東西倒下時，才終於看見地基。崩塌有時是最快的改建。",q:"從倒下的地方，你最想撿起的一樣東西是什麼？"},
+ {n:17,name:"星星",emo:"⭐",kw:"希望 · 療癒",mean:"星星摸不到，卻能指方向。你現在需要的不是大成就，而是一個小小的相信。",q:"你想重新相信的，是什麼？"},
+ {n:18,name:"月亮",emo:"🌕",kw:"不安 · 潛意識",mean:"不安不是故障，是訊號。月光下影子看起來特別大，實際上比你想的小得多。",q:"那份不安，想告訴你的是什麼？"},
+ {n:19,name:"太陽",emo:"🌞",kw:"正向 · 成就",mean:"不用刻意表現也在發光的狀態。今天那些小小的美好，別讓它們就這樣走過去。",q:"今天有什麼事，讓你笑了哪怕一秒？"},
+ {n:20,name:"審判",emo:"📯",kw:"召喚 · 再起",mean:"重新評價過去的機會來了。過去改變不了，但它的意義可以。",q:"如果再給你一次機會，你會改變什麼？"},
+ {n:21,name:"世界",emo:"🌍",kw:"完成 · 圓滿",mean:"一個循環完成了。在下一段旅程之前，好好跟結束的事說再見。",q:"對那件好好完成的事，你想說什麼道別的話？"},
+];
+const POS=["① 現在的我","② 要面對的","③ 前進的路"];
+const POS_INTRO=["映照你現在狀態的牌","想往前走，必須面對的東西","往前走的線索"];
+
+let theme="心情", deck=[], picked=[], revealIdx=0;
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1900);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+$('themeRow').addEventListener('click',e=>{
+  const el=e.target.closest('.theme'); if(!el)return;
+  document.querySelectorAll('.theme').forEach(t=>t.classList.remove('sel'));
+  el.classList.add('sel'); theme=el.dataset.t; vibrate(15);
+});
+document.querySelector('.theme').classList.add('sel');
+
+function goSpread(){
+  deck=shuffle([...Array(22).keys()]); picked=[];
+  $('spreadTheme').textContent="主題: "+({心情:"最近的心情",關係:"那個人與我",工作:"工作 · 目標",今天:"就是今天"})[theme];
+  const d=$('deck'); d.innerHTML="";
+  for(let i=0;i<22;i++){
+    const c=document.createElement('div');
+    c.className="cardback"; c.tabIndex=0; c.dataset.i=i;
+    c.addEventListener('click',()=>pickCard(c,i));
+    c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();c.click();}});
+    d.appendChild(c);
+  }
+  show('scSpread');
+  toast("🔮 心裡想著你的主題，慢慢選");
+}
+function pickCard(el,i){
+  if(picked.length>=3||el.classList.contains('gone'))return;
+  vibrate(28);
+  el.classList.add('gone');
+  const card=CARDS[deck[i]];
+  picked.push(card);
+  const slot=$('slot'+(picked.length-1));
+  slot.classList.add('filled'); slot.textContent="🂠";
+  if(picked.length===3){ setTimeout(startReveal,650); }
+}
+function startReveal(){
+  revealIdx=0;
+  $('revealArea').innerHTML="";
+  show('scReveal');
+  addFlip();
+}
+function addFlip(){
+  const card=picked[revealIdx];
+  const area=$('revealArea');
+  const wrap=document.createElement('div');
+  wrap.innerHTML=
+    "<div class='pos-label'>"+POS[revealIdx]+" — "+POS_INTRO[revealIdx]+"</div>"+
+    "<div class='flipwrap'><div class='flip' id='flip"+revealIdx+"'>"+
+      "<div class='face back'>點擊翻開</div>"+
+      "<div class='face front'><span class='no'>"+roman(card.n)+"</span><span class='emo'>"+card.emo+"</span><span class='nm'>"+card.name+"</span><span class='kw'>"+card.kw+"</span></div>"+
+    "</div></div>"+
+    "<div class='tap-hint' id='hint"+revealIdx+"'>👆 點一下卡片就會翻開</div>"+
+    "<div class='meaning' id='mean"+revealIdx+"'></div>";
+  area.appendChild(wrap);
+  const f=$('flip'+revealIdx);
+  const myIdx=revealIdx;
+  f.addEventListener('click',()=>flipCard(myIdx),{once:true});
+  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+}
+function roman(n){const R=["0","I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV","XVI","XVII","XVIII","XIX","XX","XXI"];return R[n];}
+function flipCard(i){
+  const card=picked[i];
+  $('flip'+i).classList.add('flipped');
+  $('hint'+i).style.display="none";
+  vibrate([20,40,20]);
+  setTimeout(()=>{
+    const m=$('mean'+i);
+    m.innerHTML=card.mean+"<div class='q'><b>問問自己</b> — "+card.q+"</div>";
+    m.classList.add('on');
+    revealIdx++;
+    if(revealIdx<3){ setTimeout(addFlip,500); }
+    else{ setTimeout(finish,600); }
+    window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+  },820);
+}
+function finish(){
+  vibrate([30,50,30,50,90]);
+  const s=$('summary');
+  s.innerHTML="<b>🌙 今日解讀總結</b><br>"+
+    picked.map((c,i)=>POS[i]+" · <b>"+c.name+"</b> ("+c.kw+")").join("<br>")+
+    "<br><br>牌沒有給你答案 — 它留給你 <b>3 個問題</b>。今天只要親自回答其中一個就好，那才是真正的解讀。";
+  s.style.display="block";
+  $('copyBtn').style.display="block";
+  $('againBtn').style.display="block";
+  window._resText="🔮 塔羅心理卡 — 今天問自己的 3 個問題\n"+
+    picked.map((c,i)=>(i+1)+". ["+c.name+" "+c.emo+"] "+c.q).join("\n")+
+    "\n\n我也要抽 → https://mimifactory.vibekr.com/zh-tw/apps/tarot.html";
+  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("複製完成！貼到備忘錄收好 📋")); }
+  else toast("請長按複製");
+  vibrate(20);
+}
+</script>
+</body>
+</html>
