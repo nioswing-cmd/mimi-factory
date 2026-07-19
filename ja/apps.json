@@ -25,6 +25,18 @@
    "desc": "AIが仕事を飲み込む時代、生き残る8タイプ。あなたの生存キャラは？"
   },
   {
+   "id": "eq-emotional-intelligence-test",
+   "type": "test",
+   "title": "EQ こころの知能テスト",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/eq-emotional-intelligence-test.html",
+   "premium": "apps/eq-emotional-intelligence-test.html",
+   "desc": "自己認識・自己コントロール・共感・表現 — 16問で心を扱う4つの技術を診断"
+  },
+  {
    "id": "tarot",
    "type": "test",
    "title": "タロット心理カード",

@@ -25,6 +25,18 @@
    "desc": "AI is swallowing jobs — 8 types survive. Which is your survival character?"
   },
   {
+   "id": "eq-emotional-intelligence-test",
+   "type": "test",
+   "title": "EQ Emotional Intelligence Test",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/eq-emotional-intelligence-test.html",
+   "premium": "apps/eq-emotional-intelligence-test.html",
+   "desc": "Map your 4 emotional skills — awareness, control, empathy, expression — in 16 questions."
+  },
+  {
    "id": "tarot",
    "type": "test",
    "title": "Tarot Mind Cards",

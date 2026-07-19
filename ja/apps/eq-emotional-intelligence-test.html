@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>EQ こころの知能テスト — ドーパミン実験室</title>
+<meta property="og:title" content="EQ こころの知能テスト — 心を扱う4つの技術を診断">
+<meta property="og:description" content="自己認識・自己コントロール・共感・表現。16問であなたのこころの知能プロフィールを描きます。">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansJP-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/MPLUSRounded1c-Bold-sub.woff2') format('woff2');font-weight:400;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#0d1a1c; --bg2:#12262a; --card:#173036; --line:#254750;
+  --ink:#eaf5f3; --sub:#94b8b4; --accent:#5fd0c7; --accent2:#3a8fa3;
+  --point:#e8c98d; --ok:#57c489; --bad:#e06055;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 85% -10%, rgba(95,208,199,.12), transparent 55%),
+             radial-gradient(100% 80% at 5% 110%, rgba(232,201,141,.08), transparent 50%),
+             linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--accent),var(--point));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:5vh;}
+.hero h1{font-size:44px;line-height:1.15;margin:16px 0 8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#0c1b18;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--accent),var(--point));
+  box-shadow:0 10px 26px -8px rgba(95,208,199,.5);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+
+.pillars{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px 10px;margin-bottom:16px;}
+.prow{display:flex;justify-content:space-between;align-items:flex-end;height:70px;gap:12px;}
+.pcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end;}
+.pbar{width:100%;max-width:44px;height:0%;border-radius:8px 8px 3px 3px;transition:height .5s cubic-bezier(.22,1,.36,1);min-height:4px;}
+.pcol .plab{font-family:'Jua',sans-serif;font-size:13px;color:var(--sub);}
+.pillars .cap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:9px;opacity:.8;}
+.count{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);text-align:center;margin-bottom:8px;}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent);}
+.qtext{font-size:21px;font-weight:700;line-height:1.45;margin-top:8px;}
+.qhint{font-size:13px;color:var(--sub);margin-top:8px;}
+.opts{display:flex;flex-direction:column;gap:11px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:16px;
+  font-size:16px;color:var(--ink);text-align:left;cursor:pointer;font-family:inherit;line-height:1.5;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.opt:active{transform:scale(.97);}
+.opt .ab{display:inline-block;font-family:'Jua',sans-serif;color:var(--sub);margin-right:8px;}
+
+
+.res-hero{text-align:center;margin-top:10px;}
+.res-emo{font-size:64px;}
+.res-type{font-family:'Jua',sans-serif;font-size:31px;margin:10px 0 4px;}
+.res-tag{color:var(--sub);font-size:14.5px;line-height:1.7;}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:20px;}
+.chart .ct{font-family:'Jua',sans-serif;font-size:16px;margin-bottom:6px;}
+.crow{display:flex;align-items:center;gap:10px;margin-top:11px;font-size:14px;}
+.crow .cl{width:92px;}
+.cbar{flex:1;height:11px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;}
+.cfill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--point));transition:width .9s cubic-bezier(.22,1,.36,1);}
+.crow .cv{width:38px;text-align:right;font-family:'Jua',sans-serif;color:var(--point);}
+.tips{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px 18px;margin-top:14px;font-size:14.5px;line-height:1.75;}
+.tips b{color:var(--point);}
+.tips .row{margin-top:10px;}
+.tips .row:first-child{margin-top:0;}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(23,48,54,.97);border:1.5px solid var(--accent);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(95,208,199,.5));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#84a5a1;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#84a5a1;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 ドーパミン実験室 · 頭脳シリーズ</span>
+      <h1>💚 <span class="grad">EQ こころの知能</span> テスト</h1>
+      <p class="sub">IQが問題を解く力なら、<br>EQは <b>心を扱う技術</b>です。<br>16問であなたの感情スキル4種を診断します。</p>
+    </div>
+    <div class="pitch">
+      <b>測る4つの技術</b><br>
+      自分の感情に気づく · 感情を整える · 相手の心を読む · 気持ちを伝える。<br>
+      正解はありません — <b>ありのままの自分</b>で答えるほど、正確になります。
+    </div>
+    <button class="btn" onclick="startQuiz()">💗 こころの知能診断をはじめる</button>
+    <p class="note">※ 自己申告式の参考テストです（正式な心理検査ではありません）。
+    EQは生まれつきではなく、練習で育つ力。だから結果には成長のポイントも添えています。</p>
+  </section>
+
+  
+  <section id="scQuiz" class="screen">
+    <div class="pillars">
+      <div class="prow" id="prow"></div>
+      <div class="cap">4つの感情スキルがリアルタイムで積み上がります — 正体は結果で公開！</div>
+    </div>
+    <div class="count" id="qCount">1 / 16</div>
+    <div class="qcard">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qhint">👉 「なりたい自分」ではなく「ありのままの自分」で！</div>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="res-emo" id="resEmo"></div>
+      <div class="res-type" id="resType"></div>
+      <p class="res-tag" id="resTag"></p>
+    </div>
+    <div class="chart">
+      <div class="ct">💚 あなたの感情スキル・プロフィール</div>
+      <div id="chart"></div>
+    </div>
+    <div class="tips" id="tips"></div>
+    <button class="btn" onclick="copyResult()">📋 結果をコピーしてシェア</button>
+    <button class="btn ghost" onclick="location.reload()">もう一度診断する</button>
+    <p class="note">※ EQは筋肉と同じ。いちばん低い軸を2週間意識するだけでも変わります。</p>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/ja/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 ドーパミン実験室 — ほかのテストを見る →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意味と面白さの工場</span></div>
+    <div class="mf-logo">ミミファクトリー</div>
+    <div class="mf-caption">株式会社ヨンギョル ファミリーカンパニー</div>
+  </div>
+</div>
+
+<script>
+
+const QUESTIONS=[
+ {ax:"R",q:"理由もなく気分が沈むとき、私は？",hi:"少し立ち止まって「なぜ？」と理由をたどる",lo:"とりあえず何かをして気分を変える"},
+ {ax:"R",q:"誰かに「最近どう？」と聞かれたら？",hi:"自分の状態をかなり具体的に話せる",lo:"「まあ、いつもどおり」がまず出てくる"},
+ {ax:"R",q:"カッとなったとき、私は？",hi:"怒りの奥にある本当の気持ち（寂しさ・不安）が見える",lo:"とにかく腹が立っただけ — 理由は後回し"},
+ {ax:"R",q:"たいしたことでもないのに涙がにじんだら？",hi:"「ああ、最近疲れてるんだな」と気づく",lo:"「なんで急に」と流してしまう"},
+ {ax:"C",q:"きつい言葉が喉まで出かかったら？",hi:"ひと呼吸おいて、選んだ言葉にして出す",lo:"その場で口にしてから考える"},
+ {ax:"C",q:"ストレスがひどい日、私は？",hi:"自分を立て直す確かなルーティンがある",lo:"その日の気分まかせで、なんとなく発散する"},
+ {ax:"C",q:"不安なことが起きたら？",hi:"いまできることひとつに集中する",lo:"頭の中で最悪のシナリオが自動再生される"},
+ {ax:"C",q:"嫌な気分のまま一日が終わったら？",hi:"明日の自分のために、気持ちを整えてから眠る",lo:"そのまま眠り、朝もその不機嫌を引きずる"},
+ {ax:"E",q:"友だちが悩みを打ち明けてきたら？",hi:"解決策より先に、その気持ちを受けとめる",lo:"まず一番早い解決策を出す"},
+ {ax:"E",q:"ドラマや映画を見るとき、私は？",hi:"登場人物の感情に一緒に泣いて笑う",lo:"展開や設定を分析しながら見る"},
+ {ax:"E",q:"一緒にいる人の表情が暗いと？",hi:"言われる前に、たいてい先に気づく",lo:"言ってもらわないと気づかない"},
+ {ax:"E",q:"自分と正反対の意見を聞くと？",hi:"「あの立場ならそうなるかも」がまず浮かぶ",lo:"まず反論の理屈が自動で浮かぶ"},
+ {ax:"S",q:"ありがたい、あるいは申し訳ない気持ちになったら？",hi:"その都度、言葉にして伝える",lo:"心の中にしまっておくほうだ"},
+ {ax:"S",q:"人間関係にすれ違いが生まれたら？",hi:"こじれる前に、自分から話し合いを持ちかける",lo:"時間が解決してくれるのを待つ"},
+ {ax:"S",q:"本当につらいことがあったとき？",hi:"信頼できる人に、正直に打ち明ける",lo:"ひとりで抱えるほうが気がラクだ"},
+ {ax:"S",q:"褒められたとき、私は？",hi:"「ありがとう、うれしいです」と受け取る",lo:"「いえいえ、そんな」がまず出てくる"},
+];
+const AXES={
+ R:{emo:"🔍",name:"自己認識",desc:"自分の感情に気づく力",
+    tip:"1日1回、「いまの気分をひと言でいうと？」と自分に聞いてみて。感情に名前をつけた瞬間、その半分は扱えています。"},
+ C:{emo:"🌊",name:"自己コントロール",desc:"感情に流されず、整える力",
+    tip:"カッとしたとき用の「自分だけの3秒ルーティン」（深呼吸・水をひと口）をひとつ決めておいて。コントロールは意志ではなくルーティンです。"},
+ E:{emo:"💞",name:"共感",desc:"相手の心を読む力",
+    tip:"会話ではアドバイスの前に、「そうだったんだね」のひと言を先に置いてみて。共感は才能ではなく、順番の技術です。"},
+ S:{emo:"📣",name:"感情表現",desc:"気持ちを健やかに外に出す力",
+    tip:"今日、感謝したい人ひとりに、その気持ちをメッセージで送ってみて。表現の筋肉は短い一文から育ちます。"},
+};
+const TIERS=[
+ [14,"🌟 感情の錬金術師","4つの技術がバランスよく成熟しています。まわりの人があなたのそばで安心できるのには、理由があります。"],
+ [11,"💎 感情の使い手","心を扱う手つきが、なかなか達者。いちばん低い軸をひとつ整えれば、ほぼ完成形です。"],
+ [7,"⚖️ 感情バランス型","得意な技術と苦手な技術が同居しています。苦手な軸は弱点ではなく、伸びしろです。"],
+ [4,"🌱 感情のふたば","感情とはまだ、少しよそよそしい間柄。大丈夫 — EQはここから育てていく力ですから。"],
+ [0,"📦 感情、未開封","心の箱を、しばらく開けていなかったみたい。今日の結果が、その箱を開ける最初の鍵になりますように。"],
+];
+
+let idx=0, score={R:0,C:0,E:0,S:0}, pillarMap=[], deck=[];
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1800);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+const PCOLORS=["#5fd0c7","#e8c98d","#7aa6ff","#ff9e9e"];
+function startQuiz(){
+  idx=0; score={R:0,C:0,E:0,S:0};
+  deck=shuffle([...QUESTIONS]);
+  pillarMap=shuffle(["R","C","E","S"]);
+  const pr=$('prow'); pr.innerHTML="";
+  pillarMap.forEach((k,i)=>{
+    pr.innerHTML+="<div class='pcol'><div class='pbar' id='pb"+i+"' style='background:linear-gradient(180deg,"+PCOLORS[i]+",rgba(255,255,255,.05))'></div><div class='plab'>?</div></div>";
+  });
+  show('scQuiz'); render();
+}
+function render(){
+  const Q=deck[idx];
+  $('qCount').textContent=(idx+1)+" / "+deck.length;
+  $('qNum').textContent="Q"+(idx+1);
+  const qt=$('qText'); qt.textContent=Q.q;
+  qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const pair=Math.random()<.5?[[Q.hi,1],[Q.lo,0]]:[[Q.lo,0],[Q.hi,1]];
+  const box=$('opts'); box.innerHTML="";
+  pair.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button";
+    b.innerHTML="<span class='ab'>"+(i===0?"A":"B")+"</span>"+o[0];
+    b.addEventListener('click',()=>pick(Q.ax,o[1]));
+    box.appendChild(b);
+  });
+}
+function pick(ax,pt){
+  vibrate(22); score[ax]+=pt;
+  pillarMap.forEach((k,i)=>{ $('pb'+i).style.height=(score[k]/4*100)+"%"; });
+  idx++;
+  if(idx>=deck.length){ setTimeout(showResult,450); return; }
+  setTimeout(render,240);
+}
+function showResult(){
+  const total=score.R+score.C+score.E+score.S;
+  const tier=TIERS.find(t=>total>=t[0]);
+  show('scResult'); vibrate([30,50,30,50,90]);
+  $('resEmo').textContent=tier[1].split(' ')[0];
+  $('resType').innerHTML="<span class='grad'>"+tier[1].split(' ').slice(1).join(' ')+"</span>";
+  $('resTag').textContent=tier[2]+" (合計 "+total+"/16)";
+  const ch=$('chart'); ch.innerHTML="";
+  ["R","C","E","S"].forEach((k,i)=>{
+    const a=AXES[k], pct=score[k]/4*100;
+    ch.innerHTML+="<div class='crow'><span class='cl'>"+a.emo+" "+a.name+"</span><div class='cbar'><div class='cfill' id='cf"+i+"' data-w='"+pct+"'></div></div><span class='cv'>"+score[k]+"/4</span></div>";
+  });
+  setTimeout(()=>{["R","C","E","S"].forEach((k,i)=>{const f=$('cf'+i);f.style.width=f.dataset.w+"%";});},150);
+  const sorted=["R","C","E","S"].sort((a,b)=>score[a]-score[b]);
+  const low=AXES[sorted[0]], high=AXES[sorted[3]];
+  $('tips').innerHTML=
+    "<div class='row'><b>"+high.emo+" 私の強み</b> — '"+high.name+"' ("+high.desc+")がいちばん安定しています。すでにうまく使えている技術です。</div>"+
+    "<div class='row'><b>"+low.emo+" 2週間の成長ミッション</b> — '"+low.name+"'("+low.desc+")から。 "+low.tip+"</div>";
+  window._resText="💚 EQ こころの知能テスト\n"+tier[1]+" (合計 "+total+"/16)\nプロフィール： "+["R","C","E","S"].map(k=>AXES[k].name+" "+score[k]).join(" · ")+"\n\n私の感情スキル診断 → https://mimifactory.vibekr.com/ja/apps/eq-emotional-intelligence-test.html";
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("コピー完了！どこにでも貼りつけて 📋")); }
+  else toast("長押しでコピーしてください");
+  vibrate(20);
+}
+</script>
+</body>
+</html>

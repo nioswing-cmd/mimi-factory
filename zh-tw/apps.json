@@ -25,6 +25,18 @@
    "desc": "AI 吞噬工作的時代，8 種人活下來。你是哪種生存角色？"
   },
   {
+   "id": "eq-emotional-intelligence-test",
+   "type": "test",
+   "title": "EQ 情緒智能測驗",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/eq-emotional-intelligence-test.html",
+   "premium": "apps/eq-emotional-intelligence-test.html",
+   "desc": "自我覺察、調節、同理、表達 — 用 16 題畫出你的 4 種情緒技能"
+  },
+  {
    "id": "tarot",
    "type": "test",
    "title": "塔羅心理卡",

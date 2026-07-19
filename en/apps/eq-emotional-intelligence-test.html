@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>EQ Emotional Intelligence Test — Dopamine Lab</title>
+<meta property="og:title" content="EQ Emotional Intelligence Test — a 4-part read on how you handle your feelings">
+<meta property="og:description" content="Self-awareness, self-control, empathy, expression. 16 questions to map your emotional-intelligence profile.">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#0d1a1c; --bg2:#12262a; --card:#173036; --line:#254750;
+  --ink:#eaf5f3; --sub:#94b8b4; --accent:#5fd0c7; --accent2:#3a8fa3;
+  --point:#e8c98d; --ok:#57c489; --bad:#e06055;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 85% -10%, rgba(95,208,199,.12), transparent 55%),
+             radial-gradient(100% 80% at 5% 110%, rgba(232,201,141,.08), transparent 50%),
+             linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--accent),var(--point));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:5vh;}
+.hero h1{font-size:44px;line-height:1.15;margin:16px 0 8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;overflow-wrap:break-word;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;overflow-wrap:break-word;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;overflow-wrap:break-word;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#0c1b18;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--accent),var(--point));
+  box-shadow:0 10px 26px -8px rgba(95,208,199,.5);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+
+.pillars{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px 10px;margin-bottom:16px;}
+.prow{display:flex;justify-content:space-between;align-items:flex-end;height:70px;gap:12px;}
+.pcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end;}
+.pbar{width:100%;max-width:44px;height:0%;border-radius:8px 8px 3px 3px;transition:height .5s cubic-bezier(.22,1,.36,1);min-height:4px;}
+.pcol .plab{font-family:'Jua',sans-serif;font-size:13px;color:var(--sub);}
+.pillars .cap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:9px;opacity:.8;}
+.count{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);text-align:center;margin-bottom:8px;}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent);}
+.qtext{font-size:21px;font-weight:700;line-height:1.45;margin-top:8px;overflow-wrap:break-word;}
+.qhint{font-size:13px;color:var(--sub);margin-top:8px;}
+.opts{display:flex;flex-direction:column;gap:11px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:16px;
+  font-size:16px;color:var(--ink);text-align:left;cursor:pointer;font-family:inherit;line-height:1.5;overflow-wrap:break-word;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.opt:active{transform:scale(.97);}
+.opt .ab{display:inline-block;font-family:'Jua',sans-serif;color:var(--sub);margin-right:8px;}
+
+
+.res-hero{text-align:center;margin-top:10px;}
+.res-emo{font-size:64px;}
+.res-type{font-family:'Jua',sans-serif;font-size:31px;margin:10px 0 4px;}
+.res-tag{color:var(--sub);font-size:14.5px;line-height:1.7;overflow-wrap:break-word;}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:20px;}
+.chart .ct{font-family:'Jua',sans-serif;font-size:16px;margin-bottom:6px;}
+.crow{display:flex;align-items:center;gap:10px;margin-top:11px;font-size:14px;}
+.crow .cl{width:92px;}
+.cbar{flex:1;height:11px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;}
+.cfill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--point));transition:width .9s cubic-bezier(.22,1,.36,1);}
+.crow .cv{width:38px;text-align:right;font-family:'Jua',sans-serif;color:var(--point);}
+.tips{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px 18px;margin-top:14px;font-size:14.5px;line-height:1.75;overflow-wrap:break-word;}
+.tips b{color:var(--point);}
+.tips .row{margin-top:10px;}
+.tips .row:first-child{margin-top:0;}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(23,48,54,.97);border:1.5px solid var(--accent);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(95,208,199,.5));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#84a5a1;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#84a5a1;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 Dopamine Lab · Brain Series</span>
+      <h1>💚 <span class="grad">EQ Emotional Intelligence</span> Test</h1>
+      <p class="sub">If IQ is the power to solve problems,<br>EQ is <b>the skill of handling emotions</b>.<br>16 questions to diagnose your 4 emotional skills.</p>
+    </div>
+    <div class="pitch">
+      <b>The 4 skills we measure</b><br>
+      Noticing your feelings · Steadying them · Reading others · Speaking your heart.<br>
+      There are no wrong answers — the more you answer as <b>the real you</b>, the sharper it gets.
+    </div>
+    <button class="btn" onclick="startQuiz()">💗 Start my EQ check</button>
+    <p class="note">※ A self-report reference test, not a clinical assessment.
+    EQ isn’t something you’re born with — it grows with practice, so your results come with growth pointers too.</p>
+  </section>
+
+  
+  <section id="scQuiz" class="screen">
+    <div class="pillars">
+      <div class="prow" id="prow"></div>
+      <div class="cap">Four emotional skills stack up in real time — the full picture unlocks at the end!</div>
+    </div>
+    <div class="count" id="qCount">1 / 16</div>
+    <div class="qcard">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qhint">👉 Answer as the ‘real you’, not the ‘you you wish you were’!</div>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="res-emo" id="resEmo"></div>
+      <div class="res-type" id="resType"></div>
+      <p class="res-tag" id="resTag"></p>
+    </div>
+    <div class="chart">
+      <div class="ct">💚 My emotional-skill profile</div>
+      <div id="chart"></div>
+    </div>
+    <div class="tips" id="tips"></div>
+    <button class="btn" onclick="copyResult()">📋 Copy my result to share</button>
+    <button class="btn ghost" onclick="location.reload()">Take it again</button>
+    <p class="note">※ EQ is like a muscle — just two weeks of tending your lowest axis can shift it.</p>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/en/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 Dopamine Lab — more tests this way →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>The Meaning & Fun Factory</span></div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+  </div>
+</div>
+
+<script>
+
+const QUESTIONS=[
+ {ax:"R",q:"When your mood dips for no clear reason, you…",hi:"Pause and ask yourself ‘why?’ to trace the reason",lo:"Just do something else to shake the mood off"},
+ {ax:"R",q:"When someone asks “How’ve you been?”…",hi:"You can describe how you’re doing pretty specifically",lo:"“Oh, you know, same as always” comes out first"},
+ {ax:"R",q:"When anger flares up, you…",hi:"You can see the real feeling under it (hurt, worry)",lo:"You’re just angry — the reason can wait"},
+ {ax:"R",q:"When your eyes well up over something small…",hi:"You catch it: ‘ah, I’ve been worn out lately’",lo:"You brush it off as ‘random’ and move on"},
+ {ax:"C",q:"When a sharp word rises to the tip of your tongue…",hi:"You take a beat and pick your words before letting them out",lo:"You say it on the spot, then think"},
+ {ax:"C",q:"On a high-stress day, you…",hi:"You have a reliable routine that resets you",lo:"You just wing it, however the mood goes"},
+ {ax:"C",q:"When something worrying comes up…",hi:"You focus on the one thing you can do right now",lo:"Worst-case scenarios auto-play in your head"},
+ {ax:"C",q:"When the day ends with you still upset…",hi:"You sort your feelings out for tomorrow-you, then sleep",lo:"You sleep on it and wake up still in a bad mood"},
+ {ax:"E",q:"When a friend opens up about a worry…",hi:"You read the feeling first, before any fix",lo:"You jump straight to the fastest solution"},
+ {ax:"E",q:"When you watch a show or movie, you…",hi:"You cry and laugh right along with the characters",lo:"You analyze the plot and setup as you watch"},
+ {ax:"E",q:"When the person with you looks down…",hi:"You usually notice before they say a word",lo:"You only catch on once they tell you"},
+ {ax:"E",q:"When you hear the exact opposite opinion…",hi:"‘From their side, that makes sense’ comes to mind first",lo:"A counter-argument pops up automatically first"},
+ {ax:"S",q:"When you feel grateful or sorry…",hi:"You put it into words in the moment",lo:"You tend to keep it to yourself"},
+ {ax:"S",q:"When friction shows up in a relationship…",hi:"You ask to talk before feelings get hurt",lo:"You wait for time to sort it out"},
+ {ax:"S",q:"When something truly hard hits…",hi:"You open up honestly to someone you trust",lo:"You’d rather carry it alone"},
+ {ax:"S",q:"When you get a compliment, you…",hi:"You take it: “Thank you, that means a lot”",lo:"“Oh no, not at all” slips out first"},
+];
+const AXES={
+ R:{emo:"🔍",name:"Self-Awareness",desc:"The power to notice your own feelings",
+    tip:"Once a day, ask yourself: ‘my mood right now, in one word?’ The moment you name a feeling, half of it is already handled."},
+ C:{emo:"🌊",name:"Self-Control",desc:"The power to steady emotions instead of being swept up",
+    tip:"Set one ‘3-second routine’ for when you snap (a breath, a sip of water). Control isn’t willpower — it’s routine."},
+ E:{emo:"💞",name:"Empathy",desc:"The power to read what others feel",
+    tip:"In a conversation, lead with ‘that must’ve been hard’ before any advice. Empathy isn’t a gift — it’s a matter of order."},
+ S:{emo:"📣",name:"Expression",desc:"The power to let feelings out in a healthy way",
+    tip:"Text one person you’re grateful for today and tell them so. The expression muscle grows from short sentences first."},
+};
+const TIERS=[
+ [14,"🌟 Emotion Alchemist","All four skills have ripened evenly. There’s a reason people feel safe around you."],
+ [11,"💎 Emotion Pro","You’ve got a sure hand with feelings! Polish your one lowest axis and you’re the complete package."],
+ [7,"⚖️ The Balanced Type","Skills you’re good at live side by side with ones you’re not. Your weak axis isn’t a flaw — it’s room to grow."],
+ [4,"🌱 Emotion Sprout","You and your emotions are still a little unfamiliar. That’s okay — EQ is a skill you grow from here."],
+ [0,"📦 Emotion, Unopened","You haven’t opened the box of your heart in a while. May today’s result be the first key to it."],
+];
+
+let idx=0, score={R:0,C:0,E:0,S:0}, pillarMap=[], deck=[];
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1800);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+const PCOLORS=["#5fd0c7","#e8c98d","#7aa6ff","#ff9e9e"];
+function startQuiz(){
+  idx=0; score={R:0,C:0,E:0,S:0};
+  deck=shuffle([...QUESTIONS]);
+  pillarMap=shuffle(["R","C","E","S"]);
+  const pr=$('prow'); pr.innerHTML="";
+  pillarMap.forEach((k,i)=>{
+    pr.innerHTML+="<div class='pcol'><div class='pbar' id='pb"+i+"' style='background:linear-gradient(180deg,"+PCOLORS[i]+",rgba(255,255,255,.05))'></div><div class='plab'>?</div></div>";
+  });
+  show('scQuiz'); render();
+}
+function render(){
+  const Q=deck[idx];
+  $('qCount').textContent=(idx+1)+" / "+deck.length;
+  $('qNum').textContent="Q"+(idx+1);
+  const qt=$('qText'); qt.textContent=Q.q;
+  qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const pair=Math.random()<.5?[[Q.hi,1],[Q.lo,0]]:[[Q.lo,0],[Q.hi,1]];
+  const box=$('opts'); box.innerHTML="";
+  pair.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button";
+    b.innerHTML="<span class='ab'>"+(i===0?"A":"B")+"</span>"+o[0];
+    b.addEventListener('click',()=>pick(Q.ax,o[1]));
+    box.appendChild(b);
+  });
+}
+function pick(ax,pt){
+  vibrate(22); score[ax]+=pt;
+  pillarMap.forEach((k,i)=>{ $('pb'+i).style.height=(score[k]/4*100)+"%"; });
+  idx++;
+  if(idx>=deck.length){ setTimeout(showResult,450); return; }
+  setTimeout(render,240);
+}
+function showResult(){
+  const total=score.R+score.C+score.E+score.S;
+  const tier=TIERS.find(t=>total>=t[0]);
+  show('scResult'); vibrate([30,50,30,50,90]);
+  $('resEmo').textContent=tier[1].split(' ')[0];
+  $('resType').innerHTML="<span class='grad'>"+tier[1].split(' ').slice(1).join(' ')+"</span>";
+  $('resTag').textContent=tier[2]+" (total  "+total+"/16)";
+  const ch=$('chart'); ch.innerHTML="";
+  ["R","C","E","S"].forEach((k,i)=>{
+    const a=AXES[k], pct=score[k]/4*100;
+    ch.innerHTML+="<div class='crow'><span class='cl'>"+a.emo+" "+a.name+"</span><div class='cbar'><div class='cfill' id='cf"+i+"' data-w='"+pct+"'></div></div><span class='cv'>"+score[k]+"/4</span></div>";
+  });
+  setTimeout(()=>{["R","C","E","S"].forEach((k,i)=>{const f=$('cf'+i);f.style.width=f.dataset.w+"%";});},150);
+  const sorted=["R","C","E","S"].sort((a,b)=>score[a]-score[b]);
+  const low=AXES[sorted[0]], high=AXES[sorted[3]];
+  $('tips').innerHTML=
+    "<div class='row'><b>"+high.emo+" Your strong suit</b> — '"+high.name+"' ("+high.desc+") is your steadiest — you’re already using this one well.</div>"+
+    "<div class='row'><b>"+low.emo+" 2-week growth mission</b> — '"+low.name+"'("+low.desc+") first. "+low.tip+"</div>";
+  window._resText="💚 EQ Emotional Intelligence Test\n"+tier[1]+" (total  "+total+"/16)\nProfile:  "+["R","C","E","S"].map(k=>AXES[k].name+" "+score[k]).join(" · ")+"\n\nMy emotional-skill check → https://mimifactory.vibekr.com/en/apps/eq-emotional-intelligence-test.html";
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("Copied! Paste it anywhere 📋")); }
+  else toast("Press and hold to copy");
+  vibrate(20);
+}
+</script>
+</body>
+</html>

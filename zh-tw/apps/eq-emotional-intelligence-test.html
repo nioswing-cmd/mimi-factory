@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>EQ 情緒智能測驗 — 多巴胺實驗室</title>
+<meta property="og:title" content="EQ 情緒智能測驗 — 掌握自己內心的 4 種技能診斷">
+<meta property="og:description" content="自我覺察、自我調節、同理、表達。用 16 題畫出你的情緒智能側寫。">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#0d1a1c; --bg2:#12262a; --card:#173036; --line:#254750;
+  --ink:#eaf5f3; --sub:#94b8b4; --accent:#5fd0c7; --accent2:#3a8fa3;
+  --point:#e8c98d; --ok:#57c489; --bad:#e06055;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 85% -10%, rgba(95,208,199,.12), transparent 55%),
+             radial-gradient(100% 80% at 5% 110%, rgba(232,201,141,.08), transparent 50%),
+             linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--accent),var(--point));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:5vh;}
+.hero h1{font-size:44px;line-height:1.15;margin:16px 0 8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#0c1b18;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--accent),var(--point));
+  box-shadow:0 10px 26px -8px rgba(95,208,199,.5);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+
+.pillars{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px 10px;margin-bottom:16px;}
+.prow{display:flex;justify-content:space-between;align-items:flex-end;height:70px;gap:12px;}
+.pcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end;}
+.pbar{width:100%;max-width:44px;height:0%;border-radius:8px 8px 3px 3px;transition:height .5s cubic-bezier(.22,1,.36,1);min-height:4px;}
+.pcol .plab{font-family:'Jua',sans-serif;font-size:13px;color:var(--sub);}
+.pillars .cap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:9px;opacity:.8;}
+.count{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);text-align:center;margin-bottom:8px;}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent);}
+.qtext{font-size:21px;font-weight:700;line-height:1.45;margin-top:8px;}
+.qhint{font-size:13px;color:var(--sub);margin-top:8px;}
+.opts{display:flex;flex-direction:column;gap:11px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:16px;
+  font-size:16px;color:var(--ink);text-align:left;cursor:pointer;font-family:inherit;line-height:1.5;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.opt:active{transform:scale(.97);}
+.opt .ab{display:inline-block;font-family:'Jua',sans-serif;color:var(--sub);margin-right:8px;}
+
+
+.res-hero{text-align:center;margin-top:10px;}
+.res-emo{font-size:64px;}
+.res-type{font-family:'Jua',sans-serif;font-size:31px;margin:10px 0 4px;}
+.res-tag{color:var(--sub);font-size:14.5px;line-height:1.7;}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:20px;}
+.chart .ct{font-family:'Jua',sans-serif;font-size:16px;margin-bottom:6px;}
+.crow{display:flex;align-items:center;gap:10px;margin-top:11px;font-size:14px;}
+.crow .cl{width:92px;}
+.cbar{flex:1;height:11px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;}
+.cfill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--point));transition:width .9s cubic-bezier(.22,1,.36,1);}
+.crow .cv{width:38px;text-align:right;font-family:'Jua',sans-serif;color:var(--point);}
+.tips{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px 18px;margin-top:14px;font-size:14.5px;line-height:1.75;}
+.tips b{color:var(--point);}
+.tips .row{margin-top:10px;}
+.tips .row:first-child{margin-top:0;}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(23,48,54,.97);border:1.5px solid var(--accent);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(95,208,199,.5));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#84a5a1;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#84a5a1;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 多巴胺實驗室 · 大腦系列</span>
+      <h1>💚 <span class="grad">EQ 情緒智能</span> 測驗</h1>
+      <p class="sub">如果 IQ 是解決問題的力量，<br>那 EQ <b>就是駕馭內心的技術</b>。<br>用 16 題診斷你的 4 種情緒技能。</p>
+    </div>
+    <div class="pitch">
+      <b>測量的 4 種技能</b><br>
+      覺察自己的情緒 · 駕馭情緒 · 讀懂他人的心 · 表達心意。<br>
+      沒有標準答案 — 越用 <b>真實的自己</b>作答，就越準確。
+    </div>
+    <button class="btn" onclick="startQuiz()">💗 開始情緒智能診斷</button>
+    <p class="note">※ 這是自我報告式的參考測驗（不是正式心理檢測）。
+    EQ 不是天生的，而是靠練習長出來的能力，所以結果也會附上成長重點。</p>
+  </section>
+
+  
+  <section id="scQuiz" class="screen">
+    <div class="pillars">
+      <div class="prow" id="prow"></div>
+      <div class="cap">四種情緒技能即時累積 — 真面目在結果揭曉！</div>
+    </div>
+    <div class="count" id="qCount">1 / 16</div>
+    <div class="qcard">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qhint">👉 用「真實的自己」，不是「想成為的自己」！</div>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="res-emo" id="resEmo"></div>
+      <div class="res-type" id="resType"></div>
+      <p class="res-tag" id="resTag"></p>
+    </div>
+    <div class="chart">
+      <div class="ct">💚 我的情緒技能側寫</div>
+      <div id="chart"></div>
+    </div>
+    <div class="tips" id="tips"></div>
+    <button class="btn" onclick="copyResult()">📋 複製結果來分享</button>
+    <button class="btn ghost" onclick="location.reload()">再測一次</button>
+    <p class="note">※ EQ 就像肌肉，只要兩週有意識地練最低的那一軸，就會不一樣。</p>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/zh-tw/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 多巴胺實驗室 — 看看其他測驗 →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意義與趣味工廠</span></div>
+    <div class="mf-logo">咪咪工廠 MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL股份有限公司 家族公司</div>
+  </div>
+</div>
+
+<script>
+
+const QUESTIONS=[
+ {ax:"R",q:"沒來由地心情低落時，我會？",hi:"先停一下，問自己「為什麼？」找出原因",lo:"先做點別的事，把心情帶開"},
+ {ax:"R",q:"有人問「最近好嗎？」時？",hi:"能把自己的狀態說得相當具體",lo:"「就那樣啊，都差不多」會先脫口而出"},
+ {ax:"R",q:"突然發火時，我會？",hi:"看得見怒氣底下真正的情緒（委屈、不安）",lo:"就是生氣而已 — 原因之後再說"},
+ {ax:"R",q:"為了小事眼眶一熱時？",hi:"會察覺「啊，我最近累了」",lo:"覺得「莫名其妙」就帶過"},
+ {ax:"C",q:"衝動的話衝到喉嚨時？",hi:"停一拍，挑好措辭再說出口",lo:"當場先說出口，之後才想"},
+ {ax:"C",q:"壓力很大的日子，我會？",hi:"有一套能讓自己回血的固定做法",lo:"看當天心情，隨便發洩一下"},
+ {ax:"C",q:"遇到讓人不安的事時？",hi:"專注在此刻能做的一件事上",lo:"腦中最壞的劇本會自動播放"},
+ {ax:"C",q:"帶著壞心情結束一天時？",hi:"為了明天的自己，整理好心情再睡",lo:"就這樣睡著，早上起來繼續不爽"},
+ {ax:"E",q:"朋友向你傾訴煩惱時？",hi:"比起解法，先讀懂那份心情",lo:"先給出最快的解決辦法"},
+ {ax:"E",q:"看劇或看電影時，我會？",hi:"跟著角色的情緒一起哭一起笑",lo:"邊看邊分析劇情和設定"},
+ {ax:"E",q:"身邊的人表情變沉時？",hi:"常在對方開口前就先察覺",lo:"要對方說了才知道"},
+ {ax:"E",q:"聽到跟自己完全相反的意見時？",hi:"會先想「站在他的立場，難怪如此」",lo:"反駁的邏輯會先自動冒出來"},
+ {ax:"S",q:"心裡覺得感謝或抱歉時？",hi:"當下就說出來",lo:"傾向只放在心裡"},
+ {ax:"S",q:"關係出現摩擦時？",hi:"在傷了感情之前，先開口談",lo:"等時間來解決"},
+ {ax:"S",q:"真的很難熬的時候？",hi:"向信任的人坦白傾訴",lo:"一個人默默消化比較自在"},
+ {ax:"S",q:"被稱讚時，我會？",hi:"「謝謝，聽了真開心」地接受",lo:"「哪有啦，沒有沒有」會先出來"},
+];
+const AXES={
+ R:{emo:"🔍",name:"自我覺察",desc:"覺察自己情緒的能力",
+    tip:"每天一次，問問自己「現在的心情，用一個詞是什麼？」。幫情緒取名的那一刻，它就有一半被你接住了。"},
+ C:{emo:"🌊",name:"自我調節",desc:"不被情緒沖走、還能駕馭的能力",
+    tip:"先決定一個上火時用的「專屬 3 秒儀式」（深呼吸、喝一口水）。調節靠的不是意志，是習慣。"},
+ E:{emo:"💞",name:"同理",desc:"讀懂他人心情的能力",
+    tip:"對話時，在給建議之前，先放一句「原來是這樣」。同理不是天賦，是順序的技術。"},
+ S:{emo:"📣",name:"情緒表達",desc:"把心情健康地表達出來的能力",
+    tip:"今天挑一個想感謝的人，把那份心意用訊息傳給對方。表達的肌肉，是從短短一句開始長大的。"},
+};
+const TIERS=[
+ [14,"🌟 情緒煉金術師","四種技能都均衡成熟了。身邊的人待在你身邊會覺得安心，是有原因的。"],
+ [11,"💎 情緒高手","駕馭心情的手法相當俐落！只要再磨一下最低的那一軸，就是完整體了。"],
+ [7,"⚖️ 情緒平衡型","擅長的技能和不擅長的技能並存。不擅長的那一軸不是弱點，是成長的餘地。"],
+ [4,"🌱 情緒新芽","跟情緒還有點生疏。沒關係 — EQ 是從現在開始培養的能力。"],
+ [0,"📦 情緒未拆封","心的盒子好久沒打開了。願今天的結果，成為那個盒子的第一把鑰匙。"],
+];
+
+let idx=0, score={R:0,C:0,E:0,S:0}, pillarMap=[], deck=[];
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1800);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+const PCOLORS=["#5fd0c7","#e8c98d","#7aa6ff","#ff9e9e"];
+function startQuiz(){
+  idx=0; score={R:0,C:0,E:0,S:0};
+  deck=shuffle([...QUESTIONS]);
+  pillarMap=shuffle(["R","C","E","S"]);
+  const pr=$('prow'); pr.innerHTML="";
+  pillarMap.forEach((k,i)=>{
+    pr.innerHTML+="<div class='pcol'><div class='pbar' id='pb"+i+"' style='background:linear-gradient(180deg,"+PCOLORS[i]+",rgba(255,255,255,.05))'></div><div class='plab'>?</div></div>";
+  });
+  show('scQuiz'); render();
+}
+function render(){
+  const Q=deck[idx];
+  $('qCount').textContent=(idx+1)+" / "+deck.length;
+  $('qNum').textContent="Q"+(idx+1);
+  const qt=$('qText'); qt.textContent=Q.q;
+  qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const pair=Math.random()<.5?[[Q.hi,1],[Q.lo,0]]:[[Q.lo,0],[Q.hi,1]];
+  const box=$('opts'); box.innerHTML="";
+  pair.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button";
+    b.innerHTML="<span class='ab'>"+(i===0?"A":"B")+"</span>"+o[0];
+    b.addEventListener('click',()=>pick(Q.ax,o[1]));
+    box.appendChild(b);
+  });
+}
+function pick(ax,pt){
+  vibrate(22); score[ax]+=pt;
+  pillarMap.forEach((k,i)=>{ $('pb'+i).style.height=(score[k]/4*100)+"%"; });
+  idx++;
+  if(idx>=deck.length){ setTimeout(showResult,450); return; }
+  setTimeout(render,240);
+}
+function showResult(){
+  const total=score.R+score.C+score.E+score.S;
+  const tier=TIERS.find(t=>total>=t[0]);
+  show('scResult'); vibrate([30,50,30,50,90]);
+  $('resEmo').textContent=tier[1].split(' ')[0];
+  $('resType').innerHTML="<span class='grad'>"+tier[1].split(' ').slice(1).join(' ')+"</span>";
+  $('resTag').textContent=tier[2]+" (共  "+total+"/16)";
+  const ch=$('chart'); ch.innerHTML="";
+  ["R","C","E","S"].forEach((k,i)=>{
+    const a=AXES[k], pct=score[k]/4*100;
+    ch.innerHTML+="<div class='crow'><span class='cl'>"+a.emo+" "+a.name+"</span><div class='cbar'><div class='cfill' id='cf"+i+"' data-w='"+pct+"'></div></div><span class='cv'>"+score[k]+"/4</span></div>";
+  });
+  setTimeout(()=>{["R","C","E","S"].forEach((k,i)=>{const f=$('cf'+i);f.style.width=f.dataset.w+"%";});},150);
+  const sorted=["R","C","E","S"].sort((a,b)=>score[a]-score[b]);
+  const low=AXES[sorted[0]], high=AXES[sorted[3]];
+  $('tips').innerHTML=
+    "<div class='row'><b>"+high.emo+" 你的武器</b> — '"+high.name+"' ("+high.desc+")最穩固。這是你已經用得很好的技能。</div>"+
+    "<div class='row'><b>"+low.emo+" 兩週成長任務</b> — '"+low.name+"'("+low.desc+")開始。 "+low.tip+"</div>";
+  window._resText="💚 EQ 情緒智能測驗\n"+tier[1]+" (共  "+total+"/16)\n側寫： "+["R","C","E","S"].map(k=>AXES[k].name+" "+score[k]).join(" · ")+"\n\n我的情緒技能診斷 → https://mimifactory.vibekr.com/zh-tw/apps/eq-emotional-intelligence-test.html";
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("複製完成！貼到哪都行 📋")); }
+  else toast("請長按複製");
+  vibrate(20);
+}
+</script>
+</body>
+</html>
