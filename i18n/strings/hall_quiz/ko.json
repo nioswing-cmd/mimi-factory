@@ -1,0 +1,138 @@
+{
+ "_meta": {
+  "source": "quiz.html",
+  "slug": "hall_quiz"
+ },
+ "title_001": {
+  "t": "퀴즈로읽는책 · 밤의 서재",
+  "ctx": "<title>"
+ },
+ "meta_001": {
+  "t": "하루 10분, 퀴즈로 한 권을 완독하는 서재. 매일 밤 새 책이 꽂힙니다.",
+  "ctx": "<meta name=\"description\" content=\"하루 10분, 퀴즈로 한 권을"
+ },
+ "html_001": {
+  "t": "🏭 미미팩토리",
+  "ctx": "iv class=\"nav\">     <a href=\"index.html\""
+ },
+ "html_002": {
+  "t": "📚 독서퀴즈관",
+  "ctx": "/a>     <a class=\"here\" href=\"quiz.html\""
+ },
+ "html_003": {
+  "t": "🎯 테스트관",
+  "ctx": "tml\">📚 독서퀴즈관</a>     <a href=\"test.html\""
+ },
+ "html_004": {
+  "t": "💞 친해지기관",
+  "ctx": "ml\">🎯 테스트관</a>     <a href=\"friend.html\""
+ },
+ "html_005": {
+  "t": "퀴 즈 로 읽 는 책",
+  "ctx": "v class=\"hero\">     <div class=\"eyebrow\""
+ },
+ "html_006": {
+  "t": "밤의 서재",
+  "ctx": "lass=\"eyebrow\">퀴 즈 로 읽 는 책</div>     <h1"
+ },
+ "html_007": {
+  "t": "하루 10분, 퀴즈로 한 권을 완독하는 서재.",
+  "ctx": " 로 읽 는 책</div>     <h1>밤의 서재</h1>     <p"
+ },
+ "html_008": {
+  "t": "매일 밤, 새 책이 꽂힙니다.",
+  "ctx": "/h1>     <p>하루 10분, 퀴즈로 한 권을 완독하는 서재.<br"
+ },
+ "html_009": {
+  "t": "🕯️ 오늘의 책 펼치기 →",
+  "ctx": "    <a class=\"cta\" id=\"heroCta\" href=\"#\""
+ },
+ "html_010": {
+  "t": "매일 새 책",
+  "ctx": "\">       <div class=\"feat\"><span>📖</span"
+ },
+ "html_011": {
+  "t": "한 권",
+  "ctx": "div class=\"feat\"><span>📖</span>매일 새 책<br"
+ },
+ "html_012": {
+  "t": "도파민 반복",
+  "ctx": "v>       <div class=\"feat\"><span>🔁</span"
+ },
+ "html_013": {
+  "t": "마스터 퀴즈",
+  "ctx": "div class=\"feat\"><span>🔁</span>도파민 반복<br"
+ },
+ "html_014": {
+  "t": "완독 인포그래픽",
+  "ctx": "v>       <div class=\"feat\"><span>📜</span"
+ },
+ "html_015": {
+  "t": "리포트",
+  "ctx": "v class=\"feat\"><span>📜</span>완독 인포그래픽<br"
+ },
+ "html_016": {
+  "t": "🕯️ 매일 밤 새 책 소식 받기 —",
+  "ctx": "=landing\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_017": {
+  "t": "독서위키",
+  "ctx": "l=\"noopener\">     🕯️ 매일 밤 새 책 소식 받기 — <b"
+ },
+ "html_018": {
+  "t": "의 미 와 재 미 공 장",
+  "ctx": "oter\">     <div class=\"mf-eyebrow\"><span"
+ },
+ "html_019": {
+  "t": "미미팩토리",
+  "ctx": " 장</span></div>     <div class=\"mf-logo\""
+ },
+ "html_020": {
+  "t": "주식회사 연:결 패밀리회사",
+  "ctx": ">미미팩토리</div>     <div class=\"mf-caption\""
+ },
+ "attr_001": {
+  "t": "책 제목, 작가 검색…",
+  "ctx": "placeholder=\"책 제목, 작가 검색…\""
+ },
+ "js_001": {
+  "t": "💌 VIP 초대 — 모든 책이 풀버전으로 열립니다",
+  "ctx": "em;\";   d.textContent = VIP && !PROMO ? "
+ },
+ "js_002": {
+  "t": "🎁 지금 전 서가 풀버전 무료 오픈 중!",
+  "ctx": "PROMO ? \"💌 VIP 초대 — 모든 책이 풀버전으로 열립니다\" : "
+ },
+ "js_003": {
+  "t": "🎁 지금 풀버전 무료",
+  "ctx": "      <span class=\"badge\">${bookOpen(a)?"
+ },
+ "js_004": {
+  "t": "🕯️ 이 달의 신간",
+  "ctx": "ass=\"badge\">${bookOpen(a)?'🎁 지금 풀버전 무료':"
+ },
+ "js_005": {
+  "t": "🎁 풀버전",
+  "ctx": "05;font-weight:700;\"':''}>${bookOpen(a)?"
+ },
+ "jst_001": {
+  "t": "첫 장을 펼치기",
+  "ctx": "{a.desc|| }</div>         <span class= >"
+ },
+ "jst_002": {
+  "t": "서가에 꽂힌 책",
+  "ctx": "cument.getElementById( ).textContent = `"
+ },
+ "jst_003": {
+  "t": "권",
+  "ctx": ").textContent = `서가에 꽂힌 책 ${list.length}"
+ },
+ "jst_004": {
+  "t": "이 서가엔 아직 책이 없어요.",
+  "ctx": ".length ?   :     `<div class=  style= >"
+ },
+ "jst_005": {
+  "t": "내일 새벽, 공장이 새 책을 구워올 거예요",
+  "ctx": "div class=  style= >이 서가엔 아직 책이 없어요.<br>"
+ }
+}
