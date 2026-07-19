@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>SQ 社会的知能テスト — ドーパミン実験室</title>
+<meta property="og:title" content="SQ 社会的知能テスト — 関係の技術4種診断">
+<meta property="og:description" content="空気を読む · 会話 · 境界線 · 仲直り。16問であなたの関係スキルのプロフィールを描きます。">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansJP-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/MPLUSRounded1c-Bold-sub.woff2') format('woff2');font-weight:400;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#141507; --bg2:#1e2010; --card:#272a15; --line:#3e4224;
+  --ink:#f6f7e4; --sub:#b8bd93; --accent:#d3e14a; --accent2:#8fae2e;
+  --point:#ffd166; --ok:#69c46a; --bad:#e05a4c;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 85% -10%, rgba(211,225,74,.10), transparent 55%),
+             radial-gradient(100% 80% at 5% 110%, rgba(255,209,102,.08), transparent 50%),
+             linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--accent),var(--point));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:5vh;}
+.hero h1{font-size:44px;line-height:1.15;margin:16px 0 8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#191b06;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--accent),var(--point));
+  box-shadow:0 10px 26px -8px rgba(211,225,74,.4);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+.pillars{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px 10px;margin-bottom:16px;}
+.prow{display:flex;justify-content:space-between;align-items:flex-end;height:70px;gap:12px;}
+.pcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end;}
+.pbar{width:100%;max-width:44px;height:0%;border-radius:8px 8px 3px 3px;transition:height .5s cubic-bezier(.22,1,.36,1);min-height:4px;}
+.pcol .plab{font-family:'Jua',sans-serif;font-size:13px;color:var(--sub);}
+.pillars .cap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:9px;opacity:.8;}
+.count{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);text-align:center;margin-bottom:8px;}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent2);}
+.qtext{font-size:21px;font-weight:700;line-height:1.45;margin-top:8px;}
+.qhint{font-size:13px;color:var(--sub);margin-top:8px;}
+.opts{display:flex;flex-direction:column;gap:11px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:16px;
+  font-size:16px;color:var(--ink);text-align:left;cursor:pointer;font-family:inherit;line-height:1.5;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.opt:active{transform:scale(.97);}
+.opt .ab{display:inline-block;font-family:'Jua',sans-serif;color:var(--sub);margin-right:8px;}
+
+.res-hero{text-align:center;margin-top:10px;}
+.res-emo{font-size:64px;}
+.res-type{font-family:'Jua',sans-serif;font-size:31px;margin:10px 0 4px;}
+.res-tag{color:var(--sub);font-size:14.5px;line-height:1.7;}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:20px;}
+.chart .ct{font-family:'Jua',sans-serif;font-size:16px;margin-bottom:6px;}
+.crow{display:flex;align-items:center;gap:10px;margin-top:11px;font-size:14px;}
+.crow .cl{width:92px;}
+.cbar{flex:1;height:11px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;}
+.cfill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--point));transition:width .9s cubic-bezier(.22,1,.36,1);}
+.crow .cv{width:38px;text-align:right;font-family:'Jua',sans-serif;color:var(--point);}
+.tips{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px 18px;margin-top:14px;font-size:14.5px;line-height:1.75;}
+.tips b{color:var(--point);}
+.tips .row{margin-top:10px;}
+.tips .row:first-child{margin-top:0;}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(39,42,21,.97);border:1.5px solid var(--accent);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(211,225,74,.45));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#a6ab84;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#a6ab84;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 ドーパミン実験室 · 頭脳シリーズ</span>
+      <h1>🤝 <span class="grad">SQ 社会的知能</span> テスト</h1>
+      <p class="sub">勉強アタマじゃなく、 <b>関係アタマ</b>.<br>人と人のあいだで発揮される四つの技術を<br>16問で診断します。</p>
+    </div>
+    <div class="pitch">
+      <b>測定する4つの技術</b><br>
+      空気を読む（察し） · 会話をつなぐ · 自分を守る線引き · こじれた関係の修復。<br>
+      リア充度テストではありません — <b>物静かな人でもSQは高いことがあります。</b>
+    </div>
+    <button class="btn" onclick="startQuiz()">🌿 社会的知能の診断を始める</button>
+    <p class="note">※ 自己申告式の参考テストです（正式な心理検査ではありません）。
+    外向/内向とは関係なく「関係の技術」だけを測ります。</p>
+  </section>
+
+  <section id="scQuiz" class="screen">
+    <div class="pillars">
+      <div class="prow" id="prow"></div>
+      <div class="cap">四つの関係スキルがリアルタイムで積み上がります — 正体は結果で公開！</div>
+    </div>
+    <div class="count" id="qCount">1 / 16</div>
+    <div class="qcard">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qhint">👉 「なりたい自分」ではなく「本当の自分」で！</div>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="res-emo" id="resEmo"></div>
+      <div class="res-type" id="resType"></div>
+      <p class="res-tag" id="resTag"></p>
+    </div>
+    <div class="chart">
+      <div class="ct">🤝 私の関係スキル プロフィール</div>
+      <div id="chart"></div>
+    </div>
+    <div class="tips" id="tips"></div>
+    <button class="btn" onclick="copyResult()">📋 結果をコピーして共有</button>
+    <button class="btn ghost" onclick="location.reload()">もう一度診断する</button>
+    <p class="note">※ SQは性格ではなく技術 — いちばん低い軸から練習すると、関係が楽になります。</p>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/ja/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 ドーパミン実験室 — ほかのテストを見る →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意味と面白さの工場</span></div>
+    <div class="mf-logo">ミミファクトリー</div>
+    <div class="mf-caption">株式会社ヨンギョル ファミリーカンパニー</div>
+  </div>
+</div>
+
+<script>
+
+const QUESTIONS=[
+ {ax:"N",q:"集まりで急に空気が固まったら？",hi:"なぜ、誰のせいで固まったか大体わかる",lo:"固まったこと自体、だいぶ後から気づく"},
+ {ax:"N",q:"相手が会話を切り上げたそうにしていたら？",hi:"サインに気づいて自然に締めくくる",lo:"話が楽しければそのまま続ける"},
+ {ax:"N",q:"グループチャットで自分の発言に反応がまるでないと？",hi:"タイミングや話題を見てトーンを調整する",lo:"あまり気にせず、いつも通りにする"},
+ {ax:"N",q:"初めての場（集まり·職場）での私は？",hi:"暗黙のルールと人間関係を素早くつかむ",lo:"ルールとか関係なく、まず自分のペースで"},
+ {ax:"T",q:"気まずい相手と二人きりになったら？",hi:"軽い質問で沈黙をほぐしてみる",lo:"自然な流れでスマホを取り出す"},
+ {ax:"T",q:"会話するとき、私はたいてい？",hi:"聞いて質問する時間の方が長い",lo:"自分の話をする時間の方が長い"},
+ {ax:"T",q:"相手の話を聞くとき？",hi:"リアクションや相づちが自然に出る",lo:"リアクションが苦手で、淡々と聞く"},
+ {ax:"T",q:"前に会った人の名前や近況を？",hi:"覚えておいて、次に自分から聞く",lo:"正直、けっこう忘れてしまう"},
+ {ax:"B",q:"無理なお願いをされたら？",hi:"関係を壊さずに断ることができる",lo:"断れなくて、とりあえず引き受ける"},
+ {ax:"B",q:"一線を越える冗談を言われたら？",hi:"笑いながらも「ここまで」と伝える",lo:"笑って流して、一人で傷つく"},
+ {ax:"B",q:"約束や集まりが増えすぎたら？",hi:"自分のエネルギーのために数を調整する",lo:"全部行って、家で燃え尽きる"},
+ {ax:"B",q:"自分をすり減らすだけの関係は？",hi:"少しずつ距離を調整できる",lo:"しんどくても、ずっと抱え続ける"},
+ {ax:"H",q:"近しい人とケンカした後は？",hi:"自分から仲直りの手を差し出す方だ",lo:"相手が歩み寄ってくるまで待つ"},
+ {ax:"H",q:"自分が謝るべきことができたら？",hi:"言い訳なしにきれいに謝る",lo:"つい「でも、あなたも…」が付いてしまう"},
+ {ax:"H",q:"誤解が生まれた気がしたら？",hi:"溜め込まずに、すぐ解こうと言う",lo:"言わなくても自然に解けるのを願う"},
+ {ax:"H",q:"しばらく疎遠になった大切な縁に？",hi:"自分から近況を送ることができる",lo:"気まずくて、結局送れない"},
+];
+const AXES={
+ N:{emo:"👀",name:"空気を読む",desc:"その場の流れとサインを感じ取る力",
+    tip:"会話の途中、一日一回「今、相手の機嫌は何点だろう？」と推し量ってみてください。察しは観察した回数だけ育ちます。"},
+ T:{emo:"💬",name:"会話をつなぐ",desc:"気まずさを溶かし、関係を温める力",
+    tip:"万能の質問を三つ持っておくだけで会話は続きます — 「最近ハマってることは？」「それ、どうして始めたんですか？」「それでどうなったんですか？」。"},
+ B:{emo:"🛡️",name:"線を引く",desc:"関係の中で自分を守る力",
+    tip:"断り方の公式をひとつ覚えておきましょう — 「気持ちはうれしいけど（クッション）、今回は難しくて（お断り）、次はこうなら大丈夫（代案）」。"},
+ H:{emo:"🌉",name:"関係の修復",desc:"こじれた仲を結び直す力",
+    tip:"仲直りのゴールデンタイムは48時間。「あの日は私が過敏だったね」の一言で十分です — 長く書くほど言い訳になります。"},
+};
+const TIERS=[
+ [14,"🌟 関係の錬金術師","四つの技術がまんべんなくカンスト寸前。人があなたの周りに集まるのには、ちゃんと理由があります。"],
+ [11,"🤝 社交の達人","関係の筋肉がしっかりしています！ いちばん低い軸をひとつ補強すれば、どんな関係も楽になります。"],
+ [7,"🌗 選択的な社交タイプ","合う人には最高のパートナー、合わない場ではエネルギーを消耗するタイプ。技術の問題ではなく、配分の問題かもしれません。"],
+ [4,"🚶 マイペース型","関係より自分の世界が優先のタイプ。悪いことではなくスタイルです — ただ、大切な数人にだけは技術を使ってみて。"],
+ [0,"🏕️ 自発的な隠遁者","人付き合いがとりわけ疲れますよね。全員と仲良くする必要はありません — たった一人との繋がりから。"],
+];
+
+let idx=0, score={N:0,T:0,B:0,H:0}, pillarMap=[], deck=[];
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1800);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+const PCOLORS=["#d3e14a","#ffd166","#7fd0a8","#e8a0b4"];
+function startQuiz(){
+  idx=0; score={N:0,T:0,B:0,H:0};
+  deck=shuffle([...QUESTIONS]);
+  pillarMap=shuffle(["N","T","B","H"]);
+  const pr=$('prow'); pr.innerHTML="";
+  pillarMap.forEach((k,i)=>{
+    pr.innerHTML+="<div class='pcol'><div class='pbar' id='pb"+i+"' style='background:linear-gradient(180deg,"+PCOLORS[i]+",rgba(255,255,255,.05))'></div><div class='plab'>?</div></div>";
+  });
+  show('scQuiz'); render();
+}
+function render(){
+  const Q=deck[idx];
+  $('qCount').textContent=(idx+1)+" / "+deck.length;
+  $('qNum').textContent="Q"+(idx+1);
+  const qt=$('qText'); qt.textContent=Q.q;
+  qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const pair=Math.random()<.5?[[Q.hi,1],[Q.lo,0]]:[[Q.lo,0],[Q.hi,1]];
+  const box=$('opts'); box.innerHTML="";
+  pair.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button";
+    b.innerHTML="<span class='ab'>"+(i===0?"A":"B")+"</span>"+o[0];
+    b.addEventListener('click',()=>pick(Q.ax,o[1]));
+    box.appendChild(b);
+  });
+}
+function pick(ax,pt){
+  vibrate(22); score[ax]+=pt;
+  pillarMap.forEach((k,i)=>{ $('pb'+i).style.height=(score[k]/4*100)+"%"; });
+  idx++;
+  if(idx>=deck.length){ setTimeout(showResult,450); return; }
+  setTimeout(render,240);
+}
+function showResult(){
+  const total=score.N+score.T+score.B+score.H;
+  const tier=TIERS.find(t=>total>=t[0]);
+  show('scResult'); vibrate([30,50,30,50,90]);
+  $('resEmo').textContent=tier[1].split(' ')[0];
+  $('resType').innerHTML="<span class='grad'>"+tier[1].split(' ').slice(1).join(' ')+"</span>";
+  $('resTag').textContent=tier[2]+" (合計 "+total+"/16)";
+  const ch=$('chart'); ch.innerHTML="";
+  ["N","T","B","H"].forEach((k,i)=>{
+    const a=AXES[k], pct=score[k]/4*100;
+    ch.innerHTML+="<div class='crow'><span class='cl'>"+a.emo+" "+a.name+"</span><div class='cbar'><div class='cfill' id='cf"+i+"' data-w='"+pct+"'></div></div><span class='cv'>"+score[k]+"/4</span></div>";
+  });
+  setTimeout(()=>{["N","T","B","H"].forEach((k,i)=>{const f=$('cf'+i);f.style.width=f.dataset.w+"%";});},150);
+  const sorted=["N","T","B","H"].sort((a,b)=>score[a]-score[b]);
+  const low=AXES[sorted[0]], high=AXES[sorted[3]];
+  $('tips').innerHTML=
+    "<div class='row'><b>"+high.emo+" 私の武器</b> — '"+high.name+"' ("+high.desc+"）が一番しっかりしています。関係の中ですでにうまく使えている技術です。</div>"+
+    "<div class='row'><b>"+low.emo+" 今週の練習ミッション</b> — '"+low.name+"'("+low.desc+"）から。 "+low.tip+"</div>";
+  window._resText="🤝 SQ 社会的知能テスト\n"+tier[1]+" (合計 "+total+"/16)\nプロフィール: "+["N","T","B","H"].map(k=>AXES[k].name+" "+score[k]).join(" · ")+"\n\n私の関係スキル診断 → https://mimifactory.vibekr.com/ja/apps/sq-social-intelligence.html";
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("コピー完了！どこにでも貼り付けできます 📋")); }
+  else toast("長押しでコピーしてください");
+  vibrate(20);
+}
+</script>
+</body>
+</html>

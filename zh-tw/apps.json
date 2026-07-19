@@ -61,6 +61,18 @@
    "desc": "每點一下代碼就跳動 — 最後解鎖唯一屬於你的類型"
   },
   {
+   "id": "sq-social-intelligence",
+   "type": "test",
+   "title": "SQ 社會智能測驗",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/sq-social-intelligence.html",
+   "premium": "apps/sq-social-intelligence.html",
+   "desc": "不是讀書的腦，是關係的腦 — 16 題診斷你的關係技術"
+  },
+  {
    "id": "tarot",
    "type": "test",
    "title": "塔羅心理卡",

@@ -61,6 +61,18 @@
    "desc": "An unknown code spins with every tap — one single type unlocks at the end: yours."
   },
   {
+   "id": "sq-social-intelligence",
+   "type": "test",
+   "title": "SQ Social IQ Test",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/sq-social-intelligence.html",
+   "premium": "apps/sq-social-intelligence.html",
+   "desc": "Not book-smarts, people-smarts — 16 questions on your relationship skills"
+  },
+  {
    "id": "tarot",
    "type": "test",
    "title": "Tarot Mind Cards",

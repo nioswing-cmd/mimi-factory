@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>SQ Social IQ Test — Dopamine Lab</title>
+<meta property="og:title" content="SQ Social IQ Test — a 4-skill read on how you do people">
+<meta property="og:description" content="Reading the room · conversation · boundaries · making up. 16 questions, one map of your relationship skills.">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#141507; --bg2:#1e2010; --card:#272a15; --line:#3e4224;
+  --ink:#f6f7e4; --sub:#b8bd93; --accent:#d3e14a; --accent2:#8fae2e;
+  --point:#ffd166; --ok:#69c46a; --bad:#e05a4c;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 85% -10%, rgba(211,225,74,.10), transparent 55%),
+             radial-gradient(100% 80% at 5% 110%, rgba(255,209,102,.08), transparent 50%),
+             linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--accent),var(--point));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:5vh;}
+.hero h1{font-size:44px;line-height:1.15;margin:16px 0 8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;overflow-wrap:break-word;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;overflow-wrap:break-word;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;overflow-wrap:break-word;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#191b06;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--accent),var(--point));
+  box-shadow:0 10px 26px -8px rgba(211,225,74,.4);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+.pillars{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px 10px;margin-bottom:16px;}
+.prow{display:flex;justify-content:space-between;align-items:flex-end;height:70px;gap:12px;}
+.pcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end;}
+.pbar{width:100%;max-width:44px;height:0%;border-radius:8px 8px 3px 3px;transition:height .5s cubic-bezier(.22,1,.36,1);min-height:4px;}
+.pcol .plab{font-family:'Jua',sans-serif;font-size:13px;color:var(--sub);}
+.pillars .cap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:9px;opacity:.8;}
+.count{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);text-align:center;margin-bottom:8px;}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent2);}
+.qtext{font-size:21px;font-weight:700;line-height:1.45;margin-top:8px;overflow-wrap:break-word;}
+.qhint{font-size:13px;color:var(--sub);margin-top:8px;}
+.opts{display:flex;flex-direction:column;gap:11px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:16px;
+  font-size:16px;color:var(--ink);text-align:left;cursor:pointer;font-family:inherit;line-height:1.5;overflow-wrap:break-word;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.opt:active{transform:scale(.97);}
+.opt .ab{display:inline-block;font-family:'Jua',sans-serif;color:var(--sub);margin-right:8px;}
+
+.res-hero{text-align:center;margin-top:10px;}
+.res-emo{font-size:64px;}
+.res-type{font-family:'Jua',sans-serif;font-size:31px;margin:10px 0 4px;}
+.res-tag{color:var(--sub);font-size:14.5px;line-height:1.7;overflow-wrap:break-word;}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:20px;}
+.chart .ct{font-family:'Jua',sans-serif;font-size:16px;margin-bottom:6px;}
+.crow{display:flex;align-items:center;gap:10px;margin-top:11px;font-size:14px;}
+.crow .cl{width:92px;}
+.cbar{flex:1;height:11px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;}
+.cfill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--point));transition:width .9s cubic-bezier(.22,1,.36,1);}
+.crow .cv{width:38px;text-align:right;font-family:'Jua',sans-serif;color:var(--point);}
+.tips{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px 18px;margin-top:14px;font-size:14.5px;line-height:1.75;overflow-wrap:break-word;}
+.tips b{color:var(--point);}
+.tips .row{margin-top:10px;}
+.tips .row:first-child{margin-top:0;}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(39,42,21,.97);border:1.5px solid var(--accent);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(211,225,74,.45));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#a6ab84;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#a6ab84;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 Dopamine Lab · Brain Series</span>
+      <h1>🤝 <span class="grad">SQ Social IQ</span> Test</h1>
+      <p class="sub">Not book-smarts — <b>people-smarts</b>.<br>The four skills you show between people,<br>measured in just 16 questions.</p>
+    </div>
+    <div class="pitch">
+      <b>The 4 skills we measure</b><br>
+      Reading the room · keeping talk going · drawing lines to protect yourself · repairing what broke.<br>
+      This isn’t a popularity test — <b>quiet people can score high on SQ too.</b>
+    </div>
+    <button class="btn" onclick="startQuiz()">🌿 Start the Social IQ test</button>
+    <p class="note">※ A self-report test for reference only (not a clinical assessment).
+    It measures your ‘relationship skills’ — not whether you’re an introvert or extrovert.</p>
+  </section>
+
+  <section id="scQuiz" class="screen">
+    <div class="pillars">
+      <div class="prow" id="prow"></div>
+      <div class="cap">Your four relationship skills stack up in real time — the reveal comes at the end!</div>
+    </div>
+    <div class="count" id="qCount">1 / 16</div>
+    <div class="qcard">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qhint">👉 Answer as the real you — not the you you wish you were!</div>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="res-emo" id="resEmo"></div>
+      <div class="res-type" id="resType"></div>
+      <p class="res-tag" id="resTag"></p>
+    </div>
+    <div class="chart">
+      <div class="ct">🤝 My relationship-skill profile</div>
+      <div id="chart"></div>
+    </div>
+    <div class="tips" id="tips"></div>
+    <button class="btn" onclick="copyResult()">📋 Copy my result to share</button>
+    <button class="btn ghost" onclick="location.reload()">Take it again</button>
+    <p class="note">※ SQ is a skill, not a personality — start with your lowest axis and relationships get easier.</p>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/en/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 Dopamine Lab — more tests this way →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>The Meaning & Fun Factory</span></div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+  </div>
+</div>
+
+<script>
+
+const QUESTIONS=[
+ {ax:"N",q:"The vibe in the room suddenly goes cold — you?",hi:"Roughly see why it happened, and who set it off",lo:"Only notice it went cold way later"},
+ {ax:"N",q:"They seem like they want to wrap up the chat — you?",hi:"Catch the cue and wind it down smoothly",lo:"If it’s fun, you just keep going"},
+ {ax:"N",q:"Your message gets zero reaction in the group chat — you?",hi:"Read the timing and topic, adjust your tone",lo:"Don’t sweat it, carry on as usual"},
+ {ax:"N",q:"In a brand-new setting (a group, a new job), you?",hi:"Quickly read the unspoken rules and who’s who",lo:"Rules aside, you just go at your own pace"},
+ {ax:"T",q:"Stuck one-on-one with someone you barely know — you?",hi:"Break the silence with an easy question",lo:"Casually reach for your phone"},
+ {ax:"T",q:"In a conversation, you’re usually the one who?",hi:"Spends more time listening and asking",lo:"Spends more time telling your own stories"},
+ {ax:"T",q:"When you’re listening to someone?",hi:"The reactions and mm-hmms come out on their own",lo:"Reactions feel awkward, so you listen quietly"},
+ {ax:"T",q:"The name and news of someone you met last time?",hi:"You remember, and ask about it first next time",lo:"Honestly, you tend to forget"},
+ {ax:"B",q:"Someone asks you for something unreasonable — you?",hi:"Can say no without damaging the relationship",lo:"Can’t say no, so you take it on anyway"},
+ {ax:"B",q:"Someone makes a joke that crosses a line — you?",hi:"Smile, but still make it clear — ‘that’s far enough’",lo:"Laugh it off and quietly get hurt"},
+ {ax:"B",q:"Your plans and hangouts pile up too high — you?",hi:"Dial back the count to protect your energy",lo:"Go to all of them, then crash at home"},
+ {ax:"B",q:"A relationship that only drains you — you?",hi:"Slowly adjust the distance",lo:"Keep holding on, even when it hurts"},
+ {ax:"H",q:"After a fight with someone close — you?",hi:"Tend to be the one who reaches out first",lo:"Wait until they come to you"},
+ {ax:"H",q:"When you owe someone an apology — you?",hi:"Apologize cleanly, no excuses",lo:"‘But you also…’ keeps sneaking in"},
+ {ax:"H",q:"You sense a misunderstanding brewing — you?",hi:"Don’t let it sit — you say ‘let’s clear this up’",lo:"Hope it just resolves on its own, unspoken"},
+ {ax:"H",q:"A dear connection you’ve drifted from — you?",hi:"Can send a ‘how are you’ first",lo:"Too awkward, so you never send it"},
+];
+const AXES={
+ N:{emo:"👀",name:"Reading the Room",desc:"Sensing the flow and signals in a room",
+    tip:"Once a day, mid-conversation, guess: ‘How’s their mood right now, out of 10?’ Reading people grows with every rep."},
+ T:{emo:"💬",name:"Keeping Talk Going",desc:"Melting awkwardness and warming a bond",
+    tip:"Keep three all-purpose questions in your pocket and the talk keeps flowing — ‘What are you into lately?’ ‘How’d you get into that?’ ‘So how did it turn out?’"},
+ B:{emo:"🛡️",name:"Drawing Lines",desc:"Protecting yourself inside a relationship",
+    tip:"Memorize one refusal formula — ‘I appreciate it (cushion), but I can’t this time (the no), though I could do this instead (alternative).’"},
+ H:{emo:"🌉",name:"Repair",desc:"Reconnecting what broke",
+    tip:"The golden window for making up is 48 hours. One line — ‘I was on edge that day, sorry’ — is enough. The longer you write, the more it reads like an excuse."},
+};
+const TIERS=[
+ [14,"🌟 The Relationship Alchemist","All four skills near max, evenly. People gather around you for a reason."],
+ [11,"🤝 Socially Fluent","Your relationship muscles are solid! Shore up just your lowest axis and any relationship gets easier."],
+ [7,"🌗 Selectively Social","The best partner for the right people, an energy drain in the wrong rooms. Maybe it’s not a skill issue — it’s an allocation issue."],
+ [4,"🚶 At Your Own Pace","Your own world comes before relationships. That’s not bad — it’s a style. Just try using the skills on the few who matter."],
+ [0,"🏕️ The Willing Hermit","People just wear you out, don’t they. You don’t have to get along with everyone — start with one single connection."],
+];
+
+let idx=0, score={N:0,T:0,B:0,H:0}, pillarMap=[], deck=[];
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1800);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+const PCOLORS=["#d3e14a","#ffd166","#7fd0a8","#e8a0b4"];
+function startQuiz(){
+  idx=0; score={N:0,T:0,B:0,H:0};
+  deck=shuffle([...QUESTIONS]);
+  pillarMap=shuffle(["N","T","B","H"]);
+  const pr=$('prow'); pr.innerHTML="";
+  pillarMap.forEach((k,i)=>{
+    pr.innerHTML+="<div class='pcol'><div class='pbar' id='pb"+i+"' style='background:linear-gradient(180deg,"+PCOLORS[i]+",rgba(255,255,255,.05))'></div><div class='plab'>?</div></div>";
+  });
+  show('scQuiz'); render();
+}
+function render(){
+  const Q=deck[idx];
+  $('qCount').textContent=(idx+1)+" / "+deck.length;
+  $('qNum').textContent="Q"+(idx+1);
+  const qt=$('qText'); qt.textContent=Q.q;
+  qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const pair=Math.random()<.5?[[Q.hi,1],[Q.lo,0]]:[[Q.lo,0],[Q.hi,1]];
+  const box=$('opts'); box.innerHTML="";
+  pair.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button";
+    b.innerHTML="<span class='ab'>"+(i===0?"A":"B")+"</span>"+o[0];
+    b.addEventListener('click',()=>pick(Q.ax,o[1]));
+    box.appendChild(b);
+  });
+}
+function pick(ax,pt){
+  vibrate(22); score[ax]+=pt;
+  pillarMap.forEach((k,i)=>{ $('pb'+i).style.height=(score[k]/4*100)+"%"; });
+  idx++;
+  if(idx>=deck.length){ setTimeout(showResult,450); return; }
+  setTimeout(render,240);
+}
+function showResult(){
+  const total=score.N+score.T+score.B+score.H;
+  const tier=TIERS.find(t=>total>=t[0]);
+  show('scResult'); vibrate([30,50,30,50,90]);
+  $('resEmo').textContent=tier[1].split(' ')[0];
+  $('resType').innerHTML="<span class='grad'>"+tier[1].split(' ').slice(1).join(' ')+"</span>";
+  $('resTag').textContent=tier[2]+" (Total "+total+"/16)";
+  const ch=$('chart'); ch.innerHTML="";
+  ["N","T","B","H"].forEach((k,i)=>{
+    const a=AXES[k], pct=score[k]/4*100;
+    ch.innerHTML+="<div class='crow'><span class='cl'>"+a.emo+" "+a.name+"</span><div class='cbar'><div class='cfill' id='cf"+i+"' data-w='"+pct+"'></div></div><span class='cv'>"+score[k]+"/4</span></div>";
+  });
+  setTimeout(()=>{["N","T","B","H"].forEach((k,i)=>{const f=$('cf'+i);f.style.width=f.dataset.w+"%";});},150);
+  const sorted=["N","T","B","H"].sort((a,b)=>score[a]-score[b]);
+  const low=AXES[sorted[0]], high=AXES[sorted[3]];
+  $('tips').innerHTML=
+    "<div class='row'><b>"+high.emo+" Your strength</b> — '"+high.name+"' ("+high.desc+") is your most solid one — a skill you already use well in your relationships.</div>"+
+    "<div class='row'><b>"+low.emo+" This week’s practice</b> — '"+low.name+"'("+low.desc+") is where to start. "+low.tip+"</div>";
+  window._resText="🤝 SQ Social IQ Test\n"+tier[1]+" (Total "+total+"/16)\nProfile: "+["N","T","B","H"].map(k=>AXES[k].name+" "+score[k]).join(" · ")+"\n\nMy relationship-skill read → https://mimifactory.vibekr.com/en/apps/sq-social-intelligence.html";
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("Copied! Paste it anywhere 📋")); }
+  else toast("Press and hold to copy");
+  vibrate(20);
+}
+</script>
+</body>
+</html>

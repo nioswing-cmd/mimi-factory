@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>SQ 社會智能測驗 — 多巴胺實驗室</title>
+<meta property="og:title" content="SQ 社會智能測驗 — 4 種關係技術診斷">
+<meta property="og:description" content="察言觀色 · 對話 · 界線 · 和好。16 題，畫出你的關係技術輪廓。">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#141507; --bg2:#1e2010; --card:#272a15; --line:#3e4224;
+  --ink:#f6f7e4; --sub:#b8bd93; --accent:#d3e14a; --accent2:#8fae2e;
+  --point:#ffd166; --ok:#69c46a; --bad:#e05a4c;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 85% -10%, rgba(211,225,74,.10), transparent 55%),
+             radial-gradient(100% 80% at 5% 110%, rgba(255,209,102,.08), transparent 50%),
+             linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--accent),var(--point));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:5vh;}
+.hero h1{font-size:44px;line-height:1.15;margin:16px 0 8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#191b06;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--accent),var(--point));
+  box-shadow:0 10px 26px -8px rgba(211,225,74,.4);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+.pillars{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px 10px;margin-bottom:16px;}
+.prow{display:flex;justify-content:space-between;align-items:flex-end;height:70px;gap:12px;}
+.pcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end;}
+.pbar{width:100%;max-width:44px;height:0%;border-radius:8px 8px 3px 3px;transition:height .5s cubic-bezier(.22,1,.36,1);min-height:4px;}
+.pcol .plab{font-family:'Jua',sans-serif;font-size:13px;color:var(--sub);}
+.pillars .cap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:9px;opacity:.8;}
+.count{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);text-align:center;margin-bottom:8px;}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent2);}
+.qtext{font-size:21px;font-weight:700;line-height:1.45;margin-top:8px;}
+.qhint{font-size:13px;color:var(--sub);margin-top:8px;}
+.opts{display:flex;flex-direction:column;gap:11px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:16px;
+  font-size:16px;color:var(--ink);text-align:left;cursor:pointer;font-family:inherit;line-height:1.5;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.opt:active{transform:scale(.97);}
+.opt .ab{display:inline-block;font-family:'Jua',sans-serif;color:var(--sub);margin-right:8px;}
+
+.res-hero{text-align:center;margin-top:10px;}
+.res-emo{font-size:64px;}
+.res-type{font-family:'Jua',sans-serif;font-size:31px;margin:10px 0 4px;}
+.res-tag{color:var(--sub);font-size:14.5px;line-height:1.7;}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:20px;}
+.chart .ct{font-family:'Jua',sans-serif;font-size:16px;margin-bottom:6px;}
+.crow{display:flex;align-items:center;gap:10px;margin-top:11px;font-size:14px;}
+.crow .cl{width:92px;}
+.cbar{flex:1;height:11px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;}
+.cfill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--point));transition:width .9s cubic-bezier(.22,1,.36,1);}
+.crow .cv{width:38px;text-align:right;font-family:'Jua',sans-serif;color:var(--point);}
+.tips{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px 18px;margin-top:14px;font-size:14.5px;line-height:1.75;}
+.tips b{color:var(--point);}
+.tips .row{margin-top:10px;}
+.tips .row:first-child{margin-top:0;}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(39,42,21,.97);border:1.5px solid var(--accent);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(211,225,74,.45));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#a6ab84;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#a6ab84;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 多巴胺實驗室 · 頭腦系列</span>
+      <h1>🤝 <span class="grad">SQ 社會智能</span> 測驗</h1>
+      <p class="sub">不是讀書的腦，是 <b>關係的腦</b>.<br>在人與人之間展現的四種技術，<br>用 16 題幫你診斷。</p>
+    </div>
+    <div class="pitch">
+      <b>測量的 4 種技術</b><br>
+      察言觀色 · 接住對話 · 為自己畫界線 · 修復破裂的關係。<br>
+      這不是測你人氣的測驗 — <b>安靜的人 SQ 也可能很高。</b>
+    </div>
+    <button class="btn" onclick="startQuiz()">🌿 開始社會智能診斷</button>
+    <p class="note">※ 這是自我報告式的參考測驗（不是正式心理檢測）。
+    不管你外向還是內向，只測「關係的技術」。</p>
+  </section>
+
+  <section id="scQuiz" class="screen">
+    <div class="pillars">
+      <div class="prow" id="prow"></div>
+      <div class="cap">四種關係技術即時累積 — 真面目在結果揭曉！</div>
+    </div>
+    <div class="count" id="qCount">1 / 16</div>
+    <div class="qcard">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qhint">👉 用「真實的你」回答，不是「想成為的你」！</div>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="res-emo" id="resEmo"></div>
+      <div class="res-type" id="resType"></div>
+      <p class="res-tag" id="resTag"></p>
+    </div>
+    <div class="chart">
+      <div class="ct">🤝 我的關係技術輪廓</div>
+      <div id="chart"></div>
+    </div>
+    <div class="tips" id="tips"></div>
+    <button class="btn" onclick="copyResult()">📋 複製結果分享</button>
+    <button class="btn ghost" onclick="location.reload()">再測一次</button>
+    <p class="note">※ SQ 是技術，不是個性 — 從最低的那一軸開始練，關係就會變輕鬆。</p>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/zh-tw/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 多巴胺實驗室 — 看看其他測驗 →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意義與趣味工廠</span></div>
+    <div class="mf-logo">咪咪工廠 MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL股份有限公司 家族公司</div>
+  </div>
+</div>
+
+<script>
+
+const QUESTIONS=[
+ {ax:"N",q:"聚會裡氣氛突然冷掉，你？",hi:"大概看得出為什麼冷、是誰引起的",lo:"連氣氛冷掉都是很久後才發現"},
+ {ax:"N",q:"對方好像想結束對話了，你？",hi:"察覺訊號，自然地收尾",lo:"聊得開心就繼續講下去"},
+ {ax:"N",q:"群組裡你的訊息完全沒人回，你？",hi:"看時機和話題，調整一下口氣",lo:"不太在意，照原本的方式繼續"},
+ {ax:"N",q:"第一次到一個場合（聚會·公司），你？",hi:"很快抓到潛規則和人際關係圖",lo:"規則什麼的先擺一邊，照自己步調走"},
+ {ax:"T",q:"跟不熟的人單獨留下來，你？",hi:"用輕鬆的問題化解沉默",lo:"很自然地把手機拿出來"},
+ {ax:"T",q:"聊天的時候，你通常？",hi:"聽和問的時間比較多",lo:"講自己的事的時間比較多"},
+ {ax:"T",q:"聽別人講話的時候？",hi:"反應和附和自動就冒出來",lo:"反應很尷尬，就安靜地聽"},
+ {ax:"T",q:"上次見過的人的名字和近況，你？",hi:"會記著，下次主動先問",lo:"老實說，常常就忘了"},
+ {ax:"B",q:"被拜託了做不到的事，你？",hi:"能在不傷關係的情況下拒絕",lo:"不會拒絕，先扛下來再說"},
+ {ax:"B",q:"聽到越線的玩笑，你？",hi:"笑歸笑，也會說「到這裡就好」",lo:"笑一笑帶過，自己一個人受傷"},
+ {ax:"B",q:"約會和聚會多到爆，你？",hi:"為了自己的能量，調整數量",lo:"全部都去，回家整個沒電"},
+ {ax:"B",q:"只會消耗你的關係，你？",hi:"能慢慢調整距離",lo:"再累也一直抱著不放"},
+ {ax:"H",q:"跟親近的人吵架之後，你？",hi:"比較會主動先伸手和好",lo:"等對方先靠過來"},
+ {ax:"H",q:"換你該道歉的時候，你？",hi:"不找藉口，乾脆地道歉",lo:"老是忍不住加一句「可是你也…」"},
+ {ax:"H",q:"覺得好像產生誤會了，你？",hi:"不悶著，馬上說「我們把話講開」",lo:"不講也希望它自然就化解"},
+ {ax:"H",q:"一段疏遠了一陣子的珍貴緣分，你？",hi:"能主動傳個訊息問候",lo:"太尷尬，結果傳不出去"},
+];
+const AXES={
+ N:{emo:"👀",name:"察言觀色",desc:"感知氣氛流動與訊號的能力",
+    tip:"對話中每天一次，猜猜看「對方現在的心情幾分？」。察言觀色，練幾次就長幾分。"},
+ T:{emo:"💬",name:"接住對話",desc:"化解尷尬、把關係加溫的能力",
+    tip:"口袋裡備三個萬用問題，對話就接得下去 —「最近在迷什麼？」「那你是怎麼開始的？」「後來怎麼樣了？」。"},
+ B:{emo:"🛡️",name:"畫界線",desc:"在關係裡守住自己的能力",
+    tip:"記住一句拒絕公式 —「心意我很感謝（緩衝），這次真的沒辦法（拒絕），下次這樣的話可以（替代）」。"},
+ H:{emo:"🌉",name:"關係修復",desc:"把破裂的關係重新接上的能力",
+    tip:"和好的黃金時間是 48 小時。「那天是我太敏感了」一句就夠 — 寫越長越像藉口。"},
+};
+const TIERS=[
+ [14,"🌟 關係鍊金術師","四種技術都快滿等，而且很平均。大家會聚在你身邊，是有原因的。"],
+ [11,"🤝 社交熟手","關係的肌肉很結實！只要補強最低的那一軸，任何關係都會變輕鬆。"],
+ [7,"🌗 選擇性社交型","遇到對的人是最佳夥伴，在不對的場合則很耗能。也許不是技術問題，是分配問題。"],
+ [4,"🚶 自我步調型","比起關係，你的世界優先。這不是缺點，是風格 — 只是對那少數幾個重要的人，試著用一下技術吧。"],
+ [0,"🏕️ 自願隱居者","人與人之間特別累吧。不需要跟每個人都處得來 — 從跟一個人的連結開始就好。"],
+];
+
+let idx=0, score={N:0,T:0,B:0,H:0}, pillarMap=[], deck=[];
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1800);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+const PCOLORS=["#d3e14a","#ffd166","#7fd0a8","#e8a0b4"];
+function startQuiz(){
+  idx=0; score={N:0,T:0,B:0,H:0};
+  deck=shuffle([...QUESTIONS]);
+  pillarMap=shuffle(["N","T","B","H"]);
+  const pr=$('prow'); pr.innerHTML="";
+  pillarMap.forEach((k,i)=>{
+    pr.innerHTML+="<div class='pcol'><div class='pbar' id='pb"+i+"' style='background:linear-gradient(180deg,"+PCOLORS[i]+",rgba(255,255,255,.05))'></div><div class='plab'>?</div></div>";
+  });
+  show('scQuiz'); render();
+}
+function render(){
+  const Q=deck[idx];
+  $('qCount').textContent=(idx+1)+" / "+deck.length;
+  $('qNum').textContent="Q"+(idx+1);
+  const qt=$('qText'); qt.textContent=Q.q;
+  qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const pair=Math.random()<.5?[[Q.hi,1],[Q.lo,0]]:[[Q.lo,0],[Q.hi,1]];
+  const box=$('opts'); box.innerHTML="";
+  pair.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button";
+    b.innerHTML="<span class='ab'>"+(i===0?"A":"B")+"</span>"+o[0];
+    b.addEventListener('click',()=>pick(Q.ax,o[1]));
+    box.appendChild(b);
+  });
+}
+function pick(ax,pt){
+  vibrate(22); score[ax]+=pt;
+  pillarMap.forEach((k,i)=>{ $('pb'+i).style.height=(score[k]/4*100)+"%"; });
+  idx++;
+  if(idx>=deck.length){ setTimeout(showResult,450); return; }
+  setTimeout(render,240);
+}
+function showResult(){
+  const total=score.N+score.T+score.B+score.H;
+  const tier=TIERS.find(t=>total>=t[0]);
+  show('scResult'); vibrate([30,50,30,50,90]);
+  $('resEmo').textContent=tier[1].split(' ')[0];
+  $('resType').innerHTML="<span class='grad'>"+tier[1].split(' ').slice(1).join(' ')+"</span>";
+  $('resTag').textContent=tier[2]+" (共 "+total+"/16)";
+  const ch=$('chart'); ch.innerHTML="";
+  ["N","T","B","H"].forEach((k,i)=>{
+    const a=AXES[k], pct=score[k]/4*100;
+    ch.innerHTML+="<div class='crow'><span class='cl'>"+a.emo+" "+a.name+"</span><div class='cbar'><div class='cfill' id='cf"+i+"' data-w='"+pct+"'></div></div><span class='cv'>"+score[k]+"/4</span></div>";
+  });
+  setTimeout(()=>{["N","T","B","H"].forEach((k,i)=>{const f=$('cf'+i);f.style.width=f.dataset.w+"%";});},150);
+  const sorted=["N","T","B","H"].sort((a,b)=>score[a]-score[b]);
+  const low=AXES[sorted[0]], high=AXES[sorted[3]];
+  $('tips').innerHTML=
+    "<div class='row'><b>"+high.emo+" 我的武器</b> — '"+high.name+"' ("+high.desc+"）最穩。這是你在關係裡已經用得很好的技術。</div>"+
+    "<div class='row'><b>"+low.emo+" 本週的練習任務</b> — 從 '"+low.name+"'("+low.desc+"）開始。 "+low.tip+"</div>";
+  window._resText="🤝 SQ 社會智能測驗\n"+tier[1]+" (共 "+total+"/16)\n輪廓: "+["N","T","B","H"].map(k=>AXES[k].name+" "+score[k]).join(" · ")+"\n\n我的關係技術診斷 → https://mimifactory.vibekr.com/zh-tw/apps/sq-social-intelligence.html";
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("複製完成！貼到哪都行 📋")); }
+  else toast("請長按複製");
+  vibrate(20);
+}
+</script>
+</body>
+</html>

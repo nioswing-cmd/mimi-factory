@@ -61,6 +61,18 @@
    "desc": "タップするたび揺れるコード — 最後にあなただけのタイプが解錠される診断"
   },
   {
+   "id": "sq-social-intelligence",
+   "type": "test",
+   "title": "SQ 社会的知能テスト",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/sq-social-intelligence.html",
+   "premium": "apps/sq-social-intelligence.html",
+   "desc": "勉強アタマではなく関係アタマ — 16問で関係スキルを診断"
+  },
+  {
    "id": "tarot",
    "type": "test",
    "title": "タロット心理カード",
