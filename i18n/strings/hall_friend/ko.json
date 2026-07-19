@@ -1,0 +1,122 @@
+{
+ "_meta": {
+  "source": "friend.html",
+  "slug": "hall_friend"
+ },
+ "title_001": {
+  "t": "둘의 피크닉",
+  "ctx": "<title>"
+ },
+ "meta_001": {
+  "t": "같이 놀수록 가까워지는 둘만의 돗자리. 질문 카드와 밸런스 게임.",
+  "ctx": "<meta name=\"description\" content=\"같이 놀수록 가까워지는 둘만의"
+ },
+ "html_001": {
+  "t": "🏭 미미팩토리",
+  "ctx": "iv class=\"nav\">     <a href=\"index.html\""
+ },
+ "html_002": {
+  "t": "📚 독서퀴즈관",
+  "ctx": "tml\">🏭 미미팩토리</a>     <a href=\"quiz.html\""
+ },
+ "html_003": {
+  "t": "🎯 테스트관",
+  "ctx": "tml\">📚 독서퀴즈관</a>     <a href=\"test.html\""
+ },
+ "html_004": {
+  "t": "💞 친해지기관",
+  "ctx": ">     <a class=\"here\" href=\"friend.html\""
+ },
+ "html_005": {
+  "t": "둘 이 서 · 미 미 팩 토 리",
+  "ctx": "v class=\"hero\">     <div class=\"eyebrow\""
+ },
+ "html_006": {
+  "t": "같이 놀수록 가까워지는 둘만의 돗자리.",
+  "ctx": "미 팩 토 리</div>     <h1>둘의 피크닉</h1>     <p"
+ },
+ "html_007": {
+  "t": "오늘은 누구랑 펼칠까요?",
+  "ctx": "피크닉</h1>     <p>같이 놀수록 가까워지는 둘만의 돗자리.<br"
+ },
+ "html_008": {
+  "t": "🧺 돗자리 펴기 →",
+  "ctx": "    <a class=\"cta\" id=\"heroCta\" href=\"#\""
+ },
+ "html_009": {
+  "t": "둘이 함께 하는",
+  "ctx": "\">       <div class=\"feat\"><span>💌</span"
+ },
+ "html_010": {
+  "t": "질문 놀이",
+  "ctx": "v class=\"feat\"><span>💌</span>둘이 함께 하는<br"
+ },
+ "html_011": {
+  "t": "대화가 깊어지는",
+  "ctx": "v>       <div class=\"feat\"><span>🌷</span"
+ },
+ "html_012": {
+  "t": "단계별 카드",
+  "ctx": "v class=\"feat\"><span>🌷</span>대화가 깊어지는<br"
+ },
+ "html_013": {
+  "t": "취향 대결",
+  "ctx": "v>       <div class=\"feat\"><span>🍑</span"
+ },
+ "html_014": {
+  "t": "케미 확인",
+  "ctx": "<div class=\"feat\"><span>🍑</span>취향 대결<br"
+ },
+ "html_015": {
+  "t": "🧺 새 놀이 소식 받기 —",
+  "ctx": "=landing\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_016": {
+  "t": "독서위키",
+  "ctx": "k\" rel=\"noopener\">     🧺 새 놀이 소식 받기 — <b"
+ },
+ "html_017": {
+  "t": "의 미 와 재 미 공 장",
+  "ctx": "oter\">     <div class=\"mf-eyebrow\"><span"
+ },
+ "html_018": {
+  "t": "미미팩토리",
+  "ctx": " 장</span></div>     <div class=\"mf-logo\""
+ },
+ "html_019": {
+  "t": "주식회사 연:결 패밀리회사",
+  "ctx": ">미미팩토리</div>     <div class=\"mf-caption\""
+ },
+ "attr_001": {
+  "t": "놀이 검색…",
+  "ctx": "placeholder=\"놀이 검색…\""
+ },
+ "jst_001": {
+  "t": "오늘의 돗자리",
+  "ctx": "=  style= #a8e6cf >       <span class= >"
+ },
+ "jst_002": {
+  "t": "같이 놀러 가기",
+  "ctx": ">${a.desc|| }</div>       <span class= >"
+ },
+ "jst_003": {
+  "t": "돗자리 위 놀이",
+  "ctx": "cument.getElementById( ).textContent = `"
+ },
+ "jst_004": {
+  "t": "개",
+  "ctx": ").textContent = `돗자리 위 놀이 ${list.length}"
+ },
+ "jst_005": {
+  "t": "아직 돗자리가 비어 있어요.",
+  "ctx": "L = list.length ?   :     `<div class= >"
+ },
+ "jst_006": {
+  "t": "곧 새 놀이가 도착할 거예요",
+  "ctx": " :     `<div class= >아직 돗자리가 비어 있어요.<br>"
+ },
+ "jst_007": {
+  "t": "둘이서!",
+  "ctx": "S.length]}</span>         <span class= >"
+ }
+}

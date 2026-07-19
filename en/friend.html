@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Picnic for Two</title>
+<meta name="description" content="The more you play, the closer you get — a picnic blanket just for two. Question cards and this-or-that games.">
+<meta name="theme-color" content="#ff8f70">
+<meta property="og:title" content="Picnic for Two">
+<meta property="og:description" content="The more you play, the closer you get — a picnic blanket just for two. Question cards and this-or-that games.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mimifactory.vibekr.com/en/friend.html">
+<meta name="twitter:card" content="summary">
+<link rel="manifest" href="manifest-friend.json">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+  :root{
+    --bg:#fdf6ec; --ink:#4a3f35; --sub:#a08d7a;
+    --peach:#ffb59e; --peach2:#ff8f70; --mint:#a8e6cf; --lemon:#ffe3a3;
+    --card:#ffffff; --line:rgba(74,63,53,.1);
+    --pop:cubic-bezier(.34,1.56,.64,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Noto Sans KR',sans-serif; background:var(--bg); color:var(--ink);
+    min-height:100dvh; -webkit-font-smoothing:antialiased;
+  }
+  
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(300px 240px at 88% -30px, rgba(255,181,158,.4), transparent 70%),
+      radial-gradient(260px 220px at -30px 22%, rgba(168,230,207,.45), transparent 70%),
+      radial-gradient(300px 260px at 105% 68%, rgba(255,227,163,.5), transparent 70%);
+  }
+  .wrap{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:24px 18px 40px}
+
+  .nav{display:flex;gap:6px;font-size:11px;margin-bottom:20px;flex-wrap:wrap}
+  .nav a{color:var(--sub);text-decoration:none;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.6)}
+  .nav a.here{color:#fff;background:var(--peach2);border-color:var(--peach2);font-weight:700}
+
+  .hero{text-align:center;padding:8px 0 20px}
+  .hero .eyebrow{font-size:10.5px;letter-spacing:.4em;text-indent:.4em;color:var(--sub);margin-bottom:8px}
+  .hero h1{
+    font-family:'Gaegu',cursive;font-weight:700;font-size:44px;line-height:1.1;color:var(--peach2);
+    text-shadow:2px 2px 0 rgba(168,230,207,.6);
+  }
+  .hero p{font-size:13px;color:var(--sub);margin-top:8px;line-height:1.75}
+  .hero .cta{
+    display:inline-block;margin-top:14px;font-family:'Gaegu',cursive;
+    font-size:19px;font-weight:700;text-decoration:none;
+    color:#fff;background:var(--peach2);
+    padding:10px 28px;border-radius:999px;
+    box-shadow:0 5px 0 rgba(74,63,53,.15);
+    transition:transform .35s var(--pop);
+  }
+  .hero .cta:active{transform:scale(.95)}
+  .feats{display:flex;gap:8px;margin-top:18px}
+  .feat{
+    flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;
+    background:#fff;border-radius:14px;padding:12px 6px;
+    font-size:10.5px;color:var(--sub);line-height:1.4;text-align:center;
+    box-shadow:0 4px 12px rgba(74,63,53,.08);
+  }
+  .feat span{font-size:20px}
+  .hero .doodle{font-size:17px;margin-top:12px;letter-spacing:.35em;text-indent:.35em}
+
+  
+  .picnic{
+    position:relative;margin:10px 0 26px;padding:20px 18px 22px;cursor:pointer;
+    background:var(--card);border-radius:4px;
+    box-shadow:0 10px 26px rgba(74,63,53,.14);
+    transform:rotate(-1.2deg);
+    transition:transform .35s var(--pop);
+  }
+  .picnic:hover{transform:rotate(0deg) translateY(-3px)}
+  .picnic:active{transform:scale(.97)}
+  .picnic::before{ 
+    content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(2deg);
+    width:92px;height:22px;background:var(--tp,var(--mint));opacity:.85;border-radius:2px;
+  }
+  .picnic .badge{
+    display:inline-block;font-family:'Gaegu',cursive;font-size:15px;font-weight:700;color:#fff;
+    background:var(--peach2);padding:2px 13px;border-radius:999px;transform:rotate(-2deg);
+  }
+  .picnic h2{font-family:'Gaegu',cursive;font-size:30px;margin-top:9px;line-height:1.2}
+  .picnic .meta{font-size:11.5px;color:var(--sub);margin-top:3px}
+  .picnic .desc{font-size:12.5px;color:#7a6a5b;margin-top:9px;line-height:1.65}
+  .picnic .go{
+    display:inline-block;margin-top:12px;font-family:'Gaegu',cursive;font-size:16px;font-weight:700;
+    color:var(--ink);background:var(--lemon);padding:7px 18px;border-radius:999px;
+    box-shadow:0 3px 0 rgba(74,63,53,.15);
+  }
+
+  .search{
+    width:100%;padding:11px 16px;margin-bottom:6px;font-size:14px;font-family:inherit;
+    color:var(--ink);background:#fff;border:2px dashed rgba(255,143,112,.4);border-radius:14px;outline:none;
+  }
+  .search:focus{border-color:var(--peach2);border-style:solid}
+  .count{font-family:'Gaegu',cursive;font-size:14px;color:var(--sub);margin:8px 2px 16px}
+
+  
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 14px}
+  .polaroid{
+    position:relative;background:#fff;padding:10px 10px 14px;cursor:pointer;border-radius:3px;
+    box-shadow:0 8px 20px rgba(74,63,53,.16);
+    transition:transform .35s var(--pop),box-shadow .35s;
+    animation:drop .5s var(--pop) backwards;
+  }
+  .polaroid:nth-child(odd){transform:rotate(-2deg);animation-delay:.05s}
+  .polaroid:nth-child(even){transform:rotate(1.6deg);animation-delay:.12s}
+  @keyframes drop{from{opacity:0;transform:translateY(-14px) rotate(0deg)}}
+  .polaroid:hover{transform:rotate(0deg) translateY(-5px);box-shadow:0 14px 28px rgba(74,63,53,.2)}
+  .polaroid:active{transform:scale(.94)}
+  .polaroid .photo{
+    position:relative;aspect-ratio:1/1;border-radius:2px;overflow:hidden;
+    background:var(--pc,linear-gradient(135deg,#ffb59e,#a8e6cf));
+    display:flex;align-items:center;justify-content:center;
+  }
+  .polaroid .photo .emoji{font-size:40px;filter:drop-shadow(0 3px 5px rgba(0,0,0,.16))}
+  .polaroid .sticker{
+    position:absolute;top:4px;right:4px;font-family:'Gaegu',cursive;font-size:12px;font-weight:700;
+    color:#fff;background:var(--peach2);padding:1px 9px;border-radius:999px;transform:rotate(6deg);
+  }
+  .polaroid h3{font-family:'Gaegu',cursive;font-size:19px;font-weight:700;line-height:1.2;margin-top:9px;text-align:center}
+  .polaroid .a{font-size:10.5px;color:var(--sub);margin-top:2px;text-align:center}
+  .empty{grid-column:1/-1;text-align:center;color:var(--sub);font-size:13px;padding:36px 0;line-height:1.8}
+
+  .subscribe{
+    display:block;text-align:center;margin-top:28px;padding:15px;
+    font-size:13px;color:var(--ink);text-decoration:none;
+    background:#fff;border:2px dashed var(--peach);border-radius:16px;
+  }
+  .subscribe b{color:var(--peach2)}
+
+  
+  .footer{text-align:center;margin-top:36px;padding-top:18px;border-top:1px solid rgba(74,63,53,.12)}
+  .mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px}
+  .mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(167,139,250,.6))}
+  .mf-eyebrow::after{transform:scaleX(-1)}
+  .mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#9a8fc0;font-weight:500;white-space:nowrap}
+  .mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;letter-spacing:.01em;
+    background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .mf-caption{font-size:11.5px;letter-spacing:.1em;color:#9a8fc0}
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="nav">
+    <a href="index.html">🏭 MIMI FACTORY</a>
+    <a href="quiz.html">📚 Reading Quiz Hall</a>
+    <a href="test.html">🎯 Test Hall</a>
+    <a class="here" href="friend.html">💞 Get-Closer Hall</a>
+  </div>
+
+  <div class="hero">
+    <div class="eyebrow">T W O  O F  U S · M I M I  F A C T O R Y</div>
+    <h1>Picnic for Two</h1>
+    <p>The more you play, the closer you get — a picnic blanket just for two.<br>Who’s sharing the blanket today?</p>
+    <a class="cta" id="heroCta" href="#">🧺 Roll out the blanket →</a>
+    <div class="feats">
+      <div class="feat"><span>💌</span>Made for two<br>Question games</div>
+      <div class="feat"><span>🌷</span>Talks that go deeper<br>Step-by-step cards</div>
+      <div class="feat"><span>🍑</span>Taste showdown<br>Chemistry check</div>
+    </div>
+    <div class="doodle">🧺 🌼 🍑</div>
+  </div>
+
+  <div id="picnic"></div>
+
+  <input class="search" id="q" type="search" placeholder="Search games…">
+  <div class="count" id="count"></div>
+  <div class="grid" id="grid"></div>
+
+  <a class="subscribe" href="https://blog.naver.com/4u_doumi?utm_source=picnic&utm_medium=landing" target="_blank" rel="noopener">
+    🧺 Get new game drops — <b>Reading Wiki</b> →
+  </a>
+
+  <div class="footer">
+    <div class="mf-eyebrow"><span>T H E  M E A N I N G  &  F U N  F A C T O R Y</span></div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+  </div>
+</div>
+
+<script>
+let APPS=[], query="";
+const EMOJIS=["💌","🎈","🍀","🌷","🧸","🍰"];
+
+
+if (new URLSearchParams(location.search).get("app")==="1") localStorage.setItem("mf_app_friend","1");
+if (localStorage.getItem("mf_app_friend")==="1") document.querySelector(".nav").style.display="none";
+
+async function load(){
+  try{
+    const r = await fetch("apps.json?v="+Date.now());
+    const j = await r.json();
+    APPS = (j.apps||[]).filter(a=>a.type==="friend");
+  }catch(e){ APPS = []; }
+  APPS.sort((a,b)=> (b.date||"").localeCompare(a.date||""));
+  renderPicnic(); render();
+}
+
+function grad(a){return `linear-gradient(135deg,${a.color1||"#ffb59e"},${a.color2||"#a8e6cf"})`}
+function open(a){ if(navigator.vibrate) navigator.vibrate(28); location.href = a.teaser || a.premium; }
+
+function renderPicnic(){
+  const a = APPS[0]; if(!a) return;
+  const el = document.getElementById("picnic");
+  el.innerHTML = `
+    <div class="picnic" style="--tp:${a.color2||"#a8e6cf"}">
+      <span class="badge">Today’s blanket 🧺</span>
+      <h2>${a.title}</h2>
+      <div class="meta">${a.author} · ${a.date||""}</div>
+      <div class="desc">${a.desc||""}</div>
+      <span class="go">Go play together →</span>
+    </div>`;
+  el.querySelector(".picnic").onclick = ()=>open(a);
+  const cta = document.getElementById("heroCta");
+  if (cta) cta.onclick = ev=>{ ev.preventDefault(); open(a); };
+}
+
+function render(){
+  const grid = document.getElementById("grid");
+  const list = APPS.filter(a =>
+    query==="" || (a.title+a.author).toLowerCase().includes(query)
+  );
+  document.getElementById("count").textContent = `On the blanket: ${list.length} games`;
+  grid.innerHTML = list.length ? "" :
+    `<div class="empty">The blanket’s still empty.<br>New games are on the way 🧺</div>`;
+  list.forEach((a,i)=>{
+    const c = document.createElement("div");
+    c.className="polaroid"; c.style.setProperty("--pc",grad(a));
+    c.innerHTML = `
+      <div class="photo">
+        <span class="emoji">${EMOJIS[i%EMOJIS.length]}</span>
+        <span class="sticker">For two!</span>
+      </div>
+      <h3>${a.title}</h3>
+      <div class="a">${a.author}</div>`;
+    c.onclick = ()=>open(a);
+    grid.appendChild(c);
+  });
+}
+
+document.getElementById("q").oninput = e=>{ query = e.target.value.trim().toLowerCase(); render(); };
+load();
+</script>
+</body>
+</html>
