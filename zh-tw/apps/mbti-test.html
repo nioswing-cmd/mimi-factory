@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MBTI測驗 — 解讀你的性格代碼</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.3/confetti.browser.min.js"></script>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+  :root{
+    --bg0:#140a2e; --bg1:#1f0f45; --bg2:#33165c;
+    --ink:#f4efff; --ink-soft:#c7b8ec; --ink-dim:#9a8bc8;
+    --glass:rgba(255,255,255,.06); --glass-line:rgba(255,255,255,.14);
+    --nt:#b78bf5; --nf:#4ade9b; --sj:#5b9dff; --sp:#ffb454;
+    --a1:#9b7bff; --a2:#7ac0ff;
+    --shadow:0 18px 50px rgba(0,0,0,.45);
+    --r:24px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Noto Sans KR',system-ui,sans-serif;color:var(--ink);
+    background:
+      radial-gradient(900px 620px at 12% -8%, rgba(155,123,255,.22), transparent 60%),
+      radial-gradient(820px 620px at 110% 6%, rgba(122,192,255,.16), transparent 55%),
+      radial-gradient(760px 720px at 50% 122%, rgba(255,122,192,.14), transparent 60%),
+      linear-gradient(160deg,var(--bg0),var(--bg1) 55%,var(--bg2));
+    background-attachment:fixed;min-height:100vh;
+    display:flex;align-items:flex-start;justify-content:center;
+    padding:26px 15px 56px;overflow-x:hidden;
+    transition:background .9s ease;
+  }
+  .app{width:100%;max-width:560px}
+  h1,h2,h3,.jua{font-family:'Jua',sans-serif;font-weight:400;letter-spacing:.2px}
+
+  .screen{display:none;animation:pop .45s cubic-bezier(.2,.9,.3,1.3)}
+  .screen.on{display:block}
+  @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+
+  .card{
+    background:var(--glass);border:1px solid var(--glass-line);border-radius:var(--r);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    box-shadow:var(--shadow);padding:30px 24px;
+  }
+
+  /* ---- home ---- */
+  .hero-emoji{font-size:70px;text-align:center;line-height:1;filter:drop-shadow(0 8px 20px rgba(155,123,255,.45));animation:float 3.4s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+  .home h1{font-size:clamp(30px,8vw,44px);text-align:center;margin:14px 0 6px;line-height:1.15}
+  .grad{background:linear-gradient(92deg,var(--a1),var(--nf) 45%,var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .home p.sub{text-align:center;color:var(--ink-soft);font-size:15px;line-height:1.65;margin-bottom:20px}
+  .lock-note{display:flex;gap:8px;align-items:flex-start;justify-content:center;text-align:center;
+    font-size:12.5px;color:var(--ink-dim);background:rgba(255,255,255,.04);border:1px dashed var(--glass-line);
+    border-radius:14px;padding:11px 14px;margin-bottom:22px;line-height:1.55}
+  .len-label{text-align:center;font-size:12.5px;color:var(--ink-dim);margin-bottom:9px;letter-spacing:.4px}
+  .lens{display:flex;gap:9px;margin-bottom:24px}
+  .lenbtn{flex:1;cursor:pointer;border:1.5px solid var(--glass-line);background:rgba(255,255,255,.04);
+    color:var(--ink-soft);border-radius:16px;padding:13px 6px 11px;text-align:center;font-family:'Jua';
+    transition:transform .14s ease,border-color .2s,background .2s}
+  .lenbtn b{display:block;font-size:22px;line-height:1;color:var(--ink)}
+  .lenbtn small{display:block;font-size:11px;color:var(--ink-dim);margin-top:4px;font-family:'Noto Sans KR'}
+  .lenbtn:hover{transform:translateY(-2px);background:rgba(255,255,255,.09)}
+  .lenbtn.sel{border-color:var(--a1);background:linear-gradient(180deg,rgba(155,123,255,.22),rgba(155,123,255,.06));box-shadow:0 8px 24px rgba(155,123,255,.28)}
+  .lenbtn.sel b{color:#fff}
+  .btn{
+    width:100%;border:0;cursor:pointer;font-family:'Jua',sans-serif;font-size:19px;color:#160a33;
+    padding:17px;border-radius:18px;background:linear-gradient(92deg,var(--a1),var(--a2));
+    box-shadow:0 12px 30px rgba(155,123,255,.4);transition:transform .15s,box-shadow .15s;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(155,123,255,.55)}
+  .btn:active{transform:translateY(1px) scale(.99)}
+  .btn.ghost{background:rgba(255,255,255,.08);color:var(--ink);box-shadow:none;border:1px solid var(--glass-line);font-size:16px;margin-top:12px}
+  .btn.ghost:hover{background:rgba(255,255,255,.14)}
+
+  /* ---- quiz : decoder ---- */
+  .qtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .qtop .qc{font-family:'Jua';font-size:15px;color:var(--ink-soft)}
+  .qtop .tag{font-size:12px;color:var(--ink-dim);display:flex;align-items:center;gap:6px}
+  .tag .dot{width:7px;height:7px;border-radius:50%;background:var(--a2);box-shadow:0 0 10px var(--a2);animation:blip 1s ease-in-out infinite}
+  @keyframes blip{0%,100%{opacity:.4;transform:scale(.9)}50%{opacity:1;transform:scale(1.25)}}
+  .decoder{display:flex;gap:10px;justify-content:center;margin:2px 0 14px}
+  .slot{width:58px;height:70px;border-radius:16px;background:rgba(255,255,255,.05);border:1.5px solid var(--glass-line);
+    display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .slot .g{font-family:'Jua';font-size:34px;color:var(--a1);opacity:.55}
+  .slot.scan::after{content:"";position:absolute;left:0;right:0;height:45%;top:-45%;
+    background:linear-gradient(180deg,transparent,rgba(155,123,255,.28),transparent);animation:scan 1.3s linear infinite}
+  @keyframes scan{to{top:120%}}
+  .slot.locked{border-color:var(--a1);box-shadow:0 0 22px rgba(155,123,255,.55);animation:pop .5s cubic-bezier(.2,.9,.3,1.3)}
+  .slot.locked .g{opacity:1}
+  .energy{height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:22px}
+  .energy i{display:block;height:100%;width:0;border-radius:999px;
+    background:linear-gradient(90deg,var(--a1),var(--a2));box-shadow:0 0 16px 1px var(--a2);
+    transition:width .55s cubic-bezier(.2,.9,.3,1.3),box-shadow .6s}
+  .q-num{font-family:'Jua';font-size:14px;color:var(--ink-dim);text-align:center;margin-bottom:6px}
+  .q-text{font-family:'Jua';font-size:clamp(20px,5.6vw,25px);text-align:center;line-height:1.42;margin-bottom:22px;}
+  .opt{
+    width:100%;text-align:left;border:1px solid var(--glass-line);cursor:pointer;
+    background:rgba(255,255,255,.05);color:var(--ink);padding:17px 16px;border-radius:18px;margin-bottom:12px;
+    font-size:16px;line-height:1.5;display:flex;gap:13px;align-items:center;
+    transition:transform .12s,background .2s,border-color .2s}
+  .opt:hover{background:rgba(255,255,255,.12);transform:translateX(3px)}
+  .opt .badge{flex-shrink:0;width:30px;height:30px;border-radius:10px;background:rgba(255,255,255,.09);
+    border:1px solid var(--glass-line);display:flex;align-items:center;justify-content:center;
+    font-family:'Jua';font-size:16px;color:var(--ink-soft)}
+  .opt.picked{animation:bump .35s ease}
+  @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
+
+  /* ---- result ---- */
+  .crown{text-align:center;font-size:12px;letter-spacing:4px;color:var(--ink-dim);margin-bottom:6px}
+  .code{display:flex;gap:8px;justify-content:center;margin-bottom:12px}
+  .code span{font-family:'Jua';font-size:30px;width:48px;height:56px;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);
+    border:1.5px solid var(--rc);color:var(--rc);box-shadow:0 0 18px -2px var(--rc)}
+  .res-emoji{font-size:66px;text-align:center;line-height:1;animation:float 3.4s ease-in-out infinite}
+  .res-title{font-family:'Jua';font-size:clamp(24px,6.6vw,34px);text-align:center;margin:6px 0 2px}
+  .res-tag{text-align:center;color:var(--ink-soft);font-size:15px;margin-bottom:16px;}
+  .axis-chips{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-bottom:8px}
+  .axis-chips .ac{font-size:13px;padding:7px 12px;border-radius:999px;border:1px solid var(--glass-line);
+    background:rgba(255,255,255,.05);display:flex;align-items:center;gap:5px}
+  .sec{margin-top:16px;padding-top:15px;border-top:1px solid var(--glass-line)}
+  .sec h4{font-family:'Jua';font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:7px}
+  .sec p{font-size:14.5px;line-height:1.68;color:var(--ink-soft);}
+  .hide-note{text-align:center;color:var(--ink-dim);font-size:12px;margin:18px 2px 2px;line-height:1.6}
+  .footnote{text-align:center;color:var(--ink-dim);font-size:12px;margin-top:22px;line-height:1.6}
+  .topbar{display:flex;justify-content:center;margin-bottom:14px}
+  .topbar button{background:none;border:1px solid var(--glass-line);color:var(--ink-soft);font-size:12.5px;border-radius:999px;padding:7px 14px;cursor:pointer}
+  .topbar button:hover{background:rgba(255,255,255,.08)}
+
+  .toast{position:fixed;left:50%;top:22px;transform:translateX(-50%) translateY(-20px);
+    background:rgba(31,15,69,.96);border:1.5px solid var(--a2);color:var(--ink);
+    padding:12px 20px;border-radius:999px;font-size:14px;font-family:'Jua';opacity:0;pointer-events:none;
+    transition:opacity .4s,transform .4s;z-index:60;max-width:90vw}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+  /* ---- brand footer ---- */
+  .site-footer{margin-top:26px;text-align:center;padding:8px 0 4px;user-select:none}
+  .ff-dots{display:flex;gap:7px;justify-content:center;margin-bottom:14px}
+  .ff-dots span{width:8px;height:8px;border-radius:50%;display:block;animation:ffpulse 2.4s ease-in-out infinite}
+  .ff-dots span:nth-child(1){background:var(--nt);animation-delay:0s}
+  .ff-dots span:nth-child(2){background:var(--nf);animation-delay:.24s}
+  .ff-dots span:nth-child(3){background:var(--sj);animation-delay:.48s}
+  .ff-dots span:nth-child(4){background:var(--sp);animation-delay:.72s}
+  .ff-dots span:nth-child(5){background:var(--a2);animation-delay:.96s}
+  @keyframes ffpulse{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.5);opacity:1}}
+  .ff-tag{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:4px;color:var(--ink-dim);margin-bottom:7px}
+  .ff-tag::before,.ff-tag::after{content:"";width:22px;height:1px;background:linear-gradient(90deg,transparent,var(--glass-line))}
+  .ff-tag::after{transform:scaleX(-1)}
+  .mf-logo{font-family:'Jua',sans-serif;font-size:26px;line-height:1;
+    background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+    -webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 14px rgba(155,123,255,.3))}
+  .ff-sub{font-size:12px;color:var(--ink-dim);margin-top:9px;letter-spacing:.3px}
+  .ff-sub .colon{color:var(--nf);font-weight:700;padding:0 1px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HOME -->
+  <section id="home" class="screen on home">
+    <div class="card">
+      <div class="hero-emoji">🧬</div>
+      <h1>你的 <span class="grad">性格代碼</span><br>就此解讀</h1>
+      <p class="sub">每點一下，看不見的代碼就劇烈跳動<br>多巴胺狂飆的MBTI測驗。<br>最後只有一個，你的類型會被解鎖。</p>
+      <div class="lock-note">🔒 為了防止操弄， <b>分數與數值不公開</b>。哪個選擇會通往哪裡，全都藏起來，所以只會跑出你最誠實的答案。</div>
+      <div class="len-label">選擇題目數量</div>
+      <div class="lens" id="lens">
+        <div class="lenbtn" data-n="12"><b>12</b><small>快速</small></div>
+        <div class="lenbtn sel" data-n="20"><b>20</b><small>標準</small></div>
+        <div class="lenbtn" data-n="36"><b>36</b><small>精準</small></div>
+      </div>
+      <button class="btn" onclick="startQuiz()">開始解讀 →</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="screen">
+    <div class="card">
+      <div class="qtop">
+        <span class="qc" id="qcount">1 / 20</span>
+        <span class="tag"><span class="dot"></span> 解讀代碼中…</span>
+      </div>
+      <div class="decoder" id="decoder">
+        <div class="slot"><span class="g">?</span></div>
+        <div class="slot"><span class="g">?</span></div>
+        <div class="slot"><span class="g">?</span></div>
+        <div class="slot"><span class="g">?</span></div>
+      </div>
+      <div class="energy"><i id="energy"></i></div>
+      <div class="q-num" id="qnum"></div>
+      <div class="q-text" id="qtext"></div>
+      <div id="opts"></div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="screen">
+    <div class="card">
+      <div class="crown">YOUR PERSONALITY CODE</div>
+      <div class="code" id="resCode"></div>
+      <div class="res-emoji" id="resEmoji">🧬</div>
+      <div class="res-title" id="resTitle"></div>
+      <div class="res-tag" id="resTag"></div>
+      <div class="axis-chips" id="axisChips"></div>
+      <div class="sec"><h4>💫 你是這樣的人</h4><p id="p_you"></p></div>
+      <div class="sec"><h4>✨ 閃閃發光的優點</h4><p id="p_str"></p></div>
+      <div class="sec"><h4>🌿 稍微注意一下</h4><p id="p_care"></p></div>
+      <div class="hide-note">🔒 各軸的精確數值不會公開。<br>別被數字牽著走，把注意力放在你這個類型的「氣質」上。</div>
+      <button class="btn" style="margin-top:20px" onclick="shareResult()">複製結果文字 📋</button>
+      <button class="btn ghost" onclick="resetAll()">從頭再來</button>
+      <div class="footnote">只是好玩的測驗。無論是哪種代碼，你都遠比它更立體豐富 🤍</div>
+    </div>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/zh-tw/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 多巴胺實驗室 — 看看其他測驗 →</a></div>
+  <footer class="site-footer">
+    <div class="ff-dots"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="ff-tag">意義與趣味工廠</div>
+    <div class="mf-logo">咪咪工廠 MIMI FACTORY</div>
+    <div class="ff-sub">YEON<span class="colon">:</span>GYEOL股份有限公司 家族公司</div>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ AXIS META ============ */
+const AX = {
+  E:{w:"外向",e:"🗣️"}, I:{w:"內向",e:"🧘"},
+  S:{w:"實感",e:"🔍"}, N:{w:"直覺",e:"🔮"},
+  T:{w:"思考",e:"⚖️"}, F:{w:"情感",e:"💗"},
+  J:{w:"計劃",e:"🗂️"}, P:{w:"探索",e:"🧭"}
+};
+
+/* ============ QUESTION BANK (9 per axis) ============ */
+const QBANK = {
+  EI:[
+    {a:{k:"E",txt:"和大家熱鬧在一起時就充滿活力"}, b:{k:"I",txt:"獨自安靜地待著時就充滿活力"}},
+    {a:{k:"E",txt:"初次見面我會先開口說話"}, b:{k:"I",txt:"我會先觀察，等對方靠近"}},
+    {a:{k:"E",txt:"煩惱要說給人聽才理得清"}, b:{k:"I",txt:"煩惱要自己反覆想才理得清"}},
+    {a:{k:"E",txt:"累的時候找朋友聊天就回血"}, b:{k:"I",txt:"累的時候在家獨自休息就回血"}},
+    {a:{k:"E",txt:"聚會時我會跟很多人都聊聊"}, b:{k:"I",txt:"聚會時我只跟一兩個人深聊"}},
+    {a:{k:"E",txt:"想法要先說出來才會慢慢成形"}, b:{k:"I",txt:"想清楚整理好了才會開口"}},
+    {a:{k:"E",txt:"成為全場焦點時我會超嗨"}, b:{k:"I",txt:"當焦點很有壓力，只想閃邊"}},
+    {a:{k:"E",txt:"電話一來我開心地馬上接"}, b:{k:"I",txt:"電話一來我會先猜是什麼事，猶豫一下"}},
+    {a:{k:"E",txt:"旅行時我會隨興跟人打成一片"}, b:{k:"I",txt:"旅行時我按自己的步調安靜地逛"}}
+  ],
+  SN:[
+    {a:{k:"S",txt:"具體的事實和例子更打動我"}, b:{k:"N",txt:"整體的圖像和背後的意義更打動我"}},
+    {a:{k:"S",txt:"我偏向專注在眼前的現實"}, b:{k:"N",txt:"我偏向想像未來的各種可能"}},
+    {a:{k:"S",txt:"看新資訊我會問「實際上怎麼用」"}, b:{k:"N",txt:"看新資訊我會找「隱藏的模式與連結」"}},
+    {a:{k:"S",txt:"我更相信親身經歷過的事實"}, b:{k:"N",txt:"我更相信靈光一閃的直覺"}},
+    {a:{k:"S",txt:"發生的事我會照實描述"}, b:{k:"N",txt:"我會加點比喻和想像來講"}},
+    {a:{k:"S",txt:"我一步一步照著步驟學"}, b:{k:"N",txt:"我會想先搞懂核心原理"}},
+    {a:{k:"S",txt:"務實又具體的對話讓我自在"}, b:{k:"N",txt:"抽象又有想像力的對話讓我自在"}},
+    {a:{k:"S",txt:"我偏向不放過任何細節"}, b:{k:"N",txt:"我偏向先看整體大局"}},
+    {a:{k:"S",txt:"想到未來，我腦中浮現務實的計畫"}, b:{k:"N",txt:"想到未來，我眼前展開無限的可能"}}
+  ],
+  TF:[
+    {a:{k:"T",txt:"做決定時，邏輯和客觀事實優先"}, b:{k:"F",txt:"做決定時，人的感受和關係優先"}},
+    {a:{k:"T",txt:"聽到煩惱，我會一起找解決辦法"}, b:{k:"F",txt:"聽到煩惱，我會先同理那份心情"}},
+    {a:{k:"T",txt:"被批評時我會先想內容對不對"}, b:{k:"F",txt:"被批評時我先感覺到的是語氣和情緒"}},
+    {a:{k:"T",txt:"判斷時我依循一貫的原則"}, b:{k:"F",txt:"判斷時我會顧及情境和人"}},
+    {a:{k:"T",txt:"我偏向理性又冷靜"}, b:{k:"F",txt:"我偏向溫暖又有同理心"}},
+    {a:{k:"T",txt:"衝突時我會點出事實來釐清"}, b:{k:"F",txt:"衝突時我會安撫大家的情緒"}},
+    {a:{k:"T",txt:"稱讚時我會精準指出做得好的地方"}, b:{k:"F",txt:"稱讚時我會用心給對方打氣"}},
+    {a:{k:"T",txt:"不合邏輯的主張我更受不了"}, b:{k:"F",txt:"冷漠無情我更受不了"}},
+    {a:{k:"T",txt:"做完決定我會回想「這樣合理嗎」"}, b:{k:"F",txt:"做完決定我會回想「有沒有誰受傷了」"}}
+  ],
+  JP:[
+    {a:{k:"J",txt:"旅行我會事先把行程排得密密的"}, b:{k:"P",txt:"旅行我隨當下的節奏走"}},
+    {a:{k:"J",txt:"事情提早做完我才安心"}, b:{k:"P",txt:"截止日逼近我才特別專心"}},
+    {a:{k:"J",txt:"我的空間整齊我才舒服"}, b:{k:"P",txt:"有點亂我也不太在意"}},
+    {a:{k:"J",txt:"計畫突然改變我會很慌"}, b:{k:"P",txt:"計畫變了反而覺得新鮮又有趣"}},
+    {a:{k:"J",txt:"我會快點做決定然後收尾"}, b:{k:"P",txt:"我會保留選項，從容地慢慢來"}},
+    {a:{k:"J",txt:"我照著檢查清單一項項推進"}, b:{k:"P",txt:"我看心情彈性地進行"}},
+    {a:{k:"J",txt:"約好的地方我總是提早到"}, b:{k:"P",txt:"約定的時間我常常都很趕"}},
+    {a:{k:"J",txt:"既定的框架給我安定感"}, b:{k:"P",txt:"我覺得框架可以看情況調整"}},
+    {a:{k:"J",txt:"週末我照計畫行動"}, b:{k:"P",txt:"週末我看心情隨興過"}}
+  ]
+};
+const AXES = ["EI","SN","TF","JP"];
+
+/* ============ 16 TYPES ============ */
+const TYPE = {
+  INTJ:{e:"🦉",g:"nt",name:"深謀遠慮的戰略家",tag:"腦中早已盤算好三步之後的人",
+    you:"你是設計大局、再安靜地付諸實行的戰略家。愈是複雜的問題你反而愈冷靜，還能讀出別人看不到的長期走勢。",
+    str:"洞察力與行動力。目標一定，你就親手設計出該走的路，一路推到底。",
+    care:"太投入在完美計畫裡，可能會忽略別人的情緒。偶爾先問問心情，再談邏輯。"},
+  INTP:{e:"🔬",g:"nt",name:"邏輯型思索家",tag:"對世上萬物都要問一句「為什麼?」的人",
+    you:"當你鑽進原理、徹底搞懂時，最有活著的感覺。好奇心沒有盡頭，連熟悉的事物你也總從新角度拆解。",
+    str:"獨到的分析力。你擅長把複雜的概念用清晰的邏輯拆解開來。",
+    care:"在思考裡待太久，行動可能會拖慢。比起完美的答案，有時你需要的是「先做再說」。"},
+  ENTJ:{e:"👑",g:"nt",name:"大膽的統帥",tag:"把一盤散沙帶向目標的人",
+    you:"你是立下願景、再驅動眾人把它變成現實的領袖。你受不了沒效率，總在尋找更好的方法。",
+    str:"決斷力與組織力。再大的目標你都能拆小，帶著團隊往前走。",
+    care:"你一衝快，身邊的人可能會吃力。也照看一下同行者的步調吧。"},
+  ENTP:{e:"💡",g:"nt",name:"熱血辯論家",tag:"往一池死水丟石頭的點子製造機",
+    you:"你熱愛新的可能性，也熱愛辯論。你挑戰常識，一瞬間就能拋出各種奇招。",
+    str:"反應快又有創意。任何主題你都能用有趣的角度翻轉過來。",
+    care:"興趣一淡，收尾可能就變弱。練習把開了頭的事帶到終點吧。"},
+  INFJ:{e:"🕊️",g:"nf",name:"善意的提倡者",tag:"不動聲色就讀懂人心的人",
+    you:"你擁有深刻的洞察與溫暖的信念。安靜卻有堅定的價值觀，還能驚人地察覺別人的真心。",
+    str:"同理與洞察。在把人和意義連結起來這件事上，你有過人的力量。",
+    care:"想把每個人都攬進懷裡，容易把自己耗盡。也留點時間照顧你自己的心。"},
+  INFP:{e:"🌙",g:"nf",name:"熱情的調停者",tag:"心裡藏著一整個自己宇宙的人",
+    you:"你珍視真誠與理想。外表平靜，內裡卻流動著熾熱的信念與豐沛的情感。",
+    str:"深刻的同理與想像力。你相信人的潛力，並溫柔地支持他們。",
+    care:"理想與現實的落差可能讓你疲憊。一個小小的實踐，就能讓遠大的理想活下去。"},
+  ENFJ:{e:"🌟",g:"nf",name:"正義的領航者",tag:"點亮眾人潛能的人",
+    you:"你會激勵他人，一起成長。你用溫暖的魅力把周圍的人凝聚起來，也看得見每個人的潛力。",
+    str:"影響力與同理。你能一邊帶領、一邊照顧人心，拿捏得剛剛好。",
+    care:"老是照顧別人，反而把自己排到最後。你的需求，也可以理直氣壯地說出來。"},
+  ENFP:{e:"🎈",g:"nf",name:"活力四射的自由人",tag:"走到哪都閃閃發亮的能量體",
+    you:"你充滿好奇與熱情。你從人和點子裡獲得能量，把世界看成一座充滿可能性的遊樂場。",
+    str:"熱情與連結力。你能打開人心，讓氣氛活起來。",
+    care:"興趣到處亂跳，專注力可能會散掉。挑一件你喜歡的事，往深處鑽鑽看。"},
+  ISTJ:{e:"📘",g:"sj",name:"正直的現實主義者",tag:"接下的事一定做完的人",
+    you:"你是責任感與踏實的代名詞。你守約，依據事實和原則，默默地累積信任。",
+    str:"可靠又細心。交給你的事，你會滴水不漏地完成。",
+    care:"太堅持熟悉的做法，可能會錯過變化。也為新的嘗試留一道門縫吧。"},
+  ISFJ:{e:"🛡️",g:"sj",name:"勇敢的守衛者",tag:"不著痕跡地照顧每個人的人",
+    you:"你既奉獻又溫暖。你會先察覺周圍的需要，安靜地遞上實際的幫忙。",
+    str:"細膩又願意付出。你讓人自在，也穩穩地守護他們。",
+    care:"你不擅長拒絕，容易把重擔往身上攬。「不要」有時也是一種愛的表達。"},
+  ESTJ:{e:"📊",g:"sj",name:"嚴謹的執行者",tag:"把混亂變成秩序的人",
+    you:"你是制度與執行的高手。你定下目標，用務實的方法把人和事一項項理順。",
+    str:"組織力與責任感。你用原則加執行做出成果。",
+    care:"太看重效率，可能會忽略別人的難處。像看重規則那樣，也看重人心吧。"},
+  ESFJ:{e:"🤝",g:"sj",name:"社交型外交官",tag:"為大家搭起橋樑、讓人融入的人",
+    you:"你既溫暖又體貼。你珍視人與人之間的和諧，細心地照看氣氛與關係。",
+    str:"親和力與貼心。你能自然地把人牽在一起，也照顧著他們。",
+    care:"別人的肯定可能會牽動你的心。先相信你自己的標準，也沒關係。"},
+  ISTP:{e:"🛠️",g:"sp",name:"全能的巧手",tag:"用雙手解決問題的沉默高手",
+    you:"你既沉著又實際。你用行動而非言語去拆解問題，愈是危機你反而愈冷靜地找出路。",
+    str:"解決問題的能力與冷靜。任何情況你都能親手搞定。",
+    care:"你不太表露情緒，容易被誤會。偶爾把心裡話說出一句吧。"},
+  ISFP:{e:"🎨",g:"sp",name:"好奇的藝術家",tag:"用自己獨有的感覺去感受世界的人",
+    you:"你既溫和又感性。你感受著此刻當下的美，自由又真誠地表達自己。",
+    str:"感受力與柔軟。你安靜地保有一抹只屬於自己的色彩。",
+    care:"為了避開衝突，你可能把心情吞下去。你想要的，用溫柔的方式說出來也很好。"},
+  ESTP:{e:"🔥",g:"sp",name:"愛冒險的企業家",tag:"當下就跳下去的行動派",
+    you:"你既大膽又活力充沛。你在現場能快速判斷，在刺激與挑戰裡最能感覺到自己活著。",
+    str:"反應力與執行力。你毫不猶豫地抓住當下。",
+    care:"你速度太快，可能會忽略後續。起跳前多看半拍，就更穩了。"},
+  ESFP:{e:"🎉",g:"sp",name:"自由靈魂的表演者",tag:"只要在場就變成慶典的人",
+    you:"你是開朗又有活力的氣氛製造者。你和大家一起享受當下，走到哪都散播笑聲與生氣。",
+    str:"活力與親和力。你有把當下變開心的天賦。",
+    care:"追著快樂跑，可能會把要緊事往後拖。在好玩的事和該做的事之間找個平衡吧。"}
+};
+const GCOLOR = {nt:"var(--nt)", nf:"var(--nf)", sj:"var(--sj)", sp:"var(--sp)"};
+
+/* ============ HELPERS ============ */
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(v){if(navigator.vibrate)try{navigator.vibrate(v);}catch(e){}}
+let _tt;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2000);}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});}
+
+/* ============ STATE ============ */
+let LEN = 20;
+let quiz = [], qi = 0, score = {}, myType = null;
+let decodeTimer = null;
+const GLYPH = "EINSTFJP◆◇▲△●○★☆✦※";
+
+/* length selector */
+document.getElementById('lens').addEventListener('click',e=>{
+  const b=e.target.closest('.lenbtn'); if(!b)return;
+  document.querySelectorAll('.lenbtn').forEach(x=>x.classList.remove('sel'));
+  b.classList.add('sel'); LEN=+b.dataset.n; vibrate(12);
+});
+
+/* ============ QUIZ ============ */
+function buildQuiz(){
+  const per = LEN/4;
+  let list=[];
+  AXES.forEach(ax=>{ QBANK[ax].slice(0,per).forEach(q=> list.push({a:{...q.a},b:{...q.b}})); });
+  return shuffle(list);
+}
+function startQuiz(){
+  quiz=buildQuiz(); qi=0;
+  score={E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};
+  go('quiz'); startDecoder(); updateEnergy(); renderQ();
+}
+function startDecoder(){
+  document.querySelectorAll('.slot').forEach(s=>{s.classList.add('scan');s.classList.remove('locked');});
+  clearInterval(decodeTimer);
+  decodeTimer=setInterval(()=>{
+    document.querySelectorAll('.slot .g').forEach(g=>{g.textContent=GLYPH[Math.floor(Math.random()*GLYPH.length)];});
+  },95);
+}
+function stopDecoder(){clearInterval(decodeTimer);decodeTimer=null;document.querySelectorAll('.slot').forEach(s=>s.classList.remove('scan'));}
+function renderQ(){
+  const q=quiz[qi];
+  document.getElementById('qcount').textContent=(qi+1)+" / "+quiz.length;
+  document.getElementById('qnum').textContent="Q"+(qi+1);
+  document.getElementById('qtext').textContent="以下哪一個更像「你」?";
+  const opts=shuffle([q.a,q.b]);
+  const labels=["A","B"];
+  const wrap=document.getElementById('opts');
+  wrap.innerHTML="";
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt";
+    b.innerHTML=`<span class="badge">${labels[i]}</span><span>${o.txt}</span>`;
+    b.onclick=()=>pick(o.k,b);
+    wrap.appendChild(b);
+  });
+}
+function pick(k,el){
+  score[k]++;
+  el.classList.add('picked');
+  if(window.confetti){
+    const r=el.getBoundingClientRect();
+    confetti({particleCount:16,spread:52,startVelocity:22,scalar:.8,
+      origin:{x:(r.left+r.width/2)/window.innerWidth,y:(r.top+r.height/2)/window.innerHeight},
+      colors:['#9b7bff','#7ac0ff','#4ade9b','#ffb454','#ff7ac0']});
+  }
+  vibrate(26);
+  updateEnergy();
+
+  const frac=(qi+1)/quiz.length;
+  const r=document.documentElement.style;
+  if(frac>=.67){r.setProperty('--a1','#ff6ba6');r.setProperty('--a2','#ffb454');}
+  else if(frac>=.34){r.setProperty('--a1','#c07bff');r.setProperty('--a2','#ff7ac0');}
+  if(qi+1===Math.floor(quiz.length/2)){toast('🔥 過半囉!');vibrate([20,40,20]);}
+  setTimeout(()=>{
+    qi++;
+    if(qi>=quiz.length) revealCode();
+    else renderQ();
+  },330);
+}
+function updateEnergy(){
+  const done=Object.values(score).reduce((a,b)=>a+b,0);
+  document.getElementById('energy').style.width=(done/quiz.length*100)+"%";
+}
+
+/* ============ RESULT ============ */
+function computeType(){
+  const p=(a,b)=> score[a]>=score[b]?a:b;
+  return p("E","I")+p("S","N")+p("T","F")+p("J","P");
+}
+function revealCode(){
+  stopDecoder();
+  myType=computeType();
+  const letters=myType.split('');
+  const slots=document.querySelectorAll('.slot');
+  const col=GCOLOR[TYPE[myType].g];
+  document.documentElement.style.setProperty('--rc',col);
+  toast('🧬 解鎖代碼中…');
+  letters.forEach((L,i)=>{
+    setTimeout(()=>{
+      const g=slots[i].querySelector('.g');
+      g.textContent=L; g.style.color=col;
+      slots[i].classList.add('locked'); slots[i].style.borderColor=col;
+      vibrate(34);
+      if(window.confetti){
+        const r=slots[i].getBoundingClientRect();
+        confetti({particleCount:22,spread:60,startVelocity:26,scalar:.9,
+          origin:{x:(r.left+r.width/2)/window.innerWidth,y:(r.top+r.height/2)/window.innerHeight}});
+      }
+      if(i===3) setTimeout(showResult,700);
+    }, 360*i+300);
+  });
+}
+function showResult(){
+  const T=TYPE[myType], col=GCOLOR[T.g];
+  document.documentElement.style.setProperty('--rc',col);
+  const code=document.getElementById('resCode'); code.innerHTML="";
+  myType.split('').forEach(L=>{const s=document.createElement('span');s.textContent=L;code.appendChild(s);});
+  document.getElementById('resEmoji').textContent=T.e;
+  const ti=document.getElementById('resTitle');
+  ti.textContent=myType+" · "+T.name; ti.style.color=col;
+  document.getElementById('resTag').textContent="“"+T.tag+"”";
+  const chips=document.getElementById('axisChips'); chips.innerHTML="";
+  myType.split('').forEach(L=>{
+    const c=document.createElement('span'); c.className="ac";
+    c.innerHTML=`${AX[L].e} ${AX[L].w}`;
+    chips.appendChild(c);
+  });
+  document.getElementById('p_you').textContent=T.you;
+  document.getElementById('p_str').textContent=T.str;
+  document.getElementById('p_care').textContent=T.care;
+  go('result');
+  if(window.confetti){
+    const colors=['#9b7bff','#7ac0ff','#4ade9b','#ffb454','#ff7ac0'];
+    confetti({particleCount:130,spread:95,origin:{y:.3},colors});
+    setTimeout(()=>confetti({particleCount:90,spread:120,startVelocity:36,origin:{y:.4},colors}),260);
+  }
+  vibrate([60,80,60,80,120]);
+}
+function shareResult(){
+  const T=TYPE[myType];
+  const txt=`我的性格代碼是 ${myType} · ${T.name} ${T.e}\n"${T.tag}"\n\nMBTI 測驗開始 → https://mimifactory.vibekr.com/apps/mbti_test_test.html`;
+  const done=()=>toast('📋 結果文字已複製!');
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done));}
+  else fallbackCopy(txt,done);
+  vibrate(20);
+}
+function fallbackCopy(txt,cb){
+  const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();try{document.execCommand('copy');cb();}catch(e){}document.body.removeChild(ta);
+}
+function resetAll(){
+  myType=null;
+  const r=document.documentElement.style;
+  r.setProperty('--a1','#9b7bff'); r.setProperty('--a2','#7ac0ff');
+  document.querySelectorAll('.slot').forEach(s=>{s.classList.remove('locked');s.style.borderColor='';const g=s.querySelector('.g');g.textContent='?';g.style.color='';});
+  go('home');
+}
+</script>
+</body>
+</html>

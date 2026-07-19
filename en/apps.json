@@ -49,6 +49,18 @@
    "desc": "15 questions in sequences, logic, patterns & words — plus your brain’s strongest area"
   },
   {
+   "id": "mbti-test",
+   "type": "test",
+   "title": "MBTI Test",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/mbti-test.html",
+   "premium": "apps/mbti-test.html",
+   "desc": "An unknown code spins with every tap — one single type unlocks at the end: yours."
+  },
+  {
    "id": "tarot",
    "type": "test",
    "title": "Tarot Mind Cards",

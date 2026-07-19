@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MBTI診断 — あなたの性格コードを解読</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.3/confetti.browser.min.js"></script>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansJP-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/MPLUSRounded1c-Bold-sub.woff2') format('woff2');font-weight:400;font-display:swap;}
+</style>
+<style>
+  :root{
+    --bg0:#140a2e; --bg1:#1f0f45; --bg2:#33165c;
+    --ink:#f4efff; --ink-soft:#c7b8ec; --ink-dim:#9a8bc8;
+    --glass:rgba(255,255,255,.06); --glass-line:rgba(255,255,255,.14);
+    --nt:#b78bf5; --nf:#4ade9b; --sj:#5b9dff; --sp:#ffb454;
+    --a1:#9b7bff; --a2:#7ac0ff;
+    --shadow:0 18px 50px rgba(0,0,0,.45);
+    --r:24px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Noto Sans KR',system-ui,sans-serif;color:var(--ink);
+    background:
+      radial-gradient(900px 620px at 12% -8%, rgba(155,123,255,.22), transparent 60%),
+      radial-gradient(820px 620px at 110% 6%, rgba(122,192,255,.16), transparent 55%),
+      radial-gradient(760px 720px at 50% 122%, rgba(255,122,192,.14), transparent 60%),
+      linear-gradient(160deg,var(--bg0),var(--bg1) 55%,var(--bg2));
+    background-attachment:fixed;min-height:100vh;
+    display:flex;align-items:flex-start;justify-content:center;
+    padding:26px 15px 56px;overflow-x:hidden;
+    transition:background .9s ease;
+  }
+  .app{width:100%;max-width:560px}
+  h1,h2,h3,.jua{font-family:'Jua',sans-serif;font-weight:400;letter-spacing:.2px}
+
+  .screen{display:none;animation:pop .45s cubic-bezier(.2,.9,.3,1.3)}
+  .screen.on{display:block}
+  @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+
+  .card{
+    background:var(--glass);border:1px solid var(--glass-line);border-radius:var(--r);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    box-shadow:var(--shadow);padding:30px 24px;
+  }
+
+  /* ---- home ---- */
+  .hero-emoji{font-size:70px;text-align:center;line-height:1;filter:drop-shadow(0 8px 20px rgba(155,123,255,.45));animation:float 3.4s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+  .home h1{font-size:clamp(30px,8vw,44px);text-align:center;margin:14px 0 6px;line-height:1.15}
+  .grad{background:linear-gradient(92deg,var(--a1),var(--nf) 45%,var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .home p.sub{text-align:center;color:var(--ink-soft);font-size:15px;line-height:1.65;margin-bottom:20px}
+  .lock-note{display:flex;gap:8px;align-items:flex-start;justify-content:center;text-align:center;
+    font-size:12.5px;color:var(--ink-dim);background:rgba(255,255,255,.04);border:1px dashed var(--glass-line);
+    border-radius:14px;padding:11px 14px;margin-bottom:22px;line-height:1.55}
+  .len-label{text-align:center;font-size:12.5px;color:var(--ink-dim);margin-bottom:9px;letter-spacing:.4px}
+  .lens{display:flex;gap:9px;margin-bottom:24px}
+  .lenbtn{flex:1;cursor:pointer;border:1.5px solid var(--glass-line);background:rgba(255,255,255,.04);
+    color:var(--ink-soft);border-radius:16px;padding:13px 6px 11px;text-align:center;font-family:'Jua';
+    transition:transform .14s ease,border-color .2s,background .2s}
+  .lenbtn b{display:block;font-size:22px;line-height:1;color:var(--ink)}
+  .lenbtn small{display:block;font-size:11px;color:var(--ink-dim);margin-top:4px;font-family:'Noto Sans KR'}
+  .lenbtn:hover{transform:translateY(-2px);background:rgba(255,255,255,.09)}
+  .lenbtn.sel{border-color:var(--a1);background:linear-gradient(180deg,rgba(155,123,255,.22),rgba(155,123,255,.06));box-shadow:0 8px 24px rgba(155,123,255,.28)}
+  .lenbtn.sel b{color:#fff}
+  .btn{
+    width:100%;border:0;cursor:pointer;font-family:'Jua',sans-serif;font-size:19px;color:#160a33;
+    padding:17px;border-radius:18px;background:linear-gradient(92deg,var(--a1),var(--a2));
+    box-shadow:0 12px 30px rgba(155,123,255,.4);transition:transform .15s,box-shadow .15s;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(155,123,255,.55)}
+  .btn:active{transform:translateY(1px) scale(.99)}
+  .btn.ghost{background:rgba(255,255,255,.08);color:var(--ink);box-shadow:none;border:1px solid var(--glass-line);font-size:16px;margin-top:12px}
+  .btn.ghost:hover{background:rgba(255,255,255,.14)}
+
+  /* ---- quiz : decoder ---- */
+  .qtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .qtop .qc{font-family:'Jua';font-size:15px;color:var(--ink-soft)}
+  .qtop .tag{font-size:12px;color:var(--ink-dim);display:flex;align-items:center;gap:6px}
+  .tag .dot{width:7px;height:7px;border-radius:50%;background:var(--a2);box-shadow:0 0 10px var(--a2);animation:blip 1s ease-in-out infinite}
+  @keyframes blip{0%,100%{opacity:.4;transform:scale(.9)}50%{opacity:1;transform:scale(1.25)}}
+  .decoder{display:flex;gap:10px;justify-content:center;margin:2px 0 14px}
+  .slot{width:58px;height:70px;border-radius:16px;background:rgba(255,255,255,.05);border:1.5px solid var(--glass-line);
+    display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .slot .g{font-family:'Jua';font-size:34px;color:var(--a1);opacity:.55}
+  .slot.scan::after{content:"";position:absolute;left:0;right:0;height:45%;top:-45%;
+    background:linear-gradient(180deg,transparent,rgba(155,123,255,.28),transparent);animation:scan 1.3s linear infinite}
+  @keyframes scan{to{top:120%}}
+  .slot.locked{border-color:var(--a1);box-shadow:0 0 22px rgba(155,123,255,.55);animation:pop .5s cubic-bezier(.2,.9,.3,1.3)}
+  .slot.locked .g{opacity:1}
+  .energy{height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:22px}
+  .energy i{display:block;height:100%;width:0;border-radius:999px;
+    background:linear-gradient(90deg,var(--a1),var(--a2));box-shadow:0 0 16px 1px var(--a2);
+    transition:width .55s cubic-bezier(.2,.9,.3,1.3),box-shadow .6s}
+  .q-num{font-family:'Jua';font-size:14px;color:var(--ink-dim);text-align:center;margin-bottom:6px}
+  .q-text{font-family:'Jua';font-size:clamp(20px,5.6vw,25px);text-align:center;line-height:1.42;margin-bottom:22px;}
+  .opt{
+    width:100%;text-align:left;border:1px solid var(--glass-line);cursor:pointer;
+    background:rgba(255,255,255,.05);color:var(--ink);padding:17px 16px;border-radius:18px;margin-bottom:12px;
+    font-size:16px;line-height:1.5;display:flex;gap:13px;align-items:center;
+    transition:transform .12s,background .2s,border-color .2s}
+  .opt:hover{background:rgba(255,255,255,.12);transform:translateX(3px)}
+  .opt .badge{flex-shrink:0;width:30px;height:30px;border-radius:10px;background:rgba(255,255,255,.09);
+    border:1px solid var(--glass-line);display:flex;align-items:center;justify-content:center;
+    font-family:'Jua';font-size:16px;color:var(--ink-soft)}
+  .opt.picked{animation:bump .35s ease}
+  @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
+
+  /* ---- result ---- */
+  .crown{text-align:center;font-size:12px;letter-spacing:4px;color:var(--ink-dim);margin-bottom:6px}
+  .code{display:flex;gap:8px;justify-content:center;margin-bottom:12px}
+  .code span{font-family:'Jua';font-size:30px;width:48px;height:56px;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);
+    border:1.5px solid var(--rc);color:var(--rc);box-shadow:0 0 18px -2px var(--rc)}
+  .res-emoji{font-size:66px;text-align:center;line-height:1;animation:float 3.4s ease-in-out infinite}
+  .res-title{font-family:'Jua';font-size:clamp(24px,6.6vw,34px);text-align:center;margin:6px 0 2px}
+  .res-tag{text-align:center;color:var(--ink-soft);font-size:15px;margin-bottom:16px;}
+  .axis-chips{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-bottom:8px}
+  .axis-chips .ac{font-size:13px;padding:7px 12px;border-radius:999px;border:1px solid var(--glass-line);
+    background:rgba(255,255,255,.05);display:flex;align-items:center;gap:5px}
+  .sec{margin-top:16px;padding-top:15px;border-top:1px solid var(--glass-line)}
+  .sec h4{font-family:'Jua';font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:7px}
+  .sec p{font-size:14.5px;line-height:1.68;color:var(--ink-soft);}
+  .hide-note{text-align:center;color:var(--ink-dim);font-size:12px;margin:18px 2px 2px;line-height:1.6}
+  .footnote{text-align:center;color:var(--ink-dim);font-size:12px;margin-top:22px;line-height:1.6}
+  .topbar{display:flex;justify-content:center;margin-bottom:14px}
+  .topbar button{background:none;border:1px solid var(--glass-line);color:var(--ink-soft);font-size:12.5px;border-radius:999px;padding:7px 14px;cursor:pointer}
+  .topbar button:hover{background:rgba(255,255,255,.08)}
+
+  .toast{position:fixed;left:50%;top:22px;transform:translateX(-50%) translateY(-20px);
+    background:rgba(31,15,69,.96);border:1.5px solid var(--a2);color:var(--ink);
+    padding:12px 20px;border-radius:999px;font-size:14px;font-family:'Jua';opacity:0;pointer-events:none;
+    transition:opacity .4s,transform .4s;z-index:60;max-width:90vw}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+  /* ---- brand footer ---- */
+  .site-footer{margin-top:26px;text-align:center;padding:8px 0 4px;user-select:none}
+  .ff-dots{display:flex;gap:7px;justify-content:center;margin-bottom:14px}
+  .ff-dots span{width:8px;height:8px;border-radius:50%;display:block;animation:ffpulse 2.4s ease-in-out infinite}
+  .ff-dots span:nth-child(1){background:var(--nt);animation-delay:0s}
+  .ff-dots span:nth-child(2){background:var(--nf);animation-delay:.24s}
+  .ff-dots span:nth-child(3){background:var(--sj);animation-delay:.48s}
+  .ff-dots span:nth-child(4){background:var(--sp);animation-delay:.72s}
+  .ff-dots span:nth-child(5){background:var(--a2);animation-delay:.96s}
+  @keyframes ffpulse{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.5);opacity:1}}
+  .ff-tag{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:4px;color:var(--ink-dim);margin-bottom:7px}
+  .ff-tag::before,.ff-tag::after{content:"";width:22px;height:1px;background:linear-gradient(90deg,transparent,var(--glass-line))}
+  .ff-tag::after{transform:scaleX(-1)}
+  .mf-logo{font-family:'Jua',sans-serif;font-size:26px;line-height:1;
+    background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+    -webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 14px rgba(155,123,255,.3))}
+  .ff-sub{font-size:12px;color:var(--ink-dim);margin-top:9px;letter-spacing:.3px}
+  .ff-sub .colon{color:var(--nf);font-weight:700;padding:0 1px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HOME -->
+  <section id="home" class="screen on home">
+    <div class="card">
+      <div class="hero-emoji">🧬</div>
+      <h1>あなたの <span class="grad">性格コード</span>を<br>解読します</h1>
+      <p class="sub">タップするたび、正体不明のコードが揺れ動く<br>ドーパミンが弾けるMBTI診断。<br>最後にただひとつ、あなたのタイプが解錠されます。</p>
+      <div class="lock-note">🔒 操作防止のため <b>スコアや数値は非公開</b>。どの選択がどこへ向かうか分からないように隠すから、正直な答えだけが出てきます。</div>
+      <div class="len-label">問題数を選んでください</div>
+      <div class="lens" id="lens">
+        <div class="lenbtn" data-n="12"><b>12</b><small>サクッと</small></div>
+        <div class="lenbtn sel" data-n="20"><b>20</b><small>標準</small></div>
+        <div class="lenbtn" data-n="36"><b>36</b><small>じっくり</small></div>
+      </div>
+      <button class="btn" onclick="startQuiz()">解読をはじめる →</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="screen">
+    <div class="card">
+      <div class="qtop">
+        <span class="qc" id="qcount">1 / 20</span>
+        <span class="tag"><span class="dot"></span> コード解読中…</span>
+      </div>
+      <div class="decoder" id="decoder">
+        <div class="slot"><span class="g">?</span></div>
+        <div class="slot"><span class="g">?</span></div>
+        <div class="slot"><span class="g">?</span></div>
+        <div class="slot"><span class="g">?</span></div>
+      </div>
+      <div class="energy"><i id="energy"></i></div>
+      <div class="q-num" id="qnum"></div>
+      <div class="q-text" id="qtext"></div>
+      <div id="opts"></div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="screen">
+    <div class="card">
+      <div class="crown">YOUR PERSONALITY CODE</div>
+      <div class="code" id="resCode"></div>
+      <div class="res-emoji" id="resEmoji">🧬</div>
+      <div class="res-title" id="resTitle"></div>
+      <div class="res-tag" id="resTag"></div>
+      <div class="axis-chips" id="axisChips"></div>
+      <div class="sec"><h4>💫 あなたはこんな人</h4><p id="p_you"></p></div>
+      <div class="sec"><h4>✨ 輝く強み</h4><p id="p_str"></p></div>
+      <div class="sec"><h4>🌿 ちょっと気をつけて</h4><p id="p_care"></p></div>
+      <div class="hide-note">🔒 軸ごとの正確な数値は公開しません。<br>数字に振り回されず、あなたのタイプの「持ち味」に目を向けてみてください。</div>
+      <button class="btn" style="margin-top:20px" onclick="shareResult()">結果をコピー 📋</button>
+      <button class="btn ghost" onclick="resetAll()">最初からやり直す</button>
+      <div class="footnote">遊び感覚の診断です。どんなコードでも、あなたはそれ以上に立体的な人ですよ 🤍</div>
+    </div>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/ja/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 ドーパミン実験室 — ほかのテストを見る →</a></div>
+  <footer class="site-footer">
+    <div class="ff-dots"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="ff-tag">意味と面白さの工場</div>
+    <div class="mf-logo">ミミファクトリー</div>
+    <div class="ff-sub">株式会社ヨン<span class="colon">:</span>ギョル ファミリーカンパニー</div>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ AXIS META ============ */
+const AX = {
+  E:{w:"外向",e:"🗣️"}, I:{w:"内向",e:"🧘"},
+  S:{w:"感覚",e:"🔍"}, N:{w:"直観",e:"🔮"},
+  T:{w:"思考",e:"⚖️"}, F:{w:"感情",e:"💗"},
+  J:{w:"計画",e:"🗂️"}, P:{w:"探索",e:"🧭"}
+};
+
+/* ============ QUESTION BANK (9 per axis) ============ */
+const QBANK = {
+  EI:[
+    {a:{k:"E",txt:"人と賑やかに過ごすと元気が湧く"}, b:{k:"I",txt:"ひとりで静かに過ごすと元気が湧く"}},
+    {a:{k:"E",txt:"初対面でも自分から話しかける"}, b:{k:"I",txt:"相手から来るのを見守る"}},
+    {a:{k:"E",txt:"悩みは誰かに話しながら整理する"}, b:{k:"I",txt:"悩みはひとりでじっくり整理する"}},
+    {a:{k:"E",txt:"疲れた日は友だちとおしゃべりで充電する"}, b:{k:"I",txt:"疲れた日は家でひとり休んで充電する"}},
+    {a:{k:"E",txt:"集まりでは色んな人と広く話す"}, b:{k:"I",txt:"集まりでは一人二人と深く話す"}},
+    {a:{k:"E",txt:"考えはまず口に出しながら深める"}, b:{k:"I",txt:"考えを十分まとめてから話す"}},
+    {a:{k:"E",txt:"注目の的になるとテンションが上がる"}, b:{k:"I",txt:"注目の的は気が重くて抜け出したい"}},
+    {a:{k:"E",txt:"電話が来たら嬉しくてすぐ出る"}, b:{k:"I",txt:"電話が来たら用件を考えて少しためらう"}},
+    {a:{k:"E",txt:"旅先では思いつきで人と交わる"}, b:{k:"I",txt:"旅先では自分のペースで静かに巡る"}}
+  ],
+  SN:[
+    {a:{k:"S",txt:"具体的な事実や例のほうが響く"}, b:{k:"N",txt:"全体像や隠れた意味のほうが響く"}},
+    {a:{k:"S",txt:"今、目の前の現実に集中するほうだ"}, b:{k:"N",txt:"先の可能性を想像するほうだ"}},
+    {a:{k:"S",txt:"新しい情報は「実際どう使うか」で見る"}, b:{k:"N",txt:"新しい情報は「隠れたパターンやつながり」で見る"}},
+    {a:{k:"S",txt:"自分で経験した事実を信じる"}, b:{k:"N",txt:"ひらめく直感を信じる"}},
+    {a:{k:"S",txt:"起きたことを事実のまま伝える"}, b:{k:"N",txt:"たとえや想像を交えて話す"}},
+    {a:{k:"S",txt:"手順を一歩ずつ着実に覚える"}, b:{k:"N",txt:"まず核心の原理を理解しようとする"}},
+    {a:{k:"S",txt:"現実的で具体的な話が心地いい"}, b:{k:"N",txt:"抽象的で想像力ある話が心地いい"}},
+    {a:{k:"S",txt:"細部を見逃さないほうだ"}, b:{k:"N",txt:"まず大きな絵を見るほうだ"}},
+    {a:{k:"S",txt:"未来を思うと現実的な計画が浮かぶ"}, b:{k:"N",txt:"未来を思うと無限の可能性が広がる"}}
+  ],
+  TF:[
+    {a:{k:"T",txt:"決断は論理と客観的事実が優先"}, b:{k:"F",txt:"決断は人の気持ちと関係が優先"}},
+    {a:{k:"T",txt:"悩みを聞くと一緒に解決策を探す"}, b:{k:"F",txt:"悩みを聞くとまず気持ちに寄り添う"}},
+    {a:{k:"T",txt:"批判されると内容が正しいか吟味する"}, b:{k:"F",txt:"批判されると口調や感情がまず刺さる"}},
+    {a:{k:"T",txt:"判断は一貫した原則に従う"}, b:{k:"F",txt:"判断は状況と人を見て決める"}},
+    {a:{k:"T",txt:"私は理性的で冷静なほうだ"}, b:{k:"F",txt:"私は温かく共感しやすいほうだ"}},
+    {a:{k:"T",txt:"対立では事実を指摘して正す"}, b:{k:"F",txt:"対立ではみんなの感情をなだめる"}},
+    {a:{k:"T",txt:"褒めるときは良かった点を的確に伝える"}, b:{k:"F",txt:"褒めるときは心を込めて励ます"}},
+    {a:{k:"T",txt:"非論理的な主張のほうが我慢できない"}, b:{k:"F",txt:"冷たい無関心のほうが我慢できない"}},
+    {a:{k:"T",txt:"決めた後は「合理的だったか」を振り返る"}, b:{k:"F",txt:"決めた後は「誰かを傷つけていないか」を振り返る"}}
+  ],
+  JP:[
+    {a:{k:"J",txt:"旅行は日程を前もってきっちり組む"}, b:{k:"P",txt:"旅行はその時々の流れに任せる"}},
+    {a:{k:"J",txt:"やることは早めに終えると安心する"}, b:{k:"P",txt:"締め切りが近づくほど集中できる"}},
+    {a:{k:"J",txt:"自分の空間は片づいていると落ち着く"}, b:{k:"P",txt:"少し散らかっても大して気にならない"}},
+    {a:{k:"J",txt:"計画が急に変わると戸惑う"}, b:{k:"P",txt:"計画が変わるとむしろ新鮮でわくわくする"}},
+    {a:{k:"J",txt:"早く決めて片をつける"}, b:{k:"P",txt:"選択肢を残してゆったり先延ばしする"}},
+    {a:{k:"J",txt:"チェックリスト通りに着々と進める"}, b:{k:"P",txt:"気の向くまま柔軟に進める"}},
+    {a:{k:"J",txt:"待ち合わせにはいつも早めに着く"}, b:{k:"P",txt:"約束の時間はよくギリギリになる"}},
+    {a:{k:"J",txt:"決まった枠組みが安心をくれる"}, b:{k:"P",txt:"枠組みは状況次第で変えていいと思う"}},
+    {a:{k:"J",txt:"週末は計画通りに動く"}, b:{k:"P",txt:"週末は気分次第で気ままに過ごす"}}
+  ]
+};
+const AXES = ["EI","SN","TF","JP"];
+
+/* ============ 16 TYPES ============ */
+const TYPE = {
+  INTJ:{e:"🦉",g:"nt",name:"用意周到な戦略家",tag:"頭の中ですでに三手先を描く人",
+    you:"あなたは大きな絵を設計し、静かに実行へ移す戦略家です。複雑な問題を前にするとむしろ落ち着き、他の人には見えない長期的な流れを読み取ります。",
+    str:"洞察力と推進力。目標が決まれば必要な道を自分で設計し、最後までやり抜きます。",
+    care:"完璧な計画に没頭するあまり、人の感情を見落とすことがあります。ときには論理より先に、気持ちを尋ねてみてください。"},
+  INTP:{e:"🔬",g:"nt",name:"論理的な思索家",tag:"世の中すべてに「なぜ?」をつける人",
+    you:"あなたは原理を掘り下げて理解するとき、もっとも生き生きする人です。好奇心に果てがなく、見慣れたものも常に新しい角度から見直します。",
+    str:"独創的な分析力。複雑な概念を明快な論理で解きほぐすのが得意です。",
+    care:"考えに長くとどまって、実行が遅れることがあります。完璧な答えより「とりあえず始める」が必要なときもあります。"},
+  ENTJ:{e:"👑",g:"nt",name:"大胆な指揮官",tag:"ばらばらな人々を目標へ導く人",
+    you:"あなたはビジョンを掲げ、人を動かして現実に変えるリーダーです。非効率が我慢できず、いつもより良い方法を探します。",
+    str:"決断力と組織力。大きな目標も細かく分けてチームを前へ導きます。",
+    care:"スピードを出すと、周りがついていけないことがあります。一緒に進む人のペースにも目を向けてください。"},
+  ENTP:{e:"💡",g:"nt",name:"熱き討論者",tag:"淀んだ水に石を投げるアイデアバンク",
+    you:"あなたは新しい可能性と議論を愛する人です。常識に挑み、一瞬で奇抜な代案を次々と繰り出します。",
+    str:"瞬発力と創造力。どんなテーマも面白い視点でひっくり返します。",
+    care:"興味が冷めると、仕上げが甘くなることがあります。広げたことを最後まで運ぶ力を育ててみてください。"},
+  INFJ:{e:"🕊️",g:"nf",name:"善意の擁護者",tag:"何も言わず人の本心を読む人",
+    you:"あなたは深い洞察と温かい信念を持つ人です。静かでも揺るがない価値観があり、人の本心を驚くほどよく察します。",
+    str:"共感と洞察。人と意味をつなぐ、ひときわ強い力があります。",
+    care:"みんなを抱えようとして、自分をすり減らしがちです。あなたの心をケアする時間も残しておいてください。"},
+  INFP:{e:"🌙",g:"nf",name:"情熱的な仲介者",tag:"心の中に自分だけの宇宙を抱く人",
+    you:"あなたは誠実さと理想を大切にする人です。表は穏やかでも、内には熱い信念と豊かな感性が流れています。",
+    str:"深い共感と想像力。人の可能性を信じ、優しく支えます。",
+    care:"理想と現実の隔たりに疲れることがあります。小さな実践ひとつが、大きな理想を生かします。"},
+  ENFJ:{e:"🌟",g:"nf",name:"正義の主人公",tag:"人の可能性に火を灯す人",
+    you:"あなたは人を励まし、共に成長させる人です。温かいカリスマで周りをひとつにまとめ、みんなの潜在力を見抜きます。",
+    str:"影響力と共感。人を導きながら気持ちも気遣うバランスがあります。",
+    care:"人の世話をするうち、自分を後回しにしがちです。あなたの望みも堂々と口にしていいのです。"},
+  ENFP:{e:"🎈",g:"nf",name:"才気あふれる運動家",tag:"どこでも輝くエネルギーの人",
+    you:"あなたは好奇心と情熱にあふれる人です。人とアイデアからエネルギーを得て、世界を可能性に満ちた遊び場として見ます。",
+    str:"情熱とつながる力。人の心を開き、その場を生き生きさせます。",
+    care:"興味があちこちに飛んで、集中が散らかることがあります。好きなものひとつを深く掘ってみてください。"},
+  ISTJ:{e:"📘",g:"sj",name:"実直な現実主義者",tag:"任された仕事は必ずやり遂げる人",
+    you:"あなたは責任感と誠実さの代名詞です。約束を守り、事実と原則に基づいて黙々と信頼を積み上げます。",
+    str:"信頼と丁寧さ。任された仕事を抜かりなくやり遂げます。",
+    care:"慣れたやり方にこだわって、変化を逃すことがあります。新しい試みにも少しだけ扉を開けておいてください。"},
+  ISFJ:{e:"🛡️",g:"sj",name:"勇敢な守護者",tag:"さりげなくみんなを気遣う人",
+    you:"あなたは献身的で温かい人です。周りの必要を先に察して、静かに実際の助けを差し出します。",
+    str:"細やかさと献身。人を安心させ、しっかりと守ります。",
+    care:"断るのが苦手で、負担を抱え込みがちです。「ノー」もまた愛情の表現になり得ます。"},
+  ESTJ:{e:"📊",g:"sj",name:"厳格な管理者",tag:"混乱を秩序に変える人",
+    you:"あなたは体系と実行の達人です。目標を定め、現実的な方法で人と物事を着々と整えていきます。",
+    str:"組織力と責任感。原則と実行で結果を出します。",
+    care:"効率を優先するあまり、人の事情を見過ごすことがあります。ルールと同じくらい、気持ちにも目を向けてください。"},
+  ESFJ:{e:"🤝",g:"sj",name:"社交的な外交官",tag:"みんながなじめるよう橋をかける人",
+    you:"あなたは温かく思いやり深い人です。人々の調和を大切にし、雰囲気や関係を細やかに見守ります。",
+    str:"親しみやすさと気配り。人を心地よくつなぎ、支えます。",
+    care:"他人の評価に心が揺れることがあります。まずは自分の基準を信じても大丈夫です。"},
+  ISTP:{e:"🛠️",g:"sp",name:"万能の職人",tag:"手で問題を解く静かな解決人",
+    you:"あなたは冷静で実用的な人です。言葉より行動で問題を分解し、危機のときこそ冷静に道を見つけます。",
+    str:"問題解決力と冷静さ。どんな状況も自分の手でさばきます。",
+    care:"感情をあまり表に出さず、誤解を招くことがあります。ときには本音をひとこと口にしてみてください。"},
+  ISFP:{e:"🎨",g:"sp",name:"好奇心旺盛な芸術家",tag:"自分だけの感性で世界を感じる人",
+    you:"あなたは穏やかで感覚的な人です。今この瞬間の美しさを感じ、自由に、素直に自分を表現します。",
+    str:"感受性と柔軟さ。静かに自分だけの色を持っています。",
+    care:"対立を避けようとして、気持ちを飲み込むことがあります。望みを、やわらかく口にしていいのです。"},
+  ESTP:{e:"🔥",g:"sp",name:"冒険を楽しむ起業家",tag:"今すぐ飛び込む行動派",
+    you:"あなたは大胆でエネルギーにあふれる人です。その場で素早く判断し、スリルと挑戦の中でこそ最も生きている実感を得ます。",
+    str:"瞬発力と実行力。ためらわず今をつかみます。",
+    care:"スピードが速く、後のことを見落とすことがあります。飛び込む前にひと呼吸見てみると、より心強くなります。"},
+  ESFP:{e:"🎉",g:"sp",name:"自由な魂のエンターテイナー",tag:"一緒にいると祭りになる人",
+    you:"あなたは明るく活気ある雰囲気メーカーです。人と今を楽しみ、どこでも笑いと生気を広げます。",
+    str:"活力と親しみやすさ。その瞬間を楽しくする才能があります。",
+    care:"楽しさを追ううちに、大事なことを後回しにすることがあります。ワクワクすることとやるべきことのバランスをとってみてください。"}
+};
+const GCOLOR = {nt:"var(--nt)", nf:"var(--nf)", sj:"var(--sj)", sp:"var(--sp)"};
+
+/* ============ HELPERS ============ */
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(v){if(navigator.vibrate)try{navigator.vibrate(v);}catch(e){}}
+let _tt;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2000);}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});}
+
+/* ============ STATE ============ */
+let LEN = 20;
+let quiz = [], qi = 0, score = {}, myType = null;
+let decodeTimer = null;
+const GLYPH = "EINSTFJP◆◇▲△●○★☆✦※";
+
+/* length selector */
+document.getElementById('lens').addEventListener('click',e=>{
+  const b=e.target.closest('.lenbtn'); if(!b)return;
+  document.querySelectorAll('.lenbtn').forEach(x=>x.classList.remove('sel'));
+  b.classList.add('sel'); LEN=+b.dataset.n; vibrate(12);
+});
+
+/* ============ QUIZ ============ */
+function buildQuiz(){
+  const per = LEN/4;
+  let list=[];
+  AXES.forEach(ax=>{ QBANK[ax].slice(0,per).forEach(q=> list.push({a:{...q.a},b:{...q.b}})); });
+  return shuffle(list);
+}
+function startQuiz(){
+  quiz=buildQuiz(); qi=0;
+  score={E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};
+  go('quiz'); startDecoder(); updateEnergy(); renderQ();
+}
+function startDecoder(){
+  document.querySelectorAll('.slot').forEach(s=>{s.classList.add('scan');s.classList.remove('locked');});
+  clearInterval(decodeTimer);
+  decodeTimer=setInterval(()=>{
+    document.querySelectorAll('.slot .g').forEach(g=>{g.textContent=GLYPH[Math.floor(Math.random()*GLYPH.length)];});
+  },95);
+}
+function stopDecoder(){clearInterval(decodeTimer);decodeTimer=null;document.querySelectorAll('.slot').forEach(s=>s.classList.remove('scan'));}
+function renderQ(){
+  const q=quiz[qi];
+  document.getElementById('qcount').textContent=(qi+1)+" / "+quiz.length;
+  document.getElementById('qnum').textContent="Q"+(qi+1);
+  document.getElementById('qtext').textContent="次のうち、より「私」らしいのは?";
+  const opts=shuffle([q.a,q.b]);
+  const labels=["A","B"];
+  const wrap=document.getElementById('opts');
+  wrap.innerHTML="";
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt";
+    b.innerHTML=`<span class="badge">${labels[i]}</span><span>${o.txt}</span>`;
+    b.onclick=()=>pick(o.k,b);
+    wrap.appendChild(b);
+  });
+}
+function pick(k,el){
+  score[k]++;
+  el.classList.add('picked');
+  if(window.confetti){
+    const r=el.getBoundingClientRect();
+    confetti({particleCount:16,spread:52,startVelocity:22,scalar:.8,
+      origin:{x:(r.left+r.width/2)/window.innerWidth,y:(r.top+r.height/2)/window.innerHeight},
+      colors:['#9b7bff','#7ac0ff','#4ade9b','#ffb454','#ff7ac0']});
+  }
+  vibrate(26);
+  updateEnergy();
+
+  const frac=(qi+1)/quiz.length;
+  const r=document.documentElement.style;
+  if(frac>=.67){r.setProperty('--a1','#ff6ba6');r.setProperty('--a2','#ffb454');}
+  else if(frac>=.34){r.setProperty('--a1','#c07bff');r.setProperty('--a2','#ff7ac0');}
+  if(qi+1===Math.floor(quiz.length/2)){toast('🔥 半分突破!');vibrate([20,40,20]);}
+  setTimeout(()=>{
+    qi++;
+    if(qi>=quiz.length) revealCode();
+    else renderQ();
+  },330);
+}
+function updateEnergy(){
+  const done=Object.values(score).reduce((a,b)=>a+b,0);
+  document.getElementById('energy').style.width=(done/quiz.length*100)+"%";
+}
+
+/* ============ RESULT ============ */
+function computeType(){
+  const p=(a,b)=> score[a]>=score[b]?a:b;
+  return p("E","I")+p("S","N")+p("T","F")+p("J","P");
+}
+function revealCode(){
+  stopDecoder();
+  myType=computeType();
+  const letters=myType.split('');
+  const slots=document.querySelectorAll('.slot');
+  const col=GCOLOR[TYPE[myType].g];
+  document.documentElement.style.setProperty('--rc',col);
+  toast('🧬 コード解錠中…');
+  letters.forEach((L,i)=>{
+    setTimeout(()=>{
+      const g=slots[i].querySelector('.g');
+      g.textContent=L; g.style.color=col;
+      slots[i].classList.add('locked'); slots[i].style.borderColor=col;
+      vibrate(34);
+      if(window.confetti){
+        const r=slots[i].getBoundingClientRect();
+        confetti({particleCount:22,spread:60,startVelocity:26,scalar:.9,
+          origin:{x:(r.left+r.width/2)/window.innerWidth,y:(r.top+r.height/2)/window.innerHeight}});
+      }
+      if(i===3) setTimeout(showResult,700);
+    }, 360*i+300);
+  });
+}
+function showResult(){
+  const T=TYPE[myType], col=GCOLOR[T.g];
+  document.documentElement.style.setProperty('--rc',col);
+  const code=document.getElementById('resCode'); code.innerHTML="";
+  myType.split('').forEach(L=>{const s=document.createElement('span');s.textContent=L;code.appendChild(s);});
+  document.getElementById('resEmoji').textContent=T.e;
+  const ti=document.getElementById('resTitle');
+  ti.textContent=myType+" · "+T.name; ti.style.color=col;
+  document.getElementById('resTag').textContent="“"+T.tag+"”";
+  const chips=document.getElementById('axisChips'); chips.innerHTML="";
+  myType.split('').forEach(L=>{
+    const c=document.createElement('span'); c.className="ac";
+    c.innerHTML=`${AX[L].e} ${AX[L].w}`;
+    chips.appendChild(c);
+  });
+  document.getElementById('p_you').textContent=T.you;
+  document.getElementById('p_str').textContent=T.str;
+  document.getElementById('p_care').textContent=T.care;
+  go('result');
+  if(window.confetti){
+    const colors=['#9b7bff','#7ac0ff','#4ade9b','#ffb454','#ff7ac0'];
+    confetti({particleCount:130,spread:95,origin:{y:.3},colors});
+    setTimeout(()=>confetti({particleCount:90,spread:120,startVelocity:36,origin:{y:.4},colors}),260);
+  }
+  vibrate([60,80,60,80,120]);
+}
+function shareResult(){
+  const T=TYPE[myType];
+  const txt=`私の性格コードは ${myType} · ${T.name} ${T.e}\n"${T.tag}"\n\nMBTI 診断を受ける → https://mimifactory.vibekr.com/apps/mbti_test_test.html`;
+  const done=()=>toast('📋 結果をコピーしました!');
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done));}
+  else fallbackCopy(txt,done);
+  vibrate(20);
+}
+function fallbackCopy(txt,cb){
+  const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();try{document.execCommand('copy');cb();}catch(e){}document.body.removeChild(ta);
+}
+function resetAll(){
+  myType=null;
+  const r=document.documentElement.style;
+  r.setProperty('--a1','#9b7bff'); r.setProperty('--a2','#7ac0ff');
+  document.querySelectorAll('.slot').forEach(s=>{s.classList.remove('locked');s.style.borderColor='';const g=s.querySelector('.g');g.textContent='?';g.style.color='';});
+  go('home');
+}
+</script>
+</body>
+</html>

@@ -49,6 +49,18 @@
    "desc": "数列·論理·パターン·言語の15問 — 頭脳の強み領域まで分析"
   },
   {
+   "id": "mbti-test",
+   "type": "test",
+   "title": "MBTI診断",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/mbti-test.html",
+   "premium": "apps/mbti-test.html",
+   "desc": "タップするたび揺れるコード — 最後にあなただけのタイプが解錠される診断"
+  },
+  {
    "id": "tarot",
    "type": "test",
    "title": "タロット心理カード",

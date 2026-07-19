@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MBTI Test — Decode Your Personality Code</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.3/confetti.browser.min.js"></script>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+  :root{
+    --bg0:#140a2e; --bg1:#1f0f45; --bg2:#33165c;
+    --ink:#f4efff; --ink-soft:#c7b8ec; --ink-dim:#9a8bc8;
+    --glass:rgba(255,255,255,.06); --glass-line:rgba(255,255,255,.14);
+    --nt:#b78bf5; --nf:#4ade9b; --sj:#5b9dff; --sp:#ffb454;
+    --a1:#9b7bff; --a2:#7ac0ff;
+    --shadow:0 18px 50px rgba(0,0,0,.45);
+    --r:24px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Noto Sans KR',system-ui,sans-serif;color:var(--ink);
+    background:
+      radial-gradient(900px 620px at 12% -8%, rgba(155,123,255,.22), transparent 60%),
+      radial-gradient(820px 620px at 110% 6%, rgba(122,192,255,.16), transparent 55%),
+      radial-gradient(760px 720px at 50% 122%, rgba(255,122,192,.14), transparent 60%),
+      linear-gradient(160deg,var(--bg0),var(--bg1) 55%,var(--bg2));
+    background-attachment:fixed;min-height:100vh;
+    display:flex;align-items:flex-start;justify-content:center;
+    padding:26px 15px 56px;overflow-x:hidden;
+    transition:background .9s ease;
+  }
+  .app{width:100%;max-width:560px}
+  h1,h2,h3,.jua{font-family:'Jua',sans-serif;font-weight:400;letter-spacing:.2px}
+
+  .screen{display:none;animation:pop .45s cubic-bezier(.2,.9,.3,1.3)}
+  .screen.on{display:block}
+  @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+
+  .card{
+    background:var(--glass);border:1px solid var(--glass-line);border-radius:var(--r);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    box-shadow:var(--shadow);padding:30px 24px;
+  }
+
+  /* ---- home ---- */
+  .hero-emoji{font-size:70px;text-align:center;line-height:1;filter:drop-shadow(0 8px 20px rgba(155,123,255,.45));animation:float 3.4s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+  .home h1{font-size:clamp(30px,8vw,44px);text-align:center;margin:14px 0 6px;line-height:1.15}
+  .grad{background:linear-gradient(92deg,var(--a1),var(--nf) 45%,var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .home p.sub{text-align:center;color:var(--ink-soft);font-size:15px;line-height:1.65;margin-bottom:20px}
+  .lock-note{display:flex;gap:8px;align-items:flex-start;justify-content:center;text-align:center;
+    font-size:12.5px;color:var(--ink-dim);background:rgba(255,255,255,.04);border:1px dashed var(--glass-line);
+    border-radius:14px;padding:11px 14px;margin-bottom:22px;line-height:1.55}
+  .len-label{text-align:center;font-size:12.5px;color:var(--ink-dim);margin-bottom:9px;letter-spacing:.4px}
+  .lens{display:flex;gap:9px;margin-bottom:24px}
+  .lenbtn{flex:1;cursor:pointer;border:1.5px solid var(--glass-line);background:rgba(255,255,255,.04);
+    color:var(--ink-soft);border-radius:16px;padding:13px 6px 11px;text-align:center;font-family:'Jua';
+    transition:transform .14s ease,border-color .2s,background .2s}
+  .lenbtn b{display:block;font-size:22px;line-height:1;color:var(--ink)}
+  .lenbtn small{display:block;font-size:11px;color:var(--ink-dim);margin-top:4px;font-family:'Noto Sans KR'}
+  .lenbtn:hover{transform:translateY(-2px);background:rgba(255,255,255,.09)}
+  .lenbtn.sel{border-color:var(--a1);background:linear-gradient(180deg,rgba(155,123,255,.22),rgba(155,123,255,.06));box-shadow:0 8px 24px rgba(155,123,255,.28)}
+  .lenbtn.sel b{color:#fff}
+  .btn{
+    width:100%;border:0;cursor:pointer;font-family:'Jua',sans-serif;font-size:19px;color:#160a33;
+    padding:17px;border-radius:18px;background:linear-gradient(92deg,var(--a1),var(--a2));
+    box-shadow:0 12px 30px rgba(155,123,255,.4);transition:transform .15s,box-shadow .15s;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(155,123,255,.55)}
+  .btn:active{transform:translateY(1px) scale(.99)}
+  .btn.ghost{background:rgba(255,255,255,.08);color:var(--ink);box-shadow:none;border:1px solid var(--glass-line);font-size:16px;margin-top:12px}
+  .btn.ghost:hover{background:rgba(255,255,255,.14)}
+
+  /* ---- quiz : decoder ---- */
+  .qtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .qtop .qc{font-family:'Jua';font-size:15px;color:var(--ink-soft)}
+  .qtop .tag{font-size:12px;color:var(--ink-dim);display:flex;align-items:center;gap:6px}
+  .tag .dot{width:7px;height:7px;border-radius:50%;background:var(--a2);box-shadow:0 0 10px var(--a2);animation:blip 1s ease-in-out infinite}
+  @keyframes blip{0%,100%{opacity:.4;transform:scale(.9)}50%{opacity:1;transform:scale(1.25)}}
+  .decoder{display:flex;gap:10px;justify-content:center;margin:2px 0 14px}
+  .slot{width:58px;height:70px;border-radius:16px;background:rgba(255,255,255,.05);border:1.5px solid var(--glass-line);
+    display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .slot .g{font-family:'Jua';font-size:34px;color:var(--a1);opacity:.55}
+  .slot.scan::after{content:"";position:absolute;left:0;right:0;height:45%;top:-45%;
+    background:linear-gradient(180deg,transparent,rgba(155,123,255,.28),transparent);animation:scan 1.3s linear infinite}
+  @keyframes scan{to{top:120%}}
+  .slot.locked{border-color:var(--a1);box-shadow:0 0 22px rgba(155,123,255,.55);animation:pop .5s cubic-bezier(.2,.9,.3,1.3)}
+  .slot.locked .g{opacity:1}
+  .energy{height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:22px}
+  .energy i{display:block;height:100%;width:0;border-radius:999px;
+    background:linear-gradient(90deg,var(--a1),var(--a2));box-shadow:0 0 16px 1px var(--a2);
+    transition:width .55s cubic-bezier(.2,.9,.3,1.3),box-shadow .6s}
+  .q-num{font-family:'Jua';font-size:14px;color:var(--ink-dim);text-align:center;margin-bottom:6px}
+  .q-text{font-family:'Jua';font-size:clamp(20px,5.6vw,25px);text-align:center;line-height:1.42;margin-bottom:22px;overflow-wrap:break-word;}
+  .opt{
+    width:100%;text-align:left;border:1px solid var(--glass-line);cursor:pointer;
+    background:rgba(255,255,255,.05);color:var(--ink);padding:17px 16px;border-radius:18px;margin-bottom:12px;
+    font-size:16px;line-height:1.5;display:flex;gap:13px;align-items:center;overflow-wrap:break-word;
+    transition:transform .12s,background .2s,border-color .2s}
+  .opt:hover{background:rgba(255,255,255,.12);transform:translateX(3px)}
+  .opt .badge{flex-shrink:0;width:30px;height:30px;border-radius:10px;background:rgba(255,255,255,.09);
+    border:1px solid var(--glass-line);display:flex;align-items:center;justify-content:center;
+    font-family:'Jua';font-size:16px;color:var(--ink-soft)}
+  .opt.picked{animation:bump .35s ease}
+  @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
+
+  /* ---- result ---- */
+  .crown{text-align:center;font-size:12px;letter-spacing:4px;color:var(--ink-dim);margin-bottom:6px}
+  .code{display:flex;gap:8px;justify-content:center;margin-bottom:12px}
+  .code span{font-family:'Jua';font-size:30px;width:48px;height:56px;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);
+    border:1.5px solid var(--rc);color:var(--rc);box-shadow:0 0 18px -2px var(--rc)}
+  .res-emoji{font-size:66px;text-align:center;line-height:1;animation:float 3.4s ease-in-out infinite}
+  .res-title{font-family:'Jua';font-size:clamp(24px,6.6vw,34px);text-align:center;margin:6px 0 2px}
+  .res-tag{text-align:center;color:var(--ink-soft);font-size:15px;margin-bottom:16px;overflow-wrap:break-word;}
+  .axis-chips{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-bottom:8px}
+  .axis-chips .ac{font-size:13px;padding:7px 12px;border-radius:999px;border:1px solid var(--glass-line);
+    background:rgba(255,255,255,.05);display:flex;align-items:center;gap:5px}
+  .sec{margin-top:16px;padding-top:15px;border-top:1px solid var(--glass-line)}
+  .sec h4{font-family:'Jua';font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:7px}
+  .sec p{font-size:14.5px;line-height:1.68;color:var(--ink-soft);overflow-wrap:break-word;}
+  .hide-note{text-align:center;color:var(--ink-dim);font-size:12px;margin:18px 2px 2px;line-height:1.6}
+  .footnote{text-align:center;color:var(--ink-dim);font-size:12px;margin-top:22px;line-height:1.6}
+  .topbar{display:flex;justify-content:center;margin-bottom:14px}
+  .topbar button{background:none;border:1px solid var(--glass-line);color:var(--ink-soft);font-size:12.5px;border-radius:999px;padding:7px 14px;cursor:pointer}
+  .topbar button:hover{background:rgba(255,255,255,.08)}
+
+  .toast{position:fixed;left:50%;top:22px;transform:translateX(-50%) translateY(-20px);
+    background:rgba(31,15,69,.96);border:1.5px solid var(--a2);color:var(--ink);
+    padding:12px 20px;border-radius:999px;font-size:14px;font-family:'Jua';opacity:0;pointer-events:none;
+    transition:opacity .4s,transform .4s;z-index:60;max-width:90vw}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+  /* ---- brand footer ---- */
+  .site-footer{margin-top:26px;text-align:center;padding:8px 0 4px;user-select:none}
+  .ff-dots{display:flex;gap:7px;justify-content:center;margin-bottom:14px}
+  .ff-dots span{width:8px;height:8px;border-radius:50%;display:block;animation:ffpulse 2.4s ease-in-out infinite}
+  .ff-dots span:nth-child(1){background:var(--nt);animation-delay:0s}
+  .ff-dots span:nth-child(2){background:var(--nf);animation-delay:.24s}
+  .ff-dots span:nth-child(3){background:var(--sj);animation-delay:.48s}
+  .ff-dots span:nth-child(4){background:var(--sp);animation-delay:.72s}
+  .ff-dots span:nth-child(5){background:var(--a2);animation-delay:.96s}
+  @keyframes ffpulse{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.5);opacity:1}}
+  .ff-tag{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:4px;color:var(--ink-dim);margin-bottom:7px}
+  .ff-tag::before,.ff-tag::after{content:"";width:22px;height:1px;background:linear-gradient(90deg,transparent,var(--glass-line))}
+  .ff-tag::after{transform:scaleX(-1)}
+  .mf-logo{font-family:'Jua',sans-serif;font-size:26px;line-height:1;
+    background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+    -webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 14px rgba(155,123,255,.3))}
+  .ff-sub{font-size:12px;color:var(--ink-dim);margin-top:9px;letter-spacing:.3px}
+  .ff-sub .colon{color:var(--nf);font-weight:700;padding:0 1px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HOME -->
+  <section id="home" class="screen on home">
+    <div class="card">
+      <div class="hero-emoji">🧬</div>
+      <h1>Your <span class="grad">Personality Code</span>,<br>decoded.</h1>
+      <p class="sub">Every tap sends an unknown code spinning —<br>a dopamine-rush MBTI test.<br>At the end, one single type unlocks: yours.</p>
+      <div class="lock-note">🔒 To keep it honest, <b>scores stay hidden</b>. You can’t see which choice leads where — so only your most honest answers come out.</div>
+      <div class="len-label">Pick how many questions</div>
+      <div class="lens" id="lens">
+        <div class="lenbtn" data-n="12"><b>12</b><small>Quick</small></div>
+        <div class="lenbtn sel" data-n="20"><b>20</b><small>Standard</small></div>
+        <div class="lenbtn" data-n="36"><b>36</b><small>In-depth</small></div>
+      </div>
+      <button class="btn" onclick="startQuiz()">Start decoding →</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="screen">
+    <div class="card">
+      <div class="qtop">
+        <span class="qc" id="qcount">1 / 20</span>
+        <span class="tag"><span class="dot"></span> Decoding your code…</span>
+      </div>
+      <div class="decoder" id="decoder">
+        <div class="slot"><span class="g">?</span></div>
+        <div class="slot"><span class="g">?</span></div>
+        <div class="slot"><span class="g">?</span></div>
+        <div class="slot"><span class="g">?</span></div>
+      </div>
+      <div class="energy"><i id="energy"></i></div>
+      <div class="q-num" id="qnum"></div>
+      <div class="q-text" id="qtext"></div>
+      <div id="opts"></div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="screen">
+    <div class="card">
+      <div class="crown">YOUR PERSONALITY CODE</div>
+      <div class="code" id="resCode"></div>
+      <div class="res-emoji" id="resEmoji">🧬</div>
+      <div class="res-title" id="resTitle"></div>
+      <div class="res-tag" id="resTag"></div>
+      <div class="axis-chips" id="axisChips"></div>
+      <div class="sec"><h4>💫 This is you</h4><p id="p_you"></p></div>
+      <div class="sec"><h4>✨ Your shining strengths</h4><p id="p_str"></p></div>
+      <div class="sec"><h4>🌿 A gentle heads-up</h4><p id="p_care"></p></div>
+      <div class="hide-note">🔒 We don’t reveal the exact score on each axis.<br>Don’t get caught up in the numbers — focus on the ‘texture’ of your type.</div>
+      <button class="btn" style="margin-top:20px" onclick="shareResult()">Copy my result 📋</button>
+      <button class="btn ghost" onclick="resetAll()">Start over</button>
+      <div class="footnote">This is just for fun. Whatever your code, you’re far more dimensional than any four letters 🤍</div>
+    </div>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/en/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 Dopamine Lab — more tests this way →</a></div>
+  <footer class="site-footer">
+    <div class="ff-dots"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="ff-tag">The Meaning & Fun Factory</div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="ff-sub">YEON<span class="colon">:</span>GYEOL Inc. Family Company</div>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ AXIS META ============ */
+const AX = {
+  E:{w:"Extravert",e:"🗣️"}, I:{w:"Introvert",e:"🧘"},
+  S:{w:"Sensing",e:"🔍"}, N:{w:"Intuition",e:"🔮"},
+  T:{w:"Thinking",e:"⚖️"}, F:{w:"Feeling",e:"💗"},
+  J:{w:"Planning",e:"🗂️"}, P:{w:"Exploring",e:"🧭"}
+};
+
+/* ============ QUESTION BANK (9 per axis) ============ */
+const QBANK = {
+  EI:[
+    {a:{k:"E",txt:"I recharge in a lively crowd"}, b:{k:"I",txt:"I recharge in quiet time alone"}},
+    {a:{k:"E",txt:"I speak first when I meet someone new"}, b:{k:"I",txt:"I hang back and watch until they approach"}},
+    {a:{k:"E",txt:"I sort out worries by talking them out"}, b:{k:"I",txt:"I sort out worries by mulling them alone"}},
+    {a:{k:"E",txt:"On tired days, friends and chatter recharge me"}, b:{k:"I",txt:"On tired days, resting home alone recharges me"}},
+    {a:{k:"E",txt:"At a gathering I chat with lots of people"}, b:{k:"I",txt:"At a gathering I go deep with one or two"}},
+    {a:{k:"E",txt:"I develop ideas by saying them out loud"}, b:{k:"I",txt:"I speak once I’ve thought it through"}},
+    {a:{k:"E",txt:"Being the center of attention thrills me"}, b:{k:"I",txt:"The spotlight feels heavy — I want out"}},
+    {a:{k:"E",txt:"A call comes in and I happily pick right up"}, b:{k:"I",txt:"A call comes in and I hesitate, guessing why"}},
+    {a:{k:"E",txt:"Traveling, I mingle with people on a whim"}, b:{k:"I",txt:"Traveling, I explore quietly at my own pace"}}
+  ],
+  SN:[
+    {a:{k:"S",txt:"Concrete facts and examples land better with me"}, b:{k:"N",txt:"The big picture and hidden meaning land better"}},
+    {a:{k:"S",txt:"I focus on the reality right in front of me"}, b:{k:"N",txt:"I tend to imagine the possibilities ahead"}},
+    {a:{k:"S",txt:"New info? I ask ‘how do I actually use this?’"}, b:{k:"N",txt:"New info? I look for ‘hidden patterns and links’"}},
+    {a:{k:"S",txt:"I trust what I’ve experienced firsthand"}, b:{k:"N",txt:"I trust a flash of gut intuition more"}},
+    {a:{k:"S",txt:"I retell what happened just as it was"}, b:{k:"N",txt:"I tell it with metaphor and imagination"}},
+    {a:{k:"S",txt:"I learn step by step, one stage at a time"}, b:{k:"N",txt:"I want to grasp the core principle first"}},
+    {a:{k:"S",txt:"Practical, concrete conversations feel easy"}, b:{k:"N",txt:"Abstract, imaginative conversations feel easy"}},
+    {a:{k:"S",txt:"I rarely miss the little details"}, b:{k:"N",txt:"I see the big picture first"}},
+    {a:{k:"S",txt:"Picture the future and I see realistic plans"}, b:{k:"N",txt:"Picture the future and endless possibilities open"}}
+  ],
+  TF:[
+    {a:{k:"T",txt:"In decisions, logic and hard facts come first"}, b:{k:"F",txt:"In decisions, people’s feelings and bonds come first"}},
+    {a:{k:"T",txt:"Hear a problem, and I help find a solution"}, b:{k:"F",txt:"Hear a problem, and I feel with them first"}},
+    {a:{k:"T",txt:"Criticized, I weigh whether it’s actually right"}, b:{k:"F",txt:"Criticized, I feel the tone and emotion first"}},
+    {a:{k:"T",txt:"My judgments follow consistent principles"}, b:{k:"F",txt:"My judgments read the situation and the people"}},
+    {a:{k:"T",txt:"I lean rational and level-headed"}, b:{k:"F",txt:"I lean warm and quick to empathize"}},
+    {a:{k:"T",txt:"In conflict, I point out facts to set things right"}, b:{k:"F",txt:"In conflict, I soothe everyone’s feelings"}},
+    {a:{k:"T",txt:"When I praise, I name exactly what was done well"}, b:{k:"F",txt:"When I praise, I pour in heart to lift them up"}},
+    {a:{k:"T",txt:"An illogical argument is what I can’t stand"}, b:{k:"F",txt:"Cold indifference is what I can’t stand"}},
+    {a:{k:"T",txt:"After deciding, I ask ‘was that rational?’"}, b:{k:"F",txt:"After deciding, I ask ‘did anyone get hurt?’"}}
+  ],
+  JP:[
+    {a:{k:"J",txt:"For trips I plan a tight schedule in advance"}, b:{k:"P",txt:"For trips I just go with the flow"}},
+    {a:{k:"J",txt:"I’m at ease once my tasks are done early"}, b:{k:"P",txt:"I focus best when the deadline’s looming"}},
+    {a:{k:"J",txt:"I feel settled when my space is tidy"}, b:{k:"P",txt:"A little mess doesn’t really bother me"}},
+    {a:{k:"J",txt:"A sudden change of plans throws me"}, b:{k:"P",txt:"A change of plans feels fresh and exciting"}},
+    {a:{k:"J",txt:"I decide quickly and wrap things up"}, b:{k:"P",txt:"I keep my options open and take my time"}},
+    {a:{k:"J",txt:"I move down my checklist step by step"}, b:{k:"P",txt:"I go with what feels right, staying flexible"}},
+    {a:{k:"J",txt:"I always arrive early to meet-ups"}, b:{k:"P",txt:"I’m often cutting it close on time"}},
+    {a:{k:"J",txt:"A set structure gives me a sense of stability"}, b:{k:"P",txt:"Structure is there to bend as the moment calls"}},
+    {a:{k:"J",txt:"I run my weekends by the plan"}, b:{k:"P",txt:"I spend weekends on a whim, by mood"}}
+  ]
+};
+const AXES = ["EI","SN","TF","JP"];
+
+/* ============ 16 TYPES ============ */
+const TYPE = {
+  INTJ:{e:"🦉",g:"nt",name:"The Architect",tag:"Already three moves ahead in their head",
+    you:"You’re a strategist who designs the big picture and quietly makes it real. Complex problems calm you rather than rattle you, and you read the long game others miss.",
+    str:"Insight and drive. Once the goal is set, you design the path yourself and push it all the way through.",
+    care:"Lost in the perfect plan, you can overlook how people feel. Sometimes ask about the heart before the logic."},
+  INTP:{e:"🔬",g:"nt",name:"The Logician",tag:"The one who tags a ‘why?’ onto everything",
+    you:"You feel most alive when you dig into a principle and truly get it. Your curiosity has no end, and you keep taking even familiar things apart from new angles.",
+    str:"Original analysis. You excel at untangling complex ideas into clear, clean logic.",
+    care:"Linger too long in thought and action slips. Sometimes ‘just start’ beats the perfect answer."},
+  ENTJ:{e:"👑",g:"nt",name:"The Commander",tag:"The one who rallies scattered people toward a goal",
+    you:"You’re a leader who sets a vision and moves people to make it real. You can’t stand inefficiency and are always hunting for a better way.",
+    str:"Decisiveness and organization. You break even huge goals into pieces and drive the team forward.",
+    care:"At full speed, others can struggle to keep up. Watch the pace of the people walking beside you."},
+  ENTP:{e:"💡",g:"nt",name:"The Debater",tag:"The idea machine who throws a stone in still water",
+    you:"You love new possibilities and a good debate. You challenge the obvious and fire off clever alternatives in an instant.",
+    str:"Quick wit and creativity. You flip any topic into a fascinating new angle.",
+    care:"When the interest cools, the finish can fade. Build the muscle to carry what you started all the way home."},
+  INFJ:{e:"🕊️",g:"nf",name:"The Advocate",tag:"The one who reads what hearts don’t say",
+    you:"You carry deep insight and warm conviction. Quiet but firm in your values, you sense people’s true feelings with startling accuracy.",
+    str:"Empathy and insight. You have a rare gift for connecting people to meaning.",
+    care:"Trying to hold everyone up, you burn yourself out. Leave some time to care for your own heart too."},
+  INFP:{e:"🌙",g:"nf",name:"The Mediator",tag:"The one who holds a whole private universe inside",
+    you:"You hold authenticity and ideals close. Calm on the surface, you run on fierce conviction and rich feeling underneath.",
+    str:"Deep empathy and imagination. You believe in people’s potential and back them warmly.",
+    care:"The gap between ideal and real can wear you down. One small action keeps a big ideal alive."},
+  ENFJ:{e:"🌟",g:"nf",name:"The Protagonist",tag:"The one who lights up the potential in others",
+    you:"You lift people up and grow right alongside them. With warm charisma you pull a group together and spot everyone’s potential.",
+    str:"Influence and empathy. You lead people while tending to their hearts — a rare balance.",
+    care:"Caring for others, you keep putting yourself last. It’s okay to voice your own needs, loud and proud."},
+  ENFP:{e:"🎈",g:"nf",name:"The Campaigner",tag:"The person whose energy sparkles anywhere",
+    you:"You brim with curiosity and passion. People and ideas fuel you, and you see the world as a playground full of possibility.",
+    str:"Passion and connection. You open people up and bring a whole room to life.",
+    care:"Your interest jumps everywhere and focus scatters. Try digging deep into one thing you love."},
+  ISTJ:{e:"📘",g:"sj",name:"The Logistician",tag:"The one who always finishes what they take on",
+    you:"You’re the very definition of responsibility and diligence. You keep your word and build trust quietly, on facts and principle.",
+    str:"Reliability and thoroughness. You complete what you’re given without a single gap.",
+    care:"Stick only to the familiar way and you can miss the shift. Leave the door cracked open for new attempts too."},
+  ISFJ:{e:"🛡️",g:"sj",name:"The Defender",tag:"The one who looks after everyone without a fuss",
+    you:"You’re devoted and warm. You notice what people need before they ask, and quietly offer real, practical help.",
+    str:"Attentiveness and devotion. You put people at ease and guard them steadily.",
+    care:"Saying no is hard, so the load piles onto you. A ‘no’ can be an act of love too."},
+  ESTJ:{e:"📊",g:"sj",name:"The Executive",tag:"The one who turns chaos into order",
+    you:"You’re a master of structure and execution. You set the goal, then line up people and tasks with practical, steady moves.",
+    str:"Organization and responsibility. You turn principle and action into results.",
+    care:"Put efficiency first and you can skip past people’s circumstances. Watch the heart as closely as the rules."},
+  ESFJ:{e:"🤝",g:"sj",name:"The Consul",tag:"The one who builds bridges so everyone fits in",
+    you:"You’re warm and deeply considerate. You treasure harmony among people and tend to the mood and the relationships with real care.",
+    str:"Warmth and thoughtfulness. You connect people with ease and look out for them.",
+    care:"Other people’s approval can sway you. It’s okay to trust your own standard first."},
+  ISTP:{e:"🛠️",g:"sp",name:"The Virtuoso",tag:"The quiet fixer who solves problems with their hands",
+    you:"You’re calm and practical. You take problems apart by doing rather than talking, and in a crisis you get cooler-headed, not warmer.",
+    str:"Problem-solving and composure. You handle any situation with your own two hands.",
+    care:"You show little emotion, which can get misread. Now and then, let one true feeling out loud."},
+  ISFP:{e:"🎨",g:"sp",name:"The Adventurer",tag:"The one who feels the world through their own senses",
+    you:"You’re gentle and sensory. You feel the beauty of this very moment and express yourself freely and honestly.",
+    str:"Sensitivity and flexibility. You quietly carry a color all your own.",
+    care:"Dodging conflict, you swallow what you feel. It’s fine to say what you want — gently."},
+  ESTP:{e:"🔥",g:"sp",name:"The Entrepreneur",tag:"The go-getter who dives in right now",
+    you:"You’re bold and bursting with energy. You judge fast on the spot and feel most alive in the middle of thrill and challenge.",
+    str:"Quick reflexes and follow-through. You seize the moment without hesitating.",
+    care:"You move so fast the aftermath can slip by. One beat to look before you leap makes you steadier."},
+  ESFP:{e:"🎉",g:"sp",name:"The Entertainer",tag:"The one who turns any hangout into a party",
+    you:"You’re a bright, buzzing mood-maker. You enjoy the now with people and spread laughter and life wherever you go.",
+    str:"Vitality and warmth. You have a gift for making any moment fun.",
+    care:"Chasing fun, you can put off what matters. Find the balance between the exciting and the necessary."}
+};
+const GCOLOR = {nt:"var(--nt)", nf:"var(--nf)", sj:"var(--sj)", sp:"var(--sp)"};
+
+/* ============ HELPERS ============ */
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(v){if(navigator.vibrate)try{navigator.vibrate(v);}catch(e){}}
+let _tt;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2000);}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));document.getElementById(id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});}
+
+/* ============ STATE ============ */
+let LEN = 20;
+let quiz = [], qi = 0, score = {}, myType = null;
+let decodeTimer = null;
+const GLYPH = "EINSTFJP◆◇▲△●○★☆✦※";
+
+/* length selector */
+document.getElementById('lens').addEventListener('click',e=>{
+  const b=e.target.closest('.lenbtn'); if(!b)return;
+  document.querySelectorAll('.lenbtn').forEach(x=>x.classList.remove('sel'));
+  b.classList.add('sel'); LEN=+b.dataset.n; vibrate(12);
+});
+
+/* ============ QUIZ ============ */
+function buildQuiz(){
+  const per = LEN/4;
+  let list=[];
+  AXES.forEach(ax=>{ QBANK[ax].slice(0,per).forEach(q=> list.push({a:{...q.a},b:{...q.b}})); });
+  return shuffle(list);
+}
+function startQuiz(){
+  quiz=buildQuiz(); qi=0;
+  score={E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};
+  go('quiz'); startDecoder(); updateEnergy(); renderQ();
+}
+function startDecoder(){
+  document.querySelectorAll('.slot').forEach(s=>{s.classList.add('scan');s.classList.remove('locked');});
+  clearInterval(decodeTimer);
+  decodeTimer=setInterval(()=>{
+    document.querySelectorAll('.slot .g').forEach(g=>{g.textContent=GLYPH[Math.floor(Math.random()*GLYPH.length)];});
+  },95);
+}
+function stopDecoder(){clearInterval(decodeTimer);decodeTimer=null;document.querySelectorAll('.slot').forEach(s=>s.classList.remove('scan'));}
+function renderQ(){
+  const q=quiz[qi];
+  document.getElementById('qcount').textContent=(qi+1)+" / "+quiz.length;
+  document.getElementById('qnum').textContent="Q"+(qi+1);
+  document.getElementById('qtext').textContent="Which one feels more like ‘you’?";
+  const opts=shuffle([q.a,q.b]);
+  const labels=["A","B"];
+  const wrap=document.getElementById('opts');
+  wrap.innerHTML="";
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt";
+    b.innerHTML=`<span class="badge">${labels[i]}</span><span>${o.txt}</span>`;
+    b.onclick=()=>pick(o.k,b);
+    wrap.appendChild(b);
+  });
+}
+function pick(k,el){
+  score[k]++;
+  el.classList.add('picked');
+  if(window.confetti){
+    const r=el.getBoundingClientRect();
+    confetti({particleCount:16,spread:52,startVelocity:22,scalar:.8,
+      origin:{x:(r.left+r.width/2)/window.innerWidth,y:(r.top+r.height/2)/window.innerHeight},
+      colors:['#9b7bff','#7ac0ff','#4ade9b','#ffb454','#ff7ac0']});
+  }
+  vibrate(26);
+  updateEnergy();
+
+  const frac=(qi+1)/quiz.length;
+  const r=document.documentElement.style;
+  if(frac>=.67){r.setProperty('--a1','#ff6ba6');r.setProperty('--a2','#ffb454');}
+  else if(frac>=.34){r.setProperty('--a1','#c07bff');r.setProperty('--a2','#ff7ac0');}
+  if(qi+1===Math.floor(quiz.length/2)){toast('🔥 Halfway there!');vibrate([20,40,20]);}
+  setTimeout(()=>{
+    qi++;
+    if(qi>=quiz.length) revealCode();
+    else renderQ();
+  },330);
+}
+function updateEnergy(){
+  const done=Object.values(score).reduce((a,b)=>a+b,0);
+  document.getElementById('energy').style.width=(done/quiz.length*100)+"%";
+}
+
+/* ============ RESULT ============ */
+function computeType(){
+  const p=(a,b)=> score[a]>=score[b]?a:b;
+  return p("E","I")+p("S","N")+p("T","F")+p("J","P");
+}
+function revealCode(){
+  stopDecoder();
+  myType=computeType();
+  const letters=myType.split('');
+  const slots=document.querySelectorAll('.slot');
+  const col=GCOLOR[TYPE[myType].g];
+  document.documentElement.style.setProperty('--rc',col);
+  toast('🧬 Unlocking your code…');
+  letters.forEach((L,i)=>{
+    setTimeout(()=>{
+      const g=slots[i].querySelector('.g');
+      g.textContent=L; g.style.color=col;
+      slots[i].classList.add('locked'); slots[i].style.borderColor=col;
+      vibrate(34);
+      if(window.confetti){
+        const r=slots[i].getBoundingClientRect();
+        confetti({particleCount:22,spread:60,startVelocity:26,scalar:.9,
+          origin:{x:(r.left+r.width/2)/window.innerWidth,y:(r.top+r.height/2)/window.innerHeight}});
+      }
+      if(i===3) setTimeout(showResult,700);
+    }, 360*i+300);
+  });
+}
+function showResult(){
+  const T=TYPE[myType], col=GCOLOR[T.g];
+  document.documentElement.style.setProperty('--rc',col);
+  const code=document.getElementById('resCode'); code.innerHTML="";
+  myType.split('').forEach(L=>{const s=document.createElement('span');s.textContent=L;code.appendChild(s);});
+  document.getElementById('resEmoji').textContent=T.e;
+  const ti=document.getElementById('resTitle');
+  ti.textContent=myType+" · "+T.name; ti.style.color=col;
+  document.getElementById('resTag').textContent="“"+T.tag+"”";
+  const chips=document.getElementById('axisChips'); chips.innerHTML="";
+  myType.split('').forEach(L=>{
+    const c=document.createElement('span'); c.className="ac";
+    c.innerHTML=`${AX[L].e} ${AX[L].w}`;
+    chips.appendChild(c);
+  });
+  document.getElementById('p_you').textContent=T.you;
+  document.getElementById('p_str').textContent=T.str;
+  document.getElementById('p_care').textContent=T.care;
+  go('result');
+  if(window.confetti){
+    const colors=['#9b7bff','#7ac0ff','#4ade9b','#ffb454','#ff7ac0'];
+    confetti({particleCount:130,spread:95,origin:{y:.3},colors});
+    setTimeout(()=>confetti({particleCount:90,spread:120,startVelocity:36,origin:{y:.4},colors}),260);
+  }
+  vibrate([60,80,60,80,120]);
+}
+function shareResult(){
+  const T=TYPE[myType];
+  const txt=`My personality code is ${myType} · ${T.name} ${T.e}\n"${T.tag}"\n\nMBTI take the test → https://mimifactory.vibekr.com/apps/mbti_test_test.html`;
+  const done=()=>toast('📋 Copied your result!');
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done));}
+  else fallbackCopy(txt,done);
+  vibrate(20);
+}
+function fallbackCopy(txt,cb){
+  const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();try{document.execCommand('copy');cb();}catch(e){}document.body.removeChild(ta);
+}
+function resetAll(){
+  myType=null;
+  const r=document.documentElement.style;
+  r.setProperty('--a1','#9b7bff'); r.setProperty('--a2','#7ac0ff');
+  document.querySelectorAll('.slot').forEach(s=>{s.classList.remove('locked');s.style.borderColor='';const g=s.querySelector('.g');g.textContent='?';g.style.color='';});
+  go('home');
+}
+</script>
+</body>
+</html>
