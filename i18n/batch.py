@@ -16,7 +16,8 @@ import datetime, glob, json, os, re, subprocess, sys, time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LANGS = ["ja", "en", "zh-tw"]
-CLAUDE = r"C:\Users\넥사05\AppData\Roaming\npm\claude.cmd"
+CLAUDE = os.environ.get("CLAUDE_BIN") or (
+    r"C:\Users\넥사05\AppData\Roaming\npm\claude.cmd" if os.name == "nt" else "claude")
 MODEL = "claude-opus-4-8"
 LOG = os.path.join(ROOT, "i18n_batch.log")
 LANDING_OUT = {"hall_index": "index", "hall_quiz": "quiz", "hall_friend": "friend", "hall_test": "test"}
