@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>私の感情解像度 — 私は何ピクセルで感じる人？</title>
+<meta name="description" content="同じ瞬間をざっくり感じる人と、細かな陰影まで感じ取る人がいます。12のシーンで測る、私の感情解像度。私は何ピクセルで感じる人？">
+<meta property="og:title" content="私の感情解像度 — 私は何ピクセルで感じる人？">
+<meta property="og:description" content="12のシーンで測る私の感情解像度。モザイクから4Kまで、あなたは何ピクセル？">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansJP-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/MPLUSRounded1c-Bold-sub.woff2') format('woff2');font-weight:400;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#141024; --bg2:#241a3d;
+  --accent1:#8fd0ff; --accent2:#6c7bff;
+  --cream:#f4f0ff; --muted:#c3b9e0;
+  --card:#211a3a;
+  --neutral:#2e2650;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 80% -10%, rgba(120,160,255,.12), transparent 55%),
+    radial-gradient(120% 90% at 10% 110%, rgba(180,110,255,.14), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  transition:background .9s ease;
+  min-height:100dvh;
+}
+.wrap{max-width:520px; margin:0 auto; padding:22px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(105deg,var(--accent1),#b78bf5 55%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1{font-family:'Jua',sans-serif; font-weight:400; line-height:1.28; margin:0;}
+.mono{font-variant-numeric:tabular-nums; font-feature-settings:"tnum";}
+
+
+.screen{display:none; animation:fadeIn .5s ease both; flex:1; flex-direction:column;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+
+.home{justify-content:center; text-align:center; gap:6px;}
+.eyebrow{font-size:12.5px; letter-spacing:.28em; color:var(--muted); text-indent:.28em; margin-bottom:10px;}
+.home h1{font-size:31px;}
+.home .sub{color:var(--muted); font-size:15px; line-height:1.7; margin:16px 4px 6px; }
+.chips{display:flex; gap:7px; justify-content:center; flex-wrap:wrap; margin:18px 0 8px;}
+.chip{font-size:12px; padding:7px 12px; border-radius:99px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1); color:var(--muted);}
+.previewbox{margin:22px auto 6px; width:120px; height:120px; border-radius:26px; display:grid; place-items:center; font-size:60px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);}
+
+
+.btn{
+  font-family:'Jua',sans-serif; font-size:19px; color:#161028;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2));
+  border:none; border-radius:18px; padding:17px 22px; width:100%;
+  cursor:pointer; box-shadow:0 10px 26px -8px var(--accent2);
+  transition:transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
+}
+.btn:active{transform:scale(.96);}
+.btn.ghost{background:transparent; color:var(--muted); box-shadow:none; border:1px solid rgba(255,255,255,.16); font-size:15px; padding:13px;}
+.btn:focus-visible{outline:3px solid #fff; outline-offset:2px;}
+
+
+.topbar{margin-bottom:16px;}
+.metaRow{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:9px;}
+.metaRow .qn{font-size:13px; color:var(--muted); letter-spacing:.04em;}
+.metaRow .live{font-family:'Jua',sans-serif; font-size:15px;}
+.gauge{height:12px; border-radius:99px; background:rgba(255,255,255,.09); overflow:hidden; position:relative;}
+.gaugefill{
+  height:100%; width:0%; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  box-shadow:0 0 16px 1px var(--accent2);
+  transition:width .55s cubic-bezier(.22,1,.36,1), box-shadow .6s;
+}
+.resline{display:flex; align-items:center; gap:13px; margin-top:15px;}
+.thumb{
+  width:66px; height:66px; border-radius:16px; flex:none; overflow:hidden; position:relative;
+  background:radial-gradient(circle at 40% 35%, #ff8ad0, #6c7bff 70%);
+  display:grid; place-items:center; font-size:34px;
+  filter:blur(13px); transform:scale(1.05);
+  transition:filter .6s ease, transform .6s ease;
+}
+.thumbcap{font-size:12px; color:var(--muted); line-height:1.55; }
+.thumbcap b{color:var(--cream); font-weight:700;}
+
+/* ---------- 質問 ---------- */
+.qbody{flex:1; display:flex; flex-direction:column; justify-content:center;}
+.scene{font-size:12.5px; letter-spacing:.06em; color:var(--accent1); font-weight:700; margin-bottom:9px;}
+.question{font-family:'Jua',sans-serif; font-size:22px; line-height:1.45; margin:0 0 22px; }
+.opts{display:flex; flex-direction:column; gap:11px;}
+.opt{
+  text-align:left; background:var(--neutral); color:var(--cream);
+  border:1.5px solid rgba(255,255,255,.08); border-radius:15px;
+  padding:16px 16px 16px 15px; font-size:15.5px; line-height:1.5; cursor:pointer;
+  display:flex; align-items:flex-start; gap:12px; 
+  transition:transform .16s cubic-bezier(.34,1.56,.64,1), border-color .2s, background .2s;
+}
+.opt:active{transform:scale(.98);}
+.opt:hover{border-color:rgba(255,255,255,.22);}
+.opt:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+.opt .lab{
+  font-family:'Jua',sans-serif; font-size:15px; color:var(--muted);
+  background:rgba(255,255,255,.08); border-radius:9px; width:30px; height:30px;
+  display:grid; place-items:center; flex:none;
+}
+.opt.picked{border-color:var(--accent1); background:#332a56;}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1deg); opacity:.4;} 60%{transform:scale(1.02);} 100%{transform:scale(1); opacity:1;}}
+
+
+.result{text-align:center;}
+.rtier{font-family:'Jua',sans-serif; font-size:15px; letter-spacing:.16em; color:var(--muted); margin-top:8px;}
+.remoji{font-size:70px; margin:6px 0 2px; line-height:1;}
+.rname{font-family:'Jua',sans-serif; font-size:30px; margin:2px 0;}
+.rpx{font-family:'Jua',sans-serif; font-size:46px; margin:8px 0 2px;}
+.rpx small{font-size:19px; color:var(--muted);}
+.rdesc{color:var(--muted); font-size:15px; line-height:1.75; margin:14px 6px 4px; }
+.meter{margin:22px 4px 6px; text-align:left;}
+.meterhead{display:flex; justify-content:space-between; font-size:13px; color:var(--muted); margin-bottom:7px;}
+.rbar{height:16px; border-radius:99px; background:rgba(255,255,255,.09); overflow:hidden;}
+.rbarfill{height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg,var(--accent1),#ff8ad0); box-shadow:0 0 16px 1px var(--accent2); transition:width 1.1s cubic-bezier(.22,1,.36,1);}
+.scale4{display:flex; justify-content:space-between; font-size:10.5px; color:var(--muted); margin-top:6px; opacity:.8;}
+.rcards{text-align:left; margin:20px 0 6px; display:flex; flex-direction:column; gap:11px;}
+.rcard{background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:15px; padding:14px 16px;}
+.rcard h4{margin:0 0 6px; font-size:13.5px; letter-spacing:.03em; color:var(--accent1); font-weight:700;}
+.rcard p{margin:0; font-size:14.5px; line-height:1.65; color:var(--cream); }
+.rcard.hint h4{color:#ff8ad0;}
+.actions{display:flex; flex-direction:column; gap:10px; margin-top:20px;}
+.share{display:flex; gap:10px;}
+.share .btn{flex:1;}
+
+
+.toast{
+  position:fixed; left:50%; top:22px; transform:translateX(-50%) translateY(-24px);
+  background:rgba(30,22,52,.97); border:1.5px solid var(--accent1); color:var(--cream);
+  padding:12px 20px; border-radius:99px; font-size:14px; font-family:'Jua',sans-serif;
+  opacity:0; pointer-events:none; transition:opacity .35s, transform .35s; z-index:60; max-width:90vw;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+
+.footer{text-align:center; margin-top:30px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<canvas id="fx" style="position:fixed; inset:0; pointer-events:none; z-index:55;"></canvas>
+
+<div class="wrap">
+
+  
+  <section class="screen on home" id="home">
+    <div class="eyebrow">感情解像度テスト</div>
+    <h1>私は何ピクセルで<br><span class="grad">感じる人</span>なんだろう？</h1>
+    <div class="previewbox" id="homePrev">🫥</div>
+    <p class="sub">
+      ある人は感情を <b style="color:var(--cream)">「良い・悪い」</b> 2コマで感じ、<br>
+      ある人は <b style="color:var(--cream)">「寂しいのに羨ましい、でも心地よい」</b> 細かな陰影まで感じ取る。<br>
+      同じ瞬間、あなたの心は何ピクセルで写る？
+    </p>
+    <div class="chips">
+      <span class="chip">12シーン</span>
+      <span class="chip">約2分</span>
+      <span class="chip">モザイク→4K</span>
+    </div>
+    <div style="margin-top:16px;">
+      <button class="btn" id="startBtn">解像度を測定する 📷</button>
+    </div>
+  </section>
+
+  
+  <section class="screen" id="quiz">
+    <div class="topbar">
+      <div class="metaRow">
+        <span class="qn mono" id="qn">シーン 1 / 12</span>
+        <span class="live grad" id="liveLabel">測定中…</span>
+      </div>
+      <div class="gauge"><div class="gaugefill" id="gauge"></div></div>
+      <div class="resline">
+        <div class="thumb" id="thumb">💗</div>
+        <div class="thumbcap">これまでの感情解像度<br><b id="livePct" class="mono">0%</b> — 答えるほど心が鮮明に</div>
+      </div>
+    </div>
+    <div class="qbody">
+      <div class="scene mono" id="scene">SCENE 01</div>
+      <h2 class="question" id="question">質問</h2>
+      <div class="opts" id="opts"></div>
+    </div>
+  </section>
+
+  
+  <section class="screen result" id="res">
+    <div class="rtier" id="rtier">YOUR RESOLUTION</div>
+    <div class="remoji" id="remoji">🖼️</div>
+    <div class="rname grad" id="rname">高解像度</div>
+    <div class="rpx mono" id="rpx">1080<small>px</small></div>
+    <p class="rdesc" id="rdesc"></p>
+
+    <div class="meter">
+      <div class="meterhead"><span>感情解像度</span><span class="mono" id="rpctText">0%</span></div>
+      <div class="rbar"><div class="rbarfill" id="rbar"></div></div>
+      <div class="scale4"><span>モザイク</span><span>SD</span><span>HD</span><span>4K</span></div>
+    </div>
+
+    <div class="rcards">
+      <div class="rcard"><h4>🔍 こんな人です</h4><p id="rc1"></p></div>
+      <div class="rcard"><h4>💎 あなたの強み</h4><p id="rc2"></p></div>
+      <div class="rcard hint"><h4>✨ もう一段くっきりするには</h4><p id="rc3"></p></div>
+    </div>
+
+    <div class="actions">
+      <div class="share">
+        <button class="btn" id="shareBtn">結果をシェア 🔗</button>
+        <button class="btn ghost" id="retryBtn">もう一度 ↺</button>
+      </div>
+    </div>
+  </section>
+
+  
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/ja/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 ドーパミン実験室 — ほかのテストを見る →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意味と面白さの工場</span></div>
+    <div class="mf-logo">ミミファクトリー</div>
+    <div class="mf-caption">株式会社ヨンギョル ファミリーカンパニー</div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script>
+
+
+const QUESTIONS=[
+ {s:"久しぶりに会った友だちが、自分の話ばかりしていた。帰り道、私の心は？",
+  o:[{t:"なんとなく微妙だった。",v:0},{t:"気分がよくなかった。疲れていたのかも。",v:1.5},{t:"半分は寂しさ、半分は自分も話を切り出せなかった心残り。少しだけ孤独だった。",v:3}]},
+ {s:"大事なプレゼンの直前、心臓が速く打つ。これを何と呼ぶ？",
+  o:[{t:"なんだか調子が悪いだけな気がする。",v:0},{t:"不安だ。",v:1.5},{t:"半分は緊張、半分はわくわく。うまくやりたい気持ちが体に先に出た。",v:3}]},
+ {s:"SNSで友だちの良い知らせを見た。お祝いのコメントを書くときの本音は？",
+  o:[{t:"いいね、と流した。",v:0},{t:"嬉しさもありつつ、少し羨ましかった。",v:1.5},{t:"お祝い・淡い嫉妬・自分も焦ってくる不安、三つの層が重なった。",v:3}]},
+ {s:"一日を終えて横になったのに、理由もなく心が重い。私は？",
+  o:[{t:"とりあえず寝る。そんな日もあるから。",v:0},{t:"なぜだろうと少し考えてみる。",v:1.5},{t:"重さの正体を探す。さっきのあの言葉？先延ばしにした用事？ひとつずつ名前をつけてみる。",v:3}]},
+ {s:"「今の気分どう？」と聞かれたら、たいてい？",
+  o:[{t:"「いい／まあまあ／微妙」のどれかで答える。",v:0},{t:"良い・悪いに、理由をひと言そえる。",v:1.5},{t:"「わくわくするけど少し不安」というふうに、二つ三つの言葉を混ぜて答える。",v:3}]},
+ {s:"腹が立った。その怒りをじっと見つめてみると？",
+  o:[{t:"怒りは怒り。ただ腹が立った。",v:0},{t:"イライラなのか、本気の怒りなのかくらいは分かる。",v:1.5},{t:"軽んじられた感じなのか、悔しさなのか、失望なのか、その陰影まで見える。",v:3}]},
+ {s:"好きな音楽を聴くとき、私の感情は？",
+  o:[{t:"いい、それで十分。",v:0},{t:"盛り上がる曲／切ない曲、くらいに分かれる。",v:1.5},{t:"「懐かしいけど温かい」「寂しいけど心地よい」といった微妙な色あいを感じる。",v:3}]},
+ {s:"感情を表す言葉を、普段どれくらい使う？",
+  o:[{t:"喜び・悲しみ・怒り・驚きくらい。",v:0},{t:"寂しさ、誇らしさ、すっきり感くらいはよく使う。",v:1.5},{t:"胸のつまり、切なさ、いとおしさ、きまり悪さ…細やかな言葉を選んで使う。",v:3}]},
+ {s:"誰かに「どうしたの？」と聞かれたら、私は？",
+  o:[{t:"「わかんない、なんとなく」と答えることが多い。",v:0},{t:"説明しようとするけれど、言葉がなかなか出てこない。",v:1.5},{t:"自分の状態を、わりと正確な言葉で言い当てられる。",v:3}]},
+ {s:"悲しい映画を観た。観終わって残るのは？",
+  o:[{t:"泣いたか泣かなかったか、どちらか。",v:0},{t:"悲しかった／感動した、くらいで残る。",v:1.5},{t:"どの場面の、どんな陰影が自分を揺さぶったのか思い出せる。",v:3}]},
+ {s:"体のサイン（胸のつかえ、喉のつまり）を感情と結びつける？",
+  o:[{t:"体は体、心は心。あまり結びつけない。",v:0},{t:"たまに「あ、ストレスか」くらいには結びつける。",v:1.5},{t:"胸が締めつけられれば不安、喉がつまれば悲しさ…体で感情を読む。",v:3}]},
+ {s:"複雑だった一日を、日記やメモにまとめるとしたら？",
+  o:[{t:"書くことがない。「今日はしんどかった」くらい。",v:0},{t:"何があったか、出来事を中心に書く。",v:1.5},{t:"そのときどきに感じた感情の陰影を、文章でほどいていける。",v:3}]}
+];
+
+const TIERS=[
+ {min:0, key:"モザイク解像度", tier:"8-BIT · MOSAIC", emoji:"🟫", px:240,
+  a1:"#c9a06b", a2:"#a5794b", bg1:"#1c1526", bg2:"#2c2033",
+  desc:"あなたは感情を大きなピクセルで感じます。「良い／悪い」の二、三コマで世界をとらえるタイプ。その分、決断が速く、ささいな感情に長く揺さぶられません。",
+  c1:"複雑な感情も「大丈夫」か「イマイチ」に要約しがち。心がシンプルなぶん、あとを引きません。",
+  c2:"感情に飲み込まれない強さ。周りが細かい気分に振り回されるとき、あなたは大きな絵を見ています。",
+  c3:"「良くない」が湧いてきたら、あと一言だけ足してみて。怒り？寂しさ？疲れ？ピクセルをひとつ増やすだけで、世界は少し鮮明になります。"},
+ {min:31, key:"標準解像度", tier:"SD · STANDARD", emoji:"📺", px:480,
+  a1:"#ffb56b", a2:"#ff8a5b", bg1:"#221530", bg2:"#3a1f3a",
+  desc:"基本的な感情ははっきり見分けられます。喜び・悲しみ・怒り・不安くらいは正確に言い当てます。まだ微妙な中間色はにじみますが、十分くっきりした画面です。",
+  c1:"「今日はちょっと寂しかった」のように感情に名前はつけますが、いくつも重なるときはひとつにまとめがちです。",
+  c2:"自分の感情を言葉にできる人。関係のなかで誤解が少なく、必要なときは素直に伝えられます。",
+  c3:"ひとつの瞬間に感情はひとつだけ、という思い込みを手放してみて。「嬉しいけど名残惜しい」のような*重なり感情*を見つけた瞬間、解像度がぐっと上がります。"},
+ {min:56, key:"高解像度", tier:"HD · HIGH-DEF", emoji:"🖼️", px:1080,
+  a1:"#8fd0ff", a2:"#6c7bff", bg1:"#141024", bg2:"#241a3d",
+  desc:"あなたの心は鮮明です。重なった感情の陰影に気づき、その理由もだいたい説明できます。自分と他人の微妙さをよく読み取れる人です。",
+  c1:"「寂しいけど、それでもありがたい」のような二重の感情を自然に感じます。感情の原因までさかのぼるほうです。",
+  c2:"繊細な共感力。相手が口にしなくても陰影を読み取り、自分の感情も精妙に扱えます。対立をやわらかくほどく力があります。",
+  c3:"感じ取った陰影を*記録*として残してみて。瞬間の微妙さを文章でつかまえる習慣が、あなたを4Kへ連れていきます。"},
+ {min:81, key:"超高解像度", tier:"4K · ULTRA HD", emoji:"💎", px:2160,
+  a1:"#ff9ecb", a2:"#c46bff", bg1:"#1c0f2a", bg2:"#33143f",
+  desc:"あなたは感情を超高解像度で感じます。微細なグラデーションまで言葉でつかまえる人。切なさ・胸のつまり・きまり悪さの違いを知り、体のサインまで感情に翻訳します。",
+  c1:"ひとつの瞬間に三つ四つの感情が重なっていても、それぞれに気づいて名前をつけます。感情の地図がとても緻密です。",
+  c2:"深い自己理解と共感力。芸術的な感受性と、繊細な関係づくりの源です。あなたのそばにいる人は「わかってもらえている」と感じるはずです。",
+  c3:"鮮明すぎる画面は、ときに疲れます。すべての感情を解釈しようとせず、たまには*ただ感じて流していく*低解像度モードも自分に許してあげて。"}
+];
+
+
+let idx=0, total=0, answered=0, order=[];
+const MAXPER=3;
+const HUES=[["#8fd0ff","#6c7bff"],["#ffd56b","#ffb347"],["#a0f0c0","#4fd1a0"],["#ff9ecb","#ff6b9e"],["#ffb38a","#ff7a5b"],["#c9a0ff","#8a5bff"]];
+
+
+function $(id){return document.getElementById(id);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt; function toast(m){const t=$('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),1900);}
+function tierFor(pct){let r=TIERS[0]; for(const t of TIERS){ if(pct>=t.min) r=t; } return r;}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); $(id).classList.add('on'); window.scrollTo(0,0);}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function fmt(s,color){return esc(s).replace(/\*([^*]+)\*/g,'<b style="color:'+color+'">$1</b>');}
+
+
+function burst(x,y,big){
+  if(typeof confetti!=='function') return;
+  const opt={particleCount:big?70:18, spread:big?90:55, startVelocity:big?42:26,
+    origin:{x:x/innerWidth, y:y/innerHeight}, scalar:big?1:.8,
+    colors:['#8fd0ff','#c46bff','#ff9ecb','#ffd56b','#6c7bff']};
+  confetti(opt);
+  if(big) setTimeout(()=>confetti(Object.assign({},opt,{angle:120})),180);
+}
+
+
+function start(){
+  idx=0; total=0; answered=0;
+  order=QUESTIONS.map((q,i)=>i); // 設問の順番は固定(シーンへの没入), 選択肢だけシャッフル
+  applyTheme(TIERS[2]); // HD 基本トーンにリセット
+  $('gauge').style.width='0%'; $('livePct').textContent='0%'; $('liveLabel').textContent='測定中…';
+  $('thumb').style.filter='blur(13px)';
+  show('quiz'); render();
+}
+function applyTheme(t){
+  const r=document.documentElement.style;
+  r.setProperty('--accent1',t.a1); r.setProperty('--accent2',t.a2);
+  r.setProperty('--bg1',t.bg1); r.setProperty('--bg2',t.bg2);
+}
+function render(){
+  const q=QUESTIONS[idx];
+  $('qn').textContent=`シーン ${idx+1} / ${QUESTIONS.length}`;
+  $('scene').textContent='SCENE '+String(idx+1).padStart(2,'0');
+  const qEl=$('question'); qEl.textContent=q.s;
+  qEl.classList.remove('pop'); void qEl.offsetWidth; qEl.classList.add('pop');
+
+  const opts=shuffle(q.o.map(o=>Object.assign({},o)));
+  const box=$('opts'); box.innerHTML='';
+  const labs=['A','B','C','D'];
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt'; b.type='button';
+    b.innerHTML=`<span class="lab">${labs[i]}</span><span>${esc(o.t)}</span>`;
+    b.addEventListener('click',ev=>pick(o.v,b,ev));
+    box.appendChild(b);
+  });
+}
+function pick(v,btn,ev){
+  btn.classList.add('picked');
+  document.querySelectorAll('.opt').forEach(o=>o.style.pointerEvents='none');
+  total+=v; answered++;
+  const pct=Math.round((total/(answered*MAXPER))*100);
+
+  $('gauge').style.width=pct+'%';
+  $('livePct').textContent=pct+'%';
+  const lt=tierFor(pct);
+  $('liveLabel').textContent='これまで '+lt.key;
+  $('thumb').style.filter='blur('+(13*(1-pct/100)).toFixed(1)+'px)';
+  $('thumb').textContent=lt.emoji;
+
+
+  const h=HUES[answered%HUES.length];
+  document.documentElement.style.setProperty('--accent1',h[0]);
+  document.documentElement.style.setProperty('--accent2',h[1]);
+  vibrate(24);
+  const r=btn.getBoundingClientRect(); burst(r.left+r.width/2, r.top+r.height/2, false);
+
+  if(answered===6){ toast('折り返し通過！画面がくっきりしてきています 🔍'); vibrate([18,40,18]); }
+
+  setTimeout(()=>{
+    idx++;
+    if(idx>=QUESTIONS.length) finish();
+    else render();
+  },430);
+}
+function finish(){
+  const pct=Math.round((total/(QUESTIONS.length*MAXPER))*100);
+  const t=tierFor(pct);
+  applyTheme(t);
+  $('rtier').textContent=t.tier;
+  $('remoji').textContent=t.emoji;
+  $('rname').textContent=t.key;
+
+  const px=t.px;
+  $('rpx').innerHTML=px.toLocaleString()+'<small>px</small>';
+  $('rdesc').textContent=t.desc;
+  $('rc1').innerHTML=fmt(t.c1,'var(--cream)');
+  $('rc2').innerHTML=fmt(t.c2,'var(--cream)');
+  $('rc3').innerHTML=fmt(t.c3,'#ff8ad0');
+  $('rpctText').textContent=pct+'%';
+  show('res');
+  vibrate([50,70,50,70,110]);
+  setTimeout(()=>{ $('rbar').style.width=pct+'%'; },120);
+  setTimeout(()=>burst(innerWidth/2, innerHeight*0.32, true),260);
+  toast(t.emoji+' '+t.key+'で測定完了！');
+}
+function share(){
+  const t=tierFor(Math.round((total/(QUESTIONS.length*MAXPER))*100));
+  const text=`私は「${t.key}」で感じる人 ${t.emoji} 私の感情解像度は何ピクセル？`;
+  const url=location.href.split('?')[0];
+  if(navigator.share){ navigator.share({title:'私の感情解像度',text,url}).catch(()=>{}); }
+  else {
+    const done=()=>toast('結果の文章をコピーしました 📋');
+    if(navigator.clipboard) navigator.clipboard.writeText(text+' '+url).then(done).catch(done);
+    else done();
+  }
+  burst(innerWidth/2, innerHeight*0.5, true);
+}
+
+
+$('startBtn').addEventListener('click',start);
+$('retryBtn').addEventListener('click',()=>{show('home'); $('homePrev').textContent='🫥';});
+$('shareBtn').addEventListener('click',share);
+
+
+(function(){
+  const faces=['🫥','😐','🙂','🥹'];
+  let i=0; const el=$('homePrev');
+  setInterval(()=>{ if(document.getElementById('home').classList.contains('on')){ i=(i+1)%faces.length; el.textContent=faces[i]; } },1200);
+})();
+
+
+const fx=$('fx'); function sizeFx(){fx.width=innerWidth; fx.height=innerHeight;} sizeFx(); addEventListener('resize',sizeFx);
+</script>
+</body>
+</html>

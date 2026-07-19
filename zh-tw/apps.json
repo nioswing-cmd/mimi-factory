@@ -131,6 +131,18 @@
    "teaser": "apps/recovery-speed.html",
    "premium": "apps/recovery-speed.html",
    "desc": "崩潰隔天，你會怎麼重新站起來？12 題測出回復速度 4 種類型"
+  },
+  {
+   "id": "emotion-resolution",
+   "type": "test",
+   "title": "情緒解析度測驗",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/emotion-resolution.html",
+   "premium": "apps/emotion-resolution.html",
+   "desc": "用12個場景測量，你的情緒是幾個像素？"
   }
  ],
  "updated": "2026-07-19"

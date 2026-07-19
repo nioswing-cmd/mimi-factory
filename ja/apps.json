@@ -131,6 +131,18 @@
    "teaser": "apps/recovery-speed.html",
    "premium": "apps/recovery-speed.html",
    "desc": "崩れた翌日、どう立ち直る？ 12問でわかる回復スピード4タイプ"
+  },
+  {
+   "id": "emotion-resolution",
+   "type": "test",
+   "title": "感情解像度テスト",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/emotion-resolution.html",
+   "premium": "apps/emotion-resolution.html",
+   "desc": "12のシーンで測る、あなたの感情解像度は何ピクセル？"
   }
  ],
  "updated": "2026-07-19"

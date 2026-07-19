@@ -131,6 +131,18 @@
    "teaser": "apps/recovery-speed.html",
    "premium": "apps/recovery-speed.html",
    "desc": "The morning after you fall apart — how fast do you bounce back? 12 questions, 4 types."
+  },
+  {
+   "id": "emotion-resolution",
+   "type": "test",
+   "title": "Emotional Resolution Test",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/emotion-resolution.html",
+   "premium": "apps/emotion-resolution.html",
+   "desc": "How many pixels do you feel in? Measured across 12 scenes."
   }
  ],
  "updated": "2026-07-19"

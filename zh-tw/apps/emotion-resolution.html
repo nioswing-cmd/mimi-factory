@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>我的情緒解析度 — 我是用幾個像素在感受的人？</title>
+<meta name="description" content="有人把同一個瞬間感受得很籠統，有人卻連細微的紋理都感受得到。用12個場景測量你的情緒解析度。你是用幾個像素在感受的人？">
+<meta property="og:title" content="我的情緒解析度 — 我是用幾個像素在感受的人？">
+<meta property="og:description" content="用12個場景測量你的情緒解析度。從馬賽克到4K，你是幾個像素？">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#141024; --bg2:#241a3d;
+  --accent1:#8fd0ff; --accent2:#6c7bff;
+  --cream:#f4f0ff; --muted:#c3b9e0;
+  --card:#211a3a;
+  --neutral:#2e2650;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 80% -10%, rgba(120,160,255,.12), transparent 55%),
+    radial-gradient(120% 90% at 10% 110%, rgba(180,110,255,.14), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  transition:background .9s ease;
+  min-height:100dvh;
+}
+.wrap{max-width:520px; margin:0 auto; padding:22px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(105deg,var(--accent1),#b78bf5 55%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1{font-family:'Jua',sans-serif; font-weight:400; line-height:1.28; margin:0;}
+.mono{font-variant-numeric:tabular-nums; font-feature-settings:"tnum";}
+
+
+.screen{display:none; animation:fadeIn .5s ease both; flex:1; flex-direction:column;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+
+.home{justify-content:center; text-align:center; gap:6px;}
+.eyebrow{font-size:12.5px; letter-spacing:.28em; color:var(--muted); text-indent:.28em; margin-bottom:10px;}
+.home h1{font-size:31px;}
+.home .sub{color:var(--muted); font-size:15px; line-height:1.7; margin:16px 4px 6px; }
+.chips{display:flex; gap:7px; justify-content:center; flex-wrap:wrap; margin:18px 0 8px;}
+.chip{font-size:12px; padding:7px 12px; border-radius:99px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1); color:var(--muted);}
+.previewbox{margin:22px auto 6px; width:120px; height:120px; border-radius:26px; display:grid; place-items:center; font-size:60px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);}
+
+
+.btn{
+  font-family:'Jua',sans-serif; font-size:19px; color:#161028;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2));
+  border:none; border-radius:18px; padding:17px 22px; width:100%;
+  cursor:pointer; box-shadow:0 10px 26px -8px var(--accent2);
+  transition:transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
+}
+.btn:active{transform:scale(.96);}
+.btn.ghost{background:transparent; color:var(--muted); box-shadow:none; border:1px solid rgba(255,255,255,.16); font-size:15px; padding:13px;}
+.btn:focus-visible{outline:3px solid #fff; outline-offset:2px;}
+
+
+.topbar{margin-bottom:16px;}
+.metaRow{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:9px;}
+.metaRow .qn{font-size:13px; color:var(--muted); letter-spacing:.04em;}
+.metaRow .live{font-family:'Jua',sans-serif; font-size:15px;}
+.gauge{height:12px; border-radius:99px; background:rgba(255,255,255,.09); overflow:hidden; position:relative;}
+.gaugefill{
+  height:100%; width:0%; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  box-shadow:0 0 16px 1px var(--accent2);
+  transition:width .55s cubic-bezier(.22,1,.36,1), box-shadow .6s;
+}
+.resline{display:flex; align-items:center; gap:13px; margin-top:15px;}
+.thumb{
+  width:66px; height:66px; border-radius:16px; flex:none; overflow:hidden; position:relative;
+  background:radial-gradient(circle at 40% 35%, #ff8ad0, #6c7bff 70%);
+  display:grid; place-items:center; font-size:34px;
+  filter:blur(13px); transform:scale(1.05);
+  transition:filter .6s ease, transform .6s ease;
+}
+.thumbcap{font-size:12px; color:var(--muted); line-height:1.55; }
+.thumbcap b{color:var(--cream); font-weight:700;}
+
+/* ---------- 問題 ---------- */
+.qbody{flex:1; display:flex; flex-direction:column; justify-content:center;}
+.scene{font-size:12.5px; letter-spacing:.06em; color:var(--accent1); font-weight:700; margin-bottom:9px;}
+.question{font-family:'Jua',sans-serif; font-size:22px; line-height:1.45; margin:0 0 22px; }
+.opts{display:flex; flex-direction:column; gap:11px;}
+.opt{
+  text-align:left; background:var(--neutral); color:var(--cream);
+  border:1.5px solid rgba(255,255,255,.08); border-radius:15px;
+  padding:16px 16px 16px 15px; font-size:15.5px; line-height:1.5; cursor:pointer;
+  display:flex; align-items:flex-start; gap:12px; 
+  transition:transform .16s cubic-bezier(.34,1.56,.64,1), border-color .2s, background .2s;
+}
+.opt:active{transform:scale(.98);}
+.opt:hover{border-color:rgba(255,255,255,.22);}
+.opt:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+.opt .lab{
+  font-family:'Jua',sans-serif; font-size:15px; color:var(--muted);
+  background:rgba(255,255,255,.08); border-radius:9px; width:30px; height:30px;
+  display:grid; place-items:center; flex:none;
+}
+.opt.picked{border-color:var(--accent1); background:#332a56;}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1deg); opacity:.4;} 60%{transform:scale(1.02);} 100%{transform:scale(1); opacity:1;}}
+
+
+.result{text-align:center;}
+.rtier{font-family:'Jua',sans-serif; font-size:15px; letter-spacing:.16em; color:var(--muted); margin-top:8px;}
+.remoji{font-size:70px; margin:6px 0 2px; line-height:1;}
+.rname{font-family:'Jua',sans-serif; font-size:30px; margin:2px 0;}
+.rpx{font-family:'Jua',sans-serif; font-size:46px; margin:8px 0 2px;}
+.rpx small{font-size:19px; color:var(--muted);}
+.rdesc{color:var(--muted); font-size:15px; line-height:1.75; margin:14px 6px 4px; }
+.meter{margin:22px 4px 6px; text-align:left;}
+.meterhead{display:flex; justify-content:space-between; font-size:13px; color:var(--muted); margin-bottom:7px;}
+.rbar{height:16px; border-radius:99px; background:rgba(255,255,255,.09); overflow:hidden;}
+.rbarfill{height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg,var(--accent1),#ff8ad0); box-shadow:0 0 16px 1px var(--accent2); transition:width 1.1s cubic-bezier(.22,1,.36,1);}
+.scale4{display:flex; justify-content:space-between; font-size:10.5px; color:var(--muted); margin-top:6px; opacity:.8;}
+.rcards{text-align:left; margin:20px 0 6px; display:flex; flex-direction:column; gap:11px;}
+.rcard{background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:15px; padding:14px 16px;}
+.rcard h4{margin:0 0 6px; font-size:13.5px; letter-spacing:.03em; color:var(--accent1); font-weight:700;}
+.rcard p{margin:0; font-size:14.5px; line-height:1.65; color:var(--cream); }
+.rcard.hint h4{color:#ff8ad0;}
+.actions{display:flex; flex-direction:column; gap:10px; margin-top:20px;}
+.share{display:flex; gap:10px;}
+.share .btn{flex:1;}
+
+
+.toast{
+  position:fixed; left:50%; top:22px; transform:translateX(-50%) translateY(-24px);
+  background:rgba(30,22,52,.97); border:1.5px solid var(--accent1); color:var(--cream);
+  padding:12px 20px; border-radius:99px; font-size:14px; font-family:'Jua',sans-serif;
+  opacity:0; pointer-events:none; transition:opacity .35s, transform .35s; z-index:60; max-width:90vw;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+
+.footer{text-align:center; margin-top:30px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<canvas id="fx" style="position:fixed; inset:0; pointer-events:none; z-index:55;"></canvas>
+
+<div class="wrap">
+
+  
+  <section class="screen on home" id="home">
+    <div class="eyebrow">情緒解析度測驗</div>
+    <h1>我是用幾個像素<br><span class="grad">在感受的人</span>呢？</h1>
+    <div class="previewbox" id="homePrev">🫥</div>
+    <p class="sub">
+      有些人感受情緒 <b style="color:var(--cream)">「好、壞」</b> 只有兩格，<br>
+      有些人 <b style="color:var(--cream)">「有點失落卻又羨慕，但同時很自在」</b> 連細微的紋理都感受得到。<br>
+      同樣的瞬間，你的心會用幾個像素被記錄下來？
+    </p>
+    <div class="chips">
+      <span class="chip">12 個場景</span>
+      <span class="chip">約 2 分鐘</span>
+      <span class="chip">馬賽克→4K</span>
+    </div>
+    <div style="margin-top:16px;">
+      <button class="btn" id="startBtn">開始測定解析度 📷</button>
+    </div>
+  </section>
+
+  
+  <section class="screen" id="quiz">
+    <div class="topbar">
+      <div class="metaRow">
+        <span class="qn mono" id="qn">場景 1 / 12</span>
+        <span class="live grad" id="liveLabel">測定中…</span>
+      </div>
+      <div class="gauge"><div class="gaugefill" id="gauge"></div></div>
+      <div class="resline">
+        <div class="thumb" id="thumb">💗</div>
+        <div class="thumbcap">目前為止的情緒解析度<br><b id="livePct" class="mono">0%</b> — 越回答，內心越清晰</div>
+      </div>
+    </div>
+    <div class="qbody">
+      <div class="scene mono" id="scene">SCENE 01</div>
+      <h2 class="question" id="question">問題</h2>
+      <div class="opts" id="opts"></div>
+    </div>
+  </section>
+
+  
+  <section class="screen result" id="res">
+    <div class="rtier" id="rtier">YOUR RESOLUTION</div>
+    <div class="remoji" id="remoji">🖼️</div>
+    <div class="rname grad" id="rname">高解析度</div>
+    <div class="rpx mono" id="rpx">1080<small>px</small></div>
+    <p class="rdesc" id="rdesc"></p>
+
+    <div class="meter">
+      <div class="meterhead"><span>情緒解析度</span><span class="mono" id="rpctText">0%</span></div>
+      <div class="rbar"><div class="rbarfill" id="rbar"></div></div>
+      <div class="scale4"><span>馬賽克</span><span>SD</span><span>HD</span><span>4K</span></div>
+    </div>
+
+    <div class="rcards">
+      <div class="rcard"><h4>🔍 你是這樣的人</h4><p id="rc1"></p></div>
+      <div class="rcard"><h4>💎 你的強項</h4><p id="rc2"></p></div>
+      <div class="rcard hint"><h4>✨ 想再清晰一階</h4><p id="rc3"></p></div>
+    </div>
+
+    <div class="actions">
+      <div class="share">
+        <button class="btn" id="shareBtn">分享結果 🔗</button>
+        <button class="btn ghost" id="retryBtn">再測一次 ↺</button>
+      </div>
+    </div>
+  </section>
+
+  
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/zh-tw/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 多巴胺實驗室 — 看看其他測驗 →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意義與趣味工廠</span></div>
+    <div class="mf-logo">咪咪工廠 MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL股份有限公司 家族公司</div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script>
+
+
+const QUESTIONS=[
+ {s:"久違見面的朋友，整場都只講自己的事。回家的路上，你的心情是？",
+  o:[{t:"就是有點不太爽。",v:0},{t:"心情不太好，大概是累了吧。",v:1.5},{t:"一半是失落，一半是自己也沒開口的遺憾。有點寂寞。",v:3}]},
+ {s:"重要簡報前，心跳加速。你會把它叫做什麼？",
+  o:[{t:"好像只是狀態不太好。",v:0},{t:"我很焦慮。",v:1.5},{t:"一半緊張、一半期待。想做好的心情先在身體上冒出來了。",v:3}]},
+ {s:"在社群上看到朋友的好消息。留言祝賀時，心裡真正的想法是？",
+  o:[{t:"不錯嘛，然後就滑過去了。",v:0},{t:"替他開心，但也有點羨慕。",v:1.5},{t:"祝福、淡淡的忌妒、還有自己也跟著焦急起來的不安，三層疊在一起。",v:3}]},
+ {s:"結束一天躺下後，莫名覺得心裡沉沉的。你會？",
+  o:[{t:"就睡了，反正有時候就是這樣。",v:0},{t:"稍微想一下為什麼會這樣。",v:1.5},{t:"找出這份沉重的真面目。剛才那句話？一直拖著的事？一個一個替它們取名字。",v:3}]},
+ {s:"被問到「你現在心情怎麼樣？」時，你通常會？",
+  o:[{t:"用「好／還好／不太好」其中一個回答。",v:0},{t:"在好或壞後面，補上一句理由。",v:1.5},{t:"用像「有點期待又有點不安」這樣，混合兩三個詞來回答。",v:3}]},
+ {s:"你生氣了。靜靜看進那份怒氣，會發現？",
+  o:[{t:"生氣就是生氣，就是氣了。",v:0},{t:"至少分得出是煩躁還是憤怒。",v:1.5},{t:"看得出那份紋理 — 是被忽視的感覺、是委屈、還是失望。",v:3}]},
+ {s:"聽著喜歡的音樂時，你的情緒是？",
+  o:[{t:"好聽，這樣就夠了。",v:0},{t:"大致分成嗨的歌／悲傷的歌。",v:1.5},{t:"能感覺到像「懷念卻溫暖」「有點孤單卻很自在」這樣微妙的色彩。",v:3}]},
+ {s:"平常你會用多少描述情緒的詞？",
+  o:[{t:"大概是開心、難過、生氣、驚訝。",v:0},{t:"失落、驕傲、暢快這類詞我常用。",v:1.5},{t:"鼻酸、悵然、憐惜、尷尬…我會挑細膩的詞來用。",v:3}]},
+ {s:"有人問「你怎麼了？」時，你會？",
+  o:[{t:"常常回「不知道，就這樣」。",v:0},{t:"想努力解釋，但一直找不到合適的詞。",v:1.5},{t:"我能用相對精準的詞說出自己的狀態。",v:3}]},
+ {s:"看了一部悲傷的電影。結束後留下的是？",
+  o:[{t:"哭了或沒哭，二選一。",v:0},{t:"大概留下「很難過」或「很感動」。",v:1.5},{t:"我能想起是哪一幕、哪種紋理觸動了我。",v:3}]},
+ {s:"你會把身體訊號（胸悶、喉嚨哽住）跟情緒連起來嗎？",
+  o:[{t:"身體是身體，心是心，很少把它們連在一起。",v:0},{t:"偶爾會連到「啊，是壓力吧」這種程度。",v:1.5},{t:"胸口一緊是不安、喉嚨一哽是委屈…我用身體讀情緒。",v:3}]},
+ {s:"如果要把複雜的一天寫成日記或筆記？",
+  o:[{t:"沒什麼好寫的，頂多「今天好累」。",v:0},{t:"以發生了什麼事為主來記錄。",v:1.5},{t:"我能把當下每一刻感受到的情緒紋理，用文字細細寫出來。",v:3}]}
+];
+
+const TIERS=[
+ {min:0, key:"馬賽克解析度", tier:"8-BIT · MOSAIC", emoji:"🟫", px:240,
+  a1:"#c9a06b", a2:"#a5794b", bg1:"#1c1526", bg2:"#2c2033",
+  desc:"你用大顆的像素在感受情緒，用「好／壞」兩三格就把世界裝了下來。相對地，你決斷很快，不會為了小情緒晃動太久。",
+  c1:"再複雜的情緒，你也傾向濃縮成「還好」或「不太行」。心夠簡單，所以不太記仇。",
+  c2:"不被情緒吞沒的力量。當別人被細碎的心情牽著走時，你看著的是大局。",
+  c3:"當「不太好」冒出來時，試著再多加一個詞。生氣？失落？累了？只要多一個像素，世界就會清晰一點。"},
+ {min:31, key:"標準解析度", tier:"SD · STANDARD", emoji:"📺", px:480,
+  a1:"#ffb56b", a2:"#ff8a5b", bg1:"#221530", bg2:"#3a1f3a",
+  desc:"基本情緒你分得很清楚，開心、難過、生氣、不安都抓得準。微妙的中間色還會糊掉，但已經是相當清晰的畫面了。",
+  c1:"你會替情緒命名，像「今天有點失落」，但好幾種情緒疊在一起時，就傾向揉成一團。",
+  c2:"能把自己的情緒說出口的人。在關係裡誤會少，該表達時也坦率。",
+  c3:"試著放下「一個瞬間只會有一種情緒」的想法。當你找到像「開心又有點不捨」這種*疊層情緒*的那一刻，解析度就會瞬間拉高。"},
+ {min:56, key:"高解析度", tier:"HD · HIGH-DEF", emoji:"🖼️", px:1080,
+  a1:"#8fd0ff", a2:"#6c7bff", bg1:"#141024", bg2:"#241a3d",
+  desc:"你的內心很清晰。你察覺得到層層情緒的紋理，也大致說得出原因。你是很會讀懂自己與他人細膩之處的人。",
+  c1:"你能自然感受到像「有點失落但還是很感謝」這種雙重情緒，也習慣回溯情緒的原因。",
+  c2:"細膩的同理心。對方沒說出口你也讀得到那份紋理，自己的情緒也處理得很細緻。你有把衝突溫柔化解的力量。",
+  c3:"試著把感受到的紋理留成*紀錄*。用文字抓住瞬間微妙之處的習慣，會把你帶進4K。"},
+ {min:81, key:"超高解析度", tier:"4K · ULTRA HD", emoji:"💎", px:2160,
+  a1:"#ff9ecb", a2:"#c46bff", bg1:"#1c0f2a", bg2:"#33143f",
+  desc:"你用超高解析度在感受情緒，連細微的漸層都能用語言抓住。你分得出悵然、鼻酸、尷尬之間的差別，甚至把身體訊號都翻譯成情緒。",
+  c1:"就算一個瞬間疊了三四層情緒，你也一一察覺並替它們命名。你的情緒地圖非常細密。",
+  c2:"深刻的自我理解與同理心。那是藝術感受力與細膩關係經營的源頭。在你身邊的人，會感覺自己「被懂了」。",
+  c3:"太清晰的畫面，有時也會讓人累。別想解讀每一種情緒，偶爾也允許自己切到*單純去感受、然後放它流走*的低解析度模式吧。"}
+];
+
+
+let idx=0, total=0, answered=0, order=[];
+const MAXPER=3;
+const HUES=[["#8fd0ff","#6c7bff"],["#ffd56b","#ffb347"],["#a0f0c0","#4fd1a0"],["#ff9ecb","#ff6b9e"],["#ffb38a","#ff7a5b"],["#c9a0ff","#8a5bff"]];
+
+
+function $(id){return document.getElementById(id);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt; function toast(m){const t=$('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),1900);}
+function tierFor(pct){let r=TIERS[0]; for(const t of TIERS){ if(pct>=t.min) r=t; } return r;}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); $(id).classList.add('on'); window.scrollTo(0,0);}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function fmt(s,color){return esc(s).replace(/\*([^*]+)\*/g,'<b style="color:'+color+'">$1</b>');}
+
+
+function burst(x,y,big){
+  if(typeof confetti!=='function') return;
+  const opt={particleCount:big?70:18, spread:big?90:55, startVelocity:big?42:26,
+    origin:{x:x/innerWidth, y:y/innerHeight}, scalar:big?1:.8,
+    colors:['#8fd0ff','#c46bff','#ff9ecb','#ffd56b','#6c7bff']};
+  confetti(opt);
+  if(big) setTimeout(()=>confetti(Object.assign({},opt,{angle:120})),180);
+}
+
+
+function start(){
+  idx=0; total=0; answered=0;
+  order=QUESTIONS.map((q,i)=>i); // 題目順序固定(沉浸在場景裡), 只洗選項
+  applyTheme(TIERS[2]); // HD 重設為基本色調
+  $('gauge').style.width='0%'; $('livePct').textContent='0%'; $('liveLabel').textContent='測定中…';
+  $('thumb').style.filter='blur(13px)';
+  show('quiz'); render();
+}
+function applyTheme(t){
+  const r=document.documentElement.style;
+  r.setProperty('--accent1',t.a1); r.setProperty('--accent2',t.a2);
+  r.setProperty('--bg1',t.bg1); r.setProperty('--bg2',t.bg2);
+}
+function render(){
+  const q=QUESTIONS[idx];
+  $('qn').textContent=`場景 ${idx+1} / ${QUESTIONS.length}`;
+  $('scene').textContent='SCENE '+String(idx+1).padStart(2,'0');
+  const qEl=$('question'); qEl.textContent=q.s;
+  qEl.classList.remove('pop'); void qEl.offsetWidth; qEl.classList.add('pop');
+
+  const opts=shuffle(q.o.map(o=>Object.assign({},o)));
+  const box=$('opts'); box.innerHTML='';
+  const labs=['A','B','C','D'];
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt'; b.type='button';
+    b.innerHTML=`<span class="lab">${labs[i]}</span><span>${esc(o.t)}</span>`;
+    b.addEventListener('click',ev=>pick(o.v,b,ev));
+    box.appendChild(b);
+  });
+}
+function pick(v,btn,ev){
+  btn.classList.add('picked');
+  document.querySelectorAll('.opt').forEach(o=>o.style.pointerEvents='none');
+  total+=v; answered++;
+  const pct=Math.round((total/(answered*MAXPER))*100);
+
+  $('gauge').style.width=pct+'%';
+  $('livePct').textContent=pct+'%';
+  const lt=tierFor(pct);
+  $('liveLabel').textContent='目前為止 '+lt.key;
+  $('thumb').style.filter='blur('+(13*(1-pct/100)).toFixed(1)+'px)';
+  $('thumb').textContent=lt.emoji;
+
+
+  const h=HUES[answered%HUES.length];
+  document.documentElement.style.setProperty('--accent1',h[0]);
+  document.documentElement.style.setProperty('--accent2',h[1]);
+  vibrate(24);
+  const r=btn.getBoundingClientRect(); burst(r.left+r.width/2, r.top+r.height/2, false);
+
+  if(answered===6){ toast('過一半了！畫面正在變清晰 🔍'); vibrate([18,40,18]); }
+
+  setTimeout(()=>{
+    idx++;
+    if(idx>=QUESTIONS.length) finish();
+    else render();
+  },430);
+}
+function finish(){
+  const pct=Math.round((total/(QUESTIONS.length*MAXPER))*100);
+  const t=tierFor(pct);
+  applyTheme(t);
+  $('rtier').textContent=t.tier;
+  $('remoji').textContent=t.emoji;
+  $('rname').textContent=t.key;
+
+  const px=t.px;
+  $('rpx').innerHTML=px.toLocaleString()+'<small>px</small>';
+  $('rdesc').textContent=t.desc;
+  $('rc1').innerHTML=fmt(t.c1,'var(--cream)');
+  $('rc2').innerHTML=fmt(t.c2,'var(--cream)');
+  $('rc3').innerHTML=fmt(t.c3,'#ff8ad0');
+  $('rpctText').textContent=pct+'%';
+  show('res');
+  vibrate([50,70,50,70,110]);
+  setTimeout(()=>{ $('rbar').style.width=pct+'%'; },120);
+  setTimeout(()=>burst(innerWidth/2, innerHeight*0.32, true),260);
+  toast(t.emoji+' '+t.key+'測定完成！');
+}
+function share(){
+  const t=tierFor(Math.round((total/(QUESTIONS.length*MAXPER))*100));
+  const text=`我是用「${t.key}」在感受的人 ${t.emoji} 我的情緒解析度是幾個像素？`;
+  const url=location.href.split('?')[0];
+  if(navigator.share){ navigator.share({title:'我的情緒解析度',text,url}).catch(()=>{}); }
+  else {
+    const done=()=>toast('結果文字已複製 📋');
+    if(navigator.clipboard) navigator.clipboard.writeText(text+' '+url).then(done).catch(done);
+    else done();
+  }
+  burst(innerWidth/2, innerHeight*0.5, true);
+}
+
+
+$('startBtn').addEventListener('click',start);
+$('retryBtn').addEventListener('click',()=>{show('home'); $('homePrev').textContent='🫥';});
+$('shareBtn').addEventListener('click',share);
+
+
+(function(){
+  const faces=['🫥','😐','🙂','🥹'];
+  let i=0; const el=$('homePrev');
+  setInterval(()=>{ if(document.getElementById('home').classList.contains('on')){ i=(i+1)%faces.length; el.textContent=faces[i]; } },1200);
+})();
+
+
+const fx=$('fx'); function sizeFx(){fx.width=innerWidth; fx.height=innerHeight;} sizeFx(); addEventListener('resize',sizeFx);
+</script>
+</body>
+</html>
