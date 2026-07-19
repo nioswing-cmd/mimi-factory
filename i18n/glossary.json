@@ -1,0 +1,17 @@
+{
+  "_note": "브랜드 고정 용어집 — 번역 단계에서 임의 변경 금지",
+  "terms": {
+    "미미팩토리":     { "ja": "ミミファクトリー", "en": "MIMI FACTORY",             "zh-tw": "咪咪工廠" },
+    "의미와재미공장": { "ja": "意味と面白さの工場", "en": "The Meaning & Fun Factory", "zh-tw": "意義與趣味工廠" },
+    "밤의 서재":      { "ja": "夜の書斎",           "en": "The Night Library",         "zh-tw": "夜之書齋" },
+    "도파민 실험실":  { "ja": "ドーパミン実験室",   "en": "Dopamine Lab",              "zh-tw": "多巴胺實驗室" },
+    "둘의 피크닉":    { "ja": "ふたりのピクニック", "en": "Picnic for Two",            "zh-tw": "兩人的野餐" },
+    "완독 리포트":    { "ja": "読了レポート",       "en": "Reading Report",            "zh-tw": "完讀報告" }
+  },
+  "footer_caption": {
+    "ko": "주식회사 연:결 패밀리회사",
+    "ja": "株式会社ヨンギョル ファミリーカンパニー",
+    "en": "YEON:GYEOL Inc. Family Company",
+    "zh-tw": "YEON:GYEOL股份有限公司 家族公司"
+  }
+}

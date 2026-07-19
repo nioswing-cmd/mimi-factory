@@ -8,3 +8,6 @@ __pycache__/
 자료/*.jpeg
 자료/*.webp
 자료/*/
+
+# i18n 원본 폰트 (재다운로드 가능한 대용량 바이너리)
+i18n/fonts_src/*.ttf

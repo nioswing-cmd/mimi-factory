@@ -53,6 +53,8 @@ jobs:
             .claude/**
             .github/**
             scripts/**
+            i18n/**
+            reports/**
             docs/**
             독서퀴즈/**
             강의퀴즈/**
