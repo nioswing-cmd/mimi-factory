@@ -13,6 +13,18 @@
    "desc": "散らかるのは、なまけだからじゃない — いまの集中力の状態をやさしくチェック"
   },
   {
+   "id": "ai-new-human",
+   "type": "test",
+   "title": "AI新人類テスト",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/ai-new-human.html",
+   "premium": "apps/ai-new-human.html",
+   "desc": "AIが仕事を飲み込む時代、生き残る8タイプ。あなたの生存キャラは？"
+  },
+  {
    "id": "tarot",
    "type": "test",
    "title": "タロット心理カード",

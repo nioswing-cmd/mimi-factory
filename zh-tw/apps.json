@@ -13,6 +13,18 @@
    "desc": "分心不是懶惰 — 溫柔地檢視你現在的專注力狀態"
   },
   {
+   "id": "ai-new-human",
+   "type": "test",
+   "title": "AI 新人類測驗",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/ai-new-human.html",
+   "premium": "apps/ai-new-human.html",
+   "desc": "AI 吞噬工作的時代，8 種人活下來。你是哪種生存角色？"
+  },
+  {
    "id": "tarot",
    "type": "test",
    "title": "塔羅心理卡",

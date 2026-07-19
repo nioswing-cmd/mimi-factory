@@ -13,6 +13,18 @@
    "desc": "Being scattered isn’t laziness — a gentle check-in on where your focus is now"
   },
   {
+   "id": "ai-new-human",
+   "type": "test",
+   "title": "AI New Human Test",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/ai-new-human.html",
+   "premium": "apps/ai-new-human.html",
+   "desc": "AI is swallowing jobs — 8 types survive. Which is your survival character?"
+  },
+  {
    "id": "tarot",
    "type": "test",
    "title": "Tarot Mind Cards",

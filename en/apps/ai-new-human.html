@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>AI New Human Test — What’s Your AI-Era Survival Character?</title>
+<meta property="og:title" content="AI New Human Test — Which new human am I?">
+<meta property="og:description" content="In an age where AI swallows jobs, only 8 types survive. Find your AI-era survival character in 24 questions.">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#0b0e24; --bg2:#121a3e; --card:#181f45; --line:#2b356a;
+  --ink:#eef1ff; --sub:#9aa2d4; --accent:#46e0d0; --accent2:#8a7bff;
+  --point:#5ee7ff; --char:#5ee7ff;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 85% -10%, rgba(70,224,208,.12), transparent 55%),
+             radial-gradient(100% 80% at 5% 110%, rgba(138,123,255,.14), transparent 52%),
+             linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--point),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:4vh;}
+.hero .robo{font-size:60px;animation:float 3.4s ease-in-out infinite;}
+.hero h1{font-size:42px;line-height:1.15;margin:10px 0 8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;overflow-wrap:break-word;}
+.sub b{color:var(--ink);}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:13.5px;line-height:1.7;overflow-wrap:break-word;}
+.pitch b{color:var(--point);}
+.pitch .grid8{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;margin-top:8px;}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;overflow-wrap:break-word;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#08121e;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--point),var(--accent2));
+  box-shadow:0 10px 26px -8px rgba(94,231,255,.5);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+
+.pillars{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 12px 10px;margin-bottom:16px;}
+.prow{display:flex;justify-content:space-between;align-items:flex-end;height:64px;gap:5px;}
+.pcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end;}
+.pbar{width:100%;max-width:24px;height:0%;border-radius:7px 7px 3px 3px;transition:height .5s cubic-bezier(.22,1,.36,1);min-height:4px;}
+.pcol .plab{font-family:'Jua',sans-serif;font-size:12px;color:var(--sub);}
+.pillars .cap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:9px;opacity:.8;overflow-wrap:break-word;}
+.count{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);text-align:center;margin-bottom:8px;}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent);}
+.qtext{font-size:21px;font-weight:700;line-height:1.5;margin-top:8px;overflow-wrap:break-word;}
+.qhint{font-size:13px;color:var(--sub);margin-top:8px;}
+.opts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:16px 8px;
+  font-size:15px;color:var(--ink);text-align:center;cursor:pointer;font-family:inherit;line-height:1.4;overflow-wrap:break-word;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.opt:active{transform:scale(.94);}
+.opt .em{display:block;font-size:22px;margin-bottom:5px;}
+
+
+.res-hero{text-align:center;margin-top:6px;position:relative;}
+.charcard{background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:2px solid var(--char);border-radius:24px;padding:26px 20px 22px;
+  box-shadow:0 0 40px -12px var(--char);}
+.charcard .kicker{font-size:12.5px;letter-spacing:.12em;color:var(--sub);}
+.res-emo{font-size:70px;line-height:1;margin:8px 0 4px;display:inline-block;animation:float 3.2s ease-in-out infinite;}
+.res-type{font-family:'Jua',sans-serif;font-size:32px;margin:2px 0 2px;line-height:1.25;color:var(--char);}
+.res-en{font-size:13px;letter-spacing:.14em;color:var(--sub);text-transform:uppercase;}
+.res-tag{color:var(--ink);font-size:15px;line-height:1.7;overflow-wrap:break-word;margin-top:12px;}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:18px;}
+.chart .ct{font-family:'Jua',sans-serif;font-size:16px;margin-bottom:6px;}
+.crow{display:flex;align-items:center;gap:10px;margin-top:9px;font-size:13px;}
+.crow .cl{width:96px;flex-shrink:0;}
+.cbar{flex:1;height:11px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;}
+.cfill{height:100%;width:0;border-radius:99px;transition:width .9s cubic-bezier(.22,1,.36,1);}
+.crow .cv{width:32px;text-align:right;font-family:'Jua',sans-serif;color:var(--point);}
+.tips{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px 18px;margin-top:14px;font-size:14.5px;line-height:1.75;overflow-wrap:break-word;}
+.tips b{color:var(--point);}
+.tips .row{margin-top:13px;}
+.tips .row:first-child{margin-top:0;}
+.partner{background:linear-gradient(120deg,rgba(138,123,255,.14),rgba(94,231,255,.08));
+  border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin-top:14px;text-align:center;}
+.partner .pt{font-size:12.5px;letter-spacing:.1em;color:var(--sub);}
+.partner .pn{font-family:'Jua',sans-serif;font-size:22px;margin:6px 0 4px;}
+.partner .pd{font-size:13.5px;color:var(--sub);line-height:1.65;overflow-wrap:break-word;}
+.srcbox{font-size:12px;color:var(--sub);line-height:1.65;margin-top:14px;background:rgba(255,255,255,.04);
+  border:1px solid var(--line);border-radius:14px;padding:12px 14px;overflow-wrap:break-word;}
+.srcbox b{color:var(--ink);}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(24,31,69,.97);border:1.5px solid var(--point);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.hall-nav{text-align:center;margin:22px 0 4px;}
+.hall-nav a{display:inline-block;padding:10px 22px;border:1px solid rgba(150,150,180,.4);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85;}
+.footer{text-align:center;margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(94,231,255,.5));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#8f97c8;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#8f97c8;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<canvas id="fx" style="position:fixed;inset:0;pointer-events:none;z-index:40;"></canvas>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <div class="robo">🤖</div>
+      <span class="badge">🧪 Dopamine Lab · Surviving the AI Era</span>
+      <h1><span class="grad">AI New Human</span> Test</h1>
+      <p class="sub">In an age where AI is swallowing jobs,<br>the people who still survive come in just <b>8 types</b>.<br>Which <b>new human</b>are you evolving into?</p>
+    </div>
+    <div class="pitch">
+      <b>8 new humans growing inside you</b>
+      <div class="grid8">
+        <span>🎛️ The AI Tamer</span><span>🎨 The Soul Artisan</span>
+        <span>🌉 The Connector</span><span>🧭 The Questioner</span>
+        <span>🛡️ The Anchor</span><span>🚀 The Pioneer</span>
+        <span>🔭 The Synthesizer</span><span>🌱 The Lifelong Learner</span>
+      </div>
+      After all 24 questions, you’ll get your <b>lead character · survival strategy · best partner</b>.
+    </div>
+    <button class="btn" onclick="startQuiz()">🚀 Find my survival character</button>
+    <p class="note">※ Which option leads to which character stays <b>hidden.</b> The more honestly you answer — watching only the gauge — the truer your result.</p>
+  </section>
+
+  
+  <section id="scQuiz" class="screen">
+    <div class="pillars">
+      <div class="prow" id="prow"></div>
+      <div class="cap">The pillars of all 8 new humans grow — who’s who is revealed at the end!</div>
+    </div>
+    <div class="count" id="qCount">1 / 24</div>
+    <div class="qcard">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qhint">👉 How much is this you?</div>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="charcard">
+        <div class="kicker">You’re this kind of new human</div>
+        <div class="res-emo" id="resEmo"></div>
+        <div class="res-type" id="resType"></div>
+        <div class="res-en" id="resEn"></div>
+        <p class="res-tag" id="resTag"></p>
+      </div>
+    </div>
+    <div class="chart">
+      <div class="ct">🧬 The map of 8 new humans inside me</div>
+      <div id="chart"></div>
+      <div style="font-size:12px;color:var(--sub);margin-top:10px;opacity:.85;overflow-wrap:break-word;">The tallest peak is your lead character; the second is your trusty sidekick.</div>
+    </div>
+    <div class="tips" id="tips"></div>
+    <div class="partner" id="partner"></div>
+    <div class="srcbox">🧭 <b>This test</b> was born from one idea: “AI won’t replace people — people who use AI well will replace those who don’t.” It doesn’t measure ability so much as reflect <b>your survival-strategy leanings</b> — a self-check just for reference.</div>
+    <button class="btn" onclick="copyResult()">📋 Copy my result to share</button>
+    <button class="btn ghost" onclick="location.reload()">Take the test again</button>
+  </section>
+
+  <div class="hall-nav"><a href="https://mimifactory.vibekr.com/en/test.html" target="_blank" rel="noopener">🧪 Dopamine Lab — more tests this way →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>The Meaning & Fun Factory</span></div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+  </div>
+</div>
+
+<script>
+
+const QUESTIONS=[
+ {k:"T",q:"When a new AI tool drops, I try it first and start figuring out how to plug it into my work"},
+ {k:"T",q:"Anything repetitive, I hunt for a way to automate it or hand it off"},
+ {k:"T",q:"I enjoy tweaking my prompts over and over, taming the AI until it gives me what I want"},
+ {k:"R",q:"I can’t stand output that looks like everyone else’s — it has to carry my taste and my touch"},
+ {k:"R",q:"I’m drawn more to something rough and human than to something slick the AI made"},
+ {k:"R",q:"I want people to say “only that person could have made this”"},
+ {k:"C",q:"When I meet a great person or find good info, I connect them straight to whoever might need it"},
+ {k:"C",q:"Gathering people and getting something started excites me more than working solo"},
+ {k:"C",q:"In the end, I believe it’s people who remain — in work and in life"},
+ {k:"Q",q:"I linger longer on “what should we even be solving?” than on the answer"},
+ {k:"Q",q:"In meetings, I often name the ‘real problem’ everyone else missed"},
+ {k:"Q",q:"I habitually ask back, “Why?” and “What actually matters here?”"},
+ {k:"A",q:"When everyone’s rushing, I stop once to ask whether it’s even the right direction"},
+ {k:"A",q:"The values and principles I want to keep come before speed or trends"},
+ {k:"A",q:"No matter how the tech changes, I have my own standards that don’t waver"},
+ {k:"P",q:"I get a thrill from being first to try something nobody’s doing yet"},
+ {k:"P",q:"I’d rather just go for it and learn by doing, even if I fail"},
+ {k:"P",q:"The moment I think “this could work,” I dive in faster than anyone"},
+ {k:"S",q:"I love weaving scattered bits of info into “so this is where it’s all heading”"},
+ {k:"S",q:"I connect fields that seem unrelated and spark new ideas from them"},
+ {k:"S",q:"I tend to see the big picture and the context before the details"},
+ {k:"L",q:"I always assume what I’m good at today could be useless in a few years"},
+ {k:"L",q:"Learning something new isn’t stress to me — it’s fun"},
+ {k:"L",q:"Even if my environment or job changes, I’m confident I can relearn and adapt"},
+];
+const CHAR={
+ T:{emo:"🎛️",name:"The AI Tamer",en:"The Tamer",color:"#ff9f45",
+    tag:"You bend AI to your will like a tool. In your hands, one AI does the work of ten people.",
+    who:"You don’t fear new tools — you plug them straight into your work. Repetition gets automated away, and you spend the freed-up time on what really matters.",
+    strat:"You treat AI as an amplifier, not a threat. Master the tools deeply, but grow the judgment and taste no tool can replace, and you’re unstoppable.",
+    weak:"Skilled with tools but empty on the ‘what’ and ‘why,’ you just do other people’s work faster. Pair with a Questioner who gives you direction.",
+    partner:"Q"},
+ R:{emo:"🎨",name:"The Soul Artisan",en:"The Artisan",color:"#ff6b9e",
+    tag:"The human touch AI can’t fake. What only you can make is your weapon.",
+    who:"You’re drawn to originals steeped in taste and craft, not slick mass production. You want to hear “only that person could’ve made this.”",
+    strat:"In an age of sameness, rarity is value. Let AI scale the quantity, but the final 0.1% of taste — that’s the human signature, and it’s your brand.",
+    weak:"If perfectionism keeps you from ever shipping, no one will know. Borrow the reach of a Connector.",
+    partner:"C"},
+ C:{emo:"🌉",name:"The Connector",en:"The Connector",color:"#7aa6ff",
+    tag:"The hub linking person to person, person to AI. Your relationships are your capital.",
+    who:"Meet a great person or a good lead, and you connect them to whoever needs it. You come alive when you gather people and set the stage.",
+    strat:"When information is free, what’s left is who you know and who trusts you. Use AI as a megaphone to widen your reach, but build trust human to human.",
+    weak:"Flow too wide and too shallow and nothing sticks. Team up with one Artisan who digs deep, and your network becomes a masterpiece.",
+    partner:"R"},
+ Q:{emo:"🧭",name:"The Questioner",en:"The Questioner",color:"#ffd93d",
+    tag:"When answers are free, a good question is power. You set the direction.",
+    who:"You dwell on “what should we even solve?” longer than on the answer. Sometimes you name the real problem everyone else missed.",
+    strat:"AI is just an answer machine — deciding what to ask is a human’s job. Sharpen how you define problems, and no matter what tool arrives, you’re in the driver’s seat.",
+    weak:"Questions with no execution leave you a daydreamer. Pair with a Tamer’s follow-through and your questions turn into results.",
+    partner:"T"},
+ A:{emo:"🛡️",name:"The Anchor",en:"The Anchor",color:"#4fc98d",
+    tag:"When everything shakes, you hold a standard. In an age of speed, you keep the direction.",
+    who:"When everyone’s rushing, you stop once to ask “is this right?” Values you want to keep come before trends.",
+    strat:"The faster tech moves, the more precious the ethics and center of “why” and “how far.” An unshakable standard becomes trust — and trust can’t be replaced.",
+    weak:"Too much caution and you miss the chance. Keep a Pioneer’s drive beside you and split the gas pedal and the brake between you.",
+    partner:"P"},
+ P:{emo:"🚀",name:"The Pioneer",en:"The Pioneer",color:"#ff5e5e",
+    tag:"While others hesitate, you jump on first. You’re the one who opens new ground.",
+    who:"You feel the thrill of trying what no one has. Even if it flops, you just go for it and learn.",
+    strat:"The faster things change, the more the first-mover wins. Fast experiments and fast learning are your weapon — just record what you learn so it becomes an asset.",
+    weak:"All launch and no landing or direction, and you burn out. With an Anchor beside you, the sprint becomes a voyage.",
+    partner:"A"},
+ S:{emo:"🔭",name:"The Synthesizer",en:"The Synthesizer",color:"#b78bf5",
+    tag:"You read the current inside the flood of information. The one who connects the dots into a picture.",
+    who:"You weave scattered info into “so this is the trend,” linking fields that seem unrelated.",
+    strat:"AI hands you the pieces but never the context. Cross-field fusion and the big picture are your irreplaceable turf.",
+    weak:"Draw only the big picture and you may drop execution and detail. Team up with a Lifelong Learner to keep your insight fresh.",
+    partner:"L"},
+ L:{emo:"🌱",name:"The Lifelong Learner",en:"The Learner",color:"#5ee7d8",
+    tag:"Even if your job disappears, you learn again. Adaptability is your last insurance policy.",
+    who:"You always assume what you’re good at now could soon go stale. Learning itself is the fun part.",
+    strat:"It’s not what you know but how fast you can relearn that decides survival. Sharpen the way you learn, and you’ll pass through any change.",
+    weak:"Learn without using it and you stay a knowledge collector. Pair with a Synthesizer to slot what you learn into the big picture.",
+    partner:"S"},
+};
+const KEYS=["T","R","C","Q","A","P","S","L"];
+
+let idx=0, score={}, pillarMap=[], deck=[];
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1900);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function startQuiz(){
+  idx=0; score={}; KEYS.forEach(k=>score[k]=0);
+  deck=shuffle([...QUESTIONS]);
+  pillarMap=shuffle([...KEYS]);
+  const pr=$('prow'); pr.innerHTML="";
+  pillarMap.forEach((k,i)=>{
+    pr.innerHTML+="<div class='pcol'><div class='pbar' id='pb"+i+"' style='background:linear-gradient(180deg,"+CHAR[k].color+",rgba(255,255,255,.05))'></div><div class='plab'>?</div></div>";
+  });
+  show('scQuiz'); render();
+}
+function render(){
+  const Q=deck[idx];
+  $('qCount').textContent=(idx+1)+" / "+deck.length;
+  $('qNum').textContent="Q"+(idx+1);
+  const qt=$('qText'); qt.textContent=Q.q;
+  qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const box=$('opts'); box.innerHTML="";
+  [["🙌","Totally me",2],["🤔","Kind of?",1],["🙅","Not me",0]].forEach(([em,t,pt])=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button";
+    b.innerHTML="<span class='em'>"+em+"</span>"+t;
+    b.addEventListener('click',()=>pick(Q.k,pt));
+    box.appendChild(b);
+  });
+}
+function pick(k,pt){
+  vibrate(22); score[k]+=pt;
+  pillarMap.forEach((e,i)=>{ $('pb'+i).style.height=(score[e]/6*100)+"%"; });
+  idx++;
+  if(idx>=deck.length){ setTimeout(showResult,450); return; }
+  setTimeout(render,240);
+}
+function showResult(){
+  const sorted=[...KEYS].sort((a,b)=>score[b]-score[a]);
+  const t1=CHAR[sorted[0]], t2=CHAR[sorted[1]], pn=CHAR[t1.partner];
+  document.documentElement.style.setProperty('--char',t1.color);
+  show('scResult'); vibrate([30,50,30,50,90]); burst();
+  $('resEmo').textContent=t1.emo;
+  $('resType').textContent=t1.name;
+  $('resEn').textContent=t1.en;
+  $('resTag').textContent=t1.tag;
+  const ch=$('chart'); ch.innerHTML="";
+  KEYS.slice().sort((a,b)=>score[b]-score[a]).forEach((k,i)=>{
+    const e=CHAR[k], pct=Math.round(score[k]/6*100);
+    ch.innerHTML+="<div class='crow'><span class='cl'>"+e.emo+" "+e.name+"</span><div class='cbar'><div class='cfill' data-w='"+pct+"' style='background:linear-gradient(90deg,"+e.color+"cc,"+e.color+")'></div></div><span class='cv'>"+score[k]+"</span></div>";
+  });
+  setTimeout(()=>{document.querySelectorAll('.cfill').forEach(f=>{f.style.width=f.dataset.w+"%";});},150);
+  $('tips').innerHTML=
+    "<div class='row'><b>🔍 This is you</b><br>"+t1.who+"</div>"+
+    "<div class='row'><b>🛠️ Your AI-era survival strategy</b><br>"+t1.strat+"</div>"+
+    "<div class='row'><b>⚠️ Just watch out for this</b><br>"+t1.weak+"</div>"+
+    "<div class='row'><b>🧩 Your trusty sidekick</b> — "+t2.emo+" "+t2.name+". This side of you is growing right alongside the rest.</div>";
+  $('partner').innerHTML=
+    "<div class='pt'>💞 Unstoppable together — your best-partner new human</div>"+
+    "<div class='pn'>"+pn.emo+" "+pn.name+"</div>"+
+    "<div class='pd'>"+pn.tag+"</div>";
+  window._resText="🤖 AI New Human Test\nI’m 「"+t1.emo+" "+t1.name+"」("+t1.en+")\n\""+t1.tag+"\"\nSidekick: "+t2.emo+" "+t2.name+" / Partner: "+pn.emo+" "+pn.name+"\n\nWhich new human are you? → https://mimifactory.vibekr.com/en/apps/ai-new-human.html";
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("Copied! Paste it anywhere 📋")); }
+  else toast("Press and hold to copy");
+  vibrate(20);
+}
+
+
+function burst(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const cv=$('fx'), ctx=cv.getContext('2d');
+  cv.width=innerWidth; cv.height=innerHeight;
+  const cols=["#5ee7ff","#8a7bff","#ff6b9e","#ffd93d","#4fc98d","#ff9f45"];
+  let ps=[];
+  for(let i=0;i<120;i++){
+    ps.push({x:innerWidth/2,y:innerHeight*0.32,
+      vx:(Math.random()-0.5)*13, vy:Math.random()*-13-4,
+      g:0.32, s:Math.random()*6+4, c:cols[i%cols.length], a:1, r:Math.random()*6});
+  }
+  let t=0;
+  (function frame(){
+    ctx.clearRect(0,0,cv.width,cv.height); t++;
+    ps.forEach(p=>{p.vy+=p.g; p.x+=p.vx; p.y+=p.vy; p.a-=0.008; p.r+=0.2;
+      ctx.save(); ctx.globalAlpha=Math.max(0,p.a); ctx.translate(p.x,p.y); ctx.rotate(p.r);
+      ctx.fillStyle=p.c; ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*1.6); ctx.restore();});
+    if(t<150) requestAnimationFrame(frame); else ctx.clearRect(0,0,cv.width,cv.height);
+  })();
+}
+</script>
+</body>
+</html>

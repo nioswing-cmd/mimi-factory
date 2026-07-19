@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>AI 新人類測驗 — AI 時代，我是哪種生存角色？</title>
+<meta property="og:title" content="AI 新人類測驗 — 我是哪一種新人類">
+<meta property="og:description" content="AI 吞噬工作的時代，活下來的人只有 8 種。24 題找出你的 AI 時代生存角色。">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#0b0e24; --bg2:#121a3e; --card:#181f45; --line:#2b356a;
+  --ink:#eef1ff; --sub:#9aa2d4; --accent:#46e0d0; --accent2:#8a7bff;
+  --point:#5ee7ff; --char:#5ee7ff;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 85% -10%, rgba(70,224,208,.12), transparent 55%),
+             radial-gradient(100% 80% at 5% 110%, rgba(138,123,255,.14), transparent 52%),
+             linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--point),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:4vh;}
+.hero .robo{font-size:60px;animation:float 3.4s ease-in-out infinite;}
+.hero h1{font-size:42px;line-height:1.15;margin:10px 0 8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;}
+.sub b{color:var(--ink);}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:13.5px;line-height:1.7;}
+.pitch b{color:var(--point);}
+.pitch .grid8{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;margin-top:8px;}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#08121e;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--point),var(--accent2));
+  box-shadow:0 10px 26px -8px rgba(94,231,255,.5);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+
+.pillars{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 12px 10px;margin-bottom:16px;}
+.prow{display:flex;justify-content:space-between;align-items:flex-end;height:64px;gap:5px;}
+.pcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end;}
+.pbar{width:100%;max-width:24px;height:0%;border-radius:7px 7px 3px 3px;transition:height .5s cubic-bezier(.22,1,.36,1);min-height:4px;}
+.pcol .plab{font-family:'Jua',sans-serif;font-size:12px;color:var(--sub);}
+.pillars .cap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:9px;opacity:.8;}
+.count{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);text-align:center;margin-bottom:8px;}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent);}
+.qtext{font-size:21px;font-weight:700;line-height:1.5;margin-top:8px;}
+.qhint{font-size:13px;color:var(--sub);margin-top:8px;}
+.opts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:16px 8px;
+  font-size:15px;color:var(--ink);text-align:center;cursor:pointer;font-family:inherit;line-height:1.4;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.opt:active{transform:scale(.94);}
+.opt .em{display:block;font-size:22px;margin-bottom:5px;}
+
+
+.res-hero{text-align:center;margin-top:6px;position:relative;}
+.charcard{background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:2px solid var(--char);border-radius:24px;padding:26px 20px 22px;
+  box-shadow:0 0 40px -12px var(--char);}
+.charcard .kicker{font-size:12.5px;letter-spacing:.12em;color:var(--sub);}
+.res-emo{font-size:70px;line-height:1;margin:8px 0 4px;display:inline-block;animation:float 3.2s ease-in-out infinite;}
+.res-type{font-family:'Jua',sans-serif;font-size:32px;margin:2px 0 2px;line-height:1.25;color:var(--char);}
+.res-en{font-size:13px;letter-spacing:.14em;color:var(--sub);text-transform:uppercase;}
+.res-tag{color:var(--ink);font-size:15px;line-height:1.7;margin-top:12px;}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:18px;}
+.chart .ct{font-family:'Jua',sans-serif;font-size:16px;margin-bottom:6px;}
+.crow{display:flex;align-items:center;gap:10px;margin-top:9px;font-size:13px;}
+.crow .cl{width:96px;flex-shrink:0;}
+.cbar{flex:1;height:11px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;}
+.cfill{height:100%;width:0;border-radius:99px;transition:width .9s cubic-bezier(.22,1,.36,1);}
+.crow .cv{width:32px;text-align:right;font-family:'Jua',sans-serif;color:var(--point);}
+.tips{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px 18px;margin-top:14px;font-size:14.5px;line-height:1.75;}
+.tips b{color:var(--point);}
+.tips .row{margin-top:13px;}
+.tips .row:first-child{margin-top:0;}
+.partner{background:linear-gradient(120deg,rgba(138,123,255,.14),rgba(94,231,255,.08));
+  border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin-top:14px;text-align:center;}
+.partner .pt{font-size:12.5px;letter-spacing:.1em;color:var(--sub);}
+.partner .pn{font-family:'Jua',sans-serif;font-size:22px;margin:6px 0 4px;}
+.partner .pd{font-size:13.5px;color:var(--sub);line-height:1.65;}
+.srcbox{font-size:12px;color:var(--sub);line-height:1.65;margin-top:14px;background:rgba(255,255,255,.04);
+  border:1px solid var(--line);border-radius:14px;padding:12px 14px;}
+.srcbox b{color:var(--ink);}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(24,31,69,.97);border:1.5px solid var(--point);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.hall-nav{text-align:center;margin:22px 0 4px;}
+.hall-nav a{display:inline-block;padding:10px 22px;border:1px solid rgba(150,150,180,.4);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85;}
+.footer{text-align:center;margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(94,231,255,.5));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#8f97c8;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#8f97c8;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<canvas id="fx" style="position:fixed;inset:0;pointer-events:none;z-index:40;"></canvas>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <div class="robo">🤖</div>
+      <span class="badge">🧪 多巴胺實驗室 · AI 時代生存</span>
+      <h1><span class="grad">AI 新人類</span> 測驗</h1>
+      <p class="sub">AI 吞噬工作的時代，<br>還能活下來的人有 <b>8 種</b>。<br>你正在進化成哪一種 <b>新人類</b>呢？</p>
+    </div>
+    <div class="pitch">
+      <b>在你心裡長大的 8 種新人類</b>
+      <div class="grid8">
+        <span>🎛️ AI 馴獸師</span><span>🎨 感性職人</span>
+        <span>🌉 連結者</span><span>🧭 質問設計者</span>
+        <span>🛡️ 核心守護者</span><span>🚀 開拓者</span>
+        <span>🔭 洞察家</span><span>🌱 終身學習者</span>
+      </div>
+      24 題做完，連你的 <b>代表角色・生存策略・最佳夥伴</b>都會告訴你。
+    </div>
+    <button class="btn" onclick="startQuiz()">🚀 找出我的生存角色</button>
+    <p class="note">※ 哪個選項會通往哪個角色，我們 <b>藏起來了。</b> 只看儀表、越誠實回答，結果越準。</p>
+  </section>
+
+  
+  <section id="scQuiz" class="screen">
+    <div class="pillars">
+      <div class="prow" id="prow"></div>
+      <div class="cap">八種新人類的柱子正在長高 — 誰是誰，結果揭曉！</div>
+    </div>
+    <div class="count" id="qCount">1 / 24</div>
+    <div class="qcard">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qhint">👉 這跟你有多像？</div>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="charcard">
+        <div class="kicker">你是這種新人類</div>
+        <div class="res-emo" id="resEmo"></div>
+        <div class="res-type" id="resType"></div>
+        <div class="res-en" id="resEn"></div>
+        <p class="res-tag" id="resTag"></p>
+      </div>
+    </div>
+    <div class="chart">
+      <div class="ct">🧬 我心裡的 8 種新人類地圖</div>
+      <div id="chart"></div>
+      <div style="font-size:12px;color:var(--sub);margin-top:10px;opacity:.85;">最高的那座山峰是代表角色，第二高的是你可靠的副角色。</div>
+    </div>
+    <div class="tips" id="tips"></div>
+    <div class="partner" id="partner"></div>
+    <div class="srcbox">🧭 <b>這個測驗</b> —— 出發點是一句話：「AI 不會取代人類，但會用 AI 的人，會取代不會用的人。」它測的不是能力，而是照見 <b>你的生存策略傾向</b>，是僅供參考的自我檢測。</div>
+    <button class="btn" onclick="copyResult()">📋 複製結果分享</button>
+    <button class="btn ghost" onclick="location.reload()">再測一次</button>
+  </section>
+
+  <div class="hall-nav"><a href="https://mimifactory.vibekr.com/zh-tw/test.html" target="_blank" rel="noopener">🧪 多巴胺實驗室 — 看看其他測驗 →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意義與趣味工廠</span></div>
+    <div class="mf-logo">咪咪工廠 MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL股份有限公司 家族公司</div>
+  </div>
+</div>
+
+<script>
+
+const QUESTIONS=[
+ {k:"T",q:"有新的 AI 工具出來，我會先試用，開始想「怎麼接到我的工作上」"},
+ {k:"T",q:"重複性的工作，我總會想辦法自動化或外包掉"},
+ {k:"T",q:"為了得到想要的結果，我很愛一直改指令、把 AI 調教到聽話"},
+ {k:"R",q:"我受不了做出跟大家一樣的東西 — 一定要有我的品味和手感才甘心"},
+ {k:"R",q:"比起 AI 做出來的光滑成品，我更被有人味、粗糙一點的東西吸引"},
+ {k:"R",q:"我想聽到別人說「這只有他做得出來」"},
+ {k:"C",q:"認識好的人或知道有用的資訊，我會馬上牽線給可能需要的人"},
+ {k:"C",q:"比起一個人做事，把大家揪起來、開一個局更讓我興奮"},
+ {k:"C",q:"我相信不管工作還是人生，最後留下的都是「人」"},
+ {k:"Q",q:"比起答案，我更常停在「到底該解決什麼」這個問題上"},
+ {k:"Q",q:"開會時，我常常點出大家都漏掉的「真正的問題」"},
+ {k:"Q",q:"我習慣性地一直反問「為什麼？」「真正重要的是什麼？」"},
+ {k:"A",q:"大家都在趕的時候，我會停下來想一下：這方向對嗎"},
+ {k:"A",q:"比起速度和潮流，我想守住的價值與原則更優先"},
+ {k:"A",q:"不管技術怎麼變，我都有一套不會動搖的自己的標準"},
+ {k:"P",q:"搶先去試別人還沒做的新東西，讓我覺得刺激"},
+ {k:"P",q:"就算失敗也沒差，我傾向先做了再說、用身體去學"},
+ {k:"P",q:"只要覺得「這個好像會成」，我就會比別人更快跳進去"},
+ {k:"S",q:"我喜歡把到處看到的資訊串起來，整理成「原來趨勢是這樣」"},
+ {k:"S",q:"我會把看起來毫不相關的領域連在一起，想出新點子"},
+ {k:"S",q:"比起細節，我通常先看到大局和脈絡"},
+ {k:"L",q:"我總覺得現在擅長的東西，幾年後可能就沒用了"},
+ {k:"L",q:"學新東西對我來說不是壓力，是樂趣"},
+ {k:"L",q:"就算環境或工作變了，我有自信能重新學、重新適應"},
+];
+const CHAR={
+ T:{emo:"🎛️",name:"AI 馴獸師",en:"The Tamer",color:"#ff9f45",
+    tag:"把 AI 當工具駕馭的人。在你手上，一個 AI 能做十個人的活。",
+    who:"你不怕新工具，馬上接到自己的工作上。重複的事用自動化解決，省下的時間拿去做真正重要的事。",
+    strat:"你把 AI 當成「放大器」，而不是「替代威脅」。把工具鑽深，同時養出工具取代不了的判斷與品味，就無敵了。",
+    weak:"只精通工具、卻缺了「做什麼・為什麼」，就只是幫別人把活做得更快。去跟給你方向的質問設計者搭檔吧。",
+    partner:"Q"},
+ R:{emo:"🎨",name:"感性職人",en:"The Artisan",color:"#ff6b9e",
+    tag:"AI 模仿不來的人味。只有你做得出來的東西，就是你的武器。",
+    who:"比起光滑的量產，你更被有品味、有手感的原創吸引。你想聽到「這只有他做得出來」。",
+    strat:"在什麼都氾濫的時代，稀有就是價值。量交給 AI 放大，最後 0.1% 的品味由人親手蓋章 — 那個簽名就是你的品牌。",
+    weak:"如果完美主義讓你永遠不敢拿出來，就沒人會知道。借用連結者把作品傳出去的力量吧。",
+    partner:"C"},
+ C:{emo:"🌉",name:"連結者",en:"The Connector",color:"#7aa6ff",
+    tag:"串起人與人、人與 AI 的樞紐。關係，就是你的資本。",
+    who:"遇到好的人、好的資訊，你會馬上牽線給需要的人。開局、揪人的時候，你最來勁。",
+    strat:"資訊變免費的時代，留下來的是「你認識誰」和「信任」。AI 拿來當擴大人脈的擴音器，信任則靠人跟人慢慢累積。",
+    weak:"只是廣而淺地流動，最後什麼都留不下。跟一位往深處鑽的職人搭檔，關係就會變成作品。",
+    partner:"R"},
+ Q:{emo:"🧭",name:"質問設計者",en:"The Questioner",color:"#ffd93d",
+    tag:"答案變免費的時代，好問題就是權力。方向，由你來定。",
+    who:"比起答案，你更常停在「到底該解什麼」上。你有時會點出大家都漏掉的真正問題。",
+    strat:"AI 只是答案機器，要問什麼是人的事。把定義問題的能力練起來，不管來什麼工具，坐在駕駛座的都是你。",
+    weak:"只問不做，就只會停在空想家。跟馴獸師的執行力搭檔，問題就會變成結果。",
+    partner:"T"},
+ A:{emo:"🛡️",name:"核心守護者",en:"The Anchor",color:"#4fc98d",
+    tag:"大家都動搖時，你有你的標準。在速度的時代，守住方向。",
+    who:"大家急著往前衝時，你會停下來問一句「這樣對嗎」。比起潮流，你想守住的價值更優先。",
+    strat:"技術越快，「為什麼・到哪裡為止」這種倫理與定力就越珍貴。不動搖的標準會變成信任，而信任無可取代。",
+    weak:"太謹慎就會錯過機會。把開拓者的衝勁放在身邊，油門和煞車分著踩。",
+    partner:"P"},
+ P:{emo:"🚀",name:"開拓者",en:"The Pioneer",color:"#ff5e5e",
+    tag:"別人還在猶豫，你已經先跳上去。新的局，是你開的。",
+    who:"搶先去試沒人做過的事，讓你覺得刺激。就算失敗，你也是先做了再學。",
+    strat:"變化越快，先體驗過的人越贏。快速實驗、快速學習是你的武器 — 但記得把學到的記下來，變成資產。",
+    weak:"只顧著開局、沒有收尾和方向，就會燒乾。跟核心守護者搭檔，狂奔就會變成航行。",
+    partner:"A"},
+ S:{emo:"🔭",name:"洞察家",en:"The Synthesizer",color:"#b78bf5",
+    tag:"在資訊的洪流裡讀出趨勢。把點連成圖的人。",
+    who:"你把到處的資訊編織起來，整理成「原來趨勢是這樣」，把看似無關的領域連起來。",
+    strat:"AI 給你碎片，卻給不了脈絡。跨領域的融合和大局，就是你無可取代的地盤。",
+    weak:"只畫大局，可能會漏掉執行和細節。跟不斷學習的學習者搭檔，讓你的洞察持續更新。",
+    partner:"L"},
+ L:{emo:"🌱",name:"終身學習者",en:"The Learner",color:"#5ee7d8",
+    tag:"就算職業消失，你也會重新學。適應力，是你最後的保險。",
+    who:"你總覺得現在擅長的東西很快會過時。學習本身就是樂趣。",
+    strat:"決定生存的不是你知道什麼，而是「能多快重新學」。把學習方法本身磨利，任何變化都能穿過去。",
+    weak:"只學不用，就會停在知識收藏家。跟洞察家搭檔，把學到的插進大局裡。",
+    partner:"S"},
+};
+const KEYS=["T","R","C","Q","A","P","S","L"];
+
+let idx=0, score={}, pillarMap=[], deck=[];
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1900);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function startQuiz(){
+  idx=0; score={}; KEYS.forEach(k=>score[k]=0);
+  deck=shuffle([...QUESTIONS]);
+  pillarMap=shuffle([...KEYS]);
+  const pr=$('prow'); pr.innerHTML="";
+  pillarMap.forEach((k,i)=>{
+    pr.innerHTML+="<div class='pcol'><div class='pbar' id='pb"+i+"' style='background:linear-gradient(180deg,"+CHAR[k].color+",rgba(255,255,255,.05))'></div><div class='plab'>?</div></div>";
+  });
+  show('scQuiz'); render();
+}
+function render(){
+  const Q=deck[idx];
+  $('qCount').textContent=(idx+1)+" / "+deck.length;
+  $('qNum').textContent="Q"+(idx+1);
+  const qt=$('qText'); qt.textContent=Q.q;
+  qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const box=$('opts'); box.innerHTML="";
+  [["🙌","完全是我",2],["🤔","有點吧？",1],["🙅","不是",0]].forEach(([em,t,pt])=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button";
+    b.innerHTML="<span class='em'>"+em+"</span>"+t;
+    b.addEventListener('click',()=>pick(Q.k,pt));
+    box.appendChild(b);
+  });
+}
+function pick(k,pt){
+  vibrate(22); score[k]+=pt;
+  pillarMap.forEach((e,i)=>{ $('pb'+i).style.height=(score[e]/6*100)+"%"; });
+  idx++;
+  if(idx>=deck.length){ setTimeout(showResult,450); return; }
+  setTimeout(render,240);
+}
+function showResult(){
+  const sorted=[...KEYS].sort((a,b)=>score[b]-score[a]);
+  const t1=CHAR[sorted[0]], t2=CHAR[sorted[1]], pn=CHAR[t1.partner];
+  document.documentElement.style.setProperty('--char',t1.color);
+  show('scResult'); vibrate([30,50,30,50,90]); burst();
+  $('resEmo').textContent=t1.emo;
+  $('resType').textContent=t1.name;
+  $('resEn').textContent=t1.en;
+  $('resTag').textContent=t1.tag;
+  const ch=$('chart'); ch.innerHTML="";
+  KEYS.slice().sort((a,b)=>score[b]-score[a]).forEach((k,i)=>{
+    const e=CHAR[k], pct=Math.round(score[k]/6*100);
+    ch.innerHTML+="<div class='crow'><span class='cl'>"+e.emo+" "+e.name+"</span><div class='cbar'><div class='cfill' data-w='"+pct+"' style='background:linear-gradient(90deg,"+e.color+"cc,"+e.color+")'></div></div><span class='cv'>"+score[k]+"</span></div>";
+  });
+  setTimeout(()=>{document.querySelectorAll('.cfill').forEach(f=>{f.style.width=f.dataset.w+"%";});},150);
+  $('tips').innerHTML=
+    "<div class='row'><b>🔍 你是這種人</b><br>"+t1.who+"</div>"+
+    "<div class='row'><b>🛠️ AI 時代生存策略</b><br>"+t1.strat+"</div>"+
+    "<div class='row'><b>⚠️ 只要小心這個</b><br>"+t1.weak+"</div>"+
+    "<div class='row'><b>🧩 可靠的副角色</b> — "+t2.emo+" "+t2.name+"。這個傾向也正在你心裡一起長大。</div>";
+  $('partner').innerHTML=
+    "<div class='pt'>💞 一起就最強，最佳夥伴新人類</div>"+
+    "<div class='pn'>"+pn.emo+" "+pn.name+"</div>"+
+    "<div class='pd'>"+pn.tag+"</div>";
+  window._resText="🤖 AI 新人類測驗\n我是「"+t1.emo+" "+t1.name+"」("+t1.en+")\n\""+t1.tag+"\"\n副角色: "+t2.emo+" "+t2.name+" / 夥伴: "+pn.emo+" "+pn.name+"\n\n你是哪一種新人類？ → https://mimifactory.vibekr.com/zh-tw/apps/ai-new-human.html";
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("複製完成！貼到哪都行 📋")); }
+  else toast("請長按複製");
+  vibrate(20);
+}
+
+
+function burst(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const cv=$('fx'), ctx=cv.getContext('2d');
+  cv.width=innerWidth; cv.height=innerHeight;
+  const cols=["#5ee7ff","#8a7bff","#ff6b9e","#ffd93d","#4fc98d","#ff9f45"];
+  let ps=[];
+  for(let i=0;i<120;i++){
+    ps.push({x:innerWidth/2,y:innerHeight*0.32,
+      vx:(Math.random()-0.5)*13, vy:Math.random()*-13-4,
+      g:0.32, s:Math.random()*6+4, c:cols[i%cols.length], a:1, r:Math.random()*6});
+  }
+  let t=0;
+  (function frame(){
+    ctx.clearRect(0,0,cv.width,cv.height); t++;
+    ps.forEach(p=>{p.vy+=p.g; p.x+=p.vx; p.y+=p.vy; p.a-=0.008; p.r+=0.2;
+      ctx.save(); ctx.globalAlpha=Math.max(0,p.a); ctx.translate(p.x,p.y); ctx.rotate(p.r);
+      ctx.fillStyle=p.c; ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*1.6); ctx.restore();});
+    if(t<150) requestAnimationFrame(frame); else ctx.clearRect(0,0,cv.width,cv.height);
+  })();
+}
+</script>
+</body>
+</html>
