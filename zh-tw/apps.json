@@ -37,6 +37,18 @@
    "desc": "自我覺察、調節、同理、表達 — 用 16 題畫出你的 4 種情緒技能"
   },
   {
+   "id": "iq-brain-test",
+   "type": "test",
+   "title": "IQ 頭腦測驗",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/iq-brain-test.html",
+   "premium": "apps/iq-brain-test.html",
+   "desc": "數列·邏輯·圖形·語文 15 題 — 還分析你頭腦最強的領域"
+  },
+  {
    "id": "tarot",
    "type": "test",
    "title": "塔羅心理卡",

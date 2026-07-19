@@ -37,6 +37,18 @@
    "desc": "Map your 4 emotional skills — awareness, control, empathy, expression — in 16 questions."
   },
   {
+   "id": "iq-brain-test",
+   "type": "test",
+   "title": "IQ Brain Test",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/iq-brain-test.html",
+   "premium": "apps/iq-brain-test.html",
+   "desc": "15 questions in sequences, logic, patterns & words — plus your brain’s strongest area"
+  },
+  {
    "id": "tarot",
    "type": "test",
    "title": "Tarot Mind Cards",

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>IQ Brain Test — Dopamine Lab</title>
+<meta property="og:title" content="IQ Brain Test — 15 questions, full-throttle brain">
+<meta property="og:description" content="15 questions across sequences, logic, patterns, and words — plus an analysis of where your brain is strongest.">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#10141f; --bg2:#1a2233; --card:#1e2740; --line:#2e3a57;
+  --ink:#f2ecdf; --sub:#a9b3c9; --accent:#d9a441; --accent2:#c96f3b;
+  --point:#ffd166; --ok:#4cc38a; --bad:#e5534b;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 85% -10%, rgba(217,164,65,.12), transparent 55%),
+             radial-gradient(100% 80% at 5% 110%, rgba(201,111,59,.10), transparent 50%),
+             linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--point),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:5vh;}
+.hero h1{font-size:44px;line-height:1.15;margin:16px 0 8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;overflow-wrap:break-word;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;overflow-wrap:break-word;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;overflow-wrap:break-word;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#1d1608;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--point),var(--accent));
+  box-shadow:0 10px 26px -8px rgba(217,164,65,.5);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+.topbar{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.gauge{flex:1;height:10px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden;}
+.gfill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--point),var(--accent2));
+  box-shadow:0 0 12px 1px rgba(255,209,102,.5);transition:width .5s cubic-bezier(.22,1,.36,1);}
+.stat{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);white-space:nowrap;}
+.stat b{color:var(--point);}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent);display:flex;justify-content:space-between;}
+.qnum .dom{color:var(--sub);font-size:12px;}
+.qtext{font-size:20px;font-weight:700;line-height:1.5;margin-top:8px;overflow-wrap:break-word;white-space:pre-line;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:16px 10px;
+  font-size:17px;color:var(--ink);text-align:center;cursor:pointer;font-family:inherit;line-height:1.4;overflow-wrap:break-word;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s,background .2s;}
+.opt:active{transform:scale(.96);}
+.opt.ok{border-color:var(--ok);background:rgba(76,195,138,.16);}
+.opt.bad{border-color:var(--bad);background:rgba(229,83,75,.15);}
+.opt.dim{opacity:.45;}
+.opt[disabled]{cursor:default;}
+.explain{margin-top:12px;border-radius:14px;padding:13px 15px;font-size:14px;line-height:1.6;overflow-wrap:break-word;
+  background:rgba(255,209,102,.08);border:1px solid rgba(255,209,102,.3);display:none;animation:fadeIn .4s ease;}
+.explain.on{display:block;}
+.explain b{color:var(--point);}
+#nextBtn{display:none;}
+
+
+.res-hero{text-align:center;margin-top:10px;}
+.score-ring{position:relative;width:172px;height:172px;margin:10px auto 4px;}
+.score-ring svg{transform:rotate(-90deg);}
+.score-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.score-num .pct{font-family:'Jua',sans-serif;font-size:44px;line-height:1;}
+.score-num .of{font-size:13px;color:var(--sub);margin-top:4px;}
+.res-type{font-family:'Jua',sans-serif;font-size:29px;margin:8px 0 4px;}
+.res-tag{color:var(--sub);font-size:14.5px;line-height:1.65;overflow-wrap:break-word;}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:20px;}
+.chart .ct{font-family:'Jua',sans-serif;font-size:16px;margin-bottom:6px;}
+.crow{display:flex;align-items:center;gap:10px;margin-top:11px;font-size:14px;}
+.crow .cl{width:76px;}
+.cbar{flex:1;height:11px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;}
+.cfill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--point),var(--accent2));transition:width .9s cubic-bezier(.22,1,.36,1);}
+.crow .cv{width:44px;text-align:right;font-family:'Jua',sans-serif;color:var(--point);}
+.timebox{text-align:center;color:var(--sub);font-size:13.5px;margin-top:14px;}
+.timebox b{color:var(--point);font-family:'Jua',sans-serif;}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(30,39,64,.97);border:1.5px solid var(--point);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(217,164,65,.5));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#93a0b8;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#93a0b8;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 Dopamine Lab · Brain Series</span>
+      <h1>🧠 <span class="grad">IQ Brain</span> Test</h1>
+      <p class="sub">Sequences · Logic · Patterns · Words — 15 questions.<br>The more you get right, the harder it gets — it’s a <b>full-throttle brain course</b>.</p>
+    </div>
+    <div class="pitch">
+      <b>The rules</b><br>
+      ① No time limit per question, but your <b>total time</b> is recorded.<br>
+      ② Guessing is allowed — but your brain knows. 🙃<br>
+      ③ At the end, you get a <b>strength breakdown by area</b> (Logic · Numbers · Pattern · Verbal).
+    </div>
+    <button class="btn" onclick="startQuiz()">⚡ Start the brain</button>
+    <p class="note">※ This isn’t a formal intelligence test (Wechsler, etc.) — it’s a <b>brain warm-up reference test</b>.
+    Your score shifts with how you feel today — focus on your strong areas, not the number.</p>
+  </section>
+
+  
+  <section id="scQuiz" class="screen">
+    <div class="topbar">
+      <div class="gauge"><div class="gfill" id="gfill"></div></div>
+      <div class="stat">✅ <b id="scoreNow">0</b> · <span id="qCount">1/15</span></div>
+    </div>
+    <div class="qcard">
+      <div class="qnum"><span id="qNum">Q1</span><span class="dom" id="qDom"></span></div>
+      <div class="qtext" id="qText"></div>
+    </div>
+    <div class="opts" id="opts"></div>
+    <div class="explain" id="explain"></div>
+    <button class="btn" id="nextBtn" onclick="next()">Next →</button>
+  </section>
+
+  
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="score-ring">
+        <svg width="172" height="172" viewBox="0 0 172 172">
+          <circle cx="86" cy="86" r="76" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="13"/>
+          <circle id="ringFill" cx="86" cy="86" r="76" fill="none" stroke="url(#rg)" stroke-width="13" stroke-linecap="round"/>
+          <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#ffd166"/><stop offset="1" stop-color="#c96f3b"/>
+          </linearGradient></defs>
+        </svg>
+        <div class="score-num"><div class="pct" id="resPct">0</div><div class="of" id="resOf">/ 15 correct</div></div>
+      </div>
+      <div class="res-type" id="resType"></div>
+      <p class="res-tag" id="resTag"></p>
+    </div>
+    <div class="chart">
+      <div class="ct">🧩 Brain strengths by area</div>
+      <div id="domChart"></div>
+    </div>
+    <div class="timebox" id="timeBox"></div>
+    <button class="btn" onclick="copyResult()">📋 Copy & share my result</button>
+    <button class="btn ghost" onclick="location.reload()">Try again</button>
+    <p class="note">※ A brain warm-up result for reference — not an official IQ score.</p>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/en/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 Dopamine Lab — more tests this way →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>The Meaning & Fun Factory</span></div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+  </div>
+</div>
+
+<script>
+
+const QUESTIONS=[
+ {dom:"N",q:"What fills the blank?\n2, 4, 8, 16, ?",o:["24","30","32","64"],ans:"32",ex:"<b>×2</b> each step — double 16 is 32."},
+ {dom:"V",q:"Analogy:\nBird : Sky = Fish : ?",o:["Sea","Scales","Fishing","Boat"],ans:"Sea",ex:"It’s about their arena — as a bird flies the sky, a fish swims the <b>Sea</b>."},
+ {dom:"P",q:"What comes next in the pattern?\n🔴🔵🔵🔴🔵🔵🔴 ?",o:["🔴","🔵","⚪","🟡"],ans:"🔵",ex:"It repeats in groups of three 「🔴🔵🔵」 — after 🔴 comes <b>🔵</b>."},
+ {dom:"V",q:"Which one doesn’t belong?",o:["Apple","Banana","Carrot","Grape"],ans:"Carrot",ex:"The rest are fruit — only the <b>Carrot</b> is a vegetable."},
+ {dom:"N",q:"What fills the blank?\n1, 1, 2, 3, 5, 8, ?",o:["11","12","13","15"],ans:"13",ex:"The Fibonacci sequence — each number is the sum of the two before it. 5+8=<b>13</b>."},
+ {dom:"P",q:"Rotate the lowercase letter ‘b’ 180° — what do you get?",o:["d","p","q","b"],ans:"q",ex:"It flips both vertically and horizontally, so it becomes <b>q</b>. (Mirror left-right only → d; flip top-bottom only → p)"},
+ {dom:"N",q:"What fills the blank?\n81, 27, 9, 3, ?",o:["0","1","2","1.5"],ans:"1",ex:"<b>÷3</b> each step — 3 divided by 3 is 1."},
+ {dom:"L",q:"A pencil and eraser cost $1.10 together.\nThe pencil costs $1.00 more than the eraser.\nHow much is the eraser?",o:["10¢","5¢","15¢","$1.00"],ans:"5¢",ex:"eraser x, pencil x+100¢ → 2x+100=110 → x=<b>5¢</b>. (The intuitive 10¢ is the trap!)"},
+ {dom:"N",q:"What fills the blank?\n3, 4, 6, 9, 13, ?",o:["16","17","18","20"],ans:"18",ex:"The number you add grows: +1, +2, +3, +4 → 13+5=<b>18</b>."},
+ {dom:"L",q:"All Mimis are Factories.\nSome Factories are plants.\nWhich must be true?",o:["All Mimis are plants","No Mimi is a plant","All Mimis are Factories","Some plants are Mimis"],ans:"All Mimis are Factories",ex:"The first premise is the answer as-is. The rest are <b>inferences that aren’t guaranteed</b> — nothing says ‘some Factories’ includes any Mimi."},
+ {dom:"V",q:"Analogy:\nDoctor : Hospital = Judge : ?",o:["Court","Police station","Congress","Prison"],ans:"Court",ex:"It’s about workplace — a judge works in a <b>Court</b>."},
+ {dom:"N",q:"At 3:30 on a clock,\nwhat’s the angle between the hour and minute hands?",o:["90°","75°","60°","105°"],ans:"75°",ex:"The minute hand is at 6 (180°), the hour hand halfway between 3 and 4 (105°) → the gap is <b>75°</b>."},
+ {dom:"L",q:"If today is Wednesday,\nwhat day is it 100 days later?",o:["Thursday","Friday","Saturday","Sunday"],ans:"Friday",ex:"100 ÷ 7 = 14 weeks + <b>2 days</b> → 2 days after Wednesday is <b>Friday</b>."},
+ {dom:"L",q:"5 years ago, Dad was 4× the son’s age.\nIf Dad is now 45, how old is the son?",o:["12","14","15","18"],ans:"15",ex:"5 years ago Dad was 40 = son ×4 → son was 10 → now <b>15</b>."},
+ {dom:"P",q:"On a die, opposite faces sum to 7.\nIf 1 is on top and 2 faces front,\nwhat number is on the right? (standard die)",o:["3","4","5","6"],ans:"3",ex:"On a standard die, 1·2·3 meet at one corner going clockwise → the right face is <b>3</b>."},
+];
+const DOM_NAME={L:"🧩 Logic",N:"🔢 Numbers",P:"🔷 Pattern",V:"💬 Verbal"};
+const TIERS=[
+ [14,"⚡ Full-Throttle Brain",  "You nearly aced all 15 — your brain is in top condition today."],
+ [11,"🔥 Sharp Brain",  "You cleared most of the traps too — your logic circuits are nicely warmed up."],
+ [8, "🌤 Solid Standard Brain","Steady, above-average work! Review just the types you missed and you’re set."],
+ [5, "☕ Needs a Warm-Up",   "Your brain’s still preheating. Grab a coffee, try again, and you might get a different result."],
+ [0, "😴 A Rest Day", "It’s not your score — it’s your condition! Come back with a clear head."],
+];
+
+let idx=0, score=0, domScore={}, domTotal={}, answered=false, t0=0;
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1700);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function startQuiz(){
+  idx=0; score=0; domScore={L:0,N:0,P:0,V:0}; domTotal={L:0,N:0,P:0,V:0};
+  QUESTIONS.forEach(q=>domTotal[q.dom]++);
+  t0=Date.now();
+  show('scQuiz'); render();
+}
+function render(){
+  answered=false;
+  const Q=QUESTIONS[idx];
+  $('qCount').textContent=(idx+1)+"/"+QUESTIONS.length;
+  $('gfill').style.width=(idx/QUESTIONS.length*100)+"%";
+  $('qNum').textContent="Q"+(idx+1);
+  $('qDom').textContent=DOM_NAME[Q.dom];
+  const qt=$('qText'); qt.textContent=Q.q;
+  qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const box=$('opts'); box.innerHTML="";
+  shuffle([...Q.o]).forEach(o=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button"; b.textContent=o;
+    b.addEventListener('click',()=>pick(o,b));
+    box.appendChild(b);
+  });
+  $('explain').className="explain"; $('explain').innerHTML="";
+  $('nextBtn').style.display="none";
+}
+function pick(o,btn){
+  if(answered)return; answered=true;
+  const Q=QUESTIONS[idx];
+  const correct=(o===Q.ans);
+  document.querySelectorAll('#opts .opt').forEach(b=>{
+    b.disabled=true;
+    if(b.textContent===Q.ans) b.classList.add('ok');
+    else if(b===btn) b.classList.add('bad');
+    else b.classList.add('dim');
+  });
+  if(correct){ score++; domScore[Q.dom]++; vibrate([20,40,20]); toast("Correct! ⚡"); $('scoreNow').textContent=score; }
+  else vibrate(35);
+  $('explain').innerHTML=(correct?"🎉 ":"💡 ")+Q.ex;
+  $('explain').classList.add('on');
+  $('gfill').style.width=((idx+1)/QUESTIONS.length*100)+"%";
+  const nb=$('nextBtn');
+  nb.textContent=(idx>=QUESTIONS.length-1)?"See results →":"Next →";
+  nb.style.display="block";
+}
+function next(){
+  idx++;
+  if(idx>=QUESTIONS.length){ showResult(); return; }
+  render();
+}
+function showResult(){
+  const sec=Math.round((Date.now()-t0)/1000);
+  const mm=Math.floor(sec/60), ss=sec%60;
+  show('scResult'); vibrate([30,50,30,50,90]);
+  const R=76,C=2*Math.PI*R,ring=$('ringFill');
+  ring.style.strokeDasharray=C; ring.style.strokeDashoffset=C;
+  setTimeout(()=>{ ring.style.transition="stroke-dashoffset 1.1s cubic-bezier(.22,1,.36,1)";
+    ring.style.strokeDashoffset=C*(1-score/QUESTIONS.length); },200);
+  let cur=0;const step=setInterval(()=>{cur++;if(cur>=score){cur=score;clearInterval(step);}$('resPct').textContent=cur;},60);
+  if(score===0)$('resPct').textContent=0;
+  const tier=TIERS.find(t=>score>=t[0]);
+  $('resType').innerHTML="<span class='grad'>"+tier[1]+"</span>";
+  $('resTag').textContent=tier[2];
+  const ch=$('domChart'); ch.innerHTML="";
+  Object.keys(DOM_NAME).forEach((d,i)=>{
+    const pct=domTotal[d]?Math.round(domScore[d]/domTotal[d]*100):0;
+    ch.innerHTML+="<div class='crow'><span class='cl'>"+DOM_NAME[d]+"</span><div class='cbar'><div class='cfill' id='dcf"+i+"' data-w='"+pct+"'></div></div><span class='cv'>"+domScore[d]+"/"+domTotal[d]+"</span></div>";
+  });
+  setTimeout(()=>{Object.keys(DOM_NAME).forEach((d,i)=>{const f=$('dcf'+i);f.style.width=f.dataset.w+"%";});},150);
+  const best=Object.keys(DOM_NAME).sort((a,b)=>(domScore[b]/domTotal[b])-(domScore[a]/domTotal[a]))[0];
+  $('timeBox').innerHTML="⏱ Time <b>"+(mm? mm+"m ":"")+ss+"s</b> · Top area: <b>"+DOM_NAME[best]+"</b>";
+  window._resText="🧠 IQ Brain Test\n"+tier[1]+" — "+score+"/15 correct ("+(mm?mm+"m ":"")+ss+"s)\nTop area: "+DOM_NAME[best]+"\n\nTake the full-throttle brain test → https://mimifactory.vibekr.com/en/apps/iq-brain-test.html";
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("Copied! Challenge a friend 📋")); }
+  else toast("Press and hold to copy");
+  vibrate(20);
+}
+</script>
+</body>
+</html>

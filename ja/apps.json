@@ -37,6 +37,18 @@
    "desc": "自己認識・自己コントロール・共感・表現 — 16問で心を扱う4つの技術を診断"
   },
   {
+   "id": "iq-brain-test",
+   "type": "test",
+   "title": "IQ頭脳テスト",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/iq-brain-test.html",
+   "premium": "apps/iq-brain-test.html",
+   "desc": "数列·論理·パターン·言語の15問 — 頭脳の強み領域まで分析"
+  },
+  {
    "id": "tarot",
    "type": "test",
    "title": "タロット心理カード",
