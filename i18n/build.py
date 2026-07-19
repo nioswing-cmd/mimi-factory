@@ -85,6 +85,8 @@ def build(slug, lang, outname=None):
         return "" if re.search(r"[가-힣]", m.group(0)) else m.group(0)
     html = re.sub(r"/\*[\s\S]*?\*/", _strip_ko_comments, html)
     html = re.sub(r"<!--[\s\S]*?-->", _strip_ko_comments, html)
+    # 라인주석(//) — 줄 시작(들여쓰기 허용)만 안전 제거(://·문자열 내 // 오탐 방지)
+    html = re.sub(r"(?m)^[ \t]*//.*$", _strip_ko_comments, html)
 
     # 3) lang 속성
     html = html.replace('<html lang="ko">', f'<html lang="{lang}">')

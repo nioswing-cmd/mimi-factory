@@ -1,6 +1,18 @@
 {
  "apps": [
   {
+   "id": "adhd-test",
+   "type": "test",
+   "title": "ADHD 傾向測驗",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/adhd-test.html",
+   "premium": "apps/adhd-test.html",
+   "desc": "分心不是懶惰 — 溫柔地檢視你現在的專注力狀態"
+  },
+  {
    "id": "tarot",
    "type": "test",
    "title": "塔羅心理卡",

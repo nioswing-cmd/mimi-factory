@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ADHD Tendency Test — How’s your focus right now?</title>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#141033; --bg2:#241748;
+  --accent1:#5be4c8; --accent2:#34c0a8;   
+  --cream:#f4f3ff; --muted:#aba3d4;
+  --card:#1e1740;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 82% -10%, rgba(91,228,200,.10), transparent 55%),
+    radial-gradient(120% 90% at 8% 112%, rgba(196,78,196,.14), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  min-height:100dvh;
+  transition:background .9s ease;
+}
+.wrap{max-width:520px; margin:0 auto; padding:20px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(100deg,#5be4c8,#ffd764 42%,#ff5e8a);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
+.hidden{display:none !important;}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1.2deg); opacity:.4;}60%{transform:scale(1.02) rotate(.4deg);}100%{transform:scale(1) rotate(0); opacity:1;}}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+.fade{animation:fadeIn .5s ease both;}
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+
+
+.home{flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; gap:16px;}
+.sig-emoji{font-size:62px; line-height:1; animation:floaty 3.4s ease-in-out infinite;}
+.home h1{font-size:33px; margin:6px 0 0;}
+.home .sub{color:var(--muted); font-size:15px; line-height:1.7; overflow-wrap:break-word;}
+.chips{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:2px;}
+.chip{font-size:12.5px; padding:7px 13px; border-radius:99px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); color:var(--muted);}
+.lenbox{margin-top:4px;}
+.lenlabel{font-size:13px; color:var(--muted); margin-bottom:9px;}
+.seg{display:flex; gap:9px; justify-content:center;}
+.segbtn{
+  font-family:'Jua',sans-serif; cursor:pointer; flex:1; max-width:130px;
+  padding:14px 6px 12px; border-radius:16px; color:var(--cream);
+  background:var(--card); border:1.5px solid rgba(255,255,255,.12);
+  transition:transform .15s, border-color .25s, background .3s, box-shadow .3s;
+}
+.segbtn:active{transform:scale(.97);}
+.segbtn:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+.segbtn .n{font-size:24px; line-height:1;}
+.segbtn .u{font-size:12px; color:var(--muted); display:block; margin-top:3px; font-family:'Noto Sans KR',sans-serif;}
+.segbtn .tag{font-size:10.5px; color:var(--muted); display:block; margin-top:5px; font-family:'Noto Sans KR',sans-serif; opacity:.8;}
+.segbtn.sel{
+  border-color:var(--accent2);
+  background:linear-gradient(160deg,rgba(91,228,200,.16),rgba(196,78,196,.12));
+  box-shadow:0 8px 22px -10px var(--accent2);
+}
+.segbtn.sel .u,.segbtn.sel .tag{color:var(--cream); opacity:.95;}
+.btn{
+  font-family:'Jua',sans-serif; font-size:19px; border:none; cursor:pointer;
+  color:#12102a; padding:17px 20px; border-radius:18px; width:100%;
+  background:linear-gradient(95deg,var(--accent1),var(--accent2));
+  box-shadow:0 10px 26px -8px var(--accent2); transition:transform .15s, box-shadow .4s, background .6s;
+}
+.btn:active{transform:scale(.97);}
+.btn:focus-visible{outline:3px solid var(--accent1); outline-offset:3px;}
+.btn.ghost{background:rgba(255,255,255,.07); color:var(--cream); box-shadow:none; border:1px solid rgba(255,255,255,.14);}
+.note{font-size:12px; color:var(--muted); opacity:.85; line-height:1.6;}
+
+
+.topbar{position:sticky; top:0; z-index:5; padding:8px 0 12px; background:linear-gradient(180deg,var(--bg1) 72%,transparent);}
+.tl-row{display:flex; align-items:center; gap:14px;}
+.brainwrap{
+  width:56px; height:56px; flex:none; border-radius:18px; display:flex; align-items:center; justify-content:center;
+  font-size:30px; background:linear-gradient(160deg,#0e0b24,#191140); border:1px solid rgba(255,255,255,.1);
+  box-shadow:inset 0 2px 8px rgba(0,0,0,.5); transition:box-shadow .5s;
+}
+.brainwrap.glow{box-shadow:0 0 22px 2px var(--accent2), inset 0 2px 8px rgba(0,0,0,.4);}
+.brain.pulse{animation:bpulse 1.5s ease-in-out infinite; display:inline-block;}
+@keyframes bpulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+.tl-meta{flex:1; min-width:0;}
+.tl-label{font-family:'Jua',sans-serif; font-size:19px; margin-bottom:3px; transition:color .5s;}
+.tl-count{font-size:12.5px; color:var(--muted); margin-bottom:9px;}
+.gauge{height:12px; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden; position:relative;}
+.gaugefill{height:100%; width:0%; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  box-shadow:0 0 14px 1px var(--accent2);
+  transition:width .55s cubic-bezier(.22,1,.36,1), box-shadow .6s, background .6s;}
+.ticks{display:flex; justify-content:space-between; font-size:9.5px; color:var(--muted); margin-top:5px; opacity:.7;}
+
+/* ===== questions ===== */
+.qcard{flex:1; display:flex; flex-direction:column; justify-content:center; padding:8px 2px;}
+.qidx{font-family:'Jua',sans-serif; font-size:14px; color:var(--accent1); transition:color .5s; margin-bottom:8px;}
+.qtext{font-size:22px; line-height:1.5; font-weight:700; overflow-wrap:break-word; margin-bottom:8px;}
+.qhint{font-size:13px; color:var(--muted); margin-bottom:20px;}
+.opts{display:flex; flex-direction:column; gap:10px;}
+.opt{
+  font-family:'Noto Sans KR',sans-serif; font-size:16px; font-weight:500; text-align:left;
+  cursor:pointer; color:var(--cream); padding:15px 17px; border-radius:15px;
+  background:var(--card); border:1.5px solid rgba(255,255,255,.1);
+  display:flex; align-items:center; gap:13px; transition:transform .12s, border-color .2s, background .2s;
+}
+.opt:active{transform:scale(.98);}
+.opt:hover{border-color:var(--accent2);}
+.opt:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+.dot{width:13px; height:13px; border-radius:50%; border:2px solid var(--muted); flex:none;}
+.backline{margin-top:16px; text-align:center;}
+.backline button{background:none; border:none; color:var(--muted); font-size:13px; cursor:pointer; text-decoration:underline; padding:8px;}
+
+
+.result{flex:1; display:flex; flex-direction:column; gap:16px;}
+.rlight{
+  text-align:center; padding:26px 18px; border-radius:24px; position:relative; overflow:hidden;
+  border:1.5px solid rgba(255,255,255,.12);
+}
+.rlight .big{font-size:66px; line-height:1;}
+.rlight h2{font-family:'Jua',sans-serif; font-weight:400; font-size:28px; margin:8px 0 4px;}
+.rlight .pct{font-family:'Jua',sans-serif; font-size:16px; opacity:.9;}
+.rblock{background:var(--card); border:1px solid rgba(255,255,255,.09); border-radius:18px; padding:17px 18px;}
+.rblock h3{font-family:'Jua',sans-serif; font-weight:400; font-size:16px; margin:0 0 7px; display:flex; align-items:center; gap:7px;}
+.rblock p{margin:0; font-size:14.5px; line-height:1.72; color:#e6e3fa; overflow-wrap:break-word;}
+.dims{display:flex; flex-direction:column; gap:12px;}
+.dim .dhead{display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:6px; color:var(--muted);}
+.dim .dbar{height:10px; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden;}
+.dim .dfill{height:100%; width:0; border-radius:99px; transition:width 1s cubic-bezier(.22,1,.36,1);}
+.ractions{display:flex; flex-direction:column; gap:10px; margin-top:4px;}
+.disclaim{font-size:11.5px; color:var(--muted); opacity:.85; line-height:1.6; text-align:center; padding:0 6px;}
+
+
+.toast{
+  position:fixed; left:50%; top:16px; transform:translateX(-50%) translateY(-20px);
+  background:rgba(30,23,64,.97); border:1.5px solid var(--accent2); color:var(--cream);
+  padding:12px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none;
+  transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; text-align:center;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+
+.hall-nav a{display:inline-block;padding:10px 22px;border:1px solid rgba(171,163,212,.4);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85;}
+.footer{text-align:center; margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<canvas id="fx" style="position:fixed; inset:0; pointer-events:none; z-index:55;"></canvas>
+
+<div class="wrap">
+
+  
+  <section id="home" class="home fade">
+    <div class="sig-emoji">🧠</div>
+    <h1><span class="grad">ADHD Tendency</span> Test</h1>
+    <p class="sub">Being scattered isn’t about being lazy —<br><b>your brain may simply be built this way</b>.<br>Let’s take an honest look at where your focus is right now.</p>
+    <div class="chips">
+      <span class="chip">📊 Live tendency gauge</span>
+      <span class="chip">🧩 4-area breakdown</span>
+      <span class="chip">🔒 Nothing saved</span>
+    </div>
+    <div class="lenbox">
+      <div class="lenlabel">Choose how many questions</div>
+      <div class="seg" id="seg">
+        <button class="segbtn" data-n="10" onclick="pickLen(10)"><span class="n">10</span><span class="u">questions</span><span class="tag">Quick · about 1 min</span></button>
+        <button class="segbtn sel" data-n="20" onclick="pickLen(20)"><span class="n">20</span><span class="u">questions</span><span class="tag">Balanced · about 2 min</span></button>
+        <button class="segbtn" data-n="30" onclick="pickLen(30)"><span class="n">30</span><span class="u">questions</span><span class="tag">In-depth · about 3 min</span></button>
+      </div>
+    </div>
+    <button class="btn" onclick="start()">Start the test 🧠</button>
+    <p class="note">Every answer fills the gauge above in real time.<br>There are no right answers. Just picture yourself over the last <b>6 months</b> and answer honestly.</p>
+  </section>
+
+  
+  <section id="quiz" class="hidden">
+    <div class="topbar">
+      <div class="tl-row">
+        <div class="brainwrap" id="brainWrap"><span class="brain pulse" id="brainEmo">🧠</span></div>
+        <div class="tl-meta">
+          <div class="tl-label" id="tlLabel">🌿 Still calm</div>
+          <div class="tl-count" id="tlCount">0 / 20 questions</div>
+          <div class="gauge"><div class="gaugefill" id="gfill"></div></div>
+          <div class="ticks"><span>Low</span><span>Mid</span><span>Marked</span><span>Strong</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="qcard">
+      <div class="qidx" id="qidx">Q1</div>
+      <div class="qtext" id="qtext">—</div>
+      <div class="qhint">Thinking back over the past <b>6 months</b>, how often was this true for you?</div>
+      <div class="opts" id="opts"></div>
+      <div class="backline"><button onclick="goBack()" id="backBtn">← Previous</button></div>
+    </div>
+  </section>
+
+  
+  <section id="result" class="result hidden"></section>
+
+  
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/en/test.html" target="_blank" rel="noopener">🧪 Dopamine Lab — more tests this way →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>The Meaning & Fun Factory</span></div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+  </div>
+</div>
+
+<script>
+
+// dim: I Inattention / H Hyperactivity · Restlessness / P Impulsivity / E Executive Function · Time
+const DIMS = {
+  I:{name:"Inattention", emo:"🎯", advice:"Focus isn’t held by willpower — it’s held by your ‘environment’. Clear distractions out of sight, and keep just one thing visible at a time."},
+  H:{name:"Hyperactivity · Restlessness", emo:"⚡", advice:"That extra energy isn’t meant to be killed — it’s meant to flow out. Move your body on a schedule: short walks, stretches, timer breaks."},
+  P:{name:"Impulsivity", emo:"🎢", advice:"The secret is ‘the 3 seconds before it slips out’. Before you decide, buy, or speak, build a rule: wait 3 seconds — or sleep on it one night."},
+  E:{name:"Executive Function · Time", emo:"🧭", advice:"Keep it all in your head and it all leaks out. Get your to-dos outside — notes, alarms, a calendar — and let the tools remember, not your brain."}
+};
+const POOL = {
+  I:[
+    "Even when I try to focus on a task, my mind drifts off almost right away.",
+    "I make careless slips (typos, missed details) often enough that I have to double-check.",
+    "I often can’t find where I put things like my keys, wallet, or phone.",
+    "Mid-conversation or in meetings, I lose the thread and think ‘wait, where were we?’",
+    "Boring-but-important stuff (paperwork, tidying) is exactly what I can’t start and keep putting off.",
+    "Anything long to read, I struggle to stay focused all the way through.",
+    "I jump to something new before finishing what I started, leaving things half-open everywhere.",
+    "When someone’s talking, I look like I’m listening but my head is often somewhere else."
+  ],
+  H:[
+    "Even sitting still, I fidget with my hands and feet or bounce my leg.",
+    "Situations where I have to sit for a long time feel especially stifling and itchy.",
+    "The thoughts in my head keep spinning and never quiet down.",
+    "Even during downtime, I only feel at ease if I’m doing something.",
+    "I get talkative, or cut in before the other person finishes.",
+    "Waiting in line or at a red light is unbearably boring for me.",
+    "Body or mind, I always feel like the ‘engine is running’."
+  ],
+  P:[
+    "Words or actions jump out before I’ve thought them through.",
+    "When I want something, I tend to just buy it on the spot instead of holding back.",
+    "When I feel like doing something, I just start before weighing the consequences.",
+    "When a feeling surges up, I let it out in the moment, all at once.",
+    "When I’m bored, my hand keeps reaching for a hit — phone, videos, snacks.",
+    "I often switch direction on a whim, off from what I’d planned.",
+    "Sometimes I think ‘I shouldn’t say this’ — right after I’ve already said it.",
+    "I get pulled hard toward something new, then lose interest fast."
+  ],
+  E:[
+    "I lose track of time, so I’m always racing to make appointments or deadlines.",
+    "When there are several things to do, I freeze, not knowing where to start.",
+    "I make plans just fine — actually following them is the hard part.",
+    "The engine only kicks in once the deadline is right in my face.",
+    "My stuff, papers, and files stay disorganized, so I can’t find them when I need them.",
+    "Things I figured would be ‘quick’ always take way longer than I expected.",
+    "Juggling several things at once, I keep dropping one here and there."
+  ]
+};
+
+function buildPool(){
+  const order=['I','H','P','E'], idxs={I:0,H:0,P:0,E:0}, q=[];
+  while(q.length<30){
+    for(const d of order){ if(idxs[d]<POOL[d].length){ q.push({d, t:POOL[d][idxs[d]]}); idxs[d]++; } }
+  }
+  return q;
+}
+const FULL = buildPool(); // 30questions (Area-balanced ordering)
+
+const SCALE = [
+  {t:"Not at all", v:0},
+  {t:"Rarely", v:1},
+  {t:"Sometimes", v:2},
+  {t:"Often", v:3},
+  {t:"Almost always", v:4}
+];
+
+const LEVELS = {
+  low:{key:"low", emoji:"🌿", name:"The Calm Focuser", tag:"Low tendency", a1:"#5be4c8", a2:"#34c0a8",
+    now:"Right now, your focus and follow-through are mostly running smoothly. Your ADHD tendency came out <b>low</b>. The occasional scatter is a natural wave everyone feels.",
+    do:"Keep the good rhythm you’ve got — sleep, routines, one thing at a time. On days focus scatters more than usual, start by checking your condition, sleep, and stress.",
+    care:"Low doesn’t mean ‘none of this applies to me’. If one area’s bar is unusually high, just tending to that single part makes life much easier."},
+  mid:{key:"mid", emoji:"✨", name:"The On-and-Off Type", tag:"Moderate tendency", a1:"#ffd764", a2:"#f7ad2e",
+    now:"You’ve got a real <b>swing</b> between focused days and off days. Your ADHD tendency is at a <b>moderate</b> level. You dive deep into things you care about, but stall hard in front of anything boring.",
+    do:"Don’t white-knuckle it with willpower — build <b>structure</b>. Break big tasks small, run a 25-min focus / 5-min break timer, and write your to-dos where you can see them. These three change the game.",
+    care:"It’s not that you’re ‘lazy’ — your brain is just weak against boredom. Instead of blaming yourself, add one tool that fits you at a time, and it gets plenty better."},
+  high:{key:"high", emoji:"⚡", name:"The Sparky Scatterbrain", tag:"Marked tendency", a1:"#ff8a5b", a2:"#ff6b6b",
+    now:"Signals of inattention, hyperactivity, and impulsivity showed up <b>clearly</b> overlapping. Your head is always busy, you want to do so much but struggle to finish — and you’ve probably blamed yourself for it a lot.",
+    do:"Don’t trust your brain — <b>trust your tools.</b> Park your memory outside with alarms, checklists, and a calendar, and use a ‘just start for 2 minutes’ rule to get going. What works differs person to person, so treat it like an experiment.",
+    care:"This test isn’t a diagnosis — it’s a traffic light. If these traits have weighed on your work, relationships, or peace of mind for a long time, it’s worth getting a proper evaluation from a mental health professional. Asking for help isn’t weakness — it’s strategy."},
+  vhigh:{key:"vhigh", emoji:"🌀", name:"The Storm of Energy", tag:"Strong tendency", a1:"#ff5e8a", a2:"#c44ec4",
+    now:"Signals came out <b>strong</b> across all four areas. You’ve likely been trying many times harder than the people around you. This isn’t a matter of effort — it’s closer to your brain simply working differently.",
+    do:"Don’t try to muscle through on willpower alone. Alongside setting up your environment — removing distractions, visual reminders — it’s time to seriously consider <b>professional help</b>. Once you truly understand it, managing yourself gets far easier.",
+    care:"Don’t panic at a high score. ADHD tendencies come paired with strengths too — creativity, drive, deep hyperfocus. But if daily life has felt heavy for a long time, please do talk to a mental health professional. ☎ 988 Suicide & Crisis Lifeline"}
+};
+
+
+let LEN=20;                    // Selected question count
+let QUESTIONS=[];             // This session’s questions
+let idx=0, answers=[];        // answers[i] = value 0..4
+let curLevel='low';
+
+
+function vibrate(ms){ if(navigator.vibrate) try{navigator.vibrate(ms);}catch(e){} }
+let _tt; function toast(m){ const t=document.getElementById('toast'); t.innerHTML=m; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2100); }
+function repop(el){ el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+function show(id){ ['home','quiz','result'].forEach(s=>document.getElementById(s).classList.toggle('hidden', s!==id)); }
+function levelOf(pct){ return pct<30?'low':(pct<50?'mid':(pct<70?'high':'vhigh')); }
+function setAccent(L){
+  document.documentElement.style.setProperty('--accent1', L.a1);
+  document.documentElement.style.setProperty('--accent2', L.a2);
+}
+
+
+function pickLen(n){
+  LEN=n;
+  document.querySelectorAll('.segbtn').forEach(b=>b.classList.toggle('sel', +b.dataset.n===n));
+  vibrate(16);
+}
+
+
+function currentPct(){ // Cumulative rate based on questions answered so far
+  const answered = answers.filter(a=>a!=null);
+  const sum = answered.reduce((s,v)=>s+v,0);
+  const maxSoFar = answered.length*4;
+  return maxSoFar? Math.round(sum/maxSoFar*100) : 0;
+}
+function updateGauge(){
+  const answeredCount = answers.filter(a=>a!=null).length;
+  const pct = currentPct();
+  const lv = answeredCount? levelOf(pct) : 'low';
+  const L = LEVELS[lv];
+  const g=document.getElementById('gfill');
+  g.style.width = (answeredCount? pct:2) + '%';
+  setAccent(L);
+
+  const bw=document.getElementById('brainWrap');
+  bw.classList.toggle('glow', answeredCount>0);
+
+  const lab=document.getElementById('tlLabel');
+  lab.innerHTML = L.emoji+' '+(answeredCount? L.name+' · '+L.tag : 'Still calm');
+  lab.style.color = answeredCount? L.a1 : 'var(--cream)';
+  document.getElementById('tlCount').textContent = answeredCount+' / '+QUESTIONS.length+' questions';
+  document.getElementById('qidx').style.color='var(--accent1)';
+
+  if(answeredCount>0 && lv!==curLevel){
+    const climbing = ['low','mid','high','vhigh'].indexOf(lv) > ['low','mid','high','vhigh'].indexOf(curLevel);
+    if(climbing){
+      if(lv==='mid') toast('✨ Your tendency gauge just climbed');
+      else if(lv==='high') toast('⚡ Clear signals coming through');
+      else if(lv==='vhigh') toast('🌀 Strong energy detected');
+      vibrate([18,36,18]);
+    }
+    repop(lab);
+  }
+  curLevel = lv;
+}
+
+
+function start(){
+  QUESTIONS = FULL.slice(0, LEN);
+  idx=0; answers=new Array(QUESTIONS.length).fill(null); curLevel='low';
+  setAccent(LEVELS.low);
+  show('quiz'); render();
+}
+function render(){
+  const q=QUESTIONS[idx];
+  document.getElementById('qidx').textContent = 'Q'+(idx+1);
+  const qt=document.getElementById('qtext'); qt.textContent=q.t; repop(qt);
+  const box=document.getElementById('opts'); box.innerHTML='';
+  SCALE.forEach(s=>{
+    const b=document.createElement('button');
+    b.className='opt'; b.type='button';
+    b.innerHTML='<span class="dot"></span>'+s.t;
+    if(answers[idx]===s.v){ b.style.borderColor='var(--accent2)'; const d=b.querySelector('.dot'); d.style.background='var(--accent2)'; d.style.borderColor='var(--accent2)'; }
+    b.onclick=(e)=>choose(s.v, e);
+    box.appendChild(b);
+  });
+  document.getElementById('backBtn').style.visibility = idx===0? 'hidden':'visible';
+  updateGauge();
+}
+function choose(v, e){
+  answers[idx]=v;
+  vibrate(24);
+  burst(e);
+  updateGauge();
+  setTimeout(()=>{
+    if(idx < QUESTIONS.length-1){ idx++; render(); }
+    else finish();
+  }, 300);
+}
+function goBack(){ if(idx>0){ idx--; render(); } }
+
+
+function finish(){
+  const total = answers.reduce((s,v)=>s+v,0);
+  const MAX = QUESTIONS.length*4;
+  const pct = Math.round(total/MAX*100);
+  const lv = levelOf(pct);
+  const L = LEVELS[lv];
+
+  const dimScore={I:0,H:0,P:0,E:0}, dimCount={I:0,H:0,P:0,E:0};
+  QUESTIONS.forEach((q,i)=>{ dimScore[q.d]+=answers[i]; dimCount[q.d]++; });
+  const dimPct={}; Object.keys(dimScore).forEach(k=> dimPct[k]= dimCount[k]? Math.round(dimScore[k]/(dimCount[k]*4)*100):0 );
+  const topDim = Object.keys(dimPct).sort((a,b)=>dimPct[b]-dimPct[a])[0];
+
+  setAccent(L);
+
+  const dimBars = Object.keys(DIMS).map(k=>{
+    const p=dimPct[k]; const dl=levelOf(p); const c=LEVELS[dl];
+    return `<div class="dim">
+      <div class="dhead"><span>${DIMS[k].emo} ${DIMS[k].name}</span><span>${p}%</span></div>
+      <div class="dbar"><div class="dfill" data-w="${p}" style="background:linear-gradient(90deg,${c.a1},${c.a2});"></div></div>
+    </div>`;
+  }).join('');
+
+  const topInfo = (lv==='low')
+    ? `The area that stood out relatively among them is <b>${DIMS[topDim].name}</b>. It’s nothing to worry much about, but giving just this part a little attention will make things easier.`
+    : `The area with the strongest signal is <b>${DIMS[topDim].emo} ${DIMS[topDim].name}</b>. ${DIMS[topDim].advice}`;
+
+  const bgMap = {
+    low:'rgba(52,192,168,.20)', mid:'rgba(247,173,46,.22)',
+    high:'rgba(255,107,107,.22)', vhigh:'rgba(196,78,196,.24)'
+  };
+  const bg = `radial-gradient(120% 120% at 50% 0%, ${bgMap[lv]}, rgba(30,23,64,.4))`;
+
+  document.getElementById('result').innerHTML = `
+    <div class="rlight fade" style="background:${bg}; border-color:${L.a2}55;">
+      <div class="big">${L.emoji}</div>
+      <h2 style="color:${L.a1}">${L.name}</h2>
+      <div class="pct">ADHD Tendency score ${pct} pts / 100 · ${L.tag}</div>
+    </div>
+    <div class="rblock fade"><h3>🔎 Where you are now</h3><p>${L.now}</p></div>
+    <div class="rblock fade"><h3>🧩 Signals by area</h3><div class="dims">${dimBars}</div>
+      <p style="margin-top:13px; font-size:13.5px; color:var(--muted);">${topInfo}</p></div>
+    <div class="rblock fade"><h3>✅ Try this</h3><p>${L.do}</p></div>
+    <div class="rblock fade"><h3>⚠️ Good to know</h3><p>${L.care}</p></div>
+    <div class="ractions">
+      <button class="btn" onclick="shareResult('${L.name}',${pct})">Share my result 📤</button>
+      <button class="btn ghost" onclick="restart()">Take it again 🔄</button>
+    </div>
+    <p class="disclaim">This test isn’t a medical diagnosis — it’s a self-check tool for reflecting on yourself.<br>If daily life has been hard for a long time, get a proper evaluation from a mental health professional. ☎ 988 Suicide & Crisis Lifeline</p>
+  `;
+  show('result');
+
+  requestAnimationFrame(()=>setTimeout(()=>{
+    document.querySelectorAll('.dfill').forEach(el=>el.style.width=el.dataset.w+'%');
+  },120));
+
+  vibrate([60,80,60]);
+  if(lv==='low'){ toast('🌿 You’re in a calm place right now'); cannon(L.a1,L.a2); setTimeout(()=>cannon(L.a1,L.a2),260); }
+  else if(lv==='mid'){ toast('✨ Just noticing is already half the battle'); cannon(L.a1,L.a2); }
+  else if(lv==='high'){ toast('⚡ It’s not your fault — it’s just how your brain works'); cannon(L.a1,L.a2); }
+  else { toast('🌀 You’ve made it this far — that took real effort'); cannon(L.a1,L.a2); setTimeout(()=>cannon(L.a1,L.a2),260); }
+}
+function restart(){ show('home'); setAccent(LEVELS.low); }
+
+function shareResult(name, pct){
+  const url='https://mimifactory.vibekr.com/en/apps/adhd-test.html';
+  const text=`🧠 ADHD Tendency Test result: ${name} (score ${pct} pts)\nHow’s my focus right now? Check yours too 👉`;
+  if(navigator.share){ navigator.share({title:'ADHD Tendency Test', text, url}).catch(()=>{}); }
+  else{
+    const t=text+'\n'+url;
+    if(navigator.clipboard){ navigator.clipboard.writeText(t).then(()=>toast('📋 Result copied!')).catch(()=>toast(t)); }
+    else toast('👉 '+url);
+  }
+}
+
+
+const cv=document.getElementById('fx'); const ctx=cv.getContext('2d');
+let parts=[]; function fitCanvas(){ cv.width=innerWidth; cv.height=innerHeight; } fitCanvas(); addEventListener('resize',fitCanvas);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function burst(e){ // Small burst at click point
+  if(reduce||!e) return;
+  const x=e.clientX||innerWidth/2, y=e.clientY||innerHeight/2;
+  const cs=getComputedStyle(document.documentElement);
+  const c1=cs.getPropertyValue('--accent1').trim(), c2=cs.getPropertyValue('--accent2').trim();
+  for(let i=0;i<16;i++){ parts.push({x,y,vx:(Math.random()-.5)*6,vy:(Math.random()-.7)*6-2,r:Math.random()*3+2,c:Math.random()<.5?c1:c2,life:1}); }
+  run();
+}
+function cannon(c1,c2){
+  if(reduce) return;
+  for(let i=0;i<90;i++){ parts.push({x:innerWidth/2,y:innerHeight*.4,vx:(Math.random()-.5)*13,vy:(Math.random()-.5)*13-3,r:Math.random()*4+2,c:Math.random()<.5?c1:c2,life:1}); }
+  run();
+}
+let raf=null;
+function run(){ if(raf) return; const loop=()=>{ ctx.clearRect(0,0,cv.width,cv.height); parts.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.vy+=.22; p.life-=.02; ctx.globalAlpha=Math.max(p.life,0); ctx.fillStyle=p.c; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,7); ctx.fill(); }); parts=parts.filter(p=>p.life>0 && p.y<cv.height+20); ctx.globalAlpha=1; if(parts.length) raf=requestAnimationFrame(loop); else raf=null; }; raf=requestAnimationFrame(loop); }
+</script>
+</body>
+</html>

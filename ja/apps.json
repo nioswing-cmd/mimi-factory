@@ -1,6 +1,18 @@
 {
  "apps": [
   {
+   "id": "adhd-test",
+   "type": "test",
+   "title": "ADHD傾向テスト",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/adhd-test.html",
+   "premium": "apps/adhd-test.html",
+   "desc": "散らかるのは、なまけだからじゃない — いまの集中力の状態をやさしくチェック"
+  },
+  {
    "id": "tarot",
    "type": "test",
    "title": "タロット心理カード",

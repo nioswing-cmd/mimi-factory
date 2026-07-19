@@ -1,6 +1,18 @@
 {
  "apps": [
   {
+   "id": "adhd-test",
+   "type": "test",
+   "title": "ADHD Tendency Test",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/adhd-test.html",
+   "premium": "apps/adhd-test.html",
+   "desc": "Being scattered isn’t laziness — a gentle check-in on where your focus is now"
+  },
+  {
    "id": "tarot",
    "type": "test",
    "title": "Tarot Mind Cards",
