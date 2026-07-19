@@ -95,6 +95,18 @@
    "teaser": "apps/cut-them-off.html",
    "premium": "apps/cut-them-off.html",
    "desc": "用 15 個行為，替心裡那個人亮起關係紅綠燈。"
+  },
+  {
+   "id": "dealbreaker-button",
+   "type": "test",
+   "title": "我的地雷按鈕",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/dealbreaker-button.html",
+   "premium": "apps/dealbreaker-button.html",
+   "desc": "你把一個人切得多容易？測量你的地雷按鈕靈敏度。"
   }
  ],
  "updated": "2026-07-19"

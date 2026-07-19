@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>My Dealbreaker Button — how easily do you cut people off?</title>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#12111a; --bg2:#231627;
+  --accent1:#ff6b6b; --accent2:#ff9f45;
+  --cream:#fff4ee; --muted:#c7b8c6;
+  --card:#1e1826; --line:rgba(255,255,255,.08);
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 82% -10%, rgba(255,120,80,.12), transparent 55%),
+    radial-gradient(120% 90% at 8% 112%, rgba(255,94,138,.13), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  transition:background .9s ease;
+  min-height:100dvh;
+  line-height:1.6;
+}
+.wrap{max-width:520px; margin:0 auto; padding:26px 20px 40px; min-height:100dvh; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(105deg,#ffd56b,#ff8a5b 45%,#ff5e6c);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em; line-height:1.25;}
+.screen{display:none; animation:fadeIn .5s ease; flex:1; flex-direction:column;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1.2deg); opacity:.4;} 60%{transform:scale(1.02) rotate(.4deg);} 100%{transform:scale(1) rotate(0); opacity:1;}}
+.word-break{overflow-wrap:break-word;}
+
+/* ===== HOME ===== */
+.home-center{flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center;}
+.btn-emoji{font-size:74px; line-height:1; filter:drop-shadow(0 8px 24px rgba(255,80,80,.35)); animation:float 3.4s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0);} 50%{transform:translateY(-9px);}}
+.home-center h1{font-size:38px; margin:16px 0 6px;}
+.tagline{color:var(--muted); font-size:15.5px; margin:0 auto 4px; max-width:340px;}
+.sub{color:#8f8298; font-size:13px; margin-top:18px;}
+.pill-row{display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin:22px auto 0; max-width:400px;}
+.pill{font-size:12px; color:var(--muted); background:rgba(255,255,255,.05); border:1px solid var(--line); padding:6px 12px; border-radius:99px;}
+.cta{
+  display:block; width:100%; margin-top:30px; padding:18px; border:none; cursor:pointer;
+  font-family:'Jua',sans-serif; font-size:21px; color:#2a0d10; border-radius:18px;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2));
+  box-shadow:0 10px 30px rgba(255,100,80,.35);
+  transition:transform .16s, box-shadow .3s;
+}
+.cta:active{transform:scale(.97);}
+.cta.ghost{background:transparent; color:var(--cream); border:1.5px solid var(--line); box-shadow:none; font-size:15px; padding:14px; margin-top:12px;}
+
+/* ===== QUIZ ===== */
+.q-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;}
+.q-count{font-size:13px; color:#8f8298; letter-spacing:.03em;}
+.dots{display:flex; gap:5px; flex-wrap:wrap; margin:10px 0 22px;}
+.dot{width:100%; height:6px; flex:1; min-width:6px; border-radius:99px; background:rgba(255,255,255,.09); transition:background .4s;}
+.dot.done{background:linear-gradient(90deg,var(--accent1),var(--accent2));}
+.dot.cur{background:rgba(255,255,255,.28);}
+.q-scene{font-size:12.5px; color:var(--accent2); letter-spacing:.14em; font-weight:700; margin-bottom:10px;}
+.q-text{font-size:23px; margin:0 0 8px; min-height:96px;}
+.q-hint{font-size:13.5px; color:#8f8298; margin:0 0 20px;}
+.opts{display:flex; flex-direction:column; gap:11px; flex:1;}
+.opt{
+  position:relative; text-align:left; cursor:pointer; width:100%;
+  background:var(--card); border:1.5px solid var(--line); color:var(--cream);
+  padding:16px 16px 16px 50px; border-radius:15px; font-size:15.5px; font-family:inherit;
+  transition:transform .15s, border-color .2s, background .2s; line-height:1.45;
+}
+.opt:hover{border-color:rgba(255,255,255,.22);}
+.opt:active{transform:scale(.98);}
+.opt::before{
+  content:attr(data-lab); position:absolute; left:14px; top:50%; transform:translateY(-50%);
+  width:26px; height:26px; border-radius:8px; display:flex; align-items:center; justify-content:center;
+  font-family:'Jua',sans-serif; font-size:14px; color:var(--muted);
+  background:rgba(255,255,255,.06); border:1px solid var(--line);
+}
+.opt.chosen{border-color:var(--accent2); background:linear-gradient(100deg,rgba(255,110,80,.16),rgba(255,160,70,.08));}
+.opt:focus-visible{outline:2px solid var(--accent2); outline-offset:2px;}
+.feedback{
+  text-align:center; font-family:'Jua',sans-serif; font-size:18px; color:var(--cream);
+  min-height:30px; margin-top:18px; opacity:0; transform:translateY(6px);
+  transition:opacity .4s, transform .4s;
+}
+.feedback.show{opacity:1; transform:none;}
+.feedback .spark{color:var(--accent2);}
+
+/* ===== REVEAL / RESULT ===== */
+.reveal-stage{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;}
+.measure-btn{
+  width:150px; height:150px; border-radius:50%; border:none; cursor:pointer; position:relative;
+  font-family:'Jua',sans-serif; font-size:19px; color:#fff;
+  background:radial-gradient(circle at 38% 32%, #ff8a6b, #e8333f 70%);
+  box-shadow:0 0 0 10px rgba(255,80,80,.12), 0 14px 34px rgba(230,50,60,.5), inset 0 -6px 14px rgba(0,0,0,.28);
+  animation:pulse 1.8s ease-in-out infinite; transition:transform .12s;
+}
+.measure-btn:active{transform:scale(.94);}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 10px rgba(255,80,80,.10),0 14px 34px rgba(230,50,60,.5), inset 0 -6px 14px rgba(0,0,0,.28);} 50%{box-shadow:0 0 0 20px rgba(255,80,80,.02),0 14px 40px rgba(230,50,60,.62), inset 0 -6px 14px rgba(0,0,0,.28);}}
+.measure-hint{color:var(--muted); font-size:14px; margin-top:22px;}
+
+.ring-wrap{position:relative; width:220px; height:220px; margin:6px auto 0; display:none;}
+.ring-wrap.on{display:block;}
+.ring-num{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;}
+.ring-num b{font-family:'Jua',sans-serif; font-size:62px; line-height:1; color:var(--cream);}
+.ring-num small{font-size:12.5px; color:var(--muted); letter-spacing:.2em; margin-top:4px;}
+.ring-label{font-size:13px; color:#8f8298; letter-spacing:.16em; margin-top:2px;}
+
+.result-body{display:none;}
+.result-body.on{display:block;}
+.type-card{
+  text-align:center; background:var(--card); border:1.5px solid var(--line);
+  border-radius:22px; padding:26px 20px; margin-top:20px; position:relative; overflow:hidden;
+}
+.type-card::before{content:""; position:absolute; inset:0 0 auto 0; height:5px; background:linear-gradient(90deg,var(--accent1),var(--accent2));}
+.type-emoji{font-size:60px; line-height:1;}
+.type-name{font-size:30px; margin:8px 0 2px;}
+.type-catch{color:var(--muted); font-size:15px; margin:0;}
+.sens-line{display:inline-flex; align-items:center; gap:8px; margin-top:14px; font-size:13.5px; color:var(--muted); background:rgba(255,255,255,.05); border:1px solid var(--line); padding:7px 14px; border-radius:99px;}
+.sens-line b{font-family:'Jua',sans-serif; color:var(--cream); font-size:16px;}
+
+.sect{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px 18px; margin-top:14px;}
+.sect h3{font-size:17px; margin:0 0 8px; display:flex; align-items:center; gap:8px;}
+.sect p{margin:0; font-size:14.5px; color:#e6dbe4;}
+.adv-item{display:flex; gap:11px; padding:11px 0; border-bottom:1px dashed var(--line); font-size:14.5px; color:#e6dbe4;}
+.adv-item:last-child{border-bottom:none;}
+.adv-item b{font-family:'Jua',sans-serif; color:var(--accent2); flex:none;}
+.two{display:flex; gap:12px;}
+.two .sect{flex:1;}
+.two .sect p{font-size:13.8px;}
+
+.share-card-wrap{margin-top:22px; text-align:center;}
+#shareCanvas{width:100%; max-width:340px; border-radius:18px; box-shadow:0 12px 40px rgba(0,0,0,.5); border:1px solid var(--line);}
+.row-btn{display:flex; gap:10px; margin-top:16px;}
+.row-btn .cta{margin-top:0;}
+.mini-note{font-size:12px; color:#8f8298; text-align:center; margin-top:12px;}
+
+/* toast */
+.toast{position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-20px);
+  background:rgba(30,24,38,.96); border:1.5px solid var(--accent2); color:var(--cream);
+  padding:12px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none;
+  transition:opacity .4s, transform .4s; z-index:60; max-width:90vw;}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+/* footer */
+.footer{text-align:center; margin-top:30px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  <!-- HOME -->
+  <section id="home" class="screen on">
+    <div class="home-center">
+      <div class="btn-emoji">🔴</div>
+      <h1>My <span class="grad">Dealbreaker Button</span></h1>
+      <p class="tagline word-break">How easily — or how hard — do you cut people out of your life?<br>This measures your inner dealbreaker sensitivity.</p>
+      <div class="pill-row">
+        <span class="pill">Broken plans</span><span class="pill">Trash talk</span><span class="pill">Ghosting</span>
+        <span class="pill">Money</span><span class="pill">Rudeness</span><span class="pill">Coming back</span>
+      </div>
+      <p class="sub word-break">⚠️ No score, no gauge shows while you’re taking it.<br>The button just reacts quietly. Your sensitivity is revealed <b>at the very end</b> .</p>
+      <button class="cta" onclick="startQuiz()">Start the test</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="screen">
+    <div class="q-top">
+      <span class="q-count" id="qCount">01 / 15</span>
+      <span class="q-count">🔴 Measuring…</span>
+    </div>
+    <div class="dots" id="dots"></div>
+    <div class="q-scene" id="qScene"></div>
+    <h2 class="q-text word-break" id="qText"></h2>
+    <p class="q-hint">Pick the reaction closest to you.</p>
+    <div class="opts" id="opts"></div>
+    <div class="feedback" id="feedback"></div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="screen">
+    <div id="revealStage" class="reveal-stage">
+      <h2 style="font-size:24px; margin:0 0 4px;">Every reaction is on record</h2>
+      <p style="color:var(--muted); font-size:15px; margin:0 0 30px;" class="word-break">Now press the button and reveal your <b>dealbreaker sensitivity</b>.</p>
+      <button class="measure-btn" id="measureBtn" onclick="runReveal()">Measure sensitivity</button>
+      <p class="measure-hint">Just once — it opens up right now.</p>
+
+      <div class="ring-wrap" id="ringWrap">
+        <svg width="220" height="220" viewBox="0 0 220 220">
+          <circle cx="110" cy="110" r="94" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="16"/>
+          <circle id="ringFg" cx="110" cy="110" r="94" fill="none" stroke="url(#rg)" stroke-width="16"
+                  stroke-linecap="round" transform="rotate(-90 110 110)"/>
+          <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#ff9f45"/><stop offset="1" stop-color="#ff5e6c"/>
+          </linearGradient></defs>
+        </svg>
+        <div class="ring-num"><b id="ringNum">0</b><small>dealbreaker sensitivity</small></div>
+      </div>
+      <div class="ring-label" id="ringLabel"></div>
+    </div>
+
+    <div class="result-body" id="resultBody">
+      <div class="type-card pop" id="typeCard">
+        <div class="type-emoji" id="tEmoji"></div>
+        <h2 class="type-name" id="tName"></h2>
+        <p class="type-catch" id="tCatch"></p>
+        <div class="sens-line">dealbreaker sensitivity <b id="tSens">0</b> / 100</div>
+      </div>
+
+      <div class="sect">
+        <h3>🧭 This is you</h3>
+        <p class="word-break" id="tDesc"></p>
+      </div>
+
+      <div class="two">
+        <div class="sect"><h3>💪 Strengths</h3><p class="word-break" id="tPro"></p></div>
+        <div class="sect"><h3>⚠️ Risks</h3><p class="word-break" id="tCon"></p></div>
+      </div>
+
+      <div class="sect">
+        <h3>🌱 Advice for cutting ties in a healthy way</h3>
+        <div id="tAdvice"></div>
+      </div>
+
+      <div class="share-card-wrap">
+        <canvas id="shareCanvas" width="680" height="850"></canvas>
+        <div class="row-btn">
+          <button class="cta" onclick="downloadCard()">Save result card</button>
+          <button class="cta ghost" onclick="restart()">Take it again</button>
+        </div>
+        <p class="mini-note">Screenshot the card and ask a friend: ‘What do you think my dealbreaker sensitivity is?’</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/en/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 Dopamine Lab — see the other tests →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>T H E   M E A N I N G   &   F U N   F A C T O R Y</span></div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script>
+
+
+const QUESTIONS = [
+ {scene:"Broken plans", q:"A friend cancelled an important plan the day of — for the third time. You?",
+  o:[{t:"I get it, they must have a reason",s:0,a:0,c:0},
+     {t:"Stings a little, but I let it slide",s:1,a:1,c:0},
+     {t:"From now on, I stop expecting anything from them",s:2,a:1,c:0},
+     {t:"I stop making plans with this person at all",s:3,a:0,c:1}]},
+ {scene:"Caught the gossip", q:"You accidentally find out someone’s been talking about you behind your back. You?",
+  o:[{t:"Ask them directly and clear it up if it’s a mix-up",s:1,a:0,c:1},
+     {t:"Say nothing and slowly put some distance between us",s:2,a:2,c:0},
+     {t:"Let it go once, but bank a quiet warning",s:2,a:1,c:0},
+     {t:"Trust is broken, so I end the relationship",s:3,a:0,c:1}]},
+ {scene:"Ghosting", q:"A close friend has left you on read for months. You?",
+  o:[{t:"Keep checking in — they’ll come around eventually",s:0,a:0,c:0},
+     {t:"Naturally stop reaching out too",s:2,a:2,c:0},
+     {t:"Tell them, seriously and once, that it hurt",s:1,a:0,c:1},
+     {t:"Quietly delete them from my contacts",s:3,a:2,c:0}]},
+ {scene:"Money", q:"The date they promised to pay you back is long gone, and they’re acting like the money doesn’t exist. You?",
+  o:[{t:"Figure they’re struggling, and wait a bit longer",s:0,a:1,c:0},
+     {t:"Ask them straight when exactly they’ll pay it back",s:1,a:0,c:1},
+     {t:"Write off the money and the person along with it",s:3,a:1,c:0},
+     {t:"Never see them again, but never bring it up",s:3,a:2,c:0}]},
+ {scene:"Public disrespect", q:"In front of a group, you hear a joke that puts you down. You?",
+  o:[{t:"Laugh it off — I don’t want to kill the mood",s:0,a:0,c:0},
+     {t:"Draw a clear line right there and then",s:2,a:0,c:1},
+     {t:"Decide that one more time means we’re done",s:2,a:1,c:0},
+     {t:"Never hang out with that person again",s:3,a:1,c:0}]},
+ {scene:"Always late", q:"Someone who’s 30 minutes late every single time. They do apologize each time. You?",
+  o:[{t:"Accept that that’s just who they are",s:0,a:0,c:0},
+     {t:"Tell them straight that my time matters too",s:1,a:0,c:1},
+     {t:"Slowly meet up with them less and less",s:2,a:2,c:0},
+     {t:"Filter out people who can’t keep to a time",s:3,a:1,c:0}]},
+ {scene:"Left you hanging", q:"You reached out when you were really struggling, and they brushed you off saying they were busy. You?",
+  o:[{t:"People get busy — I understand and move on",s:0,a:0,c:0},
+     {t:"Tell them honestly that it hurt",s:1,a:0,c:1},
+     {t:"Redefine them as exactly that kind of friend",s:2,a:1,c:0},
+     {t:"Stop sharing my hard times with them, and keep my distance",s:3,a:2,c:0}]},
+ {scene:"Caught in a lie", q:"You find out they keep telling small but obvious lies. You?",
+  o:[{t:"Anyone could do that — I let it go",s:0,a:0,c:0},
+     {t:"Ask them directly why they did it",s:1,a:0,c:1},
+     {t:"Dock their trust score and quietly watch",s:2,a:1,c:0},
+     {t:"Cut off a liar on the spot",s:3,a:0,c:1}]},
+ {scene:"Crossing the line", q:"They keep crossing the line and prying into your private life. You?",
+  o:[{t:"Take it as them caring, and go along with it",s:0,a:0,c:0},
+     {t:"Draw a clear line — say it makes me uncomfortable",s:2,a:0,c:1},
+     {t:"Dodge the topic and manage the distance",s:2,a:2,c:0},
+     {t:"Don’t go deep with people like this — I tidy it up",s:3,a:1,c:0}]},
+ {scene:"Feeling used", q:"You realize they only reach out when they need something. You?",
+  o:[{t:"Still, if I helped, that’s enough",s:0,a:1,c:0},
+     {t:"Next time I’ll ask them for something too, to even it out",s:1,a:0,c:1},
+     {t:"Even when they text, I gradually go lukewarm",s:2,a:2,c:0},
+     {t:"End the relationship cleanly",s:3,a:0,c:1}]},
+ {scene:"No apology", q:"They’re clearly in the wrong, but in the end there’s no apology. You?",
+  o:[{t:"No apology, but I shrug it off",s:0,a:0,c:0},
+     {t:"Ask for an apology directly",s:1,a:0,c:1},
+     {t:"No apology means I close the door in my heart",s:3,a:1,c:0},
+     {t:"Cut them off without a word",s:3,a:2,c:0}]},
+ {scene:"Asked to pile on", q:"The group is freezing someone out and wants you to join in. You?",
+  o:[{t:"Go along with the mood and half join in",s:0,a:0,c:0},
+     {t:"Say no and step out",s:2,a:0,c:1},
+     {t:"Quietly drift away from that group",s:2,a:2,c:0},
+     {t:"Cut off a group like that entirely",s:3,a:1,c:0}]},
+ {scene:"Jealous, not happy for you", q:"At your big happy news, instead of congrats you catch a jealous reaction. You?",
+  o:[{t:"They’re just bad at showing it, that’s all",s:0,a:0,c:0},
+     {t:"Mention lightly that it stung",s:1,a:0,c:1},
+     {t:"Stop sharing happy news with them from now on",s:2,a:2,c:0},
+     {t:"Tidy up a friendship that can’t truly be happy for me",s:3,a:1,c:0}]},
+ {scene:"The comeback text", q:"Someone you cut off texts you again like nothing ever happened. You?",
+  o:[{t:"Happily welcome them back",s:0,a:0,c:0},
+     {t:"Give a chance if there’s an apology and real change",s:1,a:0,c:1},
+     {t:"Read it, but don’t reply",s:2,a:2,c:0},
+     {t:"Firmly block the comeback too",s:3,a:1,c:0}]},
+ {scene:"Assumed the worst", q:"Without ever checking, they went off a rumor and changed how they treat you. You?",
+  o:[{t:"Wait for time to smooth it over",s:0,a:1,c:0},
+     {t:"Meet them in person and clear up the mix-up",s:1,a:0,c:1},
+     {t:"So that’s how much they trusted me — I keep my distance",s:2,a:2,c:0},
+     {t:"Tidy up people who can’t believe in me",s:3,a:1,c:0}]},
+];
+const MAX_S = QUESTIONS.length * 3;
+
+
+const FEEDBACK = [
+ "…the button twitched, just barely.",
+ "Somewhere, a <span class='spark'>click</span> — and it was gone.",
+ "A faint buzz brushed past your fingertip.",
+ "A shadow fell over the button for a moment.",
+ "Something was quietly logged.",
+ "The needle swayed. Which way, you can’t see.",
+ "<span class='spark'>Click.</span> And then, silence again.",
+ "The button feels ever so slightly warmer.",
+ "Under the surface, a single gear turned.",
+ "If there’s a number… it’s hidden for now.",
+ "A tiny tremor. That’s all.",
+ "Your choice was carved somewhere.",
+ "The button caught its breath.",
+ "A red light blinked, then faded out.",
+ "A counterweight quietly shifted.",
+];
+
+const TYPES = {
+ steel:{key:"steel", emoji:"🛡️", name:"Steel Patience", color:"#5b8dff", catch:"Rarely cuts anyone off — the seawall of every relationship",
+   desc:"Your dealbreaker button sits very deep. When someone lets you down, your first move is to understand — ‘they probably had a reason’ — and you carry most wounds quietly. You have the strength to believe in people to the end, but that patience can quietly wear you down.",
+   pro:"You don’t drop people easily, so your relationships last. You stay calm in conflict, and you make the people around you feel safe.",
+   con:"Enduring becomes a habit, and you keep pushing your own hurt to the back of the line. Your door stays open even to people who treat you carelessly — which burns you out fast.",
+   adv:["Tell ‘understanding’ apart from ‘allowing’. You can understand someone and still not allow the same wound on repeat.",
+        "Before you grit your teeth, ask yourself first: ‘Am I actually okay right now?’ Caring for yourself is part of the relationship too.",
+        "Practice ‘adjusting the distance’ before you jump to cutting off. You can protect yourself without ending things."]},
+ quiet:{key:"quiet", emoji:"🌫️", name:"The Quiet Fade", color:"#54c5b0", catch:"No noise — but you drift away for good",
+   desc:"You don’t fight loud or make declarations. Instead, you start closing the door quietly in your heart. The texts thin out, the warmth cools, and before long that person is outside your radius. It’s clean and drama-free — but the other person can drift away without ever knowing why.",
+   pro:"You tidy up relationships without wasting energy on feelings. You don’t hold grudges, and you know how to protect your own energy.",
+   con:"Disappearing without a word tends to leave misunderstandings behind. A relationship that could have been repaired can end in silence instead.",
+   adv:["Before you fade out, say what you feel just once. It gives the other person a chance too.",
+        "If you’ve decided to let go, take it as ‘my choice’ instead of beating yourself up.",
+        "Not every relationship has to end in a clean cut. Sometimes ‘a short break’ is an option too."]},
+ weigh:{key:"weigh", emoji:"⚖️", name:"The Weigher", color:"#f5b13a", catch:"Weighs it to the very end before cutting the cord",
+   desc:"You don’t cut people off on feeling alone. You put the situation on a scale, weighing their side against your own hurt, back and forth. You tend to try talking it out first, and only when that leads nowhere do you finally decide. Being careful means fewer regrets — but the slow decisions can drag your heart through it for a long time.",
+   pro:"Because you don’t cut on impulse, your read on a relationship is accurate. You can clear up misunderstandings by talking, so you rarely cut someone off unfairly.",
+   con:"The deliberating drags on and keeps you hurting far too long. ‘Just one more time’ on repeat can make you miss the moment to decide.",
+   adv:["Set your own ‘cut-off line’ in advance. Once someone crosses it, that’s where you stop agonizing.",
+        "If the scale keeps tipping one way, that’s already your answer. Admit it.",
+        "Spend some of that weighing energy on caring for yourself too. Judgment blurs when your heart is worn out."]},
+ submarine:{key:"submarine", emoji:"🌊", name:"The Submarine", color:"#7c8cf5", catch:"Vanishes underwater instead of facing it",
+   desc:"When conflict shows up, you pick diving over a head-on clash. You don’t fully cut ties — you dodge the messages, put off replies, and wait for things to blur over. It’s your way of keeping the peace, but the problem stays unsolved and the relationship drifts in limbo.",
+   pro:"By avoiding clashes, you leave fewer scars on a relationship. When emotions run high, you know how to step back.",
+   con:"When avoidance piles up, both the problem and the relationship fester. The other person feels abandoned, and you’re stuck too, unable to reach a conclusion.",
+   adv:["When you want to disappear, tell ‘running away’ apart from ‘a short rest’. If it’s a rest, decide for yourself when you’ll come back.",
+        "Even a quick ‘I can’t talk right now’ helps. It hurts far less than silence.",
+        "Practice saying one honest line head-on, starting with small conflicts. Even when you clash, relationships hold up better than you’d think."]},
+ warning:{key:"warning", emoji:"⚠️", name:"Three Strikes", color:"#ff9f45", catch:"Gives chances — but the rules are crystal clear",
+   desc:"You’ve got clear rules. A slip earns a warning, a repeat earns a yellow card, and crossing the line means you’re out. You neither endure blindly nor cut in one shot — you manage ‘the number of chances’. It’s fair, but the other person often has no idea you’re counting in your head.",
+   pro:"You manage relationships without getting swept up by emotion. You have a rare balance — giving chances while still protecting yourself.",
+   con:"When your inner warnings never reach the other person, the cut-off can feel unfair to them. And constantly ‘grading’ people can wear you out.",
+   adv:["Don’t just stack warnings up in your head — say them so the other person can hear. That’s the only way they become a real chance.",
+        "Bend the rules a little person to person. Not every slip weighs the same.",
+        "If you’ve called someone ‘out’, carry it out calmly. The guilt isn’t yours to hold."]},
+ onestrike:{key:"onestrike", emoji:"⚡", name:"One Strike, You’re Out", color:"#ff5e6c", catch:"Cross the line once, and it’s over",
+   desc:"Your dealbreaker button is right at your fingertips. One decisive act that breaks your trust, and you won’t look back — no matter how long you’ve known them. Your self-protection is strong and your decisions are fast, but that firmness can sometimes cut off a misunderstanding you could have cleared up.",
+   pro:"You clear out relationships that hurt you, fast. Your self-respect is clear, and you don’t stay stuck in bad relationships for long.",
+   con:"Judging one slip as beyond repair can cost you good people too. The people close to you may feel the tension of ‘one strike and it’s over’.",
+   adv:["Before you cut, tell ‘a slip’ apart from ‘their nature’, just once. The outcome might change.",
+        "Keep your firmness, but sleep on it for 24 hours first. Decisions made in the rapids are hard to undo.",
+        "Cutting someone off is fair. Just let it be one option among several — not your only card."]},
+};
+
+
+let idx=0, sumS=0, sumA=0, sumC=0, curResult=null;
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(v){if(navigator.vibrate)try{navigator.vibrate(v);}catch(e){}}
+let _tt; function toast(m){const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2000);}
+const $=id=>document.getElementById(id);
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); $(id).classList.add('on'); window.scrollTo(0,0);}
+
+function buildDots(){
+  const d=$('dots'); d.innerHTML='';
+  QUESTIONS.forEach((_,i)=>{const el=document.createElement('div'); el.className='dot'+(i<idx?' done':(i===idx?' cur':'')); d.appendChild(el);});
+}
+function startQuiz(){idx=0; sumS=0; sumA=0; sumC=0; show('quiz'); renderQ();}
+
+let locked=false;
+function renderQ(){
+  locked=false;
+  const Q=QUESTIONS[idx];
+  $('qCount').textContent=String(idx+1).padStart(2,'0')+' / '+QUESTIONS.length;
+  $('qScene').textContent='# '+Q.scene;
+  $('qText').textContent=Q.q;
+  buildDots();
+  const box=$('opts'); box.innerHTML='';
+  const fb=$('feedback'); fb.classList.remove('show'); fb.innerHTML='';
+  const opts=shuffle(Q.o.map(o=>o)); // Shuffle display order only — scoring uses object references
+  const labs=['A','B','C','D'];
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt pop'; b.setAttribute('data-lab',labs[i]); b.textContent=o.t;
+    b.style.animationDelay=(i*.05)+'s';
+    b.onclick=(ev)=>choose(o,b,ev);
+    box.appendChild(b);
+  });
+}
+
+function choose(o,btn,ev){
+  if(locked) return; locked=true;
+  document.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+  btn.classList.add('chosen');
+  sumS+=o.s; sumA+=o.a; sumC+=o.c;
+  vibrate(22);
+
+  try{
+    const r=btn.getBoundingClientRect();
+    confetti({particleCount:16, spread:55, startVelocity:26, scalar:.7, ticks:70,
+      origin:{x:(r.left+r.width/2)/window.innerWidth, y:(r.top+r.height/2)/window.innerHeight},
+      colors:['#ff6b6b','#ff9f45','#ffd56b']});
+  }catch(e){}
+
+  const fb=$('feedback');
+  fb.innerHTML=FEEDBACK[Math.floor(Math.random()*FEEDBACK.length)];
+  fb.classList.add('show');
+  setTimeout(()=>{
+    idx++;
+    if(idx>=QUESTIONS.length){ goResult(); }
+    else { renderQ(); }
+  },1050);
+}
+
+function decideType(sens){
+  if(sens<20) return TYPES.steel;
+  if(sens<40) return TYPES.quiet;
+  if(sens<60) return (sumA>sumC) ? TYPES.submarine : TYPES.weigh;
+  if(sens<80) return TYPES.warning;
+  return TYPES.onestrike;
+}
+
+function goResult(){
+  const sens=Math.round(sumS/MAX_S*100);
+  curResult={sens, type:decideType(sens)};
+  show('result');
+  $('revealStage').style.display='flex';
+  $('resultBody').classList.remove('on');
+  $('ringWrap').classList.remove('on');
+  $('ringLabel').textContent='';
+  $('measureBtn').style.display='';
+  document.querySelector('.measure-hint').style.display='';
+  document.querySelector('#revealStage h2').style.display='';
+  document.querySelector('#revealStage h2 + p').style.display='';
+}
+
+
+const R=94, C=2*Math.PI*R;
+$('ringFg').style.strokeDasharray=C; $('ringFg').style.strokeDashoffset=C;
+let revealed=false;
+function runReveal(){
+  if(revealed) return; revealed=true;
+  const sens=curResult.sens, type=curResult.type;
+  $('measureBtn').style.display='none';
+  document.querySelector('.measure-hint').style.display='none';
+  document.querySelector('#revealStage h2').style.display='none';
+  document.querySelector('#revealStage h2 + p').style.display='none';
+  $('ringWrap').classList.add('on');
+  vibrate([30,50,30]);
+
+  document.documentElement.style.setProperty('--accent1', type.color);
+
+  const dur=1800, t0=performance.now();
+  function step(now){
+    const p=Math.min(1,(now-t0)/dur);
+    const e=1-Math.pow(1-p,3); // easeOutCubic
+    const val=Math.round(sens*e);
+    $('ringNum').textContent=val;
+    $('ringFg').style.strokeDashoffset=C*(1-e*(sens/100));
+    if(p<1) requestAnimationFrame(step);
+    else finishReveal();
+  }
+  requestAnimationFrame(step);
+  setTimeout(()=>{try{confetti({particleCount:60,spread:70,origin:{y:.4},colors:['#ff9f45','#ff5e6c','#ffd56b']});}catch(e){}},900);
+}
+
+function finishReveal(){
+  const {sens,type}=curResult;
+  $('ringNum').textContent=sens;
+  $('ringLabel').textContent = sens<20?'The button sits very, very deep'
+    : sens>=80?'The button is right at your fingertips' : 'Where the button starts to react';
+  vibrate([40,60,40,60,120]);
+
+  $('tEmoji').textContent=type.emoji;
+  $('tName').textContent=type.name;
+  $('tCatch').textContent=type.catch;
+  $('tSens').textContent=sens;
+  $('tDesc').textContent=type.desc;
+  $('tPro').textContent=type.pro;
+  $('tCon').textContent=type.con;
+  const adv=$('tAdvice'); adv.innerHTML='';
+  type.adv.forEach((a,i)=>{const d=document.createElement('div'); d.className='adv-item'; d.innerHTML='<b>'+(i+1)+'</b><span class="word-break">'+a+'</span>'; adv.appendChild(d);});
+  document.documentElement.style.setProperty('--accent1', type.color);
+  document.documentElement.style.setProperty('--accent2', type.color);
+  drawCard(type,sens);
+  setTimeout(()=>{
+    $('resultBody').classList.add('on');
+    const tc=$('typeCard'); tc.classList.remove('pop'); void tc.offsetWidth; tc.classList.add('pop');
+    try{confetti({particleCount:120,spread:90,origin:{y:.35}});
+        setTimeout(()=>confetti({particleCount:90,spread:110,angle:120,origin:{x:.1,y:.5}}),150);
+        setTimeout(()=>confetti({particleCount:90,spread:110,angle:60,origin:{x:.9,y:.5}}),260);}catch(e){}
+    toast(type.emoji+' '+type.name);
+    $('resultBody').scrollIntoView({behavior:'smooth',block:'start'});
+  },550);
+}
+
+
+function drawCard(type,sens){
+  const cv=$('shareCanvas'), x=cv.getContext('2d'), W=cv.width, H=cv.height;
+
+  const g=x.createLinearGradient(0,0,W,H); g.addColorStop(0,'#191420'); g.addColorStop(1,'#2a1826');
+  x.fillStyle=g; x.fillRect(0,0,W,H);
+
+  const gb=x.createLinearGradient(0,0,W,0); gb.addColorStop(0,type.color); gb.addColorStop(1,'#ff9f45');
+  x.fillStyle=gb; x.fillRect(0,0,W,12);
+  x.textAlign='center';
+
+  x.fillStyle='#c7b8c6'; x.font='26px "Noto Sans KR", sans-serif';
+  x.fillText('M Y   D E A L B R E A K E R', W/2, 88);
+
+  x.font='120px serif'; x.fillText(type.emoji, W/2, 250);
+
+  x.fillStyle='#fff4ee'; x.font='58px "Jua", sans-serif';
+  x.fillText(type.name, W/2, 340);
+
+  x.fillStyle='#c7b8c6'; x.font='24px "Noto Sans KR", sans-serif';
+  wrapText(x, type.catch, W/2, 388, W-120, 32);
+
+  x.strokeStyle='rgba(255,255,255,.1)'; x.lineWidth=26;
+  x.beginPath(); x.arc(W/2,590,110,0,Math.PI*2); x.stroke();
+  const ga=x.createLinearGradient(0,480,0,700); ga.addColorStop(0,'#ff9f45'); ga.addColorStop(1,type.color);
+  x.strokeStyle=ga; x.lineCap='round';
+  x.beginPath(); x.arc(W/2,590,110,-Math.PI/2, -Math.PI/2 + Math.PI*2*(sens/100)); x.stroke();
+  x.fillStyle='#fff4ee'; x.font='90px "Jua", sans-serif'; x.fillText(sens, W/2, 615);
+  x.fillStyle='#c7b8c6'; x.font='20px "Noto Sans KR", sans-serif'; x.fillText('Dealbreaker sensitivity / 100', W/2, 655);
+
+  x.fillStyle='#9a8fc0'; x.font='22px "Jua", sans-serif'; x.fillText('MIMI FACTORY · The Meaning & Fun Factory', W/2, 800);
+}
+function wrapText(ctx,text,cx,y,maxW,lh){
+  const words=text.split(' '); let line=''; const lines=[];
+  for(const w of words){const t=line?line+' '+w:w; if(ctx.measureText(t).width>maxW && line){lines.push(line); line=w;} else line=t;}
+  if(line) lines.push(line);
+  lines.forEach((l,i)=>ctx.fillText(l,cx,y+i*lh));
+}
+function downloadCard(){
+  try{
+    const a=document.createElement('a');
+    a.download='My_Dealbreaker_Button_'+curResult.type.name+'.png';
+    a.href=$('shareCanvas').toDataURL('image/png'); a.click();
+    toast('Card saved 📎');
+  }catch(e){ toast('Press and hold to save the image'); }
+}
+function restart(){
+  revealed=false; idx=0; sumS=0; sumA=0; sumC=0; curResult=null;
+  $('ringFg').style.strokeDashoffset=C; $('ringNum').textContent='0';
+  document.documentElement.style.setProperty('--accent1','#ff6b6b');
+  document.documentElement.style.setProperty('--accent2','#ff9f45');
+  show('home');
+}
+buildDots();
+</script>
+</body>
+</html>

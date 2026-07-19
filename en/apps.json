@@ -95,6 +95,18 @@
    "teaser": "apps/cut-them-off.html",
    "premium": "apps/cut-them-off.html",
    "desc": "Read that one person through 15 real behaviors — a walk-away traffic light."
+  },
+  {
+   "id": "dealbreaker-button",
+   "type": "test",
+   "title": "My Dealbreaker Button",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/dealbreaker-button.html",
+   "premium": "apps/dealbreaker-button.html",
+   "desc": "How easily do you cut people off? Measure your dealbreaker sensitivity."
   }
  ],
  "updated": "2026-07-19"

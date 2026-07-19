@@ -95,6 +95,18 @@
    "teaser": "apps/cut-them-off.html",
    "premium": "apps/cut-them-off.html",
    "desc": "心に引っかかるあの人を、15の行動で損切り信号診断。"
+  },
+  {
+   "id": "dealbreaker-button",
+   "type": "test",
+   "title": "私の限界ボタン",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/dealbreaker-button.html",
+   "premium": "apps/dealbreaker-button.html",
+   "desc": "人をどれだけ簡単に、あるいは難しく切るのか — 関係の損切り感度を測る診断"
   }
  ],
  "updated": "2026-07-19"

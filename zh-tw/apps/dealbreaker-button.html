@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>我的地雷按鈕 — 人際斷捨傾向測驗</title>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#12111a; --bg2:#231627;
+  --accent1:#ff6b6b; --accent2:#ff9f45;
+  --cream:#fff4ee; --muted:#c7b8c6;
+  --card:#1e1826; --line:rgba(255,255,255,.08);
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 82% -10%, rgba(255,120,80,.12), transparent 55%),
+    radial-gradient(120% 90% at 8% 112%, rgba(255,94,138,.13), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  transition:background .9s ease;
+  min-height:100dvh;
+  line-height:1.6;
+}
+.wrap{max-width:520px; margin:0 auto; padding:26px 20px 40px; min-height:100dvh; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(105deg,#ffd56b,#ff8a5b 45%,#ff5e6c);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em; line-height:1.25;}
+.screen{display:none; animation:fadeIn .5s ease; flex:1; flex-direction:column;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1.2deg); opacity:.4;} 60%{transform:scale(1.02) rotate(.4deg);} 100%{transform:scale(1) rotate(0); opacity:1;}}
+.word-break{}
+
+/* ===== HOME ===== */
+.home-center{flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center;}
+.btn-emoji{font-size:74px; line-height:1; filter:drop-shadow(0 8px 24px rgba(255,80,80,.35)); animation:float 3.4s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0);} 50%{transform:translateY(-9px);}}
+.home-center h1{font-size:38px; margin:16px 0 6px;}
+.tagline{color:var(--muted); font-size:15.5px; margin:0 auto 4px; max-width:340px;}
+.sub{color:#8f8298; font-size:13px; margin-top:18px;}
+.pill-row{display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin:22px auto 0; max-width:400px;}
+.pill{font-size:12px; color:var(--muted); background:rgba(255,255,255,.05); border:1px solid var(--line); padding:6px 12px; border-radius:99px;}
+.cta{
+  display:block; width:100%; margin-top:30px; padding:18px; border:none; cursor:pointer;
+  font-family:'Jua',sans-serif; font-size:21px; color:#2a0d10; border-radius:18px;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2));
+  box-shadow:0 10px 30px rgba(255,100,80,.35);
+  transition:transform .16s, box-shadow .3s;
+}
+.cta:active{transform:scale(.97);}
+.cta.ghost{background:transparent; color:var(--cream); border:1.5px solid var(--line); box-shadow:none; font-size:15px; padding:14px; margin-top:12px;}
+
+/* ===== QUIZ ===== */
+.q-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;}
+.q-count{font-size:13px; color:#8f8298; letter-spacing:.03em;}
+.dots{display:flex; gap:5px; flex-wrap:wrap; margin:10px 0 22px;}
+.dot{width:100%; height:6px; flex:1; min-width:6px; border-radius:99px; background:rgba(255,255,255,.09); transition:background .4s;}
+.dot.done{background:linear-gradient(90deg,var(--accent1),var(--accent2));}
+.dot.cur{background:rgba(255,255,255,.28);}
+.q-scene{font-size:12.5px; color:var(--accent2); letter-spacing:.14em; font-weight:700; margin-bottom:10px;}
+.q-text{font-size:23px; margin:0 0 8px; min-height:96px;}
+.q-hint{font-size:13.5px; color:#8f8298; margin:0 0 20px;}
+.opts{display:flex; flex-direction:column; gap:11px; flex:1;}
+.opt{
+  position:relative; text-align:left; cursor:pointer; width:100%;
+  background:var(--card); border:1.5px solid var(--line); color:var(--cream);
+  padding:16px 16px 16px 50px; border-radius:15px; font-size:15.5px; font-family:inherit;
+  transition:transform .15s, border-color .2s, background .2s; line-height:1.45;
+}
+.opt:hover{border-color:rgba(255,255,255,.22);}
+.opt:active{transform:scale(.98);}
+.opt::before{
+  content:attr(data-lab); position:absolute; left:14px; top:50%; transform:translateY(-50%);
+  width:26px; height:26px; border-radius:8px; display:flex; align-items:center; justify-content:center;
+  font-family:'Jua',sans-serif; font-size:14px; color:var(--muted);
+  background:rgba(255,255,255,.06); border:1px solid var(--line);
+}
+.opt.chosen{border-color:var(--accent2); background:linear-gradient(100deg,rgba(255,110,80,.16),rgba(255,160,70,.08));}
+.opt:focus-visible{outline:2px solid var(--accent2); outline-offset:2px;}
+.feedback{
+  text-align:center; font-family:'Jua',sans-serif; font-size:18px; color:var(--cream);
+  min-height:30px; margin-top:18px; opacity:0; transform:translateY(6px);
+  transition:opacity .4s, transform .4s;
+}
+.feedback.show{opacity:1; transform:none;}
+.feedback .spark{color:var(--accent2);}
+
+/* ===== REVEAL / RESULT ===== */
+.reveal-stage{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;}
+.measure-btn{
+  width:150px; height:150px; border-radius:50%; border:none; cursor:pointer; position:relative;
+  font-family:'Jua',sans-serif; font-size:19px; color:#fff;
+  background:radial-gradient(circle at 38% 32%, #ff8a6b, #e8333f 70%);
+  box-shadow:0 0 0 10px rgba(255,80,80,.12), 0 14px 34px rgba(230,50,60,.5), inset 0 -6px 14px rgba(0,0,0,.28);
+  animation:pulse 1.8s ease-in-out infinite; transition:transform .12s;
+}
+.measure-btn:active{transform:scale(.94);}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 10px rgba(255,80,80,.10),0 14px 34px rgba(230,50,60,.5), inset 0 -6px 14px rgba(0,0,0,.28);} 50%{box-shadow:0 0 0 20px rgba(255,80,80,.02),0 14px 40px rgba(230,50,60,.62), inset 0 -6px 14px rgba(0,0,0,.28);}}
+.measure-hint{color:var(--muted); font-size:14px; margin-top:22px;}
+
+.ring-wrap{position:relative; width:220px; height:220px; margin:6px auto 0; display:none;}
+.ring-wrap.on{display:block;}
+.ring-num{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;}
+.ring-num b{font-family:'Jua',sans-serif; font-size:62px; line-height:1; color:var(--cream);}
+.ring-num small{font-size:12.5px; color:var(--muted); letter-spacing:.2em; margin-top:4px;}
+.ring-label{font-size:13px; color:#8f8298; letter-spacing:.16em; margin-top:2px;}
+
+.result-body{display:none;}
+.result-body.on{display:block;}
+.type-card{
+  text-align:center; background:var(--card); border:1.5px solid var(--line);
+  border-radius:22px; padding:26px 20px; margin-top:20px; position:relative; overflow:hidden;
+}
+.type-card::before{content:""; position:absolute; inset:0 0 auto 0; height:5px; background:linear-gradient(90deg,var(--accent1),var(--accent2));}
+.type-emoji{font-size:60px; line-height:1;}
+.type-name{font-size:30px; margin:8px 0 2px;}
+.type-catch{color:var(--muted); font-size:15px; margin:0;}
+.sens-line{display:inline-flex; align-items:center; gap:8px; margin-top:14px; font-size:13.5px; color:var(--muted); background:rgba(255,255,255,.05); border:1px solid var(--line); padding:7px 14px; border-radius:99px;}
+.sens-line b{font-family:'Jua',sans-serif; color:var(--cream); font-size:16px;}
+
+.sect{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px 18px; margin-top:14px;}
+.sect h3{font-size:17px; margin:0 0 8px; display:flex; align-items:center; gap:8px;}
+.sect p{margin:0; font-size:14.5px; color:#e6dbe4;}
+.adv-item{display:flex; gap:11px; padding:11px 0; border-bottom:1px dashed var(--line); font-size:14.5px; color:#e6dbe4;}
+.adv-item:last-child{border-bottom:none;}
+.adv-item b{font-family:'Jua',sans-serif; color:var(--accent2); flex:none;}
+.two{display:flex; gap:12px;}
+.two .sect{flex:1;}
+.two .sect p{font-size:13.8px;}
+
+.share-card-wrap{margin-top:22px; text-align:center;}
+#shareCanvas{width:100%; max-width:340px; border-radius:18px; box-shadow:0 12px 40px rgba(0,0,0,.5); border:1px solid var(--line);}
+.row-btn{display:flex; gap:10px; margin-top:16px;}
+.row-btn .cta{margin-top:0;}
+.mini-note{font-size:12px; color:#8f8298; text-align:center; margin-top:12px;}
+
+/* toast */
+.toast{position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-20px);
+  background:rgba(30,24,38,.96); border:1.5px solid var(--accent2); color:var(--cream);
+  padding:12px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none;
+  transition:opacity .4s, transform .4s; z-index:60; max-width:90vw;}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+/* footer */
+.footer{text-align:center; margin-top:30px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  <!-- HOME -->
+  <section id="home" class="screen on">
+    <div class="home-center">
+      <div class="btn-emoji">🔴</div>
+      <h1>我的 <span class="grad">地雷按鈕</span></h1>
+      <p class="tagline word-break">你把一個人，切得多容易，還是多困難？<br>測量你心裡那顆地雷按鈕的靈敏度。</p>
+      <div class="pill-row">
+        <span class="pill">放鴿子</span><span class="pill">說壞話</span><span class="pill">斷聯</span>
+        <span class="pill">金錢問題</span><span class="pill">無禮</span><span class="pill">又靠近</span>
+      </div>
+      <p class="sub word-break">⚠️ 進行中不會顯示分數，也不會顯示儀表。<br>按鈕只會靜靜反應。靈敏度會在 <b>最後</b> 才揭曉。</p>
+      <button class="cta" onclick="startQuiz()">開始測驗</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="screen">
+    <div class="q-top">
+      <span class="q-count" id="qCount">01 / 15</span>
+      <span class="q-count">🔴 測量中…</span>
+    </div>
+    <div class="dots" id="dots"></div>
+    <div class="q-scene" id="qScene"></div>
+    <h2 class="q-text word-break" id="qText"></h2>
+    <p class="q-hint">選出最接近你的反應。</p>
+    <div class="opts" id="opts"></div>
+    <div class="feedback" id="feedback"></div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="screen">
+    <div id="revealStage" class="reveal-stage">
+      <h2 style="font-size:24px; margin:0 0 4px;">所有反應都被記錄下來了</h2>
+      <p style="color:var(--muted); font-size:15px; margin:0 0 30px;" class="word-break">現在按下按鈕，揭曉你的 <b>地雷按鈕靈敏度</b>。</p>
+      <button class="measure-btn" id="measureBtn" onclick="runReveal()">測量靈敏度</button>
+      <p class="measure-hint">只有一次，現在揭曉。</p>
+
+      <div class="ring-wrap" id="ringWrap">
+        <svg width="220" height="220" viewBox="0 0 220 220">
+          <circle cx="110" cy="110" r="94" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="16"/>
+          <circle id="ringFg" cx="110" cy="110" r="94" fill="none" stroke="url(#rg)" stroke-width="16"
+                  stroke-linecap="round" transform="rotate(-90 110 110)"/>
+          <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#ff9f45"/><stop offset="1" stop-color="#ff5e6c"/>
+          </linearGradient></defs>
+        </svg>
+        <div class="ring-num"><b id="ringNum">0</b><small>地雷按鈕靈敏度</small></div>
+      </div>
+      <div class="ring-label" id="ringLabel"></div>
+    </div>
+
+    <div class="result-body" id="resultBody">
+      <div class="type-card pop" id="typeCard">
+        <div class="type-emoji" id="tEmoji"></div>
+        <h2 class="type-name" id="tName"></h2>
+        <p class="type-catch" id="tCatch"></p>
+        <div class="sens-line">地雷按鈕靈敏度 <b id="tSens">0</b> / 100</div>
+      </div>
+
+      <div class="sect">
+        <h3>🧭 你是這樣的人</h3>
+        <p class="word-break" id="tDesc"></p>
+      </div>
+
+      <div class="two">
+        <div class="sect"><h3>💪 強項</h3><p class="word-break" id="tPro"></p></div>
+        <div class="sect"><h3>⚠️ 風險</h3><p class="word-break" id="tCon"></p></div>
+      </div>
+
+      <div class="sect">
+        <h3>🌱 健康整理關係的建議</h3>
+        <div id="tAdvice"></div>
+      </div>
+
+      <div class="share-card-wrap">
+        <canvas id="shareCanvas" width="680" height="850"></canvas>
+        <div class="row-btn">
+          <button class="cta" onclick="downloadCard()">儲存結果卡片</button>
+          <button class="cta ghost" onclick="restart()">再測一次</button>
+        </div>
+        <p class="mini-note">把卡片截圖傳給朋友問問：「你覺得我的地雷按鈕靈敏度有幾分？」</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/zh-tw/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 多巴胺實驗室 — 看看其他測驗 →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意 義 與 趣 味 工 廠</span></div>
+    <div class="mf-logo">咪咪工廠 MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL股份有限公司 家族公司</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script>
+
+
+const QUESTIONS = [
+ {scene:"放鴿子", q:"朋友把重要的約，當天才取消，而且已經是第三次了。你會？",
+  o:[{t:"理解，應該有他的苦衷",s:0,a:0,c:0},
+     {t:"有點難過，但還是算了",s:1,a:1,c:0},
+     {t:"以後對這個人不再抱期待",s:2,a:1,c:0},
+     {t:"跟這個人的約，乾脆都不約了",s:3,a:0,c:1}]},
+ {scene:"發現被說壞話", q:"無意間知道有人在背後說我壞話。你會？",
+  o:[{t:"直接問清楚，是誤會就解開",s:1,a:0,c:1},
+     {t:"什麼都不說，慢慢拉開距離",s:2,a:2,c:0},
+     {t:"先放過一次，但心裡記下一筆警告",s:2,a:1,c:0},
+     {t:"信任破了，就結束這段關係",s:3,a:0,c:1}]},
+ {scene:"斷聯", q:"很要好的朋友，好幾個月已讀我卻不回。你會？",
+  o:[{t:"繼續傳關心，總有一天會回吧",s:0,a:0,c:0},
+     {t:"我也自然而然停止聯絡",s:2,a:2,c:0},
+     {t:"認真地，把難過說出來一次",s:1,a:0,c:1},
+     {t:"從通訊錄裡，安靜地刪掉",s:3,a:2,c:0}]},
+ {scene:"金錢問題", q:"說好還錢的日子早就過了，對方卻裝作沒這回事。你會？",
+  o:[{t:"想說他大概手頭緊，再等等",s:0,a:1,c:0},
+     {t:"直接問清楚到底什麼時候還",s:1,a:0,c:1},
+     {t:"錢就算了，人也一起斷掉",s:3,a:1,c:0},
+     {t:"再也不見，但話不說破",s:3,a:2,c:0}]},
+ {scene:"當眾失禮", q:"在一群人面前，聽到有人拿我開貶低的玩笑。你會？",
+  o:[{t:"不想破壞氣氛，笑一笑帶過",s:0,a:0,c:0},
+     {t:"當場，清楚地畫下界線",s:2,a:0,c:1},
+     {t:"下次再這樣就結束，心裡這麼決定",s:2,a:1,c:0},
+     {t:"跟那個人，再也不往來",s:3,a:1,c:0}]},
+ {scene:"每次都遲到", q:"每次見面都遲到30分鐘的人。每次是都會說抱歉。你會？",
+  o:[{t:"想說他就是這種人，接受",s:0,a:0,c:0},
+     {t:"直接說，我的時間也很寶貴",s:1,a:0,c:1},
+     {t:"見面的次數，慢慢減少",s:2,a:2,c:0},
+     {t:"守不住時間的人，直接篩掉",s:3,a:1,c:0}]},
+ {scene:"低潮時被冷落", q:"我很難過的時候找他，他卻說在忙就帶過去了。你會？",
+  o:[{t:"忙也是難免，理解一下就過去",s:0,a:0,c:0},
+     {t:"老實說出「我很難過」",s:1,a:0,c:1},
+     {t:"把這個人，重新定義成「就這種交情」",s:2,a:1,c:0},
+     {t:"以後不再分享我的難處，也拉開距離",s:3,a:2,c:0}]},
+ {scene:"謊言被拆穿", q:"發現他一再說一些小、但很明顯的謊。你會？",
+  o:[{t:"想說誰都會這樣，算了",s:0,a:0,c:0},
+     {t:"直接問清楚他為什麼這樣",s:1,a:0,c:1},
+     {t:"扣掉信任分數，安靜地觀察",s:2,a:1,c:0},
+     {t:"會說謊的人，馬上斷掉",s:3,a:0,c:1}]},
+ {scene:"越界干涉", q:"他一再越界干涉我的私生活。你會？",
+  o:[{t:"當成是關心，接受下來",s:0,a:0,c:0},
+     {t:"明白說出不舒服，畫下界線",s:2,a:0,c:1},
+     {t:"避開那個話題，調整距離",s:2,a:2,c:0},
+     {t:"這種人不深交，直接整理掉",s:3,a:1,c:0}]},
+ {scene:"覺得被利用", q:"我發現他只有在需要時才來找我。你會？",
+  o:[{t:"能幫上忙就好了",s:0,a:1,c:0},
+     {t:"下次我也拜託他，把關係拉平",s:1,a:0,c:1},
+     {t:"就算他來找，也慢慢冷淡回應",s:2,a:2,c:0},
+     {t:"乾脆結束這段關係",s:3,a:0,c:1}]},
+ {scene:"始終沒道歉", q:"明明是對方錯了，卻始終沒有道歉。你會？",
+  o:[{t:"不道歉也就這樣，算了",s:0,a:0,c:0},
+     {t:"直接要求他道歉",s:1,a:0,c:1},
+     {t:"沒有道歉，就把心門關上",s:3,a:1,c:0},
+     {t:"不聲不響地斷掉",s:3,a:2,c:0}]},
+ {scene:"被要求一起排擠", q:"一群人在排擠某個人，還希望我也一起。你會？",
+  o:[{t:"配合氣氛，稍微參一腳",s:0,a:0,c:0},
+     {t:"說我不要，然後退出",s:2,a:0,c:1},
+     {t:"安靜地，跟那群人拉開距離",s:2,a:2,c:0},
+     {t:"那種小圈子，整個斷掉",s:3,a:1,c:0}]},
+ {scene:"沒有祝福只有嫉妒", q:"我的大喜事，他不但沒祝福，還帶著嫉妒的反應。你會？",
+  o:[{t:"他本來就不太會表達",s:0,a:0,c:0},
+     {t:"輕輕地說一句我有點難過",s:1,a:0,c:1},
+     {t:"開心的事，以後不再跟他分享",s:2,a:2,c:0},
+     {t:"無法真心祝福的交情，整理掉",s:3,a:1,c:0}]},
+ {scene:"斷聯後又回來", q:"已經斷掉的人，像沒事一樣又來聯絡了。你會？",
+  o:[{t:"開心地，再次接納",s:0,a:0,c:0},
+     {t:"有道歉、有改變的話，就給個機會",s:1,a:0,c:1},
+     {t:"已讀，但不回",s:2,a:2,c:0},
+     {t:"連再靠近，也果斷封鎖",s:3,a:1,c:0}]},
+ {scene:"沒查證就誤會", q:"他沒查證，只聽了傳言，對我的態度就變了。你會？",
+  o:[{t:"想說時間會化解，先等等",s:0,a:1,c:0},
+     {t:"直接見面，把誤會解開",s:1,a:0,c:1},
+     {t:"原來只是這種程度的信任，拉開距離",s:2,a:2,c:0},
+     {t:"不相信我的人，整理掉",s:3,a:1,c:0}]},
+];
+const MAX_S = QUESTIONS.length * 3;
+
+
+const FEEDBACK = [
+ "…按鈕微微動了一下。",
+ "某個地方傳來<span class='spark'>喀噠</span>一聲。",
+ "指尖掠過一陣微微的震動。",
+ "按鈕上，一瞬間罩下了一道陰影。",
+ "有什麼，被靜靜地記錄了下來。",
+ "指針晃了一下。往哪一邊，看不見。",
+ "<span class='spark'>喀噠。</span> 然後，又是一片沉默。",
+ "按鈕好像，被微微地捂熱了一點。",
+ "表面底下，一個齒輪轉了一下。",
+ "就算有數字…現在也被遮住了。",
+ "一絲微微的顫動。就這樣而已。",
+ "你的選擇，被刻在了某個地方。",
+ "按鈕，深深地吸了一口氣。",
+ "紅色的燈閃了一下，然後熄滅。",
+ "秤砣，靜靜地換了位置。",
+];
+
+const TYPES = {
+ steel:{key:"steel", emoji:"🛡️", name:"鋼鐵忍耐型", color:"#5b8dff", catch:"很難把人斷掉，是關係裡的防波堤",
+   desc:"你的地雷按鈕藏在很深的地方。就算遇到失望的事，你也會先用「應該有他的苦衷吧」去理解，大部分的傷都自己收著放過去。你有把人信到底的力量，但那份忍耐，有時也在一點一點消耗你自己。",
+   pro:"你不會輕易放掉一個人，所以關係能走得長久。面對衝突時你很冷靜，待在你身邊會有一種安定感。",
+   con:"忍耐成了習慣，你總把自己的傷往後擺。連對那些隨便對待你的人，門也一直開著，很容易把自己耗盡。",
+   adv:["把「理解」和「容許」分開來。你可以理解對方，但重複的傷害，不必一再容許。",
+        "在忍下來之前，先問自己一句「我現在還好嗎」。好好疼自己，也是關係的一部分。",
+        "先從「調整距離」開始練習，而不是直接斷掉。不切斷，也能保護自己。"]},
+ quiet:{key:"quiet", emoji:"🌫️", name:"安靜退場型", color:"#54c5b0", catch:"沒有聲音，卻確實地愈走愈遠",
+   desc:"你不會大吵，也不會宣告什麼。你會在心裡悄悄開始整理。訊息變少、溫度變涼，不知不覺那個人就落到了你的半徑之外。乾淨俐落、沒有戲劇性，但對方可能連原因都不知道，就這樣愈走愈遠。",
+   pro:"你不做多餘的情緒消耗，就把關係整理好。不拖泥帶水，懂得守住自己的能量。",
+   con:"什麼都不說就消失，很容易留下誤會。本來可以修補的關係，也可能在沉默裡就結束了。",
+   adv:["在走遠之前，至少一次把心情說出來。那也是給對方一個機會。",
+        "如果決定整理了，就別自責，把它當成「我的選擇」接受下來。",
+        "不是每段關係都要用整理收尾。有時候「先暫停一下」也是一種方法。"]},
+ weigh:{key:"weigh", emoji:"⚖️", name:"天秤衡量型", color:"#f5b13a", catch:"斷之前會衡量到最後的平衡者",
+   desc:"你不會只憑情緒就把人斷掉。你會把情況放上天秤，把對方的立場和自己的傷來回秤量。你偏向先直接對話試著解開，真的沒答案時才終於做決定。慎重讓你少了後悔，但決定太慢，也讓你把心事拖得很長。",
+   pro:"你不會衝動斷交，所以對關係的判斷很準。你有靠對話化解誤會的能力，很少冤枉地把人斷掉。",
+   con:"糾結拖太久，會讓自己難受很久。一直「再給一次機會」，反而錯過該決定的時機。",
+   adv:["先幫自己定好一條「斷捨底線」。一旦越過那條線，就決定停止糾結。",
+        "如果天秤一直往同一邊倒，那其實已經是答案了。承認吧。",
+        "把衡量的力氣，也分一點去照顧自己。人一累，判斷就會模糊。"]},
+ submarine:{key:"submarine", emoji:"🌊", name:"迴避潛水型", color:"#7c8cf5", catch:"與其正面對決，寧可潛入水裡消失",
+   desc:"一有衝突，你會選擇潛水，而不是正面對決。你不算完全斷掉，只是避開聯絡、拖延回覆，等著事情自己淡掉。這是你維持和平的方式，但問題沒解決，關係就這樣曖昧地漂著。",
+   pro:"你避開衝突，比較不會在關係上留下傷。情緒激動時，你懂得先退一步。",
+   con:"迴避一旦累積，問題和關係都會爛掉。對方覺得被晾在一邊，你自己也遲遲下不了結論，很悶。",
+   adv:["想潛水的時候，先分清是「逃避」還是「暫時休息」。如果是休息，就自己定好什麼時候回來。",
+        "哪怕只說一句「現在不太方便聊」也好。那比沉默，痛得少很多。",
+        "從小衝突開始，練習正面說一句話。就算起了摩擦，關係其實比你想的還撐得住。"]},
+ warning:{key:"warning", emoji:"⚠️", name:"三次警告型", color:"#ff9f45", catch:"給機會，但規則清清楚楚",
+   desc:"你有明確的規則。犯錯給警告，重複就黃牌，越線就出局。你不會盲目忍耐，也不會一次就斷，而是管理「機會的次數」。你很公平，但對方常常不知道，你正在心裡默默計數。",
+   pro:"你不被情緒牽著走，能把關係管理好。一邊給機會、一邊守住自己，這種平衡感很出色。",
+   con:"心裡的警告如果沒傳到對方那裡，斷掉時就變成對方的冤枉。而且一直「評分」別人，也會讓你很累。",
+   adv:["別把警告只堆在心裡，要說到對方聽得見。這樣才是真正的機會。",
+        "規則對每個人可以稍微有彈性。每個錯的分量，都不一樣。",
+        "如果決定「出局」了，就淡淡地執行。罪惡感，不該由你來背。"]},
+ onestrike:{key:"onestrike", emoji:"⚡", name:"一次出局型", color:"#ff5e6c", catch:"只要越線一次，就結束",
+   desc:"你的地雷按鈕就在指尖上。只要一個破壞信任的關鍵舉動，再久的交情你也不回頭。你保護自己的力量很強、決斷很快，但那份果斷，有時也把本來能解開的誤會一起切掉了。",
+   pro:"你會很快整理掉傷害自己的關係。你的自我尊重很清楚，不會在壞關係裡被綁住太久。",
+   con:"把一次失誤判成無法挽回，也可能因此失去好的人。身邊的人，有時會感受到那種「一次就結束」的緊張。",
+   adv:["斷之前，至少分辨一次「是失誤，還是本性」。結果可能會不一樣。",
+        "果斷可以保留，但決定前先放個24小時。在急流裡下的決定，事後很難收回。",
+        "斷捨是正當的。只是讓它是好幾個選項之一，而不是你唯一的一張牌。"]},
+};
+
+
+let idx=0, sumS=0, sumA=0, sumC=0, curResult=null;
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(v){if(navigator.vibrate)try{navigator.vibrate(v);}catch(e){}}
+let _tt; function toast(m){const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2000);}
+const $=id=>document.getElementById(id);
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); $(id).classList.add('on'); window.scrollTo(0,0);}
+
+function buildDots(){
+  const d=$('dots'); d.innerHTML='';
+  QUESTIONS.forEach((_,i)=>{const el=document.createElement('div'); el.className='dot'+(i<idx?' done':(i===idx?' cur':'')); d.appendChild(el);});
+}
+function startQuiz(){idx=0; sumS=0; sumA=0; sumC=0; show('quiz'); renderQ();}
+
+let locked=false;
+function renderQ(){
+  locked=false;
+  const Q=QUESTIONS[idx];
+  $('qCount').textContent=String(idx+1).padStart(2,'0')+' / '+QUESTIONS.length;
+  $('qScene').textContent='# '+Q.scene;
+  $('qText').textContent=Q.q;
+  buildDots();
+  const box=$('opts'); box.innerHTML='';
+  const fb=$('feedback'); fb.classList.remove('show'); fb.innerHTML='';
+  const opts=shuffle(Q.o.map(o=>o)); // 只洗顯示順序，計分用物件參照
+  const labs=['A','B','C','D'];
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt pop'; b.setAttribute('data-lab',labs[i]); b.textContent=o.t;
+    b.style.animationDelay=(i*.05)+'s';
+    b.onclick=(ev)=>choose(o,b,ev);
+    box.appendChild(b);
+  });
+}
+
+function choose(o,btn,ev){
+  if(locked) return; locked=true;
+  document.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+  btn.classList.add('chosen');
+  sumS+=o.s; sumA+=o.a; sumC+=o.c;
+  vibrate(22);
+
+  try{
+    const r=btn.getBoundingClientRect();
+    confetti({particleCount:16, spread:55, startVelocity:26, scalar:.7, ticks:70,
+      origin:{x:(r.left+r.width/2)/window.innerWidth, y:(r.top+r.height/2)/window.innerHeight},
+      colors:['#ff6b6b','#ff9f45','#ffd56b']});
+  }catch(e){}
+
+  const fb=$('feedback');
+  fb.innerHTML=FEEDBACK[Math.floor(Math.random()*FEEDBACK.length)];
+  fb.classList.add('show');
+  setTimeout(()=>{
+    idx++;
+    if(idx>=QUESTIONS.length){ goResult(); }
+    else { renderQ(); }
+  },1050);
+}
+
+function decideType(sens){
+  if(sens<20) return TYPES.steel;
+  if(sens<40) return TYPES.quiet;
+  if(sens<60) return (sumA>sumC) ? TYPES.submarine : TYPES.weigh;
+  if(sens<80) return TYPES.warning;
+  return TYPES.onestrike;
+}
+
+function goResult(){
+  const sens=Math.round(sumS/MAX_S*100);
+  curResult={sens, type:decideType(sens)};
+  show('result');
+  $('revealStage').style.display='flex';
+  $('resultBody').classList.remove('on');
+  $('ringWrap').classList.remove('on');
+  $('ringLabel').textContent='';
+  $('measureBtn').style.display='';
+  document.querySelector('.measure-hint').style.display='';
+  document.querySelector('#revealStage h2').style.display='';
+  document.querySelector('#revealStage h2 + p').style.display='';
+}
+
+
+const R=94, C=2*Math.PI*R;
+$('ringFg').style.strokeDasharray=C; $('ringFg').style.strokeDashoffset=C;
+let revealed=false;
+function runReveal(){
+  if(revealed) return; revealed=true;
+  const sens=curResult.sens, type=curResult.type;
+  $('measureBtn').style.display='none';
+  document.querySelector('.measure-hint').style.display='none';
+  document.querySelector('#revealStage h2').style.display='none';
+  document.querySelector('#revealStage h2 + p').style.display='none';
+  $('ringWrap').classList.add('on');
+  vibrate([30,50,30]);
+
+  document.documentElement.style.setProperty('--accent1', type.color);
+
+  const dur=1800, t0=performance.now();
+  function step(now){
+    const p=Math.min(1,(now-t0)/dur);
+    const e=1-Math.pow(1-p,3); // easeOutCubic
+    const val=Math.round(sens*e);
+    $('ringNum').textContent=val;
+    $('ringFg').style.strokeDashoffset=C*(1-e*(sens/100));
+    if(p<1) requestAnimationFrame(step);
+    else finishReveal();
+  }
+  requestAnimationFrame(step);
+  setTimeout(()=>{try{confetti({particleCount:60,spread:70,origin:{y:.4},colors:['#ff9f45','#ff5e6c','#ffd56b']});}catch(e){}},900);
+}
+
+function finishReveal(){
+  const {sens,type}=curResult;
+  $('ringNum').textContent=sens;
+  $('ringLabel').textContent = sens<20?'按鈕藏在很深很深的地方'
+    : sens>=80?'按鈕就在你的指尖上' : '按鈕開始有反應的位置';
+  vibrate([40,60,40,60,120]);
+
+  $('tEmoji').textContent=type.emoji;
+  $('tName').textContent=type.name;
+  $('tCatch').textContent=type.catch;
+  $('tSens').textContent=sens;
+  $('tDesc').textContent=type.desc;
+  $('tPro').textContent=type.pro;
+  $('tCon').textContent=type.con;
+  const adv=$('tAdvice'); adv.innerHTML='';
+  type.adv.forEach((a,i)=>{const d=document.createElement('div'); d.className='adv-item'; d.innerHTML='<b>'+(i+1)+'</b><span class="word-break">'+a+'</span>'; adv.appendChild(d);});
+  document.documentElement.style.setProperty('--accent1', type.color);
+  document.documentElement.style.setProperty('--accent2', type.color);
+  drawCard(type,sens);
+  setTimeout(()=>{
+    $('resultBody').classList.add('on');
+    const tc=$('typeCard'); tc.classList.remove('pop'); void tc.offsetWidth; tc.classList.add('pop');
+    try{confetti({particleCount:120,spread:90,origin:{y:.35}});
+        setTimeout(()=>confetti({particleCount:90,spread:110,angle:120,origin:{x:.1,y:.5}}),150);
+        setTimeout(()=>confetti({particleCount:90,spread:110,angle:60,origin:{x:.9,y:.5}}),260);}catch(e){}
+    toast(type.emoji+' '+type.name);
+    $('resultBody').scrollIntoView({behavior:'smooth',block:'start'});
+  },550);
+}
+
+
+function drawCard(type,sens){
+  const cv=$('shareCanvas'), x=cv.getContext('2d'), W=cv.width, H=cv.height;
+
+  const g=x.createLinearGradient(0,0,W,H); g.addColorStop(0,'#191420'); g.addColorStop(1,'#2a1826');
+  x.fillStyle=g; x.fillRect(0,0,W,H);
+
+  const gb=x.createLinearGradient(0,0,W,0); gb.addColorStop(0,type.color); gb.addColorStop(1,'#ff9f45');
+  x.fillStyle=gb; x.fillRect(0,0,W,12);
+  x.textAlign='center';
+
+  x.fillStyle='#c7b8c6'; x.font='26px "Noto Sans KR", sans-serif';
+  x.fillText('我 的   地 雷 按 鈕', W/2, 88);
+
+  x.font='120px serif'; x.fillText(type.emoji, W/2, 250);
+
+  x.fillStyle='#fff4ee'; x.font='58px "Jua", sans-serif';
+  x.fillText(type.name, W/2, 340);
+
+  x.fillStyle='#c7b8c6'; x.font='24px "Noto Sans KR", sans-serif';
+  wrapText(x, type.catch, W/2, 388, W-120, 32);
+
+  x.strokeStyle='rgba(255,255,255,.1)'; x.lineWidth=26;
+  x.beginPath(); x.arc(W/2,590,110,0,Math.PI*2); x.stroke();
+  const ga=x.createLinearGradient(0,480,0,700); ga.addColorStop(0,'#ff9f45'); ga.addColorStop(1,type.color);
+  x.strokeStyle=ga; x.lineCap='round';
+  x.beginPath(); x.arc(W/2,590,110,-Math.PI/2, -Math.PI/2 + Math.PI*2*(sens/100)); x.stroke();
+  x.fillStyle='#fff4ee'; x.font='90px "Jua", sans-serif'; x.fillText(sens, W/2, 615);
+  x.fillStyle='#c7b8c6'; x.font='20px "Noto Sans KR", sans-serif'; x.fillText('地雷按鈕靈敏度 / 100', W/2, 655);
+
+  x.fillStyle='#9a8fc0'; x.font='22px "Jua", sans-serif'; x.fillText('咪咪工廠 · 意義與趣味工廠', W/2, 800);
+}
+function wrapText(ctx,text,cx,y,maxW,lh){
+  const words=text.split(' '); let line=''; const lines=[];
+  for(const w of words){const t=line?line+' '+w:w; if(ctx.measureText(t).width>maxW && line){lines.push(line); line=w;} else line=t;}
+  if(line) lines.push(line);
+  lines.forEach((l,i)=>ctx.fillText(l,cx,y+i*lh));
+}
+function downloadCard(){
+  try{
+    const a=document.createElement('a');
+    a.download='我的地雷按鈕_'+curResult.type.name+'.png';
+    a.href=$('shareCanvas').toDataURL('image/png'); a.click();
+    toast('已儲存卡片 📎');
+  }catch(e){ toast('長按即可儲存圖片'); }
+}
+function restart(){
+  revealed=false; idx=0; sumS=0; sumA=0; sumC=0; curResult=null;
+  $('ringFg').style.strokeDashoffset=C; $('ringNum').textContent='0';
+  document.documentElement.style.setProperty('--accent1','#ff6b6b');
+  document.documentElement.style.setProperty('--accent2','#ff9f45');
+  show('home');
+}
+buildDots();
+</script>
+</body>
+</html>
