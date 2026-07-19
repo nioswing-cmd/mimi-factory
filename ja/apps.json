@@ -143,6 +143,18 @@
    "teaser": "apps/emotion-resolution.html",
    "premium": "apps/emotion-resolution.html",
    "desc": "12のシーンで測る、あなたの感情解像度は何ピクセル？"
+  },
+  {
+   "id": "multiple-intelligences",
+   "type": "test",
+   "title": "多重知能テスト",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/multiple-intelligences.html",
+   "premium": "apps/multiple-intelligences.html",
+   "desc": "IQひとつでは語れない — ガードナーの8つの知能であなたの地図を描く。"
   }
  ],
  "updated": "2026-07-19"

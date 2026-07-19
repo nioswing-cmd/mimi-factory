@@ -143,6 +143,18 @@
    "teaser": "apps/emotion-resolution.html",
    "premium": "apps/emotion-resolution.html",
    "desc": "用12個場景測量，你的情緒是幾個像素？"
+  },
+  {
+   "id": "multiple-intelligences",
+   "type": "test",
+   "title": "多元智能測驗",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/multiple-intelligences.html",
+   "premium": "apps/multiple-intelligences.html",
+   "desc": "光靠 IQ 說明不了你 — 用加德納的 8 種智能畫出你的地圖。"
   }
  ],
  "updated": "2026-07-19"

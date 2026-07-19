@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Multiple Intelligence Test — Dopamine Lab</title>
+<meta property="og:title" content="Multiple Intelligence Test — My map of 8 intelligences">
+<meta property="og:description" content="One IQ score can’t sum you up. Map your mind with Gardner’s 8 intelligences.">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#131126; --bg2:#1c1836; --card:#241f45; --line:#383063;
+  --ink:#f4f0ff; --sub:#a9a3cd; --accent:#ff9f45; --accent2:#ff6b6b;
+  --point:#ffd93d; --ok:#4fc98d; --bad:#e85850;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 85% -10%, rgba(255,159,69,.12), transparent 55%),
+             radial-gradient(100% 80% at 5% 110%, rgba(255,107,107,.10), transparent 50%),
+             linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--point),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:5vh;}
+.hero h1{font-size:44px;line-height:1.15;margin:16px 0 8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;overflow-wrap:break-word;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;overflow-wrap:break-word;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;overflow-wrap:break-word;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#231409;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--point),var(--accent));
+  box-shadow:0 10px 26px -8px rgba(255,159,69,.5);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+
+.pillars{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 14px 10px;margin-bottom:16px;}
+.prow{display:flex;justify-content:space-between;align-items:flex-end;height:66px;gap:6px;}
+.pcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end;}
+.pbar{width:100%;max-width:26px;height:0%;border-radius:7px 7px 3px 3px;transition:height .5s cubic-bezier(.22,1,.36,1);min-height:4px;}
+.pcol .plab{font-family:'Jua',sans-serif;font-size:11px;color:var(--sub);}
+.pillars .cap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:9px;opacity:.8;}
+.count{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);text-align:center;margin-bottom:8px;}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent);}
+.qtext{font-size:21px;font-weight:700;line-height:1.5;margin-top:8px;overflow-wrap:break-word;}
+.qhint{font-size:13px;color:var(--sub);margin-top:8px;}
+.opts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:16px 8px;
+  font-size:15px;color:var(--ink);text-align:center;cursor:pointer;font-family:inherit;line-height:1.4;overflow-wrap:break-word;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.opt:active{transform:scale(.94);}
+.opt .em{display:block;font-size:22px;margin-bottom:5px;}
+
+
+.res-hero{text-align:center;margin-top:10px;}
+.res-emo{font-size:64px;}
+.res-type{font-family:'Jua',sans-serif;font-size:30px;margin:10px 0 4px;line-height:1.3;}
+.res-tag{color:var(--sub);font-size:14.5px;line-height:1.7;overflow-wrap:break-word;}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:20px;}
+.chart .ct{font-family:'Jua',sans-serif;font-size:16px;margin-bottom:6px;}
+.crow{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:13.5px;}
+.crow .cl{width:104px;}
+.cbar{flex:1;height:11px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;}
+.cfill{height:100%;width:0;border-radius:99px;transition:width .9s cubic-bezier(.22,1,.36,1);}
+.crow .cv{width:34px;text-align:right;font-family:'Jua',sans-serif;color:var(--point);}
+.tips{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px 18px;margin-top:14px;font-size:14.5px;line-height:1.75;overflow-wrap:break-word;}
+.tips b{color:var(--point);}
+.tips .row{margin-top:11px;}
+.tips .row:first-child{margin-top:0;}
+.srcbox{font-size:12px;color:var(--sub);line-height:1.65;margin-top:14px;background:rgba(255,255,255,.04);
+  border:1px solid var(--line);border-radius:14px;padding:12px 14px;overflow-wrap:break-word;}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(36,31,69,.97);border:1.5px solid var(--point);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(255,159,69,.5));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#948dbb;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#948dbb;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 Dopamine Lab · Brain Series</span>
+      <h1>🗺️ <span class="grad">Multiple Intelligence</span> Test</h1>
+      <p class="sub">One IQ score can’t sum you up.<br>You have <b>8 kinds of intelligence</b>,<br>and everyone carries a map that’s all their own.</p>
+    </div>
+    <div class="pitch">
+      <b>The 8 intelligences we measure</b><br>
+      💬 Verbal · 🔢 Logic-Math · 🧭 Spatial · 🎵 Musical<br>
+      🏃 Bodily · 🤝 Interpersonal · 🪞 Intrapersonal · 🌿 Naturalist<br>
+      When the 24 questions are done, we’ll even reveal <b>the activities that match your top intelligence combo</b>.
+    </div>
+    <button class="btn" onclick="startQuiz()">🗺️ Draw my intelligence map</button>
+    <p class="note">※ A self-report reference test that borrows the categories from Harvard psychologist Howard Gardner’s theory of Multiple Intelligences (1983, 『Frames of Mind』).
+    It doesn’t measure ability — it’s closer to a <b>map of your tendencies</b>.</p>
+  </section>
+
+  <!-- Test -->
+  <section id="scQuiz" class="screen">
+    <div class="pillars">
+      <div class="prow" id="prow"></div>
+      <div class="cap">Eight intelligence pillars are rising — which one is which? Revealed at the end!</div>
+    </div>
+    <div class="count" id="qCount">1 / 24</div>
+    <div class="qcard">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qhint">👉 How much is this like you?</div>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="res-emo" id="resEmo"></div>
+      <div class="res-type" id="resType"></div>
+      <p class="res-tag" id="resTag"></p>
+    </div>
+    <div class="chart">
+      <div class="ct">🗺️ My map of 8 intelligences</div>
+      <div id="chart"></div>
+    </div>
+    <div class="tips" id="tips"></div>
+    <div class="srcbox">📖 <b>Theory source</b> — Howard Gardner, 『Frames of Mind: The Theory of Multiple Intelligences』(1983).
+    His idea that “intelligence isn’t one thing but many, and everyone’s mix is different” — this test borrows those 8 categories to observe your tendencies.</div>
+    <button class="btn" onclick="copyResult()">📋 Copy my result to share</button>
+    <button class="btn ghost" onclick="location.reload()">Test again</button>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/en/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 Dopamine Lab — more tests this way →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>The Meaning & Fun Factory</span></div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+  </div>
+</div>
+
+<script>
+
+const QUESTIONS=[
+ {k:"L",q:"I enjoy wordplay and puns, and I save sentences I love."},
+ {k:"L",q:"When I explain complicated things out loud or in writing, people actually get it."},
+ {k:"L",q:"I remember new words and phrases I hear, and I put them to use."},
+ {k:"M",q:"Patterns in numbers or odd statistics jump out at me."},
+ {k:"M",q:"I love asking ‘why is that?’ and tracing cause and effect."},
+ {k:"M",q:"Organizing things into planners, budgets, or spreadsheets is secretly satisfying."},
+ {k:"S",q:"Once I’ve been somewhere, I can find my way back without a map."},
+ {k:"S",q:"I can rearrange furniture or rotate an object entirely in my head."},
+ {k:"S",q:"People have told me I’ve got an eye for art, photos, or design."},
+ {k:"U",q:"After hearing a song once or twice, I can hum the melody back."},
+ {k:"U",q:"When something’s off-pitch or off-beat, it grates on my ears right away."},
+ {k:"U",q:"I’ve got playlists split up by mood."},
+ {k:"B",q:"I learn faster by diving in with my body than by thinking (sports, cooking, assembling)."},
+ {k:"B",q:"Sitting still too long makes me antsy."},
+ {k:"B",q:"I’m confident building and fixing things with my hands."},
+ {k:"P",q:"When friends fall out, I tend to be the one who patches it up."},
+ {k:"P",q:"People say I get comfortable with someone I’ve just met really fast."},
+ {k:"P",q:"I’m quick to notice shifts in other people’s moods."},
+ {k:"I",q:"I absolutely need quiet time alone to sort out my thoughts."},
+ {k:"I",q:"I tend to put my feelings and thoughts down in a journal or notes."},
+ {k:"I",q:"I can describe my own strengths and weaknesses pretty specifically."},
+ {k:"N",q:"I enjoy observing or caring for animals and plants."},
+ {k:"N",q:"I feel shifts in the seasons and weather more keenly than most."},
+ {k:"N",q:"Mountains, the sea, or a forest genuinely recharge me."},
+];
+const INTEL={
+ L:{emo:"💬",name:"Verbal Intelligence",color:"#ff9f45",desc:"the power to work the world with words",
+    act:"Writing & blogging, storytelling, languages, talks & presenting"},
+ M:{emo:"🔢",name:"Logical-Mathematical Intelligence",color:"#ffd93d",desc:"the power to see through patterns and principles",
+    act:"Data analysis, strategy games, coding, planning your finances"},
+ S:{emo:"🧭",name:"Spatial Intelligence",color:"#5ee7d8",desc:"the power to picture things in your head",
+    act:"Design, photo & video, interiors, map-free travel"},
+ U:{emo:"🎵",name:"Musical Intelligence",color:"#b78bf5",desc:"the power to read sound and rhythm",
+    act:"Instruments, playlist curation, composing, live shows"},
+ B:{emo:"🏃",name:"Bodily-Kinesthetic Intelligence",color:"#ff6b6b",desc:"the power to think with your body",
+    act:"Sports & dance, cooking, woodworking & DIY, hands-on hobbies"},
+ P:{emo:"🤝",name:"Interpersonal Intelligence",color:"#7aa6ff",desc:"the power to read people and connect them",
+    act:"Running groups, mentoring, counseling & mediation, leading teams"},
+ I:{emo:"🪞",name:"Intrapersonal Intelligence",color:"#ff8ad0",desc:"the power to observe and handle yourself",
+    act:"Journaling & reflection, meditation, solo projects, career planning"},
+ N:{emo:"🌿",name:"Naturalist Intelligence",color:"#4fc98d",desc:"the power to sense nature and life",
+    act:"Gardening, hiking & camping, pets, environmental causes"},
+};
+const KEYS=["L","M","S","U","B","P","I","N"];
+
+let idx=0, score={}, pillarMap=[], deck=[];
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1800);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function startQuiz(){
+  idx=0; score={}; KEYS.forEach(k=>score[k]=0);
+  deck=shuffle([...QUESTIONS]);
+  pillarMap=shuffle([...KEYS]);
+  const pr=$('prow'); pr.innerHTML="";
+  pillarMap.forEach((k,i)=>{
+    pr.innerHTML+="<div class='pcol'><div class='pbar' id='pb"+i+"' style='background:linear-gradient(180deg,"+INTEL[k].color+",rgba(255,255,255,.05))'></div><div class='plab'>?</div></div>";
+  });
+  show('scQuiz'); render();
+}
+function render(){
+  const Q=deck[idx];
+  $('qCount').textContent=(idx+1)+" / "+deck.length;
+  $('qNum').textContent="Q"+(idx+1);
+  const qt=$('qText'); qt.textContent=Q.q;
+  qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const box=$('opts'); box.innerHTML="";
+  [["😆","Totally me",2],["🙂","Sort of?",1],["🙅","Not really",0]].forEach(([em,t,pt])=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button";
+    b.innerHTML="<span class='em'>"+em+"</span>"+t;
+    b.addEventListener('click',()=>pick(Q.k,pt));
+    box.appendChild(b);
+  });
+}
+function pick(k,pt){
+  vibrate(22); score[k]+=pt;
+  pillarMap.forEach((e,i)=>{ $('pb'+i).style.height=(score[e]/6*100)+"%"; });
+  idx++;
+  if(idx>=deck.length){ setTimeout(showResult,450); return; }
+  setTimeout(render,240);
+}
+function showResult(){
+  const sorted=[...KEYS].sort((a,b)=>score[b]-score[a]);
+  const t1=INTEL[sorted[0]], t2=INTEL[sorted[1]], low=INTEL[sorted[7]];
+  show('scResult'); vibrate([30,50,30,50,90]);
+  $('resEmo').textContent=t1.emo+t2.emo;
+  $('resType').innerHTML="<span class='grad'>"+t1.name+"</span> × "+t2.name;
+  $('resTag').textContent="The highest peak on your map is ‘"+t1.desc+"’, and the solid ridge right beside it is ‘"+t2.desc+"’.";
+  const ch=$('chart'); ch.innerHTML="";
+  KEYS.forEach((k,i)=>{
+    const e=INTEL[k], pct=Math.round(score[k]/6*100);
+    ch.innerHTML+="<div class='crow'><span class='cl'>"+e.emo+" "+e.name.replace(' Intelligence','')+"</span><div class='cbar'><div class='cfill' id='cf"+i+"' data-w='"+pct+"' style='background:linear-gradient(90deg,"+e.color+"cc,"+e.color+")'></div></div><span class='cv'>"+score[k]+"/6</span></div>";
+  });
+  setTimeout(()=>{KEYS.forEach((k,i)=>{const f=$('cf'+i);f.style.width=f.dataset.w+"%";});},150);
+  $('tips').innerHTML=
+    "<div class='row'><b>"+t1.emo+"  Play to your lead strength</b> — where  "+t1.name+" shines:  "+t1.act+".</div>"+
+    "<div class='row'><b>"+t2.emo+"  The power of the combo</b> — pairing it with  "+t2.name+" creates real synergy. Finding activities where the two intelligences meet is your best growth strategy.</div>"+
+    "<div class='row'><b>"+low.emo+"  Low isn’t a weakness</b> — a low  "+low.name+" isn’t a deficit; it just means “a place you don’t spend energy.” Borrow it only when you actually need it.</div>";
+  window._resText="🗺️ Multiple Intelligence Test (Gardner’s 8)\nTop intelligences:  "+t1.name+" "+t1.emo+" × "+t2.name+" "+t2.emo+"\nMap:  "+KEYS.map(k=>INTEL[k].emo+score[k]).join(" ")+"\n\nDraw your intelligence map → https://mimifactory.vibekr.com/en/apps/multiple-intelligences.html";
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("Copied! Paste it anywhere 📋")); }
+  else toast("Press and hold to copy");
+  vibrate(20);
+}
+</script>
+</body>
+</html>

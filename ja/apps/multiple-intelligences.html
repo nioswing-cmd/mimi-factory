@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>多重知能テスト — ドーパミン実験室</title>
+<meta property="og:title" content="多重知能テスト — 私の8つの知能マップ">
+<meta property="og:description" content="IQひとつでは私を語れない。ガードナーの8つの知能理論で描く、私の脳の地図。">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansJP-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/MPLUSRounded1c-Bold-sub.woff2') format('woff2');font-weight:400;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#131126; --bg2:#1c1836; --card:#241f45; --line:#383063;
+  --ink:#f4f0ff; --sub:#a9a3cd; --accent:#ff9f45; --accent2:#ff6b6b;
+  --point:#ffd93d; --ok:#4fc98d; --bad:#e85850;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 85% -10%, rgba(255,159,69,.12), transparent 55%),
+             radial-gradient(100% 80% at 5% 110%, rgba(255,107,107,.10), transparent 50%),
+             linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--point),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:5vh;}
+.hero h1{font-size:44px;line-height:1.15;margin:16px 0 8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#231409;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--point),var(--accent));
+  box-shadow:0 10px 26px -8px rgba(255,159,69,.5);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+
+.pillars{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 14px 10px;margin-bottom:16px;}
+.prow{display:flex;justify-content:space-between;align-items:flex-end;height:66px;gap:6px;}
+.pcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end;}
+.pbar{width:100%;max-width:26px;height:0%;border-radius:7px 7px 3px 3px;transition:height .5s cubic-bezier(.22,1,.36,1);min-height:4px;}
+.pcol .plab{font-family:'Jua',sans-serif;font-size:11px;color:var(--sub);}
+.pillars .cap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:9px;opacity:.8;}
+.count{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);text-align:center;margin-bottom:8px;}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent);}
+.qtext{font-size:21px;font-weight:700;line-height:1.5;margin-top:8px;}
+.qhint{font-size:13px;color:var(--sub);margin-top:8px;}
+.opts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:16px 8px;
+  font-size:15px;color:var(--ink);text-align:center;cursor:pointer;font-family:inherit;line-height:1.4;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.opt:active{transform:scale(.94);}
+.opt .em{display:block;font-size:22px;margin-bottom:5px;}
+
+
+.res-hero{text-align:center;margin-top:10px;}
+.res-emo{font-size:64px;}
+.res-type{font-family:'Jua',sans-serif;font-size:30px;margin:10px 0 4px;line-height:1.3;}
+.res-tag{color:var(--sub);font-size:14.5px;line-height:1.7;}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:20px;}
+.chart .ct{font-family:'Jua',sans-serif;font-size:16px;margin-bottom:6px;}
+.crow{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:13.5px;}
+.crow .cl{width:104px;}
+.cbar{flex:1;height:11px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;}
+.cfill{height:100%;width:0;border-radius:99px;transition:width .9s cubic-bezier(.22,1,.36,1);}
+.crow .cv{width:34px;text-align:right;font-family:'Jua',sans-serif;color:var(--point);}
+.tips{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px 18px;margin-top:14px;font-size:14.5px;line-height:1.75;}
+.tips b{color:var(--point);}
+.tips .row{margin-top:11px;}
+.tips .row:first-child{margin-top:0;}
+.srcbox{font-size:12px;color:var(--sub);line-height:1.65;margin-top:14px;background:rgba(255,255,255,.04);
+  border:1px solid var(--line);border-radius:14px;padding:12px 14px;}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(36,31,69,.97);border:1.5px solid var(--point);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(255,159,69,.5));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#948dbb;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#948dbb;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 ドーパミン実験室 · 脳シリーズ</span>
+      <h1>🗺️ <span class="grad">多重知能</span> テスト</h1>
+      <p class="sub">IQのスコアひとつでは、あなたを語りきれません。<br>人には <b>8種類の知能</b>があり、<br>誰もが自分だけの知能マップを持っています。</p>
+    </div>
+    <div class="pitch">
+      <b>測定する8つの知能</b><br>
+      💬 言語 · 🔢 論理数学 · 🧭 空間 · 🎵 音楽<br>
+      🏃 身体運動 · 🤝 対人 · 🪞 内省 · 🌿 博物<br>
+      24問が終わると <b>あなたの代表的な知能の組み合わせに合う活動</b>まで教えてくれます。
+    </div>
+    <button class="btn" onclick="startQuiz()">🗺️ 私の知能マップを描く</button>
+    <p class="note">※ ハーバード大学のハワード・ガードナーが唱えた多重知能理論(1983, 『Frames of Mind』)の分類を借りた
+    自己報告式の参考テストです。能力を測るものではなく <b>傾向のマップ</b>に近いものです。</p>
+  </section>
+
+  <!-- テスト -->
+  <section id="scQuiz" class="screen">
+    <div class="pillars">
+      <div class="prow" id="prow"></div>
+      <div class="cap">8本の知能の柱が伸びていきます — どの柱が何かは結果で公開！</div>
+    </div>
+    <div class="count" id="qCount">1 / 24</div>
+    <div class="qcard">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qhint">👉 あなたにどれくらい当てはまりますか？</div>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="res-emo" id="resEmo"></div>
+      <div class="res-type" id="resType"></div>
+      <p class="res-tag" id="resTag"></p>
+    </div>
+    <div class="chart">
+      <div class="ct">🗺️ 私の8つの知能マップ</div>
+      <div id="chart"></div>
+    </div>
+    <div class="tips" id="tips"></div>
+    <div class="srcbox">📖 <b>理論の出典</b> — ハワード・ガードナー(Howard Gardner)、『Frames of Mind: The Theory of Multiple Intelligences』(1983)。
+    「知能はひとつではなく複数あり、人によって組み合わせが違う」という理論で、このテストはその8分類を傾向の観察に借りました。</div>
+    <button class="btn" onclick="copyResult()">📋 結果をコピーして共有</button>
+    <button class="btn ghost" onclick="location.reload()">もう一度検査する</button>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/ja/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 ドーパミン実験室 — ほかのテストを見る →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意味と面白さの工場</span></div>
+    <div class="mf-logo">ミミファクトリー</div>
+    <div class="mf-caption">株式会社ヨンギョル ファミリーカンパニー</div>
+  </div>
+</div>
+
+<script>
+
+const QUESTIONS=[
+ {k:"L",q:"言葉遊びやダジャレが好きで、気に入った文章は保存しておく。"},
+ {k:"L",q:"複雑な内容も、話したり書いたりして説明すると、みんなよく理解してくれる。"},
+ {k:"L",q:"新しく聞いた言葉や表現をよく覚えていて、使うほうだ。"},
+ {k:"M",q:"数字の中のパターンや、おかしな統計がよく目に入る。"},
+ {k:"M",q:"「なぜだろう？」と、原因と結果を突き詰めるのが楽しい。"},
+ {k:"M",q:"予定表・家計簿・エクセルのように、体系立てて整理するのがひそかに楽しい。"},
+ {k:"S",q:"一度行った道は、地図がなくてもだいたいまた辿り着ける。"},
+ {k:"S",q:"頭の中で家具の配置を変えたり、物を回してみたりできる。"},
+ {k:"S",q:"絵・写真・デザインのセンスがあると言われたことがある。"},
+ {k:"U",q:"曲を一度か二度聴けば、メロディーを口ずさめる。"},
+ {k:"U",q:"音程やリズムが外れると、すぐに耳に引っかかる。"},
+ {k:"U",q:"気分ごとに聴くプレイリストが細かく分かれている。"},
+ {k:"B",q:"頭で考えるより、体を動かして覚えるほうが早い（運動・料理・組み立てなど）。"},
+ {k:"B",q:"長くじっと座っていると、体がむずむずしてくる。"},
+ {k:"B",q:"手で作ったり直したりする作業には自信がある。"},
+ {k:"P",q:"友だち同士でもめ事が起きると、間に入って収める役をよく引き受ける。"},
+ {k:"P",q:"初対面の人ともすぐ打ち解ける、とよく言われる。"},
+ {k:"P",q:"相手の気分の変化を、早めに察するほうだ。"},
+ {k:"I",q:"ひとりで考えを整理する時間が、どうしても必要だ。"},
+ {k:"I",q:"自分の感情や考えを、日記やメモに残すほうだ。"},
+ {k:"I",q:"自分の強みと弱みを、かなり具体的に言える。"},
+ {k:"N",q:"動物や植物を観察したり、世話したりするのが好きだ。"},
+ {k:"N",q:"季節や天気の移り変わりを、人より敏感に感じ取る。"},
+ {k:"N",q:"山・海・森に行くと、はっきり充電される感じがする。"},
+];
+const INTEL={
+ L:{emo:"💬",name:"言語的知能",color:"#ff9f45",desc:"言葉と文章で世界を扱う力",
+    act:"執筆・ブログ、ストーリーテリング、外国語、講義・発表"},
+ M:{emo:"🔢",name:"論理数学的知能",color:"#ffd93d",desc:"パターンと原理を見抜く力",
+    act:"データ分析、戦略ゲーム、コーディング、資産運用の設計"},
+ S:{emo:"🧭",name:"空間的知能",color:"#5ee7d8",desc:"頭の中に絵を描く力",
+    act:"デザイン、写真・映像、インテリア、地図なしの旅"},
+ U:{emo:"🎵",name:"音楽的知能",color:"#b78bf5",desc:"音とリズムを読む力",
+    act:"楽器、プレイリストのキュレーション、作曲、ライブ鑑賞"},
+ B:{emo:"🏃",name:"身体運動的知能",color:"#ff6b6b",desc:"体で考える力",
+    act:"運動・ダンス、料理、木工・DIY、手を動かす趣味"},
+ P:{emo:"🤝",name:"対人的知能",color:"#7aa6ff",desc:"人と人の間を読んでつなぐ力",
+    act:"集まりの運営、メンタリング、相談・仲裁、協業のリード"},
+ I:{emo:"🪞",name:"内省的知能",color:"#ff8ad0",desc:"自分を観察し扱う力",
+    act:"日記・振り返り、瞑想、ひとりプロジェクト、キャリア設計"},
+ N:{emo:"🌿",name:"博物的知能",color:"#4fc98d",desc:"自然と生命を感じ取る力",
+    act:"ガーデニング、登山・キャンプ、ペット、環境活動"},
+};
+const KEYS=["L","M","S","U","B","P","I","N"];
+
+let idx=0, score={}, pillarMap=[], deck=[];
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1800);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function startQuiz(){
+  idx=0; score={}; KEYS.forEach(k=>score[k]=0);
+  deck=shuffle([...QUESTIONS]);
+  pillarMap=shuffle([...KEYS]);
+  const pr=$('prow'); pr.innerHTML="";
+  pillarMap.forEach((k,i)=>{
+    pr.innerHTML+="<div class='pcol'><div class='pbar' id='pb"+i+"' style='background:linear-gradient(180deg,"+INTEL[k].color+",rgba(255,255,255,.05))'></div><div class='plab'>?</div></div>";
+  });
+  show('scQuiz'); render();
+}
+function render(){
+  const Q=deck[idx];
+  $('qCount').textContent=(idx+1)+" / "+deck.length;
+  $('qNum').textContent="Q"+(idx+1);
+  const qt=$('qText'); qt.textContent=Q.q;
+  qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const box=$('opts'); box.innerHTML="";
+  [["😆","完全に私",2],["🙂","ちょっと？",1],["🙅","ちがう",0]].forEach(([em,t,pt])=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button";
+    b.innerHTML="<span class='em'>"+em+"</span>"+t;
+    b.addEventListener('click',()=>pick(Q.k,pt));
+    box.appendChild(b);
+  });
+}
+function pick(k,pt){
+  vibrate(22); score[k]+=pt;
+  pillarMap.forEach((e,i)=>{ $('pb'+i).style.height=(score[e]/6*100)+"%"; });
+  idx++;
+  if(idx>=deck.length){ setTimeout(showResult,450); return; }
+  setTimeout(render,240);
+}
+function showResult(){
+  const sorted=[...KEYS].sort((a,b)=>score[b]-score[a]);
+  const t1=INTEL[sorted[0]], t2=INTEL[sorted[1]], low=INTEL[sorted[7]];
+  show('scResult'); vibrate([30,50,30,50,90]);
+  $('resEmo').textContent=t1.emo+t2.emo;
+  $('resType').innerHTML="<span class='grad'>"+t1.name+"</span> × "+t2.name;
+  $('resTag').textContent="あなたの地図でいちばん高い峰は「"+t1.desc+"」、その隣の頼もしい稜線は「"+t2.desc+"」です。";
+  const ch=$('chart'); ch.innerHTML="";
+  KEYS.forEach((k,i)=>{
+    const e=INTEL[k], pct=Math.round(score[k]/6*100);
+    ch.innerHTML+="<div class='crow'><span class='cl'>"+e.emo+" "+e.name.replace(' 知能','')+"</span><div class='cbar'><div class='cfill' id='cf"+i+"' data-w='"+pct+"' style='background:linear-gradient(90deg,"+e.color+"cc,"+e.color+")'></div></div><span class='cv'>"+score[k]+"/6</span></div>";
+  });
+  setTimeout(()=>{KEYS.forEach((k,i)=>{const f=$('cf'+i);f.style.width=f.dataset.w+"%";});},150);
+  $('tips').innerHTML=
+    "<div class='row'><b>"+t1.emo+"  代表知能を活かす</b> —  "+t1.name+"が輝く活動： "+t1.act+".</div>"+
+    "<div class='row'><b>"+t2.emo+"  組み合わせの力</b> —  "+t2.name+"と一緒に使うと相乗効果が大きくなります。二つの知能が出会う活動を探すことが、最高の成長戦略です。</div>"+
+    "<div class='row'><b>"+low.emo+"  低くても弱点ではない</b> —  "+low.name+"が低いのは欠如ではなく「エネルギーを使っていない場所」という意味。必要なときだけ借りて使えば大丈夫です。</div>";
+  window._resText="🗺️ 多重知能テスト（ガードナーの8知能）\n代表知能:  "+t1.name+" "+t1.emo+" × "+t2.name+" "+t2.emo+"\nマップ:  "+KEYS.map(k=>INTEL[k].emo+score[k]).join(" ")+"\n\n私の知能マップを描く → https://mimifactory.vibekr.com/ja/apps/multiple-intelligences.html";
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("コピーしました！どこにでも貼り付けてください 📋")); }
+  else toast("長押しでコピーしてください");
+  vibrate(20);
+}
+</script>
+</body>
+</html>

@@ -143,6 +143,18 @@
    "teaser": "apps/emotion-resolution.html",
    "premium": "apps/emotion-resolution.html",
    "desc": "How many pixels do you feel in? Measured across 12 scenes."
+  },
+  {
+   "id": "multiple-intelligences",
+   "type": "test",
+   "title": "Multiple Intelligence Test",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-19",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/multiple-intelligences.html",
+   "premium": "apps/multiple-intelligences.html",
+   "desc": "One IQ score can’t sum you up — map your 8 intelligences with Gardner."
   }
  ],
  "updated": "2026-07-19"

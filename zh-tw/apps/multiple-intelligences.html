@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>多元智能測驗 — 多巴胺實驗室</title>
+<meta property="og:title" content="多元智能測驗 — 我的 8 種智能地圖">
+<meta property="og:description" content="光靠一個 IQ 說明不了你。用加德納的 8 種智能理論，畫出你的大腦地圖。">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#131126; --bg2:#1c1836; --card:#241f45; --line:#383063;
+  --ink:#f4f0ff; --sub:#a9a3cd; --accent:#ff9f45; --accent2:#ff6b6b;
+  --point:#ffd93d; --ok:#4fc98d; --bad:#e85850;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 85% -10%, rgba(255,159,69,.12), transparent 55%),
+             radial-gradient(100% 80% at 5% 110%, rgba(255,107,107,.10), transparent 50%),
+             linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--point),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:5vh;}
+.hero h1{font-size:44px;line-height:1.15;margin:16px 0 8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#231409;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--point),var(--accent));
+  box-shadow:0 10px 26px -8px rgba(255,159,69,.5);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+
+.pillars{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 14px 10px;margin-bottom:16px;}
+.prow{display:flex;justify-content:space-between;align-items:flex-end;height:66px;gap:6px;}
+.pcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end;}
+.pbar{width:100%;max-width:26px;height:0%;border-radius:7px 7px 3px 3px;transition:height .5s cubic-bezier(.22,1,.36,1);min-height:4px;}
+.pcol .plab{font-family:'Jua',sans-serif;font-size:11px;color:var(--sub);}
+.pillars .cap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:9px;opacity:.8;}
+.count{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);text-align:center;margin-bottom:8px;}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent);}
+.qtext{font-size:21px;font-weight:700;line-height:1.5;margin-top:8px;}
+.qhint{font-size:13px;color:var(--sub);margin-top:8px;}
+.opts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:16px 8px;
+  font-size:15px;color:var(--ink);text-align:center;cursor:pointer;font-family:inherit;line-height:1.4;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.opt:active{transform:scale(.94);}
+.opt .em{display:block;font-size:22px;margin-bottom:5px;}
+
+
+.res-hero{text-align:center;margin-top:10px;}
+.res-emo{font-size:64px;}
+.res-type{font-family:'Jua',sans-serif;font-size:30px;margin:10px 0 4px;line-height:1.3;}
+.res-tag{color:var(--sub);font-size:14.5px;line-height:1.7;}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:20px;}
+.chart .ct{font-family:'Jua',sans-serif;font-size:16px;margin-bottom:6px;}
+.crow{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:13.5px;}
+.crow .cl{width:104px;}
+.cbar{flex:1;height:11px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;}
+.cfill{height:100%;width:0;border-radius:99px;transition:width .9s cubic-bezier(.22,1,.36,1);}
+.crow .cv{width:34px;text-align:right;font-family:'Jua',sans-serif;color:var(--point);}
+.tips{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px 18px;margin-top:14px;font-size:14.5px;line-height:1.75;}
+.tips b{color:var(--point);}
+.tips .row{margin-top:11px;}
+.tips .row:first-child{margin-top:0;}
+.srcbox{font-size:12px;color:var(--sub);line-height:1.65;margin-top:14px;background:rgba(255,255,255,.04);
+  border:1px solid var(--line);border-radius:14px;padding:12px 14px;}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(36,31,69,.97);border:1.5px solid var(--point);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(255,159,69,.5));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#948dbb;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#948dbb;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 多巴胺實驗室 · 大腦系列</span>
+      <h1>🗺️ <span class="grad">多元智能</span> 測驗</h1>
+      <p class="sub">光靠一個 IQ 分數，說明不了你。<br>人有 <b>8 種智能</b>，<br>每個人都有自己專屬的智能地圖。</p>
+    </div>
+    <div class="pitch">
+      <b>要測的 8 種智能</b><br>
+      💬 語言 · 🔢 邏輯數學 · 🧭 空間 · 🎵 音樂<br>
+      🏃 肢體 · 🤝 人際 · 🪞 內省 · 🌿 自然<br>
+      做完 24 題之後 <b>最適合你代表智能組合的活動</b>，都會告訴你。
+    </div>
+    <button class="btn" onclick="startQuiz()">🗺️ 畫出我的智能地圖</button>
+    <p class="note">※ 這是借用哈佛大學霍華德·加德納的多元智能理論(1983, 『Frames of Mind』)分類的
+    自我報告式參考測驗。測的不是能力，而更接近一張 <b>傾向地圖</b>。</p>
+  </section>
+
+  <!-- 測驗 -->
+  <section id="scQuiz" class="screen">
+    <div class="pillars">
+      <div class="prow" id="prow"></div>
+      <div class="cap">八根智能柱正在長高 — 哪根柱是什麼，結果揭曉！</div>
+    </div>
+    <div class="count" id="qCount">1 / 24</div>
+    <div class="qcard">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qhint">👉 這跟你有多像？</div>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="res-emo" id="resEmo"></div>
+      <div class="res-type" id="resType"></div>
+      <p class="res-tag" id="resTag"></p>
+    </div>
+    <div class="chart">
+      <div class="ct">🗺️ 我的 8 種智能地圖</div>
+      <div id="chart"></div>
+    </div>
+    <div class="tips" id="tips"></div>
+    <div class="srcbox">📖 <b>理論出處</b> — 霍華德·加德納(Howard Gardner)，『Frames of Mind: The Theory of Multiple Intelligences』(1983)。
+    「智能不是只有一種，而是有很多種，每個人的組合都不同」的理論，這個測驗借用了那 8 種分類來觀察你的傾向。</div>
+    <button class="btn" onclick="copyResult()">📋 複製結果來分享</button>
+    <button class="btn ghost" onclick="location.reload()">再測一次</button>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/zh-tw/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 多巴胺實驗室 — 看看其他測驗 →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意義與趣味工廠</span></div>
+    <div class="mf-logo">咪咪工廠 MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL股份有限公司 家族公司</div>
+  </div>
+</div>
+
+<script>
+
+const QUESTIONS=[
+ {k:"L",q:"喜歡玩文字遊戲和雙關，看到喜歡的句子會存起來。"},
+ {k:"L",q:"再複雜的內容，我用說的或寫的講出來，大家都聽得懂。"},
+ {k:"L",q:"新聽到的詞或說法我記得住，而且會拿來用。"},
+ {k:"M",q:"數字裡的規律、怪怪的統計，我特別容易注意到。"},
+ {k:"M",q:"喜歡問「為什麼會這樣？」，追究原因和結果。"},
+ {k:"M",q:"像行事曆·記帳·試算表那樣有系統地整理，其實我還滿享受的。"},
+ {k:"S",q:"去過一次的路，我不用地圖大概也能再找到。"},
+ {k:"S",q:"我可以在腦子裡重新擺家具，或把物體轉來轉去。"},
+ {k:"S",q:"有人說過我對繪畫·攝影·設計很有眼光。"},
+ {k:"U",q:"一首歌聽個一兩次，我就能哼出旋律。"},
+ {k:"U",q:"音準或節拍一跑掉，我馬上就覺得刺耳。"},
+ {k:"U",q:"我的歌單依心情分得很細。"},
+ {k:"B",q:"比起用腦，我靠身體實際去做學得更快（運動·料理·組裝等）。"},
+ {k:"B",q:"坐太久不動，身體就會發癢想動。"},
+ {k:"B",q:"用手做東西、修東西，我很有把握。"},
+ {k:"P",q:"朋友之間鬧不合，我常常是居中把它化解的那個。"},
+ {k:"P",q:"有人說我跟第一次見面的人也能很快就自在起來。"},
+ {k:"P",q:"對方心情的變化，我算是很快就察覺得到。"},
+ {k:"I",q:"我一定需要獨處、把思緒整理一下的時間。"},
+ {k:"I",q:"我習慣把自己的情緒和想法寫進日記或筆記裡。"},
+ {k:"I",q:"我可以把自己的優點和缺點講得滿具體的。"},
+ {k:"N",q:"我喜歡觀察或照顧動物·植物。"},
+ {k:"N",q:"季節和天氣的變化，我比別人更敏感。"},
+ {k:"N",q:"去山上·海邊·森林，我會明顯感覺充飽了電。"},
+];
+const INTEL={
+ L:{emo:"💬",name:"語言智能",color:"#ff9f45",desc:"用語言和文字駕馭世界的能力",
+    act:"寫作·部落格、說故事、外語、演講·簡報"},
+ M:{emo:"🔢",name:"邏輯數學智能",color:"#ffd93d",desc:"看穿模式與原理的能力",
+    act:"數據分析、策略遊戲、寫程式、理財規劃"},
+ S:{emo:"🧭",name:"空間智能",color:"#5ee7d8",desc:"在腦中作畫的能力",
+    act:"設計、攝影·影片、室內佈置、不看地圖旅行"},
+ U:{emo:"🎵",name:"音樂智能",color:"#b78bf5",desc:"讀懂聲音與節奏的能力",
+    act:"樂器、歌單策展、作曲、看表演"},
+ B:{emo:"🏃",name:"肢體動覺智能",color:"#ff6b6b",desc:"用身體思考的能力",
+    act:"運動·跳舞、料理、木工·DIY、動手的興趣"},
+ P:{emo:"🤝",name:"人際智能",color:"#7aa6ff",desc:"讀懂並串連人與人的能力",
+    act:"經營社群、當導師、諮商·調解、帶領協作"},
+ I:{emo:"🪞",name:"內省智能",color:"#ff8ad0",desc:"觀察並駕馭自己的能力",
+    act:"寫日記·回顧、冥想、單人專案、生涯規劃"},
+ N:{emo:"🌿",name:"自然智能",color:"#4fc98d",desc:"感知自然與生命的能力",
+    act:"園藝、爬山·露營、寵物、環境行動"},
+};
+const KEYS=["L","M","S","U","B","P","I","N"];
+
+let idx=0, score={}, pillarMap=[], deck=[];
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1800);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function startQuiz(){
+  idx=0; score={}; KEYS.forEach(k=>score[k]=0);
+  deck=shuffle([...QUESTIONS]);
+  pillarMap=shuffle([...KEYS]);
+  const pr=$('prow'); pr.innerHTML="";
+  pillarMap.forEach((k,i)=>{
+    pr.innerHTML+="<div class='pcol'><div class='pbar' id='pb"+i+"' style='background:linear-gradient(180deg,"+INTEL[k].color+",rgba(255,255,255,.05))'></div><div class='plab'>?</div></div>";
+  });
+  show('scQuiz'); render();
+}
+function render(){
+  const Q=deck[idx];
+  $('qCount').textContent=(idx+1)+" / "+deck.length;
+  $('qNum').textContent="Q"+(idx+1);
+  const qt=$('qText'); qt.textContent=Q.q;
+  qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const box=$('opts'); box.innerHTML="";
+  [["😆","完全是我",2],["🙂","有點？",1],["🙅","不是我",0]].forEach(([em,t,pt])=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button";
+    b.innerHTML="<span class='em'>"+em+"</span>"+t;
+    b.addEventListener('click',()=>pick(Q.k,pt));
+    box.appendChild(b);
+  });
+}
+function pick(k,pt){
+  vibrate(22); score[k]+=pt;
+  pillarMap.forEach((e,i)=>{ $('pb'+i).style.height=(score[e]/6*100)+"%"; });
+  idx++;
+  if(idx>=deck.length){ setTimeout(showResult,450); return; }
+  setTimeout(render,240);
+}
+function showResult(){
+  const sorted=[...KEYS].sort((a,b)=>score[b]-score[a]);
+  const t1=INTEL[sorted[0]], t2=INTEL[sorted[1]], low=INTEL[sorted[7]];
+  show('scResult'); vibrate([30,50,30,50,90]);
+  $('resEmo').textContent=t1.emo+t2.emo;
+  $('resType').innerHTML="<span class='grad'>"+t1.name+"</span> × "+t2.name;
+  $('resTag').textContent="你地圖上最高的山峰是「"+t1.desc+"」，旁邊那道穩穩的稜線是「"+t2.desc+"」。";
+  const ch=$('chart'); ch.innerHTML="";
+  KEYS.forEach((k,i)=>{
+    const e=INTEL[k], pct=Math.round(score[k]/6*100);
+    ch.innerHTML+="<div class='crow'><span class='cl'>"+e.emo+" "+e.name.replace(' 智能','')+"</span><div class='cbar'><div class='cfill' id='cf"+i+"' data-w='"+pct+"' style='background:linear-gradient(90deg,"+e.color+"cc,"+e.color+")'></div></div><span class='cv'>"+score[k]+"/6</span></div>";
+  });
+  setTimeout(()=>{KEYS.forEach((k,i)=>{const f=$('cf'+i);f.style.width=f.dataset.w+"%";});},150);
+  $('tips').innerHTML=
+    "<div class='row'><b>"+t1.emo+"  發揮你的代表智能</b> —  "+t1.name+"發光的活動： "+t1.act+".</div>"+
+    "<div class='row'><b>"+t2.emo+"  組合的威力</b> — 搭配  "+t2.name+"，綜效會很大。找出兩種智能交會的活動，就是最好的成長策略。</div>"+
+    "<div class='row'><b>"+low.emo+"  低不代表是弱點</b> —  "+low.name+"低，不是缺陷，只是「你沒在那裡花力氣」而已。需要時再借來用就好。</div>";
+  window._resText="🗺️ 多元智能測驗（加德納 8 智能）\n代表智能:  "+t1.name+" "+t1.emo+" × "+t2.name+" "+t2.emo+"\n地圖:  "+KEYS.map(k=>INTEL[k].emo+score[k]).join(" ")+"\n\n畫出我的智能地圖 → https://mimifactory.vibekr.com/zh-tw/apps/multiple-intelligences.html";
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("複製完成！貼到哪都行 📋")); }
+  else toast("請長按複製");
+  vibrate(20);
+}
+</script>
+</body>
+</html>
