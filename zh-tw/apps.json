@@ -215,6 +215,18 @@
    "teaser": "apps/stats-and-me.html",
    "premium": "apps/stats-and-me.html",
    "desc": "選下去就公開真實統計 — 你是主流，還是稀有物種？"
+  },
+  {
+   "id": "personal-color",
+   "type": "test",
+   "title": "個人色彩自我診斷",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/personal-color.html",
+   "premium": "apps/personal-color.html",
+   "desc": "照一次鏡子、12 題，找出最適合你的季節色彩。"
   }
  ],
  "updated": "2026-07-20"

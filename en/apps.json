@@ -215,6 +215,18 @@
    "teaser": "apps/stats-and-me.html",
    "premium": "apps/stats-and-me.html",
    "desc": "The moment you pick, the real stats go live — mainstream or rare?"
+  },
+  {
+   "id": "personal-color",
+   "type": "test",
+   "title": "Personal Color Self-Check",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/personal-color.html",
+   "premium": "apps/personal-color.html",
+   "desc": "One look in the mirror, 12 questions — find the season your face lives in."
   }
  ],
  "updated": "2026-07-20"

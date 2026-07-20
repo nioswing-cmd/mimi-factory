@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Personal Color Self-Check — Dopamine Lab</title>
+<meta property="og:title" content="Personal Color Self-Check — Which season am I?">
+<meta property="og:description" content="One look in the mirror, 12 questions. Spring Warm · Summer Cool · Autumn Warm · Winter Cool — find the color your face loves.">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#1a1016; --bg2:#271722; --card:#301c2b; --line:#4a2c42;
+  --ink:#f8ecf1; --sub:#c9a3b4; --accent:#f0708f; --accent2:#b04a7a;
+  --point:#ffc2a8; --ok:#5abf8b; --bad:#e4574f;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif; color:var(--ink); min-height:100dvh;
+  background:radial-gradient(120% 80% at 85% -10%, rgba(240,112,143,.14), transparent 55%),
+             radial-gradient(110% 90% at 5% 110%, rgba(255,194,168,.10), transparent 50%),
+             linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px; margin:0 auto; padding:22px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--point),var(--accent) 60%,var(--accent2));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif; font-weight:400;}
+.screen{display:none; flex:1; flex-direction:column; animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:5vh;}
+.hero h1{font-size:44px;line-height:1.15;margin:16px 0 8px;}
+.hero .dots{font-size:26px;letter-spacing:6px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;overflow-wrap:break-word;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;overflow-wrap:break-word;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;overflow-wrap:break-word;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#2a1018;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--point),var(--accent));
+  box-shadow:0 10px 26px -8px var(--accent);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+
+.axes{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 16px 15px;margin-bottom:16px;}
+.axis{display:flex;align-items:center;gap:10px;margin-top:8px;}
+.axis:first-child{margin-top:0;}
+.axis .end{font-family:'Jua',sans-serif;font-size:15px;color:var(--sub);width:18px;text-align:center;}
+.track{flex:1;height:12px;border-radius:99px;background:rgba(255,255,255,.09);position:relative;overflow:visible;}
+.knob{position:absolute;top:50%;left:50%;width:22px;height:22px;border-radius:50%;transform:translate(-50%,-50%);
+  background:linear-gradient(140deg,var(--point),var(--accent));box-shadow:0 0 14px 2px rgba(240,112,143,.5);
+  transition:left .45s cubic-bezier(.22,1,.36,1);}
+.axes .cap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:10px;opacity:.8;}
+.count{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);text-align:center;margin-bottom:8px;}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent);}
+.qtext{font-size:21px;font-weight:700;line-height:1.45;margin-top:8px;overflow-wrap:break-word;}
+.qhint{font-size:13px;color:var(--sub);margin-top:8px;}
+.opts{display:flex;flex-direction:column;gap:11px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:16px;
+  font-size:16px;color:var(--ink);text-align:left;cursor:pointer;font-family:inherit;line-height:1.5;overflow-wrap:break-word;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.opt:active{transform:scale(.97);}
+.opt .ab{display:inline-block;font-family:'Jua',sans-serif;color:var(--sub);margin-right:8px;}
+
+
+.res-hero{text-align:center;margin-top:10px;}
+.res-emo{font-size:64px;}
+.res-type{font-family:'Jua',sans-serif;font-size:34px;margin:10px 0 4px;}
+.res-tag{color:var(--sub);font-size:14.5px;line-height:1.6;overflow-wrap:break-word;}
+.swatch-label{font-family:'Jua',sans-serif;font-size:17px;margin:22px 0 10px;}
+.swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;}
+.sw{border-radius:13px;height:64px;position:relative;border:1px solid rgba(255,255,255,.14);animation:pop .5s cubic-bezier(.34,1.56,.64,1);}
+.sw span{position:absolute;left:0;right:0;bottom:5px;text-align:center;font-size:10.5px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.75);}
+.sw.badx::after{content:"✕";position:absolute;top:4px;right:7px;color:rgba(255,255,255,.85);font-size:13px;text-shadow:0 1px 2px rgba(0,0,0,.6);}
+.tips{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px 18px;margin-top:20px;font-size:14.5px;line-height:1.75;overflow-wrap:break-word;}
+.tips b{color:var(--point);}
+.tips .row{margin-top:9px;}
+.tips .row:first-child{margin-top:0;}
+.axis-report{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin-top:14px;}
+.ar-row{display:flex;align-items:center;gap:10px;font-size:13.5px;margin-top:10px;}
+.ar-row:first-child{margin-top:0;}
+.ar-row .lab{width:74px;color:var(--sub);}
+.ar-bar{flex:1;height:9px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden;}
+.ar-fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--point),var(--accent));transition:width .9s cubic-bezier(.22,1,.36,1);}
+.ar-val{width:44px;text-align:right;font-family:'Jua',sans-serif;color:var(--point);}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(48,28,43,.97);border:1.5px solid var(--accent);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(240,112,143,.55));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#b18b9c;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#b18b9c;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 Dopamine Lab · The Viral Test</span>
+      <h1><span class="grad">Personal Color</span><br>Self-Check</h1>
+      <div class="dots">🌸☀️🍂❄️</div>
+      <p class="sub">One look in the mirror and you’re ready.<br>In 12 questions, find <b>the color your face loves</b>.</p>
+    </div>
+    <div class="pitch">
+      <b>30-second prep before you start</b><br>
+      ① Get a mirror or a selfie ready in natural light (by a window).<br>
+      ② A bare, makeup-free face and wrist give the truest read.<br>
+      ③ If you’re torn, just pick the one that’s ‘a little closer’.
+    </div>
+    <button class="btn" onclick="startQuiz()">🎨 Start the 12-question check</button>
+    <p class="note">※ This is a reference self-check based on self-observation. Results can shift with lighting or screen settings,
+    so for an accurate read we recommend a professional draping test.</p>
+  </section>
+
+  
+  <section id="scQuiz" class="screen">
+    <div class="axes">
+      <div class="axis"><span class="end">?</span><div class="track"><div class="knob" id="knobT"></div></div><span class="end">?</span></div>
+      <div class="axis"><span class="end">?</span><div class="track"><div class="knob" id="knobD"></div></div><span class="end">?</span></div>
+      <div class="cap">Two secret axes move in real time — what they measure is revealed at the end!</div>
+    </div>
+    <div class="count" id="qCount">1 / 12</div>
+    <div class="qcard">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qhint">👉 Pick whichever is closer</div>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="res-emo" id="resEmo">🌸</div>
+      <div class="res-type" id="resType"></div>
+      <p class="res-tag" id="resTag"></p>
+    </div>
+    <div class="axis-report">
+      <div class="ar-row"><span class="lab">🌡 Temperature</span><div class="ar-bar"><div class="ar-fill" id="barT"></div></div><span class="ar-val" id="valT"></span></div>
+      <div class="ar-row"><span class="lab">🎚 Depth</span><div class="ar-bar"><div class="ar-fill" id="barD"></div></div><span class="ar-val" id="valD"></span></div>
+    </div>
+    <div class="swatch-label">✨ Colors that bring you to life</div>
+    <div class="swatches" id="bestSw"></div>
+    <div class="swatch-label">🙅 Colors that wash you out (avoid)</div>
+    <div class="swatches" id="worstSw"></div>
+    <div class="tips" id="tips"></div>
+    <button class="btn" onclick="copyResult()">📋 Copy my result to share</button>
+    <button class="btn ghost" onclick="location.reload()">Take it again</button>
+    <p class="note">※ This is a self-check for reference. Even within the same season, everyone’s finer tones differ.</p>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/en/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 Dopamine Lab — more tests this way →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>The Meaning & Fun Factory</span></div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+  </div>
+</div>
+
+<script>
+
+const QUESTIONS = [
+ {ax:"T", q:"In natural light, the veins on your inner wrist look…?", a:{t:"More green",k:"W"}, b:{t:"More blue or purple",k:"C"}},
+ {ax:"T", q:"Gold vs silver jewelry — which lifts your face more?", a:{t:"Gold — I look healthier",k:"W"}, b:{t:"Silver — my skin looks clearer",k:"C"}},
+ {ax:"T", q:"If you wear white, which suits you better?", a:{t:"Ivory or cream white",k:"W"}, b:{t:"Bright, pure white",k:"C"}},
+ {ax:"T", q:"After a lot of sun, your skin…?", a:{t:"Tans to a nice golden brown",k:"W"}, b:{t:"Turns red and barely tans",k:"C"}},
+ {ax:"T", q:"Which lip color gets you a ‘you look so alive’?", a:{t:"Coral and orange tones",k:"W"}, b:{t:"Pink and berry tones",k:"C"}},
+ {ax:"T", q:"Which closet color gets the most ‘that looks great on you’?", a:{t:"Camel, beige, brown",k:"W"}, b:{t:"Navy, gray, black",k:"C"}},
+ {ax:"T", q:"When you put on blush…?", a:{t:"Peach and apricot look natural",k:"W"}, b:{t:"Rose pink and lavender look radiant",k:"C"}},
+ {ax:"D", q:"Your eye color and the impression it gives?", a:{t:"Light brown — soft impression",k:"L"}, b:{t:"Deep dark brown — sharp impression",k:"P"}},
+ {ax:"D", q:"Your natural hair (before dyeing)?", a:{t:"Lighter, with a brown tint",k:"L"}, b:{t:"Deep black or dark brown",k:"P"}},
+ {ax:"D", q:"When you wear deep colors like burgundy or dark navy…?", a:{t:"The clothes float, not me",k:"L"}, b:{t:"My face looks sharper",k:"P"}},
+ {ax:"D", q:"When you wear pastels…?", a:{t:"My face lights up",k:"L"}, b:{t:"I look a little dull and washed out",k:"P"}},
+ {ax:"D", q:"What do people say when they first meet you?", a:{t:"Gentle and soft",k:"L"}, b:{t:"Striking and full of charisma",k:"P"}},
+];
+
+const TYPES = {
+ WL:{emo:"🌸", name:"Spring Warm Light", tag:"The clear, radiant ‘spark fairy’ — bright warm tones switch on a light in your face.",
+   best:[["Coral","#FF7F66"],["Peach","#FFCBA4"],["Apricot","#FFB347"],["Ivory","#FFF3DC"],["Spring Green","#9ACD32"],["Warm Pink","#FF9E9E"],["Gold","#F5C542"],["Camel","#C19A6B"]],
+   worst:[["Black","#15151a"],["Burgundy","#701429"],["Cool Gray","#8C92AC"],["Navy","#1b2a5e"]],
+   tip:"<div class='row'><b>Styling</b> — heavy, dark colors swallow your face. Keep tops bright; send dark shades down to your bottoms.</div><div class='row'><b>Makeup</b> — coral lip + peach blush is the formula. A dewy finish beats matte on you.</div><div class='row'><b>Hair</b> — light brown, or an orange-brown with no ashy tint.</div>"},
+ CL:{emo:"🌊", name:"Summer Cool Light", tag:"The clear, cool ‘watercolor human’ — soft cool tones glow on top of pastels.",
+   best:[["Lavender","#B57EDC"],["Baby Pink","#F4C2C2"],["Sky Blue","#87CEEB"],["Mint","#98E8C8"],["Light Gray","#C8CDD6"],["Rose","#E8A0B4"],["Soft White","#F6F8FA"],["Silver","#C0C6CF"]],
+   worst:[["Orange","#E8722C"],["Khaki","#6B6B2A"],["Gold","#C9A22E"],["Brown","#6E4423"]],
+   tip:"<div class='row'><b>Styling</b> — soft, watered-down pastels beat vivid primaries. Grayed-off shades look especially good on you.</div><div class='row'><b>Makeup</b> — rose-pink lip + lavender highlighter. Just avoiding orange tones gets you halfway there.</div><div class='row'><b>Hair</b> — ash brown or ash purple; skip any dye that turns yellow.</div>"},
+ WP:{emo:"🍂", name:"Autumn Warm Deep", tag:"The deep, mellow ‘mood master’ — rich earth tones pull up an air of luxury.",
+   best:[["Mustard","#D9A404"],["Terracotta","#E2725B"],["Khaki","#7A7042"],["Brown","#8B5A2B"],["Olive","#708238"],["Brick","#B0413E"],["Cream","#F2E3C4"],["Deep Gold","#B8860B"]],
+   worst:[["Neon Pink","#FF3E96"],["Ice Blue","#B8E2F2"],["Silver","#C0C6CF"],["Blue-White","#F2F8FF"]],
+   tip:"<div class='row'><b>Styling</b> — every fallen-leaf color is yours. Layer low-saturation, warm-yellow deep shades and your whole mood levels up.</div><div class='row'><b>Makeup</b> — MLBB brown lip + bronze shadow. Matte suits you more than shimmer.</div><div class='row'><b>Hair</b> — chocolate brown or dark copper.</div>"},
+ CP:{emo:"❄️", name:"Winter Cool Deep", tag:"The vivid, striking ‘high-contrast lead’ — a rare type who can pull off bold colors.",
+   best:[["Black","#15151a"],["Pure White","#FAFBFF"],["Royal Blue","#4169E1"],["Burgundy","#800020"],["Emerald","#2FBF8F"],["Magenta","#D02090"],["Icy Pink","#F3C6E0"],["Silver","#C9CFDA"]],
+   worst:[["Mustard","#D9A404"],["Orange Brown","#B06018"],["Camel","#C19A6B"],["Olive","#708238"]],
+   tip:"<div class='row'><b>Styling</b> — middling colors are the real poison. Win with black & white high contrast, or one single primary-color accent.</div><div class='row'><b>Makeup</b> — a red or berry lip is your holy grail. A faint MLBB can make you look unwell.</div><div class='row'><b>Hair</b> — blue-black or dark ash; skip bleaching to light brown.</div>"},
+};
+
+let idx=0, score={W:0,C:0,L:0,P:0};
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1800);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+
+function startQuiz(){ idx=0; score={W:0,C:0,L:0,P:0}; show('scQuiz'); render(); }
+
+function render(){
+  const Q=QUESTIONS[idx];
+  $('qCount').textContent=(idx+1)+" / "+QUESTIONS.length;
+  $('qNum').textContent="Q"+(idx+1);
+  const qt=$('qText'); qt.textContent=Q.q; qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const pair=Math.random()<.5?[Q.a,Q.b]:[Q.b,Q.a];
+  const box=$('opts'); box.innerHTML="";
+  pair.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button";
+    b.innerHTML="<span class='ab'>"+(i===0?"A":"B")+"</span>"+o.t;
+    b.addEventListener('click',()=>pick(o.k));
+    box.appendChild(b);
+  });
+}
+function pick(k){
+  vibrate(22); score[k]++;
+  updateKnobs();
+  idx++;
+  if(idx>=QUESTIONS.length){ setTimeout(showResult,420); return; }
+  setTimeout(render,240);
+}
+function updateKnobs(){
+  const tTot=score.W+score.C, dTot=score.L+score.P;
+  const tPos=tTot? (score.W/(tTot))*100 : 50;
+  const dPos=dTot? (score.L/(dTot))*100 : 50;
+  $('knobT').style.left=(100-tPos)+"%";
+  $('knobD').style.left=(100-dPos)+"%";
+}
+function showResult(){
+  const temp=score.W>=score.C?"W":"C";
+  const depth=score.L>=score.P?"L":"P";
+  const T=TYPES[temp+depth];
+  show('scResult'); vibrate([30,50,30,50,90]);
+  $('resEmo').textContent=T.emo;
+  $('resType').innerHTML="<span class='grad'>"+T.name+"</span>";
+  $('resTag').textContent=T.tag;
+  const tPct=Math.round(Math.max(score.W,score.C)/(score.W+score.C)*100);
+  const dPct=Math.round(Math.max(score.L,score.P)/(score.L+score.P)*100);
+  $('valT').textContent=tPct+"%";
+  $('valD').textContent=dPct+"%";
+  setTimeout(()=>{ $('barT').style.width=tPct+"%"; $('barD').style.width=dPct+"%"; },150);
+  document.querySelector('.ar-row:nth-child(1) .lab').textContent = temp==="W"?"🌡 Warm":"🌡 Cool";
+  document.querySelector('.ar-row:nth-child(2) .lab').textContent = depth==="L"?"🎚 Light":"🎚 Deep";
+  const bs=$('bestSw'); bs.innerHTML="";
+  T.best.forEach(([n,c],i)=>{ const d=document.createElement('div'); d.className="sw"; d.style.background=c; d.style.animationDelay=(i*.05)+"s"; d.innerHTML="<span>"+n+"</span>"; bs.appendChild(d); });
+  const ws=$('worstSw'); ws.innerHTML="";
+  T.worst.forEach(([n,c],i)=>{ const d=document.createElement('div'); d.className="sw badx"; d.style.background=c; d.style.opacity=".8"; d.style.animationDelay=(i*.05)+"s"; d.innerHTML="<span>"+n+"</span>"; ws.appendChild(d); });
+  $('tips').innerHTML=T.tip;
+  window._resText="🎨 My Personal Color result\nI’m 「"+T.name+"」 "+T.emo+"\n"+T.tag+"\n\nFind your season → https://mimifactory.vibekr.com/en/apps/personal-color.html";
+}
+function copyResult(){
+  const t=window._resText||"";
+  if(navigator.clipboard){ navigator.clipboard.writeText(t).then(()=>toast("Copied! Paste it anywhere 📋")); }
+  else{ toast("Press and hold to copy"); }
+  vibrate(20);
+}
+</script>
+</body>
+</html>
