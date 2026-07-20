@@ -217,6 +217,18 @@
    "desc": "選択でわかる、あなたの愛のタイプと相性。"
   },
   {
+   "id": "questions-for-two",
+   "type": "test",
+   "title": "となりの席の質問 100",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/questions-for-two.html",
+   "premium": "apps/questions-for-two.html",
+   "desc": "旅の会話がはずむランダムな質問 — スマホひとつで、ふたりとも答える"
+  },
+  {
    "id": "sensitivity-meter",
    "type": "test",
    "title": "繊細さメーター",

@@ -205,6 +205,18 @@
    "desc": "What color is your signal right now? A 12-question self-check for burnout."
   },
   {
+   "id": "questions-for-two",
+   "type": "test",
+   "title": "100 Questions for Two",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/questions-for-two.html",
+   "premium": "apps/questions-for-two.html",
+   "desc": "Road-trip conversation questions — one phone between you, you both answer."
+  },
+  {
    "id": "sensitivity-meter",
    "type": "test",
    "title": "The Sensitivity Meter",

@@ -205,6 +205,30 @@
    "desc": "現在你的燈號是什麼顏色？12題自我檢視你的倦怠程度。"
   },
   {
+   "id": "movie-protagonist",
+   "type": "test",
+   "title": "電影主角體驗",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/movie-protagonist.html",
+   "premium": "apps/movie-protagonist.html",
+   "desc": "兩人並肩坐下，抽出電影名場面即興演出 — 越尷尬默契越高的破冰遊戲"
+  },
+  {
+   "id": "questions-for-two",
+   "type": "test",
+   "title": "隔壁座位的 100 個問題",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/questions-for-two.html",
+   "premium": "apps/questions-for-two.html",
+   "desc": "旅途上一來一往的隨機問題 — 一支手機，兩個人都要回答"
+  },
+  {
    "id": "sensitivity-meter",
    "type": "test",
    "title": "敏感度儀表",
