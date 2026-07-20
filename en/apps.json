@@ -191,6 +191,18 @@
    "teaser": "apps/real-zodiac.html",
    "premium": "apps/real-zodiac.html",
    "desc": "Not your birthday — the soul sign your personality reveals, in 12 questions."
+  },
+  {
+   "id": "tarot",
+   "type": "test",
+   "title": "Tarot Mind Cards",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/tarot.html",
+   "premium": "apps/tarot.html",
+   "desc": "Not fortunes — questions. 22 symbols, one honest mirror."
   }
  ],
  "updated": "2026-07-20"

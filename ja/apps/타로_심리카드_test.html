@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>タロット心理カード — ドーパミン実験室</title>
+<meta property="og:title" content="タロット心理カード — 今日の心を映す3枚">
+<meta property="og:description" content="占いではなく、問いを引くカード。22枚の象徴を心理学の鏡にして — 3枚選んでみてください。">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansJP-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/MPLUSRounded1c-Bold-sub.woff2') format('woff2');font-weight:400;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#0c1020; --bg2:#121732; --card:#181f42; --line:#293264;
+  --ink:#eef0fb; --sub:#9aa3cc; --accent:#93a8ff; --accent2:#5f6fd6;
+  --point:#f4c66f; --ok:#52c48f; --bad:#e2584f;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 80% -10%, rgba(147,168,255,.13), transparent 55%),
+             radial-gradient(100% 80% at 10% 110%, rgba(244,198,111,.08), transparent 50%),
+             linear-gradient(165deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--point),var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:4vh;}
+.hero h1{font-size:44px;line-height:1.15;margin:16px 0 8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;opacity:.85;}
+
+.theme-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;}
+.theme{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px 10px;
+  text-align:center;cursor:pointer;transition:transform .25s cubic-bezier(.34,1.56,.64,1),border-color .25s;}
+.theme:active{transform:scale(.95);}
+.theme.sel{border-color:var(--point);background:linear-gradient(160deg,rgba(244,198,111,.14),rgba(147,168,255,.08));}
+.theme .emo{font-size:30px;display:block;}
+.theme .nm{font-family:'Jua',sans-serif;font-size:15.5px;margin-top:7px;display:block;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#141021;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--point),var(--accent));
+  box-shadow:0 10px 26px -8px var(--accent2);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.theme:focus-visible,.cardback:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+
+.spread-head{text-align:center;margin-bottom:14px;}
+.spread-head .t{font-family:'Jua',sans-serif;font-size:22px;}
+.spread-head .s{color:var(--sub);font-size:13.5px;margin-top:6px;}
+.picked-row{display:flex;justify-content:center;gap:10px;margin-bottom:16px;}
+.slot{width:64px;height:92px;border-radius:10px;border:2px dashed var(--line);display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--sub);text-align:center;line-height:1.3;}
+.slot.filled{border-style:solid;border-color:var(--point);background:linear-gradient(150deg,#232b5c,#161c40);
+  color:var(--point);font-size:26px;box-shadow:0 0 16px -2px rgba(244,198,111,.4);animation:pop .45s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.85);}60%{transform:scale(1.06);}100%{transform:scale(1);}}
+.deck{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
+.cardback{aspect-ratio:2/3;border-radius:9px;cursor:pointer;position:relative;border:1px solid #38418a;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(244,198,111,.55) 0 8%, transparent 9%),
+    radial-gradient(circle at 50% 42%, transparent 0 13%, rgba(244,198,111,.28) 14% 15.5%, transparent 16.5%),
+    linear-gradient(150deg,#2a3374,#151b45);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),opacity .3s;}
+.cardback:active{transform:scale(.92);}
+.cardback.gone{opacity:0;transform:scale(.6) rotate(8deg);pointer-events:none;}
+.deck-cap{font-size:12px;color:var(--sub);text-align:center;margin-top:14px;}
+
+
+.pos-label{font-family:'Jua',sans-serif;font-size:14px;color:var(--point);letter-spacing:.08em;text-align:center;margin:18px 0 8px;}
+.flipwrap{perspective:1000px;width:190px;margin:0 auto;}
+.flip{position:relative;width:100%;aspect-ratio:2/3;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.4,.1,.2,1);cursor:pointer;}
+.flip.flipped{transform:rotateY(180deg);}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;}
+.face.back{border:1px solid #38418a;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(244,198,111,.55) 0 8%, transparent 9%),
+    radial-gradient(circle at 50% 42%, transparent 0 13%, rgba(244,198,111,.28) 14% 15.5%, transparent 16.5%),
+    linear-gradient(150deg,#2a3374,#151b45);
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:12px;color:var(--sub);font-size:12px;}
+.face.front{transform:rotateY(180deg);background:linear-gradient(165deg,#222b63,#141a3e);
+  border:1.5px solid var(--point);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 0 30px -6px rgba(244,198,111,.45);}
+.face.front .no{font-size:11px;letter-spacing:.2em;color:var(--sub);}
+.face.front .emo{font-size:52px;}
+.face.front .nm{font-family:'Jua',sans-serif;font-size:19px;color:var(--point);}
+.face.front .kw{font-size:12px;color:var(--sub);}
+.meaning{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 17px;margin-top:14px;
+  font-size:14.5px;line-height:1.7;display:none;animation:fadeIn .5s ease;}
+.meaning.on{display:block;}
+.meaning .q{margin-top:10px;background:rgba(244,198,111,.1);border-left:3px solid var(--point);border-radius:8px;
+  padding:10px 12px;font-size:14px;}
+.meaning .q b{color:var(--point);}
+.tap-hint{text-align:center;color:var(--sub);font-size:13px;margin-top:10px;}
+
+.summary{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:24px;font-size:14.5px;line-height:1.75;}
+.summary b{color:var(--point);}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(24,31,66,.97);border:1.5px solid var(--point);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(147,168,255,.55));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#8d94bd;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#8d94bd;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 ドーパミン実験室 · 占いの心理学リメイク</span>
+      <h1>🔮 <span class="grad">タロット心理カード</span></h1>
+      <p class="sub">占いではなく <b>問い</b>を引くカードです。<br>22枚の古い象徴を、心を映す鏡として。</p>
+    </div>
+    <div class="pitch">
+      <b>使いかた</b><br>
+      ① いま心に引っかかっているテーマをひとつ選ぶ<br>
+      ② 22枚の中から <b>気になる3枚</b>を引く<br>
+      ③ 「いまの私 → 向き合うこと → 進む道」の順にカードが開きます。
+    </div>
+    <div class="theme-row" id="themeRow">
+      <div class="theme" data-t="こころ" tabindex="0"><span class="emo">🌙</span><span class="nm">いまの気持ち</span></div>
+      <div class="theme" data-t="かんけい" tabindex="0"><span class="emo">💞</span><span class="nm">あの人と私</span></div>
+      <div class="theme" data-t="しごと" tabindex="0"><span class="emo">🎯</span><span class="nm">仕事 · 目標</span></div>
+      <div class="theme" data-t="きょう" tabindex="0"><span class="emo">☀️</span><span class="nm">なんでもない今日</span></div>
+    </div>
+    <button class="btn" onclick="goSpread()">🃏 カードをシャッフルして選びに行く</button>
+    <p class="note">※ タロットは未来を当てる道具ではありません。このアプリは伝統的な象徴を心理学的に読みなおした <b>セルフコーチングカード</b>です。答えはカードではなく、あなたの中から出てきます。</p>
+  </section>
+
+  
+  <section id="scSpread" class="screen">
+    <div class="spread-head">
+      <div class="t">気になるカードを <span class="grad">3枚</span>選んでください</div>
+      <div class="s" id="spreadTheme">テーマ: いまの気持ち</div>
+    </div>
+    <div class="picked-row">
+      <div class="slot" id="slot0">① いまの<br>私</div>
+      <div class="slot" id="slot1">② 向き合う<br>こと</div>
+      <div class="slot" id="slot2">③ 進む<br>道</div>
+    </div>
+    <div class="deck" id="deck"></div>
+    <div class="deck-cap">迷いすぎなくて大丈夫 — 最初に目が合ったカードが、あなたのカードです ✨</div>
+  </section>
+
+  
+  <section id="scReveal" class="screen">
+    <div id="revealArea"></div>
+    <div class="summary" id="summary" style="display:none;"></div>
+    <button class="btn" id="copyBtn" style="display:none;" onclick="copyResult()">📋 今日の問い3つを保存する</button>
+    <button class="btn ghost" id="againBtn" style="display:none;" onclick="location.reload()">🔄 別のテーマでもう一度</button>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/ja/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 ドーパミン実験室 — ほかのテストを見る →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意味と面白さの工場</span></div>
+    <div class="mf-logo">ミミファクトリー</div>
+    <div class="mf-caption">株式会社ヨンギョル ファミリーカンパニー</div>
+  </div>
+</div>
+
+<script>
+
+const CARDS=[
+ {n:0,name:"愚者",emo:"🎒",kw:"はじまり · 純粋",mean:"計算が立つ前に一歩を踏み出す力。『準備不足』は、しばしば『始める勇気』の別名です。",q:"失敗してもいいとしたら、いま何を始めたいですか？"},
+ {n:1,name:"魔術師",emo:"🪄",kw:"実行 · 才能",mean:"必要な道具は、すでに机の上にそろっています。足りないのは能力ではなく『使うと決めること』かもしれません。",q:"持っているのに使っていない力は、何ですか？"},
+ {n:2,name:"女教皇",emo:"🌒",kw:"直感 · 沈黙",mean:"頭の中は複雑でも、心はもう答えを知っている状態。ノイズを減らせば、その声が聞こえてきます。",q:"本当は、もう分かっている答えは何ですか？"},
+ {n:3,name:"女帝",emo:"🌾",kw:"ケア · 豊かさ",mean:"満たされてこそ、あふれます。自分をケアすることはぜいたくではなく、すべての関係の元手です。",q:"最近、自分を何で満たしていますか？"},
+ {n:4,name:"皇帝",emo:"🏛️",kw:"秩序 · 責任",mean:"ルールは自分を守る柵にも、閉じ込める塀にもなります。いまはその境界線を点検するときです。",q:"自分を守るルールと縛るルール、ひとつずつ挙げるなら？"},
+ {n:5,name:"教皇",emo:"📿",kw:"学び · 助言",mean:"ひとりで切り開く時代ではありません。先を歩いた人の地図一枚が、数か月を節約してくれます。",q:"いま助言をもらうべき人は、誰ですか？"},
+ {n:6,name:"恋人",emo:"💘",kw:"選択 · 価値観",mean:"選択が難しいのは答えがないからではなく、何をあきらめるか決めていないからです。",q:"正直なところ、心はもうどちらに傾いていますか？"},
+ {n:7,name:"戦車",emo:"🏇",kw:"推進 · 集中",mean:"方向が決まったなら、次はスピードの時間。散らばったエネルギーを一点に集めましょう。",q:"いまアクセルを踏むべきことは、何ですか？"},
+ {n:8,name:"力",emo:"🦁",kw:"やわらかな勇気",mean:"本当の強さは、抑え込むことではなく手なずけること。心の中のライオンと戦わず、交渉してみましょう。",q:"あなたの中のライオン（欲・怒り）は、いま何を求めていますか？"},
+ {n:9,name:"隠者",emo:"🏮",kw:"内省 · 孤独",mean:"灯りは、暗いからこそ見えるもの。接続を切る時間が、かえって方向を教えてくれます。",q:"完全にひとりで過ごした時間、最後はいつでしたか？"},
+ {n:10,name:"運命の輪",emo:"🎡",kw:"流れ · 変化",mean:"すべてをコントロールすることはできません。回せる輪と、回っていく輪を見分けるのが知恵です。",q:"つかんでおくものと、流していくもの。ひとつずつ決めるなら？"},
+ {n:11,name:"正義",emo:"⚖️",kw:"バランス · 公正",mean:"天秤は、他人のためだけにあるのではありません。自分にだけ厳しい判決を下していませんか。",q:"他人には寛大なのに、自分にだけ厳しいところはありませんか？"},
+ {n:12,name:"吊るされた男",emo:"🙃",kw:"視点の転換",mean:"立ち止まることは後退ではありません。逆さまになって初めて見える景色があります。",q:"いまの状況を逆さまから見ると、何がチャンスに見えますか？"},
+ {n:13,name:"死神",emo:"🍂",kw:"終わり · 再生",mean:"何かが終わってこそ、次が始まります。このカードは喪失ではなく『席を空けること』の象徴です。",q:"終わったと分かっていながら、手放せずにいるものは何ですか？"},
+ {n:14,name:"節制",emo:"🏺",kw:"調律 · 回復",mean:"二つの水を混ぜ合わせるように、人生は配合の技術です。多すぎるものは減らし、足りないものは足していく。",q:"最近の生活で、多すぎるものと足りないもの、ひとつずつ挙げるなら？"},
+ {n:15,name:"悪魔",emo:"⛓️",kw:"執着 · 習慣",mean:"その鎖、よく見ると鍵はかかっていません。断てないのではなく、手放したくないだけかもしれません。",q:"分かっていてもやめられないそれ — 自分にくれている本当のごほうびは何でしょう？"},
+ {n:16,name:"塔",emo:"🌩️",kw:"崩壊 · 解放",mean:"積み上げたものが崩れるとき、初めて土台が見えます。崩壊は、ときに最速のリフォームです。",q:"崩れた（崩れつつある）場所から、拾い上げたいひとつは何ですか？"},
+ {n:17,name:"星",emo:"⭐",kw:"希望 · 癒やし",mean:"星は手に届かなくても、方角になってくれます。いま必要なのは大きな成果ではなく、小さな信頼です。",q:"もう一度、信じてみたいものは何ですか？"},
+ {n:18,name:"月",emo:"🌕",kw:"不安 · 無意識",mean:"不安は故障ではなくシグナルです。月明かりの下では影が大きく見えるだけで、実体は思ったより小さいものです。",q:"その不安が教えようとしていることは、何でしょうか？"},
+ {n:19,name:"太陽",emo:"🌞",kw:"肯定 · 達成",mean:"よく見せようとしなくても輝いている状態。今日の小さな『いいこと』を、そのまま通り過ぎないでください。",q:"今日、少しでも自分を笑わせてくれたものは何でしたか？"},
+ {n:20,name:"審判",emo:"📯",kw:"呼びかけ · 再起",mean:"過去をもう一度評価しなおす機会が来ています。過去は変えられなくても、意味は変えられます。",q:"もう一度チャンスが来たら、何を変えますか？"},
+ {n:21,name:"世界",emo:"🌍",kw:"完成 · 統合",mean:"ひとつのサイクルが完成しました。次の旅のために、終わったものにきちんとお別れを告げましょう。",q:"やり遂げたことに、どんなお別れの言葉をかけたいですか？"},
+];
+const POS=["① いまの私","② 向き合うこと","③ 進む道"];
+const POS_INTRO=["いまのあなたの状態を映すカード","前に進むために、向き合うべきもの","これから進む道のヒント"];
+
+let theme="こころ", deck=[], picked=[], revealIdx=0;
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1900);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+$('themeRow').addEventListener('click',e=>{
+  const el=e.target.closest('.theme'); if(!el)return;
+  document.querySelectorAll('.theme').forEach(t=>t.classList.remove('sel'));
+  el.classList.add('sel'); theme=el.dataset.t; vibrate(15);
+});
+document.querySelector('.theme').classList.add('sel');
+
+function goSpread(){
+  deck=shuffle([...Array(22).keys()]); picked=[];
+  $('spreadTheme').textContent="テーマ: "+({こころ:"いまの気持ち",かんけい:"あの人と私",しごと:"仕事 · 目標",きょう:"なんでもない今日"})[theme];
+  const d=$('deck'); d.innerHTML="";
+  for(let i=0;i<22;i++){
+    const c=document.createElement('div');
+    c.className="cardback"; c.tabIndex=0; c.dataset.i=i;
+    c.addEventListener('click',()=>pickCard(c,i));
+    c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();c.click();}});
+    d.appendChild(c);
+  }
+  show('scSpread');
+  toast("🔮 テーマを心に思い浮かべながら選んでください");
+}
+function pickCard(el,i){
+  if(picked.length>=3||el.classList.contains('gone'))return;
+  vibrate(28);
+  el.classList.add('gone');
+  const card=CARDS[deck[i]];
+  picked.push(card);
+  const slot=$('slot'+(picked.length-1));
+  slot.classList.add('filled'); slot.textContent="🂠";
+  if(picked.length===3){ setTimeout(startReveal,650); }
+}
+function startReveal(){
+  revealIdx=0;
+  $('revealArea').innerHTML="";
+  show('scReveal');
+  addFlip();
+}
+function addFlip(){
+  const card=picked[revealIdx];
+  const area=$('revealArea');
+  const wrap=document.createElement('div');
+  wrap.innerHTML=
+    "<div class='pos-label'>"+POS[revealIdx]+" — "+POS_INTRO[revealIdx]+"</div>"+
+    "<div class='flipwrap'><div class='flip' id='flip"+revealIdx+"'>"+
+      "<div class='face back'>タップして開く</div>"+
+      "<div class='face front'><span class='no'>"+roman(card.n)+"</span><span class='emo'>"+card.emo+"</span><span class='nm'>"+card.name+"</span><span class='kw'>"+card.kw+"</span></div>"+
+    "</div></div>"+
+    "<div class='tap-hint' id='hint"+revealIdx+"'>👆 カードをタップするとめくれます</div>"+
+    "<div class='meaning' id='mean"+revealIdx+"'></div>";
+  area.appendChild(wrap);
+  const f=$('flip'+revealIdx);
+  const myIdx=revealIdx;
+  f.addEventListener('click',()=>flipCard(myIdx),{once:true});
+  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+}
+function roman(n){const R=["0","I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV","XVI","XVII","XVIII","XIX","XX","XXI"];return R[n];}
+function flipCard(i){
+  const card=picked[i];
+  $('flip'+i).classList.add('flipped');
+  $('hint'+i).style.display="none";
+  vibrate([20,40,20]);
+  setTimeout(()=>{
+    const m=$('mean'+i);
+    m.innerHTML=card.mean+"<div class='q'><b>自分に問う</b> — "+card.q+"</div>";
+    m.classList.add('on');
+    revealIdx++;
+    if(revealIdx<3){ setTimeout(addFlip,500); }
+    else{ setTimeout(finish,600); }
+    window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+  },820);
+}
+function finish(){
+  vibrate([30,50,30,50,90]);
+  const s=$('summary');
+  s.innerHTML="<b>🌙 今日のリーディングまとめ</b><br>"+
+    picked.map((c,i)=>POS[i]+" · <b>"+c.name+"</b> ("+c.kw+")").join("<br>")+
+    "<br><br>カードは答えをくれませんでした — その代わり、<b>3つの問い</b>を残してくれました。今日はそのうちのひとつだけ、自分で答えてみてください。それが今日のリーディングです。";
+  s.style.display="block";
+  $('copyBtn').style.display="block";
+  $('againBtn').style.display="block";
+  window._resText="🔮 タロット心理カード — 今日の自分への問い3つ\n"+
+    picked.map((c,i)=>(i+1)+". ["+c.name+" "+c.emo+"] "+c.q).join("\n")+
+    "\n\n私も引いてみる → https://mimifactory.vibekr.com/ja/apps/tarot.html";
+  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("コピーしました！メモに貼っておいてください 📋")); }
+  else toast("長押しでコピーしてください");
+  vibrate(20);
+}
+</script>
+</body>
+</html>

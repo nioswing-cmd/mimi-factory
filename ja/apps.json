@@ -203,6 +203,18 @@
    "teaser": "apps/real-zodiac.html",
    "premium": "apps/real-zodiac.html",
    "desc": "誕生日ではなく、性格が教えてくれる魂の星座を12問で"
+  },
+  {
+   "id": "tarot",
+   "type": "test",
+   "title": "タロット心理カード",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/tarot.html",
+   "premium": "apps/tarot.html",
+   "desc": "占いではなく問いを引く — 22枚の象徴を心理学の鏡に"
   }
  ],
  "updated": "2026-07-20"

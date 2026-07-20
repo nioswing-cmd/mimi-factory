@@ -191,6 +191,18 @@
    "teaser": "apps/real-zodiac.html",
    "premium": "apps/real-zodiac.html",
    "desc": "不是生日，而是性格所指向的靈魂星座 — 12題揭曉"
+  },
+  {
+   "id": "tarot",
+   "type": "test",
+   "title": "塔羅心理卡",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/tarot.html",
+   "premium": "apps/tarot.html",
+   "desc": "抽的不是命運，是問題 — 22張象徵變成心理學的鏡子"
   }
  ],
  "updated": "2026-07-20"
