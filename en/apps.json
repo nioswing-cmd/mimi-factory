@@ -181,6 +181,18 @@
    "desc": "One IQ score can’t sum you up — map your 8 intelligences with Gardner."
   },
   {
+   "id": "36-questions",
+   "type": "test",
+   "title": "36 Questions to Open Up",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/36-questions.html",
+   "premium": "apps/36-questions.html",
+   "desc": "The psychology-backed conversation — 36 questions that deepen, ending in 4 minutes of eye contact."
+  },
+  {
    "id": "burnout-traffic-light",
    "type": "test",
    "title": "Burnout Traffic Light",

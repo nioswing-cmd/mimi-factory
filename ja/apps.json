@@ -181,6 +181,18 @@
    "desc": "IQひとつでは語れない — ガードナーの8つの知能であなたの地図を描く。"
   },
   {
+   "id": "36-questions",
+   "type": "test",
+   "title": "心を開く36の質問",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/36-questions.html",
+   "premium": "apps/36-questions.html",
+   "desc": "心理学が実証した会話 — だんだん深まる36問、最後は4分の見つめ合い。"
+  },
+  {
    "id": "burnout-traffic-light",
    "type": "test",
    "title": "バーンアウト信号機",

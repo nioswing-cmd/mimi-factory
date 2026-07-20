@@ -181,6 +181,18 @@
    "desc": "光靠 IQ 說明不了你 — 用加德納的 8 種智能畫出你的地圖。"
   },
   {
+   "id": "36-questions",
+   "type": "test",
+   "title": "打開心房的36個問題",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/36-questions.html",
+   "premium": "apps/36-questions.html",
+   "desc": "心理學驗證過的對話 — 越問越深的36個問題，最後是4分鐘的凝視。"
+  },
+  {
    "id": "burnout-traffic-light",
    "type": "test",
    "title": "倦怠紅綠燈",
