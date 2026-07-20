@@ -203,6 +203,18 @@
    "teaser": "apps/tarot.html",
    "premium": "apps/tarot.html",
    "desc": "Not fortunes — questions. 22 symbols, one honest mirror."
+  },
+  {
+   "id": "stats-and-me",
+   "type": "test",
+   "title": "The Stats & Me",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/stats-and-me.html",
+   "premium": "apps/stats-and-me.html",
+   "desc": "The moment you pick, the real stats go live — mainstream or rare?"
   }
  ],
  "updated": "2026-07-20"

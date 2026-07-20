@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>統計與我 — 我是主流，還是稀有物種</title>
+<meta name="description" content="選下去的瞬間，真實統計就公開。甜豆花還是鹹豆花 — 我是全民主流，還是稀有物種？">
+<meta name="theme-color" content="#141024">
+<meta property="og:title" content="統計與我 — 我是主流，還是稀有物種">
+<meta property="og:description" content="選下去的瞬間，真實統計就公開。我是全民主流，還是稀有物種？">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mimifactory.vibekr.com/zh-tw/apps/stats-and-me.html">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#141024; --bg2:#241a44; --card:#1e1738; --line:rgba(255,255,255,.1);
+  --ink:#f4efff; --muted:#a99cc9; --cream:#ffe9c9;
+  --a1:#ffd56b; --a2:#ff8a5b; --pink:#ff6b9e; --uniq:#8fd3ff;
+  --pop:cubic-bezier(.34,1.56,.64,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 85% -10%,rgba(255,138,91,.14),transparent 55%),
+             radial-gradient(110% 80% at 5% 110%,rgba(143,211,255,.10),transparent 55%),
+             linear-gradient(165deg,var(--bg1),var(--bg2));background-attachment:fixed}
+.wrap{max-width:520px;margin:0 auto;padding:26px 18px 40px}
+.screen{display:none}.screen.on{display:block;animation:fade .4s var(--pop)}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}}
+
+
+.eyebrow{font-size:11px;letter-spacing:.4em;text-indent:.4em;color:var(--muted);text-align:center;margin-bottom:10px}
+h1.title{font-family:'Jua',sans-serif;font-size:40px;text-align:center;line-height:1.15;
+  background:linear-gradient(95deg,var(--a1),var(--pink));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{font-size:13.5px;color:var(--muted);text-align:center;margin-top:12px;line-height:1.8}
+.sub b{color:var(--cream)}
+.pick-title{text-align:center;font-size:13px;color:var(--muted);margin:24px 0 12px}
+.picks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pick{background:var(--card);border:1.6px solid var(--line);border-radius:16px;padding:14px 6px;
+  color:var(--ink);font-family:inherit;cursor:pointer;transition:all .3s var(--pop)}
+.pick:active{transform:scale(.94)}
+.pick.sel{border-color:var(--a1);background:linear-gradient(160deg,rgba(255,213,107,.2),rgba(255,107,158,.12))}
+.pick .n{font-family:'Jua';font-size:24px;display:block}
+.pick .u{font-size:10.5px;color:var(--muted);display:block;margin-top:4px}
+.pick.full{grid-column:span 3}.pick.full .n{font-size:20px}
+.btn{width:100%;margin-top:18px;padding:16px;border:none;border-radius:16px;font-family:'Jua';font-size:18px;
+  color:#241a44;background:linear-gradient(95deg,var(--a1),var(--a2));cursor:pointer;transition:transform .3s var(--pop)}
+.btn:disabled{opacity:.4}.btn:active{transform:scale(.96)}
+.srcbox{margin-top:16px;padding:12px 14px;background:rgba(255,255,255,.05);border:1px solid var(--line);
+  border-radius:12px;font-size:11px;line-height:1.7;color:var(--muted);text-align:left}
+
+
+.topbar{margin-bottom:14px}
+.prog{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:8px}
+.prog b{font-family:'Jua';color:var(--cream)}
+.meter{height:10px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.meter .mf{display:block;height:100%;width:0;border-radius:99px;transition:width .8s var(--pop);
+  background:linear-gradient(90deg,var(--a1),var(--pink))}
+.meterlb{font-size:11px;color:var(--muted);margin-top:5px;text-align:right}
+.meterlb b{color:var(--cream)}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 18px;margin-top:8px;
+  animation:fade .35s var(--pop)}
+.qtag{display:inline-block;font-size:11px;padding:4px 12px;border-radius:99px;background:rgba(255,255,255,.08);color:var(--muted)}
+.qtext{font-family:'Jua';font-size:22px;line-height:1.4;margin-top:12px}
+.opts{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+.opt{position:relative;overflow:hidden;text-align:left;padding:15px 16px;border-radius:14px;border:1.6px solid var(--line);
+  background:rgba(255,255,255,.04);color:var(--ink);font-family:inherit;font-size:15px;font-weight:500;cursor:pointer;
+  transition:all .3s var(--pop)}
+.opt:active{transform:scale(.97)}
+.opt .obar{position:absolute;left:0;top:0;bottom:0;width:0;transition:width .9s var(--pop);z-index:0;opacity:.28}
+.opt .otxt{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.opt .opct{font-family:'Jua';font-size:17px;opacity:0;transition:opacity .4s}
+.opt.revealed{cursor:default}
+.opt.revealed .opct{opacity:1}
+.opt.mine{border-color:var(--a1)}
+.opt.mine .obar{background:linear-gradient(90deg,var(--a1),var(--a2))}
+.opt:not(.mine) .obar{background:rgba(255,255,255,.5)}
+.verdict{margin-top:16px;text-align:center;display:none}
+.verdict.show{display:block;animation:popin .45s var(--pop)}
+@keyframes popin{from{opacity:0;transform:scale(.8)}}
+.vchip{display:inline-block;font-family:'Jua';font-size:17px;padding:9px 20px;border-radius:99px}
+.vchip.main{background:rgba(255,213,107,.16);color:var(--a1);border:1.5px solid var(--a1)}
+.vchip.uniq{background:rgba(143,211,255,.14);color:var(--uniq);border:1.5px solid var(--uniq)}
+.vsub{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.6}
+.vsub b{color:var(--cream)}
+.vsrc{font-size:10.5px;color:var(--muted);opacity:.75;margin-top:7px}
+.nextbtn{margin-top:14px}
+
+
+.rhead{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px 20px;text-align:center}
+.rem{font-size:52px}
+.rname{font-family:'Jua';font-size:30px;margin-top:8px;
+  background:linear-gradient(95deg,var(--a1),var(--pink));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.rsub{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.75}
+.bignum{margin-top:18px}
+.bignum .pct{font-family:'Jua';font-size:54px;color:var(--cream)}
+.bignum .cap{font-size:12px;color:var(--muted);margin-top:2px}
+.rstats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.rstat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
+.rstat .v{font-family:'Jua';font-size:22px;color:var(--cream)}
+.rstat .k{font-size:11px;color:var(--muted);margin-top:4px}
+.sect{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:12px;font-size:13px;line-height:1.8;color:#d9d0ee}
+.sect h3{font-family:'Jua';font-size:15px;color:var(--cream);margin-bottom:8px}
+.ghost{width:100%;margin-top:10px;padding:14px;border-radius:14px;border:1.5px solid var(--line);
+  background:transparent;color:var(--muted);font-family:'Jua';font-size:15px;cursor:pointer}
+
+
+.footer{text-align:center;margin-top:36px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(167,139,250,.6))}
+.mf-eyebrow::after{transform:scaleX(-1)}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#9a8fc0;font-weight:500;white-space:nowrap}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#9a8fc0}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);background:rgba(30,23,56,.97);
+  border:1px solid var(--line);color:var(--ink);font-size:13px;padding:11px 20px;border-radius:99px;transition:transform .4s var(--pop);z-index:9}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="screen on" id="home">
+    <div class="eyebrow">全 民 統 計 &nbsp;V S&nbsp; 我</div>
+    <h1 class="title">統計與我</h1>
+    <p class="sub">甜豆花還是鹹豆花、鳳梨要不要放披薩 —<br>選下去的瞬間 <b>真實統計</b>就公開。<br>我是 <b>全民主流</b>，還是 <b>稀有物種</b>？</p>
+
+    <div class="pick-title">要玩幾題呢？</div>
+    <div class="picks" id="picks">
+      <button class="pick" data-n="5"><span class="n">5</span><span class="u">試玩</span></button>
+      <button class="pick" data-n="10"><span class="n">10</span><span class="u">一局</span></button>
+      <button class="pick" data-n="20"><span class="n">20</span><span class="u">認真玩</span></button>
+      <button class="pick full" data-n="100"><span class="n">100 · 完全制霸</span><span class="u">如果流落無人島的話…</span></button>
+    </div>
+    <button class="btn" id="startBtn" disabled>先選題數</button>
+
+    <div class="srcbox">📊 <b style="color:var(--cream)">統計說明</b> — 這個 App 會 <b style="color:var(--cream)">統計使用者的實際選擇</b>。當某題累積足夠回答（30 人以上），就會自動切換成「咪咪工廠使用者 N 人中 X%」的 <b style="color:var(--cream)">實測統計</b>。在那之前，會顯示參考公開民調與投票的綜合參考值；有確認實際調查出處的題目，會一併標示機構名稱。你的每一個選擇，都會變成真實的統計。</div>
+  </section>
+
+  <section class="screen" id="play">
+    <div class="topbar">
+      <div class="prog"><span><b id="qNow">1</b> / <span id="qTotal">10</span></span><span id="streakLb"></span></div>
+      <div class="meter"><span class="mf" id="meterFill"></span></div>
+      <div class="meterlb">目前為止我的主流率 <b id="meterPct">—</b></div>
+    </div>
+    <div class="qcard">
+      <span class="qtag" id="qTag">🏠 日常</span>
+      <div class="qtext" id="qText"></div>
+      <div class="opts" id="opts"></div>
+      <div class="verdict" id="verdict">
+        <span class="vchip" id="vChip"></span>
+        <div class="vsub" id="vSub"></div>
+        <div class="vsrc" id="vSrc"></div>
+        <button class="btn nextbtn" id="nextBtn">下一題 →</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="done">
+    <div class="rhead">
+      <div class="rem" id="rEm">🌊</div>
+      <div class="rname" id="rName"></div>
+      <div class="rsub" id="rSub"></div>
+      <div class="bignum"><div class="pct" id="rPct">0%</div><div class="cap">我的主流率</div></div>
+    </div>
+    <div class="rstats">
+      <div class="rstat"><div class="v" id="rSame">—</div><div class="k">平均而言和我選一樣的人</div></div>
+      <div class="rstat"><div class="v" id="rUniq">—</div><div class="k">稀有選擇次數</div></div>
+    </div>
+    <div class="sect"><h3>🔎 這個結果的意義</h3><p id="rMean"></p></div>
+    <button class="btn" id="shareBtn">保存結果卡 📷</button>
+    <button class="ghost" id="againBtn">再玩一次 ↻ (換新題目)</button>
+    <button class="ghost" id="homeBtn">回到首頁</button>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/zh-tw/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 多巴胺實驗室 — 看看其他測驗 →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意義與趣味工廠</span></div>
+    <div class="mf-logo">咪咪工廠 MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL股份有限公司 家族公司</div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+
+const BANK=[
+ ["🏠 日常", "早上起床會摺被子", [["會摺", 34], ["不摺", 66]]],
+ ["🏠 日常", "牙膏從尾端開始擠", [["從尾端擠好擠滿", 39], ["隨便亂擠", 61]]],
+ ["🍜 口味", "炸物的醬 — 淋上去還是沾著吃？", [["淋上去", 31], ["沾著吃", 62]], "Yahoo奇摩民調 2020"],
+ ["🍜 口味", "薄荷巧克力很好吃", [["好吃", 37], ["牙膏味…", 63]]],
+ ["🍜 口味", "泡麵要加蛋的話", [["打散", 46], ["整顆", 34], ["不加", 20]]],
+ ["📱 數位", "LINE已讀不回過別人", [["有", 78], ["沒有", 22]]],
+ ["📱 數位", "上廁所會帶手機", [["會帶", 61], ["不帶", 39]], "波仕特線上市調 2017"],
+ ["🧠 個性", "我是計畫型的人", [["計畫型", 44], ["隨興型", 56]]],
+ ["🌙 私密", "睡覺時流過口水", [["有", 64], ["沒有", 36]]],
+ ["💗 關係", "曾經一見鍾情過", [["有", 67], ["沒有", 33]], "愛情公寓 2011"],
+ ["🏠 日常", "襪子脫下來就那樣丟著", [["翻面就丟", 58], ["馬上翻好", 42]]],
+ ["🍜 口味", "聚餐果然還是烤肉最讚", [["就是要烤肉", 61], ["才不是", 39]]],
+ ["🍜 口味", "幾乎不吃早餐", [["不吃", 35], ["一定會吃", 65]], "衛福部 國民營養健康調查 2023"],
+ ["💸 消費", "包裹一到當天就拆", [["馬上拆", 82], ["放著再說", 18]]],
+ ["🧠 個性", "我的 MBTI 第一個字母是 E", [["E（外向）", 43], ["I（內向）", 57]]],
+ ["📱 數位", "影片開 1.5 倍速以上看", [["開倍速", 49], ["原速派", 51]]],
+ ["🌙 私密", "曾經鬼壓床過", [["有", 56], ["沒有", 44]]],
+ ["💗 關係", "偷看過前任的社群", [["有", 67], ["沒有", 33]]],
+ ["🏠 日常", "在家會穿室內拖鞋", [["會穿", 41], ["打赤腳派", 59]]],
+ ["🍜 口味", "鳳梨披薩，我認同", [["認同", 45], ["絕對反對", 55]]],
+ ["🧠 個性", "一個人吃飯完全 OK", [["很自在", 62], ["有點壓力", 38]]],
+ ["💸 消費", "常常衝動購物後後悔", [["很多", 71], ["還好", 29]], "波仕特線上市調 2017"],
+ ["📱 數位", "會設好幾個鬧鐘", [["好幾個", 66], ["一個就夠", 34]]],
+ ["🌙 私密", "洗澡時會唱歌", [["會唱", 53], ["不唱", 47]]],
+ ["💗 關係", "通常都是我先傳訊息", [["我先", 48], ["對方先", 52]]],
+ ["🏠 日常", "碗會馬上洗", [["馬上洗", 39], ["堆著", 61]]],
+ ["🍜 口味", "很能吃辣", [["很能吃", 57], ["不太行", 43]]],
+ ["🧠 個性", "有點選擇困難", [["有", 81], ["沒有", 19]], "1111人力銀行 2017"],
+ ["📱 數位", "看 YouTube 比看 Instagram 多", [["YouTube", 58], ["Instagram", 42]]],
+ ["🌙 私密", "偷放屁然後裝沒事過", [["有", 81], ["沒有", 19]]],
+ ["💗 關係", "曖昧到最後不了了之過", [["有", 69], ["沒有", 31]]],
+ ["🏠 日常", "冬天會穿襪子睡覺", [["穿著睡", 42], ["脫掉睡", 58]]],
+ ["🍜 口味", "沒有咖啡活不下去", [["不行", 55], ["還好", 45]]],
+ ["💸 消費", "會記帳", [["有記", 27], ["沒記", 73]]],
+ ["🧠 個性", "很會怕生", [["很嚴重", 51], ["才不是", 49]]],
+ ["📱 數位", "睡前一直滑手機到睡著", [["會", 79], ["才不是", 21]]],
+ ["🌙 私密", "對著鏡子練過表情", [["有", 58], ["沒有", 42]]],
+ ["💗 關係", "告白應該由男生主動", [["同意", 34], ["才不是", 66]]],
+ ["🏠 日常", "東西會物歸原位", [["會", 45], ["隨便亂擠", 55]]],
+ ["🍜 口味", "炸雞帶骨的比去骨好", [["帶骨", 47], ["去骨", 53]]],
+ ["🧠 個性", "情緒起伏比較大", [["有", 59], ["沒有", 41]]],
+ ["💸 消費", "想擁有一件精品", [["想要", 63], ["沒興趣", 37]]],
+ ["📱 數位", "不用的 App 通知都放著不管", [["放著", 61], ["馬上清", 39]]],
+ ["🌙 私密", "一個人的時候會自言自語", [["會", 66], ["不會", 34]]],
+ ["💗 關係", "情人比朋友優先", [["情人優先", 38], ["朋友優先", 62]]],
+ ["🏠 日常", "衣服摺好馬上收", [["馬上收", 36], ["堆在椅子上", 64]]],
+ ["🍜 口味", "湯會喝到最後一滴", [["全喝完", 44], ["會留一些", 56]]],
+ ["🧠 個性", "很在意別人的眼光", [["很在意", 57], ["才不是", 43]]],
+ ["📱 數位", "回覆過詐騙簡訊", [["有", 23], ["沒有", 77]]],
+ ["🌙 私密", "被說過會打呼", [["有", 52], ["沒有", 48]]],
+ ["💗 關係", "曾經暗戀一個人很久", [["有", 68], ["沒有", 32]]],
+ ["🏠 日常", "耳機線會捲好收好", [["捲得好", 38], ["糾成一團", 62]]],
+ ["🍜 口味", "喜歡吃生魚片", [["喜歡", 58], ["還好", 42]]],
+ ["🧠 個性", "我是晨型人", [["晨型", 36], ["夜型", 64]]],
+ ["💸 消費", "打折就算不需要也會買", [["會買", 54], ["才不是", 46]]],
+ ["📱 數位", "比起打電話更愛傳訊息", [["傳訊息派", 71], ["打電話派", 29]]],
+ ["🌙 私密", "曾經哭著睡著", [["有", 61], ["沒有", 39]]],
+ ["💗 關係", "談戀愛時比較容易吃醋", [["很嚴重", 49], ["才不是", 51]]],
+ ["🏠 日常", "垃圾拖到滿出來過", [["有", 66], ["沒有", 34]]],
+ ["🍜 口味", "喜歡吃香菜", [["喜歡", 33], ["不敢吃", 67]]],
+ ["🧠 個性", "有完美主義傾向", [["有", 55], ["沒有", 45]]],
+ ["💸 消費", "領薪水沒幾天戶頭就空了", [["很快就空", 58], ["很會存", 42]], "104人力銀行 2018 月光族調查"],
+ ["📱 數位", "未讀信件超過 100 封", [["超過", 47], ["有整理", 53]]],
+ ["🌙 私密", "常常抵擋不了宵夜的誘惑", [["常投降", 72], ["忍住", 28]]],
+ ["💗 關係", "第一次約會就該各付各的", [["各付各的", 57], ["一個人付", 43]]],
+ ["🏠 日常", "紙箱不丟一直堆著", [["堆著", 51], ["馬上丟", 49]]],
+ ["🍜 口味", "會把飯拌進泡麵湯裡吃", [["會拌", 74], ["不會", 26]]],
+ ["🧠 個性", "一定要有自己的時間", [["一定要", 78], ["才不是", 22]]],
+ ["📱 數位", "相簿裡有好幾百張截圖", [["好幾百張", 63], ["有整理", 37]]],
+ ["🌙 私密", "搜尋過暗戀對象的名字", [["有", 59], ["沒有", 41]]],
+ ["💗 關係", "曾經有段時間工作比戀愛重要", [["有", 64], ["沒有", 36]]],
+ ["🏠 日常", "喜歡開著窗睡覺", [["喜歡", 31], ["不喜歡", 69]]],
+ ["🍜 口味", "常常想吃甜點", [["常常", 61], ["還好", 39]]],
+ ["🧠 個性", "生氣了也不太會表現出來", [["不太會", 58], ["會表現", 42]]],
+ ["💸 消費", "覺得咖啡錢很浪費過", [["有", 53], ["沒有", 47]]],
+ ["📱 數位", "上班時偷滑手機做別的事過", [["有", 89], ["沒有", 11]]],
+ ["🌙 私密", "有那種想鑽進被子裡的黑歷史", [["有", 84], ["沒有", 16]], "打工趣 2017 黑歷史調查"],
+ ["💗 關係", "戀愛剛開始的時候最心動", [["同意", 67], ["才不是", 33]]],
+ ["🏠 日常", "不太常喝水", [["很少喝", 56], ["常喝", 44]], "董氏基金會 2024 飲水習慣調查"],
+ ["🍜 口味", "喜歡一個人小酌", [["很享受", 41], ["才不是", 59]]],
+ ["🧠 個性", "被稱讚會覺得尷尬", [["尷尬", 62], ["開心", 38]]],
+ ["💸 消費", "訂閱服務用 3 個以上", [["3 個以上", 66], ["才不是", 34]], "資策會 2025 訂閱服務使用調查"],
+ ["📱 數位", "陌生號碼不接", [["不接", 69], ["會接", 31]]],
+ ["🌙 私密", "有時候會很想吃重鹹的東西", [["有", 57], ["沒有", 43]]],
+ ["💗 關係", "情人的興趣應該要和我一樣", [["同意", 39], ["才不是", 61]]],
+ ["🏠 日常", "週末曾經一整天沒出門", [["有", 76], ["沒有", 24]]],
+ ["🍜 口味", "涼麵是湯的還是乾拌的？", [["湯的", 46], ["乾拌的", 54]]],
+ ["🧠 個性", "很容易膩", [["同意", 47], ["才不是", 53]]],
+ ["💸 消費", "會偷偷藏私房錢", [["有藏", 44], ["沒有", 56]]],
+ ["📱 數位", "曾經幾天不碰社群", [["有", 51], ["沒有", 49]]],
+ ["🌙 私密", "晚上洗澡", [["晚上派", 63], ["早上派", 37]]],
+ ["💗 關係", "婚一定要結", [["同意", 53], ["才不是", 47]], "主計總處 2024 社會調查"],
+ ["🏠 日常", "曾經為了遙控器、充電器放哪吵過架", [["有", 52], ["沒有", 48]]],
+ ["🍜 口味", "常常用超商食物解決一餐", [["常常", 58], ["才不是", 42]]],
+ ["🧠 個性", "過去的事會反覆想很久", [["一直想", 61], ["很快忘", 39]]],
+ ["💸 消費", "會認真收集點數、折價券", [["會收集", 49], ["懶得", 51]]],
+ ["📱 數位", "常常讓電量掉到 20% 以下", [["常常", 57], ["提早充", 43]]],
+ ["🌙 私密", "偶爾覺得自己是特別的人", [["會", 66], ["才不是", 34]]],
+ ["💗 關係", "常常把「我愛你」掛在嘴邊", [["常常", 43], ["比較省著說", 57]]],
+ ["🧠 個性", "很常一個人去看電影、吃餐廳", [["很常", 47], ["做不到", 53]]]
+];
+
+
+const TYPES=[
+ {min:80, em:"🌊", name:"全民主流大師", sub:"你的喜好就是民調結果。你是全國平均值的活體樣本！",
+  mean:"你的選擇和多數人一致到驚人。新產品企劃該把你請去當顧問 — 你喜歡的，大家就喜歡。不過偶爾也走走少數派的路，那裡也有新鮮的樂趣。"},
+ {min:60, em:"🍚", name:"可靠的主流型", sub:"大致上和多數人合拍，但某些地方有自己的堅持。",
+  mean:"你在多數人的舒適感和自己的喜好之間拿捏得剛剛好。跟初次見面的人也能靠聊喜好很快熟起來，是社交型的口味與個性。"},
+ {min:40, em:"⚖️", name:"各半平衡型", sub:"一半主流、一半獨特 — 不偏向任何一邊的平衡感。",
+  mean:"該跟隨多數時就跟隨，不認同時就果斷走自己的路。享受流行卻不被沖走 — 平衡感就是你的武器。"},
+ {min:20, em:"🦄", name:"獨特感性型", sub:"比起多數，更相信自己的品味。做出和別人不一樣的選擇，對你反而更自然。",
+  mean:"你的選擇常常站在少數這邊。標準很清楚，相信品味勝過相信流行 — 身邊的人說你「很特別」，你大可當作稱讚收下。"},
+ {min:0, em:"🛸", name:"稀有反骨型", sub:"全民統計裝不下你這種人。像你這樣的人，真的很稀有。",
+  mean:"幾乎每個選擇都走少數派的路，是不折不扣的稀有物種。當全世界都說 A，你懂得 B 的魅力。你的眼光，正是別人看不見的機會。"}
+];
+
+
+const API='/stats-api.php';
+const LIVE_MIN=30;
+let LIVE={};
+
+function qidOf(q){let h=5381;for(let i=0;i<q.length;i++){h=((h<<5)+h+q.charCodeAt(i))>>>0;}return 'q'+h.toString(36);}
+fetch(API+'?action=get').then(r=>r.json()).then(j=>{if(j&&typeof j==='object')LIVE=j;}).catch(()=>{});
+function sendVote(qid,opt){
+  try{
+    const fd=new FormData();fd.append('action','vote');fd.append('qid',qid);fd.append('opt',opt);
+    fetch(API,{method:'POST',body:fd,keepalive:true})
+      .then(r=>r.json()).then(j=>{if(j&&j[qid])LIVE[qid]=j[qid];}).catch(()=>{});
+  }catch(e){}
+}
+
+
+let deck=[], idx=0, chosen=0, mainCnt=0, uniqCnt=0, sameSum=0, streak=0, streakKind=null, answered=0;
+const $=id=>document.getElementById(id);
+function vibrate(ms){if(navigator.vibrate)try{navigator.vibrate(ms)}catch(e){}}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function show(s){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('on'));$(s).classList.add('on');window.scrollTo(0,0)}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2200)}
+
+
+document.querySelectorAll('#picks .pick').forEach(p=>{
+  p.addEventListener('click',()=>{
+    document.querySelectorAll('#picks .pick').forEach(x=>x.classList.remove('sel'));
+    p.classList.add('sel');chosen=+p.dataset.n;
+    $('startBtn').disabled=false;$('startBtn').textContent=chosen+'題開始 →';
+    vibrate(14);
+  });
+});
+$('startBtn').addEventListener('click',()=>{
+  if(!chosen)return;
+  startRound();
+});
+
+function startRound(){
+  deck=shuffle(BANK.slice()).slice(0,chosen);
+  idx=0;mainCnt=0;uniqCnt=0;sameSum=0;streak=0;streakKind=null;answered=0;
+  $('qTotal').textContent=deck.length;
+  $('streakLb').textContent='';
+  updateMeter();
+  show('play');loadQ();vibrate([20,40,20]);
+}
+
+
+function loadQ(){
+  const item=deck[idx];
+  $('qNow').textContent=idx+1;
+  $('qTag').textContent=item[0];
+  $('qText').textContent=item[1];
+  $('verdict').classList.remove('show');
+  const opts=item[2];
+  const box=$('opts');box.innerHTML='';
+  shuffle(opts.map((o,i)=>i)).forEach(oi=>{
+    const b=document.createElement('button');b.className='opt';b.dataset.oi=oi;
+    b.innerHTML='<span class="obar"></span><span class="otxt"><span>'+opts[oi][0]+'</span><span class="opct"></span></span>';
+    b.addEventListener('click',()=>reveal(oi));
+    box.appendChild(b);
+  });
+}
+
+function reveal(myOi){
+  const item=deck[idx], opts=item[2], src=item[3];
+  const buttons=[...document.querySelectorAll('.opt')];
+  if(buttons[0].classList.contains('revealed'))return;
+
+
+  const qid=qidOf(item[1]);
+  const live=LIVE[qid];
+  const liveN=live?live.slice(0,opts.length).reduce((a,b)=>a+(+b||0),0):0;
+  const isLive=liveN>=LIVE_MIN;
+  const pcts=isLive
+    ? opts.map((o,i)=>Math.round((+live[i]||0)/liveN*100))
+    : opts.map(o=>o[1]);
+
+  sendVote(qid,myOi);  // 我的選擇也算進統計 (非同步，忽略失敗)
+
+  const myPct=pcts[myOi];
+  const maxPct=Math.max.apply(null,pcts);
+  const isMain=myPct>=maxPct;
+
+  buttons.forEach(b=>{
+    const oi=+b.dataset.oi, pct=pcts[oi];
+    b.classList.add('revealed');b.disabled=true;
+    if(oi===myOi)b.classList.add('mine');
+    b.querySelector('.opct').textContent=pct+'%';
+    setTimeout(()=>{b.querySelector('.obar').style.width=pct+'%';},60);
+  });
+
+  answered++;sameSum+=myPct;
+  if(isMain){mainCnt++; if(streakKind==='m'){streak++;}else{streak=1;streakKind='m';}}
+  else{uniqCnt++; if(streakKind==='u'){streak++;}else{streak=1;streakKind='u';}}
+
+  const chip=$('vChip');
+  if(isMain){chip.className='vchip main';chip.textContent='🌊 主流之選！';}
+  else{chip.className='vchip uniq';chip.textContent='🦄 稀有之選！';}
+  const whoTxt=isLive
+    ? '咪咪工廠使用者 <b>'+liveN.toLocaleString()+' 人</b> 中有 <b>'+myPct+'%</b> 和你做了一樣的選擇'
+    : '全國 <b>'+myPct+'%</b> 和你做了一樣的選擇';
+  $('vSub').innerHTML=whoTxt+
+    (streak>=3?('<br>'+(streakKind==='m'?'🔥 主流 '+streak+'連續！':'🛸 稀有 '+streak+'連續！')):'');
+  const srcTxt=src?('來源: '+src):'※ 公開民調・投票綜合參考值';
+  $('vSrc').textContent=isLive
+    ? (src?('咪咪工廠實測統計 · 參考 '+srcTxt):'咪咪工廠實測統計')
+    : srcTxt+(liveN>0?(' · 實測統計中 '+liveN+'人參與'):'');
+  $('verdict').classList.add('show');
+  $('streakLb').textContent=streak>=2?((streakKind==='m'?'🌊':'🦄')+' x'+streak):'';
+  updateMeter();
+  vibrate(isMain?[20,30,20]:[40,60,40]);
+}
+
+function updateMeter(){
+  const pct=answered?Math.round(mainCnt/answered*100):0;
+  $('meterFill').style.width=pct+'%';
+  $('meterPct').textContent=answered?pct+'%':'—';
+}
+
+$('nextBtn').addEventListener('click',()=>{
+  idx++;
+  if(idx>=deck.length){finish();return;}
+  loadQ();
+});
+
+
+function finish(){
+  const rate=Math.round(mainCnt/deck.length*100);
+  const T=TYPES.find(t=>rate>=t.min);
+  $('rEm').textContent=T.em;$('rName').textContent=T.name;$('rSub').textContent=T.sub;
+  $('rMean').textContent=T.mean;
+  $('rSame').textContent=Math.round(sameSum/deck.length)+'%';
+  $('rUniq').textContent=uniqCnt+'次';
+  show('done');
+  const el=$('rPct');let v=0;const step=Math.max(1,Math.round(rate/30));
+  const iv=setInterval(()=>{v+=step;if(v>=rate){v=rate;clearInterval(iv);}el.textContent=v+'%';},30);
+  vibrate([60,80,60,80,120]);
+}
+
+$('againBtn').addEventListener('click',startRound);
+$('homeBtn').addEventListener('click',()=>{show('home')});
+
+
+$('shareBtn').addEventListener('click',()=>{
+  const rate=Math.round(mainCnt/deck.length*100);
+  const T=TYPES.find(t=>rate>=t.min);
+  const c=document.createElement('canvas');c.width=720;c.height=900;
+  const x=c.getContext('2d');
+  const g=x.createLinearGradient(0,0,720,900);g.addColorStop(0,'#141024');g.addColorStop(1,'#2b1c50');
+  x.fillStyle=g;x.fillRect(0,0,720,900);
+  x.textAlign='center';
+  x.fillStyle='#a99cc9';x.font='22px "Noto Sans KR",sans-serif';x.fillText('全 民 統 計  V S  我',360,120);
+  x.fillStyle='#ffe9c9';x.font='64px Jua,"Noto Sans KR",sans-serif';x.fillText('統計與我',360,200);
+  x.font='110px serif';x.fillText(T.em,360,370);
+  x.fillStyle='#ffd56b';x.font='58px Jua,"Noto Sans KR",sans-serif';x.fillText(T.name,360,470);
+  x.fillStyle='#f4efff';x.font='90px Jua,"Noto Sans KR",sans-serif';x.fillText('主流率 '+rate+'%',360,600);
+  x.fillStyle='#a99cc9';x.font='24px "Noto Sans KR",sans-serif';
+  x.fillText('平均 '+Math.round(sameSum/deck.length)+'%的人和我選一樣',360,660);
+  x.fillStyle='#9a8fc0';x.font='20px "Noto Sans KR",sans-serif';
+  x.fillText('「意義與趣味工廠」咪咪工廠',360,810);
+  x.fillText('mimifactory.vibekr.com',360,845);
+  c.toBlob(function(b){
+    const a=document.createElement('a');a.href=URL.createObjectURL(b);
+    a.download='統計與我_結果.png';a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href)},4000);
+    toast('結果卡已保存 📷');
+  });
+});
+</script>
+</body>
+</html>

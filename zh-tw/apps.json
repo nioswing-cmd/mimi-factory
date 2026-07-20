@@ -203,6 +203,18 @@
    "teaser": "apps/tarot.html",
    "premium": "apps/tarot.html",
    "desc": "抽的不是命運，是問題 — 22張象徵變成心理學的鏡子"
+  },
+  {
+   "id": "stats-and-me",
+   "type": "test",
+   "title": "統計與我",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/stats-and-me.html",
+   "premium": "apps/stats-and-me.html",
+   "desc": "選下去就公開真實統計 — 你是主流，還是稀有物種？"
   }
  ],
  "updated": "2026-07-20"

@@ -215,6 +215,18 @@
    "teaser": "apps/tarot.html",
    "premium": "apps/tarot.html",
    "desc": "占いではなく問いを引く — 22枚の象徴を心理学の鏡に"
+  },
+  {
+   "id": "stats-and-me",
+   "type": "test",
+   "title": "統計とわたし",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/stats-and-me.html",
+   "premium": "apps/stats-and-me.html",
+   "desc": "選んだ瞬間、リアルな統計が公開 — あなたは多数派か、レア種か"
   }
  ],
  "updated": "2026-07-20"

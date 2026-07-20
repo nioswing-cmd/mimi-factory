@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Stats & Me — Am I the Default or a Unicorn?</title>
+<meta name="description" content="The moment you pick, the real stats go live. Ketchup or ranch — are you the national default, or a rare unicorn?">
+<meta name="theme-color" content="#141024">
+<meta property="og:title" content="The Stats & Me — Am I the Default or a Unicorn?">
+<meta property="og:description" content="The moment you pick, the real stats go live. Are you the national default, or a rare unicorn?">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mimifactory.vibekr.com/en/apps/stats-and-me.html">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#141024; --bg2:#241a44; --card:#1e1738; --line:rgba(255,255,255,.1);
+  --ink:#f4efff; --muted:#a99cc9; --cream:#ffe9c9;
+  --a1:#ffd56b; --a2:#ff8a5b; --pink:#ff6b9e; --uniq:#8fd3ff;
+  --pop:cubic-bezier(.34,1.56,.64,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 85% -10%,rgba(255,138,91,.14),transparent 55%),
+             radial-gradient(110% 80% at 5% 110%,rgba(143,211,255,.10),transparent 55%),
+             linear-gradient(165deg,var(--bg1),var(--bg2));background-attachment:fixed}
+.wrap{max-width:520px;margin:0 auto;padding:26px 18px 40px}
+.screen{display:none}.screen.on{display:block;animation:fade .4s var(--pop)}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}}
+
+
+.eyebrow{font-size:11px;letter-spacing:.4em;text-indent:.4em;color:var(--muted);text-align:center;margin-bottom:10px}
+h1.title{font-family:'Jua',sans-serif;font-size:40px;text-align:center;line-height:1.15;
+  background:linear-gradient(95deg,var(--a1),var(--pink));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{font-size:13.5px;color:var(--muted);text-align:center;margin-top:12px;line-height:1.8}
+.sub b{color:var(--cream)}
+.pick-title{text-align:center;font-size:13px;color:var(--muted);margin:24px 0 12px}
+.picks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pick{background:var(--card);border:1.6px solid var(--line);border-radius:16px;padding:14px 6px;
+  color:var(--ink);font-family:inherit;cursor:pointer;transition:all .3s var(--pop)}
+.pick:active{transform:scale(.94)}
+.pick.sel{border-color:var(--a1);background:linear-gradient(160deg,rgba(255,213,107,.2),rgba(255,107,158,.12))}
+.pick .n{font-family:'Jua';font-size:24px;display:block}
+.pick .u{font-size:10.5px;color:var(--muted);display:block;margin-top:4px}
+.pick.full{grid-column:span 3}.pick.full .n{font-size:20px}
+.btn{width:100%;margin-top:18px;padding:16px;border:none;border-radius:16px;font-family:'Jua';font-size:18px;
+  color:#241a44;background:linear-gradient(95deg,var(--a1),var(--a2));cursor:pointer;transition:transform .3s var(--pop)}
+.btn:disabled{opacity:.4}.btn:active{transform:scale(.96)}
+.srcbox{margin-top:16px;padding:12px 14px;background:rgba(255,255,255,.05);border:1px solid var(--line);
+  border-radius:12px;font-size:11px;line-height:1.7;color:var(--muted);text-align:left}
+
+
+.topbar{margin-bottom:14px}
+.prog{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:8px}
+.prog b{font-family:'Jua';color:var(--cream)}
+.meter{height:10px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.meter .mf{display:block;height:100%;width:0;border-radius:99px;transition:width .8s var(--pop);
+  background:linear-gradient(90deg,var(--a1),var(--pink))}
+.meterlb{font-size:11px;color:var(--muted);margin-top:5px;text-align:right}
+.meterlb b{color:var(--cream)}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 18px;margin-top:8px;
+  animation:fade .35s var(--pop)}
+.qtag{display:inline-block;font-size:11px;padding:4px 12px;border-radius:99px;background:rgba(255,255,255,.08);color:var(--muted)}
+.qtext{font-family:'Jua';font-size:22px;line-height:1.4;margin-top:12px}
+.opts{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+.opt{position:relative;overflow:hidden;text-align:left;padding:15px 16px;border-radius:14px;border:1.6px solid var(--line);
+  background:rgba(255,255,255,.04);color:var(--ink);font-family:inherit;font-size:15px;font-weight:500;cursor:pointer;
+  transition:all .3s var(--pop)}
+.opt:active{transform:scale(.97)}
+.opt .obar{position:absolute;left:0;top:0;bottom:0;width:0;transition:width .9s var(--pop);z-index:0;opacity:.28}
+.opt .otxt{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.opt .opct{font-family:'Jua';font-size:17px;opacity:0;transition:opacity .4s}
+.opt.revealed{cursor:default}
+.opt.revealed .opct{opacity:1}
+.opt.mine{border-color:var(--a1)}
+.opt.mine .obar{background:linear-gradient(90deg,var(--a1),var(--a2))}
+.opt:not(.mine) .obar{background:rgba(255,255,255,.5)}
+.verdict{margin-top:16px;text-align:center;display:none}
+.verdict.show{display:block;animation:popin .45s var(--pop)}
+@keyframes popin{from{opacity:0;transform:scale(.8)}}
+.vchip{display:inline-block;font-family:'Jua';font-size:17px;padding:9px 20px;border-radius:99px}
+.vchip.main{background:rgba(255,213,107,.16);color:var(--a1);border:1.5px solid var(--a1)}
+.vchip.uniq{background:rgba(143,211,255,.14);color:var(--uniq);border:1.5px solid var(--uniq)}
+.vsub{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.6}
+.vsub b{color:var(--cream)}
+.vsrc{font-size:10.5px;color:var(--muted);opacity:.75;margin-top:7px}
+.nextbtn{margin-top:14px}
+
+
+.rhead{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px 20px;text-align:center}
+.rem{font-size:52px}
+.rname{font-family:'Jua';font-size:30px;margin-top:8px;
+  background:linear-gradient(95deg,var(--a1),var(--pink));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.rsub{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.75}
+.bignum{margin-top:18px}
+.bignum .pct{font-family:'Jua';font-size:54px;color:var(--cream)}
+.bignum .cap{font-size:12px;color:var(--muted);margin-top:2px}
+.rstats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.rstat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
+.rstat .v{font-family:'Jua';font-size:22px;color:var(--cream)}
+.rstat .k{font-size:11px;color:var(--muted);margin-top:4px}
+.sect{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:12px;font-size:13px;line-height:1.8;color:#d9d0ee}
+.sect h3{font-family:'Jua';font-size:15px;color:var(--cream);margin-bottom:8px}
+.ghost{width:100%;margin-top:10px;padding:14px;border-radius:14px;border:1.5px solid var(--line);
+  background:transparent;color:var(--muted);font-family:'Jua';font-size:15px;cursor:pointer}
+
+
+.footer{text-align:center;margin-top:36px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(167,139,250,.6))}
+.mf-eyebrow::after{transform:scaleX(-1)}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#9a8fc0;font-weight:500;white-space:nowrap}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#9a8fc0}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);background:rgba(30,23,56,.97);
+  border:1px solid var(--line);color:var(--ink);font-size:13px;padding:11px 20px;border-radius:99px;transition:transform .4s var(--pop);z-index:9}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="screen on" id="home">
+    <div class="eyebrow">T H E S T A T S &nbsp;V S&nbsp; M E</div>
+    <h1 class="title">The Stats & Me</h1>
+    <p class="sub">Ketchup or ranch, pineapple on pizza or not —<br>the moment you choose, <b>the real numbers</b> go live.<br>Am I the <b>national default</b>, or a <b>rare unicorn</b>?</p>
+
+    <div class="pick-title">How many questions?</div>
+    <div class="picks" id="picks">
+      <button class="pick" data-n="5"><span class="n">5</span><span class="u">A taste</span></button>
+      <button class="pick" data-n="10"><span class="n">10</span><span class="u">One round</span></button>
+      <button class="pick" data-n="20"><span class="n">20</span><span class="u">For real</span></button>
+      <button class="pick full" data-n="100"><span class="n">100 · The full deck</span><span class="u">If you’re stranded on an island…</span></button>
+    </div>
+    <button class="btn" id="startBtn" disabled>Pick how many</button>
+
+    <div class="srcbox">📊 <b style="color:var(--cream)">About the stats</b> — this app <b style="color:var(--cream)">tallies what real users actually pick</b>. Once a question gets enough answers (30+), it flips to a live  <b style="color:var(--cream)">measured stat</b> — “X% of N MIMI FACTORY users chose the same as you.” Until then, you’ll see a blended reference drawn from public polls and votes, and any question backed by a real survey shows its source. Every single choice you make becomes real data.</div>
+  </section>
+
+  <section class="screen" id="play">
+    <div class="topbar">
+      <div class="prog"><span><b id="qNow">1</b> / <span id="qTotal">10</span></span><span id="streakLb"></span></div>
+      <div class="meter"><span class="mf" id="meterFill"></span></div>
+      <div class="meterlb">My mainstream rate so far <b id="meterPct">—</b></div>
+    </div>
+    <div class="qcard">
+      <span class="qtag" id="qTag">🏠 Daily life</span>
+      <div class="qtext" id="qText"></div>
+      <div class="opts" id="opts"></div>
+      <div class="verdict" id="verdict">
+        <span class="vchip" id="vChip"></span>
+        <div class="vsub" id="vSub"></div>
+        <div class="vsrc" id="vSrc"></div>
+        <button class="btn nextbtn" id="nextBtn">Next →</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="done">
+    <div class="rhead">
+      <div class="rem" id="rEm">🌊</div>
+      <div class="rname" id="rName"></div>
+      <div class="rsub" id="rSub"></div>
+      <div class="bignum"><div class="pct" id="rPct">0%</div><div class="cap">My mainstream rate</div></div>
+    </div>
+    <div class="rstats">
+      <div class="rstat"><div class="v" id="rSame">—</div><div class="k">People who picked like me, on average</div></div>
+      <div class="rstat"><div class="v" id="rUniq">—</div><div class="k">Unique picks</div></div>
+    </div>
+    <div class="sect"><h3>🔎 What this result means</h3><p id="rMean"></p></div>
+    <button class="btn" id="shareBtn">Save result card 📷</button>
+    <button class="ghost" id="againBtn">Play again ↻ (new questions)</button>
+    <button class="ghost" id="homeBtn">Back to start</button>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/en/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 Dopamine Lab — more tests this way →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>The Meaning & Fun Factory</span></div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+
+const BANK=[
+ ["🏠 Daily life", "I make my bed when I wake up", [["I make it", 34], ["Leave it", 66]]],
+ ["🏠 Daily life", "I squeeze toothpaste from the very end", [["Neatly from the end", 39], ["Wherever", 61]]],
+ ["🍜 Taste", "Sauce on your fries — pour it on or dip?", [["Pour it on", 31], ["Dip it", 62]], "YouGov 2020"],
+ ["🍜 Taste", "Mint chocolate is delicious", [["Delicious", 37], ["Tastes like toothpaste…", 63]]],
+ ["🍜 Taste", "If you add an egg to instant noodles", [["Whisked in", 46], ["Whole", 34], ["No egg", 20]]],
+ ["📱 Digital", "I’ve left someone on read (seen, no reply)", [["Yes", 78], ["No", 22]]],
+ ["📱 Digital", "I take my phone to the bathroom", [["I bring it", 61], ["Leave it", 39]], "Statista 2017"],
+ ["🧠 Personality", "I’m a planner", [["Planner", 44], ["Spontaneous", 56]]],
+ ["🌙 Secrets", "I’ve drooled in my sleep", [["Yes", 64], ["No", 36]]],
+ ["💗 Relationships", "I’ve fallen in love at first sight", [["Yes", 67], ["No", 33]], "OkCupid 2011"],
+ ["🏠 Daily life", "I leave my socks wherever I take them off", [["Inside-out", 58], ["Turn them right", 42]]],
+ ["🍜 Taste", "The best team dinner is a good BBQ", [["Meat, obviously", 61], ["Not really", 39]]],
+ ["🍜 Taste", "I rarely eat breakfast", [["Skip it", 35], ["I eat it", 65]], "CDC National Health Survey 2023"],
+ ["💸 Money", "I open a package the day it arrives", [["Open it right away", 82], ["Let it sit", 18]]],
+ ["🧠 Personality", "My MBTI starts with E", [["E (Extrovert)", 43], ["I (Introvert)", 57]]],
+ ["📱 Digital", "I watch videos at 1.5x or faster", [["Speed it up", 49], ["Normal speed", 51]]],
+ ["🌙 Secrets", "I’ve had sleep paralysis", [["Yes", 56], ["No", 44]]],
+ ["💗 Relationships", "I’ve secretly checked an ex’s socials", [["Yes", 67], ["No", 33]]],
+ ["🏠 Daily life", "I wear slippers around the house", [["I wear them", 41], ["Barefoot", 59]]],
+ ["🍜 Taste", "Pineapple on pizza — I approve", [["I approve", 45], ["Absolutely not", 55]]],
+ ["🧠 Personality", "Eating out alone doesn’t bother me", [["Totally fine", 62], ["A bit much", 38]]],
+ ["💸 Money", "I’ve regretted plenty of impulse buys", [["Often", 71], ["Rarely", 29]], "Statista 2017"],
+ ["📱 Digital", "I set multiple alarms", [["Several", 66], ["One’s enough", 34]]],
+ ["🌙 Secrets", "I sing in the shower", [["I sing", 53], ["I don’t", 47]]],
+ ["💗 Relationships", "I’m usually the one who texts first", [["Me first", 48], ["The other person", 52]]],
+ ["🏠 Daily life", "I do the dishes right away", [["Right away", 39], ["Let them pile up", 61]]],
+ ["🍜 Taste", "I handle spicy food well", [["Bring the heat", 57], ["Not so much", 43]]],
+ ["🧠 Personality", "I’m pretty indecisive", [["Yes", 81], ["No", 19]], "Indeed 2017"],
+ ["📱 Digital", "I watch more YouTube than Instagram", [["YouTube", 58], ["Instagram", 42]]],
+ ["🌙 Secrets", "I’ve let one slip and played innocent", [["Yes", 81], ["No", 19]]],
+ ["💗 Relationships", "I’ve had a situationship that went nowhere", [["Yes", 69], ["No", 31]]],
+ ["🏠 Daily life", "I sleep with socks on in winter", [["Socks on", 42], ["Socks off", 58]]],
+ ["🍜 Taste", "I can’t live without coffee", [["Can’t", 55], ["I’m fine", 45]]],
+ ["💸 Money", "I keep track of my spending", [["I track it", 27], ["Nope", 73]]],
+ ["🧠 Personality", "I’m pretty shy with new people", [["Very", 51], ["Not really", 49]]],
+ ["📱 Digital", "I’m on my phone right until I fall asleep", [["Yep", 79], ["Not really", 21]]],
+ ["🌙 Secrets", "I’ve practiced my expressions in the mirror", [["Yes", 58], ["No", 42]]],
+ ["💗 Relationships", "The guy should be the one to confess", [["Agree", 34], ["Not really", 66]]],
+ ["🏠 Daily life", "I put things back where they belong", [["I do", 45], ["Wherever", 55]]],
+ ["🍜 Taste", "Bone-in chicken beats boneless", [["Bone-in", 47], ["Boneless", 53]]],
+ ["🧠 Personality", "My moods swing quite a bit", [["Yes", 59], ["No", 41]]],
+ ["💸 Money", "I’d like to own at least one luxury item", [["I want one", 63], ["Not interested", 37]]],
+ ["📱 Digital", "I let notifications from unused apps pile up", [["Let them pile", 61], ["Clear them", 39]]],
+ ["🌙 Secrets", "I talk to myself when I’m alone", [["I do", 66], ["I don’t", 34]]],
+ ["💗 Relationships", "My partner comes before my friends", [["Partner", 38], ["Friends", 62]]],
+ ["🏠 Daily life", "I fold laundry and put it away right away", [["Put it away", 36], ["Pile it on a chair", 64]]],
+ ["🍜 Taste", "I finish my soup to the last drop", [["Every drop", 44], ["Leave some", 56]]],
+ ["🧠 Personality", "I read the room a lot", [["A lot", 57], ["Not really", 43]]],
+ ["📱 Digital", "I’ve replied to a spam text", [["Yes", 23], ["No", 77]]],
+ ["🌙 Secrets", "I’ve been told I snore", [["Yes", 52], ["No", 48]]],
+ ["💗 Relationships", "I’ve had a long unrequited crush", [["Yes", 68], ["No", 32]]],
+ ["🏠 Daily life", "I wind up my earphone cords neatly", [["Neatly", 38], ["Tangled", 62]]],
+ ["🍜 Taste", "I love raw fish (sashimi)", [["Love it", 58], ["Rarely", 42]]],
+ ["🧠 Personality", "I’m a morning person", [["Morning", 36], ["Night", 64]]],
+ ["💸 Money", "A sale makes me buy things I don’t need", [["I buy", 54], ["Not really", 46]]],
+ ["📱 Digital", "I’d rather text than call", [["Texting", 71], ["Calling", 29]]],
+ ["🌙 Secrets", "I’ve cried myself to sleep", [["Yes", 61], ["No", 39]]],
+ ["💗 Relationships", "I get pretty jealous in relationships", [["Very", 49], ["Not really", 51]]],
+ ["🏠 Daily life", "I’ve let the trash overflow by putting it off", [["Yes", 66], ["No", 34]]],
+ ["🍜 Taste", "I like cilantro", [["Love it", 33], ["Can’t stand it", 67]]],
+ ["🧠 Personality", "I’ve got perfectionist tendencies", [["Yes", 55], ["No", 45]]],
+ ["💸 Money", "My account’s empty a few days after payday", [["Empty fast", 58], ["I save well", 42]], "LinkedIn 2018 Paycheck-to-Paycheck Survey"],
+ ["📱 Digital", "I’ve got 100+ unread emails", [["Way over", 47], ["I keep it clean", 53]]],
+ ["🌙 Secrets", "I often give in to late-night snacks", [["Often", 72], ["I resist", 28]]],
+ ["💗 Relationships", "Splitting the bill on a first date is right", [["Split it", 57], ["One pays", 43]]],
+ ["🏠 Daily life", "I stack up delivery boxes instead of tossing them", [["Let them pile up", 51], ["Toss them", 49]]],
+ ["🍜 Taste", "I add rice to my leftover noodle broth", [["Always", 74], ["Never", 26]]],
+ ["🧠 Personality", "I absolutely need my alone time", [["Must-have", 78], ["Not really", 22]]],
+ ["📱 Digital", "I’ve got hundreds of screenshots on my phone", [["Hundreds", 63], ["I clean up", 37]]],
+ ["🌙 Secrets", "I’ve searched a crush’s name online", [["Yes", 59], ["No", 41]]],
+ ["💗 Relationships", "I’ve had a phase where work beat love", [["Yes", 64], ["No", 36]]],
+ ["🏠 Daily life", "I like sleeping with the window open", [["Love it", 31], ["Nope", 69]]],
+ ["🍜 Taste", "I crave sweet desserts a lot", [["Often", 61], ["Rarely", 39]]],
+ ["🧠 Personality", "I struggle to show it when I’m angry", [["I can’t", 58], ["I show it", 42]]],
+ ["💸 Money", "I’ve felt café coffee is a waste of money", [["Yes", 53], ["No", 47]]],
+ ["📱 Digital", "I’ve gotten phone-distracted at work", [["Yes", 89], ["No", 11]]],
+ ["🌙 Secrets", "I’ve got a cringe memory I can’t shake", [["Yes", 84], ["No", 16]], "BuzzFeed 2017 Cringe Memory Poll"],
+ ["💗 Relationships", "The early days of dating are the most exciting", [["Agree", 67], ["Not really", 33]]],
+ ["🏠 Daily life", "I don’t drink much water", [["Barely", 56], ["I stay hydrated", 44]], "Gallup 2024 Hydration Survey"],
+ ["🍜 Taste", "I enjoy drinking alone", [["I enjoy it", 41], ["Not really", 59]]],
+ ["🧠 Personality", "Compliments make me awkward", [["Awkward", 62], ["Love it", 38]]],
+ ["💸 Money", "I pay for 3+ subscriptions", [["3 or more", 66], ["Not really", 34]], "Deloitte 2025 Subscription Usage Report"],
+ ["📱 Digital", "I don’t answer unknown numbers", [["Ignore", 69], ["I answer", 31]]],
+ ["🌙 Secrets", "Sometimes I just crave really salty food", [["Yes", 57], ["No", 43]]],
+ ["💗 Relationships", "A partner should share my hobbies", [["Agree", 39], ["Not really", 61]]],
+ ["🏠 Daily life", "I’ve stayed in all day on a weekend", [["Yes", 76], ["No", 24]]],
+ ["🍜 Taste", "Cold noodles — in broth or dry-mixed?", [["In broth", 46], ["Dry-mixed", 54]]],
+ ["🧠 Personality", "I get bored pretty easily", [["Agree", 47], ["Not really", 53]]],
+ ["💸 Money", "I keep a secret stash of cash", [["I’ve got one", 44], ["Nope", 56]]],
+ ["📱 Digital", "I’ve gone a few days off social media", [["Yes", 51], ["No", 49]]],
+ ["🌙 Secrets", "I shower in the evening", [["Evening", 63], ["Morning", 37]]],
+ ["💗 Relationships", "Marriage is a must", [["Agree", 53], ["Not really", 47]], "U.S. Census Bureau 2024 Social Survey"],
+ ["🏠 Daily life", "I’ve argued over where the remote or charger goes", [["Yes", 52], ["No", 48]]],
+ ["🍜 Taste", "I often make a meal out of convenience store food", [["Often", 58], ["Not really", 42]]],
+ ["🧠 Personality", "I dwell on things long after they’re over", [["I dwell", 61], ["I move on", 39]]],
+ ["💸 Money", "I’m diligent about points and coupons", [["Always", 49], ["Too much effort", 51]]],
+ ["📱 Digital", "I regularly let my battery drop below 20%", [["Often", 57], ["Charge early", 43]]],
+ ["🌙 Secrets", "Sometimes I feel like I’m someone special", [["I do", 66], ["Not really", 34]]],
+ ["💗 Relationships", "I say “I love you” pretty often", [["Often", 43], ["I hold back", 57]]],
+ ["🧠 Personality", "I happily go to movies and restaurants alone", [["Often", 47], ["Can’t do it", 53]]]
+];
+
+
+const TYPES=[
+ {min:80, em:"🌊", name:"National Default Master", sub:"Your taste IS the poll result. You’re a living sample of the national average!",
+  mean:"Your choices line up with the majority to an uncanny degree. Product teams should be recruiting you — if you like it, the nation likes it. Just now and then, try the road less taken; there’s fun to find there too."},
+ {min:60, em:"🍚", name:"The Reliable Mainstreamer", sub:"Mostly in sync with the crowd, but with a few opinions that are all your own.",
+  mean:"You strike a nice balance between the comfort of the majority and your own taste. Your palate and personality make small talk easy — you click with new people over shared favorites."},
+ {min:40, em:"⚖️", name:"The 50-50 Balancer", sub:"Half mainstream, half unique — a sense of balance that never tips too far either way.",
+  mean:"You follow the crowd when it suits you, and boldly go your own way when it doesn’t. You enjoy trends without getting swept up in them — your balance is your superpower."},
+ {min:20, em:"🦄", name:"The Unique Soul", sub:"Your taste over the majority’s. Picking differently from everyone else just comes naturally.",
+  mean:"Your choices often land on the minority side. You’ve got a clear compass and trust your taste over trends — so when people call you “a bit different,” take it as a compliment."},
+ {min:0, em:"🛸", name:"The Rare Contrarian", sub:"The stats can’t quite contain you. People like you are genuinely rare.",
+  mean:"A true rarity who takes the minority road on almost every choice. When the whole world says A, you see the charm in B. Your point of view is the opportunity no one else can spot."}
+];
+
+
+const API='/stats-api.php';
+const LIVE_MIN=30;
+let LIVE={};
+
+function qidOf(q){let h=5381;for(let i=0;i<q.length;i++){h=((h<<5)+h+q.charCodeAt(i))>>>0;}return 'q'+h.toString(36);}
+fetch(API+'?action=get').then(r=>r.json()).then(j=>{if(j&&typeof j==='object')LIVE=j;}).catch(()=>{});
+function sendVote(qid,opt){
+  try{
+    const fd=new FormData();fd.append('action','vote');fd.append('qid',qid);fd.append('opt',opt);
+    fetch(API,{method:'POST',body:fd,keepalive:true})
+      .then(r=>r.json()).then(j=>{if(j&&j[qid])LIVE[qid]=j[qid];}).catch(()=>{});
+  }catch(e){}
+}
+
+
+let deck=[], idx=0, chosen=0, mainCnt=0, uniqCnt=0, sameSum=0, streak=0, streakKind=null, answered=0;
+const $=id=>document.getElementById(id);
+function vibrate(ms){if(navigator.vibrate)try{navigator.vibrate(ms)}catch(e){}}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function show(s){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('on'));$(s).classList.add('on');window.scrollTo(0,0)}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2200)}
+
+
+document.querySelectorAll('#picks .pick').forEach(p=>{
+  p.addEventListener('click',()=>{
+    document.querySelectorAll('#picks .pick').forEach(x=>x.classList.remove('sel'));
+    p.classList.add('sel');chosen=+p.dataset.n;
+    $('startBtn').disabled=false;$('startBtn').textContent=chosen+' questions · Start →';
+    vibrate(14);
+  });
+});
+$('startBtn').addEventListener('click',()=>{
+  if(!chosen)return;
+  startRound();
+});
+
+function startRound(){
+  deck=shuffle(BANK.slice()).slice(0,chosen);
+  idx=0;mainCnt=0;uniqCnt=0;sameSum=0;streak=0;streakKind=null;answered=0;
+  $('qTotal').textContent=deck.length;
+  $('streakLb').textContent='';
+  updateMeter();
+  show('play');loadQ();vibrate([20,40,20]);
+}
+
+
+function loadQ(){
+  const item=deck[idx];
+  $('qNow').textContent=idx+1;
+  $('qTag').textContent=item[0];
+  $('qText').textContent=item[1];
+  $('verdict').classList.remove('show');
+  const opts=item[2];
+  const box=$('opts');box.innerHTML='';
+  shuffle(opts.map((o,i)=>i)).forEach(oi=>{
+    const b=document.createElement('button');b.className='opt';b.dataset.oi=oi;
+    b.innerHTML='<span class="obar"></span><span class="otxt"><span>'+opts[oi][0]+'</span><span class="opct"></span></span>';
+    b.addEventListener('click',()=>reveal(oi));
+    box.appendChild(b);
+  });
+}
+
+function reveal(myOi){
+  const item=deck[idx], opts=item[2], src=item[3];
+  const buttons=[...document.querySelectorAll('.opt')];
+  if(buttons[0].classList.contains('revealed'))return;
+
+
+  const qid=qidOf(item[1]);
+  const live=LIVE[qid];
+  const liveN=live?live.slice(0,opts.length).reduce((a,b)=>a+(+b||0),0):0;
+  const isLive=liveN>=LIVE_MIN;
+  const pcts=isLive
+    ? opts.map((o,i)=>Math.round((+live[i]||0)/liveN*100))
+    : opts.map(o=>o[1]);
+
+  sendVote(qid,myOi);  // My pick counts toward the tally too (async, ignore failures)
+
+  const myPct=pcts[myOi];
+  const maxPct=Math.max.apply(null,pcts);
+  const isMain=myPct>=maxPct;
+
+  buttons.forEach(b=>{
+    const oi=+b.dataset.oi, pct=pcts[oi];
+    b.classList.add('revealed');b.disabled=true;
+    if(oi===myOi)b.classList.add('mine');
+    b.querySelector('.opct').textContent=pct+'%';
+    setTimeout(()=>{b.querySelector('.obar').style.width=pct+'%';},60);
+  });
+
+  answered++;sameSum+=myPct;
+  if(isMain){mainCnt++; if(streakKind==='m'){streak++;}else{streak=1;streakKind='m';}}
+  else{uniqCnt++; if(streakKind==='u'){streak++;}else{streak=1;streakKind='u';}}
+
+  const chip=$('vChip');
+  if(isMain){chip.className='vchip main';chip.textContent='🌊 Mainstream pick!';}
+  else{chip.className='vchip uniq';chip.textContent='🦄 Unique pick!';}
+  const whoTxt=isLive
+    ? 'Out of <b>'+liveN.toLocaleString()+' MIMI FACTORY users</b>, <b>'+myPct+'%</b> chose the same as you'
+    : 'The nation: <b>'+myPct+'%</b> chose the same as you';
+  $('vSub').innerHTML=whoTxt+
+    (streak>=3?('<br>'+(streakKind==='m'?'🔥 Mainstream × '+streak+' in a row!':'🛸 Unique × '+streak+' in a row!')):'');
+  const srcTxt=src?('Source: '+src):'※ Blended reference from public polls & votes';
+  $('vSrc').textContent=isLive
+    ? (src?('MIMI FACTORY measured stats · ref. '+srcTxt):'MIMI FACTORY measured stats')
+    : srcTxt+(liveN>0?(' · live tally: '+liveN+' so far'):'');
+  $('verdict').classList.add('show');
+  $('streakLb').textContent=streak>=2?((streakKind==='m'?'🌊':'🦄')+' x'+streak):'';
+  updateMeter();
+  vibrate(isMain?[20,30,20]:[40,60,40]);
+}
+
+function updateMeter(){
+  const pct=answered?Math.round(mainCnt/answered*100):0;
+  $('meterFill').style.width=pct+'%';
+  $('meterPct').textContent=answered?pct+'%':'—';
+}
+
+$('nextBtn').addEventListener('click',()=>{
+  idx++;
+  if(idx>=deck.length){finish();return;}
+  loadQ();
+});
+
+
+function finish(){
+  const rate=Math.round(mainCnt/deck.length*100);
+  const T=TYPES.find(t=>rate>=t.min);
+  $('rEm').textContent=T.em;$('rName').textContent=T.name;$('rSub').textContent=T.sub;
+  $('rMean').textContent=T.mean;
+  $('rSame').textContent=Math.round(sameSum/deck.length)+'%';
+  $('rUniq').textContent=uniqCnt+'';
+  show('done');
+  const el=$('rPct');let v=0;const step=Math.max(1,Math.round(rate/30));
+  const iv=setInterval(()=>{v+=step;if(v>=rate){v=rate;clearInterval(iv);}el.textContent=v+'%';},30);
+  vibrate([60,80,60,80,120]);
+}
+
+$('againBtn').addEventListener('click',startRound);
+$('homeBtn').addEventListener('click',()=>{show('home')});
+
+
+$('shareBtn').addEventListener('click',()=>{
+  const rate=Math.round(mainCnt/deck.length*100);
+  const T=TYPES.find(t=>rate>=t.min);
+  const c=document.createElement('canvas');c.width=720;c.height=900;
+  const x=c.getContext('2d');
+  const g=x.createLinearGradient(0,0,720,900);g.addColorStop(0,'#141024');g.addColorStop(1,'#2b1c50');
+  x.fillStyle=g;x.fillRect(0,0,720,900);
+  x.textAlign='center';
+  x.fillStyle='#a99cc9';x.font='22px "Noto Sans KR",sans-serif';x.fillText('T H E S T A T S  V S  M E',360,120);
+  x.fillStyle='#ffe9c9';x.font='64px Jua,"Noto Sans KR",sans-serif';x.fillText('The Stats & Me',360,200);
+  x.font='110px serif';x.fillText(T.em,360,370);
+  x.fillStyle='#ffd56b';x.font='58px Jua,"Noto Sans KR",sans-serif';x.fillText(T.name,360,470);
+  x.fillStyle='#f4efff';x.font='90px Jua,"Noto Sans KR",sans-serif';x.fillText('Mainstream rate '+rate+'%',360,600);
+  x.fillStyle='#a99cc9';x.font='24px "Noto Sans KR",sans-serif';
+  x.fillText('Average '+Math.round(sameSum/deck.length)+'% chose the same as me',360,660);
+  x.fillStyle='#9a8fc0';x.font='20px "Noto Sans KR",sans-serif';
+  x.fillText('“The Meaning & Fun Factory” MIMI FACTORY',360,810);
+  x.fillText('mimifactory.vibekr.com',360,845);
+  c.toBlob(function(b){
+    const a=document.createElement('a');a.href=URL.createObjectURL(b);
+    a.download='stats-and-me_result.png';a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href)},4000);
+    toast('Result card saved 📷');
+  });
+});
+</script>
+</body>
+</html>

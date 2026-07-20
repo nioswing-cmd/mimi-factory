@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>統計とわたし — 私は多数派か、レア種か</title>
+<meta name="description" content="選んだ瞬間、リアルな統計が公開されます。きのこかたけのこか — あなたは国民の多数派か、それともレア種か？">
+<meta name="theme-color" content="#141024">
+<meta property="og:title" content="統計とわたし — 私は多数派か、レア種か">
+<meta property="og:description" content="選んだ瞬間、リアルな統計が公開されます。あなたは国民の多数派か、それともレア種か？">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mimifactory.vibekr.com/ja/apps/stats-and-me.html">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansJP-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/MPLUSRounded1c-Bold-sub.woff2') format('woff2');font-weight:400;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#141024; --bg2:#241a44; --card:#1e1738; --line:rgba(255,255,255,.1);
+  --ink:#f4efff; --muted:#a99cc9; --cream:#ffe9c9;
+  --a1:#ffd56b; --a2:#ff8a5b; --pink:#ff6b9e; --uniq:#8fd3ff;
+  --pop:cubic-bezier(.34,1.56,.64,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 85% -10%,rgba(255,138,91,.14),transparent 55%),
+             radial-gradient(110% 80% at 5% 110%,rgba(143,211,255,.10),transparent 55%),
+             linear-gradient(165deg,var(--bg1),var(--bg2));background-attachment:fixed}
+.wrap{max-width:520px;margin:0 auto;padding:26px 18px 40px}
+.screen{display:none}.screen.on{display:block;animation:fade .4s var(--pop)}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}}
+
+
+.eyebrow{font-size:11px;letter-spacing:.4em;text-indent:.4em;color:var(--muted);text-align:center;margin-bottom:10px}
+h1.title{font-family:'Jua',sans-serif;font-size:40px;text-align:center;line-height:1.15;
+  background:linear-gradient(95deg,var(--a1),var(--pink));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{font-size:13.5px;color:var(--muted);text-align:center;margin-top:12px;line-height:1.8}
+.sub b{color:var(--cream)}
+.pick-title{text-align:center;font-size:13px;color:var(--muted);margin:24px 0 12px}
+.picks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pick{background:var(--card);border:1.6px solid var(--line);border-radius:16px;padding:14px 6px;
+  color:var(--ink);font-family:inherit;cursor:pointer;transition:all .3s var(--pop)}
+.pick:active{transform:scale(.94)}
+.pick.sel{border-color:var(--a1);background:linear-gradient(160deg,rgba(255,213,107,.2),rgba(255,107,158,.12))}
+.pick .n{font-family:'Jua';font-size:24px;display:block}
+.pick .u{font-size:10.5px;color:var(--muted);display:block;margin-top:4px}
+.pick.full{grid-column:span 3}.pick.full .n{font-size:20px}
+.btn{width:100%;margin-top:18px;padding:16px;border:none;border-radius:16px;font-family:'Jua';font-size:18px;
+  color:#241a44;background:linear-gradient(95deg,var(--a1),var(--a2));cursor:pointer;transition:transform .3s var(--pop)}
+.btn:disabled{opacity:.4}.btn:active{transform:scale(.96)}
+.srcbox{margin-top:16px;padding:12px 14px;background:rgba(255,255,255,.05);border:1px solid var(--line);
+  border-radius:12px;font-size:11px;line-height:1.7;color:var(--muted);text-align:left}
+
+
+.topbar{margin-bottom:14px}
+.prog{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:8px}
+.prog b{font-family:'Jua';color:var(--cream)}
+.meter{height:10px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.meter .mf{display:block;height:100%;width:0;border-radius:99px;transition:width .8s var(--pop);
+  background:linear-gradient(90deg,var(--a1),var(--pink))}
+.meterlb{font-size:11px;color:var(--muted);margin-top:5px;text-align:right}
+.meterlb b{color:var(--cream)}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 18px;margin-top:8px;
+  animation:fade .35s var(--pop)}
+.qtag{display:inline-block;font-size:11px;padding:4px 12px;border-radius:99px;background:rgba(255,255,255,.08);color:var(--muted)}
+.qtext{font-family:'Jua';font-size:22px;line-height:1.4;margin-top:12px}
+.opts{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+.opt{position:relative;overflow:hidden;text-align:left;padding:15px 16px;border-radius:14px;border:1.6px solid var(--line);
+  background:rgba(255,255,255,.04);color:var(--ink);font-family:inherit;font-size:15px;font-weight:500;cursor:pointer;
+  transition:all .3s var(--pop)}
+.opt:active{transform:scale(.97)}
+.opt .obar{position:absolute;left:0;top:0;bottom:0;width:0;transition:width .9s var(--pop);z-index:0;opacity:.28}
+.opt .otxt{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.opt .opct{font-family:'Jua';font-size:17px;opacity:0;transition:opacity .4s}
+.opt.revealed{cursor:default}
+.opt.revealed .opct{opacity:1}
+.opt.mine{border-color:var(--a1)}
+.opt.mine .obar{background:linear-gradient(90deg,var(--a1),var(--a2))}
+.opt:not(.mine) .obar{background:rgba(255,255,255,.5)}
+.verdict{margin-top:16px;text-align:center;display:none}
+.verdict.show{display:block;animation:popin .45s var(--pop)}
+@keyframes popin{from{opacity:0;transform:scale(.8)}}
+.vchip{display:inline-block;font-family:'Jua';font-size:17px;padding:9px 20px;border-radius:99px}
+.vchip.main{background:rgba(255,213,107,.16);color:var(--a1);border:1.5px solid var(--a1)}
+.vchip.uniq{background:rgba(143,211,255,.14);color:var(--uniq);border:1.5px solid var(--uniq)}
+.vsub{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.6}
+.vsub b{color:var(--cream)}
+.vsrc{font-size:10.5px;color:var(--muted);opacity:.75;margin-top:7px}
+.nextbtn{margin-top:14px}
+
+
+.rhead{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px 20px;text-align:center}
+.rem{font-size:52px}
+.rname{font-family:'Jua';font-size:30px;margin-top:8px;
+  background:linear-gradient(95deg,var(--a1),var(--pink));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.rsub{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.75}
+.bignum{margin-top:18px}
+.bignum .pct{font-family:'Jua';font-size:54px;color:var(--cream)}
+.bignum .cap{font-size:12px;color:var(--muted);margin-top:2px}
+.rstats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.rstat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}
+.rstat .v{font-family:'Jua';font-size:22px;color:var(--cream)}
+.rstat .k{font-size:11px;color:var(--muted);margin-top:4px}
+.sect{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:12px;font-size:13px;line-height:1.8;color:#d9d0ee}
+.sect h3{font-family:'Jua';font-size:15px;color:var(--cream);margin-bottom:8px}
+.ghost{width:100%;margin-top:10px;padding:14px;border-radius:14px;border:1.5px solid var(--line);
+  background:transparent;color:var(--muted);font-family:'Jua';font-size:15px;cursor:pointer}
+
+
+.footer{text-align:center;margin-top:36px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(167,139,250,.6))}
+.mf-eyebrow::after{transform:scaleX(-1)}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#9a8fc0;font-weight:500;white-space:nowrap}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#9a8fc0}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);background:rgba(30,23,56,.97);
+  border:1px solid var(--line);color:var(--ink);font-size:13px;padding:11px 20px;border-radius:99px;transition:transform .4s var(--pop);z-index:9}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="screen on" id="home">
+    <div class="eyebrow">国 民 統 計 &nbsp;V S&nbsp; 私</div>
+    <h1 class="title">統計とわたし</h1>
+    <p class="sub">きのこ派かたけのこ派か、ソースはかけるかつけるか —<br>選んだ瞬間 <b>リアルな統計</b>が公開されます。<br>あなたは <b>国民の多数派</b>でしょうか、 <b>レア種</b>でしょうか？</p>
+
+    <div class="pick-title">何問やってみますか？</div>
+    <div class="picks" id="picks">
+      <button class="pick" data-n="5"><span class="n">5</span><span class="u">お試し</span></button>
+      <button class="pick" data-n="10"><span class="n">10</span><span class="u">ひと勝負</span></button>
+      <button class="pick" data-n="20"><span class="n">20</span><span class="u">本格</span></button>
+      <button class="pick full" data-n="100"><span class="n">100 · 完全制覇</span><span class="u">無人島に流れ着いたら…</span></button>
+    </div>
+    <button class="btn" id="startBtn" disabled>問題数を選んでください</button>
+
+    <div class="srcbox">📊 <b style="color:var(--cream)">統計について</b> — このアプリは <b style="color:var(--cream)">ユーザーの実際の選択を集計</b>します。項目ごとに回答が集まると（30人以上）「ミミファクトリーのユーザーN人中X%」という <b style="color:var(--cream)">実測統計</b>に自動で切り替わります。それまでは公開アンケート・投票を参考にした総合参考値を表示し、実際の調査出典が確認できる項目は機関名もあわせて表示します。あなたの選択ひとつひとつが、本物の統計になります。</div>
+  </section>
+
+  <section class="screen" id="play">
+    <div class="topbar">
+      <div class="prog"><span><b id="qNow">1</b> / <span id="qTotal">10</span></span><span id="streakLb"></span></div>
+      <div class="meter"><span class="mf" id="meterFill"></span></div>
+      <div class="meterlb">ここまでの私の多数派率 <b id="meterPct">—</b></div>
+    </div>
+    <div class="qcard">
+      <span class="qtag" id="qTag">🏠 日常</span>
+      <div class="qtext" id="qText"></div>
+      <div class="opts" id="opts"></div>
+      <div class="verdict" id="verdict">
+        <span class="vchip" id="vChip"></span>
+        <div class="vsub" id="vSub"></div>
+        <div class="vsrc" id="vSrc"></div>
+        <button class="btn nextbtn" id="nextBtn">次へ →</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="done">
+    <div class="rhead">
+      <div class="rem" id="rEm">🌊</div>
+      <div class="rname" id="rName"></div>
+      <div class="rsub" id="rSub"></div>
+      <div class="bignum"><div class="pct" id="rPct">0%</div><div class="cap">私の多数派率</div></div>
+    </div>
+    <div class="rstats">
+      <div class="rstat"><div class="v" id="rSame">—</div><div class="k">平均で私と同じ選択の人</div></div>
+      <div class="rstat"><div class="v" id="rUniq">—</div><div class="k">レアピック回数</div></div>
+    </div>
+    <div class="sect"><h3>🔎 この結果の意味</h3><p id="rMean"></p></div>
+    <button class="btn" id="shareBtn">結果カードを保存 📷</button>
+    <button class="ghost" id="againBtn">もう一度 ↻ (新しい問題で)</button>
+    <button class="ghost" id="homeBtn">最初に戻る</button>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/ja/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 ドーパミン実験室 — ほかのテストを見る →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意味と面白さの工場</span></div>
+    <div class="mf-logo">ミミファクトリー</div>
+    <div class="mf-caption">株式会社ヨンギョル ファミリーカンパニー</div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+
+const BANK=[
+ ["🏠 日常", "朝起きたら布団をたたむ", [["たたむ", 34], ["たたまない", 66]]],
+ ["🏠 日常", "歯みがき粉は端から絞る", [["きっちり端から", 39], ["てきとうに", 61]]],
+ ["🍜 味覚", "とんかつソースは「かける」派か「つける」派", [["かける派", 31], ["つける派", 62]], "マイボイスコム 2020"],
+ ["🍜 味覚", "チョコミントはおいしい", [["おいしい", 37], ["歯みがき粉の味…", 63]]],
+ ["🍜 味覚", "インスタントラーメンに卵を入れるなら", [["溶いて", 46], ["そのまま", 34], ["入れない", 20]]],
+ ["📱 デジタル", "LINEで既読スルーしたことがある", [["ある", 78], ["ない", 22]]],
+ ["📱 デジタル", "トイレにスマホを持って入る", [["持って入る", 61], ["持って入らない", 39]], "クロス・マーケティング 2017"],
+ ["🧠 性格", "私は計画型だ", [["計画型", 44], ["直感型", 56]]],
+ ["🌙 ひみつ", "寝ているときによだれを垂らしたことがある", [["ある", 64], ["ない", 36]]],
+ ["💗 関係", "ひとめぼれしたことがある", [["ある", 67], ["ない", 33]], "オーネット 2011"],
+ ["🏠 日常", "靴下は脱いだまま放置する", [["裏返しのまま", 58], ["すぐ直す", 42]]],
+ ["🍜 味覚", "飲み会はやっぱり焼肉が最高", [["焼肉一択", 61], ["そうでもない", 39]]],
+ ["🍜 味覚", "朝ごはんはほとんど食べない", [["食べない", 35], ["ちゃんと食べる", 65]], "厚生労働省 国民健康・栄養調査 2023"],
+ ["💸 お金", "荷物が届いたその日に開ける", [["すぐ開ける", 82], ["しばらく放置", 18]]],
+ ["🧠 性格", "MBTIの最初の文字はE", [["E（外向）", 43], ["I（内向）", 57]]],
+ ["📱 デジタル", "動画を1.5倍速以上で見る", [["倍速派", 49], ["等倍派", 51]]],
+ ["🌙 ひみつ", "金縛りにあったことがある", [["ある", 56], ["ない", 44]]],
+ ["💗 関係", "元恋人のSNSをこっそり見たことがある", [["ある", 67], ["ない", 33]]],
+ ["🏠 日常", "家の中でスリッパを履く", [["履く", 41], ["素足派", 59]]],
+ ["🍜 味覚", "パイナップルのピザ、アリだ", [["アリ", 45], ["絶対なし", 55]]],
+ ["🧠 性格", "ひとりごはんは平気だ", [["平気", 62], ["苦手", 38]]],
+ ["💸 お金", "衝動買いして後悔したことが多い", [["多い", 71], ["あまりない", 29]], "クロス・マーケティング 2017"],
+ ["📱 デジタル", "アラームを複数セットする", [["複数派", 66], ["1つで十分", 34]]],
+ ["🌙 ひみつ", "シャワーを浴びながら歌う", [["歌う", 53], ["歌わない", 47]]],
+ ["💗 関係", "連絡はたいてい自分から", [["自分から", 48], ["相手から", 52]]],
+ ["🏠 日常", "食器はすぐ洗うほうだ", [["すぐ洗う", 39], ["ためがち", 61]]],
+ ["🍜 味覚", "辛い食べ物が得意だ", [["得意", 57], ["苦手", 43]]],
+ ["🧠 性格", "優柔不断なほうだ", [["ある", 81], ["ない", 19]], "エン・ジャパン 2017"],
+ ["📱 デジタル", "インスタよりYouTubeをよく見る", [["YouTube", 58], ["インスタ", 42]]],
+ ["🌙 ひみつ", "こっそりして知らんぷりしたことがある", [["ある", 81], ["ない", 19]]],
+ ["💗 関係", "友達以上恋人未満で終わったことがある", [["ある", 69], ["ない", 31]]],
+ ["🏠 日常", "冬は靴下を履いて寝る", [["履いて寝る", 42], ["脱いで寝る", 58]]],
+ ["🍜 味覚", "コーヒーなしでは生きられない", [["無理", 55], ["平気", 45]]],
+ ["💸 お金", "家計簿をつける", [["つける", 27], ["つけない", 73]]],
+ ["🧠 性格", "人見知りが激しいほうだ", [["激しい", 51], ["そうでもない", 49]]],
+ ["📱 デジタル", "寝る直前までスマホを見る", [["見る", 79], ["そうでもない", 21]]],
+ ["🌙 ひみつ", "鏡の前で表情の練習をしたことがある", [["ある", 58], ["ない", 42]]],
+ ["💗 関係", "告白は男性からすべきだ", [["そう思う", 34], ["そうでもない", 66]]],
+ ["🏠 日常", "物をきちんと元の場所に戻す", [["戻す", 45], ["てきとうに", 55]]],
+ ["🍜 味覚", "唐揚げより骨付きチキン派だ", [["骨付き", 47], ["骨なし", 53]]],
+ ["🧠 性格", "気分の浮き沈みがあるほうだ", [["ある", 59], ["ない", 41]]],
+ ["💸 お金", "ブランド品を一つは持ちたい", [["持ちたい", 63], ["興味ない", 37]]],
+ ["📱 デジタル", "使わないアプリの通知を放置する", [["放置", 61], ["すぐ整理", 39]]],
+ ["🌙 ひみつ", "一人のとき独り言を言う", [["言う", 66], ["言わない", 34]]],
+ ["💗 関係", "友達より恋人が優先だ", [["恋人優先", 38], ["友達優先", 62]]],
+ ["🏠 日常", "洗濯物をたたんですぐしまう", [["すぐしまう", 36], ["椅子に山積み", 64]]],
+ ["🍜 味覚", "スープを最後の一滴まで飲む", [["完飲", 44], ["残す", 56]]],
+ ["🧠 性格", "人の顔色をよくうかがう", [["よく見る", 57], ["そうでもない", 43]]],
+ ["📱 デジタル", "迷惑メールに返信したことがある", [["ある", 23], ["ない", 77]]],
+ ["🌙 ひみつ", "いびきをかくと言われたことがある", [["ある", 52], ["ない", 48]]],
+ ["💗 関係", "片思いを長くしたことがある", [["ある", 68], ["ない", 32]]],
+ ["🏠 日常", "イヤホンのコードをきれいに巻く", [["きれいに巻く", 38], ["絡まったまま", 62]]],
+ ["🍜 味覚", "お刺身が好きだ", [["好き", 58], ["あまりない", 42]]],
+ ["🧠 性格", "私は朝型人間だ", [["朝型", 36], ["夜型", 64]]],
+ ["💸 お金", "セールだと必要なくても買う", [["買う", 54], ["そうでもない", 46]]],
+ ["📱 デジタル", "電話より文字のほうが楽だ", [["文字派", 71], ["電話派", 29]]],
+ ["🌙 ひみつ", "泣きながら眠ったことがある", [["ある", 61], ["ない", 39]]],
+ ["💗 関係", "恋愛では嫉妬深いほうだ", [["激しい", 49], ["そうでもない", 51]]],
+ ["🏠 日常", "ゴミを溜めてあふれさせたことがある", [["ある", 66], ["ない", 34]]],
+ ["🍜 味覚", "パクチーが好きだ", [["好き", 33], ["苦手", 67]]],
+ ["🧠 性格", "完璧主義なところがある", [["ある", 55], ["ない", 45]]],
+ ["💸 お金", "給料日から数日で口座が空になる", [["すぐ空", 58], ["うまく貯める", 42]], "マイナビ 2018 給料日前の家計調査"],
+ ["📱 デジタル", "未読メールが100通を超えている", [["超えてる", 47], ["整理してる", 53]]],
+ ["🌙 ひみつ", "夜食の誘惑によく負ける", [["よく負ける", 72], ["我慢する", 28]]],
+ ["💗 関係", "初デートの会計は割り勘が正しい", [["割り勘", 57], ["どちらかが", 43]]],
+ ["🏠 日常", "段ボールを捨てずに溜める", [["ためがち", 51], ["すぐ捨てる", 49]]],
+ ["🍜 味覚", "ラーメンの汁にごはんを入れて食べる", [["入れる", 74], ["入れない", 26]]],
+ ["🧠 性格", "一人の時間が必ず必要だ", [["必要", 78], ["そうでもない", 22]]],
+ ["📱 デジタル", "カメラロールにスクショが何百枚もある", [["何百枚", 63], ["整理してる", 37]]],
+ ["🌙 ひみつ", "片思いの相手の名前を検索したことがある", [["ある", 59], ["ない", 41]]],
+ ["💗 関係", "恋愛より仕事が大事な時期があった", [["ある", 64], ["ない", 36]]],
+ ["🏠 日常", "窓を開けて寝るのが好きだ", [["好き", 31], ["苦手", 69]]],
+ ["🍜 味覚", "甘いデザートをよく食べたくなる", [["よく", 61], ["あまりない", 39]]],
+ ["🧠 性格", "怒ってもうまく表現できない", [["できない", 58], ["表現する", 42]]],
+ ["💸 お金", "コーヒー代がもったいないと感じたことがある", [["ある", 53], ["ない", 47]]],
+ ["📱 デジタル", "仕事中に関係ないことでスマホを見たことがある", [["ある", 89], ["ない", 11]]],
+ ["🌙 ひみつ", "布団の中で叫びたくなる黒歴史がある", [["ある", 84], ["ない", 16]], "マイナビバイト 2017 黒歴史アンケート"],
+ ["💗 関係", "恋愛は最初がいちばんときめく", [["そう思う", 67], ["そうでもない", 33]]],
+ ["🏠 日常", "水をあまり飲まないほうだ", [["あまり飲まない", 56], ["よく飲む", 44]], "サントリー 2024 水分摂取実態調査"],
+ ["🍜 味覚", "一人飲みを楽しむ", [["楽しむ", 41], ["そうでもない", 59]]],
+ ["🧠 性格", "ほめられると照れくさい", [["照れる", 62], ["うれしい", 38]]],
+ ["💸 お金", "サブスクを3つ以上使っている", [["3つ以上", 66], ["そうでもない", 34]], "電通・マクロミル 2025 サブスク利用実態調査"],
+ ["📱 デジタル", "知らない番号は出ない", [["出ない", 69], ["出る", 31]]],
+ ["🌙 ひみつ", "無性に塩辛いものが食べたくなる時がある", [["ある", 57], ["ない", 43]]],
+ ["💗 関係", "恋人とは趣味が同じであるべきだ", [["そう思う", 39], ["そうでもない", 61]]],
+ ["🏠 日常", "週末に一日中外に出なかったことがある", [["ある", 76], ["ない", 24]]],
+ ["🍜 味覚", "冷やし麺は「スープあり」か「タレ混ぜ」か", [["スープあり", 46], ["タレ混ぜ", 54]]],
+ ["🧠 性格", "すぐ飽きるほうだ", [["そう思う", 47], ["そうでもない", 53]]],
+ ["💸 お金", "へそくりを別に隠している", [["隠してる", 44], ["ない", 56]]],
+ ["📱 デジタル", "SNSを数日断ったことがある", [["ある", 51], ["ない", 49]]],
+ ["🌙 ひみつ", "シャワーは夜に浴びる", [["夜派", 63], ["朝派", 37]]],
+ ["💗 関係", "結婚は必ずすべきだ", [["そう思う", 53], ["そうでもない", 47]], "総務省統計局 2024 社会生活基本調査"],
+ ["🏠 日常", "リモコンや充電器の場所でもめたことがある", [["ある", 52], ["ない", 48]]],
+ ["🍜 味覚", "コンビニ飯で一食すませることが多い", [["よく", 58], ["そうでもない", 42]]],
+ ["🧠 性格", "過ぎたことを長く引きずる", [["引きずる", 61], ["すぐ忘れる", 39]]],
+ ["💸 お金", "ポイントやクーポンをこまめに集める", [["集める", 49], ["面倒", 51]]],
+ ["📱 デジタル", "バッテリーをよく20%以下まで減らす", [["よく", 57], ["早めに充電", 43]]],
+ ["🌙 ひみつ", "たまに自分が特別な人間に思える", [["思う", 66], ["そうでもない", 34]]],
+ ["💗 関係", "「好き」とよく口にするほうだ", [["よく", 43], ["あまり言わない", 57]]],
+ ["🧠 性格", "一人で映画館やレストランによく行く", [["よく行く", 47], ["行けない", 53]]]
+];
+
+
+const TYPES=[
+ {min:80, em:"🌊", name:"国民の多数派マスター", sub:"あなたの好みがそのまま世論調査。国の平均を映す、生きたサンプルです！",
+  mean:"あなたの選択は驚くほど多数派と一致します。新商品の企画者はあなたを迎えに来るべき — あなたが好きなら、みんなも好きなのです。ただ、たまには少数派の道で新しい面白さも見つけてみてください。"},
+ {min:60, em:"🍚", name:"安心の多数派タイプ", sub:"たいていは多数派と通じ合いつつ、いくつかは自分のこだわりを持つタイプ。",
+  mean:"心地よい多数派の感覚と、自分の好みのバランスが取れています。初対面の人とも好みの話ですぐ打ち解けられる、社交的な味覚と性格の持ち主です。"},
+ {min:40, em:"⚖️", name:"半々バランスタイプ", sub:"多数派が半分、レアが半分 — どちらにも偏らないバランス感覚。",
+  mean:"多数派に乗るときは乗り、そうでないときは思い切って自分の道を行く。流行を楽しみつつ流されないタイプ — バランス感覚があなたの武器です。"},
+ {min:20, em:"🦄", name:"個性派タイプ", sub:"多数派より自分の好み。人と違う選択のほうがむしろ自然なタイプ。",
+  mean:"あなたの選択はよく少数派に立ちます。自分の基準がはっきりしていて、流行より好みを信じる人 — まわりから「変わってるね」と言われたら、ほめ言葉として受け取っていいんです。"},
+ {min:0, em:"🛸", name:"レア種のあまのじゃくタイプ", sub:"国民統計には収まりきらない人。あなたのような人は、本当に希少です。",
+  mean:"ほとんどの選択で少数派の道を行く、正真正銘のレア種。世界中がAと言うとき、Bの魅力を知っている人です。あなたの視点こそ、みんなには見えないチャンスなのです。"}
+];
+
+
+const API='/stats-api.php';
+const LIVE_MIN=30;
+let LIVE={};
+
+function qidOf(q){let h=5381;for(let i=0;i<q.length;i++){h=((h<<5)+h+q.charCodeAt(i))>>>0;}return 'q'+h.toString(36);}
+fetch(API+'?action=get').then(r=>r.json()).then(j=>{if(j&&typeof j==='object')LIVE=j;}).catch(()=>{});
+function sendVote(qid,opt){
+  try{
+    const fd=new FormData();fd.append('action','vote');fd.append('qid',qid);fd.append('opt',opt);
+    fetch(API,{method:'POST',body:fd,keepalive:true})
+      .then(r=>r.json()).then(j=>{if(j&&j[qid])LIVE[qid]=j[qid];}).catch(()=>{});
+  }catch(e){}
+}
+
+
+let deck=[], idx=0, chosen=0, mainCnt=0, uniqCnt=0, sameSum=0, streak=0, streakKind=null, answered=0;
+const $=id=>document.getElementById(id);
+function vibrate(ms){if(navigator.vibrate)try{navigator.vibrate(ms)}catch(e){}}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function show(s){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('on'));$(s).classList.add('on');window.scrollTo(0,0)}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2200)}
+
+
+document.querySelectorAll('#picks .pick').forEach(p=>{
+  p.addEventListener('click',()=>{
+    document.querySelectorAll('#picks .pick').forEach(x=>x.classList.remove('sel'));
+    p.classList.add('sel');chosen=+p.dataset.n;
+    $('startBtn').disabled=false;$('startBtn').textContent=chosen+'問スタート →';
+    vibrate(14);
+  });
+});
+$('startBtn').addEventListener('click',()=>{
+  if(!chosen)return;
+  startRound();
+});
+
+function startRound(){
+  deck=shuffle(BANK.slice()).slice(0,chosen);
+  idx=0;mainCnt=0;uniqCnt=0;sameSum=0;streak=0;streakKind=null;answered=0;
+  $('qTotal').textContent=deck.length;
+  $('streakLb').textContent='';
+  updateMeter();
+  show('play');loadQ();vibrate([20,40,20]);
+}
+
+
+function loadQ(){
+  const item=deck[idx];
+  $('qNow').textContent=idx+1;
+  $('qTag').textContent=item[0];
+  $('qText').textContent=item[1];
+  $('verdict').classList.remove('show');
+  const opts=item[2];
+  const box=$('opts');box.innerHTML='';
+  shuffle(opts.map((o,i)=>i)).forEach(oi=>{
+    const b=document.createElement('button');b.className='opt';b.dataset.oi=oi;
+    b.innerHTML='<span class="obar"></span><span class="otxt"><span>'+opts[oi][0]+'</span><span class="opct"></span></span>';
+    b.addEventListener('click',()=>reveal(oi));
+    box.appendChild(b);
+  });
+}
+
+function reveal(myOi){
+  const item=deck[idx], opts=item[2], src=item[3];
+  const buttons=[...document.querySelectorAll('.opt')];
+  if(buttons[0].classList.contains('revealed'))return;
+
+
+  const qid=qidOf(item[1]);
+  const live=LIVE[qid];
+  const liveN=live?live.slice(0,opts.length).reduce((a,b)=>a+(+b||0),0):0;
+  const isLive=liveN>=LIVE_MIN;
+  const pcts=isLive
+    ? opts.map((o,i)=>Math.round((+live[i]||0)/liveN*100))
+    : opts.map(o=>o[1]);
+
+  sendVote(qid,myOi);  // 自分の選択も集計に反映 (非同期、失敗は無視)
+
+  const myPct=pcts[myOi];
+  const maxPct=Math.max.apply(null,pcts);
+  const isMain=myPct>=maxPct;
+
+  buttons.forEach(b=>{
+    const oi=+b.dataset.oi, pct=pcts[oi];
+    b.classList.add('revealed');b.disabled=true;
+    if(oi===myOi)b.classList.add('mine');
+    b.querySelector('.opct').textContent=pct+'%';
+    setTimeout(()=>{b.querySelector('.obar').style.width=pct+'%';},60);
+  });
+
+  answered++;sameSum+=myPct;
+  if(isMain){mainCnt++; if(streakKind==='m'){streak++;}else{streak=1;streakKind='m';}}
+  else{uniqCnt++; if(streakKind==='u'){streak++;}else{streak=1;streakKind='u';}}
+
+  const chip=$('vChip');
+  if(isMain){chip.className='vchip main';chip.textContent='🌊 多数派ピック！';}
+  else{chip.className='vchip uniq';chip.textContent='🦄 レアピック！';}
+  const whoTxt=isLive
+    ? 'ミミファクトリーのユーザー <b>'+liveN.toLocaleString()+'人</b> 中 <b>'+myPct+'%</b>があなたと同じ選択をしました'
+    : '国民の <b>'+myPct+'%</b>があなたと同じ選択をしました';
+  $('vSub').innerHTML=whoTxt+
+    (streak>=3?('<br>'+(streakKind==='m'?'🔥 多数派 '+streak+'連続！':'🛸 レア '+streak+'連続！')):'');
+  const srcTxt=src?('出典: '+src):'※ 公開アンケート・投票の総合参考値';
+  $('vSrc').textContent=isLive
+    ? (src?('ミミファクトリー実測統計 · 参考 '+srcTxt):'ミミファクトリー実測統計')
+    : srcTxt+(liveN>0?(' · 実測集計中 '+liveN+'人が参加'):'');
+  $('verdict').classList.add('show');
+  $('streakLb').textContent=streak>=2?((streakKind==='m'?'🌊':'🦄')+' x'+streak):'';
+  updateMeter();
+  vibrate(isMain?[20,30,20]:[40,60,40]);
+}
+
+function updateMeter(){
+  const pct=answered?Math.round(mainCnt/answered*100):0;
+  $('meterFill').style.width=pct+'%';
+  $('meterPct').textContent=answered?pct+'%':'—';
+}
+
+$('nextBtn').addEventListener('click',()=>{
+  idx++;
+  if(idx>=deck.length){finish();return;}
+  loadQ();
+});
+
+
+function finish(){
+  const rate=Math.round(mainCnt/deck.length*100);
+  const T=TYPES.find(t=>rate>=t.min);
+  $('rEm').textContent=T.em;$('rName').textContent=T.name;$('rSub').textContent=T.sub;
+  $('rMean').textContent=T.mean;
+  $('rSame').textContent=Math.round(sameSum/deck.length)+'%';
+  $('rUniq').textContent=uniqCnt+'回';
+  show('done');
+  const el=$('rPct');let v=0;const step=Math.max(1,Math.round(rate/30));
+  const iv=setInterval(()=>{v+=step;if(v>=rate){v=rate;clearInterval(iv);}el.textContent=v+'%';},30);
+  vibrate([60,80,60,80,120]);
+}
+
+$('againBtn').addEventListener('click',startRound);
+$('homeBtn').addEventListener('click',()=>{show('home')});
+
+
+$('shareBtn').addEventListener('click',()=>{
+  const rate=Math.round(mainCnt/deck.length*100);
+  const T=TYPES.find(t=>rate>=t.min);
+  const c=document.createElement('canvas');c.width=720;c.height=900;
+  const x=c.getContext('2d');
+  const g=x.createLinearGradient(0,0,720,900);g.addColorStop(0,'#141024');g.addColorStop(1,'#2b1c50');
+  x.fillStyle=g;x.fillRect(0,0,720,900);
+  x.textAlign='center';
+  x.fillStyle='#a99cc9';x.font='22px "Noto Sans KR",sans-serif';x.fillText('国 民 統 計  V S  私',360,120);
+  x.fillStyle='#ffe9c9';x.font='64px Jua,"Noto Sans KR",sans-serif';x.fillText('統計とわたし',360,200);
+  x.font='110px serif';x.fillText(T.em,360,370);
+  x.fillStyle='#ffd56b';x.font='58px Jua,"Noto Sans KR",sans-serif';x.fillText(T.name,360,470);
+  x.fillStyle='#f4efff';x.font='90px Jua,"Noto Sans KR",sans-serif';x.fillText('多数派率 '+rate+'%',360,600);
+  x.fillStyle='#a99cc9';x.font='24px "Noto Sans KR",sans-serif';
+  x.fillText('平均 '+Math.round(sameSum/deck.length)+'%の人が私と同じ選択',360,660);
+  x.fillStyle='#9a8fc0';x.font='20px "Noto Sans KR",sans-serif';
+  x.fillText('「意味と面白さの工場」ミミファクトリー',360,810);
+  x.fillText('mimifactory.vibekr.com',360,845);
+  c.toBlob(function(b){
+    const a=document.createElement('a');a.href=URL.createObjectURL(b);
+    a.download='統計とわたし_結果.png';a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href)},4000);
+    toast('結果カードを保存しました 📷');
+  });
+});
+</script>
+</body>
+</html>
