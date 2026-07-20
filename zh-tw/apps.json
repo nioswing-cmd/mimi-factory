@@ -157,6 +157,18 @@
    "desc": "用12個場景測量，你的情緒是幾個像素？"
   },
   {
+   "id": "do-you-know-me",
+   "type": "test",
+   "title": "你，懂我嗎？",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/do-you-know-me.html",
+   "premium": "apps/do-you-know-me.html",
+   "desc": "關於我的 10 道題，對方能猜對幾題？猜錯就從那裡開始聊。"
+  },
+  {
    "id": "multiple-intelligences",
    "type": "test",
    "title": "多元智能測驗",

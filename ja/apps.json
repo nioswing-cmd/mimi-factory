@@ -157,6 +157,18 @@
    "desc": "12のシーンで測る、あなたの感情解像度は何ピクセル？"
   },
   {
+   "id": "do-you-know-me",
+   "type": "test",
+   "title": "あなた、私のこと分かる？",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/do-you-know-me.html",
+   "premium": "apps/do-you-know-me.html",
+   "desc": "私についての10問、相手はどこまで当てられる？外れたらそこから会話が始まります。"
+  },
+  {
    "id": "multiple-intelligences",
    "type": "test",
    "title": "多重知能テスト",

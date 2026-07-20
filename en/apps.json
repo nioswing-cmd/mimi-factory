@@ -157,6 +157,18 @@
    "desc": "How many pixels do you feel in? Measured across 12 scenes."
   },
   {
+   "id": "do-you-know-me",
+   "type": "test",
+   "title": "Do You Know Me?",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/do-you-know-me.html",
+   "premium": "apps/do-you-know-me.html",
+   "desc": "10 questions about me — how many can they get right? Every miss starts a conversation."
+  },
+  {
    "id": "multiple-intelligences",
    "type": "test",
    "title": "Multiple Intelligence Test",
