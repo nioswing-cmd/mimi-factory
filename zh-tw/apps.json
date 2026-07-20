@@ -61,6 +61,18 @@
    "desc": "每點一下代碼就跳動 — 最後解鎖唯一屬於你的類型"
   },
   {
+   "id": "mbti-match",
+   "type": "test",
+   "title": "兩人MBTI配對",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/mbti-match.html",
+   "premium": "apps/mbti-match.html",
+   "desc": "一支手機輪流測 — 算出配對指數和拉近距離的任務"
+  },
+  {
    "id": "sq-social-intelligence",
    "type": "test",
    "title": "SQ 社會智能測驗",

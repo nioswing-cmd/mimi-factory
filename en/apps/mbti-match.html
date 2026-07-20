@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Two of You: MBTI Match — MIMI FACTORY</title>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#1a1230; --bg2:#2d1b4e;
+  --accent1:#ffd56b; --accent2:#ffb347;
+  --cream:#fff6ec; --muted:#cdbfe0;
+  --card:#241a3d;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 80% -10%, rgba(255,180,90,.10), transparent 55%),
+    radial-gradient(120% 90% at 10% 110%, rgba(255,94,138,.12), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed; min-height:100dvh;
+  transition:background .9s ease;
+}
+.wrap{max-width:520px; margin:0 auto; padding:20px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; margin:0; line-height:1.25;}
+.grad{
+  background:linear-gradient(105deg,var(--accent1),#ff8a5b 45%,#ff5e8a);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+button{font-family:inherit; cursor:pointer; border:none; color:inherit;}
+.screen{display:none; animation:fadeIn .5s ease;}
+.screen.active{display:block;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1.5deg); opacity:.4;}60%{transform:scale(1.02) rotate(.5deg);}100%{transform:scale(1) rotate(0); opacity:1;}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.06);}}
+
+
+.hero{text-align:center; margin:auto 0; padding:6px 0;}
+.hero .emoji{font-size:60px; display:inline-block; animation:float 3.2s ease-in-out infinite;}
+.hero h1{font-size:32px; margin:12px 0 6px;}
+.hero p{color:var(--muted); font-size:15px; line-height:1.7; margin:0 0 4px; overflow-wrap:break-word;}
+.hero .sub{font-size:12.5px; color:#9a8fc0; margin-top:12px; line-height:1.6;}
+.btn{
+  display:block; width:100%; padding:17px; border-radius:18px; font-size:18px;
+  font-family:'Jua',sans-serif; color:#2a1636; margin-top:13px;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2));
+  box-shadow:0 10px 26px -8px var(--accent2); transition:transform .15s, box-shadow .3s;
+}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:rgba(255,255,255,.07); color:var(--cream); box-shadow:none; border:1.5px solid rgba(255,255,255,.14);}
+.btn:focus-visible{outline:3px solid var(--accent1); outline-offset:3px;}
+
+
+.rellabel{font-size:13px; color:#9a8fc0; text-align:center; margin:20px 0 8px;}
+.relseg{display:flex; gap:8px;}
+.relseg button{
+  flex:1; padding:14px 6px; border-radius:16px; background:rgba(255,255,255,.05);
+  border:1.6px solid rgba(255,255,255,.12); color:var(--muted); font-family:'Jua'; font-size:15px;
+  transition:transform .12s, background .25s, border-color .25s, color .25s;
+}
+.relseg button .re{display:block; font-size:26px; margin-bottom:4px;}
+.relseg button:active{transform:scale(.96);}
+.relseg button.on{
+  color:#2a1636; border-color:transparent;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2));
+  box-shadow:0 8px 22px -10px var(--accent2);
+}
+
+.namerow{display:flex; gap:10px; margin-top:14px;}
+.namerow .nb{flex:1;}
+.namerow label{display:block; font-size:11.5px; color:#9a8fc0; margin:0 0 5px 4px;}
+.namerow input{
+  width:100%; padding:12px 13px; border-radius:13px; background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(255,255,255,.14); color:var(--cream); font-family:'Jua'; font-size:16px; text-align:center;
+}
+.namerow input:focus{outline:2px solid var(--accent1); outline-offset:1px; border-color:var(--accent2);}
+.chips{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:16px 0 2px;}
+.chip{font-size:12px; color:var(--muted); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); padding:6px 12px; border-radius:99px;}
+
+
+.turn{text-align:center; margin:auto 0; padding:10px 0;}
+.turn .who{font-size:58px; display:inline-block; animation:pulse 1.8s ease-in-out infinite;}
+.turn h2{font-size:30px; margin:14px 0 8px;}
+.turn h2 b{font-family:'Jua';}
+.turn p{color:var(--muted); font-size:14.5px; line-height:1.7; overflow-wrap:break-word;}
+.turn .pill{display:inline-block; margin-top:14px; font-size:12.5px; color:var(--accent1);
+  background:rgba(255,181,71,.14); border:1px solid var(--accent2); padding:6px 15px; border-radius:99px;}
+
+
+.topbar{position:sticky; top:0; z-index:10; padding:10px 0 12px; margin-bottom:6px;
+  background:linear-gradient(180deg,var(--bg1) 65%,transparent);}
+.count{display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--muted); margin-bottom:8px;}
+.count b{font-family:'Jua'; color:var(--cream); font-size:15px;}
+.count .nowwho{font-family:'Jua'; color:var(--accent1); font-size:13.5px;}
+.livecode{font-family:'Jua'; font-size:24px; letter-spacing:.14em;}
+.livecode span{opacity:.35; transition:opacity .3s;}
+.livecode span.on{opacity:1;}
+.axes{display:flex; flex-direction:column; gap:9px;}
+.axis{display:grid; grid-template-columns:20px 1fr 20px; align-items:center; gap:8px; font-size:11px; color:#9a8fc0;}
+.axis .lbl{font-family:'Jua'; font-size:13px; color:var(--muted); text-align:center;}
+.axis .lbl.win{color:var(--cream);}
+.track{position:relative; height:8px; border-radius:99px; background:rgba(255,255,255,.09); overflow:hidden;}
+.track .mid{position:absolute; left:50%; top:0; bottom:0; width:2px; background:rgba(255,255,255,.18); transform:translateX(-50%);}
+.track .fill{position:absolute; top:0; bottom:0; left:50%; width:0%; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2)); box-shadow:0 0 12px var(--accent2);
+  transition:left .45s cubic-bezier(.22,1,.36,1), width .45s cubic-bezier(.22,1,.36,1);}
+
+
+.qcard{background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:22px; padding:24px 20px; margin-top:14px;
+  box-shadow:0 18px 40px -22px rgba(0,0,0,.7);}
+.qnum{font-size:12px; color:var(--accent1); font-weight:700; letter-spacing:.05em;}
+.qtext{font-size:20px; font-family:'Jua'; line-height:1.45; margin:8px 0 20px; overflow-wrap:break-word;}
+.opt{display:flex; align-items:center; gap:13px; width:100%; text-align:left; padding:16px 16px; margin-top:11px;
+  border-radius:15px; background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.12);
+  font-size:15.5px; line-height:1.5; transition:transform .12s, background .2s, border-color .2s; color:var(--cream); overflow-wrap:break-word;}
+.opt:hover{background:rgba(255,255,255,.09);}
+.opt:active{transform:scale(.98);}
+.opt .key{flex:0 0 30px; height:30px; border-radius:9px; display:grid; place-items:center; font-family:'Jua'; font-size:16px;
+  background:rgba(255,255,255,.1); color:var(--muted);}
+.opt.sel{border-color:var(--accent2); background:rgba(255,181,71,.14);}
+.opt:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+
+
+.rescard{background:var(--card); border:1px solid rgba(255,255,255,.1); border-radius:26px; padding:26px 20px; text-align:center;
+  box-shadow:0 20px 50px -24px rgba(0,0,0,.75);}
+.block{background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:16px 17px; margin-top:12px; text-align:left;}
+.block h3{font-size:15px; margin-bottom:7px; display:flex; align-items:center; gap:7px;}
+.block p{font-size:14px; line-height:1.72; color:#e7ddf2; margin:0; overflow-wrap:break-word;}
+
+
+.pairtop{text-align:center; margin-top:2px;}
+.pairtop .rel{font-size:13px; color:var(--accent1); font-family:'Jua'; letter-spacing:.04em;}
+.pairtop h2{font-size:25px; margin-top:4px;}
+.pair{display:flex; gap:10px; align-items:stretch; margin-top:16px;}
+.pcard{flex:1; background:var(--card); border:1px solid rgba(255,255,255,.1); border-radius:20px; padding:16px 10px; text-align:center;
+  box-shadow:0 16px 40px -26px rgba(0,0,0,.8);}
+.pcard .pe{font-size:44px; display:inline-block; animation:float 3.4s ease-in-out infinite;}
+.pcard .pn{font-size:13px; color:#9a8fc0; margin-top:2px;}
+.pcard .pcode{font-family:'Jua'; font-size:26px; letter-spacing:.05em; margin-top:3px;}
+.pcard .pnick{font-size:11.5px; color:var(--muted); margin-top:2px; overflow-wrap:break-word; min-height:28px;}
+.pairmid{align-self:center; text-align:center; padding:0 2px;}
+.pairmid .hh{font-size:26px; animation:pulse 1.8s ease-in-out infinite;}
+
+.scorewrap{text-align:center; margin-top:20px;}
+.scorewrap .heart{font-size:30px; margin-bottom:2px;}
+.scorewrap .pct{font-family:'Jua'; font-size:64px; line-height:1;}
+.scorewrap .head{font-size:16px; color:var(--muted); margin-top:6px; font-family:'Jua';}
+.matchbadge{display:inline-block; font-size:12px; padding:5px 13px; border-radius:99px; margin-top:10px;
+  background:rgba(255,181,71,.16); border:1px solid var(--accent2); color:var(--accent1);}
+.oneline{font-size:14.5px; color:var(--muted); margin-top:14px; line-height:1.7; overflow-wrap:break-word;}
+
+
+.intiwrap{margin-top:6px;}
+.intitop{display:flex; justify-content:space-between; align-items:center; font-size:12px; color:#9a8fc0; margin-bottom:6px;}
+.intitop b{font-family:'Jua'; color:var(--cream); font-size:14px;}
+.intibar{height:10px; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden;}
+.intifill{height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  box-shadow:0 0 12px var(--accent2); transition:width .5s cubic-bezier(.22,1,.36,1);}
+.check{display:flex; align-items:flex-start; gap:12px; width:100%; text-align:left; padding:14px 15px; margin-top:10px;
+  border-radius:14px; background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.12);
+  font-size:14.5px; line-height:1.5; color:var(--cream); transition:transform .12s, background .25s, border-color .25s; overflow-wrap:break-word;}
+.check:active{transform:scale(.98);}
+.check .box{flex:0 0 24px; height:24px; border-radius:8px; border:2px solid rgba(255,255,255,.3); display:grid; place-items:center;
+  font-size:14px; color:transparent; transition:background .2s, border-color .2s, color .2s; margin-top:1px;}
+.check.done{background:rgba(255,181,71,.13); border-color:var(--accent2);}
+.check.done .box{background:var(--accent2); border-color:var(--accent2); color:#2a1636;}
+.check.done .ctxt{opacity:.72;}
+.check:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+
+.toast{position:fixed; left:50%; top:74px; transform:translateX(-50%) translateY(-20px);
+  background:rgba(36,26,61,.96); border:1.5px solid var(--accent2); color:var(--cream);
+  padding:13px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none;
+  transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; text-align:center;}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+.mini{font-size:12.5px; color:#9a8fc0; text-align:center; margin-top:16px; line-height:1.6;}
+.linkbtn{background:none; text-decoration:underline; color:var(--muted); font-size:13px; padding:8px; margin:6px auto 0; display:block;}
+#confetti{position:fixed; inset:0; pointer-events:none; z-index:55;}
+
+
+.selrow{display:flex; gap:10px; margin-top:16px;}
+.selbox{flex:1; background:var(--card); border:1px solid rgba(255,255,255,.1); border-radius:18px; padding:14px 12px; text-align:center;}
+.selbox label{display:block; font-size:12px; color:#9a8fc0; margin-bottom:8px;}
+.selbox select{width:100%; padding:11px 8px; border-radius:12px; background:rgba(255,255,255,.06); color:var(--cream);
+  border:1.5px solid rgba(255,255,255,.16); font-family:'Jua'; font-size:16px; text-align:center; text-align-last:center;}
+.selbox .face{font-size:34px; margin-bottom:4px; height:40px;}
+.vs{align-self:center; font-family:'Jua'; font-size:20px; color:var(--accent1);}
+
+
+.footer{text-align:center; margin-top:28px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <section id="home" class="screen active">
+    <div class="hero">
+      <div class="emoji">💞</div>
+      <h1>The two of you, <span class="grad">MBTI Match</span></h1>
+      <p>One phone — <b>take turns</b>,<br>get your <b>match %</b> and <b>bonding missions</b> to grow closer!</p>
+      <div class="chips">
+        <span class="chip">👫 2 minutes together</span>
+        <span class="chip">🎯 Live gauge</span>
+        <span class="chip">✅ Bonding missions</span>
+      </div>
+
+      <div class="rellabel">What are you two to each other?</div>
+      <div class="relseg" id="relseg">
+        <button data-rel="friend" onclick="pickRel('friend',event)"><span class="re">🤝</span>Friends</button>
+        <button data-rel="lover" class="on" onclick="pickRel('lover',event)"><span class="re">💘</span>Couple</button>
+        <button data-rel="family" onclick="pickRel('family',event)"><span class="re">🏡</span>Family</button>
+      </div>
+
+      <div class="namerow">
+        <div class="nb"><label>First person</label><input id="nameA" maxlength="6" placeholder="My" autocomplete="off"></div>
+        <div class="nb"><label>Second person</label><input id="nameB" maxlength="6" placeholder="You" autocomplete="off"></div>
+      </div>
+      <p class="sub">We’ve hidden which trait each answer points to. No peeking — just go with your gut!</p>
+    </div>
+    <div>
+      <button class="btn" onclick="startTogether()">🚀 Start the test together</button>
+      <button class="btn ghost" onclick="go('quick')">⚡ We know our types · skip to match</button>
+    </div>
+  </section>
+
+  
+  <section id="turn" class="screen">
+    <div class="turn">
+      <div class="who" id="turnEmoji">🙋</div>
+      <h2 id="turnTitle"><b>My</b> turn!</h2>
+      <p id="turnDesc">Got the phone? From here, it’s <b>your</b> turn to answer.<br>12 questions — just answer honestly, from the heart.</p>
+      <div class="pill" id="turnPill">👀 Everyone else, look away for a sec</div>
+    </div>
+    <button class="btn" onclick="beginTurn()">✏️ Start my test</button>
+  </section>
+
+  
+  <section id="test" class="screen">
+    <div class="topbar">
+      <div class="count">
+        <span><span class="nowwho" id="nowWho">My</span> · <b id="qcount">1</b> / 12</span>
+        <span class="livecode" id="livecode"></span></div>
+      <div class="axes" id="axes"></div>
+    </div>
+    <div id="qholder"></div>
+  </section>
+
+  
+  <section id="pair" class="screen">
+    <div class="pairtop">
+      <div class="rel" id="relTag">💘 Love match</div>
+      <h2><span class="grad">our</span> chemistry</h2>
+    </div>
+
+    <div class="pair" id="pairCards"></div>
+
+    <div class="rescard" style="margin-top:16px; padding:22px 18px">
+      <div class="scorewrap">
+        <div class="heart">💓</div>
+        <div class="pct" id="pct">--%</div>
+        <div class="head" id="matchhead">Calculating…</div>
+        <div class="matchbadge" id="matchbadge" style="display:none"></div>
+        <div class="oneline" id="oneline"></div>
+      </div>
+    </div>
+
+    <div class="block"><h3>🧩 What you have in common</h3><p id="m-sim"></p></div>
+    <div class="block"><h3>🎚️ How to fine-tune it</h3><p id="m-adj"></p></div>
+
+    <div class="block" style="background:rgba(255,181,71,.07); border-color:rgba(255,181,71,.25)">
+      <h3>💡 Advice for your relationship</h3><p id="m-advice"></p>
+    </div>
+
+    <!-- closeness bonding missions -->
+    <div class="rescard" style="margin-top:14px; padding:20px 17px; text-align:left">
+      <h3 style="font-size:16px; margin-bottom:4px">✅ Missions to grow closer, starting today</h3>
+      <p style="font-size:12.5px; color:#9a8fc0; margin:0 0 12px">Every one you check off fills your <b>closeness</b> meter. Tap them together!</p>
+      <div class="intiwrap">
+        <div class="intitop"><span>closeness</span><b id="intiPct">0%</b></div>
+        <div class="intibar"><div class="intifill" id="intiFill"></div></div>
+      </div>
+      <div id="checklist" style="margin-top:6px"></div>
+    </div>
+
+    <button class="btn" style="margin-top:16px" onclick="cheer()">💖 Celebrate our match</button>
+    <button class="btn ghost" onclick="go('home')">🔄 Try another pair</button>
+    <p class="mini">Screenshot it and share with each other 📸</p>
+  </section>
+
+  
+  <section id="quick" class="screen">
+    <div style="text-align:center; margin-top:6px">
+      <h2 style="font-size:25px">⚡ <span class="grad">Quick</span>  match</h2>
+      <p style="color:var(--muted); font-size:13px; margin-top:6px">Already know your types? Pick them and see right away</p>
+    </div>
+    <div class="selrow">
+      <div class="selbox">
+        <div class="face" id="qfaceA">🙂</div>
+        <label id="qlabelA">My</label>
+        <select id="selA" onchange="quickCalc()"></select>
+      </div>
+      <div class="vs">💗</div>
+      <div class="selbox">
+        <div class="face" id="qfaceB">🙂</div>
+        <label id="qlabelB">Them</label>
+        <select id="selB" onchange="quickCalc()"></select>
+      </div>
+    </div>
+    <button class="btn" style="margin-top:18px" onclick="quickToPair()">💞 See this pair’s match</button>
+    <button class="linkbtn" onclick="go('home')">Back to start</button>
+  </section>
+
+  
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/en/friend.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧺 Picnic for Two — see more games →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>The Meaning & Fun Factory</span></div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script>
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt; function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2200);}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+function pop(el){el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+/* confetti */
+const cvs=document.getElementById('confetti');
+const myConfetti=(typeof confetti==='function')?confetti.create(cvs,{resize:true,useWorker:true}):null;
+function boom(x,y,big){
+  if(!myConfetti)return;
+  const o={particleCount:big?90:24,spread:big?90:55,startVelocity:big?45:32,scalar:.9,
+    origin:{x:x/window.innerWidth,y:y/window.innerHeight},
+    colors:['#ffd56b','#ffb347','#ff5e8a','#7aa6ff','#5ee7d8','#b78bf5']};
+  myConfetti(o);
+  if(big)setTimeout(()=>myConfetti(Object.assign({},o,{angle:120,origin:{x:.7,y:.4}})),160);
+}
+
+
+const REL={
+  friend:{emoji:'🤝', tag:'Friendship match', word:'Friends', bond:'Friendship',
+    heads:[[92,'Besties for life 🌈'],[84,'Dream duo ✨'],[76,'You just click 💛'],[68,'Closer the more you know each other 🧡'],[0,'Still learning each other 🌱']],
+    missions:[
+      'Meet up face-to-face at least once a month',
+      'Remember one thing they’re into lately, then ask about it',
+      'When you’re grateful, don’t put off your “thank you”',
+      'When they’re venting, listen all the way through — no judging',
+      'Keep even the small promises and build trust'],
+    advice:{
+      close:'The easier you click, the easier it is to take each other for granted. The closer you are, the less you should hold back your “thank you”s and “sorry”s.',
+      far:'Different personalities cause mix-ups — but that’s not wrong, just different. Get curious about the differences instead of teasing them, and your friendship only gets stronger.'}},
+  lover:{emoji:'💘', tag:'Love match', word:'Couple', bond:'Love',
+    heads:[[92,'Made for each other 🌈'],[84,'Dream chemistry ✨'],[76,'Butterflies 💛'],[68,'Perfect with a little effort 🧡'],[0,'Still learning each other 🌱']],
+    missions:[
+      'Say one loving thing once a day',
+      'Don’t let hurt pile up — bring it up gently the same day',
+      'Book time for just the two of you once a week',
+      'Show love the way they like to receive it',
+      'Name exactly what you’re grateful for'],
+    advice:{
+      close:'The more alike and comfy you are, the easier the spark gets buried under routine. Try something new together now and then to bring back those first butterflies.',
+      far:'What charms you now can become the seed of a fight later. Swap “why are they like that” for “that’s why I love them,” and the fire lasts longer.'}},
+  family:{emoji:'🏡', tag:'Family match', word:'Family', bond:'our bond',
+    heads:[[92,'Born to be family 🌈'],[84,'A rock-solid team ✨'],[76,'A warm bond 💛'],[68,'Great when you look out for each other 🧡'],[0,'Learning to embrace the differences 🌱']],
+    missions:[
+      'Check in with each other once a day',
+      'Ask how they feel before you nag',
+      'Say “thanks” even for the small help',
+      'Accept each other’s differences instead of fixing them',
+      'Make time to share a meal once a month'],
+    advice:{
+      close:'Being family makes it easy — and easy to get harsh with your words. Even the closest bond needs manners and respect.',
+      far:'Clashing over different generations or temperaments doesn’t mean the love is gone. Home gets cozier when you accept each other as-is instead of trying to change them.'}}
+};
+let rel='lover';
+function pickRel(r,ev){
+  rel=r;
+  document.querySelectorAll('#relseg button').forEach(b=>b.classList.toggle('on', b.dataset.rel===r));
+  const R=REL[r];
+  document.documentElement.style.setProperty('--accent1', r==='friend'?'#7fdfff':r==='family'?'#a0f0a0':'#ffd56b');
+  document.documentElement.style.setProperty('--accent2', r==='friend'?'#5b8aff':r==='family'?'#4fd1a0':'#ffb347');
+  vibrate(18);
+  if(ev){const t=ev.currentTarget.getBoundingClientRect(); boom(t.left+t.width/2, t.top+t.height/2, false);}
+}
+
+
+const TYPES={
+ INTJ:{e:'🦉',nick:'Architect'},
+ INTP:{e:'🔬',nick:'Logician'},
+ ENTJ:{e:'🦁',nick:'Commander'},
+ ENTP:{e:'🎇',nick:'Debater'},
+ INFJ:{e:'🌙',nick:'Advocate'},
+ INFP:{e:'🍃',nick:'Mediator'},
+ ENFJ:{e:'🌟',nick:'Protagonist'},
+ ENFP:{e:'🎈',nick:'Campaigner'},
+ ISTJ:{e:'🧱',nick:'Logistician'},
+ ISFJ:{e:'🧸',nick:'Defender'},
+ ESTJ:{e:'📋',nick:'Executive'},
+ ESFJ:{e:'🍰',nick:'Consul'},
+ ISTP:{e:'🛠️',nick:'Virtuoso'},
+ ISFP:{e:'🎨',nick:'Adventurer'},
+ ESTP:{e:'🔥',nick:'Entrepreneur'},
+ ESFP:{e:'🎤',nick:'Entertainer'}
+};
+const ORDER=['INTJ','INTP','ENTJ','ENTP','INFJ','INFP','ENFJ','ENFP','ISTJ','ISFJ','ESTJ','ESFJ','ISTP','ISFP','ESTP','ESFP'];
+
+
+const QS=[
+ {ax:'EI', q:'What recharges you on a weekend?', a:{t:'Being around people, loud and lively',k:'E'}, b:{t:'Quiet time on my own',k:'I'}},
+ {ax:'EI', q:'At a first meeting, I…', a:{t:'Break the ice and get things going',k:'E'}, b:{t:'Hang back and wait for others to come to me',k:'I'}},
+ {ax:'EI', q:'When something’s on my mind…', a:{t:'I talk it out with people to sort it',k:'E'}, b:{t:'I mull it over on my own',k:'I'}},
+ {ax:'SN', q:'See something new — what pulls you in?', a:{t:'The concrete how-to of using it now',k:'S'}, b:{t:'The big picture of what it’ll change',k:'N'}},
+ {ax:'SN', q:'In conversation, I mostly go for…', a:{t:'Real events and hard facts',k:'S'}, b:{t:'Ideas, possibilities, and meaning',k:'N'}},
+ {ax:'SN', q:'Giving directions, I…', a:{t:'Name the landmarks and steps exactly',k:'S'}, b:{t:'Point the rough direction and vibe',k:'N'}},
+ {ax:'TF', q:'When someone says they’re struggling, I first…', a:{t:'Look for a way to fix the problem',k:'T'}, b:{t:'Empathize and comfort them first',k:'F'}},
+ {ax:'TF', q:'Making decisions, I trust…', a:{t:'Objective evidence and logic',k:'T'}, b:{t:'How I and the people around me feel',k:'F'}},
+ {ax:'TF', q:'When I’m being honest, I…', a:{t:'Say it straight, just as it is',k:'T'}, b:{t:'Soften it so it doesn’t sting',k:'F'}},
+ {ax:'JP', q:'Planning a trip or a date, I…', a:{t:'Map the schedule out in advance, tight',k:'J'}, b:{t:'Go with whatever I feel in the moment',k:'P'}},
+ {ax:'JP', q:'When there’s a task, I…', a:{t:'Feel better getting it done early',k:'J'}, b:{t:'Focus best as the deadline closes in',k:'P'}},
+ {ax:'JP', q:'My space is…', a:{t:'Comfier when it’s tidy',k:'J'}, b:{t:'A little messy, but I’ve got my own order',k:'P'}}
+];
+const AXDEF=[['EI','E','I'],['SN','S','N'],['TF','T','F'],['JP','J','P']];
+
+
+let DISP=[];
+function shuffleDisp(){
+  DISP=AXDEF.map(([ax,p1,p2])=> Math.random()<0.5?[ax,p1,p2]:[ax,p2,p1]);
+  for(let i=DISP.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[DISP[i],DISP[j]]=[DISP[j],DISP[i]];}
+}
+
+
+let players=[ {name:'My', score:null, type:null}, {name:'You', score:null, type:null} ];
+let cur=0;            // person currently taking the test (0/1)
+let qIdx=0, score={}, locked=false;
+
+function freshScore(){return {E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};}
+
+
+function renderAxes(){
+  shuffleDisp();  // reshuffle each test — so the bar position can’t hint at the axis
+  const box=document.getElementById('axes'); box.innerHTML='';
+  DISP.forEach(([ax])=>{
+    const el=document.createElement('div'); el.className='axis'; el.dataset.ax=ax;
+    el.innerHTML=`<div class="lbl l1">?</div>
+      <div class="track"><div class="mid"></div><div class="fill" data-ax="${ax}"></div></div>
+      <div class="lbl l2">?</div>`;
+    box.appendChild(el);
+  });
+  updateAxes();
+}
+function updateAxes(){
+  DISP.forEach(([ax,p1,p2])=>{
+    const a=score[p1], b=score[p2], tot=a+b;
+    const fill=document.querySelector(`.fill[data-ax="${ax}"]`);
+    const axEl=document.querySelector(`.axis[data-ax="${ax}"]`);
+    if(!fill) return;
+    if(tot===0){ fill.style.left='50%'; fill.style.width='0%'; }
+    else if(a>=b){ const w=(a/tot)*50; fill.style.left=(50-w)+'%'; fill.style.width=w+'%'; }
+    else { const w=(b/tot)*50; fill.style.left='50%'; fill.style.width=w+'%'; }
+    if(axEl){
+      axEl.querySelector('.l1').classList.toggle('win', a>b);
+      axEl.querySelector('.l2').classList.toggle('win', b>a);
+    }
+  });
+  const lc=document.getElementById('livecode');
+
+  lc.innerHTML=AXDEF.map(([ax,p1,p2])=>{
+    const a=score[p1], b=score[p2];
+    const ch = a===b?'·':'★';
+    const on = a!==b?'on':'';
+    return `<span class="${on}">${ch}</span>`;
+  }).join('');
+}
+
+
+function startTogether(){
+  const nA=(document.getElementById('nameA').value||'').trim().slice(0,6);
+  const nB=(document.getElementById('nameB').value||'').trim().slice(0,6);
+  players=[ {name:nA||'My', score:null, type:null}, {name:nB||'You', score:null, type:null} ];
+  cur=0;
+  showTurn();
+}
+function showTurn(){
+  const p=players[cur];
+  document.getElementById('turnEmoji').textContent = cur===0?'🙋':'🙋‍♀️';
+  document.getElementById('turnTitle').innerHTML = `<b>${esc(p.name)}</b> turn!`;
+  if(cur===0){
+    document.getElementById('turnDesc').innerHTML='Whoever goes first, start answering.<br>12 questions — honestly, from the heart 🙂';
+    document.getElementById('turnPill').textContent='👀 Everyone else, look away for a sec';
+  }else{
+    document.getElementById('turnDesc').innerHTML=`Now hand the phone to <b>${esc(p.name)}</b>!<br>Same 12 questions — now it’s your turn ✨`;
+    document.getElementById('turnPill').textContent='🔄 Got the phone? Let’s go!';
+  }
+  go('turn');
+}
+function beginTurn(){
+  qIdx=0; score=freshScore(); locked=false;
+  document.getElementById('nowWho').textContent=players[cur].name;
+  renderAxes(); go('test'); renderQ();
+}
+function renderQ(){
+  const q=QS[qIdx];
+  document.getElementById('qcount').textContent=qIdx+1;
+  const opts=shuffle([{...q.a},{...q.b}]);
+  const h=document.getElementById('qholder');
+  h.innerHTML=`<div class="qcard pop">
+    <div class="qnum">Q${qIdx+1}</div>
+    <div class="qtext">${esc(q.q)}</div>
+    <button class="opt" data-k="${opts[0].k}"><span class="key">A</span><span>${esc(opts[0].t)}</span></button>
+    <button class="opt" data-k="${opts[1].k}"><span class="key">B</span><span>${esc(opts[1].t)}</span></button>
+  </div>`;
+  h.querySelectorAll('.opt').forEach((b,i)=>{
+    b.querySelector('.key').textContent = i===0?'A':'B';
+    b.addEventListener('click',ev=>pick(b.dataset.k, ev));
+  });
+  locked=false;
+}
+function pick(k, ev){
+  if(locked) return;   // prevent double-tapping the same question(block axis-shift mis-scoring)
+  locked=true;
+  score[k]++;
+  updateAxes(); vibrate(22);
+  const r=ev.currentTarget.getBoundingClientRect();
+  boom(r.left+r.width/2, r.top+r.height/2, false);
+  ev.currentTarget.classList.add('sel');
+  if(qIdx===5){ toast('Halfway there! Your type is taking shape ✨'); vibrate([18,40,18]); }
+  qIdx++;
+  if(qIdx>=QS.length){ setTimeout(finishTurn,320); }
+  else setTimeout(renderQ,240);
+}
+function finishTurn(){
+  const type=AXDEF.map(([ax,p1,p2])=>score[p1]>=score[p2]?p1:p2).join('');
+  players[cur].type=type; players[cur].score={...score};
+  toast(`${players[cur].name} → ${type} · ${TYPES[type].nick}!`);
+  vibrate([40,60,40]);
+  if(cur===0){ cur=1; setTimeout(showTurn,650); }
+  else { setTimeout(showPair,650); }
+}
+
+
+const AXTXT={
+ EI:{same:{E:'You’re both outgoing — get together and the talk and laughter never stop.',
+          I:'You’re both easygoing — comfortable side by side, even in silence.'},
+     diff:'One of you recharges out in the world, the other from within. After time together, give each other some downtime and neither of you burns out.'},
+ SN:{same:{S:'You’ve both got a good feel for reality — your plans line right up.',
+          N:'You both love imagination and meaning — your talks run deep and wide.'},
+     diff:'One of you sees the facts, the other the possibilities. Ask “what do you mean?” often and the mix-ups shrink.'},
+ TF:{same:{T:'You’re both logical — even when you clash, you fix it fast by focusing on the problem.',
+          F:'You both read each other’s feelings and take care not to hurt one another.'},
+     diff:'One of you wants solutions, the other wants empathy. Ask first: “Want advice, or should I just listen?”'},
+ JP:{same:{J:'You’re both planners — your dates and schedules fit together easily.',
+          P:'You’re both free spirits — even winging it turns into a blast.'},
+     diff:'One of you likes a plan, the other likes to improvise. Set the big frame, leave the details open, and you’ll both be happy.'}
+};
+function compat(A,B){
+  const axes=[['EI','E','I'],['SN','S','N'],['TF','T','F'],['JP','J','P']];
+  let base=72, sim=[], adj=[], diffCount=0;
+  const wSame={EI:3,SN:11,TF:4,JP:4}, wDiff={EI:6,SN:2,TF:6,JP:6};
+  axes.forEach(([ax,p1,p2],i)=>{
+    const a=A[i], b=B[i], same=a===b;
+    base += same? wSame[ax] : wDiff[ax];
+    if(same){ sim.push(AXTXT[ax].same[a]); }
+    else{ adj.push(AXTXT[ax].diff); diffCount++; }
+  });
+  if(A===B) base+=4;
+  let pct=Math.max(60,Math.min(99,base));
+  if(sim.length===0) sim.push('Opposites on the surface — which is exactly why you fill in what the other’s missing, like two magnets.');
+  if(adj.length===0) adj.push('All four axes match — you’re the soulmate type. It’s cozy, so chase new thrills together to keep it fun for the long haul.');
+  const R=REL[rel];
+  let head=R.heads[R.heads.length-1][1];
+  for(const [th,label] of R.heads){ if(pct>=th){ head=label; break; } }
+  const advice = diffCount<=1 ? R.advice.close : R.advice.far;
+  return {pct, head, sim, adj, advice, diffCount};
+}
+
+
+let _cntTimer=null;
+function showPair(){
+  const R=REL[rel];
+  const A=players[0], B=players[1];
+  pickRel(rel); // lock in the relationship theme color
+  document.getElementById('relTag').textContent = `${R.emoji} ${R.tag}`;
+
+
+  const cards=document.getElementById('pairCards');
+  cards.innerHTML=[A,B].map(p=>{
+    const t=TYPES[p.type];
+    return `<div class="pcard pop">
+      <div class="pe">${t.e}</div>
+      <div class="pn">${esc(p.name)}</div>
+      <div class="pcode grad">${p.type}</div>
+      <div class="pnick">${t.nick}</div></div>`;
+  }).join('<div class="pairmid"><div class="hh">💞</div></div>');
+
+  const r=compat(A.type,B.type);
+  document.getElementById('matchhead').textContent=r.head;
+  const badge=document.getElementById('matchbadge');
+  badge.style.display='inline-block';
+  badge.textContent=`${A.type} × ${B.type}`;
+  document.getElementById('oneline').textContent =
+    `${A.name}(${A.type}) &  ${B.name}(${B.type}), ${r.diffCount<=1?'birds of a feather,':r.diffCount>=3?'opposites attract,':'the best of both,'} ${R.word} energy! 💖`;
+  document.getElementById('m-sim').innerHTML=r.sim.map(s=>'· '+esc(s)).join('<br>');
+  document.getElementById('m-adj').innerHTML=r.adj.map(s=>'· '+esc(s)).join('<br>');
+  document.getElementById('m-advice').textContent=r.advice;
+
+  buildChecklist();
+  go('pair');
+
+  const el=document.getElementById('pct'); clearInterval(_cntTimer);
+  let cnt=0; const target=r.pct; el.textContent='0%';
+  requestAnimationFrame(()=>{
+    _cntTimer=setInterval(()=>{ cnt+=Math.max(1,Math.ceil((target-cnt)/6)); if(cnt>=target){cnt=target;clearInterval(_cntTimer);} el.textContent=cnt+'%'; },30);
+  });
+  pop(el);
+  vibrate([50,70,50,70,120]);
+  setTimeout(()=>boom(window.innerWidth/2, window.innerHeight*0.30, true),260);
+}
+
+
+let checkState=[];
+function buildChecklist(){
+  const R=REL[rel];
+  checkState=R.missions.map(()=>false);
+  const box=document.getElementById('checklist'); box.innerHTML='';
+  R.missions.forEach((m,i)=>{
+    const b=document.createElement('button');
+    b.className='check'; b.type='button';
+    b.innerHTML=`<span class="box">✓</span><span class="ctxt">${esc(m)}</span>`;
+    b.addEventListener('click',ev=>toggleCheck(i,b,ev));
+    box.appendChild(b);
+  });
+  updateInti();
+}
+function toggleCheck(i,el,ev){
+  checkState[i]=!checkState[i];
+  el.classList.toggle('done',checkState[i]);
+  vibrate(checkState[i]?26:14);
+  if(checkState[i]){
+    const r=el.getBoundingClientRect();
+    boom(r.left+30, r.top+r.height/2, false);
+  }
+  updateInti();
+}
+function updateInti(){
+  const done=checkState.filter(Boolean).length, tot=checkState.length||1;
+  const pct=Math.round(done/tot*100);
+  document.getElementById('intiFill').style.width=pct+'%';
+  document.getElementById('intiPct').textContent=pct+'%';
+  if(done===tot && tot>0){
+    toast('Closeness 100%! Today is where it really begins 💖');
+    vibrate([30,50,30,50,120]);
+    setTimeout(()=>boom(window.innerWidth/2, window.innerHeight*0.5, true),120);
+  }
+}
+
+function cheer(){
+  const A=players[0], B=players[1];
+  const r=compat(A.type||document.getElementById('selA').value, B.type||document.getElementById('selB').value);
+  toast(`${A.name||'My'} × ${B.name||'You'} = ${r.pct}% · ${r.head}`);
+  vibrate([30,50,30,50,120]);
+  boom(window.innerWidth/2, window.innerHeight*0.4, true);
+  setTimeout(()=>boom(window.innerWidth*0.3, window.innerHeight*0.5, false),180);
+  setTimeout(()=>boom(window.innerWidth*0.7, window.innerHeight*0.5, false),300);
+}
+
+
+function fillSelects(){
+  ['selA','selB'].forEach(id=>{
+    const s=document.getElementById(id);
+    s.innerHTML=ORDER.map(t=>`<option value="${t}">${t} · ${TYPES[t].nick}</option>`).join('');
+  });
+  document.getElementById('selA').value='ENFP';
+  document.getElementById('selB').value='INFJ';
+}
+function quickCalc(){
+  const A=document.getElementById('selA').value, B=document.getElementById('selB').value;
+  document.getElementById('qfaceA').textContent=TYPES[A].e;
+  document.getElementById('qfaceB').textContent=TYPES[B].e;
+  vibrate(16);
+}
+function quickToPair(){
+  const A=document.getElementById('selA').value, B=document.getElementById('selB').value;
+  const nA=(document.getElementById('nameA').value||'').trim().slice(0,6);
+  const nB=(document.getElementById('nameB').value||'').trim().slice(0,6);
+  players=[ {name:nA||'My', type:A, score:null}, {name:nB||'You', type:B, score:null} ];
+  showPair();
+}
+
+/* init */
+fillSelects();
+quickCalc();
+pickRel('lover');
+</script>
+</body>
+</html>

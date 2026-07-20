@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>兩人一起玩 MBTI 配對 · 咪咪工廠</title>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#1a1230; --bg2:#2d1b4e;
+  --accent1:#ffd56b; --accent2:#ffb347;
+  --cream:#fff6ec; --muted:#cdbfe0;
+  --card:#241a3d;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 80% -10%, rgba(255,180,90,.10), transparent 55%),
+    radial-gradient(120% 90% at 10% 110%, rgba(255,94,138,.12), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed; min-height:100dvh;
+  transition:background .9s ease;
+}
+.wrap{max-width:520px; margin:0 auto; padding:20px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; margin:0; line-height:1.25;}
+.grad{
+  background:linear-gradient(105deg,var(--accent1),#ff8a5b 45%,#ff5e8a);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+button{font-family:inherit; cursor:pointer; border:none; color:inherit;}
+.screen{display:none; animation:fadeIn .5s ease;}
+.screen.active{display:block;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1.5deg); opacity:.4;}60%{transform:scale(1.02) rotate(.5deg);}100%{transform:scale(1) rotate(0); opacity:1;}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.06);}}
+
+
+.hero{text-align:center; margin:auto 0; padding:6px 0;}
+.hero .emoji{font-size:60px; display:inline-block; animation:float 3.2s ease-in-out infinite;}
+.hero h1{font-size:32px; margin:12px 0 6px;}
+.hero p{color:var(--muted); font-size:15px; line-height:1.7; margin:0 0 4px; }
+.hero .sub{font-size:12.5px; color:#9a8fc0; margin-top:12px; line-height:1.6;}
+.btn{
+  display:block; width:100%; padding:17px; border-radius:18px; font-size:18px;
+  font-family:'Jua',sans-serif; color:#2a1636; margin-top:13px;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2));
+  box-shadow:0 10px 26px -8px var(--accent2); transition:transform .15s, box-shadow .3s;
+}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:rgba(255,255,255,.07); color:var(--cream); box-shadow:none; border:1.5px solid rgba(255,255,255,.14);}
+.btn:focus-visible{outline:3px solid var(--accent1); outline-offset:3px;}
+
+
+.rellabel{font-size:13px; color:#9a8fc0; text-align:center; margin:20px 0 8px;}
+.relseg{display:flex; gap:8px;}
+.relseg button{
+  flex:1; padding:14px 6px; border-radius:16px; background:rgba(255,255,255,.05);
+  border:1.6px solid rgba(255,255,255,.12); color:var(--muted); font-family:'Jua'; font-size:15px;
+  transition:transform .12s, background .25s, border-color .25s, color .25s;
+}
+.relseg button .re{display:block; font-size:26px; margin-bottom:4px;}
+.relseg button:active{transform:scale(.96);}
+.relseg button.on{
+  color:#2a1636; border-color:transparent;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2));
+  box-shadow:0 8px 22px -10px var(--accent2);
+}
+
+.namerow{display:flex; gap:10px; margin-top:14px;}
+.namerow .nb{flex:1;}
+.namerow label{display:block; font-size:11.5px; color:#9a8fc0; margin:0 0 5px 4px;}
+.namerow input{
+  width:100%; padding:12px 13px; border-radius:13px; background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(255,255,255,.14); color:var(--cream); font-family:'Jua'; font-size:16px; text-align:center;
+}
+.namerow input:focus{outline:2px solid var(--accent1); outline-offset:1px; border-color:var(--accent2);}
+.chips{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:16px 0 2px;}
+.chip{font-size:12px; color:var(--muted); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); padding:6px 12px; border-radius:99px;}
+
+
+.turn{text-align:center; margin:auto 0; padding:10px 0;}
+.turn .who{font-size:58px; display:inline-block; animation:pulse 1.8s ease-in-out infinite;}
+.turn h2{font-size:30px; margin:14px 0 8px;}
+.turn h2 b{font-family:'Jua';}
+.turn p{color:var(--muted); font-size:14.5px; line-height:1.7; }
+.turn .pill{display:inline-block; margin-top:14px; font-size:12.5px; color:var(--accent1);
+  background:rgba(255,181,71,.14); border:1px solid var(--accent2); padding:6px 15px; border-radius:99px;}
+
+
+.topbar{position:sticky; top:0; z-index:10; padding:10px 0 12px; margin-bottom:6px;
+  background:linear-gradient(180deg,var(--bg1) 65%,transparent);}
+.count{display:flex; justify-content:space-between; align-items:center; font-size:13px; color:var(--muted); margin-bottom:8px;}
+.count b{font-family:'Jua'; color:var(--cream); font-size:15px;}
+.count .nowwho{font-family:'Jua'; color:var(--accent1); font-size:13.5px;}
+.livecode{font-family:'Jua'; font-size:24px; letter-spacing:.14em;}
+.livecode span{opacity:.35; transition:opacity .3s;}
+.livecode span.on{opacity:1;}
+.axes{display:flex; flex-direction:column; gap:9px;}
+.axis{display:grid; grid-template-columns:20px 1fr 20px; align-items:center; gap:8px; font-size:11px; color:#9a8fc0;}
+.axis .lbl{font-family:'Jua'; font-size:13px; color:var(--muted); text-align:center;}
+.axis .lbl.win{color:var(--cream);}
+.track{position:relative; height:8px; border-radius:99px; background:rgba(255,255,255,.09); overflow:hidden;}
+.track .mid{position:absolute; left:50%; top:0; bottom:0; width:2px; background:rgba(255,255,255,.18); transform:translateX(-50%);}
+.track .fill{position:absolute; top:0; bottom:0; left:50%; width:0%; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2)); box-shadow:0 0 12px var(--accent2);
+  transition:left .45s cubic-bezier(.22,1,.36,1), width .45s cubic-bezier(.22,1,.36,1);}
+
+
+.qcard{background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:22px; padding:24px 20px; margin-top:14px;
+  box-shadow:0 18px 40px -22px rgba(0,0,0,.7);}
+.qnum{font-size:12px; color:var(--accent1); font-weight:700; letter-spacing:.05em;}
+.qtext{font-size:20px; font-family:'Jua'; line-height:1.45; margin:8px 0 20px; }
+.opt{display:flex; align-items:center; gap:13px; width:100%; text-align:left; padding:16px 16px; margin-top:11px;
+  border-radius:15px; background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.12);
+  font-size:15.5px; line-height:1.5; transition:transform .12s, background .2s, border-color .2s; color:var(--cream); }
+.opt:hover{background:rgba(255,255,255,.09);}
+.opt:active{transform:scale(.98);}
+.opt .key{flex:0 0 30px; height:30px; border-radius:9px; display:grid; place-items:center; font-family:'Jua'; font-size:16px;
+  background:rgba(255,255,255,.1); color:var(--muted);}
+.opt.sel{border-color:var(--accent2); background:rgba(255,181,71,.14);}
+.opt:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+
+
+.rescard{background:var(--card); border:1px solid rgba(255,255,255,.1); border-radius:26px; padding:26px 20px; text-align:center;
+  box-shadow:0 20px 50px -24px rgba(0,0,0,.75);}
+.block{background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:16px 17px; margin-top:12px; text-align:left;}
+.block h3{font-size:15px; margin-bottom:7px; display:flex; align-items:center; gap:7px;}
+.block p{font-size:14px; line-height:1.72; color:#e7ddf2; margin:0; }
+
+
+.pairtop{text-align:center; margin-top:2px;}
+.pairtop .rel{font-size:13px; color:var(--accent1); font-family:'Jua'; letter-spacing:.04em;}
+.pairtop h2{font-size:25px; margin-top:4px;}
+.pair{display:flex; gap:10px; align-items:stretch; margin-top:16px;}
+.pcard{flex:1; background:var(--card); border:1px solid rgba(255,255,255,.1); border-radius:20px; padding:16px 10px; text-align:center;
+  box-shadow:0 16px 40px -26px rgba(0,0,0,.8);}
+.pcard .pe{font-size:44px; display:inline-block; animation:float 3.4s ease-in-out infinite;}
+.pcard .pn{font-size:13px; color:#9a8fc0; margin-top:2px;}
+.pcard .pcode{font-family:'Jua'; font-size:26px; letter-spacing:.05em; margin-top:3px;}
+.pcard .pnick{font-size:11.5px; color:var(--muted); margin-top:2px;  min-height:28px;}
+.pairmid{align-self:center; text-align:center; padding:0 2px;}
+.pairmid .hh{font-size:26px; animation:pulse 1.8s ease-in-out infinite;}
+
+.scorewrap{text-align:center; margin-top:20px;}
+.scorewrap .heart{font-size:30px; margin-bottom:2px;}
+.scorewrap .pct{font-family:'Jua'; font-size:64px; line-height:1;}
+.scorewrap .head{font-size:16px; color:var(--muted); margin-top:6px; font-family:'Jua';}
+.matchbadge{display:inline-block; font-size:12px; padding:5px 13px; border-radius:99px; margin-top:10px;
+  background:rgba(255,181,71,.16); border:1px solid var(--accent2); color:var(--accent1);}
+.oneline{font-size:14.5px; color:var(--muted); margin-top:14px; line-height:1.7; }
+
+
+.intiwrap{margin-top:6px;}
+.intitop{display:flex; justify-content:space-between; align-items:center; font-size:12px; color:#9a8fc0; margin-bottom:6px;}
+.intitop b{font-family:'Jua'; color:var(--cream); font-size:14px;}
+.intibar{height:10px; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden;}
+.intifill{height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  box-shadow:0 0 12px var(--accent2); transition:width .5s cubic-bezier(.22,1,.36,1);}
+.check{display:flex; align-items:flex-start; gap:12px; width:100%; text-align:left; padding:14px 15px; margin-top:10px;
+  border-radius:14px; background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.12);
+  font-size:14.5px; line-height:1.5; color:var(--cream); transition:transform .12s, background .25s, border-color .25s; }
+.check:active{transform:scale(.98);}
+.check .box{flex:0 0 24px; height:24px; border-radius:8px; border:2px solid rgba(255,255,255,.3); display:grid; place-items:center;
+  font-size:14px; color:transparent; transition:background .2s, border-color .2s, color .2s; margin-top:1px;}
+.check.done{background:rgba(255,181,71,.13); border-color:var(--accent2);}
+.check.done .box{background:var(--accent2); border-color:var(--accent2); color:#2a1636;}
+.check.done .ctxt{opacity:.72;}
+.check:focus-visible{outline:3px solid var(--accent1); outline-offset:2px;}
+
+.toast{position:fixed; left:50%; top:74px; transform:translateX(-50%) translateY(-20px);
+  background:rgba(36,26,61,.96); border:1.5px solid var(--accent2); color:var(--cream);
+  padding:13px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none;
+  transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; text-align:center;}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+.mini{font-size:12.5px; color:#9a8fc0; text-align:center; margin-top:16px; line-height:1.6;}
+.linkbtn{background:none; text-decoration:underline; color:var(--muted); font-size:13px; padding:8px; margin:6px auto 0; display:block;}
+#confetti{position:fixed; inset:0; pointer-events:none; z-index:55;}
+
+
+.selrow{display:flex; gap:10px; margin-top:16px;}
+.selbox{flex:1; background:var(--card); border:1px solid rgba(255,255,255,.1); border-radius:18px; padding:14px 12px; text-align:center;}
+.selbox label{display:block; font-size:12px; color:#9a8fc0; margin-bottom:8px;}
+.selbox select{width:100%; padding:11px 8px; border-radius:12px; background:rgba(255,255,255,.06); color:var(--cream);
+  border:1.5px solid rgba(255,255,255,.16); font-family:'Jua'; font-size:16px; text-align:center; text-align-last:center;}
+.selbox .face{font-size:34px; margin-bottom:4px; height:40px;}
+.vs{align-self:center; font-family:'Jua'; font-size:20px; color:var(--accent1);}
+
+
+.footer{text-align:center; margin-top:28px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <section id="home" class="screen active">
+    <div class="hero">
+      <div class="emoji">💞</div>
+      <h1>兩人一起 <span class="grad">MBTI 配對</span></h1>
+      <p>一支手機 <b>輪流測驗</b>，<br>算出兩人的 <b>配對指數</b>，還有拉近距離的 <b>實踐任務</b>！</p>
+      <div class="chips">
+        <span class="chip">👫 兩人 2 分鐘搞定</span>
+        <span class="chip">🎯 即時儀表</span>
+        <span class="chip">✅ 親密度任務</span>
+      </div>
+
+      <div class="rellabel">你們是什麼關係？</div>
+      <div class="relseg" id="relseg">
+        <button data-rel="friend" onclick="pickRel('friend',event)"><span class="re">🤝</span>朋友</button>
+        <button data-rel="lover" class="on" onclick="pickRel('lover',event)"><span class="re">💘</span>情侶</button>
+        <button data-rel="family" onclick="pickRel('family',event)"><span class="re">🏡</span>家人</button>
+      </div>
+
+      <div class="namerow">
+        <div class="nb"><label>第一位</label><input id="nameA" maxlength="6" placeholder="我" autocomplete="off"></div>
+        <div class="nb"><label>第二位</label><input id="nameB" maxlength="6" placeholder="你" autocomplete="off"></div>
+      </div>
+      <p class="sub">選項裡藏了對應傾向的線索。別偷看對方，跟著感覺選就對了！</p>
+    </div>
+    <div>
+      <button class="btn" onclick="startTogether()">🚀 兩人一起開始測驗</button>
+      <button class="btn ghost" onclick="go('quick')">⚡ 已知類型 · 直接看配對</button>
+    </div>
+  </section>
+
+  
+  <section id="turn" class="screen">
+    <div class="turn">
+      <div class="who" id="turnEmoji">🙋</div>
+      <h2 id="turnTitle"><b>我</b>的回合！</h2>
+      <p id="turnDesc">接過手機後，從現在起輪到 <b>你</b>回答了。<br>12 題，跟著感覺誠實作答。</p>
+      <div class="pill" id="turnPill">👀 對方請先別看螢幕</div>
+    </div>
+    <button class="btn" onclick="beginTurn()">✏️ 開始我的測驗</button>
+  </section>
+
+  
+  <section id="test" class="screen">
+    <div class="topbar">
+      <div class="count">
+        <span><span class="nowwho" id="nowWho">我</span> · <b id="qcount">1</b> / 12</span>
+        <span class="livecode" id="livecode"></span></div>
+      <div class="axes" id="axes"></div>
+    </div>
+    <div id="qholder"></div>
+  </section>
+
+  
+  <section id="pair" class="screen">
+    <div class="pairtop">
+      <div class="rel" id="relTag">💘 戀愛配對</div>
+      <h2><span class="grad">我們倆</span>的化學反應</h2>
+    </div>
+
+    <div class="pair" id="pairCards"></div>
+
+    <div class="rescard" style="margin-top:16px; padding:22px 18px">
+      <div class="scorewrap">
+        <div class="heart">💓</div>
+        <div class="pct" id="pct">--%</div>
+        <div class="head" id="matchhead">計算中…</div>
+        <div class="matchbadge" id="matchbadge" style="display:none"></div>
+        <div class="oneline" id="oneline"></div>
+      </div>
+    </div>
+
+    <div class="block"><h3>🧩 我們相似的地方</h3><p id="m-sim"></p></div>
+    <div class="block"><h3>🎚️ 這樣磨合</h3><p id="m-adj"></p></div>
+
+    <div class="block" style="background:rgba(255,181,71,.07); border-color:rgba(255,181,71,.25)">
+      <h3>💡 給這段關係的建議</h3><p id="m-advice"></p>
+    </div>
+
+    <!-- 親密度 實踐任務 -->
+    <div class="rescard" style="margin-top:14px; padding:20px 17px; text-align:left">
+      <h3 style="font-size:16px; margin-bottom:4px">✅ 從今天開始變親近的任務</h3>
+      <p style="font-size:12.5px; color:#9a8fc0; margin:0 0 12px">每完成一項， <b>親密度</b>就往上漲。兩個人一起按按看！</p>
+      <div class="intiwrap">
+        <div class="intitop"><span>親密度</span><b id="intiPct">0%</b></div>
+        <div class="intibar"><div class="intifill" id="intiFill"></div></div>
+      </div>
+      <div id="checklist" style="margin-top:6px"></div>
+    </div>
+
+    <button class="btn" style="margin-top:16px" onclick="cheer()">💖 慶祝我們的配對</button>
+    <button class="btn ghost" onclick="go('home')">🔄 換兩個人再玩一次</button>
+    <p class="mini">截圖分享給彼此吧 📸</p>
+  </section>
+
+  
+  <section id="quick" class="screen">
+    <div style="text-align:center; margin-top:6px">
+      <h2 style="font-size:25px">⚡ <span class="grad">直接看</span> 配對</h2>
+      <p style="color:var(--muted); font-size:13px; margin-top:6px">已經知道類型的話，選一選馬上看結果</p>
+    </div>
+    <div class="selrow">
+      <div class="selbox">
+        <div class="face" id="qfaceA">🙂</div>
+        <label id="qlabelA">我</label>
+        <select id="selA" onchange="quickCalc()"></select>
+      </div>
+      <div class="vs">💗</div>
+      <div class="selbox">
+        <div class="face" id="qfaceB">🙂</div>
+        <label id="qlabelB">對方</label>
+        <select id="selB" onchange="quickCalc()"></select>
+      </div>
+    </div>
+    <button class="btn" style="margin-top:18px" onclick="quickToPair()">💞 用這個組合看配對</button>
+    <button class="linkbtn" onclick="go('home')">回到首頁</button>
+  </section>
+
+  
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/zh-tw/friend.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧺 兩人的野餐 — 看看其他遊戲 →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意義與趣味工廠</span></div>
+    <div class="mf-logo">咪咪工廠 MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL股份有限公司 家族公司</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script>
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt; function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2200);}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+function pop(el){el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+/* confetti */
+const cvs=document.getElementById('confetti');
+const myConfetti=(typeof confetti==='function')?confetti.create(cvs,{resize:true,useWorker:true}):null;
+function boom(x,y,big){
+  if(!myConfetti)return;
+  const o={particleCount:big?90:24,spread:big?90:55,startVelocity:big?45:32,scalar:.9,
+    origin:{x:x/window.innerWidth,y:y/window.innerHeight},
+    colors:['#ffd56b','#ffb347','#ff5e8a','#7aa6ff','#5ee7d8','#b78bf5']};
+  myConfetti(o);
+  if(big)setTimeout(()=>myConfetti(Object.assign({},o,{angle:120,origin:{x:.7,y:.4}})),160);
+}
+
+
+const REL={
+  friend:{emoji:'🤝', tag:'友情配對', word:'朋友', bond:'友情',
+    heads:[[92,'一輩子的死黨 🌈'],[84,'夢幻搭檔 ✨'],[76,'很合拍 💛'],[68,'越熟越麻吉 🧡'],[0,'彼此學習的關係 🌱']],
+    missions:[
+      '每個月至少見一次面聊聊天',
+      '記住對方最近迷的一件事，找機會問問',
+      '值得感謝的當下，別把「謝謝」往後拖',
+      '難過的話別急著評斷，好好聽到最後',
+      '連小約定都守住，慢慢累積信任'],
+    advice:{
+      close:'越聊得來，越容易把彼此當成理所當然。越親近，越別省下「謝謝」和「對不起」。',
+      far:'個性不同而產生誤會，那不是誰對誰錯，只是不一樣。與其取笑差異，不如覺得新奇，友情會更牢固。'}},
+  lover:{emoji:'💘', tag:'戀愛配對', word:'情侶', bond:'愛',
+    heads:[[92,'天生一對 🌈'],[84,'夢幻火花 ✨'],[76,'怦然心動 💛'],[68,'用點心就很搭 🧡'],[0,'彼此學習的關係 🌱']],
+    missions:[
+      '每天說一句愛的表白',
+      '委屈別累積，當天就溫柔說出口',
+      '每週預約一次只屬於兩人的時間',
+      '用對方喜歡的方式表達愛',
+      '具體點出你感謝的地方'],
+    advice:{
+      close:'越相似越自在，心動也越容易被習慣淹沒。偶爾一起嘗試新事物，把最初的怦然找回來。',
+      far:'現在的差異是魅力，有天也可能變成吵架的種子。把「怎麼這樣」換成「就是這樣才喜歡」，才能熱得久。'}},
+  family:{emoji:'🏡', tag:'家人配對', word:'家人', bond:'我們之間',
+    heads:[[92,'天生一家人 🌈'],[84,'最可靠的一隊 ✨'],[76,'溫暖的關係 💛'],[68,'互相體貼就超搭 🧡'],[0,'包容彼此不同的關係 🌱']],
+    missions:[
+      '每天互相問候一句',
+      '先問心情，別急著碎念',
+      '再小的幫忙也說聲「謝謝」',
+      '彼此的不同，接受而不是想去改',
+      '每個月安排一次一起吃飯'],
+    advice:{
+      close:'因為是家人才自在，說話也容易變衝。再親近的關係，也需要禮貌和尊重。',
+      far:'因為世代或個性不同而起衝突，並不代表沒有愛。與其想改變對方，不如如實接受，家才會變得自在。'}}
+};
+let rel='lover';
+function pickRel(r,ev){
+  rel=r;
+  document.querySelectorAll('#relseg button').forEach(b=>b.classList.toggle('on', b.dataset.rel===r));
+  const R=REL[r];
+  document.documentElement.style.setProperty('--accent1', r==='friend'?'#7fdfff':r==='family'?'#a0f0a0':'#ffd56b');
+  document.documentElement.style.setProperty('--accent2', r==='friend'?'#5b8aff':r==='family'?'#4fd1a0':'#ffb347');
+  vibrate(18);
+  if(ev){const t=ev.currentTarget.getBoundingClientRect(); boom(t.left+t.width/2, t.top+t.height/2, false);}
+}
+
+
+const TYPES={
+ INTJ:{e:'🦉',nick:'建築師'},
+ INTP:{e:'🔬',nick:'邏輯學家'},
+ ENTJ:{e:'🦁',nick:'指揮官'},
+ ENTP:{e:'🎇',nick:'辯論家'},
+ INFJ:{e:'🌙',nick:'提倡者'},
+ INFP:{e:'🍃',nick:'調停者'},
+ ENFJ:{e:'🌟',nick:'主人公'},
+ ENFP:{e:'🎈',nick:'競選者'},
+ ISTJ:{e:'🧱',nick:'物流師'},
+ ISFJ:{e:'🧸',nick:'守衛者'},
+ ESTJ:{e:'📋',nick:'總經理'},
+ ESFJ:{e:'🍰',nick:'執政官'},
+ ISTP:{e:'🛠️',nick:'鑑賞家'},
+ ISFP:{e:'🎨',nick:'探險家'},
+ ESTP:{e:'🔥',nick:'企業家'},
+ ESFP:{e:'🎤',nick:'表演者'}
+};
+const ORDER=['INTJ','INTP','ENTJ','ENTP','INFJ','INFP','ENFJ','ENFP','ISTJ','ISFJ','ESTJ','ESFJ','ISTP','ISFP','ESTP','ESFP'];
+
+
+const QS=[
+ {ax:'EI', q:'週末讓你充飽電的是？', a:{t:'跟大家熱熱鬧鬧混在一起',k:'E'}, b:{t:'自己一個人安靜過時光',k:'I'}},
+ {ax:'EI', q:'第一次見面時，我會？', a:{t:'主動搭話炒熱氣氛',k:'E'}, b:{t:'先觀察，等對方靠過來',k:'I'}},
+ {ax:'EI', q:'有煩惱時？', a:{t:'找人聊一聊來理清',k:'E'}, b:{t:'自己反覆咀嚼想清楚',k:'I'}},
+ {ax:'SN', q:'看到新東西，你更好奇的是？', a:{t:'現在具體怎麼用的方法',k:'S'}, b:{t:'它未來會改變什麼的大局',k:'N'}},
+ {ax:'SN', q:'聊天時，我主要？', a:{t:'以真實發生的事和事實為主',k:'S'}, b:{t:'以點子、可能性和意義為主',k:'N'}},
+ {ax:'SN', q:'報路的時候，我會？', a:{t:'精確說出地標和順序',k:'S'}, b:{t:'大概的方向和感覺',k:'N'}},
+ {ax:'TF', q:'對方說很累時，你會先？', a:{t:'找出解決問題的方法',k:'T'}, b:{t:'先同理對方的心情、給予安慰',k:'F'}},
+ {ax:'TF', q:'做決定時，你更相信？', a:{t:'客觀的依據和邏輯',k:'T'}, b:{t:'自己和大家的情緒',k:'F'}},
+ {ax:'TF', q:'要說真心話時，我會？', a:{t:'照實話直說',k:'T'}, b:{t:'溫柔地說，免得傷到人',k:'F'}},
+ {ax:'JP', q:'約好行程或旅行後？', a:{t:'事先把行程排得密密的',k:'J'}, b:{t:'當下想到哪就走到哪',k:'P'}},
+ {ax:'JP', q:'有事情要做時，我會？', a:{t:'早點做完才安心',k:'J'}, b:{t:'越接近截止越能專心',k:'P'}},
+ {ax:'JP', q:'我的空間？', a:{t:'整齊才自在',k:'J'}, b:{t:'有點亂，但我自有一套秩序',k:'P'}}
+];
+const AXDEF=[['EI','E','I'],['SN','S','N'],['TF','T','F'],['JP','J','P']];
+
+
+let DISP=[];
+function shuffleDisp(){
+  DISP=AXDEF.map(([ax,p1,p2])=> Math.random()<0.5?[ax,p1,p2]:[ax,p2,p1]);
+  for(let i=DISP.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[DISP[i],DISP[j]]=[DISP[j],DISP[i]];}
+}
+
+
+let players=[ {name:'我', score:null, type:null}, {name:'你', score:null, type:null} ];
+let cur=0;            // 目前正在測驗的人 (0/1)
+let qIdx=0, score={}, locked=false;
+
+function freshScore(){return {E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};}
+
+
+function renderAxes(){
+  shuffleDisp();  // 每次測驗重新洗牌 — 讓長條位置也無法推出維度
+  const box=document.getElementById('axes'); box.innerHTML='';
+  DISP.forEach(([ax])=>{
+    const el=document.createElement('div'); el.className='axis'; el.dataset.ax=ax;
+    el.innerHTML=`<div class="lbl l1">?</div>
+      <div class="track"><div class="mid"></div><div class="fill" data-ax="${ax}"></div></div>
+      <div class="lbl l2">?</div>`;
+    box.appendChild(el);
+  });
+  updateAxes();
+}
+function updateAxes(){
+  DISP.forEach(([ax,p1,p2])=>{
+    const a=score[p1], b=score[p2], tot=a+b;
+    const fill=document.querySelector(`.fill[data-ax="${ax}"]`);
+    const axEl=document.querySelector(`.axis[data-ax="${ax}"]`);
+    if(!fill) return;
+    if(tot===0){ fill.style.left='50%'; fill.style.width='0%'; }
+    else if(a>=b){ const w=(a/tot)*50; fill.style.left=(50-w)+'%'; fill.style.width=w+'%'; }
+    else { const w=(b/tot)*50; fill.style.left='50%'; fill.style.width=w+'%'; }
+    if(axEl){
+      axEl.querySelector('.l1').classList.toggle('win', a>b);
+      axEl.querySelector('.l2').classList.toggle('win', b>a);
+    }
+  });
+  const lc=document.getElementById('livecode');
+
+  lc.innerHTML=AXDEF.map(([ax,p1,p2])=>{
+    const a=score[p1], b=score[p2];
+    const ch = a===b?'·':'★';
+    const on = a!==b?'on':'';
+    return `<span class="${on}">${ch}</span>`;
+  }).join('');
+}
+
+
+function startTogether(){
+  const nA=(document.getElementById('nameA').value||'').trim().slice(0,6);
+  const nB=(document.getElementById('nameB').value||'').trim().slice(0,6);
+  players=[ {name:nA||'我', score:null, type:null}, {name:nB||'你', score:null, type:null} ];
+  cur=0;
+  showTurn();
+}
+function showTurn(){
+  const p=players[cur];
+  document.getElementById('turnEmoji').textContent = cur===0?'🙋':'🙋‍♀️';
+  document.getElementById('turnTitle').innerHTML = `<b>${esc(p.name)}</b>的回合！`;
+  if(cur===0){
+    document.getElementById('turnDesc').innerHTML='先測的人來作答。<br>12 題，跟著感覺誠實回答 🙂';
+    document.getElementById('turnPill').textContent='👀 對方請先別看螢幕';
+  }else{
+    document.getElementById('turnDesc').innerHTML=`現在把手機交給 <b>${esc(p.name)}</b>！<br>同樣 12 題，這次換你了 ✨`;
+    document.getElementById('turnPill').textContent='🔄 接到手機了嗎？開始！';
+  }
+  go('turn');
+}
+function beginTurn(){
+  qIdx=0; score=freshScore(); locked=false;
+  document.getElementById('nowWho').textContent=players[cur].name;
+  renderAxes(); go('test'); renderQ();
+}
+function renderQ(){
+  const q=QS[qIdx];
+  document.getElementById('qcount').textContent=qIdx+1;
+  const opts=shuffle([{...q.a},{...q.b}]);
+  const h=document.getElementById('qholder');
+  h.innerHTML=`<div class="qcard pop">
+    <div class="qnum">Q${qIdx+1}</div>
+    <div class="qtext">${esc(q.q)}</div>
+    <button class="opt" data-k="${opts[0].k}"><span class="key">A</span><span>${esc(opts[0].t)}</span></button>
+    <button class="opt" data-k="${opts[1].k}"><span class="key">B</span><span>${esc(opts[1].t)}</span></button>
+  </div>`;
+  h.querySelectorAll('.opt').forEach((b,i)=>{
+    b.querySelector('.key').textContent = i===0?'A':'B';
+    b.addEventListener('click',ev=>pick(b.dataset.k, ev));
+  });
+  locked=false;
+}
+function pick(k, ev){
+  if(locked) return;   // 防止同一題重複點擊(阻止維度錯位造成誤判)
+  locked=true;
+  score[k]++;
+  updateAxes(); vibrate(22);
+  const r=ev.currentTarget.getBoundingClientRect();
+  boom(r.left+r.width/2, r.top+r.height/2, false);
+  ev.currentTarget.classList.add('sel');
+  if(qIdx===5){ toast('過一半了！類型正在成形中 ✨'); vibrate([18,40,18]); }
+  qIdx++;
+  if(qIdx>=QS.length){ setTimeout(finishTurn,320); }
+  else setTimeout(renderQ,240);
+}
+function finishTurn(){
+  const type=AXDEF.map(([ax,p1,p2])=>score[p1]>=score[p2]?p1:p2).join('');
+  players[cur].type=type; players[cur].score={...score};
+  toast(`${players[cur].name} → ${type} · ${TYPES[type].nick}!`);
+  vibrate([40,60,40]);
+  if(cur===0){ cur=1; setTimeout(showTurn,650); }
+  else { setTimeout(showPair,650); }
+}
+
+
+const AXTXT={
+ EI:{same:{E:'兩個人都很外向，一見面話題和笑聲就停不下來。',
+          I:'兩個人都很沉穩，就算不說話並肩待著也很自在。'},
+     diff:'一個往外充電，一個往內充電。一起玩過之後，各自留點休息時間就不會累。'},
+ SN:{same:{S:'兩個人現實感都很好，計畫一拍即合。',
+          N:'兩個人都愛想像和意義，聊起來又深又廣。'},
+     diff:'一個看事實，一個看可能性。常問一句「你是什麼意思？」，誤會就少了。'},
+ TF:{same:{T:'兩個人都很理性，就算起衝突也能對事不對人，很快解決。',
+          F:'兩個人都很在意心情，互相體貼，不讓對方受傷。'},
+     diff:'一個想要解決，一個想要被同理。先問一句「你要建議，還是我聽就好？」'},
+ JP:{same:{J:'兩個人都很有計畫，約定和行程都很好喬。',
+          P:'兩個人都很隨性，就算臨時起意也能玩得很盡興。'},
+     diff:'一個愛計畫，一個愛即興。大方向定好、細節留白，兩個人都輕鬆。'}
+};
+function compat(A,B){
+  const axes=[['EI','E','I'],['SN','S','N'],['TF','T','F'],['JP','J','P']];
+  let base=72, sim=[], adj=[], diffCount=0;
+  const wSame={EI:3,SN:11,TF:4,JP:4}, wDiff={EI:6,SN:2,TF:6,JP:6};
+  axes.forEach(([ax,p1,p2],i)=>{
+    const a=A[i], b=B[i], same=a===b;
+    base += same? wSame[ax] : wDiff[ax];
+    if(same){ sim.push(AXTXT[ax].same[a]); }
+    else{ adj.push(AXTXT[ax].diff); diffCount++; }
+  });
+  if(A===B) base+=4;
+  let pct=Math.max(60,Math.min(99,base));
+  if(sim.length===0) sim.push('表面上完全相反！正因如此，你們像磁鐵一樣互補對方缺的那一塊。');
+  if(adj.length===0) adj.push('四個維度全部相似的靈魂伴侶型。正因為自在，一起找點新刺激，樂趣才能維持更久。');
+  const R=REL[rel];
+  let head=R.heads[R.heads.length-1][1];
+  for(const [th,label] of R.heads){ if(pct>=th){ head=label; break; } }
+  const advice = diffCount<=1 ? R.advice.close : R.advice.far;
+  return {pct, head, sim, adj, advice, diffCount};
+}
+
+
+let _cntTimer=null;
+function showPair(){
+  const R=REL[rel];
+  const A=players[0], B=players[1];
+  pickRel(rel); // 確定關係主題色
+  document.getElementById('relTag').textContent = `${R.emoji} ${R.tag}`;
+
+
+  const cards=document.getElementById('pairCards');
+  cards.innerHTML=[A,B].map(p=>{
+    const t=TYPES[p.type];
+    return `<div class="pcard pop">
+      <div class="pe">${t.e}</div>
+      <div class="pn">${esc(p.name)}</div>
+      <div class="pcode grad">${p.type}</div>
+      <div class="pnick">${t.nick}</div></div>`;
+  }).join('<div class="pairmid"><div class="hh">💞</div></div>');
+
+  const r=compat(A.type,B.type);
+  document.getElementById('matchhead').textContent=r.head;
+  const badge=document.getElementById('matchbadge');
+  badge.style.display='inline-block';
+  badge.textContent=`${A.type} × ${B.type}`;
+  document.getElementById('oneline').textContent =
+    `${A.name}(${A.type})與 ${B.name}(${B.type}), ${r.diffCount<=1?'很多地方都像的':r.diffCount>=3?'彼此差異很大的':'有點像又有點不同的'} ${R.word} 超級速配！`;
+  document.getElementById('m-sim').innerHTML=r.sim.map(s=>'· '+esc(s)).join('<br>');
+  document.getElementById('m-adj').innerHTML=r.adj.map(s=>'· '+esc(s)).join('<br>');
+  document.getElementById('m-advice').textContent=r.advice;
+
+  buildChecklist();
+  go('pair');
+
+  const el=document.getElementById('pct'); clearInterval(_cntTimer);
+  let cnt=0; const target=r.pct; el.textContent='0%';
+  requestAnimationFrame(()=>{
+    _cntTimer=setInterval(()=>{ cnt+=Math.max(1,Math.ceil((target-cnt)/6)); if(cnt>=target){cnt=target;clearInterval(_cntTimer);} el.textContent=cnt+'%'; },30);
+  });
+  pop(el);
+  vibrate([50,70,50,70,120]);
+  setTimeout(()=>boom(window.innerWidth/2, window.innerHeight*0.30, true),260);
+}
+
+
+let checkState=[];
+function buildChecklist(){
+  const R=REL[rel];
+  checkState=R.missions.map(()=>false);
+  const box=document.getElementById('checklist'); box.innerHTML='';
+  R.missions.forEach((m,i)=>{
+    const b=document.createElement('button');
+    b.className='check'; b.type='button';
+    b.innerHTML=`<span class="box">✓</span><span class="ctxt">${esc(m)}</span>`;
+    b.addEventListener('click',ev=>toggleCheck(i,b,ev));
+    box.appendChild(b);
+  });
+  updateInti();
+}
+function toggleCheck(i,el,ev){
+  checkState[i]=!checkState[i];
+  el.classList.toggle('done',checkState[i]);
+  vibrate(checkState[i]?26:14);
+  if(checkState[i]){
+    const r=el.getBoundingClientRect();
+    boom(r.left+30, r.top+r.height/2, false);
+  }
+  updateInti();
+}
+function updateInti(){
+  const done=checkState.filter(Boolean).length, tot=checkState.length||1;
+  const pct=Math.round(done/tot*100);
+  document.getElementById('intiFill').style.width=pct+'%';
+  document.getElementById('intiPct').textContent=pct+'%';
+  if(done===tot && tot>0){
+    toast('親密度 100%！今天開始才是真正的起點 💖');
+    vibrate([30,50,30,50,120]);
+    setTimeout(()=>boom(window.innerWidth/2, window.innerHeight*0.5, true),120);
+  }
+}
+
+function cheer(){
+  const A=players[0], B=players[1];
+  const r=compat(A.type||document.getElementById('selA').value, B.type||document.getElementById('selB').value);
+  toast(`${A.name||'我'} × ${B.name||'你'} = ${r.pct}% · ${r.head}`);
+  vibrate([30,50,30,50,120]);
+  boom(window.innerWidth/2, window.innerHeight*0.4, true);
+  setTimeout(()=>boom(window.innerWidth*0.3, window.innerHeight*0.5, false),180);
+  setTimeout(()=>boom(window.innerWidth*0.7, window.innerHeight*0.5, false),300);
+}
+
+
+function fillSelects(){
+  ['selA','selB'].forEach(id=>{
+    const s=document.getElementById(id);
+    s.innerHTML=ORDER.map(t=>`<option value="${t}">${t} · ${TYPES[t].nick}</option>`).join('');
+  });
+  document.getElementById('selA').value='ENFP';
+  document.getElementById('selB').value='INFJ';
+}
+function quickCalc(){
+  const A=document.getElementById('selA').value, B=document.getElementById('selB').value;
+  document.getElementById('qfaceA').textContent=TYPES[A].e;
+  document.getElementById('qfaceB').textContent=TYPES[B].e;
+  vibrate(16);
+}
+function quickToPair(){
+  const A=document.getElementById('selA').value, B=document.getElementById('selB').value;
+  const nA=(document.getElementById('nameA').value||'').trim().slice(0,6);
+  const nB=(document.getElementById('nameB').value||'').trim().slice(0,6);
+  players=[ {name:nA||'我', type:A, score:null}, {name:nB||'你', type:B, score:null} ];
+  showPair();
+}
+
+/* init */
+fillSelects();
+quickCalc();
+pickRel('lover');
+</script>
+</body>
+</html>

@@ -61,6 +61,18 @@
    "desc": "タップするたび揺れるコード — 最後にあなただけのタイプが解錠される診断"
   },
   {
+   "id": "mbti-match",
+   "type": "test",
+   "title": "ふたりでMBTI相性",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/mbti-match.html",
+   "premium": "apps/mbti-match.html",
+   "desc": "スマホ1台で交代診断 — ふたりの相性%と仲良くなるミッション"
+  },
+  {
    "id": "sq-social-intelligence",
    "type": "test",
    "title": "SQ 社会的知能テスト",

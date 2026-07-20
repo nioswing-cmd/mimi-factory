@@ -61,6 +61,18 @@
    "desc": "An unknown code spins with every tap — one single type unlocks at the end: yours."
   },
   {
+   "id": "mbti-match",
+   "type": "test",
+   "title": "MBTI Match for Two",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/mbti-match.html",
+   "premium": "apps/mbti-match.html",
+   "desc": "One phone, take turns — your match % and missions to grow closer"
+  },
+  {
    "id": "sq-social-intelligence",
    "type": "test",
    "title": "SQ Social IQ Test",
