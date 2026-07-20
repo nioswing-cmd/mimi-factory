@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Truth Game · Get closer, together</title>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#1a1230; --bg2:#2d1b4e;
+  --accent1:#ffd56b; --accent2:#ffb347;
+  --cream:#fff6ec; --muted:#cdbfe0;
+  --card:#241a3d;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 80% -10%, rgba(255,180,90,.12), transparent 55%),
+    radial-gradient(120% 90% at 10% 110%, rgba(255,94,138,.13), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  transition:background .9s ease;
+  min-height:100dvh;
+}
+.wrap{max-width:520px; margin:0 auto; padding:22px 18px calc(22px + env(safe-area-inset-bottom)); min-height:100dvh; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(105deg,var(--accent1),#ff8a5b 50%,#ff5e8a);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
+
+
+.screen{display:none; animation:fadeIn .5s ease; flex:1; flex-direction:column;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+
+.hero{text-align:center; margin-top:6px;}
+.badge{display:inline-block; font-size:12px; letter-spacing:.14em; color:var(--muted); border:1px solid rgba(255,255,255,.15); padding:6px 14px; border-radius:99px; margin-bottom:16px;}
+.hero h1{font-size:40px; margin:.1em 0 .12em; line-height:1.12;}
+.hero p{color:var(--muted); font-size:14.5px; line-height:1.7; overflow-wrap:break-word; margin:0 auto; max-width:340px;}
+.rule{
+  margin:22px 0 4px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);
+  border-radius:18px; padding:16px 18px; text-align:left;
+}
+.rule h3{font-size:16px; margin:0 0 10px;}
+.rule ul{margin:0; padding-left:2px; list-style:none;}
+.rule li{font-size:13.5px; color:var(--muted); line-height:1.6; margin:8px 0; padding-left:26px; position:relative; overflow-wrap:break-word;}
+.rule li b{color:var(--cream);}
+.rule li .ic{position:absolute; left:0; top:-1px; font-size:16px;}
+
+.names{display:flex; gap:10px; margin:20px 0 6px;}
+.names .field{flex:1;}
+.names label{display:block; font-size:12px; color:var(--muted); margin:0 0 6px 4px; letter-spacing:.02em;}
+.names input{
+  width:100%; padding:13px 14px; border-radius:14px; border:1.5px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.05); color:var(--cream); font-size:16px; font-family:inherit; text-align:center;
+  transition:border-color .25s;
+}
+.names input:focus{outline:none; border-color:var(--accent2);}
+
+.pick-title{text-align:center; font-size:13.5px; color:var(--muted); margin:22px 0 12px; letter-spacing:.02em;}
+.picks{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+.pick{
+  border:1.5px solid rgba(255,255,255,.14); background:rgba(255,255,255,.05); color:var(--cream);
+  border-radius:16px; padding:16px 8px 13px; cursor:pointer; font-family:'Jua',sans-serif;
+  transition:transform .18s cubic-bezier(.34,1.56,.64,1), border-color .2s, background .2s; text-align:center;
+}
+.pick:hover,.pick:focus-visible{border-color:var(--accent2); outline:none;}
+.pick:active{transform:scale(.94);}
+.pick.sel{border-color:var(--accent2); background:linear-gradient(160deg,rgba(255,213,107,.22),rgba(255,94,138,.14)); box-shadow:0 6px 20px -8px var(--accent2);}
+.pick .n{font-size:26px; line-height:1; display:block;}
+.pick .u{font-size:11px; color:var(--muted); letter-spacing:.04em; margin-top:5px; display:block;}
+.pick.full{grid-column:span 3;}
+.pick.full .n{font-size:22px;}
+.picks.tastes{margin-bottom:18px;}
+.picks.tastes .n{font-size:19px;}
+.picks.tastes .u{line-height:1.45;}
+
+.btn{
+  width:100%; border:none; cursor:pointer; font-family:'Jua',sans-serif; font-size:19px; color:#2a1533;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2)); border-radius:16px; padding:16px;
+  box-shadow:0 10px 26px -10px var(--accent2); transition:transform .18s cubic-bezier(.34,1.56,.64,1), filter .2s;
+  margin-top:18px; letter-spacing:.02em;
+}
+.btn:active{transform:scale(.97);}
+.btn:disabled{filter:grayscale(.6) brightness(.7); cursor:not-allowed; box-shadow:none;}
+.btn.ghost{background:transparent; color:var(--muted); border:1.5px solid rgba(255,255,255,.15); box-shadow:none; font-size:16px;}
+
+
+.topbar{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:14px;}
+.player{flex:1; background:rgba(255,255,255,.04); border:1.5px solid rgba(255,255,255,.08); border-radius:14px; padding:9px 10px; transition:border-color .3s, background .3s;}
+.player.active{border-color:var(--accent2); background:linear-gradient(160deg,rgba(255,213,107,.16),transparent);}
+.player .pn{font-size:13px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:5px;}
+.player .pn .dot{width:7px; height:7px; border-radius:50%; background:var(--accent2); opacity:0; transition:opacity .3s;}
+.player.active .pn .dot{opacity:1;}
+.player .passes{margin-top:5px; display:flex; gap:5px; align-items:center;}
+.pdot{width:9px; height:9px; border-radius:50%; background:var(--accent2); box-shadow:0 0 8px -1px var(--accent2); transition:transform .3s, background .3s, box-shadow .3s;}
+.pdot.used{background:rgba(255,255,255,.13); box-shadow:none; transform:scale(.8);}
+.player .plabel{font-size:9.5px; color:var(--muted); letter-spacing:.06em; margin-left:auto;}
+.vs{font-family:'Jua',sans-serif; font-size:15px; color:var(--muted); flex:0 0 auto;}
+
+.progline{display:flex; align-items:center; justify-content:space-between; margin:2px 2px 8px; font-size:12px; color:var(--muted);}
+.depthtag{font-family:'Jua',sans-serif; color:var(--cream); font-size:13px;}
+.gauge{height:9px; border-radius:99px; background:rgba(255,255,255,.1); overflow:hidden; margin-bottom:20px;}
+.gaugefill{height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg,var(--accent1),var(--accent2)); box-shadow:0 0 14px 1px var(--accent2); transition:width .55s cubic-bezier(.22,1,.36,1), box-shadow .6s;}
+
+.cardarea{flex:1; display:flex; align-items:center; justify-content:center; perspective:1200px; min-height:300px;}
+.card{
+  width:100%; max-width:400px; aspect-ratio:3/3.55; border-radius:26px; position:relative; cursor:pointer;
+  transform-style:preserve-3d; transition:transform .6s cubic-bezier(.4,.9,.3,1);
+}
+.card.flip{transform:rotateY(180deg);}
+.face{position:absolute; inset:0; border-radius:26px; backface-visibility:hidden; -webkit-backface-visibility:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:26px; text-align:center; overflow:hidden;}
+.back{
+  background:linear-gradient(160deg,var(--card),#1b1330); border:1.6px solid rgba(255,255,255,.1);
+  box-shadow:0 24px 60px -24px #000;
+}
+.back .qmark{font-family:'Jua',sans-serif; font-size:88px; line-height:1; background:linear-gradient(140deg,var(--accent1),var(--accent2)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px;}
+.back .tap{color:var(--muted); font-size:14px; letter-spacing:.03em;}
+.back .tap b{color:var(--cream);}
+.back::after{content:""; position:absolute; inset:0; background:radial-gradient(circle at 50% 30%, rgba(255,180,90,.14), transparent 60%); pointer-events:none;}
+.front{
+  transform:rotateY(180deg);
+  background:linear-gradient(160deg,var(--card),#20163a); border:1.6px solid var(--accent2);
+  box-shadow:0 24px 60px -22px #000, inset 0 0 60px -30px var(--accent2);
+}
+.front .lv{font-size:12px; letter-spacing:.1em; color:var(--accent2); font-weight:700; margin-bottom:auto; padding-top:4px;}
+.front .qnum{font-family:'Jua',sans-serif; font-size:15px; color:var(--muted); margin-bottom:14px;}
+.front .q{font-family:'Jua',sans-serif; font-size:25px; line-height:1.42; overflow-wrap:break-word;}
+.front .who{margin-top:auto; padding-bottom:4px; font-size:13px; color:var(--muted);}
+.front .who b{color:var(--accent1);}
+@media (max-height:720px){ .front .q{font-size:22px;} .back .qmark{font-size:70px;} }
+
+.actions{display:flex; gap:11px; margin-top:20px; min-height:56px;}
+.actions.hide{visibility:hidden;}
+.act{flex:1; border:none; cursor:pointer; font-family:'Jua',sans-serif; font-size:17px; border-radius:15px; padding:15px 8px; transition:transform .16s cubic-bezier(.34,1.56,.64,1), filter .2s;}
+.act:active{transform:scale(.95);}
+.act.answered{flex:1.7; color:#2a1533; background:linear-gradient(100deg,var(--accent1),var(--accent2)); box-shadow:0 10px 24px -12px var(--accent2);}
+.act.pass{color:var(--cream); background:rgba(255,255,255,.06); border:1.5px solid rgba(255,255,255,.16);}
+.act.pass:disabled{filter:grayscale(.6) opacity(.45); cursor:not-allowed;}
+.act.pass .sub{display:block; font-size:10.5px; font-family:'Noto Sans KR'; color:var(--muted); margin-top:2px; letter-spacing:.02em;}
+
+
+.result{text-align:center;}
+.result .big{font-size:34px; margin:6px 0 4px;}
+.result .sub{color:var(--muted); font-size:14px; line-height:1.7; overflow-wrap:break-word; margin-bottom:18px;}
+.stats{display:flex; gap:10px; margin-bottom:16px;}
+.stat{flex:1; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); border-radius:16px; padding:15px 8px;}
+.stat .v{font-family:'Jua',sans-serif; font-size:30px; line-height:1;}
+.stat .k{font-size:11.5px; color:var(--muted); margin-top:6px; letter-spacing:.03em;}
+.passbox{background:linear-gradient(160deg,rgba(255,94,138,.12),rgba(255,213,107,.06)); border:1px solid rgba(255,120,150,.28); border-radius:18px; padding:16px 18px; text-align:left; margin-bottom:14px;}
+.passbox h3{font-size:15px; margin:0 0 4px;}
+.passbox .note{font-size:12.5px; color:var(--muted); line-height:1.6; margin:0 0 12px; overflow-wrap:break-word;}
+.passbox ul{margin:0; padding:0; list-style:none;}
+.passbox li{font-size:13px; line-height:1.55; padding:8px 12px; background:rgba(0,0,0,.18); border-radius:11px; margin:7px 0; overflow-wrap:break-word;}
+.passbox li .tag{font-size:10.5px; color:var(--accent1); font-weight:700; display:block; margin-bottom:2px; letter-spacing:.04em;}
+.passbox .none{font-size:13px; color:var(--muted); text-align:center; padding:10px;}
+
+
+.toast{position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-24px); background:rgba(36,26,61,.97); border:1.5px solid var(--accent2); color:var(--cream); padding:13px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none; transition:opacity .4s, transform .4s; z-index:50; max-width:90vw; text-align:center; box-shadow:0 12px 30px -12px #000;}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1.5deg); opacity:.4;} 60%{transform:scale(1.02) rotate(.5deg);} 100%{transform:scale(1) rotate(0); opacity:1;}}
+
+
+.footer{text-align:center; margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em; background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} .card.flip{transition:none;} }
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="wrap">
+
+  
+  <section class="screen on" id="startScreen">
+    <div class="hero">
+      <span class="badge">Two of you · getting closer</span>
+      <h1>Truth<span class="grad"> Game</span></h1>
+      <p>Sit side by side, draw a card, and take turns answering.<br>Start with light fact-checks, then sink into <b style="color:var(--cream)">dizzier, more thrilling truths</b>.<br>Answers are numbers, dates, one-liners — no dodging!</p>
+    </div>
+
+    <div class="rule">
+      <h3>🃏 Rules</h3>
+      <ul>
+        <li><span class="ic">🔥</span><b>It gets deeper.</b> Warm-up → tastes → values → feelings → deep honesty. The hotter the card color, the closer you get.</li>
+        <li><span class="ic">🔄</span><b>Take turns.</b> Whoever draws answers first, then the next card passes to the other.</li>
+        <li><span class="ic">🤫</span><b>Only 3 passes, ever.</b> Only when you truly can’t answer. — <b style="color:var(--accent1)">A pass is information.</b> Where you stopped shows up at the end of the game.</li>
+      </ul>
+    </div>
+
+    <div class="names">
+      <div class="field"><label>Left player</label><input id="nameA" maxlength="6" placeholder="You" value=""></div>
+      <div class="field"><label>Right player</label><input id="nameB" maxlength="6" placeholder="You" value=""></div>
+    </div>
+
+    <div class="pick-title">Today’s spice level?</div>
+    <div class="picks tastes" id="tastes">
+      <button class="pick taste" data-taste="mild"><span class="n">🥛</span><span class="u">Mild<br>Stuff you can laugh through</span></button>
+      <button class="pick taste" data-taste="hot"><span class="n">🌶️🌶️</span><span class="u">Spicy<br>Straight to the point</span></button>
+      <button class="pick taste sel" data-taste="mix"><span class="n">🥛→🌶️</span><span class="u">Mild, then spicy<br>Dizzier and dizzier</span></button>
+    </div>
+
+    <div class="pick-title">How many questions? — you <b>both</b>  answer every one.</div>
+    <div class="picks" id="picks">
+      <button class="pick" data-n="5"><span class="n">5</span><span class="u">A quick taste</span></button>
+      <button class="pick" data-n="10"><span class="n">10</span><span class="u">Teatime</span></button>
+      <button class="pick" data-n="20"><span class="n">20</span><span class="u">For real</span></button>
+      <button class="pick full" data-n="100"><span class="n">100 · Full clear</span><span class="u">Shipwrecked together..</span></button>
+    </div>
+
+    <button class="btn" id="startBtn" disabled>Pick how many questions</button>
+  </section>
+
+  <!-- ============  Game ============ -->
+  <section class="screen" id="gameScreen">
+    <div class="topbar">
+      <div class="player" id="pA">
+        <div class="pn"><span class="dot"></span><span class="pname"></span></div>
+        <div class="passes"><span class="plabel">Pass</span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span></div>
+      </div>
+      <div class="vs">VS</div>
+      <div class="player" id="pB">
+        <div class="pn"><span class="dot"></span><span class="pname"></span></div>
+        <div class="passes"><span class="plabel">Pass</span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span></div>
+      </div>
+    </div>
+
+    <div class="progline">
+      <span id="progText">1 / 5</span>
+      <span class="depthtag" id="depthTag">🌱 Warm-up</span>
+    </div>
+    <div class="gauge"><div class="gaugefill" id="gaugeFill"></div></div>
+
+    <div class="cardarea">
+      <div class="card" id="card" role="button" tabindex="0" aria-label="Draw a card">
+        <div class="face back">
+          <div class="qmark">?</div>
+          <div class="tap"><b id="turnHint">You</b> · your turn · <b>Tap</b> to draw a card</div>
+        </div>
+        <div class="face front">
+          <div class="lv" id="frontLv">LV.1 Warm-up</div>
+          <div class="qnum" id="frontNum">Q1</div>
+          <div class="q" id="frontQ"></div>
+          <div class="who">Now it’s <b id="frontWho">You</b>’s turn</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions hide" id="actions">
+      <button class="act answered" id="answeredBtn">Answered! Next card →</button>
+      <button class="act pass" id="passBtn">Pass<span class="sub">3 left</span></button>
+    </div>
+  </section>
+
+  
+  <section class="screen" id="endScreen">
+    <div class="result">
+      <div class="hero" style="margin-top:0">
+        <span class="badge">We got a little closer</span>
+        <h2 class="big grad" id="endTitle">Getting to know each other — done!</h2>
+        <p class="sub" id="endSub"></p>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="stAnswered">0</div><div class="k">Truths we shared</div></div>
+        <div class="stat"><div class="v grad" id="stDepth">🌱</div><div class="k">How deep we went</div></div>
+        <div class="stat"><div class="v" id="stPass">0</div><div class="k">Passes (= info)</div></div>
+      </div>
+
+      <div class="passbox">
+        <h3>🤫 What the passes left behind</h3>
+        <p class="note">The questions you paused on are where a heart lingered. Not today — but someday, ask again.</p>
+        <ul id="passList"></ul>
+      </div>
+
+      <button class="btn" id="againBtn">Draw again 🔄</button>
+      <button class="btn ghost" id="homeBtn">Back to start</button>
+    </div>
+
+    <div class="footer">
+      <div class="mf-eyebrow"><span>The Meaning & Fun Factory</span></div>
+      <div class="mf-logo">MIMI FACTORY</div>
+      <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+    </div>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/en/friend.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧺 Picnic for Two — see other games →</a></div>
+
+</div>
+
+<script>
+
+const LEVELS = [
+  { key:1, tag:"🎬 Warm-up", name:"Warm-up fact-check", theme:{a1:"#ffd56b",a2:"#ffb347",bg1:"#1a1230",bg2:"#2d1b4e",card:"#241a3d"},
+    qs:[
+    "What exact time did you fall asleep last night? (Open your phone and prove it)",
+    "How many photos are in your camera roll right now — exact number?",
+    "How many hours of screen time a day? (Open Settings and show us)",
+    "What’s your shoe size?",
+    "What’s your drinking limit? (How many drinks)",
+    "Your go-to karaoke song — name the exact title",
+    "Your very first celebrity crush — name?",
+    "How many unread messages do you have right now?",
+    "How many food-delivery orders this month?",
+    "What color are the socks you’re wearing right now?",
+    "What was your very first phone model?",
+    "Your childhood nickname — the funniest one, just one",
+    "How many times have you moved house in your life?",
+    "Your first meal today — what, and at what time?",
+    "When’s the last time you laughed till it hurt — the date?",
+    "What’s your phone lock screen? (Show it right now)",
+    "One food you just can’t eat?",
+    "What’s at the top of your recent search history? (Open it)",
+    "How many alarms do you set, and how many times do you snooze?",
+    "How much cash is in your wallet right now?"]},
+  { key:2, tag:"🕵️ Private life", name:"Privacy scan", theme:{a1:"#ffb35b",a2:"#ff8a5b",bg1:"#201232",bg2:"#351a45",card:"#2a1740"},
+    qs:[
+    "The song you sing in the shower — what’s the title?",
+    "One thing you only do when nobody’s around?",
+    "One app on your phone you’d never let anyone see?",
+    "How many servings have you eaten alone — max? (Name the dish)",
+    "Scrolling in bed — what’s the latest you’ve stayed up till?",
+    "Longest you’ve gone without a shower — how many hours?",
+    "One YouTube channel you secretly subscribe to?",
+    "How many selfies did you take today — and how many did you delete?",
+    "The oldest thing in your fridge — how long has it been there?",
+    "Your biggest impulse buy this month — how much?",
+    "Your secret ‘guilty pleasure’ content?",
+    "How many times have you decided to start a diet this year?",
+    "How many packages did you order this week?",
+    "Your record for looping one song — which song, how many days?",
+    "What do you usually do on your phone in the bathroom?",
+    "Who’s at the top of your call log right now? (Open it)",
+    "When do you talk to yourself the most? Re-enact your latest one",
+    "Posts you put up then deleted — how many this year?",
+    "How many group chats do you secretly want to leave?",
+    "How many people have you blocked, total?"]},
+  { key:3, tag:"💘 Crush history", name:"History of crushes", theme:{a1:"#ff8a5b",a2:"#ff6b6b",bg1:"#25102e",bg2:"#3a1840",card:"#311536"},
+    qs:[
+    "Your first-ever flutter — how old, and who? (Initials only)",
+    "How old were you for your first kiss?",
+    "How many relationships have you had so far?",
+    "Your longest relationship — how many years and months?",
+    "Your shortest relationship — how many days till it ended?",
+    "Your blind-date record so far? (Wins out of total)",
+    "Times you confessed vs. times you were confessed to?",
+    "Times you’ve been dumped — honestly, how many?",
+    "Your first love’s initials? Do you know what they’re doing now?",
+    "The last time your heart skipped — when and where?",
+    "The celebrity closest to your type — just one?",
+    "Age gap you’d date — how many years up, how many down?",
+    "People you had a spark with but it fizzled — how many total?",
+    "Exes still saved in your contacts — how many?",
+    "That old flame’s social media — when did you last check it?",
+    "The best gift you ever got from a partner?",
+    "Your ‘falls-in-love-fast’ score, out of 10?",
+    "One date you can’t forget? (Numbers only is fine)",
+    "The line that makes your heart race, #1? (One you’ve actually heard)",
+    "Anyone in your contacts you’ve imagined a ‘what if’ about? (Just yes or no)"]},
+  { key:4, tag:"🤫 Secret vault", name:"The vault", theme:{a1:"#ff6b8a",a2:"#ff4d6d",bg1:"#260c2c",bg2:"#3d1238",card:"#331134"},
+    qs:[
+    "One secret even your family doesn’t know — just one (one sentence)",
+    "Your biggest screw-up — how old were you, and what happened?",
+    "Your biggest school-days cringe — just the headline",
+    "People you secretly liked and nobody ever knew — how many total?",
+    "Your bank balance, rounded to the nearest hundred?",
+    "Your biggest-ever purchase — what, and how much?",
+    "Your worst drunk mistake — just the title",
+    "Of the photos you deleted, the one you’d want back — who or what?",
+    "The last time you apologized without really being sorry?",
+    "One thing your parents still don’t know about?",
+    "The most recent time you cried in secret — the date?",
+    "Congrats on the outside, jealous on the inside — your latest moment?",
+    "Do you have a secret social account? (Yes or no — no lying)",
+    "Plans you bailed on by faking sick or busy — how many in the past year?",
+    "One body secret only you know? (A mole, a scar, where it is…)",
+    "Ever quietly ‘borrowed’ something without asking? (How old, and what)",
+    "Your longest one-sided crush — how many years?",
+    "The worst time you got caught in a lie — just the title",
+    "One truth about you everyone assumes they know — but actually don’t?",
+    "So far in this game, how many questions did you want to pass on?"]},
+  { key:5, tag:"❤️‍🔥 You and me", name:"You and me", theme:{a1:"#ff5e9a",a2:"#c44ec4",bg1:"#220a2a",bg2:"#380f3a",card:"#2f0f34"},
+    qs:[
+    "Your first impression of me — out of 10?",
+    "And now? (One line on why it went up or down)",
+    "The date we first met — do you remember? Say it",
+    "A moment I made your heart skip — if there was one, when?",
+    "Your favorite spot on my face — just one?",
+    "My reply — what’s the longest you’ve waited, in minutes?",
+    "What am I saved as in your phone? (Show me)",
+    "Have you ever told someone about me? What did you say?",
+    "Photos of us together — how many do you have? (Count them)",
+    "One place you’d want to go, just the two of us?",
+    "The exact moment I looked attractive to you — when?",
+    "What caught your eye most about me today?",
+    "Our first message — who reached out first? (Check the logs!)",
+    "Any message from me you screenshotted or reread?",
+    "Right now, our butterflies meter — what percent?",
+    "One habit of mine you secretly find cute?",
+    "Ever sneak a look at me? When was the last time?",
+    "My voice / my laugh — out of 10?",
+    "Can we get one step closer than now? (Yes or no)",
+    "When this game ends, what do you want to do with me?"]}
+];
+
+
+function vibrate(ms){ if(navigator.vibrate) try{ navigator.vibrate(ms); }catch(e){} }
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+let _tt;
+function toast(msg){ const t=document.getElementById('toast'); t.innerHTML=msg; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2400); }
+function applyTheme(t){
+  const r=document.documentElement.style;
+  r.setProperty('--accent1',t.a1); r.setProperty('--accent2',t.a2);
+  r.setProperty('--bg1',t.bg1); r.setProperty('--bg2',t.bg2); r.setProperty('--card',t.card);
+}
+function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); document.getElementById(id).classList.add('on'); window.scrollTo(0,0); }
+
+
+let deck=[];        // {level, tag, name, q, theme}
+let idx=0;
+let phase=0;        // 0=first answerer, 1=second answerer — both must answer the same question before the next card
+let curLevelKey=0;
+let flipped=false;
+let players=[];     // [{name, passes, answered}]
+let passedQs=[];    // {who, q, tag}
+
+
+const TASTES={
+  mild:{levels:[1,2]},        // 🥛 Mild: warm-up · private life
+  hot: {levels:[3,4,5]},      // 🌶️🌶️ Spicy: crushes史·straight to vault · you-and-me
+  mix: {levels:[1,2,3,4,5]},  // 🥛→🌶️ Mild, then spicy: full gradient (default)
+};
+let taste='mix';
+function tasteCap(){ return TASTES[taste].levels.length*20; }
+
+
+function buildDeck(total){
+  const lvs = TASTES[taste].levels.map(k=>LEVELS.find(L=>L.key===k));
+  const n = lvs.length;
+  const base = Math.floor(total/n), extra = total%n;
+  const d=[];
+  lvs.forEach((L,i)=>{
+    const take = Math.min(base + (i<extra?1:0), L.qs.length);
+    shuffle(L.qs.slice()).slice(0, take)
+      .forEach(q=> d.push({level:L.key, tag:L.tag, name:L.name, q, theme:L.theme}));
+  });
+  return d; // already in level order = shallow→deep
+}
+
+
+let chosen=0;
+const startBtn=document.getElementById('startBtn');
+
+function refreshStartBtn(){
+  if(!chosen){ startBtn.disabled=true; startBtn.textContent='Pick how many questions'; return; }
+  startBtn.disabled=false; startBtn.textContent=`Questions:  ${chosen} · each of you answers  ${chosen} times →`;
+}
+
+
+function refreshFullPick(){
+  const fb=document.querySelector('#picks .pick.full');
+  const cap=tasteCap();
+  fb.dataset.n=cap;
+  fb.querySelector('.n').textContent=`${cap} · Full clear`;
+  if(fb.classList.contains('sel')){ chosen=cap; }
+  refreshStartBtn();
+}
+
+document.querySelectorAll('#tastes .pick').forEach(p=>{
+  p.addEventListener('click',()=>{
+    document.querySelectorAll('#tastes .pick').forEach(x=>x.classList.remove('sel'));
+    p.classList.add('sel'); taste=p.dataset.taste;
+    refreshFullPick();
+    vibrate(14);
+  });
+});
+document.querySelectorAll('#picks .pick').forEach(p=>{
+  p.addEventListener('click',()=>{
+    document.querySelectorAll('#picks .pick').forEach(x=>x.classList.remove('sel'));
+    p.classList.add('sel'); chosen=+p.dataset.n;
+    refreshStartBtn();
+    vibrate(14);
+  });
+});
+startBtn.addEventListener('click', startGame);
+
+function startGame(){
+  if(!chosen) return;
+  const nA=(document.getElementById('nameA').value.trim()||'You').slice(0,6);
+  const nB=(document.getElementById('nameB').value.trim()||'You').slice(0,6);
+  players=[{name:nA,passes:3,answered:0},{name:nB,passes:3,answered:0}];
+  deck=buildDeck(chosen); idx=0; passedQs=[]; curLevelKey=0;
+  document.querySelector('#pA .pname').textContent=nA;
+  document.querySelector('#pB .pname').textContent=nB;
+  renderPasses();
+  show('gameScreen');
+  loadCard();
+  vibrate([20,40,20]);
+}
+
+
+const card=document.getElementById('card');
+const actions=document.getElementById('actions');
+
+
+function turnIndex(){ return (idx + phase) % 2; }
+
+function updateTurnUI(){
+  const who=players[turnIndex()].name;
+  document.getElementById('turnHint').textContent=who;
+  document.getElementById('frontWho').textContent=who;
+  document.getElementById('pA').classList.toggle('active', turnIndex()===0);
+  document.getElementById('pB').classList.toggle('active', turnIndex()===1);
+  const passBtn=document.getElementById('passBtn');
+  const left=players[turnIndex()].passes;
+  passBtn.querySelector('.sub').textContent = left>0 ? ` ${left} left` : 'All used up';
+  passBtn.disabled = left<=0;
+}
+
+function loadCard(){
+  flipped=false;
+  phase=0;
+  card.classList.remove('flip');
+  actions.classList.add('hide');
+  const c=deck[idx];
+
+
+  if(c.level!==curLevelKey){
+    curLevelKey=c.level;
+    applyTheme(c.theme);
+    if(idx!==0){ toast(`${c.tag} level — going deeper`); vibrate([20,40,20]); }
+  }
+
+
+  document.getElementById('progText').textContent=`${idx+1} / ${deck.length}`;
+  document.getElementById('depthTag').textContent=c.tag;
+  document.getElementById('gaugeFill').style.width=((idx)/deck.length*100)+'%';
+
+
+  document.getElementById('frontLv').textContent=`LV.${c.level} ${c.name}`;
+  document.getElementById('frontNum').textContent=`Q${idx+1} · ${deck.length}`;
+  document.getElementById('frontQ').textContent=c.q;
+
+
+  updateTurnUI();
+
+  card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
+}
+
+function flipCard(){
+  if(flipped) return;
+  flipped=true;
+  card.classList.add('flip');
+  vibrate(28);
+  setTimeout(()=>actions.classList.remove('hide'),320);
+}
+card.addEventListener('click',flipCard);
+card.addEventListener('keydown',e=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); flipCard(); }});
+
+document.getElementById('answeredBtn').addEventListener('click',()=>{
+  players[turnIndex()].answered++;
+  nextTurn();
+});
+document.getElementById('passBtn').addEventListener('click',()=>{
+  const p=players[turnIndex()];
+  if(p.passes<=0) return;
+  p.passes--;
+  passedQs.push({who:p.name, q:deck[idx].q, tag:deck[idx].tag});
+  renderPasses();
+  vibrate([15,30,60]);
+  const msgs=[`${p.name}, Pass ${p.passes} left 🤫`,`It’s okay — a pass is information too.`,`We’ll keep this question in mind.`];
+  toast(msgs[Math.floor((3-p.passes-1+3)%msgs.length)] || msgs[0]);
+  nextTurn();
+});
+
+
+function nextTurn(){
+  if(phase===0){
+    phase=1;
+    updateTurnUI();
+    toast(`Same question — now ${players[turnIndex()].name} goes! 🔁`);
+    card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
+    vibrate(20);
+  }else{
+    advance();
+  }
+}
+
+function advance(){
+  document.getElementById('gaugeFill').style.width=((idx+1)/deck.length*100)+'%';
+  phase=0;
+  idx++;
+  if(idx>=deck.length){ setTimeout(endGame,400); return; }
+  setTimeout(loadCard,380);
+}
+
+function renderPasses(){
+  [['#pA',0],['#pB',1]].forEach(([sel,i])=>{
+    const dots=document.querySelectorAll(sel+' .pdot');
+    const used=3-players[i].passes;
+    dots.forEach((d,k)=> d.classList.toggle('used', k>=3-used));
+  });
+}
+
+
+function endGame(){
+  const totalAns=players[0].answered+players[1].answered;
+  const totalPass=passedQs.length;
+  const deepest=deck.reduce((m,c)=>Math.max(m,c.level),0);
+  const deepTag=LEVELS.find(L=>L.key===deepest).tag;
+  const deepEmoji=deepTag.split(' ')[0];
+
+  applyTheme(LEVELS.find(L=>L.key===deepest).theme);
+
+  document.getElementById('stAnswered').textContent=totalAns;
+  document.getElementById('stDepth').textContent=deepEmoji;
+  document.getElementById('stPass').textContent=totalPass;
+
+  document.getElementById('endSub').innerHTML =
+    `${players[0].name} · ${players[1].name}, ${deck.length} questions — and you both answered every one.<br>`+
+    (deepest>=5 ? 'You laid bare even the truths about each other. ❤️‍🔥' :
+     deepest>=4 ? 'You even opened up your secret vaults. 🤫' :
+     deepest>=3 ? 'You shared your histories of crushes. 💘' : 'You started light, but honest. 🎬');
+
+  const list=document.getElementById('passList');
+  if(passedQs.length===0){
+    list.innerHTML=`<div class="none">Not a single pass. You two were really honest today. 💛</div>`;
+  }else{
+    list.innerHTML=passedQs.map(p=>
+      `<li><span class="tag">${p.who} · ${p.tag}</span>“${p.q}”</li>`).join('');
+  }
+
+  show('endScreen');
+  vibrate([60,80,60,80,120]);
+}
+
+document.getElementById('againBtn').addEventListener('click',()=>{
+
+  deck=buildDeck(deck.length); idx=0; passedQs=[]; curLevelKey=0;
+  players.forEach(p=>{p.passes=3; p.answered=0;});
+  renderPasses();
+  applyTheme(LEVELS[0].theme);
+  show('gameScreen');
+  loadCard();
+  vibrate([20,40,20]);
+});
+document.getElementById('homeBtn').addEventListener('click',()=>{
+  applyTheme(LEVELS[0].theme);
+  chosen=0; startBtn.disabled=true; startBtn.textContent='Pick how many questions';
+  document.querySelectorAll('#picks .pick').forEach(x=>x.classList.remove('sel')); // keep the flavor choice
+  show('startScreen');
+});
+</script>
+</body>
+</html>

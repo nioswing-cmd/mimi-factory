@@ -229,6 +229,18 @@
    "desc": "How loud are your senses? 20 questions read your Sense · Empathy · Thought · Environment in real time."
   },
   {
+   "id": "truth-game",
+   "type": "test",
+   "title": "Truth Game",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/truth-game.html",
+   "premium": "apps/truth-game.html",
+   "desc": "Sit side by side, draw cards, take turns telling the truth — a game for two."
+  },
+  {
    "id": "real-zodiac",
    "type": "test",
    "title": "Real Zodiac Test",

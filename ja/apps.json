@@ -241,6 +241,18 @@
    "desc": "あなたの感覚ボリュームはいくつ？20問で感覚 · 共感 · 思考 · 環境をリアルタイム測定。"
   },
   {
+   "id": "truth-game",
+   "type": "test",
+   "title": "真実ゲーム",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/truth-game.html",
+   "premium": "apps/truth-game.html",
+   "desc": "並んで座ってカードを引き、交互に本音を答える二人用ゲーム"
+  },
+  {
    "id": "real-zodiac",
    "type": "test",
    "title": "本当の星座診断",

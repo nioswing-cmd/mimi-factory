@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>真心話遊戲 · 兩個人一起變親近</title>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#1a1230; --bg2:#2d1b4e;
+  --accent1:#ffd56b; --accent2:#ffb347;
+  --cream:#fff6ec; --muted:#cdbfe0;
+  --card:#241a3d;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 80% -10%, rgba(255,180,90,.12), transparent 55%),
+    radial-gradient(120% 90% at 10% 110%, rgba(255,94,138,.13), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  transition:background .9s ease;
+  min-height:100dvh;
+}
+.wrap{max-width:520px; margin:0 auto; padding:22px 18px calc(22px + env(safe-area-inset-bottom)); min-height:100dvh; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(105deg,var(--accent1),#ff8a5b 50%,#ff5e8a);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
+
+
+.screen{display:none; animation:fadeIn .5s ease; flex:1; flex-direction:column;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+
+.hero{text-align:center; margin-top:6px;}
+.badge{display:inline-block; font-size:12px; letter-spacing:.14em; color:var(--muted); border:1px solid rgba(255,255,255,.15); padding:6px 14px; border-radius:99px; margin-bottom:16px;}
+.hero h1{font-size:40px; margin:.1em 0 .12em; line-height:1.12;}
+.hero p{color:var(--muted); font-size:14.5px; line-height:1.7;  margin:0 auto; max-width:340px;}
+.rule{
+  margin:22px 0 4px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);
+  border-radius:18px; padding:16px 18px; text-align:left;
+}
+.rule h3{font-size:16px; margin:0 0 10px;}
+.rule ul{margin:0; padding-left:2px; list-style:none;}
+.rule li{font-size:13.5px; color:var(--muted); line-height:1.6; margin:8px 0; padding-left:26px; position:relative; }
+.rule li b{color:var(--cream);}
+.rule li .ic{position:absolute; left:0; top:-1px; font-size:16px;}
+
+.names{display:flex; gap:10px; margin:20px 0 6px;}
+.names .field{flex:1;}
+.names label{display:block; font-size:12px; color:var(--muted); margin:0 0 6px 4px; letter-spacing:.02em;}
+.names input{
+  width:100%; padding:13px 14px; border-radius:14px; border:1.5px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.05); color:var(--cream); font-size:16px; font-family:inherit; text-align:center;
+  transition:border-color .25s;
+}
+.names input:focus{outline:none; border-color:var(--accent2);}
+
+.pick-title{text-align:center; font-size:13.5px; color:var(--muted); margin:22px 0 12px; letter-spacing:.02em;}
+.picks{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+.pick{
+  border:1.5px solid rgba(255,255,255,.14); background:rgba(255,255,255,.05); color:var(--cream);
+  border-radius:16px; padding:16px 8px 13px; cursor:pointer; font-family:'Jua',sans-serif;
+  transition:transform .18s cubic-bezier(.34,1.56,.64,1), border-color .2s, background .2s; text-align:center;
+}
+.pick:hover,.pick:focus-visible{border-color:var(--accent2); outline:none;}
+.pick:active{transform:scale(.94);}
+.pick.sel{border-color:var(--accent2); background:linear-gradient(160deg,rgba(255,213,107,.22),rgba(255,94,138,.14)); box-shadow:0 6px 20px -8px var(--accent2);}
+.pick .n{font-size:26px; line-height:1; display:block;}
+.pick .u{font-size:11px; color:var(--muted); letter-spacing:.04em; margin-top:5px; display:block;}
+.pick.full{grid-column:span 3;}
+.pick.full .n{font-size:22px;}
+.picks.tastes{margin-bottom:18px;}
+.picks.tastes .n{font-size:19px;}
+.picks.tastes .u{line-height:1.45;}
+
+.btn{
+  width:100%; border:none; cursor:pointer; font-family:'Jua',sans-serif; font-size:19px; color:#2a1533;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2)); border-radius:16px; padding:16px;
+  box-shadow:0 10px 26px -10px var(--accent2); transition:transform .18s cubic-bezier(.34,1.56,.64,1), filter .2s;
+  margin-top:18px; letter-spacing:.02em;
+}
+.btn:active{transform:scale(.97);}
+.btn:disabled{filter:grayscale(.6) brightness(.7); cursor:not-allowed; box-shadow:none;}
+.btn.ghost{background:transparent; color:var(--muted); border:1.5px solid rgba(255,255,255,.15); box-shadow:none; font-size:16px;}
+
+
+.topbar{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:14px;}
+.player{flex:1; background:rgba(255,255,255,.04); border:1.5px solid rgba(255,255,255,.08); border-radius:14px; padding:9px 10px; transition:border-color .3s, background .3s;}
+.player.active{border-color:var(--accent2); background:linear-gradient(160deg,rgba(255,213,107,.16),transparent);}
+.player .pn{font-size:13px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:5px;}
+.player .pn .dot{width:7px; height:7px; border-radius:50%; background:var(--accent2); opacity:0; transition:opacity .3s;}
+.player.active .pn .dot{opacity:1;}
+.player .passes{margin-top:5px; display:flex; gap:5px; align-items:center;}
+.pdot{width:9px; height:9px; border-radius:50%; background:var(--accent2); box-shadow:0 0 8px -1px var(--accent2); transition:transform .3s, background .3s, box-shadow .3s;}
+.pdot.used{background:rgba(255,255,255,.13); box-shadow:none; transform:scale(.8);}
+.player .plabel{font-size:9.5px; color:var(--muted); letter-spacing:.06em; margin-left:auto;}
+.vs{font-family:'Jua',sans-serif; font-size:15px; color:var(--muted); flex:0 0 auto;}
+
+.progline{display:flex; align-items:center; justify-content:space-between; margin:2px 2px 8px; font-size:12px; color:var(--muted);}
+.depthtag{font-family:'Jua',sans-serif; color:var(--cream); font-size:13px;}
+.gauge{height:9px; border-radius:99px; background:rgba(255,255,255,.1); overflow:hidden; margin-bottom:20px;}
+.gaugefill{height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg,var(--accent1),var(--accent2)); box-shadow:0 0 14px 1px var(--accent2); transition:width .55s cubic-bezier(.22,1,.36,1), box-shadow .6s;}
+
+.cardarea{flex:1; display:flex; align-items:center; justify-content:center; perspective:1200px; min-height:300px;}
+.card{
+  width:100%; max-width:400px; aspect-ratio:3/3.55; border-radius:26px; position:relative; cursor:pointer;
+  transform-style:preserve-3d; transition:transform .6s cubic-bezier(.4,.9,.3,1);
+}
+.card.flip{transform:rotateY(180deg);}
+.face{position:absolute; inset:0; border-radius:26px; backface-visibility:hidden; -webkit-backface-visibility:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:26px; text-align:center; overflow:hidden;}
+.back{
+  background:linear-gradient(160deg,var(--card),#1b1330); border:1.6px solid rgba(255,255,255,.1);
+  box-shadow:0 24px 60px -24px #000;
+}
+.back .qmark{font-family:'Jua',sans-serif; font-size:88px; line-height:1; background:linear-gradient(140deg,var(--accent1),var(--accent2)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px;}
+.back .tap{color:var(--muted); font-size:14px; letter-spacing:.03em;}
+.back .tap b{color:var(--cream);}
+.back::after{content:""; position:absolute; inset:0; background:radial-gradient(circle at 50% 30%, rgba(255,180,90,.14), transparent 60%); pointer-events:none;}
+.front{
+  transform:rotateY(180deg);
+  background:linear-gradient(160deg,var(--card),#20163a); border:1.6px solid var(--accent2);
+  box-shadow:0 24px 60px -22px #000, inset 0 0 60px -30px var(--accent2);
+}
+.front .lv{font-size:12px; letter-spacing:.1em; color:var(--accent2); font-weight:700; margin-bottom:auto; padding-top:4px;}
+.front .qnum{font-family:'Jua',sans-serif; font-size:15px; color:var(--muted); margin-bottom:14px;}
+.front .q{font-family:'Jua',sans-serif; font-size:25px; line-height:1.42; }
+.front .who{margin-top:auto; padding-bottom:4px; font-size:13px; color:var(--muted);}
+.front .who b{color:var(--accent1);}
+@media (max-height:720px){ .front .q{font-size:22px;} .back .qmark{font-size:70px;} }
+
+.actions{display:flex; gap:11px; margin-top:20px; min-height:56px;}
+.actions.hide{visibility:hidden;}
+.act{flex:1; border:none; cursor:pointer; font-family:'Jua',sans-serif; font-size:17px; border-radius:15px; padding:15px 8px; transition:transform .16s cubic-bezier(.34,1.56,.64,1), filter .2s;}
+.act:active{transform:scale(.95);}
+.act.answered{flex:1.7; color:#2a1533; background:linear-gradient(100deg,var(--accent1),var(--accent2)); box-shadow:0 10px 24px -12px var(--accent2);}
+.act.pass{color:var(--cream); background:rgba(255,255,255,.06); border:1.5px solid rgba(255,255,255,.16);}
+.act.pass:disabled{filter:grayscale(.6) opacity(.45); cursor:not-allowed;}
+.act.pass .sub{display:block; font-size:10.5px; font-family:'Noto Sans KR'; color:var(--muted); margin-top:2px; letter-spacing:.02em;}
+
+
+.result{text-align:center;}
+.result .big{font-size:34px; margin:6px 0 4px;}
+.result .sub{color:var(--muted); font-size:14px; line-height:1.7;  margin-bottom:18px;}
+.stats{display:flex; gap:10px; margin-bottom:16px;}
+.stat{flex:1; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); border-radius:16px; padding:15px 8px;}
+.stat .v{font-family:'Jua',sans-serif; font-size:30px; line-height:1;}
+.stat .k{font-size:11.5px; color:var(--muted); margin-top:6px; letter-spacing:.03em;}
+.passbox{background:linear-gradient(160deg,rgba(255,94,138,.12),rgba(255,213,107,.06)); border:1px solid rgba(255,120,150,.28); border-radius:18px; padding:16px 18px; text-align:left; margin-bottom:14px;}
+.passbox h3{font-size:15px; margin:0 0 4px;}
+.passbox .note{font-size:12.5px; color:var(--muted); line-height:1.6; margin:0 0 12px; }
+.passbox ul{margin:0; padding:0; list-style:none;}
+.passbox li{font-size:13px; line-height:1.55; padding:8px 12px; background:rgba(0,0,0,.18); border-radius:11px; margin:7px 0; }
+.passbox li .tag{font-size:10.5px; color:var(--accent1); font-weight:700; display:block; margin-bottom:2px; letter-spacing:.04em;}
+.passbox .none{font-size:13px; color:var(--muted); text-align:center; padding:10px;}
+
+
+.toast{position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-24px); background:rgba(36,26,61,.97); border:1.5px solid var(--accent2); color:var(--cream); padding:13px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none; transition:opacity .4s, transform .4s; z-index:50; max-width:90vw; text-align:center; box-shadow:0 12px 30px -12px #000;}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1.5deg); opacity:.4;} 60%{transform:scale(1.02) rotate(.5deg);} 100%{transform:scale(1) rotate(0); opacity:1;}}
+
+
+.footer{text-align:center; margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em; background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} .card.flip{transition:none;} }
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="wrap">
+
+  
+  <section class="screen on" id="startScreen">
+    <div class="hero">
+      <span class="badge">兩個人一起 · 變親近</span>
+      <h1>真心話<span class="grad">遊戲</span></h1>
+      <p>並肩坐著抽卡，輪流回答。<br>從輕鬆的事實查核開始，慢慢探向 <b style="color:var(--cream)">越來越刺激的真心話</b>。<br>答案是數字・日期・簡答 — 不准含糊帶過！</p>
+    </div>
+
+    <div class="rule">
+      <h3>🃏 規則</h3>
+      <ul>
+        <li><span class="ic">🔥</span><b>會越來越深。</b> 熱身 → 喜好 → 價值觀 → 情感 → 深層真心。卡片顏色越熱，心也越靠近。</li>
+        <li><span class="ic">🔄</span><b>輪流回答。</b> 抽到的人先答，下一張換對方抽。</li>
+        <li><span class="ic">🤫</span><b>跳過一輩子只有3次。</b> 只有真的難以回答時才用。— <b style="color:var(--accent1)">跳過本身就是資訊。</b> 你在哪一題停下來，遊戲結束時全都會現形。</li>
+      </ul>
+    </div>
+
+    <div class="names">
+      <div class="field"><label>左邊的人</label><input id="nameA" maxlength="6" placeholder="我" value=""></div>
+      <div class="field"><label>右邊的人</label><input id="nameB" maxlength="6" placeholder="你" value=""></div>
+    </div>
+
+    <div class="pick-title">今天要多辣？</div>
+    <div class="picks tastes" id="tastes">
+      <button class="pick taste" data-taste="mild"><span class="n">🥛</span><span class="u">小辣<br>笑著就能答</span></button>
+      <button class="pick taste" data-taste="hot"><span class="n">🌶️🌶️</span><span class="u">重辣<br>直接切正題</span></button>
+      <button class="pick taste sel" data-taste="mix"><span class="n">🥛→🌶️</span><span class="u">先小辣後重辣<br>越來越刺激</span></button>
+    </div>
+
+    <div class="pick-title">今天聊幾題？ — 每一題 <b>兩個人都</b> 要回答。</div>
+    <div class="picks" id="picks">
+      <button class="pick" data-n="5"><span class="n">5</span><span class="u">輕鬆試味</span></button>
+      <button class="pick" data-n="10"><span class="n">10</span><span class="u">下午茶時間</span></button>
+      <button class="pick" data-n="20"><span class="n">20</span><span class="u">認真來</span></button>
+      <button class="pick full" data-n="100"><span class="n">100 · 完全征服</span><span class="u">如果漂流到無人島..</span></button>
+    </div>
+
+    <button class="btn" id="startBtn" disabled>請選擇問題數量</button>
+  </section>
+
+  <!-- ============ 遊戲 ============ -->
+  <section class="screen" id="gameScreen">
+    <div class="topbar">
+      <div class="player" id="pA">
+        <div class="pn"><span class="dot"></span><span class="pname"></span></div>
+        <div class="passes"><span class="plabel">跳過</span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span></div>
+      </div>
+      <div class="vs">VS</div>
+      <div class="player" id="pB">
+        <div class="pn"><span class="dot"></span><span class="pname"></span></div>
+        <div class="passes"><span class="plabel">跳過</span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span></div>
+      </div>
+    </div>
+
+    <div class="progline">
+      <span id="progText">1 / 5</span>
+      <span class="depthtag" id="depthTag">🌱 熱身</span>
+    </div>
+    <div class="gauge"><div class="gaugefill" id="gaugeFill"></div></div>
+
+    <div class="cardarea">
+      <div class="card" id="card" role="button" tabindex="0" aria-label="抽卡">
+        <div class="face back">
+          <div class="qmark">?</div>
+          <div class="tap"><b id="turnHint">我</b> 的回合 · <b>點擊</b>抽卡</div>
+        </div>
+        <div class="face front">
+          <div class="lv" id="frontLv">LV.1 熱身</div>
+          <div class="qnum" id="frontNum">Q1</div>
+          <div class="q" id="frontQ"></div>
+          <div class="who">現在是 <b id="frontWho">我</b>的回合</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions hide" id="actions">
+      <button class="act answered" id="answeredBtn">答完了！下一張 →</button>
+      <button class="act pass" id="passBtn">跳過<span class="sub">剩3次</span></button>
+    </div>
+  </section>
+
+  
+  <section class="screen" id="endScreen">
+    <div class="result">
+      <div class="hero" style="margin-top:0">
+        <span class="badge">我們，又更靠近了一點</span>
+        <h2 class="big grad" id="endTitle">認識彼此的時間，結束！</h2>
+        <p class="sub" id="endSub"></p>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="stAnswered">0</div><div class="k">一起分享的真心話</div></div>
+        <div class="stat"><div class="v grad" id="stDepth">🌱</div><div class="k">下探到最深的地方</div></div>
+        <div class="stat"><div class="v" id="stPass">0</div><div class="k">跳過（＝資訊）</div></div>
+      </div>
+
+      <div class="passbox">
+        <h3>🤫 跳過留下的資訊</h3>
+        <p class="note">停下來的問題，是那個人的心停留的地方。今天先別問，改天再問問看吧。</p>
+        <ul id="passList"></ul>
+      </div>
+
+      <button class="btn" id="againBtn">再抽一次 🔄</button>
+      <button class="btn ghost" id="homeBtn">回到開頭</button>
+    </div>
+
+    <div class="footer">
+      <div class="mf-eyebrow"><span>意義與趣味工廠</span></div>
+      <div class="mf-logo">咪咪工廠 MIMI FACTORY</div>
+      <div class="mf-caption">YEON:GYEOL股份有限公司 家族公司</div>
+    </div>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/zh-tw/friend.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧺 兩人的野餐 — 看看其他遊戲 →</a></div>
+
+</div>
+
+<script>
+
+const LEVELS = [
+  { key:1, tag:"🎬 熱身", name:"熱身事實查核", theme:{a1:"#ffd56b",a2:"#ffb347",bg1:"#1a1230",bg2:"#2d1b4e",card:"#241a3d"},
+    qs:[
+    "昨晚幾點幾分睡的？（打開手機證明）",
+    "手機相簿現在剛好有幾張照片？",
+    "一天螢幕使用時間幾小時？（打開設定公開）",
+    "鞋子尺寸是幾號？",
+    "酒量多少？（啤酒大概幾瓶）",
+    "KTV 必點的那首歌，把歌名準確說出來",
+    "人生第一個最愛的藝人，名字是？",
+    "現在 LINE 未讀訊息有幾則？",
+    "這個月叫外送幾次？",
+    "現在穿的襪子是什麼顏色？",
+    "第一支手機是什麼型號？",
+    "小時候的綽號，挑最好笑的一個說",
+    "到目前為止搬過幾次家？",
+    "今天第一餐，幾點吃了什麼？",
+    "上一次笑到肚子痛是哪一天？",
+    "手機鎖定畫面是什麼？（現在馬上給看）",
+    "有什麼絕對不敢吃的食物，只說一個？",
+    "最近搜尋紀錄最上面是什麼？（打開來看）",
+    "設幾個鬧鐘？按幾次貪睡？",
+    "現在錢包裡有多少現金？"]},
+  { key:2, tag:"🕵️ 私生活", name:"私生活掃描", theme:{a1:"#ffb35b",a2:"#ff8a5b",bg1:"#201232",bg2:"#351a45",card:"#2a1740"},
+    qs:[
+    "洗澡時會唱的歌，歌名是？",
+    "只有沒人在時才會做的一件事？",
+    "手機裡絕對不能給人看的一個 App？",
+    "自己一個人最多吃過幾人份？（連菜名一起說）",
+    "在床上滑手機，最晚熬到幾點？",
+    "人生最長多久沒洗澡？（幾小時）",
+    "偷偷訂閱的一個 YouTube 頻道？",
+    "今天自拍幾張、刪掉幾張？",
+    "冰箱裡最久的食物，是什麼時候的？",
+    "這個月最大手筆的衝動購物，多少錢？",
+    "偷偷享受的「罪惡快感」內容是？",
+    "今年下定決心減肥幾次了？",
+    "這禮拜訂了幾個包裹？",
+    "單曲循環的最高紀錄 — 哪首歌、幾天？",
+    "在廁所裡通常用手機做什麼？",
+    "通話紀錄最上面現在是誰？（打開來看）",
+    "最常自言自語是什麼時候？把最近一次演出來",
+    "在社群上發了又刪的貼文，今年幾則？",
+    "有幾個群組是你很想退出的？",
+    "封鎖過幾個人的號碼，總共幾個？"]},
+  { key:3, tag:"💘 心動史", name:"心動的歷史", theme:{a1:"#ff8a5b",a2:"#ff6b6b",bg1:"#25102e",bg2:"#3a1840",card:"#311536"},
+    qs:[
+    "人生第一次心動，幾歲、對象是誰？（只說縮寫）",
+    "初吻是幾歲的時候？",
+    "到目前為止談過幾次戀愛？",
+    "最長的一段戀愛，幾年幾個月？",
+    "最短的一段戀愛，幾天就結束了？",
+    "相親／聯誼的總戰績？（幾戰幾勝）",
+    "告白過幾次 vs 被告白幾次？",
+    "被甩過幾次，老實說？",
+    "初戀的名字縮寫是？知道對方現在在做什麼嗎？",
+    "最近一次心頭一震的瞬間 — 日期和地點是？",
+    "最接近你理想型的藝人，只說一個？",
+    "能接受的年齡差，往上幾歲、往下幾歲？",
+    "只曖昧沒結果的對象，總共幾個？",
+    "前任的聯絡方式，還存著幾個？",
+    "以前那個人的社群，上一次看是哪一天？",
+    "戀愛中收過最棒的禮物是什麼？",
+    "「一秒愛上」指數，滿分10分幾分？",
+    "如果有一個忘不了的日期？（只說數字也可以）",
+    "最讓你心跳加速的一句話第一名？（要實際聽過的）",
+    "現在的聯絡人裡，有沒有你想像過「如果」的人？（只答有／沒有）"]},
+  { key:4, tag:"🤫 秘密金庫", name:"秘密金庫", theme:{a1:"#ff6b8a",a2:"#ff4d6d",bg1:"#260c2c",bg2:"#3d1238",card:"#331134"},
+    qs:[
+    "連家人都不知道的秘密，只說一個（一句話）",
+    "人生最大的一次闖禍，幾歲、發生什麼事？",
+    "學生時代最大的黑歷史，只說事件標題",
+    "偷偷喜歡過、卻沒人知道的對象，總共幾個？",
+    "銀行存款餘額，四捨五入到千位是多少？",
+    "人生最大一筆花費 — 花在什麼、多少錢？",
+    "喝醉後犯下最糟的錯，只說標題",
+    "刪掉的照片裡，最想再看一次的那張是誰／什麼？",
+    "其實並不抱歉卻還是道歉的最近一次是？",
+    "有一件爸媽到現在還不知道的事嗎？",
+    "上一次偷偷哭是哪一天？",
+    "表面祝福、心裡卻酸酸的最近一次是？",
+    "有沒有社群小帳？（有／沒有 — 不准說謊）",
+    "裝病、裝忙而爽約的次數，最近一年幾次？",
+    "只有你自己知道的身體秘密？（痣、疤痕的位置等）",
+    "有沒有偷偷「順手牽羊」過？（幾歲、拿了什麼）",
+    "單戀最長紀錄是？（幾年）",
+    "謊言被拆穿最糟的一次，只說標題",
+    "大家以為都知道、其實根本不知道的一個關於你的真相？",
+    "這場遊戲到現在，你有幾題其實很想跳過？"]},
+  { key:5, tag:"❤️‍🔥 你和我", name:"你和我", theme:{a1:"#ff5e9a",a2:"#c44ec4",bg1:"#220a2a",bg2:"#380f3a",card:"#2f0f34"},
+    qs:[
+    "第一次看到我的第一印象，滿分10分幾分？",
+    "那現在幾分？（上升或下降的理由，一句話）",
+    "我們第一次見面的日期，記得嗎？說說看",
+    "被我心動的瞬間，如果有的話是什麼時候？",
+    "我臉上你最喜歡的一個地方？",
+    "等我回訊息，最長等過幾分鐘？",
+    "我在你手機裡存的是什麼名字？（給看）",
+    "跟別人提過我嗎？說了什麼？",
+    "我們一起拍的照片，你有幾張？（數數看）",
+    "想和我單獨去的一個地方？",
+    "覺得我有魅力的那個瞬間，到底是什麼時候？",
+    "今天我的樣子裡，最吸引你目光的一點是？",
+    "我們第一次聯絡，先開口的是誰？（去查紀錄！）",
+    "我傳的訊息裡，有截圖或重看過的嗎？",
+    "現在我們之間的心動指數，幾 %？",
+    "我的習慣裡，你覺得可愛的一個？",
+    "有沒有偷看過我？最近一次是什麼時候？",
+    "我的聲音／笑聲，滿分10分幾分？",
+    "可以比現在再靠近一點嗎？（可以／不行）",
+    "這場遊戲結束後，想和我做什麼？"]}
+];
+
+
+function vibrate(ms){ if(navigator.vibrate) try{ navigator.vibrate(ms); }catch(e){} }
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+let _tt;
+function toast(msg){ const t=document.getElementById('toast'); t.innerHTML=msg; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2400); }
+function applyTheme(t){
+  const r=document.documentElement.style;
+  r.setProperty('--accent1',t.a1); r.setProperty('--accent2',t.a2);
+  r.setProperty('--bg1',t.bg1); r.setProperty('--bg2',t.bg2); r.setProperty('--card',t.card);
+}
+function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); document.getElementById(id).classList.add('on'); window.scrollTo(0,0); }
+
+
+let deck=[];        // {level, tag, name, q, theme}
+let idx=0;
+let phase=0;        // 0=第一位回答者、1=第二位回答者 — 同一題兩人都答完才進下一張
+let curLevelKey=0;
+let flipped=false;
+let players=[];     // [{name, passes, answered}]
+let passedQs=[];    // {who, q, tag}
+
+
+const TASTES={
+  mild:{levels:[1,2]},        // 🥛 小辣: 熱身・私生活
+  hot: {levels:[3,4,5]},      // 🌶️🌶️ 重辣: 心動史·直接進秘密金庫・你和我
+  mix: {levels:[1,2,3,4,5]},  // 🥛→🌶️ 先小辣後重辣: 整體漸進 (預設)
+};
+let taste='mix';
+function tasteCap(){ return TASTES[taste].levels.length*20; }
+
+
+function buildDeck(total){
+  const lvs = TASTES[taste].levels.map(k=>LEVELS.find(L=>L.key===k));
+  const n = lvs.length;
+  const base = Math.floor(total/n), extra = total%n;
+  const d=[];
+  lvs.forEach((L,i)=>{
+    const take = Math.min(base + (i<extra?1:0), L.qs.length);
+    shuffle(L.qs.slice()).slice(0, take)
+      .forEach(q=> d.push({level:L.key, tag:L.tag, name:L.name, q, theme:L.theme}));
+  });
+  return d; // 已是等級順序 = 淺→深
+}
+
+
+let chosen=0;
+const startBtn=document.getElementById('startBtn');
+
+function refreshStartBtn(){
+  if(!chosen){ startBtn.disabled=true; startBtn.textContent='請選擇問題數量'; return; }
+  startBtn.disabled=false; startBtn.textContent=`問題 ${chosen}題，各自答 ${chosen}次 →`;
+}
+
+
+function refreshFullPick(){
+  const fb=document.querySelector('#picks .pick.full');
+  const cap=tasteCap();
+  fb.dataset.n=cap;
+  fb.querySelector('.n').textContent=`${cap} · 完全征服`;
+  if(fb.classList.contains('sel')){ chosen=cap; }
+  refreshStartBtn();
+}
+
+document.querySelectorAll('#tastes .pick').forEach(p=>{
+  p.addEventListener('click',()=>{
+    document.querySelectorAll('#tastes .pick').forEach(x=>x.classList.remove('sel'));
+    p.classList.add('sel'); taste=p.dataset.taste;
+    refreshFullPick();
+    vibrate(14);
+  });
+});
+document.querySelectorAll('#picks .pick').forEach(p=>{
+  p.addEventListener('click',()=>{
+    document.querySelectorAll('#picks .pick').forEach(x=>x.classList.remove('sel'));
+    p.classList.add('sel'); chosen=+p.dataset.n;
+    refreshStartBtn();
+    vibrate(14);
+  });
+});
+startBtn.addEventListener('click', startGame);
+
+function startGame(){
+  if(!chosen) return;
+  const nA=(document.getElementById('nameA').value.trim()||'我').slice(0,6);
+  const nB=(document.getElementById('nameB').value.trim()||'你').slice(0,6);
+  players=[{name:nA,passes:3,answered:0},{name:nB,passes:3,answered:0}];
+  deck=buildDeck(chosen); idx=0; passedQs=[]; curLevelKey=0;
+  document.querySelector('#pA .pname').textContent=nA;
+  document.querySelector('#pB .pname').textContent=nB;
+  renderPasses();
+  show('gameScreen');
+  loadCard();
+  vibrate([20,40,20]);
+}
+
+
+const card=document.getElementById('card');
+const actions=document.getElementById('actions');
+
+
+function turnIndex(){ return (idx + phase) % 2; }
+
+function updateTurnUI(){
+  const who=players[turnIndex()].name;
+  document.getElementById('turnHint').textContent=who;
+  document.getElementById('frontWho').textContent=who;
+  document.getElementById('pA').classList.toggle('active', turnIndex()===0);
+  document.getElementById('pB').classList.toggle('active', turnIndex()===1);
+  const passBtn=document.getElementById('passBtn');
+  const left=players[turnIndex()].passes;
+  passBtn.querySelector('.sub').textContent = left>0 ? `剩 ${left}次` : '全部用完';
+  passBtn.disabled = left<=0;
+}
+
+function loadCard(){
+  flipped=false;
+  phase=0;
+  card.classList.remove('flip');
+  actions.classList.add('hide');
+  const c=deck[idx];
+
+
+  if(c.level!==curLevelKey){
+    curLevelKey=c.level;
+    applyTheme(c.theme);
+    if(idx!==0){ toast(`${c.tag} 階段，往下探`); vibrate([20,40,20]); }
+  }
+
+
+  document.getElementById('progText').textContent=`${idx+1} / ${deck.length}`;
+  document.getElementById('depthTag').textContent=c.tag;
+  document.getElementById('gaugeFill').style.width=((idx)/deck.length*100)+'%';
+
+
+  document.getElementById('frontLv').textContent=`LV.${c.level} ${c.name}`;
+  document.getElementById('frontNum').textContent=`Q${idx+1} · ${deck.length}`;
+  document.getElementById('frontQ').textContent=c.q;
+
+
+  updateTurnUI();
+
+  card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
+}
+
+function flipCard(){
+  if(flipped) return;
+  flipped=true;
+  card.classList.add('flip');
+  vibrate(28);
+  setTimeout(()=>actions.classList.remove('hide'),320);
+}
+card.addEventListener('click',flipCard);
+card.addEventListener('keydown',e=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); flipCard(); }});
+
+document.getElementById('answeredBtn').addEventListener('click',()=>{
+  players[turnIndex()].answered++;
+  nextTurn();
+});
+document.getElementById('passBtn').addEventListener('click',()=>{
+  const p=players[turnIndex()];
+  if(p.passes<=0) return;
+  p.passes--;
+  passedQs.push({who:p.name, q:deck[idx].q, tag:deck[idx].tag});
+  renderPasses();
+  vibrate([15,30,60]);
+  const msgs=[`${p.name}, 跳過 ${p.passes}次 🤫`,`沒關係，跳過本身也是一種資訊。`,`這個問題我們先放在心上。`];
+  toast(msgs[Math.floor((3-p.passes-1+3)%msgs.length)] || msgs[0]);
+  nextTurn();
+});
+
+
+function nextTurn(){
+  if(phase===0){
+    phase=1;
+    updateTurnUI();
+    toast(`同一題，這次換 ${players[turnIndex()].name} 回答！ 🔁`);
+    card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
+    vibrate(20);
+  }else{
+    advance();
+  }
+}
+
+function advance(){
+  document.getElementById('gaugeFill').style.width=((idx+1)/deck.length*100)+'%';
+  phase=0;
+  idx++;
+  if(idx>=deck.length){ setTimeout(endGame,400); return; }
+  setTimeout(loadCard,380);
+}
+
+function renderPasses(){
+  [['#pA',0],['#pB',1]].forEach(([sel,i])=>{
+    const dots=document.querySelectorAll(sel+' .pdot');
+    const used=3-players[i].passes;
+    dots.forEach((d,k)=> d.classList.toggle('used', k>=3-used));
+  });
+}
+
+
+function endGame(){
+  const totalAns=players[0].answered+players[1].answered;
+  const totalPass=passedQs.length;
+  const deepest=deck.reduce((m,c)=>Math.max(m,c.level),0);
+  const deepTag=LEVELS.find(L=>L.key===deepest).tag;
+  const deepEmoji=deepTag.split(' ')[0];
+
+  applyTheme(LEVELS.find(L=>L.key===deepest).theme);
+
+  document.getElementById('stAnswered').textContent=totalAns;
+  document.getElementById('stDepth').textContent=deepEmoji;
+  document.getElementById('stPass').textContent=totalPass;
+
+  document.getElementById('endSub').innerHTML =
+    `${players[0].name} · ${players[1].name}, ${deck.length}題，兩人都回答了。<br>`+
+    (deepest>=5 ? '連對彼此的真心話都掏出來了。❤️‍🔥' :
+     deepest>=4 ? '連秘密金庫都打開給對方看了。🤫' :
+     deepest>=3 ? '彼此分享了心動的歷史。💘' : '輕鬆卻誠實地起了頭。🎬');
+
+  const list=document.getElementById('passList');
+  if(passedQs.length===0){
+    list.innerHTML=`<div class="none">一次都沒有跳過。今天你們兩個，真的很誠實。 💛</div>`;
+  }else{
+    list.innerHTML=passedQs.map(p=>
+      `<li><span class="tag">${p.who} · ${p.tag}</span>“${p.q}”</li>`).join('');
+  }
+
+  show('endScreen');
+  vibrate([60,80,60,80,120]);
+}
+
+document.getElementById('againBtn').addEventListener('click',()=>{
+
+  deck=buildDeck(deck.length); idx=0; passedQs=[]; curLevelKey=0;
+  players.forEach(p=>{p.passes=3; p.answered=0;});
+  renderPasses();
+  applyTheme(LEVELS[0].theme);
+  show('gameScreen');
+  loadCard();
+  vibrate([20,40,20]);
+});
+document.getElementById('homeBtn').addEventListener('click',()=>{
+  applyTheme(LEVELS[0].theme);
+  chosen=0; startBtn.disabled=true; startBtn.textContent='請選擇問題數量';
+  document.querySelectorAll('#picks .pick').forEach(x=>x.classList.remove('sel')); // 保留辣度選擇
+  show('startScreen');
+});
+</script>
+</body>
+</html>

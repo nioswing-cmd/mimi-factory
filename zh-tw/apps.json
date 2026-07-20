@@ -241,6 +241,18 @@
    "desc": "你的感官音量開多大？20 題即時測量感覺 · 共感 · 思考 · 環境。"
   },
   {
+   "id": "truth-game",
+   "type": "test",
+   "title": "真心話遊戲",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/truth-game.html",
+   "premium": "apps/truth-game.html",
+   "desc": "並肩坐著抽卡、輪流說真心話的雙人遊戲"
+  },
+  {
    "id": "real-zodiac",
    "type": "test",
    "title": "真正的星座測驗",

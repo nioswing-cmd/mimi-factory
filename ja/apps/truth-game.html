@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>真実ゲーム · ふたりで仲良くなる</title>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansJP-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/MPLUSRounded1c-Bold-sub.woff2') format('woff2');font-weight:400;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#1a1230; --bg2:#2d1b4e;
+  --accent1:#ffd56b; --accent2:#ffb347;
+  --cream:#fff6ec; --muted:#cdbfe0;
+  --card:#241a3d;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 80% -10%, rgba(255,180,90,.12), transparent 55%),
+    radial-gradient(120% 90% at 10% 110%, rgba(255,94,138,.13), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  transition:background .9s ease;
+  min-height:100dvh;
+}
+.wrap{max-width:520px; margin:0 auto; padding:22px 18px calc(22px + env(safe-area-inset-bottom)); min-height:100dvh; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(105deg,var(--accent1),#ff8a5b 50%,#ff5e8a);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
+
+
+.screen{display:none; animation:fadeIn .5s ease; flex:1; flex-direction:column;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+
+.hero{text-align:center; margin-top:6px;}
+.badge{display:inline-block; font-size:12px; letter-spacing:.14em; color:var(--muted); border:1px solid rgba(255,255,255,.15); padding:6px 14px; border-radius:99px; margin-bottom:16px;}
+.hero h1{font-size:40px; margin:.1em 0 .12em; line-height:1.12;}
+.hero p{color:var(--muted); font-size:14.5px; line-height:1.7;  margin:0 auto; max-width:340px;}
+.rule{
+  margin:22px 0 4px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);
+  border-radius:18px; padding:16px 18px; text-align:left;
+}
+.rule h3{font-size:16px; margin:0 0 10px;}
+.rule ul{margin:0; padding-left:2px; list-style:none;}
+.rule li{font-size:13.5px; color:var(--muted); line-height:1.6; margin:8px 0; padding-left:26px; position:relative; }
+.rule li b{color:var(--cream);}
+.rule li .ic{position:absolute; left:0; top:-1px; font-size:16px;}
+
+.names{display:flex; gap:10px; margin:20px 0 6px;}
+.names .field{flex:1;}
+.names label{display:block; font-size:12px; color:var(--muted); margin:0 0 6px 4px; letter-spacing:.02em;}
+.names input{
+  width:100%; padding:13px 14px; border-radius:14px; border:1.5px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.05); color:var(--cream); font-size:16px; font-family:inherit; text-align:center;
+  transition:border-color .25s;
+}
+.names input:focus{outline:none; border-color:var(--accent2);}
+
+.pick-title{text-align:center; font-size:13.5px; color:var(--muted); margin:22px 0 12px; letter-spacing:.02em;}
+.picks{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+.pick{
+  border:1.5px solid rgba(255,255,255,.14); background:rgba(255,255,255,.05); color:var(--cream);
+  border-radius:16px; padding:16px 8px 13px; cursor:pointer; font-family:'Jua',sans-serif;
+  transition:transform .18s cubic-bezier(.34,1.56,.64,1), border-color .2s, background .2s; text-align:center;
+}
+.pick:hover,.pick:focus-visible{border-color:var(--accent2); outline:none;}
+.pick:active{transform:scale(.94);}
+.pick.sel{border-color:var(--accent2); background:linear-gradient(160deg,rgba(255,213,107,.22),rgba(255,94,138,.14)); box-shadow:0 6px 20px -8px var(--accent2);}
+.pick .n{font-size:26px; line-height:1; display:block;}
+.pick .u{font-size:11px; color:var(--muted); letter-spacing:.04em; margin-top:5px; display:block;}
+.pick.full{grid-column:span 3;}
+.pick.full .n{font-size:22px;}
+.picks.tastes{margin-bottom:18px;}
+.picks.tastes .n{font-size:19px;}
+.picks.tastes .u{line-height:1.45;}
+
+.btn{
+  width:100%; border:none; cursor:pointer; font-family:'Jua',sans-serif; font-size:19px; color:#2a1533;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2)); border-radius:16px; padding:16px;
+  box-shadow:0 10px 26px -10px var(--accent2); transition:transform .18s cubic-bezier(.34,1.56,.64,1), filter .2s;
+  margin-top:18px; letter-spacing:.02em;
+}
+.btn:active{transform:scale(.97);}
+.btn:disabled{filter:grayscale(.6) brightness(.7); cursor:not-allowed; box-shadow:none;}
+.btn.ghost{background:transparent; color:var(--muted); border:1.5px solid rgba(255,255,255,.15); box-shadow:none; font-size:16px;}
+
+
+.topbar{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:14px;}
+.player{flex:1; background:rgba(255,255,255,.04); border:1.5px solid rgba(255,255,255,.08); border-radius:14px; padding:9px 10px; transition:border-color .3s, background .3s;}
+.player.active{border-color:var(--accent2); background:linear-gradient(160deg,rgba(255,213,107,.16),transparent);}
+.player .pn{font-size:13px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:5px;}
+.player .pn .dot{width:7px; height:7px; border-radius:50%; background:var(--accent2); opacity:0; transition:opacity .3s;}
+.player.active .pn .dot{opacity:1;}
+.player .passes{margin-top:5px; display:flex; gap:5px; align-items:center;}
+.pdot{width:9px; height:9px; border-radius:50%; background:var(--accent2); box-shadow:0 0 8px -1px var(--accent2); transition:transform .3s, background .3s, box-shadow .3s;}
+.pdot.used{background:rgba(255,255,255,.13); box-shadow:none; transform:scale(.8);}
+.player .plabel{font-size:9.5px; color:var(--muted); letter-spacing:.06em; margin-left:auto;}
+.vs{font-family:'Jua',sans-serif; font-size:15px; color:var(--muted); flex:0 0 auto;}
+
+.progline{display:flex; align-items:center; justify-content:space-between; margin:2px 2px 8px; font-size:12px; color:var(--muted);}
+.depthtag{font-family:'Jua',sans-serif; color:var(--cream); font-size:13px;}
+.gauge{height:9px; border-radius:99px; background:rgba(255,255,255,.1); overflow:hidden; margin-bottom:20px;}
+.gaugefill{height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg,var(--accent1),var(--accent2)); box-shadow:0 0 14px 1px var(--accent2); transition:width .55s cubic-bezier(.22,1,.36,1), box-shadow .6s;}
+
+.cardarea{flex:1; display:flex; align-items:center; justify-content:center; perspective:1200px; min-height:300px;}
+.card{
+  width:100%; max-width:400px; aspect-ratio:3/3.55; border-radius:26px; position:relative; cursor:pointer;
+  transform-style:preserve-3d; transition:transform .6s cubic-bezier(.4,.9,.3,1);
+}
+.card.flip{transform:rotateY(180deg);}
+.face{position:absolute; inset:0; border-radius:26px; backface-visibility:hidden; -webkit-backface-visibility:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:26px; text-align:center; overflow:hidden;}
+.back{
+  background:linear-gradient(160deg,var(--card),#1b1330); border:1.6px solid rgba(255,255,255,.1);
+  box-shadow:0 24px 60px -24px #000;
+}
+.back .qmark{font-family:'Jua',sans-serif; font-size:88px; line-height:1; background:linear-gradient(140deg,var(--accent1),var(--accent2)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px;}
+.back .tap{color:var(--muted); font-size:14px; letter-spacing:.03em;}
+.back .tap b{color:var(--cream);}
+.back::after{content:""; position:absolute; inset:0; background:radial-gradient(circle at 50% 30%, rgba(255,180,90,.14), transparent 60%); pointer-events:none;}
+.front{
+  transform:rotateY(180deg);
+  background:linear-gradient(160deg,var(--card),#20163a); border:1.6px solid var(--accent2);
+  box-shadow:0 24px 60px -22px #000, inset 0 0 60px -30px var(--accent2);
+}
+.front .lv{font-size:12px; letter-spacing:.1em; color:var(--accent2); font-weight:700; margin-bottom:auto; padding-top:4px;}
+.front .qnum{font-family:'Jua',sans-serif; font-size:15px; color:var(--muted); margin-bottom:14px;}
+.front .q{font-family:'Jua',sans-serif; font-size:25px; line-height:1.42; }
+.front .who{margin-top:auto; padding-bottom:4px; font-size:13px; color:var(--muted);}
+.front .who b{color:var(--accent1);}
+@media (max-height:720px){ .front .q{font-size:22px;} .back .qmark{font-size:70px;} }
+
+.actions{display:flex; gap:11px; margin-top:20px; min-height:56px;}
+.actions.hide{visibility:hidden;}
+.act{flex:1; border:none; cursor:pointer; font-family:'Jua',sans-serif; font-size:17px; border-radius:15px; padding:15px 8px; transition:transform .16s cubic-bezier(.34,1.56,.64,1), filter .2s;}
+.act:active{transform:scale(.95);}
+.act.answered{flex:1.7; color:#2a1533; background:linear-gradient(100deg,var(--accent1),var(--accent2)); box-shadow:0 10px 24px -12px var(--accent2);}
+.act.pass{color:var(--cream); background:rgba(255,255,255,.06); border:1.5px solid rgba(255,255,255,.16);}
+.act.pass:disabled{filter:grayscale(.6) opacity(.45); cursor:not-allowed;}
+.act.pass .sub{display:block; font-size:10.5px; font-family:'Noto Sans KR'; color:var(--muted); margin-top:2px; letter-spacing:.02em;}
+
+
+.result{text-align:center;}
+.result .big{font-size:34px; margin:6px 0 4px;}
+.result .sub{color:var(--muted); font-size:14px; line-height:1.7;  margin-bottom:18px;}
+.stats{display:flex; gap:10px; margin-bottom:16px;}
+.stat{flex:1; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); border-radius:16px; padding:15px 8px;}
+.stat .v{font-family:'Jua',sans-serif; font-size:30px; line-height:1;}
+.stat .k{font-size:11.5px; color:var(--muted); margin-top:6px; letter-spacing:.03em;}
+.passbox{background:linear-gradient(160deg,rgba(255,94,138,.12),rgba(255,213,107,.06)); border:1px solid rgba(255,120,150,.28); border-radius:18px; padding:16px 18px; text-align:left; margin-bottom:14px;}
+.passbox h3{font-size:15px; margin:0 0 4px;}
+.passbox .note{font-size:12.5px; color:var(--muted); line-height:1.6; margin:0 0 12px; }
+.passbox ul{margin:0; padding:0; list-style:none;}
+.passbox li{font-size:13px; line-height:1.55; padding:8px 12px; background:rgba(0,0,0,.18); border-radius:11px; margin:7px 0; }
+.passbox li .tag{font-size:10.5px; color:var(--accent1); font-weight:700; display:block; margin-bottom:2px; letter-spacing:.04em;}
+.passbox .none{font-size:13px; color:var(--muted); text-align:center; padding:10px;}
+
+
+.toast{position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-24px); background:rgba(36,26,61,.97); border:1.5px solid var(--accent2); color:var(--cream); padding:13px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none; transition:opacity .4s, transform .4s; z-index:50; max-width:90vw; text-align:center; box-shadow:0 12px 30px -12px #000;}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1.5deg); opacity:.4;} 60%{transform:scale(1.02) rotate(.5deg);} 100%{transform:scale(1) rotate(0); opacity:1;}}
+
+
+.footer{text-align:center; margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em; background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} .card.flip{transition:none;} }
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="wrap">
+
+  
+  <section class="screen on" id="startScreen">
+    <div class="hero">
+      <span class="badge">ふたりで · 仲良くなる</span>
+      <h1>真実<span class="grad">ゲーム</span></h1>
+      <p>並んで座って、カードを引いて、交互に答えます。<br>軽いファクトチェックから始めて、だんだん <b style="color:var(--cream)">際どい本音</b>へと降りていきます。<br>答えは数字・日付・ひとこと — ごまかしなし！</p>
+    </div>
+
+    <div class="rule">
+      <h3>🃏 ルール</h3>
+      <ul>
+        <li><span class="ic">🔥</span><b>だんだん深くなります。</b> ウォームアップ → 好み → 価値観 → 感情 → 深い本音。カードの色が熱くなるほど、心も近づきます。</li>
+        <li><span class="ic">🔄</span><b>交互に答えます。</b> 引いた人が答えて、次のカードは相手に渡ります。</li>
+        <li><span class="ic">🤫</span><b>パスは一生で3回だけ。</b> 本当に答えづらいときだけ。— <b style="color:var(--accent1)">パスもまた情報です。</b> どの質問で止まったか、ゲームの最後に全部わかりますから。</li>
+      </ul>
+    </div>
+
+    <div class="names">
+      <div class="field"><label>左の人</label><input id="nameA" maxlength="6" placeholder="私" value=""></div>
+      <div class="field"><label>右の人</label><input id="nameB" maxlength="6" placeholder="きみ" value=""></div>
+    </div>
+
+    <div class="pick-title">今日の辛さは？</div>
+    <div class="picks tastes" id="tastes">
+      <button class="pick taste" data-taste="mild"><span class="n">🥛</span><span class="u">甘口<br>笑いながらできる</span></button>
+      <button class="pick taste" data-taste="hot"><span class="n">🌶️🌶️</span><span class="u">辛口<br>いきなり本題から</span></button>
+      <button class="pick taste sel" data-taste="mix"><span class="n">🥛→🌶️</span><span class="u">甘口から辛口へ<br>だんだん際どく</span></button>
+    </div>
+
+    <div class="pick-title">質問はいくつにする？ — すべての質問に <b>ふたりとも</b> 答えます。</div>
+    <div class="picks" id="picks">
+      <button class="pick" data-n="5"><span class="n">5</span><span class="u">軽く味見</span></button>
+      <button class="pick" data-n="10"><span class="n">10</span><span class="u">ティータイム</span></button>
+      <button class="pick" data-n="20"><span class="n">20</span><span class="u">しっかり</span></button>
+      <button class="pick full" data-n="100"><span class="n">100 · 完全制覇</span><span class="u">無人島に漂着したら..</span></button>
+    </div>
+
+    <button class="btn" id="startBtn" disabled>質問の数を選んでください</button>
+  </section>
+
+  <!-- ============ ゲーム ============ -->
+  <section class="screen" id="gameScreen">
+    <div class="topbar">
+      <div class="player" id="pA">
+        <div class="pn"><span class="dot"></span><span class="pname"></span></div>
+        <div class="passes"><span class="plabel">パス</span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span></div>
+      </div>
+      <div class="vs">VS</div>
+      <div class="player" id="pB">
+        <div class="pn"><span class="dot"></span><span class="pname"></span></div>
+        <div class="passes"><span class="plabel">パス</span><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span></div>
+      </div>
+    </div>
+
+    <div class="progline">
+      <span id="progText">1 / 5</span>
+      <span class="depthtag" id="depthTag">🌱 ウォームアップ</span>
+    </div>
+    <div class="gauge"><div class="gaugefill" id="gaugeFill"></div></div>
+
+    <div class="cardarea">
+      <div class="card" id="card" role="button" tabindex="0" aria-label="カードを引く">
+        <div class="face back">
+          <div class="qmark">?</div>
+          <div class="tap"><b id="turnHint">私</b> の番 · <b>タップ</b>してカードを引く</div>
+        </div>
+        <div class="face front">
+          <div class="lv" id="frontLv">LV.1 ウォームアップ</div>
+          <div class="qnum" id="frontNum">Q1</div>
+          <div class="q" id="frontQ"></div>
+          <div class="who">今は <b id="frontWho">私</b>の番</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions hide" id="actions">
+      <button class="act answered" id="answeredBtn">答えた！次のカード →</button>
+      <button class="act pass" id="passBtn">パス<span class="sub">残り3回</span></button>
+    </div>
+  </section>
+
+  
+  <section class="screen" id="endScreen">
+    <div class="result">
+      <div class="hero" style="margin-top:0">
+        <span class="badge">私たち、少し近づきました</span>
+        <h2 class="big grad" id="endTitle">お互いを知る時間、おしまい！</h2>
+        <p class="sub" id="endSub"></p>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="v" id="stAnswered">0</div><div class="k">分かち合った本音</div></div>
+        <div class="stat"><div class="v grad" id="stDepth">🌱</div><div class="k">いちばん深く降りた場所</div></div>
+        <div class="stat"><div class="v" id="stPass">0</div><div class="k">パス（＝情報）</div></div>
+      </div>
+
+      <div class="passbox">
+        <h3>🤫 パスが残した情報</h3>
+        <p class="note">止まった質問は、その人の心が留まった場所です。今日ではなく、いつかまた聞いてあげてください。</p>
+        <ul id="passList"></ul>
+      </div>
+
+      <button class="btn" id="againBtn">もう一度引く 🔄</button>
+      <button class="btn ghost" id="homeBtn">最初に戻る</button>
+    </div>
+
+    <div class="footer">
+      <div class="mf-eyebrow"><span>意味と面白さの工場</span></div>
+      <div class="mf-logo">ミミファクトリー</div>
+      <div class="mf-caption">株式会社ヨンギョル ファミリーカンパニー</div>
+    </div>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/ja/friend.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧺 ふたりのピクニック — ほかのゲームを見る →</a></div>
+
+</div>
+
+<script>
+
+const LEVELS = [
+  { key:1, tag:"🎬 ウォームアップ", name:"ウォームアップ・ファクトチェック", theme:{a1:"#ffd56b",a2:"#ffb347",bg1:"#1a1230",bg2:"#2d1b4e",card:"#241a3d"},
+    qs:[
+    "昨夜、何時何分に寝た？（スマホを開いて証明）",
+    "スマホの写真、今ちょうど何枚ある？",
+    "1日のスクリーンタイムは何時間？（設定を開いて公開）",
+    "靴のサイズは？",
+    "お酒はどれくらい？（ビール何杯くらい）",
+    "カラオケの十八番、曲名を正確に言ってみて",
+    "人生で最初に推した芸能人の名前は？",
+    "今、LINEの未読メッセージ何件？",
+    "今月、フードデリバリーを頼んだ回数は？",
+    "今履いてる靴下、何色？",
+    "初めて持った携帯の機種は？",
+    "子どもの頃のあだ名、いちばん笑えるやつをひとつ",
+    "今まで何回引っ越しした？",
+    "今日の最初の食事、何を何時に食べた？",
+    "最後にお腹を抱えて笑ったのはいつ？",
+    "スマホのロック画面は何？（すぐ見せて）",
+    "どうしても食べられない食べ物をひとつだけ？",
+    "最近の検索履歴のいちばん上は何？（開いて見せて）",
+    "アラームは何個かけて、何回スヌーズする？",
+    "今、財布に現金いくら入ってる？"]},
+  { key:2, tag:"🕵️ プライベート", name:"プライベート・スキャン", theme:{a1:"#ffb35b",a2:"#ff8a5b",bg1:"#201232",bg2:"#351a45",card:"#2a1740"},
+    qs:[
+    "シャワー中に歌う曲、タイトルは？",
+    "誰もいないときだけやる行動をひとつ？",
+    "スマホで絶対に見せられないアプリをひとつ？",
+    "ひとりで何人前まで食べたことある？（メニューも）",
+    "ベッドでスマホを見てて、最高何時まで夜更かしした？",
+    "人生で最長、何時間お風呂に入らなかった？",
+    "こっそり登録しているYouTubeチャンネルをひとつ？",
+    "今日、自撮り何枚撮って何枚消した？",
+    "冷蔵庫でいちばん古い食べ物、いつのやつ？",
+    "今月の衝動買い、最高金額は？",
+    "こっそり楽しんでいる「ギルティプレジャー」コンテンツは？",
+    "今年、ダイエットを決心した回数は？",
+    "今週、荷物を何個頼んだ？",
+    "1曲リピートの最高記録 — 何の曲、何日間？",
+    "トイレでスマホ、だいたい何してる？",
+    "通話履歴のいちばん上、今誰？（開いて見せて）",
+    "独り言をいちばん言うのはどんなとき？最近のを再現してみて",
+    "SNSに上げて消した投稿、今年何個？",
+    "抜けたいグループLINE、いくつある？",
+    "電話番号をブロックした人、全部で何人？"]},
+  { key:3, tag:"💘 ときめき史", name:"ときめきの歴史", theme:{a1:"#ff8a5b",a2:"#ff6b6b",bg1:"#25102e",bg2:"#3a1840",card:"#311536"},
+    qs:[
+    "人生初のときめき、何歳のとき誰？（イニシャルだけ）",
+    "ファーストキスは何歳のとき？",
+    "今まで何回恋愛した？",
+    "いちばん長かった恋愛、何年何か月？",
+    "いちばん短かった恋愛、何日で終わった？",
+    "合コン・お見合いの通算成績は？（何戦何勝）",
+    "告白した回数 vs 告白された回数は？",
+    "フラれた回数、正直に何回？",
+    "初恋の人のイニシャルは？今何してるか知ってる？",
+    "最近ドキッとした瞬間 — 日付と場所は？",
+    "理想のタイプにいちばん近い芸能人、ひとりだけ？",
+    "恋愛できる年の差、上は何歳、下は何歳まで？",
+    "いい感じで終わった相手、全部で何人？",
+    "元恋人の連絡先、まだ何人分保存してる？",
+    "昔のあの人のSNS、最後に見たのはいつ？",
+    "恋愛でもらった最高のプレゼントは？",
+    "「惚れっぽさ」指数、10点満点で何点？",
+    "忘れられない日付がひとつあるとしたら？（数字だけでもOK）",
+    "胸が高鳴る言葉の1位は？（実際に言われたやつで）",
+    "今の連絡先に「もしも」を想像したことのある人いる？（いる/いないだけ）"]},
+  { key:4, tag:"🤫 秘密の金庫", name:"秘密の金庫", theme:{a1:"#ff6b8a",a2:"#ff4d6d",bg1:"#260c2c",bg2:"#3d1238",card:"#331134"},
+    qs:[
+    "家族も知らない秘密、ひとつだけ（一文で）",
+    "人生最大のやらかしは、何歳のとき何をした？",
+    "学生時代の最大の黒歴史、事件のタイトルだけ言ってみて",
+    "こっそり好きだったけど誰も知らなかった相手、全部で何人？",
+    "銀行口座の残高、一万円単位で四捨五入すると？",
+    "人生最大の出費 — 何にいくら使った？",
+    "お酒を飲んでやらかした最悪の失敗、タイトルだけ",
+    "消した写真の中でもう一度見たい一枚は、誰／何？",
+    "本当は悪いと思ってないのに謝った、最近の出来事は？",
+    "親が今でも知らないこと、ひとつある？",
+    "こっそり泣いた、いちばん最近の日付は？",
+    "口では祝福、内心はモヤっとした最近の瞬間は？",
+    "SNSの裏アカ、ある？（ある/ない — 嘘なし）",
+    "体調不良や忙しいフリで断った約束、この1年で何回？",
+    "自分だけが知っている体の秘密をひとつ？（ほくろ・傷の場所など）",
+    "今まで黙って「拝借」したもの、ある？（何歳のとき、何を）",
+    "片思いの最長記録は？（何年）",
+    "嘘がバレた最悪の瞬間、タイトルだけ",
+    "みんな知ってると思ってるけど、実は知らない私の真実をひとつ？",
+    "このゲームでここまで、パスしたかった質問は何個あった？"]},
+  { key:5, tag:"❤️‍🔥 きみと私", name:"きみと私", theme:{a1:"#ff5e9a",a2:"#c44ec4",bg1:"#220a2a",bg2:"#380f3a",card:"#2f0f34"},
+    qs:[
+    "私を初めて見たときの第一印象、10点満点で何点？",
+    "じゃあ今は何点？（上がった理由 or 下がった理由をひとこと）",
+    "私たちが初めて会った日、覚えてる？言ってみて",
+    "私にドキッとした瞬間、あったならいつ？",
+    "私の顔でいちばん好きなところ、ひとつだけ？",
+    "私の返信、最長何分待ったことある？",
+    "あなたのスマホに私、何て登録されてる？（見せて）",
+    "私のことを誰かに話したことある？何て言った？",
+    "一緒に撮った写真、何枚持ってる？（数えてみて）",
+    "私とふたりきりで行ってみたい場所、ひとつだけ",
+    "私が魅力的に見えた瞬間、正確にいつ？",
+    "今日の私で、いちばん目が行ったポイントは？",
+    "私たちの最初の連絡、先に声をかけたのは誰？（記録を確認！）",
+    "私が送ったメッセージで、スクショしたり読み返したものある？",
+    "今の私たちのときめき指数、何%？",
+    "私の癖で、かわいいと思ったものをひとつ？",
+    "私に気づかれずに見てたこと、ある？最近だといつ？",
+    "私の声／笑い声、10点満点で何点？",
+    "今よりもう一歩近づいてもいい？（いい/だめ）",
+    "このゲームが終わったら、私と何がしたい？"]}
+];
+
+
+function vibrate(ms){ if(navigator.vibrate) try{ navigator.vibrate(ms); }catch(e){} }
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+let _tt;
+function toast(msg){ const t=document.getElementById('toast'); t.innerHTML=msg; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2400); }
+function applyTheme(t){
+  const r=document.documentElement.style;
+  r.setProperty('--accent1',t.a1); r.setProperty('--accent2',t.a2);
+  r.setProperty('--bg1',t.bg1); r.setProperty('--bg2',t.bg2); r.setProperty('--card',t.card);
+}
+function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); document.getElementById(id).classList.add('on'); window.scrollTo(0,0); }
+
+
+let deck=[];        // {level, tag, name, q, theme}
+let idx=0;
+let phase=0;        // 0=最初の回答者、1=2人目の回答者 — 同じ質問に2人とも答えて次のカード
+let curLevelKey=0;
+let flipped=false;
+let players=[];     // [{name, passes, answered}]
+let passedQs=[];    // {who, q, tag}
+
+
+const TASTES={
+  mild:{levels:[1,2]},        // 🥛 甘口: ウォームアップ・プライベート
+  hot: {levels:[3,4,5]},      // 🌶️🌶️ 辛口: ときめき史·秘密の金庫・きみと私へ直行
+  mix: {levels:[1,2,3,4,5]},  // 🥛→🌶️ 甘口から辛口へ: 全体を段階的に (デフォルト)
+};
+let taste='mix';
+function tasteCap(){ return TASTES[taste].levels.length*20; }
+
+
+function buildDeck(total){
+  const lvs = TASTES[taste].levels.map(k=>LEVELS.find(L=>L.key===k));
+  const n = lvs.length;
+  const base = Math.floor(total/n), extra = total%n;
+  const d=[];
+  lvs.forEach((L,i)=>{
+    const take = Math.min(base + (i<extra?1:0), L.qs.length);
+    shuffle(L.qs.slice()).slice(0, take)
+      .forEach(q=> d.push({level:L.key, tag:L.tag, name:L.name, q, theme:L.theme}));
+  });
+  return d; // すでにレベル順 = 浅い→深い
+}
+
+
+let chosen=0;
+const startBtn=document.getElementById('startBtn');
+
+function refreshStartBtn(){
+  if(!chosen){ startBtn.disabled=true; startBtn.textContent='質問の数を選んでください'; return; }
+  startBtn.disabled=false; startBtn.textContent=`質問 ${chosen}問、各自 ${chosen}回ずつ答える →`;
+}
+
+
+function refreshFullPick(){
+  const fb=document.querySelector('#picks .pick.full');
+  const cap=tasteCap();
+  fb.dataset.n=cap;
+  fb.querySelector('.n').textContent=`${cap} · 完全制覇`;
+  if(fb.classList.contains('sel')){ chosen=cap; }
+  refreshStartBtn();
+}
+
+document.querySelectorAll('#tastes .pick').forEach(p=>{
+  p.addEventListener('click',()=>{
+    document.querySelectorAll('#tastes .pick').forEach(x=>x.classList.remove('sel'));
+    p.classList.add('sel'); taste=p.dataset.taste;
+    refreshFullPick();
+    vibrate(14);
+  });
+});
+document.querySelectorAll('#picks .pick').forEach(p=>{
+  p.addEventListener('click',()=>{
+    document.querySelectorAll('#picks .pick').forEach(x=>x.classList.remove('sel'));
+    p.classList.add('sel'); chosen=+p.dataset.n;
+    refreshStartBtn();
+    vibrate(14);
+  });
+});
+startBtn.addEventListener('click', startGame);
+
+function startGame(){
+  if(!chosen) return;
+  const nA=(document.getElementById('nameA').value.trim()||'私').slice(0,6);
+  const nB=(document.getElementById('nameB').value.trim()||'きみ').slice(0,6);
+  players=[{name:nA,passes:3,answered:0},{name:nB,passes:3,answered:0}];
+  deck=buildDeck(chosen); idx=0; passedQs=[]; curLevelKey=0;
+  document.querySelector('#pA .pname').textContent=nA;
+  document.querySelector('#pB .pname').textContent=nB;
+  renderPasses();
+  show('gameScreen');
+  loadCard();
+  vibrate([20,40,20]);
+}
+
+
+const card=document.getElementById('card');
+const actions=document.getElementById('actions');
+
+
+function turnIndex(){ return (idx + phase) % 2; }
+
+function updateTurnUI(){
+  const who=players[turnIndex()].name;
+  document.getElementById('turnHint').textContent=who;
+  document.getElementById('frontWho').textContent=who;
+  document.getElementById('pA').classList.toggle('active', turnIndex()===0);
+  document.getElementById('pB').classList.toggle('active', turnIndex()===1);
+  const passBtn=document.getElementById('passBtn');
+  const left=players[turnIndex()].passes;
+  passBtn.querySelector('.sub').textContent = left>0 ? `残り ${left}回` : 'すべて使い切り';
+  passBtn.disabled = left<=0;
+}
+
+function loadCard(){
+  flipped=false;
+  phase=0;
+  card.classList.remove('flip');
+  actions.classList.add('hide');
+  const c=deck[idx];
+
+
+  if(c.level!==curLevelKey){
+    curLevelKey=c.level;
+    applyTheme(c.theme);
+    if(idx!==0){ toast(`${c.tag} レベルに入ります`); vibrate([20,40,20]); }
+  }
+
+
+  document.getElementById('progText').textContent=`${idx+1} / ${deck.length}`;
+  document.getElementById('depthTag').textContent=c.tag;
+  document.getElementById('gaugeFill').style.width=((idx)/deck.length*100)+'%';
+
+
+  document.getElementById('frontLv').textContent=`LV.${c.level} ${c.name}`;
+  document.getElementById('frontNum').textContent=`Q${idx+1} · ${deck.length}`;
+  document.getElementById('frontQ').textContent=c.q;
+
+
+  updateTurnUI();
+
+  card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
+}
+
+function flipCard(){
+  if(flipped) return;
+  flipped=true;
+  card.classList.add('flip');
+  vibrate(28);
+  setTimeout(()=>actions.classList.remove('hide'),320);
+}
+card.addEventListener('click',flipCard);
+card.addEventListener('keydown',e=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); flipCard(); }});
+
+document.getElementById('answeredBtn').addEventListener('click',()=>{
+  players[turnIndex()].answered++;
+  nextTurn();
+});
+document.getElementById('passBtn').addEventListener('click',()=>{
+  const p=players[turnIndex()];
+  if(p.passes<=0) return;
+  p.passes--;
+  passedQs.push({who:p.name, q:deck[idx].q, tag:deck[idx].tag});
+  renderPasses();
+  vibrate([15,30,60]);
+  const msgs=[`${p.name}, パス ${p.passes}回残っています 🤫`,`大丈夫。パスもすぐに情報になります。`,`この質問は心に留めておきますね。`];
+  toast(msgs[Math.floor((3-p.passes-1+3)%msgs.length)] || msgs[0]);
+  nextTurn();
+});
+
+
+function nextTurn(){
+  if(phase===0){
+    phase=1;
+    updateTurnUI();
+    toast(`同じ質問、今度は ${players[turnIndex()].name} の番！ 🔁`);
+    card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
+    vibrate(20);
+  }else{
+    advance();
+  }
+}
+
+function advance(){
+  document.getElementById('gaugeFill').style.width=((idx+1)/deck.length*100)+'%';
+  phase=0;
+  idx++;
+  if(idx>=deck.length){ setTimeout(endGame,400); return; }
+  setTimeout(loadCard,380);
+}
+
+function renderPasses(){
+  [['#pA',0],['#pB',1]].forEach(([sel,i])=>{
+    const dots=document.querySelectorAll(sel+' .pdot');
+    const used=3-players[i].passes;
+    dots.forEach((d,k)=> d.classList.toggle('used', k>=3-used));
+  });
+}
+
+
+function endGame(){
+  const totalAns=players[0].answered+players[1].answered;
+  const totalPass=passedQs.length;
+  const deepest=deck.reduce((m,c)=>Math.max(m,c.level),0);
+  const deepTag=LEVELS.find(L=>L.key===deepest).tag;
+  const deepEmoji=deepTag.split(' ')[0];
+
+  applyTheme(LEVELS.find(L=>L.key===deepest).theme);
+
+  document.getElementById('stAnswered').textContent=totalAns;
+  document.getElementById('stDepth').textContent=deepEmoji;
+  document.getElementById('stPass').textContent=totalPass;
+
+  document.getElementById('endSub').innerHTML =
+    `${players[0].name} · ${players[1].name}, ${deck.length}問すべてに、2人とも答えました。<br>`+
+    (deepest>=5 ? 'お互いへの本音まで、全部さらけ出しましたね。❤️‍🔥' :
+     deepest>=4 ? '秘密の金庫まで開けて見せ合いましたね。🤫' :
+     deepest>=3 ? 'ときめきの歴史を分かち合いましたね。💘' : '軽く、でも正直に始めましたね。🎬');
+
+  const list=document.getElementById('passList');
+  if(passedQs.length===0){
+    list.innerHTML=`<div class="none">パスは一度もありませんでした。今日のふたり、本当に正直でしたね。 💛</div>`;
+  }else{
+    list.innerHTML=passedQs.map(p=>
+      `<li><span class="tag">${p.who} · ${p.tag}</span>“${p.q}”</li>`).join('');
+  }
+
+  show('endScreen');
+  vibrate([60,80,60,80,120]);
+}
+
+document.getElementById('againBtn').addEventListener('click',()=>{
+
+  deck=buildDeck(deck.length); idx=0; passedQs=[]; curLevelKey=0;
+  players.forEach(p=>{p.passes=3; p.answered=0;});
+  renderPasses();
+  applyTheme(LEVELS[0].theme);
+  show('gameScreen');
+  loadCard();
+  vibrate([20,40,20]);
+});
+document.getElementById('homeBtn').addEventListener('click',()=>{
+  applyTheme(LEVELS[0].theme);
+  chosen=0; startBtn.disabled=true; startBtn.textContent='質問の数を選んでください';
+  document.querySelectorAll('#picks .pick').forEach(x=>x.classList.remove('sel')); // 味の選択は維持
+  show('startScreen');
+});
+</script>
+</body>
+</html>
