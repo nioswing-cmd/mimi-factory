@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Sensitivity Meter — How loud are your senses?</title>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+:root{
+  
+  --bg:#0d1a1c; --bg2:#12262a; --card:#173036; --line:#254750;
+  --ink:#eaf5f3; --sub:#94b8b4;
+  --accent:#5fd0c7; --accent2:#3a8fa3; --point:#e8c98d;
+  --ok:#57c489; --bad:#e06055;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--ink);
+  background:
+    radial-gradient(120% 80% at 82% -8%, rgba(95,208,199,.12), transparent 55%),
+    radial-gradient(120% 90% at 8% 110%, rgba(58,143,163,.16), transparent 55%),
+    linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;
+  min-height:100dvh; line-height:1.6;
+}
+.wrap{max-width:520px; margin:0 auto; padding:22px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
+.grad{
+  background:linear-gradient(105deg,var(--accent),var(--point) 70%,var(--accent2));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+.screen{display:none; animation:fadeIn .5s ease; flex:1; flex-direction:column;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1deg); opacity:.4;} 60%{transform:scale(1.02);} 100%{transform:scale(1); opacity:1;}}
+
+
+.home{justify-content:center; text-align:center; gap:8px;}
+.dial{
+  width:170px; height:170px; margin:6px auto 12px; position:relative;
+  border-radius:50%;
+  background:radial-gradient(circle at 50% 42%, var(--card), var(--bg));
+  border:2px solid var(--line);
+  box-shadow:0 0 40px rgba(95,208,199,.18), inset 0 0 30px rgba(0,0,0,.4);
+  display:flex; align-items:center; justify-content:center;
+}
+.dial::before{
+  content:""; position:absolute; inset:0; border-radius:50%;
+  background:conic-gradient(from -120deg, var(--accent2) 0deg, var(--accent) 90deg, var(--point) 170deg, transparent 240deg);
+  -webkit-mask:radial-gradient(circle, transparent 62%, #000 64%, #000 72%, transparent 74%);
+          mask:radial-gradient(circle, transparent 62%, #000 64%, #000 72%, transparent 74%);
+  opacity:.85; animation:spin 14s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.dial .needle{
+  position:absolute; width:4px; height:70px; background:linear-gradient(var(--point),var(--accent));
+  border-radius:4px; bottom:50%; transform-origin:bottom center; transform:rotate(-38deg);
+  box-shadow:0 0 10px var(--point);
+}
+.dial .cap{width:16px; height:16px; border-radius:50%; background:var(--point); box-shadow:0 0 12px var(--point); z-index:2;}
+h1{font-size:33px; margin:4px 0 2px; line-height:1.2;}
+.tagline{color:var(--sub); font-size:15px; margin:0 6px 6px;}
+.lead{font-size:14px; color:var(--sub); background:rgba(255,255,255,.03); border:1px solid var(--line);
+  border-radius:16px; padding:14px 16px; margin:10px 4px 4px; overflow-wrap:break-word;}
+.btn{
+  font-family:'Jua',sans-serif; font-size:20px; color:#08201f; border:none; cursor:pointer;
+  background:linear-gradient(100deg,var(--accent),var(--point)); border-radius:16px;
+  padding:16px 20px; margin-top:16px; width:100%;
+  box-shadow:0 8px 24px rgba(95,208,199,.28); transition:transform .15s, box-shadow .3s;
+}
+.btn:hover{transform:translateY(-2px);}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent; border:1.5px solid var(--line); color:var(--ink); box-shadow:none; font-size:16px;}
+.mini{font-size:12px; color:var(--sub); margin-top:14px;}
+
+
+.meterbox{
+  background:rgba(0,0,0,.22); border:1px solid var(--line); border-radius:18px;
+  padding:14px 12px 10px; margin-bottom:14px;
+}
+.meterhead{display:flex; justify-content:space-between; align-items:baseline; margin:0 4px 10px;}
+.meterhead .t{font-family:'Jua',sans-serif; font-size:15px;}
+.meterhead .c{font-size:13px; color:var(--sub);}
+.meterhead .c b{color:var(--point); font-size:16px;}
+.eq{display:flex; gap:9px; align-items:flex-end; height:96px;}
+.ch{flex:1; display:flex; flex-direction:column; align-items:center; gap:6px;}
+.bar{width:100%; height:74px; background:rgba(255,255,255,.06); border-radius:8px;
+  position:relative; overflow:hidden; border:1px solid rgba(255,255,255,.05);}
+.fill{position:absolute; left:0; right:0; bottom:0; height:0%;
+  background:linear-gradient(0deg,var(--accent2),var(--accent) 60%,var(--point));
+  border-radius:7px; transition:height .55s cubic-bezier(.22,1,.36,1);
+  box-shadow:0 0 14px rgba(95,208,199,.5);}
+.ch .lab{font-size:11px; color:var(--sub);}
+.ch.lead .lab{color:var(--point); font-weight:700;}
+.ch .ico{font-size:15px;}
+
+/* ── Question ── */
+.qcard{background:var(--card); border:1px solid var(--line); border-radius:20px; padding:22px 18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.25); flex:1; display:flex; flex-direction:column;}
+.qtag{font-size:12px; color:var(--accent); letter-spacing:.05em; margin-bottom:8px;}
+.qtext{font-size:19px; font-weight:500; overflow-wrap:break-word; line-height:1.5; flex:1; display:flex; align-items:center;}
+.opts{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:16px;}
+.opt{
+  font-family:'Noto Sans KR',sans-serif; font-size:15px; font-weight:500; color:var(--ink);
+  background:rgba(255,255,255,.04); border:1.5px solid var(--line); border-radius:14px;
+  padding:15px 8px; cursor:pointer; transition:transform .12s, background .2s, border-color .2s;
+}
+.opt:hover{background:rgba(95,208,199,.1); border-color:var(--accent);}
+.opt:active{transform:scale(.95);}
+.opt.sel{background:linear-gradient(100deg,var(--accent),var(--accent2)); color:#062020; border-color:var(--accent); font-weight:700;}
+.opt:focus-visible{outline:3px solid var(--point); outline-offset:2px;}
+.navrow{display:flex; gap:10px; margin-top:14px;}
+.navbtn{flex:1; background:transparent; border:1.5px solid var(--line); color:var(--sub);
+  border-radius:12px; padding:11px; font-family:'Noto Sans KR'; font-size:14px; cursor:pointer;}
+.navbtn:disabled{opacity:.35;}
+
+
+.result{gap:14px;}
+.rtop{text-align:center; padding:6px 0 2px;}
+.bigvol{font-family:'Jua',sans-serif; font-size:66px; line-height:1; margin:6px 0 2px;}
+.bigvol small{font-size:26px;}
+.rtype{font-family:'Jua',sans-serif; font-size:25px; margin:6px 0 2px;}
+.rsub{color:var(--sub); font-size:14px; margin:0 8px;}
+.rbars{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:16px 16px 10px;}
+.rbars h3{font-size:15px; margin:0 0 12px;}
+.rrow{margin-bottom:13px;}
+.rrow .rl{display:flex; justify-content:space-between; font-size:13px; margin-bottom:5px;}
+.rrow .rl .rv{color:var(--point); font-weight:700;}
+.track{height:12px; background:rgba(255,255,255,.07); border-radius:99px; overflow:hidden;}
+.trackfill{height:100%; width:0%; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent2),var(--accent),var(--point));
+  box-shadow:0 0 12px rgba(95,208,199,.5); transition:width 1.1s cubic-bezier(.22,1,.36,1);}
+.rcard{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:16px 18px;}
+.rcard h3{font-size:15px; margin:0 0 8px; color:var(--accent);}
+.rcard p{margin:0 0 6px; font-size:14px; color:var(--ink); overflow-wrap:break-word;}
+.rcard .tip{color:var(--sub); font-size:13.5px;}
+.badge{display:inline-block; background:rgba(232,201,141,.14); border:1px solid rgba(232,201,141,.4);
+  color:var(--point); border-radius:99px; padding:3px 12px; font-size:12.5px; margin-top:4px;}
+
+
+.toast{position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-20px);
+  background:rgba(23,48,54,.97); border:1.5px solid var(--accent); color:var(--ink);
+  padding:12px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none;
+  transition:opacity .4s, transform .4s; z-index:50; max-width:90vw; box-shadow:0 8px 24px rgba(0,0,0,.4);}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center; margin-top:28px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(95,208,199,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:var(--sub); font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:var(--sub);}
+
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="wrap">
+
+  
+  <section class="screen on home" id="home">
+    <div class="dial"><div class="needle"></div><div class="cap"></div></div>
+    <h1>Sensitivity <span class="grad">Meter</span></h1>
+    <p class="tagline">How loud are your senses?</p>
+    <div class="lead">
+      Do you hear the world louder, feel it deeper, and dwell on it longer than most?
+      In just 20 questions, we read the <b style="color:var(--accent)">Sense · Empathy · Thought · Environment</b> 4-channel
+      <b style="color:var(--point)">volume</b> in real time.<br>
+      There’s no right or wrong here — we just chart your own sensitivity onto the meter.
+    </div>
+    <button class="btn" onclick="start()">Turn on the meter ▶</button>
+    <p class="mini">About 2 min · 20 questions · Results stay on your device</p>
+  </section>
+
+  
+  <section class="screen" id="quiz">
+    <div class="meterbox">
+      <div class="meterhead">
+        <div class="t">📟 Live sensory meter</div>
+        <div class="c"><span id="qcount">0</span>/20 · Total volume <b id="totvol">0</b></div>
+      </div>
+      <div class="eq" id="eq"></div>
+    </div>
+    <div class="qcard pop" id="qcard">
+      <div class="qtag" id="qtag">Channel · Question</div>
+      <div class="qtext" id="qtext">Question</div>
+      <div class="opts" id="opts"></div>
+      <div class="navrow">
+        <button class="navbtn" id="prevBtn" onclick="prev()">← Back</button>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="screen result" id="result">
+    <div class="rtop">
+      <div class="badge" id="rband">Sensory volume</div>
+      <div class="bigvol"><span id="rvol" class="grad">0</span><small class="grad">%</small></div>
+      <div class="rtype grad" id="rtype">Type</div>
+      <div class="rsub" id="rlevel"></div>
+    </div>
+    <div class="rbars">
+      <h3>🎚️ Volume by channel</h3>
+      <div id="rrows"></div>
+    </div>
+    <div class="rcard" id="rdesc"></div>
+    <div class="rcard" id="rcare"></div>
+    <button class="btn" onclick="restart()">🔄 Measure again</button>
+    <button class="btn ghost" onclick="share()">📋 Copy my result</button>
+
+    <div class="footer">
+      <div class="mf-eyebrow"><span>The Meaning & Fun Factory</span></div>
+      <div class="mf-logo">MIMI FACTORY</div>
+      <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+
+const CH = {
+  sense:   {name:"Sense",  ico:"👁️", full:"Physical senses (light · sound · touch · taste · smell)"},
+  emo:     {name:"Empathy",  ico:"💗", full:"Emotion · Empathy (how easily feelings color you)"},
+  think:   {name:"Thought",  ico:"🧠", full:"Depth of processing (how much you mull and examine)"},
+  env:     {name:"Environment",  ico:"🌊", full:"Overload (how quickly crowds · stimulation drain you)"},
+};
+const CH_KEYS = Object.keys(CH);
+
+
+const QS = [
+  {c:"sense", t:"Bright lights or strong sunlight bother you more than they do most people."},
+  {c:"sense", t:"Sudden noises or loud sounds make you flinch, and they stay on your mind."},
+  {c:"sense", t:"You react sharply to textures on your skin — clothing tags, fabric, tightness."},
+  {c:"sense", t:"Caffeine, medicine, or certain foods hit your body harder than they do most."},
+  {c:"sense", t:"You notice subtle differences in smell or taste that others miss."},
+
+  {c:"emo",   t:"Moving music, films, or stories shake you deeply."},
+  {c:"emo",   t:"The mood of whoever you’re with transfers straight onto you."},
+  {c:"emo",   t:"When someone’s hurting, their feelings feel like your own."},
+  {c:"emo",   t:"When you’re hungry or tired, your moods swing hard."},
+  {c:"emo",   t:"Beautiful scenery or art has filled your chest to overflowing more than once."},
+
+  {c:"think", t:"You spot small changes or details before anyone else does."},
+  {c:"think", t:"You tend to mull one thing over for a long time and think about it deeply."},
+  {c:"think", t:"You watch yourself closely so you won’t make mistakes."},
+  {c:"think", t:"When lots of people are watching, you can’t perform at your usual level."},
+  {c:"think", t:"Before deciding, you weigh every possible option for a long time."},
+
+  {c:"env",   t:"When tasks pile up all at once, you feel overwhelmed fast."},
+  {c:"env",   t:"In crowded, stimulating places, you tire out unusually fast."},
+  {c:"env",   t:"After a busy day, you absolutely need quiet time alone to recover."},
+  {c:"env",   t:"When you have to handle a lot in a short time, your mind goes blank."},
+  {c:"env",   t:"When strong stimulation keeps up (loud noise · flashing screens), you just want to get out."},
+];
+const CH_MAX = 15, TOTAL_MAX = 60;
+
+const OPTS = [
+  {t:"No",   v:0},
+  {t:"A little",     v:1},
+  {t:"Often",     v:2},
+  {t:"Very much",     v:3},
+];
+
+const TYPES = [
+  {min:0,  name:"The Sturdy Soundproof Wall", band:"🛡️",
+   level:"Your sensory volume runs low",
+   desc:"You’ve got a sturdy filter that most stimulation can’t rattle. You hold your focus even in noisy places, and because feelings don’t sweep you away, you stay calm in a crisis.",
+   tip:"Sometimes you might miss the quiet signals of a more sensitive person. When someone looks off, make “ask one more time, even if they seem fine” a habit."},
+  {min:33, name:"The Balanced Tuner", band:"⚖️",
+   level:"Sensitive when it counts, easygoing when it doesn’t",
+   desc:"You’re a flexible meter that adjusts its sensitivity to the moment. You notice the fine details yet know when to let things slide, so you stay balanced in both relationships and work.",
+   tip:"This balance is your strength. Just know that on a bad day your volume can spike — so tend to signals like tiredness and hunger first."},
+  {min:55, name:"The Delicate Detector", band:"🌿",
+   level:"You lean toward HSP (Highly Sensitive Person)",
+   desc:"You pick up the subtle textures of the world better than most. Feeling small changes · emotions · beauty so deeply is a real gift — but it also means stimulation piles up and tires you out.",
+   tip:"Book a “stimulation-off” slot into each day. Dimming the lights · earphones · a short walk will reset your meter."},
+  {min:75, name:"The Ultra-Precision Sensor", band:"✨",
+   level:"Strong HSP — your volume is wide open",
+   desc:"Your sensory dial is turned all the way up — a high-gain sensor. Your empathy, deep insight, and rich emotions are your own special gift. But you overload easily, so you feel best when you build yourself a “shield.”",
+   tip:"Sensitivity isn’t a defect — it’s a spec. On high-stimulation days, set aside recovery time in advance, and tell yourself, “This is simply how I’m built to feel.”"},
+];
+
+const CH_CARE = {
+  sense:"Take the light · noise · texture around you into your own hands. Sunglasses, noise-canceling, and comfortable fabrics can cut a day’s fatigue way down.",
+  emo:"Draw a “boundary line” between other people’s feelings and your own. Repeating “this is their emotion, and I am safe right now” dials down the over-immersion.",
+  think:"When thinking drags on, set a timer — “just five more minutes, then I decide” — to cut off the mulling. Done protects your mind better than perfect.",
+  env:"Between packed plans, book yourself “15 minutes of doing nothing” in advance. Recovery isn’t laziness — it’s maintenance time for a high-gain sensor.",
+};
+
+
+let idx = 0;
+let answers = new Array(QS.length).fill(null);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+
+function vibrate(p){ if(navigator.vibrate) try{navigator.vibrate(p);}catch(e){} }
+let _tt;
+function toast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2000); }
+function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); document.getElementById(id).classList.add('on'); window.scrollTo(0,0); }
+function pop(el){ if(reduce) return; el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+function burst(x,y,n){ if(reduce||!window.confetti) return; confetti({particleCount:n||18, spread:55, startVelocity:26, origin:{x,y}, colors:['#5fd0c7','#e8c98d','#3a8fa3','#eaf5f3'], scalar:.8, ticks:120}); }
+
+
+function chScore(c){ let s=0; QS.forEach((q,i)=>{ if(q.c===c && answers[i]!==null) s+=answers[i]; }); return s; }
+function totScore(){ return answers.reduce((a,b)=>a+(b||0),0); }
+function leadCh(){ let best=null,bv=-1; CH_KEYS.forEach(c=>{const v=chScore(c); if(v>bv){bv=v; best=c;}}); return bv>0?best:null; }
+
+
+function buildEq(){
+  const eq=document.getElementById('eq'); eq.innerHTML='';
+  CH_KEYS.forEach(c=>{
+    const d=document.createElement('div'); d.className='ch'; d.id='ch-'+c;
+    d.innerHTML=`<div class="bar"><div class="fill" id="fill-${c}"></div></div>
+                 <div class="ico">${CH[c].ico}</div><div class="lab">${CH[c].name}</div>`;
+    eq.appendChild(d);
+  });
+}
+function updateEq(){
+  const lead=leadCh();
+  CH_KEYS.forEach(c=>{
+    const pct=Math.round(chScore(c)/CH_MAX*100);
+    document.getElementById('fill-'+c).style.height=pct+'%';
+    document.getElementById('ch-'+c).classList.toggle('lead', c===lead);
+  });
+  document.getElementById('qcount').textContent=answers.filter(a=>a!==null).length;
+  document.getElementById('totvol').textContent=Math.round(totScore()/TOTAL_MAX*100)+'%';
+}
+
+
+function start(){ idx=0; answers=new Array(QS.length).fill(null); buildEq(); show('quiz'); render(); vibrate(15); }
+
+function render(){
+  const q=QS[idx];
+  document.getElementById('qtag').textContent=`${CH[q.c].ico} ${CH[q.c].full}`;
+  document.getElementById('qtext').textContent=`Q${idx+1}. ${q.t}`;
+  const wrap=document.getElementById('opts'); wrap.innerHTML='';
+  OPTS.forEach(o=>{
+    const b=document.createElement('button'); b.className='opt'+(answers[idx]===o.v?' sel':'');
+    b.textContent=o.t;
+    b.onclick=(e)=>choose(o.v, e);
+    wrap.appendChild(b);
+  });
+  document.getElementById('prevBtn').disabled = idx===0;
+  pop(document.getElementById('qcard'));
+  updateEq();
+}
+
+function choose(v, e){
+  answers[idx]=v;
+  document.querySelectorAll('#opts .opt').forEach(b=>b.classList.remove('sel'));
+  if(e&&e.currentTarget) e.currentTarget.classList.add('sel');
+  updateEq();
+  vibrate(v>=2?[15,25]:12);
+  if(e){ const r=e.currentTarget.getBoundingClientRect(); burst((r.left+r.width/2)/innerWidth,(r.top+r.height/2)/innerHeight, 12+v*4); }
+
+  const c=QS[idx].c;
+  const chDone=QS.every((q,i)=> q.c!==c || answers[i]!==null);
+  const wasLastOfCh = idx<QS.length-1 && QS[idx+1].c!==c;
+  setTimeout(()=>{
+    if(chDone && wasLastOfCh){ toast(`${CH[c].ico} ${CH[c].name} channel measured!`); vibrate([20,40,20]); }
+    next();
+  }, 260);
+}
+
+function next(){
+  if(idx<QS.length-1){ idx++; render(); }
+  else if(answers.every(a=>a!==null)){ finish(); }
+  else { // jump to the unanswered question
+    const miss=answers.findIndex(a=>a===null); if(miss>=0){ idx=miss; render(); toast('You’ve still got unanswered questions'); }
+  }
+}
+function prev(){ if(idx>0){ idx--; render(); } }
+
+
+function finish(){
+  const tot=totScore(); const pct=Math.round(tot/TOTAL_MAX*100);
+  let ty=TYPES[0]; TYPES.forEach(t=>{ if(pct>=t.min) ty=t; });
+  const lead=leadCh()||'sense';
+
+  document.getElementById('rband').textContent=`${ty.band} Total sensory volume`;
+  document.getElementById('rtype').textContent=ty.name;
+  document.getElementById('rlevel').textContent=ty.level+` · Lead channel: ${CH[lead].ico} ${CH[lead].name}`;
+
+
+  const rows=document.getElementById('rrows'); rows.innerHTML='';
+  const chData=CH_KEYS.map(c=>({c, pct:Math.round(chScore(c)/CH_MAX*100)})).sort((a,b)=>b.pct-a.pct);
+  chData.forEach(d=>{
+    const el=document.createElement('div'); el.className='rrow';
+    el.innerHTML=`<div class="rl"><span>${CH[d.c].ico} ${CH[d.c].name} <span style="color:var(--sub);font-size:11px">${CH[d.c].full.replace(/\(.*\)/,'').trim()}</span></span><span class="rv" id="rv-${d.c}">0%</span></div>
+                  <div class="track"><div class="trackfill" id="tf-${d.c}"></div></div>`;
+    rows.appendChild(el);
+  });
+
+  document.getElementById('rdesc').innerHTML=`<h3>${ty.band} This is you</h3><p>${ty.desc}</p>`;
+  document.getElementById('rcare').innerHTML=`<h3>🎧 ${CH[lead].name} channel volume is your loudest — care for it like this</h3><p class="tip">${CH_CARE[lead]}</p><p class="tip" style="margin-top:8px">💡 ${ty.tip}</p>`;
+
+  show('result');
+
+
+  animateCount(document.getElementById('rvol'), pct, 1100);
+  setTimeout(()=>{
+    chData.forEach(d=>{
+      document.getElementById('tf-'+d.c).style.width=d.pct+'%';
+      animateCount(document.getElementById('rv-'+d.c), d.pct, 1000, '%');
+    });
+  }, 120);
+  vibrate([60,80,60,80,120]);
+  if(!reduce && window.confetti){
+    burst(.3,.3,90); setTimeout(()=>burst(.7,.35,90),260); setTimeout(()=>burst(.5,.2,60),520);
+  }
+}
+
+function animateCount(el, target, dur, suf){
+  if(reduce){ el.textContent=target+(suf||''); return; }
+  const t0=performance.now();
+  function step(now){
+    const p=Math.min(1,(now-t0)/dur); const e=1-Math.pow(1-p,3);
+    el.textContent=Math.round(target*e)+(suf||'');
+    if(p<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function restart(){ show('home'); }
+
+function share(){
+  const tot=Math.round(totScore()/TOTAL_MAX*100);
+  let ty=TYPES[0]; TYPES.forEach(t=>{ if(tot>=t.min) ty=t; });
+  const lead=leadCh()||'sense';
+  const txt=`[The Sensitivity Meter] My sensory volume is ${tot}%!\nType: ${ty.name} (${ty.level})\nLoudest channel: ${CH[lead].ico} ${CH[lead].name}\n\nMeasure yours too → https://mimifactory.vibekr.com/apps/Sensitivity_Meter_hsp_Sense_sensitivity_test.html`;
+  if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(()=>toast('Copied your result! 📋')).catch(()=>toast('Couldn’t copy')); }
+  else toast('Copying isn’t supported here');
+}
+
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('quiz').classList.contains('on')) return;
+  if(e.key>='1'&&e.key<='4'){ const v=OPTS[+e.key-1].v; const btns=document.querySelectorAll('#opts .opt'); const b=btns[+e.key-1]; if(b){ const r=b.getBoundingClientRect(); choose(v,{currentTarget:b, target:b}); } }
+  if(e.key==='ArrowLeft') prev();
+});
+</script>
+</body>
+</html>

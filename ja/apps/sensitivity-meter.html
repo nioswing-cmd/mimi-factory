@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>繊細さメーター — あなたの感覚ボリュームは？</title>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansJP-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/MPLUSRounded1c-Bold-sub.woff2') format('woff2');font-weight:400;font-display:swap;}
+</style>
+<style>
+:root{
+  
+  --bg:#0d1a1c; --bg2:#12262a; --card:#173036; --line:#254750;
+  --ink:#eaf5f3; --sub:#94b8b4;
+  --accent:#5fd0c7; --accent2:#3a8fa3; --point:#e8c98d;
+  --ok:#57c489; --bad:#e06055;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--ink);
+  background:
+    radial-gradient(120% 80% at 82% -8%, rgba(95,208,199,.12), transparent 55%),
+    radial-gradient(120% 90% at 8% 110%, rgba(58,143,163,.16), transparent 55%),
+    linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;
+  min-height:100dvh; line-height:1.6;
+}
+.wrap{max-width:520px; margin:0 auto; padding:22px 18px 30px; min-height:100dvh; display:flex; flex-direction:column;}
+h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
+.grad{
+  background:linear-gradient(105deg,var(--accent),var(--point) 70%,var(--accent2));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+.screen{display:none; animation:fadeIn .5s ease; flex:1; flex-direction:column;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.9) rotate(-1deg); opacity:.4;} 60%{transform:scale(1.02);} 100%{transform:scale(1); opacity:1;}}
+
+
+.home{justify-content:center; text-align:center; gap:8px;}
+.dial{
+  width:170px; height:170px; margin:6px auto 12px; position:relative;
+  border-radius:50%;
+  background:radial-gradient(circle at 50% 42%, var(--card), var(--bg));
+  border:2px solid var(--line);
+  box-shadow:0 0 40px rgba(95,208,199,.18), inset 0 0 30px rgba(0,0,0,.4);
+  display:flex; align-items:center; justify-content:center;
+}
+.dial::before{
+  content:""; position:absolute; inset:0; border-radius:50%;
+  background:conic-gradient(from -120deg, var(--accent2) 0deg, var(--accent) 90deg, var(--point) 170deg, transparent 240deg);
+  -webkit-mask:radial-gradient(circle, transparent 62%, #000 64%, #000 72%, transparent 74%);
+          mask:radial-gradient(circle, transparent 62%, #000 64%, #000 72%, transparent 74%);
+  opacity:.85; animation:spin 14s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.dial .needle{
+  position:absolute; width:4px; height:70px; background:linear-gradient(var(--point),var(--accent));
+  border-radius:4px; bottom:50%; transform-origin:bottom center; transform:rotate(-38deg);
+  box-shadow:0 0 10px var(--point);
+}
+.dial .cap{width:16px; height:16px; border-radius:50%; background:var(--point); box-shadow:0 0 12px var(--point); z-index:2;}
+h1{font-size:33px; margin:4px 0 2px; line-height:1.2;}
+.tagline{color:var(--sub); font-size:15px; margin:0 6px 6px;}
+.lead{font-size:14px; color:var(--sub); background:rgba(255,255,255,.03); border:1px solid var(--line);
+  border-radius:16px; padding:14px 16px; margin:10px 4px 4px; }
+.btn{
+  font-family:'Jua',sans-serif; font-size:20px; color:#08201f; border:none; cursor:pointer;
+  background:linear-gradient(100deg,var(--accent),var(--point)); border-radius:16px;
+  padding:16px 20px; margin-top:16px; width:100%;
+  box-shadow:0 8px 24px rgba(95,208,199,.28); transition:transform .15s, box-shadow .3s;
+}
+.btn:hover{transform:translateY(-2px);}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent; border:1.5px solid var(--line); color:var(--ink); box-shadow:none; font-size:16px;}
+.mini{font-size:12px; color:var(--sub); margin-top:14px;}
+
+
+.meterbox{
+  background:rgba(0,0,0,.22); border:1px solid var(--line); border-radius:18px;
+  padding:14px 12px 10px; margin-bottom:14px;
+}
+.meterhead{display:flex; justify-content:space-between; align-items:baseline; margin:0 4px 10px;}
+.meterhead .t{font-family:'Jua',sans-serif; font-size:15px;}
+.meterhead .c{font-size:13px; color:var(--sub);}
+.meterhead .c b{color:var(--point); font-size:16px;}
+.eq{display:flex; gap:9px; align-items:flex-end; height:96px;}
+.ch{flex:1; display:flex; flex-direction:column; align-items:center; gap:6px;}
+.bar{width:100%; height:74px; background:rgba(255,255,255,.06); border-radius:8px;
+  position:relative; overflow:hidden; border:1px solid rgba(255,255,255,.05);}
+.fill{position:absolute; left:0; right:0; bottom:0; height:0%;
+  background:linear-gradient(0deg,var(--accent2),var(--accent) 60%,var(--point));
+  border-radius:7px; transition:height .55s cubic-bezier(.22,1,.36,1);
+  box-shadow:0 0 14px rgba(95,208,199,.5);}
+.ch .lab{font-size:11px; color:var(--sub);}
+.ch.lead .lab{color:var(--point); font-weight:700;}
+.ch .ico{font-size:15px;}
+
+/* ── 問 ── */
+.qcard{background:var(--card); border:1px solid var(--line); border-radius:20px; padding:22px 18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.25); flex:1; display:flex; flex-direction:column;}
+.qtag{font-size:12px; color:var(--accent); letter-spacing:.05em; margin-bottom:8px;}
+.qtext{font-size:19px; font-weight:500;  line-height:1.5; flex:1; display:flex; align-items:center;}
+.opts{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:16px;}
+.opt{
+  font-family:'Noto Sans KR',sans-serif; font-size:15px; font-weight:500; color:var(--ink);
+  background:rgba(255,255,255,.04); border:1.5px solid var(--line); border-radius:14px;
+  padding:15px 8px; cursor:pointer; transition:transform .12s, background .2s, border-color .2s;
+}
+.opt:hover{background:rgba(95,208,199,.1); border-color:var(--accent);}
+.opt:active{transform:scale(.95);}
+.opt.sel{background:linear-gradient(100deg,var(--accent),var(--accent2)); color:#062020; border-color:var(--accent); font-weight:700;}
+.opt:focus-visible{outline:3px solid var(--point); outline-offset:2px;}
+.navrow{display:flex; gap:10px; margin-top:14px;}
+.navbtn{flex:1; background:transparent; border:1.5px solid var(--line); color:var(--sub);
+  border-radius:12px; padding:11px; font-family:'Noto Sans KR'; font-size:14px; cursor:pointer;}
+.navbtn:disabled{opacity:.35;}
+
+
+.result{gap:14px;}
+.rtop{text-align:center; padding:6px 0 2px;}
+.bigvol{font-family:'Jua',sans-serif; font-size:66px; line-height:1; margin:6px 0 2px;}
+.bigvol small{font-size:26px;}
+.rtype{font-family:'Jua',sans-serif; font-size:25px; margin:6px 0 2px;}
+.rsub{color:var(--sub); font-size:14px; margin:0 8px;}
+.rbars{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:16px 16px 10px;}
+.rbars h3{font-size:15px; margin:0 0 12px;}
+.rrow{margin-bottom:13px;}
+.rrow .rl{display:flex; justify-content:space-between; font-size:13px; margin-bottom:5px;}
+.rrow .rl .rv{color:var(--point); font-weight:700;}
+.track{height:12px; background:rgba(255,255,255,.07); border-radius:99px; overflow:hidden;}
+.trackfill{height:100%; width:0%; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent2),var(--accent),var(--point));
+  box-shadow:0 0 12px rgba(95,208,199,.5); transition:width 1.1s cubic-bezier(.22,1,.36,1);}
+.rcard{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:16px 18px;}
+.rcard h3{font-size:15px; margin:0 0 8px; color:var(--accent);}
+.rcard p{margin:0 0 6px; font-size:14px; color:var(--ink); }
+.rcard .tip{color:var(--sub); font-size:13.5px;}
+.badge{display:inline-block; background:rgba(232,201,141,.14); border:1px solid rgba(232,201,141,.4);
+  color:var(--point); border-radius:99px; padding:3px 12px; font-size:12.5px; margin-top:4px;}
+
+
+.toast{position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-20px);
+  background:rgba(23,48,54,.97); border:1.5px solid var(--accent); color:var(--ink);
+  padding:12px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none;
+  transition:opacity .4s, transform .4s; z-index:50; max-width:90vw; box-shadow:0 8px 24px rgba(0,0,0,.4);}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center; margin-top:28px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(95,208,199,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:var(--sub); font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:var(--sub);}
+
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="wrap">
+
+  
+  <section class="screen on home" id="home">
+    <div class="dial"><div class="needle"></div><div class="cap"></div></div>
+    <h1>繊細さ <span class="grad">メーター</span></h1>
+    <p class="tagline">あなたの感覚ボリューム、いくつ？</p>
+    <div class="lead">
+      世界を人より大きく聞き、深く感じ、長く反芻していませんか？
+      20の質問で <b style="color:var(--accent)">感覚 · 共感 · 思考 · 環境</b> 4チャンネルの
+      <b style="color:var(--point)">ボリューム</b>をリアルタイムで測定します。<br>
+      正しい・間違いではなく、あなただけの感度をメーターに描きます。
+    </div>
+    <button class="btn" onclick="start()">メーターを起動 ▶</button>
+    <p class="mini">約2分 · 20問 · 結果はこの端末にだけ残ります</p>
+  </section>
+
+  
+  <section class="screen" id="quiz">
+    <div class="meterbox">
+      <div class="meterhead">
+        <div class="t">📟 リアルタイム感覚メーター</div>
+        <div class="c"><span id="qcount">0</span>/20 · 総ボリューム <b id="totvol">0</b></div>
+      </div>
+      <div class="eq" id="eq"></div>
+    </div>
+    <div class="qcard pop" id="qcard">
+      <div class="qtag" id="qtag">チャンネル · 問</div>
+      <div class="qtext" id="qtext">問</div>
+      <div class="opts" id="opts"></div>
+      <div class="navrow">
+        <button class="navbtn" id="prevBtn" onclick="prev()">← 戻る</button>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="screen result" id="result">
+    <div class="rtop">
+      <div class="badge" id="rband">感覚ボリューム</div>
+      <div class="bigvol"><span id="rvol" class="grad">0</span><small class="grad">%</small></div>
+      <div class="rtype grad" id="rtype">タイプ</div>
+      <div class="rsub" id="rlevel"></div>
+    </div>
+    <div class="rbars">
+      <h3>🎚️ チャンネル別ボリューム</h3>
+      <div id="rrows"></div>
+    </div>
+    <div class="rcard" id="rdesc"></div>
+    <div class="rcard" id="rcare"></div>
+    <button class="btn" onclick="restart()">🔄 もう一度測る</button>
+    <button class="btn ghost" onclick="share()">📋 結果をコピー</button>
+
+    <div class="footer">
+      <div class="mf-eyebrow"><span>意味と面白さの工場</span></div>
+      <div class="mf-logo">ミミファクトリー</div>
+      <div class="mf-caption">株式会社ヨンギョル ファミリーカンパニー</div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+
+const CH = {
+  sense:   {name:"感覚",  ico:"👁️", full:"身体感覚（光 · 音 · 触感 · 味 · におい）"},
+  emo:     {name:"共感",  ico:"💗", full:"情緒 · 共感（感情に染まりやすさ）"},
+  think:   {name:"思考",  ico:"🧠", full:"処理の深さ（反芻して見極める度合い）"},
+  env:     {name:"環境",  ico:"🌊", full:"過負荷（混雑 · 刺激での疲れやすさ）"},
+};
+const CH_KEYS = Object.keys(CH);
+
+
+const QS = [
+  {c:"sense", t:"明るい照明や強い日差しが、人よりまぶしくて苦手だ。"},
+  {c:"sense", t:"突然の物音や大きな音にビクッとして、あとまで気になる。"},
+  {c:"sense", t:"服のタグ · 生地 · 締めつけなど、肌に触れる感触に敏感に反応する。"},
+  {c:"sense", t:"カフェインや薬、特定の食べ物に、人より体が大きく反応する。"},
+  {c:"sense", t:"かすかなにおいや味の違いに、人よりよく気づく。"},
+
+  {c:"emo",   t:"感動的な音楽 · 映画 · 物語に、心が深く揺さぶられる。"},
+  {c:"emo",   t:"一緒にいる人の気分が、そのまま自分に移ってくる。"},
+  {c:"emo",   t:"誰かがつらそうだと、その感情が自分のことのように感じられる。"},
+  {c:"emo",   t:"お腹がすいたり疲れたりすると、感情の起伏が大きくなる。"},
+  {c:"emo",   t:"美しい風景や芸術に、胸がいっぱいになったことが何度もある。"},
+
+  {c:"think", t:"ささいに見える変化やディテールに、人より先に気づく。"},
+  {c:"think", t:"ひとつのことを長く反芻し、深く考えるほうだ。"},
+  {c:"think", t:"ミスをしないよう、自分を細やかにチェックする。"},
+  {c:"think", t:"大勢に見られていると、いつもの力が出しにくい。"},
+  {c:"think", t:"決める前に、あり得るパターンを長く検討する。"},
+
+  {c:"env",   t:"やることが一度に押し寄せると、すぐに圧倒される感じがする。"},
+  {c:"env",   t:"混雑して刺激の多い場所にいると、やけに早く疲れる。"},
+  {c:"env",   t:"忙しい一日のあとは、一人で静かに回復する時間が必ず要る。"},
+  {c:"env",   t:"短い時間で多くをこなさなければならないと、頭が真っ白になる。"},
+  {c:"env",   t:"強い刺激（大きな音 · チカチカする画面）が続くと、その場を離れたくなる。"},
+];
+const CH_MAX = 15, TOTAL_MAX = 60;
+
+const OPTS = [
+  {t:"いいえ",   v:0},
+  {t:"少し",     v:1},
+  {t:"よく",     v:2},
+  {t:"とても",     v:3},
+];
+
+const TYPES = [
+  {min:0,  name:"頼れる防音壁タイプ", band:"🛡️",
+   level:"感覚ボリュームは低めです",
+   desc:"たいていの刺激には大きく揺れない、丈夫なフィルターの持ち主です。うるさい場所でも集中を保ち、感情に流されにくいので、危機のときも落ち着いていられます。",
+   tip:"ときには、繊細な人の小さなサインを見落とすことも。相手がつらそうなら「大丈夫そうでも、もう一度たずねる」を習慣にしてみて。"},
+  {min:33, name:"バランス調律師タイプ", band:"⚖️",
+   level:"必要なときは繊細、そうでなければおおらか",
+   desc:"状況に応じて感度を調節できる、しなやかなメーターです。細やかに気づきながらも、必要なときは受け流せるので、人間関係でも仕事でもバランスがいいです。",
+   tip:"このバランスがあなたの強みです。ただし体調が悪いときはボリュームが一気に上がることも。疲れ · 空腹のサインを先にケアしてください。"},
+  {min:55, name:"繊細なセンサータイプ", band:"🌿",
+   level:"HSP（とても繊細な人）の傾向があります",
+   desc:"世界の微妙な質感を、人よりよくとらえます。小さな変化 · 感情 · 美しさを深く感じられるのは大きな才能ですが、その分、刺激がたまると疲れやすくなります。",
+   tip:"一日のなかに「刺激をオフにする時間」を予約しておきましょう。照明を落とす · イヤホン · 短い散歩が、メーターをリセットしてくれます。"},
+  {min:75, name:"超精密センサータイプ", band:"✨",
+   level:"強いHSP — ボリュームが大きく開いています",
+   desc:"感覚のダイヤルが全開になった、高感度センサーです。共感力、深い洞察、豊かな感情は、あなただけの贈りものです。ただし過負荷になりやすいので、自分で「保護膜」を用意すると楽になります。",
+   tip:"繊細さは故障ではなく、あなたの仕様（スペック）です。刺激の多い日はあらかじめ回復時間を確保して、「私はもともとこう感じる人」と認めてあげてください。"},
+];
+
+const CH_CARE = {
+  sense:"照明 · 騒音 · 触感の環境を、自分の手で調節しましょう。サングラス、ノイズキャンセリング、心地よい生地が、一日の疲れを大きく減らしてくれます。",
+  emo:"他人の感情と自分の感情のあいだに「境界線」を引いてみましょう。「これはあの人の感情で、私は今は安全だ」と唱えると、のめり込みが減ります。",
+  think:"考えが長引くときは「あと5分だけ悩んで決める」のようにタイマーをかけ、反芻を止めてあげましょう。完璧よりも完了が、心を守ります。",
+  env:"詰まった予定のあいだに「何もしない15分」を先に予約しておきましょう。回復は怠けではなく、高感度センサーのメンテナンス時間です。",
+};
+
+
+let idx = 0;
+let answers = new Array(QS.length).fill(null);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+
+function vibrate(p){ if(navigator.vibrate) try{navigator.vibrate(p);}catch(e){} }
+let _tt;
+function toast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2000); }
+function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); document.getElementById(id).classList.add('on'); window.scrollTo(0,0); }
+function pop(el){ if(reduce) return; el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+function burst(x,y,n){ if(reduce||!window.confetti) return; confetti({particleCount:n||18, spread:55, startVelocity:26, origin:{x,y}, colors:['#5fd0c7','#e8c98d','#3a8fa3','#eaf5f3'], scalar:.8, ticks:120}); }
+
+
+function chScore(c){ let s=0; QS.forEach((q,i)=>{ if(q.c===c && answers[i]!==null) s+=answers[i]; }); return s; }
+function totScore(){ return answers.reduce((a,b)=>a+(b||0),0); }
+function leadCh(){ let best=null,bv=-1; CH_KEYS.forEach(c=>{const v=chScore(c); if(v>bv){bv=v; best=c;}}); return bv>0?best:null; }
+
+
+function buildEq(){
+  const eq=document.getElementById('eq'); eq.innerHTML='';
+  CH_KEYS.forEach(c=>{
+    const d=document.createElement('div'); d.className='ch'; d.id='ch-'+c;
+    d.innerHTML=`<div class="bar"><div class="fill" id="fill-${c}"></div></div>
+                 <div class="ico">${CH[c].ico}</div><div class="lab">${CH[c].name}</div>`;
+    eq.appendChild(d);
+  });
+}
+function updateEq(){
+  const lead=leadCh();
+  CH_KEYS.forEach(c=>{
+    const pct=Math.round(chScore(c)/CH_MAX*100);
+    document.getElementById('fill-'+c).style.height=pct+'%';
+    document.getElementById('ch-'+c).classList.toggle('lead', c===lead);
+  });
+  document.getElementById('qcount').textContent=answers.filter(a=>a!==null).length;
+  document.getElementById('totvol').textContent=Math.round(totScore()/TOTAL_MAX*100)+'%';
+}
+
+
+function start(){ idx=0; answers=new Array(QS.length).fill(null); buildEq(); show('quiz'); render(); vibrate(15); }
+
+function render(){
+  const q=QS[idx];
+  document.getElementById('qtag').textContent=`${CH[q.c].ico} ${CH[q.c].full}`;
+  document.getElementById('qtext').textContent=`Q${idx+1}. ${q.t}`;
+  const wrap=document.getElementById('opts'); wrap.innerHTML='';
+  OPTS.forEach(o=>{
+    const b=document.createElement('button'); b.className='opt'+(answers[idx]===o.v?' sel':'');
+    b.textContent=o.t;
+    b.onclick=(e)=>choose(o.v, e);
+    wrap.appendChild(b);
+  });
+  document.getElementById('prevBtn').disabled = idx===0;
+  pop(document.getElementById('qcard'));
+  updateEq();
+}
+
+function choose(v, e){
+  answers[idx]=v;
+  document.querySelectorAll('#opts .opt').forEach(b=>b.classList.remove('sel'));
+  if(e&&e.currentTarget) e.currentTarget.classList.add('sel');
+  updateEq();
+  vibrate(v>=2?[15,25]:12);
+  if(e){ const r=e.currentTarget.getBoundingClientRect(); burst((r.left+r.width/2)/innerWidth,(r.top+r.height/2)/innerHeight, 12+v*4); }
+
+  const c=QS[idx].c;
+  const chDone=QS.every((q,i)=> q.c!==c || answers[i]!==null);
+  const wasLastOfCh = idx<QS.length-1 && QS[idx+1].c!==c;
+  setTimeout(()=>{
+    if(chDone && wasLastOfCh){ toast(`${CH[c].ico} ${CH[c].name} チャンネル測定完了！`); vibrate([20,40,20]); }
+    next();
+  }, 260);
+}
+
+function next(){
+  if(idx<QS.length-1){ idx++; render(); }
+  else if(answers.every(a=>a!==null)){ finish(); }
+  else { // 未回答の問へジャンプ
+    const miss=answers.findIndex(a=>a===null); if(miss>=0){ idx=miss; render(); toast('まだ答えていない問があります'); }
+  }
+}
+function prev(){ if(idx>0){ idx--; render(); } }
+
+
+function finish(){
+  const tot=totScore(); const pct=Math.round(tot/TOTAL_MAX*100);
+  let ty=TYPES[0]; TYPES.forEach(t=>{ if(pct>=t.min) ty=t; });
+  const lead=leadCh()||'sense';
+
+  document.getElementById('rband').textContent=`${ty.band} 総感覚ボリューム`;
+  document.getElementById('rtype').textContent=ty.name;
+  document.getElementById('rlevel').textContent=ty.level+` · 代表チャンネル: ${CH[lead].ico} ${CH[lead].name}`;
+
+
+  const rows=document.getElementById('rrows'); rows.innerHTML='';
+  const chData=CH_KEYS.map(c=>({c, pct:Math.round(chScore(c)/CH_MAX*100)})).sort((a,b)=>b.pct-a.pct);
+  chData.forEach(d=>{
+    const el=document.createElement('div'); el.className='rrow';
+    el.innerHTML=`<div class="rl"><span>${CH[d.c].ico} ${CH[d.c].name} <span style="color:var(--sub);font-size:11px">${CH[d.c].full.replace(/\(.*\)/,'').trim()}</span></span><span class="rv" id="rv-${d.c}">0%</span></div>
+                  <div class="track"><div class="trackfill" id="tf-${d.c}"></div></div>`;
+    rows.appendChild(el);
+  });
+
+  document.getElementById('rdesc').innerHTML=`<h3>${ty.band} あなたはこんな人</h3><p>${ty.desc}</p>`;
+  document.getElementById('rcare').innerHTML=`<h3>🎧 ${CH[lead].name} チャンネルのボリュームが最大 — こうしていたわって</h3><p class="tip">${CH_CARE[lead]}</p><p class="tip" style="margin-top:8px">💡 ${ty.tip}</p>`;
+
+  show('result');
+
+
+  animateCount(document.getElementById('rvol'), pct, 1100);
+  setTimeout(()=>{
+    chData.forEach(d=>{
+      document.getElementById('tf-'+d.c).style.width=d.pct+'%';
+      animateCount(document.getElementById('rv-'+d.c), d.pct, 1000, '%');
+    });
+  }, 120);
+  vibrate([60,80,60,80,120]);
+  if(!reduce && window.confetti){
+    burst(.3,.3,90); setTimeout(()=>burst(.7,.35,90),260); setTimeout(()=>burst(.5,.2,60),520);
+  }
+}
+
+function animateCount(el, target, dur, suf){
+  if(reduce){ el.textContent=target+(suf||''); return; }
+  const t0=performance.now();
+  function step(now){
+    const p=Math.min(1,(now-t0)/dur); const e=1-Math.pow(1-p,3);
+    el.textContent=Math.round(target*e)+(suf||'');
+    if(p<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function restart(){ show('home'); }
+
+function share(){
+  const tot=Math.round(totScore()/TOTAL_MAX*100);
+  let ty=TYPES[0]; TYPES.forEach(t=>{ if(tot>=t.min) ty=t; });
+  const lead=leadCh()||'sense';
+  const txt=`[繊細さメーター] 私の感覚ボリュームは ${tot}%!\nタイプ: ${ty.name} (${ty.level})\nいちばん大きいチャンネル: ${CH[lead].ico} ${CH[lead].name}\n\n私も測ってみる → https://mimifactory.vibekr.com/apps/繊細さ_メーター_hsp_感覚_感度_test.html`;
+  if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(()=>toast('結果をコピーしました！📋')).catch(()=>toast('コピーに失敗しました')); }
+  else toast('この環境ではコピーに対応していません');
+}
+
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('quiz').classList.contains('on')) return;
+  if(e.key>='1'&&e.key<='4'){ const v=OPTS[+e.key-1].v; const btns=document.querySelectorAll('#opts .opt'); const b=btns[+e.key-1]; if(b){ const r=b.getBoundingClientRect(); choose(v,{currentTarget:b, target:b}); } }
+  if(e.key==='ArrowLeft') prev();
+});
+</script>
+</body>
+</html>
