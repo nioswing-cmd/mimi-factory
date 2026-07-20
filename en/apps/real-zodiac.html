@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Real Zodiac Test — Dopamine Lab</title>
+<meta property="og:title" content="Real Zodiac Test — the soul sign your personality reveals">
+<meta property="og:description" content="Forget the sign your birthday gave you — what does your personality say your real sign is? Find out in 12 questions and compare with your birthday.">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#0a0e1a; --bg2:#101a2e; --card:#14203a; --line:#22335a;
+  --ink:#e8f2ff; --sub:#8fa5c9; --accent:#38d6f5; --accent2:#8a63ff;
+  --point:#6ef2c3; --ok:#3ddc97; --bad:#ff5d6c;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 80% -10%, rgba(138,99,255,.14), transparent 55%),
+             radial-gradient(100% 80% at 10% 110%, rgba(56,214,245,.10), transparent 50%),
+             linear-gradient(165deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:5vh;}
+.hero h1{font-size:42px;line-height:1.18;margin:16px 0 8px;}
+.hero .stars{font-size:22px;letter-spacing:8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;overflow-wrap:break-word;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;overflow-wrap:break-word;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;overflow-wrap:break-word;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#0a1120;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--accent),var(--point));
+  box-shadow:0 10px 26px -8px rgba(56,214,245,.5);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+
+.cosmo{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px 11px;margin-bottom:16px;}
+.orbs{display:flex;justify-content:center;gap:14px;}
+.orb{width:52px;height:52px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;
+  font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);
+  background:rgba(255,255,255,.05);border:1.5px solid var(--line);transition:box-shadow .5s,transform .5s;}
+.orb .fillc{position:absolute;inset:3px;border-radius:50%;opacity:0;transform:scale(.4);transition:opacity .5s,transform .5s cubic-bezier(.34,1.56,.64,1);}
+.orb span{position:relative;z-index:1;}
+.modedots{display:flex;justify-content:center;gap:10px;margin-top:12px;}
+.mdot{width:34px;height:10px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;position:relative;}
+.mdot i{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .5s cubic-bezier(.22,1,.36,1);}
+.cosmo .cap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:10px;opacity:.8;}
+.count{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);text-align:center;margin-bottom:8px;}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent);}
+.qtext{font-size:21px;font-weight:700;line-height:1.45;margin-top:8px;overflow-wrap:break-word;}
+.qhint{font-size:13px;color:var(--sub);margin-top:8px;}
+.opts{display:flex;flex-direction:column;gap:11px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:15px 16px;
+  font-size:15.5px;color:var(--ink);text-align:left;cursor:pointer;font-family:inherit;line-height:1.5;overflow-wrap:break-word;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.opt:active{transform:scale(.97);}
+.opt .ab{display:inline-block;font-family:'Jua',sans-serif;color:var(--sub);margin-right:8px;}
+
+
+.res-hero{text-align:center;margin-top:10px;}
+.res-sym{font-size:70px;line-height:1;}
+.res-type{font-family:'Jua',sans-serif;font-size:34px;margin:12px 0 4px;}
+.res-kw{color:var(--point);font-size:14px;letter-spacing:.06em;}
+.res-tag{color:var(--sub);font-size:14.5px;line-height:1.7;overflow-wrap:break-word;margin-top:10px;}
+.combo{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin-top:18px;font-size:14px;line-height:1.7;overflow-wrap:break-word;}
+.combo b{color:var(--point);}
+.bday{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:14px;text-align:center;}
+.bday .t{font-family:'Jua',sans-serif;font-size:17px;margin-bottom:12px;}
+.bday select{background:var(--bg2);border:1.5px solid var(--line);color:var(--ink);border-radius:12px;
+  padding:12px 10px;font-size:15px;font-family:inherit;margin:0 4px;}
+.bday select:focus{outline:none;border-color:var(--accent);}
+.bday .cta{margin-top:12px;}
+.match{margin-top:14px;border-radius:14px;padding:15px;font-size:14.5px;line-height:1.65;overflow-wrap:break-word;display:none;animation:pop .5s cubic-bezier(.34,1.56,.64,1);}
+.match.on{display:block;}
+.match.same{background:rgba(61,220,151,.12);border:1px solid rgba(61,220,151,.45);}
+.match.diff{background:rgba(138,99,255,.12);border:1px solid rgba(138,99,255,.45);}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(20,32,58,.97);border:1.5px solid var(--accent);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(56,214,245,.5));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#7f93b8;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#7f93b8;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 Dopamine Lab · Superstition, Reinterpreted</span>
+      <h1>The Real <span class="grad">Zodiac</span> Test</h1>
+      <div class="stars">✨🌟✨</div>
+      <p class="sub">Forget the sign your birthday handed you —<br><b>the soul sign your true nature points to</b> might be a whole different one.<br>After 12 questions, compare it with your birth sign.</p>
+    </div>
+    <div class="pitch">
+      <b>How do we find it?</b><br>
+      We borrow astrology’s framework — the <b>temperament (4 elements)</b> that moves you and your
+      working <b>rhythm (3 modes)</b>. Measure both, and the combo points to one of the 12 signs.
+    </div>
+    <button class="btn" onclick="startQuiz()">🔭 Find my real sign</button>
+    <p class="note">※ A star sign isn’t a scientific prediction tool. This test borrows astrology’s categories only as a
+     <b>metaphor</b> for understanding yourself — just fun + self-observation.</p>
+  </section>
+
+  
+  <section id="scQuiz" class="screen">
+    <div class="cosmo">
+      <div class="orbs" id="orbs"></div>
+      <div class="modedots" id="mdots"></div>
+      <div class="cap">Four stars and three orbits fill up — the reveal comes with your result!</div>
+    </div>
+    <div class="count" id="qCount">1 / 12</div>
+    <div class="qcard">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qhint">👉 Pick whatever feels most like you</div>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="res-sym" id="resSym"></div>
+      <div class="res-type" id="resType"></div>
+      <div class="res-kw" id="resKw"></div>
+      <p class="res-tag" id="resTag"></p>
+    </div>
+    <div class="combo" id="combo"></div>
+    <div class="bday">
+      <div class="t">🎂 Compare with your birth sign</div>
+      <select id="bMonth"></select>
+      <select id="bDay"></select>
+      <button class="btn cta" style="margin-top:12px;font-size:16px;padding:13px;" onclick="compare()">Check your cosmic sync →</button>
+      <div class="match" id="match"></div>
+    </div>
+    <button class="btn" onclick="copyResult()">📋 Copy & share my result</button>
+    <button class="btn ghost" onclick="location.reload()">Take it again</button>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/en/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 Dopamine Lab — more tests this way →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>The Meaning & Fun Factory</span></div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+  </div>
+</div>
+
+<script>
+
+const EQ=[
+ {q:"When stress hits hard, I…", o:[
+   {t:"Burn it off by moving my body",k:"F"},{t:"Eat something good and sleep it off",k:"E"},
+   {t:"Call a friend and talk it out",k:"A"},{t:"Let it drift away alone with music or a movie",k:"W"}]},
+ {q:"When someone brings a new idea?", o:[
+   {t:"“Oh, let’s do it right now!”",k:"F"},{t:"“Is that actually doable?”",k:"E"},
+   {t:"“Fun — tell me more”",k:"A"},{t:"“What does that mean for us?”",k:"W"}]},
+ {q:"I recharge when…", o:[
+   {t:"I take on a challenge and win",k:"F"},{t:"A well-ordered day comes to a close",k:"E"},
+   {t:"I talk with someone new",k:"A"},{t:"A night of sharing deep feelings",k:"W"}]},
+ {q:"My friends describe me as…", o:[
+   {t:"“fiery”",k:"F"},{t:"“solid”",k:"E"},
+   {t:"“witty”",k:"A"},{t:"“deep”",k:"W"}]},
+ {q:"When conflict comes up, I…", o:[
+   {t:"Go head-on, right away",k:"F"},{t:"Take my time and solve it practically",k:"E"},
+   {t:"Have to talk it through — I ask to chat",k:"A"},{t:"Check the other person’s feelings first",k:"W"}]},
+ {q:"The night before a trip, I’m…", o:[
+   {t:"Too excited to sleep — let’s just go",k:"F"},{t:"Checklist double-checked, all set",k:"E"},
+   {t:"Excited for the people and things I’ll meet",k:"A"},{t:"Imagining the air and mood of the place",k:"W"}]},
+];
+const MQ=[
+ {q:"My role on a project?", o:[
+   {t:"The one who sets it up and kicks it off",k:"C"},{t:"The one who keeps pushing steadily",k:"X"},{t:"The one who adjusts as things change",k:"M"}]},
+ {q:"When a plan falls apart?", o:[
+   {t:"Draw up a new plan on the spot",k:"C"},{t:"Defend the original plan as much as I can",k:"X"},{t:"Flex with the flow",k:"M"}]},
+ {q:"My energy style?", o:[
+   {t:"Ignition — I explode early",k:"C"},{t:"Endurance — steady to the very end",k:"X"},{t:"Gearshift — I surge when it counts",k:"M"}]},
+ {q:"Familiar or new?", o:[
+   {t:"I love starting something new",k:"C"},{t:"I love going deep on the familiar",k:"X"},{t:"I love moving between the two",k:"M"}]},
+ {q:"How I make decisions?", o:[
+   {t:"Decide fast, push right away",k:"C"},{t:"Once I decide, I rarely change it",k:"X"},{t:"Keep updating even after deciding",k:"M"}]},
+ {q:"Among people, I’m…", o:[
+   {t:"The leader · the driver",k:"C"},{t:"The pillar · the protector",k:"X"},{t:"The connector · the fixer",k:"M"}]},
+];
+
+const SIGNS={
+ FC:{sym:"♈",name:"Aries",kw:"Pioneer · Head-on · First",date:[3,21,4,19],tag:"The cosmos’s vanguard — your body moves the instant you think. Starting energy is your gift; just keep a friend nearby who’s good at finishing."},
+ FX:{sym:"♌",name:"Leo",kw:"Spotlight · Pride · Warmth",date:[7,23,8,22],tag:"Center stage suits you. Your confidence warms everyone around you. Learn to shine even without applause and you’re unstoppable."},
+ FM:{sym:"♐",name:"Sagittarius",kw:"Adventure · Optimism · Freedom",date:[11,22,12,21],tag:"An explorer firing arrows toward a wider world. Optimism and motion are your oxygen. Being tied down is your only natural enemy."},
+ EC:{sym:"♑",name:"Capricorn",kw:"Goals · Patience · Summit",date:[12,22,1,19],tag:"A climber who won’t stop until the flag is on the summit. Quiet diligence is your strongest weapon — just rest at base camp now and then."},
+ EX:{sym:"♉",name:"Taurus",kw:"Stability · Taste · Grit",date:[4,20,5,20],tag:"You’ve got an eye for what’s good and the grit to hold on to it. You never rush, but you always arrive. Change, too, can be a gift sometimes."},
+ EM:{sym:"♍",name:"Virgo",kw:"Detail · Analysis · Refinement",date:[8,23,9,22],tag:"An eye for the 1% nobody else notices. You fix the world a little better, bit by bit. Just don’t aim that microscope too hard at yourself."},
+ AC:{sym:"♎",name:"Libra",kw:"Balance · Harmony · Connection",date:[9,23,10,22],tag:"The cosmic mediator who can’t walk past anything tilted. You have a rare gift for connecting people. Take your own side once in a while, too."},
+ AX:{sym:"♒",name:"Aquarius",kw:"Originality · Future · Conviction",date:[1,20,2,18],tag:"A future-dweller who can’t settle for the same answer as everyone else. Not eccentric — just ahead of your time. Even when misunderstood, your convictions are usually right."},
+ AM:{sym:"♊",name:"Gemini",kw:"Curiosity · Wit · Change",date:[5,21,6,21],tag:"Max-level curiosity — even two interests aren’t enough. Words and ideas sparkle around you. Wide-but-shallow isn’t a flaw; it’s a talent for connecting things."},
+ WC:{sym:"♋",name:"Cancer",kw:"Care · Instinct · My people",date:[6,22,7,22],tag:"A guardian with the softest heart inside the hardest shell. For ‘your people’ you’ll bare your claws without hesitation. Turn that care on yourself, too."},
+ WX:{sym:"♏",name:"Scorpio",kw:"Immersion · Insight · Sincerity",date:[10,23,11,21],tag:"A depth-seeker with no interest in shallow ties. Once you give your heart, you go all the way. That intensity is a gift not everyone has."},
+ WM:{sym:"♓",name:"Pisces",kw:"Empathy · Imagination · Flow",date:[2,19,3,20],tag:"An empathic dreamer who reads others’ feelings like subtitles. Art and comfort are your native language. Just drop an anchor into reality now and then."},
+};
+const ELEM_NAME={F:"🔥 Fire",E:"🌿 Earth",A:"💨 Air",W:"💧 Water"};
+const MODE_NAME={C:"⚡ Cardinal (the power to start)",X:"🗿 Fixed (the power to hold)",M:"🌀 Mutable (the power to adapt)"};
+
+let phase=0, idx=0, eScore={F:0,E:0,A:0,W:0}, mScore={C:0,X:0,M:0};
+let orbMap=[], myKey="";
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1900);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+const ORB_COLORS={F:"#ff7a5c",E:"#8fbb4f",A:"#38d6f5",W:"#8a63ff"};
+function startQuiz(){
+  phase=0; idx=0; eScore={F:0,E:0,A:0,W:0}; mScore={C:0,X:0,M:0};
+  orbMap=shuffle(["F","E","A","W"]);
+  const ob=$('orbs'); ob.innerHTML="";
+  orbMap.forEach((k,i)=>{ ob.innerHTML+="<div class='orb' id='orb"+i+"'><div class='fillc' style='background:radial-gradient(circle at 35% 30%, #fff5, transparent 40%),"+ORB_COLORS[k]+"'></div><span>?</span></div>"; });
+  const md=$('mdots'); md.innerHTML="";
+  for(let i=0;i<3;i++) md.innerHTML+="<div class='mdot'><i id='md"+i+"'></i></div>";
+  show('scQuiz'); render();
+}
+function render(){
+  const total=EQ.length+MQ.length;
+  const n=phase===0?idx:EQ.length+idx;
+  const Q=phase===0?EQ[idx]:MQ[idx];
+  $('qCount').textContent=(n+1)+" / "+total;
+  $('qNum').textContent="Q"+(n+1);
+  const qt=$('qText'); qt.textContent=Q.q;
+  qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const opts=shuffle([...Q.o]);
+  const box=$('opts'); box.innerHTML="";
+  const AB=["A","B","C","D"];
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button";
+    b.innerHTML="<span class='ab'>"+AB[i]+"</span>"+o.t;
+    b.addEventListener('click',()=>pick(o.k));
+    box.appendChild(b);
+  });
+}
+function pick(k){
+  vibrate(22);
+  if(phase===0){
+    eScore[k]++;
+    orbMap.forEach((e,i)=>{
+      const f=document.querySelector('#orb'+i+' .fillc');
+      const r=eScore[e]/EQ.length;
+      f.style.opacity=r>0? (0.35+r*0.65) :0;
+      f.style.transform="scale("+(0.4+r*0.6)+")";
+    });
+    idx++;
+    if(idx>=EQ.length){ phase=1; idx=0; toast("🌟 Now let’s read your orbital rhythm!"); }
+  }else{
+    mScore[k]++;
+    ["C","X","M"].forEach((m,i)=>{ $('md'+i).style.width=(mScore[m]/MQ.length*100)+"%"; });
+    idx++;
+    if(idx>=MQ.length){ setTimeout(showResult,450); return; }
+  }
+  setTimeout(render,240);
+}
+function showResult(){
+  const e=["F","E","A","W"].sort((a,b)=>eScore[b]-eScore[a])[0];
+  const m=["C","X","M"].sort((a,b)=>mScore[b]-mScore[a])[0];
+  myKey=e+m;
+  const S=SIGNS[myKey];
+  show('scResult'); vibrate([30,50,30,50,90]);
+  $('resSym').textContent=S.sym;
+  $('resType').innerHTML="My soul sign is <span class='grad'>"+S.name+"</span>";
+  $('resKw').textContent=S.kw;
+  $('resTag').textContent=S.tag;
+  $('combo').innerHTML="<b>🧬 Combo unlocked</b> — your temperament is <b>"+ELEM_NAME[e]+"</b>("+eScore[e]+"/"+EQ.length+"), and your rhythm is <b>"+MODE_NAME[m]+"</b>("+mScore[m]+"/"+MQ.length+"). In astrology, the sign this combo points to is exactly "+S.name+".";
+  const bm=$('bMonth'), bd=$('bDay');
+  if(!bm.options.length){
+    for(let i=1;i<=12;i++) bm.innerHTML+="<option value='"+i+"'>"+i+"</option>";
+    for(let i=1;i<=31;i++) bd.innerHTML+="<option value='"+i+"'>"+i+"</option>";
+  }
+  window._resText="🔭 Real Zodiac Test\nMy soul sign: "+S.name+" "+S.sym+" ("+S.kw+")\n"+S.tag+"\n\nFind your real sign → https://mimifactory.vibekr.com/en/apps/real-zodiac.html";
+}
+function zodiacOf(m,d){
+  const Z=[["CP",1,19],["AX",2,18],["WM",3,20],["FC",4,19],["EX",5,20],["AM",6,21],["WC",7,22],["FX",8,22],["EM",9,22],["AC",10,22],["WX",11,21],["FM",12,21],["CP",12,31]];
+  const map={CP:"EC"};
+  for(const [k,mm,dd] of Z){
+    if(m<mm||(m===mm&&d<=dd)) return SIGNS[map[k]||k];
+  }
+  return SIGNS.EC;
+}
+function compare(){
+  const m=parseInt($('bMonth').value), d=parseInt($('bDay').value);
+  const born=zodiacOf(m,d), mine=SIGNS[myKey];
+  const el=$('match'); vibrate([20,40,20]);
+  if(born.name===mine.name){
+    el.className="match same on";
+    el.innerHTML="🌌 <b>Cosmic sync: 100%!</b><br>Your birth sign is also <b>"+born.sym+" "+born.name+"</b> — a rare case where the star you were born under perfectly matches how you actually live.";
+  }else{
+    el.className="match diff on";
+    el.innerHTML="🌠 <b>Plot twist!</b> Your birth sign is <b>"+born.sym+" "+born.name+"</b>, but the you of right now runs on <b>"+mine.sym+" "+mine.name+"</b> energy.<br>It means you left the star you were born under and built a sign of your own — a pretty great plot twist.";
+  }
+  window._resText="🔭 Real Zodiac Test\nBirth sign: "+born.name+" "+born.sym+" → Soul sign: "+mine.name+" "+mine.sym+"\n"+(born.name===mine.name?"Cosmic sync: 100%!":"The type who built their own sign!")+"\n\nFind your real sign → https://mimifactory.vibekr.com/en/apps/real-zodiac.html";
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("Copied! Paste it anywhere 📋")); }
+  else toast("Press and hold to copy");
+  vibrate(20);
+}
+</script>
+</body>
+</html>

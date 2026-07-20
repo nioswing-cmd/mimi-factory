@@ -191,6 +191,18 @@
    "teaser": "apps/sensitivity-meter.html",
    "premium": "apps/sensitivity-meter.html",
    "desc": "あなたの感覚ボリュームはいくつ？20問で感覚 · 共感 · 思考 · 環境をリアルタイム測定。"
+  },
+  {
+   "id": "real-zodiac",
+   "type": "test",
+   "title": "本当の星座診断",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/real-zodiac.html",
+   "premium": "apps/real-zodiac.html",
+   "desc": "誕生日ではなく、性格が教えてくれる魂の星座を12問で"
   }
  ],
  "updated": "2026-07-20"

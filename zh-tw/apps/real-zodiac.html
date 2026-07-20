@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>真正的星座測驗 — 多巴胺實驗室</title>
+<meta property="og:title" content="真正的星座測驗 — 性格所指向的靈魂星座">
+<meta property="og:description" content="先別管生日給你的星座，性格說出來的真正星座是哪個? 用 12 題確認，再跟生日星座比比看。">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#0a0e1a; --bg2:#101a2e; --card:#14203a; --line:#22335a;
+  --ink:#e8f2ff; --sub:#8fa5c9; --accent:#38d6f5; --accent2:#8a63ff;
+  --point:#6ef2c3; --ok:#3ddc97; --bad:#ff5d6c;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 80% -10%, rgba(138,99,255,.14), transparent 55%),
+             radial-gradient(100% 80% at 10% 110%, rgba(56,214,245,.10), transparent 50%),
+             linear-gradient(165deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:5vh;}
+.hero h1{font-size:42px;line-height:1.18;margin:16px 0 8px;}
+.hero .stars{font-size:22px;letter-spacing:8px;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#0a1120;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--accent),var(--point));
+  box-shadow:0 10px 26px -8px rgba(56,214,245,.5);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+
+.cosmo{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px 11px;margin-bottom:16px;}
+.orbs{display:flex;justify-content:center;gap:14px;}
+.orb{width:52px;height:52px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;
+  font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);
+  background:rgba(255,255,255,.05);border:1.5px solid var(--line);transition:box-shadow .5s,transform .5s;}
+.orb .fillc{position:absolute;inset:3px;border-radius:50%;opacity:0;transform:scale(.4);transition:opacity .5s,transform .5s cubic-bezier(.34,1.56,.64,1);}
+.orb span{position:relative;z-index:1;}
+.modedots{display:flex;justify-content:center;gap:10px;margin-top:12px;}
+.mdot{width:34px;height:10px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;position:relative;}
+.mdot i{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .5s cubic-bezier(.22,1,.36,1);}
+.cosmo .cap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:10px;opacity:.8;}
+.count{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);text-align:center;margin-bottom:8px;}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent);}
+.qtext{font-size:21px;font-weight:700;line-height:1.45;margin-top:8px;}
+.qhint{font-size:13px;color:var(--sub);margin-top:8px;}
+.opts{display:flex;flex-direction:column;gap:11px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:15px 16px;
+  font-size:15.5px;color:var(--ink);text-align:left;cursor:pointer;font-family:inherit;line-height:1.5;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.opt:active{transform:scale(.97);}
+.opt .ab{display:inline-block;font-family:'Jua',sans-serif;color:var(--sub);margin-right:8px;}
+
+
+.res-hero{text-align:center;margin-top:10px;}
+.res-sym{font-size:70px;line-height:1;}
+.res-type{font-family:'Jua',sans-serif;font-size:34px;margin:12px 0 4px;}
+.res-kw{color:var(--point);font-size:14px;letter-spacing:.06em;}
+.res-tag{color:var(--sub);font-size:14.5px;line-height:1.7;margin-top:10px;}
+.combo{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin-top:18px;font-size:14px;line-height:1.7;}
+.combo b{color:var(--point);}
+.bday{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:14px;text-align:center;}
+.bday .t{font-family:'Jua',sans-serif;font-size:17px;margin-bottom:12px;}
+.bday select{background:var(--bg2);border:1.5px solid var(--line);color:var(--ink);border-radius:12px;
+  padding:12px 10px;font-size:15px;font-family:inherit;margin:0 4px;}
+.bday select:focus{outline:none;border-color:var(--accent);}
+.bday .cta{margin-top:12px;}
+.match{margin-top:14px;border-radius:14px;padding:15px;font-size:14.5px;line-height:1.65;display:none;animation:pop .5s cubic-bezier(.34,1.56,.64,1);}
+.match.on{display:block;}
+.match.same{background:rgba(61,220,151,.12);border:1px solid rgba(61,220,151,.45);}
+.match.diff{background:rgba(138,99,255,.12);border:1px solid rgba(138,99,255,.45);}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(20,32,58,.97);border:1.5px solid var(--accent);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(56,214,245,.5));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#7f93b8;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#7f93b8;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 多巴胺實驗室 · 迷信的重新詮釋</span>
+      <h1>真正的 <span class="grad">星座</span> 測驗</h1>
+      <div class="stars">✨🌟✨</div>
+      <p class="sub">生日決定的星座先放一邊，<br><b>你的性格所指向的靈魂星座</b>，也許另有其人。<br>12 題之後，再跟你的生日星座比比看。</p>
+    </div>
+    <div class="pitch">
+      <b>怎麼找出來?</b><br>
+      我們借用占星術的分類框架 — 測量驅動你的 <b>氣質（4元素）</b>，以及你做事的
+       <b>節奏（3模式）</b>，這個組合就會指向 12 星座之一。
+    </div>
+    <button class="btn" onclick="startQuiz()">🔭 找出我真正的星座</button>
+    <p class="note">※ 星座不是科學的預測工具。這個測驗只是把占星術的分類體系，當成理解自己的
+     <b>隱喻</b>來借用 — 純粹好玩 + 自我觀察。</p>
+  </section>
+
+  
+  <section id="scQuiz" class="screen">
+    <div class="cosmo">
+      <div class="orbs" id="orbs"></div>
+      <div class="modedots" id="mdots"></div>
+      <div class="cap">四顆星和三條軌道會慢慢填滿 — 真面目在結果揭曉!</div>
+    </div>
+    <div class="count" id="qCount">1 / 12</div>
+    <div class="qcard">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qhint">👉 選最像你的那一邊</div>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="res-sym" id="resSym"></div>
+      <div class="res-type" id="resType"></div>
+      <div class="res-kw" id="resKw"></div>
+      <p class="res-tag" id="resTag"></p>
+    </div>
+    <div class="combo" id="combo"></div>
+    <div class="bday">
+      <div class="t">🎂 跟生日星座比比看</div>
+      <select id="bMonth"></select>
+      <select id="bDay"></select>
+      <button class="btn cta" style="margin-top:12px;font-size:16px;padding:13px;" onclick="compare()">確認宇宙同步率 →</button>
+      <div class="match" id="match"></div>
+    </div>
+    <button class="btn" onclick="copyResult()">📋 複製結果來分享</button>
+    <button class="btn ghost" onclick="location.reload()">再測一次</button>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/zh-tw/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 多巴胺實驗室 — 看看其他測驗 →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意義與趣味工廠</span></div>
+    <div class="mf-logo">咪咪工廠 MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL股份有限公司 家族公司</div>
+  </div>
+</div>
+
+<script>
+
+const EQ=[
+ {q:"壓力一下子湧上來時，我會?", o:[
+   {t:"動一動身體，把它燃燒掉",k:"F"},{t:"吃點好吃的，好好睡一覺",k:"E"},
+   {t:"找朋友聊天發洩",k:"A"},{t:"一個人靠音樂或電影帶過去",k:"W"}]},
+ {q:"有人帶著新點子來的時候?", o:[
+   {t:"「喔，現在就來做!」",k:"F"},{t:"「現實上做得到嗎?」",k:"E"},
+   {t:"「有趣，再多說一點」",k:"A"},{t:"「那對我們有什麼意義?」",k:"W"}]},
+ {q:"讓我充電的瞬間是?", o:[
+   {t:"挑戰並且贏過去的時候",k:"F"},{t:"井然有序的一天結束時",k:"E"},
+   {t:"跟新朋友的對話",k:"A"},{t:"分享深刻情感的夜晚",k:"W"}]},
+ {q:"朋友口中的我是?", o:[
+   {t:"「火熱」",k:"F"},{t:"「可靠」",k:"E"},
+   {t:"「機靈」",k:"A"},{t:"「內斂沉穩」",k:"W"}]},
+ {q:"起衝突的時候，我會?", o:[
+   {t:"正面突破，直接對上",k:"F"},{t:"給點時間，務實地解決",k:"E"},
+   {t:"一定要說開，主動找對方談",k:"A"},{t:"先照顧對方的情緒",k:"W"}]},
+ {q:"旅行前一晚的我是?", o:[
+   {t:"興奮到睡不著，先出發再說!",k:"F"},{t:"檢查清單最後確認完成",k:"E"},
+   {t:"期待在那裡遇到的人和事",k:"A"},{t:"想像那地方的空氣和氛圍",k:"W"}]},
+];
+const MQ=[
+ {q:"在專案裡我的定位是?", o:[
+   {t:"把局面搭好、率先開始的人",k:"C"},{t:"穩穩往前推的人",k:"X"},{t:"看情況隨時調整的人",k:"M"}]},
+ {q:"計畫被打亂時?", o:[
+   {t:"當場重新排一套新計畫",k:"C"},{t:"盡量守住原本的計畫",k:"X"},{t:"順著情勢，靈活地改",k:"M"}]},
+ {q:"我的能量風格是?", o:[
+   {t:"點火型 — 一開始就爆發",k:"C"},{t:"耐力型 — 從頭到尾都一致",k:"X"},{t:"變速型 — 需要時一口氣衝出來",k:"M"}]},
+ {q:"熟悉與新鮮，你選哪個?", o:[
+   {t:"喜歡開拓新局面",k:"C"},{t:"喜歡把熟悉的東西鑽深",k:"X"},{t:"喜歡在兩者之間來回",k:"M"}]},
+ {q:"你做決定的方式是?", o:[
+   {t:"快速拍板，馬上推進",k:"C"},{t:"一旦決定就很少改",k:"X"},{t:"定了之後還會持續更新",k:"M"}]},
+ {q:"在人群裡的我是?", o:[
+   {t:"帶頭的人 · 推進者",k:"C"},{t:"像支柱的人 · 守護者",k:"X"},{t:"牽線的人 · 解決者",k:"M"}]},
+];
+
+const SIGNS={
+ FC:{sym:"♈",name:"牡羊座",kw:"開拓 · 直衝 · 第一",date:[3,21,4,19],tag:"想到的同時身體就已經衝出去的宇宙先鋒。開始的能量就是你的才能。只是，身邊要留一個擅長收尾的朋友。"},
+ FX:{sym:"♌",name:"獅子座",kw:"主角 · 自信 · 溫暖",date:[7,23,8,22],tag:"站在舞台中央最適合的人。你的自信會把周圍的人都溫暖起來。學會沒有掌聲也能發光，你就無敵了。"},
+ FM:{sym:"♐",name:"射手座",kw:"冒險 · 樂觀 · 自由",date:[11,22,12,21],tag:"朝著更寬廣世界射出箭的探險家。樂觀和移動就像你的氧氣。被綁住，是你唯一的天敵。"},
+ EC:{sym:"♑",name:"摩羯座",kw:"目標 · 耐力 · 攻頂",date:[12,22,1,19],tag:"不把旗子插上山頂就不停下的登山家。默默的踏實就是你最強的武器。偶爾也要在基地營歇一歇。"},
+ EX:{sym:"♉",name:"金牛座",kw:"穩定 · 品味 · 韌性",date:[4,20,5,20],tag:"既有辨認好東西的品味，又有守住它的韌性。你不趕，但一定會到。變化，偶爾也是一份禮物。"},
+ EM:{sym:"♍",name:"處女座",kw:"細節 · 分析 · 改善",date:[8,23,9,22],tag:"看得見別人看不到的那 1% 的眼睛。一點一點把世界修得更好的人。只是，那台顯微鏡別老是對準自己。"},
+ AC:{sym:"♎",name:"天秤座",kw:"平衡 · 和諧 · 連結",date:[9,23,10,22],tag:"看到失衡就沒辦法走過去的宇宙協調者。你連結人與人的直覺特別強。也記得，站在你自己這一邊。"},
+ AX:{sym:"♒",name:"水瓶座",kw:"獨創 · 未來 · 信念",date:[1,20,2,18],tag:"無法滿足於跟大家一樣答案的未來人。不是古怪，只是走在時代前面。就算不被理解，你的信念常常是對的。"},
+ AM:{sym:"♊",name:"雙子座",kw:"好奇 · 機智 · 變化",date:[5,21,6,21],tag:"兩個興趣都嫌不夠的好奇心滿點。言語和點子閃閃發亮的人。廣而淺不是缺點，而是連結事物的才能。"},
+ WC:{sym:"♋",name:"巨蟹座",kw:"照顧 · 直覺 · 自己人",date:[6,22,7,22],tag:"堅硬外殼裡藏著最柔軟心的守護者。為了「自己人」，連鉗子都敢亮出來。那份照顧，也留一點給自己。"},
+ WX:{sym:"♏",name:"天蠍座",kw:"投入 · 洞察 · 真心",date:[10,23,11,21],tag:"對膚淺關係沒興趣、講究深度的狠角色。一旦付出真心，就會走到最後。那份強烈，是不是誰都有的才能。"},
+ WM:{sym:"♓",name:"雙魚座",kw:"共感 · 想像 · 流動",date:[2,19,3,20],tag:"能把別人的情緒讀得像字幕一樣的共感型夢想家。藝術與安慰，就是你的語言。偶爾，也在現實裡下一個錨。"},
+};
+const ELEM_NAME={F:"🔥 火",E:"🌿 土",A:"💨 風",W:"💧 水"};
+const MODE_NAME={C:"⚡ 開創（啟動的力量）",X:"🗿 固定（守護的力量）",M:"🌀 變動（協調的力量）"};
+
+let phase=0, idx=0, eScore={F:0,E:0,A:0,W:0}, mScore={C:0,X:0,M:0};
+let orbMap=[], myKey="";
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1900);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+const ORB_COLORS={F:"#ff7a5c",E:"#8fbb4f",A:"#38d6f5",W:"#8a63ff"};
+function startQuiz(){
+  phase=0; idx=0; eScore={F:0,E:0,A:0,W:0}; mScore={C:0,X:0,M:0};
+  orbMap=shuffle(["F","E","A","W"]);
+  const ob=$('orbs'); ob.innerHTML="";
+  orbMap.forEach((k,i)=>{ ob.innerHTML+="<div class='orb' id='orb"+i+"'><div class='fillc' style='background:radial-gradient(circle at 35% 30%, #fff5, transparent 40%),"+ORB_COLORS[k]+"'></div><span>?</span></div>"; });
+  const md=$('mdots'); md.innerHTML="";
+  for(let i=0;i<3;i++) md.innerHTML+="<div class='mdot'><i id='md"+i+"'></i></div>";
+  show('scQuiz'); render();
+}
+function render(){
+  const total=EQ.length+MQ.length;
+  const n=phase===0?idx:EQ.length+idx;
+  const Q=phase===0?EQ[idx]:MQ[idx];
+  $('qCount').textContent=(n+1)+" / "+total;
+  $('qNum').textContent="Q"+(n+1);
+  const qt=$('qText'); qt.textContent=Q.q;
+  qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const opts=shuffle([...Q.o]);
+  const box=$('opts'); box.innerHTML="";
+  const AB=["A","B","C","D"];
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button";
+    b.innerHTML="<span class='ab'>"+AB[i]+"</span>"+o.t;
+    b.addEventListener('click',()=>pick(o.k));
+    box.appendChild(b);
+  });
+}
+function pick(k){
+  vibrate(22);
+  if(phase===0){
+    eScore[k]++;
+    orbMap.forEach((e,i)=>{
+      const f=document.querySelector('#orb'+i+' .fillc');
+      const r=eScore[e]/EQ.length;
+      f.style.opacity=r>0? (0.35+r*0.65) :0;
+      f.style.transform="scale("+(0.4+r*0.6)+")";
+    });
+    idx++;
+    if(idx>=EQ.length){ phase=1; idx=0; toast("🌟 接下來換看軌道的節奏!"); }
+  }else{
+    mScore[k]++;
+    ["C","X","M"].forEach((m,i)=>{ $('md'+i).style.width=(mScore[m]/MQ.length*100)+"%"; });
+    idx++;
+    if(idx>=MQ.length){ setTimeout(showResult,450); return; }
+  }
+  setTimeout(render,240);
+}
+function showResult(){
+  const e=["F","E","A","W"].sort((a,b)=>eScore[b]-eScore[a])[0];
+  const m=["C","X","M"].sort((a,b)=>mScore[b]-mScore[a])[0];
+  myKey=e+m;
+  const S=SIGNS[myKey];
+  show('scResult'); vibrate([30,50,30,50,90]);
+  $('resSym').textContent=S.sym;
+  $('resType').innerHTML="我的靈魂星座是 <span class='grad'>"+S.name+"</span>";
+  $('resKw').textContent=S.kw;
+  $('resTag').textContent=S.tag;
+  $('combo').innerHTML="<b>🧬 組合揭曉</b> — 你的氣質是 <b>"+ELEM_NAME[e]+"</b>("+eScore[e]+"/"+EQ.length+")，節奏是 <b>"+MODE_NAME[m]+"</b>("+mScore[m]+"/"+MQ.length+")。在占星術裡，這個組合指向的星座正是 "+S.name+"。";
+  const bm=$('bMonth'), bd=$('bDay');
+  if(!bm.options.length){
+    for(let i=1;i<=12;i++) bm.innerHTML+="<option value='"+i+"'>"+i+"月</option>";
+    for(let i=1;i<=31;i++) bd.innerHTML+="<option value='"+i+"'>"+i+"日</option>";
+  }
+  window._resText="🔭 真正的星座測驗\n我的靈魂星座: "+S.name+" "+S.sym+" ("+S.kw+")\n"+S.tag+"\n\n找出你真正的星座 → https://mimifactory.vibekr.com/zh-tw/apps/real-zodiac.html";
+}
+function zodiacOf(m,d){
+  const Z=[["CP",1,19],["AX",2,18],["WM",3,20],["FC",4,19],["EX",5,20],["AM",6,21],["WC",7,22],["FX",8,22],["EM",9,22],["AC",10,22],["WX",11,21],["FM",12,21],["CP",12,31]];
+  const map={CP:"EC"};
+  for(const [k,mm,dd] of Z){
+    if(m<mm||(m===mm&&d<=dd)) return SIGNS[map[k]||k];
+  }
+  return SIGNS.EC;
+}
+function compare(){
+  const m=parseInt($('bMonth').value), d=parseInt($('bDay').value);
+  const born=zodiacOf(m,d), mine=SIGNS[myKey];
+  const el=$('match'); vibrate([20,40,20]);
+  if(born.name===mine.name){
+    el.className="match same on";
+    el.innerHTML="🌌 <b>宇宙同步率100%!</b><br>連生日星座也是 <b>"+born.sym+" "+born.name+"</b> — 天生的星星和活出來的性格完全一致，是很少見的案例喔。";
+  }else{
+    el.className="match diff on";
+    el.innerHTML="🌠 <b>反轉發現!</b> 生日星座是 <b>"+born.sym+" "+born.name+"</b>，但現在的你，是靠著 <b>"+mine.sym+" "+mine.name+"</b>的氣場在生活。意思是你離開了出生的星星，靠自己走出了一個星座 — 是相當漂亮的反轉呢。";
+  }
+  window._resText="🔭 真正的星座測驗\n生日星座: "+born.name+" "+born.sym+" → 靈魂星座: "+mine.name+" "+mine.sym+"\n"+(born.name===mine.name?"宇宙同步率100%!":"靠自己走出星座的類型!")+"\n\n找出你真正的星座 → https://mimifactory.vibekr.com/zh-tw/apps/real-zodiac.html";
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("複製完成! 貼到哪裡都行 📋")); }
+  else toast("請長按複製");
+  vibrate(20);
+}
+</script>
+</body>
+</html>

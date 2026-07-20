@@ -179,6 +179,18 @@
    "teaser": "apps/sensitivity-meter.html",
    "premium": "apps/sensitivity-meter.html",
    "desc": "How loud are your senses? 20 questions read your Sense · Empathy · Thought · Environment in real time."
+  },
+  {
+   "id": "real-zodiac",
+   "type": "test",
+   "title": "Real Zodiac Test",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-20",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/real-zodiac.html",
+   "premium": "apps/real-zodiac.html",
+   "desc": "Not your birthday — the soul sign your personality reveals, in 12 questions."
   }
  ],
  "updated": "2026-07-20"
