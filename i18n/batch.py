@@ -177,7 +177,13 @@ def main():
     limit = 0
     if "--limit" in sys.argv:
         limit = int(sys.argv[sys.argv.index("--limit") + 1])
-    queue = [(rel, slug) for rel, slug in build_queue() if not done_already(slug)]
+    if "--file" in sys.argv:
+        # 단건 모드 — 새벽 생산 훅(신작 실시간 다국어화)용
+        rel = sys.argv[sys.argv.index("--file") + 1].replace("\\", "/")
+        slug = os.path.splitext(os.path.basename(rel))[0]
+        queue = [] if done_already(slug) else [(rel, slug)]
+    else:
+        queue = [(rel, slug) for rel, slug in build_queue() if not done_already(slug)]
     if limit:
         queue = queue[:limit]
     log(f"═══ 배치 시작: {len(queue)}개 항목 ═══")

@@ -475,6 +475,28 @@ def notify(item, status, url=""):
 
 
 # ── 메인 ─────────────────────────────────────────────────
+def localize_new(entry):
+    """신작을 즉시 3개 언어(ja/en/zh-TW)로 로컬라이즈 — i18n/batch.py 단건 모드.
+    저작권 규칙: 책 퀴즈는 티저만 다국어화(풀버전 금지). 실패해도 생산은 성공으로 유지."""
+    if not os.path.isdir(os.path.join(ROOT, "i18n")):
+        return
+    if entry["type"] == "quiz":
+        target = entry["teaser"]
+        if not target.endswith("_teaser.html"):
+            log("i18n: 티저 산출물이 없어 다국어화 생략 (저작권 규칙: 풀버전 금지)")
+            return
+    else:
+        target = entry["premium"]
+    log(f"🌏 실시간 다국어화 시작: {target}")
+    try:
+        r = subprocess.run([sys.executable, "i18n/batch.py", "--file", target],
+                           cwd=ROOT, capture_output=True, text=True, timeout=5400)
+        log("🌏 다국어화 " + ("완료" if r.returncode == 0 else
+                              f"일부 실패 — i18n_batch.log 확인 (토요일 배치가 재시도)"))
+    except Exception as e:
+        log(f"🌏 다국어화 예외(생산은 정상): {e}")
+
+
 def main():
     tabs = read_sheet()
     item = pick_waiting(tabs)
@@ -491,6 +513,7 @@ def main():
         site = os.environ.get("SITE_URL", "").rstrip("/")
         notify(item, "완료", f"{site}/{entry['teaser']}" if site else entry["teaser"])
         log("✅ 생산 완료!")
+        localize_new(entry)
     else:
         # 1회 재시도
         log("⚠️ 실패 — 1회 재시도합니다.")
@@ -498,6 +521,7 @@ def main():
             entry = collect(item, slug)
         if entry:
             notify(item, "완료", entry["teaser"]); log("✅ 재시도 성공!")
+            localize_new(entry)
         else:
             notify(item, "실패"); log("❌ 최종 실패 — 시트에 '실패' 기록")
             sys.exit(1)
