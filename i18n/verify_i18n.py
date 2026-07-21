@@ -35,15 +35,24 @@ def check(slug, lang, html_path):
     add("② 키 일치", ko_k == tr_k, f"누락 {len(ko_k-tr_k)} / 잉여 {len(tr_k-ko_k)}")
 
     # 3) 선택지 길이 균형 (정답 있는 퀴즈만 — options[].ok 구조 감지)
-    if re.search(r"options:\[\{t:", html):
-        blocks = re.findall(r"options:\[(.*?)\]", html)
+    def _longest_ratio(doc):
+        blocks = re.findall(r"options:\[(.*?)\]", doc)
+        if not blocks:
+            return None
         longest_correct = 0
         for b in blocks:
             opts = re.findall(r'\{t:"((?:[^"\\]|\\.)*)"(,ok:true)?\}', b)
             if opts and max(opts, key=lambda o: len(o[0]))[1]:
                 longest_correct += 1
-        ratio = longest_correct / max(1, len(blocks)) * 100
-        add("③ 정답=최장 비율 25~35%", 25 <= ratio <= 35, f"{ratio:.0f}%")
+        return longest_correct / max(1, len(blocks)) * 100
+
+    ratio = _longest_ratio(html)
+    if ratio is not None:
+        # 기준: 25~35% 밴드 안이거나, 한국어 원본 비율에서 ±10%p 이내(원본 계승)
+        ko_src = open(os.path.join(ROOT, ko["_meta"]["source"]), encoding="utf-8").read()
+        ko_ratio = _longest_ratio(ko_src) or 0
+        ok3 = (25 <= ratio <= 35) or (abs(ratio - ko_ratio) <= 10)
+        add("③ 정답=최장 비율(원본 계승)", ok3, f"{ratio:.0f}% (원본 {ko_ratio:.0f}%)")
     else:
         results.append(("③ 선택지 길이 균형", "SKIP", "정답형 퀴즈 아님(카드/진단 앱)"))
 

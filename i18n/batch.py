@@ -71,7 +71,7 @@ def outname_of(slug):
     return None
 
 
-def translate_prompt(slug, is_landing):
+def translate_prompt(slug, is_landing, lang):
     app_rule = ("랜딩 페이지이므로 \"_app\" 블록은 넣지 마라."
                 if is_landing else
                 f"각 언어 json에 \"_app\" 블록을 넣어라: {{\"id\": \"{slug}\", \"file\": \"<영문 소문자 ascii 슬러그(하이픈만, _test/_teaser 접미사 제외)>\", \"title\": \"<현지어 앱 제목>\", \"desc\": \"<현지어 한 줄 소개>\"}} — file 값은 3개 언어 모두 동일해야 한다.")
@@ -79,11 +79,12 @@ def translate_prompt(slug, is_landing):
 
 다음 파일들을 읽어라:
 1. i18n/strings/{slug}/ko.json — 원문 (키-문자열)
-2. i18n/prompts/ja.md, i18n/prompts/en.md, i18n/prompts/zh-tw.md — 언어별 톤·규칙 (절대 준수)
+2. i18n/prompts/{lang}.md — 이 언어의 톤·규칙 (절대 준수)
 3. i18n/glossary.json — 브랜드 고정 용어 (임의 변경 금지)
-4. 모범 예시: i18n/strings/tarot/ja.json, en.json, zh-tw.json
+4. 모범 예시: i18n/strings/tarot/{lang}.json
 
-그 다음 i18n/strings/{slug}/ 에 ja.json, en.json, zh-tw.json 3개 파일을 작성하라.
+그 다음 i18n/strings/{slug}/{lang}.json 파일 하나만 작성하라.
+(다른 언어 json이 이미 있으면 _app.file 값은 그 파일과 동일하게 맞춰라.)
 
 필수 규칙:
 - 키는 ko.json과 1:1 동일(_meta 제외, 값은 문자열만).
@@ -95,13 +96,22 @@ def translate_prompt(slug, is_landing):
 - {app_rule}
 - 번역은 직역이 아니라 로컬라이즈다. 한국 고유 소재는 등가의 현지 소재로.
 
-파일 3개 저장 후 다른 출력 없이 종료하라."""
+파일 저장 후 다른 출력 없이 종료하라."""
 
 
-def claude_call(prompt, timeout=1200):
-    r = run([CLAUDE, "-p", "--dangerously-skip-permissions", "--max-turns", "40",
-             "--model", MODEL], timeout=timeout, stdin_text=prompt)
-    return r.returncode
+def claude_call(prompt, timeout=1500):
+    for attempt in (1, 2):
+        try:
+            r = run([CLAUDE, "-p", "--dangerously-skip-permissions", "--max-turns", "40",
+                     "--model", MODEL], timeout=timeout, stdin_text=prompt)
+            return r.returncode
+        except subprocess.TimeoutExpired:
+            if attempt == 1:
+                log("    ⏳ 클로드 응답 시간 초과 — 사용량 창 회복 대기(30분) 후 재시도")
+                time.sleep(1800)
+            else:
+                log("    ✗ 시간 초과 재발")
+    return 1
 
 
 def build_and_verify(slug, out):
@@ -127,9 +137,11 @@ def process(rel, slug):
         log(f"  ✗ 추출 실패: {r.stderr[-200:]}"); return False
     # 2) 번역 (이미 3개 언어 json 있으면 생략)
     d = os.path.join(ROOT, "i18n", "strings", slug)
-    if not all(os.path.isfile(os.path.join(d, f"{l}.json")) for l in LANGS):
-        if claude_call(translate_prompt(slug, is_landing)) != 0:
-            log("  ✗ 번역 호출 실패"); return False
+    for lang in LANGS:
+        if os.path.isfile(os.path.join(d, f"{lang}.json")):
+            continue
+        if claude_call(translate_prompt(slug, is_landing, lang)) != 0:
+            log(f"  ✗ {lang} 번역 호출 실패"); return False
     out = outname_of(slug)
     if not out:
         log("  ✗ _app.file 슬러그 없음"); return False
