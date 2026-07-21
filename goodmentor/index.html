@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>굿멘토 플랫폼 — Good Mentor Leadership Academy</title>
+<meta property="og:title" content="굿멘토 플랫폼 — 이명진 코치의 학습 라운지" />
+<meta property="og:description" content="귀인을 통해 귀인을 만나는 연결의 기술. 강의 미션 퀴즈, 추천 도서 풀버전 퀴즈, 자기 진단을 한곳에서." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0a1430; --bg2:#0e1c44; --panel:#16264f; --panel2:#1d3160;
+    --edge:#314272;
+    --ink:#fdeef4; --body:#c8d2ec; --muted:#8493bc;
+    --gold:#ff9ebb; --gold-deep:#d96a92;
+    --green:#7fd0c0; --green-deep:#358f7e;
+    --rust:#ff7fa6;
+    --steelblue:#a9c0ff;
+    --shadow:0 18px 45px rgba(0,0,0,.5);
+    --r:18px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:"Noto Sans KR",sans-serif;
+    color:var(--body);
+    background:
+      repeating-linear-gradient(0deg, rgba(255,158,187,.05) 0 1px, transparent 1px 46px),
+      radial-gradient(1200px 600px at 80% -10%, rgba(255,158,187,.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(255,127,166,.10), transparent 55%),
+      linear-gradient(160deg, var(--bg) 0%, var(--bg2) 100%);
+    background-attachment:fixed;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:22px 18px 40px;}
+  h1,h2,h3{font-family:"Noto Serif KR",serif;color:var(--ink);margin:0;}
+  .eyebrow{font-size:12px;letter-spacing:.28em;color:var(--gold);font-weight:700;text-transform:uppercase;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    text-align:center;padding:46px 24px 38px;border-radius:24px;
+    background:linear-gradient(170deg, rgba(27,49,72,.9), rgba(15,32,49,.92));
+    border:1px solid rgba(255,158,187,.22);box-shadow:var(--shadow);position:relative;overflow:hidden;
+  }
+  .hero::after{content:"";position:absolute;inset:0;background:
+    repeating-linear-gradient(0deg, rgba(255,158,187,.05) 0 1px, transparent 1px 30px);pointer-events:none;}
+  .pillars{display:flex;justify-content:center;gap:10px;margin:10px 0 18px;}
+  .pillars span{
+    font-family:"Noto Serif KR",serif;font-weight:900;font-size:21px;
+    width:74px;height:62px;line-height:62px;border-radius:14px;display:inline-block;
+    border:1px solid rgba(255,255,255,.10);
+  }
+  .pillars .p1{color:var(--steelblue);background:rgba(169,192,255,.12);}
+  .pillars .p2{color:var(--rust);background:rgba(255,127,166,.14);}
+  .pillars .p3{color:var(--gold);background:rgba(255,158,187,.14);}
+  .hero h1{font-size:clamp(30px,7vw,46px);font-weight:900;line-height:1.18;letter-spacing:-.01em;}
+  .hero h1 small{display:block;font-size:15px;font-weight:500;color:var(--muted);letter-spacing:.16em;margin-bottom:10px;font-family:"Noto Sans KR";}
+  .byline{margin:8px 0 18px;font-size:15px;letter-spacing:.02em;color:var(--gold);font-weight:700;position:relative;}
+  .hero p{color:var(--body);font-size:15px;line-height:1.7;max-width:470px;margin:16px auto 0;position:relative;}
+  .quote{
+    margin:22px auto 4px;max-width:520px;font-family:"Noto Serif KR",serif;
+    font-size:15px;color:var(--ink);font-style:italic;line-height:1.7;
+    border-left:3px solid var(--gold);padding:10px 0 10px 16px;text-align:left;position:relative;
+  }
+  .quote b{color:var(--gold);font-style:normal;}
+  .meta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px;position:relative;}
+  .chip{font-size:12.5px;color:var(--muted);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);padding:7px 13px;border-radius:999px;}
+  .chip b{color:var(--gold);}
+
+  /* ---------- SECTION ---------- */
+  .sec-h{font-family:"Noto Serif KR",serif;color:var(--ink);font-size:21px;margin:38px 4px 6px;font-weight:900;
+    border-left:4px solid var(--gold);padding-left:12px;}
+  .sec-p{color:var(--muted);font-size:13.5px;margin:0 4px 16px;padding-left:16px;line-height:1.6;}
+
+  .cards{display:flex;flex-direction:column;gap:12px;}
+  a.card{
+    display:block;text-decoration:none;
+    background:var(--panel);border:1px solid rgba(255,255,255,.09);
+    border-radius:var(--r);padding:20px 20px 18px;box-shadow:var(--shadow);
+    transition:transform .15s ease, border-color .2s ease;position:relative;overflow:hidden;
+  }
+  a.card:hover{transform:translateY(-3px);border-color:rgba(255,158,187,.45);}
+  .card .top{display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+  .card .ci{flex:none;width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;
+    font-size:23px;background:rgba(255,158,187,.13);border:1px solid rgba(255,158,187,.25);}
+  .card h3{font-size:17.5px;font-weight:700;line-height:1.35;}
+  .card .au{font-size:12.5px;color:var(--muted);margin-top:2px;}
+  .card p{color:var(--body);font-size:13.5px;line-height:1.65;margin:6px 0 12px;}
+  .card .go{font-size:13px;color:var(--gold);font-weight:700;}
+  .badge{
+    position:absolute;top:14px;right:14px;font-size:11px;font-weight:700;letter-spacing:.04em;
+    padding:5px 11px;border-radius:999px;
+  }
+  .badge.full{color:#2a1030;background:linear-gradient(180deg,#ffc1d6,var(--gold-deep));}
+  .badge.lect{color:var(--steelblue);background:rgba(169,192,255,.14);border:1px solid rgba(169,192,255,.35);}
+  .badge.test{color:var(--green);background:rgba(127,208,192,.13);border:1px solid rgba(127,208,192,.35);}
+
+  /* 강의 대형 카드 */
+  a.card.feature{
+    background:linear-gradient(170deg, rgba(38,58,110,.92), rgba(18,34,72,.95));
+    border:1px solid rgba(255,158,187,.3);
+  }
+  .feature .fx{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 12px;}
+  .feature .fx span{font-size:11.5px;color:var(--muted);background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);padding:4px 10px;border-radius:999px;}
+
+  /* footer */
+  .footer{text-align:center;margin-top:42px;font-size:12px;color:var(--muted);line-height:1.7;}
+  .footer b{color:var(--gold);font-weight:700;}
+  .footer .factory{font-family:"Noto Serif KR",serif;color:var(--ink);font-weight:700;letter-spacing:.01em;}
+  .footer .affil{color:var(--gold);font-size:11.5px;margin-top:2px;}
+  .footer .tagline{margin-top:6px;color:var(--muted);}
+
+  @media (max-width:560px){
+    .pillars span{width:64px;height:54px;line-height:54px;font-size:18px;}
+  }
+  @media (prefers-reduced-motion:reduce){ *{transition:none !important;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <div class="hero">
+    <div class="eyebrow">Good Mentor Leadership Academy</div>
+    <div class="pillars"><span class="p1">경청</span><span class="p2">인정</span><span class="p3">질문</span></div>
+    <h1><small>귀인을 통해 귀인을 만나는 연결의 기술</small>굿멘토 플랫폼</h1>
+    <div class="byline">by 이명진 코치</div>
+    <div class="quote">
+      “귀인 옆에는, 또 다른 귀인이 있다.<br>그래서 우리는 <b>귀인을 통해 귀인을 만난다.</b>”<br>
+      <b>— 이명진 코치 · GLA 비즈니스 기회 창출 강의 중</b>
+    </div>
+    <p>강의의 핵심을 <b>미션 퀴즈</b>로 몸에 익히고, 코치가 추천하는 책을 <b>풀버전 퀴즈</b>로 완독하고,
+      <b>자기 진단</b>으로 나를 이해하는 — 굿멘토의 학습 라운지입니다.</p>
+    <div class="meta-row">
+      <span class="chip">🎓 강의 <b>미션 퀴즈</b></span>
+      <span class="chip">📚 추천 도서 <b>풀버전</b></span>
+      <span class="chip">🧭 자기 <b>진단</b></span>
+    </div>
+  </div>
+
+  <!-- ============ 강의 ============ -->
+  <h2 class="sec-h">🎓 강의 미션 퀴즈</h2>
+  <p class="sec-p">이명진 코치의 굿멘토 강의를 단계별 미션으로 복습합니다. 틀린 단계는 맞힐 때까지 다시 돌아옵니다.</p>
+  <div class="cards">
+    <a class="card feature" href="apps/connection-master-guide.html">
+      <span class="badge lect">GLA 강의</span>
+      <div class="top">
+        <div class="ci">🤝</div>
+        <div>
+          <h3>연결술사 가이드</h3>
+          <div class="au">비즈니스 기회 창출 · 경청 | 인정 | 질문</div>
+        </div>
+      </div>
+      <p>VIP 고객(귀인) 한 사람에서 출발해, 경청·인정·질문으로 새로운 귀인을 연결받고
+        나만의 <b style="color:var(--gold)">비즈니스 파트너 팀</b>을 만드는 11단계 미션.</p>
+      <div class="fx">
+        <span>총 11단계 미션</span><span>실시간 귀인 여정 게이지</span><span>미션마다 해설</span><span>PDF 정리 리포트</span>
+      </div>
+      <div class="go">여정 시작하기 →</div>
+    </a>
+  </div>
+
+  <!-- ============ 추천 도서 ============ -->
+  <h2 class="sec-h">📚 코치 추천 도서 퀴즈</h2>
+  <p class="sec-p">굿멘토 수강생을 위해 <b style="color:var(--gold)">전 권 풀버전(잠금 없음)</b>으로 열었습니다. 30문항 반복 마스터 + 완독 인포그래픽 리포트.</p>
+  <div class="cards">
+    <a class="card" href="/apps/기버_1_quiz.html">
+      <span class="badge full">풀버전</span>
+      <div class="top">
+        <div class="ci">🎁</div>
+        <div><h3>기버 1</h3><div class="au">밥 버그 · 존 데이비드 만</div></div>
+      </div>
+      <p>주는 사람이 성공한다는 강력한 역설 — 가치·보상·영향력·진정성·수용, 다섯 법칙의 마스터 퀴즈.</p>
+      <div class="go">완독하러 가기 →</div>
+    </a>
+    <a class="card" href="/apps/5가지_사랑의_언어_quiz.html">
+      <span class="badge full">풀버전</span>
+      <div class="top">
+        <div class="ci">💬</div>
+        <div><h3>5가지 사랑의 언어</h3><div class="au">게리 채프먼</div></div>
+      </div>
+      <p>사랑이 전달되지 않는 이유는 언어가 달라서 — 인정의 말·함께하는 시간·선물·봉사·스킨십.</p>
+      <div class="go">완독하러 가기 →</div>
+    </a>
+    <a class="card" href="/apps/진성리더십_quiz.html">
+      <span class="badge full">풀버전</span>
+      <div class="top">
+        <div class="ci">🧭</div>
+        <div><h3>진성리더십</h3><div class="au">윤정구</div></div>
+      </div>
+      <p>흉내 내는 리더가 아니라 나다운 리더로 — 진북(True North)을 향한 진성 리더의 여정.</p>
+      <div class="go">완독하러 가기 →</div>
+    </a>
+    <a class="card" href="/apps/에너지버스_quiz.html">
+      <span class="badge full">풀버전 · NEW</span>
+      <div class="top">
+        <div class="ci">🚌</div>
+        <div><h3>에너지 버스</h3><div class="au">존 고든</div></div>
+      </div>
+      <p>내 인생 버스의 운전사는 나 — 긍정 에너지를 연료로 인생을 바꾸는 10가지 규칙.</p>
+      <div class="go">완독하러 가기 →</div>
+    </a>
+  </div>
+
+  <!-- ============ 자기 진단 ============ -->
+  <h2 class="sec-h">🧭 자기 진단</h2>
+  <p class="sec-p">연결은 나를 아는 것에서 시작됩니다. 3분이면 충분합니다.</p>
+  <div class="cards">
+    <a class="card" href="/apps/mbti_검사_test.html">
+      <span class="badge test">진단</span>
+      <div class="top">
+        <div class="ci">🔍</div>
+        <div><h3>MBTI 검사</h3><div class="au">16가지 성격 유형</div></div>
+      </div>
+      <p>나의 에너지 방향·인식·판단·생활양식을 확인하고, 나와 다른 유형과 연결되는 법을 배웁니다.</p>
+      <div class="go">진단하러 가기 →</div>
+    </a>
+    <a class="card" href="/apps/사랑의_언어_진단_test.html">
+      <span class="badge test">진단</span>
+      <div class="top">
+        <div class="ci">💞</div>
+        <div><h3>사랑의 언어 진단</h3><div class="au">5가지 사랑의 언어 테스트</div></div>
+      </div>
+      <p>나는 어떤 언어로 사랑을 주고받는 사람일까 — 『5가지 사랑의 언어』와 함께 보면 두 배가 됩니다.</p>
+      <div class="go">진단하러 가기 →</div>
+    </a>
+  </div>
+
+  <div class="footer">
+    <div class="factory">“의미와재미공장” 미미팩토리</div>
+    <div class="affil">(주식회사 연:결 패밀리회사)</div>
+    <div class="tagline">Good Mentor Leadership Academy와 함께하는 연결의 학습 라운지</div>
+  </div>
+
+</div>
+</body>
+</html>
