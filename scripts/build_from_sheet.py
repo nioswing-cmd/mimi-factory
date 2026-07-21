@@ -79,7 +79,8 @@ def header_map(header):
     m = {}
     fields = (("제목", "title"), ("작가", "author"), ("팔레트", "palette"),
               ("에디션", "edition"), ("상태", "status"), ("url", "url"),
-              ("완료일", "done"), ("자료", "material"), ("프롬프트", "extra"))
+              ("완료일", "done"), ("자료", "material"), ("프롬프트", "extra"),
+              ("플랫폼", "platform"))
     for j, cell in enumerate(header):
         c = str(cell).strip().lower()
         for key, field in fields:
@@ -121,6 +122,7 @@ def pick_waiting(tabs):
                            "edition": cell(row, "edition") or "프리미엄+티저",
                            "material_url": cell(row, "material"),
                            "extra": cell(row, "extra"),
+                           "platform": cell(row, "platform"),
                            "_status": cell(row, "status"),
                            "_url": cell(row, "url"), "_done": cell(row, "done")})
 
@@ -475,6 +477,108 @@ def notify(item, status, url=""):
 
 
 # ── 메인 ─────────────────────────────────────────────────
+def _load_platforms():
+    p = os.path.join(ROOT, "platforms.json")
+    if not os.path.isfile(p):
+        return {}
+    d = json.load(open(p, encoding="utf-8"))
+    return {k: v for k, v in d.items() if not k.startswith("_")}
+
+
+def _platform_upsert(manifest_path, entry_dict):
+    """플랫폼 매니페스트에 항목 추가/갱신 (id 기준). 변경 시 True."""
+    path = os.path.join(ROOT, manifest_path)
+    data = {"apps": []}
+    if os.path.isfile(path):
+        data = json.load(open(path, encoding="utf-8"))
+    apps = data.setdefault("apps", [])
+    for a in apps:
+        if a.get("id") == entry_dict["id"]:
+            return False  # 이미 등록 — 수동 편집(아이콘 등) 보존
+    apps.append(entry_dict)
+    data["updated"] = TODAY
+    with open(path, "w", encoding="utf-8", newline="") as f:
+        json.dump(data, f, ensure_ascii=False, indent=1)
+    return True
+
+
+def sync_platforms(tabs):
+    """시트 '플랫폼' 열 동기화 — 완료 상태 + 플랫폼 선택 행을 해당 플랫폼 매니페스트에 등록.
+    앱 파일은 apps.json(밤의 서재 전체 매니페스트)에서 제목으로 찾는다. 풀버전(premium) 링크 사용."""
+    platforms = _load_platforms()
+    if not platforms:
+        return
+    try:
+        catalog = json.load(open(os.path.join(ROOT, "apps.json"), encoding="utf-8"))["apps"]
+    except Exception:
+        return
+    by_title = {a["title"].replace(" ", ""): a for a in catalog}
+    icon_default = {"quiz": "📕", "test": "🧭", "friend": "💞"}
+    changed = []
+    for cat, gid, rows in tabs:
+        if not rows:
+            continue
+        cm = header_map(rows[0])
+        if "platform" not in cm or "title" not in cm:
+            continue
+
+        def cell(row, field):
+            j = cm.get(field, -1)
+            return row[j].strip() if 0 <= j < len(row) else ""
+
+        for row in rows[1:]:
+            title, plat, status = cell(row, "title"), cell(row, "platform"), cell(row, "status")
+            if not title or not plat or "완료" not in status:
+                continue
+            conf = platforms.get(plat)
+            if not conf:
+                log(f"플랫폼 '{plat}'가 platforms.json에 없어 건너뜀: {title}")
+                continue
+            app = by_title.get(title.replace(" ", ""))
+            if not app:
+                log(f"플랫폼 동기화: apps.json에서 '{title}'를 찾지 못함 — 건너뜀")
+                continue
+            entry = {"id": app["id"], "type": app["type"], "title": app["title"],
+                     "author": app.get("author", ""),
+                     "icon": icon_default.get(app["type"], "📘"),
+                     "file": "/" + app.get("premium", app.get("teaser", "")),
+                     "desc": app.get("desc", "")}
+            if _platform_upsert(conf["manifest"], entry):
+                changed.append((plat, app["title"]))
+    for plat, title in changed:
+        log(f"🎓 플랫폼 등록: {title} → {plat}")
+    if changed:
+        try:
+            manifests = sorted({platforms[p]["manifest"] for p, _ in changed})
+            subprocess.run(["git", "add"] + manifests, cwd=ROOT, capture_output=True)
+            subprocess.run(["git", "commit", "-m",
+                            "🎓 플랫폼 동기화: " + ", ".join(f"{t}→{p}" for p, t in changed) +
+                            "\n\nCo-Authored-By: Claude Fable 5 <noreply@anthropic.com>"],
+                           cwd=ROOT, capture_output=True)
+            subprocess.run(["git", "pull", "--rebase"], cwd=ROOT, capture_output=True)
+            subprocess.run(["git", "push"], cwd=ROOT, capture_output=True)
+        except Exception as e:
+            log(f"플랫폼 동기화 커밋 실패(다음 커밋에 포함됨): {e}")
+
+
+def register_platform(item, entry):
+    """생산 직후 즉시 플랫폼 등록 (시트 '플랫폼' 열 값 기준)."""
+    plat = (item.get("platform") or "").strip()
+    if not plat:
+        return
+    conf = _load_platforms().get(plat)
+    if not conf:
+        log(f"플랫폼 '{plat}'가 platforms.json에 없어 등록 생략"); return
+    icon_default = {"quiz": "📕", "test": "🧭", "friend": "💞"}
+    e = {"id": entry["id"], "type": entry["type"], "title": entry["title"],
+         "author": entry.get("author", ""),
+         "icon": icon_default.get(entry["type"], "📘"),
+         "file": "/" + entry.get("premium", entry.get("teaser", "")),
+         "desc": entry.get("desc", "")}
+    if _platform_upsert(conf["manifest"], e):
+        log(f"🎓 플랫폼 즉시 등록: {entry['title']} → {plat}")
+
+
 def localize_new(entry):
     """신작을 즉시 3개 언어(ja/en/zh-TW)로 로컬라이즈 — i18n/batch.py 단건 모드.
     저작권 규칙: 책 퀴즈는 티저만 다국어화(풀버전 금지). 실패해도 생산은 성공으로 유지."""
@@ -499,6 +603,7 @@ def localize_new(entry):
 
 def main():
     tabs = read_sheet()
+    sync_platforms(tabs)   # 시트 '플랫폼' 열 → 플랫폼 매니페스트 동기화 (생산과 무관하게 매 실행)
     item = pick_waiting(tabs)
     if not item:
         log("오늘 만들 '대기' 항목이 없습니다. 시트에 등록해 주세요. (정상 종료)")
@@ -513,6 +618,7 @@ def main():
         site = os.environ.get("SITE_URL", "").rstrip("/")
         notify(item, "완료", f"{site}/{entry['teaser']}" if site else entry["teaser"])
         log("✅ 생산 완료!")
+        register_platform(item, entry)
         localize_new(entry)
     else:
         # 1회 재시도
@@ -521,6 +627,7 @@ def main():
             entry = collect(item, slug)
         if entry:
             notify(item, "완료", entry["teaser"]); log("✅ 재시도 성공!")
+            register_platform(item, entry)
             localize_new(entry)
         else:
             notify(item, "실패"); log("❌ 최종 실패 — 시트에 '실패' 기록")

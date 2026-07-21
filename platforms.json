@@ -1,0 +1,7 @@
+{
+ "_note": "플랫폼 레지스트리 — 시트 '플랫폼' 열 값과 매칭. 새 플랫폼 추가 시 여기와 시트 '플랫폼목록' 탭에 함께 등록.",
+ "굿멘토": {
+  "manifest": "goodmentor/apps.json",
+  "url": "https://mimifactory.vibekr.com/goodmentor/"
+ }
+}

@@ -78,6 +78,40 @@ function setupStatusDropdown() {
   });
 }
 
+/**
+ * 플랫폼 선택 열 설치 — 1회만 실행하면 됨 (setupPlatforms 선택 후 ▶ 실행)
+ *  1) '플랫폼목록' 탭을 만들고(없으면) 기본값 '굿멘토'를 넣는다.
+ *  2) 모든 콘텐츠 탭에 '플랫폼' 머리글 열을 추가(없으면)하고,
+ *     플랫폼목록!A2:A 를 참조하는 드롭다운을 설치한다.
+ *  → 나중에 새 플랫폼이 생기면 '플랫폼목록' 탭에 이름 한 줄만 추가하면
+ *    모든 탭의 드롭다운에 자동으로 나타난다 (코드 수정 불필요).
+ */
+function setupPlatforms() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var listName = "플랫폼목록";
+  var listSheet = ss.getSheetByName(listName);
+  if (!listSheet) {
+    listSheet = ss.insertSheet(listName);
+    listSheet.getRange(1, 1).setValue("플랫폼 이름 (한 줄에 하나)");
+    listSheet.getRange(2, 1).setValue("굿멘토");
+  }
+  var rule = SpreadsheetApp.newDataValidation()
+    .requireValueInRange(listSheet.getRange("A2:A50"), true)
+    .setAllowInvalid(false)
+    .setHelpText("이 앱을 노출할 플랫폼 선택 (비우면 미미팩토리 기본관에만). 새 플랫폼은 '플랫폼목록' 탭에 추가.")
+    .build();
+  ss.getSheets().forEach(function (sheet) {
+    if (sheet.getName() === listName) return;
+    if (colOf_(sheet, "제목") < 1) return;      // 콘텐츠 탭만
+    var cp = colOf_(sheet, "플랫폼");
+    if (cp < 1) {
+      cp = sheet.getLastColumn() + 1;
+      sheet.getRange(1, cp).setValue("플랫폼");
+    }
+    sheet.getRange(2, cp, 999).setDataValidation(rule);
+  });
+}
+
 /** 기존에 텍스트로 적힌 URL들을 클릭 가능한 링크로 일괄 변환 — 1회만 실행하면 됨 */
 function linkifyExistingUrls() {
   SpreadsheetApp.getActiveSpreadsheet().getSheets().forEach(function (sheet) {
