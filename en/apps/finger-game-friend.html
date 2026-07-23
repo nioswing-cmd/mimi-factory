@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Finger Folds · the finger game that brings two people closer 🖐</title>
+<meta name="description" content="Finger Folds, played side by side. With 100 ready-made questions, make-your-own, and pick-from-four, get closer to friends, partners and family.">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+
+:root{
+  --bg:#1a1016; --bg2:#271722; --card:#301c2b; --line:#4a2c42;
+  --ink:#f8ecf1; --sub:#c9a3b4;
+  --accent:#f0708f; --accent2:#b04a7a; --point:#ffc2a8;
+  --ok:#5abf8b; --bad:#e4574f;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--ink);
+  background:
+    radial-gradient(120% 80% at 82% -8%, rgba(255,194,168,.12), transparent 55%),
+    radial-gradient(120% 90% at 8% 112%, rgba(240,112,143,.16), transparent 55%),
+    linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;
+  min-height:100dvh;
+  transition:background .9s ease;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:520px; margin:0 auto; padding:20px 16px 8px; min-height:100dvh; display:flex; flex-direction:column;}
+.jua{font-family:'Jua',sans-serif;}
+.grad{
+  background:linear-gradient(105deg,var(--point),var(--accent) 48%,var(--accent2));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+button{font-family:inherit; cursor:pointer; border:none; color:inherit;}
+button:focus-visible, [tabindex]:focus-visible{outline:3px solid var(--point); outline-offset:2px;}
+.hidden{display:none !important;}
+.word{overflow-wrap:break-word;}
+
+
+.screen{flex:1; display:flex; flex-direction:column; animation:fadeIn .5s ease;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+
+.brandline{font-size:11px; letter-spacing:.32em; text-indent:.32em; color:var(--sub); text-align:center; margin-bottom:6px;}
+.title{font-size:38px; line-height:1.1; text-align:center; margin:2px 0 6px;}
+.subtitle{text-align:center; color:var(--sub); font-size:14px; line-height:1.6; margin-bottom:18px;}
+
+
+.panel{
+  background:linear-gradient(180deg,var(--card),color-mix(in srgb,var(--card) 82%, #000));
+  border:1px solid var(--line); border-radius:20px; padding:18px;
+  box-shadow:0 12px 30px -18px rgba(0,0,0,.7);
+}
+
+
+.rules{margin:0 0 18px; color:var(--sub); font-size:13.5px; line-height:1.75;}
+.rules b{color:var(--point);}
+.rules li{margin:5px 0;}
+.namegrid{display:flex; gap:12px; margin-bottom:8px;}
+.namebox{flex:1; text-align:center;}
+.namebox label{display:block; font-size:12px; color:var(--sub); margin-bottom:7px; letter-spacing:.04em;}
+.dot{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; vertical-align:middle;}
+.dot.a{background:var(--point);} .dot.b{background:var(--accent);}
+input[type=text]{
+  width:100%; text-align:center; font-family:'Jua',sans-serif; font-size:20px;
+  background:rgba(255,255,255,.05); border:1.5px solid var(--line); border-radius:14px;
+  color:var(--ink); padding:12px 10px; transition:border-color .2s, box-shadow .2s;
+}
+input[type=text]:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(240,112,143,.22);}
+
+
+.big{
+  width:100%; padding:17px; border-radius:16px; font-family:'Jua',sans-serif; font-size:19px;
+  color:#2a0f1c; background:linear-gradient(100deg,var(--point),var(--accent));
+  box-shadow:0 10px 24px -10px var(--accent); transition:transform .12s, box-shadow .3s;
+}
+.big:active{transform:scale(.97);}
+.ghost{
+  background:rgba(255,255,255,.06); border:1.5px solid var(--line); color:var(--ink);
+  border-radius:14px; padding:13px; font-size:15px; font-family:'Jua',sans-serif;
+  transition:transform .12s, background .2s, border-color .2s;
+}
+.ghost:active{transform:scale(.96);}
+
+
+.topbar{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px;}
+.levelseg{display:flex; gap:6px; background:rgba(255,255,255,.05); padding:5px; border-radius:14px; border:1px solid var(--line);}
+.levelseg button{
+  font-family:'Jua',sans-serif; font-size:13px; padding:7px 11px; border-radius:10px; color:var(--sub);
+  background:transparent; transition:all .25s;
+}
+.levelseg button.on{color:#2a0f1c; background:linear-gradient(100deg,var(--point),var(--accent)); box-shadow:0 4px 12px -4px var(--accent);}
+.roundtag{font-family:'Jua',sans-serif; font-size:14px; color:var(--sub); white-space:nowrap;}
+.roundtag b{color:var(--point); font-size:18px;}
+
+
+.qcard{
+  text-align:center; padding:30px 20px; margin-bottom:14px; min-height:150px;
+  display:flex; flex-direction:column; justify-content:center; position:relative; overflow:hidden;
+}
+.qcard::before{
+  content:"🖐"; position:absolute; right:-6px; top:-10px; font-size:66px; opacity:.08; transform:rotate(12deg);
+}
+.qhint{font-size:12px; color:var(--sub); letter-spacing:.03em; margin-bottom:12px;}
+.stmt{font-family:'Jua',sans-serif; font-size:25px; line-height:1.45;}
+.stmt b{color:var(--point);}
+
+
+.players{display:flex; flex-direction:column; gap:11px; margin-bottom:14px;}
+.pl{padding:14px 15px; display:flex; align-items:center; gap:12px; transition:opacity .3s, border-color .3s;}
+.pl .who{display:flex; flex-direction:column; gap:8px; min-width:0; flex:1;}
+.pl .name{font-family:'Jua',sans-serif; font-size:18px; display:flex; align-items:center; gap:2px; max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.fingers{display:flex; gap:6px;}
+.fg{
+  width:22px; height:22px; border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, var(--point), var(--accent));
+  box-shadow:0 0 10px -1px var(--accent); transition:all .35s cubic-bezier(.34,1.56,.64,1);
+}
+.fg.folded{background:rgba(255,255,255,.07); box-shadow:none; transform:scale(.62); opacity:.5;}
+.plbtns{display:flex; flex-direction:column; gap:7px;}
+.foldbtn{
+  font-family:'Jua',sans-serif; font-size:15px; padding:11px 15px; border-radius:13px; white-space:nowrap;
+  color:#2a0f1c; background:linear-gradient(100deg,var(--point),var(--accent));
+  box-shadow:0 8px 18px -9px var(--accent); transition:transform .12s;
+}
+.foldbtn:active{transform:scale(.94);}
+.passbtn{
+  font-size:12.5px; padding:6px 12px; border-radius:11px; color:var(--sub);
+  background:rgba(255,255,255,.05); border:1px solid var(--line);
+}
+.pl.done{opacity:.7;}
+.pl.done .foldbtn, .pl.done .passbtn{pointer-events:none;}
+.answered{
+  font-family:'Jua',sans-serif; font-size:14px; padding:11px 15px; border-radius:13px; text-align:center;
+  background:rgba(255,255,255,.06); border:1px solid var(--line); color:var(--sub);
+}
+.answered.fold{color:var(--point); border-color:var(--accent);}
+
+
+.sources{display:flex; gap:8px; margin-bottom:8px;}
+.sources .ghost{flex:1; padding:14px 4px; font-size:14px; display:flex; flex-direction:column; gap:3px; align-items:center;}
+.sources .ico{font-size:20px;}
+.pulse{animation:pulse 1.6s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(240,112,143,0);} 50%{box-shadow:0 0 0 5px rgba(240,112,143,.18);}}
+
+
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92) rotate(-1.2deg); opacity:.5;} 60%{transform:scale(1.02) rotate(.4deg);} 100%{transform:scale(1) rotate(0); opacity:1;}}
+
+
+.toast{
+  position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-24px);
+  background:rgba(48,28,43,.97); border:1.5px solid var(--accent); color:var(--ink);
+  padding:12px 20px; border-radius:99px; font-size:14px; font-family:'Jua',sans-serif;
+  opacity:0; pointer-events:none; transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; text-align:center;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+
+.overlay{
+  position:fixed; inset:0; background:rgba(12,7,10,.72); backdrop-filter:blur(3px);
+  display:flex; align-items:center; justify-content:center; padding:20px; z-index:50; animation:fadeIn .3s;
+}
+.sheet{width:100%; max-width:480px; max-height:82vh; overflow:auto;}
+.sheet h3{font-family:'Jua',sans-serif; font-size:20px; margin:0 0 4px; text-align:center;}
+.sheet .desc{color:var(--sub); font-size:12.5px; text-align:center; margin-bottom:16px; line-height:1.6;}
+.choice{
+  width:100%; text-align:left; padding:15px 16px; margin-bottom:9px; border-radius:14px;
+  background:rgba(255,255,255,.05); border:1.5px solid var(--line); color:var(--ink);
+  font-size:15px; line-height:1.5; transition:transform .12s, border-color .2s, background .2s; overflow-wrap:break-word;
+}
+.choice:active{transform:scale(.98);} .choice:hover{border-color:var(--accent);}
+.choice b{color:var(--point);}
+.closex{display:block; width:100%; text-align:center; margin-top:6px; color:var(--sub); background:none; font-size:13px; padding:10px;}
+
+
+.endcard{text-align:center; padding:26px 22px;}
+.crown{font-size:56px; margin-bottom:6px;}
+.endtitle{font-family:'Jua',sans-serif; font-size:26px; line-height:1.35; margin-bottom:6px;}
+.endname{font-size:29px;}
+.endsub{color:var(--sub); font-size:14px; line-height:1.7; margin-bottom:18px;}
+.score{display:flex; gap:12px; margin-bottom:18px;}
+.score .s{flex:1; padding:14px 8px; border-radius:14px; background:rgba(255,255,255,.05); border:1px solid var(--line);}
+.score .s .n{font-family:'Jua',sans-serif; font-size:15px; display:flex; align-items:center; justify-content:center; gap:4px;}
+.score .s .v{font-family:'Jua',sans-serif; font-size:30px; color:var(--point); margin-top:4px;}
+.mission{
+  background:linear-gradient(180deg,rgba(240,112,143,.14),rgba(240,112,143,.04));
+  border:1.5px dashed var(--accent); border-radius:16px; padding:16px; margin-bottom:18px;
+}
+.mission .lab{font-size:12px; letter-spacing:.15em; color:var(--accent); margin-bottom:8px;}
+.mission .txt{font-family:'Jua',sans-serif; font-size:17px; line-height:1.5;}
+.endbtns{display:flex; flex-direction:column; gap:9px;}
+
+
+.footer{text-align:center; margin-top:22px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+@media (max-width:360px){ .stmt{font-size:22px;} .title{font-size:33px;} }
+</style>
+</head>
+<body>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<div class="wrap">
+
+  
+  <section id="setup" class="screen">
+    <div class="brandline">T W O · G E T T I N G · C L O S E R</div>
+    <h1 class="title jua"><span class="grad">Finger Folds</span> 🖐</h1>
+    <p class="subtitle word">Sit side by side and hold up five fingers.<br>Fold them honestly, and you’ll be closer before you know it.</p>
+
+    <div class="panel" style="margin-bottom:16px;">
+      <ol class="rules">
+        <li>Both players start with <b>5</b> fingers up.</li>
+        <li>Draw a question — <b>if it’s you, fold a finger</b> (be honest 🤫).</li>
+        <li>Your questions come from <b>🎲 Random · ✍️ Make your own · 📋 Pick-from-four</b> — take your pick.</li>
+        <li>The first to <b>fold all 5 fingers</b> is today’s <b>Honesty King</b> 👑 — a little mission awaits!</li>
+      </ol>
+      <div class="namegrid">
+        <div class="namebox">
+          <label><span class="dot a"></span>Player 1</label>
+          <input id="n1" type="text" maxlength="6" value="Me" aria-label="Player 1 name">
+        </div>
+        <div class="namebox">
+          <label><span class="dot b"></span>Player 2</label>
+          <input id="n2" type="text" maxlength="6" value="You" aria-label="Player 2 name">
+        </div>
+      </div>
+    </div>
+
+    <button class="big" onclick="startGame()">Start together ✨</button>
+  </section>
+
+  
+  <section id="game" class="screen hidden">
+    <div class="topbar">
+      <div class="levelseg" role="tablist" aria-label="Choose depth">
+        <button data-lv="1" class="on" onclick="setLevel(1)">Light</button>
+        <button data-lv="2" onclick="setLevel(2)">Closer</button>
+        <button data-lv="3" onclick="setLevel(3)">Deep</button>
+      </div>
+      <div class="roundtag">Q <b id="roundNo">1</b></div>
+    </div>
+
+    <div class="panel qcard pop" id="qcard">
+      <div class="qhint">If it’s you, fold a finger 🤫</div>
+      <div class="stmt" id="stmt">Ready?</div>
+    </div>
+
+    <div class="players">
+      <div class="panel pl" id="pl0">
+        <div class="who">
+          <div class="name"><span class="dot a"></span><span id="nm0">Me</span></div>
+          <div class="fingers" id="fg0" aria-label="Player 1 fingers"></div>
+        </div>
+        <div class="plbtns" id="btns0">
+          <button class="foldbtn" onclick="fold(0)">Fold 👇</button>
+          <button class="passbtn" onclick="pass(0)">Not me</button>
+        </div>
+      </div>
+      <div class="panel pl" id="pl1">
+        <div class="who">
+          <div class="name"><span class="dot b"></span><span id="nm1">You</span></div>
+          <div class="fingers" id="fg1" aria-label="Player 2 fingers"></div>
+        </div>
+        <div class="plbtns" id="btns1">
+          <button class="foldbtn" onclick="fold(1)">Fold 👇</button>
+          <button class="passbtn" onclick="pass(1)">Not me</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sources" id="sources">
+      <button class="ghost" onclick="nextRandom()"><span class="ico">🎲</span>Random</button>
+      <button class="ghost" onclick="openPick()"><span class="ico">📋</span>Pick 4</button>
+      <button class="ghost" onclick="openCustom()"><span class="ico">✍️</span>Make own</button>
+    </div>
+    <div style="text-align:center; color:var(--sub); font-size:11.5px; padding:2px 0 6px;">
+      Draw the next question above · you can move on without tapping
+    </div>
+  </section>
+
+  
+  <section id="end" class="screen hidden">
+    <div class="panel endcard">
+      <div class="crown">👑</div>
+      <div class="endtitle">Today’s Honesty King<br><span class="endname grad jua" id="winName">—</span></div>
+      <div class="endsub word" id="endSub">First to fold all five fingers.<br>Which means the most honest today!</div>
+      <div class="score">
+        <div class="s"><div class="n"><span class="dot a"></span><span id="sc0n">Me</span></div><div class="v" id="sc0v">0</div></div>
+        <div class="s"><div class="n"><span class="dot b"></span><span id="sc1n">You</span></div><div class="v" id="sc1v">0</div></div>
+      </div>
+      <div class="mission">
+        <div class="lab">💌 Today’s mission</div>
+        <div class="txt word" id="missionTxt"></div>
+      </div>
+      <div class="endbtns">
+        <button class="big" onclick="restart()">One more round 🔁</button>
+        <button class="ghost" onclick="shareApp()">Share with a friend 💬</button>
+        <button class="ghost" onclick="toSetup()">Back to start</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+
+<div id="pickOverlay" class="overlay hidden">
+  <div class="panel sheet">
+    <h3>📋 Pick a question you like</h3>
+    <div class="desc">Choose one of four for this round!</div>
+    <div id="pickList"></div>
+    <button class="closex" onclick="closeOverlay('pickOverlay')">Close</button>
+  </div>
+</div>
+
+
+<div id="customOverlay" class="overlay hidden">
+  <div class="panel sheet">
+    <h3>✍️ Make your own question</h3>
+    <div class="desc">Keep it a short ‘…’ line and it flows best.<br>e.g.) <b>Laughed really hard lately</b> → “… — fold!”</div>
+    <input id="customInput" type="text" maxlength="40" placeholder="e.g. Grateful to this person today" style="margin-bottom:12px;">
+    <button class="big" onclick="submitCustom()">Use this question</button>
+    <button class="closex" onclick="closeOverlay('customOverlay')">Close</button>
+  </div>
+</div>
+
+
+<div class="wrap" style="min-height:auto; padding-top:0; padding-bottom:22px;">
+  <div class="footer">
+    <div class="mf-eyebrow"><span>The Meaning & Fun Factory</span></div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+  </div>
+</div>
+
+<script>
+
+const CARDS = {
+1:[
+"Skipped breakfast this morning","Phone battery under 30% right now","Dips fries in a milkshake","Ordered takeout in the last 3 days",
+"Loves mint choc chip","Says pineapple belongs on pizza","Considers themselves a morning person","Sets two or more alarms",
+"Has pockets in what they’re wearing","Has a go-to karaoke song","Can’t get through a day without coffee","Hates doing dishes more than cleaning",
+"Prefers summer to winter","More of a dog person","Can’t handle spicy food","Installed a new app recently",
+"Throws up a peace sign in photos","Has a case on their phone right now","Always hits the close-door button in elevators","Loves making plans",
+"Follows a comic or show every week","Went to a movie theater this past month","Wears slippers around the house","Drinks over a liter of water a day",
+"Overpacks for every trip","Has been to a concert or festival","Has a favorite seasonal food","Opens social media more than three times a day",
+"Drinks iced coffee even in winter","Picked up a new hobby recently","Is actually a pretty good cook","Thinks they have a terrible sense of direction",
+"Loves walking with music on","Has short nails right now"
+],
+2:[
+"Has been told they’re nothing like their first impression","Goes quiet instead of loud when angry","Has a hard time saying no","Absolutely needs alone time",
+"Is blunter with family than with friends","Cries pretty easily","Travels on a whim rather than a plan","Is shy around new people",
+"Stays sulky for a long time once upset","Doesn’t know what to do with a compliment","Overthinks right before falling asleep","Had a childhood dream totally unlike now",
+"Has a big regret from the past year","Gets more awkward around someone they like","Usually apologizes first after a fight","Enjoys eating, movies and trips solo",
+"Deals with stress by eating","Reads the room a little too much","Can’t throw old things away","Has gotten lost on a trip",
+"Gets all in their feelings at night","Seeks out scary movies on purpose","Turns over the lyrics of a favorite song","Gets excited meeting new people",
+"Felt let down by someone recently","Tends to leave decisions to others","Reaches out to make peace first","Gets told they look younger than they are",
+"Gets lost in memories over old photos","Sees a goal through to the end","Has taken a spontaneous trip","Is used to hiding their feelings",
+"Secretly roots for someone"
+],
+3:[
+"Is grateful to this person right now","Randomly thought of this person lately","Still has something unsaid to this person","Still remembers their first love",
+"Has secretly liked someone","Has had a crush that went nowhere","Saves the words ‘I love you’ for rare moments","Sometimes thinks of an ex",
+"Has been confessed to","Has confessed to someone first","Hasn’t said ‘I love you’ to family in a while","Feels sorry about something toward their parents",
+"Still carries a childhood wound","Cried in secret this past month","Is carrying one worry right now","Still hasn’t forgiven someone",
+"Has a breakup they regret","Wants to see this person more often","Can name more than three good things about this person","Has felt let down by this person",
+"Has laughed hard thanks to this person","Has thought of this person during a hard time","Truly trusts this person","Has something they must do before they die",
+"Has a secret they’ve told no one","Is pretty happy with life right now","Has a moment they’d go back to","Has been feeling lonely a lot lately",
+"Has something to apologize to this person for","Is happy in this very moment","Wants to stay with this person for a long, long time","Had a truly grateful moment recently",
+"Could say ‘I love you’ to this person right now"
+]
+};
+
+const MISSIONS = [
+"Share one new thing you learned about each other today.",
+"Pick the most surprising answer and talk it through.",
+"The loser gives the winner three compliments 🥰",
+"Sum up your most grateful moment together in one sentence.",
+"Each name one thing you’d like to do together next.",
+"Bring back the funniest moment from today’s chat 😆",
+"Hold eye contact for 3 seconds and say ‘thank you’.",
+"Ask about just one folded finger — why it went down."
+];
+
+
+const THEMES = {
+1:{accent:"#ff9e7a", accent2:"#e0708f", point:"#ffd3b0", bg:"#1c1015", bg2:"#2a1720", card:"#331d29"},
+2:{accent:"#f0708f", accent2:"#b04a7a", point:"#ffc2a8", bg:"#1a1016", bg2:"#271722", card:"#301c2b"},
+3:{accent:"#e05aa8", accent2:"#8a3a86", point:"#ffa8c8", bg:"#160c14", bg2:"#241030", card:"#2b1430"}
+};
+
+
+let players = [{name:"Me",folded:0},{name:"You",folded:0}];
+let level = 1;
+let round = 0;
+let decks = {1:[],2:[],3:[]};    // Shuffle deck
+let answered = [false,false];    // Each player’s answer this round
+
+
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function vibrate(p){ if(navigator.vibrate) try{ navigator.vibrate(p); }catch(e){} }
+let _tt;
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2000); }
+function repop(el){ el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+
+function applyTheme(lv){
+  const t=THEMES[lv], r=document.documentElement.style;
+  r.setProperty('--accent',t.accent); r.setProperty('--accent2',t.accent2); r.setProperty('--point',t.point);
+  r.setProperty('--bg',t.bg); r.setProperty('--bg2',t.bg2); r.setProperty('--card',t.card);
+}
+
+
+function show(id){ ['setup','game','end'].forEach(s=>document.getElementById(s).classList.toggle('hidden', s!==id)); }
+
+function startGame(){
+  const n1=(document.getElementById('n1').value||'').trim()||'Me';
+  const n2=(document.getElementById('n2').value||'').trim()||'You';
+  players=[{name:n1,folded:0},{name:n2,folded:0}];
+  document.getElementById('nm0').textContent=n1;
+  document.getElementById('nm1').textContent=n2;
+  level=1; round=0; decks={1:[],2:[],3:[]};
+  setLevelUI(1); applyTheme(1);
+  renderFingers();
+  show('game');
+  nextRandom(true);
+  vibrate(20);
+}
+
+function toSetup(){ show('setup'); }
+
+
+function renderFingers(){
+  [0,1].forEach(i=>{
+    const box=document.getElementById('fg'+i); box.innerHTML='';
+    for(let k=0;k<5;k++){
+      const d=document.createElement('span');
+      d.className='fg'+(k<players[i].folded?' folded':'');
+      box.appendChild(d);
+    }
+  });
+}
+
+
+function setLevelUI(lv){
+  document.querySelectorAll('.levelseg button').forEach(b=>b.classList.toggle('on', +b.dataset.lv===lv));
+}
+function setLevel(lv){
+  if(lv===level) return;
+  level=lv; setLevelUI(lv); applyTheme(lv);
+  const names={1:'Warm-up 🌤',2:'Getting closer 🔥',3:'Real talk 💗'};
+  toast(names[lv]); vibrate([15,30,15]);
+}
+
+
+function resetRoundButtons(){
+  answered=[false,false];
+  [0,1].forEach(i=>{
+    document.getElementById('pl'+i).classList.remove('done');
+    document.getElementById('btns'+i).innerHTML=
+      '<button class="foldbtn" onclick="fold('+i+')">Fold 👇</button>'+
+      '<button class="passbtn" onclick="pass('+i+')">Not me</button>';
+  });
+  document.getElementById('sources').classList.remove('pulse');
+}
+
+function setStatement(clause){
+  round++;
+  document.getElementById('roundNo').textContent=round;
+  document.getElementById('stmt').innerHTML=esc(clause)+' <b>— fold!</b>';
+  repop(document.getElementById('qcard'));
+  resetRoundButtons();
+}
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function drawFromDeck(){
+  if(!decks[level] || decks[level].length===0){ decks[level]=shuffle([...CARDS[level]]); }
+  return decks[level].pop();
+}
+function nextRandom(first){
+  setStatement(drawFromDeck());
+  if(!first) vibrate(22);
+}
+
+
+function openPick(){
+  const pool=[...CARDS[level]]; shuffle(pool);
+  const four=pool.slice(0,4);
+  const list=document.getElementById('pickList'); list.innerHTML='';
+  four.forEach(c=>{
+    const b=document.createElement('button');
+    b.className='choice'; b.innerHTML=esc(c)+' <b>— fold!</b>';
+    b.onclick=()=>{ closeOverlay('pickOverlay'); setStatement(c); vibrate(22); };
+    list.appendChild(b);
+  });
+  openOverlay('pickOverlay');
+}
+
+
+function openCustom(){ document.getElementById('customInput').value=''; openOverlay('customOverlay'); setTimeout(()=>document.getElementById('customInput').focus(),120); }
+function submitCustom(){
+  let v=(document.getElementById('customInput').value||'').trim();
+  if(!v){ toast('Write a question first ✍️'); return; }
+  v=v.replace(/\s*(fold)?\s*(finger)?[!.]*$/,''); // strip trailing 'fold a finger!' duplicate
+  if(!v){ toast('Write a question first ✍️'); return; }
+  CARDS[level].push(v);           // then random/shows up in pick-4 too
+  closeOverlay('customOverlay');
+  setStatement(v); vibrate([15,30,15]);
+  toast('Your own question, added! 💗');
+}
+
+function openOverlay(id){ document.getElementById(id).classList.remove('hidden'); }
+function closeOverlay(id){ document.getElementById(id).classList.add('hidden'); }
+
+
+function markDone(i, label, isFold){
+  answered[i]=true;
+  document.getElementById('pl'+i).classList.add('done');
+  document.getElementById('btns'+i).innerHTML='<div class="answered'+(isFold?' fold':'')+'">'+label+'</div>';
+  if(answered[0]&&answered[1]) document.getElementById('sources').classList.add('pulse');
+}
+
+function fold(i){
+  if(answered[i]) return;
+  if(players[i].folded>=5) return;
+  players[i].folded++;
+  renderFingers();
+  const box=document.getElementById('fg'+i); repop(box);
+  markDone(i,'Folded ✓ ('+players[i].folded+'/5)',true);
+  vibrate(28);
+  if(players[i].folded>=5){ endGame(i); return; }
+  if(players[i].folded===4) toast(players[i].name+' One finger left! 😳');
+}
+
+function pass(i){
+  if(answered[i]) return;
+  markDone(i,'Pass ✓',false);
+  vibrate(12);
+}
+
+
+function endGame(winIdx){
+  const w=players[winIdx];
+  document.getElementById('winName').textContent=w.name;
+  document.getElementById('sc0n').textContent=players[0].name;
+  document.getElementById('sc1n').textContent=players[1].name;
+  document.getElementById('sc0v').textContent=players[0].folded;
+  document.getElementById('sc1v').textContent=players[1].folded;
+  document.getElementById('endSub').innerHTML=
+    '<b style="color:var(--point)">'+esc(w.name)+'</b> folded all five fingers first.<br>Which means they were the most honest today 💗';
+  document.getElementById('missionTxt').textContent=MISSIONS[Math.floor(Math.random()*MISSIONS.length)];
+  show('end');
+  vibrate([60,80,60,80,140]);
+}
+
+function restart(){
+  players.forEach(p=>p.folded=0);
+  round=0; level=1; decks={1:[],2:[],3:[]};
+  setLevelUI(1); applyTheme(1); renderFingers();
+  show('game'); nextRandom(true); vibrate(20);
+}
+
+
+function shareApp(){
+  const url='https://mimifactory.vibekr.com/en/apps/finger-game-friend.html';
+  const text='Finger Folds — the finger game that brings two closer 🖐 100 questions ready!';
+  if(navigator.share){ navigator.share({title:'Finger Folds',text:text,url:url}).catch(()=>{}); }
+  else{
+    const full=text+'\n'+url;
+    if(navigator.clipboard){ navigator.clipboard.writeText(full).then(()=>toast('Link copied 💬')).catch(()=>toast(url)); }
+    else toast(url);
+  }
+}
+
+
+document.getElementById('n2').addEventListener('keydown',e=>{ if(e.key==='Enter') startGame(); });
+document.getElementById('customInput').addEventListener('keydown',e=>{ if(e.key==='Enter') submitCustom(); });
+</script>
+</body>
+</html>

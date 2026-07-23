@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>指折りゲーム · ふたりで仲良くなる指のゲーム 🖐</title>
+<meta name="description" content="ふたり並んで楽しむ指折りゲーム。用意された質問100問、自分でつくる、4択から選ぶ機能で、友だち·恋人·家族ともっと近づきましょう。">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansJP-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/MPLUSRounded1c-Bold-sub.woff2') format('woff2');font-weight:400;font-display:swap;}
+</style>
+<style>
+
+:root{
+  --bg:#1a1016; --bg2:#271722; --card:#301c2b; --line:#4a2c42;
+  --ink:#f8ecf1; --sub:#c9a3b4;
+  --accent:#f0708f; --accent2:#b04a7a; --point:#ffc2a8;
+  --ok:#5abf8b; --bad:#e4574f;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--ink);
+  background:
+    radial-gradient(120% 80% at 82% -8%, rgba(255,194,168,.12), transparent 55%),
+    radial-gradient(120% 90% at 8% 112%, rgba(240,112,143,.16), transparent 55%),
+    linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;
+  min-height:100dvh;
+  transition:background .9s ease;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:520px; margin:0 auto; padding:20px 16px 8px; min-height:100dvh; display:flex; flex-direction:column;}
+.jua{font-family:'Jua',sans-serif;}
+.grad{
+  background:linear-gradient(105deg,var(--point),var(--accent) 48%,var(--accent2));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+button{font-family:inherit; cursor:pointer; border:none; color:inherit;}
+button:focus-visible, [tabindex]:focus-visible{outline:3px solid var(--point); outline-offset:2px;}
+.hidden{display:none !important;}
+.word{}
+
+
+.screen{flex:1; display:flex; flex-direction:column; animation:fadeIn .5s ease;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+
+.brandline{font-size:11px; letter-spacing:.32em; text-indent:.32em; color:var(--sub); text-align:center; margin-bottom:6px;}
+.title{font-size:38px; line-height:1.1; text-align:center; margin:2px 0 6px;}
+.subtitle{text-align:center; color:var(--sub); font-size:14px; line-height:1.6; margin-bottom:18px;}
+
+
+.panel{
+  background:linear-gradient(180deg,var(--card),color-mix(in srgb,var(--card) 82%, #000));
+  border:1px solid var(--line); border-radius:20px; padding:18px;
+  box-shadow:0 12px 30px -18px rgba(0,0,0,.7);
+}
+
+
+.rules{margin:0 0 18px; color:var(--sub); font-size:13.5px; line-height:1.75;}
+.rules b{color:var(--point);}
+.rules li{margin:5px 0;}
+.namegrid{display:flex; gap:12px; margin-bottom:8px;}
+.namebox{flex:1; text-align:center;}
+.namebox label{display:block; font-size:12px; color:var(--sub); margin-bottom:7px; letter-spacing:.04em;}
+.dot{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; vertical-align:middle;}
+.dot.a{background:var(--point);} .dot.b{background:var(--accent);}
+input[type=text]{
+  width:100%; text-align:center; font-family:'Jua',sans-serif; font-size:20px;
+  background:rgba(255,255,255,.05); border:1.5px solid var(--line); border-radius:14px;
+  color:var(--ink); padding:12px 10px; transition:border-color .2s, box-shadow .2s;
+}
+input[type=text]:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(240,112,143,.22);}
+
+
+.big{
+  width:100%; padding:17px; border-radius:16px; font-family:'Jua',sans-serif; font-size:19px;
+  color:#2a0f1c; background:linear-gradient(100deg,var(--point),var(--accent));
+  box-shadow:0 10px 24px -10px var(--accent); transition:transform .12s, box-shadow .3s;
+}
+.big:active{transform:scale(.97);}
+.ghost{
+  background:rgba(255,255,255,.06); border:1.5px solid var(--line); color:var(--ink);
+  border-radius:14px; padding:13px; font-size:15px; font-family:'Jua',sans-serif;
+  transition:transform .12s, background .2s, border-color .2s;
+}
+.ghost:active{transform:scale(.96);}
+
+
+.topbar{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px;}
+.levelseg{display:flex; gap:6px; background:rgba(255,255,255,.05); padding:5px; border-radius:14px; border:1px solid var(--line);}
+.levelseg button{
+  font-family:'Jua',sans-serif; font-size:13px; padding:7px 11px; border-radius:10px; color:var(--sub);
+  background:transparent; transition:all .25s;
+}
+.levelseg button.on{color:#2a0f1c; background:linear-gradient(100deg,var(--point),var(--accent)); box-shadow:0 4px 12px -4px var(--accent);}
+.roundtag{font-family:'Jua',sans-serif; font-size:14px; color:var(--sub); white-space:nowrap;}
+.roundtag b{color:var(--point); font-size:18px;}
+
+
+.qcard{
+  text-align:center; padding:30px 20px; margin-bottom:14px; min-height:150px;
+  display:flex; flex-direction:column; justify-content:center; position:relative; overflow:hidden;
+}
+.qcard::before{
+  content:"🖐"; position:absolute; right:-6px; top:-10px; font-size:66px; opacity:.08; transform:rotate(12deg);
+}
+.qhint{font-size:12px; color:var(--sub); letter-spacing:.03em; margin-bottom:12px;}
+.stmt{font-family:'Jua',sans-serif; font-size:25px; line-height:1.45;}
+.stmt b{color:var(--point);}
+
+
+.players{display:flex; flex-direction:column; gap:11px; margin-bottom:14px;}
+.pl{padding:14px 15px; display:flex; align-items:center; gap:12px; transition:opacity .3s, border-color .3s;}
+.pl .who{display:flex; flex-direction:column; gap:8px; min-width:0; flex:1;}
+.pl .name{font-family:'Jua',sans-serif; font-size:18px; display:flex; align-items:center; gap:2px; max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.fingers{display:flex; gap:6px;}
+.fg{
+  width:22px; height:22px; border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, var(--point), var(--accent));
+  box-shadow:0 0 10px -1px var(--accent); transition:all .35s cubic-bezier(.34,1.56,.64,1);
+}
+.fg.folded{background:rgba(255,255,255,.07); box-shadow:none; transform:scale(.62); opacity:.5;}
+.plbtns{display:flex; flex-direction:column; gap:7px;}
+.foldbtn{
+  font-family:'Jua',sans-serif; font-size:15px; padding:11px 15px; border-radius:13px; white-space:nowrap;
+  color:#2a0f1c; background:linear-gradient(100deg,var(--point),var(--accent));
+  box-shadow:0 8px 18px -9px var(--accent); transition:transform .12s;
+}
+.foldbtn:active{transform:scale(.94);}
+.passbtn{
+  font-size:12.5px; padding:6px 12px; border-radius:11px; color:var(--sub);
+  background:rgba(255,255,255,.05); border:1px solid var(--line);
+}
+.pl.done{opacity:.7;}
+.pl.done .foldbtn, .pl.done .passbtn{pointer-events:none;}
+.answered{
+  font-family:'Jua',sans-serif; font-size:14px; padding:11px 15px; border-radius:13px; text-align:center;
+  background:rgba(255,255,255,.06); border:1px solid var(--line); color:var(--sub);
+}
+.answered.fold{color:var(--point); border-color:var(--accent);}
+
+
+.sources{display:flex; gap:8px; margin-bottom:8px;}
+.sources .ghost{flex:1; padding:14px 4px; font-size:14px; display:flex; flex-direction:column; gap:3px; align-items:center;}
+.sources .ico{font-size:20px;}
+.pulse{animation:pulse 1.6s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(240,112,143,0);} 50%{box-shadow:0 0 0 5px rgba(240,112,143,.18);}}
+
+
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92) rotate(-1.2deg); opacity:.5;} 60%{transform:scale(1.02) rotate(.4deg);} 100%{transform:scale(1) rotate(0); opacity:1;}}
+
+
+.toast{
+  position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-24px);
+  background:rgba(48,28,43,.97); border:1.5px solid var(--accent); color:var(--ink);
+  padding:12px 20px; border-radius:99px; font-size:14px; font-family:'Jua',sans-serif;
+  opacity:0; pointer-events:none; transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; text-align:center;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+
+.overlay{
+  position:fixed; inset:0; background:rgba(12,7,10,.72); backdrop-filter:blur(3px);
+  display:flex; align-items:center; justify-content:center; padding:20px; z-index:50; animation:fadeIn .3s;
+}
+.sheet{width:100%; max-width:480px; max-height:82vh; overflow:auto;}
+.sheet h3{font-family:'Jua',sans-serif; font-size:20px; margin:0 0 4px; text-align:center;}
+.sheet .desc{color:var(--sub); font-size:12.5px; text-align:center; margin-bottom:16px; line-height:1.6;}
+.choice{
+  width:100%; text-align:left; padding:15px 16px; margin-bottom:9px; border-radius:14px;
+  background:rgba(255,255,255,.05); border:1.5px solid var(--line); color:var(--ink);
+  font-size:15px; line-height:1.5; transition:transform .12s, border-color .2s, background .2s; 
+}
+.choice:active{transform:scale(.98);} .choice:hover{border-color:var(--accent);}
+.choice b{color:var(--point);}
+.closex{display:block; width:100%; text-align:center; margin-top:6px; color:var(--sub); background:none; font-size:13px; padding:10px;}
+
+
+.endcard{text-align:center; padding:26px 22px;}
+.crown{font-size:56px; margin-bottom:6px;}
+.endtitle{font-family:'Jua',sans-serif; font-size:26px; line-height:1.35; margin-bottom:6px;}
+.endname{font-size:29px;}
+.endsub{color:var(--sub); font-size:14px; line-height:1.7; margin-bottom:18px;}
+.score{display:flex; gap:12px; margin-bottom:18px;}
+.score .s{flex:1; padding:14px 8px; border-radius:14px; background:rgba(255,255,255,.05); border:1px solid var(--line);}
+.score .s .n{font-family:'Jua',sans-serif; font-size:15px; display:flex; align-items:center; justify-content:center; gap:4px;}
+.score .s .v{font-family:'Jua',sans-serif; font-size:30px; color:var(--point); margin-top:4px;}
+.mission{
+  background:linear-gradient(180deg,rgba(240,112,143,.14),rgba(240,112,143,.04));
+  border:1.5px dashed var(--accent); border-radius:16px; padding:16px; margin-bottom:18px;
+}
+.mission .lab{font-size:12px; letter-spacing:.15em; color:var(--accent); margin-bottom:8px;}
+.mission .txt{font-family:'Jua',sans-serif; font-size:17px; line-height:1.5;}
+.endbtns{display:flex; flex-direction:column; gap:9px;}
+
+
+.footer{text-align:center; margin-top:22px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+@media (max-width:360px){ .stmt{font-size:22px;} .title{font-size:33px;} }
+</style>
+</head>
+<body>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<div class="wrap">
+
+  
+  <section id="setup" class="screen">
+    <div class="brandline">ふ た り · 仲 よ く</div>
+    <h1 class="title jua"><span class="grad">指折りゲーム</span> 🖐</h1>
+    <p class="subtitle word">並んで座って、指を5本ひらいてください。<br>正直に折っていくうちに、いつの間にか近づいています。</p>
+
+    <div class="panel" style="margin-bottom:16px;">
+      <ol class="rules">
+        <li>ふたりとも指を <b>5本</b>ひらいた状態で始めます。</li>
+        <li>質問を引いて — <b>当てはまったら指を折る</b> （正直に 🤫）。</li>
+        <li>質問は <b>🎲 ランダム · ✍️ 自分でつくる · 📋 選んで出す（4択）</b> から選べます。</li>
+        <li>先に <b>5本すべて折った人</b>が今日の <b>正直王</b> 👑 — 小さなミッションが待っています！</li>
+      </ol>
+      <div class="namegrid">
+        <div class="namebox">
+          <label><span class="dot a"></span>プレイヤー1</label>
+          <input id="n1" type="text" maxlength="6" value="わたし" aria-label="プレイヤー1の名前">
+        </div>
+        <div class="namebox">
+          <label><span class="dot b"></span>プレイヤー2</label>
+          <input id="n2" type="text" maxlength="6" value="あなた" aria-label="プレイヤー2の名前">
+        </div>
+      </div>
+    </div>
+
+    <button class="big" onclick="startGame()">ふたりで始める ✨</button>
+  </section>
+
+  
+  <section id="game" class="screen hidden">
+    <div class="topbar">
+      <div class="levelseg" role="tablist" aria-label="深さの選択">
+        <button data-lv="1" class="on" onclick="setLevel(1)">軽く</button>
+        <button data-lv="2" onclick="setLevel(2)">近く</button>
+        <button data-lv="3" onclick="setLevel(3)">本気で</button>
+      </div>
+      <div class="roundtag">Q <b id="roundNo">1</b></div>
+    </div>
+
+    <div class="panel qcard pop" id="qcard">
+      <div class="qhint">当てはまったら、それぞれ指を折ってください 🤫</div>
+      <div class="stmt" id="stmt">準備はいいですか？</div>
+    </div>
+
+    <div class="players">
+      <div class="panel pl" id="pl0">
+        <div class="who">
+          <div class="name"><span class="dot a"></span><span id="nm0">わたし</span></div>
+          <div class="fingers" id="fg0" aria-label="プレイヤー1の指"></div>
+        </div>
+        <div class="plbtns" id="btns0">
+          <button class="foldbtn" onclick="fold(0)">折る 👇</button>
+          <button class="passbtn" onclick="pass(0)">折らない</button>
+        </div>
+      </div>
+      <div class="panel pl" id="pl1">
+        <div class="who">
+          <div class="name"><span class="dot b"></span><span id="nm1">あなた</span></div>
+          <div class="fingers" id="fg1" aria-label="プレイヤー2の指"></div>
+        </div>
+        <div class="plbtns" id="btns1">
+          <button class="foldbtn" onclick="fold(1)">折る 👇</button>
+          <button class="passbtn" onclick="pass(1)">折らない</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sources" id="sources">
+      <button class="ghost" onclick="nextRandom()"><span class="ico">🎲</span>ランダム</button>
+      <button class="ghost" onclick="openPick()"><span class="ico">📋</span>選んで出す</button>
+      <button class="ghost" onclick="openCustom()"><span class="ico">✍️</span>自分で</button>
+    </div>
+    <div style="text-align:center; color:var(--sub); font-size:11.5px; padding:2px 0 6px;">
+      次の質問を上から引いてください · 押さなくても次へ進めます
+    </div>
+  </section>
+
+  
+  <section id="end" class="screen hidden">
+    <div class="panel endcard">
+      <div class="crown">👑</div>
+      <div class="endtitle">今日の正直王<br><span class="endname grad jua" id="winName">—</span></div>
+      <div class="endsub word" id="endSub">いちばん先に、5本の指をすべて折りました。<br>それだけ今日いちばん正直だったということ！</div>
+      <div class="score">
+        <div class="s"><div class="n"><span class="dot a"></span><span id="sc0n">わたし</span></div><div class="v" id="sc0v">0</div></div>
+        <div class="s"><div class="n"><span class="dot b"></span><span id="sc1n">あなた</span></div><div class="v" id="sc1v">0</div></div>
+      </div>
+      <div class="mission">
+        <div class="lab">💌 今日のミッション</div>
+        <div class="txt word" id="missionTxt"></div>
+      </div>
+      <div class="endbtns">
+        <button class="big" onclick="restart()">もう一度 🔁</button>
+        <button class="ghost" onclick="shareApp()">友だちにシェアする 💬</button>
+        <button class="ghost" onclick="toSetup()">最初に戻る</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+
+<div id="pickOverlay" class="overlay hidden">
+  <div class="panel sheet">
+    <h3>📋 気に入った質問を選ぶ</h3>
+    <div class="desc">4つの中から1つ選んで、今回の質問に！</div>
+    <div id="pickList"></div>
+    <button class="closex" onclick="closeOverlay('pickOverlay')">閉じる</button>
+  </div>
+</div>
+
+
+<div id="customOverlay" class="overlay hidden">
+  <div class="panel sheet">
+    <h3>✍️ ふたりだけの質問をつくる</h3>
+    <div class="desc">「〜な人 · 〜した人」の形で書くと自然です。<br>例） <b>最近、大笑いした</b> → 「…した人、折って！」</div>
+    <input id="customInput" type="text" maxlength="40" placeholder="例: 今日この人に感謝したいことがある" style="margin-bottom:12px;">
+    <button class="big" onclick="submitCustom()">この質問にする</button>
+    <button class="closex" onclick="closeOverlay('customOverlay')">閉じる</button>
+  </div>
+</div>
+
+
+<div class="wrap" style="min-height:auto; padding-top:0; padding-bottom:22px;">
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意 味 と 面 白 さ の 工 場</span></div>
+    <div class="mf-logo">ミミファクトリー</div>
+    <div class="mf-caption">株式会社ヨンギョル ファミリーカンパニー</div>
+  </div>
+</div>
+
+<script>
+
+const CARDS = {
+1:[
+"今朝ごはんを抜いた","今スマホの電池が30%を切っている","鍋のシメにご飯を入れるのが好きな","この3日以内にデリバリーを頼んだ",
+"ミントチョコが好きな","たけのこの里派の","自分を朝型だと思っている","アラームを2つ以上セットしている",
+"いま着ている服にポケットがある","カラオケの十八番がはっきりある","一日でもコーヒーがないとつらい","掃除より皿洗いのほうが嫌いな",
+"冬より夏が好きな","犬派の","辛い食べものが苦手な","最近、新しいアプリを入れた",
+"写真を撮るときピースをする","いまスマホケースをつけている","エレベーターで閉ボタンを必ず押す","計画を立てるのが好きな",
+"マンガアプリを毎週チェックしている","この1か月以内に映画館へ行った","家の中でスリッパをはく","水を一日1リットル以上飲む",
+"旅行のとき荷物が多くなる","ライブやフェスに行ったことがある","好きな季節の食べものがある","SNSを一日3回以上ひらく",
+"冬でもアイスコーヒーを飲む","最近、新しい趣味ができた","料理がわりと得意な","自分を方向オンチだと思っている",
+"音楽を聴きながら歩くのが好きな","いま爪が短い"
+],
+2:[
+"第一印象と中身が違うと言われたことがある","怒るとかえって無口になる","断るのが苦手な","ひとりの時間がどうしても必要な",
+"友だちより家族にそっけない","涙もろいほうの","旅行は計画派より思いつき派の","人見知りがはげしい",
+"一度すねると長引く","ほめられるとどうしていいか分からなくなる","寝る前に考えごとが増える","子どものころの夢が今とまるで違う",
+"この1年で大きく後悔したことがある","好きな人の前ほどぎこちなくなる","けんかのあと先にあやまるほうの","ひとりごはん · ひとり映画 · ひとり旅を楽しむ",
+"ストレスを食べることで解消する","まわりの空気をよく気にする","古いものをなかなか捨てられない","旅先で道に迷ったことがある",
+"夜になると感傷的になる","こわい映画をわざわざ観にいく","好きな歌の歌詞をかみしめる","新しい人と出会うのがわくわくする",
+"最近、だれかにさみしい思いをした","決めごとを人にまかせがちな","仲直りの手を先にさしだす","年より若く見られる",
+"昔の写真を見て思い出にひたる","目標を決めたら最後までやりとげる","思いつきで出かけた旅がある","感情を隠すのに慣れている",
+"こっそり応援している人がいる"
+],
+3:[
+"いまこの人に感謝したいことがある","最近、ふとこの人を思い出したことがある","この人にまだ言えていないことがある","初恋をまだ覚えている",
+"だれかをひそかに好きになったことがある","片思いをしたことがある","「愛してる」という言葉を大事に使う","別れた人をときどき思い出す",
+"告白されたことがある","自分から告白したことがある","家族に愛してると言っていないのが久しい","親に申し訳なく思っていることがある",
+"子どものころの傷がまだ残っている","この1か月でひそかに泣いたことがある","いま心に心配ごとをひとつ抱えている","まだだれかを許せずにいる",
+"後悔している別れがある","この人ともっと頻繁に会いたい","この人のいいところを3つ以上言える","この人にさみしい思いをしたことがある",
+"この人のおかげで大笑いした日がある","つらいときこの人が思いうかんだことがある","この人を心から信じている","死ぬまでにどうしてもやりたいことがある",
+"だれにも言えない秘密がある","今の暮らしにわりと満足している","もう一度もどりたい瞬間がある","最近よくさみしいと感じる",
+"この人にあやまりたいことがある","今この瞬間が幸せな","この人とずっと一緒にいたい","最近、心から感謝した瞬間があった",
+"いまこの人に「愛してる」と言える"
+]
+};
+
+const MISSIONS = [
+"今日あらたに知ったお互いのことを、ひとつ言ってみる。",
+"いちばん意外だった答えをひとつ選んで、話してみる。",
+"負けた人が勝った人を3つほめる 🥰",
+"お互いにいちばん感謝した瞬間を、一文で。",
+"次に一緒にやりたいことを、ひとつずつ言う。",
+"今日の会話でいちばん笑った瞬間を、もう一度思い出す 😆",
+"3秒間目を合わせて、「ありがとう」とひとこと。",
+"お互いの指がなぜ折れたのか、ひとつだけ聞いてみる。"
+];
+
+
+const THEMES = {
+1:{accent:"#ff9e7a", accent2:"#e0708f", point:"#ffd3b0", bg:"#1c1015", bg2:"#2a1720", card:"#331d29"},
+2:{accent:"#f0708f", accent2:"#b04a7a", point:"#ffc2a8", bg:"#1a1016", bg2:"#271722", card:"#301c2b"},
+3:{accent:"#e05aa8", accent2:"#8a3a86", point:"#ffa8c8", bg:"#160c14", bg2:"#241030", card:"#2b1430"}
+};
+
+
+let players = [{name:"わたし",folded:0},{name:"あなた",folded:0}];
+let level = 1;
+let round = 0;
+let decks = {1:[],2:[],3:[]};    // シャッフルデッキ
+let answered = [false,false];    // 今ラウンドの各自の回答状況
+
+
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function vibrate(p){ if(navigator.vibrate) try{ navigator.vibrate(p); }catch(e){} }
+let _tt;
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2000); }
+function repop(el){ el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+
+function applyTheme(lv){
+  const t=THEMES[lv], r=document.documentElement.style;
+  r.setProperty('--accent',t.accent); r.setProperty('--accent2',t.accent2); r.setProperty('--point',t.point);
+  r.setProperty('--bg',t.bg); r.setProperty('--bg2',t.bg2); r.setProperty('--card',t.card);
+}
+
+
+function show(id){ ['setup','game','end'].forEach(s=>document.getElementById(s).classList.toggle('hidden', s!==id)); }
+
+function startGame(){
+  const n1=(document.getElementById('n1').value||'').trim()||'わたし';
+  const n2=(document.getElementById('n2').value||'').trim()||'あなた';
+  players=[{name:n1,folded:0},{name:n2,folded:0}];
+  document.getElementById('nm0').textContent=n1;
+  document.getElementById('nm1').textContent=n2;
+  level=1; round=0; decks={1:[],2:[],3:[]};
+  setLevelUI(1); applyTheme(1);
+  renderFingers();
+  show('game');
+  nextRandom(true);
+  vibrate(20);
+}
+
+function toSetup(){ show('setup'); }
+
+
+function renderFingers(){
+  [0,1].forEach(i=>{
+    const box=document.getElementById('fg'+i); box.innerHTML='';
+    for(let k=0;k<5;k++){
+      const d=document.createElement('span');
+      d.className='fg'+(k<players[i].folded?' folded':'');
+      box.appendChild(d);
+    }
+  });
+}
+
+
+function setLevelUI(lv){
+  document.querySelectorAll('.levelseg button').forEach(b=>b.classList.toggle('on', +b.dataset.lv===lv));
+}
+function setLevel(lv){
+  if(lv===level) return;
+  level=lv; setLevelUI(lv); applyTheme(lv);
+  const names={1:'軽くウォームアップ 🌤',2:'もう少し近く 🔥',3:'いよいよ本気で 💗'};
+  toast(names[lv]); vibrate([15,30,15]);
+}
+
+
+function resetRoundButtons(){
+  answered=[false,false];
+  [0,1].forEach(i=>{
+    document.getElementById('pl'+i).classList.remove('done');
+    document.getElementById('btns'+i).innerHTML=
+      '<button class="foldbtn" onclick="fold('+i+')">折る 👇</button>'+
+      '<button class="passbtn" onclick="pass('+i+')">折らない</button>';
+  });
+  document.getElementById('sources').classList.remove('pulse');
+}
+
+function setStatement(clause){
+  round++;
+  document.getElementById('roundNo').textContent=round;
+  document.getElementById('stmt').innerHTML=esc(clause)+' <b>人、折って！</b>';
+  repop(document.getElementById('qcard'));
+  resetRoundButtons();
+}
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function drawFromDeck(){
+  if(!decks[level] || decks[level].length===0){ decks[level]=shuffle([...CARDS[level]]); }
+  return decks[level].pop();
+}
+function nextRandom(first){
+  setStatement(drawFromDeck());
+  if(!first) vibrate(22);
+}
+
+
+function openPick(){
+  const pool=[...CARDS[level]]; shuffle(pool);
+  const four=pool.slice(0,4);
+  const list=document.getElementById('pickList'); list.innerHTML='';
+  four.forEach(c=>{
+    const b=document.createElement('button');
+    b.className='choice'; b.innerHTML=esc(c)+' <b>人、折って！</b>';
+    b.onclick=()=>{ closeOverlay('pickOverlay'); setStatement(c); vibrate(22); };
+    list.appendChild(b);
+  });
+  openOverlay('pickOverlay');
+}
+
+
+function openCustom(){ document.getElementById('customInput').value=''; openOverlay('customOverlay'); setTimeout(()=>document.getElementById('customInput').focus(),120); }
+function submitCustom(){
+  let v=(document.getElementById('customInput').value||'').trim();
+  if(!v){ toast('質問を書いてください ✍️'); return; }
+  v=v.replace(/\s*(人)?\s*(折って)?[!.]*$/,''); // 末尾の「人 折って！」の重複を削除
+  if(!v){ toast('質問を書いてください ✍️'); return; }
+  CARDS[level].push(v);           // 以降ランダム/選んで出すにも登場
+  closeOverlay('customOverlay');
+  setStatement(v); vibrate([15,30,15]);
+  toast('ふたりだけの質問を追加！ 💗');
+}
+
+function openOverlay(id){ document.getElementById(id).classList.remove('hidden'); }
+function closeOverlay(id){ document.getElementById(id).classList.add('hidden'); }
+
+
+function markDone(i, label, isFold){
+  answered[i]=true;
+  document.getElementById('pl'+i).classList.add('done');
+  document.getElementById('btns'+i).innerHTML='<div class="answered'+(isFold?' fold':'')+'">'+label+'</div>';
+  if(answered[0]&&answered[1]) document.getElementById('sources').classList.add('pulse');
+}
+
+function fold(i){
+  if(answered[i]) return;
+  if(players[i].folded>=5) return;
+  players[i].folded++;
+  renderFingers();
+  const box=document.getElementById('fg'+i); repop(box);
+  markDone(i,'折りました ✓ ('+players[i].folded+'/5)',true);
+  vibrate(28);
+  if(players[i].folded>=5){ endGame(i); return; }
+  if(players[i].folded===4) toast(players[i].name+' あと1本！ 😳');
+}
+
+function pass(i){
+  if(answered[i]) return;
+  markDone(i,'パス ✓',false);
+  vibrate(12);
+}
+
+
+function endGame(winIdx){
+  const w=players[winIdx];
+  document.getElementById('winName').textContent=w.name;
+  document.getElementById('sc0n').textContent=players[0].name;
+  document.getElementById('sc1n').textContent=players[1].name;
+  document.getElementById('sc0v').textContent=players[0].folded;
+  document.getElementById('sc1v').textContent=players[1].folded;
+  document.getElementById('endSub').innerHTML=
+    '<b style="color:var(--point)">'+esc(w.name)+'</b>さんが先に5本の指をすべて折りました。<br>それだけ今日いちばん正直だったということ 💗';
+  document.getElementById('missionTxt').textContent=MISSIONS[Math.floor(Math.random()*MISSIONS.length)];
+  show('end');
+  vibrate([60,80,60,80,140]);
+}
+
+function restart(){
+  players.forEach(p=>p.folded=0);
+  round=0; level=1; decks={1:[],2:[],3:[]};
+  setLevelUI(1); applyTheme(1); renderFingers();
+  show('game'); nextRandom(true); vibrate(20);
+}
+
+
+function shareApp(){
+  const url='https://mimifactory.vibekr.com/ja/apps/finger-game-friend.html';
+  const text='指折りゲーム — ふたりで仲良くなる指のゲーム 🖐 用意された質問100問！';
+  if(navigator.share){ navigator.share({title:'指折りゲーム',text:text,url:url}).catch(()=>{}); }
+  else{
+    const full=text+'\n'+url;
+    if(navigator.clipboard){ navigator.clipboard.writeText(full).then(()=>toast('リンクをコピーしました 💬')).catch(()=>toast(url)); }
+    else toast(url);
+  }
+}
+
+
+document.getElementById('n2').addEventListener('keydown',e=>{ if(e.key==='Enter') startGame(); });
+document.getElementById('customInput').addEventListener('keydown',e=>{ if(e.key==='Enter') submitCustom(); });
+</script>
+</body>
+</html>

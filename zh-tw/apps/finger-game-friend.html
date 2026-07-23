@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>收指遊戲 · 讓兩個人更親近的手指遊戲 🖐</title>
+<meta name="description" content="兩個人並肩一起玩的收指遊戲。100 道現成問題、自己出題、四選一挑題，和朋友、情人、家人變得更親近。">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+
+:root{
+  --bg:#1a1016; --bg2:#271722; --card:#301c2b; --line:#4a2c42;
+  --ink:#f8ecf1; --sub:#c9a3b4;
+  --accent:#f0708f; --accent2:#b04a7a; --point:#ffc2a8;
+  --ok:#5abf8b; --bad:#e4574f;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--ink);
+  background:
+    radial-gradient(120% 80% at 82% -8%, rgba(255,194,168,.12), transparent 55%),
+    radial-gradient(120% 90% at 8% 112%, rgba(240,112,143,.16), transparent 55%),
+    linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;
+  min-height:100dvh;
+  transition:background .9s ease;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:520px; margin:0 auto; padding:20px 16px 8px; min-height:100dvh; display:flex; flex-direction:column;}
+.jua{font-family:'Jua',sans-serif;}
+.grad{
+  background:linear-gradient(105deg,var(--point),var(--accent) 48%,var(--accent2));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+button{font-family:inherit; cursor:pointer; border:none; color:inherit;}
+button:focus-visible, [tabindex]:focus-visible{outline:3px solid var(--point); outline-offset:2px;}
+.hidden{display:none !important;}
+.word{}
+
+
+.screen{flex:1; display:flex; flex-direction:column; animation:fadeIn .5s ease;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+
+.brandline{font-size:11px; letter-spacing:.32em; text-indent:.32em; color:var(--sub); text-align:center; margin-bottom:6px;}
+.title{font-size:38px; line-height:1.1; text-align:center; margin:2px 0 6px;}
+.subtitle{text-align:center; color:var(--sub); font-size:14px; line-height:1.6; margin-bottom:18px;}
+
+
+.panel{
+  background:linear-gradient(180deg,var(--card),color-mix(in srgb,var(--card) 82%, #000));
+  border:1px solid var(--line); border-radius:20px; padding:18px;
+  box-shadow:0 12px 30px -18px rgba(0,0,0,.7);
+}
+
+
+.rules{margin:0 0 18px; color:var(--sub); font-size:13.5px; line-height:1.75;}
+.rules b{color:var(--point);}
+.rules li{margin:5px 0;}
+.namegrid{display:flex; gap:12px; margin-bottom:8px;}
+.namebox{flex:1; text-align:center;}
+.namebox label{display:block; font-size:12px; color:var(--sub); margin-bottom:7px; letter-spacing:.04em;}
+.dot{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; vertical-align:middle;}
+.dot.a{background:var(--point);} .dot.b{background:var(--accent);}
+input[type=text]{
+  width:100%; text-align:center; font-family:'Jua',sans-serif; font-size:20px;
+  background:rgba(255,255,255,.05); border:1.5px solid var(--line); border-radius:14px;
+  color:var(--ink); padding:12px 10px; transition:border-color .2s, box-shadow .2s;
+}
+input[type=text]:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(240,112,143,.22);}
+
+
+.big{
+  width:100%; padding:17px; border-radius:16px; font-family:'Jua',sans-serif; font-size:19px;
+  color:#2a0f1c; background:linear-gradient(100deg,var(--point),var(--accent));
+  box-shadow:0 10px 24px -10px var(--accent); transition:transform .12s, box-shadow .3s;
+}
+.big:active{transform:scale(.97);}
+.ghost{
+  background:rgba(255,255,255,.06); border:1.5px solid var(--line); color:var(--ink);
+  border-radius:14px; padding:13px; font-size:15px; font-family:'Jua',sans-serif;
+  transition:transform .12s, background .2s, border-color .2s;
+}
+.ghost:active{transform:scale(.96);}
+
+
+.topbar{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px;}
+.levelseg{display:flex; gap:6px; background:rgba(255,255,255,.05); padding:5px; border-radius:14px; border:1px solid var(--line);}
+.levelseg button{
+  font-family:'Jua',sans-serif; font-size:13px; padding:7px 11px; border-radius:10px; color:var(--sub);
+  background:transparent; transition:all .25s;
+}
+.levelseg button.on{color:#2a0f1c; background:linear-gradient(100deg,var(--point),var(--accent)); box-shadow:0 4px 12px -4px var(--accent);}
+.roundtag{font-family:'Jua',sans-serif; font-size:14px; color:var(--sub); white-space:nowrap;}
+.roundtag b{color:var(--point); font-size:18px;}
+
+
+.qcard{
+  text-align:center; padding:30px 20px; margin-bottom:14px; min-height:150px;
+  display:flex; flex-direction:column; justify-content:center; position:relative; overflow:hidden;
+}
+.qcard::before{
+  content:"🖐"; position:absolute; right:-6px; top:-10px; font-size:66px; opacity:.08; transform:rotate(12deg);
+}
+.qhint{font-size:12px; color:var(--sub); letter-spacing:.03em; margin-bottom:12px;}
+.stmt{font-family:'Jua',sans-serif; font-size:25px; line-height:1.45;}
+.stmt b{color:var(--point);}
+
+
+.players{display:flex; flex-direction:column; gap:11px; margin-bottom:14px;}
+.pl{padding:14px 15px; display:flex; align-items:center; gap:12px; transition:opacity .3s, border-color .3s;}
+.pl .who{display:flex; flex-direction:column; gap:8px; min-width:0; flex:1;}
+.pl .name{font-family:'Jua',sans-serif; font-size:18px; display:flex; align-items:center; gap:2px; max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.fingers{display:flex; gap:6px;}
+.fg{
+  width:22px; height:22px; border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, var(--point), var(--accent));
+  box-shadow:0 0 10px -1px var(--accent); transition:all .35s cubic-bezier(.34,1.56,.64,1);
+}
+.fg.folded{background:rgba(255,255,255,.07); box-shadow:none; transform:scale(.62); opacity:.5;}
+.plbtns{display:flex; flex-direction:column; gap:7px;}
+.foldbtn{
+  font-family:'Jua',sans-serif; font-size:15px; padding:11px 15px; border-radius:13px; white-space:nowrap;
+  color:#2a0f1c; background:linear-gradient(100deg,var(--point),var(--accent));
+  box-shadow:0 8px 18px -9px var(--accent); transition:transform .12s;
+}
+.foldbtn:active{transform:scale(.94);}
+.passbtn{
+  font-size:12.5px; padding:6px 12px; border-radius:11px; color:var(--sub);
+  background:rgba(255,255,255,.05); border:1px solid var(--line);
+}
+.pl.done{opacity:.7;}
+.pl.done .foldbtn, .pl.done .passbtn{pointer-events:none;}
+.answered{
+  font-family:'Jua',sans-serif; font-size:14px; padding:11px 15px; border-radius:13px; text-align:center;
+  background:rgba(255,255,255,.06); border:1px solid var(--line); color:var(--sub);
+}
+.answered.fold{color:var(--point); border-color:var(--accent);}
+
+
+.sources{display:flex; gap:8px; margin-bottom:8px;}
+.sources .ghost{flex:1; padding:14px 4px; font-size:14px; display:flex; flex-direction:column; gap:3px; align-items:center;}
+.sources .ico{font-size:20px;}
+.pulse{animation:pulse 1.6s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(240,112,143,0);} 50%{box-shadow:0 0 0 5px rgba(240,112,143,.18);}}
+
+
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92) rotate(-1.2deg); opacity:.5;} 60%{transform:scale(1.02) rotate(.4deg);} 100%{transform:scale(1) rotate(0); opacity:1;}}
+
+
+.toast{
+  position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-24px);
+  background:rgba(48,28,43,.97); border:1.5px solid var(--accent); color:var(--ink);
+  padding:12px 20px; border-radius:99px; font-size:14px; font-family:'Jua',sans-serif;
+  opacity:0; pointer-events:none; transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; text-align:center;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+
+.overlay{
+  position:fixed; inset:0; background:rgba(12,7,10,.72); backdrop-filter:blur(3px);
+  display:flex; align-items:center; justify-content:center; padding:20px; z-index:50; animation:fadeIn .3s;
+}
+.sheet{width:100%; max-width:480px; max-height:82vh; overflow:auto;}
+.sheet h3{font-family:'Jua',sans-serif; font-size:20px; margin:0 0 4px; text-align:center;}
+.sheet .desc{color:var(--sub); font-size:12.5px; text-align:center; margin-bottom:16px; line-height:1.6;}
+.choice{
+  width:100%; text-align:left; padding:15px 16px; margin-bottom:9px; border-radius:14px;
+  background:rgba(255,255,255,.05); border:1.5px solid var(--line); color:var(--ink);
+  font-size:15px; line-height:1.5; transition:transform .12s, border-color .2s, background .2s; 
+}
+.choice:active{transform:scale(.98);} .choice:hover{border-color:var(--accent);}
+.choice b{color:var(--point);}
+.closex{display:block; width:100%; text-align:center; margin-top:6px; color:var(--sub); background:none; font-size:13px; padding:10px;}
+
+
+.endcard{text-align:center; padding:26px 22px;}
+.crown{font-size:56px; margin-bottom:6px;}
+.endtitle{font-family:'Jua',sans-serif; font-size:26px; line-height:1.35; margin-bottom:6px;}
+.endname{font-size:29px;}
+.endsub{color:var(--sub); font-size:14px; line-height:1.7; margin-bottom:18px;}
+.score{display:flex; gap:12px; margin-bottom:18px;}
+.score .s{flex:1; padding:14px 8px; border-radius:14px; background:rgba(255,255,255,.05); border:1px solid var(--line);}
+.score .s .n{font-family:'Jua',sans-serif; font-size:15px; display:flex; align-items:center; justify-content:center; gap:4px;}
+.score .s .v{font-family:'Jua',sans-serif; font-size:30px; color:var(--point); margin-top:4px;}
+.mission{
+  background:linear-gradient(180deg,rgba(240,112,143,.14),rgba(240,112,143,.04));
+  border:1.5px dashed var(--accent); border-radius:16px; padding:16px; margin-bottom:18px;
+}
+.mission .lab{font-size:12px; letter-spacing:.15em; color:var(--accent); margin-bottom:8px;}
+.mission .txt{font-family:'Jua',sans-serif; font-size:17px; line-height:1.5;}
+.endbtns{display:flex; flex-direction:column; gap:9px;}
+
+
+.footer{text-align:center; margin-top:22px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+@media (max-width:360px){ .stmt{font-size:22px;} .title{font-size:33px;} }
+</style>
+</head>
+<body>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<div class="wrap">
+
+  
+  <section id="setup" class="screen">
+    <div class="brandline">兩 人 · 更 靠 近</div>
+    <h1 class="title jua"><span class="grad">收指遊戲</span> 🖐</h1>
+    <p class="subtitle word">並肩坐下，張開五根手指。<br>誠實地一根根收起，不知不覺就更靠近了。</p>
+
+    <div class="panel" style="margin-bottom:16px;">
+      <ol class="rules">
+        <li>兩個人都先豎起 <b>5 根</b>手指，開始。</li>
+        <li>抽一道題 — <b>中了就收一根手指</b> （要誠實 🤫）。</li>
+        <li>題目來自 <b>🎲 隨機 · ✍️ 自己出題 · 📋 四選一挑題</b> ，任你挑。</li>
+        <li>最先 <b>收完 5 根手指的人</b>就是今天的 <b>誠實王</b> 👑 — 有個小任務在等你！</li>
+      </ol>
+      <div class="namegrid">
+        <div class="namebox">
+          <label><span class="dot a"></span>玩家 1</label>
+          <input id="n1" type="text" maxlength="6" value="我" aria-label="玩家 1 名稱">
+        </div>
+        <div class="namebox">
+          <label><span class="dot b"></span>玩家 2</label>
+          <input id="n2" type="text" maxlength="6" value="你" aria-label="玩家 2 名稱">
+        </div>
+      </div>
+    </div>
+
+    <button class="big" onclick="startGame()">一起開始 ✨</button>
+  </section>
+
+  
+  <section id="game" class="screen hidden">
+    <div class="topbar">
+      <div class="levelseg" role="tablist" aria-label="選擇深度">
+        <button data-lv="1" class="on" onclick="setLevel(1)">輕鬆一點</button>
+        <button data-lv="2" onclick="setLevel(2)">更靠近</button>
+        <button data-lv="3" onclick="setLevel(3)">說真心話</button>
+      </div>
+      <div class="roundtag">Q <b id="roundNo">1</b></div>
+    </div>
+
+    <div class="panel qcard pop" id="qcard">
+      <div class="qhint">中了就各自收一根手指 🤫</div>
+      <div class="stmt" id="stmt">準備好了嗎？</div>
+    </div>
+
+    <div class="players">
+      <div class="panel pl" id="pl0">
+        <div class="who">
+          <div class="name"><span class="dot a"></span><span id="nm0">我</span></div>
+          <div class="fingers" id="fg0" aria-label="玩家 1 手指"></div>
+        </div>
+        <div class="plbtns" id="btns0">
+          <button class="foldbtn" onclick="fold(0)">收指 👇</button>
+          <button class="passbtn" onclick="pass(0)">不收指</button>
+        </div>
+      </div>
+      <div class="panel pl" id="pl1">
+        <div class="who">
+          <div class="name"><span class="dot b"></span><span id="nm1">你</span></div>
+          <div class="fingers" id="fg1" aria-label="玩家 2 手指"></div>
+        </div>
+        <div class="plbtns" id="btns1">
+          <button class="foldbtn" onclick="fold(1)">收指 👇</button>
+          <button class="passbtn" onclick="pass(1)">不收指</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sources" id="sources">
+      <button class="ghost" onclick="nextRandom()"><span class="ico">🎲</span>隨機</button>
+      <button class="ghost" onclick="openPick()"><span class="ico">📋</span>四選一</button>
+      <button class="ghost" onclick="openCustom()"><span class="ico">✍️</span>自己出</button>
+    </div>
+    <div style="text-align:center; color:var(--sub); font-size:11.5px; padding:2px 0 6px;">
+      在上方抽下一題 · 不按也能繼續
+    </div>
+  </section>
+
+  
+  <section id="end" class="screen hidden">
+    <div class="panel endcard">
+      <div class="crown">👑</div>
+      <div class="endtitle">今天的誠實王<br><span class="endname grad jua" id="winName">—</span></div>
+      <div class="endsub word" id="endSub">最先收完五根手指。<br>代表今天最誠實！</div>
+      <div class="score">
+        <div class="s"><div class="n"><span class="dot a"></span><span id="sc0n">我</span></div><div class="v" id="sc0v">0</div></div>
+        <div class="s"><div class="n"><span class="dot b"></span><span id="sc1n">你</span></div><div class="v" id="sc1v">0</div></div>
+      </div>
+      <div class="mission">
+        <div class="lab">💌 今天的任務</div>
+        <div class="txt word" id="missionTxt"></div>
+      </div>
+      <div class="endbtns">
+        <button class="big" onclick="restart()">再玩一局 🔁</button>
+        <button class="ghost" onclick="shareApp()">分享給朋友 💬</button>
+        <button class="ghost" onclick="toSetup()">回到首頁</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+
+<div id="pickOverlay" class="overlay hidden">
+  <div class="panel sheet">
+    <h3>📋 挑一道你喜歡的題目</h3>
+    <div class="desc">從四道裡選一道當這一輪的題目！</div>
+    <div id="pickList"></div>
+    <button class="closex" onclick="closeOverlay('pickOverlay')">關閉</button>
+  </div>
+</div>
+
+
+<div id="customOverlay" class="overlay hidden">
+  <div class="panel sheet">
+    <h3>✍️ 出一道我們自己的題目</h3>
+    <div class="desc">寫成「……的」這種形式最自然。<br>例如） <b>最近大笑過的</b> → 「……的人，收指！」</div>
+    <input id="customInput" type="text" maxlength="40" placeholder="例：今天很感謝這個人的" style="margin-bottom:12px;">
+    <button class="big" onclick="submitCustom()">就用這道題</button>
+    <button class="closex" onclick="closeOverlay('customOverlay')">關閉</button>
+  </div>
+</div>
+
+
+<div class="wrap" style="min-height:auto; padding-top:0; padding-bottom:22px;">
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意 義 與 趣 味 工 廠</span></div>
+    <div class="mf-logo">咪咪工廠 MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL股份有限公司 家族公司</div>
+  </div>
+</div>
+
+<script>
+
+const CARDS = {
+1:[
+"今天沒吃早餐","手機電量現在低於 30%","喜歡泡麵配白飯","最近三天內叫過外送",
+"喜歡薄荷巧克力","覺得鹽酥雞一定要加九層塔","自認是晨型人","會設兩個以上的鬧鐘",
+"現在穿的衣服有口袋","有 KTV 必點的招牌歌","一天沒咖啡就很難受","比起打掃更討厭洗碗",
+"喜歡夏天勝過冬天","比較喜歡狗狗","不太能吃辣","最近裝了新的 App",
+"拍照會比 YA","手機現在有裝手機殼","在電梯裡一定會按關門鍵","喜歡做計畫",
+"每週都會追一部連載或影集","這個月內去過電影院","在家會穿室內拖","一天喝超過一公升的水",
+"出門旅行總是帶很多行李","去過演唱會或音樂祭","有偏愛的季節限定美食","一天開社群超過三次",
+"冬天也要喝冰美式","最近多了一個新興趣","其實很會做菜","覺得自己是路痴",
+"喜歡邊聽音樂邊走路","現在指甲剪得短短的"
+],
+2:[
+"被說過跟第一印象完全不一樣","一生氣反而會變安靜","很難拒絕別人","一定需要獨處的時間",
+"對家人比對朋友還冷淡","算是很容易掉眼淚的","旅行是隨興派不是計畫派","很會認生",
+"一鬧脾氣就會持續很久","被稱讚就不知所措","睡前總是想很多","小時候的夢想跟現在完全不同",
+"過去一年內有件很後悔的事","在喜歡的人面前會更彆扭","吵架後通常會先道歉","喜歡一個人吃飯、看電影、旅行",
+"靠吃來紓解壓力","很會看別人臉色","捨不得丟舊東西","旅行時迷過路",
+"一到晚上就特別感性","會故意去找恐怖片來看","會反覆咀嚼喜歡的歌詞","認識新朋友會覺得心動",
+"最近曾對某人感到失落","習慣把決定交給別人","會先伸出和好的手","常被說看起來比實際年齡小",
+"會看著舊照片陷入回憶","立定目標就會堅持到底","有過臨時起意的旅行","習慣把情緒藏起來",
+"有默默在支持的人"
+],
+3:[
+"現在很感謝這個人","最近突然想起過這個人","還有話沒對這個人說","還記得自己的初戀",
+"曾經偷偷喜歡過某個人","有過暗戀","很少把「我愛你」說出口","偶爾會想起前任",
+"被人告白過","曾經先向別人告白","很久沒對家人說「我愛你」","對父母有覺得抱歉的事",
+"小時候的傷還留著","這個月內曾偷偷哭過","現在心裡藏著一個擔憂","還沒能原諒某個人",
+"有段讓自己後悔的分手","想更常見到這個人","能說出這個人三個以上的優點","曾經對這個人感到失落",
+"有過因為這個人而大笑的日子","難過時想起過這個人","真心信任這個人","有件死前一定要做的事",
+"有個從沒告訴任何人的祕密","對現在的生活還算滿意","有個好想回去的瞬間","最近常覺得孤單",
+"有想對這個人道歉的事","此時此刻覺得很幸福","想和這個人長長久久在一起","最近有過真心感謝的瞬間",
+"現在能對這個人說出「我愛你」"
+]
+};
+
+const MISSIONS = [
+"說一件今天新發現的、關於彼此的事。",
+"挑一個最意外的答案，聊一聊。",
+"輸的人要稱讚贏的人三次 🥰",
+"用一句話說出彼此最感謝的時刻。",
+"各說一件下次想一起做的事。",
+"重新回味今天聊天裡最好笑的瞬間 😆",
+"對看三秒，說一句「謝謝」。",
+"挑一根收起的手指，問問對方為什麼。"
+];
+
+
+const THEMES = {
+1:{accent:"#ff9e7a", accent2:"#e0708f", point:"#ffd3b0", bg:"#1c1015", bg2:"#2a1720", card:"#331d29"},
+2:{accent:"#f0708f", accent2:"#b04a7a", point:"#ffc2a8", bg:"#1a1016", bg2:"#271722", card:"#301c2b"},
+3:{accent:"#e05aa8", accent2:"#8a3a86", point:"#ffa8c8", bg:"#160c14", bg2:"#241030", card:"#2b1430"}
+};
+
+
+let players = [{name:"我",folded:0},{name:"你",folded:0}];
+let level = 1;
+let round = 0;
+let decks = {1:[],2:[],3:[]};    // 洗牌牌組
+let answered = [false,false];    // 這一輪各自的作答狀況
+
+
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function vibrate(p){ if(navigator.vibrate) try{ navigator.vibrate(p); }catch(e){} }
+let _tt;
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2000); }
+function repop(el){ el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+
+function applyTheme(lv){
+  const t=THEMES[lv], r=document.documentElement.style;
+  r.setProperty('--accent',t.accent); r.setProperty('--accent2',t.accent2); r.setProperty('--point',t.point);
+  r.setProperty('--bg',t.bg); r.setProperty('--bg2',t.bg2); r.setProperty('--card',t.card);
+}
+
+
+function show(id){ ['setup','game','end'].forEach(s=>document.getElementById(s).classList.toggle('hidden', s!==id)); }
+
+function startGame(){
+  const n1=(document.getElementById('n1').value||'').trim()||'我';
+  const n2=(document.getElementById('n2').value||'').trim()||'你';
+  players=[{name:n1,folded:0},{name:n2,folded:0}];
+  document.getElementById('nm0').textContent=n1;
+  document.getElementById('nm1').textContent=n2;
+  level=1; round=0; decks={1:[],2:[],3:[]};
+  setLevelUI(1); applyTheme(1);
+  renderFingers();
+  show('game');
+  nextRandom(true);
+  vibrate(20);
+}
+
+function toSetup(){ show('setup'); }
+
+
+function renderFingers(){
+  [0,1].forEach(i=>{
+    const box=document.getElementById('fg'+i); box.innerHTML='';
+    for(let k=0;k<5;k++){
+      const d=document.createElement('span');
+      d.className='fg'+(k<players[i].folded?' folded':'');
+      box.appendChild(d);
+    }
+  });
+}
+
+
+function setLevelUI(lv){
+  document.querySelectorAll('.levelseg button').forEach(b=>b.classList.toggle('on', +b.dataset.lv===lv));
+}
+function setLevel(lv){
+  if(lv===level) return;
+  level=lv; setLevelUI(lv); applyTheme(lv);
+  const names={1:'輕鬆暖身 🌤',2:'再靠近一點 🔥',3:'現在說真心話 💗'};
+  toast(names[lv]); vibrate([15,30,15]);
+}
+
+
+function resetRoundButtons(){
+  answered=[false,false];
+  [0,1].forEach(i=>{
+    document.getElementById('pl'+i).classList.remove('done');
+    document.getElementById('btns'+i).innerHTML=
+      '<button class="foldbtn" onclick="fold('+i+')">收指 👇</button>'+
+      '<button class="passbtn" onclick="pass('+i+')">不收指</button>';
+  });
+  document.getElementById('sources').classList.remove('pulse');
+}
+
+function setStatement(clause){
+  round++;
+  document.getElementById('roundNo').textContent=round;
+  document.getElementById('stmt').innerHTML=esc(clause)+' <b>的人，收指！</b>';
+  repop(document.getElementById('qcard'));
+  resetRoundButtons();
+}
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function drawFromDeck(){
+  if(!decks[level] || decks[level].length===0){ decks[level]=shuffle([...CARDS[level]]); }
+  return decks[level].pop();
+}
+function nextRandom(first){
+  setStatement(drawFromDeck());
+  if(!first) vibrate(22);
+}
+
+
+function openPick(){
+  const pool=[...CARDS[level]]; shuffle(pool);
+  const four=pool.slice(0,4);
+  const list=document.getElementById('pickList'); list.innerHTML='';
+  four.forEach(c=>{
+    const b=document.createElement('button');
+    b.className='choice'; b.innerHTML=esc(c)+' <b>的人，收指！</b>';
+    b.onclick=()=>{ closeOverlay('pickOverlay'); setStatement(c); vibrate(22); };
+    list.appendChild(b);
+  });
+  openOverlay('pickOverlay');
+}
+
+
+function openCustom(){ document.getElementById('customInput').value=''; openOverlay('customOverlay'); setTimeout(()=>document.getElementById('customInput').focus(),120); }
+function submitCustom(){
+  let v=(document.getElementById('customInput').value||'').trim();
+  if(!v){ toast('先寫下題目吧 ✍️'); return; }
+  v=v.replace(/\s*(的人)?\s*(收指)?[!.]*$/,''); // 刪除結尾的「的人 收指！」重複
+  if(!v){ toast('先寫下題目吧 ✍️'); return; }
+  CARDS[level].push(v);           // 之後隨機/四選一裡也會出現
+  closeOverlay('customOverlay');
+  setStatement(v); vibrate([15,30,15]);
+  toast('加入我們專屬的題目！ 💗');
+}
+
+function openOverlay(id){ document.getElementById(id).classList.remove('hidden'); }
+function closeOverlay(id){ document.getElementById(id).classList.add('hidden'); }
+
+
+function markDone(i, label, isFold){
+  answered[i]=true;
+  document.getElementById('pl'+i).classList.add('done');
+  document.getElementById('btns'+i).innerHTML='<div class="answered'+(isFold?' fold':'')+'">'+label+'</div>';
+  if(answered[0]&&answered[1]) document.getElementById('sources').classList.add('pulse');
+}
+
+function fold(i){
+  if(answered[i]) return;
+  if(players[i].folded>=5) return;
+  players[i].folded++;
+  renderFingers();
+  const box=document.getElementById('fg'+i); repop(box);
+  markDone(i,'收了 ✓ ('+players[i].folded+'/5)',true);
+  vibrate(28);
+  if(players[i].folded>=5){ endGame(i); return; }
+  if(players[i].folded===4) toast(players[i].name+' 只剩一根了！ 😳');
+}
+
+function pass(i){
+  if(answered[i]) return;
+  markDone(i,'跳過 ✓',false);
+  vibrate(12);
+}
+
+
+function endGame(winIdx){
+  const w=players[winIdx];
+  document.getElementById('winName').textContent=w.name;
+  document.getElementById('sc0n').textContent=players[0].name;
+  document.getElementById('sc1n').textContent=players[1].name;
+  document.getElementById('sc0v').textContent=players[0].folded;
+  document.getElementById('sc1v').textContent=players[1].folded;
+  document.getElementById('endSub').innerHTML=
+    '<b style="color:var(--point)">'+esc(w.name)+'</b> 最先收完五根手指。<br>代表 TA 今天最誠實 💗';
+  document.getElementById('missionTxt').textContent=MISSIONS[Math.floor(Math.random()*MISSIONS.length)];
+  show('end');
+  vibrate([60,80,60,80,140]);
+}
+
+function restart(){
+  players.forEach(p=>p.folded=0);
+  round=0; level=1; decks={1:[],2:[],3:[]};
+  setLevelUI(1); applyTheme(1); renderFingers();
+  show('game'); nextRandom(true); vibrate(20);
+}
+
+
+function shareApp(){
+  const url='https://mimifactory.vibekr.com/zh-tw/apps/finger-game-friend.html';
+  const text='收指遊戲 — 讓兩個人變親近的手指遊戲 🖐 100 道題目等你玩！';
+  if(navigator.share){ navigator.share({title:'收指遊戲',text:text,url:url}).catch(()=>{}); }
+  else{
+    const full=text+'\n'+url;
+    if(navigator.clipboard){ navigator.clipboard.writeText(full).then(()=>toast('已複製連結 💬')).catch(()=>toast(url)); }
+    else toast(url);
+  }
+}
+
+
+document.getElementById('n2').addEventListener('keydown',e=>{ if(e.key==='Enter') startGame(); });
+document.getElementById('customInput').addEventListener('keydown',e=>{ if(e.key==='Enter') submitCustom(); });
+</script>
+</body>
+</html>
