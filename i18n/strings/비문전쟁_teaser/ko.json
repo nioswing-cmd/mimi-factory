@@ -1,0 +1,1234 @@
+{
+ "_meta": {
+  "source": "apps/비문전쟁_teaser.html",
+  "slug": "비문전쟁_teaser"
+ },
+ "title_001": {
+  "t": "총·균·쇠 도파민 마스터 퀴즈",
+  "ctx": "<title>"
+ },
+ "html_001": {
+  "t": "통천 도명 · 2025 · 고대사 대탐사",
+  "ctx": "class=\"hero\">       <div class=\"eyebrow\""
+ },
+ "html_002": {
+  "t": "일제가 지운 우리 고대사, 비문에서 되찾다",
+  "ctx": "ass=\"p3\">戰</span></div>       <h1><small"
+ },
+ "html_003": {
+  "t": "비문전쟁 마스터 퀴즈",
+  "ctx": "h1><small>일제가 지운 우리 고대사, 비문에서 되찾다</small"
+ },
+ "html_004": {
+  "t": "“글자 하나, 끊어 읽기 하나가",
+  "ctx": "문전쟁 마스터 퀴즈</h1>       <div class=\"quote\""
+ },
+ "html_005": {
+  "t": "한 민족의 역사를 통째로 바꾼다.”",
+  "ctx": "ss=\"quote\">         “글자 하나, 끊어 읽기 하나가<br"
+ },
+ "html_006": {
+  "t": "— 『비문전쟁』, 통천 도명",
+  "ctx": "나가<br>한 민족의 역사를 통째로 바꾼다.”<br>         <b"
+ },
+ "html_007": {
+  "t": "이 한 편의 비문에서 시작된 책의 핵심 주장·맥락·키워드를",
+  "ctx": " 『비문전쟁』, 통천 도명</b>       </div>       <p"
+ },
+ "html_008": {
+  "t": "30개의 퀴즈",
+  "ctx": "  <p>이 한 편의 비문에서 시작된 책의 핵심 주장·맥락·키워드를 <b"
+ },
+ "html_009": {
+  "t": "로 익힙니다.\n        쉬운 것부터 시작해 점점 어려워지고,",
+  "ctx": " 비문에서 시작된 책의 핵심 주장·맥락·키워드를 <b>30개의 퀴즈</b"
+ },
+ "html_010": {
+  "t": "틀린 문제는 맞힐 때까지 다시 돌아옵니다.",
+  "ctx": ">로 익힙니다.         쉬운 것부터 시작해 점점 어려워지고, <b"
+ },
+ "html_011": {
+  "t": "총",
+  "ctx": "s=\"meta-row\">         <span class=\"chip\""
+ },
+ "html_012": {
+  "t": "24문항",
+  "ctx": "ta-row\">         <span class=\"chip\">총 <b"
+ },
+ "html_013": {
+  "t": "쉬움 → 어려움",
+  "ctx": "문항</b></span>         <span class=\"chip\""
+ },
+ "html_014": {
+  "t": "실시간",
+  "ctx": "어려움</span>         <span class=\"chip\"><b"
+ },
+ "html_015": {
+  "t": "진실 복원도",
+  "ctx": "an>         <span class=\"chip\"><b>실시간</b"
+ },
+ "html_016": {
+  "t": "문제마다",
+  "ctx": "진실 복원도</span>         <span class=\"chip\""
+ },
+ "html_017": {
+  "t": "쉬운 해설",
+  "ctx": "span>         <span class=\"chip\">문제마다 <b"
+ },
+ "html_018": {
+  "t": "탐사 시작하기 →",
+  "ctx": "=\"btn btn-primary\" onclick=\"startQuiz()\""
+ },
+ "html_019": {
+  "t": "점수",
+  "ctx": "   <div class=\"stat\"><span class=\"label\""
+ },
+ "html_020": {
+  "t": "연속 정답",
+  "ctx": "align-items:center;\"><span class=\"label\""
+ },
+ "html_021": {
+  "t": "마스터",
+  "ctx": "ign-items:flex-end;\"><span class=\"label\""
+ },
+ "html_022": {
+  "t": "왜곡 ←",
+  "ctx": "\">         <div class=\"axis-label\"><span"
+ },
+ "html_023": {
+  "t": "비문 진실 복원 ·",
+  "ctx": "lass=\"axis-label\"><span>왜곡 ←</span><span"
+ },
+ "html_024": {
+  "t": "→ 진실",
+  "ctx": "실 복원 · <b id=\"pctTxt\">0%</b></span><span"
+ },
+ "html_025": {
+  "t": "쉬움",
+  "ctx": "d\">         <span class=\"diff\" id=\"diff\""
+ },
+ "html_026": {
+  "t": "다음 →",
+  "ctx": "y\" id=\"nextBtn\" onclick=\"nextQuestion()\""
+ },
+ "html_027": {
+  "t": "여기까지가 무료 미리보기예요",
+  "ctx": ">     <div class=\"lk-ic\">🔒</div>     <h3"
+ },
+ "html_028": {
+  "t": "🔑 구독하고 전체 열기",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_029": {
+  "t": "요약 리포트 미리보기 →",
+  "ctx": "class=\"cta ghost\" onclick=\"openReport()\""
+ },
+ "html_030": {
+  "t": "비문의 탐사자",
+  "ctx": ">       <div class=\"rank\" id=\"rankTitle\""
+ },
+ "html_031": {
+  "t": "최종 점수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_032": {
+  "t": "첫 시도 정답률",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_033": {
+  "t": "최고 연속 정답",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_034": {
+  "t": "총 도전 횟수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_035": {
+  "t": "📖 전체 요약 리포트 보기",
+  "ctx": "\"btn btn-primary\" onclick=\"openReport()\""
+ },
+ "html_036": {
+  "t": "🖼 결과 카드 저장",
+  "ctx": "btn btn-ghost\" onclick=\"makeShareCard()\""
+ },
+ "html_037": {
+  "t": "다시 도전 ↻",
+  "ctx": "ss=\"btn btn-ghost\" onclick=\"startQuiz()\""
+ },
+ "html_038": {
+  "t": "처음으로",
+  "ctx": "class=\"btn btn-ghost\" onclick=\"goHome()\""
+ },
+ "html_039": {
+  "t": "완독 리포트 · INFOGRAPHIC",
+  "ctx": "s=\"rep-hero\">       <div class=\"eyebrow\""
+ },
+ "html_040": {
+  "t": "비문전쟁 한눈에 보기",
+  "ctx": "ow\">완독 리포트 · INFOGRAPHIC</div>       <h2"
+ },
+ "html_041": {
+  "t": "책 전체를",
+  "ctx": "div>       <h2>비문전쟁 한눈에 보기</h2>       <p"
+ },
+ "html_042": {
+  "t": "‘인과의 사슬’",
+  "ctx": "  <h2>비문전쟁 한눈에 보기</h2>       <p>책 전체를 <b"
+ },
+ "html_043": {
+  "t": "하나로 꿰면 절대 안 잊습니다. 모든 출발점은",
+  "ctx": "눈에 보기</h2>       <p>책 전체를 <b>‘인과의 사슬’</b"
+ },
+ "html_044": {
+  "t": "일제의 역사 왜곡(임나일본부설)",
+  "ctx": "인과의 사슬’</b> 하나로 꿰면 절대 안 잊습니다. 모든 출발점은 <b"
+ },
+ "html_045": {
+  "t": "입니다.",
+  "ctx": " 안 잊습니다. 모든 출발점은 <b>일제의 역사 왜곡(임나일본부설)</b"
+ },
+ "html_046": {
+  "t": "궁극 원인",
+  "ctx": "<div class=\"ch step s0\"><span class=\"cn\""
+ },
+ "html_047": {
+  "t": "🗾 일제의 한반도 지배 야욕",
+  "ctx": "step s0\"><span class=\"cn\">궁극 원인</span><b"
+ },
+ "html_048": {
+  "t": "정한론 — 침략을 정당화할 명분이 필요했다",
+  "ctx": "궁극 원인</span><b>🗾 일제의 한반도 지배 야욕</b><small"
+ },
+ "html_049": {
+  "t": "1단계",
+  "ctx": "<div class=\"ch step s1\"><span class=\"cn\""
+ },
+ "html_050": {
+  "t": "📜 임나일본부설 날조",
+  "ctx": "h step s1\"><span class=\"cn\">1단계</span><b"
+ },
+ "html_051": {
+  "t": "『일본서기』 신공 49년조(369년)를 근거로",
+  "ctx": "=\"cn\">1단계</span><b>📜 임나일본부설 날조</b><small"
+ },
+ "html_052": {
+  "t": "2단계",
+  "ctx": "<div class=\"ch step s2\"><span class=\"cn\""
+ },
+ "html_053": {
+  "t": "🖌️ 비문 변조 (능비·탑비)",
+  "ctx": "h step s2\"><span class=\"cn\">2단계</span><b"
+ },
+ "html_054": {
+  "t": "능비의 ‘二’→‘海’, 탁본 조작",
+  "ctx": ">2단계</span><b>🖌️ 비문 변조 (능비·탑비)</b><small"
+ },
+ "html_055": {
+  "t": "근접 원인",
+  "ctx": "s=\"ch step s3\">         <span class=\"cn\""
+ },
+ "html_056": {
+  "t": "✂️ 끊어 읽기·문맥 왜곡",
+  "ctx": "         <span class=\"cn\">근접 원인</span><b"
+ },
+ "html_057": {
+  "t": "‘倭寇□潰’ 등 — 글자 하나로 뜻이 뒤집히다",
+  "ctx": "pan><b>✂️ 끊어 읽기·문맥 왜곡</b>         <small"
+ },
+ "html_058": {
+  "t": "결과 → 복원",
+  "ctx": "<div class=\"ch step s4\"><span class=\"cn\""
+ },
+ "html_059": {
+  "t": "🏯 고대사 진실의 복원",
+  "ctx": "ep s4\"><span class=\"cn\">결과 → 복원</span><b"
+ },
+ "html_060": {
+  "t": "“그래도 진실은 끝내 숨길 순 없었다”",
+  "ctx": ">결과 → 복원</span><b>🏯 고대사 진실의 복원</b><small"
+ },
+ "html_061": {
+  "t": "핵심 개념 8",
+  "ctx": "/div>     </div>      <h3 class=\"rep-h3\""
+ },
+ "html_062": {
+  "t": "목차 한눈에 보기",
+  "ctx": "concepts\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_063": {
+  "t": "탭하면 요약이 열립니다",
+  "ctx": "ss=\"rep-h3\">목차 한눈에 보기 <span class=\"hint\""
+ },
+ "html_064": {
+  "t": "책 속, 생각해볼 사례 3",
+  "ctx": " id=\"toc\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_065": {
+  "t": "이 책이 우리에게 던지는 질문 3",
+  "ctx": "d=\"cases\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_066": {
+  "t": "내가 틀린 부분 집중 복습",
+  "ctx": " id=\"weakWrap\">       <h3 class=\"rep-h3\""
+ },
+ "html_067": {
+  "t": "📺 더 깊이 알고 싶다면",
+  "ctx": "/div>      <div class=\"deepen\">       <b"
+ },
+ "html_068": {
+  "t": "에서 비문의 원문과 쟁점을 더 깊이 확인할 수 있습니다.",
+  "ctx": "f=\"#\" target=\"_blank\" rel=\"noopener\"></a"
+ },
+ "html_069": {
+  "t": "📄 PDF로 저장",
+  "ctx": "d=\"pdfBtn\" onclick=\"downloadReportPDF()\""
+ },
+ "html_070": {
+  "t": "결과로",
+  "ctx": "\"btn btn-ghost\" onclick=\"show('result')\""
+ },
+ "html_071": {
+  "t": "📚 다른 책 퀴즈 보기 →",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_072": {
+  "t": "“의미와재미공장” 미미팩토리",
+  "ctx": "class=\"footer\">     <div class=\"factory\""
+ },
+ "html_073": {
+  "t": "(주식회사 연:결 패밀리회사)",
+  "ctx": "재미공장” 미미팩토리</div>     <div class=\"affil\""
+ },
+ "html_074": {
+  "t": "책의 핵심을 도파민으로 익히는 반복 마스터 퀴즈",
+  "ctx": ":결 패밀리회사)</div>     <div class=\"tagline\""
+ },
+ "html_075": {
+  "t": "본 앱은 도서의 핵심 개념을 학습 목적으로 재구성한 2차적 학습 콘텐츠입니다. 온전한 독서 경험은 원서로 만나보세요.",
+  "ctx": "퀴즈</div>     <div class=\"copyright-note\""
+ },
+ "html_076": {
+  "t": "비문전쟁 · 도서 검색",
+  "ctx": "EC%9F%81\" target=\"_blank\" rel=\"noopener\""
+ },
+ "js_001": {
+  "t": "\"}))}},Hn={name:\"font-size\",initialValue:\"0\",prefix:!1,type:wt.TYPE_VALUE,format:\"length\"},In={name:\"font-weight\",initialValue:\"normal\",type:wt.VALUE,prefix:!1,parse:function(e){if(Ve(e))return e.number;if(qe(e))switch(e.value){case\"bold\":return 700;case\"normal\":default:return 400}return 400}},Pn={name:\"font-variant\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return e.filter(qe).map((function(e){return e.value}))}};!function(e){e.NORMAL=\"normal\",e.ITALIC=\"italic\",e.OBLIQUE=\"oblique\"}(Nn||(Nn={}));var On,kn={name:\"font-style\",initialValue:\"normal\",prefix:!1,type:wt.IDENT_VALUE,parse:function(e){switch(e){case\"oblique\":return Nn.OBLIQUE;case\"italic\":return Nn.ITALIC;case\"normal\":default:return Nn.NORMAL}}},Rn=function(e,t){return 0!=(e&t)},Mn={name:\"content\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){if(0===e.length)return[];var t=e[0];return t.type===d.IDENT_TOKEN&&\"none\"===t.value?[]:e}},Dn={name:\"counter-increment\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;for(var r=[],n=e.filter(We),o=0;o<n.length;o++){var s=n[o],i=n[o+1];if(s.type===d.IDENT_TOKEN){var a=i&&Ve(i)?i.number:1;r.push({counter:s.value,increment:a})}}return r}},Kn={name:\"counter-reset\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return[];for(var t=[],r=e.filter(We),n=0;n<r.length;n++){var o=r[n],s=r[n+1];if(qe(o)&&\"none\"!==o.value){var i=s&&Ve(s)?s.number:0;t.push({counter:o.value,reset:i})}}return t}},zn={name:\"quotes\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;var r=[],n=e.filter(Ge);if(n.length%2!=0)return null;for(var o=0;o<n.length;o+=2){var s=n[o].value,i=n[o+1].value;r.push({open:s,close:i})}return r}},Vn=function(e,t,r){if(!e)return\"\";var n=e[Math.min(t,e.length-1)];return n?r?n.open:n.close:\"\"},qn={name:\"box-shadow\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return 1===e.length&&Xe(e[0],\"none\")?[]:Ye(e).map((function(e){for(var t={color:255,offsetX:rt,offsetY:rt,blur:rt,spread:rt,inset:!1},r=0,n=0;n<e.length;n++){var o=e[n];Xe(o,\"inset\")?t.inset=!0:$e(o)?(0===r?t.offsetX=o:1===r?t.offsetY=o:2===r?t.blur=o:t.spread=o,r++):t.color=ft(o)}return t}))}},Gn=function(){function e(e){this.backgroundClip=Jn(xt,e.backgroundClip),this.backgroundColor=Jn(Et,e.backgroundColor),this.backgroundImage=Jn(ur,e.backgroundImage),this.backgroundOrigin=Jn(cr,e.backgroundOrigin),this.backgroundPosition=Jn(lr,e.backgroundPosition),this.backgroundRepeat=Jn(fr,e.backgroundRepeat),this.backgroundSize=Jn(mr,e.backgroundSize),this.borderTopColor=Jn(vr,e.borderTopColor),this.borderRightColor=Jn(wr,e.borderRightColor),this.borderBottomColor=Jn(br,e.borderBottomColor),this.borderLeftColor=Jn(Br,e.borderLeftColor),this.borderTopLeftRadius=Jn(_r,e.borderTopLeftRadius),this.borderTopRightRadius=Jn(Cr,e.borderTopRightRadius),this.borderBottomRightRadius=Jn(xr,e.borderBottomRightRadius),this.borderBottomLeftRadius=Jn(Er,e.borderBottomLeftRadius),this.borderTopStyle=Jn(Fr,e.borderTopStyle),this.borderRightStyle=Jn(Ur,e.borderRightStyle),this.borderBottomStyle=Jn(Sr,e.borderBottomStyle),this.borderLeftStyle=Jn(Lr,e.borderLeftStyle),this.borderTopWidth=Jn(Hr,e.borderTopWidth),this.borderRightWidth=Jn(Ir,e.borderRightWidth),this.borderBottomWidth=Jn(Pr,e.borderBottomWidth),this.borderLeftWidth=Jn(Or,e.borderLeftWidth),this.boxShadow=Jn(qn,e.boxShadow),this.color=Jn(kr,e.color),this.display=Jn(Rr,e.display),this.float=Jn(Kr,e.cssFloat),this.fontFamily=Jn(Tn,e.fontFamily),this.fontSize=Jn(Hn,e.fontSize),this.fontStyle=Jn(kn,e.fontStyle),this.fontVariant=Jn(Pn,e.fontVariant),this.fontWeight=Jn(In,e.fontWeight),this.letterSpacing=Jn(zr,e.letterSpacing),this.lineBreak=Jn(qr,e.lineBreak),this.lineHeight=Jn(Gr,e.lineHeight),this.listStyleImage=Jn(Xr,e.listStyleImage),this.listStylePosition=Jn(Jr,e.listStylePosition),this.listStyleType=Jn(Zr,e.listStyleType),this.marginTop=Jn(en,e.marginTop),this.marginRight=Jn(tn,e.marginRight),this.marginBottom=Jn(rn,e.marginBottom),this.marginLeft=Jn(nn,e.marginLeft),this.opacity=Jn(Un,e.opacity);var t=Jn(sn,e.overflow);this.overflowX=t[0],this.overflowY=t[t.length>1?1:0],this.overflowWrap=Jn(An,e.overflowWrap),this.paddingTop=Jn(cn,e.paddingTop),this.paddingRight=Jn(ln,e.paddingRight),this.paddingBottom=Jn(dn,e.paddingBottom),this.paddingLeft=Jn(fn,e.paddingLeft),this.position=Jn(gn,e.position),this.textAlign=Jn(pn,e.textAlign),this.textDecorationColor=Jn(Sn,e.textDecorationColor||e.color),this.textDecorationLine=Jn(Ln,e.textDecorationLine),this.textShadow=Jn(yn,e.textShadow),this.textTransform=Jn(wn,e.textTransform),this.transform=Jn(bn,e.transform),this.transformOrigin=Jn(Cn,e.transformOrigin),this.visibility=Jn(En,e.visibility),this.wordBreak=Jn(Qn,e.wordBreak),this.zIndex=Jn(Fn,e.zIndex)}return e.prototype.isVisible=function(){return this.display>0&&this.opacity>0&&this.visibility===vn.VISIBLE},e.prototype.isTransparent=function(){return ht(this.backgroundColor)},e.prototype.isTransformed=function(){return null!==this.transform},e.prototype.isPositioned=function(){return this.position!==hn.STATIC},e.prototype.isPositionedWithZIndex=function(){return this.isPositioned()&&!this.zIndex.auto},e.prototype.isFloating=function(){return this.float!==Nr.NONE},e.prototype.isInlineLevel=function(){return Rn(this.display,4)||Rn(this.display,33554432)||Rn(this.display,268435456)||Rn(this.display,536870912)||Rn(this.display,67108864)||Rn(this.display,134217728)},e}(),Xn=function(e){this.content=Jn(Mn,e.content),this.quotes=Jn(zn,e.quotes)},Wn=function(e){this.counterIncrement=Jn(Dn,e.counterIncrement),this.counterReset=Jn(Kn,e.counterReset)},Jn=function(e,t){var r=new De,n=null!=t?t.toString():e.initialValue;r.write(n);var o=new Ke(r.read());switch(e.type){case wt.IDENT_VALUE:var s=o.parseComponentValue();return e.parse(qe(s)?s.value:e.initialValue);case wt.VALUE:return e.parse(o.parseComponentValue());case wt.LIST:return e.parse(o.parseComponentValues());case wt.TOKEN_VALUE:return o.parseComponentValue();case wt.TYPE_VALUE:switch(e.format){case\"angle\":return ut(o.parseComponentValue());case\"color\":return ft(o.parseComponentValue());case\"image\":return ir(o.parseComponentValue());case\"length\":var i=o.parseComponentValue();return $e(i)?i:rt;case\"length-percentage\":var a=o.parseComponentValue();return et(a)?a:rt}}throw new Error(\"Attempting to parse unsupported css format type \"+e.format)},Yn=function(e){this.styles=new Gn(window.getComputedStyle(e,null)),this.textNodes=[],this.elements=[],null!==this.styles.transform&&So(e)&&(e.style.transform=\"none\"),this.bounds=i(e),this.flags=0},Zn=function(e,t){this.text=e,this.bounds=t},$n=function(e){var t=e.ownerDocument;if(t){var r=t.createElement(\"html2canvaswrapper\");r.appendChild(e.cloneNode(!0));var n=e.parentNode;if(n){n.replaceChild(r,e);var o=i(r);return r.firstChild&&n.replaceChild(r.firstChild,r),o}}return new s(0,0,0,0)},eo=function(e,t,r){var n=e.ownerDocument;if(!n)throw new Error(\"Node has no owner document\");var o=n.createRange();return o.setStart(e,t),o.setEnd(e,t+r),s.fromClientRect(o.getBoundingClientRect())},to=function(e,t){return 0!==t.letterSpacing?a(e).map((function(e){return A(e)})):ro(e,t)},ro=function(e,t){for(var r,n=function(e,t){var r=a(e),n=ie(r,t),o=n[0],s=n[1],i=n[2],A=r.length,u=0,c=0;return{next:function(){if(c>=A)return{done:!0,value:null};for(var e=G;c<A&&(e=se(r,s,o,++c,i))===G;);if(e!==G||c===A){var t=new ae(r,e,u,c);return u=c,{value:t,done:!1}}return{done:!0,value:null}}}}(e,{lineBreak:t.lineBreak,wordBreak:t.overflowWrap===on.BREAK_WORD?\"break-word\":t.wordBreak}),o=[];!(r=n.next()).done;)r.value&&o.push(r.value.slice());return o},no=function(e,t){this.text=oo(e.data,t.textTransform),this.textBounds=function(e,t,r){var n=to(e,t),o=[],s=0;return n.forEach((function(e){if(t.textDecorationLine.length||e.trim().length>0)if(Pt.SUPPORT_RANGE_BOUNDS)o.push(new Zn(e,eo(r,s,e.length)));else{var n=r.splitText(e.length);o.push(new Zn(e,$n(r))),r=n}else Pt.SUPPORT_RANGE_BOUNDS||(r=r.splitText(e.length));s+=e.length})),o}(this.text,t,e)},oo=function(e,t){switch(t){case mn.LOWERCASE:return e.toLowerCase();case mn.CAPITALIZE:return e.replace(so,io);case mn.UPPERCASE:return e.toUpperCase();default:return e}},so=/(^|\\s|:|-|\\(|\\))([a-z])/g,io=function(e,t,r){return e.length>0?t+r.toUpperCase():e},ao=function(e){function r(t){var r=e.call(this,t)||this;return r.src=t.currentSrc||t.src,r.intrinsicWidth=t.naturalWidth,r.intrinsicHeight=t.naturalHeight,kt.getInstance().addImage(r.src),r}return t(r,e),r}(Yn),Ao=function(e){function r(t){var r=e.call(this,t)||this;return r.canvas=t,r.intrinsicWidth=t.width,r.intrinsicHeight=t.height,r}return t(r,e),r}(Yn),uo=function(e){function r(t){var r=e.call(this,t)||this,n=new XMLSerializer;return r.svg=\"data:image/svg+xml,\"+encodeURIComponent(n.serializeToString(t)),r.intrinsicWidth=t.width.baseVal.value,r.intrinsicHeight=t.height.baseVal.value,kt.getInstance().addImage(r.svg),r}return t(r,e),r}(Yn),co=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),lo=function(e){function r(t){var r=e.call(this,t)||this;return r.start=t.start,r.reversed=\"boolean\"==typeof t.reversed&&!0===t.reversed,r}return t(r,e),r}(Yn),fo=[{type:d.DIMENSION_TOKEN,flags:0,unit:\"px\",number:3}],ho=[{type:d.PERCENTAGE_TOKEN,flags:0,number:50}],po=\"checkbox\",mo=\"radio\",go=\"password\",yo=707406591,vo=function(e){function r(t){var r,n,o,i=e.call(this,t)||this;switch(i.type=t.type.toLowerCase(),i.checked=t.checked,i.value=0===(o=(n=t).type===go?new Array(n.value.length+1).join(\"•\"):n.value).length?n.placeholder||\"\":o,i.type!==po&&i.type!==mo||(i.styles.backgroundColor=3739148031,i.styles.borderTopColor=i.styles.borderRightColor=i.styles.borderBottomColor=i.styles.borderLeftColor=2779096575,i.styles.borderTopWidth=i.styles.borderRightWidth=i.styles.borderBottomWidth=i.styles.borderLeftWidth=1,i.styles.borderTopStyle=i.styles.borderRightStyle=i.styles.borderBottomStyle=i.styles.borderLeftStyle=pr.SOLID,i.styles.backgroundClip=[bt.BORDER_BOX],i.styles.backgroundOrigin=[0],i.bounds=(r=i.bounds).width>r.height?new s(r.left+(r.width-r.height)/2,r.top,r.height,r.height):r.width<r.height?new s(r.left,r.top+(r.height-r.width)/2,r.width,r.width):r),i.type){case po:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=fo;break;case mo:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=ho}return i}return t(r,e),r}(Yn),wo=function(e){function r(t){var r=e.call(this,t)||this,n=t.options[t.selectedIndex||0];return r.value=n&&n.text||\"\",r}return t(r,e),r}(Yn),bo=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),Bo=function(e){return ft(Ke.create(e).parseComponentValue())},jo=function(e){function r(t){var r=e.call(this,t)||this;r.src=t.src,r.width=parseInt(t.width,10)||0,r.height=parseInt(t.height,10)||0,r.backgroundColor=r.styles.backgroundColor;try{if(t.contentWindow&&t.contentWindow.document&&t.contentWindow.document.documentElement){r.tree=Eo(t.contentWindow.document.documentElement);var n=t.contentWindow.document.documentElement?Bo(getComputedStyle(t.contentWindow.document.documentElement).backgroundColor):_t.TRANSPARENT,o=t.contentWindow.document.body?Bo(getComputedStyle(t.contentWindow.document.body).backgroundColor):_t.TRANSPARENT;r.backgroundColor=ht(n)?ht(o)?r.styles.backgroundColor:o:n}}catch(e){}return r}return t(r,e),r}(Yn),_o=[\"OL\",\"UL\",\"MENU\"],Co=function(e,t,r){for(var n=e.firstChild,o=void 0;n;n=o)if(o=n.nextSibling,Fo(n)&&n.data.trim().length>0)t.textNodes.push(new no(n,t.styles));else if(Uo(n)){var s=xo(n);s.styles.isVisible()&&(No(n,s,r)?s.flags|=4:Qo(s.styles)&&(s.flags|=2),-1!==_o.indexOf(n.tagName)&&(s.flags|=8),t.elements.push(s),zo(n)||Po(n)||Vo(n)||Co(n,s,r))}},xo=function(e){return Ro(e)?new ao(e):ko(e)?new Ao(e):Po(e)?new uo(e):To(e)?new co(e):Ho(e)?new lo(e):Io(e)?new vo(e):Vo(e)?new wo(e):zo(e)?new bo(e):Mo(e)?new jo(e):new Yn(e)},Eo=function(e){var t=xo(e);return t.flags|=4,Co(e,t,t),t},No=function(e,t,r){return t.styles.isPositionedWithZIndex()||t.styles.opacity<1||t.styles.isTransformed()||Oo(e)&&r.styles.isTransparent()},Qo=function(e){return e.isPositioned()||e.isFloating()},Fo=function(e){return e.nodeType===Node.TEXT_NODE},Uo=function(e){return e.nodeType===Node.ELEMENT_NODE},So=function(e){return Uo(e)&&void 0!==e.style&&!Lo(e)},Lo=function(e){return\"object\"==typeof e.className},To=function(e){return\"LI\"===e.tagName},Ho=function(e){return\"OL\"===e.tagName},Io=function(e){return\"INPUT\"===e.tagName},Po=function(e){return\"svg\"===e.tagName},Oo=function(e){return\"BODY\"===e.tagName},ko=function(e){return\"CANVAS\"===e.tagName},Ro=function(e){return\"IMG\"===e.tagName},Mo=function(e){return\"IFRAME\"===e.tagName},Do=function(e){return\"STYLE\"===e.tagName},Ko=function(e){return\"SCRIPT\"===e.tagName},zo=function(e){return\"TEXTAREA\"===e.tagName},Vo=function(e){return\"SELECT\"===e.tagName},qo=function(){function e(){this.counters={}}return e.prototype.getCounterValue=function(e){var t=this.counters[e];return t&&t.length?t[t.length-1]:1},e.prototype.getCounterValues=function(e){return this.counters[e]||[]},e.prototype.pop=function(e){var t=this;e.forEach((function(e){return t.counters[e].pop()}))},e.prototype.parse=function(e){var t=this,r=e.counterIncrement,n=e.counterReset,o=!0;null!==r&&r.forEach((function(e){var r=t.counters[e.counter];r&&0!==e.increment&&(o=!1,r[Math.max(0,r.length-1)]+=e.increment)}));var s=[];return o&&n.forEach((function(e){var r=t.counters[e.counter];s.push(e.counter),r||(r=t.counters[e.counter]=[]),r.push(e.reset)})),s},e}(),Go={integers:[1e3,900,500,400,100,90,50,40,10,9,5,4,1],values:[\"M\",\"CM\",\"D\",\"CD\",\"C\",\"XC\",\"L\",\"XL\",\"X\",\"IX\",\"V\",\"IV\",\"I\"]},Xo={integers:[9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"Ք\",\"Փ\",\"Ւ\",\"Ց\",\"Ր\",\"Տ\",\"Վ\",\"Ս\",\"Ռ\",\"Ջ\",\"Պ\",\"Չ\",\"Ո\",\"Շ\",\"Ն\",\"Յ\",\"Մ\",\"Ճ\",\"Ղ\",\"Ձ\",\"Հ\",\"Կ\",\"Ծ\",\"Խ\",\"Լ\",\"Ի\",\"Ժ\",\"Թ\",\"Ը\",\"Է\",\"Զ\",\"Ե\",\"Դ\",\"Գ\",\"Բ\",\"Ա\"]},Wo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,400,300,200,100,90,80,70,60,50,40,30,20,19,18,17,16,15,10,9,8,7,6,5,4,3,2,1],values:[\"י׳\",\"ט׳\",\"ח׳\",\"ז׳\",\"ו׳\",\"ה׳\",\"ד׳\",\"ג׳\",\"ב׳\",\"א׳\",\"ת\",\"ש\",\"ר\",\"ק\",\"צ\",\"פ\",\"ע\",\"ס\",\"נ\",\"מ\",\"ל\",\"כ\",\"יט\",\"יח\",\"יז\",\"טז\",\"טו\",\"י\",\"ט\",\"ח\",\"ז\",\"ו\",\"ה\",\"ד\",\"ג\",\"ב\",\"א\"]},Jo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"ჵ\",\"ჰ\",\"ჯ\",\"ჴ\",\"ხ\",\"ჭ\",\"წ\",\"ძ\",\"ც\",\"ჩ\",\"შ\",\"ყ\",\"ღ\",\"ქ\",\"ფ\",\"ჳ\",\"ტ\",\"ს\",\"რ\",\"ჟ\",\"პ\",\"ო\",\"ჲ\",\"ნ\",\"მ\",\"ლ\",\"კ\",\"ი\",\"თ\",\"ჱ\",\"ზ\",\"ვ\",\"ე\",\"დ\",\"გ\",\"ბ\",\"ა\"]},Yo=function(e,t,r,n,o,s){return e<t||e>r?is(e,o,s.length>0):n.integers.reduce((function(t,r,o){for(;e>=r;)e-=r,t+=n.values[o];return t}),\"\")+s},Zo=function(e,t,r,n){var o=\"\";do{r||e--,o=n(e)+o,e/=t}while(e*t>=t);return o},$o=function(e,t,r,n,o){var s=r-t+1;return(e<0?\"-\":\"\")+(Zo(Math.abs(e),s,n,(function(e){return A(Math.floor(e%s)+t)}))+o)},es=function(e,t,r){void 0===r&&(r=\". \");var n=t.length;return Zo(Math.abs(e),n,!1,(function(e){return t[Math.floor(e%n)]}))+r},ts=function(e,t,r,n,o,s){if(e<-9999||e>9999)return is(e,Wr.CJK_DECIMAL,o.length>0);var i=Math.abs(e),a=o;if(0===i)return t[0]+a;for(var A=0;i>0&&A<=4;A++){var u=i%10;0===u&&Rn(s,1)&&\"\"!==a?a=t[u]+a:u>1||1===u&&0===A||1===u&&1===A&&Rn(s,2)||1===u&&1===A&&Rn(s,4)&&e>100||1===u&&A>1&&Rn(s,8)?a=t[u]+(A>0?r[A-1]:\"\")+a:1===u&&A>0&&(a=r[A-1]+a),i=Math.floor(i/10)}return(e<0?n:\"\")+a},rs=\"十百千萬\",ns=\"拾佰仟萬\",os=\"マイナス\",ss=\"마이너스\",is=function(e,t,r){var n=r?\". \":\"\",o=r?\"、\":\"\",s=r?\", \":\"\",i=r?\" \":\"\";switch(t){case Wr.DISC:return\"•\"+i;case Wr.CIRCLE:return\"◦\"+i;case Wr.SQUARE:return\"◾\"+i;case Wr.DECIMAL_LEADING_ZERO:var a=$o(e,48,57,!0,n);return a.length<4?\"0\"+a:a;case Wr.CJK_DECIMAL:return es(e,\"〇一二三四五六七八九\",o);case Wr.LOWER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n).toLowerCase();case Wr.UPPER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n);case Wr.LOWER_GREEK:return $o(e,945,969,!1,n);case Wr.LOWER_ALPHA:return $o(e,97,122,!1,n);case Wr.UPPER_ALPHA:return $o(e,65,90,!1,n);case Wr.ARABIC_INDIC:return $o(e,1632,1641,!0,n);case Wr.ARMENIAN:case Wr.UPPER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n);case Wr.LOWER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n).toLowerCase();case Wr.BENGALI:return $o(e,2534,2543,!0,n);case Wr.CAMBODIAN:case Wr.KHMER:return $o(e,6112,6121,!0,n);case Wr.CJK_EARTHLY_BRANCH:return es(e,\"子丑寅卯辰巳午未申酉戌亥\",o);case Wr.CJK_HEAVENLY_STEM:return es(e,\"甲乙丙丁戊己庚辛壬癸\",o);case Wr.CJK_IDEOGRAPHIC:case Wr.TRAD_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"負\",o,14);case Wr.TRAD_CHINESE_FORMAL:return ts(e,\"零壹貳參肆伍陸柒捌玖\",ns,\"負\",o,15);case Wr.SIMP_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"负\",o,14);case Wr.SIMP_CHINESE_FORMAL:return ts(e,\"零壹贰叁肆伍陆柒捌玖\",ns,\"负\",o,15);case Wr.JAPANESE_INFORMAL:return ts(e,\"〇一二三四五六七八九\",\"十百千万\",os,o,0);case Wr.JAPANESE_FORMAL:return ts(e,\"零壱弐参四伍六七八九\",\"拾百千万\",os,o,7);case Wr.KOREAN_HANGUL_FORMAL:return ts(e,\"영일이삼사오육칠팔구\",\"십백천만\",ss,s,7);case Wr.KOREAN_HANJA_INFORMAL:return ts(e,\"零一二三四五六七八九\",\"十百千萬\",ss,s,0);case Wr.KOREAN_HANJA_FORMAL:return ts(e,\"零壹貳參四五六七八九\",\"拾百千\",ss,s,7);case Wr.DEVANAGARI:return $o(e,2406,2415,!0,n);case Wr.GEORGIAN:return Yo(e,1,19999,Jo,Wr.DECIMAL,n);case Wr.GUJARATI:return $o(e,2790,2799,!0,n);case Wr.GURMUKHI:return $o(e,2662,2671,!0,n);case Wr.HEBREW:return Yo(e,1,10999,Wo,Wr.DECIMAL,n);case Wr.HIRAGANA:return es(e,\"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん\");case Wr.HIRAGANA_IROHA:return es(e,\"いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす\");case Wr.KANNADA:return $o(e,3302,3311,!0,n);case Wr.KATAKANA:return es(e,\"アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン\",o);case Wr.KATAKANA_IROHA:return es(e,\"イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセス\",o);case Wr.LAO:return $o(e,3792,3801,!0,n);case Wr.MONGOLIAN:return $o(e,6160,6169,!0,n);case Wr.MYANMAR:return $o(e,4160,4169,!0,n);case Wr.ORIYA:return $o(e,2918,2927,!0,n);case Wr.PERSIAN:return $o(e,1776,1785,!0,n);case Wr.TAMIL:return $o(e,3046,3055,!0,n);case Wr.TELUGU:return $o(e,3174,3183,!0,n);case Wr.THAI:return $o(e,3664,3673,!0,n);case Wr.TIBETAN:return $o(e,3872,3881,!0,n);case Wr.DECIMAL:default:return $o(e,48,57,!0,n)}},as=\"data-html2canvas-ignore\",As=function(){function e(e,t){if(this.options=t,this.scrolledElements=[],this.referenceElement=e,this.counters=new qo,this.quoteDepth=0,!e.ownerDocument)throw new Error(\"Cloned element does not have an owner document\");this.documentElement=this.cloneNode(e.ownerDocument.documentElement)}return e.prototype.toIFrame=function(e,t){var r=this,s=cs(e,t);if(!s.contentWindow)return Promise.reject(\"Unable to find iframe window\");var i=e.defaultView.pageXOffset,a=e.defaultView.pageYOffset,A=s.contentWindow,u=A.document,c=ls(s).then((function(){return n(r,void 0,void 0,(function(){var e;return o(this,(function(r){switch(r.label){case 0:return this.scrolledElements.forEach(ps),A&&(A.scrollTo(t.left,t.top),!/(iPad|iPhone|iPod)/g.test(navigator.userAgent)||A.scrollY===t.top&&A.scrollX===t.left||(u.documentElement.style.top=-t.top+\"px\",u.documentElement.style.left=-t.left+\"px\",u.documentElement.style.position=\"absolute\")),e=this.options.onclone,void 0===this.clonedReferenceElement?[2,Promise.reject(\"Error finding the \"+this.referenceElement.nodeName+\" in the cloned document\")]:u.fonts&&u.fonts.ready?[4,u.fonts.ready]:[3,2];case 1:r.sent(),r.label=2;case 2:return\"function\"==typeof e?[2,Promise.resolve().then((function(){return e(u)})).then((function(){return s}))]:[2,s]}}))}))}));return u.open(),u.write(fs(document.doctype)+\"<html></html>\"),hs(this.referenceElement.ownerDocument,i,a),u.replaceChild(u.adoptNode(this.documentElement),u.documentElement),u.close(),c},e.prototype.createElementClone=function(e){if(ko(e))return this.createCanvasClone(e);if(Do(e))return this.createStyleClone(e);var t=e.cloneNode(!1);return Ro(t)&&\"lazy\"===t.loading&&(t.loading=\"eager\"),t},e.prototype.createStyleClone=function(e){try{var t=e.sheet;if(t&&t.cssRules){var r=[].slice.call(t.cssRules,0).reduce((function(e,t){return t&&\"string\"==typeof t.cssText?e+t.cssText:e}),\"\"),n=e.cloneNode(!1);return n.textContent=r,n}}catch(e){if(Ot.getInstance(this.options.id).error(\"Unable to access cssRules property\",e),\"SecurityError\"!==e.name)throw e}return e.cloneNode(!1)},e.prototype.createCanvasClone=function(e){if(this.options.inlineImages&&e.ownerDocument){var t=e.ownerDocument.createElement(\"img\");try{return t.src=e.toDataURL(),t}catch(e){Ot.getInstance(this.options.id).info(\"Unable to clone canvas contents, canvas is tainted\")}}var r=e.cloneNode(!1);try{r.width=e.width,r.height=e.height;var n=e.getContext(\"2d\"),o=r.getContext(\"2d\");return o&&(n?o.putImageData(n.getImageData(0,0,e.width,e.height),0,0):o.drawImage(e,0,0)),r}catch(e){}return r},e.prototype.cloneNode=function(e){if(Fo(e))return document.createTextNode(e.data);if(!e.ownerDocument)return e.cloneNode(!1);var t=e.ownerDocument.defaultView;if(t&&Uo(e)&&(So(e)||Lo(e))){var r=this.createElementClone(e),n=t.getComputedStyle(e),o=t.getComputedStyle(e,\":before\"),s=t.getComputedStyle(e,\":after\");this.referenceElement===e&&So(r)&&(this.clonedReferenceElement=r),Oo(r)&&vs(r);for(var i=this.counters.parse(new Wn(n)),a=this.resolvePseudoContent(e,r,o,On.BEFORE),A=e.firstChild;A;A=A.nextSibling)Uo(A)&&(Ko(A)||A.hasAttribute(as)||\"function\"==typeof this.options.ignoreElements&&this.options.ignoreElements(A))||this.options.copyStyles&&Uo(A)&&Do(A)||r.appendChild(this.cloneNode(A));a&&r.insertBefore(a,r.firstChild);var u=this.resolvePseudoContent(e,r,s,On.AFTER);return u&&r.appendChild(u),this.counters.pop(i),n&&(this.options.copyStyles||Lo(e))&&!Mo(e)&&ds(n,r),0===e.scrollTop&&0===e.scrollLeft||this.scrolledElements.push([r,e.scrollLeft,e.scrollTop]),(zo(e)||Vo(e))&&(zo(r)||Vo(r))&&(r.value=e.value),r}return e.cloneNode(!1)},e.prototype.resolvePseudoContent=function(e,t,r,n){var o=this;if(r){var s=r.content,i=t.ownerDocument;if(i&&s&&\"none\"!==s&&\"-moz-alt-content\"!==s&&\"none\"!==r.display){this.counters.parse(new Wn(r));var a=new Xn(r),A=i.createElement(\"html2canvaspseudoelement\");ds(r,A),a.content.forEach((function(t){if(t.type===d.STRING_TOKEN)A.appendChild(i.createTextNode(t.value));else if(t.type===d.URL_TOKEN){var r=i.createElement(\"img\");r.src=t.value,r.style.opacity=\"1\",A.appendChild(r)}else if(t.type===d.FUNCTION){if(\"attr\"===t.name){var n=t.values.filter(qe);n.length&&A.appendChild(i.createTextNode(e.getAttribute(n[0].value)||\"\"))}else if(\"counter\"===t.name){var s=t.values.filter(Je),u=s[0],c=s[1];if(u&&qe(u)){var l=o.counters.getCounterValue(u.value),f=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL;A.appendChild(i.createTextNode(is(l,f,!1)))}}else if(\"counters\"===t.name){var h=t.values.filter(Je),p=(u=h[0],h[1]);if(c=h[2],u&&qe(u)){var m=o.counters.getCounterValues(u.value),g=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL,y=p&&p.type===d.STRING_TOKEN?p.value:\"\",v=m.map((function(e){return is(e,g,!1)})).join(y);A.appendChild(i.createTextNode(v))}}}else if(t.type===d.IDENT_TOKEN)switch(t.value){case\"open-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,o.quoteDepth++,!0)));break;case\"close-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,--o.quoteDepth,!1)));break;default:A.appendChild(i.createTextNode(t.value))}})),A.className=ms+\" \"+gs;var u=n===On.BEFORE?\" \"+ms:\" \"+gs;return Lo(t)?t.className.baseValue+=u:t.className+=u,A}}},e.destroy=function(e){return!!e.parentNode&&(e.parentNode.removeChild(e),!0)},e}();!function(e){e[e.BEFORE=0]=\"BEFORE\",e[e.AFTER=1]=\"AFTER\"}(On||(On={}));var us,cs=function(e,t){var r=e.createElement(\"iframe\");return r.className=\"html2canvas-container\",r.style.visibility=\"hidden\",r.style.position=\"fixed\",r.style.left=\"-10000px\",r.style.top=\"0px\",r.style.border=\"0\",r.width=t.width.toString(),r.height=t.height.toString(),r.scrolling=\"no\",r.setAttribute(as,\"true\"),e.body.appendChild(r),r},ls=function(e){return new Promise((function(t,r){var n=e.contentWindow;if(!n)return r(\"No window assigned for iframe\");var o=n.document;n.onload=e.onload=o.onreadystatechange=function(){n.onload=e.onload=o.onreadystatechange=null;var r=setInterval((function(){o.body.childNodes.length>0&&\"complete\"===o.readyState&&(clearInterval(r),t(e))}),50)}}))},ds=function(e,t){for(var r=e.length-1;r>=0;r--){var n=e.item(r);\"content\"!==n&&t.style.setProperty(n,e.getPropertyValue(n))}return t},fs=function(e){var t=\"\";return e&&(t+=\"<!DOCTYPE \",e.name&&(t+=e.name),e.internalSubset&&(t+=e.internalSubset),e.publicId&&(t+=",
+  "ctx": "n(e){return-1===e.indexOf(\" \")?e:\"'\"+e+\""
+ },
+ "js_002": {
+  "t": "2026-07-11 · 비문전쟁 개정판",
+  "ctx": "tm_campaign=bimunjeonjaeng\",   edition: "
+ },
+ "js_003": {
+  "t": "저자",
+  "ctx": "nst QUESTIONS = [   {id:1, level:1, tag:"
+ },
+ "js_004": {
+  "t": "『비문전쟁』을 쓴 도명 스님은 어떤 인물일까요?",
+  "ctx": "TIONS = [   {id:1, level:1, tag:\"저자\", q:"
+ },
+ "js_005": {
+  "t": "여여정사 주지이자 범어사 성보박물관 부관장인 승려",
+  "ctx": "쟁』을 쓴 도명 스님은 어떤 인물일까요?\",    options:[{t:"
+ },
+ "js_006": {
+  "t": "대학에서 고고학을 가르치는 사학과 교수",
+  "ctx": "여정사 주지이자 범어사 성보박물관 부관장인 승려\",ok:true},{t:"
+ },
+ "js_007": {
+  "t": "조선총독부 자료를 정리해 온 국사편찬위원",
+  "ctx": "ok:true},{t:\"대학에서 고고학을 가르치는 사학과 교수\"},{t:"
+ },
+ "js_008": {
+  "t": "일본에서 활동하는 재일교포 언론인",
+  "ctx": "학과 교수\"},{t:\"조선총독부 자료를 정리해 온 국사편찬위원\"},{t:"
+ },
+ "js_009": {
+  "t": "저자 <b>도명 스님</b>은 경남 밀양 <b>여여정사 주지</b>이자 <b>범어사 성보박물관 부관장</b>, (사)가야문화진흥원 이사장입니다. 1998년 범어사로 출가했고(은사 정여 대종사), 2009년부터 김해에서 포교하며 가야 역사와 인연을 맺었습니다.",
+  "ctx": "찬위원\"},{t:\"일본에서 활동하는 재일교포 언론인\"}],    ctx:"
+ },
+ "js_010": {
+  "t": "핵심 소재",
+  "ctx": "역사와 인연을 맺었습니다.\"},   {id:2, level:1, tag:"
+ },
+ "js_011": {
+  "t": "이 책이 나란히 파헤치는 두 개의 비석은 무엇일까요?",
+  "ctx": "니다.\"},   {id:2, level:1, tag:\"핵심 소재\", q:"
+ },
+ "js_012": {
+  "t": "광개토태왕릉비와 진경대사탑비",
+  "ctx": "히 파헤치는 두 개의 비석은 무엇일까요?\",    options:[{t:"
+ },
+ "js_013": {
+  "t": "광개토태왕릉비와 진흥왕 순수비",
+  "ctx": "tions:[{t:\"광개토태왕릉비와 진경대사탑비\",ok:true},{t:"
+ },
+ "js_014": {
+  "t": "중원 고구려비와 사택지적비",
+  "ctx": "사탑비\",ok:true},{t:\"광개토태왕릉비와 진흥왕 순수비\"},{t:"
+ },
+ "js_015": {
+  "t": "무령왕릉 지석과 칠지도",
+  "ctx": "태왕릉비와 진흥왕 순수비\"},{t:\"중원 고구려비와 사택지적비\"},{t:"
+ },
+ "js_016": {
+  "t": "부제 그대로 <b>'광개토태왕릉비와 진경대사탑비의 진실'</b>을 다룹니다. 두 비문은 일제가 주장한 '한반도 임나'의 세 근거 가운데 두 가지로, 역사 왜곡의 도구로 악용되어 왔습니다.",
+  "ctx": "려비와 사택지적비\"},{t:\"무령왕릉 지석과 칠지도\"}],    ctx:"
+ },
+ "js_017": {
+  "t": "위치",
+  "ctx": "도구로 악용되어 왔습니다.\"},   {id:3, level:1, tag:"
+ },
+ "js_018": {
+  "t": "광개토태왕릉비는 지금 어디에 서 있을까요?",
+  "ctx": " 왔습니다.\"},   {id:3, level:1, tag:\"위치\", q:"
+ },
+ "js_019": {
+  "t": "중국 지린성 지안(옛 만주 통구)",
+  "ctx": "개토태왕릉비는 지금 어디에 서 있을까요?\",    options:[{t:"
+ },
+ "js_020": {
+  "t": "평양 대성산성 기슭",
+  "ctx": "ns:[{t:\"중국 지린성 지안(옛 만주 통구)\",ok:true},{t:"
+ },
+ "js_021": {
+  "t": "서울 국립중앙박물관 수장고",
+  "ctx": "(옛 만주 통구)\",ok:true},{t:\"평양 대성산성 기슭\"},{t:"
+ },
+ "js_022": {
+  "t": "일본 도쿄 국립박물관 정원",
+  "ctx": "t:\"평양 대성산성 기슭\"},{t:\"서울 국립중앙박물관 수장고\"},{t:"
+ },
+ "js_023": {
+  "t": "능비는 중국 <b>지린성 지안(集安)</b>, 옛 만주 통구 지역에 서 있습니다. 고구려 역사를 담은 최대급 금석문이지만 그 해석을 두고 150년 가까운 논쟁이 이어져 왔습니다.",
+  "ctx": "박물관 수장고\"},{t:\"일본 도쿄 국립박물관 정원\"}],    ctx:"
+ },
+ "js_024": {
+  "t": "학설",
+  "ctx": " 논쟁이 이어져 왔습니다.\"},   {id:5, level:1, tag:"
+ },
+ "js_025": {
+  "t": "일제가 한반도 침략을 정당화하려고 내세운 학설은 무엇일까요?",
+  "ctx": " 왔습니다.\"},   {id:5, level:1, tag:\"학설\", q:"
+ },
+ "js_026": {
+  "t": "임나일본부설",
+  "ctx": " 정당화하려고 내세운 학설은 무엇일까요?\",    options:[{t:"
+ },
+ "js_027": {
+  "t": "만선사관",
+  "ctx": "?\",    options:[{t:\"임나일본부설\",ok:true},{t:"
+ },
+ "js_028": {
+  "t": "동조동근론",
+  "ctx": "ons:[{t:\"임나일본부설\",ok:true},{t:\"만선사관\"},{t:"
+ },
+ "js_029": {
+  "t": "정체성론",
+  "ctx": "본부설\",ok:true},{t:\"만선사관\"},{t:\"동조동근론\"},{t:"
+ },
+ "js_030": {
+  "t": "고대 일본이 한반도 남부의 '임나'를 지배했다는 <b>임나일본부설</b>입니다. 저자는 이 학설을 정당화하기 위해 일제가 두 비문을 변조·왜곡했다고 추적합니다.",
+  "ctx": "\"만선사관\"},{t:\"동조동근론\"},{t:\"정체성론\"}],    ctx:"
+ },
+ "js_031": {
+  "t": "변조",
+  "ctx": "조·왜곡했다고 추적합니다.\"},   {id:6, level:1, tag:"
+ },
+ "js_032": {
+  "t": "저자가 '일제에 의해 변조됐다'고 지목한 능비의 두 기사는?",
+  "ctx": "추적합니다.\"},   {id:6, level:1, tag:\"변조\", q:"
+ },
+ "js_033": {
+  "t": "신묘년 기사와 경자년 기사",
+  "ctx": " 변조됐다'고 지목한 능비의 두 기사는?\",    options:[{t:"
+ },
+ "js_034": {
+  "t": "갑오년 기사와 을미년 기사",
+  "ctx": "ptions:[{t:\"신묘년 기사와 경자년 기사\",ok:true},{t:"
+ },
+ "js_035": {
+  "t": "건국 신화 기사와 수묘인 기사",
+  "ctx": "자년 기사\",ok:true},{t:\"갑오년 기사와 을미년 기사\"},{t:"
+ },
+ "js_036": {
+  "t": "임진년 기사와 병자년 기사",
+  "ctx": " 기사와 을미년 기사\"},{t:\"건국 신화 기사와 수묘인 기사\"},{t:"
+ },
+ "js_037": {
+  "t": "일본 참모본부가 <b>신묘년(辛卯年) 기사</b>와 <b>경자년(庚子年) 기사</b>를 변조했다는 것이 책의 핵심 주장입니다. 변조 목적과 방법, 과정을 수사관이 범인을 쫓듯 하나하나 역추적합니다.",
+  "ctx": " 수묘인 기사\"},{t:\"임진년 기사와 병자년 기사\"}],    ctx:"
+ },
+ "js_038": {
+  "t": "변조 주체",
+  "ctx": "듯 하나하나 역추적합니다.\"},   {id:9, level:2, tag:"
+ },
+ "js_039": {
+  "t": "능비 변조를 주도했다고 책이 지목하는 기관은 어디일까요?",
+  "ctx": "니다.\"},   {id:9, level:2, tag:\"변조 주체\", q:"
+ },
+ "js_040": {
+  "t": "일본 육군 참모본부",
+  "ctx": "했다고 책이 지목하는 기관은 어디일까요?\",    options:[{t:"
+ },
+ "js_041": {
+  "t": "조선총독부 학무국",
+  "ctx": "   options:[{t:\"일본 육군 참모본부\",ok:true},{t:"
+ },
+ "js_042": {
+  "t": "교토제국대학 사학과",
+  "ctx": "일본 육군 참모본부\",ok:true},{t:\"조선총독부 학무국\"},{t:"
+ },
+ "js_043": {
+  "t": "일본 궁내청",
+  "ctx": "ue},{t:\"조선총독부 학무국\"},{t:\"교토제국대학 사학과\"},{t:"
+ },
+ "js_044": {
+  "t": "<b>일본 육군 참모본부</b>입니다. 침략에 앞서 밀정을 보내 상대국 역사를 연구·조작한다는 일제의 수법에 착안해, 저자는 참모본부의 변조 목적과 방법을 추적했습니다.",
+  "ctx": ",{t:\"교토제국대학 사학과\"},{t:\"일본 궁내청\"}],    ctx:"
+ },
+ "js_045": {
+  "t": "밀정",
+  "ctx": "과 방법을 추적했습니다.\"},   {id:10, level:2, tag:"
+ },
+ "js_046": {
+  "t": "1883년 만주에서 능비 탁본을 입수해 간 일본 참모본부의 밀정은?",
+  "ctx": "했습니다.\"},   {id:10, level:2, tag:\"밀정\", q:"
+ },
+ "js_047": {
+  "t": "한의사로 위장한 사카와 가게아키 중위",
+  "ctx": "본을 입수해 간 일본 참모본부의 밀정은?\",    options:[{t:"
+ },
+ "js_048": {
+  "t": "승려로 위장한 이토 히로부미",
+  "ctx": ":[{t:\"한의사로 위장한 사카와 가게아키 중위\",ok:true},{t:"
+ },
+ "js_049": {
+  "t": "상인으로 위장한 사이고 다카모리",
+  "ctx": "키 중위\",ok:true},{t:\"승려로 위장한 이토 히로부미\"},{t:"
+ },
+ "js_050": {
+  "t": "교사로 위장한 후쿠자와 유키치",
+  "ctx": "장한 이토 히로부미\"},{t:\"상인으로 위장한 사이고 다카모리\"},{t:"
+ },
+ "js_051": {
+  "t": "1880년 파견된 <b>사카와 가게아키(酒勾景信) 중위</b>는 한의사로 위장해 첩보 활동을 하다 1883년 만주 통구에서 비를 접하고 탁본(쌍구가묵본)을 입수, 1884년 참모본부로 가져갔습니다.",
+  "ctx": " 다카모리\"},{t:\"교사로 위장한 후쿠자와 유키치\"}],    ctx:"
+ },
+ "js_052": {
+  "t": "통설",
+  "ctx": "참모본부로 가져갔습니다.\"},   {id:13, level:2, tag:"
+ },
+ "js_053": {
+  "t": "일제가 퍼뜨린 신묘년 기사의 통설 해석은 무엇일까요?",
+  "ctx": "갔습니다.\"},   {id:13, level:2, tag:\"통설\", q:"
+ },
+ "js_054": {
+  "t": "'왜가 신묘년에 바다를 건너와 백잔·신라를 격파하고 신민으로 삼았다'",
+  "ctx": " 신묘년 기사의 통설 해석은 무엇일까요?\",    options:[{t:"
+ },
+ "js_055": {
+  "t": "'고구려가 신묘년에 왜를 정벌하고 조공을 받았다'",
+  "ctx": " 건너와 백잔·신라를 격파하고 신민으로 삼았다'\",ok:true},{t:"
+ },
+ "js_056": {
+  "t": "'백제와 신라가 연합해 왜를 바다에서 물리쳤다'",
+  "ctx": "e},{t:\"'고구려가 신묘년에 왜를 정벌하고 조공을 받았다'\"},{t:"
+ },
+ "js_057": {
+  "t": "'신묘년에 가야가 왜와 동맹을 맺었다'",
+  "ctx": "'\"},{t:\"'백제와 신라가 연합해 왜를 바다에서 물리쳤다'\"},{t:"
+ },
+ "js_058": {
+  "t": "통설은 <b>'왜가 바다를 건너와(渡海破) 백잔·신라를 격파하고 신민으로 삼았다'</b>입니다. 왜의 한반도 남부 지배, 곧 임나일본부설의 '물증'처럼 쓰여 왔지만, 저자는 문맥 단절과 내용 충돌을 들어 변조를 확신합니다.",
+  "ctx": "\"},{t:\"'신묘년에 가야가 왜와 동맹을 맺었다'\"}],    ctx:"
+ },
+ "js_059": {
+  "t": "초발성지",
+  "ctx": "들어 변조를 확신합니다.\"},   {id:18, level:3, tag:"
+ },
+ "js_060": {
+  "t": "'草拔聖枝(초발성지)'를 두고 일제 해석과 저자 해석은 어떻게 갈릴까요?",
+  "ctx": "니다.\"},   {id:18, level:3, tag:\"초발성지\", q:"
+ },
+ "js_061": {
+  "t": "일제는 '풀에서 성스러운 가지를 뽑았다'는 서술로, 저자는 귀순한 임나 왕족의 '이름'으로 본다",
+  "ctx": "제 해석과 저자 해석은 어떻게 갈릴까요?\",    options:[{t:"
+ },
+ "js_062": {
+  "t": "일제는 지명으로, 저자는 관직명으로 본다",
+  "ctx": ", 저자는 귀순한 임나 왕족의 '이름'으로 본다\",ok:true},{t:"
+ },
+ "js_063": {
+  "t": "일제는 사찰 이름으로, 저자는 연호로 본다",
+  "ctx": "k:true},{t:\"일제는 지명으로, 저자는 관직명으로 본다\"},{t:"
+ },
+ "js_064": {
+  "t": "둘 다 인명으로 보되 읽는 음만 다르다",
+  "ctx": "로 본다\"},{t:\"일제는 사찰 이름으로, 저자는 연호로 본다\"},{t:"
+ },
+ "js_065": {
+  "t": "일제는 명사를 동사·형용사로 품사를 바꿔 <b>'풀에서 성스러운 가지를 뽑았다'</b>고 풀었지만, 저자는 <b>초발성지는 사람 이름</b> — 이웃 병사들에게 시달리다 신라에 귀순한 임나 왕족이자 신김씨의 중시조 — 이라고 봅니다.",
+  "ctx": "\"},{t:\"둘 다 인명으로 보되 읽는 음만 다르다\"}],    ctx:"
+ },
+ "js_066": {
+  "t": "김유신",
+  "ctx": "시조 — 이라고 봅니다.\"},   {id:19, level:3, tag:"
+ },
+ "js_067": {
+  "t": "비문 속 흥무대왕(김유신)에 대해 저자가 바로잡은 내용은?",
+  "ctx": "봅니다.\"},   {id:19, level:3, tag:\"김유신\", q:"
+ },
+ "js_068": {
+  "t": "대사의 선조가 아니라, 선조 초발성지의 귀순을 받아준 인물",
+  "ctx": "김유신)에 대해 저자가 바로잡은 내용은?\",    options:[{t:"
+ },
+ "js_069": {
+  "t": "대사의 직계 조상이 맞다",
+  "ctx": "가 아니라, 선조 초발성지의 귀순을 받아준 인물\",ok:true},{t:"
+ },
+ "js_070": {
+  "t": "비문에 등장하지 않는 인물이다",
+  "ctx": "받아준 인물\",ok:true},{t:\"대사의 직계 조상이 맞다\"},{t:"
+ },
+ "js_071": {
+  "t": "임나의 마지막 왕이다",
+  "ctx": "의 직계 조상이 맞다\"},{t:\"비문에 등장하지 않는 인물이다\"},{t:"
+ },
+ "js_072": {
+  "t": "통설은 '김유신이 진경대사의 선조'라며 김유신을 임나(가야) 왕족으로 연결했습니다. 저자는 비문을 다시 끊어 읽어 <b>김유신은 초발성지의 귀순(投)을 받아준 인연으로 기록된 것</b>일 뿐, 대사의 선조가 아니라고 뒤집습니다.",
+  "ctx": "하지 않는 인물이다\"},{t:\"임나의 마지막 왕이다\"}],    ctx:"
+ },
+ "js_073": {
+  "t": "위키백과 「광개토대왕릉비」",
+  "ctx": "== */ const SOURCES = {   nung:  {label:"
+ },
+ "js_074": {
+  "t": "위키백과 「임나일본부설」",
+  "ctx": "95%EB%A6%89%EB%B9%84\"},   imna:  {label:"
+ },
+ "js_075": {
+  "t": "위키백과 「창원 봉림사지 진경대사탑비」",
+  "ctx": "B8%EB%B6%80%EC%84%A4\"},   tapbi: {label:"
+ },
+ "js_076": {
+  "t": "위키백과 「김유신」",
+  "ctx": "AC%ED%83%91%EB%B9%84\"},   kim:   {label:"
+ },
+ "js_077": {
+  "t": "나무위키 「광개토대왕릉비」(변조 논쟁 정리)",
+  "ctx": "80%EC%9C%A0%EC%8B%A0\"},   namu:  {label:"
+ },
+ "js_078": {
+  "t": "우리역사넷 「광개토대왕릉비」 해설",
+  "ctx": "95%EB%A6%89%EB%B9%84\"},   ebs:   {label:"
+ },
+ "js_079": {
+  "t": "저자는 역사학자가 아니라 승려입니다. ‘전공이 없으면 자격도 없다’는 통념을 깨는 인물이라는 점을 기억하세요.",
+  "ctx": "/ const EXTRA = {   1:{src:\"imna\", note:"
+ },
+ "js_080": {
+  "t": "헷갈림 주의 — 두 비석은 각각 고구려(능비)와 통일신라(탑비) 것으로 시대가 다르지만, ‘임나’라는 하나의 실로 이어집니다.",
+  "ctx": "물이라는 점을 기억하세요.\"},   2:{src:\"nung\", note:"
+ },
+ "js_081": {
+  "t": "광개토태왕은 ‘광개토(넓게 개척한)’라는 이름 그대로 정복 군주입니다. 능비 자체가 그 위업의 기록이에요.",
+  "ctx": " 하나의 실로 이어집니다.\"},   3:{src:\"nung\", note:"
+ },
+ "js_082": {
+  "t": "흔한 오해 — 능비는 한반도가 아니라 옛 고구려 땅인 중국 지린성 지안현에 있습니다. 그래서 탁본·접근을 둘러싼 문제가 컸어요.",
+  "ctx": "가 그 위업의 기록이에요.\"},   4:{src:\"nung\", note:"
+ },
+ "js_083": {
+  "t": "‘정한론’과 헷갈리지 마세요. 정한론은 조선 정벌 주장, 임나일본부설은 그 근거로 만든 고대사 왜곡 학설입니다.",
+  "ctx": "을 둘러싼 문제가 컸어요.\"},   5:{src:\"imna\", note:"
+ },
+ "js_084": {
+  "t": "변조는 비석을 없애는 게 아니라 ‘글자를 손대는’ 방식이었습니다. 그래서 탁본 비교가 진실 규명의 열쇠가 됩니다.",
+  "ctx": " 고대사 왜곡 학설입니다.\"},   6:{src:\"namu\", note:"
+ },
+ "js_085": {
+  "t": "‘아버지가 방에’ vs ‘아버지 가방에’ — 끊어 읽기 하나로 뜻이 뒤집힙니다. 한자 비문에서 이 원리가 결정적이에요.",
+  "ctx": "실 규명의 열쇠가 됩니다.\"},   7:{src:\"nung\", note:"
+ },
+ "js_086": {
+  "t": "‘二 → 海’ 단 한 글자 변조가 문맥을 통째로 꼬았습니다. 작은 조작이 큰 왜곡을 낳는 대표 사례입니다.",
+  "ctx": " 이 원리가 결정적이에요.\"},   8:{src:\"namu\", note:"
+ },
+ "js_087": {
+  "t": "창원 용지공원 것은 모형, 진품은 국립중앙박물관에 있다는 점을 구분하세요.",
+  "ctx": " 낳는 대표 사례입니다.\"},   9:{src:\"tapbi\", note:"
+ },
+ "js_088": {
+  "t": "이 책의 목표는 ‘일본을 공격’이 아니라 ‘왜곡을 걷어내 진실을 복원’하는 것입니다. 균형 잡힌 태도가 핵심이에요.",
+  "ctx": "있다는 점을 구분하세요.\"},   10:{src:\"imna\", note:"
+ },
+ "js_089": {
+  "t": "능비의 발견",
+  "ctx": "*/ const MILESTONES = [   {at:0,  label:"
+ },
+ "js_090": {
+  "t": "변조의 증거",
+  "ctx": "at:0,  label:\"능비의 발견\"},   {at:6,  label:"
+ },
+ "js_091": {
+  "t": "비문 복원",
+  "ctx": "at:6,  label:\"변조의 증거\"},   {at:12, label:"
+ },
+ "js_092": {
+  "t": "임나의 위치",
+  "ctx": "{at:12, label:\"비문 복원\"},   {at:18, label:"
+ },
+ "js_093": {
+  "t": "진경대사탑비",
+  "ctx": "at:18, label:\"임나의 위치\"},   {at:24, label:"
+ },
+ "js_094": {
+  "t": "진실의 복원",
+  "ctx": "at:24, label:\"진경대사탑비\"},   {at:30, label:"
+ },
+ "js_095": {
+  "t": "보통",
+  "ctx": "]; const DIFF_LABEL = {1:[\"쉬움\",\"l1\"],2:["
+ },
+ "js_096": {
+  "t": "어려움",
+  "ctx": "LABEL = {1:[\"쉬움\",\"l1\"],2:[\"보통\",\"l2\"],3:["
+ },
+ "js_097": {
+  "t": "· 복습",
+  "ctx": "ds.size+' / '+TOTAL_Q + (attempts[id] ? "
+ },
+ "js_098": {
+  "t": "🎯 정답!",
+  "ctx": ")      verdict.textContent = firstTry ? "
+ },
+ "js_099": {
+  "t": "✅ 이제 익혔어요!",
+  "ctx": "dict.textContent = firstTry ? '🎯 정답!' : "
+ },
+ "js_100": {
+  "t": "❌ 다시 도전!",
+  "ctx": "ing.push(id);     verdict.textContent = "
+ },
+ "js_101": {
+  "t": "↻ 이 문제는 뒤에서 다시 나옵니다",
+  "ctx": "getElementById('requeue').textContent = "
+ },
+ "js_102": {
+  "t": "광개토태왕릉비",
+  "ctx": "==== */ const CONCEPTS = [   {ic:\"🗿\", h:"
+ },
+ "js_103": {
+  "t": "고구려 19대 정복 군주 광개토태왕의 비. 중국 지린성 지안현에 있으며 고구려사의 핵심 사료입니다.",
+  "ctx": " CONCEPTS = [   {ic:\"🗿\", h:\"광개토태왕릉비\", p:"
+ },
+ "js_104": {
+  "t": "일제가 한반도 정복의 방편으로 만든 학설. 가야를 옛 임나·일본 영토라 주장했습니다.",
+  "ctx": ", src:\"nung\"},   {ic:\"📜\", h:\"임나일본부설\", p:"
+ },
+ "js_105": {
+  "t": "비문 변조",
+  "ctx": "토라 주장했습니다.\", src:\"imna\"},   {ic:\"🖌️\", h:"
+ },
+ "js_106": {
+  "t": "일제가 학설의 근거를 위해 능비 글자를 손댄 조작. 원래의 ‘二’를 ‘海’로 바꿨습니다.",
+  "ctx": ", src:\"imna\"},   {ic:\"🖌️\", h:\"비문 변조\", p:"
+ },
+ "js_107": {
+  "t": "끊어 읽기",
+  "ctx": "海’로 바꿨습니다.\", src:\"namu\"},   {ic:\"✂️\", h:"
+ },
+ "js_108": {
+  "t": "한자는 어디서 끊느냐로 뜻이 바뀝니다. ‘아버지가 방에’와 ‘아버지 가방에’처럼요.",
+  "ctx": ", src:\"namu\"},   {ic:\"✂️\", h:\"끊어 읽기\", p:"
+ },
+ "js_109": {
+  "t": "저자가 든 변조의 증거 구절. 탁본을 근거로 원형과 조작의 흔적을 규명합니다.",
+  "ctx": ".\", src:\"nung\"},   {ic:\"🔍\", h:\"倭寇□潰\", p:"
+ },
+ "js_110": {
+  "t": "창원 용지공원에 모형, 진품은 국립중앙박물관. 또 다른 역사 왜곡의 무대입니다.",
+  "ctx": ", src:\"namu\"},   {ic:\"🏯\", h:\"진경대사탑비\", p:"
+ },
+ "js_111": {
+  "t": "신김씨와 임나 왕족",
+  "ctx": "왜곡의 무대입니다.\", src:\"tapbi\"},   {ic:\"👑\", h:"
+ },
+ "js_112": {
+  "t": "대사의 선조는 임나 왕족, 원조는 흥무대왕(김유신). ‘草拔聖枝’ 해석이 열쇠입니다.",
+  "ctx": ":\"tapbi\"},   {ic:\"👑\", h:\"신김씨와 임나 왕족\", p:"
+ },
+ "js_113": {
+  "t": "쟁점과 균형",
+  "ctx": " 해석이 열쇠입니다.\", src:\"kim\"},   {ic:\"⚖️\", h:"
+ },
+ "js_114": {
+  "t": "신묘년조와 비문 조작을 별개로 보는 시각 등, 논쟁의 여러 결도 함께 알아 둡니다.",
+  "ctx": ", src:\"kim\"},   {ic:\"⚖️\", h:\"쟁점과 균형\", p:"
+ },
+ "js_115": {
+  "t": "서문",
+  "ctx": "/* 목차(클릭하면 요약 오픈) */ const TOC = [   {n:"
+ },
+ "js_116": {
+  "t": "가야에서 임나, 그리고 능비로",
+  "ctx": "하면 요약 오픈) */ const TOC = [   {n:\"서문\", t:"
+ },
+ "js_117": {
+  "t": "저자는 역사학자가 아니라 김해에서 포교하던 승려(사문 도명)입니다.",
+  "ctx": "야에서 임나, 그리고 능비로\", beats:[     {e:\"🙏\", x:"
+ },
+ "js_118": {
+  "t": "가야와 가야불교의 역사를 접하다가 ‘임나(任那)’ 문제와 마주칩니다.",
+  "ctx": "해에서 포교하던 승려(사문 도명)입니다.\"},     {e:\"🏺\", x:"
+ },
+ "js_119": {
+  "t": "임나 기록을 따라가다 광개토태왕릉비까지 살펴보게 됩니다.",
+  "ctx": "다가 ‘임나(任那)’ 문제와 마주칩니다.\"},     {e:\"🗿\", x:"
+ },
+ "js_120": {
+  "t": "‘일제가 어떻게 역사를 왜곡했는가’를 자료와 비문으로 조목조목 밝히는 여정이 시작됩니다.",
+  "ctx": "가다 광개토태왕릉비까지 살펴보게 됩니다.\"},     {e:\"🎯\", x:"
+ },
+ "js_121": {
+  "t": "1부 1~2장",
+  "ctx": " 비문으로 조목조목 밝히는 여정이 시작됩니다.\"},   ]},   {n:"
+ },
+ "js_122": {
+  "t": "한국 고대사 최대 이슈 · 신묘년 기사",
+  "ctx": "는 여정이 시작됩니다.\"},   ]},   {n:\"1부 1~2장\", t:"
+ },
+ "js_123": {
+  "t": "변조된 당대의 기록으로서 능비가 세상에 다시 출현합니다.",
+  "ctx": " 최대 이슈 · 신묘년 기사\", beats:[     {e:\"📖\", x:"
+ },
+ "js_124": {
+  "t": "정복 군주 광개토태왕의 일생과 능비의 가치를 짚습니다.",
+  "ctx": "록으로서 능비가 세상에 다시 출현합니다.\"},     {e:\"👑\", x:"
+ },
+ "js_125": {
+  "t": "임나일본부의 ‘첫 번째 근거’로 능비가 어떻게 쓰였는지 봅니다.",
+  "ctx": "태왕의 일생과 능비의 가치를 짚습니다.\"},     {e:\"⚔️\", x:"
+ },
+ "js_126": {
+  "t": "논란의 신묘년 기사와 변조의 증거 ‘倭寇□潰’를 파헤칩니다.",
+  "ctx": "근거’로 능비가 어떻게 쓰였는지 봅니다.\"},     {e:\"🔍\", x:"
+ },
+ "js_127": {
+  "t": "문맥의 모순과 변조 방식, 그리고 여러 해석들을 비교합니다.",
+  "ctx": " 변조의 증거 ‘倭寇□潰’를 파헤칩니다.\"},     {e:\"🧩\", x:"
+ },
+ "js_128": {
+  "t": "1부 3~4장",
+  "ctx": "변조 방식, 그리고 여러 해석들을 비교합니다.\"},   ]},   {n:"
+ },
+ "js_129": {
+  "t": "비문을 복원하다 · 변조의 목적",
+  "ctx": " 해석들을 비교합니다.\"},   ]},   {n:\"1부 3~4장\", t:"
+ },
+ "js_130": {
+  "t": "신묘년 기사를 복원하고, 변조의 핵심 〈병신년조〉의 ‘討倭殘國’을 분석합니다.",
+  "ctx": " 복원하다 · 변조의 목적\", beats:[     {e:\"🛠️\", x:"
+ },
+ "js_131": {
+  "t": "신묘년·경자년 기사를 뒷받침하는 문헌 기록들을 모읍니다.",
+  "ctx": "〈병신년조〉의 ‘討倭殘國’을 분석합니다.\"},     {e:\"📚\", x:"
+ },
+ "js_132": {
+  "t": "변조의 목적을 ‘정한론과 요코이 타다나오’에서 찾습니다.",
+  "ctx": "사를 뒷받침하는 문헌 기록들을 모읍니다.\"},     {e:\"🗾\", x:"
+ },
+ "js_133": {
+  "t": "탁본이 말하는 진실, ‘바다를 건넌 고구려’, 각국의 역학 구도를 정리합니다.",
+  "ctx": "한론과 요코이 타다나오’에서 찾습니다.\"},     {e:\"🖨️\", x:"
+ },
+ "js_134": {
+  "t": "1부 5~6장",
+  "ctx": "넌 고구려’, 각국의 역학 구도를 정리합니다.\"},   ]},   {n:"
+ },
+ "js_135": {
+  "t": "임나의 위치 · 주요 쟁점",
+  "ctx": "학 구도를 정리합니다.\"},   ]},   {n:\"1부 5~6장\", t:"
+ },
+ "js_136": {
+  "t": "한일 고대사의 화두 임나 — 대마도 설과 규슈 설을 검토합니다.",
+  "ctx": "임나의 위치 · 주요 쟁점\", beats:[     {e:\"🗺️\", x:"
+ },
+ "js_137": {
+  "t": "〈숭신 65년조〉의 계림 위치로 임나의 방위를 따집니다.",
+  "ctx": " — 대마도 설과 규슈 설을 검토합니다.\"},     {e:\"🧭\", x:"
+ },
+ "js_138": {
+  "t": "임나가 이동했음을 ‘전기 임나·후기 임나’로 설명합니다.",
+  "ctx": "의 계림 위치로 임나의 방위를 따집니다.\"},     {e:\"🔄\", x:"
+ },
+ "js_139": {
+  "t": "속민과 신민, 종발성과 안라인수병, 신라성의 위치를 두고 다툽니다.",
+  "ctx": " ‘전기 임나·후기 임나’로 설명합니다.\"},     {e:\"📝\", x:"
+ },
+ "js_140": {
+  "t": "고구려 남정(南征)과 가야 쇠락, 올바른 비명·편년 바로잡기로 이어집니다.",
+  "ctx": "인수병, 신라성의 위치를 두고 다툽니다.\"},     {e:\"🏇\", x:"
+ },
+ "js_141": {
+  "t": "1부 7장",
+  "ctx": "락, 올바른 비명·편년 바로잡기로 이어집니다.\"},   ]},   {n:"
+ },
+ "js_142": {
+  "t": "부활하는 태왕의 꿈",
+  "ctx": "년 바로잡기로 이어집니다.\"},   ]},   {n:\"1부 7장\", t:"
+ },
+ "js_143": {
+  "t": "태왕의 부활과 그에 대한 일본의 태도를 짚습니다.",
+  "ctx": ", t:\"부활하는 태왕의 꿈\", beats:[     {e:\"🌅\", x:"
+ },
+ "js_144": {
+  "t": "능비를 한민족 자긍심의 표석(標石)으로 자리매김합니다.",
+  "ctx": "활과 그에 대한 일본의 태도를 짚습니다.\"},     {e:\"🪧\", x:"
+ },
+ "js_145": {
+  "t": "1부 끝에 광개토태왕릉비 요약 및 석문(釋文)을 정리합니다.",
+  "ctx": "자긍심의 표석(標石)으로 자리매김합니다.\"},     {e:\"📄\", x:"
+ },
+ "js_146": {
+  "t": "2부",
+  "ctx": "토태왕릉비 요약 및 석문(釋文)을 정리합니다.\"},   ]},   {n:"
+ },
+ "js_147": {
+  "t": "진경대사탑비 — 또 다른 왜곡",
+  "ctx": " 및 석문(釋文)을 정리합니다.\"},   ]},   {n:\"2부\", t:"
+ },
+ "js_148": {
+  "t": "탑비의 개관과 내용, 신김씨·임나 왕족·흥무대왕(김유신)을 소개합니다.",
+  "ctx": "경대사탑비 — 또 다른 왜곡\", beats:[     {e:\"🏯\", x:"
+ },
+ "js_149": {
+  "t": "대사의 선조와 임나 왕족 ‘草拔聖枝’, 선조 초발성지의 투항을 다룹니다.",
+  "ctx": "나 왕족·흥무대왕(김유신)을 소개합니다.\"},     {e:\"🌿\", x:"
+ },
+ "js_150": {
+  "t": "『송서』 〈왜국조〉의 임나 기록과 ‘草拔’의 풀이로 임나의 위치를 추적합니다.",
+  "ctx": "枝’, 선조 초발성지의 투항을 다룹니다.\"},     {e:\"📜\", x:"
+ },
+ "js_151": {
+  "t": "‘草拔聖枝’가 인명이면 안 되었던 이유, 투항 대상이 신라인 이유를 밝힙니다.",
+  "ctx": "拔’의 풀이로 임나의 위치를 추적합니다.\"},     {e:\"🎯\", x:"
+ },
+ "js_152": {
+  "t": "에필로그",
+  "ctx": " 이유, 투항 대상이 신라인 이유를 밝힙니다.\"},   ]},   {n:"
+ },
+ "js_153": {
+  "t": "비문 전쟁의 뒷이야기",
+  "ctx": "이 신라인 이유를 밝힙니다.\"},   ]},   {n:\"에필로그\", t:"
+ },
+ "js_154": {
+  "t": "등소평의 흑묘백묘론 — ‘쥐만 잘 잡으면 된다’로 역사 탐구의 자격을 말합니다.",
+  "ctx": " t:\"비문 전쟁의 뒷이야기\", beats:[     {e:\"🐱\", x:"
+ },
+ "js_155": {
+  "t": "역사는 사학자의 전유물이 아니다 — 진정성과 중단 없는 탐구가 곧 자격입니다.",
+  "ctx": " 된다’로 역사 탐구의 자격을 말합니다.\"},     {e:\"🔥\", x:"
+ },
+ "js_156": {
+  "t": "글자 하나를 바꿔도 진실은 끝내 숨길 수 없다는 확신으로 책을 맺습니다.",
+  "ctx": "성과 중단 없는 탐구가 곧 자격입니다.\"},     {e:\"🕯️\", x:"
+ },
+ "js_157": {
+  "t": "‘아버지 가방에 들어가셨다’",
+  "ctx": "볼 사례 3 */ const CASES = [   {ic:\"✂️\", t:"
+ },
+ "js_158": {
+  "t": "‘아버지가 방에’를 ‘아버지 가방에’로 잘못 끊으면 뜻이 통째로 달라집니다. 한자 비문에서 끊어 읽기가 왜 결정적인지 보여 주는 비유입니다.",
+  "ctx": " = [   {ic:\"✂️\", t:\"‘아버지 가방에 들어가셨다’\", d:"
+ },
+ "js_159": {
+  "t": "사소해 보이는 해석 하나가 역사 전체를 바꿀 수 있음을 실감하게 합니다.",
+  "ctx": " 비문에서 끊어 읽기가 왜 결정적인지 보여 주는 비유입니다.\", why:"
+ },
+ "js_160": {
+  "t": "‘二’가 ‘海’로 바뀌던 순간",
+  "ctx": "전체를 바꿀 수 있음을 실감하게 합니다.\"},   {ic:\"🖌️\", t:"
+ },
+ "js_161": {
+  "t": "일제가 원래의 ‘二’ 자를 ‘海’ 자로 변조하자 끊어 읽기와 문맥이 통째로 꼬였습니다. 단 한 글자의 조작이 왜곡의 도구가 된 사례입니다.",
+  "ctx": "\"},   {ic:\"🖌️\", t:\"‘二’가 ‘海’로 바뀌던 순간\", d:"
+ },
+ "js_162": {
+  "t": "글자 하나의 변조가 어떻게 거대한 역사 왜곡으로 이어지는지 보여 줍니다.",
+  "ctx": "습니다. 단 한 글자의 조작이 왜곡의 도구가 된 사례입니다.\", why:"
+ },
+ "js_163": {
+  "t": "김유신이 임나 왕족?",
+  "ctx": "한 역사 왜곡으로 이어지는지 보여 줍니다.\"},   {ic:\"👑\", t:"
+ },
+ "js_164": {
+  "t": "일부 학자는 진경대사탑비의 틀린 풀이로 가야를 임나로, 김유신을 임나 왕족으로 잘못 인식했습니다. 비문 해석이 정체성 문제로 직결된 사례입니다.",
+  "ctx": "여 줍니다.\"},   {ic:\"👑\", t:\"김유신이 임나 왕족?\", d:"
+ },
+ "js_165": {
+  "t": "비문 한 줄의 풀이가 민족의 뿌리 인식까지 흔들 수 있음을 보여 줍니다.",
+  "ctx": "인식했습니다. 비문 해석이 정체성 문제로 직결된 사례입니다.\", why:"
+ },
+ "js_166": {
+  "t": "글자 하나·끊어 읽기 하나가 역사를 바꾼다면, 우리가 ‘사실’이라 믿는 기록은 얼마나 단단한가?",
+  "ctx": "책이 우리에게 던지는 질문 3 */ const ASKS = [   {q:"
+ },
+ "js_167": {
+  "t": "모든 사료는 해석을 거칩니다. 누가, 왜 그렇게 끊어 읽었는지를 함께 물어야 합니다.",
+  "ctx": "를 바꾼다면, 우리가 ‘사실’이라 믿는 기록은 얼마나 단단한가?\", h:"
+ },
+ "js_168": {
+  "t": "역사는 사학자만의 것인가? 전공이 없어도 진실을 밝힐 자격은 무엇으로 정해지는가?",
+  "ctx": " 누가, 왜 그렇게 끊어 읽었는지를 함께 물어야 합니다.\"},   {q:"
+ },
+ "js_169": {
+  "t": "저자의 답은 ‘진정성과 중단 없는 탐구’입니다. 흑묘백묘론의 뜻을 곱씹어 보세요.",
+  "ctx": "것인가? 전공이 없어도 진실을 밝힐 자격은 무엇으로 정해지는가?\", h:"
+ },
+ "js_170": {
+  "t": "임나일본부설처럼 ‘목적이 앞선 학설’ 앞에서, 우리는 무엇으로 진위를 가려낼 수 있을까?",
+  "ctx": "단 없는 탐구’입니다. 흑묘백묘론의 뜻을 곱씹어 보세요.\"},   {q:"
+ },
+ "js_171": {
+  "t": "문맥·문법·탁본 같은 교차 근거가 왜곡을 걷어내는 무기가 됩니다.",
+  "ctx": "앞선 학설’ 앞에서, 우리는 무엇으로 진위를 가려낼 수 있을까?\", h:"
+ },
+ "js_172": {
+  "t": "🏯 비문 전쟁의 승자",
+  "ctx": ");   let rank, sub;   if(acc>=90){ rank="
+ },
+ "js_173": {
+  "t": "비문의 진실을 완벽히 꿰뚫었습니다",
+  "ctx": "   if(acc>=90){ rank='🏯 비문 전쟁의 승자'; sub="
+ },
+ "js_174": {
+  "t": "📜 비문 해독가",
+  "ctx": "완벽히 꿰뚫었습니다'; }   else if(acc>=75){ rank="
+ },
+ "js_175": {
+  "t": "핵심 쟁점을 거의 다 잡았어요",
+  "ctx": " else if(acc>=75){ rank='📜 비문 해독가'; sub="
+ },
+ "js_176": {
+  "t": "🔍 탁본 탐사가",
+  "ctx": " 거의 다 잡았어요'; }   else if(acc>=55){ rank="
+ },
+ "js_177": {
+  "t": "뼈대를 익혔습니다 — 한 번 더!",
+  "ctx": " else if(acc>=55){ rank='🔍 탁본 탐사가'; sub="
+ },
+ "js_178": {
+  "t": "🕯️ 진실을 찾는 사문",
+  "ctx": "b='뼈대를 익혔습니다 — 한 번 더!'; }   else { rank="
+ },
+ "js_179": {
+  "t": "반복할수록 점수가 오릅니다",
+  "ctx": "!'; }   else { rank='🕯️ 진실을 찾는 사문'; sub="
+ },
+ "js_180": {
+  "t": "완독 리포트",
+  "ctx": "onst fname = ((h2 && h2.textContent) || "
+ },
+ "js_181": {
+  "t": "한눈에 보기",
+  "ctx": "&& h2.textContent) || '완독 리포트').replace("
+ },
+ "js_182": {
+  "t": "리포트.pdf",
+  "ctx": "'완독 리포트').replace('한눈에 보기','').trim() + "
+ },
+ "js_183": {
+  "t": "📄 PDF 만드는 중…",
+  "ctx": "tn){ btn.disabled=true; btn.textContent="
+ },
+ "js_184": {
+  "t": "PDF 생성 중 문제가 발생했어요. 이 HTML 파일을 내려받아 브라우저에서 직접 열고 다시 눌러 주세요.",
+  "ctx": "     }   }).catch(function(){     alert("
+ },
+ "js_185": {
+  "t": "무료로는 <b>",
+  "ctx": "t = TOTAL_Q - fl;       msg.innerHTML = "
+ },
+ "js_186": {
+  "t": "문항</b>까지 풀 수 있어요.",
+  "ctx": "fl;       msg.innerHTML = '무료로는 <b>'+fl+"
+ },
+ "js_187": {
+  "t": "나머지 <b>",
+  "ctx": " <b>'+fl+'문항</b>까지 풀 수 있어요. ' +         "
+ },
+ "js_188": {
+  "t": "문항</b>과 <b>완독 요약 리포트</b>는 구독자 전용입니다.",
+  "ctx": ">까지 풀 수 있어요. ' +         '나머지 <b>'+rest+"
+ },
+ "js_189": {
+  "t": "지금까지 쌓은 <b>비문 진실 복원도</b>는 위 게이지에 그대로 남아 있어요.",
+  "ctx": "b>완독 요약 리포트</b>는 구독자 전용입니다. ' +         "
+ },
+ "js_190": {
+  "t": "<h3>완독 리포트 전체는 구독자 전용이에요</h3>",
+  "ctx": " = '<div class=\"lk-ic\">🔒</div>' +       "
+ },
+ "js_191": {
+  "t": "<p>인과의 사슬과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>",
+  "ctx": "'<h3>완독 리포트 전체는 구독자 전용이에요</h3>' +       "
+ },
+ "js_192": {
+  "t": "목차 요약 · 사례 · 질문 · 약점 복습 · PDF 저장은 구독하면 모두 열립니다.</p>",
+  "ctx": "과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>' +       "
+ },
+ "js_193": {
+  "t": "\" target=\"_blank\" rel=\"noopener\">🔑 구독하고 완독 리포트 전체 열기</a>",
+  "ctx": "     '<a class=\"cta\" href=\"' + _sub() + "
+ },
+ "js_194": {
+  "t": "비문전쟁",
+  "ctx": " 250, '120px serif', '#e0b13e');   ctxt("
+ },
+ "js_195": {
+  "t": "통천 도명 · 고대사 대탐사 마스터 퀴즈",
+  "ctx": "to Serif KR\",serif', '#efe6d4');   ctxt("
+ },
+ "js_196": {
+  "t": "📚 매일 새 책 퀴즈  ·",
+  "ctx": "(/^https?:\\/\\//,'') : '';   if(su) ctxt("
+ },
+ "js_197": {
+  "t": "비문전쟁_퀴즈결과.png",
+  "ctx": "nt('a');     a.href = url; a.download = "
+ },
+ "js_198": {
+  "t": "💌 VIP 초대 —",
+  "ctx": "ursor:pointer;\";     d.textContent=(vip?"
+ },
+ "js_199": {
+  "t": "🎁 지금 이 책 풀버전 무료 오픈 중!",
+  "ctx": "\";     d.textContent=(vip?\"💌 VIP 초대 — \":"
+ },
+ "js_200": {
+  "t": "전체판(잠금 없음)으로 이동 →",
+  "ctx": "\"💌 VIP 초대 — \":\"🎁 지금 이 책 풀버전 무료 오픈 중! \")+"
+ },
+ "jst_001": {
+  "t": "아직",
+  "ctx": "3:30};    let pending = [];          // "
+ },
+ "jst_002": {
+  "t": "처음으로 정답",
+  "ctx": "};    let pending = [];          // 아직 ‘"
+ },
+ "jst_003": {
+  "t": "을 못 낸 문항 큐",
+  "ctx": "t pending = [];          // 아직 ‘처음으로 정답’"
+ },
+ "jst_004": {
+  "t": "앞에서 꺼냄",
+  "ctx": "[];          // 아직 ‘처음으로 정답’을 못 낸 문항 큐 ("
+ },
+ "jst_005": {
+  "t": "시도 횟수",
+  "ctx": "(); let attempts = {};         // id -> "
+ },
+ "jst_006": {
+  "t": "첫 시도에 틀린 문항",
+  "ctx": " 0; let firstWrongIds = new Set();   // "
+ },
+ "jst_007": {
+  "t": "약점",
+  "ctx": "rongIds = new Set();   // 첫 시도에 틀린 문항 = "
+ },
+ "jst_008": {
+  "t": "집중 복습 대상",
+  "ctx": "gIds = new Set();   // 첫 시도에 틀린 문항 = 약점("
+ },
+ "jst_009": {
+  "t": "세션 내 최고 점수",
+  "ctx": "r = null; let bestScore = 0;         // "
+ },
+ "jst_010": {
+  "t": "재도전 비교용,",
+  "ctx": "t bestScore = 0;         // 세션 내 최고 점수 ("
+ },
+ "jst_011": {
+  "t": "미사용",
+  "ctx": "   // 세션 내 최고 점수 (재도전 비교용, localStorage "
+ },
+ "jst_012": {
+  "t": "복습 정답은 절반 점수",
+  "ctx": " gain = Math.round(gain/2);          // "
+ },
+ "jst_013": {
+  "t": "콤보 보너스",
+  "ctx": " (streak>=2) ? (streak-1)*3 : 0;     // "
+ },
+ "jst_014": {
+  "t": "가 아니어도 최종적으로 익힌 것으로 카운트",
+  "ctx": " masteredIds.add(id);          // ‘처음으로’"
+ },
+ "jst_015": {
+  "t": "큐에서 제거",
+  "ctx": "운트     pending.shift();              // "
+ },
+ "jst_016": {
+  "t": "연속 정답!",
+  "ctx": "      comboEl.textContent = `🔥 ${streak}"
+ },
+ "jst_017": {
+  "t": "보너스",
+  "ctx": "tContent = `🔥 ${streak}연속 정답! +${bonus} "
+ },
+ "jst_018": {
+  "t": "약점으로 기록",
+  "ctx": "f(firstTry) firstWrongIds.add(id);   // "
+ },
+ "jst_019": {
+  "t": "왜 생각해볼 만한가",
+  "ctx": "= >${c.d}</div>       <div class= >💭 <b>"
+ },
+ "jst_020": {
+  "t": "첫 시도에 모두 정답!",
+  "ctx": " ;     list.innerHTML = `<div class= >🌟 "
+ },
+ "jst_021": {
+  "t": "약점이 없어 따로 복습할 항목이 없습니다. 멋져요.",
+  "ctx": "TML = `<div class= >🌟 첫 시도에 모두 정답!<span>"
+ },
+ "jst_022": {
+  "t": "개",
+  "ctx": " {     cnt.textContent = `(${ids.length}"
+ },
+ "jst_023": {
+  "t": "정답",
+  "ctx": "= >Q. ${q.q}</div>         <div class= >"
+ },
+ "jst_024": {
+  "t": "최고 점수 경신!",
+  "ctx": "re;     note.innerHTML = prev>0 ? `🏆 <b>"
+ },
+ "jst_025": {
+  "t": "이전",
+  "ctx": "nerHTML = prev>0 ? `🏆 <b>최고 점수 경신!</b> ("
+ },
+ "jst_026": {
+  "t": "점",
+  "ctx": "prev>0 ? `🏆 <b>최고 점수 경신!</b> (이전 ${prev}"
+ },
+ "jst_027": {
+  "t": "첫 기록",
+  "ctx": "`🏆 <b>최고 점수 경신!</b> (이전 ${prev}점)` : `🏆 "
+ },
+ "jst_028": {
+  "t": "다시 도전해 깨보세요!",
+  "ctx": "${prev}점)` : `🏆 첫 기록 <b>${score}점</b> — "
+ },
+ "jst_029": {
+  "t": "현재 최고 점수",
+  "ctx": "보세요!`;   } else {     note.innerHTML = `"
+ },
+ "jst_030": {
+  "t": "이번엔",
+  "ctx": "HTML = `현재 최고 점수 <b>${bestScore}점</b> · "
+ }
+}

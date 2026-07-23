@@ -1,0 +1,1198 @@
+{
+ "_meta": {
+  "source": "apps/퓨처셀프_teaser.html",
+  "slug": "퓨처셀프_teaser"
+ },
+ "title_001": {
+  "t": "총·균·쇠 도파민 마스터 퀴즈",
+  "ctx": "<title>"
+ },
+ "html_001": {
+  "t": "벤저민 하디 · 2022 · 미래 자아 심리학",
+  "ctx": "class=\"hero\">       <div class=\"eyebrow\""
+ },
+ "html_002": {
+  "t": "미",
+  "ctx": "   <div class=\"pillars\"><span class=\"p1\""
+ },
+ "html_003": {
+  "t": "래",
+  "ctx": "span class=\"p1\">미</span><span class=\"p2\""
+ },
+ "html_004": {
+  "t": "나",
+  "ctx": "span class=\"p2\">래</span><span class=\"p3\""
+ },
+ "html_005": {
+  "t": "현재와 미래가 달라지는 놀라운 혁명",
+  "ctx": "ass=\"p3\">나</span></div>       <h1><small"
+ },
+ "html_006": {
+  "t": "퓨처 셀프 마스터 퀴즈",
+  "ctx": "   <h1><small>현재와 미래가 달라지는 놀라운 혁명</small"
+ },
+ "html_007": {
+  "t": "“과거가 아니라, 미래의 내가 지금의 나를 이끈다.",
+  "ctx": " 셀프 마스터 퀴즈</h1>       <div class=\"quote\""
+ },
+ "html_008": {
+  "t": "그러니 미래의 나를 지금 이 순간부터 살아라.”",
+  "ctx": "         “과거가 아니라, 미래의 내가 지금의 나를 이끈다.<br"
+ },
+ "html_009": {
+  "t": "— 『퓨처 셀프』의 핵심 메시지",
+  "ctx": "러니 미래의 나를 지금 이 순간부터 살아라.”<br>         <b"
+ },
+ "html_010": {
+  "t": "미래의 나가 현재를 만든다는 원리·연구·키워드를",
+  "ctx": "퓨처 셀프』의 핵심 메시지</b>       </div>       <p"
+ },
+ "html_011": {
+  "t": "30개의 퀴즈",
+  "ctx": ">       <p>미래의 나가 현재를 만든다는 원리·연구·키워드를 <b"
+ },
+ "html_012": {
+  "t": "로 익힙니다.\n        쉬운 것부터 시작해 점점 어려워지고,",
+  "ctx": "미래의 나가 현재를 만든다는 원리·연구·키워드를 <b>30개의 퀴즈</b"
+ },
+ "html_013": {
+  "t": "틀린 문제는 맞힐 때까지 다시 돌아옵니다.",
+  "ctx": ">로 익힙니다.         쉬운 것부터 시작해 점점 어려워지고, <b"
+ },
+ "html_014": {
+  "t": "총",
+  "ctx": "s=\"meta-row\">         <span class=\"chip\""
+ },
+ "html_015": {
+  "t": "30문항",
+  "ctx": "ta-row\">         <span class=\"chip\">총 <b"
+ },
+ "html_016": {
+  "t": "쉬움 → 어려움",
+  "ctx": "문항</b></span>         <span class=\"chip\""
+ },
+ "html_017": {
+  "t": "실시간",
+  "ctx": "어려움</span>         <span class=\"chip\"><b"
+ },
+ "html_018": {
+  "t": "성장도",
+  "ctx": "an>         <span class=\"chip\"><b>실시간</b"
+ },
+ "html_019": {
+  "t": "문제마다",
+  "ctx": "b> 성장도</span>         <span class=\"chip\""
+ },
+ "html_020": {
+  "t": "쉬운 해설",
+  "ctx": "span>         <span class=\"chip\">문제마다 <b"
+ },
+ "html_021": {
+  "t": "미래의 나 만나기 →",
+  "ctx": "=\"btn btn-primary\" onclick=\"startQuiz()\""
+ },
+ "html_022": {
+  "t": "점수",
+  "ctx": "   <div class=\"stat\"><span class=\"label\""
+ },
+ "html_023": {
+  "t": "연속 정답",
+  "ctx": "align-items:center;\"><span class=\"label\""
+ },
+ "html_024": {
+  "t": "마스터",
+  "ctx": "ign-items:flex-end;\"><span class=\"label\""
+ },
+ "html_025": {
+  "t": "현재의 나 ←",
+  "ctx": "\">         <div class=\"axis-label\"><span"
+ },
+ "html_026": {
+  "t": "미래의 나로 성장 ·",
+  "ctx": "s=\"axis-label\"><span>현재의 나 ←</span><span"
+ },
+ "html_027": {
+  "t": "→ 미래의 나",
+  "ctx": "로 성장 · <b id=\"pctTxt\">0%</b></span><span"
+ },
+ "html_028": {
+  "t": "쉬움",
+  "ctx": "d\">         <span class=\"diff\" id=\"diff\""
+ },
+ "html_029": {
+  "t": "다음 →",
+  "ctx": "y\" id=\"nextBtn\" onclick=\"nextQuestion()\""
+ },
+ "html_030": {
+  "t": "여기까지가 무료 미리보기예요",
+  "ctx": ">     <div class=\"lk-ic\">🔒</div>     <h3"
+ },
+ "html_031": {
+  "t": "🔑 구독하고 전체 열기",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_032": {
+  "t": "요약 리포트 미리보기 →",
+  "ctx": "class=\"cta ghost\" onclick=\"openReport()\""
+ },
+ "html_033": {
+  "t": "미래 자아 설계자",
+  "ctx": ">       <div class=\"rank\" id=\"rankTitle\""
+ },
+ "html_034": {
+  "t": "최종 점수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_035": {
+  "t": "첫 시도 정답률",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_036": {
+  "t": "최고 연속 정답",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_037": {
+  "t": "총 도전 횟수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_038": {
+  "t": "📖 전체 요약 리포트 보기",
+  "ctx": "\"btn btn-primary\" onclick=\"openReport()\""
+ },
+ "html_039": {
+  "t": "🖼 결과 카드 저장",
+  "ctx": "btn btn-ghost\" onclick=\"makeShareCard()\""
+ },
+ "html_040": {
+  "t": "다시 도전 ↻",
+  "ctx": "ss=\"btn btn-ghost\" onclick=\"startQuiz()\""
+ },
+ "html_041": {
+  "t": "처음으로",
+  "ctx": "class=\"btn btn-ghost\" onclick=\"goHome()\""
+ },
+ "html_042": {
+  "t": "완독 리포트 · INFOGRAPHIC",
+  "ctx": "s=\"rep-hero\">       <div class=\"eyebrow\""
+ },
+ "html_043": {
+  "t": "퓨처 셀프 한눈에 보기",
+  "ctx": "ow\">완독 리포트 · INFOGRAPHIC</div>       <h2"
+ },
+ "html_044": {
+  "t": "책 전체를",
+  "ctx": "iv>       <h2>퓨처 셀프 한눈에 보기</h2>       <p"
+ },
+ "html_045": {
+  "t": "‘미래 → 현재의 사슬’",
+  "ctx": " <h2>퓨처 셀프 한눈에 보기</h2>       <p>책 전체를 <b"
+ },
+ "html_046": {
+  "t": "로 꿰면 절대 안 잊습니다. 모든 것의 출발점은",
+  "ctx": "</h2>       <p>책 전체를 <b>‘미래 → 현재의 사슬’</b"
+ },
+ "html_047": {
+  "t": "미래의 나",
+  "ctx": "현재의 사슬’</b>로 꿰면 절대 안 잊습니다. 모든 것의 출발점은 <b"
+ },
+ "html_048": {
+  "t": "입니다.",
+  "ctx": "b>로 꿰면 절대 안 잊습니다. 모든 것의 출발점은 <b>미래의 나</b"
+ },
+ "html_049": {
+  "t": "큰 전제",
+  "ctx": "<div class=\"ch step s0\"><span class=\"cn\""
+ },
+ "html_050": {
+  "t": "🧭 미래가 현재를 이끈다",
+  "ctx": " step s0\"><span class=\"cn\">큰 전제</span><b"
+ },
+ "html_051": {
+  "t": "과거가 아니라 미래의 나가 오늘을 만든다",
+  "ctx": "n\">큰 전제</span><b>🧭 미래가 현재를 이끈다</b><small"
+ },
+ "html_052": {
+  "t": "1단계",
+  "ctx": "<div class=\"ch step s1\"><span class=\"cn\""
+ },
+ "html_053": {
+  "t": "🔭 미래를 상상하는 존재(호모 프로스펙투스)",
+  "ctx": "h step s1\"><span class=\"cn\">1단계</span><b"
+ },
+ "html_054": {
+  "t": "인간은 미래에 이끌려 오늘을 산다",
+  "ctx": "an><b>🔭 미래를 상상하는 존재(호모 프로스펙투스)</b><small"
+ },
+ "html_055": {
+  "t": "2단계",
+  "ctx": "<div class=\"ch step s2\"><span class=\"cn\""
+ },
+ "html_056": {
+  "t": "⚠️ 미래의 나를 위협하는 7가지 걷어내기",
+  "ctx": "h step s2\"><span class=\"cn\">2단계</span><b"
+ },
+ "html_057": {
+  "t": "희망 없음·과거 서사·단절·성공의 함정",
+  "ctx": "pan><b>⚠️ 미래의 나를 위협하는 7가지 걷어내기</b><small"
+ },
+ "html_058": {
+  "t": "근접 원리",
+  "ctx": "s=\"ch step s3\">         <span class=\"cn\""
+ },
+ "html_059": {
+  "t": "🎨 생생하게 그리고 · 🚶 지금 그 사람처럼",
+  "ctx": "         <span class=\"cn\">근접 원리</span><b"
+ },
+ "html_060": {
+  "t": "구체적 목표 · 환경 설계 · 게인으로 측정",
+  "ctx": "생하게 그리고 · 🚶 지금 그 사람처럼</b>         <small"
+ },
+ "html_061": {
+  "t": "결과",
+  "ctx": "<div class=\"ch step s4\"><span class=\"cn\""
+ },
+ "html_062": {
+  "t": "🚀 미래의 나가 현실이 된다",
+  "ctx": "ch step s4\"><span class=\"cn\">결과</span><b"
+ },
+ "html_063": {
+  "t": "“미래의 나를 지금 이 순간부터 살아라”",
+  "ctx": "n\">결과</span><b>🚀 미래의 나가 현실이 된다</b><small"
+ },
+ "html_064": {
+  "t": "핵심 개념 8",
+  "ctx": "/div>     </div>      <h3 class=\"rep-h3\""
+ },
+ "html_065": {
+  "t": "목차 한눈에 보기",
+  "ctx": "concepts\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_066": {
+  "t": "탭하면 요약이 열립니다",
+  "ctx": "ss=\"rep-h3\">목차 한눈에 보기 <span class=\"hint\""
+ },
+ "html_067": {
+  "t": "책 속, 생각해볼 사례 3",
+  "ctx": " id=\"toc\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_068": {
+  "t": "이 책이 우리에게 던지는 질문 3",
+  "ctx": "d=\"cases\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_069": {
+  "t": "내가 틀린 부분 집중 복습",
+  "ctx": " id=\"weakWrap\">       <h3 class=\"rep-h3\""
+ },
+ "html_070": {
+  "t": "📺 더 깊이 알고 싶다면",
+  "ctx": "/div>      <div class=\"deepen\">       <b"
+ },
+ "html_071": {
+  "t": "에서 벤저민 하디의 미래 자아 이야기를 더 볼 수 있습니다.",
+  "ctx": "f=\"#\" target=\"_blank\" rel=\"noopener\"></a"
+ },
+ "html_072": {
+  "t": "📄 PDF로 저장",
+  "ctx": "d=\"pdfBtn\" onclick=\"downloadReportPDF()\""
+ },
+ "html_073": {
+  "t": "결과로",
+  "ctx": "\"btn btn-ghost\" onclick=\"show('result')\""
+ },
+ "html_074": {
+  "t": "📚 다른 책 퀴즈 보기 →",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_075": {
+  "t": "“의미와재미공장” 미미팩토리",
+  "ctx": "class=\"footer\">     <div class=\"factory\""
+ },
+ "html_076": {
+  "t": "(주식회사 연:결 패밀리회사)",
+  "ctx": "재미공장” 미미팩토리</div>     <div class=\"affil\""
+ },
+ "html_077": {
+  "t": "책의 핵심을 도파민으로 익히는 반복 마스터 퀴즈",
+  "ctx": ":결 패밀리회사)</div>     <div class=\"tagline\""
+ },
+ "html_078": {
+  "t": "본 앱은 도서의 핵심 개념을 학습 목적으로 재구성한 2차적 학습 콘텐츠입니다. 온전한 독서 경험은 원서로 만나보세요.",
+  "ctx": "퀴즈</div>     <div class=\"copyright-note\""
+ },
+ "html_079": {
+  "t": "퓨처 셀프 · 도서 정보",
+  "ctx": "23548193\" target=\"_blank\" rel=\"noopener\""
+ },
+ "js_001": {
+  "t": "\"}))}},Hn={name:\"font-size\",initialValue:\"0\",prefix:!1,type:wt.TYPE_VALUE,format:\"length\"},In={name:\"font-weight\",initialValue:\"normal\",type:wt.VALUE,prefix:!1,parse:function(e){if(Ve(e))return e.number;if(qe(e))switch(e.value){case\"bold\":return 700;case\"normal\":default:return 400}return 400}},Pn={name:\"font-variant\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return e.filter(qe).map((function(e){return e.value}))}};!function(e){e.NORMAL=\"normal\",e.ITALIC=\"italic\",e.OBLIQUE=\"oblique\"}(Nn||(Nn={}));var On,kn={name:\"font-style\",initialValue:\"normal\",prefix:!1,type:wt.IDENT_VALUE,parse:function(e){switch(e){case\"oblique\":return Nn.OBLIQUE;case\"italic\":return Nn.ITALIC;case\"normal\":default:return Nn.NORMAL}}},Rn=function(e,t){return 0!=(e&t)},Mn={name:\"content\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){if(0===e.length)return[];var t=e[0];return t.type===d.IDENT_TOKEN&&\"none\"===t.value?[]:e}},Dn={name:\"counter-increment\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;for(var r=[],n=e.filter(We),o=0;o<n.length;o++){var s=n[o],i=n[o+1];if(s.type===d.IDENT_TOKEN){var a=i&&Ve(i)?i.number:1;r.push({counter:s.value,increment:a})}}return r}},Kn={name:\"counter-reset\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return[];for(var t=[],r=e.filter(We),n=0;n<r.length;n++){var o=r[n],s=r[n+1];if(qe(o)&&\"none\"!==o.value){var i=s&&Ve(s)?s.number:0;t.push({counter:o.value,reset:i})}}return t}},zn={name:\"quotes\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;var r=[],n=e.filter(Ge);if(n.length%2!=0)return null;for(var o=0;o<n.length;o+=2){var s=n[o].value,i=n[o+1].value;r.push({open:s,close:i})}return r}},Vn=function(e,t,r){if(!e)return\"\";var n=e[Math.min(t,e.length-1)];return n?r?n.open:n.close:\"\"},qn={name:\"box-shadow\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return 1===e.length&&Xe(e[0],\"none\")?[]:Ye(e).map((function(e){for(var t={color:255,offsetX:rt,offsetY:rt,blur:rt,spread:rt,inset:!1},r=0,n=0;n<e.length;n++){var o=e[n];Xe(o,\"inset\")?t.inset=!0:$e(o)?(0===r?t.offsetX=o:1===r?t.offsetY=o:2===r?t.blur=o:t.spread=o,r++):t.color=ft(o)}return t}))}},Gn=function(){function e(e){this.backgroundClip=Jn(xt,e.backgroundClip),this.backgroundColor=Jn(Et,e.backgroundColor),this.backgroundImage=Jn(ur,e.backgroundImage),this.backgroundOrigin=Jn(cr,e.backgroundOrigin),this.backgroundPosition=Jn(lr,e.backgroundPosition),this.backgroundRepeat=Jn(fr,e.backgroundRepeat),this.backgroundSize=Jn(mr,e.backgroundSize),this.borderTopColor=Jn(vr,e.borderTopColor),this.borderRightColor=Jn(wr,e.borderRightColor),this.borderBottomColor=Jn(br,e.borderBottomColor),this.borderLeftColor=Jn(Br,e.borderLeftColor),this.borderTopLeftRadius=Jn(_r,e.borderTopLeftRadius),this.borderTopRightRadius=Jn(Cr,e.borderTopRightRadius),this.borderBottomRightRadius=Jn(xr,e.borderBottomRightRadius),this.borderBottomLeftRadius=Jn(Er,e.borderBottomLeftRadius),this.borderTopStyle=Jn(Fr,e.borderTopStyle),this.borderRightStyle=Jn(Ur,e.borderRightStyle),this.borderBottomStyle=Jn(Sr,e.borderBottomStyle),this.borderLeftStyle=Jn(Lr,e.borderLeftStyle),this.borderTopWidth=Jn(Hr,e.borderTopWidth),this.borderRightWidth=Jn(Ir,e.borderRightWidth),this.borderBottomWidth=Jn(Pr,e.borderBottomWidth),this.borderLeftWidth=Jn(Or,e.borderLeftWidth),this.boxShadow=Jn(qn,e.boxShadow),this.color=Jn(kr,e.color),this.display=Jn(Rr,e.display),this.float=Jn(Kr,e.cssFloat),this.fontFamily=Jn(Tn,e.fontFamily),this.fontSize=Jn(Hn,e.fontSize),this.fontStyle=Jn(kn,e.fontStyle),this.fontVariant=Jn(Pn,e.fontVariant),this.fontWeight=Jn(In,e.fontWeight),this.letterSpacing=Jn(zr,e.letterSpacing),this.lineBreak=Jn(qr,e.lineBreak),this.lineHeight=Jn(Gr,e.lineHeight),this.listStyleImage=Jn(Xr,e.listStyleImage),this.listStylePosition=Jn(Jr,e.listStylePosition),this.listStyleType=Jn(Zr,e.listStyleType),this.marginTop=Jn(en,e.marginTop),this.marginRight=Jn(tn,e.marginRight),this.marginBottom=Jn(rn,e.marginBottom),this.marginLeft=Jn(nn,e.marginLeft),this.opacity=Jn(Un,e.opacity);var t=Jn(sn,e.overflow);this.overflowX=t[0],this.overflowY=t[t.length>1?1:0],this.overflowWrap=Jn(An,e.overflowWrap),this.paddingTop=Jn(cn,e.paddingTop),this.paddingRight=Jn(ln,e.paddingRight),this.paddingBottom=Jn(dn,e.paddingBottom),this.paddingLeft=Jn(fn,e.paddingLeft),this.position=Jn(gn,e.position),this.textAlign=Jn(pn,e.textAlign),this.textDecorationColor=Jn(Sn,e.textDecorationColor||e.color),this.textDecorationLine=Jn(Ln,e.textDecorationLine),this.textShadow=Jn(yn,e.textShadow),this.textTransform=Jn(wn,e.textTransform),this.transform=Jn(bn,e.transform),this.transformOrigin=Jn(Cn,e.transformOrigin),this.visibility=Jn(En,e.visibility),this.wordBreak=Jn(Qn,e.wordBreak),this.zIndex=Jn(Fn,e.zIndex)}return e.prototype.isVisible=function(){return this.display>0&&this.opacity>0&&this.visibility===vn.VISIBLE},e.prototype.isTransparent=function(){return ht(this.backgroundColor)},e.prototype.isTransformed=function(){return null!==this.transform},e.prototype.isPositioned=function(){return this.position!==hn.STATIC},e.prototype.isPositionedWithZIndex=function(){return this.isPositioned()&&!this.zIndex.auto},e.prototype.isFloating=function(){return this.float!==Nr.NONE},e.prototype.isInlineLevel=function(){return Rn(this.display,4)||Rn(this.display,33554432)||Rn(this.display,268435456)||Rn(this.display,536870912)||Rn(this.display,67108864)||Rn(this.display,134217728)},e}(),Xn=function(e){this.content=Jn(Mn,e.content),this.quotes=Jn(zn,e.quotes)},Wn=function(e){this.counterIncrement=Jn(Dn,e.counterIncrement),this.counterReset=Jn(Kn,e.counterReset)},Jn=function(e,t){var r=new De,n=null!=t?t.toString():e.initialValue;r.write(n);var o=new Ke(r.read());switch(e.type){case wt.IDENT_VALUE:var s=o.parseComponentValue();return e.parse(qe(s)?s.value:e.initialValue);case wt.VALUE:return e.parse(o.parseComponentValue());case wt.LIST:return e.parse(o.parseComponentValues());case wt.TOKEN_VALUE:return o.parseComponentValue();case wt.TYPE_VALUE:switch(e.format){case\"angle\":return ut(o.parseComponentValue());case\"color\":return ft(o.parseComponentValue());case\"image\":return ir(o.parseComponentValue());case\"length\":var i=o.parseComponentValue();return $e(i)?i:rt;case\"length-percentage\":var a=o.parseComponentValue();return et(a)?a:rt}}throw new Error(\"Attempting to parse unsupported css format type \"+e.format)},Yn=function(e){this.styles=new Gn(window.getComputedStyle(e,null)),this.textNodes=[],this.elements=[],null!==this.styles.transform&&So(e)&&(e.style.transform=\"none\"),this.bounds=i(e),this.flags=0},Zn=function(e,t){this.text=e,this.bounds=t},$n=function(e){var t=e.ownerDocument;if(t){var r=t.createElement(\"html2canvaswrapper\");r.appendChild(e.cloneNode(!0));var n=e.parentNode;if(n){n.replaceChild(r,e);var o=i(r);return r.firstChild&&n.replaceChild(r.firstChild,r),o}}return new s(0,0,0,0)},eo=function(e,t,r){var n=e.ownerDocument;if(!n)throw new Error(\"Node has no owner document\");var o=n.createRange();return o.setStart(e,t),o.setEnd(e,t+r),s.fromClientRect(o.getBoundingClientRect())},to=function(e,t){return 0!==t.letterSpacing?a(e).map((function(e){return A(e)})):ro(e,t)},ro=function(e,t){for(var r,n=function(e,t){var r=a(e),n=ie(r,t),o=n[0],s=n[1],i=n[2],A=r.length,u=0,c=0;return{next:function(){if(c>=A)return{done:!0,value:null};for(var e=G;c<A&&(e=se(r,s,o,++c,i))===G;);if(e!==G||c===A){var t=new ae(r,e,u,c);return u=c,{value:t,done:!1}}return{done:!0,value:null}}}}(e,{lineBreak:t.lineBreak,wordBreak:t.overflowWrap===on.BREAK_WORD?\"break-word\":t.wordBreak}),o=[];!(r=n.next()).done;)r.value&&o.push(r.value.slice());return o},no=function(e,t){this.text=oo(e.data,t.textTransform),this.textBounds=function(e,t,r){var n=to(e,t),o=[],s=0;return n.forEach((function(e){if(t.textDecorationLine.length||e.trim().length>0)if(Pt.SUPPORT_RANGE_BOUNDS)o.push(new Zn(e,eo(r,s,e.length)));else{var n=r.splitText(e.length);o.push(new Zn(e,$n(r))),r=n}else Pt.SUPPORT_RANGE_BOUNDS||(r=r.splitText(e.length));s+=e.length})),o}(this.text,t,e)},oo=function(e,t){switch(t){case mn.LOWERCASE:return e.toLowerCase();case mn.CAPITALIZE:return e.replace(so,io);case mn.UPPERCASE:return e.toUpperCase();default:return e}},so=/(^|\\s|:|-|\\(|\\))([a-z])/g,io=function(e,t,r){return e.length>0?t+r.toUpperCase():e},ao=function(e){function r(t){var r=e.call(this,t)||this;return r.src=t.currentSrc||t.src,r.intrinsicWidth=t.naturalWidth,r.intrinsicHeight=t.naturalHeight,kt.getInstance().addImage(r.src),r}return t(r,e),r}(Yn),Ao=function(e){function r(t){var r=e.call(this,t)||this;return r.canvas=t,r.intrinsicWidth=t.width,r.intrinsicHeight=t.height,r}return t(r,e),r}(Yn),uo=function(e){function r(t){var r=e.call(this,t)||this,n=new XMLSerializer;return r.svg=\"data:image/svg+xml,\"+encodeURIComponent(n.serializeToString(t)),r.intrinsicWidth=t.width.baseVal.value,r.intrinsicHeight=t.height.baseVal.value,kt.getInstance().addImage(r.svg),r}return t(r,e),r}(Yn),co=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),lo=function(e){function r(t){var r=e.call(this,t)||this;return r.start=t.start,r.reversed=\"boolean\"==typeof t.reversed&&!0===t.reversed,r}return t(r,e),r}(Yn),fo=[{type:d.DIMENSION_TOKEN,flags:0,unit:\"px\",number:3}],ho=[{type:d.PERCENTAGE_TOKEN,flags:0,number:50}],po=\"checkbox\",mo=\"radio\",go=\"password\",yo=707406591,vo=function(e){function r(t){var r,n,o,i=e.call(this,t)||this;switch(i.type=t.type.toLowerCase(),i.checked=t.checked,i.value=0===(o=(n=t).type===go?new Array(n.value.length+1).join(\"•\"):n.value).length?n.placeholder||\"\":o,i.type!==po&&i.type!==mo||(i.styles.backgroundColor=3739148031,i.styles.borderTopColor=i.styles.borderRightColor=i.styles.borderBottomColor=i.styles.borderLeftColor=2779096575,i.styles.borderTopWidth=i.styles.borderRightWidth=i.styles.borderBottomWidth=i.styles.borderLeftWidth=1,i.styles.borderTopStyle=i.styles.borderRightStyle=i.styles.borderBottomStyle=i.styles.borderLeftStyle=pr.SOLID,i.styles.backgroundClip=[bt.BORDER_BOX],i.styles.backgroundOrigin=[0],i.bounds=(r=i.bounds).width>r.height?new s(r.left+(r.width-r.height)/2,r.top,r.height,r.height):r.width<r.height?new s(r.left,r.top+(r.height-r.width)/2,r.width,r.width):r),i.type){case po:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=fo;break;case mo:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=ho}return i}return t(r,e),r}(Yn),wo=function(e){function r(t){var r=e.call(this,t)||this,n=t.options[t.selectedIndex||0];return r.value=n&&n.text||\"\",r}return t(r,e),r}(Yn),bo=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),Bo=function(e){return ft(Ke.create(e).parseComponentValue())},jo=function(e){function r(t){var r=e.call(this,t)||this;r.src=t.src,r.width=parseInt(t.width,10)||0,r.height=parseInt(t.height,10)||0,r.backgroundColor=r.styles.backgroundColor;try{if(t.contentWindow&&t.contentWindow.document&&t.contentWindow.document.documentElement){r.tree=Eo(t.contentWindow.document.documentElement);var n=t.contentWindow.document.documentElement?Bo(getComputedStyle(t.contentWindow.document.documentElement).backgroundColor):_t.TRANSPARENT,o=t.contentWindow.document.body?Bo(getComputedStyle(t.contentWindow.document.body).backgroundColor):_t.TRANSPARENT;r.backgroundColor=ht(n)?ht(o)?r.styles.backgroundColor:o:n}}catch(e){}return r}return t(r,e),r}(Yn),_o=[\"OL\",\"UL\",\"MENU\"],Co=function(e,t,r){for(var n=e.firstChild,o=void 0;n;n=o)if(o=n.nextSibling,Fo(n)&&n.data.trim().length>0)t.textNodes.push(new no(n,t.styles));else if(Uo(n)){var s=xo(n);s.styles.isVisible()&&(No(n,s,r)?s.flags|=4:Qo(s.styles)&&(s.flags|=2),-1!==_o.indexOf(n.tagName)&&(s.flags|=8),t.elements.push(s),zo(n)||Po(n)||Vo(n)||Co(n,s,r))}},xo=function(e){return Ro(e)?new ao(e):ko(e)?new Ao(e):Po(e)?new uo(e):To(e)?new co(e):Ho(e)?new lo(e):Io(e)?new vo(e):Vo(e)?new wo(e):zo(e)?new bo(e):Mo(e)?new jo(e):new Yn(e)},Eo=function(e){var t=xo(e);return t.flags|=4,Co(e,t,t),t},No=function(e,t,r){return t.styles.isPositionedWithZIndex()||t.styles.opacity<1||t.styles.isTransformed()||Oo(e)&&r.styles.isTransparent()},Qo=function(e){return e.isPositioned()||e.isFloating()},Fo=function(e){return e.nodeType===Node.TEXT_NODE},Uo=function(e){return e.nodeType===Node.ELEMENT_NODE},So=function(e){return Uo(e)&&void 0!==e.style&&!Lo(e)},Lo=function(e){return\"object\"==typeof e.className},To=function(e){return\"LI\"===e.tagName},Ho=function(e){return\"OL\"===e.tagName},Io=function(e){return\"INPUT\"===e.tagName},Po=function(e){return\"svg\"===e.tagName},Oo=function(e){return\"BODY\"===e.tagName},ko=function(e){return\"CANVAS\"===e.tagName},Ro=function(e){return\"IMG\"===e.tagName},Mo=function(e){return\"IFRAME\"===e.tagName},Do=function(e){return\"STYLE\"===e.tagName},Ko=function(e){return\"SCRIPT\"===e.tagName},zo=function(e){return\"TEXTAREA\"===e.tagName},Vo=function(e){return\"SELECT\"===e.tagName},qo=function(){function e(){this.counters={}}return e.prototype.getCounterValue=function(e){var t=this.counters[e];return t&&t.length?t[t.length-1]:1},e.prototype.getCounterValues=function(e){return this.counters[e]||[]},e.prototype.pop=function(e){var t=this;e.forEach((function(e){return t.counters[e].pop()}))},e.prototype.parse=function(e){var t=this,r=e.counterIncrement,n=e.counterReset,o=!0;null!==r&&r.forEach((function(e){var r=t.counters[e.counter];r&&0!==e.increment&&(o=!1,r[Math.max(0,r.length-1)]+=e.increment)}));var s=[];return o&&n.forEach((function(e){var r=t.counters[e.counter];s.push(e.counter),r||(r=t.counters[e.counter]=[]),r.push(e.reset)})),s},e}(),Go={integers:[1e3,900,500,400,100,90,50,40,10,9,5,4,1],values:[\"M\",\"CM\",\"D\",\"CD\",\"C\",\"XC\",\"L\",\"XL\",\"X\",\"IX\",\"V\",\"IV\",\"I\"]},Xo={integers:[9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"Ք\",\"Փ\",\"Ւ\",\"Ց\",\"Ր\",\"Տ\",\"Վ\",\"Ս\",\"Ռ\",\"Ջ\",\"Պ\",\"Չ\",\"Ո\",\"Շ\",\"Ն\",\"Յ\",\"Մ\",\"Ճ\",\"Ղ\",\"Ձ\",\"Հ\",\"Կ\",\"Ծ\",\"Խ\",\"Լ\",\"Ի\",\"Ժ\",\"Թ\",\"Ը\",\"Է\",\"Զ\",\"Ե\",\"Դ\",\"Գ\",\"Բ\",\"Ա\"]},Wo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,400,300,200,100,90,80,70,60,50,40,30,20,19,18,17,16,15,10,9,8,7,6,5,4,3,2,1],values:[\"י׳\",\"ט׳\",\"ח׳\",\"ז׳\",\"ו׳\",\"ה׳\",\"ד׳\",\"ג׳\",\"ב׳\",\"א׳\",\"ת\",\"ש\",\"ר\",\"ק\",\"צ\",\"פ\",\"ע\",\"ס\",\"נ\",\"מ\",\"ל\",\"כ\",\"יט\",\"יח\",\"יז\",\"טז\",\"טו\",\"י\",\"ט\",\"ח\",\"ז\",\"ו\",\"ה\",\"ד\",\"ג\",\"ב\",\"א\"]},Jo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"ჵ\",\"ჰ\",\"ჯ\",\"ჴ\",\"ხ\",\"ჭ\",\"წ\",\"ძ\",\"ც\",\"ჩ\",\"შ\",\"ყ\",\"ღ\",\"ქ\",\"ფ\",\"ჳ\",\"ტ\",\"ს\",\"რ\",\"ჟ\",\"პ\",\"ო\",\"ჲ\",\"ნ\",\"მ\",\"ლ\",\"კ\",\"ი\",\"თ\",\"ჱ\",\"ზ\",\"ვ\",\"ე\",\"დ\",\"გ\",\"ბ\",\"ა\"]},Yo=function(e,t,r,n,o,s){return e<t||e>r?is(e,o,s.length>0):n.integers.reduce((function(t,r,o){for(;e>=r;)e-=r,t+=n.values[o];return t}),\"\")+s},Zo=function(e,t,r,n){var o=\"\";do{r||e--,o=n(e)+o,e/=t}while(e*t>=t);return o},$o=function(e,t,r,n,o){var s=r-t+1;return(e<0?\"-\":\"\")+(Zo(Math.abs(e),s,n,(function(e){return A(Math.floor(e%s)+t)}))+o)},es=function(e,t,r){void 0===r&&(r=\". \");var n=t.length;return Zo(Math.abs(e),n,!1,(function(e){return t[Math.floor(e%n)]}))+r},ts=function(e,t,r,n,o,s){if(e<-9999||e>9999)return is(e,Wr.CJK_DECIMAL,o.length>0);var i=Math.abs(e),a=o;if(0===i)return t[0]+a;for(var A=0;i>0&&A<=4;A++){var u=i%10;0===u&&Rn(s,1)&&\"\"!==a?a=t[u]+a:u>1||1===u&&0===A||1===u&&1===A&&Rn(s,2)||1===u&&1===A&&Rn(s,4)&&e>100||1===u&&A>1&&Rn(s,8)?a=t[u]+(A>0?r[A-1]:\"\")+a:1===u&&A>0&&(a=r[A-1]+a),i=Math.floor(i/10)}return(e<0?n:\"\")+a},rs=\"十百千萬\",ns=\"拾佰仟萬\",os=\"マイナス\",ss=\"마이너스\",is=function(e,t,r){var n=r?\". \":\"\",o=r?\"、\":\"\",s=r?\", \":\"\",i=r?\" \":\"\";switch(t){case Wr.DISC:return\"•\"+i;case Wr.CIRCLE:return\"◦\"+i;case Wr.SQUARE:return\"◾\"+i;case Wr.DECIMAL_LEADING_ZERO:var a=$o(e,48,57,!0,n);return a.length<4?\"0\"+a:a;case Wr.CJK_DECIMAL:return es(e,\"〇一二三四五六七八九\",o);case Wr.LOWER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n).toLowerCase();case Wr.UPPER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n);case Wr.LOWER_GREEK:return $o(e,945,969,!1,n);case Wr.LOWER_ALPHA:return $o(e,97,122,!1,n);case Wr.UPPER_ALPHA:return $o(e,65,90,!1,n);case Wr.ARABIC_INDIC:return $o(e,1632,1641,!0,n);case Wr.ARMENIAN:case Wr.UPPER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n);case Wr.LOWER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n).toLowerCase();case Wr.BENGALI:return $o(e,2534,2543,!0,n);case Wr.CAMBODIAN:case Wr.KHMER:return $o(e,6112,6121,!0,n);case Wr.CJK_EARTHLY_BRANCH:return es(e,\"子丑寅卯辰巳午未申酉戌亥\",o);case Wr.CJK_HEAVENLY_STEM:return es(e,\"甲乙丙丁戊己庚辛壬癸\",o);case Wr.CJK_IDEOGRAPHIC:case Wr.TRAD_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"負\",o,14);case Wr.TRAD_CHINESE_FORMAL:return ts(e,\"零壹貳參肆伍陸柒捌玖\",ns,\"負\",o,15);case Wr.SIMP_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"负\",o,14);case Wr.SIMP_CHINESE_FORMAL:return ts(e,\"零壹贰叁肆伍陆柒捌玖\",ns,\"负\",o,15);case Wr.JAPANESE_INFORMAL:return ts(e,\"〇一二三四五六七八九\",\"十百千万\",os,o,0);case Wr.JAPANESE_FORMAL:return ts(e,\"零壱弐参四伍六七八九\",\"拾百千万\",os,o,7);case Wr.KOREAN_HANGUL_FORMAL:return ts(e,\"영일이삼사오육칠팔구\",\"십백천만\",ss,s,7);case Wr.KOREAN_HANJA_INFORMAL:return ts(e,\"零一二三四五六七八九\",\"十百千萬\",ss,s,0);case Wr.KOREAN_HANJA_FORMAL:return ts(e,\"零壹貳參四五六七八九\",\"拾百千\",ss,s,7);case Wr.DEVANAGARI:return $o(e,2406,2415,!0,n);case Wr.GEORGIAN:return Yo(e,1,19999,Jo,Wr.DECIMAL,n);case Wr.GUJARATI:return $o(e,2790,2799,!0,n);case Wr.GURMUKHI:return $o(e,2662,2671,!0,n);case Wr.HEBREW:return Yo(e,1,10999,Wo,Wr.DECIMAL,n);case Wr.HIRAGANA:return es(e,\"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん\");case Wr.HIRAGANA_IROHA:return es(e,\"いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす\");case Wr.KANNADA:return $o(e,3302,3311,!0,n);case Wr.KATAKANA:return es(e,\"アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン\",o);case Wr.KATAKANA_IROHA:return es(e,\"イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセス\",o);case Wr.LAO:return $o(e,3792,3801,!0,n);case Wr.MONGOLIAN:return $o(e,6160,6169,!0,n);case Wr.MYANMAR:return $o(e,4160,4169,!0,n);case Wr.ORIYA:return $o(e,2918,2927,!0,n);case Wr.PERSIAN:return $o(e,1776,1785,!0,n);case Wr.TAMIL:return $o(e,3046,3055,!0,n);case Wr.TELUGU:return $o(e,3174,3183,!0,n);case Wr.THAI:return $o(e,3664,3673,!0,n);case Wr.TIBETAN:return $o(e,3872,3881,!0,n);case Wr.DECIMAL:default:return $o(e,48,57,!0,n)}},as=\"data-html2canvas-ignore\",As=function(){function e(e,t){if(this.options=t,this.scrolledElements=[],this.referenceElement=e,this.counters=new qo,this.quoteDepth=0,!e.ownerDocument)throw new Error(\"Cloned element does not have an owner document\");this.documentElement=this.cloneNode(e.ownerDocument.documentElement)}return e.prototype.toIFrame=function(e,t){var r=this,s=cs(e,t);if(!s.contentWindow)return Promise.reject(\"Unable to find iframe window\");var i=e.defaultView.pageXOffset,a=e.defaultView.pageYOffset,A=s.contentWindow,u=A.document,c=ls(s).then((function(){return n(r,void 0,void 0,(function(){var e;return o(this,(function(r){switch(r.label){case 0:return this.scrolledElements.forEach(ps),A&&(A.scrollTo(t.left,t.top),!/(iPad|iPhone|iPod)/g.test(navigator.userAgent)||A.scrollY===t.top&&A.scrollX===t.left||(u.documentElement.style.top=-t.top+\"px\",u.documentElement.style.left=-t.left+\"px\",u.documentElement.style.position=\"absolute\")),e=this.options.onclone,void 0===this.clonedReferenceElement?[2,Promise.reject(\"Error finding the \"+this.referenceElement.nodeName+\" in the cloned document\")]:u.fonts&&u.fonts.ready?[4,u.fonts.ready]:[3,2];case 1:r.sent(),r.label=2;case 2:return\"function\"==typeof e?[2,Promise.resolve().then((function(){return e(u)})).then((function(){return s}))]:[2,s]}}))}))}));return u.open(),u.write(fs(document.doctype)+\"<html></html>\"),hs(this.referenceElement.ownerDocument,i,a),u.replaceChild(u.adoptNode(this.documentElement),u.documentElement),u.close(),c},e.prototype.createElementClone=function(e){if(ko(e))return this.createCanvasClone(e);if(Do(e))return this.createStyleClone(e);var t=e.cloneNode(!1);return Ro(t)&&\"lazy\"===t.loading&&(t.loading=\"eager\"),t},e.prototype.createStyleClone=function(e){try{var t=e.sheet;if(t&&t.cssRules){var r=[].slice.call(t.cssRules,0).reduce((function(e,t){return t&&\"string\"==typeof t.cssText?e+t.cssText:e}),\"\"),n=e.cloneNode(!1);return n.textContent=r,n}}catch(e){if(Ot.getInstance(this.options.id).error(\"Unable to access cssRules property\",e),\"SecurityError\"!==e.name)throw e}return e.cloneNode(!1)},e.prototype.createCanvasClone=function(e){if(this.options.inlineImages&&e.ownerDocument){var t=e.ownerDocument.createElement(\"img\");try{return t.src=e.toDataURL(),t}catch(e){Ot.getInstance(this.options.id).info(\"Unable to clone canvas contents, canvas is tainted\")}}var r=e.cloneNode(!1);try{r.width=e.width,r.height=e.height;var n=e.getContext(\"2d\"),o=r.getContext(\"2d\");return o&&(n?o.putImageData(n.getImageData(0,0,e.width,e.height),0,0):o.drawImage(e,0,0)),r}catch(e){}return r},e.prototype.cloneNode=function(e){if(Fo(e))return document.createTextNode(e.data);if(!e.ownerDocument)return e.cloneNode(!1);var t=e.ownerDocument.defaultView;if(t&&Uo(e)&&(So(e)||Lo(e))){var r=this.createElementClone(e),n=t.getComputedStyle(e),o=t.getComputedStyle(e,\":before\"),s=t.getComputedStyle(e,\":after\");this.referenceElement===e&&So(r)&&(this.clonedReferenceElement=r),Oo(r)&&vs(r);for(var i=this.counters.parse(new Wn(n)),a=this.resolvePseudoContent(e,r,o,On.BEFORE),A=e.firstChild;A;A=A.nextSibling)Uo(A)&&(Ko(A)||A.hasAttribute(as)||\"function\"==typeof this.options.ignoreElements&&this.options.ignoreElements(A))||this.options.copyStyles&&Uo(A)&&Do(A)||r.appendChild(this.cloneNode(A));a&&r.insertBefore(a,r.firstChild);var u=this.resolvePseudoContent(e,r,s,On.AFTER);return u&&r.appendChild(u),this.counters.pop(i),n&&(this.options.copyStyles||Lo(e))&&!Mo(e)&&ds(n,r),0===e.scrollTop&&0===e.scrollLeft||this.scrolledElements.push([r,e.scrollLeft,e.scrollTop]),(zo(e)||Vo(e))&&(zo(r)||Vo(r))&&(r.value=e.value),r}return e.cloneNode(!1)},e.prototype.resolvePseudoContent=function(e,t,r,n){var o=this;if(r){var s=r.content,i=t.ownerDocument;if(i&&s&&\"none\"!==s&&\"-moz-alt-content\"!==s&&\"none\"!==r.display){this.counters.parse(new Wn(r));var a=new Xn(r),A=i.createElement(\"html2canvaspseudoelement\");ds(r,A),a.content.forEach((function(t){if(t.type===d.STRING_TOKEN)A.appendChild(i.createTextNode(t.value));else if(t.type===d.URL_TOKEN){var r=i.createElement(\"img\");r.src=t.value,r.style.opacity=\"1\",A.appendChild(r)}else if(t.type===d.FUNCTION){if(\"attr\"===t.name){var n=t.values.filter(qe);n.length&&A.appendChild(i.createTextNode(e.getAttribute(n[0].value)||\"\"))}else if(\"counter\"===t.name){var s=t.values.filter(Je),u=s[0],c=s[1];if(u&&qe(u)){var l=o.counters.getCounterValue(u.value),f=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL;A.appendChild(i.createTextNode(is(l,f,!1)))}}else if(\"counters\"===t.name){var h=t.values.filter(Je),p=(u=h[0],h[1]);if(c=h[2],u&&qe(u)){var m=o.counters.getCounterValues(u.value),g=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL,y=p&&p.type===d.STRING_TOKEN?p.value:\"\",v=m.map((function(e){return is(e,g,!1)})).join(y);A.appendChild(i.createTextNode(v))}}}else if(t.type===d.IDENT_TOKEN)switch(t.value){case\"open-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,o.quoteDepth++,!0)));break;case\"close-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,--o.quoteDepth,!1)));break;default:A.appendChild(i.createTextNode(t.value))}})),A.className=ms+\" \"+gs;var u=n===On.BEFORE?\" \"+ms:\" \"+gs;return Lo(t)?t.className.baseValue+=u:t.className+=u,A}}},e.destroy=function(e){return!!e.parentNode&&(e.parentNode.removeChild(e),!0)},e}();!function(e){e[e.BEFORE=0]=\"BEFORE\",e[e.AFTER=1]=\"AFTER\"}(On||(On={}));var us,cs=function(e,t){var r=e.createElement(\"iframe\");return r.className=\"html2canvas-container\",r.style.visibility=\"hidden\",r.style.position=\"fixed\",r.style.left=\"-10000px\",r.style.top=\"0px\",r.style.border=\"0\",r.width=t.width.toString(),r.height=t.height.toString(),r.scrolling=\"no\",r.setAttribute(as,\"true\"),e.body.appendChild(r),r},ls=function(e){return new Promise((function(t,r){var n=e.contentWindow;if(!n)return r(\"No window assigned for iframe\");var o=n.document;n.onload=e.onload=o.onreadystatechange=function(){n.onload=e.onload=o.onreadystatechange=null;var r=setInterval((function(){o.body.childNodes.length>0&&\"complete\"===o.readyState&&(clearInterval(r),t(e))}),50)}}))},ds=function(e,t){for(var r=e.length-1;r>=0;r--){var n=e.item(r);\"content\"!==n&&t.style.setProperty(n,e.getPropertyValue(n))}return t},fs=function(e){var t=\"\";return e&&(t+=\"<!DOCTYPE \",e.name&&(t+=e.name),e.internalSubset&&(t+=e.internalSubset),e.publicId&&(t+=",
+  "ctx": "n(e){return-1===e.indexOf(\" \")?e:\"'\"+e+\""
+ },
+ "js_002": {
+  "t": "2026-07-13 · 퓨처셀프",
+  "ctx": "pp&utm_campaign=futureself\",   edition: "
+ },
+ "js_003": {
+  "t": "저자",
+  "ctx": "nst QUESTIONS = [   {id:1, level:1, tag:"
+ },
+ "js_004": {
+  "t": "『퓨처 셀프(Be Your Future Self Now)』를 쓴 조직심리학자는 누구일까요?",
+  "ctx": "TIONS = [   {id:1, level:1, tag:\"저자\", q:"
+ },
+ "js_005": {
+  "t": "벤저민 하디",
+  "ctx": "ow)』를 쓴 조직심리학자는 누구일까요?\",    options:[{t:"
+ },
+ "js_006": {
+  "t": "대니얼 길버트",
+  "ctx": "?\",    options:[{t:\"벤저민 하디\",ok:true},{t:"
+ },
+ "js_007": {
+  "t": "마틴 셀리그먼",
+  "ctx": ":[{t:\"벤저민 하디\",ok:true},{t:\"대니얼 길버트\"},{t:"
+ },
+ "js_008": {
+  "t": "제임스 클리어",
+  "ctx": "ok:true},{t:\"대니얼 길버트\"},{t:\"마틴 셀리그먼\"},{t:"
+ },
+ "js_009": {
+  "t": "<b>벤저민 하디</b>는 조직심리학 박사로, ‘미래의 나(퓨처 셀프)’를 과학적으로 다루는 대표 저술가입니다.",
+  "ctx": "\"},{t:\"마틴 셀리그먼\"},{t:\"제임스 클리어\"}],    ctx:"
+ },
+ "js_010": {
+  "t": "핵심",
+  "ctx": "다루는 대표 저술가입니다.\"},   {id:2, level:1, tag:"
+ },
+ "js_011": {
+  "t": "이 책의 핵심 주장을 한마디로 하면 무엇일까요?",
+  "ctx": "술가입니다.\"},   {id:2, level:1, tag:\"핵심\", q:"
+ },
+ "js_012": {
+  "t": "과거가 아니라 미래의 내가 지금의 나를 이끈다",
+  "ctx": " 핵심 주장을 한마디로 하면 무엇일까요?\",    options:[{t:"
+ },
+ "js_013": {
+  "t": "현재의 습관만 바꾸면 인생은 저절로 완성된다",
+  "ctx": "\"과거가 아니라 미래의 내가 지금의 나를 이끈다\",ok:true},{t:"
+ },
+ "js_014": {
+  "t": "성공은 타고난 재능이 거의 다 결정하는 것이다",
+  "ctx": "true},{t:\"현재의 습관만 바꾸면 인생은 저절로 완성된다\"},{t:"
+ },
+ "js_015": {
+  "t": "사람은 결국 과거의 경험대로 살아가게 된다",
+  "ctx": "된다\"},{t:\"성공은 타고난 재능이 거의 다 결정하는 것이다\"},{t:"
+ },
+ "js_016": {
+  "t": "이 책은 <b>미래의 나(퓨처 셀프)</b>가 현재의 선택과 행동을 끌어당긴다고 말합니다. 과거가 아니라 미래가 열쇠예요.",
+  "ctx": ",{t:\"사람은 결국 과거의 경험대로 살아가게 된다\"}],    ctx:"
+ },
+ "js_017": {
+  "t": "원제",
+  "ctx": " 아니라 미래가 열쇠예요.\"},   {id:3, level:1, tag:"
+ },
+ "js_018": {
+  "t": "원제 Be Your Future Self Now가 전하는 메시지에 가장 가까운 것은?",
+  "ctx": " 열쇠예요.\"},   {id:3, level:1, tag:\"원제\", q:"
+ },
+ "js_019": {
+  "t": "미래의 나를 지금 이 순간부터 살아라",
+  "ctx": "w가 전하는 메시지에 가장 가까운 것은?\",    options:[{t:"
+ },
+ "js_020": {
+  "t": "미래는 어차피 알 수 없으니 현재만 즐겨라",
+  "ctx": ":[{t:\"미래의 나를 지금 이 순간부터 살아라\",ok:true},{t:"
+ },
+ "js_021": {
+  "t": "과거의 나를 완전히 잊고 새로 시작하라",
+  "ctx": ":true},{t:\"미래는 어차피 알 수 없으니 현재만 즐겨라\"},{t:"
+ },
+ "js_022": {
+  "t": "남들이 정해 준 미래를 그대로 따라가라",
+  "ctx": "재만 즐겨라\"},{t:\"과거의 나를 완전히 잊고 새로 시작하라\"},{t:"
+ },
+ "js_023": {
+  "t": "원제는 <b>지금(Now)</b> 미래의 내가 되라는 뜻입니다. 미래를 먼 훗날로 미루지 말고 오늘부터 그 사람처럼 살라는 거죠.",
+  "ctx": "\"},{t:\"남들이 정해 준 미래를 그대로 따라가라\"}],    ctx:"
+ },
+ "js_024": {
+  "t": "생생함",
+  "ctx": "그 사람처럼 살라는 거죠.\"},   {id:4, level:1, tag:"
+ },
+ "js_025": {
+  "t": "미래의 나를 어떻게 그릴 때 더 빠르게 성장한다고 했을까요?",
+  "ctx": "는 거죠.\"},   {id:4, level:1, tag:\"생생함\", q:"
+ },
+ "js_026": {
+  "t": "생생하고 구체적으로 그릴수록",
+  "ctx": "그릴 때 더 빠르게 성장한다고 했을까요?\",    options:[{t:"
+ },
+ "js_027": {
+  "t": "최대한 막연하고 흐릿하게 둘수록",
+  "ctx": "tions:[{t:\"생생하고 구체적으로 그릴수록\",ok:true},{t:"
+ },
+ "js_028": {
+  "t": "남의 미래를 그대로 베낄수록",
+  "ctx": "수록\",ok:true},{t:\"최대한 막연하고 흐릿하게 둘수록\"},{t:"
+ },
+ "js_029": {
+  "t": "아예 생각하지 않고 비워 둘수록",
+  "ctx": "연하고 흐릿하게 둘수록\"},{t:\"남의 미래를 그대로 베낄수록\"},{t:"
+ },
+ "js_030": {
+  "t": "진실 중 하나 — <b>미래의 나를 생생하고 자세히 그릴수록</b> 더 빨리 그 모습에 가까워집니다. 흐릿한 미래는 힘이 약해요.",
+  "ctx": "베낄수록\"},{t:\"아예 생각하지 않고 비워 둘수록\"}],    ctx:"
+ },
+ "js_031": {
+  "t": "역사의 종말 착각",
+  "ctx": "릿한 미래는 힘이 약해요.\"},   {id:5, level:1, tag:"
+ },
+ "js_032": {
+  "t": "사람들은 앞으로 자신이 얼마나 변할 거라고 예측하는 경향이 있을까요?",
+  "ctx": "},   {id:5, level:1, tag:\"역사의 종말 착각\", q:"
+ },
+ "js_033": {
+  "t": "실제보다 훨씬 적게 변할 거라고 착각한다",
+  "ctx": " 변할 거라고 예측하는 경향이 있을까요?\",    options:[{t:"
+ },
+ "js_034": {
+  "t": "실제보다 훨씬 많이 변할 거라고 기대한다",
+  "ctx": "{t:\"실제보다 훨씬 적게 변할 거라고 착각한다\",ok:true},{t:"
+ },
+ "js_035": {
+  "t": "과거만큼 앞으로도 정확히 예측한다",
+  "ctx": "k:true},{t:\"실제보다 훨씬 많이 변할 거라고 기대한다\"},{t:"
+ },
+ "js_036": {
+  "t": "변화에 대해 아예 생각하지 않는다",
+  "ctx": " 거라고 기대한다\"},{t:\"과거만큼 앞으로도 정확히 예측한다\"},{t:"
+ },
+ "js_037": {
+  "t": "<b>역사의 종말 착각</b>: 사람은 과거엔 많이 변했다고 인정하면서, 앞으로는 별로 안 변할 거라 착각합니다.",
+  "ctx": "측한다\"},{t:\"변화에 대해 아예 생각하지 않는다\"}],    ctx:"
+ },
+ "js_038": {
+  "t": "연구자",
+  "ctx": "안 변할 거라 착각합니다.\"},   {id:6, level:1, tag:"
+ },
+ "js_039": {
+  "t": "‘역사의 종말 착각’을 밝힌 대표 심리학자는 누구일까요?",
+  "ctx": "각합니다.\"},   {id:6, level:1, tag:\"연구자\", q:"
+ },
+ "js_040": {
+  "t": "지그문트 프로이트",
+  "ctx": "\",    options:[{t:\"대니얼 길버트\",ok:true},{t:"
+ },
+ "js_041": {
+  "t": "에이브러햄 매슬로",
+  "ctx": "t:\"대니얼 길버트\",ok:true},{t:\"지그문트 프로이트\"},{t:"
+ },
+ "js_042": {
+  "t": "필립 짐바르도",
+  "ctx": "rue},{t:\"지그문트 프로이트\"},{t:\"에이브러햄 매슬로\"},{t:"
+ },
+ "js_043": {
+  "t": "하버드의 <b>대니얼 길버트</b> 연구팀이 약 1만 9천 명을 조사해 이 착각을 입증했습니다(2013).",
+  "ctx": ",{t:\"에이브러햄 매슬로\"},{t:\"필립 짐바르도\"}],    ctx:"
+ },
+ "js_044": {
+  "t": "호모 프로스펙투스",
+  "ctx": " 입증했습니다(2013).\"},   {id:7, level:1, tag:"
+ },
+ "js_045": {
+  "t": "인간을 ‘미래를 내다보는 존재’로 규정한 개념은 무엇일까요?",
+  "ctx": "},   {id:7, level:1, tag:\"호모 프로스펙투스\", q:"
+ },
+ "js_046": {
+  "t": "호모 루덴스",
+  "ctx": "    options:[{t:\"호모 프로스펙투스\",ok:true},{t:"
+ },
+ "js_047": {
+  "t": "호모 에코노미쿠스",
+  "ctx": "{t:\"호모 프로스펙투스\",ok:true},{t:\"호모 루덴스\"},{t:"
+ },
+ "js_048": {
+  "t": "호모 파베르",
+  "ctx": "k:true},{t:\"호모 루덴스\"},{t:\"호모 에코노미쿠스\"},{t:"
+ },
+ "js_049": {
+  "t": "셀리그먼 등이 제시한 <b>호모 프로스펙투스</b> — 인간은 과거에 끌려가는 게 아니라 미래를 상상해 이끌린다는 관점이에요.",
+  "ctx": "},{t:\"호모 에코노미쿠스\"},{t:\"호모 파베르\"}],    ctx:"
+ },
+ "js_050": {
+  "t": "구성",
+  "ctx": "해 이끌린다는 관점이에요.\"},   {id:8, level:1, tag:"
+ },
+ "js_051": {
+  "t": "이 책은 크게 몇 개의 축으로 미래의 나를 다룰까요?",
+  "ctx": "관점이에요.\"},   {id:8, level:1, tag:\"구성\", q:"
+ },
+ "js_052": {
+  "t": "위협 · 진실 · 되는 법의 세 축",
+  "ctx": " 몇 개의 축으로 미래의 나를 다룰까요?\",    options:[{t:"
+ },
+ "js_053": {
+  "t": "과거 · 현재 · 미래의 세 시제",
+  "ctx": "s:[{t:\"위협 · 진실 · 되는 법의 세 축\",ok:true},{t:"
+ },
+ "js_054": {
+  "t": "몸 · 마음 · 돈의 세 영역",
+  "ctx": "축\",ok:true},{t:\"과거 · 현재 · 미래의 세 시제\"},{t:"
+ },
+ "js_055": {
+  "t": "계획 · 실행 · 평가로 이어지는 세 단계",
+  "ctx": " · 미래의 세 시제\"},{t:\"몸 · 마음 · 돈의 세 영역\"},{t:"
+ },
+ "js_056": {
+  "t": "책은 <b>미래의 나를 위협하는 요인 · 미래의 나에 관한 진실 · 미래의 내가 되는 법</b> 세 축으로 짜여 있습니다.",
+  "ctx": ",{t:\"계획 · 실행 · 평가로 이어지는 세 단계\"}],    ctx:"
+ },
+ "js_057": {
+  "t": "희망",
+  "ctx": "세 축으로 짜여 있습니다.\"},   {id:9, level:1, tag:"
+ },
+ "js_058": {
+  "t": "미래에 대한 희망이 사라지면 현재는 어떻게 될까요?",
+  "ctx": " 있습니다.\"},   {id:9, level:1, tag:\"희망\", q:"
+ },
+ "js_059": {
+  "t": "현재가 의미를 잃어버린다",
+  "ctx": " 희망이 사라지면 현재는 어떻게 될까요?\",    options:[{t:"
+ },
+ "js_060": {
+  "t": "현재가 오히려 더 자유로워진다",
+  "ctx": "options:[{t:\"현재가 의미를 잃어버린다\",ok:true},{t:"
+ },
+ "js_061": {
+  "t": "현재의 성과가 저절로 올라간다",
+  "ctx": "버린다\",ok:true},{t:\"현재가 오히려 더 자유로워진다\"},{t:"
+ },
+ "js_062": {
+  "t": "과거의 상처가 저절로 치유된다",
+  "ctx": "히려 더 자유로워진다\"},{t:\"현재의 성과가 저절로 올라간다\"},{t:"
+ },
+ "js_063": {
+  "t": "위협 1 — <b>미래에 대한 희망이 없으면 현재는 의미를 잃습니다.</b> 미래가 있어야 오늘의 고생도 견딜 힘이 생겨요.",
+  "ctx": " 올라간다\"},{t:\"과거의 상처가 저절로 치유된다\"}],    ctx:"
+ },
+ "js_064": {
+  "t": "안내자",
+  "ctx": "생도 견딜 힘이 생겨요.\"},   {id:10, level:1, tag:"
+ },
+ "js_065": {
+  "t": "하디는 미래의 나를 무엇으로 삼으라고 했을까요?",
+  "ctx": "생겨요.\"},   {id:10, level:1, tag:\"안내자\", q:"
+ },
+ "js_066": {
+  "t": "현재의 나를 이끄는 최고의 안내자",
+  "ctx": "미래의 나를 무엇으로 삼으라고 했을까요?\",    options:[{t:"
+ },
+ "js_067": {
+  "t": "무시하고 살아도 되는 먼 남의 이야기",
+  "ctx": "ns:[{t:\"현재의 나를 이끄는 최고의 안내자\",ok:true},{t:"
+ },
+ "js_068": {
+  "t": "이미 정해져 바꿀 수 없는 운명이라 여긴다",
+  "ctx": ",ok:true},{t:\"무시하고 살아도 되는 먼 남의 이야기\"},{t:"
+ },
+ "js_069": {
+  "t": "불안만 키우는 쓸데없는 상상으로 본다",
+  "ctx": " 이야기\"},{t:\"이미 정해져 바꿀 수 없는 운명이라 여긴다\"},{t:"
+ },
+ "js_070": {
+  "t": "미래의 나는 <b>현재를 이끄는 안내자</b>예요. 그 사람이 원할 선택을 지금 내리면 삶의 방향이 달라집니다.",
+  "ctx": "다\"},{t:\"불안만 키우는 쓸데없는 상상으로 본다\"}],    ctx:"
+ },
+ "js_071": {
+  "t": "알라딘 「퓨처 셀프」 도서정보",
+  "ctx": " */ const SOURCES = {   ko:      {label:"
+ },
+ "js_072": {
+  "t": "교보문고 「퓨처 셀프」 도서정보",
+  "ctx": "x?ItemId=323548193\"},   kyobo:   {label:"
+ },
+ "js_073": {
+  "t": "Goodreads 「Homo Prospectus」(셀리그먼)",
+  "ctx": "f-history_illusion\"},   prospect:{label:"
+ },
+ "js_074": {
+  "t": "벤저민 하디 인터뷰 · Future Self (YouTube)",
+  "ctx": "58-homo-prospectus\"},   ebs:     {label:"
+ },
+ "js_075": {
+  "t": "벤저민 하디는 조직심리학 박사예요. 『퓨처 셀프』 외에 『최고의 변화는 어디서 시작되는가』 등 정체성·변화 주제의 베스트셀러를 썼습니다.",
+  "ctx": " */ const EXTRA = {   1:{src:\"en\", note:"
+ },
+ "js_076": {
+  "t": "이 책의 사고 전환 = ‘과거가 나를 만든다’에서 ‘미래가 나를 이끈다’로. 현재는 미래로 가는 다리라고 봅니다.",
+  "ctx": "주제의 베스트셀러를 썼습니다.\"},   2:{src:\"ko\", note:"
+ },
+ "js_077": {
+  "t": "핵심은 ‘지금(Now)’이에요. 미래의 나를 먼 훗날로 미루지 말고, 오늘의 선택과 행동으로 그 사람이 되기 시작하라는 것.",
+  "ctx": "미래로 가는 다리라고 봅니다.\"},   3:{src:\"en\", note:"
+ },
+ "js_078": {
+  "t": "흐릿한 미래는 끌어당기는 힘이 약해요. 생생하고 구체적일수록 뇌가 그 미래를 진짜처럼 여겨 행동이 따라옵니다.",
+  "ctx": " 사람이 되기 시작하라는 것.\"},   4:{src:\"ko\", note:"
+ },
+ "js_079": {
+  "t": "역사의 종말 착각 = 과거엔 많이 변했다면서 미래엔 별로 안 변할 거라 믿는 착각. 그래서 지금의 나에 스스로를 가둡니다.",
+  "ctx": "럼 여겨 행동이 따라옵니다.\"},   5:{src:\"eoh\", note:"
+ },
+ "js_080": {
+  "t": "하버드 대니얼 길버트 팀이 18~68세 약 1만 9천 명을 조사(2013). 나이와 상관없이 모두가 이 착각에 빠졌습니다.",
+  "ctx": "의 나에 스스로를 가둡니다.\"},   6:{src:\"eoh\", note:"
+ },
+ "js_081": {
+  "t": "셀리그먼 등의 『호모 프로스펙투스』 — 인간은 과거에 떠밀리는 게 아니라 미래를 상상하며 그쪽으로 이끌리는 존재라는 관점이에요.",
+  "ctx": "착각에 빠졌습니다.\"},   7:{src:\"prospect\", note:"
+ },
+ "js_082": {
+  "t": "3부 구성 = 미래의 나를 위협하는 7가지 · 미래의 나에 관한 7가지 진실 · 미래의 내가 되는 법. 위협을 알고, 진실을 익히고, 실천합니다.",
+  "ctx": "이끌리는 존재라는 관점이에요.\"},   8:{src:\"ko\", note:"
+ },
+ "js_083": {
+  "t": "빅터 프랭클처럼, 미래에 대한 희망(의미)이 있어야 현재의 고통을 견딥니다. 희망이 사라지면 오늘이 무너져요.",
+  "ctx": " 진실을 익히고, 실천합니다.\"},   9:{src:\"en\", note:"
+ },
+ "js_084": {
+  "t": "미래의 나를 ‘남’이 아니라 ‘함께 갈 최고의 안내자’로 대하세요. 그 사람의 눈으로 오늘을 보면 선택이 달라집니다.",
+  "ctx": " 사라지면 오늘이 무너져요.\"},   10:{src:\"ko\", note:"
+ },
+ "js_085": {
+  "t": "현재의 나",
+  "ctx": "*/ const MILESTONES = [   {at:0,  label:"
+ },
+ "js_086": {
+  "t": "희망 켜기",
+  "ctx": "{at:0,  label:\"현재의 나\"},   {at:6,  label:"
+ },
+ "js_087": {
+  "t": "위협 걷어내기",
+  "ctx": "{at:6,  label:\"희망 켜기\"},   {at:12, label:"
+ },
+ "js_088": {
+  "t": "진실 익히기",
+  "ctx": "t:12, label:\"위협 걷어내기\"},   {at:18, label:"
+ },
+ "js_089": {
+  "t": "미래 그리기",
+  "ctx": "at:18, label:\"진실 익히기\"},   {at:24, label:"
+ },
+ "js_090": {
+  "t": "미래의 나 되기",
+  "ctx": "at:24, label:\"미래 그리기\"},   {at:30, label:"
+ },
+ "js_091": {
+  "t": "보통",
+  "ctx": "]; const DIFF_LABEL = {1:[\"쉬움\",\"l1\"],2:["
+ },
+ "js_092": {
+  "t": "어려움",
+  "ctx": "LABEL = {1:[\"쉬움\",\"l1\"],2:[\"보통\",\"l2\"],3:["
+ },
+ "js_093": {
+  "t": "· 복습",
+  "ctx": "ds.size+' / '+TOTAL_Q + (attempts[id] ? "
+ },
+ "js_094": {
+  "t": "🎯 정답!",
+  "ctx": ")      verdict.textContent = firstTry ? "
+ },
+ "js_095": {
+  "t": "✅ 이제 익혔어요!",
+  "ctx": "dict.textContent = firstTry ? '🎯 정답!' : "
+ },
+ "js_096": {
+  "t": "❌ 다시 도전!",
+  "ctx": "ing.push(id);     verdict.textContent = "
+ },
+ "js_097": {
+  "t": "↻ 이 문제는 뒤에서 다시 나옵니다",
+  "ctx": "getElementById('requeue').textContent = "
+ },
+ "js_098": {
+  "t": "미래가 현재를 이끈다",
+  "ctx": "==== */ const CONCEPTS = [   {ic:\"🧭\", h:"
+ },
+ "js_099": {
+  "t": "과거가 아니라 미래의 나가 지금의 선택과 행동을 끌어당깁니다. 이 책의 대전제예요.",
+  "ctx": "CEPTS = [   {ic:\"🧭\", h:\"미래가 현재를 이끈다\", p:"
+ },
+ "js_100": {
+  "t": "사람은 과거엔 많이 변했다면서 미래엔 별로 안 변할 거라 착각합니다(길버트, 2013). 그래서 지금의 나에 스스로를 가둬요.",
+  "ctx": " src:\"ko\"},   {ic:\"⏳\", h:\"역사의 종말 착각\", p:"
+ },
+ "js_101": {
+  "t": "인간은 과거에 떠밀리는 게 아니라 미래를 상상하며 그쪽으로 이끌리는 존재입니다(셀리그먼).",
+  "ctx": "src:\"eoh\"},   {ic:\"🔭\", h:\"호모 프로스펙투스\", p:"
+ },
+ "js_102": {
+  "t": "생생할수록 빨라진다",
+  "ctx": "(셀리그먼).\", src:\"prospect\"},   {ic:\"🎨\", h:"
+ },
+ "js_103": {
+  "t": "미래의 나를 구체적·측정 가능·기한 있게 그릴수록 그 모습에 더 빨리 가까워집니다. 흐릿한 미래는 힘이 약해요.",
+  "ctx": "rospect\"},   {ic:\"🎨\", h:\"생생할수록 빨라진다\", p:"
+ },
+ "js_104": {
+  "t": "과거의 의미는 다시 쓴다",
+  "ctx": "한 미래는 힘이 약해요.\", src:\"ko\"},   {ic:\"🌱\", h:"
+ },
+ "js_105": {
+  "t": "과거는 고정된 사실이 아니라 지금 부여하는 의미. 미래의 나가 바뀌면 과거의 뜻도 바뀝니다.",
+  "ctx": ":\"ko\"},   {ic:\"🌱\", h:\"과거의 의미는 다시 쓴다\", p:"
+ },
+ "js_106": {
+  "t": "경기장에 들어가라",
+  "ctx": "과거의 뜻도 바뀝니다.\", src:\"ko\"},   {ic:\"🏟️\", h:"
+ },
+ "js_107": {
+  "t": "시도조차 않으면 기본값은 실패. 비난이 두려워 안 나서기보다 뛰어들어 도전하는 사람이 됩니다.",
+  "ctx": "src:\"ko\"},   {ic:\"🏟️\", h:\"경기장에 들어가라\", p:"
+ },
+ "js_108": {
+  "t": "갭이 아니라 게인",
+  "ctx": "도전하는 사람이 됩니다.\", src:\"en\"},   {ic:\"📏\", h:"
+ },
+ "js_109": {
+  "t": "이상과 견주면 늘 부족하고, 출발점과 견주면 나아간 만큼 보입니다. 게인으로 측정해야 지치지 않아요.",
+  "ctx": " src:\"en\"},   {ic:\"📏\", h:\"갭이 아니라 게인\", p:"
+ },
+ "js_110": {
+  "t": "성공이라는 함정",
+  "ctx": "정해야 지치지 않아요.\", src:\"en\"},   {ic:\"⚠️\", h:"
+ },
+ "js_111": {
+  "t": "성공에 안주해 미래의 나를 갱신하지 않으면, 어제의 성공 공식이 내일의 발목을 잡습니다.",
+  "ctx": " src:\"en\"},   {ic:\"⚠️\", h:\"성공이라는 함정\", p:"
+ },
+ "js_112": {
+  "t": "프롤로그",
+  "ctx": "/* 목차(클릭하면 요약 오픈) */ const TOC = [   {n:"
+ },
+ "js_113": {
+  "t": "미래의 내가 지금의 나를 만든다",
+  "ctx": " 요약 오픈) */ const TOC = [   {n:\"프롤로그\", t:"
+ },
+ "js_114": {
+  "t": "세상은 ‘과거가 너를 만들었다’고 말하지만, 하디는 정반대를 제안합니다 — 미래가 현재를 이끈다.",
+  "ctx": "의 내가 지금의 나를 만든다\", beats:[     {e:\"🧭\", x:"
+ },
+ "js_115": {
+  "t": "핵심 근거는 심리학 — 인간은 미래를 상상하며 그쪽으로 이끌리는 존재(호모 프로스펙투스).",
+  "ctx": "를 제안합니다 — 미래가 현재를 이끈다.\"},     {e:\"⏳\", x:"
+ },
+ "js_116": {
+  "t": "원제의 방점은 ‘지금(Now)’. 미래의 나를 훗날로 미루지 말고 오늘부터 그 사람처럼 살라는 것.",
+  "ctx": "으로 이끌리는 존재(호모 프로스펙투스).\"},     {e:\"🔑\", x:"
+ },
+ "js_117": {
+  "t": "책 전체를 관통하는 질문 하나: 나는 어떤 미래의 나를, 얼마나 선명히 그리고 있는가?",
+  "ctx": " 말고 오늘부터 그 사람처럼 살라는 것.\"},     {e:\"❓\", x:"
+ },
+ "js_118": {
+  "t": "1부",
+  "ctx": " 미래의 나를, 얼마나 선명히 그리고 있는가?\"},   ]},   {n:"
+ },
+ "js_119": {
+  "t": "미래의 나를 위협하는 7가지",
+  "ctx": " 얼마나 선명히 그리고 있는가?\"},   ]},   {n:\"1부\", t:"
+ },
+ "js_120": {
+  "t": "위협① 미래에 대한 희망이 없으면 현재는 의미를 잃는다 — 미래가 있어야 오늘을 견딘다.",
+  "ctx": "미래의 나를 위협하는 7가지\", beats:[     {e:\"💡\", x:"
+ },
+ "js_121": {
+  "t": "위협② 과거에 대한 부정적 스토리에 갇히면 미래가 막힌다 — 과거의 의미는 다시 쓸 수 있다.",
+  "ctx": "잃는다 — 미래가 있어야 오늘을 견딘다.\"},     {e:\"📉\", x:"
+ },
+ "js_122": {
+  "t": "위협③ 환경을 의식하지 못하면 아무 길로나 떠밀린다 — 그래서 환경을 ‘설계’해야 한다.",
+  "ctx": " — 과거의 의미는 다시 쓸 수 있다.\"},     {e:\"🌫️\", x:"
+ },
+ "js_123": {
+  "t": "위협④ 미래의 나와 단절되면 근시안이 된다 — 미래 이익을 헐값에 팔아넘긴다(현재 편향).",
+  "ctx": "다 — 그래서 환경을 ‘설계’해야 한다.\"},     {e:\"🔍\", x:"
+ },
+ "js_124": {
+  "t": "위협⑤ 시급한 문제와 사소한 목표가 발목을 잡는다 — 급한 것과 중요한 것을 구분하라.",
+  "ctx": " 이익을 헐값에 팔아넘긴다(현재 편향).\"},     {e:\"🧱\", x:"
+ },
+ "js_125": {
+  "t": "위협⑥ 경기장에 들어가지 않으면 당연히 패배 — 시도조차 않는 것이 진짜 실패다.",
+  "ctx": " — 급한 것과 중요한 것을 구분하라.\"},     {e:\"🏟️\", x:"
+ },
+ "js_126": {
+  "t": "위협⑦ 성공이 실패의 기폭제가 된다 — 성공에 고착되면 미래의 나를 갱신하지 못한다.",
+  "ctx": " — 시도조차 않는 것이 진짜 실패다.\"},     {e:\"⚠️\", x:"
+ },
+ "js_127": {
+  "t": "2부",
+  "ctx": "성공에 고착되면 미래의 나를 갱신하지 못한다.\"},   ]},   {n:"
+ },
+ "js_128": {
+  "t": "미래의 나에 관한 7가지 진실",
+  "ctx": " 미래의 나를 갱신하지 못한다.\"},   ]},   {n:\"2부\", t:"
+ },
+ "js_129": {
+  "t": "진실① 당신의 미래가 현재를 이끈다 — 방향(미래)이 오늘의 걸음을 정한다.",
+  "ctx": "래의 나에 관한 7가지 진실\", beats:[     {e:\"🧭\", x:"
+ },
+ "js_130": {
+  "t": "진실② 미래의 나는 예상과 다르다 — 지금의 취향·가치관을 미래에 못 박지 말라.",
+  "ctx": "— 방향(미래)이 오늘의 걸음을 정한다.\"},     {e:\"🔄\", x:"
+ },
+ "js_131": {
+  "t": "진실③ 미래의 나는 피리 부는 사람 — 매력적인 미래가 앞서 걸으며 나를 이끈다.",
+  "ctx": "의 취향·가치관을 미래에 못 박지 말라.\"},     {e:\"🎺\", x:"
+ },
+ "js_132": {
+  "t": "진실④ 생생하고 자세할수록 더 빨리 성장한다 — 구체적·측정 가능·기한 있는 미래.",
+  "ctx": "력적인 미래가 앞서 걸으며 나를 이끈다.\"},     {e:\"🎨\", x:"
+ },
+ "js_133": {
+  "t": "진실⑤ 미래의 나의 실패가 현재의 나의 성공보다 낫다 — 담대한 도전이 안전한 정체보다 값지다.",
+  "ctx": " — 구체적·측정 가능·기한 있는 미래.\"},     {e:\"🚀\", x:"
+ },
+ "js_134": {
+  "t": "진실⑥ 성공하려면 미래의 나에게 진실해져야 한다 — 그 사람에게 부끄럽지 않은 오늘.",
+  "ctx": " 담대한 도전이 안전한 정체보다 값지다.\"},     {e:\"🤝\", x:"
+ },
+ "js_135": {
+  "t": "진실⑦ 삶의 궁극적 의미(세계관)에 대한 관점이 미래의 나를 좌우한다.",
+  "ctx": "다 — 그 사람에게 부끄럽지 않은 오늘.\"},     {e:\"🌌\", x:"
+ },
+ "js_136": {
+  "t": "3부",
+  "ctx": "세계관)에 대한 관점이 미래의 나를 좌우한다.\"},   ]},   {n:"
+ },
+ "js_137": {
+  "t": "미래의 내가 되는 법",
+  "ctx": " 관점이 미래의 나를 좌우한다.\"},   ]},   {n:\"3부\", t:"
+ },
+ "js_138": {
+  "t": "원하는 미래의 나를 종이에 구체적으로 적는다 — 흐릿함을 선명함으로 바꾼다.",
+  "ctx": "t:\"미래의 내가 되는 법\", beats:[     {e:\"🖊️\", x:"
+ },
+ "js_139": {
+  "t": "목표를 구체적·측정 가능·기한 있게 세운다 — 막연한 크기보다 선명한 구체성.",
+  "ctx": " 적는다 — 흐릿함을 선명함으로 바꾼다.\"},     {e:\"🎯\", x:"
+ },
+ "js_140": {
+  "t": "환경을 설계한다 — 사람·공간·정보를 원하는 미래에 맞게 정비한다.",
+  "ctx": "다 — 막연한 크기보다 선명한 구체성.\"},     {e:\"🏗️\", x:"
+ },
+ "js_141": {
+  "t": "지금 그 사람처럼 행동한다 — ‘미래의 나라면?’을 묻고 오늘 그대로 실천한다.",
+  "ctx": "간·정보를 원하는 미래에 맞게 정비한다.\"},     {e:\"🚶\", x:"
+ },
+ "js_142": {
+  "t": "갭이 아니라 게인으로 측정한다 — 출발점과 견줘 나아간 만큼을 본다.",
+  "ctx": "나라면?’을 묻고 오늘 그대로 실천한다.\"},     {e:\"📏\", x:"
+ },
+ "js_143": {
+  "t": "결론은 하나 — 미래의 나를 선명히 그려 지금 그 사람처럼 살면 그 미래가 현실이 된다.",
+  "ctx": " — 출발점과 견줘 나아간 만큼을 본다.\"},     {e:\"✅\", x:"
+ },
+ "js_144": {
+  "t": "역사의 종말 착각 실험",
+  "ctx": "해볼 사례 3 */ const CASES = [   {ic:\"⏳\", t:"
+ },
+ "js_145": {
+  "t": "하버드 대니얼 길버트 팀은 18~68세 약 1만 9천 명을 조사했습니다. 사람들은 지난 10년간 많이 변했다고 인정하면서도, 앞으로 10년은 별로 안 변할 거라 믿었어요. 나이와 상관없이 누구나 지금의 자신을 최종본이라 여겼죠.",
+  "ctx": "ASES = [   {ic:\"⏳\", t:\"역사의 종말 착각 실험\", d:"
+ },
+ "js_146": {
+  "t": "우리가 왜 미래의 나를 과소평가하고 지금의 나에 스스로를 가두는지를 과학적으로 보여줍니다.",
+  "ctx": ". 나이와 상관없이 누구나 지금의 자신을 최종본이라 여겼죠.\", why:"
+ },
+ "js_147": {
+  "t": "셀리그먼 등은 인간을 ‘미래를 내다보는 존재(호모 프로스펙투스)’로 규정합니다. 프로이트·스키너식으로 과거에 떠밀리는 게 아니라, 상상한 미래에 이끌려 오늘을 산다는 관점의 전환이에요.",
+  "ctx": "로 보여줍니다.\"},   {ic:\"🔭\", t:\"호모 프로스펙투스\", d:"
+ },
+ "js_148": {
+  "t": "‘미래가 현재를 이끈다’는 이 책의 대전제가 심리학 연구에 뿌리를 두고 있음을 보여줍니다.",
+  "ctx": "라, 상상한 미래에 이끌려 오늘을 산다는 관점의 전환이에요.\", why:"
+ },
+ "js_149": {
+  "t": "경기장 속 투사 (루스벨트)",
+  "ctx": " 연구에 뿌리를 두고 있음을 보여줍니다.\"},   {ic:\"🏟️\", t:"
+ },
+ "js_150": {
+  "t": "하디는 루스벨트의 유명한 연설을 빌려옵니다 — 중요한 건 비평가가 아니라 먼지와 땀으로 얼굴이 범벅된 채 경기장에서 애쓰는 사람이다. 실패가 두려워 뛰어들지 않으면 기본값은 이미 패배라는 거죠.",
+  "ctx": ".\"},   {ic:\"🏟️\", t:\"경기장 속 투사 (루스벨트)\", d:"
+ },
+ "js_151": {
+  "t": "미래의 나로 가려면 완벽한 준비가 아니라 지금 ‘경기장에 들어서는 용기’가 먼저임을 일깨웁니다.",
+  "ctx": "실패가 두려워 뛰어들지 않으면 기본값은 이미 패배라는 거죠.\", why:"
+ },
+ "js_152": {
+  "t": "10년 뒤 ‘미래의 나’를 지금 얼마나 선명하게 그리고 있는가? 흐릿하다면 무엇부터 또렷하게 할 수 있을까?",
+  "ctx": "책이 우리에게 던지는 질문 3 */ const ASKS = [   {q:"
+ },
+ "js_153": {
+  "t": "직업·관계·건강·태도 등 한 영역만이라도 구체적·측정 가능·기한 있게 적어 보세요. 선명함이 곧 힘입니다.",
+  "ctx": "게 그리고 있는가? 흐릿하다면 무엇부터 또렷하게 할 수 있을까?\", h:"
+ },
+ "js_154": {
+  "t": "나는 과거의 어떤 이야기에 갇혀 있는가? 그 과거를 미래의 나의 눈으로 다시 쓴다면 뜻이 어떻게 달라질까?",
+  "ctx": "정 가능·기한 있게 적어 보세요. 선명함이 곧 힘입니다.\"},   {q:"
+ },
+ "js_155": {
+  "t": "같은 사건도 ‘피해’가 아니라 ‘배움’으로 의미를 다시 쓸 수 있어요. 과거의 의미는 지금 정해집니다.",
+  "ctx": " 과거를 미래의 나의 눈으로 다시 쓴다면 뜻이 어떻게 달라질까?\", h:"
+ },
+ "js_156": {
+  "t": "지금 나의 환경(사람·공간·정보)은 미래의 나를 돕고 있는가, 가로막고 있는가?",
+  "ctx": "를 다시 쓸 수 있어요. 과거의 의미는 지금 정해집니다.\"},   {q:"
+ },
+ "js_157": {
+  "t": "환경은 조용히 나를 빚습니다. 원하는 미래에 맞게 한 가지만이라도 환경을 바꿔 보세요.",
+  "ctx": "사람·공간·정보)은 미래의 나를 돕고 있는가, 가로막고 있는가?\", h:"
+ },
+ "js_158": {
+  "t": "🚀 미래 자아 설계자",
+  "ctx": ");   let rank, sub;   if(acc>=90){ rank="
+ },
+ "js_159": {
+  "t": "퓨처 셀프의 원리를 완벽히 꿰뚫었습니다",
+  "ctx": "   if(acc>=90){ rank='🚀 미래 자아 설계자'; sub="
+ },
+ "js_160": {
+  "t": "🧭 미래로 가는 여행자",
+  "ctx": "완벽히 꿰뚫었습니다'; }   else if(acc>=75){ rank="
+ },
+ "js_161": {
+  "t": "핵심 논리를 거의 다 잡았어요",
+  "ctx": "e if(acc>=75){ rank='🧭 미래로 가는 여행자'; sub="
+ },
+ "js_162": {
+  "t": "🌱 미래를 그리는 견습생",
+  "ctx": " 거의 다 잡았어요'; }   else if(acc>=55){ rank="
+ },
+ "js_163": {
+  "t": "뼈대를 익혔습니다 — 한 번 더!",
+  "ctx": " if(acc>=55){ rank='🌱 미래를 그리는 견습생'; sub="
+ },
+ "js_164": {
+  "t": "🐣 현재에 머문 입문자",
+  "ctx": "b='뼈대를 익혔습니다 — 한 번 더!'; }   else { rank="
+ },
+ "js_165": {
+  "t": "반복할수록 점수가 오릅니다",
+  "ctx": "!'; }   else { rank='🐣 현재에 머문 입문자'; sub="
+ },
+ "js_166": {
+  "t": "완독 리포트",
+  "ctx": "onst fname = ((h2 && h2.textContent) || "
+ },
+ "js_167": {
+  "t": "한눈에 보기",
+  "ctx": "&& h2.textContent) || '완독 리포트').replace("
+ },
+ "js_168": {
+  "t": "리포트.pdf",
+  "ctx": "'완독 리포트').replace('한눈에 보기','').trim() + "
+ },
+ "js_169": {
+  "t": "📄 PDF 만드는 중…",
+  "ctx": "tn){ btn.disabled=true; btn.textContent="
+ },
+ "js_170": {
+  "t": "PDF 생성 중 문제가 발생했어요. 이 HTML 파일을 내려받아 브라우저에서 직접 열고 다시 눌러 주세요.",
+  "ctx": "     }   }).catch(function(){     alert("
+ },
+ "js_171": {
+  "t": "무료로는 <b>",
+  "ctx": "t = TOTAL_Q - fl;       msg.innerHTML = "
+ },
+ "js_172": {
+  "t": "문항</b>까지 풀 수 있어요.",
+  "ctx": "fl;       msg.innerHTML = '무료로는 <b>'+fl+"
+ },
+ "js_173": {
+  "t": "나머지 <b>",
+  "ctx": " <b>'+fl+'문항</b>까지 풀 수 있어요. ' +         "
+ },
+ "js_174": {
+  "t": "문항</b>과 <b>완독 요약 리포트</b>는 구독자 전용입니다.",
+  "ctx": ">까지 풀 수 있어요. ' +         '나머지 <b>'+rest+"
+ },
+ "js_175": {
+  "t": "지금까지 쌓은 <b>성장 진행도</b>는 위 게이지에 그대로 남아 있어요.",
+  "ctx": "b>완독 요약 리포트</b>는 구독자 전용입니다. ' +         "
+ },
+ "js_176": {
+  "t": "<h3>완독 리포트 전체는 구독자 전용이에요</h3>",
+  "ctx": " = '<div class=\"lk-ic\">🔒</div>' +       "
+ },
+ "js_177": {
+  "t": "<p>미래 → 현재의 사슬과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>",
+  "ctx": "'<h3>완독 리포트 전체는 구독자 전용이에요</h3>' +       "
+ },
+ "js_178": {
+  "t": "목차 요약 · 사례 · 질문 · 약점 복습 · PDF 저장은 구독하면 모두 열립니다.</p>",
+  "ctx": "과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>' +       "
+ },
+ "js_179": {
+  "t": "\" target=\"_blank\" rel=\"noopener\">🔑 구독하고 완독 리포트 전체 열기</a>",
+  "ctx": "     '<a class=\"cta\" href=\"' + _sub() + "
+ },
+ "js_180": {
+  "t": "퓨처 셀프 (Future Self)",
+  "ctx": " 250, '120px serif', '#38d6f5');   ctxt("
+ },
+ "js_181": {
+  "t": "벤저민 하디 · 미래의 나 마스터 퀴즈",
+  "ctx": "to Serif KR\",serif', '#ffffff');   ctxt("
+ },
+ "js_182": {
+  "t": "퓨처 셀프",
+  "ctx": "ntById('rankTitle')||{}).textContent || "
+ },
+ "js_183": {
+  "t": "📚 매일 새 책 퀴즈  ·",
+  "ctx": "(/^https?:\\/\\//,'') : '';   if(su) ctxt("
+ },
+ "js_184": {
+  "t": "퓨처셀프_퀴즈결과.png",
+  "ctx": "nt('a');     a.href = url; a.download = "
+ },
+ "js_185": {
+  "t": "💌 VIP 초대 —",
+  "ctx": "ursor:pointer;\";     d.textContent=(vip?"
+ },
+ "js_186": {
+  "t": "🎁 지금 이 책 풀버전 무료 오픈 중!",
+  "ctx": "\";     d.textContent=(vip?\"💌 VIP 초대 — \":"
+ },
+ "js_187": {
+  "t": "전체판(잠금 없음)으로 이동 →",
+  "ctx": "\"💌 VIP 초대 — \":\"🎁 지금 이 책 풀버전 무료 오픈 중! \")+"
+ },
+ "jst_001": {
+  "t": "무료로 풀 수 있는 문항 수",
+  "ctx": "    freeLimit: 10,           // teaser: "
+ },
+ "jst_002": {
+  "t": "아직",
+  "ctx": "3:30};    let pending = [];          // "
+ },
+ "jst_003": {
+  "t": "처음으로 정답",
+  "ctx": "};    let pending = [];          // 아직 ‘"
+ },
+ "jst_004": {
+  "t": "을 못 낸 문항 큐",
+  "ctx": "t pending = [];          // 아직 ‘처음으로 정답’"
+ },
+ "jst_005": {
+  "t": "앞에서 꺼냄",
+  "ctx": "[];          // 아직 ‘처음으로 정답’을 못 낸 문항 큐 ("
+ },
+ "jst_006": {
+  "t": "시도 횟수",
+  "ctx": "(); let attempts = {};         // id -> "
+ },
+ "jst_007": {
+  "t": "첫 시도에 틀린 문항",
+  "ctx": " 0; let firstWrongIds = new Set();   // "
+ },
+ "jst_008": {
+  "t": "약점",
+  "ctx": "rongIds = new Set();   // 첫 시도에 틀린 문항 = "
+ },
+ "jst_009": {
+  "t": "집중 복습 대상",
+  "ctx": "gIds = new Set();   // 첫 시도에 틀린 문항 = 약점("
+ },
+ "jst_010": {
+  "t": "세션 내 최고 점수",
+  "ctx": "r = null; let bestScore = 0;         // "
+ },
+ "jst_011": {
+  "t": "재도전 비교용,",
+  "ctx": "t bestScore = 0;         // 세션 내 최고 점수 ("
+ },
+ "jst_012": {
+  "t": "미사용",
+  "ctx": "   // 세션 내 최고 점수 (재도전 비교용, localStorage "
+ },
+ "jst_013": {
+  "t": "복습 정답은 절반 점수",
+  "ctx": " gain = Math.round(gain/2);          // "
+ },
+ "jst_014": {
+  "t": "콤보 보너스",
+  "ctx": " (streak>=2) ? (streak-1)*3 : 0;     // "
+ },
+ "jst_015": {
+  "t": "가 아니어도 최종적으로 익힌 것으로 카운트",
+  "ctx": " masteredIds.add(id);          // ‘처음으로’"
+ },
+ "jst_016": {
+  "t": "큐에서 제거",
+  "ctx": "운트     pending.shift();              // "
+ },
+ "jst_017": {
+  "t": "연속 정답!",
+  "ctx": "      comboEl.textContent = `🔥 ${streak}"
+ },
+ "jst_018": {
+  "t": "보너스",
+  "ctx": "tContent = `🔥 ${streak}연속 정답! +${bonus} "
+ },
+ "jst_019": {
+  "t": "약점으로 기록",
+  "ctx": "f(firstTry) firstWrongIds.add(id);   // "
+ },
+ "jst_020": {
+  "t": "왜 생각해볼 만한가",
+  "ctx": "= >${c.d}</div>       <div class= >💭 <b>"
+ },
+ "jst_021": {
+  "t": "첫 시도에 모두 정답!",
+  "ctx": " ;     list.innerHTML = `<div class= >🌟 "
+ },
+ "jst_022": {
+  "t": "약점이 없어 따로 복습할 항목이 없습니다. 멋져요.",
+  "ctx": "TML = `<div class= >🌟 첫 시도에 모두 정답!<span>"
+ },
+ "jst_023": {
+  "t": "개",
+  "ctx": " {     cnt.textContent = `(${ids.length}"
+ },
+ "jst_024": {
+  "t": "정답",
+  "ctx": "= >Q. ${q.q}</div>         <div class= >"
+ },
+ "jst_025": {
+  "t": "최고 점수 경신!",
+  "ctx": "re;     note.innerHTML = prev>0 ? `🏆 <b>"
+ },
+ "jst_026": {
+  "t": "이전",
+  "ctx": "nerHTML = prev>0 ? `🏆 <b>최고 점수 경신!</b> ("
+ },
+ "jst_027": {
+  "t": "점",
+  "ctx": "prev>0 ? `🏆 <b>최고 점수 경신!</b> (이전 ${prev}"
+ },
+ "jst_028": {
+  "t": "첫 기록",
+  "ctx": "`🏆 <b>최고 점수 경신!</b> (이전 ${prev}점)` : `🏆 "
+ },
+ "jst_029": {
+  "t": "다시 도전해 깨보세요!",
+  "ctx": "${prev}점)` : `🏆 첫 기록 <b>${score}점</b> — "
+ },
+ "jst_030": {
+  "t": "현재 최고 점수",
+  "ctx": "보세요!`;   } else {     note.innerHTML = `"
+ },
+ "jst_031": {
+  "t": "이번엔",
+  "ctx": "HTML = `현재 최고 점수 <b>${bestScore}점</b> · "
+ }
+}

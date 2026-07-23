@@ -1,0 +1,1210 @@
+{
+ "_meta": {
+  "source": "apps/광장_teaser.html",
+  "slug": "광장_teaser"
+ },
+ "title_001": {
+  "t": "광장 도파민 마스터 퀴즈 · 최인훈",
+  "ctx": "<title>"
+ },
+ "html_001": {
+  "t": "최인훈 · 1960 · 4·19가 낳은 분단문학의 고전",
+  "ctx": "class=\"hero\">       <div class=\"eyebrow\""
+ },
+ "html_002": {
+  "t": "밀실과 광장 사이, 참된 삶을 찾아 헤맨 한 사람",
+  "ctx": "ass=\"p3\">🌊</span></div>       <h1><small"
+ },
+ "html_003": {
+  "t": "광장 마스터 퀴즈",
+  "ctx": "small>밀실과 광장 사이, 참된 삶을 찾아 헤맨 한 사람</small"
+ },
+ "html_004": {
+  "t": "“밀실만 있고 광장이 없는 곳, 광장만 있고 밀실이 없는 곳 — 어디서 살 것인가.”",
+  "ctx": ">광장 마스터 퀴즈</h1>       <div class=\"quote\""
+ },
+ "html_005": {
+  "t": "— 소설 『광장』이 던지는 물음",
+  "ctx": "있고 밀실이 없는 곳 — 어디서 살 것인가.”<br>         <b"
+ },
+ "html_006": {
+  "t": "이명준의 여정과 이 소설의 인물·상징·주제를",
+  "ctx": "설 『광장』이 던지는 물음</b>       </div>       <p"
+ },
+ "html_007": {
+  "t": "30개의 퀴즈",
+  "ctx": "iv>       <p>이명준의 여정과 이 소설의 인물·상징·주제를 <b"
+ },
+ "html_008": {
+  "t": "로 익힙니다.\n        쉬운 것부터 시작해 점점 어려워지고,",
+  "ctx": "p>이명준의 여정과 이 소설의 인물·상징·주제를 <b>30개의 퀴즈</b"
+ },
+ "html_009": {
+  "t": "틀린 문제는 맞힐 때까지 다시 돌아옵니다.",
+  "ctx": ">로 익힙니다.         쉬운 것부터 시작해 점점 어려워지고, <b"
+ },
+ "html_010": {
+  "t": "총",
+  "ctx": "s=\"meta-row\">         <span class=\"chip\""
+ },
+ "html_011": {
+  "t": "30문항",
+  "ctx": "ta-row\">         <span class=\"chip\">총 <b"
+ },
+ "html_012": {
+  "t": "쉬움 → 어려움",
+  "ctx": "문항</b></span>         <span class=\"chip\""
+ },
+ "html_013": {
+  "t": "실시간",
+  "ctx": "어려움</span>         <span class=\"chip\"><b"
+ },
+ "html_014": {
+  "t": "명준의 여정",
+  "ctx": "an>         <span class=\"chip\"><b>실시간</b"
+ },
+ "html_015": {
+  "t": "문제마다",
+  "ctx": "명준의 여정</span>         <span class=\"chip\""
+ },
+ "html_016": {
+  "t": "쉬운 해설",
+  "ctx": "span>         <span class=\"chip\">문제마다 <b"
+ },
+ "html_017": {
+  "t": "광장으로 →",
+  "ctx": "=\"btn btn-primary\" onclick=\"startQuiz()\""
+ },
+ "html_018": {
+  "t": "점수",
+  "ctx": "   <div class=\"stat\"><span class=\"label\""
+ },
+ "html_019": {
+  "t": "연속 정답",
+  "ctx": "align-items:center;\"><span class=\"label\""
+ },
+ "html_020": {
+  "t": "마스터",
+  "ctx": "ign-items:flex-end;\"><span class=\"label\""
+ },
+ "html_021": {
+  "t": "밀실 ←",
+  "ctx": "\">         <div class=\"axis-label\"><span"
+ },
+ "html_022": {
+  "t": "명준의 여정 ·",
+  "ctx": "lass=\"axis-label\"><span>밀실 ←</span><span"
+ },
+ "html_023": {
+  "t": "→ 광장",
+  "ctx": "의 여정 · <b id=\"pctTxt\">0%</b></span><span"
+ },
+ "html_024": {
+  "t": "쉬움",
+  "ctx": "d\">         <span class=\"diff\" id=\"diff\""
+ },
+ "html_025": {
+  "t": "다음 →",
+  "ctx": "y\" id=\"nextBtn\" onclick=\"nextQuestion()\""
+ },
+ "html_026": {
+  "t": "여기까지가 무료 미리보기예요",
+  "ctx": ">     <div class=\"lk-ic\">🔒</div>     <h3"
+ },
+ "html_027": {
+  "t": "🔑 구독하고 전체 열기",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_028": {
+  "t": "요약 리포트 미리보기 →",
+  "ctx": "class=\"cta ghost\" onclick=\"openReport()\""
+ },
+ "html_029": {
+  "t": "푸른 광장에 이른 사람",
+  "ctx": ">       <div class=\"rank\" id=\"rankTitle\""
+ },
+ "html_030": {
+  "t": "최종 점수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_031": {
+  "t": "첫 시도 정답률",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_032": {
+  "t": "최고 연속 정답",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_033": {
+  "t": "총 도전 횟수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_034": {
+  "t": "📖 전체 요약 리포트 보기",
+  "ctx": "\"btn btn-primary\" onclick=\"openReport()\""
+ },
+ "html_035": {
+  "t": "🖼 결과 카드 저장",
+  "ctx": "btn btn-ghost\" onclick=\"makeShareCard()\""
+ },
+ "html_036": {
+  "t": "다시 도전 ↻",
+  "ctx": "ss=\"btn btn-ghost\" onclick=\"startQuiz()\""
+ },
+ "html_037": {
+  "t": "처음으로",
+  "ctx": "class=\"btn btn-ghost\" onclick=\"goHome()\""
+ },
+ "html_038": {
+  "t": "완독 리포트 · INFOGRAPHIC",
+  "ctx": "s=\"rep-hero\">       <div class=\"eyebrow\""
+ },
+ "html_039": {
+  "t": "광장 한눈에 보기",
+  "ctx": "ow\">완독 리포트 · INFOGRAPHIC</div>       <h2"
+ },
+ "html_040": {
+  "t": "소설 전체를",
+  "ctx": "</div>       <h2>광장 한눈에 보기</h2>       <p"
+ },
+ "html_041": {
+  "t": "‘밀실에서 광장으로’",
+  "ctx": "   <h2>광장 한눈에 보기</h2>       <p>소설 전체를 <b"
+ },
+ "html_042": {
+  "t": "하나로 꿰면 절대 안 잊습니다. 모든 것의 발단은",
+  "ctx": "기</h2>       <p>소설 전체를 <b>‘밀실에서 광장으로’</b"
+ },
+ "html_043": {
+  "t": "분단과 이념 대립",
+  "ctx": "광장으로’</b> 하나로 꿰면 절대 안 잊습니다. 모든 것의 발단은 <b"
+ },
+ "html_044": {
+  "t": "입니다.",
+  "ctx": " 꿰면 절대 안 잊습니다. 모든 것의 발단은 <b>분단과 이념 대립</b"
+ },
+ "html_045": {
+  "t": "발단",
+  "ctx": "<div class=\"ch step s0\"><span class=\"cn\""
+ },
+ "html_046": {
+  "t": "🇰🇷 분단과 이념 대립",
+  "ctx": "ch step s0\"><span class=\"cn\">발단</span><b"
+ },
+ "html_047": {
+  "t": "남과 북으로 갈라진 땅",
+  "ctx": "=\"cn\">발단</span><b>🇰🇷 분단과 이념 대립</b><small"
+ },
+ "html_048": {
+  "t": "1단계",
+  "ctx": "<div class=\"ch step s1\"><span class=\"cn\""
+ },
+ "html_049": {
+  "t": "🚪 남한 — 밀실만 있고 광장은 텅 빈 곳",
+  "ctx": "h step s1\"><span class=\"cn\">1단계</span><b"
+ },
+ "html_050": {
+  "t": "취조·환멸 → 월북 결심",
+  "ctx": "pan><b>🚪 남한 — 밀실만 있고 광장은 텅 빈 곳</b><small"
+ },
+ "html_051": {
+  "t": "2단계",
+  "ctx": "<div class=\"ch step s2\"><span class=\"cn\""
+ },
+ "html_052": {
+  "t": "🏛️ 북한 — 구호뿐인 빈 광장",
+  "ctx": "h step s2\"><span class=\"cn\">2단계</span><b"
+ },
+ "html_053": {
+  "t": "또다시 환멸 · 은혜와의 사랑",
+  "ctx": "2단계</span><b>🏛️ 북한 — 구호뿐인 빈 광장</b><small"
+ },
+ "html_054": {
+  "t": "전개",
+  "ctx": "s=\"ch step s3\">         <span class=\"cn\""
+ },
+ "html_055": {
+  "t": "💥 전쟁 · 은혜의 죽음 · 포로",
+  "ctx": "3\">         <span class=\"cn\">전개</span><b"
+ },
+ "html_056": {
+  "t": "사랑과 이상의 좌초",
+  "ctx": "<b>💥 전쟁 · 은혜의 죽음 · 포로</b>         <small"
+ },
+ "html_057": {
+  "t": "결과",
+  "ctx": "<div class=\"ch step s4\"><span class=\"cn\""
+ },
+ "html_058": {
+  "t": "🌊 중립국행, 푸른 바다로의 투신",
+  "ctx": "ch step s4\"><span class=\"cn\">결과</span><b"
+ },
+ "html_059": {
+  "t": "“지상에 없던 참된 광장”",
+  "ctx": "결과</span><b>🌊 중립국행, 푸른 바다로의 투신</b><small"
+ },
+ "html_060": {
+  "t": "핵심 개념 8",
+  "ctx": "/div>     </div>      <h3 class=\"rep-h3\""
+ },
+ "html_061": {
+  "t": "목차 한눈에 보기",
+  "ctx": "concepts\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_062": {
+  "t": "탭하면 요약이 열립니다",
+  "ctx": "ss=\"rep-h3\">목차 한눈에 보기 <span class=\"hint\""
+ },
+ "html_063": {
+  "t": "책 속, 생각해볼 사례 3",
+  "ctx": " id=\"toc\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_064": {
+  "t": "이 책이 우리에게 던지는 질문 3",
+  "ctx": "d=\"cases\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_065": {
+  "t": "내가 틀린 부분 집중 복습",
+  "ctx": " id=\"weakWrap\">       <h3 class=\"rep-h3\""
+ },
+ "html_066": {
+  "t": "📺 더 깊이 알고 싶다면",
+  "ctx": "/div>      <div class=\"deepen\">       <b"
+ },
+ "html_067": {
+  "t": "에서 『광장』의 문학사적 의미와 최인훈의 세계를 더 깊이 살펴볼 수 있습니다.",
+  "ctx": "f=\"#\" target=\"_blank\" rel=\"noopener\"></a"
+ },
+ "html_068": {
+  "t": "📄 PDF로 저장",
+  "ctx": "d=\"pdfBtn\" onclick=\"downloadReportPDF()\""
+ },
+ "html_069": {
+  "t": "결과로",
+  "ctx": "\"btn btn-ghost\" onclick=\"show('result')\""
+ },
+ "html_070": {
+  "t": "📚 다른 책 퀴즈 보기 →",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_071": {
+  "t": "“의미와재미공장” 미미팩토리",
+  "ctx": "class=\"footer\">     <div class=\"factory\""
+ },
+ "html_072": {
+  "t": "(주식회사 연:결 패밀리회사)",
+  "ctx": "재미공장” 미미팩토리</div>     <div class=\"affil\""
+ },
+ "html_073": {
+  "t": "책의 핵심을 도파민으로 익히는 반복 마스터 퀴즈",
+  "ctx": ":결 패밀리회사)</div>     <div class=\"tagline\""
+ },
+ "html_074": {
+  "t": "본 앱은 도서의 핵심 개념을 학습 목적으로 재구성한 2차적 학습 콘텐츠입니다. 온전한 독서 경험은 원서로 만나보세요.",
+  "ctx": "퀴즈</div>     <div class=\"copyright-note\""
+ },
+ "html_075": {
+  "t": "광장 · 도서 정보",
+  "ctx": "d=광장+최인훈\" target=\"_blank\" rel=\"noopener\""
+ },
+ "js_001": {
+  "t": "\"}))}},Hn={name:\"font-size\",initialValue:\"0\",prefix:!1,type:wt.TYPE_VALUE,format:\"length\"},In={name:\"font-weight\",initialValue:\"normal\",type:wt.VALUE,prefix:!1,parse:function(e){if(Ve(e))return e.number;if(qe(e))switch(e.value){case\"bold\":return 700;case\"normal\":default:return 400}return 400}},Pn={name:\"font-variant\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return e.filter(qe).map((function(e){return e.value}))}};!function(e){e.NORMAL=\"normal\",e.ITALIC=\"italic\",e.OBLIQUE=\"oblique\"}(Nn||(Nn={}));var On,kn={name:\"font-style\",initialValue:\"normal\",prefix:!1,type:wt.IDENT_VALUE,parse:function(e){switch(e){case\"oblique\":return Nn.OBLIQUE;case\"italic\":return Nn.ITALIC;case\"normal\":default:return Nn.NORMAL}}},Rn=function(e,t){return 0!=(e&t)},Mn={name:\"content\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){if(0===e.length)return[];var t=e[0];return t.type===d.IDENT_TOKEN&&\"none\"===t.value?[]:e}},Dn={name:\"counter-increment\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;for(var r=[],n=e.filter(We),o=0;o<n.length;o++){var s=n[o],i=n[o+1];if(s.type===d.IDENT_TOKEN){var a=i&&Ve(i)?i.number:1;r.push({counter:s.value,increment:a})}}return r}},Kn={name:\"counter-reset\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return[];for(var t=[],r=e.filter(We),n=0;n<r.length;n++){var o=r[n],s=r[n+1];if(qe(o)&&\"none\"!==o.value){var i=s&&Ve(s)?s.number:0;t.push({counter:o.value,reset:i})}}return t}},zn={name:\"quotes\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;var r=[],n=e.filter(Ge);if(n.length%2!=0)return null;for(var o=0;o<n.length;o+=2){var s=n[o].value,i=n[o+1].value;r.push({open:s,close:i})}return r}},Vn=function(e,t,r){if(!e)return\"\";var n=e[Math.min(t,e.length-1)];return n?r?n.open:n.close:\"\"},qn={name:\"box-shadow\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return 1===e.length&&Xe(e[0],\"none\")?[]:Ye(e).map((function(e){for(var t={color:255,offsetX:rt,offsetY:rt,blur:rt,spread:rt,inset:!1},r=0,n=0;n<e.length;n++){var o=e[n];Xe(o,\"inset\")?t.inset=!0:$e(o)?(0===r?t.offsetX=o:1===r?t.offsetY=o:2===r?t.blur=o:t.spread=o,r++):t.color=ft(o)}return t}))}},Gn=function(){function e(e){this.backgroundClip=Jn(xt,e.backgroundClip),this.backgroundColor=Jn(Et,e.backgroundColor),this.backgroundImage=Jn(ur,e.backgroundImage),this.backgroundOrigin=Jn(cr,e.backgroundOrigin),this.backgroundPosition=Jn(lr,e.backgroundPosition),this.backgroundRepeat=Jn(fr,e.backgroundRepeat),this.backgroundSize=Jn(mr,e.backgroundSize),this.borderTopColor=Jn(vr,e.borderTopColor),this.borderRightColor=Jn(wr,e.borderRightColor),this.borderBottomColor=Jn(br,e.borderBottomColor),this.borderLeftColor=Jn(Br,e.borderLeftColor),this.borderTopLeftRadius=Jn(_r,e.borderTopLeftRadius),this.borderTopRightRadius=Jn(Cr,e.borderTopRightRadius),this.borderBottomRightRadius=Jn(xr,e.borderBottomRightRadius),this.borderBottomLeftRadius=Jn(Er,e.borderBottomLeftRadius),this.borderTopStyle=Jn(Fr,e.borderTopStyle),this.borderRightStyle=Jn(Ur,e.borderRightStyle),this.borderBottomStyle=Jn(Sr,e.borderBottomStyle),this.borderLeftStyle=Jn(Lr,e.borderLeftStyle),this.borderTopWidth=Jn(Hr,e.borderTopWidth),this.borderRightWidth=Jn(Ir,e.borderRightWidth),this.borderBottomWidth=Jn(Pr,e.borderBottomWidth),this.borderLeftWidth=Jn(Or,e.borderLeftWidth),this.boxShadow=Jn(qn,e.boxShadow),this.color=Jn(kr,e.color),this.display=Jn(Rr,e.display),this.float=Jn(Kr,e.cssFloat),this.fontFamily=Jn(Tn,e.fontFamily),this.fontSize=Jn(Hn,e.fontSize),this.fontStyle=Jn(kn,e.fontStyle),this.fontVariant=Jn(Pn,e.fontVariant),this.fontWeight=Jn(In,e.fontWeight),this.letterSpacing=Jn(zr,e.letterSpacing),this.lineBreak=Jn(qr,e.lineBreak),this.lineHeight=Jn(Gr,e.lineHeight),this.listStyleImage=Jn(Xr,e.listStyleImage),this.listStylePosition=Jn(Jr,e.listStylePosition),this.listStyleType=Jn(Zr,e.listStyleType),this.marginTop=Jn(en,e.marginTop),this.marginRight=Jn(tn,e.marginRight),this.marginBottom=Jn(rn,e.marginBottom),this.marginLeft=Jn(nn,e.marginLeft),this.opacity=Jn(Un,e.opacity);var t=Jn(sn,e.overflow);this.overflowX=t[0],this.overflowY=t[t.length>1?1:0],this.overflowWrap=Jn(An,e.overflowWrap),this.paddingTop=Jn(cn,e.paddingTop),this.paddingRight=Jn(ln,e.paddingRight),this.paddingBottom=Jn(dn,e.paddingBottom),this.paddingLeft=Jn(fn,e.paddingLeft),this.position=Jn(gn,e.position),this.textAlign=Jn(pn,e.textAlign),this.textDecorationColor=Jn(Sn,e.textDecorationColor||e.color),this.textDecorationLine=Jn(Ln,e.textDecorationLine),this.textShadow=Jn(yn,e.textShadow),this.textTransform=Jn(wn,e.textTransform),this.transform=Jn(bn,e.transform),this.transformOrigin=Jn(Cn,e.transformOrigin),this.visibility=Jn(En,e.visibility),this.wordBreak=Jn(Qn,e.wordBreak),this.zIndex=Jn(Fn,e.zIndex)}return e.prototype.isVisible=function(){return this.display>0&&this.opacity>0&&this.visibility===vn.VISIBLE},e.prototype.isTransparent=function(){return ht(this.backgroundColor)},e.prototype.isTransformed=function(){return null!==this.transform},e.prototype.isPositioned=function(){return this.position!==hn.STATIC},e.prototype.isPositionedWithZIndex=function(){return this.isPositioned()&&!this.zIndex.auto},e.prototype.isFloating=function(){return this.float!==Nr.NONE},e.prototype.isInlineLevel=function(){return Rn(this.display,4)||Rn(this.display,33554432)||Rn(this.display,268435456)||Rn(this.display,536870912)||Rn(this.display,67108864)||Rn(this.display,134217728)},e}(),Xn=function(e){this.content=Jn(Mn,e.content),this.quotes=Jn(zn,e.quotes)},Wn=function(e){this.counterIncrement=Jn(Dn,e.counterIncrement),this.counterReset=Jn(Kn,e.counterReset)},Jn=function(e,t){var r=new De,n=null!=t?t.toString():e.initialValue;r.write(n);var o=new Ke(r.read());switch(e.type){case wt.IDENT_VALUE:var s=o.parseComponentValue();return e.parse(qe(s)?s.value:e.initialValue);case wt.VALUE:return e.parse(o.parseComponentValue());case wt.LIST:return e.parse(o.parseComponentValues());case wt.TOKEN_VALUE:return o.parseComponentValue();case wt.TYPE_VALUE:switch(e.format){case\"angle\":return ut(o.parseComponentValue());case\"color\":return ft(o.parseComponentValue());case\"image\":return ir(o.parseComponentValue());case\"length\":var i=o.parseComponentValue();return $e(i)?i:rt;case\"length-percentage\":var a=o.parseComponentValue();return et(a)?a:rt}}throw new Error(\"Attempting to parse unsupported css format type \"+e.format)},Yn=function(e){this.styles=new Gn(window.getComputedStyle(e,null)),this.textNodes=[],this.elements=[],null!==this.styles.transform&&So(e)&&(e.style.transform=\"none\"),this.bounds=i(e),this.flags=0},Zn=function(e,t){this.text=e,this.bounds=t},$n=function(e){var t=e.ownerDocument;if(t){var r=t.createElement(\"html2canvaswrapper\");r.appendChild(e.cloneNode(!0));var n=e.parentNode;if(n){n.replaceChild(r,e);var o=i(r);return r.firstChild&&n.replaceChild(r.firstChild,r),o}}return new s(0,0,0,0)},eo=function(e,t,r){var n=e.ownerDocument;if(!n)throw new Error(\"Node has no owner document\");var o=n.createRange();return o.setStart(e,t),o.setEnd(e,t+r),s.fromClientRect(o.getBoundingClientRect())},to=function(e,t){return 0!==t.letterSpacing?a(e).map((function(e){return A(e)})):ro(e,t)},ro=function(e,t){for(var r,n=function(e,t){var r=a(e),n=ie(r,t),o=n[0],s=n[1],i=n[2],A=r.length,u=0,c=0;return{next:function(){if(c>=A)return{done:!0,value:null};for(var e=G;c<A&&(e=se(r,s,o,++c,i))===G;);if(e!==G||c===A){var t=new ae(r,e,u,c);return u=c,{value:t,done:!1}}return{done:!0,value:null}}}}(e,{lineBreak:t.lineBreak,wordBreak:t.overflowWrap===on.BREAK_WORD?\"break-word\":t.wordBreak}),o=[];!(r=n.next()).done;)r.value&&o.push(r.value.slice());return o},no=function(e,t){this.text=oo(e.data,t.textTransform),this.textBounds=function(e,t,r){var n=to(e,t),o=[],s=0;return n.forEach((function(e){if(t.textDecorationLine.length||e.trim().length>0)if(Pt.SUPPORT_RANGE_BOUNDS)o.push(new Zn(e,eo(r,s,e.length)));else{var n=r.splitText(e.length);o.push(new Zn(e,$n(r))),r=n}else Pt.SUPPORT_RANGE_BOUNDS||(r=r.splitText(e.length));s+=e.length})),o}(this.text,t,e)},oo=function(e,t){switch(t){case mn.LOWERCASE:return e.toLowerCase();case mn.CAPITALIZE:return e.replace(so,io);case mn.UPPERCASE:return e.toUpperCase();default:return e}},so=/(^|\\s|:|-|\\(|\\))([a-z])/g,io=function(e,t,r){return e.length>0?t+r.toUpperCase():e},ao=function(e){function r(t){var r=e.call(this,t)||this;return r.src=t.currentSrc||t.src,r.intrinsicWidth=t.naturalWidth,r.intrinsicHeight=t.naturalHeight,kt.getInstance().addImage(r.src),r}return t(r,e),r}(Yn),Ao=function(e){function r(t){var r=e.call(this,t)||this;return r.canvas=t,r.intrinsicWidth=t.width,r.intrinsicHeight=t.height,r}return t(r,e),r}(Yn),uo=function(e){function r(t){var r=e.call(this,t)||this,n=new XMLSerializer;return r.svg=\"data:image/svg+xml,\"+encodeURIComponent(n.serializeToString(t)),r.intrinsicWidth=t.width.baseVal.value,r.intrinsicHeight=t.height.baseVal.value,kt.getInstance().addImage(r.svg),r}return t(r,e),r}(Yn),co=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),lo=function(e){function r(t){var r=e.call(this,t)||this;return r.start=t.start,r.reversed=\"boolean\"==typeof t.reversed&&!0===t.reversed,r}return t(r,e),r}(Yn),fo=[{type:d.DIMENSION_TOKEN,flags:0,unit:\"px\",number:3}],ho=[{type:d.PERCENTAGE_TOKEN,flags:0,number:50}],po=\"checkbox\",mo=\"radio\",go=\"password\",yo=707406591,vo=function(e){function r(t){var r,n,o,i=e.call(this,t)||this;switch(i.type=t.type.toLowerCase(),i.checked=t.checked,i.value=0===(o=(n=t).type===go?new Array(n.value.length+1).join(\"•\"):n.value).length?n.placeholder||\"\":o,i.type!==po&&i.type!==mo||(i.styles.backgroundColor=3739148031,i.styles.borderTopColor=i.styles.borderRightColor=i.styles.borderBottomColor=i.styles.borderLeftColor=2779096575,i.styles.borderTopWidth=i.styles.borderRightWidth=i.styles.borderBottomWidth=i.styles.borderLeftWidth=1,i.styles.borderTopStyle=i.styles.borderRightStyle=i.styles.borderBottomStyle=i.styles.borderLeftStyle=pr.SOLID,i.styles.backgroundClip=[bt.BORDER_BOX],i.styles.backgroundOrigin=[0],i.bounds=(r=i.bounds).width>r.height?new s(r.left+(r.width-r.height)/2,r.top,r.height,r.height):r.width<r.height?new s(r.left,r.top+(r.height-r.width)/2,r.width,r.width):r),i.type){case po:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=fo;break;case mo:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=ho}return i}return t(r,e),r}(Yn),wo=function(e){function r(t){var r=e.call(this,t)||this,n=t.options[t.selectedIndex||0];return r.value=n&&n.text||\"\",r}return t(r,e),r}(Yn),bo=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),Bo=function(e){return ft(Ke.create(e).parseComponentValue())},jo=function(e){function r(t){var r=e.call(this,t)||this;r.src=t.src,r.width=parseInt(t.width,10)||0,r.height=parseInt(t.height,10)||0,r.backgroundColor=r.styles.backgroundColor;try{if(t.contentWindow&&t.contentWindow.document&&t.contentWindow.document.documentElement){r.tree=Eo(t.contentWindow.document.documentElement);var n=t.contentWindow.document.documentElement?Bo(getComputedStyle(t.contentWindow.document.documentElement).backgroundColor):_t.TRANSPARENT,o=t.contentWindow.document.body?Bo(getComputedStyle(t.contentWindow.document.body).backgroundColor):_t.TRANSPARENT;r.backgroundColor=ht(n)?ht(o)?r.styles.backgroundColor:o:n}}catch(e){}return r}return t(r,e),r}(Yn),_o=[\"OL\",\"UL\",\"MENU\"],Co=function(e,t,r){for(var n=e.firstChild,o=void 0;n;n=o)if(o=n.nextSibling,Fo(n)&&n.data.trim().length>0)t.textNodes.push(new no(n,t.styles));else if(Uo(n)){var s=xo(n);s.styles.isVisible()&&(No(n,s,r)?s.flags|=4:Qo(s.styles)&&(s.flags|=2),-1!==_o.indexOf(n.tagName)&&(s.flags|=8),t.elements.push(s),zo(n)||Po(n)||Vo(n)||Co(n,s,r))}},xo=function(e){return Ro(e)?new ao(e):ko(e)?new Ao(e):Po(e)?new uo(e):To(e)?new co(e):Ho(e)?new lo(e):Io(e)?new vo(e):Vo(e)?new wo(e):zo(e)?new bo(e):Mo(e)?new jo(e):new Yn(e)},Eo=function(e){var t=xo(e);return t.flags|=4,Co(e,t,t),t},No=function(e,t,r){return t.styles.isPositionedWithZIndex()||t.styles.opacity<1||t.styles.isTransformed()||Oo(e)&&r.styles.isTransparent()},Qo=function(e){return e.isPositioned()||e.isFloating()},Fo=function(e){return e.nodeType===Node.TEXT_NODE},Uo=function(e){return e.nodeType===Node.ELEMENT_NODE},So=function(e){return Uo(e)&&void 0!==e.style&&!Lo(e)},Lo=function(e){return\"object\"==typeof e.className},To=function(e){return\"LI\"===e.tagName},Ho=function(e){return\"OL\"===e.tagName},Io=function(e){return\"INPUT\"===e.tagName},Po=function(e){return\"svg\"===e.tagName},Oo=function(e){return\"BODY\"===e.tagName},ko=function(e){return\"CANVAS\"===e.tagName},Ro=function(e){return\"IMG\"===e.tagName},Mo=function(e){return\"IFRAME\"===e.tagName},Do=function(e){return\"STYLE\"===e.tagName},Ko=function(e){return\"SCRIPT\"===e.tagName},zo=function(e){return\"TEXTAREA\"===e.tagName},Vo=function(e){return\"SELECT\"===e.tagName},qo=function(){function e(){this.counters={}}return e.prototype.getCounterValue=function(e){var t=this.counters[e];return t&&t.length?t[t.length-1]:1},e.prototype.getCounterValues=function(e){return this.counters[e]||[]},e.prototype.pop=function(e){var t=this;e.forEach((function(e){return t.counters[e].pop()}))},e.prototype.parse=function(e){var t=this,r=e.counterIncrement,n=e.counterReset,o=!0;null!==r&&r.forEach((function(e){var r=t.counters[e.counter];r&&0!==e.increment&&(o=!1,r[Math.max(0,r.length-1)]+=e.increment)}));var s=[];return o&&n.forEach((function(e){var r=t.counters[e.counter];s.push(e.counter),r||(r=t.counters[e.counter]=[]),r.push(e.reset)})),s},e}(),Go={integers:[1e3,900,500,400,100,90,50,40,10,9,5,4,1],values:[\"M\",\"CM\",\"D\",\"CD\",\"C\",\"XC\",\"L\",\"XL\",\"X\",\"IX\",\"V\",\"IV\",\"I\"]},Xo={integers:[9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"Ք\",\"Փ\",\"Ւ\",\"Ց\",\"Ր\",\"Տ\",\"Վ\",\"Ս\",\"Ռ\",\"Ջ\",\"Պ\",\"Չ\",\"Ո\",\"Շ\",\"Ն\",\"Յ\",\"Մ\",\"Ճ\",\"Ղ\",\"Ձ\",\"Հ\",\"Կ\",\"Ծ\",\"Խ\",\"Լ\",\"Ի\",\"Ժ\",\"Թ\",\"Ը\",\"Է\",\"Զ\",\"Ե\",\"Դ\",\"Գ\",\"Բ\",\"Ա\"]},Wo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,400,300,200,100,90,80,70,60,50,40,30,20,19,18,17,16,15,10,9,8,7,6,5,4,3,2,1],values:[\"י׳\",\"ט׳\",\"ח׳\",\"ז׳\",\"ו׳\",\"ה׳\",\"ד׳\",\"ג׳\",\"ב׳\",\"א׳\",\"ת\",\"ש\",\"ר\",\"ק\",\"צ\",\"פ\",\"ע\",\"ס\",\"נ\",\"מ\",\"ל\",\"כ\",\"יט\",\"יח\",\"יז\",\"טז\",\"טו\",\"י\",\"ט\",\"ח\",\"ז\",\"ו\",\"ה\",\"ד\",\"ג\",\"ב\",\"א\"]},Jo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"ჵ\",\"ჰ\",\"ჯ\",\"ჴ\",\"ხ\",\"ჭ\",\"წ\",\"ძ\",\"ც\",\"ჩ\",\"შ\",\"ყ\",\"ღ\",\"ქ\",\"ფ\",\"ჳ\",\"ტ\",\"ს\",\"რ\",\"ჟ\",\"პ\",\"ო\",\"ჲ\",\"ნ\",\"მ\",\"ლ\",\"კ\",\"ი\",\"თ\",\"ჱ\",\"ზ\",\"ვ\",\"ე\",\"დ\",\"გ\",\"ბ\",\"ა\"]},Yo=function(e,t,r,n,o,s){return e<t||e>r?is(e,o,s.length>0):n.integers.reduce((function(t,r,o){for(;e>=r;)e-=r,t+=n.values[o];return t}),\"\")+s},Zo=function(e,t,r,n){var o=\"\";do{r||e--,o=n(e)+o,e/=t}while(e*t>=t);return o},$o=function(e,t,r,n,o){var s=r-t+1;return(e<0?\"-\":\"\")+(Zo(Math.abs(e),s,n,(function(e){return A(Math.floor(e%s)+t)}))+o)},es=function(e,t,r){void 0===r&&(r=\". \");var n=t.length;return Zo(Math.abs(e),n,!1,(function(e){return t[Math.floor(e%n)]}))+r},ts=function(e,t,r,n,o,s){if(e<-9999||e>9999)return is(e,Wr.CJK_DECIMAL,o.length>0);var i=Math.abs(e),a=o;if(0===i)return t[0]+a;for(var A=0;i>0&&A<=4;A++){var u=i%10;0===u&&Rn(s,1)&&\"\"!==a?a=t[u]+a:u>1||1===u&&0===A||1===u&&1===A&&Rn(s,2)||1===u&&1===A&&Rn(s,4)&&e>100||1===u&&A>1&&Rn(s,8)?a=t[u]+(A>0?r[A-1]:\"\")+a:1===u&&A>0&&(a=r[A-1]+a),i=Math.floor(i/10)}return(e<0?n:\"\")+a},rs=\"十百千萬\",ns=\"拾佰仟萬\",os=\"マイナス\",ss=\"마이너스\",is=function(e,t,r){var n=r?\". \":\"\",o=r?\"、\":\"\",s=r?\", \":\"\",i=r?\" \":\"\";switch(t){case Wr.DISC:return\"•\"+i;case Wr.CIRCLE:return\"◦\"+i;case Wr.SQUARE:return\"◾\"+i;case Wr.DECIMAL_LEADING_ZERO:var a=$o(e,48,57,!0,n);return a.length<4?\"0\"+a:a;case Wr.CJK_DECIMAL:return es(e,\"〇一二三四五六七八九\",o);case Wr.LOWER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n).toLowerCase();case Wr.UPPER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n);case Wr.LOWER_GREEK:return $o(e,945,969,!1,n);case Wr.LOWER_ALPHA:return $o(e,97,122,!1,n);case Wr.UPPER_ALPHA:return $o(e,65,90,!1,n);case Wr.ARABIC_INDIC:return $o(e,1632,1641,!0,n);case Wr.ARMENIAN:case Wr.UPPER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n);case Wr.LOWER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n).toLowerCase();case Wr.BENGALI:return $o(e,2534,2543,!0,n);case Wr.CAMBODIAN:case Wr.KHMER:return $o(e,6112,6121,!0,n);case Wr.CJK_EARTHLY_BRANCH:return es(e,\"子丑寅卯辰巳午未申酉戌亥\",o);case Wr.CJK_HEAVENLY_STEM:return es(e,\"甲乙丙丁戊己庚辛壬癸\",o);case Wr.CJK_IDEOGRAPHIC:case Wr.TRAD_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"負\",o,14);case Wr.TRAD_CHINESE_FORMAL:return ts(e,\"零壹貳參肆伍陸柒捌玖\",ns,\"負\",o,15);case Wr.SIMP_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"负\",o,14);case Wr.SIMP_CHINESE_FORMAL:return ts(e,\"零壹贰叁肆伍陆柒捌玖\",ns,\"负\",o,15);case Wr.JAPANESE_INFORMAL:return ts(e,\"〇一二三四五六七八九\",\"十百千万\",os,o,0);case Wr.JAPANESE_FORMAL:return ts(e,\"零壱弐参四伍六七八九\",\"拾百千万\",os,o,7);case Wr.KOREAN_HANGUL_FORMAL:return ts(e,\"영일이삼사오육칠팔구\",\"십백천만\",ss,s,7);case Wr.KOREAN_HANJA_INFORMAL:return ts(e,\"零一二三四五六七八九\",\"十百千萬\",ss,s,0);case Wr.KOREAN_HANJA_FORMAL:return ts(e,\"零壹貳參四五六七八九\",\"拾百千\",ss,s,7);case Wr.DEVANAGARI:return $o(e,2406,2415,!0,n);case Wr.GEORGIAN:return Yo(e,1,19999,Jo,Wr.DECIMAL,n);case Wr.GUJARATI:return $o(e,2790,2799,!0,n);case Wr.GURMUKHI:return $o(e,2662,2671,!0,n);case Wr.HEBREW:return Yo(e,1,10999,Wo,Wr.DECIMAL,n);case Wr.HIRAGANA:return es(e,\"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん\");case Wr.HIRAGANA_IROHA:return es(e,\"いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす\");case Wr.KANNADA:return $o(e,3302,3311,!0,n);case Wr.KATAKANA:return es(e,\"アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン\",o);case Wr.KATAKANA_IROHA:return es(e,\"イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセス\",o);case Wr.LAO:return $o(e,3792,3801,!0,n);case Wr.MONGOLIAN:return $o(e,6160,6169,!0,n);case Wr.MYANMAR:return $o(e,4160,4169,!0,n);case Wr.ORIYA:return $o(e,2918,2927,!0,n);case Wr.PERSIAN:return $o(e,1776,1785,!0,n);case Wr.TAMIL:return $o(e,3046,3055,!0,n);case Wr.TELUGU:return $o(e,3174,3183,!0,n);case Wr.THAI:return $o(e,3664,3673,!0,n);case Wr.TIBETAN:return $o(e,3872,3881,!0,n);case Wr.DECIMAL:default:return $o(e,48,57,!0,n)}},as=\"data-html2canvas-ignore\",As=function(){function e(e,t){if(this.options=t,this.scrolledElements=[],this.referenceElement=e,this.counters=new qo,this.quoteDepth=0,!e.ownerDocument)throw new Error(\"Cloned element does not have an owner document\");this.documentElement=this.cloneNode(e.ownerDocument.documentElement)}return e.prototype.toIFrame=function(e,t){var r=this,s=cs(e,t);if(!s.contentWindow)return Promise.reject(\"Unable to find iframe window\");var i=e.defaultView.pageXOffset,a=e.defaultView.pageYOffset,A=s.contentWindow,u=A.document,c=ls(s).then((function(){return n(r,void 0,void 0,(function(){var e;return o(this,(function(r){switch(r.label){case 0:return this.scrolledElements.forEach(ps),A&&(A.scrollTo(t.left,t.top),!/(iPad|iPhone|iPod)/g.test(navigator.userAgent)||A.scrollY===t.top&&A.scrollX===t.left||(u.documentElement.style.top=-t.top+\"px\",u.documentElement.style.left=-t.left+\"px\",u.documentElement.style.position=\"absolute\")),e=this.options.onclone,void 0===this.clonedReferenceElement?[2,Promise.reject(\"Error finding the \"+this.referenceElement.nodeName+\" in the cloned document\")]:u.fonts&&u.fonts.ready?[4,u.fonts.ready]:[3,2];case 1:r.sent(),r.label=2;case 2:return\"function\"==typeof e?[2,Promise.resolve().then((function(){return e(u)})).then((function(){return s}))]:[2,s]}}))}))}));return u.open(),u.write(fs(document.doctype)+\"<html></html>\"),hs(this.referenceElement.ownerDocument,i,a),u.replaceChild(u.adoptNode(this.documentElement),u.documentElement),u.close(),c},e.prototype.createElementClone=function(e){if(ko(e))return this.createCanvasClone(e);if(Do(e))return this.createStyleClone(e);var t=e.cloneNode(!1);return Ro(t)&&\"lazy\"===t.loading&&(t.loading=\"eager\"),t},e.prototype.createStyleClone=function(e){try{var t=e.sheet;if(t&&t.cssRules){var r=[].slice.call(t.cssRules,0).reduce((function(e,t){return t&&\"string\"==typeof t.cssText?e+t.cssText:e}),\"\"),n=e.cloneNode(!1);return n.textContent=r,n}}catch(e){if(Ot.getInstance(this.options.id).error(\"Unable to access cssRules property\",e),\"SecurityError\"!==e.name)throw e}return e.cloneNode(!1)},e.prototype.createCanvasClone=function(e){if(this.options.inlineImages&&e.ownerDocument){var t=e.ownerDocument.createElement(\"img\");try{return t.src=e.toDataURL(),t}catch(e){Ot.getInstance(this.options.id).info(\"Unable to clone canvas contents, canvas is tainted\")}}var r=e.cloneNode(!1);try{r.width=e.width,r.height=e.height;var n=e.getContext(\"2d\"),o=r.getContext(\"2d\");return o&&(n?o.putImageData(n.getImageData(0,0,e.width,e.height),0,0):o.drawImage(e,0,0)),r}catch(e){}return r},e.prototype.cloneNode=function(e){if(Fo(e))return document.createTextNode(e.data);if(!e.ownerDocument)return e.cloneNode(!1);var t=e.ownerDocument.defaultView;if(t&&Uo(e)&&(So(e)||Lo(e))){var r=this.createElementClone(e),n=t.getComputedStyle(e),o=t.getComputedStyle(e,\":before\"),s=t.getComputedStyle(e,\":after\");this.referenceElement===e&&So(r)&&(this.clonedReferenceElement=r),Oo(r)&&vs(r);for(var i=this.counters.parse(new Wn(n)),a=this.resolvePseudoContent(e,r,o,On.BEFORE),A=e.firstChild;A;A=A.nextSibling)Uo(A)&&(Ko(A)||A.hasAttribute(as)||\"function\"==typeof this.options.ignoreElements&&this.options.ignoreElements(A))||this.options.copyStyles&&Uo(A)&&Do(A)||r.appendChild(this.cloneNode(A));a&&r.insertBefore(a,r.firstChild);var u=this.resolvePseudoContent(e,r,s,On.AFTER);return u&&r.appendChild(u),this.counters.pop(i),n&&(this.options.copyStyles||Lo(e))&&!Mo(e)&&ds(n,r),0===e.scrollTop&&0===e.scrollLeft||this.scrolledElements.push([r,e.scrollLeft,e.scrollTop]),(zo(e)||Vo(e))&&(zo(r)||Vo(r))&&(r.value=e.value),r}return e.cloneNode(!1)},e.prototype.resolvePseudoContent=function(e,t,r,n){var o=this;if(r){var s=r.content,i=t.ownerDocument;if(i&&s&&\"none\"!==s&&\"-moz-alt-content\"!==s&&\"none\"!==r.display){this.counters.parse(new Wn(r));var a=new Xn(r),A=i.createElement(\"html2canvaspseudoelement\");ds(r,A),a.content.forEach((function(t){if(t.type===d.STRING_TOKEN)A.appendChild(i.createTextNode(t.value));else if(t.type===d.URL_TOKEN){var r=i.createElement(\"img\");r.src=t.value,r.style.opacity=\"1\",A.appendChild(r)}else if(t.type===d.FUNCTION){if(\"attr\"===t.name){var n=t.values.filter(qe);n.length&&A.appendChild(i.createTextNode(e.getAttribute(n[0].value)||\"\"))}else if(\"counter\"===t.name){var s=t.values.filter(Je),u=s[0],c=s[1];if(u&&qe(u)){var l=o.counters.getCounterValue(u.value),f=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL;A.appendChild(i.createTextNode(is(l,f,!1)))}}else if(\"counters\"===t.name){var h=t.values.filter(Je),p=(u=h[0],h[1]);if(c=h[2],u&&qe(u)){var m=o.counters.getCounterValues(u.value),g=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL,y=p&&p.type===d.STRING_TOKEN?p.value:\"\",v=m.map((function(e){return is(e,g,!1)})).join(y);A.appendChild(i.createTextNode(v))}}}else if(t.type===d.IDENT_TOKEN)switch(t.value){case\"open-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,o.quoteDepth++,!0)));break;case\"close-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,--o.quoteDepth,!1)));break;default:A.appendChild(i.createTextNode(t.value))}})),A.className=ms+\" \"+gs;var u=n===On.BEFORE?\" \"+ms:\" \"+gs;return Lo(t)?t.className.baseValue+=u:t.className+=u,A}}},e.destroy=function(e){return!!e.parentNode&&(e.parentNode.removeChild(e),!0)},e}();!function(e){e[e.BEFORE=0]=\"BEFORE\",e[e.AFTER=1]=\"AFTER\"}(On||(On={}));var us,cs=function(e,t){var r=e.createElement(\"iframe\");return r.className=\"html2canvas-container\",r.style.visibility=\"hidden\",r.style.position=\"fixed\",r.style.left=\"-10000px\",r.style.top=\"0px\",r.style.border=\"0\",r.width=t.width.toString(),r.height=t.height.toString(),r.scrolling=\"no\",r.setAttribute(as,\"true\"),e.body.appendChild(r),r},ls=function(e){return new Promise((function(t,r){var n=e.contentWindow;if(!n)return r(\"No window assigned for iframe\");var o=n.document;n.onload=e.onload=o.onreadystatechange=function(){n.onload=e.onload=o.onreadystatechange=null;var r=setInterval((function(){o.body.childNodes.length>0&&\"complete\"===o.readyState&&(clearInterval(r),t(e))}),50)}}))},ds=function(e,t){for(var r=e.length-1;r>=0;r--){var n=e.item(r);\"content\"!==n&&t.style.setProperty(n,e.getPropertyValue(n))}return t},fs=function(e){var t=\"\";return e&&(t+=\"<!DOCTYPE \",e.name&&(t+=e.name),e.internalSubset&&(t+=e.internalSubset),e.publicId&&(t+=",
+  "ctx": "n(e){return-1===e.indexOf(\" \")?e:\"'\"+e+\""
+ },
+ "js_002": {
+  "t": "2026-07-17 · 광장",
+  "ctx": "app&utm_campaign=gwangjang\",   edition: "
+ },
+ "js_003": {
+  "t": "저자",
+  "ctx": "nst QUESTIONS = [   {id:1, level:1, tag:"
+ },
+ "js_004": {
+  "t": "『광장』을 쓴 한국 작가는 누구일까요?",
+  "ctx": "TIONS = [   {id:1, level:1, tag:\"저자\", q:"
+ },
+ "js_005": {
+  "t": "최인훈",
+  "ctx": "\"『광장』을 쓴 한국 작가는 누구일까요?\",    options:[{t:"
+ },
+ "js_006": {
+  "t": "이문열",
+  "ctx": "일까요?\",    options:[{t:\"최인훈\",ok:true},{t:"
+ },
+ "js_007": {
+  "t": "황석영",
+  "ctx": "options:[{t:\"최인훈\",ok:true},{t:\"이문열\"},{t:"
+ },
+ "js_008": {
+  "t": "김승옥",
+  "ctx": "t:\"최인훈\",ok:true},{t:\"이문열\"},{t:\"황석영\"},{t:"
+ },
+ "js_009": {
+  "t": "『광장』은 <b>최인훈</b>이 1960년에 발표한 장편소설입니다. 분단과 이념을 정면으로 다룬 전후 문학의 대표작이에요.",
+  "ctx": ",{t:\"이문열\"},{t:\"황석영\"},{t:\"김승옥\"}],    ctx:"
+ },
+ "js_010": {
+  "t": "주인공",
+  "ctx": "전후 문학의 대표작이에요.\"},   {id:2, level:1, tag:"
+ },
+ "js_011": {
+  "t": "『광장』의 주인공인 철학과 대학생의 이름은?",
+  "ctx": "작이에요.\"},   {id:2, level:1, tag:\"주인공\", q:"
+ },
+ "js_012": {
+  "t": "이명준",
+  "ctx": "장』의 주인공인 철학과 대학생의 이름은?\",    options:[{t:"
+ },
+ "js_013": {
+  "t": "이태식",
+  "ctx": "이름은?\",    options:[{t:\"이명준\",ok:true},{t:"
+ },
+ "js_014": {
+  "t": "정민호",
+  "ctx": "options:[{t:\"이명준\",ok:true},{t:\"이태식\"},{t:"
+ },
+ "js_015": {
+  "t": "김진수",
+  "ctx": "t:\"이명준\",ok:true},{t:\"이태식\"},{t:\"정민호\"},{t:"
+ },
+ "js_016": {
+  "t": "주인공은 <b>이명준</b>이에요. 이상적인 삶의 공간을 찾아 남과 북을 오가는 철학도입니다.",
+  "ctx": ",{t:\"이태식\"},{t:\"정민호\"},{t:\"김진수\"}],    ctx:"
+ },
+ "js_017": {
+  "t": "핵심 대비",
+  "ctx": "북을 오가는 철학도입니다.\"},   {id:3, level:1, tag:"
+ },
+ "js_018": {
+  "t": "이 소설이 맞세우는 두 개의 공간은 무엇일까요?",
+  "ctx": "니다.\"},   {id:3, level:1, tag:\"핵심 대비\", q:"
+ },
+ "js_019": {
+  "t": "밀실과 광장",
+  "ctx": "이 맞세우는 두 개의 공간은 무엇일까요?\",    options:[{t:"
+ },
+ "js_020": {
+  "t": "도시와 시골 마을",
+  "ctx": "?\",    options:[{t:\"밀실과 광장\",ok:true},{t:"
+ },
+ "js_021": {
+  "t": "학교와 공장 건물",
+  "ctx": "{t:\"밀실과 광장\",ok:true},{t:\"도시와 시골 마을\"},{t:"
+ },
+ "js_022": {
+  "t": "이상과 현실 세계",
+  "ctx": "rue},{t:\"도시와 시골 마을\"},{t:\"학교와 공장 건물\"},{t:"
+ },
+ "js_023": {
+  "t": "소설의 뼈대는 <b>밀실</b>과 <b>광장</b>의 대비예요. 개인의 사적 공간과 함께 사는 공적 공간을 가리킵니다.",
+  "ctx": "t:\"학교와 공장 건물\"},{t:\"이상과 현실 세계\"}],    ctx:"
+ },
+ "js_024": {
+  "t": "밀실",
+  "ctx": " 공적 공간을 가리킵니다.\"},   {id:4, level:1, tag:"
+ },
+ "js_025": {
+  "t": "소설에서 ‘밀실’이 상징하는 것에 가장 가까운 것은?",
+  "ctx": "가리킵니다.\"},   {id:4, level:1, tag:\"밀실\", q:"
+ },
+ "js_026": {
+  "t": "혼자만의 사사로운 개인 공간",
+  "ctx": "실’이 상징하는 것에 가장 가까운 것은?\",    options:[{t:"
+ },
+ "js_027": {
+  "t": "국가 권력의 감옥과 취조실",
+  "ctx": "tions:[{t:\"혼자만의 사사로운 개인 공간\",ok:true},{t:"
+ },
+ "js_028": {
+  "t": "사람들이 오가는 넓은 광장 거리",
+  "ctx": "개인 공간\",ok:true},{t:\"국가 권력의 감옥과 취조실\"},{t:"
+ },
+ "js_029": {
+  "t": "전쟁터의 참호와 벙커 진지",
+  "ctx": "력의 감옥과 취조실\"},{t:\"사람들이 오가는 넓은 광장 거리\"},{t:"
+ },
+ "js_030": {
+  "t": "<b>밀실</b>은 남이 침범할 수 없는 개인의 사적 영역이에요. 명준은 남한을 밀실만 있는 곳으로 봅니다.",
+  "ctx": "은 광장 거리\"},{t:\"전쟁터의 참호와 벙커 진지\"}],    ctx:"
+ },
+ "js_031": {
+  "t": "광장",
+  "ctx": "실만 있는 곳으로 봅니다.\"},   {id:5, level:1, tag:"
+ },
+ "js_032": {
+  "t": "소설에서 ‘광장’이 상징하는 것에 가장 가까운 것은?",
+  "ctx": "로 봅니다.\"},   {id:5, level:1, tag:\"광장\", q:"
+ },
+ "js_033": {
+  "t": "사람들이 더불어 사는 공적 삶의 영역",
+  "ctx": "장’이 상징하는 것에 가장 가까운 것은?\",    options:[{t:"
+ },
+ "js_034": {
+  "t": "혼자 숨어드는 은밀한 골방",
+  "ctx": ":[{t:\"사람들이 더불어 사는 공적 삶의 영역\",ok:true},{t:"
+ },
+ "js_035": {
+  "t": "많은 사람들이 오가며 부대끼는 시장 거리",
+  "ctx": "삶의 영역\",ok:true},{t:\"혼자 숨어드는 은밀한 골방\"},{t:"
+ },
+ "js_036": {
+  "t": "죽은 자들이 머무는 저승",
+  "ctx": "밀한 골방\"},{t:\"많은 사람들이 오가며 부대끼는 시장 거리\"},{t:"
+ },
+ "js_037": {
+  "t": "<b>광장</b>은 사람들이 함께 어울려 사는 공적인 삶의 자리예요. 명준이 끝내 찾아 헤매는 이상입니다.",
+  "ctx": "끼는 시장 거리\"},{t:\"죽은 자들이 머무는 저승\"}],    ctx:"
+ },
+ "js_038": {
+  "t": "결말 선택",
+  "ctx": " 찾아 헤매는 이상입니다.\"},   {id:6, level:1, tag:"
+ },
+ "js_039": {
+  "t": "포로가 된 명준이 남한도 북한도 아닌 무엇을 택할까요?",
+  "ctx": "니다.\"},   {id:6, level:1, tag:\"결말 선택\", q:"
+ },
+ "js_040": {
+  "t": "중립국",
+  "ctx": "이 남한도 북한도 아닌 무엇을 택할까요?\",    options:[{t:"
+ },
+ "js_041": {
+  "t": "남한 잔류",
+  "ctx": "할까요?\",    options:[{t:\"중립국\",ok:true},{t:"
+ },
+ "js_042": {
+  "t": "북한 잔류",
+  "ctx": "tions:[{t:\"중립국\",ok:true},{t:\"남한 잔류\"},{t:"
+ },
+ "js_043": {
+  "t": "미국 망명",
+  "ctx": "립국\",ok:true},{t:\"남한 잔류\"},{t:\"북한 잔류\"},{t:"
+ },
+ "js_044": {
+  "t": "명준은 남과 북 어느 쪽도 아닌 <b>중립국</b>을 택해요. 어느 체제에서도 참된 광장을 찾지 못했기 때문입니다.",
+  "ctx": "한 잔류\"},{t:\"북한 잔류\"},{t:\"미국 망명\"}],    ctx:"
+ },
+ "js_045": {
+  "t": "배 이름",
+  "ctx": " 찾지 못했기 때문입니다.\"},   {id:7, level:1, tag:"
+ },
+ "js_046": {
+  "t": "중립국으로 향하는 명준이 몸을 실은 인도 상선의 이름은?",
+  "ctx": "입니다.\"},   {id:7, level:1, tag:\"배 이름\", q:"
+ },
+ "js_047": {
+  "t": "타고르호",
+  "ctx": " 명준이 몸을 실은 인도 상선의 이름은?\",    options:[{t:"
+ },
+ "js_048": {
+  "t": "아리랑호",
+  "ctx": "름은?\",    options:[{t:\"타고르호\",ok:true},{t:"
+ },
+ "js_049": {
+  "t": "무궁화호",
+  "ctx": "tions:[{t:\"타고르호\",ok:true},{t:\"아리랑호\"},{t:"
+ },
+ "js_050": {
+  "t": "자유호",
+  "ctx": "타고르호\",ok:true},{t:\"아리랑호\"},{t:\"무궁화호\"},{t:"
+ },
+ "js_051": {
+  "t": "명준이 탄 배는 인도 상선 <b>타고르호</b>예요. 이 배가 남지나해를 지나는 밤에 마지막 장면이 펼쳐집니다.",
+  "ctx": "t:\"아리랑호\"},{t:\"무궁화호\"},{t:\"자유호\"}],    ctx:"
+ },
+ "js_052": {
+  "t": "명준의 최후",
+  "ctx": "마지막 장면이 펼쳐집니다.\"},   {id:8, level:1, tag:"
+ },
+ "js_053": {
+  "t": "명준이 항해 도중 맞이하는 결말로 알맞은 것은?",
+  "ctx": "다.\"},   {id:8, level:1, tag:\"명준의 최후\", q:"
+ },
+ "js_054": {
+  "t": "푸른 바다에 몸을 던진다",
+  "ctx": "항해 도중 맞이하는 결말로 알맞은 것은?\",    options:[{t:"
+ },
+ "js_055": {
+  "t": "인도에 무사히 도착한다",
+  "ctx": "options:[{t:\"푸른 바다에 몸을 던진다\",ok:true},{t:"
+ },
+ "js_056": {
+  "t": "다시 남한으로 돌아온다",
+  "ctx": " 몸을 던진다\",ok:true},{t:\"인도에 무사히 도착한다\"},{t:"
+ },
+ "js_057": {
+  "t": "배 안에서 병을 얻어 끝내 죽는다",
+  "ctx": "t:\"인도에 무사히 도착한다\"},{t:\"다시 남한으로 돌아온다\"},{t:"
+ },
+ "js_058": {
+  "t": "명준은 항해 도중 <b>푸른 바다에 투신</b>합니다. 그 바다가 그가 찾던 마지막 광장이 되지요.",
+  "ctx": "아온다\"},{t:\"배 안에서 병을 얻어 끝내 죽는다\"}],    ctx:"
+ },
+ "js_059": {
+  "t": "시대 계기",
+  "ctx": "던 마지막 광장이 되지요.\"},   {id:9, level:1, tag:"
+ },
+ "js_060": {
+  "t": "작가가 분단 문제를 정면으로 다룰 수 있게 한 1960년의 사건은?",
+  "ctx": "지요.\"},   {id:9, level:1, tag:\"시대 계기\", q:"
+ },
+ "js_061": {
+  "t": "4·19 혁명",
+  "ctx": " 다룰 수 있게 한 1960년의 사건은?\",    options:[{t:"
+ },
+ "js_062": {
+  "t": "6·25 전쟁",
+  "ctx": "\",    options:[{t:\"4·19 혁명\",ok:true},{t:"
+ },
+ "js_063": {
+  "t": "8·15 광복",
+  "ctx": "[{t:\"4·19 혁명\",ok:true},{t:\"6·25 전쟁\"},{t:"
+ },
+ "js_064": {
+  "t": "5·16 군사정변",
+  "ctx": "ok:true},{t:\"6·25 전쟁\"},{t:\"8·15 광복\"},{t:"
+ },
+ "js_065": {
+  "t": "작가는 <b>4·19 혁명</b> 덕분에 분단을 정면으로 쓸 수 있었다고 밝혔어요. 표현의 금기가 무너진 순간입니다.",
+  "ctx": ",{t:\"8·15 광복\"},{t:\"5·16 군사정변\"}],    ctx:"
+ },
+ "js_066": {
+  "t": "발표 시기",
+  "ctx": "기가 무너진 순간입니다.\"},   {id:10, level:1, tag:"
+ },
+ "js_067": {
+  "t": "『광장』이 세상에 처음 나온 때로 알맞은 것은?",
+  "ctx": "다.\"},   {id:10, level:1, tag:\"발표 시기\", q:"
+ },
+ "js_068": {
+  "t": "4·19 혁명 직후인 1960년",
+  "ctx": "이 세상에 처음 나온 때로 알맞은 것은?\",    options:[{t:"
+ },
+ "js_069": {
+  "t": "일제강점기 1930년대",
+  "ctx": "ons:[{t:\"4·19 혁명 직후인 1960년\",ok:true},{t:"
+ },
+ "js_070": {
+  "t": "6·25 전쟁이 한창이던 1951년",
+  "ctx": "인 1960년\",ok:true},{t:\"일제강점기 1930년대\"},{t:"
+ },
+ "js_071": {
+  "t": "유신 체제하의 1972년",
+  "ctx": "기 1930년대\"},{t:\"6·25 전쟁이 한창이던 1951년\"},{t:"
+ },
+ "js_072": {
+  "t": "『광장』은 <b>1960년</b> 잡지 『새벽』에 발표됐어요. 이듬해 단행본으로 묶여 나왔습니다.",
+  "ctx": "이던 1951년\"},{t:\"유신 체제하의 1972년\"}],    ctx:"
+ },
+ "js_073": {
+  "t": "위키백과 「광장 (소설)」",
+  "ctx": "== */ const SOURCES = {   ko:    {label:"
+ },
+ "js_074": {
+  "t": "https://ko.wikipedia.org/wiki/광장_(소설)",
+  "ctx": "{   ko:    {label:\"위키백과 「광장 (소설)」\", url:"
+ },
+ "js_075": {
+  "t": "위키백과 「최인훈」",
+  "ctx": ".org/wiki/Choe_Inhun\"},   choi:  {label:"
+ },
+ "js_076": {
+  "t": "https://ko.wikipedia.org/wiki/최인훈",
+  "ctx": "un\"},   choi:  {label:\"위키백과 「최인훈」\", url:"
+ },
+ "js_077": {
+  "t": "위키백과 「4·19 혁명」",
+  "ctx": "kipedia.org/wiki/최인훈\"},   r419:  {label:"
+ },
+ "js_078": {
+  "t": "https://ko.wikipedia.org/wiki/4·19_혁명",
+  "ctx": ",   r419:  {label:\"위키백과 「4·19 혁명」\", url:"
+ },
+ "js_079": {
+  "t": "나무위키 「광장(소설)」",
+  "ctx": "dia.org/wiki/4·19_혁명\"},   namu:  {label:"
+ },
+ "js_080": {
+  "t": "https://namu.wiki/w/광장(소설)",
+  "ctx": "},   namu:  {label:\"나무위키 「광장(소설)」\", url:"
+ },
+ "js_081": {
+  "t": "한국민족문화대백과사전 「광장」",
+  "ctx": "//namu.wiki/w/광장(소설)\"},   ebs:   {label:"
+ },
+ "js_082": {
+  "t": "최인훈(1934~2018)은 회령에서 태어나 6·25 때 월남한 작가예요. 『회색인』 『구운몽』 등으로 관념과 존재를 파고들었습니다.",
+  "ctx": "/ const EXTRA = {   1:{src:\"choi\", note:"
+ },
+ "js_083": {
+  "t": "이명준은 철학과 학생이에요. 관념적이면서도 참된 삶을 갈망하는 성격이 소설 전체를 이끌어 갑니다.",
+  "ctx": "관념과 존재를 파고들었습니다.\"},   2:{src:\"ko\", note:"
+ },
+ "js_084": {
+  "t": "밀실과 광장은 이 소설의 두 열쇳말이에요. 개인의 사적 자유(밀실)와 공적 삶(광장)이 함께 있어야 한다는 문제의식입니다.",
+  "ctx": " 소설 전체를 이끌어 갑니다.\"},   3:{src:\"ko\", note:"
+ },
+ "js_085": {
+  "t": "명준은 남한을 밀실만 있고 광장은 텅 빈 곳으로 봐요. 저마다 제 잇속만 챙길 뿐 공적 이상이 없다는 환멸입니다.",
+  "ctx": "야 한다는 문제의식입니다.\"},   4:{src:\"namu\", note:"
+ },
+ "js_086": {
+  "t": "광장은 사람들이 더불어 사는 공적 삶의 자리예요. 명준이 남과 북을 가로지르며 끝내 찾아 헤매는 이상이지요.",
+  "ctx": "적 이상이 없다는 환멸입니다.\"},   5:{src:\"ko\", note:"
+ },
+ "js_087": {
+  "t": "포로가 된 명준은 남도 북도 아닌 중립국을 택해요. 어느 체제에서도 밀실과 광장의 조화를 못 찾았기 때문입니다.",
+  "ctx": "끝내 찾아 헤매는 이상이지요.\"},   6:{src:\"ko\", note:"
+ },
+ "js_088": {
+  "t": "타고르호는 중립국행 포로를 실은 인도 상선이에요. 인도의 시인 타고르의 이름을 딴 배라는 점이 상징적입니다.",
+  "ctx": "조화를 못 찾았기 때문입니다.\"},   7:{src:\"en\", note:"
+ },
+ "js_089": {
+  "t": "명준은 항해 도중 푸른 바다에 몸을 던져요. 지상에 없던 광장을 그는 바다에서 완성하는 셈입니다.",
+  "ctx": "딴 배라는 점이 상징적입니다.\"},   8:{src:\"ko\", note:"
+ },
+ "js_090": {
+  "t": "4·19 혁명(1960)은 이승만 독재를 무너뜨린 시민 항쟁이에요. 그 자유의 공기 속에서 분단을 정면으로 쓰는 일이 가능해졌습니다.",
+  "ctx": "다에서 완성하는 셈입니다.\"},   9:{src:\"r419\", note:"
+ },
+ "js_091": {
+  "t": "『광장』은 1960년 잡지 『새벽』에 발표되고 이듬해 단행본이 됐어요. 4·19 직후의 시대정신이 짙게 배어 있습니다.",
+  "ctx": " 쓰는 일이 가능해졌습니다.\"},   10:{src:\"ko\", note:"
+ },
+ "js_092": {
+  "t": "분단의 땅",
+  "ctx": "*/ const MILESTONES = [   {at:0,  label:"
+ },
+ "js_093": {
+  "t": "남한의 밀실",
+  "ctx": "{at:0,  label:\"분단의 땅\"},   {at:6,  label:"
+ },
+ "js_094": {
+  "t": "월북, 북의 광장",
+  "ctx": "at:6,  label:\"남한의 밀실\"},   {at:12, label:"
+ },
+ "js_095": {
+  "t": "전쟁과 은혜",
+  "ctx": "12, label:\"월북, 북의 광장\"},   {at:18, label:"
+ },
+ "js_096": {
+  "t": "포로수용소",
+  "ctx": "at:18, label:\"전쟁과 은혜\"},   {at:24, label:"
+ },
+ "js_097": {
+  "t": "푸른 바다",
+  "ctx": "{at:24, label:\"포로수용소\"},   {at:30, label:"
+ },
+ "js_098": {
+  "t": "보통",
+  "ctx": "]; const DIFF_LABEL = {1:[\"쉬움\",\"l1\"],2:["
+ },
+ "js_099": {
+  "t": "어려움",
+  "ctx": "LABEL = {1:[\"쉬움\",\"l1\"],2:[\"보통\",\"l2\"],3:["
+ },
+ "js_100": {
+  "t": "· 복습",
+  "ctx": "ds.size+' / '+TOTAL_Q + (attempts[id] ? "
+ },
+ "js_101": {
+  "t": "🎯 정답!",
+  "ctx": ")      verdict.textContent = firstTry ? "
+ },
+ "js_102": {
+  "t": "✅ 이제 익혔어요!",
+  "ctx": "dict.textContent = firstTry ? '🎯 정답!' : "
+ },
+ "js_103": {
+  "t": "❌ 다시 도전!",
+  "ctx": "ing.push(id);     verdict.textContent = "
+ },
+ "js_104": {
+  "t": "↻ 이 문제는 뒤에서 다시 나옵니다",
+  "ctx": "getElementById('requeue').textContent = "
+ },
+ "js_105": {
+  "t": "남이 침범할 수 없는 개인의 사적 공간. 명준은 남한을 밀실만 넘치고 광장은 텅 빈 곳으로 봅니다. 저마다 제 방에 숨어 사는 사회예요.",
+  "ctx": "const CONCEPTS = [   {ic:\"🚪\", h:\"밀실\", p:"
+ },
+ "js_106": {
+  "t": "사람들이 더불어 사는 공적 삶의 자리. 명준이 남과 북을 가로지르며 끝내 찾아 헤매는 이상입니다. 밀실과 짝을 이루는 열쇳말이에요.",
+  "ctx": "회예요.\", src:\"ko\"},   {ic:\"🏛️\", h:\"광장\", p:"
+ },
+ "js_107": {
+  "t": "참된 삶을 갈망하는 철학도. 이상을 좇다 남과 북 모두에서 거듭 환멸하는, 이 소설의 관념적 주인공입니다.",
+  "ctx": "요.\", src:\"ko\"},   {ic:\"🧑‍🎓\", h:\"이명준\", p:"
+ },
+ "js_108": {
+  "t": "윤애와 은혜",
+  "ctx": " 관념적 주인공입니다.\", src:\"en\"},   {ic:\"🕊️\", h:"
+ },
+ "js_109": {
+  "t": "남한의 연인 윤애, 북한의 연인이자 무용수 은혜. 은혜는 명준의 아이를 밴 채 전장에서 죽어, 명준을 마지막 절망으로 이끕니다.",
+  "ctx": "\", src:\"en\"},   {ic:\"🕊️\", h:\"윤애와 은혜\", p:"
+ },
+ "js_110": {
+  "t": "분단과 이념",
+  "ctx": "절망으로 이끕니다.\", src:\"namu\"},   {ic:\"⚔️\", h:"
+ },
+ "js_111": {
+  "t": "남한의 나태·방종과 북한의 공허한 구호. 소설은 어느 한쪽 편도 들지 않고 양쪽 체제를 함께 비판합니다.",
+  "ctx": " src:\"namu\"},   {ic:\"⚔️\", h:\"분단과 이념\", p:"
+ },
+ "js_112": {
+  "t": "중립국행",
+  "ctx": "를 함께 비판합니다.\", src:\"r419\"},   {ic:\"🚢\", h:"
+ },
+ "js_113": {
+  "t": "포로 명준은 남도 북도 아닌 중립국을 택해 인도 상선 타고르호에 오릅니다. 어디에도 참된 광장이 없다는 결론이지요.",
+  "ctx": ".\", src:\"r419\"},   {ic:\"🚢\", h:\"중립국행\", p:"
+ },
+ "js_114": {
+  "t": "명준이 몸을 던지는 바다. 지상에 없던 참된 광장의 상징으로 읽힙니다. 두 갈매기의 환영이 그를 그곳으로 이끕니다.",
+  "ctx": ".\", src:\"ebs\"},   {ic:\"🌊\", h:\"푸른 바다\", p:"
+ },
+ "js_115": {
+  "t": "최인훈과 개작",
+  "ctx": "를 그곳으로 이끕니다.\", src:\"ko\"},   {ic:\"✍️\", h:"
+ },
+ "js_116": {
+  "t": "4·19의 자유 속에 분단을 정면으로 쓴 작가. 『광장』을 여러 차례 개작하며 갈매기의 의미까지 판본마다 다듬었습니다.",
+  "ctx": ", src:\"ko\"},   {ic:\"✍️\", h:\"최인훈과 개작\", p:"
+ },
+ "js_117": {
+  "t": "들어가며",
+  "ctx": "/* 목차(클릭하면 요약 오픈) */ const TOC = [   {n:"
+ },
+ "js_118": {
+  "t": "4·19가 열어젖힌 광장",
+  "ctx": " 요약 오픈) */ const TOC = [   {n:\"들어가며\", t:"
+ },
+ "js_119": {
+  "t": "1960년 잡지 『새벽』에 발표된 최인훈의 대표 장편입니다.",
+  "ctx": ":\"4·19가 열어젖힌 광장\", beats:[     {e:\"📚\", x:"
+ },
+ "js_120": {
+  "t": "4·19 혁명이 연 자유가 분단을 정면으로 쓰는 일을 가능케 했어요.",
+  "ctx": "』에 발표된 최인훈의 대표 장편입니다.\"},     {e:\"🕊️\", x:"
+ },
+ "js_121": {
+  "t": "밀실과 광장이라는 두 열쇳말로 남과 북을 함께 저울질합니다.",
+  "ctx": "단을 정면으로 쓰는 일을 가능케 했어요.\"},     {e:\"🧭\", x:"
+ },
+ "js_122": {
+  "t": "철학도 이명준이 참된 삶의 자리를 찾아 나서는 여정이에요.",
+  "ctx": "쇳말로 남과 북을 함께 저울질합니다.\"},     {e:\"🧑‍🎓\", x:"
+ },
+ "js_123": {
+  "t": "1부",
+  "ctx": "이 참된 삶의 자리를 찾아 나서는 여정이에요.\"},   ]},   {n:"
+ },
+ "js_124": {
+  "t": "명준은 남한을 밀실만 있고 광장은 텅 빈 곳으로 느낍니다.",
+  "ctx": "\"1부\", t:\"남한의 밀실\", beats:[     {e:\"🚪\", x:"
+ },
+ "js_125": {
+  "t": "월북한 아버지 탓에 사상을 의심받아 취조와 고문을 당해요.",
+  "ctx": " 있고 광장은 텅 빈 곳으로 느낍니다.\"},     {e:\"⛓️\", x:"
+ },
+ "js_126": {
+  "t": "윤애를 사랑하지만, 그 사랑도 환멸을 되돌리지 못합니다.",
+  "ctx": " 사상을 의심받아 취조와 고문을 당해요.\"},     {e:\"💔\", x:"
+ },
+ "js_127": {
+  "t": "끝내 남한에 절망하고 북으로 갈 결심을 굳힙니다.",
+  "ctx": ", 그 사랑도 환멸을 되돌리지 못합니다.\"},     {e:\"🧳\", x:"
+ },
+ "js_128": {
+  "t": "2부",
+  "ctx": " 남한에 절망하고 북으로 갈 결심을 굳힙니다.\"},   ]},   {n:"
+ },
+ "js_129": {
+  "t": "월북, 북한의 광장",
+  "ctx": "고 북으로 갈 결심을 굳힙니다.\"},   ]},   {n:\"2부\", t:"
+ },
+ "js_130": {
+  "t": "아버지가 있는 북으로 월북해 새로운 광장을 기대합니다.",
+  "ctx": ", t:\"월북, 북한의 광장\", beats:[     {e:\"🚩\", x:"
+ },
+ "js_131": {
+  "t": "그러나 북의 광장은 텅 빈 구호로 가득할 뿐이었어요.",
+  "ctx": "북으로 월북해 새로운 광장을 기대합니다.\"},     {e:\"📢\", x:"
+ },
+ "js_132": {
+  "t": "무용수 은혜를 만나 삭막한 삶 속 위안을 얻습니다.",
+  "ctx": "광장은 텅 빈 구호로 가득할 뿐이었어요.\"},     {e:\"🩰\", x:"
+ },
+ "js_133": {
+  "t": "남도 북도 참된 삶의 자리가 아님을 명준은 깨닫습니다.",
+  "ctx": "를 만나 삭막한 삶 속 위안을 얻습니다.\"},     {e:\"😞\", x:"
+ },
+ "js_134": {
+  "t": "3부",
+  "ctx": " 참된 삶의 자리가 아님을 명준은 깨닫습니다.\"},   ]},   {n:"
+ },
+ "js_135": {
+  "t": "전쟁과 사랑의 상실",
+  "ctx": "리가 아님을 명준은 깨닫습니다.\"},   ]},   {n:\"3부\", t:"
+ },
+ "js_136": {
+  "t": "6·25 전쟁이 터지고 명준도 전장으로 나섭니다.",
+  "ctx": ", t:\"전쟁과 사랑의 상실\", beats:[     {e:\"💥\", x:"
+ },
+ "js_137": {
+  "t": "종군하던 은혜가 명준의 아이를 밴 채 전사합니다.",
+  "ctx": "쟁이 터지고 명준도 전장으로 나섭니다.\"},     {e:\"🕯️\", x:"
+ },
+ "js_138": {
+  "t": "명준은 포로가 되어 수용소에 갇힙니다.",
+  "ctx": "혜가 명준의 아이를 밴 채 전사합니다.\"},     {e:\"⛓️\", x:"
+ },
+ "js_139": {
+  "t": "사랑과 이상이 한꺼번에 무너져 내립니다.",
+  "ctx": "\"명준은 포로가 되어 수용소에 갇힙니다.\"},     {e:\"🥀\", x:"
+ },
+ "js_140": {
+  "t": "4부",
+  "ctx": "x:\"사랑과 이상이 한꺼번에 무너져 내립니다.\"},   ]},   {n:"
+ },
+ "js_141": {
+  "t": "중립국행과 푸른 바다",
+  "ctx": "상이 한꺼번에 무너져 내립니다.\"},   ]},   {n:\"4부\", t:"
+ },
+ "js_142": {
+  "t": "포로 송환에서 남이냐 북이냐를 강요받습니다.",
+  "ctx": "t:\"중립국행과 푸른 바다\", beats:[     {e:\"⚖️\", x:"
+ },
+ "js_143": {
+  "t": "둘 다 거부하고 중립국을 택해 타고르호에 오릅니다.",
+  "ctx": " 송환에서 남이냐 북이냐를 강요받습니다.\"},     {e:\"🚢\", x:"
+ },
+ "js_144": {
+  "t": "배를 따르는 두 갈매기에서 죽은 은혜와 딸을 봅니다.",
+  "ctx": "고 중립국을 택해 타고르호에 오릅니다.\"},     {e:\"🕊️\", x:"
+ },
+ "js_145": {
+  "t": "어느 밤, 명준은 푸른 바다에 몸을 던집니다.",
+  "ctx": "두 갈매기에서 죽은 은혜와 딸을 봅니다.\"},     {e:\"🌊\", x:"
+ },
+ "js_146": {
+  "t": "나가며",
+  "ctx": "어느 밤, 명준은 푸른 바다에 몸을 던집니다.\"},   ]},   {n:"
+ },
+ "js_147": {
+  "t": "밀실과 광장, 그리고 오늘",
+  "ctx": " 푸른 바다에 몸을 던집니다.\"},   ]},   {n:\"나가며\", t:"
+ },
+ "js_148": {
+  "t": "밀실만의 삶도, 광장만의 삶도 온전하지 않다는 물음을 남깁니다.",
+  "ctx": "\"밀실과 광장, 그리고 오늘\", beats:[     {e:\"🤔\", x:"
+ },
+ "js_149": {
+  "t": "분단을 이념적으로 성찰한 전후 문학의 이정표가 되었어요.",
+  "ctx": "삶도 온전하지 않다는 물음을 남깁니다.\"},     {e:\"🇰🇷\", x:"
+ },
+ "js_150": {
+  "t": "최인훈은 이 작품을 여러 판본으로 거듭 개작했습니다.",
+  "ctx": " 성찰한 전후 문학의 이정표가 되었어요.\"},     {e:\"🔁\", x:"
+ },
+ "js_151": {
+  "t": "푸른 바다는 지상에 없던 참된 광장의 상징으로 남습니다.",
+  "ctx": "작품을 여러 판본으로 거듭 개작했습니다.\"},     {e:\"🌊\", x:"
+ },
+ "js_152": {
+  "t": "취조실의 명준",
+  "ctx": "볼 사례 3 */ const CASES = [   {ic:\"⛓️\", t:"
+ },
+ "js_153": {
+  "t": "명준은 월북한 아버지 때문에 사상을 의심받아 남한 경찰에게 취조와 폭력을 당합니다. 개인의 밀실조차 국가가 함부로 침범하는 순간이에요.",
+  "ctx": "st CASES = [   {ic:\"⛓️\", t:\"취조실의 명준\", d:"
+ },
+ "js_154": {
+  "t": "자유로워 보이던 남한의 밀실이 실은 얼마나 취약한지를 드러내며, 명준을 월북으로 밀어붙입니다.",
+  "ctx": "합니다. 개인의 밀실조차 국가가 함부로 침범하는 순간이에요.\", why:"
+ },
+ "js_155": {
+  "t": "낙동강의 은혜",
+  "ctx": "드러내며, 명준을 월북으로 밀어붙입니다.\"},   {ic:\"🕯️\", t:"
+ },
+ "js_156": {
+  "t": "무용수 은혜는 종군하다 명준의 아이를 밴 채 전장에서 죽습니다. 명준이 붙들 수 있었던 마지막 사랑이자 온기가 사라지는 장면이에요.",
+  "ctx": "로 밀어붙입니다.\"},   {ic:\"🕯️\", t:\"낙동강의 은혜\", d:"
+ },
+ "js_157": {
+  "t": "이념이 아니라 한 사람의 사랑마저 전쟁이 앗아갈 때, 명준에게 남는 선택지가 무엇일지 되묻게 합니다.",
+  "ctx": "붙들 수 있었던 마지막 사랑이자 온기가 사라지는 장면이에요.\", why:"
+ },
+ "js_158": {
+  "t": "판문점의 선택",
+  "ctx": " 남는 선택지가 무엇일지 되묻게 합니다.\"},   {ic:\"⚖️\", t:"
+ },
+ "js_159": {
+  "t": "포로 송환에서 명준은 남과 북 어느 쪽도 아닌 중립국을 택합니다. 두 체제의 강요 앞에서 제3의 답을 내놓는 결정적 장면입니다.",
+  "ctx": " 되묻게 합니다.\"},   {ic:\"⚖️\", t:\"판문점의 선택\", d:"
+ },
+ "js_160": {
+  "t": "어느 한쪽을 고르는 것이 당연해 보이는 자리에서, 둘 다 거부하는 일이 무엇을 뜻하는지 생각하게 합니다.",
+  "ctx": " 체제의 강요 앞에서 제3의 답을 내놓는 결정적 장면입니다.\", why:"
+ },
+ "js_161": {
+  "t": "밀실만 있는 삶과 광장만 있는 삶, 당신은 어느 쪽이 더 두려운가?",
+  "ctx": "책이 우리에게 던지는 질문 3 */ const ASKS = [   {q:"
+ },
+ "js_162": {
+  "t": "개인의 자유(밀실)와 공적 연대(광장) 중 하나만 남는다면 무엇을 잃는 것인지 떠올려 보세요.",
+  "ctx": "만 있는 삶과 광장만 있는 삶, 당신은 어느 쪽이 더 두려운가?\", h:"
+ },
+ "js_163": {
+  "t": "어느 체제에서도 참된 삶을 찾지 못할 때, 사람은 무엇을 택해야 하는가?",
+  "ctx": " 중 하나만 남는다면 무엇을 잃는 것인지 떠올려 보세요.\"},   {q:"
+ },
+ "js_164": {
+  "t": "명준의 중립국 선택을 떠올려 보세요. 거부하는 일도 하나의 선택이 될 수 있습니다.",
+  "ctx": "에서도 참된 삶을 찾지 못할 때, 사람은 무엇을 택해야 하는가?\", h:"
+ },
+ "js_165": {
+  "t": "명준이 바다로 몸을 던진 것은 패배인가, 마지막 자유인가?",
+  "ctx": " 보세요. 거부하는 일도 하나의 선택이 될 수 있습니다.\"},   {q:"
+ },
+ "js_166": {
+  "t": "푸른 바다를 참된 광장의 상징으로 읽는다면, 그의 최후는 다르게 보일 수 있습니다.",
+  "ctx": "q:\"명준이 바다로 몸을 던진 것은 패배인가, 마지막 자유인가?\", h:"
+ },
+ "js_167": {
+  "t": "🌊 푸른 광장에 이른 사람",
+  "ctx": ");   let rank, sub;   if(acc>=90){ rank="
+ },
+ "js_168": {
+  "t": "광장을 완벽히 읽어냈습니다",
+  "ctx": "if(acc>=90){ rank='🌊 푸른 광장에 이른 사람'; sub="
+ },
+ "js_169": {
+  "t": "🕊️ 중립국의 항해자",
+  "ctx": "완벽히 읽어냈습니다'; }   else if(acc>=75){ rank="
+ },
+ "js_170": {
+  "t": "핵심을 거의 다 잡았어요",
+  "ctx": "se if(acc>=75){ rank='🕊️ 중립국의 항해자'; sub="
+ },
+ "js_171": {
+  "t": "🏛️ 광장을 찾는 사람",
+  "ctx": " 거의 다 잡았어요'; }   else if(acc>=55){ rank="
+ },
+ "js_172": {
+  "t": "뼈대를 익혔습니다 — 한 번 더!",
+  "ctx": "e if(acc>=55){ rank='🏛️ 광장을 찾는 사람'; sub="
+ },
+ "js_173": {
+  "t": "🚪 밀실 속의 방랑자",
+  "ctx": "b='뼈대를 익혔습니다 — 한 번 더!'; }   else { rank="
+ },
+ "js_174": {
+  "t": "반복할수록 점수가 오릅니다",
+  "ctx": "더!'; }   else { rank='🚪 밀실 속의 방랑자'; sub="
+ },
+ "js_175": {
+  "t": "완독 리포트",
+  "ctx": "onst fname = ((h2 && h2.textContent) || "
+ },
+ "js_176": {
+  "t": "한눈에 보기",
+  "ctx": "&& h2.textContent) || '완독 리포트').replace("
+ },
+ "js_177": {
+  "t": "리포트.pdf",
+  "ctx": "'완독 리포트').replace('한눈에 보기','').trim() + "
+ },
+ "js_178": {
+  "t": "📄 PDF 만드는 중…",
+  "ctx": "tn){ btn.disabled=true; btn.textContent="
+ },
+ "js_179": {
+  "t": "PDF 생성 중 문제가 발생했어요. 이 HTML 파일을 내려받아 브라우저에서 직접 열고 다시 눌러 주세요.",
+  "ctx": "     }   }).catch(function(){     alert("
+ },
+ "js_180": {
+  "t": "무료로는 <b>",
+  "ctx": "t = TOTAL_Q - fl;       msg.innerHTML = "
+ },
+ "js_181": {
+  "t": "문항</b>까지 풀 수 있어요.",
+  "ctx": "fl;       msg.innerHTML = '무료로는 <b>'+fl+"
+ },
+ "js_182": {
+  "t": "나머지 <b>",
+  "ctx": " <b>'+fl+'문항</b>까지 풀 수 있어요. ' +         "
+ },
+ "js_183": {
+  "t": "문항</b>과 <b>완독 요약 리포트</b>는 구독자 전용입니다.",
+  "ctx": ">까지 풀 수 있어요. ' +         '나머지 <b>'+rest+"
+ },
+ "js_184": {
+  "t": "지금까지 쌓은 <b>명준의 여정 진행도</b>는 위 게이지에 그대로 남아 있어요.",
+  "ctx": "b>완독 요약 리포트</b>는 구독자 전용입니다. ' +         "
+ },
+ "js_185": {
+  "t": "<h3>완독 리포트 전체는 구독자 전용이에요</h3>",
+  "ctx": " = '<div class=\"lk-ic\">🔒</div>' +       "
+ },
+ "js_186": {
+  "t": "<p>인과의 사슬과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>",
+  "ctx": "'<h3>완독 리포트 전체는 구독자 전용이에요</h3>' +       "
+ },
+ "js_187": {
+  "t": "목차 요약 · 사례 · 질문 · 약점 복습 · PDF 저장은 구독하면 모두 열립니다.</p>",
+  "ctx": "과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>' +       "
+ },
+ "js_188": {
+  "t": "\" target=\"_blank\" rel=\"noopener\">🔑 구독하고 완독 리포트 전체 열기</a>",
+  "ctx": "     '<a class=\"cta\" href=\"' + _sub() + "
+ },
+ "js_189": {
+  "t": "최인훈 · 분단문학의 고전 마스터 퀴즈",
+  "ctx": "to Serif KR\",serif', '#ffffff');   ctxt("
+ },
+ "js_190": {
+  "t": "📚 매일 새 책 퀴즈  ·",
+  "ctx": "(/^https?:\\/\\//,'') : '';   if(su) ctxt("
+ },
+ "js_191": {
+  "t": "광장_퀴즈결과.png",
+  "ctx": "nt('a');     a.href = url; a.download = "
+ },
+ "js_192": {
+  "t": "💌 VIP 초대 —",
+  "ctx": "ursor:pointer;\";     d.textContent=(vip?"
+ },
+ "js_193": {
+  "t": "🎁 지금 이 책 풀버전 무료 오픈 중!",
+  "ctx": "\";     d.textContent=(vip?\"💌 VIP 초대 — \":"
+ },
+ "js_194": {
+  "t": "전체판(잠금 없음)으로 이동 →",
+  "ctx": "\"💌 VIP 초대 — \":\"🎁 지금 이 책 풀버전 무료 오픈 중! \")+"
+ },
+ "jst_001": {
+  "t": "무료로 풀 수 있는 문항 수",
+  "ctx": "    freeLimit: 10,           // teaser: "
+ },
+ "jst_002": {
+  "t": "아직",
+  "ctx": "3:30};    let pending = [];          // "
+ },
+ "jst_003": {
+  "t": "처음으로 정답",
+  "ctx": "};    let pending = [];          // 아직 ‘"
+ },
+ "jst_004": {
+  "t": "을 못 낸 문항 큐",
+  "ctx": "t pending = [];          // 아직 ‘처음으로 정답’"
+ },
+ "jst_005": {
+  "t": "앞에서 꺼냄",
+  "ctx": "[];          // 아직 ‘처음으로 정답’을 못 낸 문항 큐 ("
+ },
+ "jst_006": {
+  "t": "시도 횟수",
+  "ctx": "(); let attempts = {};         // id -> "
+ },
+ "jst_007": {
+  "t": "첫 시도에 틀린 문항",
+  "ctx": " 0; let firstWrongIds = new Set();   // "
+ },
+ "jst_008": {
+  "t": "약점",
+  "ctx": "rongIds = new Set();   // 첫 시도에 틀린 문항 = "
+ },
+ "jst_009": {
+  "t": "집중 복습 대상",
+  "ctx": "gIds = new Set();   // 첫 시도에 틀린 문항 = 약점("
+ },
+ "jst_010": {
+  "t": "세션 내 최고 점수",
+  "ctx": "r = null; let bestScore = 0;         // "
+ },
+ "jst_011": {
+  "t": "재도전 비교용,",
+  "ctx": "t bestScore = 0;         // 세션 내 최고 점수 ("
+ },
+ "jst_012": {
+  "t": "미사용",
+  "ctx": "   // 세션 내 최고 점수 (재도전 비교용, localStorage "
+ },
+ "jst_013": {
+  "t": "복습 정답은 절반 점수",
+  "ctx": " gain = Math.round(gain/2);          // "
+ },
+ "jst_014": {
+  "t": "콤보 보너스",
+  "ctx": " (streak>=2) ? (streak-1)*3 : 0;     // "
+ },
+ "jst_015": {
+  "t": "가 아니어도 최종적으로 익힌 것으로 카운트",
+  "ctx": " masteredIds.add(id);          // ‘처음으로’"
+ },
+ "jst_016": {
+  "t": "큐에서 제거",
+  "ctx": "운트     pending.shift();              // "
+ },
+ "jst_017": {
+  "t": "연속 정답!",
+  "ctx": "      comboEl.textContent = `🔥 ${streak}"
+ },
+ "jst_018": {
+  "t": "보너스",
+  "ctx": "tContent = `🔥 ${streak}연속 정답! +${bonus} "
+ },
+ "jst_019": {
+  "t": "약점으로 기록",
+  "ctx": "f(firstTry) firstWrongIds.add(id);   // "
+ },
+ "jst_020": {
+  "t": "왜 생각해볼 만한가",
+  "ctx": "= >${c.d}</div>       <div class= >💭 <b>"
+ },
+ "jst_021": {
+  "t": "첫 시도에 모두 정답!",
+  "ctx": " ;     list.innerHTML = `<div class= >🌟 "
+ },
+ "jst_022": {
+  "t": "약점이 없어 따로 복습할 항목이 없습니다. 멋져요.",
+  "ctx": "TML = `<div class= >🌟 첫 시도에 모두 정답!<span>"
+ },
+ "jst_023": {
+  "t": "개",
+  "ctx": " {     cnt.textContent = `(${ids.length}"
+ },
+ "jst_024": {
+  "t": "정답",
+  "ctx": "= >Q. ${q.q}</div>         <div class= >"
+ },
+ "jst_025": {
+  "t": "최고 점수 경신!",
+  "ctx": "re;     note.innerHTML = prev>0 ? `🏆 <b>"
+ },
+ "jst_026": {
+  "t": "이전",
+  "ctx": "nerHTML = prev>0 ? `🏆 <b>최고 점수 경신!</b> ("
+ },
+ "jst_027": {
+  "t": "점",
+  "ctx": "prev>0 ? `🏆 <b>최고 점수 경신!</b> (이전 ${prev}"
+ },
+ "jst_028": {
+  "t": "첫 기록",
+  "ctx": "`🏆 <b>최고 점수 경신!</b> (이전 ${prev}점)` : `🏆 "
+ },
+ "jst_029": {
+  "t": "다시 도전해 깨보세요!",
+  "ctx": "${prev}점)` : `🏆 첫 기록 <b>${score}점</b> — "
+ },
+ "jst_030": {
+  "t": "현재 최고 점수",
+  "ctx": "보세요!`;   } else {     note.innerHTML = `"
+ },
+ "jst_031": {
+  "t": "이번엔",
+  "ctx": "HTML = `현재 최고 점수 <b>${bestScore}점</b> · "
+ }
+}

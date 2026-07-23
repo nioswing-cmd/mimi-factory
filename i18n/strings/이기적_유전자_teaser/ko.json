@@ -1,0 +1,1190 @@
+{
+ "_meta": {
+  "source": "apps/이기적_유전자_teaser.html",
+  "slug": "이기적_유전자_teaser"
+ },
+ "title_001": {
+  "t": "이기적 유전자 도파민 마스터 퀴즈 · 리처드 도킨스",
+  "ctx": "<title>"
+ },
+ "html_001": {
+  "t": "리처드 도킨스 · 1976 · 진화생물학의 고전",
+  "ctx": "class=\"hero\">       <div class=\"eyebrow\""
+ },
+ "html_002": {
+  "t": "진화의 진짜 주인공은 개체가 아니라 유전자다",
+  "ctx": "ass=\"p3\">🔁</span></div>       <h1><small"
+ },
+ "html_003": {
+  "t": "이기적 유전자 마스터 퀴즈",
+  "ctx": "1><small>진화의 진짜 주인공은 개체가 아니라 유전자다</small"
+ },
+ "html_004": {
+  "t": "“우리는 유전자라 불리는 이기적 분자를 보존하기 위해",
+  "ctx": "유전자 마스터 퀴즈</h1>       <div class=\"quote\""
+ },
+ "html_005": {
+  "t": "맹목적으로 프로그램된 생존 기계다.”",
+  "ctx": "        “우리는 유전자라 불리는 이기적 분자를 보존하기 위해<br"
+ },
+ "html_006": {
+  "t": "— 리처드 도킨스 『이기적 유전자』",
+  "ctx": "해<br>맹목적으로 프로그램된 생존 기계다.”<br>         <b"
+ },
+ "html_007": {
+  "t": "유전자의 눈으로 본 진화, 그 핵심 개념·사례·논쟁을",
+  "ctx": " 도킨스 『이기적 유전자』</b>       </div>       <p"
+ },
+ "html_008": {
+  "t": "30개의 퀴즈",
+  "ctx": "     <p>유전자의 눈으로 본 진화, 그 핵심 개념·사례·논쟁을 <b"
+ },
+ "html_009": {
+  "t": "로 익힙니다.\n        쉬운 것부터 시작해 점점 어려워지고,",
+  "ctx": "의 눈으로 본 진화, 그 핵심 개념·사례·논쟁을 <b>30개의 퀴즈</b"
+ },
+ "html_010": {
+  "t": "틀린 문제는 맞힐 때까지 다시 돌아옵니다.",
+  "ctx": ">로 익힙니다.         쉬운 것부터 시작해 점점 어려워지고, <b"
+ },
+ "html_011": {
+  "t": "총",
+  "ctx": "s=\"meta-row\">         <span class=\"chip\""
+ },
+ "html_012": {
+  "t": "30문항",
+  "ctx": "ta-row\">         <span class=\"chip\">총 <b"
+ },
+ "html_013": {
+  "t": "쉬움 → 어려움",
+  "ctx": "문항</b></span>         <span class=\"chip\""
+ },
+ "html_014": {
+  "t": "실시간",
+  "ctx": "어려움</span>         <span class=\"chip\"><b"
+ },
+ "html_015": {
+  "t": "복제자의 여정",
+  "ctx": "an>         <span class=\"chip\"><b>실시간</b"
+ },
+ "html_016": {
+  "t": "문제마다",
+  "ctx": "제자의 여정</span>         <span class=\"chip\""
+ },
+ "html_017": {
+  "t": "쉬운 해설",
+  "ctx": "span>         <span class=\"chip\">문제마다 <b"
+ },
+ "html_018": {
+  "t": "진화의 게임 시작 →",
+  "ctx": "=\"btn btn-primary\" onclick=\"startQuiz()\""
+ },
+ "html_019": {
+  "t": "점수",
+  "ctx": "   <div class=\"stat\"><span class=\"label\""
+ },
+ "html_020": {
+  "t": "연속 정답",
+  "ctx": "align-items:center;\"><span class=\"label\""
+ },
+ "html_021": {
+  "t": "마스터",
+  "ctx": "ign-items:flex-end;\"><span class=\"label\""
+ },
+ "html_022": {
+  "t": "원시 수프 ←",
+  "ctx": "\">         <div class=\"axis-label\"><span"
+ },
+ "html_023": {
+  "t": "복제자의 여정 ·",
+  "ctx": "s=\"axis-label\"><span>원시 수프 ←</span><span"
+ },
+ "html_024": {
+  "t": "→ 밈·문명",
+  "ctx": "의 여정 · <b id=\"pctTxt\">0%</b></span><span"
+ },
+ "html_025": {
+  "t": "쉬움",
+  "ctx": "d\">         <span class=\"diff\" id=\"diff\""
+ },
+ "html_026": {
+  "t": "다음 →",
+  "ctx": "y\" id=\"nextBtn\" onclick=\"nextQuestion()\""
+ },
+ "html_027": {
+  "t": "여기까지가 무료 미리보기예요",
+  "ctx": ">     <div class=\"lk-ic\">🔒</div>     <h3"
+ },
+ "html_028": {
+  "t": "🔑 구독하고 전체 열기",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_029": {
+  "t": "요약 리포트 미리보기 →",
+  "ctx": "class=\"cta ghost\" onclick=\"openReport()\""
+ },
+ "html_030": {
+  "t": "유전자를 꿰뚫어 본 사람",
+  "ctx": ">       <div class=\"rank\" id=\"rankTitle\""
+ },
+ "html_031": {
+  "t": "최종 점수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_032": {
+  "t": "첫 시도 정답률",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_033": {
+  "t": "최고 연속 정답",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_034": {
+  "t": "총 도전 횟수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_035": {
+  "t": "📖 전체 요약 리포트 보기",
+  "ctx": "\"btn btn-primary\" onclick=\"openReport()\""
+ },
+ "html_036": {
+  "t": "🖼 결과 카드 저장",
+  "ctx": "btn btn-ghost\" onclick=\"makeShareCard()\""
+ },
+ "html_037": {
+  "t": "다시 도전 ↻",
+  "ctx": "ss=\"btn btn-ghost\" onclick=\"startQuiz()\""
+ },
+ "html_038": {
+  "t": "처음으로",
+  "ctx": "class=\"btn btn-ghost\" onclick=\"goHome()\""
+ },
+ "html_039": {
+  "t": "완독 리포트 · INFOGRAPHIC",
+  "ctx": "s=\"rep-hero\">       <div class=\"eyebrow\""
+ },
+ "html_040": {
+  "t": "이기적 유전자 한눈에 보기",
+  "ctx": "ow\">완독 리포트 · INFOGRAPHIC</div>       <h2"
+ },
+ "html_041": {
+  "t": "책 전체를",
+  "ctx": ">       <h2>이기적 유전자 한눈에 보기</h2>       <p"
+ },
+ "html_042": {
+  "t": "‘복제자의 사슬’",
+  "ctx": "h2>이기적 유전자 한눈에 보기</h2>       <p>책 전체를 <b"
+ },
+ "html_043": {
+  "t": "하나로 꿰면 절대 안 잊습니다. 모든 출발점은",
+  "ctx": "에 보기</h2>       <p>책 전체를 <b>‘복제자의 사슬’</b"
+ },
+ "html_044": {
+  "t": "자기 복제자(유전자)",
+  "ctx": "제자의 사슬’</b> 하나로 꿰면 절대 안 잊습니다. 모든 출발점은 <b"
+ },
+ "html_045": {
+  "t": "입니다.",
+  "ctx": " 꿰면 절대 안 잊습니다. 모든 출발점은 <b>자기 복제자(유전자)</b"
+ },
+ "html_046": {
+  "t": "뿌리",
+  "ctx": "<div class=\"ch step s0\"><span class=\"cn\""
+ },
+ "html_047": {
+  "t": "🧫 원시 수프의 자기 복제자",
+  "ctx": "ch step s0\"><span class=\"cn\">뿌리</span><b"
+ },
+ "html_048": {
+  "t": "스스로를 복사하는 최초의 분자",
+  "ctx": "n\">뿌리</span><b>🧫 원시 수프의 자기 복제자</b><small"
+ },
+ "html_049": {
+  "t": "1단계",
+  "ctx": "<div class=\"ch step s1\"><span class=\"cn\""
+ },
+ "html_050": {
+  "t": "🧬 이기적 유전자 = 복제자",
+  "ctx": "h step s1\"><span class=\"cn\">1단계</span><b"
+ },
+ "html_051": {
+  "t": "자기 복사본을 늘리려는 경쟁",
+  "ctx": "\">1단계</span><b>🧬 이기적 유전자 = 복제자</b><small"
+ },
+ "html_052": {
+  "t": "2단계",
+  "ctx": "<div class=\"ch step s2\"><span class=\"cn\""
+ },
+ "html_053": {
+  "t": "🤖 생존 기계(몸)를 만들어 조종",
+  "ctx": "h step s2\"><span class=\"cn\">2단계</span><b"
+ },
+ "html_054": {
+  "t": "몸은 유전자의 탈것",
+  "ctx": "단계</span><b>🤖 생존 기계(몸)를 만들어 조종</b><small"
+ },
+ "html_055": {
+  "t": "근접 원인",
+  "ctx": "s=\"ch step s3\">         <span class=\"cn\""
+ },
+ "html_056": {
+  "t": "🤝 이타성의 전략(혈연선택·ESS·호혜)",
+  "ctx": "         <span class=\"cn\">근접 원인</span><b"
+ },
+ "html_057": {
+  "t": "‘이기적’ 유전자가 낳는 협력",
+  "ctx": " 이타성의 전략(혈연선택·ESS·호혜)</b>         <small"
+ },
+ "html_058": {
+  "t": "결과",
+  "ctx": "<div class=\"ch step s4\"><span class=\"cn\""
+ },
+ "html_059": {
+  "t": "🧠 새로운 복제자 ‘밈’ + 유전자에 맞서는 인간",
+  "ctx": "ch step s4\"><span class=\"cn\">결과</span><b"
+ },
+ "html_060": {
+  "t": "“우리는 이기적 유전자에 반역할 수 있다”",
+  "ctx": "<b>🧠 새로운 복제자 ‘밈’ + 유전자에 맞서는 인간</b><small"
+ },
+ "html_061": {
+  "t": "핵심 개념 8",
+  "ctx": "/div>     </div>      <h3 class=\"rep-h3\""
+ },
+ "html_062": {
+  "t": "목차 한눈에 보기",
+  "ctx": "concepts\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_063": {
+  "t": "탭하면 요약이 열립니다",
+  "ctx": "ss=\"rep-h3\">목차 한눈에 보기 <span class=\"hint\""
+ },
+ "html_064": {
+  "t": "책 속, 생각해볼 사례 3",
+  "ctx": " id=\"toc\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_065": {
+  "t": "이 책이 우리에게 던지는 질문 3",
+  "ctx": "d=\"cases\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_066": {
+  "t": "내가 틀린 부분 집중 복습",
+  "ctx": " id=\"weakWrap\">       <h3 class=\"rep-h3\""
+ },
+ "html_067": {
+  "t": "📺 더 깊이 알고 싶다면",
+  "ctx": "/div>      <div class=\"deepen\">       <b"
+ },
+ "html_068": {
+  "t": "에서 『이기적 유전자』의 핵심 개념과 논쟁을 더 깊이 살펴볼 수 있습니다.",
+  "ctx": "f=\"#\" target=\"_blank\" rel=\"noopener\"></a"
+ },
+ "html_069": {
+  "t": "📄 PDF로 저장",
+  "ctx": "d=\"pdfBtn\" onclick=\"downloadReportPDF()\""
+ },
+ "html_070": {
+  "t": "결과로",
+  "ctx": "\"btn btn-ghost\" onclick=\"show('result')\""
+ },
+ "html_071": {
+  "t": "📚 다른 책 퀴즈 보기 →",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_072": {
+  "t": "“의미와재미공장” 미미팩토리",
+  "ctx": "class=\"footer\">     <div class=\"factory\""
+ },
+ "html_073": {
+  "t": "(주식회사 연:결 패밀리회사)",
+  "ctx": "재미공장” 미미팩토리</div>     <div class=\"affil\""
+ },
+ "html_074": {
+  "t": "책의 핵심을 도파민으로 익히는 반복 마스터 퀴즈",
+  "ctx": ":결 패밀리회사)</div>     <div class=\"tagline\""
+ },
+ "html_075": {
+  "t": "본 앱은 도서의 핵심 개념을 학습 목적으로 재구성한 2차적 학습 콘텐츠입니다. 온전한 독서 경험은 원서로 만나보세요.",
+  "ctx": "퀴즈</div>     <div class=\"copyright-note\""
+ },
+ "html_076": {
+  "t": "이기적 유전자 · 도서 정보",
+  "ctx": "+리처드+도킨스\" target=\"_blank\" rel=\"noopener\""
+ },
+ "js_001": {
+  "t": "\"}))}},Hn={name:\"font-size\",initialValue:\"0\",prefix:!1,type:wt.TYPE_VALUE,format:\"length\"},In={name:\"font-weight\",initialValue:\"normal\",type:wt.VALUE,prefix:!1,parse:function(e){if(Ve(e))return e.number;if(qe(e))switch(e.value){case\"bold\":return 700;case\"normal\":default:return 400}return 400}},Pn={name:\"font-variant\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return e.filter(qe).map((function(e){return e.value}))}};!function(e){e.NORMAL=\"normal\",e.ITALIC=\"italic\",e.OBLIQUE=\"oblique\"}(Nn||(Nn={}));var On,kn={name:\"font-style\",initialValue:\"normal\",prefix:!1,type:wt.IDENT_VALUE,parse:function(e){switch(e){case\"oblique\":return Nn.OBLIQUE;case\"italic\":return Nn.ITALIC;case\"normal\":default:return Nn.NORMAL}}},Rn=function(e,t){return 0!=(e&t)},Mn={name:\"content\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){if(0===e.length)return[];var t=e[0];return t.type===d.IDENT_TOKEN&&\"none\"===t.value?[]:e}},Dn={name:\"counter-increment\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;for(var r=[],n=e.filter(We),o=0;o<n.length;o++){var s=n[o],i=n[o+1];if(s.type===d.IDENT_TOKEN){var a=i&&Ve(i)?i.number:1;r.push({counter:s.value,increment:a})}}return r}},Kn={name:\"counter-reset\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return[];for(var t=[],r=e.filter(We),n=0;n<r.length;n++){var o=r[n],s=r[n+1];if(qe(o)&&\"none\"!==o.value){var i=s&&Ve(s)?s.number:0;t.push({counter:o.value,reset:i})}}return t}},zn={name:\"quotes\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;var r=[],n=e.filter(Ge);if(n.length%2!=0)return null;for(var o=0;o<n.length;o+=2){var s=n[o].value,i=n[o+1].value;r.push({open:s,close:i})}return r}},Vn=function(e,t,r){if(!e)return\"\";var n=e[Math.min(t,e.length-1)];return n?r?n.open:n.close:\"\"},qn={name:\"box-shadow\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return 1===e.length&&Xe(e[0],\"none\")?[]:Ye(e).map((function(e){for(var t={color:255,offsetX:rt,offsetY:rt,blur:rt,spread:rt,inset:!1},r=0,n=0;n<e.length;n++){var o=e[n];Xe(o,\"inset\")?t.inset=!0:$e(o)?(0===r?t.offsetX=o:1===r?t.offsetY=o:2===r?t.blur=o:t.spread=o,r++):t.color=ft(o)}return t}))}},Gn=function(){function e(e){this.backgroundClip=Jn(xt,e.backgroundClip),this.backgroundColor=Jn(Et,e.backgroundColor),this.backgroundImage=Jn(ur,e.backgroundImage),this.backgroundOrigin=Jn(cr,e.backgroundOrigin),this.backgroundPosition=Jn(lr,e.backgroundPosition),this.backgroundRepeat=Jn(fr,e.backgroundRepeat),this.backgroundSize=Jn(mr,e.backgroundSize),this.borderTopColor=Jn(vr,e.borderTopColor),this.borderRightColor=Jn(wr,e.borderRightColor),this.borderBottomColor=Jn(br,e.borderBottomColor),this.borderLeftColor=Jn(Br,e.borderLeftColor),this.borderTopLeftRadius=Jn(_r,e.borderTopLeftRadius),this.borderTopRightRadius=Jn(Cr,e.borderTopRightRadius),this.borderBottomRightRadius=Jn(xr,e.borderBottomRightRadius),this.borderBottomLeftRadius=Jn(Er,e.borderBottomLeftRadius),this.borderTopStyle=Jn(Fr,e.borderTopStyle),this.borderRightStyle=Jn(Ur,e.borderRightStyle),this.borderBottomStyle=Jn(Sr,e.borderBottomStyle),this.borderLeftStyle=Jn(Lr,e.borderLeftStyle),this.borderTopWidth=Jn(Hr,e.borderTopWidth),this.borderRightWidth=Jn(Ir,e.borderRightWidth),this.borderBottomWidth=Jn(Pr,e.borderBottomWidth),this.borderLeftWidth=Jn(Or,e.borderLeftWidth),this.boxShadow=Jn(qn,e.boxShadow),this.color=Jn(kr,e.color),this.display=Jn(Rr,e.display),this.float=Jn(Kr,e.cssFloat),this.fontFamily=Jn(Tn,e.fontFamily),this.fontSize=Jn(Hn,e.fontSize),this.fontStyle=Jn(kn,e.fontStyle),this.fontVariant=Jn(Pn,e.fontVariant),this.fontWeight=Jn(In,e.fontWeight),this.letterSpacing=Jn(zr,e.letterSpacing),this.lineBreak=Jn(qr,e.lineBreak),this.lineHeight=Jn(Gr,e.lineHeight),this.listStyleImage=Jn(Xr,e.listStyleImage),this.listStylePosition=Jn(Jr,e.listStylePosition),this.listStyleType=Jn(Zr,e.listStyleType),this.marginTop=Jn(en,e.marginTop),this.marginRight=Jn(tn,e.marginRight),this.marginBottom=Jn(rn,e.marginBottom),this.marginLeft=Jn(nn,e.marginLeft),this.opacity=Jn(Un,e.opacity);var t=Jn(sn,e.overflow);this.overflowX=t[0],this.overflowY=t[t.length>1?1:0],this.overflowWrap=Jn(An,e.overflowWrap),this.paddingTop=Jn(cn,e.paddingTop),this.paddingRight=Jn(ln,e.paddingRight),this.paddingBottom=Jn(dn,e.paddingBottom),this.paddingLeft=Jn(fn,e.paddingLeft),this.position=Jn(gn,e.position),this.textAlign=Jn(pn,e.textAlign),this.textDecorationColor=Jn(Sn,e.textDecorationColor||e.color),this.textDecorationLine=Jn(Ln,e.textDecorationLine),this.textShadow=Jn(yn,e.textShadow),this.textTransform=Jn(wn,e.textTransform),this.transform=Jn(bn,e.transform),this.transformOrigin=Jn(Cn,e.transformOrigin),this.visibility=Jn(En,e.visibility),this.wordBreak=Jn(Qn,e.wordBreak),this.zIndex=Jn(Fn,e.zIndex)}return e.prototype.isVisible=function(){return this.display>0&&this.opacity>0&&this.visibility===vn.VISIBLE},e.prototype.isTransparent=function(){return ht(this.backgroundColor)},e.prototype.isTransformed=function(){return null!==this.transform},e.prototype.isPositioned=function(){return this.position!==hn.STATIC},e.prototype.isPositionedWithZIndex=function(){return this.isPositioned()&&!this.zIndex.auto},e.prototype.isFloating=function(){return this.float!==Nr.NONE},e.prototype.isInlineLevel=function(){return Rn(this.display,4)||Rn(this.display,33554432)||Rn(this.display,268435456)||Rn(this.display,536870912)||Rn(this.display,67108864)||Rn(this.display,134217728)},e}(),Xn=function(e){this.content=Jn(Mn,e.content),this.quotes=Jn(zn,e.quotes)},Wn=function(e){this.counterIncrement=Jn(Dn,e.counterIncrement),this.counterReset=Jn(Kn,e.counterReset)},Jn=function(e,t){var r=new De,n=null!=t?t.toString():e.initialValue;r.write(n);var o=new Ke(r.read());switch(e.type){case wt.IDENT_VALUE:var s=o.parseComponentValue();return e.parse(qe(s)?s.value:e.initialValue);case wt.VALUE:return e.parse(o.parseComponentValue());case wt.LIST:return e.parse(o.parseComponentValues());case wt.TOKEN_VALUE:return o.parseComponentValue();case wt.TYPE_VALUE:switch(e.format){case\"angle\":return ut(o.parseComponentValue());case\"color\":return ft(o.parseComponentValue());case\"image\":return ir(o.parseComponentValue());case\"length\":var i=o.parseComponentValue();return $e(i)?i:rt;case\"length-percentage\":var a=o.parseComponentValue();return et(a)?a:rt}}throw new Error(\"Attempting to parse unsupported css format type \"+e.format)},Yn=function(e){this.styles=new Gn(window.getComputedStyle(e,null)),this.textNodes=[],this.elements=[],null!==this.styles.transform&&So(e)&&(e.style.transform=\"none\"),this.bounds=i(e),this.flags=0},Zn=function(e,t){this.text=e,this.bounds=t},$n=function(e){var t=e.ownerDocument;if(t){var r=t.createElement(\"html2canvaswrapper\");r.appendChild(e.cloneNode(!0));var n=e.parentNode;if(n){n.replaceChild(r,e);var o=i(r);return r.firstChild&&n.replaceChild(r.firstChild,r),o}}return new s(0,0,0,0)},eo=function(e,t,r){var n=e.ownerDocument;if(!n)throw new Error(\"Node has no owner document\");var o=n.createRange();return o.setStart(e,t),o.setEnd(e,t+r),s.fromClientRect(o.getBoundingClientRect())},to=function(e,t){return 0!==t.letterSpacing?a(e).map((function(e){return A(e)})):ro(e,t)},ro=function(e,t){for(var r,n=function(e,t){var r=a(e),n=ie(r,t),o=n[0],s=n[1],i=n[2],A=r.length,u=0,c=0;return{next:function(){if(c>=A)return{done:!0,value:null};for(var e=G;c<A&&(e=se(r,s,o,++c,i))===G;);if(e!==G||c===A){var t=new ae(r,e,u,c);return u=c,{value:t,done:!1}}return{done:!0,value:null}}}}(e,{lineBreak:t.lineBreak,wordBreak:t.overflowWrap===on.BREAK_WORD?\"break-word\":t.wordBreak}),o=[];!(r=n.next()).done;)r.value&&o.push(r.value.slice());return o},no=function(e,t){this.text=oo(e.data,t.textTransform),this.textBounds=function(e,t,r){var n=to(e,t),o=[],s=0;return n.forEach((function(e){if(t.textDecorationLine.length||e.trim().length>0)if(Pt.SUPPORT_RANGE_BOUNDS)o.push(new Zn(e,eo(r,s,e.length)));else{var n=r.splitText(e.length);o.push(new Zn(e,$n(r))),r=n}else Pt.SUPPORT_RANGE_BOUNDS||(r=r.splitText(e.length));s+=e.length})),o}(this.text,t,e)},oo=function(e,t){switch(t){case mn.LOWERCASE:return e.toLowerCase();case mn.CAPITALIZE:return e.replace(so,io);case mn.UPPERCASE:return e.toUpperCase();default:return e}},so=/(^|\\s|:|-|\\(|\\))([a-z])/g,io=function(e,t,r){return e.length>0?t+r.toUpperCase():e},ao=function(e){function r(t){var r=e.call(this,t)||this;return r.src=t.currentSrc||t.src,r.intrinsicWidth=t.naturalWidth,r.intrinsicHeight=t.naturalHeight,kt.getInstance().addImage(r.src),r}return t(r,e),r}(Yn),Ao=function(e){function r(t){var r=e.call(this,t)||this;return r.canvas=t,r.intrinsicWidth=t.width,r.intrinsicHeight=t.height,r}return t(r,e),r}(Yn),uo=function(e){function r(t){var r=e.call(this,t)||this,n=new XMLSerializer;return r.svg=\"data:image/svg+xml,\"+encodeURIComponent(n.serializeToString(t)),r.intrinsicWidth=t.width.baseVal.value,r.intrinsicHeight=t.height.baseVal.value,kt.getInstance().addImage(r.svg),r}return t(r,e),r}(Yn),co=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),lo=function(e){function r(t){var r=e.call(this,t)||this;return r.start=t.start,r.reversed=\"boolean\"==typeof t.reversed&&!0===t.reversed,r}return t(r,e),r}(Yn),fo=[{type:d.DIMENSION_TOKEN,flags:0,unit:\"px\",number:3}],ho=[{type:d.PERCENTAGE_TOKEN,flags:0,number:50}],po=\"checkbox\",mo=\"radio\",go=\"password\",yo=707406591,vo=function(e){function r(t){var r,n,o,i=e.call(this,t)||this;switch(i.type=t.type.toLowerCase(),i.checked=t.checked,i.value=0===(o=(n=t).type===go?new Array(n.value.length+1).join(\"•\"):n.value).length?n.placeholder||\"\":o,i.type!==po&&i.type!==mo||(i.styles.backgroundColor=3739148031,i.styles.borderTopColor=i.styles.borderRightColor=i.styles.borderBottomColor=i.styles.borderLeftColor=2779096575,i.styles.borderTopWidth=i.styles.borderRightWidth=i.styles.borderBottomWidth=i.styles.borderLeftWidth=1,i.styles.borderTopStyle=i.styles.borderRightStyle=i.styles.borderBottomStyle=i.styles.borderLeftStyle=pr.SOLID,i.styles.backgroundClip=[bt.BORDER_BOX],i.styles.backgroundOrigin=[0],i.bounds=(r=i.bounds).width>r.height?new s(r.left+(r.width-r.height)/2,r.top,r.height,r.height):r.width<r.height?new s(r.left,r.top+(r.height-r.width)/2,r.width,r.width):r),i.type){case po:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=fo;break;case mo:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=ho}return i}return t(r,e),r}(Yn),wo=function(e){function r(t){var r=e.call(this,t)||this,n=t.options[t.selectedIndex||0];return r.value=n&&n.text||\"\",r}return t(r,e),r}(Yn),bo=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),Bo=function(e){return ft(Ke.create(e).parseComponentValue())},jo=function(e){function r(t){var r=e.call(this,t)||this;r.src=t.src,r.width=parseInt(t.width,10)||0,r.height=parseInt(t.height,10)||0,r.backgroundColor=r.styles.backgroundColor;try{if(t.contentWindow&&t.contentWindow.document&&t.contentWindow.document.documentElement){r.tree=Eo(t.contentWindow.document.documentElement);var n=t.contentWindow.document.documentElement?Bo(getComputedStyle(t.contentWindow.document.documentElement).backgroundColor):_t.TRANSPARENT,o=t.contentWindow.document.body?Bo(getComputedStyle(t.contentWindow.document.body).backgroundColor):_t.TRANSPARENT;r.backgroundColor=ht(n)?ht(o)?r.styles.backgroundColor:o:n}}catch(e){}return r}return t(r,e),r}(Yn),_o=[\"OL\",\"UL\",\"MENU\"],Co=function(e,t,r){for(var n=e.firstChild,o=void 0;n;n=o)if(o=n.nextSibling,Fo(n)&&n.data.trim().length>0)t.textNodes.push(new no(n,t.styles));else if(Uo(n)){var s=xo(n);s.styles.isVisible()&&(No(n,s,r)?s.flags|=4:Qo(s.styles)&&(s.flags|=2),-1!==_o.indexOf(n.tagName)&&(s.flags|=8),t.elements.push(s),zo(n)||Po(n)||Vo(n)||Co(n,s,r))}},xo=function(e){return Ro(e)?new ao(e):ko(e)?new Ao(e):Po(e)?new uo(e):To(e)?new co(e):Ho(e)?new lo(e):Io(e)?new vo(e):Vo(e)?new wo(e):zo(e)?new bo(e):Mo(e)?new jo(e):new Yn(e)},Eo=function(e){var t=xo(e);return t.flags|=4,Co(e,t,t),t},No=function(e,t,r){return t.styles.isPositionedWithZIndex()||t.styles.opacity<1||t.styles.isTransformed()||Oo(e)&&r.styles.isTransparent()},Qo=function(e){return e.isPositioned()||e.isFloating()},Fo=function(e){return e.nodeType===Node.TEXT_NODE},Uo=function(e){return e.nodeType===Node.ELEMENT_NODE},So=function(e){return Uo(e)&&void 0!==e.style&&!Lo(e)},Lo=function(e){return\"object\"==typeof e.className},To=function(e){return\"LI\"===e.tagName},Ho=function(e){return\"OL\"===e.tagName},Io=function(e){return\"INPUT\"===e.tagName},Po=function(e){return\"svg\"===e.tagName},Oo=function(e){return\"BODY\"===e.tagName},ko=function(e){return\"CANVAS\"===e.tagName},Ro=function(e){return\"IMG\"===e.tagName},Mo=function(e){return\"IFRAME\"===e.tagName},Do=function(e){return\"STYLE\"===e.tagName},Ko=function(e){return\"SCRIPT\"===e.tagName},zo=function(e){return\"TEXTAREA\"===e.tagName},Vo=function(e){return\"SELECT\"===e.tagName},qo=function(){function e(){this.counters={}}return e.prototype.getCounterValue=function(e){var t=this.counters[e];return t&&t.length?t[t.length-1]:1},e.prototype.getCounterValues=function(e){return this.counters[e]||[]},e.prototype.pop=function(e){var t=this;e.forEach((function(e){return t.counters[e].pop()}))},e.prototype.parse=function(e){var t=this,r=e.counterIncrement,n=e.counterReset,o=!0;null!==r&&r.forEach((function(e){var r=t.counters[e.counter];r&&0!==e.increment&&(o=!1,r[Math.max(0,r.length-1)]+=e.increment)}));var s=[];return o&&n.forEach((function(e){var r=t.counters[e.counter];s.push(e.counter),r||(r=t.counters[e.counter]=[]),r.push(e.reset)})),s},e}(),Go={integers:[1e3,900,500,400,100,90,50,40,10,9,5,4,1],values:[\"M\",\"CM\",\"D\",\"CD\",\"C\",\"XC\",\"L\",\"XL\",\"X\",\"IX\",\"V\",\"IV\",\"I\"]},Xo={integers:[9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"Ք\",\"Փ\",\"Ւ\",\"Ց\",\"Ր\",\"Տ\",\"Վ\",\"Ս\",\"Ռ\",\"Ջ\",\"Պ\",\"Չ\",\"Ո\",\"Շ\",\"Ն\",\"Յ\",\"Մ\",\"Ճ\",\"Ղ\",\"Ձ\",\"Հ\",\"Կ\",\"Ծ\",\"Խ\",\"Լ\",\"Ի\",\"Ժ\",\"Թ\",\"Ը\",\"Է\",\"Զ\",\"Ե\",\"Դ\",\"Գ\",\"Բ\",\"Ա\"]},Wo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,400,300,200,100,90,80,70,60,50,40,30,20,19,18,17,16,15,10,9,8,7,6,5,4,3,2,1],values:[\"י׳\",\"ט׳\",\"ח׳\",\"ז׳\",\"ו׳\",\"ה׳\",\"ד׳\",\"ג׳\",\"ב׳\",\"א׳\",\"ת\",\"ש\",\"ר\",\"ק\",\"צ\",\"פ\",\"ע\",\"ס\",\"נ\",\"מ\",\"ל\",\"כ\",\"יט\",\"יח\",\"יז\",\"טז\",\"טו\",\"י\",\"ט\",\"ח\",\"ז\",\"ו\",\"ה\",\"ד\",\"ג\",\"ב\",\"א\"]},Jo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"ჵ\",\"ჰ\",\"ჯ\",\"ჴ\",\"ხ\",\"ჭ\",\"წ\",\"ძ\",\"ც\",\"ჩ\",\"შ\",\"ყ\",\"ღ\",\"ქ\",\"ფ\",\"ჳ\",\"ტ\",\"ს\",\"რ\",\"ჟ\",\"პ\",\"ო\",\"ჲ\",\"ნ\",\"მ\",\"ლ\",\"კ\",\"ი\",\"თ\",\"ჱ\",\"ზ\",\"ვ\",\"ე\",\"დ\",\"გ\",\"ბ\",\"ა\"]},Yo=function(e,t,r,n,o,s){return e<t||e>r?is(e,o,s.length>0):n.integers.reduce((function(t,r,o){for(;e>=r;)e-=r,t+=n.values[o];return t}),\"\")+s},Zo=function(e,t,r,n){var o=\"\";do{r||e--,o=n(e)+o,e/=t}while(e*t>=t);return o},$o=function(e,t,r,n,o){var s=r-t+1;return(e<0?\"-\":\"\")+(Zo(Math.abs(e),s,n,(function(e){return A(Math.floor(e%s)+t)}))+o)},es=function(e,t,r){void 0===r&&(r=\". \");var n=t.length;return Zo(Math.abs(e),n,!1,(function(e){return t[Math.floor(e%n)]}))+r},ts=function(e,t,r,n,o,s){if(e<-9999||e>9999)return is(e,Wr.CJK_DECIMAL,o.length>0);var i=Math.abs(e),a=o;if(0===i)return t[0]+a;for(var A=0;i>0&&A<=4;A++){var u=i%10;0===u&&Rn(s,1)&&\"\"!==a?a=t[u]+a:u>1||1===u&&0===A||1===u&&1===A&&Rn(s,2)||1===u&&1===A&&Rn(s,4)&&e>100||1===u&&A>1&&Rn(s,8)?a=t[u]+(A>0?r[A-1]:\"\")+a:1===u&&A>0&&(a=r[A-1]+a),i=Math.floor(i/10)}return(e<0?n:\"\")+a},rs=\"十百千萬\",ns=\"拾佰仟萬\",os=\"マイナス\",ss=\"마이너스\",is=function(e,t,r){var n=r?\". \":\"\",o=r?\"、\":\"\",s=r?\", \":\"\",i=r?\" \":\"\";switch(t){case Wr.DISC:return\"•\"+i;case Wr.CIRCLE:return\"◦\"+i;case Wr.SQUARE:return\"◾\"+i;case Wr.DECIMAL_LEADING_ZERO:var a=$o(e,48,57,!0,n);return a.length<4?\"0\"+a:a;case Wr.CJK_DECIMAL:return es(e,\"〇一二三四五六七八九\",o);case Wr.LOWER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n).toLowerCase();case Wr.UPPER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n);case Wr.LOWER_GREEK:return $o(e,945,969,!1,n);case Wr.LOWER_ALPHA:return $o(e,97,122,!1,n);case Wr.UPPER_ALPHA:return $o(e,65,90,!1,n);case Wr.ARABIC_INDIC:return $o(e,1632,1641,!0,n);case Wr.ARMENIAN:case Wr.UPPER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n);case Wr.LOWER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n).toLowerCase();case Wr.BENGALI:return $o(e,2534,2543,!0,n);case Wr.CAMBODIAN:case Wr.KHMER:return $o(e,6112,6121,!0,n);case Wr.CJK_EARTHLY_BRANCH:return es(e,\"子丑寅卯辰巳午未申酉戌亥\",o);case Wr.CJK_HEAVENLY_STEM:return es(e,\"甲乙丙丁戊己庚辛壬癸\",o);case Wr.CJK_IDEOGRAPHIC:case Wr.TRAD_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"負\",o,14);case Wr.TRAD_CHINESE_FORMAL:return ts(e,\"零壹貳參肆伍陸柒捌玖\",ns,\"負\",o,15);case Wr.SIMP_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"负\",o,14);case Wr.SIMP_CHINESE_FORMAL:return ts(e,\"零壹贰叁肆伍陆柒捌玖\",ns,\"负\",o,15);case Wr.JAPANESE_INFORMAL:return ts(e,\"〇一二三四五六七八九\",\"十百千万\",os,o,0);case Wr.JAPANESE_FORMAL:return ts(e,\"零壱弐参四伍六七八九\",\"拾百千万\",os,o,7);case Wr.KOREAN_HANGUL_FORMAL:return ts(e,\"영일이삼사오육칠팔구\",\"십백천만\",ss,s,7);case Wr.KOREAN_HANJA_INFORMAL:return ts(e,\"零一二三四五六七八九\",\"十百千萬\",ss,s,0);case Wr.KOREAN_HANJA_FORMAL:return ts(e,\"零壹貳參四五六七八九\",\"拾百千\",ss,s,7);case Wr.DEVANAGARI:return $o(e,2406,2415,!0,n);case Wr.GEORGIAN:return Yo(e,1,19999,Jo,Wr.DECIMAL,n);case Wr.GUJARATI:return $o(e,2790,2799,!0,n);case Wr.GURMUKHI:return $o(e,2662,2671,!0,n);case Wr.HEBREW:return Yo(e,1,10999,Wo,Wr.DECIMAL,n);case Wr.HIRAGANA:return es(e,\"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん\");case Wr.HIRAGANA_IROHA:return es(e,\"いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす\");case Wr.KANNADA:return $o(e,3302,3311,!0,n);case Wr.KATAKANA:return es(e,\"アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン\",o);case Wr.KATAKANA_IROHA:return es(e,\"イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセス\",o);case Wr.LAO:return $o(e,3792,3801,!0,n);case Wr.MONGOLIAN:return $o(e,6160,6169,!0,n);case Wr.MYANMAR:return $o(e,4160,4169,!0,n);case Wr.ORIYA:return $o(e,2918,2927,!0,n);case Wr.PERSIAN:return $o(e,1776,1785,!0,n);case Wr.TAMIL:return $o(e,3046,3055,!0,n);case Wr.TELUGU:return $o(e,3174,3183,!0,n);case Wr.THAI:return $o(e,3664,3673,!0,n);case Wr.TIBETAN:return $o(e,3872,3881,!0,n);case Wr.DECIMAL:default:return $o(e,48,57,!0,n)}},as=\"data-html2canvas-ignore\",As=function(){function e(e,t){if(this.options=t,this.scrolledElements=[],this.referenceElement=e,this.counters=new qo,this.quoteDepth=0,!e.ownerDocument)throw new Error(\"Cloned element does not have an owner document\");this.documentElement=this.cloneNode(e.ownerDocument.documentElement)}return e.prototype.toIFrame=function(e,t){var r=this,s=cs(e,t);if(!s.contentWindow)return Promise.reject(\"Unable to find iframe window\");var i=e.defaultView.pageXOffset,a=e.defaultView.pageYOffset,A=s.contentWindow,u=A.document,c=ls(s).then((function(){return n(r,void 0,void 0,(function(){var e;return o(this,(function(r){switch(r.label){case 0:return this.scrolledElements.forEach(ps),A&&(A.scrollTo(t.left,t.top),!/(iPad|iPhone|iPod)/g.test(navigator.userAgent)||A.scrollY===t.top&&A.scrollX===t.left||(u.documentElement.style.top=-t.top+\"px\",u.documentElement.style.left=-t.left+\"px\",u.documentElement.style.position=\"absolute\")),e=this.options.onclone,void 0===this.clonedReferenceElement?[2,Promise.reject(\"Error finding the \"+this.referenceElement.nodeName+\" in the cloned document\")]:u.fonts&&u.fonts.ready?[4,u.fonts.ready]:[3,2];case 1:r.sent(),r.label=2;case 2:return\"function\"==typeof e?[2,Promise.resolve().then((function(){return e(u)})).then((function(){return s}))]:[2,s]}}))}))}));return u.open(),u.write(fs(document.doctype)+\"<html></html>\"),hs(this.referenceElement.ownerDocument,i,a),u.replaceChild(u.adoptNode(this.documentElement),u.documentElement),u.close(),c},e.prototype.createElementClone=function(e){if(ko(e))return this.createCanvasClone(e);if(Do(e))return this.createStyleClone(e);var t=e.cloneNode(!1);return Ro(t)&&\"lazy\"===t.loading&&(t.loading=\"eager\"),t},e.prototype.createStyleClone=function(e){try{var t=e.sheet;if(t&&t.cssRules){var r=[].slice.call(t.cssRules,0).reduce((function(e,t){return t&&\"string\"==typeof t.cssText?e+t.cssText:e}),\"\"),n=e.cloneNode(!1);return n.textContent=r,n}}catch(e){if(Ot.getInstance(this.options.id).error(\"Unable to access cssRules property\",e),\"SecurityError\"!==e.name)throw e}return e.cloneNode(!1)},e.prototype.createCanvasClone=function(e){if(this.options.inlineImages&&e.ownerDocument){var t=e.ownerDocument.createElement(\"img\");try{return t.src=e.toDataURL(),t}catch(e){Ot.getInstance(this.options.id).info(\"Unable to clone canvas contents, canvas is tainted\")}}var r=e.cloneNode(!1);try{r.width=e.width,r.height=e.height;var n=e.getContext(\"2d\"),o=r.getContext(\"2d\");return o&&(n?o.putImageData(n.getImageData(0,0,e.width,e.height),0,0):o.drawImage(e,0,0)),r}catch(e){}return r},e.prototype.cloneNode=function(e){if(Fo(e))return document.createTextNode(e.data);if(!e.ownerDocument)return e.cloneNode(!1);var t=e.ownerDocument.defaultView;if(t&&Uo(e)&&(So(e)||Lo(e))){var r=this.createElementClone(e),n=t.getComputedStyle(e),o=t.getComputedStyle(e,\":before\"),s=t.getComputedStyle(e,\":after\");this.referenceElement===e&&So(r)&&(this.clonedReferenceElement=r),Oo(r)&&vs(r);for(var i=this.counters.parse(new Wn(n)),a=this.resolvePseudoContent(e,r,o,On.BEFORE),A=e.firstChild;A;A=A.nextSibling)Uo(A)&&(Ko(A)||A.hasAttribute(as)||\"function\"==typeof this.options.ignoreElements&&this.options.ignoreElements(A))||this.options.copyStyles&&Uo(A)&&Do(A)||r.appendChild(this.cloneNode(A));a&&r.insertBefore(a,r.firstChild);var u=this.resolvePseudoContent(e,r,s,On.AFTER);return u&&r.appendChild(u),this.counters.pop(i),n&&(this.options.copyStyles||Lo(e))&&!Mo(e)&&ds(n,r),0===e.scrollTop&&0===e.scrollLeft||this.scrolledElements.push([r,e.scrollLeft,e.scrollTop]),(zo(e)||Vo(e))&&(zo(r)||Vo(r))&&(r.value=e.value),r}return e.cloneNode(!1)},e.prototype.resolvePseudoContent=function(e,t,r,n){var o=this;if(r){var s=r.content,i=t.ownerDocument;if(i&&s&&\"none\"!==s&&\"-moz-alt-content\"!==s&&\"none\"!==r.display){this.counters.parse(new Wn(r));var a=new Xn(r),A=i.createElement(\"html2canvaspseudoelement\");ds(r,A),a.content.forEach((function(t){if(t.type===d.STRING_TOKEN)A.appendChild(i.createTextNode(t.value));else if(t.type===d.URL_TOKEN){var r=i.createElement(\"img\");r.src=t.value,r.style.opacity=\"1\",A.appendChild(r)}else if(t.type===d.FUNCTION){if(\"attr\"===t.name){var n=t.values.filter(qe);n.length&&A.appendChild(i.createTextNode(e.getAttribute(n[0].value)||\"\"))}else if(\"counter\"===t.name){var s=t.values.filter(Je),u=s[0],c=s[1];if(u&&qe(u)){var l=o.counters.getCounterValue(u.value),f=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL;A.appendChild(i.createTextNode(is(l,f,!1)))}}else if(\"counters\"===t.name){var h=t.values.filter(Je),p=(u=h[0],h[1]);if(c=h[2],u&&qe(u)){var m=o.counters.getCounterValues(u.value),g=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL,y=p&&p.type===d.STRING_TOKEN?p.value:\"\",v=m.map((function(e){return is(e,g,!1)})).join(y);A.appendChild(i.createTextNode(v))}}}else if(t.type===d.IDENT_TOKEN)switch(t.value){case\"open-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,o.quoteDepth++,!0)));break;case\"close-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,--o.quoteDepth,!1)));break;default:A.appendChild(i.createTextNode(t.value))}})),A.className=ms+\" \"+gs;var u=n===On.BEFORE?\" \"+ms:\" \"+gs;return Lo(t)?t.className.baseValue+=u:t.className+=u,A}}},e.destroy=function(e){return!!e.parentNode&&(e.parentNode.removeChild(e),!0)},e}();!function(e){e[e.BEFORE=0]=\"BEFORE\",e[e.AFTER=1]=\"AFTER\"}(On||(On={}));var us,cs=function(e,t){var r=e.createElement(\"iframe\");return r.className=\"html2canvas-container\",r.style.visibility=\"hidden\",r.style.position=\"fixed\",r.style.left=\"-10000px\",r.style.top=\"0px\",r.style.border=\"0\",r.width=t.width.toString(),r.height=t.height.toString(),r.scrolling=\"no\",r.setAttribute(as,\"true\"),e.body.appendChild(r),r},ls=function(e){return new Promise((function(t,r){var n=e.contentWindow;if(!n)return r(\"No window assigned for iframe\");var o=n.document;n.onload=e.onload=o.onreadystatechange=function(){n.onload=e.onload=o.onreadystatechange=null;var r=setInterval((function(){o.body.childNodes.length>0&&\"complete\"===o.readyState&&(clearInterval(r),t(e))}),50)}}))},ds=function(e,t){for(var r=e.length-1;r>=0;r--){var n=e.item(r);\"content\"!==n&&t.style.setProperty(n,e.getPropertyValue(n))}return t},fs=function(e){var t=\"\";return e&&(t+=\"<!DOCTYPE \",e.name&&(t+=e.name),e.internalSubset&&(t+=e.internalSubset),e.publicId&&(t+=",
+  "ctx": "n(e){return-1===e.indexOf(\" \")?e:\"'\"+e+\""
+ },
+ "js_002": {
+  "t": "2026-07-17 · 이기적 유전자",
+  "ctx": "p&utm_campaign=selfishgene\",   edition: "
+ },
+ "js_003": {
+  "t": "저자",
+  "ctx": "nst QUESTIONS = [   {id:1, level:1, tag:"
+ },
+ "js_004": {
+  "t": "『이기적 유전자』를 쓴 영국의 진화생물학자는 누구일까요?",
+  "ctx": "TIONS = [   {id:1, level:1, tag:\"저자\", q:"
+ },
+ "js_005": {
+  "t": "리처드 도킨스",
+  "ctx": "를 쓴 영국의 진화생물학자는 누구일까요?\",    options:[{t:"
+ },
+ "js_006": {
+  "t": "찰스 다윈",
+  "ctx": "\",    options:[{t:\"리처드 도킨스\",ok:true},{t:"
+ },
+ "js_007": {
+  "t": "스티븐 제이 굴드",
+  "ctx": "s:[{t:\"리처드 도킨스\",ok:true},{t:\"찰스 다윈\"},{t:"
+ },
+ "js_008": {
+  "t": "에드워드 윌슨",
+  "ctx": "ok:true},{t:\"찰스 다윈\"},{t:\"스티븐 제이 굴드\"},{t:"
+ },
+ "js_009": {
+  "t": "『이기적 유전자』는 영국의 진화생물학자 <b>리처드 도킨스</b>가 1976년에 발표한 과학 교양서예요. 진화를 ‘유전자의 눈’으로 다시 보게 만든 문제작입니다.",
+  "ctx": ",{t:\"스티븐 제이 굴드\"},{t:\"에드워드 윌슨\"}],    ctx:"
+ },
+ "js_010": {
+  "t": "출판",
+  "ctx": " 보게 만든 문제작입니다.\"},   {id:2, level:1, tag:"
+ },
+ "js_011": {
+  "t": "이 책이 처음 세상에 나온 해로 알맞은 것은?",
+  "ctx": "제작입니다.\"},   {id:2, level:1, tag:\"출판\", q:"
+ },
+ "js_012": {
+  "t": "1976년",
+  "ctx": "이 처음 세상에 나온 해로 알맞은 것은?\",    options:[{t:"
+ },
+ "js_013": {
+  "t": "1859년",
+  "ctx": "은?\",    options:[{t:\"1976년\",ok:true},{t:"
+ },
+ "js_014": {
+  "t": "1996년",
+  "ctx": "ons:[{t:\"1976년\",ok:true},{t:\"1859년\"},{t:"
+ },
+ "js_015": {
+  "t": "2006년",
+  "ctx": "6년\",ok:true},{t:\"1859년\"},{t:\"1996년\"},{t:"
+ },
+ "js_016": {
+  "t": "『이기적 유전자』는 <b>1976년</b> 옥스퍼드대 출판부에서 처음 나왔어요. 이후 1989년 개정판, 2006년 30주년판, 2016년 40주년판으로 이어졌습니다.",
+  "ctx": "859년\"},{t:\"1996년\"},{t:\"2006년\"}],    ctx:"
+ },
+ "js_017": {
+  "t": "핵심 단위",
+  "ctx": "0주년판으로 이어졌습니다.\"},   {id:3, level:1, tag:"
+ },
+ "js_018": {
+  "t": "이 책이 진화에서 자연선택의 근본 단위로 본 것은 무엇일까요?",
+  "ctx": "니다.\"},   {id:3, level:1, tag:\"핵심 단위\", q:"
+ },
+ "js_019": {
+  "t": "유전자",
+  "ctx": "선택의 근본 단위로 본 것은 무엇일까요?\",    options:[{t:"
+ },
+ "js_020": {
+  "t": "생물 개체 하나하나",
+  "ctx": "일까요?\",    options:[{t:\"유전자\",ok:true},{t:"
+ },
+ "js_021": {
+  "t": "하나의 종 전체",
+  "ctx": ":[{t:\"유전자\",ok:true},{t:\"생물 개체 하나하나\"},{t:"
+ },
+ "js_022": {
+  "t": "생태계 전체",
+  "ctx": "rue},{t:\"생물 개체 하나하나\"},{t:\"하나의 종 전체\"},{t:"
+ },
+ "js_023": {
+  "t": "도킨스는 자연선택이 작동하는 진짜 단위를 <b>유전자</b>라고 봤어요. 개체나 종이 아니라, 유전자가 살아남기 위해 경쟁한다는 관점입니다.",
+  "ctx": "\"},{t:\"하나의 종 전체\"},{t:\"생태계 전체\"}],    ctx:"
+ },
+ "js_024": {
+  "t": "생존 기계",
+  "ctx": "해 경쟁한다는 관점입니다.\"},   {id:4, level:1, tag:"
+ },
+ "js_025": {
+  "t": "도킨스가 우리 몸(생물 개체)을 가리켜 부른 이름으로 알맞은 것은?",
+  "ctx": "니다.\"},   {id:4, level:1, tag:\"생존 기계\", q:"
+ },
+ "js_026": {
+  "t": "이기적 개체",
+  "ctx": "은?\",    options:[{t:\"생존 기계\",ok:true},{t:"
+ },
+ "js_027": {
+  "t": "유전자 운반 상자",
+  "ctx": "ns:[{t:\"생존 기계\",ok:true},{t:\"이기적 개체\"},{t:"
+ },
+ "js_028": {
+  "t": "복제 공장",
+  "ctx": "k:true},{t:\"이기적 개체\"},{t:\"유전자 운반 상자\"},{t:"
+ },
+ "js_029": {
+  "t": "도킨스는 생물의 몸을 유전자가 만들어 조종하는 <b>생존 기계(survival machine)</b>라 불렀어요. 몸은 유전자를 실어 나르는 ‘탈것’인 셈입니다.",
+  "ctx": "\"},{t:\"유전자 운반 상자\"},{t:\"복제 공장\"}],    ctx:"
+ },
+ "js_030": {
+  "t": "밈",
+  "ctx": "르는 ‘탈것’인 셈입니다.\"},   {id:5, level:1, tag:"
+ },
+ "js_031": {
+  "t": "이 책에서 도킨스가 처음 만들어 퍼뜨린, 문화의 전달 단위를 뜻하는 말은?",
+  "ctx": "인 셈입니다.\"},   {id:5, level:1, tag:\"밈\", q:"
+ },
+ "js_032": {
+  "t": "표현형",
+  "ctx": "하는 말은?\",    options:[{t:\"밈\",ok:true},{t:"
+ },
+ "js_033": {
+  "t": "유전형",
+  "ctx": "  options:[{t:\"밈\",ok:true},{t:\"표현형\"},{t:"
+ },
+ "js_034": {
+  "t": "염색체",
+  "ctx": "[{t:\"밈\",ok:true},{t:\"표현형\"},{t:\"유전형\"},{t:"
+ },
+ "js_035": {
+  "t": "<b>밈(meme)</b>은 노래·유행어·패션처럼 사람에서 사람으로 복사되는 ‘문화의 복제자’예요. 도킨스가 유전자(gene)에 빗대 이 책 11장에서 처음 만든 말입니다.",
+  "ctx": ",{t:\"표현형\"},{t:\"유전형\"},{t:\"염색체\"}],    ctx:"
+ },
+ "js_036": {
+  "t": "제목의 이기적",
+  "ctx": "에서 처음 만든 말입니다.\"},   {id:6, level:1, tag:"
+ },
+ "js_037": {
+  "t": "제목에서 ‘이기적’이라고 표현한 대상은 무엇일까요?",
+  "ctx": ".\"},   {id:6, level:1, tag:\"제목의 이기적\", q:"
+ },
+ "js_038": {
+  "t": "인간",
+  "ctx": "일까요?\",    options:[{t:\"유전자\",ok:true},{t:"
+ },
+ "js_039": {
+  "t": "동물 개체",
+  "ctx": " options:[{t:\"유전자\",ok:true},{t:\"인간\"},{t:"
+ },
+ "js_040": {
+  "t": "제목의 ‘이기적’은 인간이 아니라 <b>유전자</b>를 가리켜요. 유전자가 자기 복사본을 늘리려는 듯 행동한다는 <b>비유</b>이지, 유전자에 마음이 있다는 뜻은 아닙니다.",
+  "ctx": "간\"},{t:\"동물 개체\"},{t:\"하나의 종 전체\"}],    ctx:"
+ },
+ "js_041": {
+  "t": "복제자",
+  "ctx": "이 있다는 뜻은 아닙니다.\"},   {id:7, level:1, tag:"
+ },
+ "js_042": {
+  "t": "유전자를 가리키는 또 다른 핵심 개념으로, 자기 자신을 복사하는 존재를 뜻하는 말은?",
+  "ctx": "아닙니다.\"},   {id:7, level:1, tag:\"복제자\", q:"
+ },
+ "js_043": {
+  "t": "자기 복제자",
+  "ctx": "기 자신을 복사하는 존재를 뜻하는 말은?\",    options:[{t:"
+ },
+ "js_044": {
+  "t": "확장된 표현형",
+  "ctx": "ns:[{t:\"자기 복제자\",ok:true},{t:\"생존 기계\"},{t:"
+ },
+ "js_045": {
+  "t": "진화적 안정 전략",
+  "ctx": "\",ok:true},{t:\"생존 기계\"},{t:\"확장된 표현형\"},{t:"
+ },
+ "js_046": {
+  "t": "도킨스는 유전자를 <b>자기 복제자(replicator)</b>라 불러요. 생명의 역사는 자신을 정확히 복사하는 이 복제자들이 살아남기 위해 벌인 경쟁의 이야기라는 것입니다.",
+  "ctx": ",{t:\"확장된 표현형\"},{t:\"진화적 안정 전략\"}],    ctx:"
+ },
+ "js_047": {
+  "t": "원시 수프",
+  "ctx": "쟁의 이야기라는 것입니다.\"},   {id:8, level:1, tag:"
+ },
+ "js_048": {
+  "t": "최초의 자기 복제자가 우연히 생겨났다고 도킨스가 본 곳은?",
+  "ctx": "니다.\"},   {id:8, level:1, tag:\"원시 수프\", q:"
+ },
+ "js_049": {
+  "t": "깊은 땅속 동굴",
+  "ctx": "은?\",    options:[{t:\"원시 수프\",ok:true},{t:"
+ },
+ "js_050": {
+  "t": "다른 행성 표면",
+  "ctx": ":[{t:\"원시 수프\",ok:true},{t:\"깊은 땅속 동굴\"},{t:"
+ },
+ "js_051": {
+  "t": "거대한 빙하 속",
+  "ctx": ":true},{t:\"깊은 땅속 동굴\"},{t:\"다른 행성 표면\"},{t:"
+ },
+ "js_052": {
+  "t": "생명 이전의 바다, 이른바 <b>원시 수프</b>에서 우연히 자신을 복사하는 분자가 처음 생겼다고 봐요. 이 복제자들의 경쟁이 곧 진화의 출발점이 됩니다.",
+  "ctx": ",{t:\"다른 행성 표면\"},{t:\"거대한 빙하 속\"}],    ctx:"
+ },
+ "js_053": {
+  "t": "불멸의 코일",
+  "ctx": " 진화의 출발점이 됩니다.\"},   {id:9, level:1, tag:"
+ },
+ "js_054": {
+  "t": "몸은 죽어도 복사되어 이어지는 유전자를 도킨스가 표현한 말에 가장 가까운 것은?",
+  "ctx": "다.\"},   {id:9, level:1, tag:\"불멸의 코일\", q:"
+ },
+ "js_055": {
+  "t": "사실상 죽지 않는 불멸에 가까운 존재",
+  "ctx": "도킨스가 표현한 말에 가장 가까운 것은?\",    options:[{t:"
+ },
+ "js_056": {
+  "t": "한 세대만 살고 사라지는 존재",
+  "ctx": ":[{t:\"사실상 죽지 않는 불멸에 가까운 존재\",ok:true},{t:"
+ },
+ "js_057": {
+  "t": "개체와 함께 사라지는 존재",
+  "ctx": " 존재\",ok:true},{t:\"한 세대만 살고 사라지는 존재\"},{t:"
+ },
+ "js_058": {
+  "t": "늘 새로 태어나는 존재",
+  "ctx": "대만 살고 사라지는 존재\"},{t:\"개체와 함께 사라지는 존재\"},{t:"
+ },
+ "js_059": {
+  "t": "도킨스는 유전자를 <b>‘불멸의 코일’</b>이라 불러요. 몸은 한 세대로 사라지지만, 유전자는 복사본으로 수백만 년을 건너뛰어 살아남을 수 있기 때문입니다.",
+  "ctx": "께 사라지는 존재\"},{t:\"늘 새로 태어나는 존재\"}],    ctx:"
+ },
+ "js_060": {
+  "t": "자유의지",
+  "ctx": "을 수 있기 때문입니다.\"},   {id:10, level:1, tag:"
+ },
+ "js_061": {
+  "t": "인간이 이기적 유전자에 영원히 지배당하느냐는 물음에 도킨스가 내놓은 답은?",
+  "ctx": "니다.\"},   {id:10, level:1, tag:\"자유의지\", q:"
+ },
+ "js_062": {
+  "t": "인간은 유전자의 독재에 맞설 수 있는 유일한 존재다",
+  "ctx": "당하느냐는 물음에 도킨스가 내놓은 답은?\",    options:[{t:"
+ },
+ "js_063": {
+  "t": "인간도 유전자의 꼭두각시일 뿐이다",
+  "ctx": "은 유전자의 독재에 맞설 수 있는 유일한 존재다\",ok:true},{t:"
+ },
+ "js_064": {
+  "t": "유전자가 모든 것을 완전히 정한다",
+  "ctx": "다\",ok:true},{t:\"인간도 유전자의 꼭두각시일 뿐이다\"},{t:"
+ },
+ "js_065": {
+  "t": "문명도 유전자가 시키는 대로 흐른다",
+  "ctx": "꼭두각시일 뿐이다\"},{t:\"유전자가 모든 것을 완전히 정한다\"},{t:"
+ },
+ "js_066": {
+  "t": "도킨스의 결론은 뜻밖에 희망적이에요. 이기적 유전자의 원리를 <b>이해한 인간</b>만은, 유전자의 명령을 거슬러 이타적으로 살 수 있다고 봤습니다.",
+  "ctx": "한다\"},{t:\"문명도 유전자가 시키는 대로 흐른다\"}],    ctx:"
+ },
+ "js_067": {
+  "t": "위키백과 「이기적 유전자」",
+  "ctx": " */ const SOURCES = {   ko:      {label:"
+ },
+ "js_068": {
+  "t": "https://ko.wikipedia.org/wiki/이기적_유전자",
+  "ctx": "  ko:      {label:\"위키백과 「이기적 유전자」\", url:"
+ },
+ "js_069": {
+  "t": "위키백과 「리처드 도킨스」",
+  "ctx": "i/The_Selfish_Gene\"},   dawkins: {label:"
+ },
+ "js_070": {
+  "t": "https://ko.wikipedia.org/wiki/리처드_도킨스",
+  "ctx": "  dawkins: {label:\"위키백과 「리처드 도킨스」\", url:"
+ },
+ "js_071": {
+  "t": "나무위키 「이기적 유전자」",
+  "ctx": "ly_stable_strategy\"},   namu:    {label:"
+ },
+ "js_072": {
+  "t": "https://namu.wiki/w/이기적 유전자",
+  "ctx": "  namu:    {label:\"나무위키 「이기적 유전자」\", url:"
+ },
+ "js_073": {
+  "t": "EBS 클래스e 「전중환의 이기적 유전자 읽기」",
+  "ctx": "amu.wiki/w/이기적 유전자\"},   ebs:     {label:"
+ },
+ "js_074": {
+  "t": "리처드 도킨스(1941~ )는 옥스퍼드대 교수를 지낸 진화생물학자예요. 『이기적 유전자』로 세계적 명성을 얻었고, 이후 『눈먼 시계공』·『만들어진 신』 등을 썼습니다.",
+  "ctx": "onst EXTRA = {   1:{src:\"dawkins\", note:"
+ },
+ "js_075": {
+  "t": "1976년 초판 이후, 도킨스는 1989년 개정판에서 ‘착한 놈이 일등한다’와 ‘유전자의 긴 팔’ 두 장을 새로 더했어요. 지금 널리 읽히는 판본입니다.",
+  "ctx": "만들어진 신』 등을 썼습니다.\"},   2:{src:\"ko\", note:"
+ },
+ "js_076": {
+  "t": "핵심은 ‘무엇이 선택되는가’예요. 도킨스는 개체나 종이 아니라 <b>유전자</b>가 자연선택의 단위라고 봤습니다. 개체는 유전자가 잠시 머무는 그릇일 뿐입니다.",
+  "ctx": "지금 널리 읽히는 판본입니다.\"},   3:{src:\"ko\", note:"
+ },
+ "js_077": {
+  "t": "생존 기계(survival machine)는 유전자가 자신을 지키고 나르기 위해 만든 몸이에요. 우리의 눈·손·뇌·행동은 모두 유전자의 생존을 돕도록 다듬어진 장치입니다.",
+  "ctx": "잠시 머무는 그릇일 뿐입니다.\"},   4:{src:\"en\", note:"
+ },
+ "js_078": {
+  "t": "밈(meme)은 ‘모방’을 뜻하는 그리스어에서 따온 말로, 유전자(gene)와 소리가 닮게 지었어요. 노래·유행어·기술처럼 뇌에서 뇌로 복사되는 문화의 복제자입니다.",
+  "ctx": "도록 다듬어진 장치입니다.\"},   5:{src:\"meme\", note:"
+ },
+ "js_079": {
+  "t": "‘이기적’은 유전자를 향한 비유예요. 유전자에 욕심이 있는 게 아니라, 자기 복사본을 남기는 데 유리하게 ‘행동하는 것처럼 보인다’는 뜻입니다.",
+  "ctx": "복사되는 문화의 복제자입니다.\"},   6:{src:\"ko\", note:"
+ },
+ "js_080": {
+  "t": "복제자(replicator)는 자기 자신을 복사하는 존재예요. 도킨스는 생명의 역사를 ‘복제자들이 살아남기 위해 벌인 경쟁의 이야기’로 다시 씁니다.",
+  "ctx": " 것처럼 보인다’는 뜻입니다.\"},   7:{src:\"en\", note:"
+ },
+ "js_081": {
+  "t": "원시 수프는 생명 이전 바다의 화학 물질 죽이에요. 그 속에서 우연히 자신을 복사하는 분자가 생겼고, 복사를 더 잘하는 쪽이 살아남으며 진화가 시작됩니다.",
+  "ctx": "쟁의 이야기’로 다시 씁니다.\"},   8:{src:\"en\", note:"
+ },
+ "js_082": {
+  "t": "몸은 한 세대로 사라지지만 유전자는 복사본으로 이어져요. 그래서 도킨스는 유전자를 ‘불멸의 코일’, 사실상 죽지 않는 존재라고 표현합니다.",
+  "ctx": "살아남으며 진화가 시작됩니다.\"},   9:{src:\"en\", note:"
+ },
+ "js_083": {
+  "t": "도킨스의 결론은 희망적이에요. 이기적 유전자의 원리를 이해한 인간은, 유전자가 시키는 이기심을 거슬러 이타적으로 살기를 ‘선택’할 수 있습니다.",
+  "ctx": " 않는 존재라고 표현합니다.\"},   10:{src:\"ko\", note:"
+ },
+ "js_084": {
+  "t": "원시 수프의 복제자",
+  "ctx": "*/ const MILESTONES = [   {at:0,  label:"
+ },
+ "js_085": {
+  "t": "생존 기계의 탄생",
+  "ctx": ",  label:\"원시 수프의 복제자\"},   {at:6,  label:"
+ },
+ "js_086": {
+  "t": "혈연선택과 이타성",
+  "ctx": "6,  label:\"생존 기계의 탄생\"},   {at:12, label:"
+ },
+ "js_087": {
+  "t": "안정 전략과 협력",
+  "ctx": "12, label:\"혈연선택과 이타성\"},   {at:18, label:"
+ },
+ "js_088": {
+  "t": "밈, 새로운 복제자",
+  "ctx": "18, label:\"안정 전략과 협력\"},   {at:24, label:"
+ },
+ "js_089": {
+  "t": "유전자에 맞서는 인간",
+  "ctx": "4, label:\"밈, 새로운 복제자\"},   {at:30, label:"
+ },
+ "js_090": {
+  "t": "보통",
+  "ctx": "]; const DIFF_LABEL = {1:[\"쉬움\",\"l1\"],2:["
+ },
+ "js_091": {
+  "t": "어려움",
+  "ctx": "LABEL = {1:[\"쉬움\",\"l1\"],2:[\"보통\",\"l2\"],3:["
+ },
+ "js_092": {
+  "t": "· 복습",
+  "ctx": "ds.size+' / '+TOTAL_Q + (attempts[id] ? "
+ },
+ "js_093": {
+  "t": "🎯 정답!",
+  "ctx": ")      verdict.textContent = firstTry ? "
+ },
+ "js_094": {
+  "t": "✅ 이제 익혔어요!",
+  "ctx": "dict.textContent = firstTry ? '🎯 정답!' : "
+ },
+ "js_095": {
+  "t": "❌ 다시 도전!",
+  "ctx": "ing.push(id);     verdict.textContent = "
+ },
+ "js_096": {
+  "t": "↻ 이 문제는 뒤에서 다시 나옵니다",
+  "ctx": "getElementById('requeue').textContent = "
+ },
+ "js_097": {
+  "t": "이기적 유전자 = 복제자",
+  "ctx": "==== */ const CONCEPTS = [   {ic:\"🧬\", h:"
+ },
+ "js_098": {
+  "t": "자연선택의 진짜 단위는 개체나 종이 아니라 유전자입니다. 유전자는 자기 복사본을 남기려 경쟁하는 자기 복제자입니다.",
+  "ctx": "PTS = [   {ic:\"🧬\", h:\"이기적 유전자 = 복제자\", p:"
+ },
+ "js_099": {
+  "t": "생존 기계(vehicle)",
+  "ctx": "하는 자기 복제자입니다.\", src:\"ko\"},   {ic:\"🤖\", h:"
+ },
+ "js_100": {
+  "t": "우리 몸은 유전자가 만들어 조종하는 생존 기계, 곧 유전자를 실어 나르는 탈것입니다.",
+  "ctx": "\"ko\"},   {ic:\"🤖\", h:\"생존 기계(vehicle)\", p:"
+ },
+ "js_101": {
+  "t": "친척은 나와 유전자를 나눠 가집니다. 친척을 도우면 내 유전자를 돕는 셈이라, 가족을 향한 이타성이 진화합니다.",
+  "ctx": " src:\"en\"},   {ic:\"🐜\", h:\"혈연선택과 이타성\", p:"
+ },
+ "js_102": {
+  "t": "진화적으로 안정한 전략(ESS)",
+  "ctx": "이타성이 진화합니다.\", src:\"kin\"},   {ic:\"⚖️\", h:"
+ },
+ "js_103": {
+  "t": "매-비둘기 게임처럼, 다른 전략이 침입해도 뒤집히지 않는 안정된 행동 전략입니다.",
+  "ctx": "},   {ic:\"⚖️\", h:\"진화적으로 안정한 전략(ESS)\", p:"
+ },
+ "js_104": {
+  "t": "호혜적 이타성",
+  "ctx": "정된 행동 전략입니다.\", src:\"ess\"},   {ic:\"🤝\", h:"
+ },
+ "js_105": {
+  "t": "다시 만날 사이라면 서로 돕고 되갚는 관계가 양쪽 유전자에 이득이 됩니다. 남남 사이 협력의 뿌리입니다.",
+  "ctx": ", src:\"ess\"},   {ic:\"🤝\", h:\"호혜적 이타성\", p:"
+ },
+ "js_106": {
+  "t": "노래·유행어·패션처럼 뇌에서 뇌로 복사되는 문화의 복제자. 도킨스가 이 책에서 처음 만든 말입니다.",
+  "ctx": "src:\"en\"},   {ic:\"🧠\", h:\"밈, 새로운 복제자\", p:"
+ },
+ "js_107": {
+  "t": "비버의 댐처럼 유전자의 효과는 몸을 넘어 환경에까지 뻗습니다. 유전자의 힘은 몸 안에 갇히지 않습니다.",
+  "ctx": " src:\"meme\"},   {ic:\"🦫\", h:\"확장된 표현형\", p:"
+ },
+ "js_108": {
+  "t": "이기적 유전자를 이해한 인간은, 유전자의 명령을 거슬러 이타적으로 살 수 있는 유일한 존재입니다.",
+  "ctx": "rc:\"en\"},   {ic:\"✊\", h:\"유전자에 맞서는 인간\", p:"
+ },
+ "js_109": {
+  "t": "1~2장",
+  "ctx": "/* 목차(클릭하면 요약 오픈) */ const TOC = [   {n:"
+ },
+ "js_110": {
+  "t": "왜 우리는 존재하는가 — 복제자의 탄생",
+  "ctx": " 요약 오픈) */ const TOC = [   {n:\"1~2장\", t:"
+ },
+ "js_111": {
+  "t": "‘우리는 왜 사는가’라는 물음에, 도킨스는 유전자의 눈으로 답을 찾습니다.",
+  "ctx": "존재하는가 — 복제자의 탄생\", beats:[     {e:\"❓\", x:"
+ },
+ "js_112": {
+  "t": "생명 이전의 원시 수프에서 스스로를 복사하는 분자, 곧 복제자가 처음 생깁니다.",
+  "ctx": "도킨스는 유전자의 눈으로 답을 찾습니다.\"},     {e:\"🧫\", x:"
+ },
+ "js_113": {
+  "t": "더 정확히·빠르게·오래 복사하는 복제자가 살아남아 수를 불립니다.",
+  "ctx": "하는 분자, 곧 복제자가 처음 생깁니다.\"},     {e:\"🔁\", x:"
+ },
+ "js_114": {
+  "t": "오늘날 그 복제자의 후예가 바로 유전자입니다.",
+  "ctx": "사하는 복제자가 살아남아 수를 불립니다.\"},     {e:\"🧬\", x:"
+ },
+ "js_115": {
+  "t": "3~4장",
+  "ctx": "오늘날 그 복제자의 후예가 바로 유전자입니다.\"},   ]},   {n:"
+ },
+ "js_116": {
+  "t": "불멸의 코일과 생존 기계",
+  "ctx": " 후예가 바로 유전자입니다.\"},   ]},   {n:\"3~4장\", t:"
+ },
+ "js_117": {
+  "t": "몸은 한 세대로 사라지지만, 유전자는 복사본으로 수백만 년을 건너뜁니다.",
+  "ctx": "\"불멸의 코일과 생존 기계\", beats:[     {e:\"♾️\", x:"
+ },
+ "js_118": {
+  "t": "유전자는 자신을 실어 나를 몸, 곧 ‘생존 기계’를 만들어 조종합니다.",
+  "ctx": "자는 복사본으로 수백만 년을 건너뜁니다.\"},     {e:\"🤖\", x:"
+ },
+ "js_119": {
+  "t": "뇌·근육·행동은 모두 유전자의 생존을 돕도록 다듬어진 장치입니다.",
+  "ctx": " 곧 ‘생존 기계’를 만들어 조종합니다.\"},     {e:\"🧠\", x:"
+ },
+ "js_120": {
+  "t": "몸은 유전자의 ‘탈것(vehicle)’이라는 관점이 이 책의 핵심입니다.",
+  "ctx": "자의 생존을 돕도록 다듬어진 장치입니다.\"},     {e:\"🚗\", x:"
+ },
+ "js_121": {
+  "t": "5~6장",
+  "ctx": "icle)’이라는 관점이 이 책의 핵심입니다.\"},   ]},   {n:"
+ },
+ "js_122": {
+  "t": "공격성과 혈연선택",
+  "ctx": "관점이 이 책의 핵심입니다.\"},   ]},   {n:\"5~6장\", t:"
+ },
+ "js_123": {
+  "t": "매-비둘기 게임으로 공격성이 왜 일정 선에서 멈추는지(ESS) 설명합니다.",
+  "ctx": ", t:\"공격성과 혈연선택\", beats:[     {e:\"⚖️\", x:"
+ },
+ "js_124": {
+  "t": "친척은 내 유전자를 나눠 가졌으니, 친척을 돕는 건 내 유전자를 돕는 일입니다.",
+  "ctx": "정 선에서 멈추는지(ESS) 설명합니다.\"},     {e:\"🐜\", x:"
+ },
+ "js_125": {
+  "t": "해밀턴 법칙 rB > C — 이득×혈연도가 비용보다 크면 이타성이 진화합니다.",
+  "ctx": "을 돕는 건 내 유전자를 돕는 일입니다.\"},     {e:\"➗\", x:"
+ },
+ "js_126": {
+  "t": "부모의 자식 사랑도 결국 유전자 관점의 ‘계산’으로 설명됩니다.",
+  "ctx": "용보다 크면 이타성이 진화합니다.\"},     {e:\"👨‍👩‍👧\", x:"
+ },
+ "js_127": {
+  "t": "7~9장",
+  "ctx": " 결국 유전자 관점의 ‘계산’으로 설명됩니다.\"},   ]},   {n:"
+ },
+ "js_128": {
+  "t": "가족계획과 세대·암수의 전쟁",
+  "ctx": "의 ‘계산’으로 설명됩니다.\"},   ]},   {n:\"7~9장\", t:"
+ },
+ "js_129": {
+  "t": "동물은 무작정 많이 낳지 않고, 기를 수 있는 만큼 자식 수를 조절합니다.",
+  "ctx": "가족계획과 세대·암수의 전쟁\", beats:[     {e:\"🍼\", x:"
+ },
+ "js_130": {
+  "t": "자식은 조금 더 원하고 부모는 고루 나누려 해, 젖떼기 갈등이 생깁니다.",
+  "ctx": "를 수 있는 만큼 자식 수를 조절합니다.\"},     {e:\"🥄\", x:"
+ },
+ "js_131": {
+  "t": "크고 값비싼 난자와 작고 값싼 정자의 차이에서 암수 전략이 갈립니다.",
+  "ctx": "루 나누려 해, 젖떼기 갈등이 생깁니다.\"},     {e:\"🥚\", x:"
+ },
+ "js_132": {
+  "t": "암컷의 신중함과 수컷의 경쟁, 밀당의 게임이 여기서 시작됩니다.",
+  "ctx": " 정자의 차이에서 암수 전략이 갈립니다.\"},     {e:\"💃\", x:"
+ },
+ "js_133": {
+  "t": "10~11장",
+  "ctx": "컷의 경쟁, 밀당의 게임이 여기서 시작됩니다.\"},   ]},   {n:"
+ },
+ "js_134": {
+  "t": "되갚기의 협력, 그리고 밈",
+  "ctx": "임이 여기서 시작됩니다.\"},   ]},   {n:\"10~11장\", t:"
+ },
+ "js_135": {
+  "t": "다시 만날 사이라면 서로 돕고 되갚는 호혜적 이타성이 진화합니다.",
+  "ctx": "\"되갚기의 협력, 그리고 밈\", beats:[     {e:\"🤝\", x:"
+ },
+ "js_136": {
+  "t": "11장에서 도킨스는 문화의 복제자 ‘밈(meme)’을 처음 제안합니다.",
+  "ctx": "돕고 되갚는 호혜적 이타성이 진화합니다.\"},     {e:\"🧠\", x:"
+ },
+ "js_137": {
+  "t": "노래·유행어·패션·기술처럼, 밈도 복사·변이·경쟁을 거칩니다.",
+  "ctx": "자 ‘밈(meme)’을 처음 제안합니다.\"},     {e:\"🎵\", x:"
+ },
+ "js_138": {
+  "t": "밈은 유전자보다 훨씬 빠르게, 누구에게서나 퍼져 나갑니다.",
+  "ctx": "처럼, 밈도 복사·변이·경쟁을 거칩니다.\"},     {e:\"⚡\", x:"
+ },
+ "js_139": {
+  "t": "12~13장",
+  "ctx": "다 훨씬 빠르게, 누구에게서나 퍼져 나갑니다.\"},   ]},   {n:"
+ },
+ "js_140": {
+  "t": "착한 놈이 일등한다 · 유전자의 긴 팔",
+  "ctx": "에게서나 퍼져 나갑니다.\"},   ]},   {n:\"12~13장\", t:"
+ },
+ "js_141": {
+  "t": "반복되는 죄수의 딜레마에서 ‘먼저 협력’하는 팃포탯이 승리합니다.",
+  "ctx": "등한다 · 유전자의 긴 팔\", beats:[     {e:\"♻️\", x:"
+ },
+ "js_142": {
+  "t": "먼저 배신하지 않는 ‘착한’ 전략이 장기적으로 가장 이득임을 보여 줍니다.",
+  "ctx": " ‘먼저 협력’하는 팃포탯이 승리합니다.\"},     {e:\"😊\", x:"
+ },
+ "js_143": {
+  "t": "비버의 댐처럼 유전자의 효과는 몸 밖 세계에까지 뻗습니다(확장된 표현형).",
+  "ctx": " 장기적으로 가장 이득임을 보여 줍니다.\"},     {e:\"🦫\", x:"
+ },
+ "js_144": {
+  "t": "그러나 인간만은 유전자의 이기성을 이해하고 거기에 맞설 수 있습니다.",
+  "ctx": "밖 세계에까지 뻗습니다(확장된 표현형).\"},     {e:\"✊\", x:"
+ },
+ "js_145": {
+  "t": "자기 목숨을 버리는 일벌",
+  "ctx": "해볼 사례 3 */ const CASES = [   {ic:\"🐝\", t:"
+ },
+ "js_146": {
+  "t": "일벌은 침을 쏘면 자신은 죽지만 벌집을 지킵니다. 개체로 보면 자살이지만, 여왕과 자매가 자신의 유전자를 나눠 가졌기에 ‘유전자의 눈’으로는 이득이 됩니다.",
+  "ctx": "SES = [   {ic:\"🐝\", t:\"자기 목숨을 버리는 일벌\", d:"
+ },
+ "js_147": {
+  "t": "개체의 희생이 유전자에겐 이득일 수 있다는 것 — 혈연선택이 왜 강력한지를 한눈에 보여 주는 사례입니다.",
+  "ctx": "유전자를 나눠 가졌기에 ‘유전자의 눈’으로는 이득이 됩니다.\", why:"
+ },
+ "js_148": {
+  "t": "남의 둥지에 알을 맡기는 뻐꾸기",
+  "ctx": " 강력한지를 한눈에 보여 주는 사례입니다.\"},   {ic:\"🐦\", t:"
+ },
+ "js_149": {
+  "t": "뻐꾸기는 다른 새의 둥지에 몰래 알을 낳고, 그 새끼는 원래 알을 밀어냅니다. 속아서 남의 새끼를 키우는 숙주새의 행동은 뻐꾸기 유전자에 조종당한 결과입니다.",
+  "ctx": "\"},   {ic:\"🐦\", t:\"남의 둥지에 알을 맡기는 뻐꾸기\", d:"
+ },
+ "js_150": {
+  "t": "한 생물의 유전자가 다른 생물의 행동까지 바꾼다 — ‘확장된 표현형’과 유전자 간 군비경쟁을 생각하게 합니다.",
+  "ctx": "키우는 숙주새의 행동은 뻐꾸기 유전자에 조종당한 결과입니다.\", why:"
+ },
+ "js_151": {
+  "t": "피를 나눠 주는 흡혈박쥐",
+  "ctx": "과 유전자 간 군비경쟁을 생각하게 합니다.\"},   {ic:\"🦇\", t:"
+ },
+ "js_152": {
+  "t": "흡혈박쥐는 굶주린 동료에게 자기가 먹은 피를 게워 나눠 줍니다. 오늘 내가 주면 다음에 내가 굶을 때 돌려받는, 되갚기 관계 위에서 이 나눔이 유지됩니다.",
+  "ctx": "합니다.\"},   {ic:\"🦇\", t:\"피를 나눠 주는 흡혈박쥐\", d:"
+ },
+ "js_153": {
+  "t": "친척이 아니어도 ‘되갚기’만 성립하면 협력이 진화한다 — 호혜적 이타성의 대표 사례입니다.",
+  "ctx": "을 때 돌려받는, 되갚기 관계 위에서 이 나눔이 유지됩니다.\", why:"
+ },
+ "js_154": {
+  "t": "내 몸이 유전자의 ‘생존 기계’라면, ‘나’라는 존재는 대체 무엇일까?",
+  "ctx": "책이 우리에게 던지는 질문 3 */ const ASKS = [   {q:"
+ },
+ "js_155": {
+  "t": "유전자가 나를 만들었지만, 이 책을 읽고 그 사실을 ‘아는’ 것도 나입니다. 앎이 어디까지 나를 바꿀 수 있을지 생각해 보세요.",
+  "ctx": " 유전자의 ‘생존 기계’라면, ‘나’라는 존재는 대체 무엇일까?\", h:"
+ },
+ "js_156": {
+  "t": "‘이기적’ 유전자에서 어떻게 ‘이타적’ 행동이 나올 수 있을까?",
+  "ctx": "다. 앎이 어디까지 나를 바꿀 수 있을지 생각해 보세요.\"},   {q:"
+ },
+ "js_157": {
+  "t": "혈연선택·호혜·되갚기를 떠올려 보세요. 이기심과 협력이 사실 같은 뿌리에서 나온다는 역설을 곱씹어 볼 만합니다.",
+  "ctx": "‘이기적’ 유전자에서 어떻게 ‘이타적’ 행동이 나올 수 있을까?\", h:"
+ },
+ "js_158": {
+  "t": "유전자처럼 밈도 ‘이기적’이라면, 내 머릿속 생각은 정말 내 것일까?",
+  "ctx": "사실 같은 뿌리에서 나온다는 역설을 곱씹어 볼 만합니다.\"},   {q:"
+ },
+ "js_159": {
+  "t": "어떤 믿음·유행은 나에게 이득이라서가 아니라 ‘잘 퍼져서’ 남았을 수 있습니다. 내 신념이 누구를 위한 것인지 되물어 보세요.",
+  "ctx": "처럼 밈도 ‘이기적’이라면, 내 머릿속 생각은 정말 내 것일까?\", h:"
+ },
+ "js_160": {
+  "t": "🧬 유전자를 꿰뚫어 본 사람",
+  "ctx": ");   let rank, sub;   if(acc>=90){ rank="
+ },
+ "js_161": {
+  "t": "이기적 유전자를 완벽히 읽어 냈습니다",
+  "ctx": "f(acc>=90){ rank='🧬 유전자를 꿰뚫어 본 사람'; sub="
+ },
+ "js_162": {
+  "t": "🔬 복제자의 논리를 간파한 독자",
+  "ctx": "벽히 읽어 냈습니다'; }   else if(acc>=75){ rank="
+ },
+ "js_163": {
+  "t": "핵심을 거의 다 잡았어요",
+  "ctx": "acc>=75){ rank='🔬 복제자의 논리를 간파한 독자'; sub="
+ },
+ "js_164": {
+  "t": "🧫 진화의 게임을 따라온 사람",
+  "ctx": " 거의 다 잡았어요'; }   else if(acc>=55){ rank="
+ },
+ "js_165": {
+  "t": "뼈대를 익혔습니다 — 한 번 더!",
+  "ctx": "(acc>=55){ rank='🧫 진화의 게임을 따라온 사람'; sub="
+ },
+ "js_166": {
+  "t": "🌱 이제 원시 수프를 갓 벗어난 사람",
+  "ctx": "b='뼈대를 익혔습니다 — 한 번 더!'; }   else { rank="
+ },
+ "js_167": {
+  "t": "반복할수록 점수가 오릅니다",
+  "ctx": "else { rank='🌱 이제 원시 수프를 갓 벗어난 사람'; sub="
+ },
+ "js_168": {
+  "t": "완독 리포트",
+  "ctx": "onst fname = ((h2 && h2.textContent) || "
+ },
+ "js_169": {
+  "t": "한눈에 보기",
+  "ctx": "&& h2.textContent) || '완독 리포트').replace("
+ },
+ "js_170": {
+  "t": "리포트.pdf",
+  "ctx": "'완독 리포트').replace('한눈에 보기','').trim() + "
+ },
+ "js_171": {
+  "t": "📄 PDF 만드는 중…",
+  "ctx": "tn){ btn.disabled=true; btn.textContent="
+ },
+ "js_172": {
+  "t": "PDF 생성 중 문제가 발생했어요. 이 HTML 파일을 내려받아 브라우저에서 직접 열고 다시 눌러 주세요.",
+  "ctx": "     }   }).catch(function(){     alert("
+ },
+ "js_173": {
+  "t": "무료로는 <b>",
+  "ctx": "t = TOTAL_Q - fl;       msg.innerHTML = "
+ },
+ "js_174": {
+  "t": "문항</b>까지 풀 수 있어요.",
+  "ctx": "fl;       msg.innerHTML = '무료로는 <b>'+fl+"
+ },
+ "js_175": {
+  "t": "나머지 <b>",
+  "ctx": " <b>'+fl+'문항</b>까지 풀 수 있어요. ' +         "
+ },
+ "js_176": {
+  "t": "문항</b>과 <b>완독 요약 리포트</b>는 구독자 전용입니다.",
+  "ctx": ">까지 풀 수 있어요. ' +         '나머지 <b>'+rest+"
+ },
+ "js_177": {
+  "t": "지금까지 쌓은 <b>복제자의 여정 진행도</b>는 위 게이지에 그대로 남아 있어요.",
+  "ctx": "b>완독 요약 리포트</b>는 구독자 전용입니다. ' +         "
+ },
+ "js_178": {
+  "t": "<h3>완독 리포트 전체는 구독자 전용이에요</h3>",
+  "ctx": " = '<div class=\"lk-ic\">🔒</div>' +       "
+ },
+ "js_179": {
+  "t": "<p>복제자의 사슬과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>",
+  "ctx": "'<h3>완독 리포트 전체는 구독자 전용이에요</h3>' +       "
+ },
+ "js_180": {
+  "t": "목차 요약 · 사례 · 질문 · 약점 복습 · PDF 저장은 구독하면 모두 열립니다.</p>",
+  "ctx": "과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>' +       "
+ },
+ "js_181": {
+  "t": "\" target=\"_blank\" rel=\"noopener\">🔑 구독하고 완독 리포트 전체 열기</a>",
+  "ctx": "     '<a class=\"cta\" href=\"' + _sub() + "
+ },
+ "js_182": {
+  "t": "이기적 유전자",
+  "ctx": " 250, '120px serif', '#39b7a2');   ctxt("
+ },
+ "js_183": {
+  "t": "리처드 도킨스 · 진화생물학 고전 마스터 퀴즈",
+  "ctx": "to Serif KR\",serif', '#ffffff');   ctxt("
+ },
+ "js_184": {
+  "t": "📚 매일 새 책 퀴즈  ·",
+  "ctx": "(/^https?:\\/\\//,'') : '';   if(su) ctxt("
+ },
+ "js_185": {
+  "t": "이기적유전자_퀴즈결과.png",
+  "ctx": "nt('a');     a.href = url; a.download = "
+ },
+ "js_186": {
+  "t": "💌 VIP 초대 —",
+  "ctx": "ursor:pointer;\";     d.textContent=(vip?"
+ },
+ "js_187": {
+  "t": "🎁 지금 이 책 풀버전 무료 오픈 중!",
+  "ctx": "\";     d.textContent=(vip?\"💌 VIP 초대 — \":"
+ },
+ "js_188": {
+  "t": "전체판(잠금 없음)으로 이동 →",
+  "ctx": "\"💌 VIP 초대 — \":\"🎁 지금 이 책 풀버전 무료 오픈 중! \")+"
+ },
+ "jst_001": {
+  "t": "무료로 풀 수 있는 문항 수",
+  "ctx": "    freeLimit: 10,           // teaser: "
+ },
+ "jst_002": {
+  "t": "아직",
+  "ctx": "3:30};    let pending = [];          // "
+ },
+ "jst_003": {
+  "t": "처음으로 정답",
+  "ctx": "};    let pending = [];          // 아직 ‘"
+ },
+ "jst_004": {
+  "t": "을 못 낸 문항 큐",
+  "ctx": "t pending = [];          // 아직 ‘처음으로 정답’"
+ },
+ "jst_005": {
+  "t": "앞에서 꺼냄",
+  "ctx": "[];          // 아직 ‘처음으로 정답’을 못 낸 문항 큐 ("
+ },
+ "jst_006": {
+  "t": "시도 횟수",
+  "ctx": "(); let attempts = {};         // id -> "
+ },
+ "jst_007": {
+  "t": "첫 시도에 틀린 문항",
+  "ctx": " 0; let firstWrongIds = new Set();   // "
+ },
+ "jst_008": {
+  "t": "약점",
+  "ctx": "rongIds = new Set();   // 첫 시도에 틀린 문항 = "
+ },
+ "jst_009": {
+  "t": "집중 복습 대상",
+  "ctx": "gIds = new Set();   // 첫 시도에 틀린 문항 = 약점("
+ },
+ "jst_010": {
+  "t": "세션 내 최고 점수",
+  "ctx": "r = null; let bestScore = 0;         // "
+ },
+ "jst_011": {
+  "t": "재도전 비교용,",
+  "ctx": "t bestScore = 0;         // 세션 내 최고 점수 ("
+ },
+ "jst_012": {
+  "t": "미사용",
+  "ctx": "   // 세션 내 최고 점수 (재도전 비교용, localStorage "
+ },
+ "jst_013": {
+  "t": "복습 정답은 절반 점수",
+  "ctx": " gain = Math.round(gain/2);          // "
+ },
+ "jst_014": {
+  "t": "콤보 보너스",
+  "ctx": " (streak>=2) ? (streak-1)*3 : 0;     // "
+ },
+ "jst_015": {
+  "t": "가 아니어도 최종적으로 익힌 것으로 카운트",
+  "ctx": " masteredIds.add(id);          // ‘처음으로’"
+ },
+ "jst_016": {
+  "t": "큐에서 제거",
+  "ctx": "운트     pending.shift();              // "
+ },
+ "jst_017": {
+  "t": "연속 정답!",
+  "ctx": "      comboEl.textContent = `🔥 ${streak}"
+ },
+ "jst_018": {
+  "t": "보너스",
+  "ctx": "tContent = `🔥 ${streak}연속 정답! +${bonus} "
+ },
+ "jst_019": {
+  "t": "약점으로 기록",
+  "ctx": "f(firstTry) firstWrongIds.add(id);   // "
+ },
+ "jst_020": {
+  "t": "왜 생각해볼 만한가",
+  "ctx": "= >${c.d}</div>       <div class= >💭 <b>"
+ },
+ "jst_021": {
+  "t": "첫 시도에 모두 정답!",
+  "ctx": " ;     list.innerHTML = `<div class= >🌟 "
+ },
+ "jst_022": {
+  "t": "약점이 없어 따로 복습할 항목이 없습니다. 멋져요.",
+  "ctx": "TML = `<div class= >🌟 첫 시도에 모두 정답!<span>"
+ },
+ "jst_023": {
+  "t": "개",
+  "ctx": " {     cnt.textContent = `(${ids.length}"
+ },
+ "jst_024": {
+  "t": "정답",
+  "ctx": "= >Q. ${q.q}</div>         <div class= >"
+ },
+ "jst_025": {
+  "t": "최고 점수 경신!",
+  "ctx": "re;     note.innerHTML = prev>0 ? `🏆 <b>"
+ },
+ "jst_026": {
+  "t": "이전",
+  "ctx": "nerHTML = prev>0 ? `🏆 <b>최고 점수 경신!</b> ("
+ },
+ "jst_027": {
+  "t": "점",
+  "ctx": "prev>0 ? `🏆 <b>최고 점수 경신!</b> (이전 ${prev}"
+ },
+ "jst_028": {
+  "t": "첫 기록",
+  "ctx": "`🏆 <b>최고 점수 경신!</b> (이전 ${prev}점)` : `🏆 "
+ },
+ "jst_029": {
+  "t": "다시 도전해 깨보세요!",
+  "ctx": "${prev}점)` : `🏆 첫 기록 <b>${score}점</b> — "
+ },
+ "jst_030": {
+  "t": "현재 최고 점수",
+  "ctx": "보세요!`;   } else {     note.innerHTML = `"
+ },
+ "jst_031": {
+  "t": "이번엔",
+  "ctx": "HTML = `현재 최고 점수 <b>${bestScore}점</b> · "
+ }
+}

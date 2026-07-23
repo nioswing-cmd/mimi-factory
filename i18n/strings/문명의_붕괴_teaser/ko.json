@@ -1,0 +1,1234 @@
+{
+ "_meta": {
+  "source": "apps/문명의_붕괴_teaser.html",
+  "slug": "문명의_붕괴_teaser"
+ },
+ "title_001": {
+  "t": "문명의 붕괴 도파민 마스터 퀴즈",
+  "ctx": "<title>"
+ },
+ "html_001": {
+  "t": "재러드 다이아몬드 · 2005 · 『총, 균, 쇠』 작가",
+  "ctx": "class=\"hero\">       <div class=\"eyebrow\""
+ },
+ "html_002": {
+  "t": "한때 찬란했던 문명은 왜 스스로 무너졌는가",
+  "ctx": "ss=\"p3\">⚖️</span></div>       <h1><small"
+ },
+ "html_003": {
+  "t": "문명의 붕괴 마스터 퀴즈",
+  "ctx": "h1><small>한때 찬란했던 문명은 왜 스스로 무너졌는가</small"
+ },
+ "html_004": {
+  "t": "“사회는 살해당하는 것이 아니라,",
+  "ctx": " 붕괴 마스터 퀴즈</h1>       <div class=\"quote\""
+ },
+ "html_005": {
+  "t": "스스로 목숨을 끊는다(자멸한다).”",
+  "ctx": "s=\"quote\">         “사회는 살해당하는 것이 아니라,<br"
+ },
+ "html_006": {
+  "t": "— 이 책을 관통하는 한 문장",
+  "ctx": "라,<br>스스로 목숨을 끊는다(자멸한다).”<br>         <b"
+ },
+ "html_007": {
+  "t": "이스터섬·그린란드·마야가 무너진 이유와 일본·티코피아가 살아남은 비결을",
+  "ctx": "이 책을 관통하는 한 문장</b>       </div>       <p"
+ },
+ "html_008": {
+  "t": "30개의 퀴즈",
+  "ctx": "터섬·그린란드·마야가 무너진 이유와 일본·티코피아가 살아남은 비결을 <b"
+ },
+ "html_009": {
+  "t": "로 익힙니다.\n        쉬운 것부터 시작해 점점 어려워지고,",
+  "ctx": " 무너진 이유와 일본·티코피아가 살아남은 비결을 <b>30개의 퀴즈</b"
+ },
+ "html_010": {
+  "t": "틀린 문제는 맞힐 때까지 다시 돌아옵니다.",
+  "ctx": ">로 익힙니다.         쉬운 것부터 시작해 점점 어려워지고, <b"
+ },
+ "html_011": {
+  "t": "총",
+  "ctx": "s=\"meta-row\">         <span class=\"chip\""
+ },
+ "html_012": {
+  "t": "30문항",
+  "ctx": "ta-row\">         <span class=\"chip\">총 <b"
+ },
+ "html_013": {
+  "t": "쉬움 → 어려움",
+  "ctx": "문항</b></span>         <span class=\"chip\""
+ },
+ "html_014": {
+  "t": "실시간",
+  "ctx": "어려움</span>         <span class=\"chip\"><b"
+ },
+ "html_015": {
+  "t": "문명 운명 추적",
+  "ctx": "an>         <span class=\"chip\"><b>실시간</b"
+ },
+ "html_016": {
+  "t": "문제마다",
+  "ctx": " 운명 추적</span>         <span class=\"chip\""
+ },
+ "html_017": {
+  "t": "쉬운 해설",
+  "ctx": "span>         <span class=\"chip\">문제마다 <b"
+ },
+ "html_018": {
+  "t": "붕괴의 수수께끼 풀기 →",
+  "ctx": "=\"btn btn-primary\" onclick=\"startQuiz()\""
+ },
+ "html_019": {
+  "t": "점수",
+  "ctx": "   <div class=\"stat\"><span class=\"label\""
+ },
+ "html_020": {
+  "t": "연속 정답",
+  "ctx": "align-items:center;\"><span class=\"label\""
+ },
+ "html_021": {
+  "t": "마스터",
+  "ctx": "ign-items:flex-end;\"><span class=\"label\""
+ },
+ "html_022": {
+  "t": "붕괴 ←",
+  "ctx": "\">         <div class=\"axis-label\"><span"
+ },
+ "html_023": {
+  "t": "문명의 운명 추적 ·",
+  "ctx": "lass=\"axis-label\"><span>붕괴 ←</span><span"
+ },
+ "html_024": {
+  "t": "→ 생존",
+  "ctx": "명 추적 · <b id=\"pctTxt\">0%</b></span><span"
+ },
+ "html_025": {
+  "t": "쉬움",
+  "ctx": "d\">         <span class=\"diff\" id=\"diff\""
+ },
+ "html_026": {
+  "t": "다음 →",
+  "ctx": "y\" id=\"nextBtn\" onclick=\"nextQuestion()\""
+ },
+ "html_027": {
+  "t": "무료 체험 구간이 끝났어요",
+  "ctx": "    <div class=\"lk-ic\">🔒</div>       <h3"
+ },
+ "html_028": {
+  "t": "🔑 구독하고 나머지 20문항 + 완독 리포트 열기",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_029": {
+  "t": "📖 미리보기 리포트 보기",
+  "ctx": "s=\"btn btn-ghost\" onclick=\"openReport()\""
+ },
+ "html_030": {
+  "t": "📚 다른 책 퀴즈 보기 →",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_031": {
+  "t": "지속가능성의 현자",
+  "ctx": ">       <div class=\"rank\" id=\"rankTitle\""
+ },
+ "html_032": {
+  "t": "최종 점수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_033": {
+  "t": "첫 시도 정답률",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_034": {
+  "t": "최고 연속 정답",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_035": {
+  "t": "총 도전 횟수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_036": {
+  "t": "🖼 결과 카드 저장",
+  "ctx": "btn btn-ghost\" onclick=\"makeShareCard()\""
+ },
+ "html_037": {
+  "t": "다시 도전 ↻",
+  "ctx": "ss=\"btn btn-ghost\" onclick=\"startQuiz()\""
+ },
+ "html_038": {
+  "t": "처음으로",
+  "ctx": "class=\"btn btn-ghost\" onclick=\"goHome()\""
+ },
+ "html_039": {
+  "t": "완독 리포트 · INFOGRAPHIC",
+  "ctx": "s=\"rep-hero\">       <div class=\"eyebrow\""
+ },
+ "html_040": {
+  "t": "문명의 붕괴 한눈에 보기",
+  "ctx": "ow\">완독 리포트 · INFOGRAPHIC</div>       <h2"
+ },
+ "html_041": {
+  "t": "책 전체를",
+  "ctx": "v>       <h2>문명의 붕괴 한눈에 보기</h2>       <p"
+ },
+ "html_042": {
+  "t": "‘붕괴의 5대 요인 → 선택 → 결말’",
+  "ctx": "<h2>문명의 붕괴 한눈에 보기</h2>       <p>책 전체를 <b"
+ },
+ "html_043": {
+  "t": "하나로 꿰면 절대 안 잊습니다. 핵심은",
+  "ctx": "    <p>책 전체를 <b>‘붕괴의 5대 요인 → 선택 → 결말’</b"
+ },
+ "html_044": {
+  "t": "다섯 번째 요인, 즉 사회의 ‘대응(선택)’",
+  "ctx": " → 선택 → 결말’</b> 하나로 꿰면 절대 안 잊습니다. 핵심은 <b"
+ },
+ "html_045": {
+  "t": "입니다.",
+  "ctx": "잊습니다. 핵심은 <b>다섯 번째 요인, 즉 사회의 ‘대응(선택)’</b"
+ },
+ "html_046": {
+  "t": "출발 질문",
+  "ctx": "<div class=\"ch step s0\"><span class=\"cn\""
+ },
+ "html_047": {
+  "t": "🏛️ 번영하던 사회는 왜 무너졌나",
+  "ctx": "step s0\"><span class=\"cn\">출발 질문</span><b"
+ },
+ "html_048": {
+  "t": "“사회는 자멸한다”",
+  "ctx": "질문</span><b>🏛️ 번영하던 사회는 왜 무너졌나</b><small"
+ },
+ "html_049": {
+  "t": "외부 압력 4",
+  "ctx": "<div class=\"ch step s1\"><span class=\"cn\""
+ },
+ "html_050": {
+  "t": "🌲환경 훼손 · 🌡️기후 변화 · ⚔️적대적 이웃 · 🚢우호국 상실",
+  "ctx": "ep s1\"><span class=\"cn\">외부 압력 4</span><b"
+ },
+ "html_051": {
+  "t": "붕괴를 부르는 외부 요인들",
+  "ctx": "· 🌡️기후 변화 · ⚔️적대적 이웃 · 🚢우호국 상실</b><small"
+ },
+ "html_052": {
+  "t": "다섯째·결정 요인",
+  "ctx": "<div class=\"ch step s2\"><span class=\"cn\""
+ },
+ "html_053": {
+  "t": "🧭 그 문제에 사회가 어떻게 ‘대응(선택)’했는가",
+  "ctx": " s2\"><span class=\"cn\">다섯째·결정 요인</span><b"
+ },
+ "html_054": {
+  "t": "제도·가치관이 성패를 가른다",
+  "ctx": "<b>🧭 그 문제에 사회가 어떻게 ‘대응(선택)’했는가</b><small"
+ },
+ "html_055": {
+  "t": "갈림길",
+  "ctx": "s=\"ch step s3\">         <span class=\"cn\""
+ },
+ "html_056": {
+  "t": "✅ 대응 성공(일본·티코피아) ↔ ❌ 대응 실패(이스터·그린란드)",
+  "ctx": "\">         <span class=\"cn\">갈림길</span><b"
+ },
+ "html_057": {
+  "t": "같은 문제, 다른 선택, 다른 운명",
+  "ctx": ") ↔ ❌ 대응 실패(이스터·그린란드)</b>         <small"
+ },
+ "html_058": {
+  "t": "결과",
+  "ctx": "<div class=\"ch step s4\"><span class=\"cn\""
+ },
+ "html_059": {
+  "t": "🗿 붕괴 혹은 🌱 생존",
+  "ctx": "ch step s4\"><span class=\"cn\">결과</span><b"
+ },
+ "html_060": {
+  "t": "“운명이 아니라 선택의 문제”",
+  "ctx": "=\"cn\">결과</span><b>🗿 붕괴 혹은 🌱 생존</b><small"
+ },
+ "html_061": {
+  "t": "핵심 개념 8",
+  "ctx": "/div>     </div>      <h3 class=\"rep-h3\""
+ },
+ "html_062": {
+  "t": "목차 한눈에 보기",
+  "ctx": "concepts\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_063": {
+  "t": "탭하면 요약이 열립니다",
+  "ctx": "ss=\"rep-h3\">목차 한눈에 보기 <span class=\"hint\""
+ },
+ "html_064": {
+  "t": "책 속, 생각해볼 사례 3",
+  "ctx": " id=\"toc\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_065": {
+  "t": "이 책이 우리에게 던지는 질문 3",
+  "ctx": "d=\"cases\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_066": {
+  "t": "내가 틀린 부분 집중 복습",
+  "ctx": " id=\"weakWrap\">       <h3 class=\"rep-h3\""
+ },
+ "html_067": {
+  "t": "📖 더 깊이 알고 싶다면",
+  "ctx": "/div>      <div class=\"deepen\">       <b"
+ },
+ "html_068": {
+  "t": "에서 책의 전체 구조와 토론 질문을 확인할 수 있습니다.",
+  "ctx": "f=\"#\" target=\"_blank\" rel=\"noopener\"></a"
+ },
+ "html_069": {
+  "t": "📄 PDF로 저장",
+  "ctx": "d=\"pdfBtn\" onclick=\"downloadReportPDF()\""
+ },
+ "html_070": {
+  "t": "결과로",
+  "ctx": "\"btn btn-ghost\" onclick=\"show('result')\""
+ },
+ "html_071": {
+  "t": "“의미와재미공장” 미미팩토리",
+  "ctx": "class=\"footer\">     <div class=\"factory\""
+ },
+ "html_072": {
+  "t": "(주식회사 연:결 패밀리회사)",
+  "ctx": "재미공장” 미미팩토리</div>     <div class=\"affil\""
+ },
+ "html_073": {
+  "t": "책의 핵심을 도파민으로 익히는 반복 마스터 퀴즈",
+  "ctx": ":결 패밀리회사)</div>     <div class=\"tagline\""
+ },
+ "js_001": {
+  "t": "\"}))}},Hn={name:\"font-size\",initialValue:\"0\",prefix:!1,type:wt.TYPE_VALUE,format:\"length\"},In={name:\"font-weight\",initialValue:\"normal\",type:wt.VALUE,prefix:!1,parse:function(e){if(Ve(e))return e.number;if(qe(e))switch(e.value){case\"bold\":return 700;case\"normal\":default:return 400}return 400}},Pn={name:\"font-variant\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return e.filter(qe).map((function(e){return e.value}))}};!function(e){e.NORMAL=\"normal\",e.ITALIC=\"italic\",e.OBLIQUE=\"oblique\"}(Nn||(Nn={}));var On,kn={name:\"font-style\",initialValue:\"normal\",prefix:!1,type:wt.IDENT_VALUE,parse:function(e){switch(e){case\"oblique\":return Nn.OBLIQUE;case\"italic\":return Nn.ITALIC;case\"normal\":default:return Nn.NORMAL}}},Rn=function(e,t){return 0!=(e&t)},Mn={name:\"content\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){if(0===e.length)return[];var t=e[0];return t.type===d.IDENT_TOKEN&&\"none\"===t.value?[]:e}},Dn={name:\"counter-increment\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;for(var r=[],n=e.filter(We),o=0;o<n.length;o++){var s=n[o],i=n[o+1];if(s.type===d.IDENT_TOKEN){var a=i&&Ve(i)?i.number:1;r.push({counter:s.value,increment:a})}}return r}},Kn={name:\"counter-reset\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return[];for(var t=[],r=e.filter(We),n=0;n<r.length;n++){var o=r[n],s=r[n+1];if(qe(o)&&\"none\"!==o.value){var i=s&&Ve(s)?s.number:0;t.push({counter:o.value,reset:i})}}return t}},zn={name:\"quotes\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;var r=[],n=e.filter(Ge);if(n.length%2!=0)return null;for(var o=0;o<n.length;o+=2){var s=n[o].value,i=n[o+1].value;r.push({open:s,close:i})}return r}},Vn=function(e,t,r){if(!e)return\"\";var n=e[Math.min(t,e.length-1)];return n?r?n.open:n.close:\"\"},qn={name:\"box-shadow\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return 1===e.length&&Xe(e[0],\"none\")?[]:Ye(e).map((function(e){for(var t={color:255,offsetX:rt,offsetY:rt,blur:rt,spread:rt,inset:!1},r=0,n=0;n<e.length;n++){var o=e[n];Xe(o,\"inset\")?t.inset=!0:$e(o)?(0===r?t.offsetX=o:1===r?t.offsetY=o:2===r?t.blur=o:t.spread=o,r++):t.color=ft(o)}return t}))}},Gn=function(){function e(e){this.backgroundClip=Jn(xt,e.backgroundClip),this.backgroundColor=Jn(Et,e.backgroundColor),this.backgroundImage=Jn(ur,e.backgroundImage),this.backgroundOrigin=Jn(cr,e.backgroundOrigin),this.backgroundPosition=Jn(lr,e.backgroundPosition),this.backgroundRepeat=Jn(fr,e.backgroundRepeat),this.backgroundSize=Jn(mr,e.backgroundSize),this.borderTopColor=Jn(vr,e.borderTopColor),this.borderRightColor=Jn(wr,e.borderRightColor),this.borderBottomColor=Jn(br,e.borderBottomColor),this.borderLeftColor=Jn(Br,e.borderLeftColor),this.borderTopLeftRadius=Jn(_r,e.borderTopLeftRadius),this.borderTopRightRadius=Jn(Cr,e.borderTopRightRadius),this.borderBottomRightRadius=Jn(xr,e.borderBottomRightRadius),this.borderBottomLeftRadius=Jn(Er,e.borderBottomLeftRadius),this.borderTopStyle=Jn(Fr,e.borderTopStyle),this.borderRightStyle=Jn(Ur,e.borderRightStyle),this.borderBottomStyle=Jn(Sr,e.borderBottomStyle),this.borderLeftStyle=Jn(Lr,e.borderLeftStyle),this.borderTopWidth=Jn(Hr,e.borderTopWidth),this.borderRightWidth=Jn(Ir,e.borderRightWidth),this.borderBottomWidth=Jn(Pr,e.borderBottomWidth),this.borderLeftWidth=Jn(Or,e.borderLeftWidth),this.boxShadow=Jn(qn,e.boxShadow),this.color=Jn(kr,e.color),this.display=Jn(Rr,e.display),this.float=Jn(Kr,e.cssFloat),this.fontFamily=Jn(Tn,e.fontFamily),this.fontSize=Jn(Hn,e.fontSize),this.fontStyle=Jn(kn,e.fontStyle),this.fontVariant=Jn(Pn,e.fontVariant),this.fontWeight=Jn(In,e.fontWeight),this.letterSpacing=Jn(zr,e.letterSpacing),this.lineBreak=Jn(qr,e.lineBreak),this.lineHeight=Jn(Gr,e.lineHeight),this.listStyleImage=Jn(Xr,e.listStyleImage),this.listStylePosition=Jn(Jr,e.listStylePosition),this.listStyleType=Jn(Zr,e.listStyleType),this.marginTop=Jn(en,e.marginTop),this.marginRight=Jn(tn,e.marginRight),this.marginBottom=Jn(rn,e.marginBottom),this.marginLeft=Jn(nn,e.marginLeft),this.opacity=Jn(Un,e.opacity);var t=Jn(sn,e.overflow);this.overflowX=t[0],this.overflowY=t[t.length>1?1:0],this.overflowWrap=Jn(An,e.overflowWrap),this.paddingTop=Jn(cn,e.paddingTop),this.paddingRight=Jn(ln,e.paddingRight),this.paddingBottom=Jn(dn,e.paddingBottom),this.paddingLeft=Jn(fn,e.paddingLeft),this.position=Jn(gn,e.position),this.textAlign=Jn(pn,e.textAlign),this.textDecorationColor=Jn(Sn,e.textDecorationColor||e.color),this.textDecorationLine=Jn(Ln,e.textDecorationLine),this.textShadow=Jn(yn,e.textShadow),this.textTransform=Jn(wn,e.textTransform),this.transform=Jn(bn,e.transform),this.transformOrigin=Jn(Cn,e.transformOrigin),this.visibility=Jn(En,e.visibility),this.wordBreak=Jn(Qn,e.wordBreak),this.zIndex=Jn(Fn,e.zIndex)}return e.prototype.isVisible=function(){return this.display>0&&this.opacity>0&&this.visibility===vn.VISIBLE},e.prototype.isTransparent=function(){return ht(this.backgroundColor)},e.prototype.isTransformed=function(){return null!==this.transform},e.prototype.isPositioned=function(){return this.position!==hn.STATIC},e.prototype.isPositionedWithZIndex=function(){return this.isPositioned()&&!this.zIndex.auto},e.prototype.isFloating=function(){return this.float!==Nr.NONE},e.prototype.isInlineLevel=function(){return Rn(this.display,4)||Rn(this.display,33554432)||Rn(this.display,268435456)||Rn(this.display,536870912)||Rn(this.display,67108864)||Rn(this.display,134217728)},e}(),Xn=function(e){this.content=Jn(Mn,e.content),this.quotes=Jn(zn,e.quotes)},Wn=function(e){this.counterIncrement=Jn(Dn,e.counterIncrement),this.counterReset=Jn(Kn,e.counterReset)},Jn=function(e,t){var r=new De,n=null!=t?t.toString():e.initialValue;r.write(n);var o=new Ke(r.read());switch(e.type){case wt.IDENT_VALUE:var s=o.parseComponentValue();return e.parse(qe(s)?s.value:e.initialValue);case wt.VALUE:return e.parse(o.parseComponentValue());case wt.LIST:return e.parse(o.parseComponentValues());case wt.TOKEN_VALUE:return o.parseComponentValue();case wt.TYPE_VALUE:switch(e.format){case\"angle\":return ut(o.parseComponentValue());case\"color\":return ft(o.parseComponentValue());case\"image\":return ir(o.parseComponentValue());case\"length\":var i=o.parseComponentValue();return $e(i)?i:rt;case\"length-percentage\":var a=o.parseComponentValue();return et(a)?a:rt}}throw new Error(\"Attempting to parse unsupported css format type \"+e.format)},Yn=function(e){this.styles=new Gn(window.getComputedStyle(e,null)),this.textNodes=[],this.elements=[],null!==this.styles.transform&&So(e)&&(e.style.transform=\"none\"),this.bounds=i(e),this.flags=0},Zn=function(e,t){this.text=e,this.bounds=t},$n=function(e){var t=e.ownerDocument;if(t){var r=t.createElement(\"html2canvaswrapper\");r.appendChild(e.cloneNode(!0));var n=e.parentNode;if(n){n.replaceChild(r,e);var o=i(r);return r.firstChild&&n.replaceChild(r.firstChild,r),o}}return new s(0,0,0,0)},eo=function(e,t,r){var n=e.ownerDocument;if(!n)throw new Error(\"Node has no owner document\");var o=n.createRange();return o.setStart(e,t),o.setEnd(e,t+r),s.fromClientRect(o.getBoundingClientRect())},to=function(e,t){return 0!==t.letterSpacing?a(e).map((function(e){return A(e)})):ro(e,t)},ro=function(e,t){for(var r,n=function(e,t){var r=a(e),n=ie(r,t),o=n[0],s=n[1],i=n[2],A=r.length,u=0,c=0;return{next:function(){if(c>=A)return{done:!0,value:null};for(var e=G;c<A&&(e=se(r,s,o,++c,i))===G;);if(e!==G||c===A){var t=new ae(r,e,u,c);return u=c,{value:t,done:!1}}return{done:!0,value:null}}}}(e,{lineBreak:t.lineBreak,wordBreak:t.overflowWrap===on.BREAK_WORD?\"break-word\":t.wordBreak}),o=[];!(r=n.next()).done;)r.value&&o.push(r.value.slice());return o},no=function(e,t){this.text=oo(e.data,t.textTransform),this.textBounds=function(e,t,r){var n=to(e,t),o=[],s=0;return n.forEach((function(e){if(t.textDecorationLine.length||e.trim().length>0)if(Pt.SUPPORT_RANGE_BOUNDS)o.push(new Zn(e,eo(r,s,e.length)));else{var n=r.splitText(e.length);o.push(new Zn(e,$n(r))),r=n}else Pt.SUPPORT_RANGE_BOUNDS||(r=r.splitText(e.length));s+=e.length})),o}(this.text,t,e)},oo=function(e,t){switch(t){case mn.LOWERCASE:return e.toLowerCase();case mn.CAPITALIZE:return e.replace(so,io);case mn.UPPERCASE:return e.toUpperCase();default:return e}},so=/(^|\\s|:|-|\\(|\\))([a-z])/g,io=function(e,t,r){return e.length>0?t+r.toUpperCase():e},ao=function(e){function r(t){var r=e.call(this,t)||this;return r.src=t.currentSrc||t.src,r.intrinsicWidth=t.naturalWidth,r.intrinsicHeight=t.naturalHeight,kt.getInstance().addImage(r.src),r}return t(r,e),r}(Yn),Ao=function(e){function r(t){var r=e.call(this,t)||this;return r.canvas=t,r.intrinsicWidth=t.width,r.intrinsicHeight=t.height,r}return t(r,e),r}(Yn),uo=function(e){function r(t){var r=e.call(this,t)||this,n=new XMLSerializer;return r.svg=\"data:image/svg+xml,\"+encodeURIComponent(n.serializeToString(t)),r.intrinsicWidth=t.width.baseVal.value,r.intrinsicHeight=t.height.baseVal.value,kt.getInstance().addImage(r.svg),r}return t(r,e),r}(Yn),co=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),lo=function(e){function r(t){var r=e.call(this,t)||this;return r.start=t.start,r.reversed=\"boolean\"==typeof t.reversed&&!0===t.reversed,r}return t(r,e),r}(Yn),fo=[{type:d.DIMENSION_TOKEN,flags:0,unit:\"px\",number:3}],ho=[{type:d.PERCENTAGE_TOKEN,flags:0,number:50}],po=\"checkbox\",mo=\"radio\",go=\"password\",yo=707406591,vo=function(e){function r(t){var r,n,o,i=e.call(this,t)||this;switch(i.type=t.type.toLowerCase(),i.checked=t.checked,i.value=0===(o=(n=t).type===go?new Array(n.value.length+1).join(\"•\"):n.value).length?n.placeholder||\"\":o,i.type!==po&&i.type!==mo||(i.styles.backgroundColor=3739148031,i.styles.borderTopColor=i.styles.borderRightColor=i.styles.borderBottomColor=i.styles.borderLeftColor=2779096575,i.styles.borderTopWidth=i.styles.borderRightWidth=i.styles.borderBottomWidth=i.styles.borderLeftWidth=1,i.styles.borderTopStyle=i.styles.borderRightStyle=i.styles.borderBottomStyle=i.styles.borderLeftStyle=pr.SOLID,i.styles.backgroundClip=[bt.BORDER_BOX],i.styles.backgroundOrigin=[0],i.bounds=(r=i.bounds).width>r.height?new s(r.left+(r.width-r.height)/2,r.top,r.height,r.height):r.width<r.height?new s(r.left,r.top+(r.height-r.width)/2,r.width,r.width):r),i.type){case po:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=fo;break;case mo:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=ho}return i}return t(r,e),r}(Yn),wo=function(e){function r(t){var r=e.call(this,t)||this,n=t.options[t.selectedIndex||0];return r.value=n&&n.text||\"\",r}return t(r,e),r}(Yn),bo=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),Bo=function(e){return ft(Ke.create(e).parseComponentValue())},jo=function(e){function r(t){var r=e.call(this,t)||this;r.src=t.src,r.width=parseInt(t.width,10)||0,r.height=parseInt(t.height,10)||0,r.backgroundColor=r.styles.backgroundColor;try{if(t.contentWindow&&t.contentWindow.document&&t.contentWindow.document.documentElement){r.tree=Eo(t.contentWindow.document.documentElement);var n=t.contentWindow.document.documentElement?Bo(getComputedStyle(t.contentWindow.document.documentElement).backgroundColor):_t.TRANSPARENT,o=t.contentWindow.document.body?Bo(getComputedStyle(t.contentWindow.document.body).backgroundColor):_t.TRANSPARENT;r.backgroundColor=ht(n)?ht(o)?r.styles.backgroundColor:o:n}}catch(e){}return r}return t(r,e),r}(Yn),_o=[\"OL\",\"UL\",\"MENU\"],Co=function(e,t,r){for(var n=e.firstChild,o=void 0;n;n=o)if(o=n.nextSibling,Fo(n)&&n.data.trim().length>0)t.textNodes.push(new no(n,t.styles));else if(Uo(n)){var s=xo(n);s.styles.isVisible()&&(No(n,s,r)?s.flags|=4:Qo(s.styles)&&(s.flags|=2),-1!==_o.indexOf(n.tagName)&&(s.flags|=8),t.elements.push(s),zo(n)||Po(n)||Vo(n)||Co(n,s,r))}},xo=function(e){return Ro(e)?new ao(e):ko(e)?new Ao(e):Po(e)?new uo(e):To(e)?new co(e):Ho(e)?new lo(e):Io(e)?new vo(e):Vo(e)?new wo(e):zo(e)?new bo(e):Mo(e)?new jo(e):new Yn(e)},Eo=function(e){var t=xo(e);return t.flags|=4,Co(e,t,t),t},No=function(e,t,r){return t.styles.isPositionedWithZIndex()||t.styles.opacity<1||t.styles.isTransformed()||Oo(e)&&r.styles.isTransparent()},Qo=function(e){return e.isPositioned()||e.isFloating()},Fo=function(e){return e.nodeType===Node.TEXT_NODE},Uo=function(e){return e.nodeType===Node.ELEMENT_NODE},So=function(e){return Uo(e)&&void 0!==e.style&&!Lo(e)},Lo=function(e){return\"object\"==typeof e.className},To=function(e){return\"LI\"===e.tagName},Ho=function(e){return\"OL\"===e.tagName},Io=function(e){return\"INPUT\"===e.tagName},Po=function(e){return\"svg\"===e.tagName},Oo=function(e){return\"BODY\"===e.tagName},ko=function(e){return\"CANVAS\"===e.tagName},Ro=function(e){return\"IMG\"===e.tagName},Mo=function(e){return\"IFRAME\"===e.tagName},Do=function(e){return\"STYLE\"===e.tagName},Ko=function(e){return\"SCRIPT\"===e.tagName},zo=function(e){return\"TEXTAREA\"===e.tagName},Vo=function(e){return\"SELECT\"===e.tagName},qo=function(){function e(){this.counters={}}return e.prototype.getCounterValue=function(e){var t=this.counters[e];return t&&t.length?t[t.length-1]:1},e.prototype.getCounterValues=function(e){return this.counters[e]||[]},e.prototype.pop=function(e){var t=this;e.forEach((function(e){return t.counters[e].pop()}))},e.prototype.parse=function(e){var t=this,r=e.counterIncrement,n=e.counterReset,o=!0;null!==r&&r.forEach((function(e){var r=t.counters[e.counter];r&&0!==e.increment&&(o=!1,r[Math.max(0,r.length-1)]+=e.increment)}));var s=[];return o&&n.forEach((function(e){var r=t.counters[e.counter];s.push(e.counter),r||(r=t.counters[e.counter]=[]),r.push(e.reset)})),s},e}(),Go={integers:[1e3,900,500,400,100,90,50,40,10,9,5,4,1],values:[\"M\",\"CM\",\"D\",\"CD\",\"C\",\"XC\",\"L\",\"XL\",\"X\",\"IX\",\"V\",\"IV\",\"I\"]},Xo={integers:[9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"Ք\",\"Փ\",\"Ւ\",\"Ց\",\"Ր\",\"Տ\",\"Վ\",\"Ս\",\"Ռ\",\"Ջ\",\"Պ\",\"Չ\",\"Ո\",\"Շ\",\"Ն\",\"Յ\",\"Մ\",\"Ճ\",\"Ղ\",\"Ձ\",\"Հ\",\"Կ\",\"Ծ\",\"Խ\",\"Լ\",\"Ի\",\"Ժ\",\"Թ\",\"Ը\",\"Է\",\"Զ\",\"Ե\",\"Դ\",\"Գ\",\"Բ\",\"Ա\"]},Wo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,400,300,200,100,90,80,70,60,50,40,30,20,19,18,17,16,15,10,9,8,7,6,5,4,3,2,1],values:[\"י׳\",\"ט׳\",\"ח׳\",\"ז׳\",\"ו׳\",\"ה׳\",\"ד׳\",\"ג׳\",\"ב׳\",\"א׳\",\"ת\",\"ש\",\"ר\",\"ק\",\"צ\",\"פ\",\"ע\",\"ס\",\"נ\",\"מ\",\"ל\",\"כ\",\"יט\",\"יח\",\"יז\",\"טז\",\"טו\",\"י\",\"ט\",\"ח\",\"ז\",\"ו\",\"ה\",\"ד\",\"ג\",\"ב\",\"א\"]},Jo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"ჵ\",\"ჰ\",\"ჯ\",\"ჴ\",\"ხ\",\"ჭ\",\"წ\",\"ძ\",\"ც\",\"ჩ\",\"შ\",\"ყ\",\"ღ\",\"ქ\",\"ფ\",\"ჳ\",\"ტ\",\"ს\",\"რ\",\"ჟ\",\"პ\",\"ო\",\"ჲ\",\"ნ\",\"მ\",\"ლ\",\"კ\",\"ი\",\"თ\",\"ჱ\",\"ზ\",\"ვ\",\"ე\",\"დ\",\"გ\",\"ბ\",\"ა\"]},Yo=function(e,t,r,n,o,s){return e<t||e>r?is(e,o,s.length>0):n.integers.reduce((function(t,r,o){for(;e>=r;)e-=r,t+=n.values[o];return t}),\"\")+s},Zo=function(e,t,r,n){var o=\"\";do{r||e--,o=n(e)+o,e/=t}while(e*t>=t);return o},$o=function(e,t,r,n,o){var s=r-t+1;return(e<0?\"-\":\"\")+(Zo(Math.abs(e),s,n,(function(e){return A(Math.floor(e%s)+t)}))+o)},es=function(e,t,r){void 0===r&&(r=\". \");var n=t.length;return Zo(Math.abs(e),n,!1,(function(e){return t[Math.floor(e%n)]}))+r},ts=function(e,t,r,n,o,s){if(e<-9999||e>9999)return is(e,Wr.CJK_DECIMAL,o.length>0);var i=Math.abs(e),a=o;if(0===i)return t[0]+a;for(var A=0;i>0&&A<=4;A++){var u=i%10;0===u&&Rn(s,1)&&\"\"!==a?a=t[u]+a:u>1||1===u&&0===A||1===u&&1===A&&Rn(s,2)||1===u&&1===A&&Rn(s,4)&&e>100||1===u&&A>1&&Rn(s,8)?a=t[u]+(A>0?r[A-1]:\"\")+a:1===u&&A>0&&(a=r[A-1]+a),i=Math.floor(i/10)}return(e<0?n:\"\")+a},rs=\"十百千萬\",ns=\"拾佰仟萬\",os=\"マイナス\",ss=\"마이너스\",is=function(e,t,r){var n=r?\". \":\"\",o=r?\"、\":\"\",s=r?\", \":\"\",i=r?\" \":\"\";switch(t){case Wr.DISC:return\"•\"+i;case Wr.CIRCLE:return\"◦\"+i;case Wr.SQUARE:return\"◾\"+i;case Wr.DECIMAL_LEADING_ZERO:var a=$o(e,48,57,!0,n);return a.length<4?\"0\"+a:a;case Wr.CJK_DECIMAL:return es(e,\"〇一二三四五六七八九\",o);case Wr.LOWER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n).toLowerCase();case Wr.UPPER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n);case Wr.LOWER_GREEK:return $o(e,945,969,!1,n);case Wr.LOWER_ALPHA:return $o(e,97,122,!1,n);case Wr.UPPER_ALPHA:return $o(e,65,90,!1,n);case Wr.ARABIC_INDIC:return $o(e,1632,1641,!0,n);case Wr.ARMENIAN:case Wr.UPPER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n);case Wr.LOWER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n).toLowerCase();case Wr.BENGALI:return $o(e,2534,2543,!0,n);case Wr.CAMBODIAN:case Wr.KHMER:return $o(e,6112,6121,!0,n);case Wr.CJK_EARTHLY_BRANCH:return es(e,\"子丑寅卯辰巳午未申酉戌亥\",o);case Wr.CJK_HEAVENLY_STEM:return es(e,\"甲乙丙丁戊己庚辛壬癸\",o);case Wr.CJK_IDEOGRAPHIC:case Wr.TRAD_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"負\",o,14);case Wr.TRAD_CHINESE_FORMAL:return ts(e,\"零壹貳參肆伍陸柒捌玖\",ns,\"負\",o,15);case Wr.SIMP_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"负\",o,14);case Wr.SIMP_CHINESE_FORMAL:return ts(e,\"零壹贰叁肆伍陆柒捌玖\",ns,\"负\",o,15);case Wr.JAPANESE_INFORMAL:return ts(e,\"〇一二三四五六七八九\",\"十百千万\",os,o,0);case Wr.JAPANESE_FORMAL:return ts(e,\"零壱弐参四伍六七八九\",\"拾百千万\",os,o,7);case Wr.KOREAN_HANGUL_FORMAL:return ts(e,\"영일이삼사오육칠팔구\",\"십백천만\",ss,s,7);case Wr.KOREAN_HANJA_INFORMAL:return ts(e,\"零一二三四五六七八九\",\"十百千萬\",ss,s,0);case Wr.KOREAN_HANJA_FORMAL:return ts(e,\"零壹貳參四五六七八九\",\"拾百千\",ss,s,7);case Wr.DEVANAGARI:return $o(e,2406,2415,!0,n);case Wr.GEORGIAN:return Yo(e,1,19999,Jo,Wr.DECIMAL,n);case Wr.GUJARATI:return $o(e,2790,2799,!0,n);case Wr.GURMUKHI:return $o(e,2662,2671,!0,n);case Wr.HEBREW:return Yo(e,1,10999,Wo,Wr.DECIMAL,n);case Wr.HIRAGANA:return es(e,\"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん\");case Wr.HIRAGANA_IROHA:return es(e,\"いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす\");case Wr.KANNADA:return $o(e,3302,3311,!0,n);case Wr.KATAKANA:return es(e,\"アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン\",o);case Wr.KATAKANA_IROHA:return es(e,\"イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセス\",o);case Wr.LAO:return $o(e,3792,3801,!0,n);case Wr.MONGOLIAN:return $o(e,6160,6169,!0,n);case Wr.MYANMAR:return $o(e,4160,4169,!0,n);case Wr.ORIYA:return $o(e,2918,2927,!0,n);case Wr.PERSIAN:return $o(e,1776,1785,!0,n);case Wr.TAMIL:return $o(e,3046,3055,!0,n);case Wr.TELUGU:return $o(e,3174,3183,!0,n);case Wr.THAI:return $o(e,3664,3673,!0,n);case Wr.TIBETAN:return $o(e,3872,3881,!0,n);case Wr.DECIMAL:default:return $o(e,48,57,!0,n)}},as=\"data-html2canvas-ignore\",As=function(){function e(e,t){if(this.options=t,this.scrolledElements=[],this.referenceElement=e,this.counters=new qo,this.quoteDepth=0,!e.ownerDocument)throw new Error(\"Cloned element does not have an owner document\");this.documentElement=this.cloneNode(e.ownerDocument.documentElement)}return e.prototype.toIFrame=function(e,t){var r=this,s=cs(e,t);if(!s.contentWindow)return Promise.reject(\"Unable to find iframe window\");var i=e.defaultView.pageXOffset,a=e.defaultView.pageYOffset,A=s.contentWindow,u=A.document,c=ls(s).then((function(){return n(r,void 0,void 0,(function(){var e;return o(this,(function(r){switch(r.label){case 0:return this.scrolledElements.forEach(ps),A&&(A.scrollTo(t.left,t.top),!/(iPad|iPhone|iPod)/g.test(navigator.userAgent)||A.scrollY===t.top&&A.scrollX===t.left||(u.documentElement.style.top=-t.top+\"px\",u.documentElement.style.left=-t.left+\"px\",u.documentElement.style.position=\"absolute\")),e=this.options.onclone,void 0===this.clonedReferenceElement?[2,Promise.reject(\"Error finding the \"+this.referenceElement.nodeName+\" in the cloned document\")]:u.fonts&&u.fonts.ready?[4,u.fonts.ready]:[3,2];case 1:r.sent(),r.label=2;case 2:return\"function\"==typeof e?[2,Promise.resolve().then((function(){return e(u)})).then((function(){return s}))]:[2,s]}}))}))}));return u.open(),u.write(fs(document.doctype)+\"<html></html>\"),hs(this.referenceElement.ownerDocument,i,a),u.replaceChild(u.adoptNode(this.documentElement),u.documentElement),u.close(),c},e.prototype.createElementClone=function(e){if(ko(e))return this.createCanvasClone(e);if(Do(e))return this.createStyleClone(e);var t=e.cloneNode(!1);return Ro(t)&&\"lazy\"===t.loading&&(t.loading=\"eager\"),t},e.prototype.createStyleClone=function(e){try{var t=e.sheet;if(t&&t.cssRules){var r=[].slice.call(t.cssRules,0).reduce((function(e,t){return t&&\"string\"==typeof t.cssText?e+t.cssText:e}),\"\"),n=e.cloneNode(!1);return n.textContent=r,n}}catch(e){if(Ot.getInstance(this.options.id).error(\"Unable to access cssRules property\",e),\"SecurityError\"!==e.name)throw e}return e.cloneNode(!1)},e.prototype.createCanvasClone=function(e){if(this.options.inlineImages&&e.ownerDocument){var t=e.ownerDocument.createElement(\"img\");try{return t.src=e.toDataURL(),t}catch(e){Ot.getInstance(this.options.id).info(\"Unable to clone canvas contents, canvas is tainted\")}}var r=e.cloneNode(!1);try{r.width=e.width,r.height=e.height;var n=e.getContext(\"2d\"),o=r.getContext(\"2d\");return o&&(n?o.putImageData(n.getImageData(0,0,e.width,e.height),0,0):o.drawImage(e,0,0)),r}catch(e){}return r},e.prototype.cloneNode=function(e){if(Fo(e))return document.createTextNode(e.data);if(!e.ownerDocument)return e.cloneNode(!1);var t=e.ownerDocument.defaultView;if(t&&Uo(e)&&(So(e)||Lo(e))){var r=this.createElementClone(e),n=t.getComputedStyle(e),o=t.getComputedStyle(e,\":before\"),s=t.getComputedStyle(e,\":after\");this.referenceElement===e&&So(r)&&(this.clonedReferenceElement=r),Oo(r)&&vs(r);for(var i=this.counters.parse(new Wn(n)),a=this.resolvePseudoContent(e,r,o,On.BEFORE),A=e.firstChild;A;A=A.nextSibling)Uo(A)&&(Ko(A)||A.hasAttribute(as)||\"function\"==typeof this.options.ignoreElements&&this.options.ignoreElements(A))||this.options.copyStyles&&Uo(A)&&Do(A)||r.appendChild(this.cloneNode(A));a&&r.insertBefore(a,r.firstChild);var u=this.resolvePseudoContent(e,r,s,On.AFTER);return u&&r.appendChild(u),this.counters.pop(i),n&&(this.options.copyStyles||Lo(e))&&!Mo(e)&&ds(n,r),0===e.scrollTop&&0===e.scrollLeft||this.scrolledElements.push([r,e.scrollLeft,e.scrollTop]),(zo(e)||Vo(e))&&(zo(r)||Vo(r))&&(r.value=e.value),r}return e.cloneNode(!1)},e.prototype.resolvePseudoContent=function(e,t,r,n){var o=this;if(r){var s=r.content,i=t.ownerDocument;if(i&&s&&\"none\"!==s&&\"-moz-alt-content\"!==s&&\"none\"!==r.display){this.counters.parse(new Wn(r));var a=new Xn(r),A=i.createElement(\"html2canvaspseudoelement\");ds(r,A),a.content.forEach((function(t){if(t.type===d.STRING_TOKEN)A.appendChild(i.createTextNode(t.value));else if(t.type===d.URL_TOKEN){var r=i.createElement(\"img\");r.src=t.value,r.style.opacity=\"1\",A.appendChild(r)}else if(t.type===d.FUNCTION){if(\"attr\"===t.name){var n=t.values.filter(qe);n.length&&A.appendChild(i.createTextNode(e.getAttribute(n[0].value)||\"\"))}else if(\"counter\"===t.name){var s=t.values.filter(Je),u=s[0],c=s[1];if(u&&qe(u)){var l=o.counters.getCounterValue(u.value),f=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL;A.appendChild(i.createTextNode(is(l,f,!1)))}}else if(\"counters\"===t.name){var h=t.values.filter(Je),p=(u=h[0],h[1]);if(c=h[2],u&&qe(u)){var m=o.counters.getCounterValues(u.value),g=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL,y=p&&p.type===d.STRING_TOKEN?p.value:\"\",v=m.map((function(e){return is(e,g,!1)})).join(y);A.appendChild(i.createTextNode(v))}}}else if(t.type===d.IDENT_TOKEN)switch(t.value){case\"open-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,o.quoteDepth++,!0)));break;case\"close-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,--o.quoteDepth,!1)));break;default:A.appendChild(i.createTextNode(t.value))}})),A.className=ms+\" \"+gs;var u=n===On.BEFORE?\" \"+ms:\" \"+gs;return Lo(t)?t.className.baseValue+=u:t.className+=u,A}}},e.destroy=function(e){return!!e.parentNode&&(e.parentNode.removeChild(e),!0)},e}();!function(e){e[e.BEFORE=0]=\"BEFORE\",e[e.AFTER=1]=\"AFTER\"}(On||(On={}));var us,cs=function(e,t){var r=e.createElement(\"iframe\");return r.className=\"html2canvas-container\",r.style.visibility=\"hidden\",r.style.position=\"fixed\",r.style.left=\"-10000px\",r.style.top=\"0px\",r.style.border=\"0\",r.width=t.width.toString(),r.height=t.height.toString(),r.scrolling=\"no\",r.setAttribute(as,\"true\"),e.body.appendChild(r),r},ls=function(e){return new Promise((function(t,r){var n=e.contentWindow;if(!n)return r(\"No window assigned for iframe\");var o=n.document;n.onload=e.onload=o.onreadystatechange=function(){n.onload=e.onload=o.onreadystatechange=null;var r=setInterval((function(){o.body.childNodes.length>0&&\"complete\"===o.readyState&&(clearInterval(r),t(e))}),50)}}))},ds=function(e,t){for(var r=e.length-1;r>=0;r--){var n=e.item(r);\"content\"!==n&&t.style.setProperty(n,e.getPropertyValue(n))}return t},fs=function(e){var t=\"\";return e&&(t+=\"<!DOCTYPE \",e.name&&(t+=e.name),e.internalSubset&&(t+=e.internalSubset),e.publicId&&(t+=",
+  "ctx": "n(e){return-1===e.indexOf(\" \")?e:\"'\"+e+\""
+ },
+ "js_002": {
+  "t": "2026-07-09 · 문명의 붕괴",
+  "ctx": "_campaign=collapse_diamond\",   edition: "
+ },
+ "js_003": {
+  "t": "저자",
+  "ctx": "워드) ---------- */   {id:1, level:1, tag:"
+ },
+ "js_004": {
+  "t": "『문명의 붕괴』의 저자는 누구일까요?",
+  "ctx": "------ */   {id:1, level:1, tag:\"저자\", q:"
+ },
+ "js_005": {
+  "t": "재러드 다이아몬드",
+  "ctx": ":\"『문명의 붕괴』의 저자는 누구일까요?\",    options:[{t:"
+ },
+ "js_006": {
+  "t": "유발 노아 하라리",
+  "ctx": "    options:[{t:\"재러드 다이아몬드\",ok:true},{t:"
+ },
+ "js_007": {
+  "t": "새뮤얼 P. 헌팅턴",
+  "ctx": "\"재러드 다이아몬드\",ok:true},{t:\"유발 노아 하라리\"},{t:"
+ },
+ "js_008": {
+  "t": "클로드 레비스트로스",
+  "ctx": "ue},{t:\"유발 노아 하라리\"},{t:\"새뮤얼 P. 헌팅턴\"},{t:"
+ },
+ "js_009": {
+  "t": "<b>재러드 다이아몬드</b>는 『총, 균, 쇠』로 퓰리처 상을 받은 학자입니다. 『총, 균, 쇠』가 ‘왜 어떤 사회가 <b>일어섰나</b>’를 다뤘다면, 이 책은 그 반대인 ‘<b>왜 무너졌나</b>’를 다룹니다.",
+  "ctx": "\"새뮤얼 P. 헌팅턴\"},{t:\"클로드 레비스트로스\"}],    ctx:"
+ },
+ "js_010": {
+  "t": "핵심 질문",
+  "ctx": "졌나</b>’를 다룹니다.\"},   {id:2, level:1, tag:"
+ },
+ "js_011": {
+  "t": "이 책이 던지는 가장 큰 질문은 무엇일까요?",
+  "ctx": "니다.\"},   {id:2, level:1, tag:\"핵심 질문\", q:"
+ },
+ "js_012": {
+  "t": "한때 번영하던 사회가 왜 완전히 붕괴해 사라졌는가",
+  "ctx": "책이 던지는 가장 큰 질문은 무엇일까요?\",    options:[{t:"
+ },
+ "js_013": {
+  "t": "인류라는 종은 지구상 어디에서 처음 나타났는가",
+  "ctx": "때 번영하던 사회가 왜 완전히 붕괴해 사라졌는가\",ok:true},{t:"
+ },
+ "js_014": {
+  "t": "왜 어떤 나라는 부유해지고 어떤 나라는 끝내 가난해지는가",
+  "ctx": "rue},{t:\"인류라는 종은 지구상 어디에서 처음 나타났는가\"},{t:"
+ },
+ "js_015": {
+  "t": "인간 사회는 왜 끊임없이 전쟁을 되풀이하게 되는가",
+  "ctx": "t:\"왜 어떤 나라는 부유해지고 어떤 나라는 끝내 가난해지는가\"},{t:"
+ },
+ "js_016": {
+  "t": "다이아몬드는 ‘오늘의 뉴욕 마천루도 언젠가 마야 유적처럼 정글에 묻히는 건 아닐까?’라고 묻습니다. 찬란했던 사회가 <b>갑자기 사라진</b> 이유를 추적하는 책이죠.",
+  "ctx": "\"인간 사회는 왜 끊임없이 전쟁을 되풀이하게 되는가\"}],    ctx:"
+ },
+ "js_017": {
+  "t": "부제 키워드",
+  "ctx": " 이유를 추적하는 책이죠.\"},   {id:3, level:1, tag:"
+ },
+ "js_018": {
+  "t": "원제 부제 ‘How Societies Choose to Fail or Succeed’의 핵심 단어는?",
+  "ctx": "죠.\"},   {id:3, level:1, tag:\"부제 키워드\", q:"
+ },
+ "js_019": {
+  "t": "선택(Choose) — 붕괴는 운명이 아니라 선택의 결과다",
+  "ctx": "l or Succeed’의 핵심 단어는?\",    options:[{t:"
+ },
+ "js_020": {
+  "t": "운명(Fate) — 붕괴는 피할 수 없도록 이미 정해져 있다",
+  "ctx": "ose) — 붕괴는 운명이 아니라 선택의 결과다\",ok:true},{t:"
+ },
+ "js_021": {
+  "t": "행운(Luck) — 살아남는 사회는 순전히 운이 좋았을 뿐이다",
+  "ctx": "\"운명(Fate) — 붕괴는 피할 수 없도록 이미 정해져 있다\"},{t:"
+ },
+ "js_022": {
+  "t": "정복(Conquest) — 강한 사회가 약한 사회를 무너뜨린다",
+  "ctx": "행운(Luck) — 살아남는 사회는 순전히 운이 좋았을 뿐이다\"},{t:"
+ },
+ "js_023": {
+  "t": "제목이 곧 결론입니다. 붕괴는 피할 수 없는 운명이 아니라, 그 사회가 위기에 <b>어떻게 대응하기로 ‘선택’했는가</b>의 문제라는 것이 이 책의 메시지예요.",
+  "ctx": "quest) — 강한 사회가 약한 사회를 무너뜨린다\"}],    ctx:"
+ },
+ "js_024": {
+  "t": "붕괴의 정의",
+  "ctx": "것이 이 책의 메시지예요.\"},   {id:4, level:1, tag:"
+ },
+ "js_025": {
+  "t": "다이아몬드가 말하는 ‘붕괴(collapse)’의 정의에 가장 가까운 것은?",
+  "ctx": "요.\"},   {id:4, level:1, tag:\"붕괴의 정의\", q:"
+ },
+ "js_026": {
+  "t": "넓은 지역에서 오랜 기간에 걸쳐 인구·정치·경제의 복잡성이 급격히 감소하는 것",
+  "ctx": "apse)’의 정의에 가장 가까운 것은?\",    options:[{t:"
+ },
+ "js_027": {
+  "t": "한 왕조가 다른 왕조로 한 차례 교체되며 권력의 주인이 바뀌는 것",
+  "ctx": " 인구·정치·경제의 복잡성이 급격히 감소하는 것\",ok:true},{t:"
+ },
+ "js_028": {
+  "t": "단 한 번의 큰 전쟁에서 패배해 영토의 일부를 잃게 되는 것",
+  "ctx": "왕조가 다른 왕조로 한 차례 교체되며 권력의 주인이 바뀌는 것\"},{t:"
+ },
+ "js_029": {
+  "t": "경기 침체로 경제가 일시적으로 나빠졌다가 다시 회복되는 것",
+  "ctx": "\"단 한 번의 큰 전쟁에서 패배해 영토의 일부를 잃게 되는 것\"},{t:"
+ },
+ "js_030": {
+  "t": "단순한 쇠락이 아니라 <b>거의 완전히 무너져 사라진</b> 경우를 말합니다. 그래서 그는 ‘조금 약해진’ 사회가 아니라 이스터섬·그린란드처럼 ‘끝장난’ 사례를 골랐어요.",
+  "ctx": "체로 경제가 일시적으로 나빠졌다가 다시 회복되는 것\"}],    ctx:"
+ },
+ "js_031": {
+  "t": "5대 요인",
+  "ctx": "끝장난’ 사례를 골랐어요.\"},   {id:5, level:1, tag:"
+ },
+ "js_032": {
+  "t": "다이아몬드가 꼽은 붕괴의 5대 요인 중 ‘환경’과 가장 직접 관련된 것은?",
+  "ctx": "어요.\"},   {id:5, level:1, tag:\"5대 요인\", q:"
+ },
+ "js_033": {
+  "t": "환경 훼손(삼림 파괴와 토양 침식 등)",
+  "ctx": " 중 ‘환경’과 가장 직접 관련된 것은?\",    options:[{t:"
+ },
+ "js_034": {
+  "t": "구성원들이 믿는 종교와 신앙 체계의 차이",
+  "ctx": "[{t:\"환경 훼손(삼림 파괴와 토양 침식 등)\",ok:true},{t:"
+ },
+ "js_035": {
+  "t": "사람들이 쓰는 언어와 문자 체계의 차이",
+  "ctx": "k:true},{t:\"구성원들이 믿는 종교와 신앙 체계의 차이\"},{t:"
+ },
+ "js_036": {
+  "t": "타고난 인종·민족·지능의 우열 차이",
+  "ctx": "체계의 차이\"},{t:\"사람들이 쓰는 언어와 문자 체계의 차이\"},{t:"
+ },
+ "js_037": {
+  "t": "숲을 다 베고 흙을 망치는 <b>환경 훼손</b>은 거의 모든 붕괴 사례의 공통 출발점입니다. 다만 다이아몬드는 ‘환경만으로 다 설명된다’고 주장하진 않아요(곧 나옵니다).",
+  "ctx": "차이\"},{t:\"타고난 인종·민족·지능의 우열 차이\"}],    ctx:"
+ },
+ "js_038": {
+  "t": "대표 사례",
+  "ctx": "진 않아요(곧 나옵니다).\"},   {id:6, level:1, tag:"
+ },
+ "js_039": {
+  "t": "이 책에서 환경 붕괴의 가장 유명한 상징으로 등장하는 섬은?",
+  "ctx": "다).\"},   {id:6, level:1, tag:\"대표 사례\", q:"
+ },
+ "js_040": {
+  "t": "이스터섬(라파누이)",
+  "ctx": "의 가장 유명한 상징으로 등장하는 섬은?\",    options:[{t:"
+ },
+ "js_041": {
+  "t": "하와이의 빅아일랜드",
+  "ctx": "   options:[{t:\"이스터섬(라파누이)\",ok:true},{t:"
+ },
+ "js_042": {
+  "t": "한국 남해의 제주도",
+  "ctx": "스터섬(라파누이)\",ok:true},{t:\"하와이의 빅아일랜드\"},{t:"
+ },
+ "js_043": {
+  "t": "북대서양의 아이슬란드",
+  "ctx": "e},{t:\"하와이의 빅아일랜드\"},{t:\"한국 남해의 제주도\"},{t:"
+ },
+ "js_044": {
+  "t": "거대한 석상 <b>모아이</b>로 유명한 이스터섬은, 이 책에서 ‘마지막 한 그루까지 베어버린 사회’의 상징으로 그려집니다. (단, 이 서사는 오늘날 논쟁 중 — 뒤에서 다룹니다.)",
+  "ctx": "한국 남해의 제주도\"},{t:\"북대서양의 아이슬란드\"}],    ctx:"
+ },
+ "js_045": {
+  "t": "이스터섬",
+  "ctx": "중 — 뒤에서 다룹니다.)\"},   {id:7, level:1, tag:"
+ },
+ "js_046": {
+  "t": "다이아몬드의 설명에 따르면, 이스터섬에서 결정적으로 사라진 것은?",
+  "ctx": "니다.)\"},   {id:7, level:1, tag:\"이스터섬\", q:"
+ },
+ "js_047": {
+  "t": "숲(삼림) — 나무를 다 써버려 섬 전체가 완전히 헐벗게 된 것",
+  "ctx": ", 이스터섬에서 결정적으로 사라진 것은?\",    options:[{t:"
+ },
+ "js_048": {
+  "t": "마실 수 있는 깨끗한 식수원",
+  "ctx": "무를 다 써버려 섬 전체가 완전히 헐벗게 된 것\",ok:true},{t:"
+ },
+ "js_049": {
+  "t": "화폐로 쓰이던 귀한 금과 은",
+  "ctx": " 된 것\",ok:true},{t:\"마실 수 있는 깨끗한 식수원\"},{t:"
+ },
+ "js_050": {
+  "t": "후대에 전하려고 만든 그들만의 고유 문자 체계",
+  "ctx": "수 있는 깨끗한 식수원\"},{t:\"화폐로 쓰이던 귀한 금과 은\"},{t:"
+ },
+ "js_051": {
+  "t": "배를 만들고 거대 석상을 옮기느라 <b>나무를 다 써버려</b> 섬이 헐벗었다는 것이 다이아몬드의 서사입니다. 숲이 사라지자 카누·연료·작물이 함께 무너졌다고 봤죠.",
+  "ctx": "t:\"후대에 전하려고 만든 그들만의 고유 문자 체계\"}],    ctx:"
+ },
+ "js_052": {
+  "t": "모아이",
+  "ctx": "이 함께 무너졌다고 봤죠.\"},   {id:8, level:1, tag:"
+ },
+ "js_053": {
+  "t": "이스터섬의 거대한 돌 석상을 부르는 이름은?",
+  "ctx": "고 봤죠.\"},   {id:8, level:1, tag:\"모아이\", q:"
+ },
+ "js_054": {
+  "t": "모아이(moai)",
+  "ctx": "터섬의 거대한 돌 석상을 부르는 이름은?\",    options:[{t:"
+ },
+ "js_055": {
+  "t": "토템 폴(totem pole)",
+  "ctx": "    options:[{t:\"모아이(moai)\",ok:true},{t:"
+ },
+ "js_056": {
+  "t": "스핑크스(sphinx)",
+  "ctx": "ai)\",ok:true},{t:\"토템 폴(totem pole)\"},{t:"
+ },
+ "js_057": {
+  "t": "가고일(gargoyle)",
+  "ctx": "템 폴(totem pole)\"},{t:\"스핑크스(sphinx)\"},{t:"
+ },
+ "js_058": {
+  "t": "섬 곳곳의 거대 인물상 <b>모아이</b>는 부족·씨족 간 경쟁의 산물로 해석됩니다. ‘더 큰 석상’ 경쟁이 숲을 더 빨리 갉아먹었다는 거죠.",
+  "ctx": "(sphinx)\"},{t:\"가고일(gargoyle)\"}],    ctx:"
+ },
+ "js_059": {
+  "t": "그린란드",
+  "ctx": " 빨리 갉아먹었다는 거죠.\"},   {id:9, level:1, tag:"
+ },
+ "js_060": {
+  "t": "그린란드에 정착해 약 500년간 살다 완전히 사라진 유럽인은?",
+  "ctx": " 거죠.\"},   {id:9, level:1, tag:\"그린란드\", q:"
+ },
+ "js_061": {
+  "t": "노르드인(바이킹)",
+  "ctx": "500년간 살다 완전히 사라진 유럽인은?\",    options:[{t:"
+ },
+ "js_062": {
+  "t": "고대 로마 제국의 군단병",
+  "ctx": "    options:[{t:\"노르드인(바이킹)\",ok:true},{t:"
+ },
+ "js_063": {
+  "t": "중앙아시아의 몽골 유목민",
+  "ctx": "인(바이킹)\",ok:true},{t:\"고대 로마 제국의 군단병\"},{t:"
+ },
+ "js_064": {
+  "t": "남아메리카의 잉카 사람들",
+  "ctx": "\"고대 로마 제국의 군단병\"},{t:\"중앙아시아의 몽골 유목민\"},{t:"
+ },
+ "js_065": {
+  "t": "984년경부터 그린란드에 정착한 <b>노르드인(바이킹)</b>은 15세기 초 마지막 한 사람까지 사라졌습니다. 다이아몬드가 무려 두 장(章)을 할애한 핵심 사례예요.",
+  "ctx": "의 몽골 유목민\"},{t:\"남아메리카의 잉카 사람들\"}],    ctx:"
+ },
+ "js_066": {
+  "t": "성공 사례",
+  "ctx": " 할애한 핵심 사례예요.\"},   {id:10, level:1, tag:"
+ },
+ "js_067": {
+  "t": "다이아몬드가 ‘위기를 이겨내고 살아남은’ 성공 사례로 든 곳은?",
+  "ctx": "요.\"},   {id:10, level:1, tag:\"성공 사례\", q:"
+ },
+ "js_068": {
+  "t": "에도 시대 일본과 작은 섬 티코피아, 파푸아 고원지대의 사회들",
+  "ctx": "겨내고 살아남은’ 성공 사례로 든 곳은?\",    options:[{t:"
+ },
+ "js_069": {
+  "t": "고대 로마 제국과 카르타고, 그리고 아테네",
+  "ctx": "과 작은 섬 티코피아, 파푸아 고원지대의 사회들\",ok:true},{t:"
+ },
+ "js_070": {
+  "t": "숲을 모조리 베어낸 이스터섬과 노르드 그린란드 정착지",
+  "ctx": ":true},{t:\"고대 로마 제국과 카르타고, 그리고 아테네\"},{t:"
+ },
+ "js_071": {
+  "t": "가뭄으로 무너진 마야와 아나사지 도시들",
+  "ctx": ",{t:\"숲을 모조리 베어낸 이스터섬과 노르드 그린란드 정착지\"},{t:"
+ },
+ "js_072": {
+  "t": "붕괴만 다룬 책이 아닙니다. 산림 파괴 위기를 <b>적극적 관리로 극복한</b> 에도 일본, 작은 섬 티코피아, 파푸아 고원처럼 ‘살아남은 선택’도 균형 있게 보여줍니다.",
+  "ctx": "\"},{t:\"가뭄으로 무너진 마야와 아나사지 도시들\"}],    ctx:"
+ },
+ "js_073": {
+  "t": "위키백과 「재러드 다이아몬드」",
+  "ctx": "==== */ const SOURCES = {   ko:  {label:"
+ },
+ "js_074": {
+  "t": "Wikipedia “Easter Island”(이스터섬·생태 논쟁)",
+  "ctx": "ose_to_Fail_or_Succeed\"},   ee:  {label:"
+ },
+ "js_075": {
+  "t": "American Scientist 서평 「A Usable Past」",
+  "ctx": "org/wiki/Easter_Island\"},   as:  {label:"
+ },
+ "js_076": {
+  "t": "Penguin Random House 공식 리딩 가이드",
+  "ctx": "/article/a-usable-past\"},   prh: {label:"
+ },
+ "js_077": {
+  "t": "Binghamton University · 이스터섬 신화 재검토",
+  "ctx": "3117001/readers-guide/\"},   bing:{label:"
+ },
+ "js_078": {
+  "t": "펭귄랜덤하우스 · 『Collapse』 공식 리딩 가이드(전체 구조·토론 질문)",
+  "ctx": "island-myth-gets-wrong\"},   ebs: {label:"
+ },
+ "js_079": {
+  "t": "『총, 균, 쇠』가 ‘흥성’을, 『문명의 붕괴』가 ‘몰락’을 다룬 짝 책이라는 점을 기억하세요.",
+  "ctx": "*/ const EXTRA = {   1:{src:\"ko\",  note:"
+ },
+ "js_080": {
+  "t": "‘쇠락’이 아니라 ‘완전한 붕괴’가 주제입니다. 그래서 끝장난 사례를 골라 비교합니다.",
+  "ctx": " 책이라는 점을 기억하세요.\"},   2:{src:\"en\",  note:"
+ },
+ "js_081": {
+  "t": "헷갈림 주의 — 핵심은 ‘운명’이 아니라 ‘선택(Choose)’. 제목이 곧 결론입니다.",
+  "ctx": "난 사례를 골라 비교합니다.\"},   3:{src:\"en\",  note:"
+ },
+ "js_082": {
+  "t": "붕괴 = 넓은 지역에서 오랜 기간 인구·복잡성이 급감하는 것. ‘잠깐 나빠짐’과 구분하세요.",
+  "ctx": "’. 제목이 곧 결론입니다.\"},   4:{src:\"en\",  note:"
+ },
+ "js_083": {
+  "t": "환경 훼손은 ‘공통 출발점’일 뿐, 다이아몬드도 ‘환경만이 전부’라고는 하지 않습니다(소련 붕괴 등 반례).",
+  "ctx": "잠깐 나빠짐’과 구분하세요.\"},   5:{src:\"en\",  note:"
+ },
+ "js_084": {
+  "t": "이스터섬 서사는 강력하지만 최신 학계의 재검토 대상이기도 합니다(문항 30 참고).",
+  "ctx": "니다(소련 붕괴 등 반례).\"},   6:{src:\"ee\",  note:"
+ },
+ "js_085": {
+  "t": "숲 소실 → 카누·연료·작물 붕괴. ‘숲’ 하나가 도미노의 첫 조각이라는 게 핵심.",
+  "ctx": " 합니다(문항 30 참고).\"},   7:{src:\"ee\",  note:"
+ },
+ "js_086": {
+  "t": "모아이=거대 인물 석상. 씨족 간 ‘더 큰 석상’ 경쟁이 자원 소모를 키웠다는 해석.",
+  "ctx": "의 첫 조각이라는 게 핵심.\"},   8:{src:\"ee\",  note:"
+ },
+ "js_087": {
+  "t": "노르드인은 984년경~15세기 초. 다이아몬드가 두 장을 할애한 ‘가장 설득력 있는’ 사례.",
+  "ctx": "자원 소모를 키웠다는 해석.\"},   9:{src:\"as\",  note:"
+ },
+ "js_088": {
+  "t": "붕괴만이 아니라 ‘살아남은 선택’(일본·티코피아)도 다뤄 균형을 잡습니다.",
+  "ctx": "‘가장 설득력 있는’ 사례.\"},   10:{src:\"en\", note:"
+ },
+ "js_089": {
+  "t": "번영의 정점",
+  "ctx": "*/ const MILESTONES = [   {at:0,  label:"
+ },
+ "js_090": {
+  "t": "환경 훼손",
+  "ctx": "at:0,  label:\"번영의 정점\"},   {at:6,  label:"
+ },
+ "js_091": {
+  "t": "위기의 경고",
+  "ctx": "{at:6,  label:\"환경 훼손\"},   {at:12, label:"
+ },
+ "js_092": {
+  "t": "대응의 갈림길",
+  "ctx": "at:12, label:\"위기의 경고\"},   {at:18, label:"
+ },
+ "js_093": {
+  "t": "붕괴 vs 생존",
+  "ctx": "t:18, label:\"대응의 갈림길\"},   {at:24, label:"
+ },
+ "js_094": {
+  "t": "오늘의 교훈",
+  "ctx": ":24, label:\"붕괴 vs 생존\"},   {at:30, label:"
+ },
+ "js_095": {
+  "t": "보통",
+  "ctx": "]; const DIFF_LABEL = {1:[\"쉬움\",\"l1\"],2:["
+ },
+ "js_096": {
+  "t": "어려움",
+  "ctx": "LABEL = {1:[\"쉬움\",\"l1\"],2:[\"보통\",\"l2\"],3:["
+ },
+ "js_097": {
+  "t": "· 복습",
+  "ctx": "ds.size+' / '+TOTAL_Q + (attempts[id] ? "
+ },
+ "js_098": {
+  "t": "🎯 정답!",
+  "ctx": ")      verdict.textContent = firstTry ? "
+ },
+ "js_099": {
+  "t": "✅ 이제 익혔어요!",
+  "ctx": "dict.textContent = firstTry ? '🎯 정답!' : "
+ },
+ "js_100": {
+  "t": "❌ 다시 도전!",
+  "ctx": "ing.push(id);     verdict.textContent = "
+ },
+ "js_101": {
+  "t": "↻ 이 문제는 뒤에서 다시 나옵니다",
+  "ctx": "getElementById('requeue').textContent = "
+ },
+ "js_102": {
+  "t": "붕괴는 ‘선택’이다",
+  "ctx": "=== */ const CONCEPTS = [   {ic:\"⚖️\", h:"
+ },
+ "js_103": {
+  "t": "부제 ‘Choose’가 핵심. 외부 압력이 같아도 사회의 대응에 따라 생존과 붕괴가 갈립니다.",
+  "ctx": "CEPTS = [   {ic:\"⚖️\", h:\"붕괴는 ‘선택’이다\", p:"
+ },
+ "js_104": {
+  "t": "5대 요인 틀",
+  "ctx": "생존과 붕괴가 갈립니다.\", src:\"en\"},   {ic:\"🧩\", h:"
+ },
+ "js_105": {
+  "t": "환경 훼손·기후 변화·적대적 이웃·우호적 무역국 상실·사회의 대응. 이 다섯으로 모든 사례를 읽습니다.",
+  "ctx": "\", src:\"en\"},   {ic:\"🧩\", h:\"5대 요인 틀\", p:"
+ },
+ "js_106": {
+  "t": "환경 훼손(삼림 파괴)",
+  "ctx": " 모든 사례를 읽습니다.\", src:\"en\"},   {ic:\"🌲\", h:"
+ },
+ "js_107": {
+  "t": "숲 소실 → 토양 침식·연료 부족·작물 실패. 거의 모든 붕괴 사례의 공통 출발점.",
+  "ctx": "c:\"en\"},   {ic:\"🌲\", h:\"환경 훼손(삼림 파괴)\", p:"
+ },
+ "js_108": {
+  "t": "숲을 다 베어낸 자멸의 상징. 단, 쥐·유럽인 접촉을 강조하는 최신 반론도 함께 알아두세요.",
+  "ctx": "발점.\", src:\"en\"},   {ic:\"🗿\", h:\"이스터섬\", p:"
+ },
+ "js_109": {
+  "t": "그린란드 노르드인",
+  "ctx": "반론도 함께 알아두세요.\", src:\"ee\"},   {ic:\"🐟\", h:"
+ },
+ "js_110": {
+  "t": "굶으면서도 생선을 피하고 유럽식을 고수한 ‘적응 거부’의 비극. 이누이트는 적응해 생존.",
+  "ctx": " src:\"ee\"},   {ic:\"🐟\", h:\"그린란드 노르드인\", p:"
+ },
+ "js_111": {
+  "t": "풍경 기억상실",
+  "ctx": "이누이트는 적응해 생존.\", src:\"as\"},   {ic:\"🧠\", h:"
+ },
+ "js_112": {
+  "t": "위기가 서서히 진행돼 ‘원래 이랬나?’ 하며 알아채지 못하는 인지 실패(점진적 정상화).",
+  "ctx": "\", src:\"as\"},   {ic:\"🧠\", h:\"풍경 기억상실\", p:"
+ },
+ "js_113": {
+  "t": "세계화의 역설",
+  "ctx": " 실패(점진적 정상화).\", src:\"en\"},   {ic:\"🌏\", h:"
+ },
+ "js_114": {
+  "t": "이제 어떤 사회도 ‘고립된 붕괴’가 불가능. 한 곳의 위기가 전 지구로 연쇄됩니다.",
+  "ctx": "\", src:\"en\"},   {ic:\"🌏\", h:\"세계화의 역설\", p:"
+ },
+ "js_115": {
+  "t": "비판: 환경 결정론",
+  "ctx": "전 지구로 연쇄됩니다.\", src:\"en\"},   {ic:\"⚠️\", h:"
+ },
+ "js_116": {
+  "t": "환경 탓으로 단순화하고 사례를 취사선택했다는 비판. 이스터섬 서사는 특히 논쟁 중.",
+  "ctx": "rc:\"en\"},   {ic:\"⚠️\", h:\"비판: 환경 결정론\", p:"
+ },
+ "js_117": {
+  "t": "프롤로그",
+  "ctx": "/* 목차(클릭하면 요약 오픈) */ const TOC = [   {n:"
+ },
+ "js_118": {
+  "t": "두 농장 이야기",
+  "ctx": " 요약 오픈) */ const TOC = [   {n:\"프롤로그\", t:"
+ },
+ "js_119": {
+  "t": "미국 몬태나의 헐스 농장은 번창 중이고, 그린란드 가르다르 농장은 500년 전 폐허가 됐습니다.",
+  "ctx": "그\", t:\"두 농장 이야기\", beats:[     {e:\"🐄\", x:"
+ },
+ "js_120": {
+  "t": "멀쩡히 번성하던 사회도 어느 순간 ‘끝장’날 수 있다 — 이 대비가 책 전체의 출발점입니다.",
+  "ctx": "르 농장은 500년 전 폐허가 됐습니다.\"},     {e:\"🤔\", x:"
+ },
+ "js_121": {
+  "t": "붕괴란? ‘넓은 지역에서 오랜 기간 인구·정치·경제·사회 복잡성이 급격히 감소’하는 것.",
+  "ctx": " — 이 대비가 책 전체의 출발점입니다.\"},     {e:\"📉\", x:"
+ },
+ "js_122": {
+  "t": "분석 도구로 ‘5대 요인 틀’을 제시: 환경 훼손·기후 변화·적대적 이웃·무역국 상실·사회의 대응.",
+  "ctx": "제·사회 복잡성이 급격히 감소’하는 것.\"},     {e:\"🧩\", x:"
+ },
+ "js_123": {
+  "t": "이 중 다섯째 ‘대응(선택)’이 운명을 가르는 결정 변수임을 미리 못 박습니다.",
+  "ctx": "·적대적 이웃·무역국 상실·사회의 대응.\"},     {e:\"🧭\", x:"
+ },
+ "js_124": {
+  "t": "1부",
+  "ctx": "명을 가르는 결정 변수임을 미리 못 박습니다.\"},   ]},   {n:"
+ },
+ "js_125": {
+  "t": "현대 몬태나",
+  "ctx": "정 변수임을 미리 못 박습니다.\"},   ]},   {n:\"1부\", t:"
+ },
+ "js_126": {
+  "t": "왜 아름다운 몬태나로 시작할까? ‘붕괴는 먼 옛날 남의 일이 아니다’를 보여주려는 의도.",
+  "ctx": "1부\", t:\"현대 몬태나\", beats:[     {e:\"🏔️\", x:"
+ },
+ "js_127": {
+  "t": "광산 오염, 산불, 토양·물 문제, 인구 압력 — 풍요로워 보이는 곳에도 환경 압력이 깔려 있습니다.",
+  "ctx": "남의 일이 아니다’를 보여주려는 의도.\"},     {e:\"⛏️\", x:"
+ },
+ "js_128": {
+  "t": "몬태나는 ‘현대의 거울’. 과거 붕괴 사회를 비추는 현재의 시작점 역할을 합니다.",
+  "ctx": "이는 곳에도 환경 압력이 깔려 있습니다.\"},     {e:\"🪞\", x:"
+ },
+ "js_129": {
+  "t": "여기서 던진 질문 — 이 압력들이 쌓이면 우리도 무너질 수 있을까?",
+  "ctx": "를 비추는 현재의 시작점 역할을 합니다.\"},     {e:\"🔍\", x:"
+ },
+ "js_130": {
+  "t": "2부",
+  "ctx": "이 압력들이 쌓이면 우리도 무너질 수 있을까?\"},   ]},   {n:"
+ },
+ "js_131": {
+  "t": "과거의 사회들 — 붕괴와 생존",
+  "ctx": "이면 우리도 무너질 수 있을까?\"},   ]},   {n:\"2부\", t:"
+ },
+ "js_132": {
+  "t": "이스터섬: 거대 석상 경쟁 속 숲을 다 베어낸 ‘생태자살’의 상징(최신 학계는 재검토 중).",
+  "ctx": "거의 사회들 — 붕괴와 생존\", beats:[     {e:\"🗿\", x:"
+ },
+ "js_133": {
+  "t": "핏케언·헨더슨 섬: 무역 파트너(본섬)를 잃자 함께 무너진 ‘우호국 상실’ 사례.",
+  "ctx": "살’의 상징(최신 학계는 재검토 중).\"},     {e:\"🏝️\", x:"
+ },
+ "js_134": {
+  "t": "아나사지: 삼림 파괴 + 장기 가뭄(기후)이 겹쳐 차코 캐니언 도시가 버려졌습니다.",
+  "ctx": "자 함께 무너진 ‘우호국 상실’ 사례.\"},     {e:\"🏜️\", x:"
+ },
+ "js_135": {
+  "t": "마야: 인구 과잉·가뭄·전쟁·지도층 실패가 겹친 ‘복합 붕괴’.",
+  "ctx": " 겹쳐 차코 캐니언 도시가 버려졌습니다.\"},     {e:\"🛕\", x:"
+ },
+ "js_136": {
+  "t": "노르드 그린란드: 5대 요인이 모두 작동. 생선 기피·유럽식 고수 등 ‘적응 거부’가 치명적.",
+  "ctx": "전쟁·지도층 실패가 겹친 ‘복합 붕괴’.\"},     {e:\"🐟\", x:"
+ },
+ "js_137": {
+  "t": "반대로 파푸아 고원·티코피아·에도 일본은 ‘적극적 자원 관리’로 살아남았습니다.",
+  "ctx": "유럽식 고수 등 ‘적응 거부’가 치명적.\"},     {e:\"✅\", x:"
+ },
+ "js_138": {
+  "t": "교훈: 같은 문제라도 ‘어떻게 대응하느냐’가 붕괴와 생존을 가른다.",
+  "ctx": " ‘적극적 자원 관리’로 살아남았습니다.\"},     {e:\"💡\", x:"
+ },
+ "js_139": {
+  "t": "3부",
+  "ctx": "‘어떻게 대응하느냐’가 붕괴와 생존을 가른다.\"},   ]},   {n:"
+ },
+ "js_140": {
+  "t": "현대 사회들",
+  "ctx": "느냐’가 붕괴와 생존을 가른다.\"},   ]},   {n:\"3부\", t:"
+ },
+ "js_141": {
+  "t": "르완다(1994): 인구 과잉·토지 압박이 집단학살을 부채질했다는 (논쟁적) 해석.",
+  "ctx": "\"3부\", t:\"현대 사회들\", beats:[     {e:\"🔪\", x:"
+ },
+ "js_142": {
+  "t": "히스파니올라: 같은 섬의 아이티(헐벗음)와 도미니카(상대적 회복) — 정책·리더십의 차이.",
+  "ctx": "집단학살을 부채질했다는 (논쟁적) 해석.\"},     {e:\"🌴\", x:"
+ },
+ "js_143": {
+  "t": "중국: 거대한 경제·인구·면적 탓에 12가지 현대 환경문제를 모두 안고, 그 영향은 전 세계로.",
+  "ctx": "(상대적 회복) — 정책·리더십의 차이.\"},     {e:\"🐉\", x:"
+ },
+ "js_144": {
+  "t": "호주: 가장 취약한 환경에 놓인 제1세계 — 토양·물·외래종 문제로 경고등이 켜졌습니다.",
+  "ctx": "제를 모두 안고, 그 영향은 전 세계로.\"},     {e:\"🦘\", x:"
+ },
+ "js_145": {
+  "t": "현대편의 메시지 — 과거의 붕괴 패턴이 지금 우리 곁에서 반복될 수 있다.",
+  "ctx": "·물·외래종 문제로 경고등이 켜졌습니다.\"},     {e:\"🌐\", x:"
+ },
+ "js_146": {
+  "t": "4부",
+  "ctx": "괴 패턴이 지금 우리 곁에서 반복될 수 있다.\"},   ]},   {n:"
+ },
+ "js_147": {
+  "t": "실천적 교훈",
+  "ctx": " 우리 곁에서 반복될 수 있다.\"},   ]},   {n:\"4부\", t:"
+ },
+ "js_148": {
+  "t": "‘왜 사회는 파국적 결정을 내리나’ — ①문제를 미리 예상 못 함 ②닥쳐도 인지 못 함 ③알아도 방치 ④시도해도 실패.",
+  "ctx": "\"4부\", t:\"실천적 교훈\", beats:[     {e:\"🤷\", x:"
+ },
+ "js_149": {
+  "t": "‘풍경 기억상실/점진적 정상화’: 서서히 나빠져 위기를 못 알아채는 함정.",
+  "ctx": " 못 함 ③알아도 방치 ④시도해도 실패.\"},     {e:\"🧠\", x:"
+ },
+ "js_150": {
+  "t": "‘공유지의 비극’: 개인엔 이득·집단엔 손해인 행동을 각자 계속하다 자멸.",
+  "ctx": "서히 나빠져 위기를 못 알아채는 함정.\"},     {e:\"♻️\", x:"
+ },
+ "js_151": {
+  "t": "가치관의 함정: 위기에도 기존 신념·정체성을 못 버려 변화에 실패(노르드인의 교회).",
+  "ctx": "단엔 손해인 행동을 각자 계속하다 자멸.\"},     {e:\"⛪\", x:"
+ },
+ "js_152": {
+  "t": "대기업과 환경: 소비자·제도가 압박하면 기업도 지속가능하게 바뀔 수 있다는 현실적 희망.",
+  "ctx": "못 버려 변화에 실패(노르드인의 교회).\"},     {e:\"🏢\", x:"
+ },
+ "js_153": {
+  "t": "‘둑(폴더)으로서의 세계’: 세계화 시대엔 누구도 고립된 붕괴가 불가능 — 함께 막아야 함.",
+  "ctx": "속가능하게 바뀔 수 있다는 현실적 희망.\"},     {e:\"🌏\", x:"
+ },
+ "js_154": {
+  "t": "에필로그",
+  "ctx": "도 고립된 붕괴가 불가능 — 함께 막아야 함.\"},   ]},   {n:"
+ },
+ "js_155": {
+  "t": "우리의 선택",
+  "ctx": "불가능 — 함께 막아야 함.\"},   ]},   {n:\"에필로그\", t:"
+ },
+ "js_156": {
+  "t": "한 문장 결론: 붕괴는 불운이 아니라 ‘사회가 환경 문제에 어떻게 대응했느냐’의 결과.",
+  "ctx": "필로그\", t:\"우리의 선택\", beats:[     {e:\"🎯\", x:"
+ },
+ "js_157": {
+  "t": "비관만이 아니라 희망도 — 일본·티코피아처럼 ‘선택’으로 운명을 바꾼 사회가 실제로 있다.",
+  "ctx": "환경 문제에 어떻게 대응했느냐’의 결과.\"},     {e:\"🌱\", x:"
+ },
+ "js_158": {
+  "t": "동시에 ‘환경 결정론’이라는 비판도 인정하며, 정치·문화·우연의 여백을 남깁니다.",
+  "ctx": "으로 운명을 바꾼 사회가 실제로 있다.\"},     {e:\"⚖️\", x:"
+ },
+ "js_159": {
+  "t": "좋은 독자는 강력한 주장과 그 한계(이스터섬 논쟁 등)를 함께 기억합니다.",
+  "ctx": "며, 정치·문화·우연의 여백을 남깁니다.\"},     {e:\"📌\", x:"
+ },
+ "js_160": {
+  "t": "이스터섬의 모아이",
+  "ctx": "해볼 사례 3 */ const CASES = [   {ic:\"🗿\", t:"
+ },
+ "js_161": {
+  "t": "씨족 간 ‘더 큰 석상’ 경쟁 속에 배·운반대를 만드느라 숲을 다 베었고, 헐벗은 섬에서 사회가 무너졌다는 다이아몬드의 서사. 단, 최신 학계는 쥐와 유럽인 접촉의 역할을 강조하며 이 서사를 재검토합니다.",
+  "ctx": "t CASES = [   {ic:\"🗿\", t:\"이스터섬의 모아이\", d:"
+ },
+ "js_162": {
+  "t": "‘자멸의 상징’인 동시에, 단일한 ‘생태자살’ 서사가 얼마나 쉽게 굳어지는지를 보여줍니다.",
+  "ctx": "쥐와 유럽인 접촉의 역할을 강조하며 이 서사를 재검토합니다.\", why:"
+ },
+ "js_163": {
+  "t": "그린란드 노르드인 vs 이누이트",
+  "ctx": "사가 얼마나 쉽게 굳어지는지를 보여줍니다.\"},   {ic:\"🐟\", t:"
+ },
+ "js_164": {
+  "t": "같은 추운 땅에서, 이누이트는 바다표범·물고기로 적응해 살아남았고, 노르드인은 유럽식 농경·신앙을 고수하다 굶주려 사라졌습니다.",
+  "ctx": "\"},   {ic:\"🐟\", t:\"그린란드 노르드인 vs 이누이트\", d:"
+ },
+ "js_165": {
+  "t": "‘같은 환경, 다른 선택, 다른 운명’ — 다섯째 요인(대응)이 결정적임을 보여주는 가장 강력한 사례.",
+  "ctx": "노르드인은 유럽식 농경·신앙을 고수하다 굶주려 사라졌습니다.\", why:"
+ },
+ "js_166": {
+  "t": "한 섬, 두 나라 (히스파니올라)",
+  "ctx": "이 결정적임을 보여주는 가장 강력한 사례.\"},   {ic:\"🌴\", t:"
+ },
+ "js_167": {
+  "t": "같은 섬의 아이티는 숲이 거의 사라져 헐벗었지만, 도미니카공화국은 산림을 더 지켜 상대적으로 나았습니다. 차이를 만든 한 요인은 ‘지도자의 정책’이었죠.",
+  "ctx": "},   {ic:\"🌴\", t:\"한 섬, 두 나라 (히스파니올라)\", d:"
+ },
+ "js_168": {
+  "t": "환경이 운명을 ‘정하는’ 게 아니라 정책·대응이 가른다 — 환경 결정론에 대한 반증.",
+  "ctx": "나았습니다. 차이를 만든 한 요인은 ‘지도자의 정책’이었죠.\", why:"
+ },
+ "js_169": {
+  "t": "우리 사회의 ‘풍경 기억상실’은 무엇일까? — 서서히 나빠져 우리가 못 알아채는 위기는?",
+  "ctx": "책이 우리에게 던지는 질문 3 */ const ASKS = [   {q:"
+ },
+ "js_170": {
+  "t": "기후·집값·인구처럼 ‘매년 조금씩’ 변해 무뎌진 문제를 떠올려 보세요.",
+  "ctx": "실’은 무엇일까? — 서서히 나빠져 우리가 못 알아채는 위기는?\", h:"
+ },
+ "js_171": {
+  "t": "단기 이익(나)과 장기 생존(우리)이 충돌할 때, 나는 어느 쪽을 택하는가?",
+  "ctx": "처럼 ‘매년 조금씩’ 변해 무뎌진 문제를 떠올려 보세요.\"},   {q:"
+ },
+ "js_172": {
+  "t": "‘공유지의 비극’은 먼 옛날 이야기가 아니라 오늘의 선택입니다.",
+  "ctx": ")과 장기 생존(우리)이 충돌할 때, 나는 어느 쪽을 택하는가?\", h:"
+ },
+ "js_173": {
+  "t": "내가 차마 버리지 못하는 ‘가치관’이, 정작 변화의 발목을 잡고 있진 않은가?",
+  "ctx": "의 비극’은 먼 옛날 이야기가 아니라 오늘의 선택입니다.\"},   {q:"
+ },
+ "js_174": {
+  "t": "노르드인의 교회처럼, 한때의 강점이 자멸의 원인이 되기도 합니다.",
+  "ctx": "지 못하는 ‘가치관’이, 정작 변화의 발목을 잡고 있진 않은가?\", h:"
+ },
+ "js_175": {
+  "t": "문명의 흥망을 완벽히 꿰뚫었습니다",
+  "ctx": "b;   if(acc>=90){ rank='지속가능성의 현자'; sub="
+ },
+ "js_176": {
+  "t": "현명한 항해자",
+  "ctx": "완벽히 꿰뚫었습니다'; }   else if(acc>=75){ rank="
+ },
+ "js_177": {
+  "t": "핵심 논리를 거의 다 잡았어요",
+  "ctx": "  else if(acc>=75){ rank='현명한 항해자'; sub="
+ },
+ "js_178": {
+  "t": "깨어나는 관찰자",
+  "ctx": " 거의 다 잡았어요'; }   else if(acc>=55){ rank="
+ },
+ "js_179": {
+  "t": "뼈대를 익혔습니다 — 한 번 더!",
+  "ctx": " else if(acc>=55){ rank='깨어나는 관찰자'; sub="
+ },
+ "js_180": {
+  "t": "호기심 많은 탐험가",
+  "ctx": "b='뼈대를 익혔습니다 — 한 번 더!'; }   else { rank="
+ },
+ "js_181": {
+  "t": "반복할수록 점수가 오릅니다",
+  "ctx": " 더!'; }   else { rank='호기심 많은 탐험가'; sub="
+ },
+ "js_182": {
+  "t": "완독 리포트",
+  "ctx": "onst fname = ((h2 && h2.textContent) || "
+ },
+ "js_183": {
+  "t": "한눈에 보기",
+  "ctx": "&& h2.textContent) || '완독 리포트').replace("
+ },
+ "js_184": {
+  "t": "리포트.pdf",
+  "ctx": "'완독 리포트').replace('한눈에 보기','').trim() + "
+ },
+ "js_185": {
+  "t": "📄 PDF 만드는 중…",
+  "ctx": "tn){ btn.disabled=true; btn.textContent="
+ },
+ "js_186": {
+  "t": "PDF 생성 중 문제가 발생했어요. 이 HTML 파일을 내려받아 브라우저에서 직접 열고 다시 눌러 주세요.",
+  "ctx": "     }   }).catch(function(){     alert("
+ },
+ "js_187": {
+  "t": "무료로는 <b>",
+  "ctx": "t = TOTAL_Q - fl;       msg.innerHTML = "
+ },
+ "js_188": {
+  "t": "문항</b>까지 풀 수 있어요.",
+  "ctx": "fl;       msg.innerHTML = '무료로는 <b>'+fl+"
+ },
+ "js_189": {
+  "t": "나머지 <b>",
+  "ctx": " <b>'+fl+'문항</b>까지 풀 수 있어요. ' +         "
+ },
+ "js_190": {
+  "t": "문항</b>과 <b>완독 요약 리포트</b>는 구독자 전용입니다.",
+  "ctx": ">까지 풀 수 있어요. ' +         '나머지 <b>'+rest+"
+ },
+ "js_191": {
+  "t": "지금까지 추적한 <b>문명의 운명</b>은 위 게이지에 그대로 남아 있어요.",
+  "ctx": "b>완독 요약 리포트</b>는 구독자 전용입니다. ' +         "
+ },
+ "js_192": {
+  "t": "<h3>완독 리포트 전체는 구독자 전용이에요</h3>",
+  "ctx": " = '<div class=\"lk-ic\">🔒</div>' +       "
+ },
+ "js_193": {
+  "t": "<p>인과의 사슬과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>",
+  "ctx": "'<h3>완독 리포트 전체는 구독자 전용이에요</h3>' +       "
+ },
+ "js_194": {
+  "t": "목차 요약 · 사례 · 질문 · 약점 복습 · PDF 저장은 구독하면 모두 열립니다.</p>",
+  "ctx": "과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>' +       "
+ },
+ "js_195": {
+  "t": "\" target=\"_blank\" rel=\"noopener\">🔑 구독하고 완독 리포트 전체 열기</a>",
+  "ctx": "     '<a class=\"cta\" href=\"' + _sub() + "
+ },
+ "js_196": {
+  "t": "문명의 붕괴",
+  "ctx": " 250, '120px serif', '#d8a24a');   ctxt("
+ },
+ "js_197": {
+  "t": "재러드 다이아몬드 · 붕괴와 생존 마스터 퀴즈",
+  "ctx": "to Serif KR\",serif', '#ede4d3');   ctxt("
+ },
+ "js_198": {
+  "t": "📚 매일 새 책 퀴즈  ·",
+  "ctx": "(/^https?:\\/\\//,'') : '';   if(su) ctxt("
+ },
+ "js_199": {
+  "t": "문명의붕괴_퀴즈결과.png",
+  "ctx": "nt('a');     a.href = url; a.download = "
+ },
+ "js_200": {
+  "t": "💌 VIP 초대 —",
+  "ctx": "ursor:pointer;\";     d.textContent=(vip?"
+ },
+ "js_201": {
+  "t": "🎁 지금 이 책 풀버전 무료 오픈 중!",
+  "ctx": "\";     d.textContent=(vip?\"💌 VIP 초대 — \":"
+ },
+ "js_202": {
+  "t": "전체판(잠금 없음)으로 이동 →",
+  "ctx": "\"💌 VIP 초대 — \":\"🎁 지금 이 책 풀버전 무료 오픈 중! \")+"
+ },
+ "jst_001": {
+  "t": "무료로 풀 수 있는 문항 수",
+  "ctx": "  freeLimit: 10,             // teaser: "
+ },
+ "jst_002": {
+  "t": "아직",
+  "ctx": "ength;    let pending = [];          // "
+ },
+ "jst_003": {
+  "t": "처음으로 정답",
+  "ctx": "h;    let pending = [];          // 아직 ‘"
+ },
+ "jst_004": {
+  "t": "을 못 낸 문항 큐",
+  "ctx": "t pending = [];          // 아직 ‘처음으로 정답’"
+ },
+ "jst_005": {
+  "t": "앞에서 꺼냄",
+  "ctx": "[];          // 아직 ‘처음으로 정답’을 못 낸 문항 큐 ("
+ },
+ "jst_006": {
+  "t": "시도 횟수",
+  "ctx": "(); let attempts = {};         // id -> "
+ },
+ "jst_007": {
+  "t": "첫 시도에 틀린 문항",
+  "ctx": " 0; let firstWrongIds = new Set();   // "
+ },
+ "jst_008": {
+  "t": "약점",
+  "ctx": "rongIds = new Set();   // 첫 시도에 틀린 문항 = "
+ },
+ "jst_009": {
+  "t": "집중 복습 대상",
+  "ctx": "gIds = new Set();   // 첫 시도에 틀린 문항 = 약점("
+ },
+ "jst_010": {
+  "t": "세션 내 최고 점수",
+  "ctx": "r = null; let bestScore = 0;         // "
+ },
+ "jst_011": {
+  "t": "재도전 비교용,",
+  "ctx": "t bestScore = 0;         // 세션 내 최고 점수 ("
+ },
+ "jst_012": {
+  "t": "미사용",
+  "ctx": "   // 세션 내 최고 점수 (재도전 비교용, localStorage "
+ },
+ "jst_013": {
+  "t": "복습 정답은 절반 점수",
+  "ctx": " gain = Math.round(gain/2);          // "
+ },
+ "jst_014": {
+  "t": "콤보 보너스",
+  "ctx": " (streak>=2) ? (streak-1)*3 : 0;     // "
+ },
+ "jst_015": {
+  "t": "가 아니어도 최종적으로 익힌 것으로 카운트",
+  "ctx": " masteredIds.add(id);          // ‘처음으로’"
+ },
+ "jst_016": {
+  "t": "큐에서 제거",
+  "ctx": "운트     pending.shift();              // "
+ },
+ "jst_017": {
+  "t": "연속 정답!",
+  "ctx": "      comboEl.textContent = `🔥 ${streak}"
+ },
+ "jst_018": {
+  "t": "보너스",
+  "ctx": "tContent = `🔥 ${streak}연속 정답! +${bonus} "
+ },
+ "jst_019": {
+  "t": "약점으로 기록",
+  "ctx": "f(firstTry) firstWrongIds.add(id);   // "
+ },
+ "jst_020": {
+  "t": "왜 생각해볼 만한가",
+  "ctx": "= >${c.d}</div>       <div class= >💭 <b>"
+ },
+ "jst_021": {
+  "t": "첫 시도에 모두 정답!",
+  "ctx": " ;     list.innerHTML = `<div class= >🌟 "
+ },
+ "jst_022": {
+  "t": "약점이 없어 따로 복습할 항목이 없습니다. 멋져요.",
+  "ctx": "TML = `<div class= >🌟 첫 시도에 모두 정답!<span>"
+ },
+ "jst_023": {
+  "t": "개",
+  "ctx": " {     cnt.textContent = `(${ids.length}"
+ },
+ "jst_024": {
+  "t": "정답",
+  "ctx": "= >Q. ${q.q}</div>         <div class= >"
+ },
+ "jst_025": {
+  "t": "최고 점수 경신!",
+  "ctx": "re;     note.innerHTML = prev>0 ? `🏆 <b>"
+ },
+ "jst_026": {
+  "t": "이전",
+  "ctx": "nerHTML = prev>0 ? `🏆 <b>최고 점수 경신!</b> ("
+ },
+ "jst_027": {
+  "t": "점",
+  "ctx": "prev>0 ? `🏆 <b>최고 점수 경신!</b> (이전 ${prev}"
+ },
+ "jst_028": {
+  "t": "첫 기록",
+  "ctx": "`🏆 <b>최고 점수 경신!</b> (이전 ${prev}점)` : `🏆 "
+ },
+ "jst_029": {
+  "t": "다시 도전해 깨보세요!",
+  "ctx": "${prev}점)` : `🏆 첫 기록 <b>${score}점</b> — "
+ },
+ "jst_030": {
+  "t": "현재 최고 점수",
+  "ctx": "보세요!`;   } else {     note.innerHTML = `"
+ },
+ "jst_031": {
+  "t": "이번엔",
+  "ctx": "HTML = `현재 최고 점수 <b>${bestScore}점</b> · "
+ }
+}

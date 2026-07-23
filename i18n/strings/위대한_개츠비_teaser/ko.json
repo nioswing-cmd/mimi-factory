@@ -1,0 +1,1170 @@
+{
+ "_meta": {
+  "source": "apps/위대한_개츠비_teaser.html",
+  "slug": "위대한_개츠비_teaser"
+ },
+ "title_001": {
+  "t": "위대한 개츠비 도파민 마스터 퀴즈 · F. 스콧 피츠제럴드",
+  "ctx": "<title>"
+ },
+ "html_001": {
+  "t": "F. 스콧 피츠제럴드 · 1925 · 재즈 시대 미국의 자화상",
+  "ctx": "class=\"hero\">       <div class=\"eyebrow\""
+ },
+ "html_002": {
+  "t": "초록 불빛을 향해 손을 뻗은, 이룰 수 없는 꿈의 이야기",
+  "ctx": "ass=\"p3\">🌃</span></div>       <h1><small"
+ },
+ "html_003": {
+  "t": "위대한 개츠비 마스터 퀴즈",
+  "ctx": "l>초록 불빛을 향해 손을 뻗은, 이룰 수 없는 꿈의 이야기</small"
+ },
+ "html_004": {
+  "t": "“그리하여 우리는 물결을 거스르는 배처럼, 끊임없이 과거로 떠밀려가면서도 계속 나아간다.”",
+  "ctx": "개츠비 마스터 퀴즈</h1>       <div class=\"quote\""
+ },
+ "html_005": {
+  "t": "— 소설 『위대한 개츠비』의 마지막 문장",
+  "ctx": "임없이 과거로 떠밀려가면서도 계속 나아간다.”<br>         <b"
+ },
+ "html_006": {
+  "t": "개츠비의 꿈과 이 소설의 인물·상징·주제를",
+  "ctx": "한 개츠비』의 마지막 문장</b>       </div>       <p"
+ },
+ "html_007": {
+  "t": "30개의 퀴즈",
+  "ctx": "div>       <p>개츠비의 꿈과 이 소설의 인물·상징·주제를 <b"
+ },
+ "html_008": {
+  "t": "로 익힙니다.\n        쉬운 것부터 시작해 점점 어려워지고,",
+  "ctx": "<p>개츠비의 꿈과 이 소설의 인물·상징·주제를 <b>30개의 퀴즈</b"
+ },
+ "html_009": {
+  "t": "틀린 문제는 맞힐 때까지 다시 돌아옵니다.",
+  "ctx": ">로 익힙니다.         쉬운 것부터 시작해 점점 어려워지고, <b"
+ },
+ "html_010": {
+  "t": "총",
+  "ctx": "s=\"meta-row\">         <span class=\"chip\""
+ },
+ "html_011": {
+  "t": "30문항",
+  "ctx": "ta-row\">         <span class=\"chip\">총 <b"
+ },
+ "html_012": {
+  "t": "쉬움 → 어려움",
+  "ctx": "문항</b></span>         <span class=\"chip\""
+ },
+ "html_013": {
+  "t": "실시간",
+  "ctx": "어려움</span>         <span class=\"chip\"><b"
+ },
+ "html_014": {
+  "t": "개츠비의 꿈",
+  "ctx": "an>         <span class=\"chip\"><b>실시간</b"
+ },
+ "html_015": {
+  "t": "문제마다",
+  "ctx": "개츠비의 꿈</span>         <span class=\"chip\""
+ },
+ "html_016": {
+  "t": "쉬운 해설",
+  "ctx": "span>         <span class=\"chip\">문제마다 <b"
+ },
+ "html_017": {
+  "t": "초록 불빛으로 →",
+  "ctx": "=\"btn btn-primary\" onclick=\"startQuiz()\""
+ },
+ "html_018": {
+  "t": "점수",
+  "ctx": "   <div class=\"stat\"><span class=\"label\""
+ },
+ "html_019": {
+  "t": "연속 정답",
+  "ctx": "align-items:center;\"><span class=\"label\""
+ },
+ "html_020": {
+  "t": "마스터",
+  "ctx": "ign-items:flex-end;\"><span class=\"label\""
+ },
+ "html_021": {
+  "t": "꿈 ←",
+  "ctx": "\">         <div class=\"axis-label\"><span"
+ },
+ "html_022": {
+  "t": "개츠비의 여정 ·",
+  "ctx": "class=\"axis-label\"><span>꿈 ←</span><span"
+ },
+ "html_023": {
+  "t": "→ 파국",
+  "ctx": "의 여정 · <b id=\"pctTxt\">0%</b></span><span"
+ },
+ "html_024": {
+  "t": "쉬움",
+  "ctx": "d\">         <span class=\"diff\" id=\"diff\""
+ },
+ "html_025": {
+  "t": "다음 →",
+  "ctx": "y\" id=\"nextBtn\" onclick=\"nextQuestion()\""
+ },
+ "html_026": {
+  "t": "여기까지가 무료 미리보기예요",
+  "ctx": ">     <div class=\"lk-ic\">🔒</div>     <h3"
+ },
+ "html_027": {
+  "t": "🔑 구독하고 전체 열기",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_028": {
+  "t": "요약 리포트 미리보기 →",
+  "ctx": "class=\"cta ghost\" onclick=\"openReport()\""
+ },
+ "html_029": {
+  "t": "초록 불빛에 닿은 사람",
+  "ctx": ">       <div class=\"rank\" id=\"rankTitle\""
+ },
+ "html_030": {
+  "t": "최종 점수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_031": {
+  "t": "첫 시도 정답률",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_032": {
+  "t": "최고 연속 정답",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_033": {
+  "t": "총 도전 횟수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_034": {
+  "t": "📖 전체 요약 리포트 보기",
+  "ctx": "\"btn btn-primary\" onclick=\"openReport()\""
+ },
+ "html_035": {
+  "t": "🖼 결과 카드 저장",
+  "ctx": "btn btn-ghost\" onclick=\"makeShareCard()\""
+ },
+ "html_036": {
+  "t": "다시 도전 ↻",
+  "ctx": "ss=\"btn btn-ghost\" onclick=\"startQuiz()\""
+ },
+ "html_037": {
+  "t": "처음으로",
+  "ctx": "class=\"btn btn-ghost\" onclick=\"goHome()\""
+ },
+ "html_038": {
+  "t": "완독 리포트 · INFOGRAPHIC",
+  "ctx": "s=\"rep-hero\">       <div class=\"eyebrow\""
+ },
+ "html_039": {
+  "t": "위대한 개츠비 한눈에 보기",
+  "ctx": "ow\">완독 리포트 · INFOGRAPHIC</div>       <h2"
+ },
+ "html_040": {
+  "t": "소설 전체를",
+  "ctx": ">       <h2>위대한 개츠비 한눈에 보기</h2>       <p"
+ },
+ "html_041": {
+  "t": "‘꿈에서 파국으로’",
+  "ctx": "2>위대한 개츠비 한눈에 보기</h2>       <p>소설 전체를 <b"
+ },
+ "html_042": {
+  "t": "하나로 꿰면 절대 안 잊습니다. 모든 것의 발단은",
+  "ctx": "보기</h2>       <p>소설 전체를 <b>‘꿈에서 파국으로’</b"
+ },
+ "html_043": {
+  "t": "초록 불빛을 향한 개츠비의 꿈",
+  "ctx": "파국으로’</b> 하나로 꿰면 절대 안 잊습니다. 모든 것의 발단은 <b"
+ },
+ "html_044": {
+  "t": "입니다.",
+  "ctx": "안 잊습니다. 모든 것의 발단은 <b>초록 불빛을 향한 개츠비의 꿈</b"
+ },
+ "html_045": {
+  "t": "발단",
+  "ctx": "<div class=\"ch step s0\"><span class=\"cn\""
+ },
+ "html_046": {
+  "t": "🌃 재즈 시대의 아메리칸 드림",
+  "ctx": "ch step s0\"><span class=\"cn\">발단</span><b"
+ },
+ "html_047": {
+  "t": "1922년 여름, 롱아일랜드",
+  "ctx": "\">발단</span><b>🌃 재즈 시대의 아메리칸 드림</b><small"
+ },
+ "html_048": {
+  "t": "1단계",
+  "ctx": "<div class=\"ch step s1\"><span class=\"cn\""
+ },
+ "html_049": {
+  "t": "💚 개츠비의 꿈 — 부로 옛 사랑을 되찾기",
+  "ctx": "h step s1\"><span class=\"cn\">1단계</span><b"
+ },
+ "html_050": {
+  "t": "가난한 장교 → 밀주로 쌓은 대부호",
+  "ctx": "pan><b>💚 개츠비의 꿈 — 부로 옛 사랑을 되찾기</b><small"
+ },
+ "html_051": {
+  "t": "2단계",
+  "ctx": "<div class=\"ch step s2\"><span class=\"cn\""
+ },
+ "html_052": {
+  "t": "🥂 파티와 재회 — 구자본 vs 신흥부호",
+  "ctx": "h step s2\"><span class=\"cn\">2단계</span><b"
+ },
+ "html_053": {
+  "t": "이스트에그와 웨스트에그의 벽",
+  "ctx": "span><b>🥂 파티와 재회 — 구자본 vs 신흥부호</b><small"
+ },
+ "html_054": {
+  "t": "전개",
+  "ctx": "s=\"ch step s3\">         <span class=\"cn\""
+ },
+ "html_055": {
+  "t": "🥊 플라자의 대결 · 머틀의 죽음 · 개츠비 피살",
+  "ctx": "3\">         <span class=\"cn\">전개</span><b"
+ },
+ "html_056": {
+  "t": "꿈과 현실의 정면충돌",
+  "ctx": " 대결 · 머틀의 죽음 · 개츠비 피살</b>         <small"
+ },
+ "html_057": {
+  "t": "결과",
+  "ctx": "<div class=\"ch step s4\"><span class=\"cn\""
+ },
+ "html_058": {
+  "t": "⚰️ 무너진 꿈, 텅 빈 장례식",
+  "ctx": "ch step s4\"><span class=\"cn\">결과</span><b"
+ },
+ "html_059": {
+  "t": "“과거는 되돌릴 수 없다”",
+  "ctx": ">결과</span><b>⚰️ 무너진 꿈, 텅 빈 장례식</b><small"
+ },
+ "html_060": {
+  "t": "핵심 개념 8",
+  "ctx": "/div>     </div>      <h3 class=\"rep-h3\""
+ },
+ "html_061": {
+  "t": "목차 한눈에 보기",
+  "ctx": "concepts\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_062": {
+  "t": "탭하면 요약이 열립니다",
+  "ctx": "ss=\"rep-h3\">목차 한눈에 보기 <span class=\"hint\""
+ },
+ "html_063": {
+  "t": "책 속, 생각해볼 사례 3",
+  "ctx": " id=\"toc\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_064": {
+  "t": "이 책이 우리에게 던지는 질문 3",
+  "ctx": "d=\"cases\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_065": {
+  "t": "내가 틀린 부분 집중 복습",
+  "ctx": " id=\"weakWrap\">       <h3 class=\"rep-h3\""
+ },
+ "html_066": {
+  "t": "📺 더 깊이 알고 싶다면",
+  "ctx": "/div>      <div class=\"deepen\">       <b"
+ },
+ "html_067": {
+  "t": "에서 『위대한 개츠비』의 상징과 주제를 장별로 더 깊이 살펴볼 수 있습니다.",
+  "ctx": "f=\"#\" target=\"_blank\" rel=\"noopener\"></a"
+ },
+ "html_068": {
+  "t": "📄 PDF로 저장",
+  "ctx": "d=\"pdfBtn\" onclick=\"downloadReportPDF()\""
+ },
+ "html_069": {
+  "t": "결과로",
+  "ctx": "\"btn btn-ghost\" onclick=\"show('result')\""
+ },
+ "html_070": {
+  "t": "📚 다른 책 퀴즈 보기 →",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_071": {
+  "t": "“의미와재미공장” 미미팩토리",
+  "ctx": "class=\"footer\">     <div class=\"factory\""
+ },
+ "html_072": {
+  "t": "(주식회사 연:결 패밀리회사)",
+  "ctx": "재미공장” 미미팩토리</div>     <div class=\"affil\""
+ },
+ "html_073": {
+  "t": "책의 핵심을 도파민으로 익히는 반복 마스터 퀴즈",
+  "ctx": ":결 패밀리회사)</div>     <div class=\"tagline\""
+ },
+ "html_074": {
+  "t": "본 앱은 도서의 핵심 개념을 학습 목적으로 재구성한 2차적 학습 콘텐츠입니다. 온전한 독서 경험은 원서로 만나보세요.",
+  "ctx": "퀴즈</div>     <div class=\"copyright-note\""
+ },
+ "html_075": {
+  "t": "위대한 개츠비 · 도서 정보",
+  "ctx": "=위대한+개츠비\" target=\"_blank\" rel=\"noopener\""
+ },
+ "js_001": {
+  "t": "\"}))}},Hn={name:\"font-size\",initialValue:\"0\",prefix:!1,type:wt.TYPE_VALUE,format:\"length\"},In={name:\"font-weight\",initialValue:\"normal\",type:wt.VALUE,prefix:!1,parse:function(e){if(Ve(e))return e.number;if(qe(e))switch(e.value){case\"bold\":return 700;case\"normal\":default:return 400}return 400}},Pn={name:\"font-variant\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return e.filter(qe).map((function(e){return e.value}))}};!function(e){e.NORMAL=\"normal\",e.ITALIC=\"italic\",e.OBLIQUE=\"oblique\"}(Nn||(Nn={}));var On,kn={name:\"font-style\",initialValue:\"normal\",prefix:!1,type:wt.IDENT_VALUE,parse:function(e){switch(e){case\"oblique\":return Nn.OBLIQUE;case\"italic\":return Nn.ITALIC;case\"normal\":default:return Nn.NORMAL}}},Rn=function(e,t){return 0!=(e&t)},Mn={name:\"content\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){if(0===e.length)return[];var t=e[0];return t.type===d.IDENT_TOKEN&&\"none\"===t.value?[]:e}},Dn={name:\"counter-increment\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;for(var r=[],n=e.filter(We),o=0;o<n.length;o++){var s=n[o],i=n[o+1];if(s.type===d.IDENT_TOKEN){var a=i&&Ve(i)?i.number:1;r.push({counter:s.value,increment:a})}}return r}},Kn={name:\"counter-reset\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return[];for(var t=[],r=e.filter(We),n=0;n<r.length;n++){var o=r[n],s=r[n+1];if(qe(o)&&\"none\"!==o.value){var i=s&&Ve(s)?s.number:0;t.push({counter:o.value,reset:i})}}return t}},zn={name:\"quotes\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;var r=[],n=e.filter(Ge);if(n.length%2!=0)return null;for(var o=0;o<n.length;o+=2){var s=n[o].value,i=n[o+1].value;r.push({open:s,close:i})}return r}},Vn=function(e,t,r){if(!e)return\"\";var n=e[Math.min(t,e.length-1)];return n?r?n.open:n.close:\"\"},qn={name:\"box-shadow\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return 1===e.length&&Xe(e[0],\"none\")?[]:Ye(e).map((function(e){for(var t={color:255,offsetX:rt,offsetY:rt,blur:rt,spread:rt,inset:!1},r=0,n=0;n<e.length;n++){var o=e[n];Xe(o,\"inset\")?t.inset=!0:$e(o)?(0===r?t.offsetX=o:1===r?t.offsetY=o:2===r?t.blur=o:t.spread=o,r++):t.color=ft(o)}return t}))}},Gn=function(){function e(e){this.backgroundClip=Jn(xt,e.backgroundClip),this.backgroundColor=Jn(Et,e.backgroundColor),this.backgroundImage=Jn(ur,e.backgroundImage),this.backgroundOrigin=Jn(cr,e.backgroundOrigin),this.backgroundPosition=Jn(lr,e.backgroundPosition),this.backgroundRepeat=Jn(fr,e.backgroundRepeat),this.backgroundSize=Jn(mr,e.backgroundSize),this.borderTopColor=Jn(vr,e.borderTopColor),this.borderRightColor=Jn(wr,e.borderRightColor),this.borderBottomColor=Jn(br,e.borderBottomColor),this.borderLeftColor=Jn(Br,e.borderLeftColor),this.borderTopLeftRadius=Jn(_r,e.borderTopLeftRadius),this.borderTopRightRadius=Jn(Cr,e.borderTopRightRadius),this.borderBottomRightRadius=Jn(xr,e.borderBottomRightRadius),this.borderBottomLeftRadius=Jn(Er,e.borderBottomLeftRadius),this.borderTopStyle=Jn(Fr,e.borderTopStyle),this.borderRightStyle=Jn(Ur,e.borderRightStyle),this.borderBottomStyle=Jn(Sr,e.borderBottomStyle),this.borderLeftStyle=Jn(Lr,e.borderLeftStyle),this.borderTopWidth=Jn(Hr,e.borderTopWidth),this.borderRightWidth=Jn(Ir,e.borderRightWidth),this.borderBottomWidth=Jn(Pr,e.borderBottomWidth),this.borderLeftWidth=Jn(Or,e.borderLeftWidth),this.boxShadow=Jn(qn,e.boxShadow),this.color=Jn(kr,e.color),this.display=Jn(Rr,e.display),this.float=Jn(Kr,e.cssFloat),this.fontFamily=Jn(Tn,e.fontFamily),this.fontSize=Jn(Hn,e.fontSize),this.fontStyle=Jn(kn,e.fontStyle),this.fontVariant=Jn(Pn,e.fontVariant),this.fontWeight=Jn(In,e.fontWeight),this.letterSpacing=Jn(zr,e.letterSpacing),this.lineBreak=Jn(qr,e.lineBreak),this.lineHeight=Jn(Gr,e.lineHeight),this.listStyleImage=Jn(Xr,e.listStyleImage),this.listStylePosition=Jn(Jr,e.listStylePosition),this.listStyleType=Jn(Zr,e.listStyleType),this.marginTop=Jn(en,e.marginTop),this.marginRight=Jn(tn,e.marginRight),this.marginBottom=Jn(rn,e.marginBottom),this.marginLeft=Jn(nn,e.marginLeft),this.opacity=Jn(Un,e.opacity);var t=Jn(sn,e.overflow);this.overflowX=t[0],this.overflowY=t[t.length>1?1:0],this.overflowWrap=Jn(An,e.overflowWrap),this.paddingTop=Jn(cn,e.paddingTop),this.paddingRight=Jn(ln,e.paddingRight),this.paddingBottom=Jn(dn,e.paddingBottom),this.paddingLeft=Jn(fn,e.paddingLeft),this.position=Jn(gn,e.position),this.textAlign=Jn(pn,e.textAlign),this.textDecorationColor=Jn(Sn,e.textDecorationColor||e.color),this.textDecorationLine=Jn(Ln,e.textDecorationLine),this.textShadow=Jn(yn,e.textShadow),this.textTransform=Jn(wn,e.textTransform),this.transform=Jn(bn,e.transform),this.transformOrigin=Jn(Cn,e.transformOrigin),this.visibility=Jn(En,e.visibility),this.wordBreak=Jn(Qn,e.wordBreak),this.zIndex=Jn(Fn,e.zIndex)}return e.prototype.isVisible=function(){return this.display>0&&this.opacity>0&&this.visibility===vn.VISIBLE},e.prototype.isTransparent=function(){return ht(this.backgroundColor)},e.prototype.isTransformed=function(){return null!==this.transform},e.prototype.isPositioned=function(){return this.position!==hn.STATIC},e.prototype.isPositionedWithZIndex=function(){return this.isPositioned()&&!this.zIndex.auto},e.prototype.isFloating=function(){return this.float!==Nr.NONE},e.prototype.isInlineLevel=function(){return Rn(this.display,4)||Rn(this.display,33554432)||Rn(this.display,268435456)||Rn(this.display,536870912)||Rn(this.display,67108864)||Rn(this.display,134217728)},e}(),Xn=function(e){this.content=Jn(Mn,e.content),this.quotes=Jn(zn,e.quotes)},Wn=function(e){this.counterIncrement=Jn(Dn,e.counterIncrement),this.counterReset=Jn(Kn,e.counterReset)},Jn=function(e,t){var r=new De,n=null!=t?t.toString():e.initialValue;r.write(n);var o=new Ke(r.read());switch(e.type){case wt.IDENT_VALUE:var s=o.parseComponentValue();return e.parse(qe(s)?s.value:e.initialValue);case wt.VALUE:return e.parse(o.parseComponentValue());case wt.LIST:return e.parse(o.parseComponentValues());case wt.TOKEN_VALUE:return o.parseComponentValue();case wt.TYPE_VALUE:switch(e.format){case\"angle\":return ut(o.parseComponentValue());case\"color\":return ft(o.parseComponentValue());case\"image\":return ir(o.parseComponentValue());case\"length\":var i=o.parseComponentValue();return $e(i)?i:rt;case\"length-percentage\":var a=o.parseComponentValue();return et(a)?a:rt}}throw new Error(\"Attempting to parse unsupported css format type \"+e.format)},Yn=function(e){this.styles=new Gn(window.getComputedStyle(e,null)),this.textNodes=[],this.elements=[],null!==this.styles.transform&&So(e)&&(e.style.transform=\"none\"),this.bounds=i(e),this.flags=0},Zn=function(e,t){this.text=e,this.bounds=t},$n=function(e){var t=e.ownerDocument;if(t){var r=t.createElement(\"html2canvaswrapper\");r.appendChild(e.cloneNode(!0));var n=e.parentNode;if(n){n.replaceChild(r,e);var o=i(r);return r.firstChild&&n.replaceChild(r.firstChild,r),o}}return new s(0,0,0,0)},eo=function(e,t,r){var n=e.ownerDocument;if(!n)throw new Error(\"Node has no owner document\");var o=n.createRange();return o.setStart(e,t),o.setEnd(e,t+r),s.fromClientRect(o.getBoundingClientRect())},to=function(e,t){return 0!==t.letterSpacing?a(e).map((function(e){return A(e)})):ro(e,t)},ro=function(e,t){for(var r,n=function(e,t){var r=a(e),n=ie(r,t),o=n[0],s=n[1],i=n[2],A=r.length,u=0,c=0;return{next:function(){if(c>=A)return{done:!0,value:null};for(var e=G;c<A&&(e=se(r,s,o,++c,i))===G;);if(e!==G||c===A){var t=new ae(r,e,u,c);return u=c,{value:t,done:!1}}return{done:!0,value:null}}}}(e,{lineBreak:t.lineBreak,wordBreak:t.overflowWrap===on.BREAK_WORD?\"break-word\":t.wordBreak}),o=[];!(r=n.next()).done;)r.value&&o.push(r.value.slice());return o},no=function(e,t){this.text=oo(e.data,t.textTransform),this.textBounds=function(e,t,r){var n=to(e,t),o=[],s=0;return n.forEach((function(e){if(t.textDecorationLine.length||e.trim().length>0)if(Pt.SUPPORT_RANGE_BOUNDS)o.push(new Zn(e,eo(r,s,e.length)));else{var n=r.splitText(e.length);o.push(new Zn(e,$n(r))),r=n}else Pt.SUPPORT_RANGE_BOUNDS||(r=r.splitText(e.length));s+=e.length})),o}(this.text,t,e)},oo=function(e,t){switch(t){case mn.LOWERCASE:return e.toLowerCase();case mn.CAPITALIZE:return e.replace(so,io);case mn.UPPERCASE:return e.toUpperCase();default:return e}},so=/(^|\\s|:|-|\\(|\\))([a-z])/g,io=function(e,t,r){return e.length>0?t+r.toUpperCase():e},ao=function(e){function r(t){var r=e.call(this,t)||this;return r.src=t.currentSrc||t.src,r.intrinsicWidth=t.naturalWidth,r.intrinsicHeight=t.naturalHeight,kt.getInstance().addImage(r.src),r}return t(r,e),r}(Yn),Ao=function(e){function r(t){var r=e.call(this,t)||this;return r.canvas=t,r.intrinsicWidth=t.width,r.intrinsicHeight=t.height,r}return t(r,e),r}(Yn),uo=function(e){function r(t){var r=e.call(this,t)||this,n=new XMLSerializer;return r.svg=\"data:image/svg+xml,\"+encodeURIComponent(n.serializeToString(t)),r.intrinsicWidth=t.width.baseVal.value,r.intrinsicHeight=t.height.baseVal.value,kt.getInstance().addImage(r.svg),r}return t(r,e),r}(Yn),co=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),lo=function(e){function r(t){var r=e.call(this,t)||this;return r.start=t.start,r.reversed=\"boolean\"==typeof t.reversed&&!0===t.reversed,r}return t(r,e),r}(Yn),fo=[{type:d.DIMENSION_TOKEN,flags:0,unit:\"px\",number:3}],ho=[{type:d.PERCENTAGE_TOKEN,flags:0,number:50}],po=\"checkbox\",mo=\"radio\",go=\"password\",yo=707406591,vo=function(e){function r(t){var r,n,o,i=e.call(this,t)||this;switch(i.type=t.type.toLowerCase(),i.checked=t.checked,i.value=0===(o=(n=t).type===go?new Array(n.value.length+1).join(\"•\"):n.value).length?n.placeholder||\"\":o,i.type!==po&&i.type!==mo||(i.styles.backgroundColor=3739148031,i.styles.borderTopColor=i.styles.borderRightColor=i.styles.borderBottomColor=i.styles.borderLeftColor=2779096575,i.styles.borderTopWidth=i.styles.borderRightWidth=i.styles.borderBottomWidth=i.styles.borderLeftWidth=1,i.styles.borderTopStyle=i.styles.borderRightStyle=i.styles.borderBottomStyle=i.styles.borderLeftStyle=pr.SOLID,i.styles.backgroundClip=[bt.BORDER_BOX],i.styles.backgroundOrigin=[0],i.bounds=(r=i.bounds).width>r.height?new s(r.left+(r.width-r.height)/2,r.top,r.height,r.height):r.width<r.height?new s(r.left,r.top+(r.height-r.width)/2,r.width,r.width):r),i.type){case po:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=fo;break;case mo:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=ho}return i}return t(r,e),r}(Yn),wo=function(e){function r(t){var r=e.call(this,t)||this,n=t.options[t.selectedIndex||0];return r.value=n&&n.text||\"\",r}return t(r,e),r}(Yn),bo=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),Bo=function(e){return ft(Ke.create(e).parseComponentValue())},jo=function(e){function r(t){var r=e.call(this,t)||this;r.src=t.src,r.width=parseInt(t.width,10)||0,r.height=parseInt(t.height,10)||0,r.backgroundColor=r.styles.backgroundColor;try{if(t.contentWindow&&t.contentWindow.document&&t.contentWindow.document.documentElement){r.tree=Eo(t.contentWindow.document.documentElement);var n=t.contentWindow.document.documentElement?Bo(getComputedStyle(t.contentWindow.document.documentElement).backgroundColor):_t.TRANSPARENT,o=t.contentWindow.document.body?Bo(getComputedStyle(t.contentWindow.document.body).backgroundColor):_t.TRANSPARENT;r.backgroundColor=ht(n)?ht(o)?r.styles.backgroundColor:o:n}}catch(e){}return r}return t(r,e),r}(Yn),_o=[\"OL\",\"UL\",\"MENU\"],Co=function(e,t,r){for(var n=e.firstChild,o=void 0;n;n=o)if(o=n.nextSibling,Fo(n)&&n.data.trim().length>0)t.textNodes.push(new no(n,t.styles));else if(Uo(n)){var s=xo(n);s.styles.isVisible()&&(No(n,s,r)?s.flags|=4:Qo(s.styles)&&(s.flags|=2),-1!==_o.indexOf(n.tagName)&&(s.flags|=8),t.elements.push(s),zo(n)||Po(n)||Vo(n)||Co(n,s,r))}},xo=function(e){return Ro(e)?new ao(e):ko(e)?new Ao(e):Po(e)?new uo(e):To(e)?new co(e):Ho(e)?new lo(e):Io(e)?new vo(e):Vo(e)?new wo(e):zo(e)?new bo(e):Mo(e)?new jo(e):new Yn(e)},Eo=function(e){var t=xo(e);return t.flags|=4,Co(e,t,t),t},No=function(e,t,r){return t.styles.isPositionedWithZIndex()||t.styles.opacity<1||t.styles.isTransformed()||Oo(e)&&r.styles.isTransparent()},Qo=function(e){return e.isPositioned()||e.isFloating()},Fo=function(e){return e.nodeType===Node.TEXT_NODE},Uo=function(e){return e.nodeType===Node.ELEMENT_NODE},So=function(e){return Uo(e)&&void 0!==e.style&&!Lo(e)},Lo=function(e){return\"object\"==typeof e.className},To=function(e){return\"LI\"===e.tagName},Ho=function(e){return\"OL\"===e.tagName},Io=function(e){return\"INPUT\"===e.tagName},Po=function(e){return\"svg\"===e.tagName},Oo=function(e){return\"BODY\"===e.tagName},ko=function(e){return\"CANVAS\"===e.tagName},Ro=function(e){return\"IMG\"===e.tagName},Mo=function(e){return\"IFRAME\"===e.tagName},Do=function(e){return\"STYLE\"===e.tagName},Ko=function(e){return\"SCRIPT\"===e.tagName},zo=function(e){return\"TEXTAREA\"===e.tagName},Vo=function(e){return\"SELECT\"===e.tagName},qo=function(){function e(){this.counters={}}return e.prototype.getCounterValue=function(e){var t=this.counters[e];return t&&t.length?t[t.length-1]:1},e.prototype.getCounterValues=function(e){return this.counters[e]||[]},e.prototype.pop=function(e){var t=this;e.forEach((function(e){return t.counters[e].pop()}))},e.prototype.parse=function(e){var t=this,r=e.counterIncrement,n=e.counterReset,o=!0;null!==r&&r.forEach((function(e){var r=t.counters[e.counter];r&&0!==e.increment&&(o=!1,r[Math.max(0,r.length-1)]+=e.increment)}));var s=[];return o&&n.forEach((function(e){var r=t.counters[e.counter];s.push(e.counter),r||(r=t.counters[e.counter]=[]),r.push(e.reset)})),s},e}(),Go={integers:[1e3,900,500,400,100,90,50,40,10,9,5,4,1],values:[\"M\",\"CM\",\"D\",\"CD\",\"C\",\"XC\",\"L\",\"XL\",\"X\",\"IX\",\"V\",\"IV\",\"I\"]},Xo={integers:[9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"Ք\",\"Փ\",\"Ւ\",\"Ց\",\"Ր\",\"Տ\",\"Վ\",\"Ս\",\"Ռ\",\"Ջ\",\"Պ\",\"Չ\",\"Ո\",\"Շ\",\"Ն\",\"Յ\",\"Մ\",\"Ճ\",\"Ղ\",\"Ձ\",\"Հ\",\"Կ\",\"Ծ\",\"Խ\",\"Լ\",\"Ի\",\"Ժ\",\"Թ\",\"Ը\",\"Է\",\"Զ\",\"Ե\",\"Դ\",\"Գ\",\"Բ\",\"Ա\"]},Wo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,400,300,200,100,90,80,70,60,50,40,30,20,19,18,17,16,15,10,9,8,7,6,5,4,3,2,1],values:[\"י׳\",\"ט׳\",\"ח׳\",\"ז׳\",\"ו׳\",\"ה׳\",\"ד׳\",\"ג׳\",\"ב׳\",\"א׳\",\"ת\",\"ש\",\"ר\",\"ק\",\"צ\",\"פ\",\"ע\",\"ס\",\"נ\",\"מ\",\"ל\",\"כ\",\"יט\",\"יח\",\"יז\",\"טז\",\"טו\",\"י\",\"ט\",\"ח\",\"ז\",\"ו\",\"ה\",\"ד\",\"ג\",\"ב\",\"א\"]},Jo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"ჵ\",\"ჰ\",\"ჯ\",\"ჴ\",\"ხ\",\"ჭ\",\"წ\",\"ძ\",\"ც\",\"ჩ\",\"შ\",\"ყ\",\"ღ\",\"ქ\",\"ფ\",\"ჳ\",\"ტ\",\"ს\",\"რ\",\"ჟ\",\"პ\",\"ო\",\"ჲ\",\"ნ\",\"მ\",\"ლ\",\"კ\",\"ი\",\"თ\",\"ჱ\",\"ზ\",\"ვ\",\"ე\",\"დ\",\"გ\",\"ბ\",\"ა\"]},Yo=function(e,t,r,n,o,s){return e<t||e>r?is(e,o,s.length>0):n.integers.reduce((function(t,r,o){for(;e>=r;)e-=r,t+=n.values[o];return t}),\"\")+s},Zo=function(e,t,r,n){var o=\"\";do{r||e--,o=n(e)+o,e/=t}while(e*t>=t);return o},$o=function(e,t,r,n,o){var s=r-t+1;return(e<0?\"-\":\"\")+(Zo(Math.abs(e),s,n,(function(e){return A(Math.floor(e%s)+t)}))+o)},es=function(e,t,r){void 0===r&&(r=\". \");var n=t.length;return Zo(Math.abs(e),n,!1,(function(e){return t[Math.floor(e%n)]}))+r},ts=function(e,t,r,n,o,s){if(e<-9999||e>9999)return is(e,Wr.CJK_DECIMAL,o.length>0);var i=Math.abs(e),a=o;if(0===i)return t[0]+a;for(var A=0;i>0&&A<=4;A++){var u=i%10;0===u&&Rn(s,1)&&\"\"!==a?a=t[u]+a:u>1||1===u&&0===A||1===u&&1===A&&Rn(s,2)||1===u&&1===A&&Rn(s,4)&&e>100||1===u&&A>1&&Rn(s,8)?a=t[u]+(A>0?r[A-1]:\"\")+a:1===u&&A>0&&(a=r[A-1]+a),i=Math.floor(i/10)}return(e<0?n:\"\")+a},rs=\"十百千萬\",ns=\"拾佰仟萬\",os=\"マイナス\",ss=\"마이너스\",is=function(e,t,r){var n=r?\". \":\"\",o=r?\"、\":\"\",s=r?\", \":\"\",i=r?\" \":\"\";switch(t){case Wr.DISC:return\"•\"+i;case Wr.CIRCLE:return\"◦\"+i;case Wr.SQUARE:return\"◾\"+i;case Wr.DECIMAL_LEADING_ZERO:var a=$o(e,48,57,!0,n);return a.length<4?\"0\"+a:a;case Wr.CJK_DECIMAL:return es(e,\"〇一二三四五六七八九\",o);case Wr.LOWER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n).toLowerCase();case Wr.UPPER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n);case Wr.LOWER_GREEK:return $o(e,945,969,!1,n);case Wr.LOWER_ALPHA:return $o(e,97,122,!1,n);case Wr.UPPER_ALPHA:return $o(e,65,90,!1,n);case Wr.ARABIC_INDIC:return $o(e,1632,1641,!0,n);case Wr.ARMENIAN:case Wr.UPPER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n);case Wr.LOWER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n).toLowerCase();case Wr.BENGALI:return $o(e,2534,2543,!0,n);case Wr.CAMBODIAN:case Wr.KHMER:return $o(e,6112,6121,!0,n);case Wr.CJK_EARTHLY_BRANCH:return es(e,\"子丑寅卯辰巳午未申酉戌亥\",o);case Wr.CJK_HEAVENLY_STEM:return es(e,\"甲乙丙丁戊己庚辛壬癸\",o);case Wr.CJK_IDEOGRAPHIC:case Wr.TRAD_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"負\",o,14);case Wr.TRAD_CHINESE_FORMAL:return ts(e,\"零壹貳參肆伍陸柒捌玖\",ns,\"負\",o,15);case Wr.SIMP_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"负\",o,14);case Wr.SIMP_CHINESE_FORMAL:return ts(e,\"零壹贰叁肆伍陆柒捌玖\",ns,\"负\",o,15);case Wr.JAPANESE_INFORMAL:return ts(e,\"〇一二三四五六七八九\",\"十百千万\",os,o,0);case Wr.JAPANESE_FORMAL:return ts(e,\"零壱弐参四伍六七八九\",\"拾百千万\",os,o,7);case Wr.KOREAN_HANGUL_FORMAL:return ts(e,\"영일이삼사오육칠팔구\",\"십백천만\",ss,s,7);case Wr.KOREAN_HANJA_INFORMAL:return ts(e,\"零一二三四五六七八九\",\"十百千萬\",ss,s,0);case Wr.KOREAN_HANJA_FORMAL:return ts(e,\"零壹貳參四五六七八九\",\"拾百千\",ss,s,7);case Wr.DEVANAGARI:return $o(e,2406,2415,!0,n);case Wr.GEORGIAN:return Yo(e,1,19999,Jo,Wr.DECIMAL,n);case Wr.GUJARATI:return $o(e,2790,2799,!0,n);case Wr.GURMUKHI:return $o(e,2662,2671,!0,n);case Wr.HEBREW:return Yo(e,1,10999,Wo,Wr.DECIMAL,n);case Wr.HIRAGANA:return es(e,\"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん\");case Wr.HIRAGANA_IROHA:return es(e,\"いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす\");case Wr.KANNADA:return $o(e,3302,3311,!0,n);case Wr.KATAKANA:return es(e,\"アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン\",o);case Wr.KATAKANA_IROHA:return es(e,\"イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセス\",o);case Wr.LAO:return $o(e,3792,3801,!0,n);case Wr.MONGOLIAN:return $o(e,6160,6169,!0,n);case Wr.MYANMAR:return $o(e,4160,4169,!0,n);case Wr.ORIYA:return $o(e,2918,2927,!0,n);case Wr.PERSIAN:return $o(e,1776,1785,!0,n);case Wr.TAMIL:return $o(e,3046,3055,!0,n);case Wr.TELUGU:return $o(e,3174,3183,!0,n);case Wr.THAI:return $o(e,3664,3673,!0,n);case Wr.TIBETAN:return $o(e,3872,3881,!0,n);case Wr.DECIMAL:default:return $o(e,48,57,!0,n)}},as=\"data-html2canvas-ignore\",As=function(){function e(e,t){if(this.options=t,this.scrolledElements=[],this.referenceElement=e,this.counters=new qo,this.quoteDepth=0,!e.ownerDocument)throw new Error(\"Cloned element does not have an owner document\");this.documentElement=this.cloneNode(e.ownerDocument.documentElement)}return e.prototype.toIFrame=function(e,t){var r=this,s=cs(e,t);if(!s.contentWindow)return Promise.reject(\"Unable to find iframe window\");var i=e.defaultView.pageXOffset,a=e.defaultView.pageYOffset,A=s.contentWindow,u=A.document,c=ls(s).then((function(){return n(r,void 0,void 0,(function(){var e;return o(this,(function(r){switch(r.label){case 0:return this.scrolledElements.forEach(ps),A&&(A.scrollTo(t.left,t.top),!/(iPad|iPhone|iPod)/g.test(navigator.userAgent)||A.scrollY===t.top&&A.scrollX===t.left||(u.documentElement.style.top=-t.top+\"px\",u.documentElement.style.left=-t.left+\"px\",u.documentElement.style.position=\"absolute\")),e=this.options.onclone,void 0===this.clonedReferenceElement?[2,Promise.reject(\"Error finding the \"+this.referenceElement.nodeName+\" in the cloned document\")]:u.fonts&&u.fonts.ready?[4,u.fonts.ready]:[3,2];case 1:r.sent(),r.label=2;case 2:return\"function\"==typeof e?[2,Promise.resolve().then((function(){return e(u)})).then((function(){return s}))]:[2,s]}}))}))}));return u.open(),u.write(fs(document.doctype)+\"<html></html>\"),hs(this.referenceElement.ownerDocument,i,a),u.replaceChild(u.adoptNode(this.documentElement),u.documentElement),u.close(),c},e.prototype.createElementClone=function(e){if(ko(e))return this.createCanvasClone(e);if(Do(e))return this.createStyleClone(e);var t=e.cloneNode(!1);return Ro(t)&&\"lazy\"===t.loading&&(t.loading=\"eager\"),t},e.prototype.createStyleClone=function(e){try{var t=e.sheet;if(t&&t.cssRules){var r=[].slice.call(t.cssRules,0).reduce((function(e,t){return t&&\"string\"==typeof t.cssText?e+t.cssText:e}),\"\"),n=e.cloneNode(!1);return n.textContent=r,n}}catch(e){if(Ot.getInstance(this.options.id).error(\"Unable to access cssRules property\",e),\"SecurityError\"!==e.name)throw e}return e.cloneNode(!1)},e.prototype.createCanvasClone=function(e){if(this.options.inlineImages&&e.ownerDocument){var t=e.ownerDocument.createElement(\"img\");try{return t.src=e.toDataURL(),t}catch(e){Ot.getInstance(this.options.id).info(\"Unable to clone canvas contents, canvas is tainted\")}}var r=e.cloneNode(!1);try{r.width=e.width,r.height=e.height;var n=e.getContext(\"2d\"),o=r.getContext(\"2d\");return o&&(n?o.putImageData(n.getImageData(0,0,e.width,e.height),0,0):o.drawImage(e,0,0)),r}catch(e){}return r},e.prototype.cloneNode=function(e){if(Fo(e))return document.createTextNode(e.data);if(!e.ownerDocument)return e.cloneNode(!1);var t=e.ownerDocument.defaultView;if(t&&Uo(e)&&(So(e)||Lo(e))){var r=this.createElementClone(e),n=t.getComputedStyle(e),o=t.getComputedStyle(e,\":before\"),s=t.getComputedStyle(e,\":after\");this.referenceElement===e&&So(r)&&(this.clonedReferenceElement=r),Oo(r)&&vs(r);for(var i=this.counters.parse(new Wn(n)),a=this.resolvePseudoContent(e,r,o,On.BEFORE),A=e.firstChild;A;A=A.nextSibling)Uo(A)&&(Ko(A)||A.hasAttribute(as)||\"function\"==typeof this.options.ignoreElements&&this.options.ignoreElements(A))||this.options.copyStyles&&Uo(A)&&Do(A)||r.appendChild(this.cloneNode(A));a&&r.insertBefore(a,r.firstChild);var u=this.resolvePseudoContent(e,r,s,On.AFTER);return u&&r.appendChild(u),this.counters.pop(i),n&&(this.options.copyStyles||Lo(e))&&!Mo(e)&&ds(n,r),0===e.scrollTop&&0===e.scrollLeft||this.scrolledElements.push([r,e.scrollLeft,e.scrollTop]),(zo(e)||Vo(e))&&(zo(r)||Vo(r))&&(r.value=e.value),r}return e.cloneNode(!1)},e.prototype.resolvePseudoContent=function(e,t,r,n){var o=this;if(r){var s=r.content,i=t.ownerDocument;if(i&&s&&\"none\"!==s&&\"-moz-alt-content\"!==s&&\"none\"!==r.display){this.counters.parse(new Wn(r));var a=new Xn(r),A=i.createElement(\"html2canvaspseudoelement\");ds(r,A),a.content.forEach((function(t){if(t.type===d.STRING_TOKEN)A.appendChild(i.createTextNode(t.value));else if(t.type===d.URL_TOKEN){var r=i.createElement(\"img\");r.src=t.value,r.style.opacity=\"1\",A.appendChild(r)}else if(t.type===d.FUNCTION){if(\"attr\"===t.name){var n=t.values.filter(qe);n.length&&A.appendChild(i.createTextNode(e.getAttribute(n[0].value)||\"\"))}else if(\"counter\"===t.name){var s=t.values.filter(Je),u=s[0],c=s[1];if(u&&qe(u)){var l=o.counters.getCounterValue(u.value),f=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL;A.appendChild(i.createTextNode(is(l,f,!1)))}}else if(\"counters\"===t.name){var h=t.values.filter(Je),p=(u=h[0],h[1]);if(c=h[2],u&&qe(u)){var m=o.counters.getCounterValues(u.value),g=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL,y=p&&p.type===d.STRING_TOKEN?p.value:\"\",v=m.map((function(e){return is(e,g,!1)})).join(y);A.appendChild(i.createTextNode(v))}}}else if(t.type===d.IDENT_TOKEN)switch(t.value){case\"open-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,o.quoteDepth++,!0)));break;case\"close-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,--o.quoteDepth,!1)));break;default:A.appendChild(i.createTextNode(t.value))}})),A.className=ms+\" \"+gs;var u=n===On.BEFORE?\" \"+ms:\" \"+gs;return Lo(t)?t.className.baseValue+=u:t.className+=u,A}}},e.destroy=function(e){return!!e.parentNode&&(e.parentNode.removeChild(e),!0)},e}();!function(e){e[e.BEFORE=0]=\"BEFORE\",e[e.AFTER=1]=\"AFTER\"}(On||(On={}));var us,cs=function(e,t){var r=e.createElement(\"iframe\");return r.className=\"html2canvas-container\",r.style.visibility=\"hidden\",r.style.position=\"fixed\",r.style.left=\"-10000px\",r.style.top=\"0px\",r.style.border=\"0\",r.width=t.width.toString(),r.height=t.height.toString(),r.scrolling=\"no\",r.setAttribute(as,\"true\"),e.body.appendChild(r),r},ls=function(e){return new Promise((function(t,r){var n=e.contentWindow;if(!n)return r(\"No window assigned for iframe\");var o=n.document;n.onload=e.onload=o.onreadystatechange=function(){n.onload=e.onload=o.onreadystatechange=null;var r=setInterval((function(){o.body.childNodes.length>0&&\"complete\"===o.readyState&&(clearInterval(r),t(e))}),50)}}))},ds=function(e,t){for(var r=e.length-1;r>=0;r--){var n=e.item(r);\"content\"!==n&&t.style.setProperty(n,e.getPropertyValue(n))}return t},fs=function(e){var t=\"\";return e&&(t+=\"<!DOCTYPE \",e.name&&(t+=e.name),e.internalSubset&&(t+=e.internalSubset),e.publicId&&(t+=",
+  "ctx": "n(e){return-1===e.indexOf(\" \")?e:\"'\"+e+\""
+ },
+ "js_002": {
+  "t": "2026-07-17 · 위대한 개츠비",
+  "ctx": "um=app&utm_campaign=gatsby\",   edition: "
+ },
+ "js_003": {
+  "t": "저자",
+  "ctx": "nst QUESTIONS = [   {id:1, level:1, tag:"
+ },
+ "js_004": {
+  "t": "『위대한 개츠비』를 쓴 미국 작가는 누구일까요?",
+  "ctx": "TIONS = [   {id:1, level:1, tag:\"저자\", q:"
+ },
+ "js_005": {
+  "t": "F. 스콧 피츠제럴드",
+  "ctx": " 개츠비』를 쓴 미국 작가는 누구일까요?\",    options:[{t:"
+ },
+ "js_006": {
+  "t": "어니스트 헤밍웨이",
+  "ctx": "  options:[{t:\"F. 스콧 피츠제럴드\",ok:true},{t:"
+ },
+ "js_007": {
+  "t": "마크 트웨인",
+  "ctx": ". 스콧 피츠제럴드\",ok:true},{t:\"어니스트 헤밍웨이\"},{t:"
+ },
+ "js_008": {
+  "t": "J.D. 샐린저",
+  "ctx": "k:true},{t:\"어니스트 헤밍웨이\"},{t:\"마크 트웨인\"},{t:"
+ },
+ "js_009": {
+  "t": "『위대한 개츠비』는 <b>F. 스콧 피츠제럴드</b>가 1925년 발표한 소설이에요. 재즈 시대 미국을 그린 현대 미국 문학의 걸작으로 꼽힙니다.",
+  "ctx": "\"},{t:\"마크 트웨인\"},{t:\"J.D. 샐린저\"}],    ctx:"
+ },
+ "js_010": {
+  "t": "화자",
+  "ctx": "문학의 걸작으로 꼽힙니다.\"},   {id:2, level:1, tag:"
+ },
+ "js_011": {
+  "t": "이 소설의 이야기를 들려주는 서술자는 누구일까요?",
+  "ctx": " 꼽힙니다.\"},   {id:2, level:1, tag:\"화자\", q:"
+ },
+ "js_012": {
+  "t": "닉 캐러웨이",
+  "ctx": " 이야기를 들려주는 서술자는 누구일까요?\",    options:[{t:"
+ },
+ "js_013": {
+  "t": "제이 개츠비",
+  "ctx": "?\",    options:[{t:\"닉 캐러웨이\",ok:true},{t:"
+ },
+ "js_014": {
+  "t": "톰 뷰캐넌",
+  "ctx": "s:[{t:\"닉 캐러웨이\",ok:true},{t:\"제이 개츠비\"},{t:"
+ },
+ "js_015": {
+  "t": "조지 윌슨",
+  "ctx": "이\",ok:true},{t:\"제이 개츠비\"},{t:\"톰 뷰캐넌\"},{t:"
+ },
+ "js_016": {
+  "t": "이야기는 <b>닉 캐러웨이</b>의 눈과 목소리로 전해져요. 중서부에서 뉴욕으로 온 그가 개츠비의 이웃이 되며 모든 사건을 지켜봅니다.",
+  "ctx": " 개츠비\"},{t:\"톰 뷰캐넌\"},{t:\"조지 윌슨\"}],    ctx:"
+ },
+ "js_017": {
+  "t": "주인공",
+  "ctx": " 모든 사건을 지켜봅니다.\"},   {id:3, level:1, tag:"
+ },
+ "js_018": {
+  "t": "웨스트에그의 대저택에서 파티를 여는 이 소설의 주인공은?",
+  "ctx": "켜봅니다.\"},   {id:3, level:1, tag:\"주인공\", q:"
+ },
+ "js_019": {
+  "t": "마이어 울프심",
+  "ctx": "비\",ok:true},{t:\"닉 캐러웨이\"},{t:\"톰 뷰캐넌\"},{t:"
+ },
+ "js_020": {
+  "t": "주인공은 <b>제이 개츠비</b>예요. 막대한 부를 쌓아 화려한 파티를 열지만, 그 모든 것은 단 한 사람을 향한 꿈에서 비롯됩니다.",
+  "ctx": "웨이\"},{t:\"톰 뷰캐넌\"},{t:\"마이어 울프심\"}],    ctx:"
+ },
+ "js_021": {
+  "t": "배경 시대",
+  "ctx": " 향한 꿈에서 비롯됩니다.\"},   {id:4, level:1, tag:"
+ },
+ "js_022": {
+  "t": "이 소설의 배경이 되는 시대로 알맞은 것은?",
+  "ctx": "니다.\"},   {id:4, level:1, tag:\"배경 시대\", q:"
+ },
+ "js_023": {
+  "t": "1920년대 재즈 시대",
+  "ctx": "소설의 배경이 되는 시대로 알맞은 것은?\",    options:[{t:"
+ },
+ "js_024": {
+  "t": "남북전쟁 직후의 혼란기",
+  "ctx": " options:[{t:\"1920년대 재즈 시대\",ok:true},{t:"
+ },
+ "js_025": {
+  "t": "대공황이 한창인 1930년대",
+  "ctx": "대 재즈 시대\",ok:true},{t:\"남북전쟁 직후의 혼란기\"},{t:"
+ },
+ "js_026": {
+  "t": "제2차 세계대전이 벌어지던 시기",
+  "ctx": "남북전쟁 직후의 혼란기\"},{t:\"대공황이 한창인 1930년대\"},{t:"
+ },
+ "js_027": {
+  "t": "배경은 <b>1922년 여름</b>, 이른바 <b>재즈 시대</b>의 미국이에요. 흥청거리는 번영과 그 이면의 공허가 함께 흐르는 시기입니다.",
+  "ctx": "30년대\"},{t:\"제2차 세계대전이 벌어지던 시기\"}],    ctx:"
+ },
+ "js_028": {
+  "t": "초록 불빛",
+  "ctx": " 함께 흐르는 시기입니다.\"},   {id:5, level:1, tag:"
+ },
+ "js_029": {
+  "t": "개츠비가 밤마다 바라보는 부두 끝 불빛의 색은 무엇일까요?",
+  "ctx": "니다.\"},   {id:5, level:1, tag:\"초록 불빛\", q:"
+ },
+ "js_030": {
+  "t": "초록색",
+  "ctx": "라보는 부두 끝 불빛의 색은 무엇일까요?\",    options:[{t:"
+ },
+ "js_031": {
+  "t": "붉은색",
+  "ctx": "일까요?\",    options:[{t:\"초록색\",ok:true},{t:"
+ },
+ "js_032": {
+  "t": "노란색",
+  "ctx": "options:[{t:\"초록색\",ok:true},{t:\"붉은색\"},{t:"
+ },
+ "js_033": {
+  "t": "파란색",
+  "ctx": "t:\"초록색\",ok:true},{t:\"붉은색\"},{t:\"노란색\"},{t:"
+ },
+ "js_034": {
+  "t": "그 불빛은 <b>초록색</b>이에요. 데이지의 집 부두 끝에서 빛나는 이 불빛은 개츠비가 좇는 꿈의 상징이 됩니다.",
+  "ctx": ",{t:\"붉은색\"},{t:\"노란색\"},{t:\"파란색\"}],    ctx:"
+ },
+ "js_035": {
+  "t": "옛 연인",
+  "ctx": "좇는 꿈의 상징이 됩니다.\"},   {id:6, level:1, tag:"
+ },
+ "js_036": {
+  "t": "개츠비가 다시 만나기를 갈망하는 옛 연인의 이름은?",
+  "ctx": "됩니다.\"},   {id:6, level:1, tag:\"옛 연인\", q:"
+ },
+ "js_037": {
+  "t": "데이지 뷰캐넌",
+  "ctx": "시 만나기를 갈망하는 옛 연인의 이름은?\",    options:[{t:"
+ },
+ "js_038": {
+  "t": "데이지의 친구 조던 베이커",
+  "ctx": "\",    options:[{t:\"데이지 뷰캐넌\",ok:true},{t:"
+ },
+ "js_039": {
+  "t": "톰의 정부 머틀 윌슨",
+  "ctx": "지 뷰캐넌\",ok:true},{t:\"데이지의 친구 조던 베이커\"},{t:"
+ },
+ "js_040": {
+  "t": "젤다 세이어",
+  "ctx": ":\"데이지의 친구 조던 베이커\"},{t:\"톰의 정부 머틀 윌슨\"},{t:"
+ },
+ "js_041": {
+  "t": "개츠비가 그리는 사람은 <b>데이지 뷰캐넌</b>이에요. 그의 모든 부와 파티는 그녀를 되찾기 위한 것이었습니다.",
+  "ctx": "{t:\"톰의 정부 머틀 윌슨\"},{t:\"젤다 세이어\"}],    ctx:"
+ },
+ "js_042": {
+  "t": "데이지의 남편",
+  "ctx": "되찾기 위한 것이었습니다.\"},   {id:7, level:1, tag:"
+ },
+ "js_043": {
+  "t": "데이지와 결혼한, 부유하고 오만한 남자는 누구일까요?",
+  "ctx": ".\"},   {id:7, level:1, tag:\"데이지의 남편\", q:"
+ },
+ "js_044": {
+  "t": "데이지의 남편은 <b>톰 뷰캐넌</b>이에요. 명문가 출신의 부자이지만 거만하고 폭력적이며, 몰래 다른 여자를 만납니다.",
+  "ctx": "슨\"},{t:\"닉 캐러웨이\"},{t:\"마이어 울프심\"}],    ctx:"
+ },
+ "js_045": {
+  "t": "두 마을",
+  "ctx": "래 다른 여자를 만납니다.\"},   {id:8, level:1, tag:"
+ },
+ "js_046": {
+  "t": "만을 사이에 두고 마주 본, 소설의 두 무대가 되는 마을은?",
+  "ctx": "납니다.\"},   {id:8, level:1, tag:\"두 마을\", q:"
+ },
+ "js_047": {
+  "t": "이스트에그와 웨스트에그",
+  "ctx": "주 본, 소설의 두 무대가 되는 마을은?\",    options:[{t:"
+ },
+ "js_048": {
+  "t": "미국을 대표하는 북부와 남부의 두 도시",
+  "ctx": " options:[{t:\"이스트에그와 웨스트에그\",ok:true},{t:"
+ },
+ "js_049": {
+  "t": "파리와 뉴욕의 두 도시",
+  "ctx": "ok:true},{t:\"미국을 대표하는 북부와 남부의 두 도시\"},{t:"
+ },
+ "js_050": {
+  "t": "상류 마을과 하류 마을",
+  "ctx": "하는 북부와 남부의 두 도시\"},{t:\"파리와 뉴욕의 두 도시\"},{t:"
+ },
+ "js_051": {
+  "t": "두 마을은 <b>이스트에그</b>와 <b>웨스트에그</b>예요. 만을 사이에 둔 이 둘의 대비가 소설의 계급 구도를 이룹니다.",
+  "ctx": " 뉴욕의 두 도시\"},{t:\"상류 마을과 하류 마을\"}],    ctx:"
+ },
+ "js_052": {
+  "t": "파티",
+  "ctx": "의 계급 구도를 이룹니다.\"},   {id:9, level:1, tag:"
+ },
+ "js_053": {
+  "t": "개츠비가 여름마다 여는 것으로 온 도시에 소문난 것은?",
+  "ctx": " 이룹니다.\"},   {id:9, level:1, tag:\"파티\", q:"
+ },
+ "js_054": {
+  "t": "성대하고 화려한 파티",
+  "ctx": "다 여는 것으로 온 도시에 소문난 것은?\",    options:[{t:"
+ },
+ "js_055": {
+  "t": "사람들이 은밀히 모이는 비밀 정치 집회",
+  "ctx": "  options:[{t:\"성대하고 화려한 파티\",ok:true},{t:"
+ },
+ "js_056": {
+  "t": "조용한 독서 모임",
+  "ctx": "ok:true},{t:\"사람들이 은밀히 모이는 비밀 정치 집회\"},{t:"
+ },
+ "js_057": {
+  "t": "엄숙한 종교 예배",
+  "ctx": "이 은밀히 모이는 비밀 정치 집회\"},{t:\"조용한 독서 모임\"},{t:"
+ },
+ "js_058": {
+  "t": "개츠비는 <b>거대한 파티</b>를 엽니다. 수많은 사람이 초대도 없이 몰려들지만, 정작 개츠비 본인을 아는 이는 거의 없어요.",
+  "ctx": "t:\"조용한 독서 모임\"},{t:\"엄숙한 종교 예배\"}],    ctx:"
+ },
+ "js_059": {
+  "t": "출판 연도",
+  "ctx": "아는 이는 거의 없어요.\"},   {id:10, level:1, tag:"
+ },
+ "js_060": {
+  "t": "『위대한 개츠비』가 처음 세상에 나온 해로 알맞은 것은?",
+  "ctx": "요.\"},   {id:10, level:1, tag:\"출판 연도\", q:"
+ },
+ "js_061": {
+  "t": "1925년",
+  "ctx": "가 처음 세상에 나온 해로 알맞은 것은?\",    options:[{t:"
+ },
+ "js_062": {
+  "t": "1876년",
+  "ctx": "은?\",    options:[{t:\"1925년\",ok:true},{t:"
+ },
+ "js_063": {
+  "t": "1949년",
+  "ctx": "ons:[{t:\"1925년\",ok:true},{t:\"1876년\"},{t:"
+ },
+ "js_064": {
+  "t": "1960년",
+  "ctx": "5년\",ok:true},{t:\"1876년\"},{t:\"1949년\"},{t:"
+ },
+ "js_065": {
+  "t": "이 소설은 <b>1925년</b>에 출판됐어요. 생전엔 크게 팔리지 않았지만, 사후에 미국을 대표하는 고전으로 재평가되었습니다.",
+  "ctx": "876년\"},{t:\"1949년\"},{t:\"1960년\"}],    ctx:"
+ },
+ "js_066": {
+  "t": "위키백과 「위대한 개츠비」",
+  "ctx": "== */ const SOURCES = {   ko:    {label:"
+ },
+ "js_067": {
+  "t": "https://ko.wikipedia.org/wiki/위대한_개츠비",
+  "ctx": "{   ko:    {label:\"위키백과 「위대한 개츠비」\", url:"
+ },
+ "js_068": {
+  "t": "위키백과 「F. 스콧 피츠제럴드」",
+  "ctx": "iki/The_Great_Gatsby\"},   fitz:  {label:"
+ },
+ "js_069": {
+  "t": "https://ko.wikipedia.org/wiki/F._스콧_피츠제럴드",
+  "ctx": "fitz:  {label:\"위키백과 「F. 스콧 피츠제럴드」\", url:"
+ },
+ "js_070": {
+  "t": "나무위키 「위대한 개츠비」",
+  "ctx": "/lit/gatsby/symbols/\"},   namu:  {label:"
+ },
+ "js_071": {
+  "t": "https://namu.wiki/w/위대한 개츠비",
+  "ctx": ",   namu:  {label:\"나무위키 「위대한 개츠비」\", url:"
+ },
+ "js_072": {
+  "t": "F. 스콧 피츠제럴드(1896~1940)는 재즈 시대를 대표하는 미국 작가예요. 화려한 성공과 몰락을 함께 겪으며 그 시대의 빛과 그늘을 누구보다 잘 그려 냈습니다.",
+  "ctx": "/ const EXTRA = {   1:{src:\"fitz\", note:"
+ },
+ "js_073": {
+  "t": "닉 캐러웨이는 중서부 출신의 서술자예요. 사건에 깊이 관여하기보다 지켜보며 판단을 미루는 관찰자로, 독자가 개츠비를 바라보는 창이 됩니다.",
+  "ctx": " 누구보다 잘 그려 냈습니다.\"},   2:{src:\"ko\", note:"
+ },
+ "js_074": {
+  "t": "제이 개츠비는 무일푼에서 대부호가 된 인물이에요. 그의 모든 화려함은 단 한 사람, 데이지를 되찾으려는 꿈을 위한 무대 장치입니다.",
+  "ctx": "츠비를 바라보는 창이 됩니다.\"},   3:{src:\"ko\", note:"
+ },
+ "js_075": {
+  "t": "배경은 1922년 여름, 금주법과 재즈가 함께 흐르던 번영의 시대예요. 흥청거리는 부의 이면에 도덕적 공허가 자라던 시기입니다.",
+  "ctx": " 꿈을 위한 무대 장치입니다.\"},   4:{src:\"en\", note:"
+ },
+ "js_076": {
+  "t": "초록 불빛은 데이지의 집 부두 끝에서 빛나요. 개츠비가 어둠 속에서 손을 뻗는 이 불빛은 그가 좇는 꿈의 상징으로 소설 내내 반복됩니다.",
+  "ctx": "허가 자라던 시기입니다.\"},   5:{src:\"spark\", note:"
+ },
+ "js_077": {
+  "t": "데이지 뷰캐넌은 개츠비의 옛 연인이에요. 아름답지만 안락한 부를 벗어날 용기가 없는 인물로, 개츠비의 꿈을 끝내 배신합니다.",
+  "ctx": "징으로 소설 내내 반복됩니다.\"},   6:{src:\"ko\", note:"
+ },
+ "js_078": {
+  "t": "톰 뷰캐넌은 데이지의 남편이자 명문가의 부자예요. 오만하고 폭력적이며 정부까지 두고 있어, 구자본의 위선을 보여 줍니다.",
+  "ctx": "츠비의 꿈을 끝내 배신합니다.\"},   7:{src:\"ko\", note:"
+ },
+ "js_079": {
+  "t": "이스트에그와 웨스트에그는 만을 사이에 둔 두 마을이에요. 각각 구자본과 신흥부호를 상징하며, 둘 사이의 벽이 소설의 갈등을 만듭니다.",
+  "ctx": "구자본의 위선을 보여 줍니다.\"},   8:{src:\"ko\", note:"
+ },
+ "js_080": {
+  "t": "개츠비의 파티에는 초대받지 않은 사람들까지 몰려와요. 정작 주최자 개츠비를 아는 이는 드물어, 화려함 속의 고독을 드러냅니다.",
+  "ctx": " 소설의 갈등을 만듭니다.\"},   9:{src:\"namu\", note:"
+ },
+ "js_081": {
+  "t": "『위대한 개츠비』는 1925년에 나왔어요. 생전엔 반응이 미지근했지만, 사후에 미국 문학을 대표하는 고전으로 재평가되었습니다.",
+  "ctx": "함 속의 고독을 드러냅니다.\"},   10:{src:\"ko\", note:"
+ },
+ "js_082": {
+  "t": "재즈 시대",
+  "ctx": "*/ const MILESTONES = [   {at:0,  label:"
+ },
+ "js_083": {
+  "t": "개츠비의 파티",
+  "ctx": "{at:6,  label:\"초록 불빛\"},   {at:12, label:"
+ },
+ "js_084": {
+  "t": "데이지와의 재회",
+  "ctx": "t:12, label:\"개츠비의 파티\"},   {at:18, label:"
+ },
+ "js_085": {
+  "t": "플라자의 대결",
+  "ctx": ":18, label:\"데이지와의 재회\"},   {at:24, label:"
+ },
+ "js_086": {
+  "t": "재의 골짜기",
+  "ctx": "t:24, label:\"플라자의 대결\"},   {at:30, label:"
+ },
+ "js_087": {
+  "t": "보통",
+  "ctx": "]; const DIFF_LABEL = {1:[\"쉬움\",\"l1\"],2:["
+ },
+ "js_088": {
+  "t": "어려움",
+  "ctx": "LABEL = {1:[\"쉬움\",\"l1\"],2:[\"보통\",\"l2\"],3:["
+ },
+ "js_089": {
+  "t": "· 복습",
+  "ctx": "ds.size+' / '+TOTAL_Q + (attempts[id] ? "
+ },
+ "js_090": {
+  "t": "🎯 정답!",
+  "ctx": ")      verdict.textContent = firstTry ? "
+ },
+ "js_091": {
+  "t": "✅ 이제 익혔어요!",
+  "ctx": "dict.textContent = firstTry ? '🎯 정답!' : "
+ },
+ "js_092": {
+  "t": "❌ 다시 도전!",
+  "ctx": "ing.push(id);     verdict.textContent = "
+ },
+ "js_093": {
+  "t": "↻ 이 문제는 뒤에서 다시 나옵니다",
+  "ctx": "getElementById('requeue').textContent = "
+ },
+ "js_094": {
+  "t": "데이지의 집 부두 끝에서 빛나는 초록 불빛. 개츠비가 어둠 속에서 손을 뻗는 이 불빛은 이룰 수 없는 꿈, 나아가 아메리칸 드림 그 자체의 상징입니다.",
+  "ctx": "st CONCEPTS = [   {ic:\"💚\", h:\"초록 불빛\", p:"
+ },
+ "js_095": {
+  "t": "무일푼 제임스 개츠에서 대부호 개츠비로 자신을 새로 창조한 인물. 화려함 뒤에는 옛 연인 데이지를 되찾겠다는 단 하나의 꿈이 있습니다.",
+  "ctx": " src:\"spark\"},   {ic:\"🎩\", h:\"제이 개츠비\", p:"
+ },
+ "js_096": {
+  "t": "에클버그 박사의 눈",
+  "ctx": " 하나의 꿈이 있습니다.\", src:\"ko\"},   {ic:\"👓\", h:"
+ },
+ "js_097": {
+  "t": "재의 골짜기 광고판에 그려진 거대한 두 눈. 도덕이 사라진 세상을 말없이 내려다보는 신의 시선처럼 읽히는 강렬한 상징입니다.",
+  "ctx": "src:\"ko\"},   {ic:\"👓\", h:\"에클버그 박사의 눈\", p:"
+ },
+ "js_098": {
+  "t": "웨스트에그와 뉴욕 사이의 잿빛 황무지. 번영의 그늘에 버려진 사람들, 곧 아메리칸 드림의 어두운 뒷면을 상징합니다.",
+  "ctx": "src:\"spark\"},   {ic:\"🌫️\", h:\"재의 골짜기\", p:"
+ },
+ "js_099": {
+  "t": "만을 사이에 둔 두 마을. 이스트에그는 대대로 내려온 구자본, 웨스트에그는 벼락부자 신흥부호를 상징하며 넘을 수 없는 계급의 벽을 그립니다.",
+  "ctx": "spark\"},   {ic:\"🥂\", h:\"이스트에그와 웨스트에그\", p:"
+ },
+ "js_100": {
+  "t": "데이지와 톰",
+  "ctx": " 계급의 벽을 그립니다.\", src:\"ko\"},   {ic:\"💔\", h:"
+ },
+ "js_101": {
+  "t": "안락한 부를 벗어날 용기가 없는 데이지, 오만하고 폭력적인 톰. 사고를 저지르고도 태연히 자기 세계로 물러나는 무책임한 부자들입니다.",
+  "ctx": ".\", src:\"ko\"},   {ic:\"💔\", h:\"데이지와 톰\", p:"
+ },
+ "js_102": {
+  "t": "재즈 시대와 금주법",
+  "ctx": "책임한 부자들입니다.\", src:\"namu\"},   {ic:\"🍸\", h:"
+ },
+ "js_103": {
+  "t": "흥청거리는 1920년대. 개츠비의 부는 금주법이 낳은 밀주 밀매 등 불법 사업에서 나온 것으로 암시되어, 시대의 빛과 그늘을 함께 보여 줍니다.",
+  "ctx": "c:\"namu\"},   {ic:\"🍸\", h:\"재즈 시대와 금주법\", p:"
+ },
+ "js_104": {
+  "t": "피츠제럴드",
+  "ctx": "을 함께 보여 줍니다.\", src:\"en\"},   {ic:\"✍️\", h:"
+ },
+ "js_105": {
+  "t": "재즈 시대의 화려함과 몰락을 함께 겪은 작가. 자신의 시대를 누구보다 예리하게 관찰해, 아메리칸 드림의 허상을 이 한 권에 담아냈습니다.",
+  "ctx": ".\", src:\"en\"},   {ic:\"✍️\", h:\"피츠제럴드\", p:"
+ },
+ "js_106": {
+  "t": "1장",
+  "ctx": "/* 목차(클릭하면 요약 오픈) */ const TOC = [   {n:"
+ },
+ "js_107": {
+  "t": "닉의 시선, 그리고 초록 불빛",
+  "ctx": "하면 요약 오픈) */ const TOC = [   {n:\"1장\", t:"
+ },
+ "js_108": {
+  "t": "중서부 출신 닉이 채권 일을 배우러 웨스트에그로 이사 옵니다.",
+  "ctx": "의 시선, 그리고 초록 불빛\", beats:[     {e:\"🚂\", x:"
+ },
+ "js_109": {
+  "t": "그의 옆집이 바로 밤마다 파티가 열리는 개츠비의 대저택이에요.",
+  "ctx": " 일을 배우러 웨스트에그로 이사 옵니다.\"},     {e:\"🏰\", x:"
+ },
+ "js_110": {
+  "t": "사촌 데이지와 그 남편 톰 뷰캐넌의 저택에 저녁 초대를 받습니다.",
+  "ctx": " 파티가 열리는 개츠비의 대저택이에요.\"},     {e:\"🍽️\", x:"
+ },
+ "js_111": {
+  "t": "그날 밤, 어둠 속에서 초록 불빛을 향해 손을 뻗는 개츠비를 봅니다.",
+  "ctx": " 뷰캐넌의 저택에 저녁 초대를 받습니다.\"},     {e:\"💚\", x:"
+ },
+ "js_112": {
+  "t": "2~3장",
+  "ctx": "초록 불빛을 향해 손을 뻗는 개츠비를 봅니다.\"},   ]},   {n:"
+ },
+ "js_113": {
+  "t": "재의 골짜기와 개츠비의 파티",
+  "ctx": "손을 뻗는 개츠비를 봅니다.\"},   ]},   {n:\"2~3장\", t:"
+ },
+ "js_114": {
+  "t": "뉴욕 가는 길목의 잿빛 재의 골짜기와 에클버그의 눈이 등장합니다.",
+  "ctx": "의 골짜기와 개츠비의 파티\", beats:[     {e:\"🌫️\", x:"
+ },
+ "js_115": {
+  "t": "톰이 정부 머틀 윌슨을 닉에게 소개하며 그의 이중생활이 드러나요.",
+  "ctx": "의 골짜기와 에클버그의 눈이 등장합니다.\"},     {e:\"💋\", x:"
+ },
+ "js_116": {
+  "t": "닉은 마침내 개츠비의 성대한 파티에 초대받아 그와 마주합니다.",
+  "ctx": "에게 소개하며 그의 이중생활이 드러나요.\"},     {e:\"🥂\", x:"
+ },
+ "js_117": {
+  "t": "손님들은 개츠비를 두고 온갖 소문을 떠들지만 진실은 아무도 모릅니다.",
+  "ctx": "대한 파티에 초대받아 그와 마주합니다.\"},     {e:\"🕵️\", x:"
+ },
+ "js_118": {
+  "t": "4~5장",
+  "ctx": "온갖 소문을 떠들지만 진실은 아무도 모릅니다.\"},   ]},   {n:"
+ },
+ "js_119": {
+  "t": "개츠비의 과거와 재회",
+  "ctx": "만 진실은 아무도 모릅니다.\"},   ]},   {n:\"4~5장\", t:"
+ },
+ "js_120": {
+  "t": "개츠비가 만들어 낸 화려한 과거와 데이지를 향한 오랜 사랑이 밝혀집니다.",
+  "ctx": " t:\"개츠비의 과거와 재회\", beats:[     {e:\"📜\", x:"
+ },
+ "js_121": {
+  "t": "조던을 통해 개츠비는 닉에게 데이지와의 재회를 부탁합니다.",
+  "ctx": " 데이지를 향한 오랜 사랑이 밝혀집니다.\"},     {e:\"🤝\", x:"
+ },
+ "js_122": {
+  "t": "닉의 집에서 어색하게 다시 만난 두 사람은 옛 감정을 되살립니다.",
+  "ctx": "는 닉에게 데이지와의 재회를 부탁합니다.\"},     {e:\"🍵\", x:"
+ },
+ "js_123": {
+  "t": "개츠비는 저택을 보여 주며 5년간 꿈꾼 순간이 이뤄졌다고 느낍니다.",
+  "ctx": " 만난 두 사람은 옛 감정을 되살립니다.\"},     {e:\"🏠\", x:"
+ },
+ "js_124": {
+  "t": "6~7장",
+  "ctx": "주며 5년간 꿈꾼 순간이 이뤄졌다고 느낍니다.\"},   ]},   {n:"
+ },
+ "js_125": {
+  "t": "균열, 그리고 플라자의 대결",
+  "ctx": "순간이 이뤄졌다고 느낍니다.\"},   ]},   {n:\"6~7장\", t:"
+ },
+ "js_126": {
+  "t": "톰이 개츠비의 부의 출처를 의심하며 두 남자 사이가 팽팽해집니다.",
+  "ctx": "균열, 그리고 플라자의 대결\", beats:[     {e:\"🔍\", x:"
+ },
+ "js_127": {
+  "t": "무더운 날 플라자 호텔에서 톰과 개츠비가 데이지를 두고 정면충돌해요.",
+  "ctx": " 의심하며 두 남자 사이가 팽팽해집니다.\"},     {e:\"🥊\", x:"
+ },
+ "js_128": {
+  "t": "데이지는 톰을 한 번도 사랑하지 않았다는 말을 끝내 하지 못합니다.",
+  "ctx": "과 개츠비가 데이지를 두고 정면충돌해요.\"},     {e:\"💔\", x:"
+ },
+ "js_129": {
+  "t": "돌아가는 길, 데이지가 몬 개츠비의 차가 머틀을 치어 죽입니다.",
+  "ctx": "하지 않았다는 말을 끝내 하지 못합니다.\"},     {e:\"🚗\", x:"
+ },
+ "js_130": {
+  "t": "8~9장",
+  "ctx": "지가 몬 개츠비의 차가 머틀을 치어 죽입니다.\"},   ]},   {n:"
+ },
+ "js_131": {
+  "t": "파국과 텅 빈 장례식",
+  "ctx": "차가 머틀을 치어 죽입니다.\"},   ]},   {n:\"8~9장\", t:"
+ },
+ "js_132": {
+  "t": "개츠비는 데이지를 감싸며 사고의 죄를 대신 뒤집어쓰려 합니다.",
+  "ctx": "t:\"파국과 텅 빈 장례식\", beats:[     {e:\"🕯️\", x:"
+ },
+ "js_133": {
+  "t": "아내를 잃은 조지 윌슨이 개츠비를 오해해 그를 쏘고 스스로 목숨을 끊어요.",
+  "ctx": "며 사고의 죄를 대신 뒤집어쓰려 합니다.\"},     {e:\"🔫\", x:"
+ },
+ "js_134": {
+  "t": "그 많던 파티 손님 중 장례식엔 거의 아무도 오지 않습니다.",
+  "ctx": "해해 그를 쏘고 스스로 목숨을 끊어요.\"},     {e:\"⚰️\", x:"
+ },
+ "js_135": {
+  "t": "닉은 환멸을 안고 동부를 떠나 고향으로 돌아갑니다.",
+  "ctx": "중 장례식엔 거의 아무도 오지 않습니다.\"},     {e:\"🌙\", x:"
+ },
+ "js_136": {
+  "t": "나가며",
+  "ctx": "환멸을 안고 동부를 떠나 고향으로 돌아갑니다.\"},   ]},   {n:"
+ },
+ "js_137": {
+  "t": "초록 불빛의 의미",
+  "ctx": "를 떠나 고향으로 돌아갑니다.\"},   ]},   {n:\"나가며\", t:"
+ },
+ "js_138": {
+  "t": "초록 불빛은 손에 잡히지 않는 꿈, 곧 아메리칸 드림의 상징이 됩니다.",
+  "ctx": "\", t:\"초록 불빛의 의미\", beats:[     {e:\"🌊\", x:"
+ },
+ "js_139": {
+  "t": "과거를 되돌릴 수 있다고 믿은 개츠비의 꿈은 끝내 좌초합니다.",
+  "ctx": "꿈, 곧 아메리칸 드림의 상징이 됩니다.\"},     {e:\"⏳\", x:"
+ },
+ "js_140": {
+  "t": "화려한 부의 이면에 자리한 도덕적 공허를 소설은 냉정하게 비춥니다.",
+  "ctx": " 믿은 개츠비의 꿈은 끝내 좌초합니다.\"},     {e:\"🇺🇸\", x:"
+ },
+ "js_141": {
+  "t": "그리하여 우리는 물결을 거스르는 배처럼 과거로 떠밀려가며 나아갑니다.",
+  "ctx": "도덕적 공허를 소설은 냉정하게 비춥니다.\"},     {e:\"📖\", x:"
+ },
+ "js_142": {
+  "t": "수많은 사람이 초대도 없이 개츠비의 저택으로 몰려들어 밤새 흥청거립니다. 그러나 정작 주최자 개츠비를 아는 이도, 그에게 진심으로 다가오는 이도 거의 없어요.",
+  "ctx": "nst CASES = [   {ic:\"🥂\", t:\"개츠비의 파티\", d:"
+ },
+ "js_143": {
+  "t": "화려함의 절정에서 오히려 짙어지는 고독을 통해, 부와 인기가 진짜 관계를 대신할 수 없음을 되묻게 합니다.",
+  "ctx": "를 아는 이도, 그에게 진심으로 다가오는 이도 거의 없어요.\", why:"
+ },
+ "js_144": {
+  "t": "플라자 호텔의 대결",
+  "ctx": " 관계를 대신할 수 없음을 되묻게 합니다.\"},   {ic:\"🥊\", t:"
+ },
+ "js_145": {
+  "t": "무더운 날 톰과 개츠비가 데이지를 사이에 두고 정면으로 부딪칩니다. 개츠비는 데이지가 톰을 한 번도 사랑하지 않았다고 말해 주길 바라지만, 그녀는 끝내 그러지 못해요.",
+  "ctx": "묻게 합니다.\"},   {ic:\"🥊\", t:\"플라자 호텔의 대결\", d:"
+ },
+ "js_146": {
+  "t": "과거를 통째로 되돌리려는 개츠비의 꿈이 현실의 벽에 부서지는 순간, 그 꿈의 위대함과 무모함을 동시에 보게 합니다.",
+  "ctx": " 않았다고 말해 주길 바라지만, 그녀는 끝내 그러지 못해요.\", why:"
+ },
+ "js_147": {
+  "t": "텅 빈 장례식",
+  "ctx": " 위대함과 무모함을 동시에 보게 합니다.\"},   {ic:\"⚰️\", t:"
+ },
+ "js_148": {
+  "t": "살아서 수백 명을 불러 모으던 개츠비의 장례식에는 거의 아무도 오지 않습니다. 데이지조차 연락 한 번 없이 톰과 함께 자기 세계로 물러나 버려요.",
+  "ctx": "에 보게 합니다.\"},   {ic:\"⚰️\", t:\"텅 빈 장례식\", d:"
+ },
+ "js_149": {
+  "t": "화려한 인맥이 얼마나 공허했는지를 드러내며, 개츠비가 좇던 세계의 무책임과 냉정함을 적나라하게 보여 줍니다.",
+  "ctx": "차 연락 한 번 없이 톰과 함께 자기 세계로 물러나 버려요.\", why:"
+ },
+ "js_150": {
+  "t": "과거는 정말 되돌릴 수 있을까? 개츠비의 믿음은 위대한가, 헛된가?",
+  "ctx": "책이 우리에게 던지는 질문 3 */ const ASKS = [   {q:"
+ },
+ "js_151": {
+  "t": "과거를 반복할 수 있다고 믿은 개츠비를 떠올려 보세요. 그 집념이 그를 위대하게도, 비극적이게도 만듭니다.",
+  "ctx": "는 정말 되돌릴 수 있을까? 개츠비의 믿음은 위대한가, 헛된가?\", h:"
+ },
+ "js_152": {
+  "t": "부와 성공을 손에 넣으면 아메리칸 드림은 완성되는가?",
+  "ctx": "요. 그 집념이 그를 위대하게도, 비극적이게도 만듭니다.\"},   {q:"
+ },
+ "js_153": {
+  "t": "개츠비가 모든 것을 가지고도 끝내 얻지 못한 것이 무엇인지 생각해 보세요.",
+  "ctx": "  {q:\"부와 성공을 손에 넣으면 아메리칸 드림은 완성되는가?\", h:"
+ },
+ "js_154": {
+  "t": "사고를 저지르고도 태연히 물러난 톰과 데이지, 그들의 무책임을 우리는 어떻게 봐야 할까?",
+  "ctx": " 가지고도 끝내 얻지 못한 것이 무엇인지 생각해 보세요.\"},   {q:"
+ },
+ "js_155": {
+  "t": "부가 사람을 어떻게 무책임하게 만드는지, 개츠비의 죽음 뒤 그들의 태도에서 찾아보세요.",
+  "ctx": "물러난 톰과 데이지, 그들의 무책임을 우리는 어떻게 봐야 할까?\", h:"
+ },
+ "js_156": {
+  "t": "💚 초록 불빛에 닿은 사람",
+  "ctx": ");   let rank, sub;   if(acc>=90){ rank="
+ },
+ "js_157": {
+  "t": "개츠비를 완벽히 읽어냈습니다",
+  "ctx": "if(acc>=90){ rank='💚 초록 불빛에 닿은 사람'; sub="
+ },
+ "js_158": {
+  "t": "🥂 개츠비의 파티 손님",
+  "ctx": "완벽히 읽어냈습니다'; }   else if(acc>=75){ rank="
+ },
+ "js_159": {
+  "t": "핵심을 거의 다 잡았어요",
+  "ctx": "e if(acc>=75){ rank='🥂 개츠비의 파티 손님'; sub="
+ },
+ "js_160": {
+  "t": "🌃 웨스트에그의 이웃",
+  "ctx": " 거의 다 잡았어요'; }   else if(acc>=55){ rank="
+ },
+ "js_161": {
+  "t": "뼈대를 익혔습니다 — 한 번 더!",
+  "ctx": "se if(acc>=55){ rank='🌃 웨스트에그의 이웃'; sub="
+ },
+ "js_162": {
+  "t": "🌫️ 재의 골짜기의 행인",
+  "ctx": "b='뼈대를 익혔습니다 — 한 번 더!'; }   else { rank="
+ },
+ "js_163": {
+  "t": "반복할수록 점수가 오릅니다",
+  "ctx": "'; }   else { rank='🌫️ 재의 골짜기의 행인'; sub="
+ },
+ "js_164": {
+  "t": "완독 리포트",
+  "ctx": "onst fname = ((h2 && h2.textContent) || "
+ },
+ "js_165": {
+  "t": "한눈에 보기",
+  "ctx": "&& h2.textContent) || '완독 리포트').replace("
+ },
+ "js_166": {
+  "t": "리포트.pdf",
+  "ctx": "'완독 리포트').replace('한눈에 보기','').trim() + "
+ },
+ "js_167": {
+  "t": "📄 PDF 만드는 중…",
+  "ctx": "tn){ btn.disabled=true; btn.textContent="
+ },
+ "js_168": {
+  "t": "PDF 생성 중 문제가 발생했어요. 이 HTML 파일을 내려받아 브라우저에서 직접 열고 다시 눌러 주세요.",
+  "ctx": "     }   }).catch(function(){     alert("
+ },
+ "js_169": {
+  "t": "무료로는 <b>",
+  "ctx": "t = TOTAL_Q - fl;       msg.innerHTML = "
+ },
+ "js_170": {
+  "t": "문항</b>까지 풀 수 있어요.",
+  "ctx": "fl;       msg.innerHTML = '무료로는 <b>'+fl+"
+ },
+ "js_171": {
+  "t": "나머지 <b>",
+  "ctx": " <b>'+fl+'문항</b>까지 풀 수 있어요. ' +         "
+ },
+ "js_172": {
+  "t": "문항</b>과 <b>완독 요약 리포트</b>는 구독자 전용입니다.",
+  "ctx": ">까지 풀 수 있어요. ' +         '나머지 <b>'+rest+"
+ },
+ "js_173": {
+  "t": "지금까지 쌓은 <b>개츠비의 꿈 진행도</b>는 위 게이지에 그대로 남아 있어요.",
+  "ctx": "b>완독 요약 리포트</b>는 구독자 전용입니다. ' +         "
+ },
+ "js_174": {
+  "t": "<h3>완독 리포트 전체는 구독자 전용이에요</h3>",
+  "ctx": " = '<div class=\"lk-ic\">🔒</div>' +       "
+ },
+ "js_175": {
+  "t": "<p>인과의 사슬과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>",
+  "ctx": "'<h3>완독 리포트 전체는 구독자 전용이에요</h3>' +       "
+ },
+ "js_176": {
+  "t": "목차 요약 · 사례 · 질문 · 약점 복습 · PDF 저장은 구독하면 모두 열립니다.</p>",
+  "ctx": "과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>' +       "
+ },
+ "js_177": {
+  "t": "\" target=\"_blank\" rel=\"noopener\">🔑 구독하고 완독 리포트 전체 열기</a>",
+  "ctx": "     '<a class=\"cta\" href=\"' + _sub() + "
+ },
+ "js_178": {
+  "t": "위대한 개츠비",
+  "ctx": " 250, '120px serif', '#4fc98a');   ctxt("
+ },
+ "js_179": {
+  "t": "F. 스콧 피츠제럴드 · 재즈 시대의 자화상",
+  "ctx": "to Serif KR\",serif', '#ffffff');   ctxt("
+ },
+ "js_180": {
+  "t": "📚 매일 새 책 퀴즈  ·",
+  "ctx": "(/^https?:\\/\\//,'') : '';   if(su) ctxt("
+ },
+ "js_181": {
+  "t": "위대한_개츠비_퀴즈결과.png",
+  "ctx": "nt('a');     a.href = url; a.download = "
+ },
+ "js_182": {
+  "t": "💌 VIP 초대 —",
+  "ctx": "ursor:pointer;\";     d.textContent=(vip?"
+ },
+ "js_183": {
+  "t": "🎁 지금 이 책 풀버전 무료 오픈 중!",
+  "ctx": "\";     d.textContent=(vip?\"💌 VIP 초대 — \":"
+ },
+ "js_184": {
+  "t": "전체판(잠금 없음)으로 이동 →",
+  "ctx": "\"💌 VIP 초대 — \":\"🎁 지금 이 책 풀버전 무료 오픈 중! \")+"
+ },
+ "jst_001": {
+  "t": "무료로 풀 수 있는 문항 수",
+  "ctx": "    freeLimit: 10,           // teaser: "
+ },
+ "jst_002": {
+  "t": "아직",
+  "ctx": "3:30};    let pending = [];          // "
+ },
+ "jst_003": {
+  "t": "처음으로 정답",
+  "ctx": "};    let pending = [];          // 아직 ‘"
+ },
+ "jst_004": {
+  "t": "을 못 낸 문항 큐",
+  "ctx": "t pending = [];          // 아직 ‘처음으로 정답’"
+ },
+ "jst_005": {
+  "t": "앞에서 꺼냄",
+  "ctx": "[];          // 아직 ‘처음으로 정답’을 못 낸 문항 큐 ("
+ },
+ "jst_006": {
+  "t": "시도 횟수",
+  "ctx": "(); let attempts = {};         // id -> "
+ },
+ "jst_007": {
+  "t": "첫 시도에 틀린 문항",
+  "ctx": " 0; let firstWrongIds = new Set();   // "
+ },
+ "jst_008": {
+  "t": "약점",
+  "ctx": "rongIds = new Set();   // 첫 시도에 틀린 문항 = "
+ },
+ "jst_009": {
+  "t": "집중 복습 대상",
+  "ctx": "gIds = new Set();   // 첫 시도에 틀린 문항 = 약점("
+ },
+ "jst_010": {
+  "t": "세션 내 최고 점수",
+  "ctx": "r = null; let bestScore = 0;         // "
+ },
+ "jst_011": {
+  "t": "재도전 비교용,",
+  "ctx": "t bestScore = 0;         // 세션 내 최고 점수 ("
+ },
+ "jst_012": {
+  "t": "미사용",
+  "ctx": "   // 세션 내 최고 점수 (재도전 비교용, localStorage "
+ },
+ "jst_013": {
+  "t": "복습 정답은 절반 점수",
+  "ctx": " gain = Math.round(gain/2);          // "
+ },
+ "jst_014": {
+  "t": "콤보 보너스",
+  "ctx": " (streak>=2) ? (streak-1)*3 : 0;     // "
+ },
+ "jst_015": {
+  "t": "가 아니어도 최종적으로 익힌 것으로 카운트",
+  "ctx": " masteredIds.add(id);          // ‘처음으로’"
+ },
+ "jst_016": {
+  "t": "큐에서 제거",
+  "ctx": "운트     pending.shift();              // "
+ },
+ "jst_017": {
+  "t": "연속 정답!",
+  "ctx": "      comboEl.textContent = `🔥 ${streak}"
+ },
+ "jst_018": {
+  "t": "보너스",
+  "ctx": "tContent = `🔥 ${streak}연속 정답! +${bonus} "
+ },
+ "jst_019": {
+  "t": "약점으로 기록",
+  "ctx": "f(firstTry) firstWrongIds.add(id);   // "
+ },
+ "jst_020": {
+  "t": "왜 생각해볼 만한가",
+  "ctx": "= >${c.d}</div>       <div class= >💭 <b>"
+ },
+ "jst_021": {
+  "t": "첫 시도에 모두 정답!",
+  "ctx": " ;     list.innerHTML = `<div class= >🌟 "
+ },
+ "jst_022": {
+  "t": "약점이 없어 따로 복습할 항목이 없습니다. 멋져요.",
+  "ctx": "TML = `<div class= >🌟 첫 시도에 모두 정답!<span>"
+ },
+ "jst_023": {
+  "t": "개",
+  "ctx": " {     cnt.textContent = `(${ids.length}"
+ },
+ "jst_024": {
+  "t": "정답",
+  "ctx": "= >Q. ${q.q}</div>         <div class= >"
+ },
+ "jst_025": {
+  "t": "최고 점수 경신!",
+  "ctx": "re;     note.innerHTML = prev>0 ? `🏆 <b>"
+ },
+ "jst_026": {
+  "t": "이전",
+  "ctx": "nerHTML = prev>0 ? `🏆 <b>최고 점수 경신!</b> ("
+ },
+ "jst_027": {
+  "t": "점",
+  "ctx": "prev>0 ? `🏆 <b>최고 점수 경신!</b> (이전 ${prev}"
+ },
+ "jst_028": {
+  "t": "첫 기록",
+  "ctx": "`🏆 <b>최고 점수 경신!</b> (이전 ${prev}점)` : `🏆 "
+ },
+ "jst_029": {
+  "t": "다시 도전해 깨보세요!",
+  "ctx": "${prev}점)` : `🏆 첫 기록 <b>${score}점</b> — "
+ },
+ "jst_030": {
+  "t": "현재 최고 점수",
+  "ctx": "보세요!`;   } else {     note.innerHTML = `"
+ },
+ "jst_031": {
+  "t": "이번엔",
+  "ctx": "HTML = `현재 최고 점수 <b>${bestScore}점</b> · "
+ }
+}

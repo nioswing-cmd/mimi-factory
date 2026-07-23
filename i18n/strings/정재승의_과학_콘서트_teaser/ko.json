@@ -1,0 +1,1254 @@
+{
+ "_meta": {
+  "source": "apps/정재승의_과학_콘서트_teaser.html",
+  "slug": "정재승의_과학_콘서트_teaser"
+ },
+ "title_001": {
+  "t": "정재승의 과학 콘서트 도파민 마스터 퀴즈 · 정재승",
+  "ctx": "<title>"
+ },
+ "html_001": {
+  "t": "정재승 · 2001 · 대중 과학의 고전",
+  "ctx": "class=\"hero\">       <div class=\"eyebrow\""
+ },
+ "html_002": {
+  "t": "복잡한 세상, 명쾌한 과학",
+  "ctx": "ass=\"p3\">🔬</span></div>       <h1><small"
+ },
+ "html_003": {
+  "t": "과학 콘서트 마스터 퀴즈",
+  "ctx": ">       <h1><small>복잡한 세상, 명쾌한 과학</small"
+ },
+ "html_004": {
+  "t": "“세상은 복잡해 보이지만, 그 무질서 속에는",
+  "ctx": "콘서트 마스터 퀴즈</h1>       <div class=\"quote\""
+ },
+ "html_005": {
+  "t": "언제나 과학이 찾아낼 질서가 숨어 있다.”",
+  "ctx": "te\">         “세상은 복잡해 보이지만, 그 무질서 속에는<br"
+ },
+ "html_006": {
+  "t": "— 『정재승의 과학 콘서트』가 던지는 메시지",
+  "ctx": "r>언제나 과학이 찾아낼 질서가 숨어 있다.”<br>         <b"
+ },
+ "html_007": {
+  "t": "머피의 법칙부터 프랙탈, 나비효과, 교통 정체까지 이 책의 핵심을",
+  "ctx": " 콘서트』가 던지는 메시지</b>       </div>       <p"
+ },
+ "html_008": {
+  "t": "30개의 퀴즈",
+  "ctx": ">머피의 법칙부터 프랙탈, 나비효과, 교통 정체까지 이 책의 핵심을 <b"
+ },
+ "html_009": {
+  "t": "로 익힙니다.\n        쉬운 것부터 시작해 점점 어려워지고,",
+  "ctx": "랙탈, 나비효과, 교통 정체까지 이 책의 핵심을 <b>30개의 퀴즈</b"
+ },
+ "html_010": {
+  "t": "틀린 문제는 맞힐 때까지 다시 돌아옵니다.",
+  "ctx": ">로 익힙니다.         쉬운 것부터 시작해 점점 어려워지고, <b"
+ },
+ "html_011": {
+  "t": "총",
+  "ctx": "s=\"meta-row\">         <span class=\"chip\""
+ },
+ "html_012": {
+  "t": "30문항",
+  "ctx": "ta-row\">         <span class=\"chip\">총 <b"
+ },
+ "html_013": {
+  "t": "쉬움 → 어려움",
+  "ctx": "문항</b></span>         <span class=\"chip\""
+ },
+ "html_014": {
+  "t": "실시간",
+  "ctx": "어려움</span>         <span class=\"chip\"><b"
+ },
+ "html_015": {
+  "t": "콘서트 진행도",
+  "ctx": "an>         <span class=\"chip\"><b>실시간</b"
+ },
+ "html_016": {
+  "t": "문제마다",
+  "ctx": "서트 진행도</span>         <span class=\"chip\""
+ },
+ "html_017": {
+  "t": "쉬운 해설",
+  "ctx": "span>         <span class=\"chip\">문제마다 <b"
+ },
+ "html_018": {
+  "t": "콘서트 입장하기 →",
+  "ctx": "=\"btn btn-primary\" onclick=\"startQuiz()\""
+ },
+ "html_019": {
+  "t": "점수",
+  "ctx": "   <div class=\"stat\"><span class=\"label\""
+ },
+ "html_020": {
+  "t": "연속 정답",
+  "ctx": "align-items:center;\"><span class=\"label\""
+ },
+ "html_021": {
+  "t": "마스터",
+  "ctx": "ign-items:flex-end;\"><span class=\"label\""
+ },
+ "html_022": {
+  "t": "서곡 ←",
+  "ctx": "\">         <div class=\"axis-label\"><span"
+ },
+ "html_023": {
+  "t": "과학 콘서트 ·",
+  "ctx": "lass=\"axis-label\"><span>서곡 ←</span><span"
+ },
+ "html_024": {
+  "t": "→ 피날레",
+  "ctx": " 콘서트 · <b id=\"pctTxt\">0%</b></span><span"
+ },
+ "html_025": {
+  "t": "쉬움",
+  "ctx": "d\">         <span class=\"diff\" id=\"diff\""
+ },
+ "html_026": {
+  "t": "다음 →",
+  "ctx": "y\" id=\"nextBtn\" onclick=\"nextQuestion()\""
+ },
+ "html_027": {
+  "t": "여기까지가 무료 미리보기예요",
+  "ctx": ">     <div class=\"lk-ic\">🔒</div>     <h3"
+ },
+ "html_028": {
+  "t": "🔑 구독하고 전체 열기",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_029": {
+  "t": "요약 리포트 미리보기 →",
+  "ctx": "class=\"cta ghost\" onclick=\"openReport()\""
+ },
+ "html_030": {
+  "t": "복잡계의 지휘자",
+  "ctx": ">       <div class=\"rank\" id=\"rankTitle\""
+ },
+ "html_031": {
+  "t": "최종 점수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_032": {
+  "t": "첫 시도 정답률",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_033": {
+  "t": "최고 연속 정답",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_034": {
+  "t": "총 도전 횟수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_035": {
+  "t": "📖 전체 요약 리포트 보기",
+  "ctx": "\"btn btn-primary\" onclick=\"openReport()\""
+ },
+ "html_036": {
+  "t": "🖼 결과 카드 저장",
+  "ctx": "btn btn-ghost\" onclick=\"makeShareCard()\""
+ },
+ "html_037": {
+  "t": "다시 도전 ↻",
+  "ctx": "ss=\"btn btn-ghost\" onclick=\"startQuiz()\""
+ },
+ "html_038": {
+  "t": "처음으로",
+  "ctx": "class=\"btn btn-ghost\" onclick=\"goHome()\""
+ },
+ "html_039": {
+  "t": "완독 리포트 · INFOGRAPHIC",
+  "ctx": "s=\"rep-hero\">       <div class=\"eyebrow\""
+ },
+ "html_040": {
+  "t": "과학 콘서트 한눈에 보기",
+  "ctx": "ow\">완독 리포트 · INFOGRAPHIC</div>       <h2"
+ },
+ "html_041": {
+  "t": "책 전체를",
+  "ctx": "v>       <h2>과학 콘서트 한눈에 보기</h2>       <p"
+ },
+ "html_042": {
+  "t": "‘복잡계의 사슬’",
+  "ctx": "<h2>과학 콘서트 한눈에 보기</h2>       <p>책 전체를 <b"
+ },
+ "html_043": {
+  "t": "하나로 꿰면 절대 안 잊습니다. 모든 이야기의 출발점은",
+  "ctx": "에 보기</h2>       <p>책 전체를 <b>‘복잡계의 사슬’</b"
+ },
+ "html_044": {
+  "t": "복잡한 세상",
+  "ctx": "슬’</b> 하나로 꿰면 절대 안 잊습니다. 모든 이야기의 출발점은 <b"
+ },
+ "html_045": {
+  "t": "입니다.",
+  "ctx": " 꿰면 절대 안 잊습니다. 모든 이야기의 출발점은 <b>복잡한 세상</b"
+ },
+ "html_046": {
+  "t": "뿌리",
+  "ctx": "<div class=\"ch step s0\"><span class=\"cn\""
+ },
+ "html_047": {
+  "t": "🎻 복잡한 세상",
+  "ctx": "ch step s0\"><span class=\"cn\">뿌리</span><b"
+ },
+ "html_048": {
+  "t": "수많은 요소가 얽혀 예측이 어렵다",
+  "ctx": "lass=\"cn\">뿌리</span><b>🎻 복잡한 세상</b><small"
+ },
+ "html_049": {
+  "t": "1단계",
+  "ctx": "<div class=\"ch step s1\"><span class=\"cn\""
+ },
+ "html_050": {
+  "t": "🔗 연결망 — 좁은 세상과 6단계",
+  "ctx": "h step s1\"><span class=\"cn\">1단계</span><b"
+ },
+ "html_051": {
+  "t": "사회는 촘촘히 이어진 하나의 그물",
+  "ctx": "단계</span><b>🔗 연결망 — 좁은 세상과 6단계</b><small"
+ },
+ "html_052": {
+  "t": "2단계",
+  "ctx": "<div class=\"ch step s2\"><span class=\"cn\""
+ },
+ "html_053": {
+  "t": "🎨 반복되는 패턴 — 프랙탈과 멱함수",
+  "ctx": "h step s2\"><span class=\"cn\">2단계</span><b"
+ },
+ "html_054": {
+  "t": "부분이 전체를 닮고, 큰 사건은 드물다",
+  "ctx": "</span><b>🎨 반복되는 패턴 — 프랙탈과 멱함수</b><small"
+ },
+ "html_055": {
+  "t": "근접 원인",
+  "ctx": "s=\"ch step s3\">         <span class=\"cn\""
+ },
+ "html_056": {
+  "t": "🦋 작은 차이의 증폭 — 나비효과·카오스",
+  "ctx": "         <span class=\"cn\">근접 원인</span><b"
+ },
+ "html_057": {
+  "t": "초기의 사소한 차이가 큰 결과로",
+  "ctx": " 작은 차이의 증폭 — 나비효과·카오스</b>         <small"
+ },
+ "html_058": {
+  "t": "결과",
+  "ctx": "<div class=\"ch step s4\"><span class=\"cn\""
+ },
+ "html_059": {
+  "t": "👏 무질서 속 숨은 질서",
+  "ctx": "ch step s4\"><span class=\"cn\">결과</span><b"
+ },
+ "html_060": {
+  "t": "“자기조직화와 동기화의 앙코르”",
+  "ctx": "\"cn\">결과</span><b>👏 무질서 속 숨은 질서</b><small"
+ },
+ "html_061": {
+  "t": "핵심 개념 8",
+  "ctx": "/div>     </div>      <h3 class=\"rep-h3\""
+ },
+ "html_062": {
+  "t": "목차 한눈에 보기",
+  "ctx": "concepts\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_063": {
+  "t": "탭하면 요약이 열립니다",
+  "ctx": "ss=\"rep-h3\">목차 한눈에 보기 <span class=\"hint\""
+ },
+ "html_064": {
+  "t": "책 속, 생각해볼 사례 3",
+  "ctx": " id=\"toc\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_065": {
+  "t": "이 책이 우리에게 던지는 질문 3",
+  "ctx": "d=\"cases\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_066": {
+  "t": "내가 틀린 부분 집중 복습",
+  "ctx": " id=\"weakWrap\">       <h3 class=\"rep-h3\""
+ },
+ "html_067": {
+  "t": "📺 더 깊이 알고 싶다면",
+  "ctx": "/div>      <div class=\"deepen\">       <b"
+ },
+ "html_068": {
+  "t": "에서 저자 정재승의 과학 이야기와 복잡계 과학을 더 깊이 만나 볼 수 있습니다.",
+  "ctx": "f=\"#\" target=\"_blank\" rel=\"noopener\"></a"
+ },
+ "html_069": {
+  "t": "📄 PDF로 저장",
+  "ctx": "d=\"pdfBtn\" onclick=\"downloadReportPDF()\""
+ },
+ "html_070": {
+  "t": "결과로",
+  "ctx": "\"btn btn-ghost\" onclick=\"show('result')\""
+ },
+ "html_071": {
+  "t": "📚 다른 책 퀴즈 보기 →",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_072": {
+  "t": "“의미와재미공장” 미미팩토리",
+  "ctx": "class=\"footer\">     <div class=\"factory\""
+ },
+ "html_073": {
+  "t": "(주식회사 연:결 패밀리회사)",
+  "ctx": "재미공장” 미미팩토리</div>     <div class=\"affil\""
+ },
+ "html_074": {
+  "t": "책의 핵심을 도파민으로 익히는 반복 마스터 퀴즈",
+  "ctx": ":결 패밀리회사)</div>     <div class=\"tagline\""
+ },
+ "html_075": {
+  "t": "본 앱은 도서의 핵심 개념을 학습 목적으로 재구성한 2차적 학습 콘텐츠입니다. 온전한 독서 경험은 원서로 만나보세요.",
+  "ctx": "퀴즈</div>     <div class=\"copyright-note\""
+ },
+ "html_076": {
+  "t": "정재승의 과학 콘서트 · 도서 정보",
+  "ctx": "43970084\" target=\"_blank\" rel=\"noopener\""
+ },
+ "js_001": {
+  "t": "\"}))}},Hn={name:\"font-size\",initialValue:\"0\",prefix:!1,type:wt.TYPE_VALUE,format:\"length\"},In={name:\"font-weight\",initialValue:\"normal\",type:wt.VALUE,prefix:!1,parse:function(e){if(Ve(e))return e.number;if(qe(e))switch(e.value){case\"bold\":return 700;case\"normal\":default:return 400}return 400}},Pn={name:\"font-variant\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return e.filter(qe).map((function(e){return e.value}))}};!function(e){e.NORMAL=\"normal\",e.ITALIC=\"italic\",e.OBLIQUE=\"oblique\"}(Nn||(Nn={}));var On,kn={name:\"font-style\",initialValue:\"normal\",prefix:!1,type:wt.IDENT_VALUE,parse:function(e){switch(e){case\"oblique\":return Nn.OBLIQUE;case\"italic\":return Nn.ITALIC;case\"normal\":default:return Nn.NORMAL}}},Rn=function(e,t){return 0!=(e&t)},Mn={name:\"content\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){if(0===e.length)return[];var t=e[0];return t.type===d.IDENT_TOKEN&&\"none\"===t.value?[]:e}},Dn={name:\"counter-increment\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;for(var r=[],n=e.filter(We),o=0;o<n.length;o++){var s=n[o],i=n[o+1];if(s.type===d.IDENT_TOKEN){var a=i&&Ve(i)?i.number:1;r.push({counter:s.value,increment:a})}}return r}},Kn={name:\"counter-reset\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return[];for(var t=[],r=e.filter(We),n=0;n<r.length;n++){var o=r[n],s=r[n+1];if(qe(o)&&\"none\"!==o.value){var i=s&&Ve(s)?s.number:0;t.push({counter:o.value,reset:i})}}return t}},zn={name:\"quotes\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;var r=[],n=e.filter(Ge);if(n.length%2!=0)return null;for(var o=0;o<n.length;o+=2){var s=n[o].value,i=n[o+1].value;r.push({open:s,close:i})}return r}},Vn=function(e,t,r){if(!e)return\"\";var n=e[Math.min(t,e.length-1)];return n?r?n.open:n.close:\"\"},qn={name:\"box-shadow\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return 1===e.length&&Xe(e[0],\"none\")?[]:Ye(e).map((function(e){for(var t={color:255,offsetX:rt,offsetY:rt,blur:rt,spread:rt,inset:!1},r=0,n=0;n<e.length;n++){var o=e[n];Xe(o,\"inset\")?t.inset=!0:$e(o)?(0===r?t.offsetX=o:1===r?t.offsetY=o:2===r?t.blur=o:t.spread=o,r++):t.color=ft(o)}return t}))}},Gn=function(){function e(e){this.backgroundClip=Jn(xt,e.backgroundClip),this.backgroundColor=Jn(Et,e.backgroundColor),this.backgroundImage=Jn(ur,e.backgroundImage),this.backgroundOrigin=Jn(cr,e.backgroundOrigin),this.backgroundPosition=Jn(lr,e.backgroundPosition),this.backgroundRepeat=Jn(fr,e.backgroundRepeat),this.backgroundSize=Jn(mr,e.backgroundSize),this.borderTopColor=Jn(vr,e.borderTopColor),this.borderRightColor=Jn(wr,e.borderRightColor),this.borderBottomColor=Jn(br,e.borderBottomColor),this.borderLeftColor=Jn(Br,e.borderLeftColor),this.borderTopLeftRadius=Jn(_r,e.borderTopLeftRadius),this.borderTopRightRadius=Jn(Cr,e.borderTopRightRadius),this.borderBottomRightRadius=Jn(xr,e.borderBottomRightRadius),this.borderBottomLeftRadius=Jn(Er,e.borderBottomLeftRadius),this.borderTopStyle=Jn(Fr,e.borderTopStyle),this.borderRightStyle=Jn(Ur,e.borderRightStyle),this.borderBottomStyle=Jn(Sr,e.borderBottomStyle),this.borderLeftStyle=Jn(Lr,e.borderLeftStyle),this.borderTopWidth=Jn(Hr,e.borderTopWidth),this.borderRightWidth=Jn(Ir,e.borderRightWidth),this.borderBottomWidth=Jn(Pr,e.borderBottomWidth),this.borderLeftWidth=Jn(Or,e.borderLeftWidth),this.boxShadow=Jn(qn,e.boxShadow),this.color=Jn(kr,e.color),this.display=Jn(Rr,e.display),this.float=Jn(Kr,e.cssFloat),this.fontFamily=Jn(Tn,e.fontFamily),this.fontSize=Jn(Hn,e.fontSize),this.fontStyle=Jn(kn,e.fontStyle),this.fontVariant=Jn(Pn,e.fontVariant),this.fontWeight=Jn(In,e.fontWeight),this.letterSpacing=Jn(zr,e.letterSpacing),this.lineBreak=Jn(qr,e.lineBreak),this.lineHeight=Jn(Gr,e.lineHeight),this.listStyleImage=Jn(Xr,e.listStyleImage),this.listStylePosition=Jn(Jr,e.listStylePosition),this.listStyleType=Jn(Zr,e.listStyleType),this.marginTop=Jn(en,e.marginTop),this.marginRight=Jn(tn,e.marginRight),this.marginBottom=Jn(rn,e.marginBottom),this.marginLeft=Jn(nn,e.marginLeft),this.opacity=Jn(Un,e.opacity);var t=Jn(sn,e.overflow);this.overflowX=t[0],this.overflowY=t[t.length>1?1:0],this.overflowWrap=Jn(An,e.overflowWrap),this.paddingTop=Jn(cn,e.paddingTop),this.paddingRight=Jn(ln,e.paddingRight),this.paddingBottom=Jn(dn,e.paddingBottom),this.paddingLeft=Jn(fn,e.paddingLeft),this.position=Jn(gn,e.position),this.textAlign=Jn(pn,e.textAlign),this.textDecorationColor=Jn(Sn,e.textDecorationColor||e.color),this.textDecorationLine=Jn(Ln,e.textDecorationLine),this.textShadow=Jn(yn,e.textShadow),this.textTransform=Jn(wn,e.textTransform),this.transform=Jn(bn,e.transform),this.transformOrigin=Jn(Cn,e.transformOrigin),this.visibility=Jn(En,e.visibility),this.wordBreak=Jn(Qn,e.wordBreak),this.zIndex=Jn(Fn,e.zIndex)}return e.prototype.isVisible=function(){return this.display>0&&this.opacity>0&&this.visibility===vn.VISIBLE},e.prototype.isTransparent=function(){return ht(this.backgroundColor)},e.prototype.isTransformed=function(){return null!==this.transform},e.prototype.isPositioned=function(){return this.position!==hn.STATIC},e.prototype.isPositionedWithZIndex=function(){return this.isPositioned()&&!this.zIndex.auto},e.prototype.isFloating=function(){return this.float!==Nr.NONE},e.prototype.isInlineLevel=function(){return Rn(this.display,4)||Rn(this.display,33554432)||Rn(this.display,268435456)||Rn(this.display,536870912)||Rn(this.display,67108864)||Rn(this.display,134217728)},e}(),Xn=function(e){this.content=Jn(Mn,e.content),this.quotes=Jn(zn,e.quotes)},Wn=function(e){this.counterIncrement=Jn(Dn,e.counterIncrement),this.counterReset=Jn(Kn,e.counterReset)},Jn=function(e,t){var r=new De,n=null!=t?t.toString():e.initialValue;r.write(n);var o=new Ke(r.read());switch(e.type){case wt.IDENT_VALUE:var s=o.parseComponentValue();return e.parse(qe(s)?s.value:e.initialValue);case wt.VALUE:return e.parse(o.parseComponentValue());case wt.LIST:return e.parse(o.parseComponentValues());case wt.TOKEN_VALUE:return o.parseComponentValue();case wt.TYPE_VALUE:switch(e.format){case\"angle\":return ut(o.parseComponentValue());case\"color\":return ft(o.parseComponentValue());case\"image\":return ir(o.parseComponentValue());case\"length\":var i=o.parseComponentValue();return $e(i)?i:rt;case\"length-percentage\":var a=o.parseComponentValue();return et(a)?a:rt}}throw new Error(\"Attempting to parse unsupported css format type \"+e.format)},Yn=function(e){this.styles=new Gn(window.getComputedStyle(e,null)),this.textNodes=[],this.elements=[],null!==this.styles.transform&&So(e)&&(e.style.transform=\"none\"),this.bounds=i(e),this.flags=0},Zn=function(e,t){this.text=e,this.bounds=t},$n=function(e){var t=e.ownerDocument;if(t){var r=t.createElement(\"html2canvaswrapper\");r.appendChild(e.cloneNode(!0));var n=e.parentNode;if(n){n.replaceChild(r,e);var o=i(r);return r.firstChild&&n.replaceChild(r.firstChild,r),o}}return new s(0,0,0,0)},eo=function(e,t,r){var n=e.ownerDocument;if(!n)throw new Error(\"Node has no owner document\");var o=n.createRange();return o.setStart(e,t),o.setEnd(e,t+r),s.fromClientRect(o.getBoundingClientRect())},to=function(e,t){return 0!==t.letterSpacing?a(e).map((function(e){return A(e)})):ro(e,t)},ro=function(e,t){for(var r,n=function(e,t){var r=a(e),n=ie(r,t),o=n[0],s=n[1],i=n[2],A=r.length,u=0,c=0;return{next:function(){if(c>=A)return{done:!0,value:null};for(var e=G;c<A&&(e=se(r,s,o,++c,i))===G;);if(e!==G||c===A){var t=new ae(r,e,u,c);return u=c,{value:t,done:!1}}return{done:!0,value:null}}}}(e,{lineBreak:t.lineBreak,wordBreak:t.overflowWrap===on.BREAK_WORD?\"break-word\":t.wordBreak}),o=[];!(r=n.next()).done;)r.value&&o.push(r.value.slice());return o},no=function(e,t){this.text=oo(e.data,t.textTransform),this.textBounds=function(e,t,r){var n=to(e,t),o=[],s=0;return n.forEach((function(e){if(t.textDecorationLine.length||e.trim().length>0)if(Pt.SUPPORT_RANGE_BOUNDS)o.push(new Zn(e,eo(r,s,e.length)));else{var n=r.splitText(e.length);o.push(new Zn(e,$n(r))),r=n}else Pt.SUPPORT_RANGE_BOUNDS||(r=r.splitText(e.length));s+=e.length})),o}(this.text,t,e)},oo=function(e,t){switch(t){case mn.LOWERCASE:return e.toLowerCase();case mn.CAPITALIZE:return e.replace(so,io);case mn.UPPERCASE:return e.toUpperCase();default:return e}},so=/(^|\\s|:|-|\\(|\\))([a-z])/g,io=function(e,t,r){return e.length>0?t+r.toUpperCase():e},ao=function(e){function r(t){var r=e.call(this,t)||this;return r.src=t.currentSrc||t.src,r.intrinsicWidth=t.naturalWidth,r.intrinsicHeight=t.naturalHeight,kt.getInstance().addImage(r.src),r}return t(r,e),r}(Yn),Ao=function(e){function r(t){var r=e.call(this,t)||this;return r.canvas=t,r.intrinsicWidth=t.width,r.intrinsicHeight=t.height,r}return t(r,e),r}(Yn),uo=function(e){function r(t){var r=e.call(this,t)||this,n=new XMLSerializer;return r.svg=\"data:image/svg+xml,\"+encodeURIComponent(n.serializeToString(t)),r.intrinsicWidth=t.width.baseVal.value,r.intrinsicHeight=t.height.baseVal.value,kt.getInstance().addImage(r.svg),r}return t(r,e),r}(Yn),co=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),lo=function(e){function r(t){var r=e.call(this,t)||this;return r.start=t.start,r.reversed=\"boolean\"==typeof t.reversed&&!0===t.reversed,r}return t(r,e),r}(Yn),fo=[{type:d.DIMENSION_TOKEN,flags:0,unit:\"px\",number:3}],ho=[{type:d.PERCENTAGE_TOKEN,flags:0,number:50}],po=\"checkbox\",mo=\"radio\",go=\"password\",yo=707406591,vo=function(e){function r(t){var r,n,o,i=e.call(this,t)||this;switch(i.type=t.type.toLowerCase(),i.checked=t.checked,i.value=0===(o=(n=t).type===go?new Array(n.value.length+1).join(\"•\"):n.value).length?n.placeholder||\"\":o,i.type!==po&&i.type!==mo||(i.styles.backgroundColor=3739148031,i.styles.borderTopColor=i.styles.borderRightColor=i.styles.borderBottomColor=i.styles.borderLeftColor=2779096575,i.styles.borderTopWidth=i.styles.borderRightWidth=i.styles.borderBottomWidth=i.styles.borderLeftWidth=1,i.styles.borderTopStyle=i.styles.borderRightStyle=i.styles.borderBottomStyle=i.styles.borderLeftStyle=pr.SOLID,i.styles.backgroundClip=[bt.BORDER_BOX],i.styles.backgroundOrigin=[0],i.bounds=(r=i.bounds).width>r.height?new s(r.left+(r.width-r.height)/2,r.top,r.height,r.height):r.width<r.height?new s(r.left,r.top+(r.height-r.width)/2,r.width,r.width):r),i.type){case po:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=fo;break;case mo:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=ho}return i}return t(r,e),r}(Yn),wo=function(e){function r(t){var r=e.call(this,t)||this,n=t.options[t.selectedIndex||0];return r.value=n&&n.text||\"\",r}return t(r,e),r}(Yn),bo=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),Bo=function(e){return ft(Ke.create(e).parseComponentValue())},jo=function(e){function r(t){var r=e.call(this,t)||this;r.src=t.src,r.width=parseInt(t.width,10)||0,r.height=parseInt(t.height,10)||0,r.backgroundColor=r.styles.backgroundColor;try{if(t.contentWindow&&t.contentWindow.document&&t.contentWindow.document.documentElement){r.tree=Eo(t.contentWindow.document.documentElement);var n=t.contentWindow.document.documentElement?Bo(getComputedStyle(t.contentWindow.document.documentElement).backgroundColor):_t.TRANSPARENT,o=t.contentWindow.document.body?Bo(getComputedStyle(t.contentWindow.document.body).backgroundColor):_t.TRANSPARENT;r.backgroundColor=ht(n)?ht(o)?r.styles.backgroundColor:o:n}}catch(e){}return r}return t(r,e),r}(Yn),_o=[\"OL\",\"UL\",\"MENU\"],Co=function(e,t,r){for(var n=e.firstChild,o=void 0;n;n=o)if(o=n.nextSibling,Fo(n)&&n.data.trim().length>0)t.textNodes.push(new no(n,t.styles));else if(Uo(n)){var s=xo(n);s.styles.isVisible()&&(No(n,s,r)?s.flags|=4:Qo(s.styles)&&(s.flags|=2),-1!==_o.indexOf(n.tagName)&&(s.flags|=8),t.elements.push(s),zo(n)||Po(n)||Vo(n)||Co(n,s,r))}},xo=function(e){return Ro(e)?new ao(e):ko(e)?new Ao(e):Po(e)?new uo(e):To(e)?new co(e):Ho(e)?new lo(e):Io(e)?new vo(e):Vo(e)?new wo(e):zo(e)?new bo(e):Mo(e)?new jo(e):new Yn(e)},Eo=function(e){var t=xo(e);return t.flags|=4,Co(e,t,t),t},No=function(e,t,r){return t.styles.isPositionedWithZIndex()||t.styles.opacity<1||t.styles.isTransformed()||Oo(e)&&r.styles.isTransparent()},Qo=function(e){return e.isPositioned()||e.isFloating()},Fo=function(e){return e.nodeType===Node.TEXT_NODE},Uo=function(e){return e.nodeType===Node.ELEMENT_NODE},So=function(e){return Uo(e)&&void 0!==e.style&&!Lo(e)},Lo=function(e){return\"object\"==typeof e.className},To=function(e){return\"LI\"===e.tagName},Ho=function(e){return\"OL\"===e.tagName},Io=function(e){return\"INPUT\"===e.tagName},Po=function(e){return\"svg\"===e.tagName},Oo=function(e){return\"BODY\"===e.tagName},ko=function(e){return\"CANVAS\"===e.tagName},Ro=function(e){return\"IMG\"===e.tagName},Mo=function(e){return\"IFRAME\"===e.tagName},Do=function(e){return\"STYLE\"===e.tagName},Ko=function(e){return\"SCRIPT\"===e.tagName},zo=function(e){return\"TEXTAREA\"===e.tagName},Vo=function(e){return\"SELECT\"===e.tagName},qo=function(){function e(){this.counters={}}return e.prototype.getCounterValue=function(e){var t=this.counters[e];return t&&t.length?t[t.length-1]:1},e.prototype.getCounterValues=function(e){return this.counters[e]||[]},e.prototype.pop=function(e){var t=this;e.forEach((function(e){return t.counters[e].pop()}))},e.prototype.parse=function(e){var t=this,r=e.counterIncrement,n=e.counterReset,o=!0;null!==r&&r.forEach((function(e){var r=t.counters[e.counter];r&&0!==e.increment&&(o=!1,r[Math.max(0,r.length-1)]+=e.increment)}));var s=[];return o&&n.forEach((function(e){var r=t.counters[e.counter];s.push(e.counter),r||(r=t.counters[e.counter]=[]),r.push(e.reset)})),s},e}(),Go={integers:[1e3,900,500,400,100,90,50,40,10,9,5,4,1],values:[\"M\",\"CM\",\"D\",\"CD\",\"C\",\"XC\",\"L\",\"XL\",\"X\",\"IX\",\"V\",\"IV\",\"I\"]},Xo={integers:[9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"Ք\",\"Փ\",\"Ւ\",\"Ց\",\"Ր\",\"Տ\",\"Վ\",\"Ս\",\"Ռ\",\"Ջ\",\"Պ\",\"Չ\",\"Ո\",\"Շ\",\"Ն\",\"Յ\",\"Մ\",\"Ճ\",\"Ղ\",\"Ձ\",\"Հ\",\"Կ\",\"Ծ\",\"Խ\",\"Լ\",\"Ի\",\"Ժ\",\"Թ\",\"Ը\",\"Է\",\"Զ\",\"Ե\",\"Դ\",\"Գ\",\"Բ\",\"Ա\"]},Wo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,400,300,200,100,90,80,70,60,50,40,30,20,19,18,17,16,15,10,9,8,7,6,5,4,3,2,1],values:[\"י׳\",\"ט׳\",\"ח׳\",\"ז׳\",\"ו׳\",\"ה׳\",\"ד׳\",\"ג׳\",\"ב׳\",\"א׳\",\"ת\",\"ש\",\"ר\",\"ק\",\"צ\",\"פ\",\"ע\",\"ס\",\"נ\",\"מ\",\"ל\",\"כ\",\"יט\",\"יח\",\"יז\",\"טז\",\"טו\",\"י\",\"ט\",\"ח\",\"ז\",\"ו\",\"ה\",\"ד\",\"ג\",\"ב\",\"א\"]},Jo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"ჵ\",\"ჰ\",\"ჯ\",\"ჴ\",\"ხ\",\"ჭ\",\"წ\",\"ძ\",\"ც\",\"ჩ\",\"შ\",\"ყ\",\"ღ\",\"ქ\",\"ფ\",\"ჳ\",\"ტ\",\"ს\",\"რ\",\"ჟ\",\"პ\",\"ო\",\"ჲ\",\"ნ\",\"მ\",\"ლ\",\"კ\",\"ი\",\"თ\",\"ჱ\",\"ზ\",\"ვ\",\"ე\",\"დ\",\"გ\",\"ბ\",\"ა\"]},Yo=function(e,t,r,n,o,s){return e<t||e>r?is(e,o,s.length>0):n.integers.reduce((function(t,r,o){for(;e>=r;)e-=r,t+=n.values[o];return t}),\"\")+s},Zo=function(e,t,r,n){var o=\"\";do{r||e--,o=n(e)+o,e/=t}while(e*t>=t);return o},$o=function(e,t,r,n,o){var s=r-t+1;return(e<0?\"-\":\"\")+(Zo(Math.abs(e),s,n,(function(e){return A(Math.floor(e%s)+t)}))+o)},es=function(e,t,r){void 0===r&&(r=\". \");var n=t.length;return Zo(Math.abs(e),n,!1,(function(e){return t[Math.floor(e%n)]}))+r},ts=function(e,t,r,n,o,s){if(e<-9999||e>9999)return is(e,Wr.CJK_DECIMAL,o.length>0);var i=Math.abs(e),a=o;if(0===i)return t[0]+a;for(var A=0;i>0&&A<=4;A++){var u=i%10;0===u&&Rn(s,1)&&\"\"!==a?a=t[u]+a:u>1||1===u&&0===A||1===u&&1===A&&Rn(s,2)||1===u&&1===A&&Rn(s,4)&&e>100||1===u&&A>1&&Rn(s,8)?a=t[u]+(A>0?r[A-1]:\"\")+a:1===u&&A>0&&(a=r[A-1]+a),i=Math.floor(i/10)}return(e<0?n:\"\")+a},rs=\"十百千萬\",ns=\"拾佰仟萬\",os=\"マイナス\",ss=\"마이너스\",is=function(e,t,r){var n=r?\". \":\"\",o=r?\"、\":\"\",s=r?\", \":\"\",i=r?\" \":\"\";switch(t){case Wr.DISC:return\"•\"+i;case Wr.CIRCLE:return\"◦\"+i;case Wr.SQUARE:return\"◾\"+i;case Wr.DECIMAL_LEADING_ZERO:var a=$o(e,48,57,!0,n);return a.length<4?\"0\"+a:a;case Wr.CJK_DECIMAL:return es(e,\"〇一二三四五六七八九\",o);case Wr.LOWER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n).toLowerCase();case Wr.UPPER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n);case Wr.LOWER_GREEK:return $o(e,945,969,!1,n);case Wr.LOWER_ALPHA:return $o(e,97,122,!1,n);case Wr.UPPER_ALPHA:return $o(e,65,90,!1,n);case Wr.ARABIC_INDIC:return $o(e,1632,1641,!0,n);case Wr.ARMENIAN:case Wr.UPPER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n);case Wr.LOWER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n).toLowerCase();case Wr.BENGALI:return $o(e,2534,2543,!0,n);case Wr.CAMBODIAN:case Wr.KHMER:return $o(e,6112,6121,!0,n);case Wr.CJK_EARTHLY_BRANCH:return es(e,\"子丑寅卯辰巳午未申酉戌亥\",o);case Wr.CJK_HEAVENLY_STEM:return es(e,\"甲乙丙丁戊己庚辛壬癸\",o);case Wr.CJK_IDEOGRAPHIC:case Wr.TRAD_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"負\",o,14);case Wr.TRAD_CHINESE_FORMAL:return ts(e,\"零壹貳參肆伍陸柒捌玖\",ns,\"負\",o,15);case Wr.SIMP_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"负\",o,14);case Wr.SIMP_CHINESE_FORMAL:return ts(e,\"零壹贰叁肆伍陆柒捌玖\",ns,\"负\",o,15);case Wr.JAPANESE_INFORMAL:return ts(e,\"〇一二三四五六七八九\",\"十百千万\",os,o,0);case Wr.JAPANESE_FORMAL:return ts(e,\"零壱弐参四伍六七八九\",\"拾百千万\",os,o,7);case Wr.KOREAN_HANGUL_FORMAL:return ts(e,\"영일이삼사오육칠팔구\",\"십백천만\",ss,s,7);case Wr.KOREAN_HANJA_INFORMAL:return ts(e,\"零一二三四五六七八九\",\"十百千萬\",ss,s,0);case Wr.KOREAN_HANJA_FORMAL:return ts(e,\"零壹貳參四五六七八九\",\"拾百千\",ss,s,7);case Wr.DEVANAGARI:return $o(e,2406,2415,!0,n);case Wr.GEORGIAN:return Yo(e,1,19999,Jo,Wr.DECIMAL,n);case Wr.GUJARATI:return $o(e,2790,2799,!0,n);case Wr.GURMUKHI:return $o(e,2662,2671,!0,n);case Wr.HEBREW:return Yo(e,1,10999,Wo,Wr.DECIMAL,n);case Wr.HIRAGANA:return es(e,\"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん\");case Wr.HIRAGANA_IROHA:return es(e,\"いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす\");case Wr.KANNADA:return $o(e,3302,3311,!0,n);case Wr.KATAKANA:return es(e,\"アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン\",o);case Wr.KATAKANA_IROHA:return es(e,\"イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセス\",o);case Wr.LAO:return $o(e,3792,3801,!0,n);case Wr.MONGOLIAN:return $o(e,6160,6169,!0,n);case Wr.MYANMAR:return $o(e,4160,4169,!0,n);case Wr.ORIYA:return $o(e,2918,2927,!0,n);case Wr.PERSIAN:return $o(e,1776,1785,!0,n);case Wr.TAMIL:return $o(e,3046,3055,!0,n);case Wr.TELUGU:return $o(e,3174,3183,!0,n);case Wr.THAI:return $o(e,3664,3673,!0,n);case Wr.TIBETAN:return $o(e,3872,3881,!0,n);case Wr.DECIMAL:default:return $o(e,48,57,!0,n)}},as=\"data-html2canvas-ignore\",As=function(){function e(e,t){if(this.options=t,this.scrolledElements=[],this.referenceElement=e,this.counters=new qo,this.quoteDepth=0,!e.ownerDocument)throw new Error(\"Cloned element does not have an owner document\");this.documentElement=this.cloneNode(e.ownerDocument.documentElement)}return e.prototype.toIFrame=function(e,t){var r=this,s=cs(e,t);if(!s.contentWindow)return Promise.reject(\"Unable to find iframe window\");var i=e.defaultView.pageXOffset,a=e.defaultView.pageYOffset,A=s.contentWindow,u=A.document,c=ls(s).then((function(){return n(r,void 0,void 0,(function(){var e;return o(this,(function(r){switch(r.label){case 0:return this.scrolledElements.forEach(ps),A&&(A.scrollTo(t.left,t.top),!/(iPad|iPhone|iPod)/g.test(navigator.userAgent)||A.scrollY===t.top&&A.scrollX===t.left||(u.documentElement.style.top=-t.top+\"px\",u.documentElement.style.left=-t.left+\"px\",u.documentElement.style.position=\"absolute\")),e=this.options.onclone,void 0===this.clonedReferenceElement?[2,Promise.reject(\"Error finding the \"+this.referenceElement.nodeName+\" in the cloned document\")]:u.fonts&&u.fonts.ready?[4,u.fonts.ready]:[3,2];case 1:r.sent(),r.label=2;case 2:return\"function\"==typeof e?[2,Promise.resolve().then((function(){return e(u)})).then((function(){return s}))]:[2,s]}}))}))}));return u.open(),u.write(fs(document.doctype)+\"<html></html>\"),hs(this.referenceElement.ownerDocument,i,a),u.replaceChild(u.adoptNode(this.documentElement),u.documentElement),u.close(),c},e.prototype.createElementClone=function(e){if(ko(e))return this.createCanvasClone(e);if(Do(e))return this.createStyleClone(e);var t=e.cloneNode(!1);return Ro(t)&&\"lazy\"===t.loading&&(t.loading=\"eager\"),t},e.prototype.createStyleClone=function(e){try{var t=e.sheet;if(t&&t.cssRules){var r=[].slice.call(t.cssRules,0).reduce((function(e,t){return t&&\"string\"==typeof t.cssText?e+t.cssText:e}),\"\"),n=e.cloneNode(!1);return n.textContent=r,n}}catch(e){if(Ot.getInstance(this.options.id).error(\"Unable to access cssRules property\",e),\"SecurityError\"!==e.name)throw e}return e.cloneNode(!1)},e.prototype.createCanvasClone=function(e){if(this.options.inlineImages&&e.ownerDocument){var t=e.ownerDocument.createElement(\"img\");try{return t.src=e.toDataURL(),t}catch(e){Ot.getInstance(this.options.id).info(\"Unable to clone canvas contents, canvas is tainted\")}}var r=e.cloneNode(!1);try{r.width=e.width,r.height=e.height;var n=e.getContext(\"2d\"),o=r.getContext(\"2d\");return o&&(n?o.putImageData(n.getImageData(0,0,e.width,e.height),0,0):o.drawImage(e,0,0)),r}catch(e){}return r},e.prototype.cloneNode=function(e){if(Fo(e))return document.createTextNode(e.data);if(!e.ownerDocument)return e.cloneNode(!1);var t=e.ownerDocument.defaultView;if(t&&Uo(e)&&(So(e)||Lo(e))){var r=this.createElementClone(e),n=t.getComputedStyle(e),o=t.getComputedStyle(e,\":before\"),s=t.getComputedStyle(e,\":after\");this.referenceElement===e&&So(r)&&(this.clonedReferenceElement=r),Oo(r)&&vs(r);for(var i=this.counters.parse(new Wn(n)),a=this.resolvePseudoContent(e,r,o,On.BEFORE),A=e.firstChild;A;A=A.nextSibling)Uo(A)&&(Ko(A)||A.hasAttribute(as)||\"function\"==typeof this.options.ignoreElements&&this.options.ignoreElements(A))||this.options.copyStyles&&Uo(A)&&Do(A)||r.appendChild(this.cloneNode(A));a&&r.insertBefore(a,r.firstChild);var u=this.resolvePseudoContent(e,r,s,On.AFTER);return u&&r.appendChild(u),this.counters.pop(i),n&&(this.options.copyStyles||Lo(e))&&!Mo(e)&&ds(n,r),0===e.scrollTop&&0===e.scrollLeft||this.scrolledElements.push([r,e.scrollLeft,e.scrollTop]),(zo(e)||Vo(e))&&(zo(r)||Vo(r))&&(r.value=e.value),r}return e.cloneNode(!1)},e.prototype.resolvePseudoContent=function(e,t,r,n){var o=this;if(r){var s=r.content,i=t.ownerDocument;if(i&&s&&\"none\"!==s&&\"-moz-alt-content\"!==s&&\"none\"!==r.display){this.counters.parse(new Wn(r));var a=new Xn(r),A=i.createElement(\"html2canvaspseudoelement\");ds(r,A),a.content.forEach((function(t){if(t.type===d.STRING_TOKEN)A.appendChild(i.createTextNode(t.value));else if(t.type===d.URL_TOKEN){var r=i.createElement(\"img\");r.src=t.value,r.style.opacity=\"1\",A.appendChild(r)}else if(t.type===d.FUNCTION){if(\"attr\"===t.name){var n=t.values.filter(qe);n.length&&A.appendChild(i.createTextNode(e.getAttribute(n[0].value)||\"\"))}else if(\"counter\"===t.name){var s=t.values.filter(Je),u=s[0],c=s[1];if(u&&qe(u)){var l=o.counters.getCounterValue(u.value),f=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL;A.appendChild(i.createTextNode(is(l,f,!1)))}}else if(\"counters\"===t.name){var h=t.values.filter(Je),p=(u=h[0],h[1]);if(c=h[2],u&&qe(u)){var m=o.counters.getCounterValues(u.value),g=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL,y=p&&p.type===d.STRING_TOKEN?p.value:\"\",v=m.map((function(e){return is(e,g,!1)})).join(y);A.appendChild(i.createTextNode(v))}}}else if(t.type===d.IDENT_TOKEN)switch(t.value){case\"open-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,o.quoteDepth++,!0)));break;case\"close-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,--o.quoteDepth,!1)));break;default:A.appendChild(i.createTextNode(t.value))}})),A.className=ms+\" \"+gs;var u=n===On.BEFORE?\" \"+ms:\" \"+gs;return Lo(t)?t.className.baseValue+=u:t.className+=u,A}}},e.destroy=function(e){return!!e.parentNode&&(e.parentNode.removeChild(e),!0)},e}();!function(e){e[e.BEFORE=0]=\"BEFORE\",e[e.AFTER=1]=\"AFTER\"}(On||(On={}));var us,cs=function(e,t){var r=e.createElement(\"iframe\");return r.className=\"html2canvas-container\",r.style.visibility=\"hidden\",r.style.position=\"fixed\",r.style.left=\"-10000px\",r.style.top=\"0px\",r.style.border=\"0\",r.width=t.width.toString(),r.height=t.height.toString(),r.scrolling=\"no\",r.setAttribute(as,\"true\"),e.body.appendChild(r),r},ls=function(e){return new Promise((function(t,r){var n=e.contentWindow;if(!n)return r(\"No window assigned for iframe\");var o=n.document;n.onload=e.onload=o.onreadystatechange=function(){n.onload=e.onload=o.onreadystatechange=null;var r=setInterval((function(){o.body.childNodes.length>0&&\"complete\"===o.readyState&&(clearInterval(r),t(e))}),50)}}))},ds=function(e,t){for(var r=e.length-1;r>=0;r--){var n=e.item(r);\"content\"!==n&&t.style.setProperty(n,e.getPropertyValue(n))}return t},fs=function(e){var t=\"\";return e&&(t+=\"<!DOCTYPE \",e.name&&(t+=e.name),e.internalSubset&&(t+=e.internalSubset),e.publicId&&(t+=",
+  "ctx": "n(e){return-1===e.indexOf(\" \")?e:\"'\"+e+\""
+ },
+ "js_002": {
+  "t": "2026-07-17 · 과학 콘서트",
+  "ctx": "utm_campaign=gwahakconcert\",   edition: "
+ },
+ "js_003": {
+  "t": "저자",
+  "ctx": "nst QUESTIONS = [   {id:1, level:1, tag:"
+ },
+ "js_004": {
+  "t": "『정재승의 과학 콘서트』를 쓴 대한민국의 물리학자이자 뇌과학자는 누구일까요?",
+  "ctx": "TIONS = [   {id:1, level:1, tag:\"저자\", q:"
+ },
+ "js_005": {
+  "t": "정재승",
+  "ctx": "국의 물리학자이자 뇌과학자는 누구일까요?\",    options:[{t:"
+ },
+ "js_006": {
+  "t": "최재천",
+  "ctx": "일까요?\",    options:[{t:\"정재승\",ok:true},{t:"
+ },
+ "js_007": {
+  "t": "김상욱",
+  "ctx": "options:[{t:\"정재승\",ok:true},{t:\"최재천\"},{t:"
+ },
+ "js_008": {
+  "t": "칼 세이건",
+  "ctx": "t:\"정재승\",ok:true},{t:\"최재천\"},{t:\"김상욱\"},{t:"
+ },
+ "js_009": {
+  "t": "『정재승의 과학 콘서트』는 KAIST의 물리학자이자 뇌과학자 <b>정재승</b>이 쓴 대중 과학서예요. 어려운 과학을 일상의 언어로 풀어내 큰 사랑을 받았습니다.",
+  "ctx": "t:\"최재천\"},{t:\"김상욱\"},{t:\"칼 세이건\"}],    ctx:"
+ },
+ "js_010": {
+  "t": "출판",
+  "ctx": "내 큰 사랑을 받았습니다.\"},   {id:2, level:1, tag:"
+ },
+ "js_011": {
+  "t": "이 책이 국내 대중 과학서의 새 장을 연 첫 출간 연도로 알맞은 것은?",
+  "ctx": "받았습니다.\"},   {id:2, level:1, tag:\"출판\", q:"
+ },
+ "js_012": {
+  "t": "2001년",
+  "ctx": " 장을 연 첫 출간 연도로 알맞은 것은?\",    options:[{t:"
+ },
+ "js_013": {
+  "t": "인류가 달에 처음 간 1969년",
+  "ctx": "은?\",    options:[{t:\"2001년\",ok:true},{t:"
+ },
+ "js_014": {
+  "t": "1988년",
+  "ctx": "1년\",ok:true},{t:\"인류가 달에 처음 간 1969년\"},{t:"
+ },
+ "js_015": {
+  "t": "2018년",
+  "ctx": ",{t:\"인류가 달에 처음 간 1969년\"},{t:\"1988년\"},{t:"
+ },
+ "js_016": {
+  "t": "이 책은 <b>2001년</b>에 나왔어요. 번역서 일색이던 국내 대중 과학서 시장에서 국내 저자의 책이 크게 성공한 이정표 같은 작품입니다.",
+  "ctx": "969년\"},{t:\"1988년\"},{t:\"2018년\"}],    ctx:"
+ },
+ "js_017": {
+  "t": "부제",
+  "ctx": " 이정표 같은 작품입니다.\"},   {id:3, level:1, tag:"
+ },
+ "js_018": {
+  "t": "이 책의 부제 복잡한 세상 ○○ 과학에서 ○○에 들어갈 말로 알맞은 것은?",
+  "ctx": "작품입니다.\"},   {id:3, level:1, tag:\"부제\", q:"
+ },
+ "js_019": {
+  "t": "명쾌한",
+  "ctx": "학에서 ○○에 들어갈 말로 알맞은 것은?\",    options:[{t:"
+ },
+ "js_020": {
+  "t": "위험한",
+  "ctx": " 것은?\",    options:[{t:\"명쾌한\",ok:true},{t:"
+ },
+ "js_021": {
+  "t": "지루한",
+  "ctx": "options:[{t:\"명쾌한\",ok:true},{t:\"위험한\"},{t:"
+ },
+ "js_022": {
+  "t": "쓸모없는",
+  "ctx": "t:\"명쾌한\",ok:true},{t:\"위험한\"},{t:\"지루한\"},{t:"
+ },
+ "js_023": {
+  "t": "부제는 <b>복잡한 세상 명쾌한 과학</b>이에요. 뒤엉킨 듯 보이는 일상과 사회 현상을 과학으로 시원하게 풀어 준다는 뜻을 담고 있습니다.",
+  "ctx": "{t:\"위험한\"},{t:\"지루한\"},{t:\"쓸모없는\"}],    ctx:"
+ },
+ "js_024": {
+  "t": "형식",
+  "ctx": "다는 뜻을 담고 있습니다.\"},   {id:4, level:1, tag:"
+ },
+ "js_025": {
+  "t": "책 제목처럼, 이 책이 여러 악장으로 나뉜 구성을 빌려온 형식으로 알맞은 것은?",
+  "ctx": " 있습니다.\"},   {id:4, level:1, tag:\"형식\", q:"
+ },
+ "js_026": {
+  "t": "콘서트(음악회)",
+  "ctx": "뉜 구성을 빌려온 형식으로 알맞은 것은?\",    options:[{t:"
+ },
+ "js_027": {
+  "t": "관객이 무대에서 겨루는 요리 경연 대회",
+  "ctx": ",    options:[{t:\"콘서트(음악회)\",ok:true},{t:"
+ },
+ "js_028": {
+  "t": "축구 경기",
+  "ctx": "ok:true},{t:\"관객이 무대에서 겨루는 요리 경연 대회\"},{t:"
+ },
+ "js_029": {
+  "t": "우주 탐사",
+  "ctx": "\"관객이 무대에서 겨루는 요리 경연 대회\"},{t:\"축구 경기\"},{t:"
+ },
+ "js_030": {
+  "t": "저자는 책을 <b>콘서트(음악회)</b>처럼 여러 악장으로 나눠 구성했어요. 딱딱한 과학을 한 편의 공연처럼 즐기게 하려는 장치입니다.",
+  "ctx": "연 대회\"},{t:\"축구 경기\"},{t:\"우주 탐사\"}],    ctx:"
+ },
+ "js_031": {
+  "t": "핵심 관점",
+  "ctx": "즐기게 하려는 장치입니다.\"},   {id:5, level:1, tag:"
+ },
+ "js_032": {
+  "t": "저자가 일상과 사회 현상을 설명하는 데 사용하는 과학의 큰 틀로 알맞은 것은?",
+  "ctx": "니다.\"},   {id:5, level:1, tag:\"핵심 관점\", q:"
+ },
+ "js_033": {
+  "t": "여러 요소가 얽혀 예측이 어려운 복잡계 과학",
+  "ctx": " 사용하는 과학의 큰 틀로 알맞은 것은?\",    options:[{t:"
+ },
+ "js_034": {
+  "t": "별자리로 운세를 보는 점성술",
+  "ctx": ":\"여러 요소가 얽혀 예측이 어려운 복잡계 과학\",ok:true},{t:"
+ },
+ "js_035": {
+  "t": "정답이 하나뿐인 단순한 산수",
+  "ctx": "계 과학\",ok:true},{t:\"별자리로 운세를 보는 점성술\"},{t:"
+ },
+ "js_036": {
+  "t": "연대를 외우는 역사 암기",
+  "ctx": "로 운세를 보는 점성술\"},{t:\"정답이 하나뿐인 단순한 산수\"},{t:"
+ },
+ "js_037": {
+  "t": "이 책의 열쇠말은 <b>복잡계 과학</b>이에요. 수많은 요소가 얽혀 예측이 어려운 세상 속에서, 겉보기 무질서 뒤에 숨은 질서를 찾아냅니다.",
+  "ctx": "인 단순한 산수\"},{t:\"연대를 외우는 역사 암기\"}],    ctx:"
+ },
+ "js_038": {
+  "t": "머피의 법칙",
+  "ctx": " 숨은 질서를 찾아냅니다.\"},   {id:6, level:1, tag:"
+ },
+ "js_039": {
+  "t": "잘못될 수 있는 일은 꼭 잘못된다는, 1악장에 나오는 유명한 법칙의 이름은?",
+  "ctx": "다.\"},   {id:6, level:1, tag:\"머피의 법칙\", q:"
+ },
+ "js_040": {
+  "t": "뉴턴의 법칙",
+  "ctx": "?\",    options:[{t:\"머피의 법칙\",ok:true},{t:"
+ },
+ "js_041": {
+  "t": "옴의 법칙",
+  "ctx": "s:[{t:\"머피의 법칙\",ok:true},{t:\"뉴턴의 법칙\"},{t:"
+ },
+ "js_042": {
+  "t": "케플러의 법칙",
+  "ctx": "칙\",ok:true},{t:\"뉴턴의 법칙\"},{t:\"옴의 법칙\"},{t:"
+ },
+ "js_043": {
+  "t": "<b>머피의 법칙</b>은 하필이면 안 좋은 일이 몰린다고 느끼는 현상이에요. 저자는 이것을 운이 아니라 확률과 기억의 문제로 풀어냅니다.",
+  "ctx": "법칙\"},{t:\"옴의 법칙\"},{t:\"케플러의 법칙\"}],    ctx:"
+ },
+ "js_044": {
+  "t": "버터 토스트",
+  "ctx": "기억의 문제로 풀어냅니다.\"},   {id:7, level:1, tag:"
+ },
+ "js_045": {
+  "t": "머피의 법칙 사례로 자주 드는, 떨어뜨린 버터 바른 토스트가 흔히 보이는 결과는?",
+  "ctx": "다.\"},   {id:7, level:1, tag:\"버터 토스트\", q:"
+ },
+ "js_046": {
+  "t": "버터 바른 면이 바닥으로 떨어지기 쉽다",
+  "ctx": "버터 바른 토스트가 흔히 보이는 결과는?\",    options:[{t:"
+ },
+ "js_047": {
+  "t": "언제나 버터 면이 위로 온다",
+  "ctx": "[{t:\"버터 바른 면이 바닥으로 떨어지기 쉽다\",ok:true},{t:"
+ },
+ "js_048": {
+  "t": "공중에서 그대로 멈춘다",
+  "ctx": "기 쉽다\",ok:true},{t:\"언제나 버터 면이 위로 온다\"},{t:"
+ },
+ "js_049": {
+  "t": "두 조각으로 갈라진다",
+  "ctx": "언제나 버터 면이 위로 온다\"},{t:\"공중에서 그대로 멈춘다\"},{t:"
+ },
+ "js_050": {
+  "t": "식탁 높이에서 떨어지는 토스트는 대개 반 바퀴만 돌아 <b>버터 면이 바닥</b>으로 향해요. 심술이 아니라 높이와 회전이 만든 물리적 결과입니다.",
+  "ctx": "에서 그대로 멈춘다\"},{t:\"두 조각으로 갈라진다\"}],    ctx:"
+ },
+ "js_051": {
+  "t": "케빈 베이컨",
+  "ctx": " 만든 물리적 결과입니다.\"},   {id:8, level:1, tag:"
+ },
+ "js_052": {
+  "t": "어떤 배우든 몇 다리만 건너면 서로 연결된다는, 1악장에 나오는 놀이의 이름은?",
+  "ctx": "다.\"},   {id:8, level:1, tag:\"케빈 베이컨\", q:"
+ },
+ "js_053": {
+  "t": "케빈 베이컨 게임",
+  "ctx": "된다는, 1악장에 나오는 놀이의 이름은?\",    options:[{t:"
+ },
+ "js_054": {
+  "t": "서로 눈치를 살피며 버티는 눈치 게임",
+  "ctx": "    options:[{t:\"케빈 베이컨 게임\",ok:true},{t:"
+ },
+ "js_055": {
+  "t": "스무고개",
+  "ctx": ",ok:true},{t:\"서로 눈치를 살피며 버티는 눈치 게임\"},{t:"
+ },
+ "js_056": {
+  "t": "끝말잇기",
+  "ctx": "t:\"서로 눈치를 살피며 버티는 눈치 게임\"},{t:\"스무고개\"},{t:"
+ },
+ "js_057": {
+  "t": "<b>케빈 베이컨 게임</b>은 어떤 배우를 골라도 몇 단계면 배우 케빈 베이컨과 이어진다는 놀이예요. 세상이 촘촘히 연결돼 있음을 보여 줍니다.",
+  "ctx": " 눈치 게임\"},{t:\"스무고개\"},{t:\"끝말잇기\"}],    ctx:"
+ },
+ "js_058": {
+  "t": "좁은 세상",
+  "ctx": "결돼 있음을 보여 줍니다.\"},   {id:9, level:1, tag:"
+ },
+ "js_059": {
+  "t": "세상 사람들이 몇 다리만 건너면 서로 아는 사이라는 현상을 뭐라고 부를까요?",
+  "ctx": "니다.\"},   {id:9, level:1, tag:\"좁은 세상\", q:"
+ },
+ "js_060": {
+  "t": "좁은 세상 현상",
+  "ctx": " 아는 사이라는 현상을 뭐라고 부를까요?\",    options:[{t:"
+ },
+ "js_061": {
+  "t": "끝도 없이 넓게 퍼지는 우주 이론",
+  "ctx": ",    options:[{t:\"좁은 세상 현상\",ok:true},{t:"
+ },
+ "js_062": {
+  "t": "깊은 바다 가설",
+  "ctx": "상\",ok:true},{t:\"끝도 없이 넓게 퍼지는 우주 이론\"},{t:"
+ },
+ "js_063": {
+  "t": "높은 산 법칙",
+  "ctx": "\"끝도 없이 넓게 퍼지는 우주 이론\"},{t:\"깊은 바다 가설\"},{t:"
+ },
+ "js_064": {
+  "t": "<b>좁은 세상 현상</b>은 낯선 사람도 몇 다리만 건너면 이어진다는 뜻이에요. 사회가 하나의 거대한 연결망임을 드러내는 복잡계의 대표 사례입니다.",
+  "ctx": "},{t:\"깊은 바다 가설\"},{t:\"높은 산 법칙\"}],    ctx:"
+ },
+ "js_065": {
+  "t": "프랙탈",
+  "ctx": "잡계의 대표 사례입니다.\"},   {id:10, level:1, tag:"
+ },
+ "js_066": {
+  "t": "부분이 전체와 닮은 꼴로 끝없이 반복되는 자기 닮음 구조를 뭐라고 할까요?",
+  "ctx": "입니다.\"},   {id:10, level:1, tag:\"프랙탈\", q:"
+ },
+ "js_067": {
+  "t": "줄줄이 이어져 넘어가는 도미노",
+  "ctx": "할까요?\",    options:[{t:\"프랙탈\",ok:true},{t:"
+ },
+ "js_068": {
+  "t": "나침반",
+  "ctx": "프랙탈\",ok:true},{t:\"줄줄이 이어져 넘어가는 도미노\"},{t:"
+ },
+ "js_069": {
+  "t": "저울",
+  "ctx": "ue},{t:\"줄줄이 이어져 넘어가는 도미노\"},{t:\"나침반\"},{t:"
+ },
+ "js_070": {
+  "t": "<b>프랙탈</b>은 작은 조각이 전체와 닮은 모양으로 되풀이되는 구조예요. 나뭇가지, 해안선, 구름처럼 자연 곳곳에서 발견됩니다.",
+  "ctx": " 넘어가는 도미노\"},{t:\"나침반\"},{t:\"저울\"}],    ctx:"
+ },
+ "js_071": {
+  "t": "알라딘 「정재승의 과학 콘서트」",
+  "ctx": " */ const SOURCES = {   book:    {label:"
+ },
+ "js_072": {
+  "t": "위키백과 「정재승」",
+  "ctx": "x?ItemId=243970084\"},   author:  {label:"
+ },
+ "js_073": {
+  "t": "https://ko.wikipedia.org/wiki/정재승",
+  "ctx": "\"},   author:  {label:\"위키백과 「정재승」\", url:"
+ },
+ "js_074": {
+  "t": "위키백과 「혼돈 이론(카오스)」",
+  "ctx": "pedia.org/wiki/정재승\"},   chaos:   {label:"
+ },
+ "js_075": {
+  "t": "https://ko.wikipedia.org/wiki/혼돈_이론",
+  "ctx": "haos:   {label:\"위키백과 「혼돈 이론(카오스)」\", url:"
+ },
+ "js_076": {
+  "t": "위키백과 「나비 효과」",
+  "ctx": "ia.org/wiki/혼돈_이론\"},   butterfly:{label:"
+ },
+ "js_077": {
+  "t": "https://ko.wikipedia.org/wiki/나비_효과",
+  "ctx": "   butterfly:{label:\"위키백과 「나비 효과」\", url:"
+ },
+ "js_078": {
+  "t": "위키백과 「프랙탈」",
+  "ctx": "dia.org/wiki/나비_효과\"},   fractal: {label:"
+ },
+ "js_079": {
+  "t": "https://ko.wikipedia.org/wiki/프랙탈",
+  "ctx": "\"},   fractal: {label:\"위키백과 「프랙탈」\", url:"
+ },
+ "js_080": {
+  "t": "위키백과 「지프의 법칙」",
+  "ctx": "pedia.org/wiki/프랙탈\"},   zipf:    {label:"
+ },
+ "js_081": {
+  "t": "https://ko.wikipedia.org/wiki/지프의_법칙",
+  "ctx": "   zipf:    {label:\"위키백과 「지프의 법칙」\", url:"
+ },
+ "js_082": {
+  "t": "위키백과 「케빈 베이컨의 여섯 다리」",
+  "ctx": "ia.org/wiki/지프의_법칙\"},   kevin:   {label:"
+ },
+ "js_083": {
+  "t": "https://ko.wikipedia.org/wiki/케빈_베이컨의_여섯_다리",
+  "ctx": "n:   {label:\"위키백과 「케빈 베이컨의 여섯 다리」\", url:"
+ },
+ "js_084": {
+  "t": "위키백과 「머피의 법칙」",
+  "ctx": "wiki/케빈_베이컨의_여섯_다리\"},   murphy:  {label:"
+ },
+ "js_085": {
+  "t": "https://ko.wikipedia.org/wiki/머피의_법칙",
+  "ctx": "   murphy:  {label:\"위키백과 「머피의 법칙」\", url:"
+ },
+ "js_086": {
+  "t": "위키백과 「파레토 법칙」",
+  "ctx": "ia.org/wiki/머피의_법칙\"},   pareto:  {label:"
+ },
+ "js_087": {
+  "t": "https://ko.wikipedia.org/wiki/파레토_법칙",
+  "ctx": "   pareto:  {label:\"위키백과 「파레토 법칙」\", url:"
+ },
+ "js_088": {
+  "t": "나무위키 「카오스 이론」",
+  "ctx": "ia.org/wiki/파레토_법칙\"},   namu:    {label:"
+ },
+ "js_089": {
+  "t": "https://namu.wiki/w/카오스 이론",
+  "ctx": "   namu:    {label:\"나무위키 「카오스 이론」\", url:"
+ },
+ "js_090": {
+  "t": "나무위키 「정재승」 (저자·강연 더 보기)",
+  "ctx": "namu.wiki/w/카오스 이론\"},   ebs:     {label:"
+ },
+ "js_091": {
+  "t": "https://namu.wiki/w/정재승",
+  "ctx": "  {label:\"나무위키 「정재승」 (저자·강연 더 보기)\", url:"
+ },
+ "js_092": {
+  "t": "정재승(1972~ )은 KAIST에서 물리학을 전공하고 뇌과학을 연구하는 과학자예요. 어려운 과학을 대중의 언어로 옮기는 데 뛰어난 것으로 유명합니다.",
+  "ctx": "const EXTRA = {   1:{src:\"author\", note:"
+ },
+ "js_093": {
+  "t": "2001년 출간 당시 국내 대중 과학서는 대부분 번역서였어요. 젊은 국내 물리학도가 쓴 이 책의 성공은 그 자체로 하나의 사건이었습니다.",
+  "ctx": "뛰어난 것으로 유명합니다.\"},   2:{src:\"book\", note:"
+ },
+ "js_094": {
+  "t": "부제 복잡한 세상 명쾌한 과학은 책의 방향을 그대로 담아요. 뒤엉킨 듯한 현상에서 숨은 질서를 찾아 시원하게 설명하겠다는 약속입니다.",
+  "ctx": "로 하나의 사건이었습니다.\"},   3:{src:\"book\", note:"
+ },
+ "js_095": {
+  "t": "책은 여러 악장으로 나뉜 콘서트 형식을 빌려요. 딱딱한 지식 전달이 아니라, 한 편의 공연처럼 과학을 즐기게 하려는 구성입니다.",
+  "ctx": " 설명하겠다는 약속입니다.\"},   4:{src:\"book\", note:"
+ },
+ "js_096": {
+  "t": "복잡계 과학은 수많은 요소가 얽힌 계에서 나타나는 뜻밖의 질서를 연구해요. 이 책 전체를 꿰는 하나의 관점이자 열쇠말입니다.",
+  "ctx": "기게 하려는 구성입니다.\"},   5:{src:\"chaos\", note:"
+ },
+ "js_097": {
+  "t": "머피의 법칙은 잘못될 일은 꼭 잘못된다는 경험칙이에요. 저자는 이를 초자연이 아니라 확률과 선택적 기억으로 담담히 설명합니다.",
+  "ctx": "관점이자 열쇠말입니다.\"},   6:{src:\"murphy\", note:"
+ },
+ "js_098": {
+  "t": "식탁 높이에서 떨어진 토스트는 대개 반 바퀴만 돌아 버터 면이 바닥으로 향해요. 우리의 심술궂은 상상이 아니라 회전과 높이의 물리입니다.",
+  "ctx": "로 담담히 설명합니다.\"},   7:{src:\"murphy\", note:"
+ },
+ "js_099": {
+  "t": "케빈 베이컨 게임은 어떤 배우든 몇 단계면 그와 이어진다는 놀이예요. 사회가 촘촘히 연결된 하나의 연결망임을 재미있게 보여 줍니다.",
+  "ctx": "전과 높이의 물리입니다.\"},   8:{src:\"kevin\", note:"
+ },
+ "js_100": {
+  "t": "좁은 세상 현상은 낯선 사람도 몇 다리면 이어진다는 뜻이에요. 사회 연결망 연구의 출발점이자 복잡계 과학의 대표 사례입니다.",
+  "ctx": " 재미있게 보여 줍니다.\"},   9:{src:\"kevin\", note:"
+ },
+ "js_101": {
+  "t": "프랙탈은 부분이 전체를 닮은 자기 닮음 구조예요. 나뭇가지, 해안선, 눈송이처럼 자연이 즐겨 쓰는 형태 언어입니다.",
+  "ctx": " 대표 사례입니다.\"},   10:{src:\"fractal\", note:"
+ },
+ "js_102": {
+  "t": "무대의 서곡",
+  "ctx": "*/ const MILESTONES = [   {at:0,  label:"
+ },
+ "js_103": {
+  "t": "1악장 · 사회의 과학",
+  "ctx": "at:0,  label:\"무대의 서곡\"},   {at:6,  label:"
+ },
+ "js_104": {
+  "t": "2악장 · 예술의 프랙탈",
+  "ctx": " label:\"1악장 · 사회의 과학\"},   {at:12, label:"
+ },
+ "js_105": {
+  "t": "3악장 · 경제와 교통",
+  "ctx": "label:\"2악장 · 예술의 프랙탈\"},   {at:18, label:"
+ },
+ "js_106": {
+  "t": "4악장 · 일상의 물리",
+  "ctx": " label:\"3악장 · 경제와 교통\"},   {at:24, label:"
+ },
+ "js_107": {
+  "t": "피날레 · 복잡계의 앙코르",
+  "ctx": " label:\"4악장 · 일상의 물리\"},   {at:30, label:"
+ },
+ "js_108": {
+  "t": "보통",
+  "ctx": "]; const DIFF_LABEL = {1:[\"쉬움\",\"l1\"],2:["
+ },
+ "js_109": {
+  "t": "어려움",
+  "ctx": "LABEL = {1:[\"쉬움\",\"l1\"],2:[\"보통\",\"l2\"],3:["
+ },
+ "js_110": {
+  "t": "· 복습",
+  "ctx": "ds.size+' / '+TOTAL_Q + (attempts[id] ? "
+ },
+ "js_111": {
+  "t": "🎯 정답!",
+  "ctx": ")      verdict.textContent = firstTry ? "
+ },
+ "js_112": {
+  "t": "✅ 이제 익혔어요!",
+  "ctx": "dict.textContent = firstTry ? '🎯 정답!' : "
+ },
+ "js_113": {
+  "t": "❌ 다시 도전!",
+  "ctx": "ing.push(id);     verdict.textContent = "
+ },
+ "js_114": {
+  "t": "↻ 이 문제는 뒤에서 다시 나옵니다",
+  "ctx": "getElementById('requeue').textContent = "
+ },
+ "js_115": {
+  "t": "복잡계 과학",
+  "ctx": "==== */ const CONCEPTS = [   {ic:\"🎻\", h:"
+ },
+ "js_116": {
+  "t": "수많은 요소가 얽혀 예측이 어려운 계에서 나타나는 뜻밖의 질서를 연구합니다. 이 책 전체를 꿰는 하나의 관점이자 열쇠말입니다.",
+  "ctx": "t CONCEPTS = [   {ic:\"🎻\", h:\"복잡계 과학\", p:"
+ },
+ "js_117": {
+  "t": "잘못될 일은 꼭 잘못된다는 느낌의 정체. 초자연이 아니라 확률과 선택적 기억으로 설명되는 우리 마음의 착시입니다.",
+  "ctx": " src:\"chaos\"},   {ic:\"🍞\", h:\"머피의 법칙\", p:"
+ },
+ "js_118": {
+  "t": "좁은 세상과 6단계",
+  "ctx": "음의 착시입니다.\", src:\"murphy\"},   {ic:\"🔗\", h:"
+ },
+ "js_119": {
+  "t": "낯선 사람도 평균 여섯 다리면 이어진다는 현상. 사회가 촘촘한 연결망임을 보여 주는 복잡계의 대표 사례입니다.",
+  "ctx": "\"murphy\"},   {ic:\"🔗\", h:\"좁은 세상과 6단계\", p:"
+ },
+ "js_120": {
+  "t": "프랙탈과 자기 유사성",
+  "ctx": " 대표 사례입니다.\", src:\"kevin\"},   {ic:\"🎨\", h:"
+ },
+ "js_121": {
+  "t": "부분이 전체를 닮아 끝없이 반복되는 구조. 폴록의 그림, 해안선, 나뭇가지처럼 자연과 예술 곳곳에 숨어 있습니다.",
+  "ctx": "\"kevin\"},   {ic:\"🎨\", h:\"프랙탈과 자기 유사성\", p:"
+ },
+ "js_122": {
+  "t": "지프의 법칙과 멱함수",
+  "ctx": "숨어 있습니다.\", src:\"fractal\"},   {ic:\"📊\", h:"
+ },
+ "js_123": {
+  "t": "순위가 낮아질수록 빈도가 일정 비율로 줄어드는 규칙. 단어, 도시 크기, 지진의 세기에서 반복되는 통계적 질서입니다.",
+  "ctx": "ractal\"},   {ic:\"📊\", h:\"지프의 법칙과 멱함수\", p:"
+ },
+ "js_124": {
+  "t": "교통의 물리학",
+  "ctx": " 통계적 질서입니다.\", src:\"zipf\"},   {ic:\"🚗\", h:"
+ },
+ "js_125": {
+  "t": "사고도 없이 생기는 유령 정체. 앞차의 작은 브레이크가 뒤로 번지며 멈춤을 만드는 자기조직화 현상입니다.",
+  "ctx": " src:\"zipf\"},   {ic:\"🚗\", h:\"교통의 물리학\", p:"
+ },
+ "js_126": {
+  "t": "나비효과와 카오스",
+  "ctx": "조직화 현상입니다.\", src:\"chaos\"},   {ic:\"🦋\", h:"
+ },
+ "js_127": {
+  "t": "초기의 작은 차이가 큰 결과로 증폭되는 현상. 날씨처럼 예측이 어려운 이유이자 복잡계 과학의 뿌리입니다.",
+  "ctx": "c:\"chaos\"},   {ic:\"🦋\", h:\"나비효과와 카오스\", p:"
+ },
+ "js_128": {
+  "t": "동기화와 자기조직화",
+  "ctx": "뿌리입니다.\", src:\"butterfly\"},   {ic:\"👏\", h:"
+ },
+ "js_129": {
+  "t": "제각각이던 박수가 저절로 한 박자로 모이듯, 규칙 없이도 스스로 질서를 만들어 내는 놀라운 힘입니다.",
+  "ctx": "tterfly\"},   {ic:\"👏\", h:\"동기화와 자기조직화\", p:"
+ },
+ "js_130": {
+  "t": "들어가며",
+  "ctx": "/* 목차(클릭하면 요약 오픈) */ const TOC = [   {n:"
+ },
+ "js_131": {
+  "t": "복잡한 세상을 위한 과학 콘서트",
+  "ctx": " 요약 오픈) */ const TOC = [   {n:\"들어가며\", t:"
+ },
+ "js_132": {
+  "t": "저자는 딱딱한 과학을 여러 악장의 콘서트처럼 즐기게 하겠다고 예고합니다.",
+  "ctx": "한 세상을 위한 과학 콘서트\", beats:[     {e:\"🎻\", x:"
+ },
+ "js_133": {
+  "t": "백화점부터 응급실까지, 일상 곳곳이 과학의 무대가 됩니다.",
+  "ctx": " 콘서트처럼 즐기게 하겠다고 예고합니다.\"},     {e:\"🌍\", x:"
+ },
+ "js_134": {
+  "t": "열쇠말은 복잡계 과학 — 겉보기 무질서 뒤의 숨은 질서를 찾습니다.",
+  "ctx": "지, 일상 곳곳이 과학의 무대가 됩니다.\"},     {e:\"🧩\", x:"
+ },
+ "js_135": {
+  "t": "1악장",
+  "ctx": "— 겉보기 무질서 뒤의 숨은 질서를 찾습니다.\"},   ]},   {n:"
+ },
+ "js_136": {
+  "t": "사회 속에서 발견한 과학",
+  "ctx": " 뒤의 숨은 질서를 찾습니다.\"},   ]},   {n:\"1악장\", t:"
+ },
+ "js_137": {
+  "t": "케빈 베이컨 게임으로 좁은 세상과 6단계 연결망을 소개합니다.",
+  "ctx": ":\"사회 속에서 발견한 과학\", beats:[     {e:\"🔗\", x:"
+ },
+ "js_138": {
+  "t": "머피의 법칙을 확률과 기억의 문제로 담담하게 풀어냅니다.",
+  "ctx": "좁은 세상과 6단계 연결망을 소개합니다.\"},     {e:\"🍞\", x:"
+ },
+ "js_139": {
+  "t": "재판 사례로 확률과 통계를 잘못 읽을 때의 위험을 짚습니다.",
+  "ctx": "과 기억의 문제로 담담하게 풀어냅니다.\"},     {e:\"⚖️\", x:"
+ },
+ "js_140": {
+  "t": "방청객 웃음소리에서 감정이 번지는 웃음의 사회학을 봅니다.",
+  "ctx": "통계를 잘못 읽을 때의 위험을 짚습니다.\"},     {e:\"😂\", x:"
+ },
+ "js_141": {
+  "t": "아인슈타인의 뇌를 통해 천재성의 비밀과 그 한계를 묻습니다.",
+  "ctx": " 감정이 번지는 웃음의 사회학을 봅니다.\"},     {e:\"🧠\", x:"
+ },
+ "js_142": {
+  "t": "2악장",
+  "ctx": "를 통해 천재성의 비밀과 그 한계를 묻습니다.\"},   ]},   {n:"
+ },
+ "js_143": {
+  "t": "대중예술 속의 과학",
+  "ctx": " 비밀과 그 한계를 묻습니다.\"},   ]},   {n:\"2악장\", t:"
+ },
+ "js_144": {
+  "t": "잭슨 폴록의 흩뿌린 그림에서 프랙탈 구조를 찾아냅니다.",
+  "ctx": ", t:\"대중예술 속의 과학\", beats:[     {e:\"🎨\", x:"
+ },
+ "js_145": {
+  "t": "자기 유사성이라는 프랙탈의 핵심 성질을 이해합니다.",
+  "ctx": "뿌린 그림에서 프랙탈 구조를 찾아냅니다.\"},     {e:\"🌀\", x:"
+ },
+ "js_146": {
+  "t": "바흐부터 비틀즈까지, 음악 속 프랙탈 같은 규칙을 탐색합니다.",
+  "ctx": "이라는 프랙탈의 핵심 성질을 이해합니다.\"},     {e:\"🎵\", x:"
+ },
+ "js_147": {
+  "t": "지프의 법칙으로 언어와 도시에 숨은 멱함수 질서를 봅니다.",
+  "ctx": "음악 속 프랙탈 같은 규칙을 탐색합니다.\"},     {e:\"📖\", x:"
+ },
+ "js_148": {
+  "t": "3악장",
+  "ctx": "로 언어와 도시에 숨은 멱함수 질서를 봅니다.\"},   ]},   {n:"
+ },
+ "js_149": {
+  "t": "자본주의 경제의 물리학",
+  "ctx": " 숨은 멱함수 질서를 봅니다.\"},   ]},   {n:\"3악장\", t:"
+ },
+ "js_150": {
+  "t": "창문과 시계 없는 백화점에서 소비를 부추기는 심리학을 읽습니다.",
+  "ctx": ":\"자본주의 경제의 물리학\", beats:[     {e:\"🛍️\", x:"
+ },
+ "js_151": {
+  "t": "사고 없이 생기는 유령 정체를 교통의 물리학으로 설명합니다.",
+  "ctx": "에서 소비를 부추기는 심리학을 읽습니다.\"},     {e:\"🚗\", x:"
+ },
+ "js_152": {
+  "t": "흔들면 큰 것이 위로 오는 브라질 땅콩 효과를 만납니다.",
+  "ctx": "령 정체를 교통의 물리학으로 설명합니다.\"},     {e:\"🥜\", x:"
+ },
+ "js_153": {
+  "t": "주식과 경제의 요동에서도 복잡계의 흔적을 발견합니다.",
+  "ctx": "위로 오는 브라질 땅콩 효과를 만납니다.\"},     {e:\"📈\", x:"
+ },
+ "js_154": {
+  "t": "4악장",
+  "ctx": "경제의 요동에서도 복잡계의 흔적을 발견합니다.\"},   ]},   {n:"
+ },
+ "js_155": {
+  "t": "일상과 순수과학의 앙코르",
+  "ctx": " 복잡계의 흔적을 발견합니다.\"},   ]},   {n:\"4악장\", t:"
+ },
+ "js_156": {
+  "t": "제각각이던 박수가 하나로 모이는 동기화 현상을 살핍니다.",
+  "ctx": ":\"일상과 순수과학의 앙코르\", beats:[     {e:\"👏\", x:"
+ },
+ "js_157": {
+  "t": "지진과 산불의 멱함수 분포, 모래더미의 자기조직화 임계성을 봅니다.",
+  "ctx": " 하나로 모이는 동기화 현상을 살핍니다.\"},     {e:\"🌋\", x:"
+ },
+ "js_158": {
+  "t": "소음과 공명 등 일상 속 물리 현상으로 콘서트를 마무리합니다.",
+  "ctx": " 모래더미의 자기조직화 임계성을 봅니다.\"},     {e:\"🔊\", x:"
+ },
+ "js_159": {
+  "t": "세상을 과학의 눈으로 바라보는 호기심을 독자에게 건넵니다.",
+  "ctx": "속 물리 현상으로 콘서트를 마무리합니다.\"},     {e:\"🔭\", x:"
+ },
+ "js_160": {
+  "t": "아무 이유 없는 유령 정체",
+  "ctx": "해볼 사례 3 */ const CASES = [   {ic:\"🚗\", t:"
+ },
+ "js_161": {
+  "t": "사고도 공사도 없는데 고속도로가 멈춥니다. 앞차의 사소한 브레이크 하나가 뒤차로, 또 그 뒤차로 물결처럼 번지며 정체가 스스로 만들어집니다.",
+  "ctx": "ES = [   {ic:\"🚗\", t:\"아무 이유 없는 유령 정체\", d:"
+ },
+ "js_162": {
+  "t": "뚜렷한 원인 없이도 질서와 혼란이 생겨나는 자기조직화를, 매일 겪는 교통에서 실감하게 합니다.",
+  "ctx": " 또 그 뒤차로 물결처럼 번지며 정체가 스스로 만들어집니다.\", why:"
+ },
+ "js_163": {
+  "t": "폴록의 그림에 숨은 프랙탈",
+  "ctx": "를, 매일 겪는 교통에서 실감하게 합니다.\"},   {ic:\"🎨\", t:"
+ },
+ "js_164": {
+  "t": "무질서하게 물감을 흩뿌린 듯한 잭슨 폴록의 그림에는 프랙탈 구조가 숨어 있고, 물리학자들은 그 프랙탈 차원으로 진짜 폴록 작품을 가려내기도 했습니다.",
+  "ctx": "니다.\"},   {ic:\"🎨\", t:\"폴록의 그림에 숨은 프랙탈\", d:"
+ },
+ "js_165": {
+  "t": "예술의 아름다움과 과학의 규칙이 만나는 지점을 보여 주며, 무질서와 질서의 경계를 다시 생각하게 합니다.",
+  "ctx": " 그 프랙탈 차원으로 진짜 폴록 작품을 가려내기도 했습니다.\", why:"
+ },
+ "js_166": {
+  "t": "창문도 시계도 없는 백화점",
+  "ctx": "와 질서의 경계를 다시 생각하게 합니다.\"},   {ic:\"🛍️\", t:"
+ },
+ "js_167": {
+  "t": "많은 백화점에는 창문과 시계가 없습니다. 바깥 날씨와 시간을 잊게 만들어 손님이 더 오래 머물며 소비하도록 공간을 설계한 것입니다.",
+  "ctx": "다.\"},   {ic:\"🛍️\", t:\"창문도 시계도 없는 백화점\", d:"
+ },
+ "js_168": {
+  "t": "익숙한 공간에 숨은 설계 의도를 과학의 눈으로 읽어 내며, 소비 심리와 환경의 힘을 돌아보게 합니다.",
+  "ctx": " 손님이 더 오래 머물며 소비하도록 공간을 설계한 것입니다.\", why:"
+ },
+ "js_169": {
+  "t": "내게만 불운이 몰린다는 머피의 법칙은 정말 세상의 심술일까, 아니면 통계와 기억의 착시일까?",
+  "ctx": "책이 우리에게 던지는 질문 3 */ const ASKS = [   {q:"
+ },
+ "js_170": {
+  "t": "안 좋은 일은 더 오래 기억되고, 확률은 흔히 오해받습니다. 우연과 필연을 우리가 어떻게 다르게 느끼는지 떠올려 보세요.",
+  "ctx": " 법칙은 정말 세상의 심술일까, 아니면 통계와 기억의 착시일까?\", h:"
+ },
+ "js_171": {
+  "t": "여섯 다리로 촘촘히 연결된 세상에서, 나의 작은 말과 행동은 어디까지 퍼져 나갈까?",
+  "ctx": "과 필연을 우리가 어떻게 다르게 느끼는지 떠올려 보세요.\"},   {q:"
+ },
+ "js_172": {
+  "t": "좁은 세상 연결망에서는 사소한 신호도 멀리 번질 수 있습니다. 소문, 유행, 선의가 퍼지는 경로를 상상해 보세요.",
+  "ctx": "연결된 세상에서, 나의 작은 말과 행동은 어디까지 퍼져 나갈까?\", h:"
+ },
+ "js_173": {
+  "t": "복잡한 과학을 쉬운 비유로 옮길 때, 명쾌함과 지나친 단순화의 경계는 어디일까?",
+  "ctx": "다. 소문, 유행, 선의가 퍼지는 경로를 상상해 보세요.\"},   {q:"
+ },
+ "js_174": {
+  "t": "이 책의 강점인 대중화는 동시에 한계로도 지적됩니다. 이해를 돕는 비유와 오해를 부르는 비유를 구분해 보세요.",
+  "ctx": "운 비유로 옮길 때, 명쾌함과 지나친 단순화의 경계는 어디일까?\", h:"
+ },
+ "js_175": {
+  "t": "🎻 복잡계의 지휘자",
+  "ctx": ");   let rank, sub;   if(acc>=90){ rank="
+ },
+ "js_176": {
+  "t": "세상의 숨은 질서를 완벽히 읽어 냈습니다",
+  "ctx": ";   if(acc>=90){ rank='🎻 복잡계의 지휘자'; sub="
+ },
+ "js_177": {
+  "t": "🔬 일상의 과학자",
+  "ctx": "벽히 읽어 냈습니다'; }   else if(acc>=75){ rank="
+ },
+ "js_178": {
+  "t": "핵심을 거의 다 잡았어요",
+  "ctx": "else if(acc>=75){ rank='🔬 일상의 과학자'; sub="
+ },
+ "js_179": {
+  "t": "🦋 호기심 많은 관찰자",
+  "ctx": " 거의 다 잡았어요'; }   else if(acc>=55){ rank="
+ },
+ "js_180": {
+  "t": "뼈대를 익혔습니다 — 한 번 더!",
+  "ctx": "e if(acc>=55){ rank='🦋 호기심 많은 관찰자'; sub="
+ },
+ "js_181": {
+  "t": "🎫 콘서트 입장객",
+  "ctx": "b='뼈대를 익혔습니다 — 한 번 더!'; }   else { rank="
+ },
+ "js_182": {
+  "t": "반복할수록 점수가 오릅니다",
+  "ctx": "번 더!'; }   else { rank='🎫 콘서트 입장객'; sub="
+ },
+ "js_183": {
+  "t": "완독 리포트",
+  "ctx": "onst fname = ((h2 && h2.textContent) || "
+ },
+ "js_184": {
+  "t": "한눈에 보기",
+  "ctx": "&& h2.textContent) || '완독 리포트').replace("
+ },
+ "js_185": {
+  "t": "리포트.pdf",
+  "ctx": "'완독 리포트').replace('한눈에 보기','').trim() + "
+ },
+ "js_186": {
+  "t": "📄 PDF 만드는 중…",
+  "ctx": "tn){ btn.disabled=true; btn.textContent="
+ },
+ "js_187": {
+  "t": "PDF 생성 중 문제가 발생했어요. 이 HTML 파일을 내려받아 브라우저에서 직접 열고 다시 눌러 주세요.",
+  "ctx": "     }   }).catch(function(){     alert("
+ },
+ "js_188": {
+  "t": "무료로는 <b>",
+  "ctx": "t = TOTAL_Q - fl;       msg.innerHTML = "
+ },
+ "js_189": {
+  "t": "문항</b>까지 풀 수 있어요.",
+  "ctx": "fl;       msg.innerHTML = '무료로는 <b>'+fl+"
+ },
+ "js_190": {
+  "t": "나머지 <b>",
+  "ctx": " <b>'+fl+'문항</b>까지 풀 수 있어요. ' +         "
+ },
+ "js_191": {
+  "t": "문항</b>과 <b>완독 요약 리포트</b>는 구독자 전용입니다.",
+  "ctx": ">까지 풀 수 있어요. ' +         '나머지 <b>'+rest+"
+ },
+ "js_192": {
+  "t": "지금까지 쌓은 <b>콘서트 진행도</b>는 위 게이지에 그대로 남아 있어요.",
+  "ctx": "b>완독 요약 리포트</b>는 구독자 전용입니다. ' +         "
+ },
+ "js_193": {
+  "t": "<h3>완독 리포트 전체는 구독자 전용이에요</h3>",
+  "ctx": " = '<div class=\"lk-ic\">🔒</div>' +       "
+ },
+ "js_194": {
+  "t": "<p>복잡계의 사슬과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>",
+  "ctx": "'<h3>완독 리포트 전체는 구독자 전용이에요</h3>' +       "
+ },
+ "js_195": {
+  "t": "목차 요약 · 사례 · 질문 · 약점 복습 · PDF 저장은 구독하면 모두 열립니다.</p>",
+  "ctx": "과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>' +       "
+ },
+ "js_196": {
+  "t": "\" target=\"_blank\" rel=\"noopener\">🔑 구독하고 완독 리포트 전체 열기</a>",
+  "ctx": "     '<a class=\"cta\" href=\"' + _sub() + "
+ },
+ "js_197": {
+  "t": "정재승의 과학 콘서트",
+  "ctx": " 250, '120px serif', '#38d6f5');   ctxt("
+ },
+ "js_198": {
+  "t": "정재승 · 대중 과학의 고전 마스터 퀴즈",
+  "ctx": "to Serif KR\",serif', '#ffffff');   ctxt("
+ },
+ "js_199": {
+  "t": "과학 콘서트",
+  "ctx": "ntById('rankTitle')||{}).textContent || "
+ },
+ "js_200": {
+  "t": "📚 매일 새 책 퀴즈  ·",
+  "ctx": "(/^https?:\\/\\//,'') : '';   if(su) ctxt("
+ },
+ "js_201": {
+  "t": "정재승의_과학_콘서트_퀴즈결과.png",
+  "ctx": "nt('a');     a.href = url; a.download = "
+ },
+ "js_202": {
+  "t": "💌 VIP 초대 —",
+  "ctx": "ursor:pointer;\";     d.textContent=(vip?"
+ },
+ "js_203": {
+  "t": "🎁 지금 이 책 풀버전 무료 오픈 중!",
+  "ctx": "\";     d.textContent=(vip?\"💌 VIP 초대 — \":"
+ },
+ "js_204": {
+  "t": "전체판(잠금 없음)으로 이동 →",
+  "ctx": "\"💌 VIP 초대 — \":\"🎁 지금 이 책 풀버전 무료 오픈 중! \")+"
+ },
+ "jst_001": {
+  "t": "무료로 풀 수 있는 문항 수",
+  "ctx": "    freeLimit: 10,           // teaser: "
+ },
+ "jst_002": {
+  "t": "아직",
+  "ctx": "3:30};    let pending = [];          // "
+ },
+ "jst_003": {
+  "t": "처음으로 정답",
+  "ctx": "};    let pending = [];          // 아직 ‘"
+ },
+ "jst_004": {
+  "t": "을 못 낸 문항 큐",
+  "ctx": "t pending = [];          // 아직 ‘처음으로 정답’"
+ },
+ "jst_005": {
+  "t": "앞에서 꺼냄",
+  "ctx": "[];          // 아직 ‘처음으로 정답’을 못 낸 문항 큐 ("
+ },
+ "jst_006": {
+  "t": "시도 횟수",
+  "ctx": "(); let attempts = {};         // id -> "
+ },
+ "jst_007": {
+  "t": "첫 시도에 틀린 문항",
+  "ctx": " 0; let firstWrongIds = new Set();   // "
+ },
+ "jst_008": {
+  "t": "약점",
+  "ctx": "rongIds = new Set();   // 첫 시도에 틀린 문항 = "
+ },
+ "jst_009": {
+  "t": "집중 복습 대상",
+  "ctx": "gIds = new Set();   // 첫 시도에 틀린 문항 = 약점("
+ },
+ "jst_010": {
+  "t": "세션 내 최고 점수",
+  "ctx": "r = null; let bestScore = 0;         // "
+ },
+ "jst_011": {
+  "t": "재도전 비교용,",
+  "ctx": "t bestScore = 0;         // 세션 내 최고 점수 ("
+ },
+ "jst_012": {
+  "t": "미사용",
+  "ctx": "   // 세션 내 최고 점수 (재도전 비교용, localStorage "
+ },
+ "jst_013": {
+  "t": "복습 정답은 절반 점수",
+  "ctx": " gain = Math.round(gain/2);          // "
+ },
+ "jst_014": {
+  "t": "콤보 보너스",
+  "ctx": " (streak>=2) ? (streak-1)*3 : 0;     // "
+ },
+ "jst_015": {
+  "t": "가 아니어도 최종적으로 익힌 것으로 카운트",
+  "ctx": " masteredIds.add(id);          // ‘처음으로’"
+ },
+ "jst_016": {
+  "t": "큐에서 제거",
+  "ctx": "운트     pending.shift();              // "
+ },
+ "jst_017": {
+  "t": "연속 정답!",
+  "ctx": "      comboEl.textContent = `🔥 ${streak}"
+ },
+ "jst_018": {
+  "t": "보너스",
+  "ctx": "tContent = `🔥 ${streak}연속 정답! +${bonus} "
+ },
+ "jst_019": {
+  "t": "약점으로 기록",
+  "ctx": "f(firstTry) firstWrongIds.add(id);   // "
+ },
+ "jst_020": {
+  "t": "왜 생각해볼 만한가",
+  "ctx": "= >${c.d}</div>       <div class= >💭 <b>"
+ },
+ "jst_021": {
+  "t": "첫 시도에 모두 정답!",
+  "ctx": " ;     list.innerHTML = `<div class= >🌟 "
+ },
+ "jst_022": {
+  "t": "약점이 없어 따로 복습할 항목이 없습니다. 멋져요.",
+  "ctx": "TML = `<div class= >🌟 첫 시도에 모두 정답!<span>"
+ },
+ "jst_023": {
+  "t": "개",
+  "ctx": " {     cnt.textContent = `(${ids.length}"
+ },
+ "jst_024": {
+  "t": "정답",
+  "ctx": "= >Q. ${q.q}</div>         <div class= >"
+ },
+ "jst_025": {
+  "t": "최고 점수 경신!",
+  "ctx": "re;     note.innerHTML = prev>0 ? `🏆 <b>"
+ },
+ "jst_026": {
+  "t": "이전",
+  "ctx": "nerHTML = prev>0 ? `🏆 <b>최고 점수 경신!</b> ("
+ },
+ "jst_027": {
+  "t": "점",
+  "ctx": "prev>0 ? `🏆 <b>최고 점수 경신!</b> (이전 ${prev}"
+ },
+ "jst_028": {
+  "t": "첫 기록",
+  "ctx": "`🏆 <b>최고 점수 경신!</b> (이전 ${prev}점)` : `🏆 "
+ },
+ "jst_029": {
+  "t": "다시 도전해 깨보세요!",
+  "ctx": "${prev}점)` : `🏆 첫 기록 <b>${score}점</b> — "
+ },
+ "jst_030": {
+  "t": "현재 최고 점수",
+  "ctx": "보세요!`;   } else {     note.innerHTML = `"
+ },
+ "jst_031": {
+  "t": "이번엔",
+  "ctx": "HTML = `현재 최고 점수 <b>${bestScore}점</b> · "
+ }
+}

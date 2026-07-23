@@ -1,0 +1,1214 @@
+{
+ "_meta": {
+  "source": "apps/팡세_teaser.html",
+  "slug": "팡세_teaser"
+ },
+ "title_001": {
+  "t": "팡세 도파민 마스터 퀴즈 · 블레즈 파스칼",
+  "ctx": "<title>"
+ },
+ "html_001": {
+  "t": "블레즈 파스칼 · 1670 · 유고로 남은 기독교 변증",
+  "ctx": "class=\"hero\">       <div class=\"eyebrow\""
+ },
+ "html_002": {
+  "t": "비참과 위대 사이, 인간을 응시하다",
+  "ctx": "ss=\"p3\">🕯️</span></div>       <h1><small"
+ },
+ "html_003": {
+  "t": "팡세 마스터 퀴즈",
+  "ctx": "   <h1><small>비참과 위대 사이, 인간을 응시하다</small"
+ },
+ "html_004": {
+  "t": "“인간은 자연에서 가장 연약한 갈대이지만, 생각하는 갈대다.”",
+  "ctx": ">팡세 마스터 퀴즈</h1>       <div class=\"quote\""
+ },
+ "html_005": {
+  "t": "— 블레즈 파스칼 『팡세』",
+  "ctx": " 가장 연약한 갈대이지만, 생각하는 갈대다.”<br>         <b"
+ },
+ "html_006": {
+  "t": "‘생각하는 갈대’에서 시작된 이 책의 인간·개념·주제를",
+  "ctx": "— 블레즈 파스칼 『팡세』</b>       </div>       <p"
+ },
+ "html_007": {
+  "t": "30개의 퀴즈",
+  "ctx": "    <p>‘생각하는 갈대’에서 시작된 이 책의 인간·개념·주제를 <b"
+ },
+ "html_008": {
+  "t": "로 익힙니다.\n        쉬운 것부터 시작해 점점 어려워지고,",
+  "ctx": "는 갈대’에서 시작된 이 책의 인간·개념·주제를 <b>30개의 퀴즈</b"
+ },
+ "html_009": {
+  "t": "틀린 문제는 맞힐 때까지 다시 돌아옵니다.",
+  "ctx": ">로 익힙니다.         쉬운 것부터 시작해 점점 어려워지고, <b"
+ },
+ "html_010": {
+  "t": "총",
+  "ctx": "s=\"meta-row\">         <span class=\"chip\""
+ },
+ "html_011": {
+  "t": "30문항",
+  "ctx": "ta-row\">         <span class=\"chip\">총 <b"
+ },
+ "html_012": {
+  "t": "쉬움 → 어려움",
+  "ctx": "문항</b></span>         <span class=\"chip\""
+ },
+ "html_013": {
+  "t": "실시간",
+  "ctx": "어려움</span>         <span class=\"chip\"><b"
+ },
+ "html_014": {
+  "t": "사색의 여정",
+  "ctx": "an>         <span class=\"chip\"><b>실시간</b"
+ },
+ "html_015": {
+  "t": "문제마다",
+  "ctx": "사색의 여정</span>         <span class=\"chip\""
+ },
+ "html_016": {
+  "t": "쉬운 해설",
+  "ctx": "span>         <span class=\"chip\">문제마다 <b"
+ },
+ "html_017": {
+  "t": "사색의 세계로 →",
+  "ctx": "=\"btn btn-primary\" onclick=\"startQuiz()\""
+ },
+ "html_018": {
+  "t": "점수",
+  "ctx": "   <div class=\"stat\"><span class=\"label\""
+ },
+ "html_019": {
+  "t": "연속 정답",
+  "ctx": "align-items:center;\"><span class=\"label\""
+ },
+ "html_020": {
+  "t": "마스터",
+  "ctx": "ign-items:flex-end;\"><span class=\"label\""
+ },
+ "html_021": {
+  "t": "비참 ←",
+  "ctx": "\">         <div class=\"axis-label\"><span"
+ },
+ "html_022": {
+  "t": "사색의 여정 ·",
+  "ctx": "lass=\"axis-label\"><span>비참 ←</span><span"
+ },
+ "html_023": {
+  "t": "→ 신앙",
+  "ctx": "의 여정 · <b id=\"pctTxt\">0%</b></span><span"
+ },
+ "html_024": {
+  "t": "쉬움",
+  "ctx": "d\">         <span class=\"diff\" id=\"diff\""
+ },
+ "html_025": {
+  "t": "다음 →",
+  "ctx": "y\" id=\"nextBtn\" onclick=\"nextQuestion()\""
+ },
+ "html_026": {
+  "t": "여기까지가 무료 미리보기예요",
+  "ctx": ">     <div class=\"lk-ic\">🔒</div>     <h3"
+ },
+ "html_027": {
+  "t": "🔑 구독하고 전체 열기",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_028": {
+  "t": "요약 리포트 미리보기 →",
+  "ctx": "class=\"cta ghost\" onclick=\"openReport()\""
+ },
+ "html_029": {
+  "t": "파스칼의 밤을 함께 지샌 사람",
+  "ctx": ">       <div class=\"rank\" id=\"rankTitle\""
+ },
+ "html_030": {
+  "t": "최종 점수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_031": {
+  "t": "첫 시도 정답률",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_032": {
+  "t": "최고 연속 정답",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_033": {
+  "t": "총 도전 횟수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_034": {
+  "t": "📖 전체 요약 리포트 보기",
+  "ctx": "\"btn btn-primary\" onclick=\"openReport()\""
+ },
+ "html_035": {
+  "t": "🖼 결과 카드 저장",
+  "ctx": "btn btn-ghost\" onclick=\"makeShareCard()\""
+ },
+ "html_036": {
+  "t": "다시 도전 ↻",
+  "ctx": "ss=\"btn btn-ghost\" onclick=\"startQuiz()\""
+ },
+ "html_037": {
+  "t": "처음으로",
+  "ctx": "class=\"btn btn-ghost\" onclick=\"goHome()\""
+ },
+ "html_038": {
+  "t": "완독 리포트 · INFOGRAPHIC",
+  "ctx": "s=\"rep-hero\">       <div class=\"eyebrow\""
+ },
+ "html_039": {
+  "t": "팡세 한눈에 보기",
+  "ctx": "ow\">완독 리포트 · INFOGRAPHIC</div>       <h2"
+ },
+ "html_040": {
+  "t": "책 전체를",
+  "ctx": "</div>       <h2>팡세 한눈에 보기</h2>       <p"
+ },
+ "html_041": {
+  "t": "‘생각의 사슬’",
+  "ctx": "    <h2>팡세 한눈에 보기</h2>       <p>책 전체를 <b"
+ },
+ "html_042": {
+  "t": "하나로 꿰면 절대 안 잊습니다. 모든 것의 출발점은",
+  "ctx": "눈에 보기</h2>       <p>책 전체를 <b>‘생각의 사슬’</b"
+ },
+ "html_043": {
+  "t": "인간이라는 모순",
+  "ctx": " 사슬’</b> 하나로 꿰면 절대 안 잊습니다. 모든 것의 출발점은 <b"
+ },
+ "html_044": {
+  "t": "입니다.",
+  "ctx": " 꿰면 절대 안 잊습니다. 모든 것의 출발점은 <b>인간이라는 모순</b"
+ },
+ "html_045": {
+  "t": "출발점",
+  "ctx": "<div class=\"ch step s0\"><span class=\"cn\""
+ },
+ "html_046": {
+  "t": "🪞 인간이라는 모순 (비참 ↔ 위대)",
+  "ctx": "h step s0\"><span class=\"cn\">출발점</span><b"
+ },
+ "html_047": {
+  "t": "천사도 짐승도 아닌 존재",
+  "ctx": "</span><b>🪞 인간이라는 모순 (비참 ↔ 위대)</b><small"
+ },
+ "html_048": {
+  "t": "1단계",
+  "ctx": "<div class=\"ch step s1\"><span class=\"cn\""
+ },
+ "html_049": {
+  "t": "🎭 기분전환으로 도피",
+  "ctx": "h step s1\"><span class=\"cn\">1단계</span><b"
+ },
+ "html_050": {
+  "t": "소란으로 진실을 회피",
+  "ctx": "=\"cn\">1단계</span><b>🎭 기분전환으로 도피</b><small"
+ },
+ "html_051": {
+  "t": "2단계",
+  "ctx": "<div class=\"ch step s2\"><span class=\"cn\""
+ },
+ "html_052": {
+  "t": "♾️ 이성의 한계 · 두 무한 사이의 갈대",
+  "ctx": "h step s2\"><span class=\"cn\">2단계</span><b"
+ },
+ "html_053": {
+  "t": "다 헤아리지 못하는 중간자",
+  "ctx": "pan><b>♾️ 이성의 한계 · 두 무한 사이의 갈대</b><small"
+ },
+ "html_054": {
+  "t": "근접 원인",
+  "ctx": "s=\"ch step s3\">         <span class=\"cn\""
+ },
+ "html_055": {
+  "t": "🎲 마음과 내기 — 신에게 거는 결단",
+  "ctx": "         <span class=\"cn\">근접 원인</span><b"
+ },
+ "html_056": {
+  "t": "이성 너머로의 도약",
+  "ctx": ">🎲 마음과 내기 — 신에게 거는 결단</b>         <small"
+ },
+ "html_057": {
+  "t": "결과",
+  "ctx": "<div class=\"ch step s4\"><span class=\"cn\""
+ },
+ "html_058": {
+  "t": "🙈 숨은 신 안에서 풀리는 모순",
+  "ctx": "ch step s4\"><span class=\"cn\">결과</span><b"
+ },
+ "html_059": {
+  "t": "“마음으로 느끼는 신”",
+  "ctx": ">결과</span><b>🙈 숨은 신 안에서 풀리는 모순</b><small"
+ },
+ "html_060": {
+  "t": "핵심 개념 8",
+  "ctx": "/div>     </div>      <h3 class=\"rep-h3\""
+ },
+ "html_061": {
+  "t": "목차 한눈에 보기",
+  "ctx": "concepts\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_062": {
+  "t": "탭하면 요약이 열립니다",
+  "ctx": "ss=\"rep-h3\">목차 한눈에 보기 <span class=\"hint\""
+ },
+ "html_063": {
+  "t": "책 속, 생각해볼 사례 3",
+  "ctx": " id=\"toc\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_064": {
+  "t": "이 책이 우리에게 던지는 질문 3",
+  "ctx": "d=\"cases\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_065": {
+  "t": "내가 틀린 부분 집중 복습",
+  "ctx": " id=\"weakWrap\">       <h3 class=\"rep-h3\""
+ },
+ "html_066": {
+  "t": "📺 더 깊이 알고 싶다면",
+  "ctx": "/div>      <div class=\"deepen\">       <b"
+ },
+ "html_067": {
+  "t": "에서 파스칼의 철학과 『팡세』의 핵심 개념을 더 깊이 살펴볼 수 있습니다.",
+  "ctx": "f=\"#\" target=\"_blank\" rel=\"noopener\"></a"
+ },
+ "html_068": {
+  "t": "📄 PDF로 저장",
+  "ctx": "d=\"pdfBtn\" onclick=\"downloadReportPDF()\""
+ },
+ "html_069": {
+  "t": "결과로",
+  "ctx": "\"btn btn-ghost\" onclick=\"show('result')\""
+ },
+ "html_070": {
+  "t": "📚 다른 책 퀴즈 보기 →",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_071": {
+  "t": "“의미와재미공장” 미미팩토리",
+  "ctx": "class=\"footer\">     <div class=\"factory\""
+ },
+ "html_072": {
+  "t": "(주식회사 연:결 패밀리회사)",
+  "ctx": "재미공장” 미미팩토리</div>     <div class=\"affil\""
+ },
+ "html_073": {
+  "t": "책의 핵심을 도파민으로 익히는 반복 마스터 퀴즈",
+  "ctx": ":결 패밀리회사)</div>     <div class=\"tagline\""
+ },
+ "html_074": {
+  "t": "본 앱은 도서의 핵심 개념을 학습 목적으로 재구성한 2차적 학습 콘텐츠입니다. 온전한 독서 경험은 원서로 만나보세요.",
+  "ctx": "퀴즈</div>     <div class=\"copyright-note\""
+ },
+ "html_075": {
+  "t": "팡세 · 도서 정보",
+  "ctx": "d=팡세+파스칼\" target=\"_blank\" rel=\"noopener\""
+ },
+ "js_001": {
+  "t": "\"}))}},Hn={name:\"font-size\",initialValue:\"0\",prefix:!1,type:wt.TYPE_VALUE,format:\"length\"},In={name:\"font-weight\",initialValue:\"normal\",type:wt.VALUE,prefix:!1,parse:function(e){if(Ve(e))return e.number;if(qe(e))switch(e.value){case\"bold\":return 700;case\"normal\":default:return 400}return 400}},Pn={name:\"font-variant\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return e.filter(qe).map((function(e){return e.value}))}};!function(e){e.NORMAL=\"normal\",e.ITALIC=\"italic\",e.OBLIQUE=\"oblique\"}(Nn||(Nn={}));var On,kn={name:\"font-style\",initialValue:\"normal\",prefix:!1,type:wt.IDENT_VALUE,parse:function(e){switch(e){case\"oblique\":return Nn.OBLIQUE;case\"italic\":return Nn.ITALIC;case\"normal\":default:return Nn.NORMAL}}},Rn=function(e,t){return 0!=(e&t)},Mn={name:\"content\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){if(0===e.length)return[];var t=e[0];return t.type===d.IDENT_TOKEN&&\"none\"===t.value?[]:e}},Dn={name:\"counter-increment\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;for(var r=[],n=e.filter(We),o=0;o<n.length;o++){var s=n[o],i=n[o+1];if(s.type===d.IDENT_TOKEN){var a=i&&Ve(i)?i.number:1;r.push({counter:s.value,increment:a})}}return r}},Kn={name:\"counter-reset\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return[];for(var t=[],r=e.filter(We),n=0;n<r.length;n++){var o=r[n],s=r[n+1];if(qe(o)&&\"none\"!==o.value){var i=s&&Ve(s)?s.number:0;t.push({counter:o.value,reset:i})}}return t}},zn={name:\"quotes\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;var r=[],n=e.filter(Ge);if(n.length%2!=0)return null;for(var o=0;o<n.length;o+=2){var s=n[o].value,i=n[o+1].value;r.push({open:s,close:i})}return r}},Vn=function(e,t,r){if(!e)return\"\";var n=e[Math.min(t,e.length-1)];return n?r?n.open:n.close:\"\"},qn={name:\"box-shadow\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return 1===e.length&&Xe(e[0],\"none\")?[]:Ye(e).map((function(e){for(var t={color:255,offsetX:rt,offsetY:rt,blur:rt,spread:rt,inset:!1},r=0,n=0;n<e.length;n++){var o=e[n];Xe(o,\"inset\")?t.inset=!0:$e(o)?(0===r?t.offsetX=o:1===r?t.offsetY=o:2===r?t.blur=o:t.spread=o,r++):t.color=ft(o)}return t}))}},Gn=function(){function e(e){this.backgroundClip=Jn(xt,e.backgroundClip),this.backgroundColor=Jn(Et,e.backgroundColor),this.backgroundImage=Jn(ur,e.backgroundImage),this.backgroundOrigin=Jn(cr,e.backgroundOrigin),this.backgroundPosition=Jn(lr,e.backgroundPosition),this.backgroundRepeat=Jn(fr,e.backgroundRepeat),this.backgroundSize=Jn(mr,e.backgroundSize),this.borderTopColor=Jn(vr,e.borderTopColor),this.borderRightColor=Jn(wr,e.borderRightColor),this.borderBottomColor=Jn(br,e.borderBottomColor),this.borderLeftColor=Jn(Br,e.borderLeftColor),this.borderTopLeftRadius=Jn(_r,e.borderTopLeftRadius),this.borderTopRightRadius=Jn(Cr,e.borderTopRightRadius),this.borderBottomRightRadius=Jn(xr,e.borderBottomRightRadius),this.borderBottomLeftRadius=Jn(Er,e.borderBottomLeftRadius),this.borderTopStyle=Jn(Fr,e.borderTopStyle),this.borderRightStyle=Jn(Ur,e.borderRightStyle),this.borderBottomStyle=Jn(Sr,e.borderBottomStyle),this.borderLeftStyle=Jn(Lr,e.borderLeftStyle),this.borderTopWidth=Jn(Hr,e.borderTopWidth),this.borderRightWidth=Jn(Ir,e.borderRightWidth),this.borderBottomWidth=Jn(Pr,e.borderBottomWidth),this.borderLeftWidth=Jn(Or,e.borderLeftWidth),this.boxShadow=Jn(qn,e.boxShadow),this.color=Jn(kr,e.color),this.display=Jn(Rr,e.display),this.float=Jn(Kr,e.cssFloat),this.fontFamily=Jn(Tn,e.fontFamily),this.fontSize=Jn(Hn,e.fontSize),this.fontStyle=Jn(kn,e.fontStyle),this.fontVariant=Jn(Pn,e.fontVariant),this.fontWeight=Jn(In,e.fontWeight),this.letterSpacing=Jn(zr,e.letterSpacing),this.lineBreak=Jn(qr,e.lineBreak),this.lineHeight=Jn(Gr,e.lineHeight),this.listStyleImage=Jn(Xr,e.listStyleImage),this.listStylePosition=Jn(Jr,e.listStylePosition),this.listStyleType=Jn(Zr,e.listStyleType),this.marginTop=Jn(en,e.marginTop),this.marginRight=Jn(tn,e.marginRight),this.marginBottom=Jn(rn,e.marginBottom),this.marginLeft=Jn(nn,e.marginLeft),this.opacity=Jn(Un,e.opacity);var t=Jn(sn,e.overflow);this.overflowX=t[0],this.overflowY=t[t.length>1?1:0],this.overflowWrap=Jn(An,e.overflowWrap),this.paddingTop=Jn(cn,e.paddingTop),this.paddingRight=Jn(ln,e.paddingRight),this.paddingBottom=Jn(dn,e.paddingBottom),this.paddingLeft=Jn(fn,e.paddingLeft),this.position=Jn(gn,e.position),this.textAlign=Jn(pn,e.textAlign),this.textDecorationColor=Jn(Sn,e.textDecorationColor||e.color),this.textDecorationLine=Jn(Ln,e.textDecorationLine),this.textShadow=Jn(yn,e.textShadow),this.textTransform=Jn(wn,e.textTransform),this.transform=Jn(bn,e.transform),this.transformOrigin=Jn(Cn,e.transformOrigin),this.visibility=Jn(En,e.visibility),this.wordBreak=Jn(Qn,e.wordBreak),this.zIndex=Jn(Fn,e.zIndex)}return e.prototype.isVisible=function(){return this.display>0&&this.opacity>0&&this.visibility===vn.VISIBLE},e.prototype.isTransparent=function(){return ht(this.backgroundColor)},e.prototype.isTransformed=function(){return null!==this.transform},e.prototype.isPositioned=function(){return this.position!==hn.STATIC},e.prototype.isPositionedWithZIndex=function(){return this.isPositioned()&&!this.zIndex.auto},e.prototype.isFloating=function(){return this.float!==Nr.NONE},e.prototype.isInlineLevel=function(){return Rn(this.display,4)||Rn(this.display,33554432)||Rn(this.display,268435456)||Rn(this.display,536870912)||Rn(this.display,67108864)||Rn(this.display,134217728)},e}(),Xn=function(e){this.content=Jn(Mn,e.content),this.quotes=Jn(zn,e.quotes)},Wn=function(e){this.counterIncrement=Jn(Dn,e.counterIncrement),this.counterReset=Jn(Kn,e.counterReset)},Jn=function(e,t){var r=new De,n=null!=t?t.toString():e.initialValue;r.write(n);var o=new Ke(r.read());switch(e.type){case wt.IDENT_VALUE:var s=o.parseComponentValue();return e.parse(qe(s)?s.value:e.initialValue);case wt.VALUE:return e.parse(o.parseComponentValue());case wt.LIST:return e.parse(o.parseComponentValues());case wt.TOKEN_VALUE:return o.parseComponentValue();case wt.TYPE_VALUE:switch(e.format){case\"angle\":return ut(o.parseComponentValue());case\"color\":return ft(o.parseComponentValue());case\"image\":return ir(o.parseComponentValue());case\"length\":var i=o.parseComponentValue();return $e(i)?i:rt;case\"length-percentage\":var a=o.parseComponentValue();return et(a)?a:rt}}throw new Error(\"Attempting to parse unsupported css format type \"+e.format)},Yn=function(e){this.styles=new Gn(window.getComputedStyle(e,null)),this.textNodes=[],this.elements=[],null!==this.styles.transform&&So(e)&&(e.style.transform=\"none\"),this.bounds=i(e),this.flags=0},Zn=function(e,t){this.text=e,this.bounds=t},$n=function(e){var t=e.ownerDocument;if(t){var r=t.createElement(\"html2canvaswrapper\");r.appendChild(e.cloneNode(!0));var n=e.parentNode;if(n){n.replaceChild(r,e);var o=i(r);return r.firstChild&&n.replaceChild(r.firstChild,r),o}}return new s(0,0,0,0)},eo=function(e,t,r){var n=e.ownerDocument;if(!n)throw new Error(\"Node has no owner document\");var o=n.createRange();return o.setStart(e,t),o.setEnd(e,t+r),s.fromClientRect(o.getBoundingClientRect())},to=function(e,t){return 0!==t.letterSpacing?a(e).map((function(e){return A(e)})):ro(e,t)},ro=function(e,t){for(var r,n=function(e,t){var r=a(e),n=ie(r,t),o=n[0],s=n[1],i=n[2],A=r.length,u=0,c=0;return{next:function(){if(c>=A)return{done:!0,value:null};for(var e=G;c<A&&(e=se(r,s,o,++c,i))===G;);if(e!==G||c===A){var t=new ae(r,e,u,c);return u=c,{value:t,done:!1}}return{done:!0,value:null}}}}(e,{lineBreak:t.lineBreak,wordBreak:t.overflowWrap===on.BREAK_WORD?\"break-word\":t.wordBreak}),o=[];!(r=n.next()).done;)r.value&&o.push(r.value.slice());return o},no=function(e,t){this.text=oo(e.data,t.textTransform),this.textBounds=function(e,t,r){var n=to(e,t),o=[],s=0;return n.forEach((function(e){if(t.textDecorationLine.length||e.trim().length>0)if(Pt.SUPPORT_RANGE_BOUNDS)o.push(new Zn(e,eo(r,s,e.length)));else{var n=r.splitText(e.length);o.push(new Zn(e,$n(r))),r=n}else Pt.SUPPORT_RANGE_BOUNDS||(r=r.splitText(e.length));s+=e.length})),o}(this.text,t,e)},oo=function(e,t){switch(t){case mn.LOWERCASE:return e.toLowerCase();case mn.CAPITALIZE:return e.replace(so,io);case mn.UPPERCASE:return e.toUpperCase();default:return e}},so=/(^|\\s|:|-|\\(|\\))([a-z])/g,io=function(e,t,r){return e.length>0?t+r.toUpperCase():e},ao=function(e){function r(t){var r=e.call(this,t)||this;return r.src=t.currentSrc||t.src,r.intrinsicWidth=t.naturalWidth,r.intrinsicHeight=t.naturalHeight,kt.getInstance().addImage(r.src),r}return t(r,e),r}(Yn),Ao=function(e){function r(t){var r=e.call(this,t)||this;return r.canvas=t,r.intrinsicWidth=t.width,r.intrinsicHeight=t.height,r}return t(r,e),r}(Yn),uo=function(e){function r(t){var r=e.call(this,t)||this,n=new XMLSerializer;return r.svg=\"data:image/svg+xml,\"+encodeURIComponent(n.serializeToString(t)),r.intrinsicWidth=t.width.baseVal.value,r.intrinsicHeight=t.height.baseVal.value,kt.getInstance().addImage(r.svg),r}return t(r,e),r}(Yn),co=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),lo=function(e){function r(t){var r=e.call(this,t)||this;return r.start=t.start,r.reversed=\"boolean\"==typeof t.reversed&&!0===t.reversed,r}return t(r,e),r}(Yn),fo=[{type:d.DIMENSION_TOKEN,flags:0,unit:\"px\",number:3}],ho=[{type:d.PERCENTAGE_TOKEN,flags:0,number:50}],po=\"checkbox\",mo=\"radio\",go=\"password\",yo=707406591,vo=function(e){function r(t){var r,n,o,i=e.call(this,t)||this;switch(i.type=t.type.toLowerCase(),i.checked=t.checked,i.value=0===(o=(n=t).type===go?new Array(n.value.length+1).join(\"•\"):n.value).length?n.placeholder||\"\":o,i.type!==po&&i.type!==mo||(i.styles.backgroundColor=3739148031,i.styles.borderTopColor=i.styles.borderRightColor=i.styles.borderBottomColor=i.styles.borderLeftColor=2779096575,i.styles.borderTopWidth=i.styles.borderRightWidth=i.styles.borderBottomWidth=i.styles.borderLeftWidth=1,i.styles.borderTopStyle=i.styles.borderRightStyle=i.styles.borderBottomStyle=i.styles.borderLeftStyle=pr.SOLID,i.styles.backgroundClip=[bt.BORDER_BOX],i.styles.backgroundOrigin=[0],i.bounds=(r=i.bounds).width>r.height?new s(r.left+(r.width-r.height)/2,r.top,r.height,r.height):r.width<r.height?new s(r.left,r.top+(r.height-r.width)/2,r.width,r.width):r),i.type){case po:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=fo;break;case mo:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=ho}return i}return t(r,e),r}(Yn),wo=function(e){function r(t){var r=e.call(this,t)||this,n=t.options[t.selectedIndex||0];return r.value=n&&n.text||\"\",r}return t(r,e),r}(Yn),bo=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),Bo=function(e){return ft(Ke.create(e).parseComponentValue())},jo=function(e){function r(t){var r=e.call(this,t)||this;r.src=t.src,r.width=parseInt(t.width,10)||0,r.height=parseInt(t.height,10)||0,r.backgroundColor=r.styles.backgroundColor;try{if(t.contentWindow&&t.contentWindow.document&&t.contentWindow.document.documentElement){r.tree=Eo(t.contentWindow.document.documentElement);var n=t.contentWindow.document.documentElement?Bo(getComputedStyle(t.contentWindow.document.documentElement).backgroundColor):_t.TRANSPARENT,o=t.contentWindow.document.body?Bo(getComputedStyle(t.contentWindow.document.body).backgroundColor):_t.TRANSPARENT;r.backgroundColor=ht(n)?ht(o)?r.styles.backgroundColor:o:n}}catch(e){}return r}return t(r,e),r}(Yn),_o=[\"OL\",\"UL\",\"MENU\"],Co=function(e,t,r){for(var n=e.firstChild,o=void 0;n;n=o)if(o=n.nextSibling,Fo(n)&&n.data.trim().length>0)t.textNodes.push(new no(n,t.styles));else if(Uo(n)){var s=xo(n);s.styles.isVisible()&&(No(n,s,r)?s.flags|=4:Qo(s.styles)&&(s.flags|=2),-1!==_o.indexOf(n.tagName)&&(s.flags|=8),t.elements.push(s),zo(n)||Po(n)||Vo(n)||Co(n,s,r))}},xo=function(e){return Ro(e)?new ao(e):ko(e)?new Ao(e):Po(e)?new uo(e):To(e)?new co(e):Ho(e)?new lo(e):Io(e)?new vo(e):Vo(e)?new wo(e):zo(e)?new bo(e):Mo(e)?new jo(e):new Yn(e)},Eo=function(e){var t=xo(e);return t.flags|=4,Co(e,t,t),t},No=function(e,t,r){return t.styles.isPositionedWithZIndex()||t.styles.opacity<1||t.styles.isTransformed()||Oo(e)&&r.styles.isTransparent()},Qo=function(e){return e.isPositioned()||e.isFloating()},Fo=function(e){return e.nodeType===Node.TEXT_NODE},Uo=function(e){return e.nodeType===Node.ELEMENT_NODE},So=function(e){return Uo(e)&&void 0!==e.style&&!Lo(e)},Lo=function(e){return\"object\"==typeof e.className},To=function(e){return\"LI\"===e.tagName},Ho=function(e){return\"OL\"===e.tagName},Io=function(e){return\"INPUT\"===e.tagName},Po=function(e){return\"svg\"===e.tagName},Oo=function(e){return\"BODY\"===e.tagName},ko=function(e){return\"CANVAS\"===e.tagName},Ro=function(e){return\"IMG\"===e.tagName},Mo=function(e){return\"IFRAME\"===e.tagName},Do=function(e){return\"STYLE\"===e.tagName},Ko=function(e){return\"SCRIPT\"===e.tagName},zo=function(e){return\"TEXTAREA\"===e.tagName},Vo=function(e){return\"SELECT\"===e.tagName},qo=function(){function e(){this.counters={}}return e.prototype.getCounterValue=function(e){var t=this.counters[e];return t&&t.length?t[t.length-1]:1},e.prototype.getCounterValues=function(e){return this.counters[e]||[]},e.prototype.pop=function(e){var t=this;e.forEach((function(e){return t.counters[e].pop()}))},e.prototype.parse=function(e){var t=this,r=e.counterIncrement,n=e.counterReset,o=!0;null!==r&&r.forEach((function(e){var r=t.counters[e.counter];r&&0!==e.increment&&(o=!1,r[Math.max(0,r.length-1)]+=e.increment)}));var s=[];return o&&n.forEach((function(e){var r=t.counters[e.counter];s.push(e.counter),r||(r=t.counters[e.counter]=[]),r.push(e.reset)})),s},e}(),Go={integers:[1e3,900,500,400,100,90,50,40,10,9,5,4,1],values:[\"M\",\"CM\",\"D\",\"CD\",\"C\",\"XC\",\"L\",\"XL\",\"X\",\"IX\",\"V\",\"IV\",\"I\"]},Xo={integers:[9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"Ք\",\"Փ\",\"Ւ\",\"Ց\",\"Ր\",\"Տ\",\"Վ\",\"Ս\",\"Ռ\",\"Ջ\",\"Պ\",\"Չ\",\"Ո\",\"Շ\",\"Ն\",\"Յ\",\"Մ\",\"Ճ\",\"Ղ\",\"Ձ\",\"Հ\",\"Կ\",\"Ծ\",\"Խ\",\"Լ\",\"Ի\",\"Ժ\",\"Թ\",\"Ը\",\"Է\",\"Զ\",\"Ե\",\"Դ\",\"Գ\",\"Բ\",\"Ա\"]},Wo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,400,300,200,100,90,80,70,60,50,40,30,20,19,18,17,16,15,10,9,8,7,6,5,4,3,2,1],values:[\"י׳\",\"ט׳\",\"ח׳\",\"ז׳\",\"ו׳\",\"ה׳\",\"ד׳\",\"ג׳\",\"ב׳\",\"א׳\",\"ת\",\"ש\",\"ר\",\"ק\",\"צ\",\"פ\",\"ע\",\"ס\",\"נ\",\"מ\",\"ל\",\"כ\",\"יט\",\"יח\",\"יז\",\"טז\",\"טו\",\"י\",\"ט\",\"ח\",\"ז\",\"ו\",\"ה\",\"ד\",\"ג\",\"ב\",\"א\"]},Jo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"ჵ\",\"ჰ\",\"ჯ\",\"ჴ\",\"ხ\",\"ჭ\",\"წ\",\"ძ\",\"ც\",\"ჩ\",\"შ\",\"ყ\",\"ღ\",\"ქ\",\"ფ\",\"ჳ\",\"ტ\",\"ს\",\"რ\",\"ჟ\",\"პ\",\"ო\",\"ჲ\",\"ნ\",\"მ\",\"ლ\",\"კ\",\"ი\",\"თ\",\"ჱ\",\"ზ\",\"ვ\",\"ე\",\"დ\",\"გ\",\"ბ\",\"ა\"]},Yo=function(e,t,r,n,o,s){return e<t||e>r?is(e,o,s.length>0):n.integers.reduce((function(t,r,o){for(;e>=r;)e-=r,t+=n.values[o];return t}),\"\")+s},Zo=function(e,t,r,n){var o=\"\";do{r||e--,o=n(e)+o,e/=t}while(e*t>=t);return o},$o=function(e,t,r,n,o){var s=r-t+1;return(e<0?\"-\":\"\")+(Zo(Math.abs(e),s,n,(function(e){return A(Math.floor(e%s)+t)}))+o)},es=function(e,t,r){void 0===r&&(r=\". \");var n=t.length;return Zo(Math.abs(e),n,!1,(function(e){return t[Math.floor(e%n)]}))+r},ts=function(e,t,r,n,o,s){if(e<-9999||e>9999)return is(e,Wr.CJK_DECIMAL,o.length>0);var i=Math.abs(e),a=o;if(0===i)return t[0]+a;for(var A=0;i>0&&A<=4;A++){var u=i%10;0===u&&Rn(s,1)&&\"\"!==a?a=t[u]+a:u>1||1===u&&0===A||1===u&&1===A&&Rn(s,2)||1===u&&1===A&&Rn(s,4)&&e>100||1===u&&A>1&&Rn(s,8)?a=t[u]+(A>0?r[A-1]:\"\")+a:1===u&&A>0&&(a=r[A-1]+a),i=Math.floor(i/10)}return(e<0?n:\"\")+a},rs=\"十百千萬\",ns=\"拾佰仟萬\",os=\"マイナス\",ss=\"마이너스\",is=function(e,t,r){var n=r?\". \":\"\",o=r?\"、\":\"\",s=r?\", \":\"\",i=r?\" \":\"\";switch(t){case Wr.DISC:return\"•\"+i;case Wr.CIRCLE:return\"◦\"+i;case Wr.SQUARE:return\"◾\"+i;case Wr.DECIMAL_LEADING_ZERO:var a=$o(e,48,57,!0,n);return a.length<4?\"0\"+a:a;case Wr.CJK_DECIMAL:return es(e,\"〇一二三四五六七八九\",o);case Wr.LOWER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n).toLowerCase();case Wr.UPPER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n);case Wr.LOWER_GREEK:return $o(e,945,969,!1,n);case Wr.LOWER_ALPHA:return $o(e,97,122,!1,n);case Wr.UPPER_ALPHA:return $o(e,65,90,!1,n);case Wr.ARABIC_INDIC:return $o(e,1632,1641,!0,n);case Wr.ARMENIAN:case Wr.UPPER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n);case Wr.LOWER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n).toLowerCase();case Wr.BENGALI:return $o(e,2534,2543,!0,n);case Wr.CAMBODIAN:case Wr.KHMER:return $o(e,6112,6121,!0,n);case Wr.CJK_EARTHLY_BRANCH:return es(e,\"子丑寅卯辰巳午未申酉戌亥\",o);case Wr.CJK_HEAVENLY_STEM:return es(e,\"甲乙丙丁戊己庚辛壬癸\",o);case Wr.CJK_IDEOGRAPHIC:case Wr.TRAD_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"負\",o,14);case Wr.TRAD_CHINESE_FORMAL:return ts(e,\"零壹貳參肆伍陸柒捌玖\",ns,\"負\",o,15);case Wr.SIMP_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"负\",o,14);case Wr.SIMP_CHINESE_FORMAL:return ts(e,\"零壹贰叁肆伍陆柒捌玖\",ns,\"负\",o,15);case Wr.JAPANESE_INFORMAL:return ts(e,\"〇一二三四五六七八九\",\"十百千万\",os,o,0);case Wr.JAPANESE_FORMAL:return ts(e,\"零壱弐参四伍六七八九\",\"拾百千万\",os,o,7);case Wr.KOREAN_HANGUL_FORMAL:return ts(e,\"영일이삼사오육칠팔구\",\"십백천만\",ss,s,7);case Wr.KOREAN_HANJA_INFORMAL:return ts(e,\"零一二三四五六七八九\",\"十百千萬\",ss,s,0);case Wr.KOREAN_HANJA_FORMAL:return ts(e,\"零壹貳參四五六七八九\",\"拾百千\",ss,s,7);case Wr.DEVANAGARI:return $o(e,2406,2415,!0,n);case Wr.GEORGIAN:return Yo(e,1,19999,Jo,Wr.DECIMAL,n);case Wr.GUJARATI:return $o(e,2790,2799,!0,n);case Wr.GURMUKHI:return $o(e,2662,2671,!0,n);case Wr.HEBREW:return Yo(e,1,10999,Wo,Wr.DECIMAL,n);case Wr.HIRAGANA:return es(e,\"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん\");case Wr.HIRAGANA_IROHA:return es(e,\"いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす\");case Wr.KANNADA:return $o(e,3302,3311,!0,n);case Wr.KATAKANA:return es(e,\"アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン\",o);case Wr.KATAKANA_IROHA:return es(e,\"イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセス\",o);case Wr.LAO:return $o(e,3792,3801,!0,n);case Wr.MONGOLIAN:return $o(e,6160,6169,!0,n);case Wr.MYANMAR:return $o(e,4160,4169,!0,n);case Wr.ORIYA:return $o(e,2918,2927,!0,n);case Wr.PERSIAN:return $o(e,1776,1785,!0,n);case Wr.TAMIL:return $o(e,3046,3055,!0,n);case Wr.TELUGU:return $o(e,3174,3183,!0,n);case Wr.THAI:return $o(e,3664,3673,!0,n);case Wr.TIBETAN:return $o(e,3872,3881,!0,n);case Wr.DECIMAL:default:return $o(e,48,57,!0,n)}},as=\"data-html2canvas-ignore\",As=function(){function e(e,t){if(this.options=t,this.scrolledElements=[],this.referenceElement=e,this.counters=new qo,this.quoteDepth=0,!e.ownerDocument)throw new Error(\"Cloned element does not have an owner document\");this.documentElement=this.cloneNode(e.ownerDocument.documentElement)}return e.prototype.toIFrame=function(e,t){var r=this,s=cs(e,t);if(!s.contentWindow)return Promise.reject(\"Unable to find iframe window\");var i=e.defaultView.pageXOffset,a=e.defaultView.pageYOffset,A=s.contentWindow,u=A.document,c=ls(s).then((function(){return n(r,void 0,void 0,(function(){var e;return o(this,(function(r){switch(r.label){case 0:return this.scrolledElements.forEach(ps),A&&(A.scrollTo(t.left,t.top),!/(iPad|iPhone|iPod)/g.test(navigator.userAgent)||A.scrollY===t.top&&A.scrollX===t.left||(u.documentElement.style.top=-t.top+\"px\",u.documentElement.style.left=-t.left+\"px\",u.documentElement.style.position=\"absolute\")),e=this.options.onclone,void 0===this.clonedReferenceElement?[2,Promise.reject(\"Error finding the \"+this.referenceElement.nodeName+\" in the cloned document\")]:u.fonts&&u.fonts.ready?[4,u.fonts.ready]:[3,2];case 1:r.sent(),r.label=2;case 2:return\"function\"==typeof e?[2,Promise.resolve().then((function(){return e(u)})).then((function(){return s}))]:[2,s]}}))}))}));return u.open(),u.write(fs(document.doctype)+\"<html></html>\"),hs(this.referenceElement.ownerDocument,i,a),u.replaceChild(u.adoptNode(this.documentElement),u.documentElement),u.close(),c},e.prototype.createElementClone=function(e){if(ko(e))return this.createCanvasClone(e);if(Do(e))return this.createStyleClone(e);var t=e.cloneNode(!1);return Ro(t)&&\"lazy\"===t.loading&&(t.loading=\"eager\"),t},e.prototype.createStyleClone=function(e){try{var t=e.sheet;if(t&&t.cssRules){var r=[].slice.call(t.cssRules,0).reduce((function(e,t){return t&&\"string\"==typeof t.cssText?e+t.cssText:e}),\"\"),n=e.cloneNode(!1);return n.textContent=r,n}}catch(e){if(Ot.getInstance(this.options.id).error(\"Unable to access cssRules property\",e),\"SecurityError\"!==e.name)throw e}return e.cloneNode(!1)},e.prototype.createCanvasClone=function(e){if(this.options.inlineImages&&e.ownerDocument){var t=e.ownerDocument.createElement(\"img\");try{return t.src=e.toDataURL(),t}catch(e){Ot.getInstance(this.options.id).info(\"Unable to clone canvas contents, canvas is tainted\")}}var r=e.cloneNode(!1);try{r.width=e.width,r.height=e.height;var n=e.getContext(\"2d\"),o=r.getContext(\"2d\");return o&&(n?o.putImageData(n.getImageData(0,0,e.width,e.height),0,0):o.drawImage(e,0,0)),r}catch(e){}return r},e.prototype.cloneNode=function(e){if(Fo(e))return document.createTextNode(e.data);if(!e.ownerDocument)return e.cloneNode(!1);var t=e.ownerDocument.defaultView;if(t&&Uo(e)&&(So(e)||Lo(e))){var r=this.createElementClone(e),n=t.getComputedStyle(e),o=t.getComputedStyle(e,\":before\"),s=t.getComputedStyle(e,\":after\");this.referenceElement===e&&So(r)&&(this.clonedReferenceElement=r),Oo(r)&&vs(r);for(var i=this.counters.parse(new Wn(n)),a=this.resolvePseudoContent(e,r,o,On.BEFORE),A=e.firstChild;A;A=A.nextSibling)Uo(A)&&(Ko(A)||A.hasAttribute(as)||\"function\"==typeof this.options.ignoreElements&&this.options.ignoreElements(A))||this.options.copyStyles&&Uo(A)&&Do(A)||r.appendChild(this.cloneNode(A));a&&r.insertBefore(a,r.firstChild);var u=this.resolvePseudoContent(e,r,s,On.AFTER);return u&&r.appendChild(u),this.counters.pop(i),n&&(this.options.copyStyles||Lo(e))&&!Mo(e)&&ds(n,r),0===e.scrollTop&&0===e.scrollLeft||this.scrolledElements.push([r,e.scrollLeft,e.scrollTop]),(zo(e)||Vo(e))&&(zo(r)||Vo(r))&&(r.value=e.value),r}return e.cloneNode(!1)},e.prototype.resolvePseudoContent=function(e,t,r,n){var o=this;if(r){var s=r.content,i=t.ownerDocument;if(i&&s&&\"none\"!==s&&\"-moz-alt-content\"!==s&&\"none\"!==r.display){this.counters.parse(new Wn(r));var a=new Xn(r),A=i.createElement(\"html2canvaspseudoelement\");ds(r,A),a.content.forEach((function(t){if(t.type===d.STRING_TOKEN)A.appendChild(i.createTextNode(t.value));else if(t.type===d.URL_TOKEN){var r=i.createElement(\"img\");r.src=t.value,r.style.opacity=\"1\",A.appendChild(r)}else if(t.type===d.FUNCTION){if(\"attr\"===t.name){var n=t.values.filter(qe);n.length&&A.appendChild(i.createTextNode(e.getAttribute(n[0].value)||\"\"))}else if(\"counter\"===t.name){var s=t.values.filter(Je),u=s[0],c=s[1];if(u&&qe(u)){var l=o.counters.getCounterValue(u.value),f=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL;A.appendChild(i.createTextNode(is(l,f,!1)))}}else if(\"counters\"===t.name){var h=t.values.filter(Je),p=(u=h[0],h[1]);if(c=h[2],u&&qe(u)){var m=o.counters.getCounterValues(u.value),g=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL,y=p&&p.type===d.STRING_TOKEN?p.value:\"\",v=m.map((function(e){return is(e,g,!1)})).join(y);A.appendChild(i.createTextNode(v))}}}else if(t.type===d.IDENT_TOKEN)switch(t.value){case\"open-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,o.quoteDepth++,!0)));break;case\"close-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,--o.quoteDepth,!1)));break;default:A.appendChild(i.createTextNode(t.value))}})),A.className=ms+\" \"+gs;var u=n===On.BEFORE?\" \"+ms:\" \"+gs;return Lo(t)?t.className.baseValue+=u:t.className+=u,A}}},e.destroy=function(e){return!!e.parentNode&&(e.parentNode.removeChild(e),!0)},e}();!function(e){e[e.BEFORE=0]=\"BEFORE\",e[e.AFTER=1]=\"AFTER\"}(On||(On={}));var us,cs=function(e,t){var r=e.createElement(\"iframe\");return r.className=\"html2canvas-container\",r.style.visibility=\"hidden\",r.style.position=\"fixed\",r.style.left=\"-10000px\",r.style.top=\"0px\",r.style.border=\"0\",r.width=t.width.toString(),r.height=t.height.toString(),r.scrolling=\"no\",r.setAttribute(as,\"true\"),e.body.appendChild(r),r},ls=function(e){return new Promise((function(t,r){var n=e.contentWindow;if(!n)return r(\"No window assigned for iframe\");var o=n.document;n.onload=e.onload=o.onreadystatechange=function(){n.onload=e.onload=o.onreadystatechange=null;var r=setInterval((function(){o.body.childNodes.length>0&&\"complete\"===o.readyState&&(clearInterval(r),t(e))}),50)}}))},ds=function(e,t){for(var r=e.length-1;r>=0;r--){var n=e.item(r);\"content\"!==n&&t.style.setProperty(n,e.getPropertyValue(n))}return t},fs=function(e){var t=\"\";return e&&(t+=\"<!DOCTYPE \",e.name&&(t+=e.name),e.internalSubset&&(t+=e.internalSubset),e.publicId&&(t+=",
+  "ctx": "n(e){return-1===e.indexOf(\" \")?e:\"'\"+e+\""
+ },
+ "js_002": {
+  "t": "2026-07-17 · 팡세",
+  "ctx": "m=app&utm_campaign=pensees\",   edition: "
+ },
+ "js_003": {
+  "t": "저자",
+  "ctx": "nst QUESTIONS = [   {id:1, level:1, tag:"
+ },
+ "js_004": {
+  "t": "『팡세』를 쓴 17세기 프랑스의 사상가는 누구일까요?",
+  "ctx": "TIONS = [   {id:1, level:1, tag:\"저자\", q:"
+ },
+ "js_005": {
+  "t": "블레즈 파스칼",
+  "ctx": " 17세기 프랑스의 사상가는 누구일까요?\",    options:[{t:"
+ },
+ "js_006": {
+  "t": "르네 데카르트",
+  "ctx": "\",    options:[{t:\"블레즈 파스칼\",ok:true},{t:"
+ },
+ "js_007": {
+  "t": "미셸 드 몽테뉴",
+  "ctx": "[{t:\"블레즈 파스칼\",ok:true},{t:\"르네 데카르트\"},{t:"
+ },
+ "js_008": {
+  "t": "장 자크 루소",
+  "ctx": "k:true},{t:\"르네 데카르트\"},{t:\"미셸 드 몽테뉴\"},{t:"
+ },
+ "js_009": {
+  "t": "『팡세』는 프랑스의 수학자이자 철학자 <b>블레즈 파스칼</b>(1623~1662)이 남긴 글이에요. 그는 서른아홉 살에 세상을 떠났습니다.",
+  "ctx": "},{t:\"미셸 드 몽테뉴\"},{t:\"장 자크 루소\"}],    ctx:"
+ },
+ "js_010": {
+  "t": "제목",
+  "ctx": " 살에 세상을 떠났습니다.\"},   {id:2, level:1, tag:"
+ },
+ "js_011": {
+  "t": "프랑스어 제목 팡세(Pensées)의 뜻으로 알맞은 것은?",
+  "ctx": "떠났습니다.\"},   {id:2, level:1, tag:\"제목\", q:"
+ },
+ "js_012": {
+  "t": "생각 또는 단상",
+  "ctx": "(Pensées)의 뜻으로 알맞은 것은?\",    options:[{t:"
+ },
+ "js_013": {
+  "t": "신에게 올리는 기도",
+  "ctx": ",    options:[{t:\"생각 또는 단상\",ok:true},{t:"
+ },
+ "js_014": {
+  "t": "벗에게 쓴 편지",
+  "ctx": "\"생각 또는 단상\",ok:true},{t:\"신에게 올리는 기도\"},{t:"
+ },
+ "js_015": {
+  "t": "지난날의 고백",
+  "ctx": "rue},{t:\"신에게 올리는 기도\"},{t:\"벗에게 쓴 편지\"},{t:"
+ },
+ "js_016": {
+  "t": "<b>팡세(Pensées)</b>는 프랑스어로 ‘생각들’ ‘단상들’이라는 뜻이에요. 파스칼이 틈틈이 적어 둔 사색의 조각들이라 이런 제목이 붙었습니다.",
+  "ctx": "},{t:\"벗에게 쓴 편지\"},{t:\"지난날의 고백\"}],    ctx:"
+ },
+ "js_017": {
+  "t": "출판",
+  "ctx": " 이런 제목이 붙었습니다.\"},   {id:3, level:1, tag:"
+ },
+ "js_018": {
+  "t": "『팡세』가 세상에 나온 방식으로 알맞은 것은?",
+  "ctx": "붙었습니다.\"},   {id:3, level:1, tag:\"출판\", q:"
+ },
+ "js_019": {
+  "t": "파스칼이 죽은 뒤 유고로 묶여 나왔다",
+  "ctx": "』가 세상에 나온 방식으로 알맞은 것은?\",    options:[{t:"
+ },
+ "js_020": {
+  "t": "파스칼이 직접 완성해 생전에 펴냈다",
+  "ctx": ":[{t:\"파스칼이 죽은 뒤 유고로 묶여 나왔다\",ok:true},{t:"
+ },
+ "js_021": {
+  "t": "제자가 강의를 받아 적어 냈다",
+  "ctx": "\",ok:true},{t:\"파스칼이 직접 완성해 생전에 펴냈다\"},{t:"
+ },
+ "js_022": {
+  "t": "교회가 공식 교리서로 펴냈다",
+  "ctx": "완성해 생전에 펴냈다\"},{t:\"제자가 강의를 받아 적어 냈다\"},{t:"
+ },
+ "js_023": {
+  "t": "『팡세』는 파스칼이 죽은 뒤인 <b>1670년</b>, 그가 남긴 글 묶음을 유족과 지인들이 모아 펴낸 <b>유고집</b>이에요. 그래서 저자가 짜 놓은 완결된 책이 아닙니다.",
+  "ctx": " 적어 냈다\"},{t:\"교회가 공식 교리서로 펴냈다\"}],    ctx:"
+ },
+ "js_024": {
+  "t": "명언",
+  "ctx": "은 완결된 책이 아닙니다.\"},   {id:4, level:1, tag:"
+ },
+ "js_025": {
+  "t": "파스칼이 인간을 빗댄, 가장 유명한 한마디는?",
+  "ctx": " 아닙니다.\"},   {id:4, level:1, tag:\"명언\", q:"
+ },
+ "js_026": {
+  "t": "생각하는 갈대",
+  "ctx": "이 인간을 빗댄, 가장 유명한 한마디는?\",    options:[{t:"
+ },
+ "js_027": {
+  "t": "만물의 척도이자 주인",
+  "ctx": "\",    options:[{t:\"생각하는 갈대\",ok:true},{t:"
+ },
+ "js_028": {
+  "t": "이성적 동물",
+  "ctx": "\"생각하는 갈대\",ok:true},{t:\"만물의 척도이자 주인\"},{t:"
+ },
+ "js_029": {
+  "t": "신의 형상",
+  "ctx": "true},{t:\"만물의 척도이자 주인\"},{t:\"이성적 동물\"},{t:"
+ },
+ "js_030": {
+  "t": "‘인간은 <b>생각하는 갈대</b>다’는 『팡세』에서 가장 널리 알려진 구절이에요. 연약함과 위대함을 한 문장에 담은 파스칼의 인간관을 압축합니다.",
+  "ctx": " 주인\"},{t:\"이성적 동물\"},{t:\"신의 형상\"}],    ctx:"
+ },
+ "js_031": {
+  "t": "갈대의 뜻",
+  "ctx": "칼의 인간관을 압축합니다.\"},   {id:5, level:1, tag:"
+ },
+ "js_032": {
+  "t": "인간을 ‘갈대’에 빗댄 까닭으로 알맞은 것은?",
+  "ctx": "니다.\"},   {id:5, level:1, tag:\"갈대의 뜻\", q:"
+ },
+ "js_033": {
+  "t": "자연에서 가장 연약한 존재라서",
+  "ctx": " ‘갈대’에 빗댄 까닭으로 알맞은 것은?\",    options:[{t:"
+ },
+ "js_034": {
+  "t": "물가에서만 자란다는 뜻이 담겨서",
+  "ctx": "ions:[{t:\"자연에서 가장 연약한 존재라서\",ok:true},{t:"
+ },
+ "js_035": {
+  "t": "늘 무리 지어 산다는 뜻이라",
+  "ctx": "라서\",ok:true},{t:\"물가에서만 자란다는 뜻이 담겨서\"},{t:"
+ },
+ "js_036": {
+  "t": "쉼 없이 흔들린다는 뜻이라",
+  "ctx": " 자란다는 뜻이 담겨서\"},{t:\"늘 무리 지어 산다는 뜻이라\"},{t:"
+ },
+ "js_037": {
+  "t": "갈대는 <b>자연에서 가장 약한 것</b>의 상징이에요. 한 방울의 물, 한 줄기 바람에도 꺾이는 인간의 연약함을 나타냅니다.",
+  "ctx": "산다는 뜻이라\"},{t:\"쉼 없이 흔들린다는 뜻이라\"}],    ctx:"
+ },
+ "js_038": {
+  "t": "갈대의 위대함",
+  "ctx": "간의 연약함을 나타냅니다.\"},   {id:6, level:1, tag:"
+ },
+ "js_039": {
+  "t": "연약한 갈대인 인간이 그럼에도 위대한 이유는?",
+  "ctx": ".\"},   {id:6, level:1, tag:\"갈대의 위대함\", q:"
+ },
+ "js_040": {
+  "t": "자신이 죽는다는 것을 생각할 수 있어서",
+  "ctx": " 갈대인 인간이 그럼에도 위대한 이유는?\",    options:[{t:"
+ },
+ "js_041": {
+  "t": "우주보다 몸집이 훨씬 커서",
+  "ctx": "[{t:\"자신이 죽는다는 것을 생각할 수 있어서\",ok:true},{t:"
+ },
+ "js_042": {
+  "t": "어떤 것에도 부서지지 않아서",
+  "ctx": "수 있어서\",ok:true},{t:\"우주보다 몸집이 훨씬 커서\"},{t:"
+ },
+ "js_043": {
+  "t": "신과 똑같은 힘을 지녀서",
+  "ctx": "보다 몸집이 훨씬 커서\"},{t:\"어떤 것에도 부서지지 않아서\"},{t:"
+ },
+ "js_044": {
+  "t": "우주는 인간을 짓밟을 수 있지만, 인간은 <b>자신이 죽는다는 것과 우주의 힘을 안다</b>는 점에서 우주보다 고귀하다고 파스칼은 말해요. 위대함은 ‘생각’에 있습니다.",
+  "ctx": "부서지지 않아서\"},{t:\"신과 똑같은 힘을 지녀서\"}],    ctx:"
+ },
+ "js_045": {
+  "t": "다른 업적",
+  "ctx": "함은 ‘생각’에 있습니다.\"},   {id:7, level:1, tag:"
+ },
+ "js_046": {
+  "t": "파스칼이 사상가이기 이전에 큰 업적을 남긴 분야는?",
+  "ctx": "니다.\"},   {id:7, level:1, tag:\"다른 업적\", q:"
+ },
+ "js_047": {
+  "t": "수학과 물리학",
+  "ctx": "상가이기 이전에 큰 업적을 남긴 분야는?\",    options:[{t:"
+ },
+ "js_048": {
+  "t": "바다 위를 누빈 항해와 탐험",
+  "ctx": "\",    options:[{t:\"수학과 물리학\",ok:true},{t:"
+ },
+ "js_049": {
+  "t": "작곡과 연주",
+  "ctx": " 물리학\",ok:true},{t:\"바다 위를 누빈 항해와 탐험\"},{t:"
+ },
+ "js_050": {
+  "t": "회화와 조각",
+  "ctx": "},{t:\"바다 위를 누빈 항해와 탐험\"},{t:\"작곡과 연주\"},{t:"
+ },
+ "js_051": {
+  "t": "파스칼은 <b>수학·물리학</b>의 천재이기도 했어요. 확률론의 기초를 놓고, 압력의 단위 ‘파스칼(Pa)’에 이름을 남긴 과학자였습니다.",
+  "ctx": "탐험\"},{t:\"작곡과 연주\"},{t:\"회화와 조각\"}],    ctx:"
+ },
+ "js_052": {
+  "t": "내기",
+  "ctx": "름을 남긴 과학자였습니다.\"},   {id:8, level:1, tag:"
+ },
+ "js_053": {
+  "t": "신의 존재를 두고 파스칼이 제안한 유명한 논증의 이름은?",
+  "ctx": "자였습니다.\"},   {id:8, level:1, tag:\"내기\", q:"
+ },
+ "js_054": {
+  "t": "파스칼의 내기",
+  "ctx": " 파스칼이 제안한 유명한 논증의 이름은?\",    options:[{t:"
+ },
+ "js_055": {
+  "t": "파스칼의 삼각형",
+  "ctx": "\",    options:[{t:\"파스칼의 내기\",ok:true},{t:"
+ },
+ "js_056": {
+  "t": "파스칼의 원리",
+  "ctx": "{t:\"파스칼의 내기\",ok:true},{t:\"파스칼의 삼각형\"},{t:"
+ },
+ "js_057": {
+  "t": "파스칼의 정리",
+  "ctx": "k:true},{t:\"파스칼의 삼각형\"},{t:\"파스칼의 원리\"},{t:"
+ },
+ "js_058": {
+  "t": "<b>파스칼의 내기</b>는 신을 믿는 쪽에 거는 것이 이득이라는 논증이에요. (삼각형·원리는 그의 수학·물리 업적으로, 이름만 같을 뿐 다른 이야기입니다.)",
+  "ctx": "\"},{t:\"파스칼의 원리\"},{t:\"파스칼의 정리\"}],    ctx:"
+ },
+ "js_059": {
+  "t": "목적",
+  "ctx": " 뿐 다른 이야기입니다.)\"},   {id:9, level:1, tag:"
+ },
+ "js_060": {
+  "t": "『팡세』가 궁극적으로 변호하고자 한 것은?",
+  "ctx": "기입니다.)\"},   {id:9, level:1, tag:\"목적\", q:"
+ },
+ "js_061": {
+  "t": "기독교 신앙",
+  "ctx": "팡세』가 궁극적으로 변호하고자 한 것은?\",    options:[{t:"
+ },
+ "js_062": {
+  "t": "왕의 절대 권력",
+  "ctx": "?\",    options:[{t:\"기독교 신앙\",ok:true},{t:"
+ },
+ "js_063": {
+  "t": "과학의 진보",
+  "ctx": "[{t:\"기독교 신앙\",ok:true},{t:\"왕의 절대 권력\"},{t:"
+ },
+ "js_064": {
+  "t": "상인의 이익",
+  "ctx": "ok:true},{t:\"왕의 절대 권력\"},{t:\"과학의 진보\"},{t:"
+ },
+ "js_065": {
+  "t": "파스칼은 회심 이후 <b>기독교를 옹호하려는 목적</b>으로 『팡세』를 구상했어요. 그래서 이 책은 신앙을 논리적으로 변호하는 ‘변증(변론)’의 성격을 띱니다.",
+  "ctx": "권력\"},{t:\"과학의 진보\"},{t:\"상인의 이익\"}],    ctx:"
+ },
+ "js_066": {
+  "t": "기분전환",
+  "ctx": "론)’의 성격을 띱니다.\"},   {id:10, level:1, tag:"
+ },
+ "js_067": {
+  "t": "인간이 괴로운 진실을 잊으려 분주함에 몰두하는 것을 파스칼은 무엇이라 불렀나?",
+  "ctx": "니다.\"},   {id:10, level:1, tag:\"기분전환\", q:"
+ },
+ "js_068": {
+  "t": "기분전환(오락)",
+  "ctx": "몰두하는 것을 파스칼은 무엇이라 불렀나?\",    options:[{t:"
+ },
+ "js_069": {
+  "t": "노동",
+  "ctx": ",    options:[{t:\"기분전환(오락)\",ok:true},{t:"
+ },
+ "js_070": {
+  "t": "기도",
+  "ctx": "ons:[{t:\"기분전환(오락)\",ok:true},{t:\"노동\"},{t:"
+ },
+ "js_071": {
+  "t": "홀로 하는 깊은 명상",
+  "ctx": "기분전환(오락)\",ok:true},{t:\"노동\"},{t:\"기도\"},{t:"
+ },
+ "js_072": {
+  "t": "파스칼은 이것을 <b>기분전환(divertissement)</b>이라 불렀어요. 사냥·노름·전쟁 같은 소란으로 정작 중요한 물음에서 눈을 돌리는 인간의 습성을 가리킵니다.",
+  "ctx": "동\"},{t:\"기도\"},{t:\"홀로 하는 깊은 명상\"}],    ctx:"
+ },
+ "js_073": {
+  "t": "위키백과 「팡세」",
+  "ctx": "== */ const SOURCES = {   ko:    {label:"
+ },
+ "js_074": {
+  "t": "https://ko.wikipedia.org/wiki/팡세",
+  "ctx": "ES = {   ko:    {label:\"위키백과 「팡세」\", url:"
+ },
+ "js_075": {
+  "t": "위키백과 「블레즈 파스칼」",
+  "ctx": "ikipedia.org/wiki/팡세\"},   pascal:{label:"
+ },
+ "js_076": {
+  "t": "https://ko.wikipedia.org/wiki/블레즈_파스칼",
+  "ctx": ",   pascal:{label:\"위키백과 「블레즈 파스칼」\", url:"
+ },
+ "js_077": {
+  "t": "나무위키 「블레즈 파스칼」",
+  "ctx": "ntries/pascal-wager/\"},   namu:  {label:"
+ },
+ "js_078": {
+  "t": "https://namu.wiki/w/블레즈 파스칼",
+  "ctx": ",   namu:  {label:\"나무위키 「블레즈 파스칼」\", url:"
+ },
+ "js_079": {
+  "t": "SEP 「Blaise Pascal」 (스탠퍼드 철학사전)",
+  "ctx": "/namu.wiki/w/블레즈 파스칼\"},   ebs:   {label:"
+ },
+ "js_080": {
+  "t": "파스칼(1623~1662)은 수학·물리학의 천재이자 철학자·신학자였어요. 계산기를 발명하고 확률론의 기초를 놓았으며, 압력의 단위 ‘파스칼’에 이름을 남겼습니다.",
+  "ctx": "const EXTRA = {   1:{src:\"pascal\", note:"
+ },
+ "js_081": {
+  "t": "‘팡세’는 프랑스어로 ‘생각·단상’이에요. 원제는 『종교 및 기타 주제에 관한 파스칼 씨의 팡세』로, 편집자들이 붙인 이름이 굳어졌습니다.",
+  "ctx": "파스칼’에 이름을 남겼습니다.\"},   2:{src:\"ko\", note:"
+ },
+ "js_082": {
+  "t": "파스칼이 죽은 뒤 유족과 포르루아얄 지인들이 흩어진 원고를 모아 1670년에 펴냈어요. 완성된 저작이 아니라 사후에 편집된 유고집입니다.",
+  "ctx": "이 붙인 이름이 굳어졌습니다.\"},   3:{src:\"ko\", note:"
+ },
+ "js_083": {
+  "t": "‘생각하는 갈대’는 연약함(갈대)과 위대함(생각)을 한 문장에 겹쳐 놓은 표현이에요. 인간을 바라보는 파스칼의 시선이 이 한마디에 다 들어 있습니다.",
+  "ctx": " 편집된 유고집입니다.\"},   4:{src:\"pascal\", note:"
+ },
+ "js_084": {
+  "t": "갈대는 가장 약한 존재의 상징이에요. 우주의 티끌 같은 물 한 방울로도 인간은 죽을 수 있다는, 인간 조건의 연약함을 나타냅니다.",
+  "ctx": "에 다 들어 있습니다.\"},   5:{src:\"pascal\", note:"
+ },
+ "js_085": {
+  "t": "우주는 인간을 으스러뜨릴 수 있지만 그것을 알지 못합니다. 반면 인간은 자기가 죽는다는 것을 ‘안다’ — 이 앎이 인간을 우주보다 고귀하게 만든다는 논리입니다.",
+  "ctx": " 연약함을 나타냅니다.\"},   6:{src:\"pascal\", note:"
+ },
+ "js_086": {
+  "t": "파스칼은 열여섯에 원뿔곡선 정리를 냈고, 페르마와 편지를 주고받으며 확률론을 열었어요. 진공 실험, 계산기 발명 등 과학사에도 큰 자취를 남겼습니다.",
+  "ctx": "하게 만든다는 논리입니다.\"},   7:{src:\"namu\", note:"
+ },
+ "js_087": {
+  "t": "‘파스칼의 내기’는 신의 존재를 증명하는 논증이 아니라, 믿는 것이 ‘이득’이라는 실용적 논증이에요. 삼각형·원리는 이름만 같은 그의 수학·물리 업적입니다.",
+  "ctx": " 큰 자취를 남겼습니다.\"},   8:{src:\"wager\", note:"
+ },
+ "js_088": {
+  "t": "파스칼은 회심 뒤 기독교를 변호하는 큰 책을 구상했고, 『팡세』는 그 미완의 초고예요. 그래서 곳곳에 변증(변론)의 논리가 배어 있습니다.",
+  "ctx": " 그의 수학·물리 업적입니다.\"},   9:{src:\"ko\", note:"
+ },
+ "js_089": {
+  "t": "기분전환(divertissement)은 파스칼 사상의 핵심 개념이에요. 인간은 자기 처지의 비참을 직시하기 두려워 끊임없이 소란과 분주함으로 도망친다는 것입니다.",
+  "ctx": ")의 논리가 배어 있습니다.\"},   10:{src:\"en\", note:"
+ },
+ "js_090": {
+  "t": "미완의 단상",
+  "ctx": "*/ const MILESTONES = [   {at:0,  label:"
+ },
+ "js_091": {
+  "t": "두 무한 사이",
+  "ctx": "t:6,  label:\"생각하는 갈대\"},   {at:12, label:"
+ },
+ "js_092": {
+  "t": "기분전환의 함정",
+  "ctx": "t:12, label:\"두 무한 사이\"},   {at:18, label:"
+ },
+ "js_093": {
+  "t": "마음과 내기",
+  "ctx": ":18, label:\"기분전환의 함정\"},   {at:24, label:"
+ },
+ "js_094": {
+  "t": "숨은 신 앞에서",
+  "ctx": "at:24, label:\"마음과 내기\"},   {at:30, label:"
+ },
+ "js_095": {
+  "t": "보통",
+  "ctx": "]; const DIFF_LABEL = {1:[\"쉬움\",\"l1\"],2:["
+ },
+ "js_096": {
+  "t": "어려움",
+  "ctx": "LABEL = {1:[\"쉬움\",\"l1\"],2:[\"보통\",\"l2\"],3:["
+ },
+ "js_097": {
+  "t": "· 복습",
+  "ctx": "ds.size+' / '+TOTAL_Q + (attempts[id] ? "
+ },
+ "js_098": {
+  "t": "🎯 정답!",
+  "ctx": ")      verdict.textContent = firstTry ? "
+ },
+ "js_099": {
+  "t": "✅ 이제 익혔어요!",
+  "ctx": "dict.textContent = firstTry ? '🎯 정답!' : "
+ },
+ "js_100": {
+  "t": "❌ 다시 도전!",
+  "ctx": "ing.push(id);     verdict.textContent = "
+ },
+ "js_101": {
+  "t": "↻ 이 문제는 뒤에서 다시 나옵니다",
+  "ctx": "getElementById('requeue').textContent = "
+ },
+ "js_102": {
+  "t": "인간은 자연에서 가장 연약한 갈대이지만, 자신이 죽는다는 것을 아는 ‘생각하는 갈대’입니다. 위대함은 바로 그 생각에 있습니다.",
+  "ctx": " CONCEPTS = [   {ic:\"🌾\", h:\"생각하는 갈대\", p:"
+ },
+ "js_103": {
+  "t": "신이 있다면 믿는 자는 무한을 얻고, 없더라도 잃을 것은 유한합니다. 그러니 믿는 쪽에 거는 것이 합리적이라는 실용적 논증입니다.",
+  "ctx": "rc:\"pascal\"},   {ic:\"🎲\", h:\"파스칼의 내기\", p:"
+ },
+ "js_104": {
+  "t": "두 무한 사이의 인간",
+  "ctx": "용적 논증입니다.\", src:\"wager\"},   {ic:\"♾️\", h:"
+ },
+ "js_105": {
+  "t": "무한히 큰 우주와 무한히 작은 세계, 그 어느 쪽도 다 헤아리지 못하는 중간자. 인간은 무와 무한 사이에 낀 존재입니다.",
+  "ctx": "wager\"},   {ic:\"♾️\", h:\"두 무한 사이의 인간\", p:"
+ },
+ "js_106": {
+  "t": "기분전환(divertissement)",
+  "ctx": " 사이에 낀 존재입니다.\", src:\"en\"},   {ic:\"🎭\", h:"
+ },
+ "js_107": {
+  "t": "사냥·노름·소란으로 분주함을 채우는 까닭은, 멈추는 순간 마주할 자기 처지의 비참을 피하고 싶어서입니다.",
+  "ctx": "   {ic:\"🎭\", h:\"기분전환(divertissement)\", p:"
+ },
+ "js_108": {
+  "t": "마음의 논리",
+  "ctx": " 피하고 싶어서입니다.\", src:\"en\"},   {ic:\"❤️\", h:"
+ },
+ "js_109": {
+  "t": "마음은 이성이 알지 못하는 자기 나름의 이유를 갖고 있습니다. 신앙과 사랑은 논증이 아니라 마음으로 체득됩니다.",
+  "ctx": "\", src:\"en\"},   {ic:\"❤️\", h:\"마음의 논리\", p:"
+ },
+ "js_110": {
+  "t": "비참과 위대",
+  "ctx": " 마음으로 체득됩니다.\", src:\"ko\"},   {ic:\"⚖️\", h:"
+ },
+ "js_111": {
+  "t": "인간은 천사도 짐승도 아닌, 비참과 위대가 뒤섞인 모순입니다. 진흙에 발을 담근 채 무한을 갈망하는 존재입니다.",
+  "ctx": "\", src:\"ko\"},   {ic:\"⚖️\", h:\"비참과 위대\", p:"
+ },
+ "js_112": {
+  "t": "숨은 신",
+  "ctx": "하는 존재입니다.\", src:\"pascal\"},   {ic:\"🙈\", h:"
+ },
+ "js_113": {
+  "t": "신은 찾는 이에겐 충분한 빛을, 외면하는 이에겐 충분한 어둠을 남깁니다. 신앙은 강요가 아니라 마음의 방향에 달려 있습니다.",
+  "ctx": ", src:\"pascal\"},   {ic:\"🙈\", h:\"숨은 신\", p:"
+ },
+ "js_114": {
+  "t": "기하학의 정신·섬세의 정신",
+  "ctx": "방향에 달려 있습니다.\", src:\"ebs\"},   {ic:\"📐\", h:"
+ },
+ "js_115": {
+  "t": "원리에서 차근차근 증명하는 사고와, 미묘함을 한눈에 직관하는 사고. 파스칼은 두 정신이 모두 필요하다고 보았습니다.",
+  "ctx": "ebs\"},   {ic:\"📐\", h:\"기하학의 정신·섬세의 정신\", p:"
+ },
+ "js_116": {
+  "t": "여는 글",
+  "ctx": "/* 목차(클릭하면 요약 오픈) */ const TOC = [   {n:"
+ },
+ "js_117": {
+  "t": "「단상」이라는 미완의 책",
+  "ctx": " 요약 오픈) */ const TOC = [   {n:\"여는 글\", t:"
+ },
+ "js_118": {
+  "t": "파스칼이 죽은 뒤 1670년, 흩어진 낱장 메모들을 모아 펴낸 유고집입니다.",
+  "ctx": ":\"「단상」이라는 미완의 책\", beats:[     {e:\"📌\", x:"
+ },
+ "js_119": {
+  "t": "회심 이후 기독교를 변호하려던 큰 책의 미완성 초고입니다.",
+  "ctx": "낱장 메모들을 모아 펴낸 유고집입니다.\"},     {e:\"✝️\", x:"
+ },
+ "js_120": {
+  "t": "미완성이라 편집자마다 순서가 달라, 브런슈빅·라퓌마 등 여러 판본이 있습니다.",
+  "ctx": " 변호하려던 큰 책의 미완성 초고입니다.\"},     {e:\"🔀\", x:"
+ },
+ "js_121": {
+  "t": "1654년 ‘불의 밤’이라 불리는 강렬한 종교 체험이 그 밑바닥에 흐릅니다.",
+  "ctx": "런슈빅·라퓌마 등 여러 판본이 있습니다.\"},     {e:\"🔥\", x:"
+ },
+ "js_122": {
+  "t": "1부",
+  "ctx": "는 강렬한 종교 체험이 그 밑바닥에 흐릅니다.\"},   ]},   {n:"
+ },
+ "js_123": {
+  "t": "인간의 비참 — 기분전환이라는 도피",
+  "ctx": " 체험이 그 밑바닥에 흐릅니다.\"},   ]},   {n:\"1부\", t:"
+ },
+ "js_124": {
+  "t": "인간은 사냥·노름·전쟁 같은 분주함으로 끊임없이 자기를 잊으려 합니다.",
+  "ctx": "비참 — 기분전환이라는 도피\", beats:[     {e:\"🎭\", x:"
+ },
+ "js_125": {
+  "t": "모든 불행은 방 안에 홀로 조용히 있을 줄 모르는 데서 비롯됩니다.",
+  "ctx": "주함으로 끊임없이 자기를 잊으려 합니다.\"},     {e:\"🚪\", x:"
+ },
+ "js_126": {
+  "t": "가장 행복해 보이는 왕조차 광대와 오락 없이는 견디지 못합니다.",
+  "ctx": "조용히 있을 줄 모르는 데서 비롯됩니다.\"},     {e:\"👑\", x:"
+ },
+ "js_127": {
+  "t": "소란이 멈추면 곧 죽음과 공허, 자기 처지의 비참이 드러나기 때문입니다.",
+  "ctx": " 광대와 오락 없이는 견디지 못합니다.\"},     {e:\"🕳️\", x:"
+ },
+ "js_128": {
+  "t": "2부",
+  "ctx": "허, 자기 처지의 비참이 드러나기 때문입니다.\"},   ]},   {n:"
+ },
+ "js_129": {
+  "t": "인간의 위대 — 생각하는 갈대",
+  "ctx": "의 비참이 드러나기 때문입니다.\"},   ]},   {n:\"2부\", t:"
+ },
+ "js_130": {
+  "t": "인간은 우주에서 가장 연약한 한 줄기 갈대에 지나지 않습니다.",
+  "ctx": "간의 위대 — 생각하는 갈대\", beats:[     {e:\"🌾\", x:"
+ },
+ "js_131": {
+  "t": "그러나 자신이 죽는다는 것을 ‘아는’ 갈대이기에 우주보다 고귀합니다.",
+  "ctx": "연약한 한 줄기 갈대에 지나지 않습니다.\"},     {e:\"🧠\", x:"
+ },
+ "js_132": {
+  "t": "비참과 위대가 한 몸에 뒤섞인 모순, 그것이 인간의 참모습입니다.",
+  "ctx": "아는’ 갈대이기에 우주보다 고귀합니다.\"},     {e:\"⚖️\", x:"
+ },
+ "js_133": {
+  "t": "위대함은 힘이 아니라 오직 ‘생각’에 있다고 파스칼은 말합니다.",
+  "ctx": "섞인 모순, 그것이 인간의 참모습입니다.\"},     {e:\"💡\", x:"
+ },
+ "js_134": {
+  "t": "3부",
+  "ctx": "라 오직 ‘생각’에 있다고 파스칼은 말합니다.\"},   ]},   {n:"
+ },
+ "js_135": {
+  "t": "두 무한 사이 — 이성의 한계",
+  "ctx": "’에 있다고 파스칼은 말합니다.\"},   ]},   {n:\"3부\", t:"
+ },
+ "js_136": {
+  "t": "무한히 큰 우주와 무한히 작은 세계 사이에 인간은 놓여 있습니다.",
+  "ctx": " 무한 사이 — 이성의 한계\", beats:[     {e:\"🔭\", x:"
+ },
+ "js_137": {
+  "t": "어느 쪽도 다 헤아리지 못하는, 무와 무한 사이의 중간자입니다.",
+  "ctx": "작은 세계 사이에 인간은 놓여 있습니다.\"},     {e:\"📏\", x:"
+ },
+ "js_138": {
+  "t": "클레오파트라의 코 하나가 역사를 바꾸듯, 이성은 우연 앞에 무력합니다.",
+  "ctx": "못하는, 무와 무한 사이의 중간자입니다.\"},     {e:\"👃\", x:"
+ },
+ "js_139": {
+  "t": "이성의 한계를 아는 것 — 그것이 이성의 마지막 걸음입니다.",
+  "ctx": " 바꾸듯, 이성은 우연 앞에 무력합니다.\"},     {e:\"🤔\", x:"
+ },
+ "js_140": {
+  "t": "4부",
+  "ctx": "아는 것 — 그것이 이성의 마지막 걸음입니다.\"},   ]},   {n:"
+ },
+ "js_141": {
+  "t": "마음과 내기 — 믿음으로의 도약",
+  "ctx": "것이 이성의 마지막 걸음입니다.\"},   ]},   {n:\"4부\", t:"
+ },
+ "js_142": {
+  "t": "마음은 이성이 알지 못하는 자기 나름의 이유를 갖고 있습니다.",
+  "ctx": " 내기 — 믿음으로의 도약\", beats:[     {e:\"❤️\", x:"
+ },
+ "js_143": {
+  "t": "신이 있다면 무한을 얻고 없어도 잃을 것은 적으니, 믿는 쪽에 걸라 합니다.",
+  "ctx": "하는 자기 나름의 이유를 갖고 있습니다.\"},     {e:\"🎲\", x:"
+ },
+ "js_144": {
+  "t": "습관은 제2의 천성 — 반복이 이성보다 먼저 믿음을 길러 냅니다.",
+  "ctx": " 것은 적으니, 믿는 쪽에 걸라 합니다.\"},     {e:\"🙏\", x:"
+ },
+ "js_145": {
+  "t": "손익 계산이 참된 믿음이냐는 비판도 함께 따라다닙니다.",
+  "ctx": "복이 이성보다 먼저 믿음을 길러 냅니다.\"},     {e:\"🧩\", x:"
+ },
+ "js_146": {
+  "t": "5부",
+  "ctx": "이 참된 믿음이냐는 비판도 함께 따라다닙니다.\"},   ]},   {n:"
+ },
+ "js_147": {
+  "t": "숨은 신 — 변증의 결론",
+  "ctx": "냐는 비판도 함께 따라다닙니다.\"},   ]},   {n:\"5부\", t:"
+ },
+ "js_148": {
+  "t": "신은 찾는 이에겐 빛을, 외면하는 이에겐 어둠을 남기는 ‘숨은 신’입니다.",
+  "ctx": ":\"숨은 신 — 변증의 결론\", beats:[     {e:\"🙈\", x:"
+ },
+ "js_149": {
+  "t": "신을 아는 것은 논증이 아니라 마음으로 느끼는 일이라고 말합니다.",
+  "ctx": "이에겐 어둠을 남기는 ‘숨은 신’입니다.\"},     {e:\"🧭\", x:"
+ },
+ "js_150": {
+  "t": "인간의 모순은 오직 신 안에서만 풀린다는 것이 변증의 결론입니다.",
+  "ctx": "니라 마음으로 느끼는 일이라고 말합니다.\"},     {e:\"⛪\", x:"
+ },
+ "js_151": {
+  "t": "미완의 단상이지만, 인간을 응시하는 물음만으로도 고전이 되었습니다.",
+  "ctx": "에서만 풀린다는 것이 변증의 결론입니다.\"},     {e:\"📖\", x:"
+ },
+ "js_152": {
+  "t": "클레오파트라의 코",
+  "ctx": "해볼 사례 3 */ const CASES = [   {ic:\"👃\", t:"
+ },
+ "js_153": {
+  "t": "파스칼은 ‘클레오파트라의 코가 조금만 낮았더라면 세계의 온 표면이 달라졌을 것’이라 적었습니다. 한 여인의 외모 같은 사소한 우연이 로마의 운명과 세계사를 뒤흔들 수 있다는 것입니다.",
+  "ctx": "t CASES = [   {ic:\"👃\", t:\"클레오파트라의 코\", d:"
+ },
+ "js_154": {
+  "t": "거대한 역사가 하찮아 보이는 우연에 좌우된다는 이 예는, 모든 것을 계산으로 꿰뚫을 수 있다는 이성의 자만을 정면으로 흔듭니다.",
+  "ctx": " 우연이 로마의 운명과 세계사를 뒤흔들 수 있다는 것입니다.\", why:"
+ },
+ "js_155": {
+  "t": "광대가 필요한 왕",
+  "ctx": " 있다는 이성의 자만을 정면으로 흔듭니다.\"},   {ic:\"👑\", t:"
+ },
+ "js_156": {
+  "t": "파스칼은 가장 부럽다는 왕조차 홀로 남으면 견디지 못해, 광대와 사냥과 놀이로 자기를 끊임없이 채운다고 보았습니다. 권력도 오락 없이는 공허를 막지 못합니다.",
+  "ctx": "으로 흔듭니다.\"},   {ic:\"👑\", t:\"광대가 필요한 왕\", d:"
+ },
+ "js_157": {
+  "t": "가진 것이 가장 많은 사람조차 자기 자신과 홀로 있기를 두려워한다는 사실은, 기분전환이 인간의 보편적 조건임을 날카롭게 드러냅니다.",
+  "ctx": "다고 보았습니다. 권력도 오락 없이는 공허를 막지 못합니다.\", why:"
+ },
+ "js_158": {
+  "t": "신을 두고 거는 내기",
+  "ctx": "간의 보편적 조건임을 날카롭게 드러냅니다.\"},   {ic:\"🎲\", t:"
+ },
+ "js_159": {
+  "t": "파스칼은 신의 존재를 증명하는 대신, 하나의 내기로 제안합니다. 믿고 신이 있으면 무한한 것을 얻고, 없어도 잃을 것은 유한하다 — 그러니 믿는 쪽에 걸라는 것입니다.",
+  "ctx": "드러냅니다.\"},   {ic:\"🎲\", t:\"신을 두고 거는 내기\", d:"
+ },
+ "js_160": {
+  "t": "신앙을 확률과 기대값의 문제로 옮겨 놓은 이 논증은, 400년 뒤 의사결정 이론에까지 영향을 준 동시에 ‘계산된 믿음’ 논쟁을 낳았습니다.",
+  "ctx": " 잃을 것은 유한하다 — 그러니 믿는 쪽에 걸라는 것입니다.\", why:"
+ },
+ "js_161": {
+  "t": "당신은 지금 무엇으로 ‘기분전환’하며 정작 중요한 물음을 미루고 있습니까?",
+  "ctx": "책이 우리에게 던지는 질문 3 */ const ASKS = [   {q:"
+ },
+ "js_162": {
+  "t": "영상·알림·바쁨으로 채운 하루에서, 홀로 조용히 있을 때 떠오르는 물음이 무엇인지 떠올려 보세요.",
+  "ctx": " 무엇으로 ‘기분전환’하며 정작 중요한 물음을 미루고 있습니까?\", h:"
+ },
+ "js_163": {
+  "t": "이성으로 증명되지 않는 것을 ‘마음’으로 믿어도 괜찮을까요?",
+  "ctx": "조용히 있을 때 떠오르는 물음이 무엇인지 떠올려 보세요.\"},   {q:"
+ },
+ "js_164": {
+  "t": "사랑·신뢰·신앙처럼 논증 밖에 있는 앎이 우리 삶에서 어떤 자리를 차지하는지 생각해 보세요.",
+  "ctx": ":\"이성으로 증명되지 않는 것을 ‘마음’으로 믿어도 괜찮을까요?\", h:"
+ },
+ "js_165": {
+  "t": "확률로 신을 선택하는 ‘내기’는 진정한 믿음이라 할 수 있을까요?",
+  "ctx": "앎이 우리 삶에서 어떤 자리를 차지하는지 생각해 보세요.\"},   {q:"
+ },
+ "js_166": {
+  "t": "손익 계산에서 출발한 마음이 어떻게 참된 믿음으로 바뀔 수 있는지(혹은 없는지) 되물어 보세요.",
+  "ctx": "률로 신을 선택하는 ‘내기’는 진정한 믿음이라 할 수 있을까요?\", h:"
+ },
+ "js_167": {
+  "t": "🕯️ 파스칼의 밤을 함께 지샌 사람",
+  "ctx": ");   let rank, sub;   if(acc>=90){ rank="
+ },
+ "js_168": {
+  "t": "팡세의 심연까지 읽어 냈습니다",
+  "ctx": "c>=90){ rank='🕯️ 파스칼의 밤을 함께 지샌 사람'; sub="
+ },
+ "js_169": {
+  "t": "🌾 생각하는 갈대",
+  "ctx": "까지 읽어 냈습니다'; }   else if(acc>=75){ rank="
+ },
+ "js_170": {
+  "t": "핵심을 거의 다 잡았어요",
+  "ctx": "else if(acc>=75){ rank='🌾 생각하는 갈대'; sub="
+ },
+ "js_171": {
+  "t": "🎲 내기의 문턱에 선 사람",
+  "ctx": " 거의 다 잡았어요'; }   else if(acc>=55){ rank="
+ },
+ "js_172": {
+  "t": "뼈대를 익혔습니다 — 한 번 더!",
+  "ctx": "if(acc>=55){ rank='🎲 내기의 문턱에 선 사람'; sub="
+ },
+ "js_173": {
+  "t": "📖 이제 첫 단상을 펼친 사람",
+  "ctx": "b='뼈대를 익혔습니다 — 한 번 더!'; }   else { rank="
+ },
+ "js_174": {
+  "t": "반복할수록 점수가 오릅니다",
+  "ctx": "}   else { rank='📖 이제 첫 단상을 펼친 사람'; sub="
+ },
+ "js_175": {
+  "t": "완독 리포트",
+  "ctx": "onst fname = ((h2 && h2.textContent) || "
+ },
+ "js_176": {
+  "t": "한눈에 보기",
+  "ctx": "&& h2.textContent) || '완독 리포트').replace("
+ },
+ "js_177": {
+  "t": "리포트.pdf",
+  "ctx": "'완독 리포트').replace('한눈에 보기','').trim() + "
+ },
+ "js_178": {
+  "t": "📄 PDF 만드는 중…",
+  "ctx": "tn){ btn.disabled=true; btn.textContent="
+ },
+ "js_179": {
+  "t": "PDF 생성 중 문제가 발생했어요. 이 HTML 파일을 내려받아 브라우저에서 직접 열고 다시 눌러 주세요.",
+  "ctx": "     }   }).catch(function(){     alert("
+ },
+ "js_180": {
+  "t": "무료로는 <b>",
+  "ctx": "t = TOTAL_Q - fl;       msg.innerHTML = "
+ },
+ "js_181": {
+  "t": "문항</b>까지 풀 수 있어요.",
+  "ctx": "fl;       msg.innerHTML = '무료로는 <b>'+fl+"
+ },
+ "js_182": {
+  "t": "나머지 <b>",
+  "ctx": " <b>'+fl+'문항</b>까지 풀 수 있어요. ' +         "
+ },
+ "js_183": {
+  "t": "문항</b>과 <b>완독 요약 리포트</b>는 구독자 전용입니다.",
+  "ctx": ">까지 풀 수 있어요. ' +         '나머지 <b>'+rest+"
+ },
+ "js_184": {
+  "t": "지금까지 쌓은 <b>사색의 여정 진행도</b>는 위 게이지에 그대로 남아 있어요.",
+  "ctx": "b>완독 요약 리포트</b>는 구독자 전용입니다. ' +         "
+ },
+ "js_185": {
+  "t": "<h3>완독 리포트 전체는 구독자 전용이에요</h3>",
+  "ctx": " = '<div class=\"lk-ic\">🔒</div>' +       "
+ },
+ "js_186": {
+  "t": "<p>생각의 사슬과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>",
+  "ctx": "'<h3>완독 리포트 전체는 구독자 전용이에요</h3>' +       "
+ },
+ "js_187": {
+  "t": "목차 요약 · 사례 · 질문 · 약점 복습 · PDF 저장은 구독하면 모두 열립니다.</p>",
+  "ctx": "과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>' +       "
+ },
+ "js_188": {
+  "t": "\" target=\"_blank\" rel=\"noopener\">🔑 구독하고 완독 리포트 전체 열기</a>",
+  "ctx": "     '<a class=\"cta\" href=\"' + _sub() + "
+ },
+ "js_189": {
+  "t": "팡세",
+  "ctx": " 250, '120px serif', '#e0b862');   ctxt("
+ },
+ "js_190": {
+  "t": "블레즈 파스칼 · 기독교 변증의 고전 마스터 퀴즈",
+  "ctx": "to Serif KR\",serif', '#ffffff');   ctxt("
+ },
+ "js_191": {
+  "t": "📚 매일 새 책 퀴즈  ·",
+  "ctx": "(/^https?:\\/\\//,'') : '';   if(su) ctxt("
+ },
+ "js_192": {
+  "t": "팡세_퀴즈결과.png",
+  "ctx": "nt('a');     a.href = url; a.download = "
+ },
+ "js_193": {
+  "t": "💌 VIP 초대 —",
+  "ctx": "ursor:pointer;\";     d.textContent=(vip?"
+ },
+ "js_194": {
+  "t": "🎁 지금 이 책 풀버전 무료 오픈 중!",
+  "ctx": "\";     d.textContent=(vip?\"💌 VIP 초대 — \":"
+ },
+ "js_195": {
+  "t": "전체판(잠금 없음)으로 이동 →",
+  "ctx": "\"💌 VIP 초대 — \":\"🎁 지금 이 책 풀버전 무료 오픈 중! \")+"
+ },
+ "jst_001": {
+  "t": "무료로 풀 수 있는 문항 수",
+  "ctx": "    freeLimit: 10,           // teaser: "
+ },
+ "jst_002": {
+  "t": "아직",
+  "ctx": "3:30};    let pending = [];          // "
+ },
+ "jst_003": {
+  "t": "처음으로 정답",
+  "ctx": "};    let pending = [];          // 아직 ‘"
+ },
+ "jst_004": {
+  "t": "을 못 낸 문항 큐",
+  "ctx": "t pending = [];          // 아직 ‘처음으로 정답’"
+ },
+ "jst_005": {
+  "t": "앞에서 꺼냄",
+  "ctx": "[];          // 아직 ‘처음으로 정답’을 못 낸 문항 큐 ("
+ },
+ "jst_006": {
+  "t": "시도 횟수",
+  "ctx": "(); let attempts = {};         // id -> "
+ },
+ "jst_007": {
+  "t": "첫 시도에 틀린 문항",
+  "ctx": " 0; let firstWrongIds = new Set();   // "
+ },
+ "jst_008": {
+  "t": "약점",
+  "ctx": "rongIds = new Set();   // 첫 시도에 틀린 문항 = "
+ },
+ "jst_009": {
+  "t": "집중 복습 대상",
+  "ctx": "gIds = new Set();   // 첫 시도에 틀린 문항 = 약점("
+ },
+ "jst_010": {
+  "t": "세션 내 최고 점수",
+  "ctx": "r = null; let bestScore = 0;         // "
+ },
+ "jst_011": {
+  "t": "재도전 비교용,",
+  "ctx": "t bestScore = 0;         // 세션 내 최고 점수 ("
+ },
+ "jst_012": {
+  "t": "미사용",
+  "ctx": "   // 세션 내 최고 점수 (재도전 비교용, localStorage "
+ },
+ "jst_013": {
+  "t": "복습 정답은 절반 점수",
+  "ctx": " gain = Math.round(gain/2);          // "
+ },
+ "jst_014": {
+  "t": "콤보 보너스",
+  "ctx": " (streak>=2) ? (streak-1)*3 : 0;     // "
+ },
+ "jst_015": {
+  "t": "가 아니어도 최종적으로 익힌 것으로 카운트",
+  "ctx": " masteredIds.add(id);          // ‘처음으로’"
+ },
+ "jst_016": {
+  "t": "큐에서 제거",
+  "ctx": "운트     pending.shift();              // "
+ },
+ "jst_017": {
+  "t": "연속 정답!",
+  "ctx": "      comboEl.textContent = `🔥 ${streak}"
+ },
+ "jst_018": {
+  "t": "보너스",
+  "ctx": "tContent = `🔥 ${streak}연속 정답! +${bonus} "
+ },
+ "jst_019": {
+  "t": "약점으로 기록",
+  "ctx": "f(firstTry) firstWrongIds.add(id);   // "
+ },
+ "jst_020": {
+  "t": "왜 생각해볼 만한가",
+  "ctx": "= >${c.d}</div>       <div class= >💭 <b>"
+ },
+ "jst_021": {
+  "t": "첫 시도에 모두 정답!",
+  "ctx": " ;     list.innerHTML = `<div class= >🌟 "
+ },
+ "jst_022": {
+  "t": "약점이 없어 따로 복습할 항목이 없습니다. 멋져요.",
+  "ctx": "TML = `<div class= >🌟 첫 시도에 모두 정답!<span>"
+ },
+ "jst_023": {
+  "t": "개",
+  "ctx": " {     cnt.textContent = `(${ids.length}"
+ },
+ "jst_024": {
+  "t": "정답",
+  "ctx": "= >Q. ${q.q}</div>         <div class= >"
+ },
+ "jst_025": {
+  "t": "최고 점수 경신!",
+  "ctx": "re;     note.innerHTML = prev>0 ? `🏆 <b>"
+ },
+ "jst_026": {
+  "t": "이전",
+  "ctx": "nerHTML = prev>0 ? `🏆 <b>최고 점수 경신!</b> ("
+ },
+ "jst_027": {
+  "t": "점",
+  "ctx": "prev>0 ? `🏆 <b>최고 점수 경신!</b> (이전 ${prev}"
+ },
+ "jst_028": {
+  "t": "첫 기록",
+  "ctx": "`🏆 <b>최고 점수 경신!</b> (이전 ${prev}점)` : `🏆 "
+ },
+ "jst_029": {
+  "t": "다시 도전해 깨보세요!",
+  "ctx": "${prev}점)` : `🏆 첫 기록 <b>${score}점</b> — "
+ },
+ "jst_030": {
+  "t": "현재 최고 점수",
+  "ctx": "보세요!`;   } else {     note.innerHTML = `"
+ },
+ "jst_031": {
+  "t": "이번엔",
+  "ctx": "HTML = `현재 최고 점수 <b>${bestScore}점</b> · "
+ }
+}

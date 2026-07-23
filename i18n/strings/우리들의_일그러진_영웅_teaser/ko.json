@@ -1,0 +1,1230 @@
+{
+ "_meta": {
+  "source": "apps/우리들의_일그러진_영웅_teaser.html",
+  "slug": "우리들의_일그러진_영웅_teaser"
+ },
+ "title_001": {
+  "t": "우리들의 일그러진 영웅 도파민 마스터 퀴즈 · 이문열",
+  "ctx": "<title>"
+ },
+ "html_001": {
+  "t": "이문열 · 1987 · 이상문학상 수상 정치우화",
+  "ctx": "class=\"hero\">       <div class=\"eyebrow\""
+ },
+ "html_002": {
+  "t": "교실 속 작은 독재, 그 앞에 선 우리 모두의 초상",
+  "ctx": "ss=\"p3\">⚖️</span></div>       <h1><small"
+ },
+ "html_003": {
+  "t": "우리들의 일그러진 영웅 마스터 퀴즈",
+  "ctx": "mall>교실 속 작은 독재, 그 앞에 선 우리 모두의 초상</small"
+ },
+ "html_004": {
+  "t": "“너희는 불의한 힘 앞에 굴복하고도 부끄러운 줄 몰랐다.”",
+  "ctx": " 영웅 마스터 퀴즈</h1>       <div class=\"quote\""
+ },
+ "html_005": {
+  "t": "— 소설 속 새 담임 선생님의 꾸짖음",
+  "ctx": "한 힘 앞에 굴복하고도 부끄러운 줄 몰랐다.”<br>         <b"
+ },
+ "html_006": {
+  "t": "한병태와 엄석대, 그리고 이 소설의 인물·사건·주제를",
+  "ctx": " 새 담임 선생님의 꾸짖음</b>       </div>       <p"
+ },
+ "html_007": {
+  "t": "30개의 퀴즈",
+  "ctx": "     <p>한병태와 엄석대, 그리고 이 소설의 인물·사건·주제를 <b"
+ },
+ "html_008": {
+  "t": "로 익힙니다.\n        쉬운 것부터 시작해 점점 어려워지고,",
+  "ctx": "와 엄석대, 그리고 이 소설의 인물·사건·주제를 <b>30개의 퀴즈</b"
+ },
+ "html_009": {
+  "t": "틀린 문제는 맞힐 때까지 다시 돌아옵니다.",
+  "ctx": ">로 익힙니다.         쉬운 것부터 시작해 점점 어려워지고, <b"
+ },
+ "html_010": {
+  "t": "총",
+  "ctx": "s=\"meta-row\">         <span class=\"chip\""
+ },
+ "html_011": {
+  "t": "30문항",
+  "ctx": "ta-row\">         <span class=\"chip\">총 <b"
+ },
+ "html_012": {
+  "t": "쉬움 → 어려움",
+  "ctx": "문항</b></span>         <span class=\"chip\""
+ },
+ "html_013": {
+  "t": "실시간",
+  "ctx": "어려움</span>         <span class=\"chip\"><b"
+ },
+ "html_014": {
+  "t": "석대 왕국의 흥망",
+  "ctx": "an>         <span class=\"chip\"><b>실시간</b"
+ },
+ "html_015": {
+  "t": "문제마다",
+  "ctx": "왕국의 흥망</span>         <span class=\"chip\""
+ },
+ "html_016": {
+  "t": "쉬운 해설",
+  "ctx": "span>         <span class=\"chip\">문제마다 <b"
+ },
+ "html_017": {
+  "t": "교실로 들어가기 →",
+  "ctx": "=\"btn btn-primary\" onclick=\"startQuiz()\""
+ },
+ "html_018": {
+  "t": "점수",
+  "ctx": "   <div class=\"stat\"><span class=\"label\""
+ },
+ "html_019": {
+  "t": "연속 정답",
+  "ctx": "align-items:center;\"><span class=\"label\""
+ },
+ "html_020": {
+  "t": "마스터",
+  "ctx": "ign-items:flex-end;\"><span class=\"label\""
+ },
+ "html_021": {
+  "t": "전학 ←",
+  "ctx": "\">         <div class=\"axis-label\"><span"
+ },
+ "html_022": {
+  "t": "석대 왕국의 흥망 ·",
+  "ctx": "lass=\"axis-label\"><span>전학 ←</span><span"
+ },
+ "html_023": {
+  "t": "→ 몰락",
+  "ctx": "의 흥망 · <b id=\"pctTxt\">0%</b></span><span"
+ },
+ "html_024": {
+  "t": "쉬움",
+  "ctx": "d\">         <span class=\"diff\" id=\"diff\""
+ },
+ "html_025": {
+  "t": "다음 →",
+  "ctx": "y\" id=\"nextBtn\" onclick=\"nextQuestion()\""
+ },
+ "html_026": {
+  "t": "여기까지가 무료 미리보기예요",
+  "ctx": ">     <div class=\"lk-ic\">🔒</div>     <h3"
+ },
+ "html_027": {
+  "t": "🔑 구독하고 전체 열기",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_028": {
+  "t": "요약 리포트 미리보기 →",
+  "ctx": "class=\"cta ghost\" onclick=\"openReport()\""
+ },
+ "html_029": {
+  "t": "교실의 진실을 꿰뚫은 사람",
+  "ctx": ">       <div class=\"rank\" id=\"rankTitle\""
+ },
+ "html_030": {
+  "t": "최종 점수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_031": {
+  "t": "첫 시도 정답률",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_032": {
+  "t": "최고 연속 정답",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_033": {
+  "t": "총 도전 횟수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_034": {
+  "t": "📖 전체 요약 리포트 보기",
+  "ctx": "\"btn btn-primary\" onclick=\"openReport()\""
+ },
+ "html_035": {
+  "t": "🖼 결과 카드 저장",
+  "ctx": "btn btn-ghost\" onclick=\"makeShareCard()\""
+ },
+ "html_036": {
+  "t": "다시 도전 ↻",
+  "ctx": "ss=\"btn btn-ghost\" onclick=\"startQuiz()\""
+ },
+ "html_037": {
+  "t": "처음으로",
+  "ctx": "class=\"btn btn-ghost\" onclick=\"goHome()\""
+ },
+ "html_038": {
+  "t": "완독 리포트 · INFOGRAPHIC",
+  "ctx": "s=\"rep-hero\">       <div class=\"eyebrow\""
+ },
+ "html_039": {
+  "t": "우리들의 일그러진 영웅 한눈에 보기",
+  "ctx": "ow\">완독 리포트 · INFOGRAPHIC</div>       <h2"
+ },
+ "html_040": {
+  "t": "소설 전체를",
+  "ctx": "   <h2>우리들의 일그러진 영웅 한눈에 보기</h2>       <p"
+ },
+ "html_041": {
+  "t": "‘왕국의 흥망’",
+  "ctx": "의 일그러진 영웅 한눈에 보기</h2>       <p>소설 전체를 <b"
+ },
+ "html_042": {
+  "t": "하나로 꿰면 절대 안 잊습니다. 모든 것의 발단은",
+  "ctx": "에 보기</h2>       <p>소설 전체를 <b>‘왕국의 흥망’</b"
+ },
+ "html_043": {
+  "t": "낯선 교실로의 전학",
+  "ctx": "의 흥망’</b> 하나로 꿰면 절대 안 잊습니다. 모든 것의 발단은 <b"
+ },
+ "html_044": {
+  "t": "입니다.",
+  "ctx": "꿰면 절대 안 잊습니다. 모든 것의 발단은 <b>낯선 교실로의 전학</b"
+ },
+ "html_045": {
+  "t": "발단",
+  "ctx": "<div class=\"ch step s0\"><span class=\"cn\""
+ },
+ "html_046": {
+  "t": "🚸 서울에서 시골 교실로 전학",
+  "ctx": "ch step s0\"><span class=\"cn\">발단</span><b"
+ },
+ "html_047": {
+  "t": "낯선 왕국에 던져진 한병태",
+  "ctx": "\">발단</span><b>🚸 서울에서 시골 교실로 전학</b><small"
+ },
+ "html_048": {
+  "t": "1단계",
+  "ctx": "<div class=\"ch step s1\"><span class=\"cn\""
+ },
+ "html_049": {
+  "t": "👑 엄석대의 절대 권력",
+  "ctx": "h step s1\"><span class=\"cn\">1단계</span><b"
+ },
+ "html_050": {
+  "t": "폭력·상납·대리시험으로 짜인 질서",
+  "ctx": "\"cn\">1단계</span><b>👑 엄석대의 절대 권력</b><small"
+ },
+ "html_051": {
+  "t": "2단계",
+  "ctx": "<div class=\"ch step s2\"><span class=\"cn\""
+ },
+ "html_052": {
+  "t": "✊ 병태의 저항 → 고립 → 굴복",
+  "ctx": "h step s2\"><span class=\"cn\">2단계</span><b"
+ },
+ "html_053": {
+  "t": "특권과 안락, 순응의 달콤한 대가",
+  "ctx": "단계</span><b>✊ 병태의 저항 → 고립 → 굴복</b><small"
+ },
+ "html_054": {
+  "t": "전환",
+  "ctx": "s=\"ch step s3\">         <span class=\"cn\""
+ },
+ "html_055": {
+  "t": "🧑‍🏫 새 담임의 등장과 폭로",
+  "ctx": "3\">         <span class=\"cn\">전환</span><b"
+ },
+ "html_056": {
+  "t": "대리시험 발각 · 각성의 꾸짖음",
+  "ctx": "n><b>🧑‍🏫 새 담임의 등장과 폭로</b>         <small"
+ },
+ "html_057": {
+  "t": "결과",
+  "ctx": "<div class=\"ch step s4\"><span class=\"cn\""
+ },
+ "html_058": {
+  "t": "🔥 왕국의 붕괴, 사라진 석대",
+  "ctx": "ch step s4\"><span class=\"cn\">결과</span><b"
+ },
+ "html_059": {
+  "t": "“굴종하던 군중의 돌변, 그리고 눈물”",
+  "ctx": "\">결과</span><b>🔥 왕국의 붕괴, 사라진 석대</b><small"
+ },
+ "html_060": {
+  "t": "핵심 개념 8",
+  "ctx": "/div>     </div>      <h3 class=\"rep-h3\""
+ },
+ "html_061": {
+  "t": "목차 한눈에 보기",
+  "ctx": "concepts\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_062": {
+  "t": "탭하면 요약이 열립니다",
+  "ctx": "ss=\"rep-h3\">목차 한눈에 보기 <span class=\"hint\""
+ },
+ "html_063": {
+  "t": "책 속, 생각해볼 사례 3",
+  "ctx": " id=\"toc\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_064": {
+  "t": "이 책이 우리에게 던지는 질문 3",
+  "ctx": "d=\"cases\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_065": {
+  "t": "내가 틀린 부분 집중 복습",
+  "ctx": " id=\"weakWrap\">       <h3 class=\"rep-h3\""
+ },
+ "html_066": {
+  "t": "📺 더 깊이 알고 싶다면",
+  "ctx": "/div>      <div class=\"deepen\">       <b"
+ },
+ "html_067": {
+  "t": "에서 『우리들의 일그러진 영웅』의 문학사적 의미와 이문열의 세계를 더 깊이 살펴볼 수 있습니다.",
+  "ctx": "f=\"#\" target=\"_blank\" rel=\"noopener\"></a"
+ },
+ "html_068": {
+  "t": "📄 PDF로 저장",
+  "ctx": "d=\"pdfBtn\" onclick=\"downloadReportPDF()\""
+ },
+ "html_069": {
+  "t": "결과로",
+  "ctx": "\"btn btn-ghost\" onclick=\"show('result')\""
+ },
+ "html_070": {
+  "t": "📚 다른 책 퀴즈 보기 →",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_071": {
+  "t": "“의미와재미공장” 미미팩토리",
+  "ctx": "class=\"footer\">     <div class=\"factory\""
+ },
+ "html_072": {
+  "t": "(주식회사 연:결 패밀리회사)",
+  "ctx": "재미공장” 미미팩토리</div>     <div class=\"affil\""
+ },
+ "html_073": {
+  "t": "책의 핵심을 도파민으로 익히는 반복 마스터 퀴즈",
+  "ctx": ":결 패밀리회사)</div>     <div class=\"tagline\""
+ },
+ "html_074": {
+  "t": "본 앱은 도서의 핵심 개념을 학습 목적으로 재구성한 2차적 학습 콘텐츠입니다. 온전한 독서 경험은 원서로 만나보세요.",
+  "ctx": "퀴즈</div>     <div class=\"copyright-note\""
+ },
+ "html_075": {
+  "t": "우리들의 일그러진 영웅 · 도서 정보",
+  "ctx": "진+영웅+이문열\" target=\"_blank\" rel=\"noopener\""
+ },
+ "js_001": {
+  "t": "\"}))}},Hn={name:\"font-size\",initialValue:\"0\",prefix:!1,type:wt.TYPE_VALUE,format:\"length\"},In={name:\"font-weight\",initialValue:\"normal\",type:wt.VALUE,prefix:!1,parse:function(e){if(Ve(e))return e.number;if(qe(e))switch(e.value){case\"bold\":return 700;case\"normal\":default:return 400}return 400}},Pn={name:\"font-variant\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return e.filter(qe).map((function(e){return e.value}))}};!function(e){e.NORMAL=\"normal\",e.ITALIC=\"italic\",e.OBLIQUE=\"oblique\"}(Nn||(Nn={}));var On,kn={name:\"font-style\",initialValue:\"normal\",prefix:!1,type:wt.IDENT_VALUE,parse:function(e){switch(e){case\"oblique\":return Nn.OBLIQUE;case\"italic\":return Nn.ITALIC;case\"normal\":default:return Nn.NORMAL}}},Rn=function(e,t){return 0!=(e&t)},Mn={name:\"content\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){if(0===e.length)return[];var t=e[0];return t.type===d.IDENT_TOKEN&&\"none\"===t.value?[]:e}},Dn={name:\"counter-increment\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;for(var r=[],n=e.filter(We),o=0;o<n.length;o++){var s=n[o],i=n[o+1];if(s.type===d.IDENT_TOKEN){var a=i&&Ve(i)?i.number:1;r.push({counter:s.value,increment:a})}}return r}},Kn={name:\"counter-reset\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return[];for(var t=[],r=e.filter(We),n=0;n<r.length;n++){var o=r[n],s=r[n+1];if(qe(o)&&\"none\"!==o.value){var i=s&&Ve(s)?s.number:0;t.push({counter:o.value,reset:i})}}return t}},zn={name:\"quotes\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;var r=[],n=e.filter(Ge);if(n.length%2!=0)return null;for(var o=0;o<n.length;o+=2){var s=n[o].value,i=n[o+1].value;r.push({open:s,close:i})}return r}},Vn=function(e,t,r){if(!e)return\"\";var n=e[Math.min(t,e.length-1)];return n?r?n.open:n.close:\"\"},qn={name:\"box-shadow\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return 1===e.length&&Xe(e[0],\"none\")?[]:Ye(e).map((function(e){for(var t={color:255,offsetX:rt,offsetY:rt,blur:rt,spread:rt,inset:!1},r=0,n=0;n<e.length;n++){var o=e[n];Xe(o,\"inset\")?t.inset=!0:$e(o)?(0===r?t.offsetX=o:1===r?t.offsetY=o:2===r?t.blur=o:t.spread=o,r++):t.color=ft(o)}return t}))}},Gn=function(){function e(e){this.backgroundClip=Jn(xt,e.backgroundClip),this.backgroundColor=Jn(Et,e.backgroundColor),this.backgroundImage=Jn(ur,e.backgroundImage),this.backgroundOrigin=Jn(cr,e.backgroundOrigin),this.backgroundPosition=Jn(lr,e.backgroundPosition),this.backgroundRepeat=Jn(fr,e.backgroundRepeat),this.backgroundSize=Jn(mr,e.backgroundSize),this.borderTopColor=Jn(vr,e.borderTopColor),this.borderRightColor=Jn(wr,e.borderRightColor),this.borderBottomColor=Jn(br,e.borderBottomColor),this.borderLeftColor=Jn(Br,e.borderLeftColor),this.borderTopLeftRadius=Jn(_r,e.borderTopLeftRadius),this.borderTopRightRadius=Jn(Cr,e.borderTopRightRadius),this.borderBottomRightRadius=Jn(xr,e.borderBottomRightRadius),this.borderBottomLeftRadius=Jn(Er,e.borderBottomLeftRadius),this.borderTopStyle=Jn(Fr,e.borderTopStyle),this.borderRightStyle=Jn(Ur,e.borderRightStyle),this.borderBottomStyle=Jn(Sr,e.borderBottomStyle),this.borderLeftStyle=Jn(Lr,e.borderLeftStyle),this.borderTopWidth=Jn(Hr,e.borderTopWidth),this.borderRightWidth=Jn(Ir,e.borderRightWidth),this.borderBottomWidth=Jn(Pr,e.borderBottomWidth),this.borderLeftWidth=Jn(Or,e.borderLeftWidth),this.boxShadow=Jn(qn,e.boxShadow),this.color=Jn(kr,e.color),this.display=Jn(Rr,e.display),this.float=Jn(Kr,e.cssFloat),this.fontFamily=Jn(Tn,e.fontFamily),this.fontSize=Jn(Hn,e.fontSize),this.fontStyle=Jn(kn,e.fontStyle),this.fontVariant=Jn(Pn,e.fontVariant),this.fontWeight=Jn(In,e.fontWeight),this.letterSpacing=Jn(zr,e.letterSpacing),this.lineBreak=Jn(qr,e.lineBreak),this.lineHeight=Jn(Gr,e.lineHeight),this.listStyleImage=Jn(Xr,e.listStyleImage),this.listStylePosition=Jn(Jr,e.listStylePosition),this.listStyleType=Jn(Zr,e.listStyleType),this.marginTop=Jn(en,e.marginTop),this.marginRight=Jn(tn,e.marginRight),this.marginBottom=Jn(rn,e.marginBottom),this.marginLeft=Jn(nn,e.marginLeft),this.opacity=Jn(Un,e.opacity);var t=Jn(sn,e.overflow);this.overflowX=t[0],this.overflowY=t[t.length>1?1:0],this.overflowWrap=Jn(An,e.overflowWrap),this.paddingTop=Jn(cn,e.paddingTop),this.paddingRight=Jn(ln,e.paddingRight),this.paddingBottom=Jn(dn,e.paddingBottom),this.paddingLeft=Jn(fn,e.paddingLeft),this.position=Jn(gn,e.position),this.textAlign=Jn(pn,e.textAlign),this.textDecorationColor=Jn(Sn,e.textDecorationColor||e.color),this.textDecorationLine=Jn(Ln,e.textDecorationLine),this.textShadow=Jn(yn,e.textShadow),this.textTransform=Jn(wn,e.textTransform),this.transform=Jn(bn,e.transform),this.transformOrigin=Jn(Cn,e.transformOrigin),this.visibility=Jn(En,e.visibility),this.wordBreak=Jn(Qn,e.wordBreak),this.zIndex=Jn(Fn,e.zIndex)}return e.prototype.isVisible=function(){return this.display>0&&this.opacity>0&&this.visibility===vn.VISIBLE},e.prototype.isTransparent=function(){return ht(this.backgroundColor)},e.prototype.isTransformed=function(){return null!==this.transform},e.prototype.isPositioned=function(){return this.position!==hn.STATIC},e.prototype.isPositionedWithZIndex=function(){return this.isPositioned()&&!this.zIndex.auto},e.prototype.isFloating=function(){return this.float!==Nr.NONE},e.prototype.isInlineLevel=function(){return Rn(this.display,4)||Rn(this.display,33554432)||Rn(this.display,268435456)||Rn(this.display,536870912)||Rn(this.display,67108864)||Rn(this.display,134217728)},e}(),Xn=function(e){this.content=Jn(Mn,e.content),this.quotes=Jn(zn,e.quotes)},Wn=function(e){this.counterIncrement=Jn(Dn,e.counterIncrement),this.counterReset=Jn(Kn,e.counterReset)},Jn=function(e,t){var r=new De,n=null!=t?t.toString():e.initialValue;r.write(n);var o=new Ke(r.read());switch(e.type){case wt.IDENT_VALUE:var s=o.parseComponentValue();return e.parse(qe(s)?s.value:e.initialValue);case wt.VALUE:return e.parse(o.parseComponentValue());case wt.LIST:return e.parse(o.parseComponentValues());case wt.TOKEN_VALUE:return o.parseComponentValue();case wt.TYPE_VALUE:switch(e.format){case\"angle\":return ut(o.parseComponentValue());case\"color\":return ft(o.parseComponentValue());case\"image\":return ir(o.parseComponentValue());case\"length\":var i=o.parseComponentValue();return $e(i)?i:rt;case\"length-percentage\":var a=o.parseComponentValue();return et(a)?a:rt}}throw new Error(\"Attempting to parse unsupported css format type \"+e.format)},Yn=function(e){this.styles=new Gn(window.getComputedStyle(e,null)),this.textNodes=[],this.elements=[],null!==this.styles.transform&&So(e)&&(e.style.transform=\"none\"),this.bounds=i(e),this.flags=0},Zn=function(e,t){this.text=e,this.bounds=t},$n=function(e){var t=e.ownerDocument;if(t){var r=t.createElement(\"html2canvaswrapper\");r.appendChild(e.cloneNode(!0));var n=e.parentNode;if(n){n.replaceChild(r,e);var o=i(r);return r.firstChild&&n.replaceChild(r.firstChild,r),o}}return new s(0,0,0,0)},eo=function(e,t,r){var n=e.ownerDocument;if(!n)throw new Error(\"Node has no owner document\");var o=n.createRange();return o.setStart(e,t),o.setEnd(e,t+r),s.fromClientRect(o.getBoundingClientRect())},to=function(e,t){return 0!==t.letterSpacing?a(e).map((function(e){return A(e)})):ro(e,t)},ro=function(e,t){for(var r,n=function(e,t){var r=a(e),n=ie(r,t),o=n[0],s=n[1],i=n[2],A=r.length,u=0,c=0;return{next:function(){if(c>=A)return{done:!0,value:null};for(var e=G;c<A&&(e=se(r,s,o,++c,i))===G;);if(e!==G||c===A){var t=new ae(r,e,u,c);return u=c,{value:t,done:!1}}return{done:!0,value:null}}}}(e,{lineBreak:t.lineBreak,wordBreak:t.overflowWrap===on.BREAK_WORD?\"break-word\":t.wordBreak}),o=[];!(r=n.next()).done;)r.value&&o.push(r.value.slice());return o},no=function(e,t){this.text=oo(e.data,t.textTransform),this.textBounds=function(e,t,r){var n=to(e,t),o=[],s=0;return n.forEach((function(e){if(t.textDecorationLine.length||e.trim().length>0)if(Pt.SUPPORT_RANGE_BOUNDS)o.push(new Zn(e,eo(r,s,e.length)));else{var n=r.splitText(e.length);o.push(new Zn(e,$n(r))),r=n}else Pt.SUPPORT_RANGE_BOUNDS||(r=r.splitText(e.length));s+=e.length})),o}(this.text,t,e)},oo=function(e,t){switch(t){case mn.LOWERCASE:return e.toLowerCase();case mn.CAPITALIZE:return e.replace(so,io);case mn.UPPERCASE:return e.toUpperCase();default:return e}},so=/(^|\\s|:|-|\\(|\\))([a-z])/g,io=function(e,t,r){return e.length>0?t+r.toUpperCase():e},ao=function(e){function r(t){var r=e.call(this,t)||this;return r.src=t.currentSrc||t.src,r.intrinsicWidth=t.naturalWidth,r.intrinsicHeight=t.naturalHeight,kt.getInstance().addImage(r.src),r}return t(r,e),r}(Yn),Ao=function(e){function r(t){var r=e.call(this,t)||this;return r.canvas=t,r.intrinsicWidth=t.width,r.intrinsicHeight=t.height,r}return t(r,e),r}(Yn),uo=function(e){function r(t){var r=e.call(this,t)||this,n=new XMLSerializer;return r.svg=\"data:image/svg+xml,\"+encodeURIComponent(n.serializeToString(t)),r.intrinsicWidth=t.width.baseVal.value,r.intrinsicHeight=t.height.baseVal.value,kt.getInstance().addImage(r.svg),r}return t(r,e),r}(Yn),co=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),lo=function(e){function r(t){var r=e.call(this,t)||this;return r.start=t.start,r.reversed=\"boolean\"==typeof t.reversed&&!0===t.reversed,r}return t(r,e),r}(Yn),fo=[{type:d.DIMENSION_TOKEN,flags:0,unit:\"px\",number:3}],ho=[{type:d.PERCENTAGE_TOKEN,flags:0,number:50}],po=\"checkbox\",mo=\"radio\",go=\"password\",yo=707406591,vo=function(e){function r(t){var r,n,o,i=e.call(this,t)||this;switch(i.type=t.type.toLowerCase(),i.checked=t.checked,i.value=0===(o=(n=t).type===go?new Array(n.value.length+1).join(\"•\"):n.value).length?n.placeholder||\"\":o,i.type!==po&&i.type!==mo||(i.styles.backgroundColor=3739148031,i.styles.borderTopColor=i.styles.borderRightColor=i.styles.borderBottomColor=i.styles.borderLeftColor=2779096575,i.styles.borderTopWidth=i.styles.borderRightWidth=i.styles.borderBottomWidth=i.styles.borderLeftWidth=1,i.styles.borderTopStyle=i.styles.borderRightStyle=i.styles.borderBottomStyle=i.styles.borderLeftStyle=pr.SOLID,i.styles.backgroundClip=[bt.BORDER_BOX],i.styles.backgroundOrigin=[0],i.bounds=(r=i.bounds).width>r.height?new s(r.left+(r.width-r.height)/2,r.top,r.height,r.height):r.width<r.height?new s(r.left,r.top+(r.height-r.width)/2,r.width,r.width):r),i.type){case po:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=fo;break;case mo:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=ho}return i}return t(r,e),r}(Yn),wo=function(e){function r(t){var r=e.call(this,t)||this,n=t.options[t.selectedIndex||0];return r.value=n&&n.text||\"\",r}return t(r,e),r}(Yn),bo=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),Bo=function(e){return ft(Ke.create(e).parseComponentValue())},jo=function(e){function r(t){var r=e.call(this,t)||this;r.src=t.src,r.width=parseInt(t.width,10)||0,r.height=parseInt(t.height,10)||0,r.backgroundColor=r.styles.backgroundColor;try{if(t.contentWindow&&t.contentWindow.document&&t.contentWindow.document.documentElement){r.tree=Eo(t.contentWindow.document.documentElement);var n=t.contentWindow.document.documentElement?Bo(getComputedStyle(t.contentWindow.document.documentElement).backgroundColor):_t.TRANSPARENT,o=t.contentWindow.document.body?Bo(getComputedStyle(t.contentWindow.document.body).backgroundColor):_t.TRANSPARENT;r.backgroundColor=ht(n)?ht(o)?r.styles.backgroundColor:o:n}}catch(e){}return r}return t(r,e),r}(Yn),_o=[\"OL\",\"UL\",\"MENU\"],Co=function(e,t,r){for(var n=e.firstChild,o=void 0;n;n=o)if(o=n.nextSibling,Fo(n)&&n.data.trim().length>0)t.textNodes.push(new no(n,t.styles));else if(Uo(n)){var s=xo(n);s.styles.isVisible()&&(No(n,s,r)?s.flags|=4:Qo(s.styles)&&(s.flags|=2),-1!==_o.indexOf(n.tagName)&&(s.flags|=8),t.elements.push(s),zo(n)||Po(n)||Vo(n)||Co(n,s,r))}},xo=function(e){return Ro(e)?new ao(e):ko(e)?new Ao(e):Po(e)?new uo(e):To(e)?new co(e):Ho(e)?new lo(e):Io(e)?new vo(e):Vo(e)?new wo(e):zo(e)?new bo(e):Mo(e)?new jo(e):new Yn(e)},Eo=function(e){var t=xo(e);return t.flags|=4,Co(e,t,t),t},No=function(e,t,r){return t.styles.isPositionedWithZIndex()||t.styles.opacity<1||t.styles.isTransformed()||Oo(e)&&r.styles.isTransparent()},Qo=function(e){return e.isPositioned()||e.isFloating()},Fo=function(e){return e.nodeType===Node.TEXT_NODE},Uo=function(e){return e.nodeType===Node.ELEMENT_NODE},So=function(e){return Uo(e)&&void 0!==e.style&&!Lo(e)},Lo=function(e){return\"object\"==typeof e.className},To=function(e){return\"LI\"===e.tagName},Ho=function(e){return\"OL\"===e.tagName},Io=function(e){return\"INPUT\"===e.tagName},Po=function(e){return\"svg\"===e.tagName},Oo=function(e){return\"BODY\"===e.tagName},ko=function(e){return\"CANVAS\"===e.tagName},Ro=function(e){return\"IMG\"===e.tagName},Mo=function(e){return\"IFRAME\"===e.tagName},Do=function(e){return\"STYLE\"===e.tagName},Ko=function(e){return\"SCRIPT\"===e.tagName},zo=function(e){return\"TEXTAREA\"===e.tagName},Vo=function(e){return\"SELECT\"===e.tagName},qo=function(){function e(){this.counters={}}return e.prototype.getCounterValue=function(e){var t=this.counters[e];return t&&t.length?t[t.length-1]:1},e.prototype.getCounterValues=function(e){return this.counters[e]||[]},e.prototype.pop=function(e){var t=this;e.forEach((function(e){return t.counters[e].pop()}))},e.prototype.parse=function(e){var t=this,r=e.counterIncrement,n=e.counterReset,o=!0;null!==r&&r.forEach((function(e){var r=t.counters[e.counter];r&&0!==e.increment&&(o=!1,r[Math.max(0,r.length-1)]+=e.increment)}));var s=[];return o&&n.forEach((function(e){var r=t.counters[e.counter];s.push(e.counter),r||(r=t.counters[e.counter]=[]),r.push(e.reset)})),s},e}(),Go={integers:[1e3,900,500,400,100,90,50,40,10,9,5,4,1],values:[\"M\",\"CM\",\"D\",\"CD\",\"C\",\"XC\",\"L\",\"XL\",\"X\",\"IX\",\"V\",\"IV\",\"I\"]},Xo={integers:[9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"Ք\",\"Փ\",\"Ւ\",\"Ց\",\"Ր\",\"Տ\",\"Վ\",\"Ս\",\"Ռ\",\"Ջ\",\"Պ\",\"Չ\",\"Ո\",\"Շ\",\"Ն\",\"Յ\",\"Մ\",\"Ճ\",\"Ղ\",\"Ձ\",\"Հ\",\"Կ\",\"Ծ\",\"Խ\",\"Լ\",\"Ի\",\"Ժ\",\"Թ\",\"Ը\",\"Է\",\"Զ\",\"Ե\",\"Դ\",\"Գ\",\"Բ\",\"Ա\"]},Wo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,400,300,200,100,90,80,70,60,50,40,30,20,19,18,17,16,15,10,9,8,7,6,5,4,3,2,1],values:[\"י׳\",\"ט׳\",\"ח׳\",\"ז׳\",\"ו׳\",\"ה׳\",\"ד׳\",\"ג׳\",\"ב׳\",\"א׳\",\"ת\",\"ש\",\"ר\",\"ק\",\"צ\",\"פ\",\"ע\",\"ס\",\"נ\",\"מ\",\"ל\",\"כ\",\"יט\",\"יח\",\"יז\",\"טז\",\"טו\",\"י\",\"ט\",\"ח\",\"ז\",\"ו\",\"ה\",\"ד\",\"ג\",\"ב\",\"א\"]},Jo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"ჵ\",\"ჰ\",\"ჯ\",\"ჴ\",\"ხ\",\"ჭ\",\"წ\",\"ძ\",\"ც\",\"ჩ\",\"შ\",\"ყ\",\"ღ\",\"ქ\",\"ფ\",\"ჳ\",\"ტ\",\"ს\",\"რ\",\"ჟ\",\"პ\",\"ო\",\"ჲ\",\"ნ\",\"მ\",\"ლ\",\"კ\",\"ი\",\"თ\",\"ჱ\",\"ზ\",\"ვ\",\"ე\",\"დ\",\"გ\",\"ბ\",\"ა\"]},Yo=function(e,t,r,n,o,s){return e<t||e>r?is(e,o,s.length>0):n.integers.reduce((function(t,r,o){for(;e>=r;)e-=r,t+=n.values[o];return t}),\"\")+s},Zo=function(e,t,r,n){var o=\"\";do{r||e--,o=n(e)+o,e/=t}while(e*t>=t);return o},$o=function(e,t,r,n,o){var s=r-t+1;return(e<0?\"-\":\"\")+(Zo(Math.abs(e),s,n,(function(e){return A(Math.floor(e%s)+t)}))+o)},es=function(e,t,r){void 0===r&&(r=\". \");var n=t.length;return Zo(Math.abs(e),n,!1,(function(e){return t[Math.floor(e%n)]}))+r},ts=function(e,t,r,n,o,s){if(e<-9999||e>9999)return is(e,Wr.CJK_DECIMAL,o.length>0);var i=Math.abs(e),a=o;if(0===i)return t[0]+a;for(var A=0;i>0&&A<=4;A++){var u=i%10;0===u&&Rn(s,1)&&\"\"!==a?a=t[u]+a:u>1||1===u&&0===A||1===u&&1===A&&Rn(s,2)||1===u&&1===A&&Rn(s,4)&&e>100||1===u&&A>1&&Rn(s,8)?a=t[u]+(A>0?r[A-1]:\"\")+a:1===u&&A>0&&(a=r[A-1]+a),i=Math.floor(i/10)}return(e<0?n:\"\")+a},rs=\"十百千萬\",ns=\"拾佰仟萬\",os=\"マイナス\",ss=\"마이너스\",is=function(e,t,r){var n=r?\". \":\"\",o=r?\"、\":\"\",s=r?\", \":\"\",i=r?\" \":\"\";switch(t){case Wr.DISC:return\"•\"+i;case Wr.CIRCLE:return\"◦\"+i;case Wr.SQUARE:return\"◾\"+i;case Wr.DECIMAL_LEADING_ZERO:var a=$o(e,48,57,!0,n);return a.length<4?\"0\"+a:a;case Wr.CJK_DECIMAL:return es(e,\"〇一二三四五六七八九\",o);case Wr.LOWER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n).toLowerCase();case Wr.UPPER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n);case Wr.LOWER_GREEK:return $o(e,945,969,!1,n);case Wr.LOWER_ALPHA:return $o(e,97,122,!1,n);case Wr.UPPER_ALPHA:return $o(e,65,90,!1,n);case Wr.ARABIC_INDIC:return $o(e,1632,1641,!0,n);case Wr.ARMENIAN:case Wr.UPPER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n);case Wr.LOWER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n).toLowerCase();case Wr.BENGALI:return $o(e,2534,2543,!0,n);case Wr.CAMBODIAN:case Wr.KHMER:return $o(e,6112,6121,!0,n);case Wr.CJK_EARTHLY_BRANCH:return es(e,\"子丑寅卯辰巳午未申酉戌亥\",o);case Wr.CJK_HEAVENLY_STEM:return es(e,\"甲乙丙丁戊己庚辛壬癸\",o);case Wr.CJK_IDEOGRAPHIC:case Wr.TRAD_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"負\",o,14);case Wr.TRAD_CHINESE_FORMAL:return ts(e,\"零壹貳參肆伍陸柒捌玖\",ns,\"負\",o,15);case Wr.SIMP_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"负\",o,14);case Wr.SIMP_CHINESE_FORMAL:return ts(e,\"零壹贰叁肆伍陆柒捌玖\",ns,\"负\",o,15);case Wr.JAPANESE_INFORMAL:return ts(e,\"〇一二三四五六七八九\",\"十百千万\",os,o,0);case Wr.JAPANESE_FORMAL:return ts(e,\"零壱弐参四伍六七八九\",\"拾百千万\",os,o,7);case Wr.KOREAN_HANGUL_FORMAL:return ts(e,\"영일이삼사오육칠팔구\",\"십백천만\",ss,s,7);case Wr.KOREAN_HANJA_INFORMAL:return ts(e,\"零一二三四五六七八九\",\"十百千萬\",ss,s,0);case Wr.KOREAN_HANJA_FORMAL:return ts(e,\"零壹貳參四五六七八九\",\"拾百千\",ss,s,7);case Wr.DEVANAGARI:return $o(e,2406,2415,!0,n);case Wr.GEORGIAN:return Yo(e,1,19999,Jo,Wr.DECIMAL,n);case Wr.GUJARATI:return $o(e,2790,2799,!0,n);case Wr.GURMUKHI:return $o(e,2662,2671,!0,n);case Wr.HEBREW:return Yo(e,1,10999,Wo,Wr.DECIMAL,n);case Wr.HIRAGANA:return es(e,\"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん\");case Wr.HIRAGANA_IROHA:return es(e,\"いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす\");case Wr.KANNADA:return $o(e,3302,3311,!0,n);case Wr.KATAKANA:return es(e,\"アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン\",o);case Wr.KATAKANA_IROHA:return es(e,\"イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセス\",o);case Wr.LAO:return $o(e,3792,3801,!0,n);case Wr.MONGOLIAN:return $o(e,6160,6169,!0,n);case Wr.MYANMAR:return $o(e,4160,4169,!0,n);case Wr.ORIYA:return $o(e,2918,2927,!0,n);case Wr.PERSIAN:return $o(e,1776,1785,!0,n);case Wr.TAMIL:return $o(e,3046,3055,!0,n);case Wr.TELUGU:return $o(e,3174,3183,!0,n);case Wr.THAI:return $o(e,3664,3673,!0,n);case Wr.TIBETAN:return $o(e,3872,3881,!0,n);case Wr.DECIMAL:default:return $o(e,48,57,!0,n)}},as=\"data-html2canvas-ignore\",As=function(){function e(e,t){if(this.options=t,this.scrolledElements=[],this.referenceElement=e,this.counters=new qo,this.quoteDepth=0,!e.ownerDocument)throw new Error(\"Cloned element does not have an owner document\");this.documentElement=this.cloneNode(e.ownerDocument.documentElement)}return e.prototype.toIFrame=function(e,t){var r=this,s=cs(e,t);if(!s.contentWindow)return Promise.reject(\"Unable to find iframe window\");var i=e.defaultView.pageXOffset,a=e.defaultView.pageYOffset,A=s.contentWindow,u=A.document,c=ls(s).then((function(){return n(r,void 0,void 0,(function(){var e;return o(this,(function(r){switch(r.label){case 0:return this.scrolledElements.forEach(ps),A&&(A.scrollTo(t.left,t.top),!/(iPad|iPhone|iPod)/g.test(navigator.userAgent)||A.scrollY===t.top&&A.scrollX===t.left||(u.documentElement.style.top=-t.top+\"px\",u.documentElement.style.left=-t.left+\"px\",u.documentElement.style.position=\"absolute\")),e=this.options.onclone,void 0===this.clonedReferenceElement?[2,Promise.reject(\"Error finding the \"+this.referenceElement.nodeName+\" in the cloned document\")]:u.fonts&&u.fonts.ready?[4,u.fonts.ready]:[3,2];case 1:r.sent(),r.label=2;case 2:return\"function\"==typeof e?[2,Promise.resolve().then((function(){return e(u)})).then((function(){return s}))]:[2,s]}}))}))}));return u.open(),u.write(fs(document.doctype)+\"<html></html>\"),hs(this.referenceElement.ownerDocument,i,a),u.replaceChild(u.adoptNode(this.documentElement),u.documentElement),u.close(),c},e.prototype.createElementClone=function(e){if(ko(e))return this.createCanvasClone(e);if(Do(e))return this.createStyleClone(e);var t=e.cloneNode(!1);return Ro(t)&&\"lazy\"===t.loading&&(t.loading=\"eager\"),t},e.prototype.createStyleClone=function(e){try{var t=e.sheet;if(t&&t.cssRules){var r=[].slice.call(t.cssRules,0).reduce((function(e,t){return t&&\"string\"==typeof t.cssText?e+t.cssText:e}),\"\"),n=e.cloneNode(!1);return n.textContent=r,n}}catch(e){if(Ot.getInstance(this.options.id).error(\"Unable to access cssRules property\",e),\"SecurityError\"!==e.name)throw e}return e.cloneNode(!1)},e.prototype.createCanvasClone=function(e){if(this.options.inlineImages&&e.ownerDocument){var t=e.ownerDocument.createElement(\"img\");try{return t.src=e.toDataURL(),t}catch(e){Ot.getInstance(this.options.id).info(\"Unable to clone canvas contents, canvas is tainted\")}}var r=e.cloneNode(!1);try{r.width=e.width,r.height=e.height;var n=e.getContext(\"2d\"),o=r.getContext(\"2d\");return o&&(n?o.putImageData(n.getImageData(0,0,e.width,e.height),0,0):o.drawImage(e,0,0)),r}catch(e){}return r},e.prototype.cloneNode=function(e){if(Fo(e))return document.createTextNode(e.data);if(!e.ownerDocument)return e.cloneNode(!1);var t=e.ownerDocument.defaultView;if(t&&Uo(e)&&(So(e)||Lo(e))){var r=this.createElementClone(e),n=t.getComputedStyle(e),o=t.getComputedStyle(e,\":before\"),s=t.getComputedStyle(e,\":after\");this.referenceElement===e&&So(r)&&(this.clonedReferenceElement=r),Oo(r)&&vs(r);for(var i=this.counters.parse(new Wn(n)),a=this.resolvePseudoContent(e,r,o,On.BEFORE),A=e.firstChild;A;A=A.nextSibling)Uo(A)&&(Ko(A)||A.hasAttribute(as)||\"function\"==typeof this.options.ignoreElements&&this.options.ignoreElements(A))||this.options.copyStyles&&Uo(A)&&Do(A)||r.appendChild(this.cloneNode(A));a&&r.insertBefore(a,r.firstChild);var u=this.resolvePseudoContent(e,r,s,On.AFTER);return u&&r.appendChild(u),this.counters.pop(i),n&&(this.options.copyStyles||Lo(e))&&!Mo(e)&&ds(n,r),0===e.scrollTop&&0===e.scrollLeft||this.scrolledElements.push([r,e.scrollLeft,e.scrollTop]),(zo(e)||Vo(e))&&(zo(r)||Vo(r))&&(r.value=e.value),r}return e.cloneNode(!1)},e.prototype.resolvePseudoContent=function(e,t,r,n){var o=this;if(r){var s=r.content,i=t.ownerDocument;if(i&&s&&\"none\"!==s&&\"-moz-alt-content\"!==s&&\"none\"!==r.display){this.counters.parse(new Wn(r));var a=new Xn(r),A=i.createElement(\"html2canvaspseudoelement\");ds(r,A),a.content.forEach((function(t){if(t.type===d.STRING_TOKEN)A.appendChild(i.createTextNode(t.value));else if(t.type===d.URL_TOKEN){var r=i.createElement(\"img\");r.src=t.value,r.style.opacity=\"1\",A.appendChild(r)}else if(t.type===d.FUNCTION){if(\"attr\"===t.name){var n=t.values.filter(qe);n.length&&A.appendChild(i.createTextNode(e.getAttribute(n[0].value)||\"\"))}else if(\"counter\"===t.name){var s=t.values.filter(Je),u=s[0],c=s[1];if(u&&qe(u)){var l=o.counters.getCounterValue(u.value),f=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL;A.appendChild(i.createTextNode(is(l,f,!1)))}}else if(\"counters\"===t.name){var h=t.values.filter(Je),p=(u=h[0],h[1]);if(c=h[2],u&&qe(u)){var m=o.counters.getCounterValues(u.value),g=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL,y=p&&p.type===d.STRING_TOKEN?p.value:\"\",v=m.map((function(e){return is(e,g,!1)})).join(y);A.appendChild(i.createTextNode(v))}}}else if(t.type===d.IDENT_TOKEN)switch(t.value){case\"open-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,o.quoteDepth++,!0)));break;case\"close-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,--o.quoteDepth,!1)));break;default:A.appendChild(i.createTextNode(t.value))}})),A.className=ms+\" \"+gs;var u=n===On.BEFORE?\" \"+ms:\" \"+gs;return Lo(t)?t.className.baseValue+=u:t.className+=u,A}}},e.destroy=function(e){return!!e.parentNode&&(e.parentNode.removeChild(e),!0)},e}();!function(e){e[e.BEFORE=0]=\"BEFORE\",e[e.AFTER=1]=\"AFTER\"}(On||(On={}));var us,cs=function(e,t){var r=e.createElement(\"iframe\");return r.className=\"html2canvas-container\",r.style.visibility=\"hidden\",r.style.position=\"fixed\",r.style.left=\"-10000px\",r.style.top=\"0px\",r.style.border=\"0\",r.width=t.width.toString(),r.height=t.height.toString(),r.scrolling=\"no\",r.setAttribute(as,\"true\"),e.body.appendChild(r),r},ls=function(e){return new Promise((function(t,r){var n=e.contentWindow;if(!n)return r(\"No window assigned for iframe\");var o=n.document;n.onload=e.onload=o.onreadystatechange=function(){n.onload=e.onload=o.onreadystatechange=null;var r=setInterval((function(){o.body.childNodes.length>0&&\"complete\"===o.readyState&&(clearInterval(r),t(e))}),50)}}))},ds=function(e,t){for(var r=e.length-1;r>=0;r--){var n=e.item(r);\"content\"!==n&&t.style.setProperty(n,e.getPropertyValue(n))}return t},fs=function(e){var t=\"\";return e&&(t+=\"<!DOCTYPE \",e.name&&(t+=e.name),e.internalSubset&&(t+=e.internalSubset),e.publicId&&(t+=",
+  "ctx": "n(e){return-1===e.indexOf(\" \")?e:\"'\"+e+\""
+ },
+ "js_002": {
+  "t": "2026-07-17 · 우리들의 일그러진 영웅",
+  "ctx": "&utm_campaign=twisted_hero\",   edition: "
+ },
+ "js_003": {
+  "t": "저자",
+  "ctx": "nst QUESTIONS = [   {id:1, level:1, tag:"
+ },
+ "js_004": {
+  "t": "『우리들의 일그러진 영웅』을 쓴 한국 작가는 누구일까요?",
+  "ctx": "TIONS = [   {id:1, level:1, tag:\"저자\", q:"
+ },
+ "js_005": {
+  "t": "이문열",
+  "ctx": "진 영웅』을 쓴 한국 작가는 누구일까요?\",    options:[{t:"
+ },
+ "js_006": {
+  "t": "조세희",
+  "ctx": "일까요?\",    options:[{t:\"이문열\",ok:true},{t:"
+ },
+ "js_007": {
+  "t": "황석영",
+  "ctx": "options:[{t:\"이문열\",ok:true},{t:\"조세희\"},{t:"
+ },
+ "js_008": {
+  "t": "김승옥",
+  "ctx": "t:\"이문열\",ok:true},{t:\"조세희\"},{t:\"황석영\"},{t:"
+ },
+ "js_009": {
+  "t": "『우리들의 일그러진 영웅』은 <b>이문열</b>이 1987년에 발표한 중편소설이에요. 이듬해가 아니라 그해 이상문학상을 받았습니다.",
+  "ctx": ",{t:\"조세희\"},{t:\"황석영\"},{t:\"김승옥\"}],    ctx:"
+ },
+ "js_010": {
+  "t": "주인공",
+  "ctx": " 이상문학상을 받았습니다.\"},   {id:2, level:1, tag:"
+ },
+ "js_011": {
+  "t": "서울에서 시골 학교로 전학 온 이 소설의 주인공 이름은?",
+  "ctx": "았습니다.\"},   {id:2, level:1, tag:\"주인공\", q:"
+ },
+ "js_012": {
+  "t": "한병태",
+  "ctx": "교로 전학 온 이 소설의 주인공 이름은?\",    options:[{t:"
+ },
+ "js_013": {
+  "t": "한병수",
+  "ctx": "이름은?\",    options:[{t:\"한병태\",ok:true},{t:"
+ },
+ "js_014": {
+  "t": "김영수",
+  "ctx": "options:[{t:\"한병태\",ok:true},{t:\"한병수\"},{t:"
+ },
+ "js_015": {
+  "t": "이대수",
+  "ctx": "t:\"한병태\",ok:true},{t:\"한병수\"},{t:\"김영수\"},{t:"
+ },
+ "js_016": {
+  "t": "주인공은 <b>한병태</b>예요. 이야기 전체를 이끄는 관찰자이자, 어른이 되어 지난날을 돌아보는 서술자입니다.",
+  "ctx": ",{t:\"한병수\"},{t:\"김영수\"},{t:\"이대수\"}],    ctx:"
+ },
+ "js_017": {
+  "t": "권력자",
+  "ctx": "을 돌아보는 서술자입니다.\"},   {id:3, level:1, tag:"
+ },
+ "js_018": {
+  "t": "반을 절대 권력으로 지배하는 급장(반장)의 이름은?",
+  "ctx": "자입니다.\"},   {id:3, level:1, tag:\"권력자\", q:"
+ },
+ "js_019": {
+  "t": "엄석대",
+  "ctx": "권력으로 지배하는 급장(반장)의 이름은?\",    options:[{t:"
+ },
+ "js_020": {
+  "t": "엄상대",
+  "ctx": "이름은?\",    options:[{t:\"엄석대\",ok:true},{t:"
+ },
+ "js_021": {
+  "t": "석대환",
+  "ctx": "options:[{t:\"엄석대\",ok:true},{t:\"엄상대\"},{t:"
+ },
+ "js_022": {
+  "t": "한상혁",
+  "ctx": "t:\"엄석대\",ok:true},{t:\"엄상대\"},{t:\"석대환\"},{t:"
+ },
+ "js_023": {
+  "t": "반의 지배자는 급장 <b>엄석대</b>예요. 선생님에겐 모범생, 아이들에겐 폭군인 이중적 존재입니다.",
+  "ctx": ",{t:\"엄상대\"},{t:\"석대환\"},{t:\"한상혁\"}],    ctx:"
+ },
+ "js_024": {
+  "t": "배경 공간",
+  "ctx": "폭군인 이중적 존재입니다.\"},   {id:4, level:1, tag:"
+ },
+ "js_025": {
+  "t": "이 소설의 주요 무대가 되는 공간은 어디일까요?",
+  "ctx": "니다.\"},   {id:4, level:1, tag:\"배경 공간\", q:"
+ },
+ "js_026": {
+  "t": "시골 소도시의 한 국민학교 교실",
+  "ctx": "의 주요 무대가 되는 공간은 어디일까요?\",    options:[{t:"
+ },
+ "js_027": {
+  "t": "서울 명문 사립대의 강의실",
+  "ctx": "ons:[{t:\"시골 소도시의 한 국민학교 교실\",ok:true},{t:"
+ },
+ "js_028": {
+  "t": "전쟁터의 좁은 참호 안",
+  "ctx": "학교 교실\",ok:true},{t:\"서울 명문 사립대의 강의실\"},{t:"
+ },
+ "js_029": {
+  "t": "바닷가 어느 등대",
+  "ctx": "\"서울 명문 사립대의 강의실\"},{t:\"전쟁터의 좁은 참호 안\"},{t:"
+ },
+ "js_030": {
+  "t": "무대는 <b>시골 소도시의 국민학교 교실</b>이에요. 좁은 교실 하나에 권력과 굴종의 정치가 압축돼 있습니다.",
+  "ctx": "전쟁터의 좁은 참호 안\"},{t:\"바닷가 어느 등대\"}],    ctx:"
+ },
+ "js_031": {
+  "t": "전학 계기",
+  "ctx": " 정치가 압축돼 있습니다.\"},   {id:5, level:1, tag:"
+ },
+ "js_032": {
+  "t": "한병태가 시골 학교로 전학 오게 된 계기는 무엇일까요?",
+  "ctx": "니다.\"},   {id:5, level:1, tag:\"전학 계기\", q:"
+ },
+ "js_033": {
+  "t": "공무원 아버지의 좌천과 전근",
+  "ctx": "학교로 전학 오게 된 계기는 무엇일까요?\",    options:[{t:"
+ },
+ "js_034": {
+  "t": "큰 사고를 쳐서 전학 처분을 받아서",
+  "ctx": "tions:[{t:\"공무원 아버지의 좌천과 전근\",ok:true},{t:"
+ },
+ "js_035": {
+  "t": "부모가 이혼해 홀로 맡겨져서",
+  "ctx": "\",ok:true},{t:\"큰 사고를 쳐서 전학 처분을 받아서\"},{t:"
+ },
+ "js_036": {
+  "t": "몸이 아파 요양하려고",
+  "ctx": "서 전학 처분을 받아서\"},{t:\"부모가 이혼해 홀로 맡겨져서\"},{t:"
+ },
+ "js_037": {
+  "t": "병태는 <b>공무원 아버지가 좌천</b>되면서 서울에서 시골로 옮겨 와요. 화려한 서울과 초라한 시골의 낙차가 이야기의 출발점입니다.",
+  "ctx": "혼해 홀로 맡겨져서\"},{t:\"몸이 아파 요양하려고\"}],    ctx:"
+ },
+ "js_038": {
+  "t": "직책",
+  "ctx": "가 이야기의 출발점입니다.\"},   {id:6, level:1, tag:"
+ },
+ "js_039": {
+  "t": "엄석대가 반에서 맡고 있던 직책은 무엇일까요?",
+  "ctx": "발점입니다.\"},   {id:6, level:1, tag:\"직책\", q:"
+ },
+ "js_040": {
+  "t": "급장(반장)",
+  "ctx": "가 반에서 맡고 있던 직책은 무엇일까요?\",    options:[{t:"
+ },
+ "js_041": {
+  "t": "학급 신문 편집장",
+  "ctx": "?\",    options:[{t:\"급장(반장)\",ok:true},{t:"
+ },
+ "js_042": {
+  "t": "주번 당번",
+  "ctx": "{t:\"급장(반장)\",ok:true},{t:\"학급 신문 편집장\"},{t:"
+ },
+ "js_043": {
+  "t": "부반장",
+  "ctx": "ok:true},{t:\"학급 신문 편집장\"},{t:\"주번 당번\"},{t:"
+ },
+ "js_044": {
+  "t": "석대의 직책은 <b>급장(반장)</b>이에요. 담임이 위임한 이 작은 권력이 교실 전체를 지배하는 도구가 됩니다.",
+  "ctx": "신문 편집장\"},{t:\"주번 당번\"},{t:\"부반장\"}],    ctx:"
+ },
+ "js_045": {
+  "t": "시대 배경",
+  "ctx": " 지배하는 도구가 됩니다.\"},   {id:7, level:1, tag:"
+ },
+ "js_046": {
+  "t": "이 소설의 시대적 배경으로 알맞은 것은?",
+  "ctx": "니다.\"},   {id:7, level:1, tag:\"시대 배경\", q:"
+ },
+ "js_047": {
+  "t": "자유당 정권 말기의 1950년대 말",
+  "ctx": "이 소설의 시대적 배경으로 알맞은 것은?\",    options:[{t:"
+ },
+ "js_048": {
+  "t": "일본의 식민 지배가 한창이던 1930년대",
+  "ctx": "s:[{t:\"자유당 정권 말기의 1950년대 말\",ok:true},{t:"
+ },
+ "js_049": {
+  "t": "유신 체제하의 1970년대",
+  "ctx": "k:true},{t:\"일본의 식민 지배가 한창이던 1930년대\"},{t:"
+ },
+ "js_050": {
+  "t": "6·25 전쟁 중",
+  "ctx": "가 한창이던 1930년대\"},{t:\"유신 체제하의 1970년대\"},{t:"
+ },
+ "js_051": {
+  "t": "배경은 <b>자유당 정권 말기, 1950년대 말</b>이에요. 4·19 혁명 직전의 시대 공기가 교실의 이야기에 겹쳐집니다.",
+  "ctx": " 체제하의 1970년대\"},{t:\"6·25 전쟁 중\"}],    ctx:"
+ },
+ "js_052": {
+  "t": "지배 방식",
+  "ctx": "실의 이야기에 겹쳐집니다.\"},   {id:8, level:1, tag:"
+ },
+ "js_053": {
+  "t": "엄석대가 반 아이들을 다스린 방식에 가장 가까운 것은?",
+  "ctx": "니다.\"},   {id:8, level:1, tag:\"지배 방식\", q:"
+ },
+ "js_054": {
+  "t": "폭력과 강압으로 굴종을 강요함",
+  "ctx": "이들을 다스린 방식에 가장 가까운 것은?\",    options:[{t:"
+ },
+ "js_055": {
+  "t": "언제나 공정한 규칙과 투표로 이끎",
+  "ctx": "ions:[{t:\"폭력과 강압으로 굴종을 강요함\",ok:true},{t:"
+ },
+ "js_056": {
+  "t": "돈을 나눠 주며 인심을 얻음",
+  "ctx": "함\",ok:true},{t:\"언제나 공정한 규칙과 투표로 이끎\"},{t:"
+ },
+ "js_057": {
+  "t": "늘 약자를 먼저 배려함",
+  "ctx": "한 규칙과 투표로 이끎\"},{t:\"돈을 나눠 주며 인심을 얻음\"},{t:"
+ },
+ "js_058": {
+  "t": "석대는 <b>폭력과 강압</b>으로 아이들의 굴종을 이끌어 내요. 겉으로는 질서정연하지만 속은 두려움으로 유지되는 세계입니다.",
+  "ctx": "주며 인심을 얻음\"},{t:\"늘 약자를 먼저 배려함\"}],    ctx:"
+ },
+ "js_059": {
+  "t": "새 담임",
+  "ctx": "으로 유지되는 세계입니다.\"},   {id:9, level:1, tag:"
+ },
+ "js_060": {
+  "t": "6학년이 되어 새로 부임한, 석대를 무너뜨리는 인물은?",
+  "ctx": "입니다.\"},   {id:9, level:1, tag:\"새 담임\", q:"
+ },
+ "js_061": {
+  "t": "새 담임 선생님",
+  "ctx": "새로 부임한, 석대를 무너뜨리는 인물은?\",    options:[{t:"
+ },
+ "js_062": {
+  "t": "옆 반의 담임 선생님",
+  "ctx": ",    options:[{t:\"새 담임 선생님\",ok:true},{t:"
+ },
+ "js_063": {
+  "t": "교장 선생님",
+  "ctx": "새 담임 선생님\",ok:true},{t:\"옆 반의 담임 선생님\"},{t:"
+ },
+ "js_064": {
+  "t": "장학사",
+  "ctx": "true},{t:\"옆 반의 담임 선생님\"},{t:\"교장 선생님\"},{t:"
+ },
+ "js_065": {
+  "t": "석대의 왕국을 무너뜨리는 이는 <b>새로 부임한 6학년 담임</b>이에요. 바깥에서 온 힘이 굳어 버린 질서를 흔듭니다.",
+  "ctx": "임 선생님\"},{t:\"교장 선생님\"},{t:\"장학사\"}],    ctx:"
+ },
+ "js_066": {
+  "t": "어른 병태",
+  "ctx": " 버린 질서를 흔듭니다.\"},   {id:10, level:1, tag:"
+ },
+ "js_067": {
+  "t": "어른이 된 한병태의 직업으로 알맞은 것은?",
+  "ctx": "다.\"},   {id:10, level:1, tag:\"어른 병태\", q:"
+ },
+ "js_068": {
+  "t": "학원 강사",
+  "ctx": "른이 된 한병태의 직업으로 알맞은 것은?\",    options:[{t:"
+ },
+ "js_069": {
+  "t": "유명한 소설가",
+  "ctx": "은?\",    options:[{t:\"학원 강사\",ok:true},{t:"
+ },
+ "js_070": {
+  "t": "대기업 사장",
+  "ctx": "s:[{t:\"학원 강사\",ok:true},{t:\"유명한 소설가\"},{t:"
+ },
+ "js_071": {
+  "t": "국회의원",
+  "ctx": ",ok:true},{t:\"유명한 소설가\"},{t:\"대기업 사장\"},{t:"
+ },
+ "js_072": {
+  "t": "어른이 된 병태는 <b>학원 강사</b>로, 특별할 것 없는 소시민이에요. 젊은 날의 좌절과 타협이 그의 뒷모습에 배어 있습니다.",
+  "ctx": " 소설가\"},{t:\"대기업 사장\"},{t:\"국회의원\"}],    ctx:"
+ },
+ "js_073": {
+  "t": "위키백과 「우리들의 일그러진 영웅」",
+  "ctx": "== */ const SOURCES = {   ko:    {label:"
+ },
+ "js_074": {
+  "t": "https://ko.wikipedia.org/wiki/우리들의_일그러진_영웅",
+  "ctx": "o:    {label:\"위키백과 「우리들의 일그러진 영웅」\", url:"
+ },
+ "js_075": {
+  "t": "위키백과 「이문열」",
+  "ctx": "iki/Our_Twisted_Hero\"},   yi:    {label:"
+ },
+ "js_076": {
+  "t": "https://ko.wikipedia.org/wiki/이문열",
+  "ctx": "ro\"},   yi:    {label:\"위키백과 「이문열」\", url:"
+ },
+ "js_077": {
+  "t": "위키백과 「4·19 혁명」",
+  "ctx": "kipedia.org/wiki/이문열\"},   r419:  {label:"
+ },
+ "js_078": {
+  "t": "https://ko.wikipedia.org/wiki/4·19_혁명",
+  "ctx": ",   r419:  {label:\"위키백과 「4·19 혁명」\", url:"
+ },
+ "js_079": {
+  "t": "나무위키 「우리들의 일그러진 영웅」",
+  "ctx": "dia.org/wiki/4·19_혁명\"},   namu:  {label:"
+ },
+ "js_080": {
+  "t": "https://namu.wiki/w/우리들의 일그러진 영웅",
+  "ctx": "amu:  {label:\"나무위키 「우리들의 일그러진 영웅」\", url:"
+ },
+ "js_081": {
+  "t": "한국민족문화대백과사전 「우리들의 일그러진 영웅」",
+  "ctx": ".wiki/w/우리들의 일그러진 영웅\"},   ebs:   {label:"
+ },
+ "js_082": {
+  "t": "이문열(1948~)은 1980~90년대 한국 문단을 대표한 작가예요. 『우리들의 일그러진 영웅』으로 1987년 이상문학상을 받았습니다.",
+  "ctx": " */ const EXTRA = {   1:{src:\"yi\", note:"
+ },
+ "js_083": {
+  "t": "한병태는 서울에서 온 전학생이자 서술자예요. 관찰하고 저항하고 굴복하는 그의 시선을 따라 이야기가 흘러갑니다.",
+  "ctx": "7년 이상문학상을 받았습니다.\"},   2:{src:\"ko\", note:"
+ },
+ "js_084": {
+  "t": "엄석대는 급장의 권력으로 반을 지배하는 폭군이에요. 선생님 앞에선 모범생, 아이들 앞에선 절대자인 이중적 인물입니다.",
+  "ctx": "따라 이야기가 흘러갑니다.\"},   3:{src:\"namu\", note:"
+ },
+ "js_085": {
+  "t": "무대는 시골 소도시의 국민학교 교실 하나예요. 이 좁은 공간에 권력의 생성·유지·붕괴가 통째로 압축돼 있습니다.",
+  "ctx": " 절대자인 이중적 인물입니다.\"},   4:{src:\"ko\", note:"
+ },
+ "js_086": {
+  "t": "병태는 공무원 아버지의 좌천으로 서울에서 시골로 전학 와요. 화려한 도시와 초라한 시골의 낙차가 갈등의 씨앗이 됩니다.",
+  "ctx": "괴가 통째로 압축돼 있습니다.\"},   5:{src:\"ko\", note:"
+ },
+ "js_087": {
+  "t": "석대의 직책은 급장(반장)이에요. 담임이 위임한 이 작은 권한이 폭력·상납·대리시험으로 뻗어 가는 지배 도구가 됩니다.",
+  "ctx": "가 갈등의 씨앗이 됩니다.\"},   6:{src:\"namu\", note:"
+ },
+ "js_088": {
+  "t": "배경은 자유당 정권 말기의 1950년대 말이에요. 4·19 혁명 직전의 시대 공기가 교실 이야기에 겹쳐 읽힙니다.",
+  "ctx": "가는 지배 도구가 됩니다.\"},   7:{src:\"r419\", note:"
+ },
+ "js_089": {
+  "t": "석대는 폭력과 강압으로 굴종을 이끌어 내요. 겉은 질서정연하지만 속은 두려움으로 유지되는 세계입니다.",
+  "ctx": "교실 이야기에 겹쳐 읽힙니다.\"},   8:{src:\"ko\", note:"
+ },
+ "js_090": {
+  "t": "6학년 새 담임이 석대의 왕국을 무너뜨려요. 바깥에서 온 힘이 굳어 버린 질서를 흔드는 결정적 계기입니다.",
+  "ctx": "려움으로 유지되는 세계입니다.\"},   9:{src:\"ko\", note:"
+ },
+ "js_091": {
+  "t": "어른이 된 병태는 학원 강사로, 특별할 것 없는 소시민이에요. 젊은 날의 좌절과 타협이 그 뒷모습에 배어 있습니다.",
+  "ctx": " 흔드는 결정적 계기입니다.\"},   10:{src:\"ko\", note:"
+ },
+ "js_092": {
+  "t": "전학 온 교실",
+  "ctx": "*/ const MILESTONES = [   {at:0,  label:"
+ },
+ "js_093": {
+  "t": "석대의 왕국",
+  "ctx": "t:0,  label:\"전학 온 교실\"},   {at:6,  label:"
+ },
+ "js_094": {
+  "t": "고독한 저항",
+  "ctx": "at:6,  label:\"석대의 왕국\"},   {at:12, label:"
+ },
+ "js_095": {
+  "t": "굴복과 특권",
+  "ctx": "at:12, label:\"고독한 저항\"},   {at:18, label:"
+ },
+ "js_096": {
+  "t": "새 담임의 등장",
+  "ctx": "at:18, label:\"굴복과 특권\"},   {at:24, label:"
+ },
+ "js_097": {
+  "t": "무너진 영웅",
+  "ctx": ":24, label:\"새 담임의 등장\"},   {at:30, label:"
+ },
+ "js_098": {
+  "t": "보통",
+  "ctx": "]; const DIFF_LABEL = {1:[\"쉬움\",\"l1\"],2:["
+ },
+ "js_099": {
+  "t": "어려움",
+  "ctx": "LABEL = {1:[\"쉬움\",\"l1\"],2:[\"보통\",\"l2\"],3:["
+ },
+ "js_100": {
+  "t": "· 복습",
+  "ctx": "ds.size+' / '+TOTAL_Q + (attempts[id] ? "
+ },
+ "js_101": {
+  "t": "🎯 정답!",
+  "ctx": ")      verdict.textContent = firstTry ? "
+ },
+ "js_102": {
+  "t": "✅ 이제 익혔어요!",
+  "ctx": "dict.textContent = firstTry ? '🎯 정답!' : "
+ },
+ "js_103": {
+  "t": "❌ 다시 도전!",
+  "ctx": "ing.push(id);     verdict.textContent = "
+ },
+ "js_104": {
+  "t": "↻ 이 문제는 뒤에서 다시 나옵니다",
+  "ctx": "getElementById('requeue').textContent = "
+ },
+ "js_105": {
+  "t": "급장의 권력으로 반을 지배하는 폭군. 선생님에겐 모범생, 아이들에겐 절대자인 이중적 인물입니다. 일그러진 영웅 그 자체예요.",
+  "ctx": "onst CONCEPTS = [   {ic:\"👑\", h:\"엄석대\", p:"
+ },
+ "js_106": {
+  "t": "서울에서 온 전학생이자 서술자. 저항하고 고립되고 끝내 굴복하는, 지식인의 흔들리는 자화상입니다.",
+  "ctx": "\", src:\"namu\"},   {ic:\"🧑‍🎓\", h:\"한병태\", p:"
+ },
+ "js_107": {
+  "t": "교실이라는 무대",
+  "ctx": " 흔들리는 자화상입니다.\", src:\"ko\"},   {ic:\"🏫\", h:"
+ },
+ "js_108": {
+  "t": "시골 국민학교 교실 하나에 권력의 생성·유지·붕괴가 압축돼 있습니다. 좁은 공간이 곧 하나의 사회이자 나라예요.",
+  "ctx": ", src:\"ko\"},   {ic:\"🏫\", h:\"교실이라는 무대\", p:"
+ },
+ "js_109": {
+  "t": "대리시험",
+  "ctx": "나의 사회이자 나라예요.\", src:\"ko\"},   {ic:\"📝\", h:"
+ },
+ "js_110": {
+  "t": "석대의 1등 비결. 과목별 우등생이 자기 이름을 지우고 석대 이름으로 답안을 냈습니다. 권력을 떠받친 조직적 부정이에요.",
+  "ctx": "예요.\", src:\"ko\"},   {ic:\"📝\", h:\"대리시험\", p:"
+ },
+ "js_111": {
+  "t": "굴종과 상납",
+  "ctx": "받친 조직적 부정이에요.\", src:\"ko\"},   {ic:\"🙇\", h:"
+ },
+ "js_112": {
+  "t": "아이들은 먹을 것과 좋은 물건을 바치며 굴종했습니다. 작은 조공과 침묵이 쌓여 폭군의 왕국을 완성합니다.",
+  "ctx": ".\", src:\"ko\"},   {ic:\"🙇\", h:\"굴종과 상납\", p:"
+ },
+ "js_113": {
+  "t": "6학년에 부임해 석대의 부정을 폭로하고 아이들의 각성을 촉구합니다. 바깥에서 온 각성의 힘, 곧 혁명적 계기예요.",
+  "ctx": ".\", src:\"ko\"},   {ic:\"🧑‍🏫\", h:\"새 담임\", p:"
+ },
+ "js_114": {
+  "t": "왕국의 붕괴",
+  "ctx": "곧 혁명적 계기예요.\", src:\"r419\"},   {ic:\"🔥\", h:"
+ },
+ "js_115": {
+  "t": "권위가 무너지자 아이들은 앞다투어 석대를 고발합니다. 석대는 유리창을 부수고 사라지고, 대중의 이중성이 드러나요.",
+  "ctx": ", src:\"r419\"},   {ic:\"🔥\", h:\"왕국의 붕괴\", p:"
+ },
+ "js_116": {
+  "t": "정치 우화",
+  "ctx": "이중성이 드러나요.\", src:\"namu\"},   {ic:\"🕊️\", h:"
+ },
+ "js_117": {
+  "t": "교실을 빌린 독재와 순응의 알레고리. 자유당 말기와 4·19의 그림자가 겹쳐, 권력과 대중을 오늘까지 되묻게 합니다.",
+  "ctx": ", src:\"namu\"},   {ic:\"🕊️\", h:\"정치 우화\", p:"
+ },
+ "js_118": {
+  "t": "들어가며",
+  "ctx": "/* 목차(클릭하면 요약 오픈) */ const TOC = [   {n:"
+ },
+ "js_119": {
+  "t": "교실이라는 작은 나라",
+  "ctx": " 요약 오픈) */ const TOC = [   {n:\"들어가며\", t:"
+ },
+ "js_120": {
+  "t": "1987년 발표돼 그해 이상문학상을 받은 이문열의 대표 중편입니다.",
+  "ctx": " t:\"교실이라는 작은 나라\", beats:[     {e:\"📖\", x:"
+ },
+ "js_121": {
+  "t": "시골 국민학교 교실 하나를 무대로 삼은 정치 우화예요.",
+  "ctx": "문학상을 받은 이문열의 대표 중편입니다.\"},     {e:\"🏫\", x:"
+ },
+ "js_122": {
+  "t": "자유당 말기 1950년대 말, 4·19 직전의 시대 공기가 배경입니다.",
+  "ctx": "실 하나를 무대로 삼은 정치 우화예요.\"},     {e:\"🗓️\", x:"
+ },
+ "js_123": {
+  "t": "어른이 된 한병태가 지난날을 돌아보는 액자 구성이에요.",
+  "ctx": "19 직전의 시대 공기가 배경입니다.\"},     {e:\"🧑‍🎓\", x:"
+ },
+ "js_124": {
+  "t": "1부",
+  "ctx": " 한병태가 지난날을 돌아보는 액자 구성이에요.\"},   ]},   {n:"
+ },
+ "js_125": {
+  "t": "전학, 그리고 낯선 왕국",
+  "ctx": "날을 돌아보는 액자 구성이에요.\"},   ]},   {n:\"1부\", t:"
+ },
+ "js_126": {
+  "t": "공무원 아버지의 좌천으로 병태가 서울에서 시골로 전학 옵니다.",
+  "ctx": ":\"전학, 그리고 낯선 왕국\", beats:[     {e:\"🚸\", x:"
+ },
+ "js_127": {
+  "t": "반은 이미 급장 엄석대가 절대 권력으로 지배하고 있었어요.",
+  "ctx": "로 병태가 서울에서 시골로 전학 옵니다.\"},     {e:\"👑\", x:"
+ },
+ "js_128": {
+  "t": "폭력·상납·굴종으로 짜인 질서에 병태는 충격을 받습니다.",
+  "ctx": "석대가 절대 권력으로 지배하고 있었어요.\"},     {e:\"😮\", x:"
+ },
+ "js_129": {
+  "t": "부당함에 맞서 홀로 저항하기로 마음먹습니다.",
+  "ctx": "로 짜인 질서에 병태는 충격을 받습니다.\"},     {e:\"✊\", x:"
+ },
+ "js_130": {
+  "t": "2부",
+  "ctx": "\"부당함에 맞서 홀로 저항하기로 마음먹습니다.\"},   ]},   {n:"
+ },
+ "js_131": {
+  "t": "고독한 저항과 굴복",
+  "ctx": " 홀로 저항하기로 마음먹습니다.\"},   ]},   {n:\"2부\", t:"
+ },
+ "js_132": {
+  "t": "급우도 담임도 석대 편이라 병태는 철저히 고립됩니다.",
+  "ctx": ", t:\"고독한 저항과 굴복\", beats:[     {e:\"🧱\", x:"
+ },
+ "js_133": {
+  "t": "정의를 외쳐도 아무도 편들지 않는 외로움에 지쳐 갑니다.",
+  "ctx": " 석대 편이라 병태는 철저히 고립됩니다.\"},     {e:\"💧\", x:"
+ },
+ "js_134": {
+  "t": "끝내 저항을 접고 석대의 질서에 편입해 버려요.",
+  "ctx": "무도 편들지 않는 외로움에 지쳐 갑니다.\"},     {e:\"🤝\", x:"
+ },
+ "js_135": {
+  "t": "측근의 특권과 안락 — 굴복의 달콤한 대가를 누립니다.",
+  "ctx": "항을 접고 석대의 질서에 편입해 버려요.\"},     {e:\"🍬\", x:"
+ },
+ "js_136": {
+  "t": "3부",
+  "ctx": "권과 안락 — 굴복의 달콤한 대가를 누립니다.\"},   ]},   {n:"
+ },
+ "js_137": {
+  "t": "드러난 부정, 무너지는 왕국",
+  "ctx": "굴복의 달콤한 대가를 누립니다.\"},   ]},   {n:\"3부\", t:"
+ },
+ "js_138": {
+  "t": "6학년에 새 담임이 부임해 교실을 낯설게 들여다봅니다.",
+  "ctx": "난 부정, 무너지는 왕국\", beats:[     {e:\"🧑‍🏫\", x:"
+ },
+ "js_139": {
+  "t": "우등생이 석대 이름으로 답안을 낸 대리시험이 발각됩니다.",
+  "ctx": "임이 부임해 교실을 낯설게 들여다봅니다.\"},     {e:\"📝\", x:"
+ },
+ "js_140": {
+  "t": "담임은 불의에 굴복하고도 부끄러운 줄 몰랐다고 꾸짖어요.",
+  "ctx": "으로 답안을 낸 대리시험이 발각됩니다.\"},     {e:\"🗣️\", x:"
+ },
+ "js_141": {
+  "t": "권위가 무너지자 아이들이 앞다투어 석대를 고발합니다.",
+  "ctx": "복하고도 부끄러운 줄 몰랐다고 꾸짖어요.\"},     {e:\"🔥\", x:"
+ },
+ "js_142": {
+  "t": "4부",
+  "ctx": "무너지자 아이들이 앞다투어 석대를 고발합니다.\"},   ]},   {n:"
+ },
+ "js_143": {
+  "t": "사라진 석대, 남겨진 물음",
+  "ctx": "이 앞다투어 석대를 고발합니다.\"},   ]},   {n:\"4부\", t:"
+ },
+ "js_144": {
+  "t": "석대는 유리창을 부수고 학교를 떠나 사라집니다.",
+  "ctx": "\"사라진 석대, 남겨진 물음\", beats:[     {e:\"🪟\", x:"
+ },
+ "js_145": {
+  "t": "병태는 돌변한 군중 앞에서 통쾌함보다 씁쓸함을 느껴요.",
+  "ctx": "유리창을 부수고 학교를 떠나 사라집니다.\"},     {e:\"😞\", x:"
+ },
+ "js_146": {
+  "t": "세월이 흘러 병태는 평범한 소시민 어른이 됩니다.",
+  "ctx": "군중 앞에서 통쾌함보다 씁쓸함을 느껴요.\"},     {e:\"⏳\", x:"
+ },
+ "js_147": {
+  "t": "여행길에서 수갑 찬 채 끌려가는 석대를 목격합니다.",
+  "ctx": "러 병태는 평범한 소시민 어른이 됩니다.\"},     {e:\"🚉\", x:"
+ },
+ "js_148": {
+  "t": "나가며",
+  "ctx": "에서 수갑 찬 채 끌려가는 석대를 목격합니다.\"},   ]},   {n:"
+ },
+ "js_149": {
+  "t": "일그러진 영웅, 우리들의 자화상",
+  "ctx": " 끌려가는 석대를 목격합니다.\"},   ]},   {n:\"나가며\", t:"
+ },
+ "js_150": {
+  "t": "굴종과 배신 사이를 오가는 대중의 이중성을 되묻습니다.",
+  "ctx": "러진 영웅, 우리들의 자화상\", beats:[     {e:\"🤔\", x:"
+ },
+ "js_151": {
+  "t": "저항하다 굴복한 병태는 우리 안의 지식인을 비춥니다.",
+  "ctx": "이를 오가는 대중의 이중성을 되묻습니다.\"},     {e:\"🪞\", x:"
+ },
+ "js_152": {
+  "t": "독재와 순응, 4·19의 그림자가 교실 위에 겹쳐 읽혀요.",
+  "ctx": " 병태는 우리 안의 지식인을 비춥니다.\"},     {e:\"🇰🇷\", x:"
+ },
+ "js_153": {
+  "t": "까닭 모를 눈물로 끝나는 결말이 긴 여운을 남깁니다.",
+  "ctx": "19의 그림자가 교실 위에 겹쳐 읽혀요.\"},     {e:\"💧\", x:"
+ },
+ "js_154": {
+  "t": "이름이 바뀐 시험지",
+  "ctx": "해볼 사례 3 */ const CASES = [   {ic:\"📝\", t:"
+ },
+ "js_155": {
+  "t": "한 아이가 시험지 위칸의 자기 이름을 지우고 석대 이름을 써 넣는 장면이 발각됩니다. 석대 1등의 비밀, 대리시험이 드러나는 순간이에요.",
+  "ctx": " CASES = [   {ic:\"📝\", t:\"이름이 바뀐 시험지\", d:"
+ },
+ "js_156": {
+  "t": "실력이 아니라 조직된 부정이 권력을 떠받쳐 왔음을 보여 주며, 왕국이 무너지는 방아쇠가 됩니다.",
+  "ctx": "됩니다. 석대 1등의 비밀, 대리시험이 드러나는 순간이에요.\", why:"
+ },
+ "js_157": {
+  "t": "새 담임의 꾸짖음",
+  "ctx": "주며, 왕국이 무너지는 방아쇠가 됩니다.\"},   {ic:\"🗣️\", t:"
+ },
+ "js_158": {
+  "t": "새 담임은 너희는 빼앗기고도 분한 줄 몰랐고 굴복하고도 부끄러운 줄 몰랐다며 아이들을 매섭게 나무랍니다.",
+  "ctx": "쇠가 됩니다.\"},   {ic:\"🗣️\", t:\"새 담임의 꾸짖음\", d:"
+ },
+ "js_159": {
+  "t": "침묵과 굴종이 곧 공모였음을 일깨우며, 순응해 온 대중에게 책임을 되묻는 이 소설의 핵심 대사입니다.",
+  "ctx": "굴복하고도 부끄러운 줄 몰랐다며 아이들을 매섭게 나무랍니다.\", why:"
+ },
+ "js_160": {
+  "t": "수갑을 찬 석대",
+  "ctx": "책임을 되묻는 이 소설의 핵심 대사입니다.\"},   {ic:\"🚉\", t:"
+ },
+ "js_161": {
+  "t": "어른이 된 병태가 여행길에서 형사에게 붙들려 가는 석대를 봅니다. 한때의 폭군이 초라하게 끌려가는 뒷모습이에요.",
+  "ctx": "핵심 대사입니다.\"},   {ic:\"🚉\", t:\"수갑을 찬 석대\", d:"
+ },
+ "js_162": {
+  "t": "권력의 말로를 보여 주는 동시에, 병태의 까닭 모를 눈물로 청산되지 못한 지난날을 되묻게 합니다.",
+  "ctx": "대를 봅니다. 한때의 폭군이 초라하게 끌려가는 뒷모습이에요.\", why:"
+ },
+ "js_163": {
+  "t": "불의한 질서 안에서 나는 저항하는 쪽일까, 편입해 안락을 누리는 쪽일까?",
+  "ctx": "책이 우리에게 던지는 질문 3 */ const ASKS = [   {q:"
+ },
+ "js_164": {
+  "t": "병태의 굴복을 떠올려 보세요. 특권의 달콤함은 누구에게나 무서운 유혹입니다.",
+  "ctx": "서 안에서 나는 저항하는 쪽일까, 편입해 안락을 누리는 쪽일까?\", h:"
+ },
+ "js_165": {
+  "t": "석대를 무너뜨린 것이 대중 스스로가 아니라 새 담임이었다는 점은 무엇을 뜻할까?",
+  "ctx": " 보세요. 특권의 달콤함은 누구에게나 무서운 유혹입니다.\"},   {q:"
+ },
+ "js_166": {
+  "t": "바깥의 힘으로 뒤집힌 질서는 언제든 또 다른 굴종으로 이어질 수 있습니다.",
+  "ctx": "것이 대중 스스로가 아니라 새 담임이었다는 점은 무엇을 뜻할까?\", h:"
+ },
+ "js_167": {
+  "t": "어제의 충복이 오늘의 고발자가 되는 군중을 우리는 어떻게 봐야 할까?",
+  "ctx": "힌 질서는 언제든 또 다른 굴종으로 이어질 수 있습니다.\"},   {q:"
+ },
+ "js_168": {
+  "t": "순응과 배신이 한 몸일 수 있음을, 병태의 씁쓸함에 비추어 생각해 보세요.",
+  "ctx": " 충복이 오늘의 고발자가 되는 군중을 우리는 어떻게 봐야 할까?\", h:"
+ },
+ "js_169": {
+  "t": "👑 교실의 진실을 꿰뚫은 사람",
+  "ctx": ");   let rank, sub;   if(acc>=90){ rank="
+ },
+ "js_170": {
+  "t": "우리들의 일그러진 영웅을 완벽히 읽어냈습니다",
+  "ctx": "(acc>=90){ rank='👑 교실의 진실을 꿰뚫은 사람'; sub="
+ },
+ "js_171": {
+  "t": "⚖️ 불의를 읽어낸 사람",
+  "ctx": "완벽히 읽어냈습니다'; }   else if(acc>=75){ rank="
+ },
+ "js_172": {
+  "t": "핵심을 거의 다 잡았어요",
+  "ctx": " if(acc>=75){ rank='⚖️ 불의를 읽어낸 사람'; sub="
+ },
+ "js_173": {
+  "t": "🏫 교실을 다시 보는 사람",
+  "ctx": " 거의 다 잡았어요'; }   else if(acc>=55){ rank="
+ },
+ "js_174": {
+  "t": "뼈대를 익혔습니다 — 한 번 더!",
+  "ctx": "if(acc>=55){ rank='🏫 교실을 다시 보는 사람'; sub="
+ },
+ "js_175": {
+  "t": "🚸 갓 전학 온 관찰자",
+  "ctx": "b='뼈대를 익혔습니다 — 한 번 더!'; }   else { rank="
+ },
+ "js_176": {
+  "t": "반복할수록 점수가 오릅니다",
+  "ctx": "!'; }   else { rank='🚸 갓 전학 온 관찰자'; sub="
+ },
+ "js_177": {
+  "t": "완독 리포트",
+  "ctx": "onst fname = ((h2 && h2.textContent) || "
+ },
+ "js_178": {
+  "t": "한눈에 보기",
+  "ctx": "&& h2.textContent) || '완독 리포트').replace("
+ },
+ "js_179": {
+  "t": "리포트.pdf",
+  "ctx": "'완독 리포트').replace('한눈에 보기','').trim() + "
+ },
+ "js_180": {
+  "t": "📄 PDF 만드는 중…",
+  "ctx": "tn){ btn.disabled=true; btn.textContent="
+ },
+ "js_181": {
+  "t": "PDF 생성 중 문제가 발생했어요. 이 HTML 파일을 내려받아 브라우저에서 직접 열고 다시 눌러 주세요.",
+  "ctx": "     }   }).catch(function(){     alert("
+ },
+ "js_182": {
+  "t": "무료로는 <b>",
+  "ctx": "t = TOTAL_Q - fl;       msg.innerHTML = "
+ },
+ "js_183": {
+  "t": "문항</b>까지 풀 수 있어요.",
+  "ctx": "fl;       msg.innerHTML = '무료로는 <b>'+fl+"
+ },
+ "js_184": {
+  "t": "나머지 <b>",
+  "ctx": " <b>'+fl+'문항</b>까지 풀 수 있어요. ' +         "
+ },
+ "js_185": {
+  "t": "문항</b>과 <b>완독 요약 리포트</b>는 구독자 전용입니다.",
+  "ctx": ">까지 풀 수 있어요. ' +         '나머지 <b>'+rest+"
+ },
+ "js_186": {
+  "t": "지금까지 쌓은 <b>석대 왕국의 흥망 진행도</b>는 위 게이지에 그대로 남아 있어요.",
+  "ctx": "b>완독 요약 리포트</b>는 구독자 전용입니다. ' +         "
+ },
+ "js_187": {
+  "t": "<h3>완독 리포트 전체는 구독자 전용이에요</h3>",
+  "ctx": " = '<div class=\"lk-ic\">🔒</div>' +       "
+ },
+ "js_188": {
+  "t": "<p>인과의 사슬과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>",
+  "ctx": "'<h3>완독 리포트 전체는 구독자 전용이에요</h3>' +       "
+ },
+ "js_189": {
+  "t": "목차 요약 · 사례 · 질문 · 약점 복습 · PDF 저장은 구독하면 모두 열립니다.</p>",
+  "ctx": "과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>' +       "
+ },
+ "js_190": {
+  "t": "\" target=\"_blank\" rel=\"noopener\">🔑 구독하고 완독 리포트 전체 열기</a>",
+  "ctx": "     '<a class=\"cta\" href=\"' + _sub() + "
+ },
+ "js_191": {
+  "t": "우리들의",
+  "ctx": " 235, '110px serif', '#caa24b');   ctxt("
+ },
+ "js_192": {
+  "t": "일그러진 영웅",
+  "ctx": "to Serif KR\",serif', '#ffffff');   ctxt("
+ },
+ "js_193": {
+  "t": "이문열 · 이상문학상 정치우화 마스터 퀴즈",
+  "ctx": "to Serif KR\",serif', '#ffffff');   ctxt("
+ },
+ "js_194": {
+  "t": "우리들의 일그러진 영웅",
+  "ctx": "ntById('rankTitle')||{}).textContent || "
+ },
+ "js_195": {
+  "t": "📚 매일 새 책 퀴즈  ·",
+  "ctx": "(/^https?:\\/\\//,'') : '';   if(su) ctxt("
+ },
+ "js_196": {
+  "t": "우리들의_일그러진_영웅_퀴즈결과.png",
+  "ctx": "nt('a');     a.href = url; a.download = "
+ },
+ "js_197": {
+  "t": "💌 VIP 초대 —",
+  "ctx": "ursor:pointer;\";     d.textContent=(vip?"
+ },
+ "js_198": {
+  "t": "🎁 지금 이 책 풀버전 무료 오픈 중!",
+  "ctx": "\";     d.textContent=(vip?\"💌 VIP 초대 — \":"
+ },
+ "js_199": {
+  "t": "전체판(잠금 없음)으로 이동 →",
+  "ctx": "\"💌 VIP 초대 — \":\"🎁 지금 이 책 풀버전 무료 오픈 중! \")+"
+ },
+ "jst_001": {
+  "t": "무료로 풀 수 있는 문항 수",
+  "ctx": "    freeLimit: 10,           // teaser: "
+ },
+ "jst_002": {
+  "t": "아직",
+  "ctx": "3:30};    let pending = [];          // "
+ },
+ "jst_003": {
+  "t": "처음으로 정답",
+  "ctx": "};    let pending = [];          // 아직 ‘"
+ },
+ "jst_004": {
+  "t": "을 못 낸 문항 큐",
+  "ctx": "t pending = [];          // 아직 ‘처음으로 정답’"
+ },
+ "jst_005": {
+  "t": "앞에서 꺼냄",
+  "ctx": "[];          // 아직 ‘처음으로 정답’을 못 낸 문항 큐 ("
+ },
+ "jst_006": {
+  "t": "시도 횟수",
+  "ctx": "(); let attempts = {};         // id -> "
+ },
+ "jst_007": {
+  "t": "첫 시도에 틀린 문항",
+  "ctx": " 0; let firstWrongIds = new Set();   // "
+ },
+ "jst_008": {
+  "t": "약점",
+  "ctx": "rongIds = new Set();   // 첫 시도에 틀린 문항 = "
+ },
+ "jst_009": {
+  "t": "집중 복습 대상",
+  "ctx": "gIds = new Set();   // 첫 시도에 틀린 문항 = 약점("
+ },
+ "jst_010": {
+  "t": "세션 내 최고 점수",
+  "ctx": "r = null; let bestScore = 0;         // "
+ },
+ "jst_011": {
+  "t": "재도전 비교용,",
+  "ctx": "t bestScore = 0;         // 세션 내 최고 점수 ("
+ },
+ "jst_012": {
+  "t": "미사용",
+  "ctx": "   // 세션 내 최고 점수 (재도전 비교용, localStorage "
+ },
+ "jst_013": {
+  "t": "복습 정답은 절반 점수",
+  "ctx": " gain = Math.round(gain/2);          // "
+ },
+ "jst_014": {
+  "t": "콤보 보너스",
+  "ctx": " (streak>=2) ? (streak-1)*3 : 0;     // "
+ },
+ "jst_015": {
+  "t": "가 아니어도 최종적으로 익힌 것으로 카운트",
+  "ctx": " masteredIds.add(id);          // ‘처음으로’"
+ },
+ "jst_016": {
+  "t": "큐에서 제거",
+  "ctx": "운트     pending.shift();              // "
+ },
+ "jst_017": {
+  "t": "연속 정답!",
+  "ctx": "      comboEl.textContent = `🔥 ${streak}"
+ },
+ "jst_018": {
+  "t": "보너스",
+  "ctx": "tContent = `🔥 ${streak}연속 정답! +${bonus} "
+ },
+ "jst_019": {
+  "t": "약점으로 기록",
+  "ctx": "f(firstTry) firstWrongIds.add(id);   // "
+ },
+ "jst_020": {
+  "t": "왜 생각해볼 만한가",
+  "ctx": "= >${c.d}</div>       <div class= >💭 <b>"
+ },
+ "jst_021": {
+  "t": "첫 시도에 모두 정답!",
+  "ctx": " ;     list.innerHTML = `<div class= >🌟 "
+ },
+ "jst_022": {
+  "t": "약점이 없어 따로 복습할 항목이 없습니다. 멋져요.",
+  "ctx": "TML = `<div class= >🌟 첫 시도에 모두 정답!<span>"
+ },
+ "jst_023": {
+  "t": "개",
+  "ctx": " {     cnt.textContent = `(${ids.length}"
+ },
+ "jst_024": {
+  "t": "정답",
+  "ctx": "= >Q. ${q.q}</div>         <div class= >"
+ },
+ "jst_025": {
+  "t": "최고 점수 경신!",
+  "ctx": "re;     note.innerHTML = prev>0 ? `🏆 <b>"
+ },
+ "jst_026": {
+  "t": "이전",
+  "ctx": "nerHTML = prev>0 ? `🏆 <b>최고 점수 경신!</b> ("
+ },
+ "jst_027": {
+  "t": "점",
+  "ctx": "prev>0 ? `🏆 <b>최고 점수 경신!</b> (이전 ${prev}"
+ },
+ "jst_028": {
+  "t": "첫 기록",
+  "ctx": "`🏆 <b>최고 점수 경신!</b> (이전 ${prev}점)` : `🏆 "
+ },
+ "jst_029": {
+  "t": "다시 도전해 깨보세요!",
+  "ctx": "${prev}점)` : `🏆 첫 기록 <b>${score}점</b> — "
+ },
+ "jst_030": {
+  "t": "현재 최고 점수",
+  "ctx": "보세요!`;   } else {     note.innerHTML = `"
+ },
+ "jst_031": {
+  "t": "이번엔",
+  "ctx": "HTML = `현재 최고 점수 <b>${bestScore}점</b> · "
+ }
+}

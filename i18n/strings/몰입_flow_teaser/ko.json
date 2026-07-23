@@ -1,0 +1,1206 @@
+{
+ "_meta": {
+  "source": "apps/몰입_flow_teaser.html",
+  "slug": "몰입_flow_teaser"
+ },
+ "title_001": {
+  "t": "총·균·쇠 도파민 마스터 퀴즈",
+  "ctx": "<title>"
+ },
+ "html_001": {
+  "t": "미하이 칙센트미하이 · 1990 · 긍정심리학 고전",
+  "ctx": "class=\"hero\">       <div class=\"eyebrow\""
+ },
+ "html_002": {
+  "t": "몰",
+  "ctx": "   <div class=\"pillars\"><span class=\"p1\""
+ },
+ "html_003": {
+  "t": "입",
+  "ctx": "span class=\"p1\">몰</span><span class=\"p2\""
+ },
+ "html_004": {
+  "t": "삶을 최고로 만드는 최적 경험의 심리학",
+  "ctx": "ass=\"p3\">流</span></div>       <h1><small"
+ },
+ "html_005": {
+  "t": "몰입 FLOW 마스터 퀴즈",
+  "ctx": " <h1><small>삶을 최고로 만드는 최적 경험의 심리학</small"
+ },
+ "html_006": {
+  "t": "“행복은 우연히 찾아오는 것이 아니라,",
+  "ctx": "LOW 마스터 퀴즈</h1>       <div class=\"quote\""
+ },
+ "html_007": {
+  "t": "의식을 다스릴 때 스스로 만들어 가는 것이다.”",
+  "ctx": "quote\">         “행복은 우연히 찾아오는 것이 아니라,<br"
+ },
+ "html_008": {
+  "t": "— 『몰입 FLOW』의 핵심 메시지",
+  "ctx": "식을 다스릴 때 스스로 만들어 가는 것이다.”<br>         <b"
+ },
+ "html_009": {
+  "t": "행복은 다스리는 것이라는 원리·연구·키워드를",
+  "ctx": " FLOW』의 핵심 메시지</b>       </div>       <p"
+ },
+ "html_010": {
+  "t": "30개의 퀴즈",
+  "ctx": "iv>       <p>행복은 다스리는 것이라는 원리·연구·키워드를 <b"
+ },
+ "html_011": {
+  "t": "로 익힙니다.\n        쉬운 것부터 시작해 점점 어려워지고,",
+  "ctx": "p>행복은 다스리는 것이라는 원리·연구·키워드를 <b>30개의 퀴즈</b"
+ },
+ "html_012": {
+  "t": "틀린 문제는 맞힐 때까지 다시 돌아옵니다.",
+  "ctx": ">로 익힙니다.         쉬운 것부터 시작해 점점 어려워지고, <b"
+ },
+ "html_013": {
+  "t": "총",
+  "ctx": "s=\"meta-row\">         <span class=\"chip\""
+ },
+ "html_014": {
+  "t": "30문항",
+  "ctx": "ta-row\">         <span class=\"chip\">총 <b"
+ },
+ "html_015": {
+  "t": "쉬움 → 어려움",
+  "ctx": "문항</b></span>         <span class=\"chip\""
+ },
+ "html_016": {
+  "t": "실시간",
+  "ctx": "어려움</span>         <span class=\"chip\"><b"
+ },
+ "html_017": {
+  "t": "몰입 진행도",
+  "ctx": "an>         <span class=\"chip\"><b>실시간</b"
+ },
+ "html_018": {
+  "t": "문제마다",
+  "ctx": "몰입 진행도</span>         <span class=\"chip\""
+ },
+ "html_019": {
+  "t": "쉬운 해설",
+  "ctx": "span>         <span class=\"chip\">문제마다 <b"
+ },
+ "html_020": {
+  "t": "몰입 속으로 →",
+  "ctx": "=\"btn btn-primary\" onclick=\"startQuiz()\""
+ },
+ "html_021": {
+  "t": "점수",
+  "ctx": "   <div class=\"stat\"><span class=\"label\""
+ },
+ "html_022": {
+  "t": "연속 정답",
+  "ctx": "align-items:center;\"><span class=\"label\""
+ },
+ "html_023": {
+  "t": "마스터",
+  "ctx": "ign-items:flex-end;\"><span class=\"label\""
+ },
+ "html_024": {
+  "t": "흩어진 마음 ←",
+  "ctx": "\">         <div class=\"axis-label\"><span"
+ },
+ "html_025": {
+  "t": "몰입의 흐름 ·",
+  "ctx": "=\"axis-label\"><span>흩어진 마음 ←</span><span"
+ },
+ "html_026": {
+  "t": "→ 몰입",
+  "ctx": "의 흐름 · <b id=\"pctTxt\">0%</b></span><span"
+ },
+ "html_027": {
+  "t": "쉬움",
+  "ctx": "d\">         <span class=\"diff\" id=\"diff\""
+ },
+ "html_028": {
+  "t": "다음 →",
+  "ctx": "y\" id=\"nextBtn\" onclick=\"nextQuestion()\""
+ },
+ "html_029": {
+  "t": "여기까지가 무료 미리보기예요",
+  "ctx": ">     <div class=\"lk-ic\">🔒</div>     <h3"
+ },
+ "html_030": {
+  "t": "🔑 구독하고 전체 열기",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_031": {
+  "t": "요약 리포트 미리보기 →",
+  "ctx": "class=\"cta ghost\" onclick=\"openReport()\""
+ },
+ "html_032": {
+  "t": "몰입의 대가",
+  "ctx": ">       <div class=\"rank\" id=\"rankTitle\""
+ },
+ "html_033": {
+  "t": "최종 점수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_034": {
+  "t": "첫 시도 정답률",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_035": {
+  "t": "최고 연속 정답",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_036": {
+  "t": "총 도전 횟수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_037": {
+  "t": "📖 전체 요약 리포트 보기",
+  "ctx": "\"btn btn-primary\" onclick=\"openReport()\""
+ },
+ "html_038": {
+  "t": "🖼 결과 카드 저장",
+  "ctx": "btn btn-ghost\" onclick=\"makeShareCard()\""
+ },
+ "html_039": {
+  "t": "다시 도전 ↻",
+  "ctx": "ss=\"btn btn-ghost\" onclick=\"startQuiz()\""
+ },
+ "html_040": {
+  "t": "처음으로",
+  "ctx": "class=\"btn btn-ghost\" onclick=\"goHome()\""
+ },
+ "html_041": {
+  "t": "완독 리포트 · INFOGRAPHIC",
+  "ctx": "s=\"rep-hero\">       <div class=\"eyebrow\""
+ },
+ "html_042": {
+  "t": "몰입 한눈에 보기",
+  "ctx": "ow\">완독 리포트 · INFOGRAPHIC</div>       <h2"
+ },
+ "html_043": {
+  "t": "책 전체를",
+  "ctx": "</div>       <h2>몰입 한눈에 보기</h2>       <p"
+ },
+ "html_044": {
+  "t": "‘행복을 다스리는 사슬’",
+  "ctx": "    <h2>몰입 한눈에 보기</h2>       <p>책 전체를 <b"
+ },
+ "html_045": {
+  "t": "하나로 꿰면 절대 안 잊습니다. 모든 출발점은",
+  "ctx": "</h2>       <p>책 전체를 <b>‘행복을 다스리는 사슬’</b"
+ },
+ "html_046": {
+  "t": "내 주의",
+  "ctx": "스리는 사슬’</b> 하나로 꿰면 절대 안 잊습니다. 모든 출발점은 <b"
+ },
+ "html_047": {
+  "t": "입니다.",
+  "ctx": "/b> 하나로 꿰면 절대 안 잊습니다. 모든 출발점은 <b>내 주의</b"
+ },
+ "html_048": {
+  "t": "큰 전제",
+  "ctx": "<div class=\"ch step s0\"><span class=\"cn\""
+ },
+ "html_049": {
+  "t": "🌊 행복은 다스리는 것",
+  "ctx": " step s0\"><span class=\"cn\">큰 전제</span><b"
+ },
+ "html_050": {
+  "t": "행복은 우연이 아니라 의식을 다스릴 때 온다",
+  "ctx": "cn\">큰 전제</span><b>🌊 행복은 다스리는 것</b><small"
+ },
+ "html_051": {
+  "t": "1단계",
+  "ctx": "<div class=\"ch step s1\"><span class=\"cn\""
+ },
+ "html_052": {
+  "t": "⚡ 주의를 모은다",
+  "ctx": "h step s1\"><span class=\"cn\">1단계</span><b"
+ },
+ "html_053": {
+  "t": "주의 = 한정된 심리적 에너지",
+  "ctx": "ss=\"cn\">1단계</span><b>⚡ 주의를 모은다</b><small"
+ },
+ "html_054": {
+  "t": "2단계",
+  "ctx": "<div class=\"ch step s2\"><span class=\"cn\""
+ },
+ "html_055": {
+  "t": "⚖️ 도전과 역량을 맞춘다",
+  "ctx": "h step s2\"><span class=\"cn\">2단계</span><b"
+ },
+ "html_056": {
+  "t": "불안도 권태도 아닌 균형의 통로",
+  "ctx": "n\">2단계</span><b>⚖️ 도전과 역량을 맞춘다</b><small"
+ },
+ "html_057": {
+  "t": "근접 원리",
+  "ctx": "s=\"ch step s3\">         <span class=\"cn\""
+ },
+ "html_058": {
+  "t": "🌊 몰입 = 의식의 질서",
+  "ctx": "         <span class=\"cn\">근접 원리</span><b"
+ },
+ "html_059": {
+  "t": "자의식·시간이 사라진 최적 경험",
+  "ctx": "span><b>🌊 몰입 = 의식의 질서</b>         <small"
+ },
+ "html_060": {
+  "t": "결과",
+  "ctx": "<div class=\"ch step s4\"><span class=\"cn\""
+ },
+ "html_061": {
+  "t": "🌱 자아가 더 복잡하게 성장한다",
+  "ctx": "ch step s4\"><span class=\"cn\">결과</span><b"
+ },
+ "html_062": {
+  "t": "“삶 전체가 하나의 흐름이 된다”",
+  "ctx": ">결과</span><b>🌱 자아가 더 복잡하게 성장한다</b><small"
+ },
+ "html_063": {
+  "t": "핵심 개념 8",
+  "ctx": "/div>     </div>      <h3 class=\"rep-h3\""
+ },
+ "html_064": {
+  "t": "목차 한눈에 보기",
+  "ctx": "concepts\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_065": {
+  "t": "탭하면 요약이 열립니다",
+  "ctx": "ss=\"rep-h3\">목차 한눈에 보기 <span class=\"hint\""
+ },
+ "html_066": {
+  "t": "책 속, 생각해볼 사례 3",
+  "ctx": " id=\"toc\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_067": {
+  "t": "이 책이 우리에게 던지는 질문 3",
+  "ctx": "d=\"cases\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_068": {
+  "t": "내가 틀린 부분 집중 복습",
+  "ctx": " id=\"weakWrap\">       <h3 class=\"rep-h3\""
+ },
+ "html_069": {
+  "t": "📺 더 깊이 알고 싶다면",
+  "ctx": "/div>      <div class=\"deepen\">       <b"
+ },
+ "html_070": {
+  "t": "에서 칙센트미하이의 몰입 강연을 직접 볼 수 있습니다.",
+  "ctx": "f=\"#\" target=\"_blank\" rel=\"noopener\"></a"
+ },
+ "html_071": {
+  "t": "📄 PDF로 저장",
+  "ctx": "d=\"pdfBtn\" onclick=\"downloadReportPDF()\""
+ },
+ "html_072": {
+  "t": "결과로",
+  "ctx": "\"btn btn-ghost\" onclick=\"show('result')\""
+ },
+ "html_073": {
+  "t": "📚 다른 책 퀴즈 보기 →",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_074": {
+  "t": "“의미와재미공장” 미미팩토리",
+  "ctx": "class=\"footer\">     <div class=\"factory\""
+ },
+ "html_075": {
+  "t": "(주식회사 연:결 패밀리회사)",
+  "ctx": "재미공장” 미미팩토리</div>     <div class=\"affil\""
+ },
+ "html_076": {
+  "t": "책의 핵심을 도파민으로 익히는 반복 마스터 퀴즈",
+  "ctx": ":결 패밀리회사)</div>     <div class=\"tagline\""
+ },
+ "html_077": {
+  "t": "본 앱은 도서의 핵심 개념을 학습 목적으로 재구성한 2차적 학습 콘텐츠입니다. 온전한 독서 경험은 원서로 만나보세요.",
+  "ctx": "퀴즈</div>     <div class=\"copyright-note\""
+ },
+ "html_078": {
+  "t": "몰입 FLOW · 도서 정보",
+  "ctx": "d=503603\" target=\"_blank\" rel=\"noopener\""
+ },
+ "js_001": {
+  "t": "\"}))}},Hn={name:\"font-size\",initialValue:\"0\",prefix:!1,type:wt.TYPE_VALUE,format:\"length\"},In={name:\"font-weight\",initialValue:\"normal\",type:wt.VALUE,prefix:!1,parse:function(e){if(Ve(e))return e.number;if(qe(e))switch(e.value){case\"bold\":return 700;case\"normal\":default:return 400}return 400}},Pn={name:\"font-variant\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return e.filter(qe).map((function(e){return e.value}))}};!function(e){e.NORMAL=\"normal\",e.ITALIC=\"italic\",e.OBLIQUE=\"oblique\"}(Nn||(Nn={}));var On,kn={name:\"font-style\",initialValue:\"normal\",prefix:!1,type:wt.IDENT_VALUE,parse:function(e){switch(e){case\"oblique\":return Nn.OBLIQUE;case\"italic\":return Nn.ITALIC;case\"normal\":default:return Nn.NORMAL}}},Rn=function(e,t){return 0!=(e&t)},Mn={name:\"content\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){if(0===e.length)return[];var t=e[0];return t.type===d.IDENT_TOKEN&&\"none\"===t.value?[]:e}},Dn={name:\"counter-increment\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;for(var r=[],n=e.filter(We),o=0;o<n.length;o++){var s=n[o],i=n[o+1];if(s.type===d.IDENT_TOKEN){var a=i&&Ve(i)?i.number:1;r.push({counter:s.value,increment:a})}}return r}},Kn={name:\"counter-reset\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return[];for(var t=[],r=e.filter(We),n=0;n<r.length;n++){var o=r[n],s=r[n+1];if(qe(o)&&\"none\"!==o.value){var i=s&&Ve(s)?s.number:0;t.push({counter:o.value,reset:i})}}return t}},zn={name:\"quotes\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;var r=[],n=e.filter(Ge);if(n.length%2!=0)return null;for(var o=0;o<n.length;o+=2){var s=n[o].value,i=n[o+1].value;r.push({open:s,close:i})}return r}},Vn=function(e,t,r){if(!e)return\"\";var n=e[Math.min(t,e.length-1)];return n?r?n.open:n.close:\"\"},qn={name:\"box-shadow\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return 1===e.length&&Xe(e[0],\"none\")?[]:Ye(e).map((function(e){for(var t={color:255,offsetX:rt,offsetY:rt,blur:rt,spread:rt,inset:!1},r=0,n=0;n<e.length;n++){var o=e[n];Xe(o,\"inset\")?t.inset=!0:$e(o)?(0===r?t.offsetX=o:1===r?t.offsetY=o:2===r?t.blur=o:t.spread=o,r++):t.color=ft(o)}return t}))}},Gn=function(){function e(e){this.backgroundClip=Jn(xt,e.backgroundClip),this.backgroundColor=Jn(Et,e.backgroundColor),this.backgroundImage=Jn(ur,e.backgroundImage),this.backgroundOrigin=Jn(cr,e.backgroundOrigin),this.backgroundPosition=Jn(lr,e.backgroundPosition),this.backgroundRepeat=Jn(fr,e.backgroundRepeat),this.backgroundSize=Jn(mr,e.backgroundSize),this.borderTopColor=Jn(vr,e.borderTopColor),this.borderRightColor=Jn(wr,e.borderRightColor),this.borderBottomColor=Jn(br,e.borderBottomColor),this.borderLeftColor=Jn(Br,e.borderLeftColor),this.borderTopLeftRadius=Jn(_r,e.borderTopLeftRadius),this.borderTopRightRadius=Jn(Cr,e.borderTopRightRadius),this.borderBottomRightRadius=Jn(xr,e.borderBottomRightRadius),this.borderBottomLeftRadius=Jn(Er,e.borderBottomLeftRadius),this.borderTopStyle=Jn(Fr,e.borderTopStyle),this.borderRightStyle=Jn(Ur,e.borderRightStyle),this.borderBottomStyle=Jn(Sr,e.borderBottomStyle),this.borderLeftStyle=Jn(Lr,e.borderLeftStyle),this.borderTopWidth=Jn(Hr,e.borderTopWidth),this.borderRightWidth=Jn(Ir,e.borderRightWidth),this.borderBottomWidth=Jn(Pr,e.borderBottomWidth),this.borderLeftWidth=Jn(Or,e.borderLeftWidth),this.boxShadow=Jn(qn,e.boxShadow),this.color=Jn(kr,e.color),this.display=Jn(Rr,e.display),this.float=Jn(Kr,e.cssFloat),this.fontFamily=Jn(Tn,e.fontFamily),this.fontSize=Jn(Hn,e.fontSize),this.fontStyle=Jn(kn,e.fontStyle),this.fontVariant=Jn(Pn,e.fontVariant),this.fontWeight=Jn(In,e.fontWeight),this.letterSpacing=Jn(zr,e.letterSpacing),this.lineBreak=Jn(qr,e.lineBreak),this.lineHeight=Jn(Gr,e.lineHeight),this.listStyleImage=Jn(Xr,e.listStyleImage),this.listStylePosition=Jn(Jr,e.listStylePosition),this.listStyleType=Jn(Zr,e.listStyleType),this.marginTop=Jn(en,e.marginTop),this.marginRight=Jn(tn,e.marginRight),this.marginBottom=Jn(rn,e.marginBottom),this.marginLeft=Jn(nn,e.marginLeft),this.opacity=Jn(Un,e.opacity);var t=Jn(sn,e.overflow);this.overflowX=t[0],this.overflowY=t[t.length>1?1:0],this.overflowWrap=Jn(An,e.overflowWrap),this.paddingTop=Jn(cn,e.paddingTop),this.paddingRight=Jn(ln,e.paddingRight),this.paddingBottom=Jn(dn,e.paddingBottom),this.paddingLeft=Jn(fn,e.paddingLeft),this.position=Jn(gn,e.position),this.textAlign=Jn(pn,e.textAlign),this.textDecorationColor=Jn(Sn,e.textDecorationColor||e.color),this.textDecorationLine=Jn(Ln,e.textDecorationLine),this.textShadow=Jn(yn,e.textShadow),this.textTransform=Jn(wn,e.textTransform),this.transform=Jn(bn,e.transform),this.transformOrigin=Jn(Cn,e.transformOrigin),this.visibility=Jn(En,e.visibility),this.wordBreak=Jn(Qn,e.wordBreak),this.zIndex=Jn(Fn,e.zIndex)}return e.prototype.isVisible=function(){return this.display>0&&this.opacity>0&&this.visibility===vn.VISIBLE},e.prototype.isTransparent=function(){return ht(this.backgroundColor)},e.prototype.isTransformed=function(){return null!==this.transform},e.prototype.isPositioned=function(){return this.position!==hn.STATIC},e.prototype.isPositionedWithZIndex=function(){return this.isPositioned()&&!this.zIndex.auto},e.prototype.isFloating=function(){return this.float!==Nr.NONE},e.prototype.isInlineLevel=function(){return Rn(this.display,4)||Rn(this.display,33554432)||Rn(this.display,268435456)||Rn(this.display,536870912)||Rn(this.display,67108864)||Rn(this.display,134217728)},e}(),Xn=function(e){this.content=Jn(Mn,e.content),this.quotes=Jn(zn,e.quotes)},Wn=function(e){this.counterIncrement=Jn(Dn,e.counterIncrement),this.counterReset=Jn(Kn,e.counterReset)},Jn=function(e,t){var r=new De,n=null!=t?t.toString():e.initialValue;r.write(n);var o=new Ke(r.read());switch(e.type){case wt.IDENT_VALUE:var s=o.parseComponentValue();return e.parse(qe(s)?s.value:e.initialValue);case wt.VALUE:return e.parse(o.parseComponentValue());case wt.LIST:return e.parse(o.parseComponentValues());case wt.TOKEN_VALUE:return o.parseComponentValue();case wt.TYPE_VALUE:switch(e.format){case\"angle\":return ut(o.parseComponentValue());case\"color\":return ft(o.parseComponentValue());case\"image\":return ir(o.parseComponentValue());case\"length\":var i=o.parseComponentValue();return $e(i)?i:rt;case\"length-percentage\":var a=o.parseComponentValue();return et(a)?a:rt}}throw new Error(\"Attempting to parse unsupported css format type \"+e.format)},Yn=function(e){this.styles=new Gn(window.getComputedStyle(e,null)),this.textNodes=[],this.elements=[],null!==this.styles.transform&&So(e)&&(e.style.transform=\"none\"),this.bounds=i(e),this.flags=0},Zn=function(e,t){this.text=e,this.bounds=t},$n=function(e){var t=e.ownerDocument;if(t){var r=t.createElement(\"html2canvaswrapper\");r.appendChild(e.cloneNode(!0));var n=e.parentNode;if(n){n.replaceChild(r,e);var o=i(r);return r.firstChild&&n.replaceChild(r.firstChild,r),o}}return new s(0,0,0,0)},eo=function(e,t,r){var n=e.ownerDocument;if(!n)throw new Error(\"Node has no owner document\");var o=n.createRange();return o.setStart(e,t),o.setEnd(e,t+r),s.fromClientRect(o.getBoundingClientRect())},to=function(e,t){return 0!==t.letterSpacing?a(e).map((function(e){return A(e)})):ro(e,t)},ro=function(e,t){for(var r,n=function(e,t){var r=a(e),n=ie(r,t),o=n[0],s=n[1],i=n[2],A=r.length,u=0,c=0;return{next:function(){if(c>=A)return{done:!0,value:null};for(var e=G;c<A&&(e=se(r,s,o,++c,i))===G;);if(e!==G||c===A){var t=new ae(r,e,u,c);return u=c,{value:t,done:!1}}return{done:!0,value:null}}}}(e,{lineBreak:t.lineBreak,wordBreak:t.overflowWrap===on.BREAK_WORD?\"break-word\":t.wordBreak}),o=[];!(r=n.next()).done;)r.value&&o.push(r.value.slice());return o},no=function(e,t){this.text=oo(e.data,t.textTransform),this.textBounds=function(e,t,r){var n=to(e,t),o=[],s=0;return n.forEach((function(e){if(t.textDecorationLine.length||e.trim().length>0)if(Pt.SUPPORT_RANGE_BOUNDS)o.push(new Zn(e,eo(r,s,e.length)));else{var n=r.splitText(e.length);o.push(new Zn(e,$n(r))),r=n}else Pt.SUPPORT_RANGE_BOUNDS||(r=r.splitText(e.length));s+=e.length})),o}(this.text,t,e)},oo=function(e,t){switch(t){case mn.LOWERCASE:return e.toLowerCase();case mn.CAPITALIZE:return e.replace(so,io);case mn.UPPERCASE:return e.toUpperCase();default:return e}},so=/(^|\\s|:|-|\\(|\\))([a-z])/g,io=function(e,t,r){return e.length>0?t+r.toUpperCase():e},ao=function(e){function r(t){var r=e.call(this,t)||this;return r.src=t.currentSrc||t.src,r.intrinsicWidth=t.naturalWidth,r.intrinsicHeight=t.naturalHeight,kt.getInstance().addImage(r.src),r}return t(r,e),r}(Yn),Ao=function(e){function r(t){var r=e.call(this,t)||this;return r.canvas=t,r.intrinsicWidth=t.width,r.intrinsicHeight=t.height,r}return t(r,e),r}(Yn),uo=function(e){function r(t){var r=e.call(this,t)||this,n=new XMLSerializer;return r.svg=\"data:image/svg+xml,\"+encodeURIComponent(n.serializeToString(t)),r.intrinsicWidth=t.width.baseVal.value,r.intrinsicHeight=t.height.baseVal.value,kt.getInstance().addImage(r.svg),r}return t(r,e),r}(Yn),co=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),lo=function(e){function r(t){var r=e.call(this,t)||this;return r.start=t.start,r.reversed=\"boolean\"==typeof t.reversed&&!0===t.reversed,r}return t(r,e),r}(Yn),fo=[{type:d.DIMENSION_TOKEN,flags:0,unit:\"px\",number:3}],ho=[{type:d.PERCENTAGE_TOKEN,flags:0,number:50}],po=\"checkbox\",mo=\"radio\",go=\"password\",yo=707406591,vo=function(e){function r(t){var r,n,o,i=e.call(this,t)||this;switch(i.type=t.type.toLowerCase(),i.checked=t.checked,i.value=0===(o=(n=t).type===go?new Array(n.value.length+1).join(\"•\"):n.value).length?n.placeholder||\"\":o,i.type!==po&&i.type!==mo||(i.styles.backgroundColor=3739148031,i.styles.borderTopColor=i.styles.borderRightColor=i.styles.borderBottomColor=i.styles.borderLeftColor=2779096575,i.styles.borderTopWidth=i.styles.borderRightWidth=i.styles.borderBottomWidth=i.styles.borderLeftWidth=1,i.styles.borderTopStyle=i.styles.borderRightStyle=i.styles.borderBottomStyle=i.styles.borderLeftStyle=pr.SOLID,i.styles.backgroundClip=[bt.BORDER_BOX],i.styles.backgroundOrigin=[0],i.bounds=(r=i.bounds).width>r.height?new s(r.left+(r.width-r.height)/2,r.top,r.height,r.height):r.width<r.height?new s(r.left,r.top+(r.height-r.width)/2,r.width,r.width):r),i.type){case po:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=fo;break;case mo:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=ho}return i}return t(r,e),r}(Yn),wo=function(e){function r(t){var r=e.call(this,t)||this,n=t.options[t.selectedIndex||0];return r.value=n&&n.text||\"\",r}return t(r,e),r}(Yn),bo=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),Bo=function(e){return ft(Ke.create(e).parseComponentValue())},jo=function(e){function r(t){var r=e.call(this,t)||this;r.src=t.src,r.width=parseInt(t.width,10)||0,r.height=parseInt(t.height,10)||0,r.backgroundColor=r.styles.backgroundColor;try{if(t.contentWindow&&t.contentWindow.document&&t.contentWindow.document.documentElement){r.tree=Eo(t.contentWindow.document.documentElement);var n=t.contentWindow.document.documentElement?Bo(getComputedStyle(t.contentWindow.document.documentElement).backgroundColor):_t.TRANSPARENT,o=t.contentWindow.document.body?Bo(getComputedStyle(t.contentWindow.document.body).backgroundColor):_t.TRANSPARENT;r.backgroundColor=ht(n)?ht(o)?r.styles.backgroundColor:o:n}}catch(e){}return r}return t(r,e),r}(Yn),_o=[\"OL\",\"UL\",\"MENU\"],Co=function(e,t,r){for(var n=e.firstChild,o=void 0;n;n=o)if(o=n.nextSibling,Fo(n)&&n.data.trim().length>0)t.textNodes.push(new no(n,t.styles));else if(Uo(n)){var s=xo(n);s.styles.isVisible()&&(No(n,s,r)?s.flags|=4:Qo(s.styles)&&(s.flags|=2),-1!==_o.indexOf(n.tagName)&&(s.flags|=8),t.elements.push(s),zo(n)||Po(n)||Vo(n)||Co(n,s,r))}},xo=function(e){return Ro(e)?new ao(e):ko(e)?new Ao(e):Po(e)?new uo(e):To(e)?new co(e):Ho(e)?new lo(e):Io(e)?new vo(e):Vo(e)?new wo(e):zo(e)?new bo(e):Mo(e)?new jo(e):new Yn(e)},Eo=function(e){var t=xo(e);return t.flags|=4,Co(e,t,t),t},No=function(e,t,r){return t.styles.isPositionedWithZIndex()||t.styles.opacity<1||t.styles.isTransformed()||Oo(e)&&r.styles.isTransparent()},Qo=function(e){return e.isPositioned()||e.isFloating()},Fo=function(e){return e.nodeType===Node.TEXT_NODE},Uo=function(e){return e.nodeType===Node.ELEMENT_NODE},So=function(e){return Uo(e)&&void 0!==e.style&&!Lo(e)},Lo=function(e){return\"object\"==typeof e.className},To=function(e){return\"LI\"===e.tagName},Ho=function(e){return\"OL\"===e.tagName},Io=function(e){return\"INPUT\"===e.tagName},Po=function(e){return\"svg\"===e.tagName},Oo=function(e){return\"BODY\"===e.tagName},ko=function(e){return\"CANVAS\"===e.tagName},Ro=function(e){return\"IMG\"===e.tagName},Mo=function(e){return\"IFRAME\"===e.tagName},Do=function(e){return\"STYLE\"===e.tagName},Ko=function(e){return\"SCRIPT\"===e.tagName},zo=function(e){return\"TEXTAREA\"===e.tagName},Vo=function(e){return\"SELECT\"===e.tagName},qo=function(){function e(){this.counters={}}return e.prototype.getCounterValue=function(e){var t=this.counters[e];return t&&t.length?t[t.length-1]:1},e.prototype.getCounterValues=function(e){return this.counters[e]||[]},e.prototype.pop=function(e){var t=this;e.forEach((function(e){return t.counters[e].pop()}))},e.prototype.parse=function(e){var t=this,r=e.counterIncrement,n=e.counterReset,o=!0;null!==r&&r.forEach((function(e){var r=t.counters[e.counter];r&&0!==e.increment&&(o=!1,r[Math.max(0,r.length-1)]+=e.increment)}));var s=[];return o&&n.forEach((function(e){var r=t.counters[e.counter];s.push(e.counter),r||(r=t.counters[e.counter]=[]),r.push(e.reset)})),s},e}(),Go={integers:[1e3,900,500,400,100,90,50,40,10,9,5,4,1],values:[\"M\",\"CM\",\"D\",\"CD\",\"C\",\"XC\",\"L\",\"XL\",\"X\",\"IX\",\"V\",\"IV\",\"I\"]},Xo={integers:[9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"Ք\",\"Փ\",\"Ւ\",\"Ց\",\"Ր\",\"Տ\",\"Վ\",\"Ս\",\"Ռ\",\"Ջ\",\"Պ\",\"Չ\",\"Ո\",\"Շ\",\"Ն\",\"Յ\",\"Մ\",\"Ճ\",\"Ղ\",\"Ձ\",\"Հ\",\"Կ\",\"Ծ\",\"Խ\",\"Լ\",\"Ի\",\"Ժ\",\"Թ\",\"Ը\",\"Է\",\"Զ\",\"Ե\",\"Դ\",\"Գ\",\"Բ\",\"Ա\"]},Wo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,400,300,200,100,90,80,70,60,50,40,30,20,19,18,17,16,15,10,9,8,7,6,5,4,3,2,1],values:[\"י׳\",\"ט׳\",\"ח׳\",\"ז׳\",\"ו׳\",\"ה׳\",\"ד׳\",\"ג׳\",\"ב׳\",\"א׳\",\"ת\",\"ש\",\"ר\",\"ק\",\"צ\",\"פ\",\"ע\",\"ס\",\"נ\",\"מ\",\"ל\",\"כ\",\"יט\",\"יח\",\"יז\",\"טז\",\"טו\",\"י\",\"ט\",\"ח\",\"ז\",\"ו\",\"ה\",\"ד\",\"ג\",\"ב\",\"א\"]},Jo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"ჵ\",\"ჰ\",\"ჯ\",\"ჴ\",\"ხ\",\"ჭ\",\"წ\",\"ძ\",\"ც\",\"ჩ\",\"შ\",\"ყ\",\"ღ\",\"ქ\",\"ფ\",\"ჳ\",\"ტ\",\"ს\",\"რ\",\"ჟ\",\"პ\",\"ო\",\"ჲ\",\"ნ\",\"მ\",\"ლ\",\"კ\",\"ი\",\"თ\",\"ჱ\",\"ზ\",\"ვ\",\"ე\",\"დ\",\"გ\",\"ბ\",\"ა\"]},Yo=function(e,t,r,n,o,s){return e<t||e>r?is(e,o,s.length>0):n.integers.reduce((function(t,r,o){for(;e>=r;)e-=r,t+=n.values[o];return t}),\"\")+s},Zo=function(e,t,r,n){var o=\"\";do{r||e--,o=n(e)+o,e/=t}while(e*t>=t);return o},$o=function(e,t,r,n,o){var s=r-t+1;return(e<0?\"-\":\"\")+(Zo(Math.abs(e),s,n,(function(e){return A(Math.floor(e%s)+t)}))+o)},es=function(e,t,r){void 0===r&&(r=\". \");var n=t.length;return Zo(Math.abs(e),n,!1,(function(e){return t[Math.floor(e%n)]}))+r},ts=function(e,t,r,n,o,s){if(e<-9999||e>9999)return is(e,Wr.CJK_DECIMAL,o.length>0);var i=Math.abs(e),a=o;if(0===i)return t[0]+a;for(var A=0;i>0&&A<=4;A++){var u=i%10;0===u&&Rn(s,1)&&\"\"!==a?a=t[u]+a:u>1||1===u&&0===A||1===u&&1===A&&Rn(s,2)||1===u&&1===A&&Rn(s,4)&&e>100||1===u&&A>1&&Rn(s,8)?a=t[u]+(A>0?r[A-1]:\"\")+a:1===u&&A>0&&(a=r[A-1]+a),i=Math.floor(i/10)}return(e<0?n:\"\")+a},rs=\"十百千萬\",ns=\"拾佰仟萬\",os=\"マイナス\",ss=\"마이너스\",is=function(e,t,r){var n=r?\". \":\"\",o=r?\"、\":\"\",s=r?\", \":\"\",i=r?\" \":\"\";switch(t){case Wr.DISC:return\"•\"+i;case Wr.CIRCLE:return\"◦\"+i;case Wr.SQUARE:return\"◾\"+i;case Wr.DECIMAL_LEADING_ZERO:var a=$o(e,48,57,!0,n);return a.length<4?\"0\"+a:a;case Wr.CJK_DECIMAL:return es(e,\"〇一二三四五六七八九\",o);case Wr.LOWER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n).toLowerCase();case Wr.UPPER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n);case Wr.LOWER_GREEK:return $o(e,945,969,!1,n);case Wr.LOWER_ALPHA:return $o(e,97,122,!1,n);case Wr.UPPER_ALPHA:return $o(e,65,90,!1,n);case Wr.ARABIC_INDIC:return $o(e,1632,1641,!0,n);case Wr.ARMENIAN:case Wr.UPPER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n);case Wr.LOWER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n).toLowerCase();case Wr.BENGALI:return $o(e,2534,2543,!0,n);case Wr.CAMBODIAN:case Wr.KHMER:return $o(e,6112,6121,!0,n);case Wr.CJK_EARTHLY_BRANCH:return es(e,\"子丑寅卯辰巳午未申酉戌亥\",o);case Wr.CJK_HEAVENLY_STEM:return es(e,\"甲乙丙丁戊己庚辛壬癸\",o);case Wr.CJK_IDEOGRAPHIC:case Wr.TRAD_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"負\",o,14);case Wr.TRAD_CHINESE_FORMAL:return ts(e,\"零壹貳參肆伍陸柒捌玖\",ns,\"負\",o,15);case Wr.SIMP_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"负\",o,14);case Wr.SIMP_CHINESE_FORMAL:return ts(e,\"零壹贰叁肆伍陆柒捌玖\",ns,\"负\",o,15);case Wr.JAPANESE_INFORMAL:return ts(e,\"〇一二三四五六七八九\",\"十百千万\",os,o,0);case Wr.JAPANESE_FORMAL:return ts(e,\"零壱弐参四伍六七八九\",\"拾百千万\",os,o,7);case Wr.KOREAN_HANGUL_FORMAL:return ts(e,\"영일이삼사오육칠팔구\",\"십백천만\",ss,s,7);case Wr.KOREAN_HANJA_INFORMAL:return ts(e,\"零一二三四五六七八九\",\"十百千萬\",ss,s,0);case Wr.KOREAN_HANJA_FORMAL:return ts(e,\"零壹貳參四五六七八九\",\"拾百千\",ss,s,7);case Wr.DEVANAGARI:return $o(e,2406,2415,!0,n);case Wr.GEORGIAN:return Yo(e,1,19999,Jo,Wr.DECIMAL,n);case Wr.GUJARATI:return $o(e,2790,2799,!0,n);case Wr.GURMUKHI:return $o(e,2662,2671,!0,n);case Wr.HEBREW:return Yo(e,1,10999,Wo,Wr.DECIMAL,n);case Wr.HIRAGANA:return es(e,\"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん\");case Wr.HIRAGANA_IROHA:return es(e,\"いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす\");case Wr.KANNADA:return $o(e,3302,3311,!0,n);case Wr.KATAKANA:return es(e,\"アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン\",o);case Wr.KATAKANA_IROHA:return es(e,\"イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセス\",o);case Wr.LAO:return $o(e,3792,3801,!0,n);case Wr.MONGOLIAN:return $o(e,6160,6169,!0,n);case Wr.MYANMAR:return $o(e,4160,4169,!0,n);case Wr.ORIYA:return $o(e,2918,2927,!0,n);case Wr.PERSIAN:return $o(e,1776,1785,!0,n);case Wr.TAMIL:return $o(e,3046,3055,!0,n);case Wr.TELUGU:return $o(e,3174,3183,!0,n);case Wr.THAI:return $o(e,3664,3673,!0,n);case Wr.TIBETAN:return $o(e,3872,3881,!0,n);case Wr.DECIMAL:default:return $o(e,48,57,!0,n)}},as=\"data-html2canvas-ignore\",As=function(){function e(e,t){if(this.options=t,this.scrolledElements=[],this.referenceElement=e,this.counters=new qo,this.quoteDepth=0,!e.ownerDocument)throw new Error(\"Cloned element does not have an owner document\");this.documentElement=this.cloneNode(e.ownerDocument.documentElement)}return e.prototype.toIFrame=function(e,t){var r=this,s=cs(e,t);if(!s.contentWindow)return Promise.reject(\"Unable to find iframe window\");var i=e.defaultView.pageXOffset,a=e.defaultView.pageYOffset,A=s.contentWindow,u=A.document,c=ls(s).then((function(){return n(r,void 0,void 0,(function(){var e;return o(this,(function(r){switch(r.label){case 0:return this.scrolledElements.forEach(ps),A&&(A.scrollTo(t.left,t.top),!/(iPad|iPhone|iPod)/g.test(navigator.userAgent)||A.scrollY===t.top&&A.scrollX===t.left||(u.documentElement.style.top=-t.top+\"px\",u.documentElement.style.left=-t.left+\"px\",u.documentElement.style.position=\"absolute\")),e=this.options.onclone,void 0===this.clonedReferenceElement?[2,Promise.reject(\"Error finding the \"+this.referenceElement.nodeName+\" in the cloned document\")]:u.fonts&&u.fonts.ready?[4,u.fonts.ready]:[3,2];case 1:r.sent(),r.label=2;case 2:return\"function\"==typeof e?[2,Promise.resolve().then((function(){return e(u)})).then((function(){return s}))]:[2,s]}}))}))}));return u.open(),u.write(fs(document.doctype)+\"<html></html>\"),hs(this.referenceElement.ownerDocument,i,a),u.replaceChild(u.adoptNode(this.documentElement),u.documentElement),u.close(),c},e.prototype.createElementClone=function(e){if(ko(e))return this.createCanvasClone(e);if(Do(e))return this.createStyleClone(e);var t=e.cloneNode(!1);return Ro(t)&&\"lazy\"===t.loading&&(t.loading=\"eager\"),t},e.prototype.createStyleClone=function(e){try{var t=e.sheet;if(t&&t.cssRules){var r=[].slice.call(t.cssRules,0).reduce((function(e,t){return t&&\"string\"==typeof t.cssText?e+t.cssText:e}),\"\"),n=e.cloneNode(!1);return n.textContent=r,n}}catch(e){if(Ot.getInstance(this.options.id).error(\"Unable to access cssRules property\",e),\"SecurityError\"!==e.name)throw e}return e.cloneNode(!1)},e.prototype.createCanvasClone=function(e){if(this.options.inlineImages&&e.ownerDocument){var t=e.ownerDocument.createElement(\"img\");try{return t.src=e.toDataURL(),t}catch(e){Ot.getInstance(this.options.id).info(\"Unable to clone canvas contents, canvas is tainted\")}}var r=e.cloneNode(!1);try{r.width=e.width,r.height=e.height;var n=e.getContext(\"2d\"),o=r.getContext(\"2d\");return o&&(n?o.putImageData(n.getImageData(0,0,e.width,e.height),0,0):o.drawImage(e,0,0)),r}catch(e){}return r},e.prototype.cloneNode=function(e){if(Fo(e))return document.createTextNode(e.data);if(!e.ownerDocument)return e.cloneNode(!1);var t=e.ownerDocument.defaultView;if(t&&Uo(e)&&(So(e)||Lo(e))){var r=this.createElementClone(e),n=t.getComputedStyle(e),o=t.getComputedStyle(e,\":before\"),s=t.getComputedStyle(e,\":after\");this.referenceElement===e&&So(r)&&(this.clonedReferenceElement=r),Oo(r)&&vs(r);for(var i=this.counters.parse(new Wn(n)),a=this.resolvePseudoContent(e,r,o,On.BEFORE),A=e.firstChild;A;A=A.nextSibling)Uo(A)&&(Ko(A)||A.hasAttribute(as)||\"function\"==typeof this.options.ignoreElements&&this.options.ignoreElements(A))||this.options.copyStyles&&Uo(A)&&Do(A)||r.appendChild(this.cloneNode(A));a&&r.insertBefore(a,r.firstChild);var u=this.resolvePseudoContent(e,r,s,On.AFTER);return u&&r.appendChild(u),this.counters.pop(i),n&&(this.options.copyStyles||Lo(e))&&!Mo(e)&&ds(n,r),0===e.scrollTop&&0===e.scrollLeft||this.scrolledElements.push([r,e.scrollLeft,e.scrollTop]),(zo(e)||Vo(e))&&(zo(r)||Vo(r))&&(r.value=e.value),r}return e.cloneNode(!1)},e.prototype.resolvePseudoContent=function(e,t,r,n){var o=this;if(r){var s=r.content,i=t.ownerDocument;if(i&&s&&\"none\"!==s&&\"-moz-alt-content\"!==s&&\"none\"!==r.display){this.counters.parse(new Wn(r));var a=new Xn(r),A=i.createElement(\"html2canvaspseudoelement\");ds(r,A),a.content.forEach((function(t){if(t.type===d.STRING_TOKEN)A.appendChild(i.createTextNode(t.value));else if(t.type===d.URL_TOKEN){var r=i.createElement(\"img\");r.src=t.value,r.style.opacity=\"1\",A.appendChild(r)}else if(t.type===d.FUNCTION){if(\"attr\"===t.name){var n=t.values.filter(qe);n.length&&A.appendChild(i.createTextNode(e.getAttribute(n[0].value)||\"\"))}else if(\"counter\"===t.name){var s=t.values.filter(Je),u=s[0],c=s[1];if(u&&qe(u)){var l=o.counters.getCounterValue(u.value),f=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL;A.appendChild(i.createTextNode(is(l,f,!1)))}}else if(\"counters\"===t.name){var h=t.values.filter(Je),p=(u=h[0],h[1]);if(c=h[2],u&&qe(u)){var m=o.counters.getCounterValues(u.value),g=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL,y=p&&p.type===d.STRING_TOKEN?p.value:\"\",v=m.map((function(e){return is(e,g,!1)})).join(y);A.appendChild(i.createTextNode(v))}}}else if(t.type===d.IDENT_TOKEN)switch(t.value){case\"open-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,o.quoteDepth++,!0)));break;case\"close-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,--o.quoteDepth,!1)));break;default:A.appendChild(i.createTextNode(t.value))}})),A.className=ms+\" \"+gs;var u=n===On.BEFORE?\" \"+ms:\" \"+gs;return Lo(t)?t.className.baseValue+=u:t.className+=u,A}}},e.destroy=function(e){return!!e.parentNode&&(e.parentNode.removeChild(e),!0)},e}();!function(e){e[e.BEFORE=0]=\"BEFORE\",e[e.AFTER=1]=\"AFTER\"}(On||(On={}));var us,cs=function(e,t){var r=e.createElement(\"iframe\");return r.className=\"html2canvas-container\",r.style.visibility=\"hidden\",r.style.position=\"fixed\",r.style.left=\"-10000px\",r.style.top=\"0px\",r.style.border=\"0\",r.width=t.width.toString(),r.height=t.height.toString(),r.scrolling=\"no\",r.setAttribute(as,\"true\"),e.body.appendChild(r),r},ls=function(e){return new Promise((function(t,r){var n=e.contentWindow;if(!n)return r(\"No window assigned for iframe\");var o=n.document;n.onload=e.onload=o.onreadystatechange=function(){n.onload=e.onload=o.onreadystatechange=null;var r=setInterval((function(){o.body.childNodes.length>0&&\"complete\"===o.readyState&&(clearInterval(r),t(e))}),50)}}))},ds=function(e,t){for(var r=e.length-1;r>=0;r--){var n=e.item(r);\"content\"!==n&&t.style.setProperty(n,e.getPropertyValue(n))}return t},fs=function(e){var t=\"\";return e&&(t+=\"<!DOCTYPE \",e.name&&(t+=e.name),e.internalSubset&&(t+=e.internalSubset),e.publicId&&(t+=",
+  "ctx": "n(e){return-1===e.indexOf(\" \")?e:\"'\"+e+\""
+ },
+ "js_002": {
+  "t": "2026-07-17 · 몰입 FLOW",
+  "ctx": "dium=app&utm_campaign=flow\",   edition: "
+ },
+ "js_003": {
+  "t": "저자",
+  "ctx": "nst QUESTIONS = [   {id:1, level:1, tag:"
+ },
+ "js_004": {
+  "t": "『몰입 FLOW』를 쓴 긍정심리학의 대가는 누구일까요?",
+  "ctx": "TIONS = [   {id:1, level:1, tag:\"저자\", q:"
+ },
+ "js_005": {
+  "t": "미하이 칙센트미하이",
+  "ctx": "』를 쓴 긍정심리학의 대가는 누구일까요?\",    options:[{t:"
+ },
+ "js_006": {
+  "t": "행동경제학자 대니얼 카너먼",
+  "ctx": "   options:[{t:\"미하이 칙센트미하이\",ok:true},{t:"
+ },
+ "js_007": {
+  "t": "긍정심리학자 마틴 셀리그먼",
+  "ctx": "센트미하이\",ok:true},{t:\"행동경제학자 대니얼 카너먼\"},{t:"
+ },
+ "js_008": {
+  "t": "욕구 이론의 에이브러햄 매슬로",
+  "ctx": "동경제학자 대니얼 카너먼\"},{t:\"긍정심리학자 마틴 셀리그먼\"},{t:"
+ },
+ "js_009": {
+  "t": "<b>미하이 칙센트미하이</b>는 시카고대 심리학자로, 무언가에 완전히 빠져드는 <b>몰입(flow)</b> 이론을 창시했습니다.",
+  "ctx": " 셀리그먼\"},{t:\"욕구 이론의 에이브러햄 매슬로\"}],    ctx:"
+ },
+ "js_010": {
+  "t": "핵심",
+  "ctx": "b> 이론을 창시했습니다.\"},   {id:2, level:1, tag:"
+ },
+ "js_011": {
+  "t": "이 책의 핵심 주장을 한마디로 하면 무엇일까요?",
+  "ctx": "시했습니다.\"},   {id:2, level:1, tag:\"핵심\", q:"
+ },
+ "js_012": {
+  "t": "행복은 우연이 아니라 의식을 다스릴 때 스스로 만드는 것이다",
+  "ctx": " 핵심 주장을 한마디로 하면 무엇일까요?\",    options:[{t:"
+ },
+ "js_013": {
+  "t": "행복은 결국 타고난 성격과 재물이 거의 다 결정하는 것이다",
+  "ctx": " 아니라 의식을 다스릴 때 스스로 만드는 것이다\",ok:true},{t:"
+ },
+ "js_014": {
+  "t": "행복은 바깥에서 주어질 때까지 조용히 기다려야 하는 것이다",
+  "ctx": ":\"행복은 결국 타고난 성격과 재물이 거의 다 결정하는 것이다\"},{t:"
+ },
+ "js_015": {
+  "t": "행복은 남과 비교해 앞설 때 비로소 찾아오는 것이다",
+  "ctx": ":\"행복은 바깥에서 주어질 때까지 조용히 기다려야 하는 것이다\"},{t:"
+ },
+ "js_016": {
+  "t": "이 책은 <b>행복이 저절로 오는 것이 아니라</b>, 내면의 경험을 스스로 다스릴 때 만들어진다고 말합니다.",
+  "ctx": "행복은 남과 비교해 앞설 때 비로소 찾아오는 것이다\"}],    ctx:"
+ },
+ "js_017": {
+  "t": "몰입 정의",
+  "ctx": "때 만들어진다고 말합니다.\"},   {id:3, level:1, tag:"
+ },
+ "js_018": {
+  "t": "몰입(flow)이란 어떤 상태를 뜻할까요?",
+  "ctx": "니다.\"},   {id:3, level:1, tag:\"몰입 정의\", q:"
+ },
+ "js_019": {
+  "t": "하는 일에 완전히 빠져 시간과 자아마저 잊는 최적 경험",
+  "ctx": "입(flow)이란 어떤 상태를 뜻할까요?\",    options:[{t:"
+ },
+ "js_020": {
+  "t": "아무 생각도 하지 않고 편하게 늘어져 마냥 푹 쉬고 있는 상태",
+  "ctx": "에 완전히 빠져 시간과 자아마저 잊는 최적 경험\",ok:true},{t:"
+ },
+ "js_021": {
+  "t": "여러 가지 일을 한꺼번에 아주 빠른 속도로 처리하는 멀티태스킹 상태",
+  "ctx": "아무 생각도 하지 않고 편하게 늘어져 마냥 푹 쉬고 있는 상태\"},{t:"
+ },
+ "js_022": {
+  "t": "남의 시선을 강하게 의식하며 잔뜩 긴장한 채 굳어 있는 상태",
+  "ctx": "가지 일을 한꺼번에 아주 빠른 속도로 처리하는 멀티태스킹 상태\"},{t:"
+ },
+ "js_023": {
+  "t": "<b>몰입</b>은 하는 일에 푹 빠져 시간·공간·자기 자신마저 잊는 <b>최적 경험(optimal experience)</b>이에요.",
+  "ctx": "을 강하게 의식하며 잔뜩 긴장한 채 굳어 있는 상태\"}],    ctx:"
+ },
+ "js_024": {
+  "t": "원제",
+  "ctx": "ience)</b>이에요.\"},   {id:4, level:1, tag:"
+ },
+ "js_025": {
+  "t": "원제 Flow: The Psychology of Optimal Experience가 강조하는 것은?",
+  "ctx": "b>이에요.\"},   {id:4, level:1, tag:\"원제\", q:"
+ },
+ "js_026": {
+  "t": "가장 좋은 경험, 곧 최적 경험의 심리학",
+  "ctx": "l Experience가 강조하는 것은?\",    options:[{t:"
+ },
+ "js_027": {
+  "t": "성공한 사람들의 남다른 생활 습관에 대한 분석",
+  "ctx": "{t:\"가장 좋은 경험, 곧 최적 경험의 심리학\",ok:true},{t:"
+ },
+ "js_028": {
+  "t": "일상의 스트레스를 없애 주는 휴식과 이완의 기술",
+  "ctx": "rue},{t:\"성공한 사람들의 남다른 생활 습관에 대한 분석\"},{t:"
+ },
+ "js_029": {
+  "t": "돈을 더 많이 버는 방법에 대한 경제적 심리",
+  "ctx": "석\"},{t:\"일상의 스트레스를 없애 주는 휴식과 이완의 기술\"},{t:"
+ },
+ "js_030": {
+  "t": "원제의 방점은 <b>최적 경험(optimal experience)</b>이에요. 인간이 언제 가장 충만하게 사는지를 다룹니다.",
+  "ctx": "{t:\"돈을 더 많이 버는 방법에 대한 경제적 심리\"}],    ctx:"
+ },
+ "js_031": {
+  "t": "행복의 출처",
+  "ctx": "만하게 사는지를 다룹니다.\"},   {id:5, level:1, tag:"
+ },
+ "js_032": {
+  "t": "칙센트미하이가 말한 진정한 행복은 어디서 온다고 했을까요?",
+  "ctx": "다.\"},   {id:5, level:1, tag:\"행복의 출처\", q:"
+ },
+ "js_033": {
+  "t": "바깥 사건이 아니라 내면의 경험을 다스리는 데서 온다",
+  "ctx": " 진정한 행복은 어디서 온다고 했을까요?\",    options:[{t:"
+ },
+ "js_034": {
+  "t": "좋은 운과 우연한 행운이 겹쳐 찾아올 때 온다",
+  "ctx": "사건이 아니라 내면의 경험을 다스리는 데서 온다\",ok:true},{t:"
+ },
+ "js_035": {
+  "t": "남들이 부러워할 성공을 이뤘을 때 비로소 온다",
+  "ctx": "rue},{t:\"좋은 운과 우연한 행운이 겹쳐 찾아올 때 온다\"},{t:"
+ },
+ "js_036": {
+  "t": "아무 걱정 없이 편히 쉴 수 있을 때 저절로 온다",
+  "ctx": "온다\"},{t:\"남들이 부러워할 성공을 이뤘을 때 비로소 온다\"},{t:"
+ },
+ "js_037": {
+  "t": "행복은 밖에서 오는 게 아니라 <b>내면의 경험을 어떻게 다스리느냐</b>에 달렸다는 것이 이 책의 대전제예요.",
+  "ctx": "\"아무 걱정 없이 편히 쉴 수 있을 때 저절로 온다\"}],    ctx:"
+ },
+ "js_038": {
+  "t": "최고의 순간",
+  "ctx": "것이 이 책의 대전제예요.\"},   {id:6, level:1, tag:"
+ },
+ "js_039": {
+  "t": "삶의 최고의 순간은 대개 언제 찾아온다고 했을까요?",
+  "ctx": "요.\"},   {id:6, level:1, tag:\"최고의 순간\", q:"
+ },
+ "js_040": {
+  "t": "몸과 마음을 한계까지 밀어붙여 어려운 일을 해낼 때",
+  "ctx": " 순간은 대개 언제 찾아온다고 했을까요?\",    options:[{t:"
+ },
+ "js_041": {
+  "t": "아무 일도 하지 않고 편안히 쉬며 즐길 때",
+  "ctx": " 마음을 한계까지 밀어붙여 어려운 일을 해낼 때\",ok:true},{t:"
+ },
+ "js_042": {
+  "t": "남에게 인정받고 크게 칭찬을 들었을 때",
+  "ctx": ":true},{t:\"아무 일도 하지 않고 편안히 쉬며 즐길 때\"},{t:"
+ },
+ "js_043": {
+  "t": "원하던 물건을 손에 넣어 만족했을 때",
+  "ctx": "며 즐길 때\"},{t:\"남에게 인정받고 크게 칭찬을 들었을 때\"},{t:"
+ },
+ "js_044": {
+  "t": "최고의 순간은 편한 휴식이 아니라 <b>스스로 원해서 어려운 일에 몸과 마음을 다 쏟을 때</b> 찾아옵니다.",
+  "ctx": "때\"},{t:\"원하던 물건을 손에 넣어 만족했을 때\"}],    ctx:"
+ },
+ "js_045": {
+  "t": "자기목적적",
+  "ctx": "을 때</b> 찾아옵니다.\"},   {id:7, level:1, tag:"
+ },
+ "js_046": {
+  "t": "활동 그 자체가 보상이 되는 경험을 뜻하는 말은 무엇일까요?",
+  "ctx": "니다.\"},   {id:7, level:1, tag:\"자기목적적\", q:"
+ },
+ "js_047": {
+  "t": "자기목적적(autotelic) 경험",
+  "ctx": "이 되는 경험을 뜻하는 말은 무엇일까요?\",    options:[{t:"
+ },
+ "js_048": {
+  "t": "돈과 인정 같은 외재적 보상을 좇는 경험",
+  "ctx": "s:[{t:\"자기목적적(autotelic) 경험\",ok:true},{t:"
+ },
+ "js_049": {
+  "t": "가만히 받아들이기만 하는 수동적 소비 경험",
+  "ctx": "k:true},{t:\"돈과 인정 같은 외재적 보상을 좇는 경험\"},{t:"
+ },
+ "js_050": {
+  "t": "금세 사라져 버리는 일시적 쾌락의 경험",
+  "ctx": "는 경험\"},{t:\"가만히 받아들이기만 하는 수동적 소비 경험\"},{t:"
+ },
+ "js_051": {
+  "t": "<b>자기목적적(autotelic) 경험</b> = 결과나 대가가 아니라 <b>그 일을 하는 것 자체</b>가 보상이 되는 경험이에요.",
+  "ctx": "\"},{t:\"금세 사라져 버리는 일시적 쾌락의 경험\"}],    ctx:"
+ },
+ "js_052": {
+  "t": "어원",
+  "ctx": " 보상이 되는 경험이에요.\"},   {id:8, level:1, tag:"
+ },
+ "js_053": {
+  "t": "자기목적적(autotelic)이라는 말의 어원으로 알맞은 것은?",
+  "ctx": "경험이에요.\"},   {id:8, level:1, tag:\"어원\", q:"
+ },
+ "js_054": {
+  "t": "스스로(auto)와 목적(telos)의 결합",
+  "ctx": "ic)이라는 말의 어원으로 알맞은 것은?\",    options:[{t:"
+ },
+ "js_055": {
+  "t": "함께(syn)와 느낌(pathos)이 결합한 말",
+  "ctx": ":\"스스로(auto)와 목적(telos)의 결합\",ok:true},{t:"
+ },
+ "js_056": {
+  "t": "바깥(exo)과 힘(dynamis)이 결합한 말",
+  "ctx": "ue},{t:\"함께(syn)와 느낌(pathos)이 결합한 말\"},{t:"
+ },
+ "js_057": {
+  "t": "많음(poly)과 앎(logos)이 결합한 말",
+  "ctx": "말\"},{t:\"바깥(exo)과 힘(dynamis)이 결합한 말\"},{t:"
+ },
+ "js_058": {
+  "t": "autotelic은 그리스어 <b>auto(스스로) + telos(목적)</b> — 일 자체가 목적인 활동을 가리킵니다.",
+  "ctx": "t:\"많음(poly)과 앎(logos)이 결합한 말\"}],    ctx:"
+ },
+ "js_059": {
+  "t": "몰입 조건",
+  "ctx": "목적인 활동을 가리킵니다.\"},   {id:9, level:1, tag:"
+ },
+ "js_060": {
+  "t": "몰입은 주로 언제 일어난다고 했을까요?",
+  "ctx": "니다.\"},   {id:9, level:1, tag:\"몰입 조건\", q:"
+ },
+ "js_061": {
+  "t": "도전 과제와 자신의 역량이 균형을 이룰 때",
+  "ctx": "\"몰입은 주로 언제 일어난다고 했을까요?\",    options:[{t:"
+ },
+ "js_062": {
+  "t": "도전 과제는 전혀 없고 역량만 넘쳐날 때",
+  "ctx": "t:\"도전 과제와 자신의 역량이 균형을 이룰 때\",ok:true},{t:"
+ },
+ "js_063": {
+  "t": "역량은 한참 부족한데 도전만 거세게 밀려올 때",
+  "ctx": "k:true},{t:\"도전 과제는 전혀 없고 역량만 넘쳐날 때\"},{t:"
+ },
+ "js_064": {
+  "t": "도전도 역량도 모두 바닥까지 낮게 가라앉을 때",
+  "ctx": " 때\"},{t:\"역량은 한참 부족한데 도전만 거세게 밀려올 때\"},{t:"
+ },
+ "js_065": {
+  "t": "몰입은 <b>도전(challenge)과 역량(skill)이 팽팽히 맞물릴 때</b> 열려요. 어느 한쪽으로 크게 기울면 깨집니다.",
+  "ctx": "t:\"도전도 역량도 모두 바닥까지 낮게 가라앉을 때\"}],    ctx:"
+ },
+ "js_066": {
+  "t": "주의",
+  "ctx": " 크게 기울면 깨집니다.\"},   {id:10, level:1, tag:"
+ },
+ "js_067": {
+  "t": "칙센트미하이가 삶을 빚는 심리적 에너지라 부른 것은 무엇일까요?",
+  "ctx": "깨집니다.\"},   {id:10, level:1, tag:\"주의\", q:"
+ },
+ "js_068": {
+  "t": "주의(attention)",
+  "ctx": " 심리적 에너지라 부른 것은 무엇일까요?\",    options:[{t:"
+ },
+ "js_069": {
+  "t": "과거를 담아 두는 기억의 저장고",
+  "ctx": "options:[{t:\"주의(attention)\",ok:true},{t:"
+ },
+ "js_070": {
+  "t": "타고나 바꾸기 어려운 본능",
+  "ctx": "n)\",ok:true},{t:\"과거를 담아 두는 기억의 저장고\"},{t:"
+ },
+ "js_071": {
+  "t": "순간순간 요동치는 감정과 기분",
+  "ctx": "담아 두는 기억의 저장고\"},{t:\"타고나 바꾸기 어려운 본능\"},{t:"
+ },
+ "js_072": {
+  "t": "<b>주의(attention)</b>는 한정된 심리적 에너지예요. 그것을 어디에 쓰느냐가 곧 우리 삶을 만듭니다.",
+  "ctx": "려운 본능\"},{t:\"순간순간 요동치는 감정과 기분\"}],    ctx:"
+ },
+ "js_073": {
+  "t": "알라딘 「몰입 Flow」 도서정보",
+  "ctx": " */ const SOURCES = {   ko:      {label:"
+ },
+ "js_074": {
+  "t": "교보문고 「몰입, FLOW」 도서정보",
+  "ctx": "aspx?ItemId=503603\"},   kyobo:   {label:"
+ },
+ "js_075": {
+  "t": "위키백과 「몰입(심리학)」",
+  "ctx": "y_Csikszentmihalyi\"},   kowiki:  {label:"
+ },
+ "js_076": {
+  "t": "https://ko.wikipedia.org/wiki/몰입",
+  "ctx": "  kowiki:  {label:\"위키백과 「몰입(심리학)」\", url:"
+ },
+ "js_077": {
+  "t": "나무위키 「flow(몰입)」",
+  "ctx": "ipedia.org/wiki/몰입\"},   namu:    {label:"
+ },
+ "js_078": {
+  "t": "https://namu.wiki/w/flow(몰입)",
+  "ctx": " namu:    {label:\"나무위키 「flow(몰입)」\", url:"
+ },
+ "js_079": {
+  "t": "미하이 칙센트미하이 TED · Flow, the secret to happiness",
+  "ctx": "mu.wiki/w/flow(몰입)\"},   ebs:     {label:"
+ },
+ "js_080": {
+  "t": "미하이 칙센트미하이(1934~2021)는 헝가리 출신 심리학자로 시카고대 교수를 지냈어요. 긍정심리학의 창시자 중 한 명으로 평생 창의성과 행복을 연구했습니다.",
+  "ctx": "const EXTRA = {   1:{src:\"author\", note:"
+ },
+ "js_081": {
+  "t": "이 책의 사고 전환 = ‘행복은 주어지는 것’에서 ‘행복은 다스리는 것’으로. 열쇠는 바깥 조건이 아니라 내면의 경험을 스스로 정돈하는 힘이에요.",
+  "ctx": "창의성과 행복을 연구했습니다.\"},   2:{src:\"ko\", note:"
+ },
+ "js_082": {
+  "t": "몰입은 흔히 ‘무아지경’ ‘물아일체’ ‘존(zone)에 든다’로도 불려요. 하는 일과 하나가 되어 자기 자신마저 잊는 상태입니다.",
+  "ctx": "스스로 정돈하는 힘이에요.\"},   3:{src:\"flow\", note:"
+ },
+ "js_083": {
+  "t": "원제의 핵심은 ‘최적 경험’. 쾌락(pleasure)이 아니라, 몸과 마음을 다 써서 얻는 깊은 즐거움(enjoyment)이 삶의 질을 만든다고 봅니다.",
+  "ctx": "기 자신마저 잊는 상태입니다.\"},   4:{src:\"en\", note:"
+ },
+ "js_084": {
+  "t": "행복은 재물·운이 아니라 의식을 다스리는 데서 옵니다. 같은 사건도 어떻게 해석하고 주의를 두느냐에 따라 삶의 질이 달라져요.",
+  "ctx": "질을 만든다고 봅니다.\"},   5:{src:\"kowiki\", note:"
+ },
+ "js_085": {
+  "t": "최고의 순간은 편한 휴식이 아니라 ‘자발적으로 어려운 일에 몸과 마음을 한계까지 쓰는’ 순간에 옵니다. 노력 없는 행복은 오래가지 않아요.",
+  "ctx": "에 따라 삶의 질이 달라져요.\"},   6:{src:\"en\", note:"
+ },
+ "js_086": {
+  "t": "자기목적적(autotelic) 경험은 돈·인정 같은 외적 보상 없이도 그 일 자체가 즐거워 계속하게 되는 경험이에요. 몰입의 핵심 성질입니다.",
+  "ctx": " 행복은 오래가지 않아요.\"},   7:{src:\"namu\", note:"
+ },
+ "js_087": {
+  "t": "autotelic = auto(스스로) + telos(목적). 목적이 활동 바깥이 아니라 활동 그 자체에 있다는 뜻이에요.",
+  "ctx": " 몰입의 핵심 성질입니다.\"},   8:{src:\"flow\", note:"
+ },
+ "js_088": {
+  "t": "몰입은 도전과 역량이 팽팽할 때 열려요. 도전이 너무 크면 불안, 역량이 너무 크면 권태 — 둘이 맞물리는 좁은 통로가 몰입입니다.",
+  "ctx": "체에 있다는 뜻이에요.\"},   9:{src:\"kowiki\", note:"
+ },
+ "js_089": {
+  "t": "주의는 한정된 자원이에요. 하루에 처리할 수 있는 정보량은 제한돼 있어, 그 주의를 어디에 쓰느냐가 곧 그 사람의 삶이 됩니다.",
+  "ctx": "는 좁은 통로가 몰입입니다.\"},   10:{src:\"ko\", note:"
+ },
+ "js_090": {
+  "t": "흩어진 마음",
+  "ctx": "*/ const MILESTONES = [   {at:0,  label:"
+ },
+ "js_091": {
+  "t": "주의 모으기",
+  "ctx": "at:0,  label:\"흩어진 마음\"},   {at:6,  label:"
+ },
+ "js_092": {
+  "t": "도전 만나기",
+  "ctx": "at:6,  label:\"주의 모으기\"},   {at:12, label:"
+ },
+ "js_093": {
+  "t": "흐름에 들다",
+  "ctx": "at:12, label:\"도전 만나기\"},   {at:18, label:"
+ },
+ "js_094": {
+  "t": "자아를 잊다",
+  "ctx": "at:18, label:\"흐름에 들다\"},   {at:24, label:"
+ },
+ "js_095": {
+  "t": "삶이 몰입이 되다",
+  "ctx": "at:24, label:\"자아를 잊다\"},   {at:30, label:"
+ },
+ "js_096": {
+  "t": "보통",
+  "ctx": "]; const DIFF_LABEL = {1:[\"쉬움\",\"l1\"],2:["
+ },
+ "js_097": {
+  "t": "어려움",
+  "ctx": "LABEL = {1:[\"쉬움\",\"l1\"],2:[\"보통\",\"l2\"],3:["
+ },
+ "js_098": {
+  "t": "· 복습",
+  "ctx": "ds.size+' / '+TOTAL_Q + (attempts[id] ? "
+ },
+ "js_099": {
+  "t": "🎯 정답!",
+  "ctx": ")      verdict.textContent = firstTry ? "
+ },
+ "js_100": {
+  "t": "✅ 이제 익혔어요!",
+  "ctx": "dict.textContent = firstTry ? '🎯 정답!' : "
+ },
+ "js_101": {
+  "t": "❌ 다시 도전!",
+  "ctx": "ing.push(id);     verdict.textContent = "
+ },
+ "js_102": {
+  "t": "↻ 이 문제는 뒤에서 다시 나옵니다",
+  "ctx": "getElementById('requeue').textContent = "
+ },
+ "js_103": {
+  "t": "몰입(flow)",
+  "ctx": "==== */ const CONCEPTS = [   {ic:\"🌊\", h:"
+ },
+ "js_104": {
+  "t": "하는 일에 완전히 빠져 시간·자아마저 잊는 최적 경험. 존(zone)에 든 상태로, 이 책의 심장입니다.",
+  "ctx": "CONCEPTS = [   {ic:\"🌊\", h:\"몰입(flow)\", p:"
+ },
+ "js_105": {
+  "t": "도전과 역량의 균형",
+  "ctx": " 책의 심장입니다.\", src:\"flow\"},   {ic:\"⚖️\", h:"
+ },
+ "js_106": {
+  "t": "도전>역량이면 불안, 역량>도전이면 권태. 둘이 팽팽히 맞물리는 좁은 통로에서 몰입이 열립니다.",
+  "ctx": ":\"flow\"},   {ic:\"⚖️\", h:\"도전과 역량의 균형\", p:"
+ },
+ "js_107": {
+  "t": "주의라는 심리적 에너지",
+  "ctx": "몰입이 열립니다.\", src:\"kowiki\"},   {ic:\"⚡\", h:"
+ },
+ "js_108": {
+  "t": "주의는 한정된 자원. 무엇에 주의를 쓰느냐가 곧 그 사람의 삶이 됩니다.",
+  "ctx": "owiki\"},   {ic:\"⚡\", h:\"주의라는 심리적 에너지\", p:"
+ },
+ "js_109": {
+  "t": "심리적 엔트로피",
+  "ctx": "그 사람의 삶이 됩니다.\", src:\"ko\"},   {ic:\"🌀\", h:"
+ },
+ "js_110": {
+  "t": "목표와 어긋나는 정보(걱정·두려움)가 의식을 어지럽히는 무질서. 몰입은 그 반대인 의식의 질서예요.",
+  "ctx": ", src:\"ko\"},   {ic:\"🌀\", h:\"심리적 엔트로피\", p:"
+ },
+ "js_111": {
+  "t": "자기목적적 경험",
+  "ctx": "반대인 의식의 질서예요.\", src:\"en\"},   {ic:\"🎭\", h:"
+ },
+ "js_112": {
+  "t": "결과가 아니라 활동 그 자체가 보상이 되는 경험. auto(스스로)+telos(목적)에서 왔습니다.",
+  "ctx": ", src:\"en\"},   {ic:\"🎭\", h:\"자기목적적 경험\", p:"
+ },
+ "js_113": {
+  "t": "시간의 왜곡",
+  "ctx": "목적)에서 왔습니다.\", src:\"namu\"},   {ic:\"⏳\", h:"
+ },
+ "js_114": {
+  "t": "몰입하면 시간 감각이 달라져요. 몇 시간이 순식간처럼, 때로는 한순간이 길게 늘어납니다.",
+  "ctx": ", src:\"namu\"},   {ic:\"⏳\", h:\"시간의 왜곡\", p:"
+ },
+ "js_115": {
+  "t": "분화와 통합의 복잡성",
+  "ctx": "이 길게 늘어납니다.\", src:\"flow\"},   {ic:\"🧩\", h:"
+ },
+ "js_116": {
+  "t": "몰입을 거친 자아는 개성(분화)과 조화(통합)를 함께 이뤄 더 복잡하고 성숙해집니다.",
+  "ctx": ":\"flow\"},   {ic:\"🧩\", h:\"분화와 통합의 복잡성\", p:"
+ },
+ "js_117": {
+  "t": "인생의 테마",
+  "ctx": "고 성숙해집니다.\", src:\"author\"},   {ic:\"🧭\", h:"
+ },
+ "js_118": {
+  "t": "삶 전체를 관통하는 궁극의 목표. 흩어진 경험을 하나로 꿰어 인생을 하나의 몰입으로 만듭니다.",
+  "ctx": "src:\"author\"},   {ic:\"🧭\", h:\"인생의 테마\", p:"
+ },
+ "js_119": {
+  "t": "1부",
+  "ctx": "/* 목차(클릭하면 요약 오픈) */ const TOC = [   {n:"
+ },
+ "js_120": {
+  "t": "행복은 다스리는 것 (1~3장)",
+  "ctx": "하면 요약 오픈) */ const TOC = [   {n:\"1부\", t:"
+ },
+ "js_121": {
+  "t": "행복의 재조명 — 행복은 우연이나 재물이 아니라 내면의 경험을 다스리는 데서 온다.",
+  "ctx": "은 다스리는 것 (1~3장)\", beats:[     {e:\"🌊\", x:"
+ },
+ "js_122": {
+  "t": "의식의 해부 — 주의(심리적 에너지)는 한정된 자원, 어디에 쓰느냐가 삶을 만든다.",
+  "ctx": "니라 내면의 경험을 다스리는 데서 온다.\"},     {e:\"⚡\", x:"
+ },
+ "js_123": {
+  "t": "심리적 엔트로피 — 목표와 어긋나는 정보가 의식을 어지럽히는 무질서 상태.",
+  "ctx": "된 자원, 어디에 쓰느냐가 삶을 만든다.\"},     {e:\"🌀\", x:"
+ },
+ "js_124": {
+  "t": "쾌락 vs 즐거움 — 쾌락은 소비되어 사라지고, 즐거움(enjoyment)은 성장을 남긴다.",
+  "ctx": " 정보가 의식을 어지럽히는 무질서 상태.\"},     {e:\"🍬\", x:"
+ },
+ "js_125": {
+  "t": "최적 경험 — 몸과 마음을 한계까지 쓴 자발적 노력의 순간에 삶의 최고가 온다.",
+  "ctx": "(enjoyment)은 성장을 남긴다.\"},     {e:\"⛰️\", x:"
+ },
+ "js_126": {
+  "t": "2부",
+  "ctx": " 쓴 자발적 노력의 순간에 삶의 최고가 온다.\"},   ]},   {n:"
+ },
+ "js_127": {
+  "t": "몰입의 조건 (4장)",
+  "ctx": "력의 순간에 삶의 최고가 온다.\"},   ]},   {n:\"2부\", t:"
+ },
+ "js_128": {
+  "t": "도전과 역량의 균형 — 둘이 맞물릴 때 몰입의 통로가 열린다.",
+  "ctx": "t:\"몰입의 조건 (4장)\", beats:[     {e:\"⚖️\", x:"
+ },
+ "js_129": {
+  "t": "불안과 권태 — 도전이 크면 불안, 역량이 크면 권태. 몰입은 그 사이의 좁은 길.",
+  "ctx": " 둘이 맞물릴 때 몰입의 통로가 열린다.\"},     {e:\"😰\", x:"
+ },
+ "js_130": {
+  "t": "명확한 목표·즉각 피드백 — 무엇을 어떻게 하는지 매 순간 알 수 있어야 한다.",
+  "ctx": "크면 권태. 몰입은 그 사이의 좁은 길.\"},     {e:\"🎯\", x:"
+ },
+ "js_131": {
+  "t": "몰입의 요소 — 깊은 집중, 통제감, 자의식 소멸, 시간 왜곡이 함께 나타난다.",
+  "ctx": "게 하는지 매 순간 알 수 있어야 한다.\"},     {e:\"🔦\", x:"
+ },
+ "js_132": {
+  "t": "자기목적적 활동 — 결과가 아니라 그 일 자체가 보상이 되는 일.",
+  "ctx": "의식 소멸, 시간 왜곡이 함께 나타난다.\"},     {e:\"🎭\", x:"
+ },
+ "js_133": {
+  "t": "3부",
+  "ctx": "결과가 아니라 그 일 자체가 보상이 되는 일.\"},   ]},   {n:"
+ },
+ "js_134": {
+  "t": "몰입의 무대: 몸·생각·일·관계 (5~8장)",
+  "ctx": "그 일 자체가 보상이 되는 일.\"},   ]},   {n:\"3부\", t:"
+ },
+ "js_135": {
+  "t": "몸의 몰입 — 달리기·수영·춤·요가·무술처럼 몸의 움직임에도 흐름이 있다.",
+  "ctx": "·생각·일·관계 (5~8장)\", beats:[     {e:\"🏃\", x:"
+ },
+ "js_136": {
+  "t": "생각의 몰입 — 시·음악·수학·체스처럼 마음속 상징을 다루는 활동의 몰입.",
+  "ctx": "무술처럼 몸의 움직임에도 흐름이 있다.\"},     {e:\"♟️\", x:"
+ },
+ "js_137": {
+  "t": "일 속의 몰입 — 역설: 사람들은 여가보다 일할 때 더 자주 몰입한다.",
+  "ctx": "럼 마음속 상징을 다루는 활동의 몰입.\"},     {e:\"🛠️\", x:"
+ },
+ "js_138": {
+  "t": "고독과 관계 — 혼자를 견디는 힘, 그리고 함께하는 관계 속의 몰입.",
+  "ctx": "은 여가보다 일할 때 더 자주 몰입한다.\"},     {e:\"🤝\", x:"
+ },
+ "js_139": {
+  "t": "일상의 재설계 — 평범한 하루의 활동을 몰입거리로 바꾸는 법.",
+  "ctx": " 힘, 그리고 함께하는 관계 속의 몰입.\"},     {e:\"🔄\", x:"
+ },
+ "js_140": {
+  "t": "4부",
+  "ctx": " 평범한 하루의 활동을 몰입거리로 바꾸는 법.\"},   ]},   {n:"
+ },
+ "js_141": {
+  "t": "혼돈을 넘어 의미로 (9~10장)",
+  "ctx": " 활동을 몰입거리로 바꾸는 법.\"},   ]},   {n:\"4부\", t:"
+ },
+ "js_142": {
+  "t": "혼돈에 맞서기 — 시련조차 새로운 몰입으로 바꾸는 자기목적적 자아의 힘.",
+  "ctx": "넘어 의미로 (9~10장)\", beats:[     {e:\"🌪️\", x:"
+ },
+ "js_143": {
+  "t": "인생의 테마 — 삶 전체를 관통하는 하나의 궁극 목표를 세운다.",
+  "ctx": " 몰입으로 바꾸는 자기목적적 자아의 힘.\"},     {e:\"🧭\", x:"
+ },
+ "js_144": {
+  "t": "의미의 형성 — 흩어진 경험을 꿰어 전 생애를 하나의 흐름으로 통합한다.",
+  "ctx": "를 관통하는 하나의 궁극 목표를 세운다.\"},     {e:\"🧵\", x:"
+ },
+ "js_145": {
+  "t": "자아의 복잡성 — 분화와 통합을 함께 이룬 성숙한 자아로 자란다.",
+  "ctx": "어 전 생애를 하나의 흐름으로 통합한다.\"},     {e:\"🧩\", x:"
+ },
+ "js_146": {
+  "t": "한 줄 결론 — 주의를 다스려 삶 전체를 몰입으로 채우면 그것이 곧 행복이다.",
+  "ctx": "통합을 함께 이룬 성숙한 자아로 자란다.\"},     {e:\"✅\", x:"
+ },
+ "js_147": {
+  "t": "암벽등반가·체스기사·외과의 인터뷰",
+  "ctx": "해볼 사례 3 */ const CASES = [   {ic:\"🧗\", t:"
+ },
+ "js_148": {
+  "t": "칙센트미하이는 돈이나 명예 같은 보상이 거의 없는데도 활동에 푹 빠져든 사람들 — 암벽등반가, 체스 선수, 화가, 외과의 — 를 인터뷰하며 몰입을 처음 발견했습니다. 이들은 하나같이 그 일을 하는 것 자체가 좋아서 한다고 답했어요.",
+  "ctx": " [   {ic:\"🧗\", t:\"암벽등반가·체스기사·외과의 인터뷰\", d:"
+ },
+ "js_149": {
+  "t": "보상 없이도 활동 자체에 빠져드는 자기목적적 경험이 무엇인지, 몰입의 원형을 생생하게 보여줍니다.",
+  "ctx": " 하나같이 그 일을 하는 것 자체가 좋아서 한다고 답했어요.\", why:"
+ },
+ "js_150": {
+  "t": "경험표집법(ESM)과 일의 역설",
+  "ctx": "지, 몰입의 원형을 생생하게 보여줍니다.\"},   {ic:\"⏱️\", t:"
+ },
+ "js_151": {
+  "t": "참가자에게 호출기를 주고 하루 중 무작위로 울려 그 순간의 경험을 적게 했더니, 사람들은 여가보다 일할 때 더 자주 몰입했습니다. 그런데도 정작 그 순간엔 쉬고 싶다고 답했죠 — 자신이 언제 충만한지를 스스로 오해한 겁니다.",
+  "ctx": "},   {ic:\"⏱️\", t:\"경험표집법(ESM)과 일의 역설\", d:"
+ },
+ "js_152": {
+  "t": "몰입이 실험실이 아니라 실제 일상에서 어떻게 일어나는지, 그리고 우리가 행복을 얼마나 착각하는지 드러냅니다.",
+  "ctx": "고 답했죠 — 자신이 언제 충만한지를 스스로 오해한 겁니다.\", why:"
+ },
+ "js_153": {
+  "t": "몰입의 그림자 — 도덕적 중립성",
+  "ctx": "리가 행복을 얼마나 착각하는지 드러냅니다.\"},   {ic:\"🃏\", t:"
+ },
+ "js_154": {
+  "t": "소매치기, 도박꾼, 전쟁터의 군인도 몰입을 경험합니다. 몰입은 그 자체로는 선하지도 악하지도 않아요. 강렬하고 중독적이기까지 해서, 무엇에 몰입하느냐에 따라 삶을 키우기도 망치기도 합니다.",
+  "ctx": "\"},   {ic:\"🃏\", t:\"몰입의 그림자 — 도덕적 중립성\", d:"
+ },
+ "js_155": {
+  "t": "몰입만 좇으면 위험하다는 점을 일깨웁니다. ‘어떤 몰입인가’라는 가치의 질문이 반드시 함께 가야 함을 보여줘요.",
+  "ctx": ", 무엇에 몰입하느냐에 따라 삶을 키우기도 망치기도 합니다.\", why:"
+ },
+ "js_156": {
+  "t": "오늘 나는 무엇에 주의를 쏟았는가? 그 주의는 나를 키웠는가, 아니면 흩뜨렸는가?",
+  "ctx": "책이 우리에게 던지는 질문 3 */ const ASKS = [   {q:"
+ },
+ "js_157": {
+  "t": "주의는 한정된 에너지예요. 스마트폰·걱정에 새어 나간 주의를 한 가지 활동으로 모아 보세요. 주의를 모으는 것이 몰입의 시작입니다.",
+  "ctx": "주의를 쏟았는가? 그 주의는 나를 키웠는가, 아니면 흩뜨렸는가?\", h:"
+ },
+ "js_158": {
+  "t": "지금 하는 일에서 도전과 역량은 균형을 이루는가? 불안(도전 과다)인가, 권태(역량 과다)인가?",
+  "ctx": "로 모아 보세요. 주의를 모으는 것이 몰입의 시작입니다.\"},   {q:"
+ },
+ "js_159": {
+  "t": "불안하다면 과제를 잘게 쪼개거나 실력을 키우고, 지루하다면 난도를 조금 높여 보세요. 균형점이 곧 몰입의 통로입니다.",
+  "ctx": "균형을 이루는가? 불안(도전 과다)인가, 권태(역량 과다)인가?\", h:"
+ },
+ "js_160": {
+  "t": "내 삶을 하나로 꿰는 ‘인생의 테마’는 무엇인가? 흩어진 하루가 그 테마로 이어지는가?",
+  "ctx": "도를 조금 높여 보세요. 균형점이 곧 몰입의 통로입니다.\"},   {q:"
+ },
+ "js_161": {
+  "t": "거창하지 않아도 좋아요. 나를 끌어당기는 하나의 궁극 목표를 정하면, 평범한 일상도 그 목표를 향한 몰입으로 이어집니다.",
+  "ctx": "인생의 테마’는 무엇인가? 흩어진 하루가 그 테마로 이어지는가?\", h:"
+ },
+ "js_162": {
+  "t": "🌊 몰입의 대가",
+  "ctx": ");   let rank, sub;   if(acc>=90){ rank="
+ },
+ "js_163": {
+  "t": "몰입의 원리를 완벽히 꿰뚫었습니다",
+  "ctx": "ub;   if(acc>=90){ rank='🌊 몰입의 대가'; sub="
+ },
+ "js_164": {
+  "t": "🎯 흐름을 타는 사람",
+  "ctx": "완벽히 꿰뚫었습니다'; }   else if(acc>=75){ rank="
+ },
+ "js_165": {
+  "t": "핵심 논리를 거의 다 잡았어요",
+  "ctx": "se if(acc>=75){ rank='🎯 흐름을 타는 사람'; sub="
+ },
+ "js_166": {
+  "t": "🌱 몰입을 배우는 견습생",
+  "ctx": " 거의 다 잡았어요'; }   else if(acc>=55){ rank="
+ },
+ "js_167": {
+  "t": "뼈대를 익혔습니다 — 한 번 더!",
+  "ctx": " if(acc>=55){ rank='🌱 몰입을 배우는 견습생'; sub="
+ },
+ "js_168": {
+  "t": "🐣 주의를 모으는 입문자",
+  "ctx": "b='뼈대를 익혔습니다 — 한 번 더!'; }   else { rank="
+ },
+ "js_169": {
+  "t": "반복할수록 점수가 오릅니다",
+  "ctx": "'; }   else { rank='🐣 주의를 모으는 입문자'; sub="
+ },
+ "js_170": {
+  "t": "완독 리포트",
+  "ctx": "onst fname = ((h2 && h2.textContent) || "
+ },
+ "js_171": {
+  "t": "한눈에 보기",
+  "ctx": "&& h2.textContent) || '완독 리포트').replace("
+ },
+ "js_172": {
+  "t": "리포트.pdf",
+  "ctx": "'완독 리포트').replace('한눈에 보기','').trim() + "
+ },
+ "js_173": {
+  "t": "📄 PDF 만드는 중…",
+  "ctx": "tn){ btn.disabled=true; btn.textContent="
+ },
+ "js_174": {
+  "t": "PDF 생성 중 문제가 발생했어요. 이 HTML 파일을 내려받아 브라우저에서 직접 열고 다시 눌러 주세요.",
+  "ctx": "     }   }).catch(function(){     alert("
+ },
+ "js_175": {
+  "t": "무료로는 <b>",
+  "ctx": "t = TOTAL_Q - fl;       msg.innerHTML = "
+ },
+ "js_176": {
+  "t": "문항</b>까지 풀 수 있어요.",
+  "ctx": "fl;       msg.innerHTML = '무료로는 <b>'+fl+"
+ },
+ "js_177": {
+  "t": "나머지 <b>",
+  "ctx": " <b>'+fl+'문항</b>까지 풀 수 있어요. ' +         "
+ },
+ "js_178": {
+  "t": "문항</b>과 <b>완독 요약 리포트</b>는 구독자 전용입니다.",
+  "ctx": ">까지 풀 수 있어요. ' +         '나머지 <b>'+rest+"
+ },
+ "js_179": {
+  "t": "지금까지 쌓은 <b>몰입 진행도</b>는 위 게이지에 그대로 남아 있어요.",
+  "ctx": "b>완독 요약 리포트</b>는 구독자 전용입니다. ' +         "
+ },
+ "js_180": {
+  "t": "<h3>완독 리포트 전체는 구독자 전용이에요</h3>",
+  "ctx": " = '<div class=\"lk-ic\">🔒</div>' +       "
+ },
+ "js_181": {
+  "t": "<p>행복을 다스리는 사슬과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>",
+  "ctx": "'<h3>완독 리포트 전체는 구독자 전용이에요</h3>' +       "
+ },
+ "js_182": {
+  "t": "목차 요약 · 사례 · 질문 · 약점 복습 · PDF 저장은 구독하면 모두 열립니다.</p>",
+  "ctx": "과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>' +       "
+ },
+ "js_183": {
+  "t": "\" target=\"_blank\" rel=\"noopener\">🔑 구독하고 완독 리포트 전체 열기</a>",
+  "ctx": "     '<a class=\"cta\" href=\"' + _sub() + "
+ },
+ "js_184": {
+  "t": "몰입 FLOW",
+  "ctx": " 250, '120px serif', '#f2b950');   ctxt("
+ },
+ "js_185": {
+  "t": "미하이 칙센트미하이 · 몰입 마스터 퀴즈",
+  "ctx": "to Serif KR\",serif', '#ffffff');   ctxt("
+ },
+ "js_186": {
+  "t": "📚 매일 새 책 퀴즈  ·",
+  "ctx": "(/^https?:\\/\\//,'') : '';   if(su) ctxt("
+ },
+ "js_187": {
+  "t": "몰입FLOW_퀴즈결과.png",
+  "ctx": "nt('a');     a.href = url; a.download = "
+ },
+ "js_188": {
+  "t": "💌 VIP 초대 —",
+  "ctx": "ursor:pointer;\";     d.textContent=(vip?"
+ },
+ "js_189": {
+  "t": "🎁 지금 이 책 풀버전 무료 오픈 중!",
+  "ctx": "\";     d.textContent=(vip?\"💌 VIP 초대 — \":"
+ },
+ "js_190": {
+  "t": "전체판(잠금 없음)으로 이동 →",
+  "ctx": "\"💌 VIP 초대 — \":\"🎁 지금 이 책 풀버전 무료 오픈 중! \")+"
+ },
+ "jst_001": {
+  "t": "무료로 풀 수 있는 문항 수",
+  "ctx": "    freeLimit: 10,           // teaser: "
+ },
+ "jst_002": {
+  "t": "아직",
+  "ctx": "3:30};    let pending = [];          // "
+ },
+ "jst_003": {
+  "t": "처음으로 정답",
+  "ctx": "};    let pending = [];          // 아직 ‘"
+ },
+ "jst_004": {
+  "t": "을 못 낸 문항 큐",
+  "ctx": "t pending = [];          // 아직 ‘처음으로 정답’"
+ },
+ "jst_005": {
+  "t": "앞에서 꺼냄",
+  "ctx": "[];          // 아직 ‘처음으로 정답’을 못 낸 문항 큐 ("
+ },
+ "jst_006": {
+  "t": "시도 횟수",
+  "ctx": "(); let attempts = {};         // id -> "
+ },
+ "jst_007": {
+  "t": "첫 시도에 틀린 문항",
+  "ctx": " 0; let firstWrongIds = new Set();   // "
+ },
+ "jst_008": {
+  "t": "약점",
+  "ctx": "rongIds = new Set();   // 첫 시도에 틀린 문항 = "
+ },
+ "jst_009": {
+  "t": "집중 복습 대상",
+  "ctx": "gIds = new Set();   // 첫 시도에 틀린 문항 = 약점("
+ },
+ "jst_010": {
+  "t": "세션 내 최고 점수",
+  "ctx": "r = null; let bestScore = 0;         // "
+ },
+ "jst_011": {
+  "t": "재도전 비교용,",
+  "ctx": "t bestScore = 0;         // 세션 내 최고 점수 ("
+ },
+ "jst_012": {
+  "t": "미사용",
+  "ctx": "   // 세션 내 최고 점수 (재도전 비교용, localStorage "
+ },
+ "jst_013": {
+  "t": "복습 정답은 절반 점수",
+  "ctx": " gain = Math.round(gain/2);          // "
+ },
+ "jst_014": {
+  "t": "콤보 보너스",
+  "ctx": " (streak>=2) ? (streak-1)*3 : 0;     // "
+ },
+ "jst_015": {
+  "t": "가 아니어도 최종적으로 익힌 것으로 카운트",
+  "ctx": " masteredIds.add(id);          // ‘처음으로’"
+ },
+ "jst_016": {
+  "t": "큐에서 제거",
+  "ctx": "운트     pending.shift();              // "
+ },
+ "jst_017": {
+  "t": "연속 정답!",
+  "ctx": "      comboEl.textContent = `🔥 ${streak}"
+ },
+ "jst_018": {
+  "t": "보너스",
+  "ctx": "tContent = `🔥 ${streak}연속 정답! +${bonus} "
+ },
+ "jst_019": {
+  "t": "약점으로 기록",
+  "ctx": "f(firstTry) firstWrongIds.add(id);   // "
+ },
+ "jst_020": {
+  "t": "왜 생각해볼 만한가",
+  "ctx": "= >${c.d}</div>       <div class= >💭 <b>"
+ },
+ "jst_021": {
+  "t": "첫 시도에 모두 정답!",
+  "ctx": " ;     list.innerHTML = `<div class= >🌟 "
+ },
+ "jst_022": {
+  "t": "약점이 없어 따로 복습할 항목이 없습니다. 멋져요.",
+  "ctx": "TML = `<div class= >🌟 첫 시도에 모두 정답!<span>"
+ },
+ "jst_023": {
+  "t": "개",
+  "ctx": " {     cnt.textContent = `(${ids.length}"
+ },
+ "jst_024": {
+  "t": "정답",
+  "ctx": "= >Q. ${q.q}</div>         <div class= >"
+ },
+ "jst_025": {
+  "t": "최고 점수 경신!",
+  "ctx": "re;     note.innerHTML = prev>0 ? `🏆 <b>"
+ },
+ "jst_026": {
+  "t": "이전",
+  "ctx": "nerHTML = prev>0 ? `🏆 <b>최고 점수 경신!</b> ("
+ },
+ "jst_027": {
+  "t": "점",
+  "ctx": "prev>0 ? `🏆 <b>최고 점수 경신!</b> (이전 ${prev}"
+ },
+ "jst_028": {
+  "t": "첫 기록",
+  "ctx": "`🏆 <b>최고 점수 경신!</b> (이전 ${prev}점)` : `🏆 "
+ },
+ "jst_029": {
+  "t": "다시 도전해 깨보세요!",
+  "ctx": "${prev}점)` : `🏆 첫 기록 <b>${score}점</b> — "
+ },
+ "jst_030": {
+  "t": "현재 최고 점수",
+  "ctx": "보세요!`;   } else {     note.innerHTML = `"
+ },
+ "jst_031": {
+  "t": "이번엔",
+  "ctx": "HTML = `현재 최고 점수 <b>${bestScore}점</b> · "
+ }
+}

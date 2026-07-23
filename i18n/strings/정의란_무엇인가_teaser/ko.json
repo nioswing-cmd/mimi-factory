@@ -1,0 +1,1274 @@
+{
+ "_meta": {
+  "source": "apps/정의란_무엇인가_teaser.html",
+  "slug": "정의란_무엇인가_teaser"
+ },
+ "title_001": {
+  "t": "정의란 무엇인가 도파민 마스터 퀴즈 · 마이클 샌델",
+  "ctx": "<title>"
+ },
+ "html_001": {
+  "t": "마이클 샌델 · 2009 · 하버드 정의 강의의 고전",
+  "ctx": "class=\"hero\">       <div class=\"eyebrow\""
+ },
+ "html_002": {
+  "t": "행복·자유·미덕, 무엇이 옳은 일인가",
+  "ctx": "ss=\"p3\">🏛️</span></div>       <h1><small"
+ },
+ "html_003": {
+  "t": "정의란 무엇인가 마스터 퀴즈",
+  "ctx": "  <h1><small>행복·자유·미덕, 무엇이 옳은 일인가</small"
+ },
+ "html_004": {
+  "t": "“정의로운 사회는 좋은 삶에 대한 물음을 결코 피할 수 없다.”",
+  "ctx": "엇인가 마스터 퀴즈</h1>       <div class=\"quote\""
+ },
+ "html_005": {
+  "t": "— 마이클 샌델, 『정의란 무엇인가』",
+  "ctx": "좋은 삶에 대한 물음을 결코 피할 수 없다.”<br>         <b"
+ },
+ "html_006": {
+  "t": "트롤리 딜레마부터 공리주의·칸트·롤스·아리스토텔레스까지, 이 책의 핵심을",
+  "ctx": "샌델, 『정의란 무엇인가』</b>       </div>       <p"
+ },
+ "html_007": {
+  "t": "30개의 퀴즈",
+  "ctx": " 딜레마부터 공리주의·칸트·롤스·아리스토텔레스까지, 이 책의 핵심을 <b"
+ },
+ "html_008": {
+  "t": "로 익힙니다.\n        쉬운 것부터 시작해 점점 어려워지고,",
+  "ctx": "·칸트·롤스·아리스토텔레스까지, 이 책의 핵심을 <b>30개의 퀴즈</b"
+ },
+ "html_009": {
+  "t": "틀린 문제는 맞힐 때까지 다시 돌아옵니다.",
+  "ctx": ">로 익힙니다.         쉬운 것부터 시작해 점점 어려워지고, <b"
+ },
+ "html_010": {
+  "t": "총",
+  "ctx": "s=\"meta-row\">         <span class=\"chip\""
+ },
+ "html_011": {
+  "t": "30문항",
+  "ctx": "ta-row\">         <span class=\"chip\">총 <b"
+ },
+ "html_012": {
+  "t": "쉬움 → 어려움",
+  "ctx": "문항</b></span>         <span class=\"chip\""
+ },
+ "html_013": {
+  "t": "실시간",
+  "ctx": "어려움</span>         <span class=\"chip\"><b"
+ },
+ "html_014": {
+  "t": "정의를 향한 사유",
+  "ctx": "an>         <span class=\"chip\"><b>실시간</b"
+ },
+ "html_015": {
+  "t": "문제마다",
+  "ctx": " 향한 사유</span>         <span class=\"chip\""
+ },
+ "html_016": {
+  "t": "쉬운 해설",
+  "ctx": "span>         <span class=\"chip\">문제마다 <b"
+ },
+ "html_017": {
+  "t": "정의를 향해 →",
+  "ctx": "=\"btn btn-primary\" onclick=\"startQuiz()\""
+ },
+ "html_018": {
+  "t": "점수",
+  "ctx": "   <div class=\"stat\"><span class=\"label\""
+ },
+ "html_019": {
+  "t": "연속 정답",
+  "ctx": "align-items:center;\"><span class=\"label\""
+ },
+ "html_020": {
+  "t": "마스터",
+  "ctx": "ign-items:flex-end;\"><span class=\"label\""
+ },
+ "html_021": {
+  "t": "딜레마 ←",
+  "ctx": "\">         <div class=\"axis-label\"><span"
+ },
+ "html_022": {
+  "t": "정의를 향한 사유 ·",
+  "ctx": "ass=\"axis-label\"><span>딜레마 ←</span><span"
+ },
+ "html_023": {
+  "t": "→ 공동선",
+  "ctx": "한 사유 · <b id=\"pctTxt\">0%</b></span><span"
+ },
+ "html_024": {
+  "t": "쉬움",
+  "ctx": "d\">         <span class=\"diff\" id=\"diff\""
+ },
+ "html_025": {
+  "t": "다음 →",
+  "ctx": "y\" id=\"nextBtn\" onclick=\"nextQuestion()\""
+ },
+ "html_026": {
+  "t": "여기까지가 무료 미리보기예요",
+  "ctx": ">     <div class=\"lk-ic\">🔒</div>     <h3"
+ },
+ "html_027": {
+  "t": "🔑 구독하고 전체 열기",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_028": {
+  "t": "요약 리포트 미리보기 →",
+  "ctx": "class=\"cta ghost\" onclick=\"openReport()\""
+ },
+ "html_029": {
+  "t": "정의의 현자",
+  "ctx": ">       <div class=\"rank\" id=\"rankTitle\""
+ },
+ "html_030": {
+  "t": "최종 점수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_031": {
+  "t": "첫 시도 정답률",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_032": {
+  "t": "최고 연속 정답",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_033": {
+  "t": "총 도전 횟수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_034": {
+  "t": "📖 전체 요약 리포트 보기",
+  "ctx": "\"btn btn-primary\" onclick=\"openReport()\""
+ },
+ "html_035": {
+  "t": "🖼 결과 카드 저장",
+  "ctx": "btn btn-ghost\" onclick=\"makeShareCard()\""
+ },
+ "html_036": {
+  "t": "다시 도전 ↻",
+  "ctx": "ss=\"btn btn-ghost\" onclick=\"startQuiz()\""
+ },
+ "html_037": {
+  "t": "처음으로",
+  "ctx": "class=\"btn btn-ghost\" onclick=\"goHome()\""
+ },
+ "html_038": {
+  "t": "완독 리포트 · INFOGRAPHIC",
+  "ctx": "s=\"rep-hero\">       <div class=\"eyebrow\""
+ },
+ "html_039": {
+  "t": "정의란 무엇인가 한눈에 보기",
+  "ctx": "ow\">완독 리포트 · INFOGRAPHIC</div>       <h2"
+ },
+ "html_040": {
+  "t": "책 전체를",
+  "ctx": "       <h2>정의란 무엇인가 한눈에 보기</h2>       <p"
+ },
+ "html_041": {
+  "t": "‘딜레마에서 공동선으로’",
+  "ctx": "2>정의란 무엇인가 한눈에 보기</h2>       <p>책 전체를 <b"
+ },
+ "html_042": {
+  "t": "하나로 꿰면 절대 안 잊습니다. 모든 물음의 잣대는",
+  "ctx": "</h2>       <p>책 전체를 <b>‘딜레마에서 공동선으로’</b"
+ },
+ "html_043": {
+  "t": "행복·자유·미덕",
+  "ctx": "선으로’</b> 하나로 꿰면 절대 안 잊습니다. 모든 물음의 잣대는 <b"
+ },
+ "html_044": {
+  "t": "입니다.",
+  "ctx": " 꿰면 절대 안 잊습니다. 모든 물음의 잣대는 <b>행복·자유·미덕</b"
+ },
+ "html_045": {
+  "t": "물음",
+  "ctx": "<div class=\"ch step s0\"><span class=\"cn\""
+ },
+ "html_046": {
+  "t": "🚋 정의의 딜레마",
+  "ctx": "ch step s0\"><span class=\"cn\">물음</span><b"
+ },
+ "html_047": {
+  "t": "트롤리 문제 · 가격 폭리 · 훈장",
+  "ctx": "ass=\"cn\">물음</span><b>🚋 정의의 딜레마</b><small"
+ },
+ "html_048": {
+  "t": "1잣대",
+  "ctx": "<div class=\"ch step s1\"><span class=\"cn\""
+ },
+ "html_049": {
+  "t": "😊 행복 — 공리주의",
+  "ctx": "h step s1\"><span class=\"cn\">1잣대</span><b"
+ },
+ "html_050": {
+  "t": "벤담·밀 / 최대 다수의 최대 행복",
+  "ctx": "=\"cn\">1잣대</span><b>😊 행복 — 공리주의</b><small"
+ },
+ "html_051": {
+  "t": "2잣대",
+  "ctx": "<div class=\"ch step s2\"><span class=\"cn\""
+ },
+ "html_052": {
+  "t": "🗽 자유 — 자유지상주의와 칸트",
+  "ctx": "h step s2\"><span class=\"cn\">2잣대</span><b"
+ },
+ "html_053": {
+  "t": "노직의 자기 소유 / 칸트의 정언명령",
+  "ctx": "2잣대</span><b>🗽 자유 — 자유지상주의와 칸트</b><small"
+ },
+ "html_054": {
+  "t": "3잣대",
+  "ctx": "s=\"ch step s3\">         <span class=\"cn\""
+ },
+ "html_055": {
+  "t": "⚖️ 평등과 미덕 — 롤스·아리스토텔레스",
+  "ctx": "\">         <span class=\"cn\">3잣대</span><b"
+ },
+ "html_056": {
+  "t": "무지의 베일 · 차등 원칙 / 목적론·응분",
+  "ctx": "️ 평등과 미덕 — 롤스·아리스토텔레스</b>         <small"
+ },
+ "html_057": {
+  "t": "결론",
+  "ctx": "<div class=\"ch step s4\"><span class=\"cn\""
+ },
+ "html_058": {
+  "t": "🤝 공동선의 정치",
+  "ctx": "ch step s4\"><span class=\"cn\">결론</span><b"
+ },
+ "html_059": {
+  "t": "“정의는 좋은 삶을 함께 묻는 일”",
+  "ctx": "ass=\"cn\">결론</span><b>🤝 공동선의 정치</b><small"
+ },
+ "html_060": {
+  "t": "핵심 개념 8",
+  "ctx": "/div>     </div>      <h3 class=\"rep-h3\""
+ },
+ "html_061": {
+  "t": "목차 한눈에 보기",
+  "ctx": "concepts\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_062": {
+  "t": "탭하면 요약이 열립니다",
+  "ctx": "ss=\"rep-h3\">목차 한눈에 보기 <span class=\"hint\""
+ },
+ "html_063": {
+  "t": "책 속, 생각해볼 사례 3",
+  "ctx": " id=\"toc\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_064": {
+  "t": "이 책이 우리에게 던지는 질문 3",
+  "ctx": "d=\"cases\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_065": {
+  "t": "내가 틀린 부분 집중 복습",
+  "ctx": " id=\"weakWrap\">       <h3 class=\"rep-h3\""
+ },
+ "html_066": {
+  "t": "📺 더 깊이 알고 싶다면",
+  "ctx": "/div>      <div class=\"deepen\">       <b"
+ },
+ "html_067": {
+  "t": "에서 샌델의 하버드 정의 강의를 무료로 직접 볼 수 있습니다.",
+  "ctx": "f=\"#\" target=\"_blank\" rel=\"noopener\"></a"
+ },
+ "html_068": {
+  "t": "📄 PDF로 저장",
+  "ctx": "d=\"pdfBtn\" onclick=\"downloadReportPDF()\""
+ },
+ "html_069": {
+  "t": "결과로",
+  "ctx": "\"btn btn-ghost\" onclick=\"show('result')\""
+ },
+ "html_070": {
+  "t": "📚 다른 책 퀴즈 보기 →",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_071": {
+  "t": "“의미와재미공장” 미미팩토리",
+  "ctx": "class=\"footer\">     <div class=\"factory\""
+ },
+ "html_072": {
+  "t": "(주식회사 연:결 패밀리회사)",
+  "ctx": "재미공장” 미미팩토리</div>     <div class=\"affil\""
+ },
+ "html_073": {
+  "t": "책의 핵심을 도파민으로 익히는 반복 마스터 퀴즈",
+  "ctx": ":결 패밀리회사)</div>     <div class=\"tagline\""
+ },
+ "html_074": {
+  "t": "본 앱은 도서의 핵심 개념을 학습 목적으로 재구성한 2차적 학습 콘텐츠입니다. 온전한 독서 경험은 원서로 만나보세요.",
+  "ctx": "퀴즈</div>     <div class=\"copyright-note\""
+ },
+ "html_075": {
+  "t": "정의란 무엇인가 · 도서 정보",
+  "ctx": "가+마이클+샌델\" target=\"_blank\" rel=\"noopener\""
+ },
+ "js_001": {
+  "t": "\"}))}},Hn={name:\"font-size\",initialValue:\"0\",prefix:!1,type:wt.TYPE_VALUE,format:\"length\"},In={name:\"font-weight\",initialValue:\"normal\",type:wt.VALUE,prefix:!1,parse:function(e){if(Ve(e))return e.number;if(qe(e))switch(e.value){case\"bold\":return 700;case\"normal\":default:return 400}return 400}},Pn={name:\"font-variant\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return e.filter(qe).map((function(e){return e.value}))}};!function(e){e.NORMAL=\"normal\",e.ITALIC=\"italic\",e.OBLIQUE=\"oblique\"}(Nn||(Nn={}));var On,kn={name:\"font-style\",initialValue:\"normal\",prefix:!1,type:wt.IDENT_VALUE,parse:function(e){switch(e){case\"oblique\":return Nn.OBLIQUE;case\"italic\":return Nn.ITALIC;case\"normal\":default:return Nn.NORMAL}}},Rn=function(e,t){return 0!=(e&t)},Mn={name:\"content\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){if(0===e.length)return[];var t=e[0];return t.type===d.IDENT_TOKEN&&\"none\"===t.value?[]:e}},Dn={name:\"counter-increment\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;for(var r=[],n=e.filter(We),o=0;o<n.length;o++){var s=n[o],i=n[o+1];if(s.type===d.IDENT_TOKEN){var a=i&&Ve(i)?i.number:1;r.push({counter:s.value,increment:a})}}return r}},Kn={name:\"counter-reset\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return[];for(var t=[],r=e.filter(We),n=0;n<r.length;n++){var o=r[n],s=r[n+1];if(qe(o)&&\"none\"!==o.value){var i=s&&Ve(s)?s.number:0;t.push({counter:o.value,reset:i})}}return t}},zn={name:\"quotes\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;var r=[],n=e.filter(Ge);if(n.length%2!=0)return null;for(var o=0;o<n.length;o+=2){var s=n[o].value,i=n[o+1].value;r.push({open:s,close:i})}return r}},Vn=function(e,t,r){if(!e)return\"\";var n=e[Math.min(t,e.length-1)];return n?r?n.open:n.close:\"\"},qn={name:\"box-shadow\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return 1===e.length&&Xe(e[0],\"none\")?[]:Ye(e).map((function(e){for(var t={color:255,offsetX:rt,offsetY:rt,blur:rt,spread:rt,inset:!1},r=0,n=0;n<e.length;n++){var o=e[n];Xe(o,\"inset\")?t.inset=!0:$e(o)?(0===r?t.offsetX=o:1===r?t.offsetY=o:2===r?t.blur=o:t.spread=o,r++):t.color=ft(o)}return t}))}},Gn=function(){function e(e){this.backgroundClip=Jn(xt,e.backgroundClip),this.backgroundColor=Jn(Et,e.backgroundColor),this.backgroundImage=Jn(ur,e.backgroundImage),this.backgroundOrigin=Jn(cr,e.backgroundOrigin),this.backgroundPosition=Jn(lr,e.backgroundPosition),this.backgroundRepeat=Jn(fr,e.backgroundRepeat),this.backgroundSize=Jn(mr,e.backgroundSize),this.borderTopColor=Jn(vr,e.borderTopColor),this.borderRightColor=Jn(wr,e.borderRightColor),this.borderBottomColor=Jn(br,e.borderBottomColor),this.borderLeftColor=Jn(Br,e.borderLeftColor),this.borderTopLeftRadius=Jn(_r,e.borderTopLeftRadius),this.borderTopRightRadius=Jn(Cr,e.borderTopRightRadius),this.borderBottomRightRadius=Jn(xr,e.borderBottomRightRadius),this.borderBottomLeftRadius=Jn(Er,e.borderBottomLeftRadius),this.borderTopStyle=Jn(Fr,e.borderTopStyle),this.borderRightStyle=Jn(Ur,e.borderRightStyle),this.borderBottomStyle=Jn(Sr,e.borderBottomStyle),this.borderLeftStyle=Jn(Lr,e.borderLeftStyle),this.borderTopWidth=Jn(Hr,e.borderTopWidth),this.borderRightWidth=Jn(Ir,e.borderRightWidth),this.borderBottomWidth=Jn(Pr,e.borderBottomWidth),this.borderLeftWidth=Jn(Or,e.borderLeftWidth),this.boxShadow=Jn(qn,e.boxShadow),this.color=Jn(kr,e.color),this.display=Jn(Rr,e.display),this.float=Jn(Kr,e.cssFloat),this.fontFamily=Jn(Tn,e.fontFamily),this.fontSize=Jn(Hn,e.fontSize),this.fontStyle=Jn(kn,e.fontStyle),this.fontVariant=Jn(Pn,e.fontVariant),this.fontWeight=Jn(In,e.fontWeight),this.letterSpacing=Jn(zr,e.letterSpacing),this.lineBreak=Jn(qr,e.lineBreak),this.lineHeight=Jn(Gr,e.lineHeight),this.listStyleImage=Jn(Xr,e.listStyleImage),this.listStylePosition=Jn(Jr,e.listStylePosition),this.listStyleType=Jn(Zr,e.listStyleType),this.marginTop=Jn(en,e.marginTop),this.marginRight=Jn(tn,e.marginRight),this.marginBottom=Jn(rn,e.marginBottom),this.marginLeft=Jn(nn,e.marginLeft),this.opacity=Jn(Un,e.opacity);var t=Jn(sn,e.overflow);this.overflowX=t[0],this.overflowY=t[t.length>1?1:0],this.overflowWrap=Jn(An,e.overflowWrap),this.paddingTop=Jn(cn,e.paddingTop),this.paddingRight=Jn(ln,e.paddingRight),this.paddingBottom=Jn(dn,e.paddingBottom),this.paddingLeft=Jn(fn,e.paddingLeft),this.position=Jn(gn,e.position),this.textAlign=Jn(pn,e.textAlign),this.textDecorationColor=Jn(Sn,e.textDecorationColor||e.color),this.textDecorationLine=Jn(Ln,e.textDecorationLine),this.textShadow=Jn(yn,e.textShadow),this.textTransform=Jn(wn,e.textTransform),this.transform=Jn(bn,e.transform),this.transformOrigin=Jn(Cn,e.transformOrigin),this.visibility=Jn(En,e.visibility),this.wordBreak=Jn(Qn,e.wordBreak),this.zIndex=Jn(Fn,e.zIndex)}return e.prototype.isVisible=function(){return this.display>0&&this.opacity>0&&this.visibility===vn.VISIBLE},e.prototype.isTransparent=function(){return ht(this.backgroundColor)},e.prototype.isTransformed=function(){return null!==this.transform},e.prototype.isPositioned=function(){return this.position!==hn.STATIC},e.prototype.isPositionedWithZIndex=function(){return this.isPositioned()&&!this.zIndex.auto},e.prototype.isFloating=function(){return this.float!==Nr.NONE},e.prototype.isInlineLevel=function(){return Rn(this.display,4)||Rn(this.display,33554432)||Rn(this.display,268435456)||Rn(this.display,536870912)||Rn(this.display,67108864)||Rn(this.display,134217728)},e}(),Xn=function(e){this.content=Jn(Mn,e.content),this.quotes=Jn(zn,e.quotes)},Wn=function(e){this.counterIncrement=Jn(Dn,e.counterIncrement),this.counterReset=Jn(Kn,e.counterReset)},Jn=function(e,t){var r=new De,n=null!=t?t.toString():e.initialValue;r.write(n);var o=new Ke(r.read());switch(e.type){case wt.IDENT_VALUE:var s=o.parseComponentValue();return e.parse(qe(s)?s.value:e.initialValue);case wt.VALUE:return e.parse(o.parseComponentValue());case wt.LIST:return e.parse(o.parseComponentValues());case wt.TOKEN_VALUE:return o.parseComponentValue();case wt.TYPE_VALUE:switch(e.format){case\"angle\":return ut(o.parseComponentValue());case\"color\":return ft(o.parseComponentValue());case\"image\":return ir(o.parseComponentValue());case\"length\":var i=o.parseComponentValue();return $e(i)?i:rt;case\"length-percentage\":var a=o.parseComponentValue();return et(a)?a:rt}}throw new Error(\"Attempting to parse unsupported css format type \"+e.format)},Yn=function(e){this.styles=new Gn(window.getComputedStyle(e,null)),this.textNodes=[],this.elements=[],null!==this.styles.transform&&So(e)&&(e.style.transform=\"none\"),this.bounds=i(e),this.flags=0},Zn=function(e,t){this.text=e,this.bounds=t},$n=function(e){var t=e.ownerDocument;if(t){var r=t.createElement(\"html2canvaswrapper\");r.appendChild(e.cloneNode(!0));var n=e.parentNode;if(n){n.replaceChild(r,e);var o=i(r);return r.firstChild&&n.replaceChild(r.firstChild,r),o}}return new s(0,0,0,0)},eo=function(e,t,r){var n=e.ownerDocument;if(!n)throw new Error(\"Node has no owner document\");var o=n.createRange();return o.setStart(e,t),o.setEnd(e,t+r),s.fromClientRect(o.getBoundingClientRect())},to=function(e,t){return 0!==t.letterSpacing?a(e).map((function(e){return A(e)})):ro(e,t)},ro=function(e,t){for(var r,n=function(e,t){var r=a(e),n=ie(r,t),o=n[0],s=n[1],i=n[2],A=r.length,u=0,c=0;return{next:function(){if(c>=A)return{done:!0,value:null};for(var e=G;c<A&&(e=se(r,s,o,++c,i))===G;);if(e!==G||c===A){var t=new ae(r,e,u,c);return u=c,{value:t,done:!1}}return{done:!0,value:null}}}}(e,{lineBreak:t.lineBreak,wordBreak:t.overflowWrap===on.BREAK_WORD?\"break-word\":t.wordBreak}),o=[];!(r=n.next()).done;)r.value&&o.push(r.value.slice());return o},no=function(e,t){this.text=oo(e.data,t.textTransform),this.textBounds=function(e,t,r){var n=to(e,t),o=[],s=0;return n.forEach((function(e){if(t.textDecorationLine.length||e.trim().length>0)if(Pt.SUPPORT_RANGE_BOUNDS)o.push(new Zn(e,eo(r,s,e.length)));else{var n=r.splitText(e.length);o.push(new Zn(e,$n(r))),r=n}else Pt.SUPPORT_RANGE_BOUNDS||(r=r.splitText(e.length));s+=e.length})),o}(this.text,t,e)},oo=function(e,t){switch(t){case mn.LOWERCASE:return e.toLowerCase();case mn.CAPITALIZE:return e.replace(so,io);case mn.UPPERCASE:return e.toUpperCase();default:return e}},so=/(^|\\s|:|-|\\(|\\))([a-z])/g,io=function(e,t,r){return e.length>0?t+r.toUpperCase():e},ao=function(e){function r(t){var r=e.call(this,t)||this;return r.src=t.currentSrc||t.src,r.intrinsicWidth=t.naturalWidth,r.intrinsicHeight=t.naturalHeight,kt.getInstance().addImage(r.src),r}return t(r,e),r}(Yn),Ao=function(e){function r(t){var r=e.call(this,t)||this;return r.canvas=t,r.intrinsicWidth=t.width,r.intrinsicHeight=t.height,r}return t(r,e),r}(Yn),uo=function(e){function r(t){var r=e.call(this,t)||this,n=new XMLSerializer;return r.svg=\"data:image/svg+xml,\"+encodeURIComponent(n.serializeToString(t)),r.intrinsicWidth=t.width.baseVal.value,r.intrinsicHeight=t.height.baseVal.value,kt.getInstance().addImage(r.svg),r}return t(r,e),r}(Yn),co=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),lo=function(e){function r(t){var r=e.call(this,t)||this;return r.start=t.start,r.reversed=\"boolean\"==typeof t.reversed&&!0===t.reversed,r}return t(r,e),r}(Yn),fo=[{type:d.DIMENSION_TOKEN,flags:0,unit:\"px\",number:3}],ho=[{type:d.PERCENTAGE_TOKEN,flags:0,number:50}],po=\"checkbox\",mo=\"radio\",go=\"password\",yo=707406591,vo=function(e){function r(t){var r,n,o,i=e.call(this,t)||this;switch(i.type=t.type.toLowerCase(),i.checked=t.checked,i.value=0===(o=(n=t).type===go?new Array(n.value.length+1).join(\"•\"):n.value).length?n.placeholder||\"\":o,i.type!==po&&i.type!==mo||(i.styles.backgroundColor=3739148031,i.styles.borderTopColor=i.styles.borderRightColor=i.styles.borderBottomColor=i.styles.borderLeftColor=2779096575,i.styles.borderTopWidth=i.styles.borderRightWidth=i.styles.borderBottomWidth=i.styles.borderLeftWidth=1,i.styles.borderTopStyle=i.styles.borderRightStyle=i.styles.borderBottomStyle=i.styles.borderLeftStyle=pr.SOLID,i.styles.backgroundClip=[bt.BORDER_BOX],i.styles.backgroundOrigin=[0],i.bounds=(r=i.bounds).width>r.height?new s(r.left+(r.width-r.height)/2,r.top,r.height,r.height):r.width<r.height?new s(r.left,r.top+(r.height-r.width)/2,r.width,r.width):r),i.type){case po:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=fo;break;case mo:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=ho}return i}return t(r,e),r}(Yn),wo=function(e){function r(t){var r=e.call(this,t)||this,n=t.options[t.selectedIndex||0];return r.value=n&&n.text||\"\",r}return t(r,e),r}(Yn),bo=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),Bo=function(e){return ft(Ke.create(e).parseComponentValue())},jo=function(e){function r(t){var r=e.call(this,t)||this;r.src=t.src,r.width=parseInt(t.width,10)||0,r.height=parseInt(t.height,10)||0,r.backgroundColor=r.styles.backgroundColor;try{if(t.contentWindow&&t.contentWindow.document&&t.contentWindow.document.documentElement){r.tree=Eo(t.contentWindow.document.documentElement);var n=t.contentWindow.document.documentElement?Bo(getComputedStyle(t.contentWindow.document.documentElement).backgroundColor):_t.TRANSPARENT,o=t.contentWindow.document.body?Bo(getComputedStyle(t.contentWindow.document.body).backgroundColor):_t.TRANSPARENT;r.backgroundColor=ht(n)?ht(o)?r.styles.backgroundColor:o:n}}catch(e){}return r}return t(r,e),r}(Yn),_o=[\"OL\",\"UL\",\"MENU\"],Co=function(e,t,r){for(var n=e.firstChild,o=void 0;n;n=o)if(o=n.nextSibling,Fo(n)&&n.data.trim().length>0)t.textNodes.push(new no(n,t.styles));else if(Uo(n)){var s=xo(n);s.styles.isVisible()&&(No(n,s,r)?s.flags|=4:Qo(s.styles)&&(s.flags|=2),-1!==_o.indexOf(n.tagName)&&(s.flags|=8),t.elements.push(s),zo(n)||Po(n)||Vo(n)||Co(n,s,r))}},xo=function(e){return Ro(e)?new ao(e):ko(e)?new Ao(e):Po(e)?new uo(e):To(e)?new co(e):Ho(e)?new lo(e):Io(e)?new vo(e):Vo(e)?new wo(e):zo(e)?new bo(e):Mo(e)?new jo(e):new Yn(e)},Eo=function(e){var t=xo(e);return t.flags|=4,Co(e,t,t),t},No=function(e,t,r){return t.styles.isPositionedWithZIndex()||t.styles.opacity<1||t.styles.isTransformed()||Oo(e)&&r.styles.isTransparent()},Qo=function(e){return e.isPositioned()||e.isFloating()},Fo=function(e){return e.nodeType===Node.TEXT_NODE},Uo=function(e){return e.nodeType===Node.ELEMENT_NODE},So=function(e){return Uo(e)&&void 0!==e.style&&!Lo(e)},Lo=function(e){return\"object\"==typeof e.className},To=function(e){return\"LI\"===e.tagName},Ho=function(e){return\"OL\"===e.tagName},Io=function(e){return\"INPUT\"===e.tagName},Po=function(e){return\"svg\"===e.tagName},Oo=function(e){return\"BODY\"===e.tagName},ko=function(e){return\"CANVAS\"===e.tagName},Ro=function(e){return\"IMG\"===e.tagName},Mo=function(e){return\"IFRAME\"===e.tagName},Do=function(e){return\"STYLE\"===e.tagName},Ko=function(e){return\"SCRIPT\"===e.tagName},zo=function(e){return\"TEXTAREA\"===e.tagName},Vo=function(e){return\"SELECT\"===e.tagName},qo=function(){function e(){this.counters={}}return e.prototype.getCounterValue=function(e){var t=this.counters[e];return t&&t.length?t[t.length-1]:1},e.prototype.getCounterValues=function(e){return this.counters[e]||[]},e.prototype.pop=function(e){var t=this;e.forEach((function(e){return t.counters[e].pop()}))},e.prototype.parse=function(e){var t=this,r=e.counterIncrement,n=e.counterReset,o=!0;null!==r&&r.forEach((function(e){var r=t.counters[e.counter];r&&0!==e.increment&&(o=!1,r[Math.max(0,r.length-1)]+=e.increment)}));var s=[];return o&&n.forEach((function(e){var r=t.counters[e.counter];s.push(e.counter),r||(r=t.counters[e.counter]=[]),r.push(e.reset)})),s},e}(),Go={integers:[1e3,900,500,400,100,90,50,40,10,9,5,4,1],values:[\"M\",\"CM\",\"D\",\"CD\",\"C\",\"XC\",\"L\",\"XL\",\"X\",\"IX\",\"V\",\"IV\",\"I\"]},Xo={integers:[9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"Ք\",\"Փ\",\"Ւ\",\"Ց\",\"Ր\",\"Տ\",\"Վ\",\"Ս\",\"Ռ\",\"Ջ\",\"Պ\",\"Չ\",\"Ո\",\"Շ\",\"Ն\",\"Յ\",\"Մ\",\"Ճ\",\"Ղ\",\"Ձ\",\"Հ\",\"Կ\",\"Ծ\",\"Խ\",\"Լ\",\"Ի\",\"Ժ\",\"Թ\",\"Ը\",\"Է\",\"Զ\",\"Ե\",\"Դ\",\"Գ\",\"Բ\",\"Ա\"]},Wo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,400,300,200,100,90,80,70,60,50,40,30,20,19,18,17,16,15,10,9,8,7,6,5,4,3,2,1],values:[\"י׳\",\"ט׳\",\"ח׳\",\"ז׳\",\"ו׳\",\"ה׳\",\"ד׳\",\"ג׳\",\"ב׳\",\"א׳\",\"ת\",\"ש\",\"ר\",\"ק\",\"צ\",\"פ\",\"ע\",\"ס\",\"נ\",\"מ\",\"ל\",\"כ\",\"יט\",\"יח\",\"יז\",\"טז\",\"טו\",\"י\",\"ט\",\"ח\",\"ז\",\"ו\",\"ה\",\"ד\",\"ג\",\"ב\",\"א\"]},Jo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"ჵ\",\"ჰ\",\"ჯ\",\"ჴ\",\"ხ\",\"ჭ\",\"წ\",\"ძ\",\"ც\",\"ჩ\",\"შ\",\"ყ\",\"ღ\",\"ქ\",\"ფ\",\"ჳ\",\"ტ\",\"ს\",\"რ\",\"ჟ\",\"პ\",\"ო\",\"ჲ\",\"ნ\",\"მ\",\"ლ\",\"კ\",\"ი\",\"თ\",\"ჱ\",\"ზ\",\"ვ\",\"ე\",\"დ\",\"გ\",\"ბ\",\"ა\"]},Yo=function(e,t,r,n,o,s){return e<t||e>r?is(e,o,s.length>0):n.integers.reduce((function(t,r,o){for(;e>=r;)e-=r,t+=n.values[o];return t}),\"\")+s},Zo=function(e,t,r,n){var o=\"\";do{r||e--,o=n(e)+o,e/=t}while(e*t>=t);return o},$o=function(e,t,r,n,o){var s=r-t+1;return(e<0?\"-\":\"\")+(Zo(Math.abs(e),s,n,(function(e){return A(Math.floor(e%s)+t)}))+o)},es=function(e,t,r){void 0===r&&(r=\". \");var n=t.length;return Zo(Math.abs(e),n,!1,(function(e){return t[Math.floor(e%n)]}))+r},ts=function(e,t,r,n,o,s){if(e<-9999||e>9999)return is(e,Wr.CJK_DECIMAL,o.length>0);var i=Math.abs(e),a=o;if(0===i)return t[0]+a;for(var A=0;i>0&&A<=4;A++){var u=i%10;0===u&&Rn(s,1)&&\"\"!==a?a=t[u]+a:u>1||1===u&&0===A||1===u&&1===A&&Rn(s,2)||1===u&&1===A&&Rn(s,4)&&e>100||1===u&&A>1&&Rn(s,8)?a=t[u]+(A>0?r[A-1]:\"\")+a:1===u&&A>0&&(a=r[A-1]+a),i=Math.floor(i/10)}return(e<0?n:\"\")+a},rs=\"十百千萬\",ns=\"拾佰仟萬\",os=\"マイナス\",ss=\"마이너스\",is=function(e,t,r){var n=r?\". \":\"\",o=r?\"、\":\"\",s=r?\", \":\"\",i=r?\" \":\"\";switch(t){case Wr.DISC:return\"•\"+i;case Wr.CIRCLE:return\"◦\"+i;case Wr.SQUARE:return\"◾\"+i;case Wr.DECIMAL_LEADING_ZERO:var a=$o(e,48,57,!0,n);return a.length<4?\"0\"+a:a;case Wr.CJK_DECIMAL:return es(e,\"〇一二三四五六七八九\",o);case Wr.LOWER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n).toLowerCase();case Wr.UPPER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n);case Wr.LOWER_GREEK:return $o(e,945,969,!1,n);case Wr.LOWER_ALPHA:return $o(e,97,122,!1,n);case Wr.UPPER_ALPHA:return $o(e,65,90,!1,n);case Wr.ARABIC_INDIC:return $o(e,1632,1641,!0,n);case Wr.ARMENIAN:case Wr.UPPER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n);case Wr.LOWER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n).toLowerCase();case Wr.BENGALI:return $o(e,2534,2543,!0,n);case Wr.CAMBODIAN:case Wr.KHMER:return $o(e,6112,6121,!0,n);case Wr.CJK_EARTHLY_BRANCH:return es(e,\"子丑寅卯辰巳午未申酉戌亥\",o);case Wr.CJK_HEAVENLY_STEM:return es(e,\"甲乙丙丁戊己庚辛壬癸\",o);case Wr.CJK_IDEOGRAPHIC:case Wr.TRAD_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"負\",o,14);case Wr.TRAD_CHINESE_FORMAL:return ts(e,\"零壹貳參肆伍陸柒捌玖\",ns,\"負\",o,15);case Wr.SIMP_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"负\",o,14);case Wr.SIMP_CHINESE_FORMAL:return ts(e,\"零壹贰叁肆伍陆柒捌玖\",ns,\"负\",o,15);case Wr.JAPANESE_INFORMAL:return ts(e,\"〇一二三四五六七八九\",\"十百千万\",os,o,0);case Wr.JAPANESE_FORMAL:return ts(e,\"零壱弐参四伍六七八九\",\"拾百千万\",os,o,7);case Wr.KOREAN_HANGUL_FORMAL:return ts(e,\"영일이삼사오육칠팔구\",\"십백천만\",ss,s,7);case Wr.KOREAN_HANJA_INFORMAL:return ts(e,\"零一二三四五六七八九\",\"十百千萬\",ss,s,0);case Wr.KOREAN_HANJA_FORMAL:return ts(e,\"零壹貳參四五六七八九\",\"拾百千\",ss,s,7);case Wr.DEVANAGARI:return $o(e,2406,2415,!0,n);case Wr.GEORGIAN:return Yo(e,1,19999,Jo,Wr.DECIMAL,n);case Wr.GUJARATI:return $o(e,2790,2799,!0,n);case Wr.GURMUKHI:return $o(e,2662,2671,!0,n);case Wr.HEBREW:return Yo(e,1,10999,Wo,Wr.DECIMAL,n);case Wr.HIRAGANA:return es(e,\"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん\");case Wr.HIRAGANA_IROHA:return es(e,\"いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす\");case Wr.KANNADA:return $o(e,3302,3311,!0,n);case Wr.KATAKANA:return es(e,\"アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン\",o);case Wr.KATAKANA_IROHA:return es(e,\"イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセス\",o);case Wr.LAO:return $o(e,3792,3801,!0,n);case Wr.MONGOLIAN:return $o(e,6160,6169,!0,n);case Wr.MYANMAR:return $o(e,4160,4169,!0,n);case Wr.ORIYA:return $o(e,2918,2927,!0,n);case Wr.PERSIAN:return $o(e,1776,1785,!0,n);case Wr.TAMIL:return $o(e,3046,3055,!0,n);case Wr.TELUGU:return $o(e,3174,3183,!0,n);case Wr.THAI:return $o(e,3664,3673,!0,n);case Wr.TIBETAN:return $o(e,3872,3881,!0,n);case Wr.DECIMAL:default:return $o(e,48,57,!0,n)}},as=\"data-html2canvas-ignore\",As=function(){function e(e,t){if(this.options=t,this.scrolledElements=[],this.referenceElement=e,this.counters=new qo,this.quoteDepth=0,!e.ownerDocument)throw new Error(\"Cloned element does not have an owner document\");this.documentElement=this.cloneNode(e.ownerDocument.documentElement)}return e.prototype.toIFrame=function(e,t){var r=this,s=cs(e,t);if(!s.contentWindow)return Promise.reject(\"Unable to find iframe window\");var i=e.defaultView.pageXOffset,a=e.defaultView.pageYOffset,A=s.contentWindow,u=A.document,c=ls(s).then((function(){return n(r,void 0,void 0,(function(){var e;return o(this,(function(r){switch(r.label){case 0:return this.scrolledElements.forEach(ps),A&&(A.scrollTo(t.left,t.top),!/(iPad|iPhone|iPod)/g.test(navigator.userAgent)||A.scrollY===t.top&&A.scrollX===t.left||(u.documentElement.style.top=-t.top+\"px\",u.documentElement.style.left=-t.left+\"px\",u.documentElement.style.position=\"absolute\")),e=this.options.onclone,void 0===this.clonedReferenceElement?[2,Promise.reject(\"Error finding the \"+this.referenceElement.nodeName+\" in the cloned document\")]:u.fonts&&u.fonts.ready?[4,u.fonts.ready]:[3,2];case 1:r.sent(),r.label=2;case 2:return\"function\"==typeof e?[2,Promise.resolve().then((function(){return e(u)})).then((function(){return s}))]:[2,s]}}))}))}));return u.open(),u.write(fs(document.doctype)+\"<html></html>\"),hs(this.referenceElement.ownerDocument,i,a),u.replaceChild(u.adoptNode(this.documentElement),u.documentElement),u.close(),c},e.prototype.createElementClone=function(e){if(ko(e))return this.createCanvasClone(e);if(Do(e))return this.createStyleClone(e);var t=e.cloneNode(!1);return Ro(t)&&\"lazy\"===t.loading&&(t.loading=\"eager\"),t},e.prototype.createStyleClone=function(e){try{var t=e.sheet;if(t&&t.cssRules){var r=[].slice.call(t.cssRules,0).reduce((function(e,t){return t&&\"string\"==typeof t.cssText?e+t.cssText:e}),\"\"),n=e.cloneNode(!1);return n.textContent=r,n}}catch(e){if(Ot.getInstance(this.options.id).error(\"Unable to access cssRules property\",e),\"SecurityError\"!==e.name)throw e}return e.cloneNode(!1)},e.prototype.createCanvasClone=function(e){if(this.options.inlineImages&&e.ownerDocument){var t=e.ownerDocument.createElement(\"img\");try{return t.src=e.toDataURL(),t}catch(e){Ot.getInstance(this.options.id).info(\"Unable to clone canvas contents, canvas is tainted\")}}var r=e.cloneNode(!1);try{r.width=e.width,r.height=e.height;var n=e.getContext(\"2d\"),o=r.getContext(\"2d\");return o&&(n?o.putImageData(n.getImageData(0,0,e.width,e.height),0,0):o.drawImage(e,0,0)),r}catch(e){}return r},e.prototype.cloneNode=function(e){if(Fo(e))return document.createTextNode(e.data);if(!e.ownerDocument)return e.cloneNode(!1);var t=e.ownerDocument.defaultView;if(t&&Uo(e)&&(So(e)||Lo(e))){var r=this.createElementClone(e),n=t.getComputedStyle(e),o=t.getComputedStyle(e,\":before\"),s=t.getComputedStyle(e,\":after\");this.referenceElement===e&&So(r)&&(this.clonedReferenceElement=r),Oo(r)&&vs(r);for(var i=this.counters.parse(new Wn(n)),a=this.resolvePseudoContent(e,r,o,On.BEFORE),A=e.firstChild;A;A=A.nextSibling)Uo(A)&&(Ko(A)||A.hasAttribute(as)||\"function\"==typeof this.options.ignoreElements&&this.options.ignoreElements(A))||this.options.copyStyles&&Uo(A)&&Do(A)||r.appendChild(this.cloneNode(A));a&&r.insertBefore(a,r.firstChild);var u=this.resolvePseudoContent(e,r,s,On.AFTER);return u&&r.appendChild(u),this.counters.pop(i),n&&(this.options.copyStyles||Lo(e))&&!Mo(e)&&ds(n,r),0===e.scrollTop&&0===e.scrollLeft||this.scrolledElements.push([r,e.scrollLeft,e.scrollTop]),(zo(e)||Vo(e))&&(zo(r)||Vo(r))&&(r.value=e.value),r}return e.cloneNode(!1)},e.prototype.resolvePseudoContent=function(e,t,r,n){var o=this;if(r){var s=r.content,i=t.ownerDocument;if(i&&s&&\"none\"!==s&&\"-moz-alt-content\"!==s&&\"none\"!==r.display){this.counters.parse(new Wn(r));var a=new Xn(r),A=i.createElement(\"html2canvaspseudoelement\");ds(r,A),a.content.forEach((function(t){if(t.type===d.STRING_TOKEN)A.appendChild(i.createTextNode(t.value));else if(t.type===d.URL_TOKEN){var r=i.createElement(\"img\");r.src=t.value,r.style.opacity=\"1\",A.appendChild(r)}else if(t.type===d.FUNCTION){if(\"attr\"===t.name){var n=t.values.filter(qe);n.length&&A.appendChild(i.createTextNode(e.getAttribute(n[0].value)||\"\"))}else if(\"counter\"===t.name){var s=t.values.filter(Je),u=s[0],c=s[1];if(u&&qe(u)){var l=o.counters.getCounterValue(u.value),f=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL;A.appendChild(i.createTextNode(is(l,f,!1)))}}else if(\"counters\"===t.name){var h=t.values.filter(Je),p=(u=h[0],h[1]);if(c=h[2],u&&qe(u)){var m=o.counters.getCounterValues(u.value),g=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL,y=p&&p.type===d.STRING_TOKEN?p.value:\"\",v=m.map((function(e){return is(e,g,!1)})).join(y);A.appendChild(i.createTextNode(v))}}}else if(t.type===d.IDENT_TOKEN)switch(t.value){case\"open-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,o.quoteDepth++,!0)));break;case\"close-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,--o.quoteDepth,!1)));break;default:A.appendChild(i.createTextNode(t.value))}})),A.className=ms+\" \"+gs;var u=n===On.BEFORE?\" \"+ms:\" \"+gs;return Lo(t)?t.className.baseValue+=u:t.className+=u,A}}},e.destroy=function(e){return!!e.parentNode&&(e.parentNode.removeChild(e),!0)},e}();!function(e){e[e.BEFORE=0]=\"BEFORE\",e[e.AFTER=1]=\"AFTER\"}(On||(On={}));var us,cs=function(e,t){var r=e.createElement(\"iframe\");return r.className=\"html2canvas-container\",r.style.visibility=\"hidden\",r.style.position=\"fixed\",r.style.left=\"-10000px\",r.style.top=\"0px\",r.style.border=\"0\",r.width=t.width.toString(),r.height=t.height.toString(),r.scrolling=\"no\",r.setAttribute(as,\"true\"),e.body.appendChild(r),r},ls=function(e){return new Promise((function(t,r){var n=e.contentWindow;if(!n)return r(\"No window assigned for iframe\");var o=n.document;n.onload=e.onload=o.onreadystatechange=function(){n.onload=e.onload=o.onreadystatechange=null;var r=setInterval((function(){o.body.childNodes.length>0&&\"complete\"===o.readyState&&(clearInterval(r),t(e))}),50)}}))},ds=function(e,t){for(var r=e.length-1;r>=0;r--){var n=e.item(r);\"content\"!==n&&t.style.setProperty(n,e.getPropertyValue(n))}return t},fs=function(e){var t=\"\";return e&&(t+=\"<!DOCTYPE \",e.name&&(t+=e.name),e.internalSubset&&(t+=e.internalSubset),e.publicId&&(t+=",
+  "ctx": "n(e){return-1===e.indexOf(\" \")?e:\"'\"+e+\""
+ },
+ "js_002": {
+  "t": "2026-07-17 · 정의란 무엇인가",
+  "ctx": "m=app&utm_campaign=justice\",   edition: "
+ },
+ "js_003": {
+  "t": "저자",
+  "ctx": "nst QUESTIONS = [   {id:1, level:1, tag:"
+ },
+ "js_004": {
+  "t": "『정의란 무엇인가』를 쓴 미국의 정치철학자는 누구일까요?",
+  "ctx": "TIONS = [   {id:1, level:1, tag:\"저자\", q:"
+ },
+ "js_005": {
+  "t": "마이클 샌델",
+  "ctx": "』를 쓴 미국의 정치철학자는 누구일까요?\",    options:[{t:"
+ },
+ "js_006": {
+  "t": "유발 하라리",
+  "ctx": "?\",    options:[{t:\"마이클 샌델\",ok:true},{t:"
+ },
+ "js_007": {
+  "t": "장 폴 사르트르",
+  "ctx": "s:[{t:\"마이클 샌델\",ok:true},{t:\"유발 하라리\"},{t:"
+ },
+ "js_008": {
+  "t": "알랭 드 보통",
+  "ctx": "ok:true},{t:\"유발 하라리\"},{t:\"장 폴 사르트르\"},{t:"
+ },
+ "js_009": {
+  "t": "『정의란 무엇인가』는 하버드대 교수 <b>마이클 샌델</b>이 쓴 정치철학서예요. 그의 인기 강의 <b>정의(Justice)</b>를 책으로 옮긴 것입니다.",
+  "ctx": "},{t:\"장 폴 사르트르\"},{t:\"알랭 드 보통\"}],    ctx:"
+ },
+ "js_010": {
+  "t": "강의 배경",
+  "ctx": "를 책으로 옮긴 것입니다.\"},   {id:2, level:1, tag:"
+ },
+ "js_011": {
+  "t": "이 책의 바탕이 된, 하버드대에서 진행된 전설적인 강의의 이름은?",
+  "ctx": "니다.\"},   {id:2, level:1, tag:\"강의 배경\", q:"
+ },
+ "js_012": {
+  "t": "정의(Justice)",
+  "ctx": "드대에서 진행된 전설적인 강의의 이름은?\",    options:[{t:"
+ },
+ "js_013": {
+  "t": "행복(Happiness)",
+  "ctx": "  options:[{t:\"정의(Justice)\",ok:true},{t:"
+ },
+ "js_014": {
+  "t": "자유(Liberty)",
+  "ctx": "stice)\",ok:true},{t:\"행복(Happiness)\"},{t:"
+ },
+ "js_015": {
+  "t": "국가(Republic)",
+  "ctx": "t:\"행복(Happiness)\"},{t:\"자유(Liberty)\"},{t:"
+ },
+ "js_016": {
+  "t": "이 책은 샌델의 하버드 강의 <b>정의(Justice)</b>에서 나왔어요. 온라인으로 무료 공개되어 전 세계 수천만 명이 시청한 명강의입니다.",
+  "ctx": "(Liberty)\"},{t:\"국가(Republic)\"}],    ctx:"
+ },
+ "js_017": {
+  "t": "세 잣대",
+  "ctx": "명이 시청한 명강의입니다.\"},   {id:3, level:1, tag:"
+ },
+ "js_018": {
+  "t": "이 책이 정의를 판단하는 세 가지 잣대로 드는 것은?",
+  "ctx": "입니다.\"},   {id:3, level:1, tag:\"세 잣대\", q:"
+ },
+ "js_019": {
+  "t": "행복과 자유와 미덕",
+  "ctx": "를 판단하는 세 가지 잣대로 드는 것은?\",    options:[{t:"
+ },
+ "js_020": {
+  "t": "평등과 박애와 우애",
+  "ctx": "   options:[{t:\"행복과 자유와 미덕\",ok:true},{t:"
+ },
+ "js_021": {
+  "t": "권력과 명예와 재물",
+  "ctx": "복과 자유와 미덕\",ok:true},{t:\"평등과 박애와 우애\"},{t:"
+ },
+ "js_022": {
+  "t": "이성과 감정과 직관",
+  "ctx": "e},{t:\"평등과 박애와 우애\"},{t:\"권력과 명예와 재물\"},{t:"
+ },
+ "js_023": {
+  "t": "샌델은 정의를 <b>행복(공리주의)·자유(자유주의)·미덕(공동체주의)</b> 세 잣대로 따집니다. 책 전체가 이 세 관점을 오가며 전개돼요.",
+  "ctx": "\"권력과 명예와 재물\"},{t:\"이성과 감정과 직관\"}],    ctx:"
+ },
+ "js_024": {
+  "t": "트롤리",
+  "ctx": " 관점을 오가며 전개돼요.\"},   {id:4, level:1, tag:"
+ },
+ "js_025": {
+  "t": "브레이크가 고장 난 전차가 다섯 명을 향해 달릴 때, 선로를 틀면 한 명이 죽는 이 유명한 사고실험은?",
+  "ctx": "전개돼요.\"},   {id:4, level:1, tag:\"트롤리\", q:"
+ },
+ "js_026": {
+  "t": "트롤리 문제",
+  "ctx": "면 한 명이 죽는 이 유명한 사고실험은?\",    options:[{t:"
+ },
+ "js_027": {
+  "t": "죄수의 딜레마",
+  "ctx": "?\",    options:[{t:\"트롤리 문제\",ok:true},{t:"
+ },
+ "js_028": {
+  "t": "튜링 테스트",
+  "ctx": ":[{t:\"트롤리 문제\",ok:true},{t:\"죄수의 딜레마\"},{t:"
+ },
+ "js_029": {
+  "t": "파스칼의 내기",
+  "ctx": ",ok:true},{t:\"죄수의 딜레마\"},{t:\"튜링 테스트\"},{t:"
+ },
+ "js_030": {
+  "t": "<b>트롤리 문제</b>(광차 문제)는 다섯을 살리려 한 명을 희생해도 되는지 묻는 사고실험이에요. 책의 문을 여는 대표 딜레마입니다.",
+  "ctx": "마\"},{t:\"튜링 테스트\"},{t:\"파스칼의 내기\"}],    ctx:"
+ },
+ "js_031": {
+  "t": "공리주의 창시",
+  "ctx": " 여는 대표 딜레마입니다.\"},   {id:5, level:1, tag:"
+ },
+ "js_032": {
+  "t": "최대 다수의 최대 행복을 내세운 공리주의를 체계화한 철학자는?",
+  "ctx": ".\"},   {id:5, level:1, tag:\"공리주의 창시\", q:"
+ },
+ "js_033": {
+  "t": "제러미 벤담",
+  "ctx": "을 내세운 공리주의를 체계화한 철학자는?\",    options:[{t:"
+ },
+ "js_034": {
+  "t": "존 로크",
+  "ctx": "?\",    options:[{t:\"제러미 벤담\",ok:true},{t:"
+ },
+ "js_035": {
+  "t": "데이비드 흄",
+  "ctx": "ons:[{t:\"제러미 벤담\",ok:true},{t:\"존 로크\"},{t:"
+ },
+ "js_036": {
+  "t": "장 자크 루소",
+  "ctx": "벤담\",ok:true},{t:\"존 로크\"},{t:\"데이비드 흄\"},{t:"
+ },
+ "js_037": {
+  "t": "공리주의를 체계화한 사람은 <b>제러미 벤담</b>이에요. 행복을 쾌락의 양으로 계산해 최대 다수의 최대 행복을 좇자고 했습니다.",
+  "ctx": "크\"},{t:\"데이비드 흄\"},{t:\"장 자크 루소\"}],    ctx:"
+ },
+ "js_038": {
+  "t": "칸트 핵심어",
+  "ctx": " 행복을 좇자고 했습니다.\"},   {id:6, level:1, tag:"
+ },
+ "js_039": {
+  "t": "조건 없이 무조건 따라야 하는 칸트의 도덕법칙을 부르는 말은?",
+  "ctx": "다.\"},   {id:6, level:1, tag:\"칸트 핵심어\", q:"
+ },
+ "js_040": {
+  "t": "정언명령",
+  "ctx": "야 하는 칸트의 도덕법칙을 부르는 말은?\",    options:[{t:"
+ },
+ "js_041": {
+  "t": "황금률",
+  "ctx": "말은?\",    options:[{t:\"정언명령\",ok:true},{t:"
+ },
+ "js_042": {
+  "t": "사회계약론",
+  "ctx": "ptions:[{t:\"정언명령\",ok:true},{t:\"황금률\"},{t:"
+ },
+ "js_043": {
+  "t": "자연법",
+  "ctx": "정언명령\",ok:true},{t:\"황금률\"},{t:\"사회계약론\"},{t:"
+ },
+ "js_044": {
+  "t": "칸트의 도덕법칙은 <b>정언명령</b>이에요. 어떤 목적을 위한 수단(가언명령)이 아니라, 그 자체로 무조건 지켜야 하는 명령입니다.",
+  "ctx": "t:\"황금률\"},{t:\"사회계약론\"},{t:\"자연법\"}],    ctx:"
+ },
+ "js_045": {
+  "t": "롤스 장치",
+  "ctx": " 지켜야 하는 명령입니다.\"},   {id:7, level:1, tag:"
+ },
+ "js_046": {
+  "t": "자신의 처지를 전혀 모르는 상태에서 정의의 원칙을 고르게 하는 롤스의 사고 장치는?",
+  "ctx": "니다.\"},   {id:7, level:1, tag:\"롤스 장치\", q:"
+ },
+ "js_047": {
+  "t": "무지의 베일",
+  "ctx": "원칙을 고르게 하는 롤스의 사고 장치는?\",    options:[{t:"
+ },
+ "js_048": {
+  "t": "죽음의 도약",
+  "ctx": "?\",    options:[{t:\"무지의 베일\",ok:true},{t:"
+ },
+ "js_049": {
+  "t": "보이지 않는 손",
+  "ctx": "s:[{t:\"무지의 베일\",ok:true},{t:\"죽음의 도약\"},{t:"
+ },
+ "js_050": {
+  "t": "절대정신",
+  "ctx": "ok:true},{t:\"죽음의 도약\"},{t:\"보이지 않는 손\"},{t:"
+ },
+ "js_051": {
+  "t": "롤스는 <b>무지의 베일</b>을 제안해요. 내가 부자일지 가난할지 모른 채 원칙을 정하면, 누구에게나 공정한 정의에 이른다는 발상입니다.",
+  "ctx": "도약\"},{t:\"보이지 않는 손\"},{t:\"절대정신\"}],    ctx:"
+ },
+ "js_052": {
+  "t": "아리스토텔레스",
+  "ctx": "의에 이른다는 발상입니다.\"},   {id:8, level:1, tag:"
+ },
+ "js_053": {
+  "t": "정의를 각자의 목적(텔로스)에 맞게 나누어 주는 것으로 본 고대 그리스 철학자는?",
+  "ctx": ".\"},   {id:8, level:1, tag:\"아리스토텔레스\", q:"
+ },
+ "js_054": {
+  "t": "소크라테스",
+  "ctx": "\",    options:[{t:\"아리스토텔레스\",ok:true},{t:"
+ },
+ "js_055": {
+  "t": "에피쿠로스",
+  "ctx": "s:[{t:\"아리스토텔레스\",ok:true},{t:\"소크라테스\"},{t:"
+ },
+ "js_056": {
+  "t": "피타고라스",
+  "ctx": "레스\",ok:true},{t:\"소크라테스\"},{t:\"에피쿠로스\"},{t:"
+ },
+ "js_057": {
+  "t": "<b>아리스토텔레스</b>는 정의를 각 사물·직책의 목적에 맞게 나누는 일로 봤어요. 미덕과 좋은 삶을 정의의 중심에 둔 목적론적 관점입니다.",
+  "ctx": "크라테스\"},{t:\"에피쿠로스\"},{t:\"피타고라스\"}],    ctx:"
+ },
+ "js_058": {
+  "t": "인기",
+  "ctx": " 둔 목적론적 관점입니다.\"},   {id:9, level:1, tag:"
+ },
+ "js_059": {
+  "t": "이 책이 유독 크게 인기를 끌어 100만 부를 넘긴 밀리언셀러가 된 나라는?",
+  "ctx": "관점입니다.\"},   {id:9, level:1, tag:\"인기\", q:"
+ },
+ "js_060": {
+  "t": "대한민국",
+  "ctx": "0만 부를 넘긴 밀리언셀러가 된 나라는?\",    options:[{t:"
+ },
+ "js_061": {
+  "t": "독일",
+  "ctx": "라는?\",    options:[{t:\"대한민국\",ok:true},{t:"
+ },
+ "js_062": {
+  "t": "프랑스",
+  "ctx": "options:[{t:\"대한민국\",ok:true},{t:\"독일\"},{t:"
+ },
+ "js_063": {
+  "t": "아르헨티나",
+  "ctx": "t:\"대한민국\",ok:true},{t:\"독일\"},{t:\"프랑스\"},{t:"
+ },
+ "js_064": {
+  "t": "미국에서 10만 부 남짓 팔린 이 책은 <b>대한민국</b>에서 폭발적 인기를 끌어 200만 부가 팔렸어요. 인문서로는 드문 대기록입니다.",
+  "ctx": "{t:\"독일\"},{t:\"프랑스\"},{t:\"아르헨티나\"}],    ctx:"
+ },
+ "js_065": {
+  "t": "샌델 입장",
+  "ctx": "로는 드문 대기록입니다.\"},   {id:10, level:1, tag:"
+ },
+ "js_066": {
+  "t": "샌델이 옹호하는, 공동선과 미덕을 정치의 중심에 두는 철학 흐름은?",
+  "ctx": "다.\"},   {id:10, level:1, tag:\"샌델 입장\", q:"
+ },
+ "js_067": {
+  "t": "공동체주의",
+  "ctx": "미덕을 정치의 중심에 두는 철학 흐름은?\",    options:[{t:"
+ },
+ "js_068": {
+  "t": "실용주의",
+  "ctx": "은?\",    options:[{t:\"공동체주의\",ok:true},{t:"
+ },
+ "js_069": {
+  "t": "허무주의",
+  "ctx": "ions:[{t:\"공동체주의\",ok:true},{t:\"실용주의\"},{t:"
+ },
+ "js_070": {
+  "t": "전체주의",
+  "ctx": "동체주의\",ok:true},{t:\"실용주의\"},{t:\"허무주의\"},{t:"
+ },
+ "js_071": {
+  "t": "샌델은 <b>공동체주의</b>에 가까운 사상가예요. 정의는 좋은 삶과 공동선을 함께 물어야 한다며, 중립을 내세우는 자유주의를 비판합니다.",
+  "ctx": ":\"실용주의\"},{t:\"허무주의\"},{t:\"전체주의\"}],    ctx:"
+ },
+ "js_072": {
+  "t": "위키백과 「정의란 무엇인가」",
+  "ctx": "== */ const SOURCES = {   ko:    {label:"
+ },
+ "js_073": {
+  "t": "https://ko.wikipedia.org/wiki/정의란_무엇인가",
+  "ctx": "   ko:    {label:\"위키백과 「정의란 무엇인가」\", url:"
+ },
+ "js_074": {
+  "t": "위키백과 「마이클 샌델」",
+  "ctx": "ia.org/wiki/정의란_무엇인가\"},   sandel:{label:"
+ },
+ "js_075": {
+  "t": "https://ko.wikipedia.org/wiki/마이클_샌델",
+  "ctx": "},   sandel:{label:\"위키백과 「마이클 샌델」\", url:"
+ },
+ "js_076": {
+  "t": "위키백과 「광차 문제」",
+  "ctx": "dia.org/wiki/마이클_샌델\"},   trolley:{label:"
+ },
+ "js_077": {
+  "t": "https://ko.wikipedia.org/wiki/광차_문제",
+  "ctx": "},   trolley:{label:\"위키백과 「광차 문제」\", url:"
+ },
+ "js_078": {
+  "t": "위키백과 「공리주의」",
+  "ctx": "pedia.org/wiki/광차_문제\"},   util:  {label:"
+ },
+ "js_079": {
+  "t": "https://ko.wikipedia.org/wiki/공리주의",
+  "ctx": "제\"},   util:  {label:\"위키백과 「공리주의」\", url:"
+ },
+ "js_080": {
+  "t": "위키백과 「정언명령」",
+  "ctx": "ipedia.org/wiki/공리주의\"},   kant:  {label:"
+ },
+ "js_081": {
+  "t": "https://ko.wikipedia.org/wiki/정언명령",
+  "ctx": "의\"},   kant:  {label:\"위키백과 「정언명령」\", url:"
+ },
+ "js_082": {
+  "t": "위키백과 「정의론」",
+  "ctx": "ipedia.org/wiki/정언명령\"},   rawls: {label:"
+ },
+ "js_083": {
+  "t": "https://ko.wikipedia.org/wiki/정의론",
+  "ctx": "명령\"},   rawls: {label:\"위키백과 「정의론」\", url:"
+ },
+ "js_084": {
+  "t": "위키백과 「원초적 입장」",
+  "ctx": "kipedia.org/wiki/정의론\"},   orig:  {label:"
+ },
+ "js_085": {
+  "t": "https://ko.wikipedia.org/wiki/원초적_입장",
+  "ctx": "},   orig:  {label:\"위키백과 「원초적 입장」\", url:"
+ },
+ "js_086": {
+  "t": "위키백과 「니코마코스 윤리학」",
+  "ctx": "edia.org/wiki/원초적_입장\"},   arist: {label:"
+ },
+ "js_087": {
+  "t": "https://ko.wikipedia.org/wiki/니코마코스_윤리학",
+  "ctx": "  arist: {label:\"위키백과 「니코마코스 윤리학」\", url:"
+ },
+ "js_088": {
+  "t": "위키백과 「공동체주의」",
+  "ctx": "a.org/wiki/니코마코스_윤리학\"},   comm:  {label:"
+ },
+ "js_089": {
+  "t": "https://ko.wikipedia.org/wiki/공동체주의",
+  "ctx": "\"},   comm:  {label:\"위키백과 「공동체주의」\", url:"
+ },
+ "js_090": {
+  "t": "나무위키 「정의란 무엇인가」",
+  "ctx": "pedia.org/wiki/공동체주의\"},   namu:  {label:"
+ },
+ "js_091": {
+  "t": "https://namu.wiki/w/정의란 무엇인가",
+  "ctx": "   namu:  {label:\"나무위키 「정의란 무엇인가」\", url:"
+ },
+ "js_092": {
+  "t": "Harvard Justice — 샌델의 정의 강의(무료 공개)",
+  "ctx": "namu.wiki/w/정의란 무엇인가\"},   ebs:   {label:"
+ },
+ "js_093": {
+  "t": "마이클 샌델(1953~)은 하버드대 정치철학 교수예요. 자유주의의 중립성을 비판하고 공동선의 정치를 주장한 대표적 공동체주의 사상가입니다.",
+  "ctx": "const EXTRA = {   1:{src:\"sandel\", note:"
+ },
+ "js_094": {
+  "t": "강의 정의(Justice)는 하버드 역사상 가장 많은 학생이 들은 수업 중 하나예요. 온라인 무료 공개로 전 세계 수천만 명이 시청했습니다.",
+  "ctx": "표적 공동체주의 사상가입니다.\"},   2:{src:\"ko\", note:"
+ },
+ "js_095": {
+  "t": "행복(공리주의)·자유(자유주의)·미덕(공동체주의). 이 세 잣대가 책 전체를 관통해요. 샌델은 세 관점을 차례로 검토하며 정의를 파고듭니다.",
+  "ctx": "계 수천만 명이 시청했습니다.\"},   3:{src:\"ko\", note:"
+ },
+ "js_096": {
+  "t": "트롤리 문제는 필리파 풋이 제시한 사고실험이에요. 다수를 위해 소수를 희생하는 선택이 옳은지 묻는, 윤리학의 대표적 딜레마입니다.",
+  "ctx": " 정의를 파고듭니다.\"},   4:{src:\"trolley\", note:"
+ },
+ "js_097": {
+  "t": "제러미 벤담(1748~1832)은 공리주의의 창시자예요. 행복을 쾌락의 양으로 계산해 최대 다수의 최대 행복을 옳음의 기준으로 삼았습니다.",
+  "ctx": "학의 대표적 딜레마입니다.\"},   5:{src:\"util\", note:"
+ },
+ "js_098": {
+  "t": "정언명령은 어떤 목적을 위한 수단(가언명령)이 아니라, 그 자체로 무조건 따라야 하는 도덕법칙이에요. 네 행위의 준칙이 보편법칙이 되게 하라가 대표 정식입니다.",
+  "ctx": "음의 기준으로 삼았습니다.\"},   6:{src:\"kant\", note:"
+ },
+ "js_099": {
+  "t": "무지의 베일은 롤스의 사고 장치예요. 내 지위·재산·재능을 모른 채 원칙을 정하면 누구에게나 공정한 정의에 이른다는 발상입니다.",
+  "ctx": "하라가 대표 정식입니다.\"},   7:{src:\"rawls\", note:"
+ },
+ "js_100": {
+  "t": "아리스토텔레스는 정의를 각 사물의 목적(텔로스)에 맞게 나누는 일로 봤어요. 미덕을 기르고 좋은 삶을 이루는 것을 정치의 목적으로 삼았습니다.",
+  "ctx": "에 이른다는 발상입니다.\"},   8:{src:\"arist\", note:"
+ },
+ "js_101": {
+  "t": "미국에서 10만 부 남짓 팔린 이 책은 한국에서 200만 부가 팔렸어요. 정의를 향한 사회적 갈증과 맞물려 인문서로는 드문 신드롬을 일으켰습니다.",
+  "ctx": "치의 목적으로 삼았습니다.\"},   9:{src:\"namu\", note:"
+ },
+ "js_102": {
+  "t": "샌델은 공동체주의에 가까워요. 다만 스스로는 전통적 공동체주의자가 아니라며, 자유주의적 공동체주의로 불리기도 합니다.",
+  "ctx": " 신드롬을 일으켰습니다.\"},   10:{src:\"comm\", note:"
+ },
+ "js_103": {
+  "t": "정의의 딜레마",
+  "ctx": "*/ const MILESTONES = [   {at:0,  label:"
+ },
+ "js_104": {
+  "t": "행복 · 공리주의",
+  "ctx": "t:0,  label:\"정의의 딜레마\"},   {at:6,  label:"
+ },
+ "js_105": {
+  "t": "자유 · 칸트",
+  "ctx": "6,  label:\"행복 · 공리주의\"},   {at:12, label:"
+ },
+ "js_106": {
+  "t": "평등 · 롤스",
+  "ctx": "t:12, label:\"자유 · 칸트\"},   {at:18, label:"
+ },
+ "js_107": {
+  "t": "미덕 · 아리스토텔레스",
+  "ctx": "t:18, label:\"평등 · 롤스\"},   {at:24, label:"
+ },
+ "js_108": {
+  "t": "공동선의 정치",
+  "ctx": " label:\"미덕 · 아리스토텔레스\"},   {at:30, label:"
+ },
+ "js_109": {
+  "t": "보통",
+  "ctx": "]; const DIFF_LABEL = {1:[\"쉬움\",\"l1\"],2:["
+ },
+ "js_110": {
+  "t": "어려움",
+  "ctx": "LABEL = {1:[\"쉬움\",\"l1\"],2:[\"보통\",\"l2\"],3:["
+ },
+ "js_111": {
+  "t": "· 복습",
+  "ctx": "ds.size+' / '+TOTAL_Q + (attempts[id] ? "
+ },
+ "js_112": {
+  "t": "🎯 정답!",
+  "ctx": ")      verdict.textContent = firstTry ? "
+ },
+ "js_113": {
+  "t": "✅ 이제 익혔어요!",
+  "ctx": "dict.textContent = firstTry ? '🎯 정답!' : "
+ },
+ "js_114": {
+  "t": "❌ 다시 도전!",
+  "ctx": "ing.push(id);     verdict.textContent = "
+ },
+ "js_115": {
+  "t": "↻ 이 문제는 뒤에서 다시 나옵니다",
+  "ctx": "getElementById('requeue').textContent = "
+ },
+ "js_116": {
+  "t": "정의의 세 잣대",
+  "ctx": "=== */ const CONCEPTS = [   {ic:\"⚖️\", h:"
+ },
+ "js_117": {
+  "t": "행복(공리주의)·자유(자유주의)·미덕(공동체주의). 샌델은 이 세 관점을 차례로 검토하며 무엇이 정의로운가를 파고듭니다.",
+  "ctx": "ONCEPTS = [   {ic:\"⚖️\", h:\"정의의 세 잣대\", p:"
+ },
+ "js_118": {
+  "t": "다섯을 살리려 한 명을 희생해도 되는가. 다수를 위한 소수의 희생을 묻는 사고실험으로, 책의 문을 여는 대표 딜레마입니다.",
+  "ctx": ".\", src:\"ko\"},   {ic:\"🚋\", h:\"트롤리 문제\", p:"
+ },
+ "js_119": {
+  "t": "공리주의",
+  "ctx": " 딜레마입니다.\", src:\"trolley\"},   {ic:\"😊\", h:"
+ },
+ "js_120": {
+  "t": "최대 다수의 최대 행복을 옳음의 기준으로 삼는 벤담·밀의 사상. 소수의 권리를 짓밟을 수 있다는 약점이 함께 다뤄집니다.",
+  "ctx": " src:\"trolley\"},   {ic:\"😊\", h:\"공리주의\", p:"
+ },
+ "js_121": {
+  "t": "자유지상주의",
+  "ctx": "이 함께 다뤄집니다.\", src:\"util\"},   {ic:\"🗽\", h:"
+ },
+ "js_122": {
+  "t": "내 몸과 삶은 오직 나의 것. 노직은 재분배를 위한 세금을 강제노동에 빗대며 최소국가만이 정당하다고 봅니다.",
+  "ctx": ", src:\"util\"},   {ic:\"🗽\", h:\"자유지상주의\", p:"
+ },
+ "js_123": {
+  "t": "칸트의 정언명령",
+  "ctx": " 정당하다고 봅니다.\", src:\"comm\"},   {ic:\"🧭\", h:"
+ },
+ "js_124": {
+  "t": "동기와 의무의 도덕. 사람을 수단이 아니라 목적으로 대하라. 조건 없이 따라야 하는 보편적 도덕법칙을 세웁니다.",
+  "ctx": "src:\"comm\"},   {ic:\"🧭\", h:\"칸트의 정언명령\", p:"
+ },
+ "js_125": {
+  "t": "롤스의 무지의 베일",
+  "ctx": "도덕법칙을 세웁니다.\", src:\"kant\"},   {ic:\"🎭\", h:"
+ },
+ "js_126": {
+  "t": "내 처지를 모른 채 원칙을 정하는 원초적 입장. 불평등은 가장 불리한 사람에게 이득이 될 때만 정당하다는 차등 원칙으로 이어집니다.",
+  "ctx": "c:\"kant\"},   {ic:\"🎭\", h:\"롤스의 무지의 베일\", p:"
+ },
+ "js_127": {
+  "t": "정의는 각 사물의 목적(텔로스)에 맞게 나누는 일. 미덕을 기르고 좋은 삶을 이루는 것을 정치의 목적으로 삼습니다.",
+  "ctx": "rc:\"rawls\"},   {ic:\"🏛️\", h:\"아리스토텔레스\", p:"
+ },
+ "js_128": {
+  "t": "공동선과 연대",
+  "ctx": "목적으로 삼습니다.\", src:\"arist\"},   {ic:\"🤝\", h:"
+ },
+ "js_129": {
+  "t": "샌델의 대안. 스스로 고르지 않아도 지는 연대의 의무를 인정하고, 좋은 삶을 함께 토론하는 공동선의 정치를 제안합니다.",
+  "ctx": "src:\"arist\"},   {ic:\"🤝\", h:\"공동선과 연대\", p:"
+ },
+ "js_130": {
+  "t": "들어가며",
+  "ctx": "/* 목차(클릭하면 요약 오픈) */ const TOC = [   {n:"
+ },
+ "js_131": {
+  "t": "옳은 일 하기 — 정의의 딜레마",
+  "ctx": " 요약 오픈) */ const TOC = [   {n:\"들어가며\", t:"
+ },
+ "js_132": {
+  "t": "트롤리 문제로 시작해 정의라는 물음의 문을 엽니다.",
+  "ctx": " 일 하기 — 정의의 딜레마\", beats:[     {e:\"🚋\", x:"
+ },
+ "js_133": {
+  "t": "허리케인 뒤 가격 폭리 논란으로 시장과 공정함을 저울질해요.",
+  "ctx": "로 시작해 정의라는 물음의 문을 엽니다.\"},     {e:\"🌀\", x:"
+ },
+ "js_134": {
+  "t": "부상 훈장·구제금융 같은 실제 사례로 정의 감각을 흔듭니다.",
+  "ctx": " 논란으로 시장과 공정함을 저울질해요.\"},     {e:\"🎖️\", x:"
+ },
+ "js_135": {
+  "t": "정의를 재는 세 잣대 — 행복·자유·미덕을 예고합니다.",
+  "ctx": "같은 실제 사례로 정의 감각을 흔듭니다.\"},     {e:\"🧭\", x:"
+ },
+ "js_136": {
+  "t": "1부",
+  "ctx": "는 세 잣대 — 행복·자유·미덕을 예고합니다.\"},   ]},   {n:"
+ },
+ "js_137": {
+  "t": "행복을 극대화하라 — 공리주의",
+  "ctx": " 행복·자유·미덕을 예고합니다.\"},   ]},   {n:\"1부\", t:"
+ },
+ "js_138": {
+  "t": "벤담은 최대 다수의 최대 행복을 옳음의 기준으로 세웁니다.",
+  "ctx": "복을 극대화하라 — 공리주의\", beats:[     {e:\"😊\", x:"
+ },
+ "js_139": {
+  "t": "행복을 쾌락의 양으로 계산하는 공리의 셈법을 봅니다.",
+  "ctx": " 최대 행복을 옳음의 기준으로 세웁니다.\"},     {e:\"🧮\", x:"
+ },
+ "js_140": {
+  "t": "밀은 쾌락의 질을 도입해 공리주의를 세련되게 다듬어요.",
+  "ctx": " 양으로 계산하는 공리의 셈법을 봅니다.\"},     {e:\"📚\", x:"
+ },
+ "js_141": {
+  "t": "다수의 행복이 소수의 권리를 짓밟을 위험을 짚습니다.",
+  "ctx": " 도입해 공리주의를 세련되게 다듬어요.\"},     {e:\"⚠️\", x:"
+ },
+ "js_142": {
+  "t": "2부",
+  "ctx": "행복이 소수의 권리를 짓밟을 위험을 짚습니다.\"},   ]},   {n:"
+ },
+ "js_143": {
+  "t": "자유를 존중하라 — 자유지상주의와 칸트",
+  "ctx": "권리를 짓밟을 위험을 짚습니다.\"},   ]},   {n:\"2부\", t:"
+ },
+ "js_144": {
+  "t": "노직의 자유지상주의 — 내 몸은 내 것, 재분배는 부당하다.",
+  "ctx": "하라 — 자유지상주의와 칸트\", beats:[     {e:\"🗽\", x:"
+ },
+ "js_145": {
+  "t": "군 복무·대리 출산을 사고파는 시장과 도덕을 따집니다.",
+  "ctx": "— 내 몸은 내 것, 재분배는 부당하다.\"},     {e:\"💰\", x:"
+ },
+ "js_146": {
+  "t": "칸트는 동기와 의무, 사람을 목적으로 대하라를 말합니다.",
+  "ctx": "출산을 사고파는 시장과 도덕을 따집니다.\"},     {e:\"🧭\", x:"
+ },
+ "js_147": {
+  "t": "정언명령 — 네 준칙이 보편법칙이 되게 행동하라.",
+  "ctx": "무, 사람을 목적으로 대하라를 말합니다.\"},     {e:\"📏\", x:"
+ },
+ "js_148": {
+  "t": "3부",
+  "ctx": "명령 — 네 준칙이 보편법칙이 되게 행동하라.\"},   ]},   {n:"
+ },
+ "js_149": {
+  "t": "공정으로서의 정의 — 롤스",
+  "ctx": "칙이 보편법칙이 되게 행동하라.\"},   ]},   {n:\"3부\", t:"
+ },
+ "js_150": {
+  "t": "무지의 베일을 쓰고 원초적 입장에서 원칙을 정합니다.",
+  "ctx": "\"공정으로서의 정의 — 롤스\", beats:[     {e:\"🎭\", x:"
+ },
+ "js_151": {
+  "t": "평등한 자유의 원칙과 차등 원칙, 두 정의 원칙이 나옵니다.",
+  "ctx": "쓰고 원초적 입장에서 원칙을 정합니다.\"},     {e:\"⚖️\", x:"
+ },
+ "js_152": {
+  "t": "불평등은 가장 불리한 사람에게 이득이 될 때만 정당해요.",
+  "ctx": " 차등 원칙, 두 정의 원칙이 나옵니다.\"},     {e:\"🤲\", x:"
+ },
+ "js_153": {
+  "t": "소수집단 우대 정책 논쟁으로 자격과 정의를 되묻습니다.",
+  "ctx": "리한 사람에게 이득이 될 때만 정당해요.\"},     {e:\"🎓\", x:"
+ },
+ "js_154": {
+  "t": "4부",
+  "ctx": "우대 정책 논쟁으로 자격과 정의를 되묻습니다.\"},   ]},   {n:"
+ },
+ "js_155": {
+  "t": "미덕과 좋은 삶 — 아리스토텔레스",
+  "ctx": "으로 자격과 정의를 되묻습니다.\"},   ]},   {n:\"4부\", t:"
+ },
+ "js_156": {
+  "t": "정의는 각 사물의 목적(텔로스)에 맞게 나누는 일입니다.",
+  "ctx": "좋은 삶 — 아리스토텔레스\", beats:[     {e:\"🏛️\", x:"
+ },
+ "js_157": {
+  "t": "최고의 피리는 최고의 연주자에게 — 목적론적 분배.",
+  "ctx": " 목적(텔로스)에 맞게 나누는 일입니다.\"},     {e:\"🎺\", x:"
+ },
+ "js_158": {
+  "t": "정치의 목적은 시민의 미덕과 좋은 삶을 기르는 것이에요.",
+  "ctx": "는 최고의 연주자에게 — 목적론적 분배.\"},     {e:\"🌱\", x:"
+ },
+ "js_159": {
+  "t": "자격에 따라 몫이 정해진다는 도덕적 응분을 다룹니다.",
+  "ctx": "민의 미덕과 좋은 삶을 기르는 것이에요.\"},     {e:\"🏅\", x:"
+ },
+ "js_160": {
+  "t": "나가며",
+  "ctx": "따라 몫이 정해진다는 도덕적 응분을 다룹니다.\"},   ]},   {n:"
+ },
+ "js_161": {
+  "t": "정의와 공동선",
+  "ctx": "다는 도덕적 응분을 다룹니다.\"},   ]},   {n:\"나가며\", t:"
+ },
+ "js_162": {
+  "t": "샌델은 연고·소속 없는 무연고적 자아를 비판합니다.",
+  "ctx": "가며\", t:\"정의와 공동선\", beats:[     {e:\"🧍\", x:"
+ },
+ "js_163": {
+  "t": "스스로 고르지 않아도 지는 연대의 의무를 인정해요.",
+  "ctx": "·소속 없는 무연고적 자아를 비판합니다.\"},     {e:\"🤝\", x:"
+ },
+ "js_164": {
+  "t": "좋은 삶을 함께 토론하는 공동선의 정치를 제안합니다.",
+  "ctx": " 않아도 지는 연대의 의무를 인정해요.\"},     {e:\"🗣️\", x:"
+ },
+ "js_165": {
+  "t": "다수가 소수를 억누를 위험이라는 숙제도 함께 남깁니다.",
+  "ctx": "께 토론하는 공동선의 정치를 제안합니다.\"},     {e:\"❓\", x:"
+ },
+ "js_166": {
+  "t": "허리케인 뒤의 가격 폭리",
+  "ctx": "해볼 사례 3 */ const CASES = [   {ic:\"🌀\", t:"
+ },
+ "js_167": {
+  "t": "허리케인 찰리가 지나간 뒤 생수와 얼음, 발전기 값이 몇 배로 뛰었습니다. 시장의 자유로운 가격일 뿐인가, 재난을 이용한 부당한 착취인가.",
+  "ctx": "SES = [   {ic:\"🌀\", t:\"허리케인 뒤의 가격 폭리\", d:"
+ },
+ "js_168": {
+  "t": "시장의 효율과 공동체의 공정함이 정면으로 부딪히는 지점으로, 책이 정의의 물음을 여는 첫 사례입니다.",
+  "ctx": "의 자유로운 가격일 뿐인가, 재난을 이용한 부당한 착취인가.\", why:"
+ },
+ "js_169": {
+  "t": "구명보트의 소년",
+  "ctx": " 책이 정의의 물음을 여는 첫 사례입니다.\"},   {ic:\"⛵\", t:"
+ },
+ "js_170": {
+  "t": "난파된 선원들이 표류 끝에 굶주리자, 병든 소년 한 명을 죽여 그 살로 살아남습니다. 다수의 생존이 한 사람의 생명을 앗을 자격을 주는가.",
+  "ctx": " 첫 사례입니다.\"},   {ic:\"⛵\", t:\"구명보트의 소년\", d:"
+ },
+ "js_171": {
+  "t": "최대 다수의 생존이라는 공리와, 사람을 수단으로 삼지 말라는 원칙이 극한에서 충돌하는 실제 사건입니다.",
+  "ctx": "니다. 다수의 생존이 한 사람의 생명을 앗을 자격을 주는가.\", why:"
+ },
+ "js_172": {
+  "t": "아프가니스탄의 염소치기",
+  "ctx": "칙이 극한에서 충돌하는 실제 사건입니다.\"},   {ic:\"🏔️\", t:"
+ },
+ "js_173": {
+  "t": "정찰 임무 중인 특수부대가 민간인 목동과 마주칩니다. 놓아주면 위치가 발각될 수 있고, 죽이면 무고한 이를 해치게 됩니다.",
+  "ctx": "입니다.\"},   {ic:\"🏔️\", t:\"아프가니스탄의 염소치기\", d:"
+ },
+ "js_174": {
+  "t": "결과를 따지는 공리와 도덕적 원칙이 전장에서 부딪히는 선택으로, 정의가 결코 계산만의 문제가 아님을 보여줍니다.",
+  "ctx": "위치가 발각될 수 있고, 죽이면 무고한 이를 해치게 됩니다.\", why:"
+ },
+ "js_175": {
+  "t": "다수의 행복을 위해 한 사람의 권리를 희생해도 정의로운가?",
+  "ctx": "책이 우리에게 던지는 질문 3 */ const ASKS = [   {q:"
+ },
+ "js_176": {
+  "t": "트롤리 문제와 구명보트 사건을 떠올려 보세요. 공리의 셈법이 놓치는 것이 무엇인지 물어보는 것입니다.",
+  "ctx": "q:\"다수의 행복을 위해 한 사람의 권리를 희생해도 정의로운가?\", h:"
+ },
+ "js_177": {
+  "t": "돈으로 사고팔아서는 안 되는 것이 있다면, 그것은 무엇인가?",
+  "ctx": " 공리의 셈법이 놓치는 것이 무엇인지 물어보는 것입니다.\"},   {q:"
+ },
+ "js_178": {
+  "t": "병역·투표·대리 출산을 시장에 맡길 때 훼손되는 가치가 있는지 생각해 보세요.",
+  "ctx": ":\"돈으로 사고팔아서는 안 되는 것이 있다면, 그것은 무엇인가?\", h:"
+ },
+ "js_179": {
+  "t": "정의는 좋은 삶이 무엇인지 묻지 않고도 세워질 수 있는가?",
+  "ctx": " 시장에 맡길 때 훼손되는 가치가 있는지 생각해 보세요.\"},   {q:"
+ },
+ "js_180": {
+  "t": "중립을 내세우는 자유주의와, 미덕을 말하는 샌델의 공동선 정치를 나란히 두고 견주어 보세요.",
+  "ctx": "q:\"정의는 좋은 삶이 무엇인지 묻지 않고도 세워질 수 있는가?\", h:"
+ },
+ "js_181": {
+  "t": "⚖️ 정의의 현자",
+  "ctx": ");   let rank, sub;   if(acc>=90){ rank="
+ },
+ "js_182": {
+  "t": "정의란 무엇인가를 완벽히 꿰뚫었습니다",
+  "ctx": "b;   if(acc>=90){ rank='⚖️ 정의의 현자'; sub="
+ },
+ "js_183": {
+  "t": "🏛️ 공론장의 논객",
+  "ctx": "완벽히 꿰뚫었습니다'; }   else if(acc>=75){ rank="
+ },
+ "js_184": {
+  "t": "핵심 논리를 거의 다 잡았어요",
+  "ctx": "lse if(acc>=75){ rank='🏛️ 공론장의 논객'; sub="
+ },
+ "js_185": {
+  "t": "🤔 사유하는 시민",
+  "ctx": " 거의 다 잡았어요'; }   else if(acc>=55){ rank="
+ },
+ "js_186": {
+  "t": "뼈대를 익혔습니다 — 한 번 더!",
+  "ctx": "else if(acc>=55){ rank='🤔 사유하는 시민'; sub="
+ },
+ "js_187": {
+  "t": "🌱 정의를 묻기 시작한 사람",
+  "ctx": "b='뼈대를 익혔습니다 — 한 번 더!'; }   else { rank="
+ },
+ "js_188": {
+  "t": "반복할수록 점수가 오릅니다",
+  "ctx": " }   else { rank='🌱 정의를 묻기 시작한 사람'; sub="
+ },
+ "js_189": {
+  "t": "완독 리포트",
+  "ctx": "onst fname = ((h2 && h2.textContent) || "
+ },
+ "js_190": {
+  "t": "한눈에 보기",
+  "ctx": "&& h2.textContent) || '완독 리포트').replace("
+ },
+ "js_191": {
+  "t": "리포트.pdf",
+  "ctx": "'완독 리포트').replace('한눈에 보기','').trim() + "
+ },
+ "js_192": {
+  "t": "📄 PDF 만드는 중…",
+  "ctx": "tn){ btn.disabled=true; btn.textContent="
+ },
+ "js_193": {
+  "t": "PDF 생성 중 문제가 발생했어요. 이 HTML 파일을 내려받아 브라우저에서 직접 열고 다시 눌러 주세요.",
+  "ctx": "     }   }).catch(function(){     alert("
+ },
+ "js_194": {
+  "t": "무료로는 <b>",
+  "ctx": "t = TOTAL_Q - fl;       msg.innerHTML = "
+ },
+ "js_195": {
+  "t": "문항</b>까지 풀 수 있어요.",
+  "ctx": "fl;       msg.innerHTML = '무료로는 <b>'+fl+"
+ },
+ "js_196": {
+  "t": "나머지 <b>",
+  "ctx": " <b>'+fl+'문항</b>까지 풀 수 있어요. ' +         "
+ },
+ "js_197": {
+  "t": "문항</b>과 <b>완독 요약 리포트</b>는 구독자 전용입니다.",
+  "ctx": ">까지 풀 수 있어요. ' +         '나머지 <b>'+rest+"
+ },
+ "js_198": {
+  "t": "지금까지 쌓은 <b>정의를 향한 사유 진행도</b>는 위 게이지에 그대로 남아 있어요.",
+  "ctx": "b>완독 요약 리포트</b>는 구독자 전용입니다. ' +         "
+ },
+ "js_199": {
+  "t": "<h3>완독 리포트 전체는 구독자 전용이에요</h3>",
+  "ctx": " = '<div class=\"lk-ic\">🔒</div>' +       "
+ },
+ "js_200": {
+  "t": "<p>정의의 세 잣대와 핵심 개념 일부는 미리 확인하실 수 있어요.<br>",
+  "ctx": "'<h3>완독 리포트 전체는 구독자 전용이에요</h3>' +       "
+ },
+ "js_201": {
+  "t": "목차 요약 · 사례 · 질문 · 약점 복습 · PDF 저장은 구독하면 모두 열립니다.</p>",
+  "ctx": "와 핵심 개념 일부는 미리 확인하실 수 있어요.<br>' +       "
+ },
+ "js_202": {
+  "t": "\" target=\"_blank\" rel=\"noopener\">🔑 구독하고 완독 리포트 전체 열기</a>",
+  "ctx": "     '<a class=\"cta\" href=\"' + _sub() + "
+ },
+ "js_203": {
+  "t": "정의란 무엇인가",
+  "ctx": " 250, '120px serif', '#9db4c9');   ctxt("
+ },
+ "js_204": {
+  "t": "마이클 샌델 · 하버드 정의 강의 마스터 퀴즈",
+  "ctx": "to Serif KR\",serif', '#ffffff');   ctxt("
+ },
+ "js_205": {
+  "t": "정의",
+  "ctx": "ntById('rankTitle')||{}).textContent || "
+ },
+ "js_206": {
+  "t": "📚 매일 새 책 퀴즈  ·",
+  "ctx": "(/^https?:\\/\\//,'') : '';   if(su) ctxt("
+ },
+ "js_207": {
+  "t": "정의란무엇인가_퀴즈결과.png",
+  "ctx": "nt('a');     a.href = url; a.download = "
+ },
+ "js_208": {
+  "t": "💌 VIP 초대 —",
+  "ctx": "ursor:pointer;\";     d.textContent=(vip?"
+ },
+ "js_209": {
+  "t": "🎁 지금 이 책 풀버전 무료 오픈 중!",
+  "ctx": "\";     d.textContent=(vip?\"💌 VIP 초대 — \":"
+ },
+ "js_210": {
+  "t": "전체판(잠금 없음)으로 이동 →",
+  "ctx": "\"💌 VIP 초대 — \":\"🎁 지금 이 책 풀버전 무료 오픈 중! \")+"
+ },
+ "jst_001": {
+  "t": "무료로 풀 수 있는 문항 수",
+  "ctx": "    freeLimit: 10,           // teaser: "
+ },
+ "jst_002": {
+  "t": "아직",
+  "ctx": "3:30};    let pending = [];          // "
+ },
+ "jst_003": {
+  "t": "처음으로 정답",
+  "ctx": "};    let pending = [];          // 아직 ‘"
+ },
+ "jst_004": {
+  "t": "을 못 낸 문항 큐",
+  "ctx": "t pending = [];          // 아직 ‘처음으로 정답’"
+ },
+ "jst_005": {
+  "t": "앞에서 꺼냄",
+  "ctx": "[];          // 아직 ‘처음으로 정답’을 못 낸 문항 큐 ("
+ },
+ "jst_006": {
+  "t": "시도 횟수",
+  "ctx": "(); let attempts = {};         // id -> "
+ },
+ "jst_007": {
+  "t": "첫 시도에 틀린 문항",
+  "ctx": " 0; let firstWrongIds = new Set();   // "
+ },
+ "jst_008": {
+  "t": "약점",
+  "ctx": "rongIds = new Set();   // 첫 시도에 틀린 문항 = "
+ },
+ "jst_009": {
+  "t": "집중 복습 대상",
+  "ctx": "gIds = new Set();   // 첫 시도에 틀린 문항 = 약점("
+ },
+ "jst_010": {
+  "t": "세션 내 최고 점수",
+  "ctx": "r = null; let bestScore = 0;         // "
+ },
+ "jst_011": {
+  "t": "재도전 비교용,",
+  "ctx": "t bestScore = 0;         // 세션 내 최고 점수 ("
+ },
+ "jst_012": {
+  "t": "미사용",
+  "ctx": "   // 세션 내 최고 점수 (재도전 비교용, localStorage "
+ },
+ "jst_013": {
+  "t": "복습 정답은 절반 점수",
+  "ctx": " gain = Math.round(gain/2);          // "
+ },
+ "jst_014": {
+  "t": "콤보 보너스",
+  "ctx": " (streak>=2) ? (streak-1)*3 : 0;     // "
+ },
+ "jst_015": {
+  "t": "가 아니어도 최종적으로 익힌 것으로 카운트",
+  "ctx": " masteredIds.add(id);          // ‘처음으로’"
+ },
+ "jst_016": {
+  "t": "큐에서 제거",
+  "ctx": "운트     pending.shift();              // "
+ },
+ "jst_017": {
+  "t": "연속 정답!",
+  "ctx": "      comboEl.textContent = `🔥 ${streak}"
+ },
+ "jst_018": {
+  "t": "보너스",
+  "ctx": "tContent = `🔥 ${streak}연속 정답! +${bonus} "
+ },
+ "jst_019": {
+  "t": "약점으로 기록",
+  "ctx": "f(firstTry) firstWrongIds.add(id);   // "
+ },
+ "jst_020": {
+  "t": "왜 생각해볼 만한가",
+  "ctx": "= >${c.d}</div>       <div class= >💭 <b>"
+ },
+ "jst_021": {
+  "t": "첫 시도에 모두 정답!",
+  "ctx": " ;     list.innerHTML = `<div class= >🌟 "
+ },
+ "jst_022": {
+  "t": "약점이 없어 따로 복습할 항목이 없습니다. 멋져요.",
+  "ctx": "TML = `<div class= >🌟 첫 시도에 모두 정답!<span>"
+ },
+ "jst_023": {
+  "t": "개",
+  "ctx": " {     cnt.textContent = `(${ids.length}"
+ },
+ "jst_024": {
+  "t": "정답",
+  "ctx": "= >Q. ${q.q}</div>         <div class= >"
+ },
+ "jst_025": {
+  "t": "최고 점수 경신!",
+  "ctx": "re;     note.innerHTML = prev>0 ? `🏆 <b>"
+ },
+ "jst_026": {
+  "t": "이전",
+  "ctx": "nerHTML = prev>0 ? `🏆 <b>최고 점수 경신!</b> ("
+ },
+ "jst_027": {
+  "t": "점",
+  "ctx": "prev>0 ? `🏆 <b>최고 점수 경신!</b> (이전 ${prev}"
+ },
+ "jst_028": {
+  "t": "첫 기록",
+  "ctx": "`🏆 <b>최고 점수 경신!</b> (이전 ${prev}점)` : `🏆 "
+ },
+ "jst_029": {
+  "t": "다시 도전해 깨보세요!",
+  "ctx": "${prev}점)` : `🏆 첫 기록 <b>${score}점</b> — "
+ },
+ "jst_030": {
+  "t": "현재 최고 점수",
+  "ctx": "보세요!`;   } else {     note.innerHTML = `"
+ },
+ "jst_031": {
+  "t": "이번엔",
+  "ctx": "HTML = `현재 최고 점수 <b>${bestScore}점</b> · "
+ }
+}

@@ -1,0 +1,1194 @@
+{
+ "_meta": {
+  "source": "apps/군주론_teaser.html",
+  "slug": "군주론_teaser"
+ },
+ "title_001": {
+  "t": "군주론 도파민 마스터 퀴즈 · 니콜로 마키아벨리",
+  "ctx": "<title>"
+ },
+ "html_001": {
+  "t": "니콜로 마키아벨리 · 1532 · 근대 정치학의 출발점",
+  "ctx": "class=\"hero\">       <div class=\"eyebrow\""
+ },
+ "html_002": {
+  "t": "권력은 어떻게 얻고 지키는가, 500년의 냉정한 대답",
+  "ctx": "ass=\"p3\">👑</span></div>       <h1><small"
+ },
+ "html_003": {
+  "t": "군주론 마스터 퀴즈",
+  "ctx": "all>권력은 어떻게 얻고 지키는가, 500년의 냉정한 대답</small"
+ },
+ "html_004": {
+  "t": "“사랑받는 것과 두려움의 대상이 되는 것을 함께 얻기 어렵다면,",
+  "ctx": "군주론 마스터 퀴즈</h1>       <div class=\"quote\""
+ },
+ "html_005": {
+  "t": "두려움의 대상이 되는 편이 훨씬 안전하다.”",
+  "ctx": "  “사랑받는 것과 두려움의 대상이 되는 것을 함께 얻기 어렵다면,<br"
+ },
+ "html_006": {
+  "t": "— 니콜로 마키아벨리, 『군주론』",
+  "ctx": ">두려움의 대상이 되는 편이 훨씬 안전하다.”<br>         <b"
+ },
+ "html_007": {
+  "t": "이 책의 핵심 개념·논리·통치술을",
+  "ctx": "로 마키아벨리, 『군주론』</b>       </div>       <p"
+ },
+ "html_008": {
+  "t": "30개의 퀴즈",
+  "ctx": "   </div>       <p>이 책의 핵심 개념·논리·통치술을 <b"
+ },
+ "html_009": {
+  "t": "로 익힙니다.\n        쉬운 것부터 시작해 점점 어려워지고,",
+  "ctx": "     <p>이 책의 핵심 개념·논리·통치술을 <b>30개의 퀴즈</b"
+ },
+ "html_010": {
+  "t": "틀린 문제는 맞힐 때까지 다시 돌아옵니다.",
+  "ctx": ">로 익힙니다.         쉬운 것부터 시작해 점점 어려워지고, <b"
+ },
+ "html_011": {
+  "t": "총",
+  "ctx": "s=\"meta-row\">         <span class=\"chip\""
+ },
+ "html_012": {
+  "t": "30문항",
+  "ctx": "ta-row\">         <span class=\"chip\">총 <b"
+ },
+ "html_013": {
+  "t": "쉬움 → 어려움",
+  "ctx": "문항</b></span>         <span class=\"chip\""
+ },
+ "html_014": {
+  "t": "실시간",
+  "ctx": "어려움</span>         <span class=\"chip\"><b"
+ },
+ "html_015": {
+  "t": "통치의 여정",
+  "ctx": "an>         <span class=\"chip\"><b>실시간</b"
+ },
+ "html_016": {
+  "t": "문제마다",
+  "ctx": "통치의 여정</span>         <span class=\"chip\""
+ },
+ "html_017": {
+  "t": "쉬운 해설",
+  "ctx": "span>         <span class=\"chip\">문제마다 <b"
+ },
+ "html_018": {
+  "t": "권력의 기술을 향해 →",
+  "ctx": "=\"btn btn-primary\" onclick=\"startQuiz()\""
+ },
+ "html_019": {
+  "t": "점수",
+  "ctx": "   <div class=\"stat\"><span class=\"label\""
+ },
+ "html_020": {
+  "t": "연속 정답",
+  "ctx": "align-items:center;\"><span class=\"label\""
+ },
+ "html_021": {
+  "t": "마스터",
+  "ctx": "ign-items:flex-end;\"><span class=\"label\""
+ },
+ "html_022": {
+  "t": "혼란 ←",
+  "ctx": "\">         <div class=\"axis-label\"><span"
+ },
+ "html_023": {
+  "t": "통치의 여정 ·",
+  "ctx": "lass=\"axis-label\"><span>혼란 ←</span><span"
+ },
+ "html_024": {
+  "t": "→ 권력",
+  "ctx": "의 여정 · <b id=\"pctTxt\">0%</b></span><span"
+ },
+ "html_025": {
+  "t": "쉬움",
+  "ctx": "d\">         <span class=\"diff\" id=\"diff\""
+ },
+ "html_026": {
+  "t": "다음 →",
+  "ctx": "y\" id=\"nextBtn\" onclick=\"nextQuestion()\""
+ },
+ "html_027": {
+  "t": "여기까지가 무료 미리보기예요",
+  "ctx": ">     <div class=\"lk-ic\">🔒</div>     <h3"
+ },
+ "html_028": {
+  "t": "🔑 구독하고 전체 열기",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_029": {
+  "t": "요약 리포트 미리보기 →",
+  "ctx": "class=\"cta ghost\" onclick=\"openReport()\""
+ },
+ "html_030": {
+  "t": "통치의 대가",
+  "ctx": ">       <div class=\"rank\" id=\"rankTitle\""
+ },
+ "html_031": {
+  "t": "최종 점수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_032": {
+  "t": "첫 시도 정답률",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_033": {
+  "t": "최고 연속 정답",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_034": {
+  "t": "총 도전 횟수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_035": {
+  "t": "📖 전체 요약 리포트 보기",
+  "ctx": "\"btn btn-primary\" onclick=\"openReport()\""
+ },
+ "html_036": {
+  "t": "🖼 결과 카드 저장",
+  "ctx": "btn btn-ghost\" onclick=\"makeShareCard()\""
+ },
+ "html_037": {
+  "t": "다시 도전 ↻",
+  "ctx": "ss=\"btn btn-ghost\" onclick=\"startQuiz()\""
+ },
+ "html_038": {
+  "t": "처음으로",
+  "ctx": "class=\"btn btn-ghost\" onclick=\"goHome()\""
+ },
+ "html_039": {
+  "t": "완독 리포트 · INFOGRAPHIC",
+  "ctx": "s=\"rep-hero\">       <div class=\"eyebrow\""
+ },
+ "html_040": {
+  "t": "군주론 한눈에 보기",
+  "ctx": "ow\">완독 리포트 · INFOGRAPHIC</div>       <h2"
+ },
+ "html_041": {
+  "t": "책 전체를",
+  "ctx": "/div>       <h2>군주론 한눈에 보기</h2>       <p"
+ },
+ "html_042": {
+  "t": "‘권력의 사슬’",
+  "ctx": "   <h2>군주론 한눈에 보기</h2>       <p>책 전체를 <b"
+ },
+ "html_043": {
+  "t": "하나로 꿰면 절대 안 잊습니다. 모든 것의 출발점은",
+  "ctx": "눈에 보기</h2>       <p>책 전체를 <b>‘권력의 사슬’</b"
+ },
+ "html_044": {
+  "t": "인간 본성에 대한 냉정한 직시",
+  "ctx": " 사슬’</b> 하나로 꿰면 절대 안 잊습니다. 모든 것의 출발점은 <b"
+ },
+ "html_045": {
+  "t": "입니다.",
+  "ctx": " 잊습니다. 모든 것의 출발점은 <b>인간 본성에 대한 냉정한 직시</b"
+ },
+ "html_046": {
+  "t": "출발",
+  "ctx": "<div class=\"ch step s0\"><span class=\"cn\""
+ },
+ "html_047": {
+  "t": "🌍 인간은 이기적·변덕스럽다",
+  "ctx": "ch step s0\"><span class=\"cn\">출발</span><b"
+ },
+ "html_048": {
+  "t": "현실을 있는 그대로 직시",
+  "ctx": "n\">출발</span><b>🌍 인간은 이기적·변덕스럽다</b><small"
+ },
+ "html_049": {
+  "t": "1단계",
+  "ctx": "<div class=\"ch step s1\"><span class=\"cn\""
+ },
+ "html_050": {
+  "t": "📕 당위가 아니라 현실 정치에서 출발",
+  "ctx": "h step s1\"><span class=\"cn\">1단계</span><b"
+ },
+ "html_051": {
+  "t": "마땅함이 아닌 실제 작동 방식",
+  "ctx": "</span><b>📕 당위가 아니라 현실 정치에서 출발</b><small"
+ },
+ "html_052": {
+  "t": "2단계",
+  "ctx": "<div class=\"ch step s2\"><span class=\"cn\""
+ },
+ "html_053": {
+  "t": "🦁🦊 사자의 힘 + 여우의 꾀, 자신의 군대와 법",
+  "ctx": "h step s2\"><span class=\"cn\">2단계</span><b"
+ },
+ "html_054": {
+  "t": "용병·원군은 경계",
+  "ctx": "<b>🦁🦊 사자의 힘 + 여우의 꾀, 자신의 군대와 법</b><small"
+ },
+ "html_055": {
+  "t": "근접 원인",
+  "ctx": "s=\"ch step s3\">         <span class=\"cn\""
+ },
+ "html_056": {
+  "t": "🎲 비르투(역량)로 포르투나(운명)에 대비",
+  "ctx": "         <span class=\"cn\">근접 원인</span><b"
+ },
+ "html_057": {
+  "t": "미리 둑을 쌓는 자만이 견딘다",
+  "ctx": "비르투(역량)로 포르투나(운명)에 대비</b>         <small"
+ },
+ "html_058": {
+  "t": "결과",
+  "ctx": "<div class=\"ch step s4\"><span class=\"cn\""
+ },
+ "html_059": {
+  "t": "👑 권력의 획득과 유지",
+  "ctx": "ch step s4\"><span class=\"cn\">결과</span><b"
+ },
+ "html_060": {
+  "t": "“미움받지 않으면서 두려움의 대상으로”",
+  "ctx": "=\"cn\">결과</span><b>👑 권력의 획득과 유지</b><small"
+ },
+ "html_061": {
+  "t": "핵심 개념 8",
+  "ctx": "/div>     </div>      <h3 class=\"rep-h3\""
+ },
+ "html_062": {
+  "t": "목차 한눈에 보기",
+  "ctx": "concepts\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_063": {
+  "t": "탭하면 요약이 열립니다",
+  "ctx": "ss=\"rep-h3\">목차 한눈에 보기 <span class=\"hint\""
+ },
+ "html_064": {
+  "t": "책 속, 생각해볼 사례 3",
+  "ctx": " id=\"toc\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_065": {
+  "t": "이 책이 우리에게 던지는 질문 3",
+  "ctx": "d=\"cases\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_066": {
+  "t": "내가 틀린 부분 집중 복습",
+  "ctx": " id=\"weakWrap\">       <h3 class=\"rep-h3\""
+ },
+ "html_067": {
+  "t": "📖 더 깊이 알고 싶다면",
+  "ctx": "/div>      <div class=\"deepen\">       <b"
+ },
+ "html_068": {
+  "t": "에서 마키아벨리 정치철학의 핵심 개념을 더 깊이 살펴볼 수 있습니다.",
+  "ctx": "f=\"#\" target=\"_blank\" rel=\"noopener\"></a"
+ },
+ "html_069": {
+  "t": "📄 PDF로 저장",
+  "ctx": "d=\"pdfBtn\" onclick=\"downloadReportPDF()\""
+ },
+ "html_070": {
+  "t": "결과로",
+  "ctx": "\"btn btn-ghost\" onclick=\"show('result')\""
+ },
+ "html_071": {
+  "t": "📚 다른 책 퀴즈 보기 →",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_072": {
+  "t": "“의미와재미공장” 미미팩토리",
+  "ctx": "class=\"footer\">     <div class=\"factory\""
+ },
+ "html_073": {
+  "t": "(주식회사 연:결 패밀리회사)",
+  "ctx": "재미공장” 미미팩토리</div>     <div class=\"affil\""
+ },
+ "html_074": {
+  "t": "책의 핵심을 도파민으로 익히는 반복 마스터 퀴즈",
+  "ctx": ":결 패밀리회사)</div>     <div class=\"tagline\""
+ },
+ "html_075": {
+  "t": "본 앱은 도서의 핵심 개념을 학습 목적으로 재구성한 2차적 학습 콘텐츠입니다. 온전한 독서 경험은 원서로 만나보세요.",
+  "ctx": "퀴즈</div>     <div class=\"copyright-note\""
+ },
+ "html_076": {
+  "t": "군주론 · 도서 정보",
+  "ctx": "Word=군주론\" target=\"_blank\" rel=\"noopener\""
+ },
+ "js_001": {
+  "t": "\"}))}},Hn={name:\"font-size\",initialValue:\"0\",prefix:!1,type:wt.TYPE_VALUE,format:\"length\"},In={name:\"font-weight\",initialValue:\"normal\",type:wt.VALUE,prefix:!1,parse:function(e){if(Ve(e))return e.number;if(qe(e))switch(e.value){case\"bold\":return 700;case\"normal\":default:return 400}return 400}},Pn={name:\"font-variant\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return e.filter(qe).map((function(e){return e.value}))}};!function(e){e.NORMAL=\"normal\",e.ITALIC=\"italic\",e.OBLIQUE=\"oblique\"}(Nn||(Nn={}));var On,kn={name:\"font-style\",initialValue:\"normal\",prefix:!1,type:wt.IDENT_VALUE,parse:function(e){switch(e){case\"oblique\":return Nn.OBLIQUE;case\"italic\":return Nn.ITALIC;case\"normal\":default:return Nn.NORMAL}}},Rn=function(e,t){return 0!=(e&t)},Mn={name:\"content\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){if(0===e.length)return[];var t=e[0];return t.type===d.IDENT_TOKEN&&\"none\"===t.value?[]:e}},Dn={name:\"counter-increment\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;for(var r=[],n=e.filter(We),o=0;o<n.length;o++){var s=n[o],i=n[o+1];if(s.type===d.IDENT_TOKEN){var a=i&&Ve(i)?i.number:1;r.push({counter:s.value,increment:a})}}return r}},Kn={name:\"counter-reset\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return[];for(var t=[],r=e.filter(We),n=0;n<r.length;n++){var o=r[n],s=r[n+1];if(qe(o)&&\"none\"!==o.value){var i=s&&Ve(s)?s.number:0;t.push({counter:o.value,reset:i})}}return t}},zn={name:\"quotes\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;var r=[],n=e.filter(Ge);if(n.length%2!=0)return null;for(var o=0;o<n.length;o+=2){var s=n[o].value,i=n[o+1].value;r.push({open:s,close:i})}return r}},Vn=function(e,t,r){if(!e)return\"\";var n=e[Math.min(t,e.length-1)];return n?r?n.open:n.close:\"\"},qn={name:\"box-shadow\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return 1===e.length&&Xe(e[0],\"none\")?[]:Ye(e).map((function(e){for(var t={color:255,offsetX:rt,offsetY:rt,blur:rt,spread:rt,inset:!1},r=0,n=0;n<e.length;n++){var o=e[n];Xe(o,\"inset\")?t.inset=!0:$e(o)?(0===r?t.offsetX=o:1===r?t.offsetY=o:2===r?t.blur=o:t.spread=o,r++):t.color=ft(o)}return t}))}},Gn=function(){function e(e){this.backgroundClip=Jn(xt,e.backgroundClip),this.backgroundColor=Jn(Et,e.backgroundColor),this.backgroundImage=Jn(ur,e.backgroundImage),this.backgroundOrigin=Jn(cr,e.backgroundOrigin),this.backgroundPosition=Jn(lr,e.backgroundPosition),this.backgroundRepeat=Jn(fr,e.backgroundRepeat),this.backgroundSize=Jn(mr,e.backgroundSize),this.borderTopColor=Jn(vr,e.borderTopColor),this.borderRightColor=Jn(wr,e.borderRightColor),this.borderBottomColor=Jn(br,e.borderBottomColor),this.borderLeftColor=Jn(Br,e.borderLeftColor),this.borderTopLeftRadius=Jn(_r,e.borderTopLeftRadius),this.borderTopRightRadius=Jn(Cr,e.borderTopRightRadius),this.borderBottomRightRadius=Jn(xr,e.borderBottomRightRadius),this.borderBottomLeftRadius=Jn(Er,e.borderBottomLeftRadius),this.borderTopStyle=Jn(Fr,e.borderTopStyle),this.borderRightStyle=Jn(Ur,e.borderRightStyle),this.borderBottomStyle=Jn(Sr,e.borderBottomStyle),this.borderLeftStyle=Jn(Lr,e.borderLeftStyle),this.borderTopWidth=Jn(Hr,e.borderTopWidth),this.borderRightWidth=Jn(Ir,e.borderRightWidth),this.borderBottomWidth=Jn(Pr,e.borderBottomWidth),this.borderLeftWidth=Jn(Or,e.borderLeftWidth),this.boxShadow=Jn(qn,e.boxShadow),this.color=Jn(kr,e.color),this.display=Jn(Rr,e.display),this.float=Jn(Kr,e.cssFloat),this.fontFamily=Jn(Tn,e.fontFamily),this.fontSize=Jn(Hn,e.fontSize),this.fontStyle=Jn(kn,e.fontStyle),this.fontVariant=Jn(Pn,e.fontVariant),this.fontWeight=Jn(In,e.fontWeight),this.letterSpacing=Jn(zr,e.letterSpacing),this.lineBreak=Jn(qr,e.lineBreak),this.lineHeight=Jn(Gr,e.lineHeight),this.listStyleImage=Jn(Xr,e.listStyleImage),this.listStylePosition=Jn(Jr,e.listStylePosition),this.listStyleType=Jn(Zr,e.listStyleType),this.marginTop=Jn(en,e.marginTop),this.marginRight=Jn(tn,e.marginRight),this.marginBottom=Jn(rn,e.marginBottom),this.marginLeft=Jn(nn,e.marginLeft),this.opacity=Jn(Un,e.opacity);var t=Jn(sn,e.overflow);this.overflowX=t[0],this.overflowY=t[t.length>1?1:0],this.overflowWrap=Jn(An,e.overflowWrap),this.paddingTop=Jn(cn,e.paddingTop),this.paddingRight=Jn(ln,e.paddingRight),this.paddingBottom=Jn(dn,e.paddingBottom),this.paddingLeft=Jn(fn,e.paddingLeft),this.position=Jn(gn,e.position),this.textAlign=Jn(pn,e.textAlign),this.textDecorationColor=Jn(Sn,e.textDecorationColor||e.color),this.textDecorationLine=Jn(Ln,e.textDecorationLine),this.textShadow=Jn(yn,e.textShadow),this.textTransform=Jn(wn,e.textTransform),this.transform=Jn(bn,e.transform),this.transformOrigin=Jn(Cn,e.transformOrigin),this.visibility=Jn(En,e.visibility),this.wordBreak=Jn(Qn,e.wordBreak),this.zIndex=Jn(Fn,e.zIndex)}return e.prototype.isVisible=function(){return this.display>0&&this.opacity>0&&this.visibility===vn.VISIBLE},e.prototype.isTransparent=function(){return ht(this.backgroundColor)},e.prototype.isTransformed=function(){return null!==this.transform},e.prototype.isPositioned=function(){return this.position!==hn.STATIC},e.prototype.isPositionedWithZIndex=function(){return this.isPositioned()&&!this.zIndex.auto},e.prototype.isFloating=function(){return this.float!==Nr.NONE},e.prototype.isInlineLevel=function(){return Rn(this.display,4)||Rn(this.display,33554432)||Rn(this.display,268435456)||Rn(this.display,536870912)||Rn(this.display,67108864)||Rn(this.display,134217728)},e}(),Xn=function(e){this.content=Jn(Mn,e.content),this.quotes=Jn(zn,e.quotes)},Wn=function(e){this.counterIncrement=Jn(Dn,e.counterIncrement),this.counterReset=Jn(Kn,e.counterReset)},Jn=function(e,t){var r=new De,n=null!=t?t.toString():e.initialValue;r.write(n);var o=new Ke(r.read());switch(e.type){case wt.IDENT_VALUE:var s=o.parseComponentValue();return e.parse(qe(s)?s.value:e.initialValue);case wt.VALUE:return e.parse(o.parseComponentValue());case wt.LIST:return e.parse(o.parseComponentValues());case wt.TOKEN_VALUE:return o.parseComponentValue();case wt.TYPE_VALUE:switch(e.format){case\"angle\":return ut(o.parseComponentValue());case\"color\":return ft(o.parseComponentValue());case\"image\":return ir(o.parseComponentValue());case\"length\":var i=o.parseComponentValue();return $e(i)?i:rt;case\"length-percentage\":var a=o.parseComponentValue();return et(a)?a:rt}}throw new Error(\"Attempting to parse unsupported css format type \"+e.format)},Yn=function(e){this.styles=new Gn(window.getComputedStyle(e,null)),this.textNodes=[],this.elements=[],null!==this.styles.transform&&So(e)&&(e.style.transform=\"none\"),this.bounds=i(e),this.flags=0},Zn=function(e,t){this.text=e,this.bounds=t},$n=function(e){var t=e.ownerDocument;if(t){var r=t.createElement(\"html2canvaswrapper\");r.appendChild(e.cloneNode(!0));var n=e.parentNode;if(n){n.replaceChild(r,e);var o=i(r);return r.firstChild&&n.replaceChild(r.firstChild,r),o}}return new s(0,0,0,0)},eo=function(e,t,r){var n=e.ownerDocument;if(!n)throw new Error(\"Node has no owner document\");var o=n.createRange();return o.setStart(e,t),o.setEnd(e,t+r),s.fromClientRect(o.getBoundingClientRect())},to=function(e,t){return 0!==t.letterSpacing?a(e).map((function(e){return A(e)})):ro(e,t)},ro=function(e,t){for(var r,n=function(e,t){var r=a(e),n=ie(r,t),o=n[0],s=n[1],i=n[2],A=r.length,u=0,c=0;return{next:function(){if(c>=A)return{done:!0,value:null};for(var e=G;c<A&&(e=se(r,s,o,++c,i))===G;);if(e!==G||c===A){var t=new ae(r,e,u,c);return u=c,{value:t,done:!1}}return{done:!0,value:null}}}}(e,{lineBreak:t.lineBreak,wordBreak:t.overflowWrap===on.BREAK_WORD?\"break-word\":t.wordBreak}),o=[];!(r=n.next()).done;)r.value&&o.push(r.value.slice());return o},no=function(e,t){this.text=oo(e.data,t.textTransform),this.textBounds=function(e,t,r){var n=to(e,t),o=[],s=0;return n.forEach((function(e){if(t.textDecorationLine.length||e.trim().length>0)if(Pt.SUPPORT_RANGE_BOUNDS)o.push(new Zn(e,eo(r,s,e.length)));else{var n=r.splitText(e.length);o.push(new Zn(e,$n(r))),r=n}else Pt.SUPPORT_RANGE_BOUNDS||(r=r.splitText(e.length));s+=e.length})),o}(this.text,t,e)},oo=function(e,t){switch(t){case mn.LOWERCASE:return e.toLowerCase();case mn.CAPITALIZE:return e.replace(so,io);case mn.UPPERCASE:return e.toUpperCase();default:return e}},so=/(^|\\s|:|-|\\(|\\))([a-z])/g,io=function(e,t,r){return e.length>0?t+r.toUpperCase():e},ao=function(e){function r(t){var r=e.call(this,t)||this;return r.src=t.currentSrc||t.src,r.intrinsicWidth=t.naturalWidth,r.intrinsicHeight=t.naturalHeight,kt.getInstance().addImage(r.src),r}return t(r,e),r}(Yn),Ao=function(e){function r(t){var r=e.call(this,t)||this;return r.canvas=t,r.intrinsicWidth=t.width,r.intrinsicHeight=t.height,r}return t(r,e),r}(Yn),uo=function(e){function r(t){var r=e.call(this,t)||this,n=new XMLSerializer;return r.svg=\"data:image/svg+xml,\"+encodeURIComponent(n.serializeToString(t)),r.intrinsicWidth=t.width.baseVal.value,r.intrinsicHeight=t.height.baseVal.value,kt.getInstance().addImage(r.svg),r}return t(r,e),r}(Yn),co=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),lo=function(e){function r(t){var r=e.call(this,t)||this;return r.start=t.start,r.reversed=\"boolean\"==typeof t.reversed&&!0===t.reversed,r}return t(r,e),r}(Yn),fo=[{type:d.DIMENSION_TOKEN,flags:0,unit:\"px\",number:3}],ho=[{type:d.PERCENTAGE_TOKEN,flags:0,number:50}],po=\"checkbox\",mo=\"radio\",go=\"password\",yo=707406591,vo=function(e){function r(t){var r,n,o,i=e.call(this,t)||this;switch(i.type=t.type.toLowerCase(),i.checked=t.checked,i.value=0===(o=(n=t).type===go?new Array(n.value.length+1).join(\"•\"):n.value).length?n.placeholder||\"\":o,i.type!==po&&i.type!==mo||(i.styles.backgroundColor=3739148031,i.styles.borderTopColor=i.styles.borderRightColor=i.styles.borderBottomColor=i.styles.borderLeftColor=2779096575,i.styles.borderTopWidth=i.styles.borderRightWidth=i.styles.borderBottomWidth=i.styles.borderLeftWidth=1,i.styles.borderTopStyle=i.styles.borderRightStyle=i.styles.borderBottomStyle=i.styles.borderLeftStyle=pr.SOLID,i.styles.backgroundClip=[bt.BORDER_BOX],i.styles.backgroundOrigin=[0],i.bounds=(r=i.bounds).width>r.height?new s(r.left+(r.width-r.height)/2,r.top,r.height,r.height):r.width<r.height?new s(r.left,r.top+(r.height-r.width)/2,r.width,r.width):r),i.type){case po:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=fo;break;case mo:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=ho}return i}return t(r,e),r}(Yn),wo=function(e){function r(t){var r=e.call(this,t)||this,n=t.options[t.selectedIndex||0];return r.value=n&&n.text||\"\",r}return t(r,e),r}(Yn),bo=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),Bo=function(e){return ft(Ke.create(e).parseComponentValue())},jo=function(e){function r(t){var r=e.call(this,t)||this;r.src=t.src,r.width=parseInt(t.width,10)||0,r.height=parseInt(t.height,10)||0,r.backgroundColor=r.styles.backgroundColor;try{if(t.contentWindow&&t.contentWindow.document&&t.contentWindow.document.documentElement){r.tree=Eo(t.contentWindow.document.documentElement);var n=t.contentWindow.document.documentElement?Bo(getComputedStyle(t.contentWindow.document.documentElement).backgroundColor):_t.TRANSPARENT,o=t.contentWindow.document.body?Bo(getComputedStyle(t.contentWindow.document.body).backgroundColor):_t.TRANSPARENT;r.backgroundColor=ht(n)?ht(o)?r.styles.backgroundColor:o:n}}catch(e){}return r}return t(r,e),r}(Yn),_o=[\"OL\",\"UL\",\"MENU\"],Co=function(e,t,r){for(var n=e.firstChild,o=void 0;n;n=o)if(o=n.nextSibling,Fo(n)&&n.data.trim().length>0)t.textNodes.push(new no(n,t.styles));else if(Uo(n)){var s=xo(n);s.styles.isVisible()&&(No(n,s,r)?s.flags|=4:Qo(s.styles)&&(s.flags|=2),-1!==_o.indexOf(n.tagName)&&(s.flags|=8),t.elements.push(s),zo(n)||Po(n)||Vo(n)||Co(n,s,r))}},xo=function(e){return Ro(e)?new ao(e):ko(e)?new Ao(e):Po(e)?new uo(e):To(e)?new co(e):Ho(e)?new lo(e):Io(e)?new vo(e):Vo(e)?new wo(e):zo(e)?new bo(e):Mo(e)?new jo(e):new Yn(e)},Eo=function(e){var t=xo(e);return t.flags|=4,Co(e,t,t),t},No=function(e,t,r){return t.styles.isPositionedWithZIndex()||t.styles.opacity<1||t.styles.isTransformed()||Oo(e)&&r.styles.isTransparent()},Qo=function(e){return e.isPositioned()||e.isFloating()},Fo=function(e){return e.nodeType===Node.TEXT_NODE},Uo=function(e){return e.nodeType===Node.ELEMENT_NODE},So=function(e){return Uo(e)&&void 0!==e.style&&!Lo(e)},Lo=function(e){return\"object\"==typeof e.className},To=function(e){return\"LI\"===e.tagName},Ho=function(e){return\"OL\"===e.tagName},Io=function(e){return\"INPUT\"===e.tagName},Po=function(e){return\"svg\"===e.tagName},Oo=function(e){return\"BODY\"===e.tagName},ko=function(e){return\"CANVAS\"===e.tagName},Ro=function(e){return\"IMG\"===e.tagName},Mo=function(e){return\"IFRAME\"===e.tagName},Do=function(e){return\"STYLE\"===e.tagName},Ko=function(e){return\"SCRIPT\"===e.tagName},zo=function(e){return\"TEXTAREA\"===e.tagName},Vo=function(e){return\"SELECT\"===e.tagName},qo=function(){function e(){this.counters={}}return e.prototype.getCounterValue=function(e){var t=this.counters[e];return t&&t.length?t[t.length-1]:1},e.prototype.getCounterValues=function(e){return this.counters[e]||[]},e.prototype.pop=function(e){var t=this;e.forEach((function(e){return t.counters[e].pop()}))},e.prototype.parse=function(e){var t=this,r=e.counterIncrement,n=e.counterReset,o=!0;null!==r&&r.forEach((function(e){var r=t.counters[e.counter];r&&0!==e.increment&&(o=!1,r[Math.max(0,r.length-1)]+=e.increment)}));var s=[];return o&&n.forEach((function(e){var r=t.counters[e.counter];s.push(e.counter),r||(r=t.counters[e.counter]=[]),r.push(e.reset)})),s},e}(),Go={integers:[1e3,900,500,400,100,90,50,40,10,9,5,4,1],values:[\"M\",\"CM\",\"D\",\"CD\",\"C\",\"XC\",\"L\",\"XL\",\"X\",\"IX\",\"V\",\"IV\",\"I\"]},Xo={integers:[9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"Ք\",\"Փ\",\"Ւ\",\"Ց\",\"Ր\",\"Տ\",\"Վ\",\"Ս\",\"Ռ\",\"Ջ\",\"Պ\",\"Չ\",\"Ո\",\"Շ\",\"Ն\",\"Յ\",\"Մ\",\"Ճ\",\"Ղ\",\"Ձ\",\"Հ\",\"Կ\",\"Ծ\",\"Խ\",\"Լ\",\"Ի\",\"Ժ\",\"Թ\",\"Ը\",\"Է\",\"Զ\",\"Ե\",\"Դ\",\"Գ\",\"Բ\",\"Ա\"]},Wo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,400,300,200,100,90,80,70,60,50,40,30,20,19,18,17,16,15,10,9,8,7,6,5,4,3,2,1],values:[\"י׳\",\"ט׳\",\"ח׳\",\"ז׳\",\"ו׳\",\"ה׳\",\"ד׳\",\"ג׳\",\"ב׳\",\"א׳\",\"ת\",\"ש\",\"ר\",\"ק\",\"צ\",\"פ\",\"ע\",\"ס\",\"נ\",\"מ\",\"ל\",\"כ\",\"יט\",\"יח\",\"יז\",\"טז\",\"טו\",\"י\",\"ט\",\"ח\",\"ז\",\"ו\",\"ה\",\"ד\",\"ג\",\"ב\",\"א\"]},Jo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"ჵ\",\"ჰ\",\"ჯ\",\"ჴ\",\"ხ\",\"ჭ\",\"წ\",\"ძ\",\"ც\",\"ჩ\",\"შ\",\"ყ\",\"ღ\",\"ქ\",\"ფ\",\"ჳ\",\"ტ\",\"ს\",\"რ\",\"ჟ\",\"პ\",\"ო\",\"ჲ\",\"ნ\",\"მ\",\"ლ\",\"კ\",\"ი\",\"თ\",\"ჱ\",\"ზ\",\"ვ\",\"ე\",\"დ\",\"გ\",\"ბ\",\"ა\"]},Yo=function(e,t,r,n,o,s){return e<t||e>r?is(e,o,s.length>0):n.integers.reduce((function(t,r,o){for(;e>=r;)e-=r,t+=n.values[o];return t}),\"\")+s},Zo=function(e,t,r,n){var o=\"\";do{r||e--,o=n(e)+o,e/=t}while(e*t>=t);return o},$o=function(e,t,r,n,o){var s=r-t+1;return(e<0?\"-\":\"\")+(Zo(Math.abs(e),s,n,(function(e){return A(Math.floor(e%s)+t)}))+o)},es=function(e,t,r){void 0===r&&(r=\". \");var n=t.length;return Zo(Math.abs(e),n,!1,(function(e){return t[Math.floor(e%n)]}))+r},ts=function(e,t,r,n,o,s){if(e<-9999||e>9999)return is(e,Wr.CJK_DECIMAL,o.length>0);var i=Math.abs(e),a=o;if(0===i)return t[0]+a;for(var A=0;i>0&&A<=4;A++){var u=i%10;0===u&&Rn(s,1)&&\"\"!==a?a=t[u]+a:u>1||1===u&&0===A||1===u&&1===A&&Rn(s,2)||1===u&&1===A&&Rn(s,4)&&e>100||1===u&&A>1&&Rn(s,8)?a=t[u]+(A>0?r[A-1]:\"\")+a:1===u&&A>0&&(a=r[A-1]+a),i=Math.floor(i/10)}return(e<0?n:\"\")+a},rs=\"十百千萬\",ns=\"拾佰仟萬\",os=\"マイナス\",ss=\"마이너스\",is=function(e,t,r){var n=r?\". \":\"\",o=r?\"、\":\"\",s=r?\", \":\"\",i=r?\" \":\"\";switch(t){case Wr.DISC:return\"•\"+i;case Wr.CIRCLE:return\"◦\"+i;case Wr.SQUARE:return\"◾\"+i;case Wr.DECIMAL_LEADING_ZERO:var a=$o(e,48,57,!0,n);return a.length<4?\"0\"+a:a;case Wr.CJK_DECIMAL:return es(e,\"〇一二三四五六七八九\",o);case Wr.LOWER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n).toLowerCase();case Wr.UPPER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n);case Wr.LOWER_GREEK:return $o(e,945,969,!1,n);case Wr.LOWER_ALPHA:return $o(e,97,122,!1,n);case Wr.UPPER_ALPHA:return $o(e,65,90,!1,n);case Wr.ARABIC_INDIC:return $o(e,1632,1641,!0,n);case Wr.ARMENIAN:case Wr.UPPER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n);case Wr.LOWER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n).toLowerCase();case Wr.BENGALI:return $o(e,2534,2543,!0,n);case Wr.CAMBODIAN:case Wr.KHMER:return $o(e,6112,6121,!0,n);case Wr.CJK_EARTHLY_BRANCH:return es(e,\"子丑寅卯辰巳午未申酉戌亥\",o);case Wr.CJK_HEAVENLY_STEM:return es(e,\"甲乙丙丁戊己庚辛壬癸\",o);case Wr.CJK_IDEOGRAPHIC:case Wr.TRAD_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"負\",o,14);case Wr.TRAD_CHINESE_FORMAL:return ts(e,\"零壹貳參肆伍陸柒捌玖\",ns,\"負\",o,15);case Wr.SIMP_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"负\",o,14);case Wr.SIMP_CHINESE_FORMAL:return ts(e,\"零壹贰叁肆伍陆柒捌玖\",ns,\"负\",o,15);case Wr.JAPANESE_INFORMAL:return ts(e,\"〇一二三四五六七八九\",\"十百千万\",os,o,0);case Wr.JAPANESE_FORMAL:return ts(e,\"零壱弐参四伍六七八九\",\"拾百千万\",os,o,7);case Wr.KOREAN_HANGUL_FORMAL:return ts(e,\"영일이삼사오육칠팔구\",\"십백천만\",ss,s,7);case Wr.KOREAN_HANJA_INFORMAL:return ts(e,\"零一二三四五六七八九\",\"十百千萬\",ss,s,0);case Wr.KOREAN_HANJA_FORMAL:return ts(e,\"零壹貳參四五六七八九\",\"拾百千\",ss,s,7);case Wr.DEVANAGARI:return $o(e,2406,2415,!0,n);case Wr.GEORGIAN:return Yo(e,1,19999,Jo,Wr.DECIMAL,n);case Wr.GUJARATI:return $o(e,2790,2799,!0,n);case Wr.GURMUKHI:return $o(e,2662,2671,!0,n);case Wr.HEBREW:return Yo(e,1,10999,Wo,Wr.DECIMAL,n);case Wr.HIRAGANA:return es(e,\"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん\");case Wr.HIRAGANA_IROHA:return es(e,\"いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす\");case Wr.KANNADA:return $o(e,3302,3311,!0,n);case Wr.KATAKANA:return es(e,\"アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン\",o);case Wr.KATAKANA_IROHA:return es(e,\"イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセス\",o);case Wr.LAO:return $o(e,3792,3801,!0,n);case Wr.MONGOLIAN:return $o(e,6160,6169,!0,n);case Wr.MYANMAR:return $o(e,4160,4169,!0,n);case Wr.ORIYA:return $o(e,2918,2927,!0,n);case Wr.PERSIAN:return $o(e,1776,1785,!0,n);case Wr.TAMIL:return $o(e,3046,3055,!0,n);case Wr.TELUGU:return $o(e,3174,3183,!0,n);case Wr.THAI:return $o(e,3664,3673,!0,n);case Wr.TIBETAN:return $o(e,3872,3881,!0,n);case Wr.DECIMAL:default:return $o(e,48,57,!0,n)}},as=\"data-html2canvas-ignore\",As=function(){function e(e,t){if(this.options=t,this.scrolledElements=[],this.referenceElement=e,this.counters=new qo,this.quoteDepth=0,!e.ownerDocument)throw new Error(\"Cloned element does not have an owner document\");this.documentElement=this.cloneNode(e.ownerDocument.documentElement)}return e.prototype.toIFrame=function(e,t){var r=this,s=cs(e,t);if(!s.contentWindow)return Promise.reject(\"Unable to find iframe window\");var i=e.defaultView.pageXOffset,a=e.defaultView.pageYOffset,A=s.contentWindow,u=A.document,c=ls(s).then((function(){return n(r,void 0,void 0,(function(){var e;return o(this,(function(r){switch(r.label){case 0:return this.scrolledElements.forEach(ps),A&&(A.scrollTo(t.left,t.top),!/(iPad|iPhone|iPod)/g.test(navigator.userAgent)||A.scrollY===t.top&&A.scrollX===t.left||(u.documentElement.style.top=-t.top+\"px\",u.documentElement.style.left=-t.left+\"px\",u.documentElement.style.position=\"absolute\")),e=this.options.onclone,void 0===this.clonedReferenceElement?[2,Promise.reject(\"Error finding the \"+this.referenceElement.nodeName+\" in the cloned document\")]:u.fonts&&u.fonts.ready?[4,u.fonts.ready]:[3,2];case 1:r.sent(),r.label=2;case 2:return\"function\"==typeof e?[2,Promise.resolve().then((function(){return e(u)})).then((function(){return s}))]:[2,s]}}))}))}));return u.open(),u.write(fs(document.doctype)+\"<html></html>\"),hs(this.referenceElement.ownerDocument,i,a),u.replaceChild(u.adoptNode(this.documentElement),u.documentElement),u.close(),c},e.prototype.createElementClone=function(e){if(ko(e))return this.createCanvasClone(e);if(Do(e))return this.createStyleClone(e);var t=e.cloneNode(!1);return Ro(t)&&\"lazy\"===t.loading&&(t.loading=\"eager\"),t},e.prototype.createStyleClone=function(e){try{var t=e.sheet;if(t&&t.cssRules){var r=[].slice.call(t.cssRules,0).reduce((function(e,t){return t&&\"string\"==typeof t.cssText?e+t.cssText:e}),\"\"),n=e.cloneNode(!1);return n.textContent=r,n}}catch(e){if(Ot.getInstance(this.options.id).error(\"Unable to access cssRules property\",e),\"SecurityError\"!==e.name)throw e}return e.cloneNode(!1)},e.prototype.createCanvasClone=function(e){if(this.options.inlineImages&&e.ownerDocument){var t=e.ownerDocument.createElement(\"img\");try{return t.src=e.toDataURL(),t}catch(e){Ot.getInstance(this.options.id).info(\"Unable to clone canvas contents, canvas is tainted\")}}var r=e.cloneNode(!1);try{r.width=e.width,r.height=e.height;var n=e.getContext(\"2d\"),o=r.getContext(\"2d\");return o&&(n?o.putImageData(n.getImageData(0,0,e.width,e.height),0,0):o.drawImage(e,0,0)),r}catch(e){}return r},e.prototype.cloneNode=function(e){if(Fo(e))return document.createTextNode(e.data);if(!e.ownerDocument)return e.cloneNode(!1);var t=e.ownerDocument.defaultView;if(t&&Uo(e)&&(So(e)||Lo(e))){var r=this.createElementClone(e),n=t.getComputedStyle(e),o=t.getComputedStyle(e,\":before\"),s=t.getComputedStyle(e,\":after\");this.referenceElement===e&&So(r)&&(this.clonedReferenceElement=r),Oo(r)&&vs(r);for(var i=this.counters.parse(new Wn(n)),a=this.resolvePseudoContent(e,r,o,On.BEFORE),A=e.firstChild;A;A=A.nextSibling)Uo(A)&&(Ko(A)||A.hasAttribute(as)||\"function\"==typeof this.options.ignoreElements&&this.options.ignoreElements(A))||this.options.copyStyles&&Uo(A)&&Do(A)||r.appendChild(this.cloneNode(A));a&&r.insertBefore(a,r.firstChild);var u=this.resolvePseudoContent(e,r,s,On.AFTER);return u&&r.appendChild(u),this.counters.pop(i),n&&(this.options.copyStyles||Lo(e))&&!Mo(e)&&ds(n,r),0===e.scrollTop&&0===e.scrollLeft||this.scrolledElements.push([r,e.scrollLeft,e.scrollTop]),(zo(e)||Vo(e))&&(zo(r)||Vo(r))&&(r.value=e.value),r}return e.cloneNode(!1)},e.prototype.resolvePseudoContent=function(e,t,r,n){var o=this;if(r){var s=r.content,i=t.ownerDocument;if(i&&s&&\"none\"!==s&&\"-moz-alt-content\"!==s&&\"none\"!==r.display){this.counters.parse(new Wn(r));var a=new Xn(r),A=i.createElement(\"html2canvaspseudoelement\");ds(r,A),a.content.forEach((function(t){if(t.type===d.STRING_TOKEN)A.appendChild(i.createTextNode(t.value));else if(t.type===d.URL_TOKEN){var r=i.createElement(\"img\");r.src=t.value,r.style.opacity=\"1\",A.appendChild(r)}else if(t.type===d.FUNCTION){if(\"attr\"===t.name){var n=t.values.filter(qe);n.length&&A.appendChild(i.createTextNode(e.getAttribute(n[0].value)||\"\"))}else if(\"counter\"===t.name){var s=t.values.filter(Je),u=s[0],c=s[1];if(u&&qe(u)){var l=o.counters.getCounterValue(u.value),f=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL;A.appendChild(i.createTextNode(is(l,f,!1)))}}else if(\"counters\"===t.name){var h=t.values.filter(Je),p=(u=h[0],h[1]);if(c=h[2],u&&qe(u)){var m=o.counters.getCounterValues(u.value),g=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL,y=p&&p.type===d.STRING_TOKEN?p.value:\"\",v=m.map((function(e){return is(e,g,!1)})).join(y);A.appendChild(i.createTextNode(v))}}}else if(t.type===d.IDENT_TOKEN)switch(t.value){case\"open-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,o.quoteDepth++,!0)));break;case\"close-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,--o.quoteDepth,!1)));break;default:A.appendChild(i.createTextNode(t.value))}})),A.className=ms+\" \"+gs;var u=n===On.BEFORE?\" \"+ms:\" \"+gs;return Lo(t)?t.className.baseValue+=u:t.className+=u,A}}},e.destroy=function(e){return!!e.parentNode&&(e.parentNode.removeChild(e),!0)},e}();!function(e){e[e.BEFORE=0]=\"BEFORE\",e[e.AFTER=1]=\"AFTER\"}(On||(On={}));var us,cs=function(e,t){var r=e.createElement(\"iframe\");return r.className=\"html2canvas-container\",r.style.visibility=\"hidden\",r.style.position=\"fixed\",r.style.left=\"-10000px\",r.style.top=\"0px\",r.style.border=\"0\",r.width=t.width.toString(),r.height=t.height.toString(),r.scrolling=\"no\",r.setAttribute(as,\"true\"),e.body.appendChild(r),r},ls=function(e){return new Promise((function(t,r){var n=e.contentWindow;if(!n)return r(\"No window assigned for iframe\");var o=n.document;n.onload=e.onload=o.onreadystatechange=function(){n.onload=e.onload=o.onreadystatechange=null;var r=setInterval((function(){o.body.childNodes.length>0&&\"complete\"===o.readyState&&(clearInterval(r),t(e))}),50)}}))},ds=function(e,t){for(var r=e.length-1;r>=0;r--){var n=e.item(r);\"content\"!==n&&t.style.setProperty(n,e.getPropertyValue(n))}return t},fs=function(e){var t=\"\";return e&&(t+=\"<!DOCTYPE \",e.name&&(t+=e.name),e.internalSubset&&(t+=e.internalSubset),e.publicId&&(t+=",
+  "ctx": "n(e){return-1===e.indexOf(\" \")?e:\"'\"+e+\""
+ },
+ "js_002": {
+  "t": "2026-07-17 · 군주론",
+  "ctx": "=app&utm_campaign=gunjuron\",   edition: "
+ },
+ "js_003": {
+  "t": "저자",
+  "ctx": "nst QUESTIONS = [   {id:1, level:1, tag:"
+ },
+ "js_004": {
+  "t": "『군주론』을 쓴 르네상스 시대의 인물은 누구일까요?",
+  "ctx": "TIONS = [   {id:1, level:1, tag:\"저자\", q:"
+ },
+ "js_005": {
+  "t": "니콜로 마키아벨리",
+  "ctx": " 쓴 르네상스 시대의 인물은 누구일까요?\",    options:[{t:"
+ },
+ "js_006": {
+  "t": "토머스 홉스",
+  "ctx": "    options:[{t:\"니콜로 마키아벨리\",ok:true},{t:"
+ },
+ "js_007": {
+  "t": "장 자크 루소",
+  "ctx": "{t:\"니콜로 마키아벨리\",ok:true},{t:\"토머스 홉스\"},{t:"
+ },
+ "js_008": {
+  "t": "토머스 모어",
+  "ctx": ",ok:true},{t:\"토머스 홉스\"},{t:\"장 자크 루소\"},{t:"
+ },
+ "js_009": {
+  "t": "『군주론』은 16세기 초 이탈리아 피렌체의 사상가 <b>니콜로 마키아벨리</b>가 쓴 정치철학의 고전이에요. 근대 정치학의 출발점으로 꼽힙니다.",
+  "ctx": "스\"},{t:\"장 자크 루소\"},{t:\"토머스 모어\"}],    ctx:"
+ },
+ "js_010": {
+  "t": "도시국가",
+  "ctx": "학의 출발점으로 꼽힙니다.\"},   {id:2, level:1, tag:"
+ },
+ "js_011": {
+  "t": "마키아벨리가 관료로 일한 이탈리아의 도시국가는 어디일까요?",
+  "ctx": "힙니다.\"},   {id:2, level:1, tag:\"도시국가\", q:"
+ },
+ "js_012": {
+  "t": "피렌체",
+  "ctx": " 일한 이탈리아의 도시국가는 어디일까요?\",    options:[{t:"
+ },
+ "js_013": {
+  "t": "베네치아 공화국",
+  "ctx": "일까요?\",    options:[{t:\"피렌체\",ok:true},{t:"
+ },
+ "js_014": {
+  "t": "밀라노 공국",
+  "ctx": "ns:[{t:\"피렌체\",ok:true},{t:\"베네치아 공화국\"},{t:"
+ },
+ "js_015": {
+  "t": "로마 교황령",
+  "ctx": "ok:true},{t:\"베네치아 공화국\"},{t:\"밀라노 공국\"},{t:"
+ },
+ "js_016": {
+  "t": "마키아벨리는 <b>피렌체</b> 공화국의 관료였어요. 르네상스 문화의 중심지였던 이 도시에서 외교와 국방 실무를 맡았습니다.",
+  "ctx": "화국\"},{t:\"밀라노 공국\"},{t:\"로마 교황령\"}],    ctx:"
+ },
+ "js_017": {
+  "t": "헌정",
+  "ctx": " 국방 실무를 맡았습니다.\"},   {id:3, level:1, tag:"
+ },
+ "js_018": {
+  "t": "마키아벨리가 『군주론』을 바친(헌정한) 가문으로 알맞은 것은?",
+  "ctx": "맡았습니다.\"},   {id:3, level:1, tag:\"헌정\", q:"
+ },
+ "js_019": {
+  "t": "메디치 가문",
+  "ctx": "을 바친(헌정한) 가문으로 알맞은 것은?\",    options:[{t:"
+ },
+ "js_020": {
+  "t": "보르자 가문",
+  "ctx": "?\",    options:[{t:\"메디치 가문\",ok:true},{t:"
+ },
+ "js_021": {
+  "t": "스포르차 가문",
+  "ctx": "s:[{t:\"메디치 가문\",ok:true},{t:\"보르자 가문\"},{t:"
+ },
+ "js_022": {
+  "t": "합스부르크 가문",
+  "ctx": ",ok:true},{t:\"보르자 가문\"},{t:\"스포르차 가문\"},{t:"
+ },
+ "js_023": {
+  "t": "마키아벨리는 이 책을 피렌체를 다시 장악한 <b>메디치 가문</b>(로렌초 데 메디치)에 바쳤어요. 다시 관직을 얻으려는 바람도 담겨 있었습니다.",
+  "ctx": "},{t:\"스포르차 가문\"},{t:\"합스부르크 가문\"}],    ctx:"
+ },
+ "js_024": {
+  "t": "이력",
+  "ctx": " 바람도 담겨 있었습니다.\"},   {id:4, level:1, tag:"
+ },
+ "js_025": {
+  "t": "마키아벨리가 『군주론』을 쓰기 전 본래 지녔던 이력으로 알맞은 것은?",
+  "ctx": "있었습니다.\"},   {id:4, level:1, tag:\"이력\", q:"
+ },
+ "js_026": {
+  "t": "피렌체 공화국의 외교관이자 관료",
+  "ctx": " 전 본래 지녔던 이력으로 알맞은 것은?\",    options:[{t:"
+ },
+ "js_027": {
+  "t": "돈을 받고 싸우는 용병 부대의 대장",
+  "ctx": "ons:[{t:\"피렌체 공화국의 외교관이자 관료\",ok:true},{t:"
+ },
+ "js_028": {
+  "t": "교회를 이끄는 높은 지위의 성직자",
+  "ctx": "\",ok:true},{t:\"돈을 받고 싸우는 용병 부대의 대장\"},{t:"
+ },
+ "js_029": {
+  "t": "여러 나라를 오가며 장사한 무역 상인",
+  "ctx": "용병 부대의 대장\"},{t:\"교회를 이끄는 높은 지위의 성직자\"},{t:"
+ },
+ "js_030": {
+  "t": "마키아벨리는 <b>외교관이자 국방 담당 관료</b>로 오래 일했어요. 여러 군주와 정세를 직접 관찰한 이 현장 경험이 책의 밑거름이 됩니다.",
+  "ctx": "자\"},{t:\"여러 나라를 오가며 장사한 무역 상인\"}],    ctx:"
+ },
+ "js_031": {
+  "t": "두려움",
+  "ctx": "이 책의 밑거름이 됩니다.\"},   {id:5, level:1, tag:"
+ },
+ "js_032": {
+  "t": "사랑받는 것과 두려움의 대상이 되는 것을 함께 얻기 어렵다면, 마키아벨리의 조언은?",
+  "ctx": " 됩니다.\"},   {id:5, level:1, tag:\"두려움\", q:"
+ },
+ "js_033": {
+  "t": "두려움의 대상이 되는 편이 더 안전하다",
+  "ctx": "께 얻기 어렵다면, 마키아벨리의 조언은?\",    options:[{t:"
+ },
+ "js_034": {
+  "t": "언제나 사랑받는 쪽을 택해야 한다",
+  "ctx": "[{t:\"두려움의 대상이 되는 편이 더 안전하다\",ok:true},{t:"
+ },
+ "js_035": {
+  "t": "둘 다 완전히 포기하는 편이 낫다",
+  "ctx": "다\",ok:true},{t:\"언제나 사랑받는 쪽을 택해야 한다\"},{t:"
+ },
+ "js_036": {
+  "t": "백성의 판단에 전적으로 맡겨야 한다",
+  "ctx": "쪽을 택해야 한다\"},{t:\"둘 다 완전히 포기하는 편이 낫다\"},{t:"
+ },
+ "js_037": {
+  "t": "마키아벨리는 <b>사랑받기보다 두려움의 대상</b>이 되라고 했어요. 사랑은 쉽게 끊어지지만, 처벌의 두려움은 군주를 더 든든히 지켜 준다고 본 것입니다.",
+  "ctx": "낫다\"},{t:\"백성의 판단에 전적으로 맡겨야 한다\"}],    ctx:"
+ },
+ "js_038": {
+  "t": "사자와 여우",
+  "ctx": "지켜 준다고 본 것입니다.\"},   {id:6, level:1, tag:"
+ },
+ "js_039": {
+  "t": "마키아벨리가 군주에게 본받으라고 한 두 동물은?",
+  "ctx": "다.\"},   {id:6, level:1, tag:\"사자와 여우\", q:"
+ },
+ "js_040": {
+  "t": "늑대와 어린 양",
+  "ctx": "?\",    options:[{t:\"사자와 여우\",ok:true},{t:"
+ },
+ "js_041": {
+  "t": "독수리와 뱀",
+  "ctx": "[{t:\"사자와 여우\",ok:true},{t:\"늑대와 어린 양\"},{t:"
+ },
+ "js_042": {
+  "t": "곰과 사슴",
+  "ctx": "ok:true},{t:\"늑대와 어린 양\"},{t:\"독수리와 뱀\"},{t:"
+ },
+ "js_043": {
+  "t": "군주는 힘을 상징하는 <b>사자</b>와 꾀를 상징하는 <b>여우</b>를 겸해야 해요. 힘만으로도, 꾀만으로도 권력을 지킬 수 없기 때문입니다.",
+  "ctx": "린 양\"},{t:\"독수리와 뱀\"},{t:\"곰과 사슴\"}],    ctx:"
+ },
+ "js_044": {
+  "t": "비르투",
+  "ctx": "지킬 수 없기 때문입니다.\"},   {id:7, level:1, tag:"
+ },
+ "js_045": {
+  "t": "『군주론』의 핵심어 비르투(virtù)가 뜻하는 것에 가장 가까운 것은?",
+  "ctx": "문입니다.\"},   {id:7, level:1, tag:\"비르투\", q:"
+ },
+ "js_046": {
+  "t": "역량과 수완, 기개",
+  "ctx": "tù)가 뜻하는 것에 가장 가까운 것은?\",    options:[{t:"
+ },
+ "js_047": {
+  "t": "도덕적으로 선하고 올바른 마음씨",
+  "ctx": "   options:[{t:\"역량과 수완, 기개\",ok:true},{t:"
+ },
+ "js_048": {
+  "t": "고귀하게 타고난 좋은 혈통",
+  "ctx": "기개\",ok:true},{t:\"도덕적으로 선하고 올바른 마음씨\"},{t:"
+ },
+ "js_049": {
+  "t": "신을 향한 깊고 뜨거운 신앙심",
+  "ctx": "로 선하고 올바른 마음씨\"},{t:\"고귀하게 타고난 좋은 혈통\"},{t:"
+ },
+ "js_050": {
+  "t": "<b>비르투</b>는 흔히 ‘덕’으로 옮기지만, 여기서는 도덕적 선함이 아니라 <b>역량·수완·기개</b>에 가까워요. 상황을 스스로 만들어 가는 정치적 힘입니다.",
+  "ctx": "좋은 혈통\"},{t:\"신을 향한 깊고 뜨거운 신앙심\"}],    ctx:"
+ },
+ "js_051": {
+  "t": "포르투나",
+  "ctx": "어 가는 정치적 힘입니다.\"},   {id:8, level:1, tag:"
+ },
+ "js_052": {
+  "t": "마키아벨리가 말한 포르투나(fortuna)는 무엇을 가리킬까요?",
+  "ctx": "입니다.\"},   {id:8, level:1, tag:\"포르투나\", q:"
+ },
+ "js_053": {
+  "t": "운, 곧 운명",
+  "ctx": "나(fortuna)는 무엇을 가리킬까요?\",    options:[{t:"
+ },
+ "js_054": {
+  "t": "군주가 모은 재산과 보물",
+  "ctx": "\",    options:[{t:\"운, 곧 운명\",ok:true},{t:"
+ },
+ "js_055": {
+  "t": "세습으로 물려받은 명예",
+  "ctx": ", 곧 운명\",ok:true},{t:\"군주가 모은 재산과 보물\"},{t:"
+ },
+ "js_056": {
+  "t": "잘 훈련된 강한 군대",
+  "ctx": ":\"군주가 모은 재산과 보물\"},{t:\"세습으로 물려받은 명예\"},{t:"
+ },
+ "js_057": {
+  "t": "<b>포르투나</b>는 인간이 어쩌지 못하는 <b>운·운명</b>이에요. 마키아벨리는 이 변덕스러운 운에 맞서는 힘이 곧 비르투라고 보았습니다.",
+  "ctx": "으로 물려받은 명예\"},{t:\"잘 훈련된 강한 군대\"}],    ctx:"
+ },
+ "js_058": {
+  "t": "성격",
+  "ctx": "곧 비르투라고 보았습니다.\"},   {id:9, level:1, tag:"
+ },
+ "js_059": {
+  "t": "『군주론』은 어떤 성격의 책일까요?",
+  "ctx": "보았습니다.\"},   {id:9, level:1, tag:\"성격\", q:"
+ },
+ "js_060": {
+  "t": "군주가 권력을 얻고 지키는 법을 다룬 정치 실용서",
+  "ctx": "q:\"『군주론』은 어떤 성격의 책일까요?\",    options:[{t:"
+ },
+ "js_061": {
+  "t": "사후 세계의 구원을 설파한 종교 경전",
+  "ctx": "주가 권력을 얻고 지키는 법을 다룬 정치 실용서\",ok:true},{t:"
+ },
+ "js_062": {
+  "t": "우주의 원리를 탐구한 자연 과학서",
+  "ctx": ",ok:true},{t:\"사후 세계의 구원을 설파한 종교 경전\"},{t:"
+ },
+ "js_063": {
+  "t": "연인의 사랑을 노래한 서정 시집",
+  "ctx": "설파한 종교 경전\"},{t:\"우주의 원리를 탐구한 자연 과학서\"},{t:"
+ },
+ "js_064": {
+  "t": "『군주론』은 <b>권력을 어떻게 얻고 유지하는가</b>를 냉정하게 분석한 정치 실용서예요. 당위가 아니라 현실의 작동 방식을 다룹니다.",
+  "ctx": " 과학서\"},{t:\"연인의 사랑을 노래한 서정 시집\"}],    ctx:"
+ },
+ "js_065": {
+  "t": "마키아벨리즘",
+  "ctx": " 작동 방식을 다룹니다.\"},   {id:10, level:1, tag:"
+ },
+ "js_066": {
+  "t": "권모술수와 목적을 위한 냉혹함을 뜻하는, 그의 이름에서 나온 말은?",
+  "ctx": ".\"},   {id:10, level:1, tag:\"마키아벨리즘\", q:"
+ },
+ "js_067": {
+  "t": "에피쿠로스주의",
+  "ctx": "?\",    options:[{t:\"마키아벨리즘\",ok:true},{t:"
+ },
+ "js_068": {
+  "t": "스토아주의",
+  "ctx": ":[{t:\"마키아벨리즘\",ok:true},{t:\"에피쿠로스주의\"},{t:"
+ },
+ "js_069": {
+  "t": "낭만주의",
+  "ctx": "\",ok:true},{t:\"에피쿠로스주의\"},{t:\"스토아주의\"},{t:"
+ },
+ "js_070": {
+  "t": "그의 이름에서 <b>마키아벨리즘</b>이라는 말이 나왔어요. 목적을 위해 수단을 가리지 않는 권모술수를 가리키는, 다소 부정적 뉘앙스의 말입니다.",
+  "ctx": "쿠로스주의\"},{t:\"스토아주의\"},{t:\"낭만주의\"}],    ctx:"
+ },
+ "js_071": {
+  "t": "위키백과 「군주론」",
+  "ctx": "== */ const SOURCES = {   ko:    {label:"
+ },
+ "js_072": {
+  "t": "https://ko.wikipedia.org/wiki/군주론",
+  "ctx": "S = {   ko:    {label:\"위키백과 「군주론」\", url:"
+ },
+ "js_073": {
+  "t": "위키백과 「니콜로 마키아벨리」",
+  "ctx": ".org/wiki/The_Prince\"},   machi: {label:"
+ },
+ "js_074": {
+  "t": "https://ko.wikipedia.org/wiki/니콜로_마키아벨리",
+  "ctx": "  machi: {label:\"위키백과 「니콜로 마키아벨리」\", url:"
+ },
+ "js_075": {
+  "t": "나무위키 「군주론」",
+  "ctx": "dia.org/wiki/Fortuna\"},   namu:  {label:"
+ },
+ "js_076": {
+  "t": "https://namu.wiki/w/군주론",
+  "ctx": "na\"},   namu:  {label:\"나무위키 「군주론」\", url:"
+ },
+ "js_077": {
+  "t": "니콜로 마키아벨리(1469~1527)는 피렌체의 외교관·사상가예요. 근대 정치학의 아버지로 불리며, 정치를 도덕·종교에서 떼어 낸 냉철한 분석으로 유명합니다.",
+  "ctx": " const EXTRA = {   1:{src:\"machi\", note:"
+ },
+ "js_078": {
+  "t": "피렌체는 메디치 가문과 르네상스 예술의 도시였어요. 마키아벨리는 이곳 공화국에서 14년간 외교·군사 실무를 맡으며 유럽 각국의 정세를 직접 겪었습니다.",
+  "ctx": "한 분석으로 유명합니다.\"},   2:{src:\"machi\", note:"
+ },
+ "js_079": {
+  "t": "1512년 메디치 가문이 피렌체를 다시 장악하자 마키아벨리는 관직에서 쫓겨나요. 그는 이 책을 메디치에 바쳐 다시 쓰임받기를 바랐지만 뜻을 이루지 못했습니다.",
+  "ctx": "국의 정세를 직접 겪었습니다.\"},   3:{src:\"ko\", note:"
+ },
+ "js_080": {
+  "t": "마키아벨리의 통찰은 책상물림이 아니라 현장에서 나왔어요. 프랑스 왕, 교황, 체사레 보르자 등을 직접 상대한 외교 경험이 냉정한 현실주의의 바탕이 됩니다.",
+  "ctx": "뜻을 이루지 못했습니다.\"},   4:{src:\"machi\", note:"
+ },
+ "js_081": {
+  "t": "‘사랑받기보다 두려움의 대상이 되라’는 이 책의 가장 유명한 조언이에요. 다만 두려움이 미움으로 번지지 않도록 선을 지키라는 단서가 반드시 따라붙습니다.",
+  "ctx": "한 현실주의의 바탕이 됩니다.\"},   5:{src:\"en\", note:"
+ },
+ "js_082": {
+  "t": "사자는 힘, 여우는 꾀를 상징해요. 사자는 함정을 피하지 못하고 여우는 늑대를 막지 못하니, 군주는 두 짐승의 본성을 모두 갖춰야 한다는 비유입니다.",
+  "ctx": "서가 반드시 따라붙습니다.\"},   6:{src:\"namu\", note:"
+ },
+ "js_083": {
+  "t": "비르투(virtù)는 라틴어 ‘비르(vir, 사나이)’에서 왔어요. 도덕적 덕이 아니라 위기를 돌파하는 역량·용기·수완을 가리키며, 운명에 맞서는 인간의 힘입니다.",
+  "ctx": "춰야 한다는 비유입니다.\"},   7:{src:\"virtu\", note:"
+ },
+ "js_084": {
+  "t": "포르투나는 로마 신화의 운명의 여신에서 온 말이에요. 마키아벨리는 인간사의 절반쯤은 운이 좌우하지만, 나머지 절반은 비르투로 바꿀 수 있다고 보았습니다.",
+  "ctx": "는 인간의 힘입니다.\"},   8:{src:\"fortuna\", note:"
+ },
+ "js_085": {
+  "t": "『군주론』은 26개의 짧은 장으로 이루어져 있어요. 군주국의 종류부터 군대·처신·운명론까지, 권력의 획득과 유지를 단계별로 다루는 실전 지침서입니다.",
+  "ctx": " 바꿀 수 있다고 보았습니다.\"},   9:{src:\"ko\", note:"
+ },
+ "js_086": {
+  "t": "‘마키아벨리즘’은 오늘날 심리학에서도 쓰여요. 타인을 목적을 위한 수단으로 다루는 냉정하고 조종적인 성향을 가리키는 용어로 자리 잡았습니다.",
+  "ctx": " 다루는 실전 지침서입니다.\"},   10:{src:\"en\", note:"
+ },
+ "js_087": {
+  "t": "질문: 어떻게 권력을 얻는가",
+  "ctx": "*/ const MILESTONES = [   {at:0,  label:"
+ },
+ "js_088": {
+  "t": "현실을 직시하는 군주",
+  "ctx": "bel:\"질문: 어떻게 권력을 얻는가\"},   {at:6,  label:"
+ },
+ "js_089": {
+  "t": "비르투와 포르투나",
+  "ctx": "  label:\"현실을 직시하는 군주\"},   {at:12, label:"
+ },
+ "js_090": {
+  "t": "자신의 군대와 법",
+  "ctx": "at:18, label:\"사자와 여우\"},   {at:24, label:"
+ },
+ "js_091": {
+  "t": "권력의 획득과 유지",
+  "ctx": "24, label:\"자신의 군대와 법\"},   {at:30, label:"
+ },
+ "js_092": {
+  "t": "보통",
+  "ctx": "]; const DIFF_LABEL = {1:[\"쉬움\",\"l1\"],2:["
+ },
+ "js_093": {
+  "t": "어려움",
+  "ctx": "LABEL = {1:[\"쉬움\",\"l1\"],2:[\"보통\",\"l2\"],3:["
+ },
+ "js_094": {
+  "t": "· 복습",
+  "ctx": "ds.size+' / '+TOTAL_Q + (attempts[id] ? "
+ },
+ "js_095": {
+  "t": "🎯 정답!",
+  "ctx": ")      verdict.textContent = firstTry ? "
+ },
+ "js_096": {
+  "t": "✅ 이제 익혔어요!",
+  "ctx": "dict.textContent = firstTry ? '🎯 정답!' : "
+ },
+ "js_097": {
+  "t": "❌ 다시 도전!",
+  "ctx": "ing.push(id);     verdict.textContent = "
+ },
+ "js_098": {
+  "t": "↻ 이 문제는 뒤에서 다시 나옵니다",
+  "ctx": "getElementById('requeue').textContent = "
+ },
+ "js_099": {
+  "t": "비르투(virtù)",
+  "ctx": "==== */ const CONCEPTS = [   {ic:\"🧭\", h:"
+ },
+ "js_100": {
+  "t": "도덕적 덕이 아니라 역량·수완·기개. 상황을 스스로 만들어 가며 운명에 맞서는 군주의 정치적 힘입니다.",
+  "ctx": "NCEPTS = [   {ic:\"🧭\", h:\"비르투(virtù)\", p:"
+ },
+ "js_101": {
+  "t": "포르투나(fortuna)",
+  "ctx": " 정치적 힘입니다.\", src:\"virtu\"},   {ic:\"🎲\", h:"
+ },
+ "js_102": {
+  "t": "인간이 어쩌지 못하는 운·운명. 범람하는 강과 같아, 평소 둑을 쌓아 둔 자만이 그 습격을 견뎌 냅니다.",
+  "ctx": "irtu\"},   {ic:\"🎲\", h:\"포르투나(fortuna)\", p:"
+ },
+ "js_103": {
+  "t": "사자의 힘과 여우의 꾀. 함정은 여우로 알아채고 늑대는 사자로 쫓으니, 군주는 두 본성을 겸해야 합니다.",
+  "ctx": "rc:\"fortuna\"},   {ic:\"🦁\", h:\"사자와 여우\", p:"
+ },
+ "js_104": {
+  "t": "두려움 vs 사랑",
+  "ctx": "성을 겸해야 합니다.\", src:\"namu\"},   {ic:\"😨\", h:"
+ },
+ "js_105": {
+  "t": "둘을 함께 얻기 어렵다면 두려움의 대상이 되는 편이 안전. 단 미움과 경멸만은 반드시 피해야 합니다.",
+  "ctx": "rc:\"namu\"},   {ic:\"😨\", h:\"두려움 vs 사랑\", p:"
+ },
+ "js_106": {
+  "t": "자신의 군대",
+  "ctx": "반드시 피해야 합니다.\", src:\"en\"},   {ic:\"⚔️\", h:"
+ },
+ "js_107": {
+  "t": "용병과 원군은 충성심이 없어 위태롭다. 좋은 법도 결국 튼튼한 자국 군대 위에서만 선다고 보았습니다.",
+  "ctx": "\", src:\"en\"},   {ic:\"⚔️\", h:\"자신의 군대\", p:"
+ },
+ "js_108": {
+  "t": "겉모습과 평판",
+  "ctx": "서만 선다고 보았습니다.\", src:\"ko\"},   {ic:\"🎭\", h:"
+ },
+ "js_109": {
+  "t": "자비·신의를 다 갖추기보다 갖춘 듯 보이는 것. 필요하면 정반대로 행동할 각오도 해야 하는 처세술입니다.",
+  "ctx": "\", src:\"ko\"},   {ic:\"🎭\", h:\"겉모습과 평판\", p:"
+ },
+ "js_110": {
+  "t": "현실주의",
+  "ctx": "해야 하는 처세술입니다.\", src:\"en\"},   {ic:\"🌍\", h:"
+ },
+ "js_111": {
+  "t": "사람이 마땅히 어떻게 살아야 하는가 대신, 실제로 어떻게 사는가를 본다. 정치를 도덕에서 분리한 시선입니다.",
+  "ctx": "니다.\", src:\"en\"},   {ic:\"🌍\", h:\"현실주의\", p:"
+ },
+ "js_112": {
+  "t": "이탈리아 통일의 꿈",
+  "ctx": " 분리한 시선입니다.\", src:\"ebs\"},   {ic:\"🇮🇹\", h:"
+ },
+ "js_113": {
+  "t": "냉철한 책의 마지막 장은 뜨겁다. 외세를 몰아내고 분열된 이탈리아를 통일할 군주를 애타게 부릅니다.",
+  "ctx": "c:\"ebs\"},   {ic:\"🇮🇹\", h:\"이탈리아 통일의 꿈\", p:"
+ },
+ "js_114": {
+  "t": "1~11장",
+  "ctx": "/* 목차(클릭하면 요약 오픈) */ const TOC = [   {n:"
+ },
+ "js_115": {
+  "t": "군주국의 종류와 획득 방법",
+  "ctx": "요약 오픈) */ const TOC = [   {n:\"1~11장\", t:"
+ },
+ "js_116": {
+  "t": "군주국을 세습 군주국과 신생 군주국으로 나누며 시작합니다.",
+  "ctx": "\"군주국의 종류와 획득 방법\", beats:[     {e:\"👑\", x:"
+ },
+ "js_117": {
+  "t": "물려받은 나라는 지키기 쉽지만, 새로 세운 나라는 지키기 어렵습니다.",
+  "ctx": "국과 신생 군주국으로 나누며 시작합니다.\"},     {e:\"🏰\", x:"
+ },
+ "js_118": {
+  "t": "자신의 힘(비르투)으로 얻은 나라와 운·남의 힘으로 얻은 나라를 비교합니다.",
+  "ctx": " 새로 세운 나라는 지키기 어렵습니다.\"},     {e:\"⚔️\", x:"
+ },
+ "js_119": {
+  "t": "체사레 보르자를 신생 군주의 산 표본으로 자세히 분석합니다.",
+  "ctx": "운·남의 힘으로 얻은 나라를 비교합니다.\"},     {e:\"🩸\", x:"
+ },
+ "js_120": {
+  "t": "교회 군주국 등 특수한 경우까지 유형별로 훑습니다.",
+  "ctx": " 군주의 산 표본으로 자세히 분석합니다.\"},     {e:\"⛪\", x:"
+ },
+ "js_121": {
+  "t": "12~14장",
+  "ctx": "군주국 등 특수한 경우까지 유형별로 훑습니다.\"},   ]},   {n:"
+ },
+ "js_122": {
+  "t": "군대론 — 나라의 뼈대",
+  "ctx": "까지 유형별로 훑습니다.\"},   ]},   {n:\"12~14장\", t:"
+ },
+ "js_123": {
+  "t": "좋은 법과 좋은 군대가 나라의 두 기둥이라 선언합니다.",
+  "ctx": "t:\"군대론 — 나라의 뼈대\", beats:[     {e:\"🛡\", x:"
+ },
+ "js_124": {
+  "t": "돈으로 움직이는 용병은 충성심이 없어 위태롭다고 경고합니다.",
+  "ctx": " 군대가 나라의 두 기둥이라 선언합니다.\"},     {e:\"💰\", x:"
+ },
+ "js_125": {
+  "t": "남의 군대인 원군은 이겨도 그 나라에 종속되게 만든다고 봅니다.",
+  "ctx": "은 충성심이 없어 위태롭다고 경고합니다.\"},     {e:\"🚩\", x:"
+ },
+ "js_126": {
+  "t": "오직 자신의 군대만이 믿을 만하며, 군주는 전쟁 기술을 늘 익혀야 합니다.",
+  "ctx": "도 그 나라에 종속되게 만든다고 봅니다.\"},     {e:\"🏹\", x:"
+ },
+ "js_127": {
+  "t": "15~19장",
+  "ctx": "하며, 군주는 전쟁 기술을 늘 익혀야 합니다.\"},   ]},   {n:"
+ },
+ "js_128": {
+  "t": "군주의 처신 — 덕과 악덕 사이",
+  "ctx": "술을 늘 익혀야 합니다.\"},   ]},   {n:\"15~19장\", t:"
+ },
+ "js_129": {
+  "t": "덕을 다 갖추기보다 갖춘 듯 보이는 편이 낫다고 조언합니다.",
+  "ctx": "의 처신 — 덕과 악덕 사이\", beats:[     {e:\"🎭\", x:"
+ },
+ "js_130": {
+  "t": "지나친 관대는 해로우니 차라리 인색하다는 평판을 감수하라 합니다.",
+  "ctx": "갖춘 듯 보이는 편이 낫다고 조언합니다.\"},     {e:\"💸\", x:"
+ },
+ "js_131": {
+  "t": "사랑받기보다 두려움의 대상이 되는 편이 더 안전하다고 봅니다.",
+  "ctx": "라리 인색하다는 평판을 감수하라 합니다.\"},     {e:\"😨\", x:"
+ },
+ "js_132": {
+  "t": "신의는 불리해지면 어길 수 있으니, 사자와 여우를 겸하라 합니다.",
+  "ctx": "대상이 되는 편이 더 안전하다고 봅니다.\"},     {e:\"🦊\", x:"
+ },
+ "js_133": {
+  "t": "무엇보다 미움과 경멸의 대상이 되는 것만은 피하라고 못 박습니다.",
+  "ctx": " 있으니, 사자와 여우를 겸하라 합니다.\"},     {e:\"🚫\", x:"
+ },
+ "js_134": {
+  "t": "20~23장",
+  "ctx": "의 대상이 되는 것만은 피하라고 못 박습니다.\"},   ]},   {n:"
+ },
+ "js_135": {
+  "t": "통치의 기술 — 명성과 사람",
+  "ctx": " 피하라고 못 박습니다.\"},   ]},   {n:\"20~23장\", t:"
+ },
+ "js_136": {
+  "t": "요새를 쌓을지 말지, 명성을 어떻게 얻을지를 따집니다.",
+  "ctx": "통치의 기술 — 명성과 사람\", beats:[     {e:\"🏯\", x:"
+ },
+ "js_137": {
+  "t": "중립에 어정쩡하게 서지 말고 분명히 편을 정하라 합니다.",
+  "ctx": "말지, 명성을 어떻게 얻을지를 따집니다.\"},     {e:\"🤝\", x:"
+ },
+ "js_138": {
+  "t": "유능한 신하를 알아보고, 그를 어떻게 대해야 하는지 논합니다.",
+  "ctx": "지 말고 분명히 편을 정하라 합니다.\"},     {e:\"🧑‍💼\", x:"
+ },
+ "js_139": {
+  "t": "달콤한 말만 하는 아첨꾼을 멀리하는 법을 일러 줍니다.",
+  "ctx": ", 그를 어떻게 대해야 하는지 논합니다.\"},     {e:\"👂\", x:"
+ },
+ "js_140": {
+  "t": "24~26장",
+  "ctx": "만 하는 아첨꾼을 멀리하는 법을 일러 줍니다.\"},   ]},   {n:"
+ },
+ "js_141": {
+  "t": "운명, 그리고 이탈리아를 향한 호소",
+  "ctx": "하는 법을 일러 줍니다.\"},   ]},   {n:\"24~26장\", t:"
+ },
+ "js_142": {
+  "t": "운명은 인간사의 절반을 쥐지만, 나머지 절반은 비르투의 몫이라 봅니다.",
+  "ctx": "그리고 이탈리아를 향한 호소\", beats:[     {e:\"🎲\", x:"
+ },
+ "js_143": {
+  "t": "운명을 범람하는 강에 빗대어 미리 둑을 쌓아 대비하라 합니다.",
+  "ctx": " 나머지 절반은 비르투의 몫이라 봅니다.\"},     {e:\"🌊\", x:"
+ },
+ "js_144": {
+  "t": "신중함보다 과감함 — 운명은 대담한 자의 편이라 강조합니다.",
+  "ctx": "빗대어 미리 둑을 쌓아 대비하라 합니다.\"},     {e:\"⚡\", x:"
+ },
+ "js_145": {
+  "t": "외세를 몰아내고 분열된 이탈리아를 통일하라는 뜨거운 호소로 끝맺습니다.",
+  "ctx": "운명은 대담한 자의 편이라 강조합니다.\"},     {e:\"🇮🇹\", x:"
+ },
+ "js_146": {
+  "t": "체사레 보르자의 흥망",
+  "ctx": "해볼 사례 3 */ const CASES = [   {ic:\"🐺\", t:"
+ },
+ "js_147": {
+  "t": "교황의 아들 체사레 보르자는 비르투로 빠르게 세력을 일궜지만, 아버지의 갑작스러운 죽음과 자신의 병이라는 운명(포르투나) 앞에 무너졌습니다.",
+  "ctx": "CASES = [   {ic:\"🐺\", t:\"체사레 보르자의 흥망\", d:"
+ },
+ "js_148": {
+  "t": "아무리 뛰어난 역량도 운을 완전히 이기진 못함을 보여 줍니다. 그럼에도 마키아벨리가 그를 모범으로 든 이유를 곱씹게 합니다.",
+  "ctx": " 죽음과 자신의 병이라는 운명(포르투나) 앞에 무너졌습니다.\", why:"
+ },
+ "js_149": {
+  "t": "범람하는 강과 둑",
+  "ctx": " 그를 모범으로 든 이유를 곱씹게 합니다.\"},   {ic:\"🌊\", t:"
+ },
+ "js_150": {
+  "t": "마키아벨리는 운명을 홍수 나는 강에 빗댔습니다. 물이 잔잔할 때 둑과 제방을 쌓아 둔 곳은 범람을 견디고, 방심한 곳은 휩쓸립니다.",
+  "ctx": "곱씹게 합니다.\"},   {ic:\"🌊\", t:\"범람하는 강과 둑\", d:"
+ },
+ "js_151": {
+  "t": "통제할 수 없는 운(포르투나)과 대비할 수 있는 역량(비르투)의 관계를 한 장면으로 압축합니다. 오늘의 위기 관리에도 곧장 닿는 비유입니다.",
+  "ctx": "방을 쌓아 둔 곳은 범람을 견디고, 방심한 곳은 휩쓸립니다.\", why:"
+ },
+ "js_152": {
+  "t": "사랑보다 두려움",
+  "ctx": "늘의 위기 관리에도 곧장 닿는 비유입니다.\"},   {ic:\"😨\", t:"
+ },
+ "js_153": {
+  "t": "사랑은 이해관계가 사라지면 쉽게 끊어지지만, 처벌의 두려움은 늘 군주 곁에 남아 사람들을 붙듭니다. 다만 미움으로 번지면 도리어 위험합니다.",
+  "ctx": "닿는 비유입니다.\"},   {ic:\"😨\", t:\"사랑보다 두려움\", d:"
+ },
+ "js_154": {
+  "t": "리더십에서 애정과 규율, 존경과 공포의 균형을 어디에 둘지 되묻게 합니다. 냉정하지만 지금도 유효한 물음입니다.",
+  "ctx": "사람들을 붙듭니다. 다만 미움으로 번지면 도리어 위험합니다.\", why:"
+ },
+ "js_155": {
+  "t": "리더가 ‘좋은 사람’이기와 ‘유능한 사람’이기가 충돌할 때, 나는 무엇을 택할까? 그 선택의 대가는 무엇일까?",
+  "ctx": "책이 우리에게 던지는 질문 3 */ const ASKS = [   {q:"
+ },
+ "js_156": {
+  "t": "마키아벨리의 냉정한 물음을 나에게 돌려보세요. 이상과 현실이 부딪칠 때 당신이 실제로 어디에 서는지가 드러납니다.",
+  "ctx": " 충돌할 때, 나는 무엇을 택할까? 그 선택의 대가는 무엇일까?\", h:"
+ },
+ "js_157": {
+  "t": "내 삶에서 내가 바꿀 수 있는 것(비르투)과 어쩔 수 없는 운(포르투나)은 어떻게 나뉠까? 나는 미리 둑을 쌓고 있는가?",
+  "ctx": "이 부딪칠 때 당신이 실제로 어디에 서는지가 드러납니다.\"},   {q:"
+ },
+ "js_158": {
+  "t": "통제 가능한 것과 불가능한 것을 나누어 보세요. 운을 탓하기 전에 대비할 수 있었던 지점이 보일 것입니다.",
+  "ctx": " 운(포르투나)은 어떻게 나뉠까? 나는 미리 둑을 쌓고 있는가?\", h:"
+ },
+ "js_159": {
+  "t": "두려움과 사랑, 나는 사람들과 어느 쪽으로 관계 맺고 있을까? 미움과 존경의 경계는 어디쯤일까?",
+  "ctx": "을 탓하기 전에 대비할 수 있었던 지점이 보일 것입니다.\"},   {q:"
+ },
+ "js_160": {
+  "t": "관계에서 규율과 애정의 균형을 떠올려 보세요. 존경을 두려움으로, 사랑을 무름으로 착각하고 있진 않은지 살펴보세요.",
+  "ctx": "느 쪽으로 관계 맺고 있을까? 미움과 존경의 경계는 어디쯤일까?\", h:"
+ },
+ "js_161": {
+  "t": "👑 통치의 대가",
+  "ctx": ");   let rank, sub;   if(acc>=90){ rank="
+ },
+ "js_162": {
+  "t": "마키아벨리의 통찰을 완벽히 꿰뚫었습니다",
+  "ctx": "ub;   if(acc>=90){ rank='👑 통치의 대가'; sub="
+ },
+ "js_163": {
+  "t": "🦁 노련한 군주",
+  "ctx": "완벽히 꿰뚫었습니다'; }   else if(acc>=75){ rank="
+ },
+ "js_164": {
+  "t": "핵심을 거의 다 잡았어요",
+  "ctx": " else if(acc>=75){ rank='🦁 노련한 군주'; sub="
+ },
+ "js_165": {
+  "t": "🦊 책략을 익히는 신하",
+  "ctx": " 거의 다 잡았어요'; }   else if(acc>=55){ rank="
+ },
+ "js_166": {
+  "t": "뼈대를 익혔습니다 — 한 번 더!",
+  "ctx": "e if(acc>=55){ rank='🦊 책략을 익히는 신하'; sub="
+ },
+ "js_167": {
+  "t": "🌱 이제 정치에 눈뜬 견습생",
+  "ctx": "b='뼈대를 익혔습니다 — 한 번 더!'; }   else { rank="
+ },
+ "js_168": {
+  "t": "반복할수록 점수가 오릅니다",
+  "ctx": " }   else { rank='🌱 이제 정치에 눈뜬 견습생'; sub="
+ },
+ "js_169": {
+  "t": "완독 리포트",
+  "ctx": "onst fname = ((h2 && h2.textContent) || "
+ },
+ "js_170": {
+  "t": "한눈에 보기",
+  "ctx": "&& h2.textContent) || '완독 리포트').replace("
+ },
+ "js_171": {
+  "t": "리포트.pdf",
+  "ctx": "'완독 리포트').replace('한눈에 보기','').trim() + "
+ },
+ "js_172": {
+  "t": "📄 PDF 만드는 중…",
+  "ctx": "tn){ btn.disabled=true; btn.textContent="
+ },
+ "js_173": {
+  "t": "PDF 생성 중 문제가 발생했어요. 이 HTML 파일을 내려받아 브라우저에서 직접 열고 다시 눌러 주세요.",
+  "ctx": "     }   }).catch(function(){     alert("
+ },
+ "js_174": {
+  "t": "무료로는 <b>",
+  "ctx": "t = TOTAL_Q - fl;       msg.innerHTML = "
+ },
+ "js_175": {
+  "t": "문항</b>까지 풀 수 있어요.",
+  "ctx": "fl;       msg.innerHTML = '무료로는 <b>'+fl+"
+ },
+ "js_176": {
+  "t": "나머지 <b>",
+  "ctx": " <b>'+fl+'문항</b>까지 풀 수 있어요. ' +         "
+ },
+ "js_177": {
+  "t": "문항</b>과 <b>완독 요약 리포트</b>는 구독자 전용입니다.",
+  "ctx": ">까지 풀 수 있어요. ' +         '나머지 <b>'+rest+"
+ },
+ "js_178": {
+  "t": "지금까지 쌓은 <b>통치의 여정 진행도</b>는 위 게이지에 그대로 남아 있어요.",
+  "ctx": "b>완독 요약 리포트</b>는 구독자 전용입니다. ' +         "
+ },
+ "js_179": {
+  "t": "<h3>완독 리포트 전체는 구독자 전용이에요</h3>",
+  "ctx": " = '<div class=\"lk-ic\">🔒</div>' +       "
+ },
+ "js_180": {
+  "t": "<p>권력의 사슬과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>",
+  "ctx": "'<h3>완독 리포트 전체는 구독자 전용이에요</h3>' +       "
+ },
+ "js_181": {
+  "t": "목차 요약 · 사례 · 질문 · 약점 복습 · PDF 저장은 구독하면 모두 열립니다.</p>",
+  "ctx": "과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>' +       "
+ },
+ "js_182": {
+  "t": "\" target=\"_blank\" rel=\"noopener\">🔑 구독하고 완독 리포트 전체 열기</a>",
+  "ctx": "     '<a class=\"cta\" href=\"' + _sub() + "
+ },
+ "js_183": {
+  "t": "군주론",
+  "ctx": " 250, '120px serif', '#dca94a');   ctxt("
+ },
+ "js_184": {
+  "t": "니콜로 마키아벨리 · 근대 정치학의 출발점 마스터 퀴즈",
+  "ctx": "to Serif KR\",serif', '#ffffff');   ctxt("
+ },
+ "js_185": {
+  "t": "📚 매일 새 책 퀴즈  ·",
+  "ctx": "(/^https?:\\/\\//,'') : '';   if(su) ctxt("
+ },
+ "js_186": {
+  "t": "군주론_퀴즈결과.png",
+  "ctx": "nt('a');     a.href = url; a.download = "
+ },
+ "js_187": {
+  "t": "💌 VIP 초대 —",
+  "ctx": "ursor:pointer;\";     d.textContent=(vip?"
+ },
+ "js_188": {
+  "t": "🎁 지금 이 책 풀버전 무료 오픈 중!",
+  "ctx": "\";     d.textContent=(vip?\"💌 VIP 초대 — \":"
+ },
+ "js_189": {
+  "t": "전체판(잠금 없음)으로 이동 →",
+  "ctx": "\"💌 VIP 초대 — \":\"🎁 지금 이 책 풀버전 무료 오픈 중! \")+"
+ },
+ "jst_001": {
+  "t": "무료로 풀 수 있는 문항 수",
+  "ctx": "    freeLimit: 10,           // teaser: "
+ },
+ "jst_002": {
+  "t": "아직",
+  "ctx": "3:30};    let pending = [];          // "
+ },
+ "jst_003": {
+  "t": "처음으로 정답",
+  "ctx": "};    let pending = [];          // 아직 ‘"
+ },
+ "jst_004": {
+  "t": "을 못 낸 문항 큐",
+  "ctx": "t pending = [];          // 아직 ‘처음으로 정답’"
+ },
+ "jst_005": {
+  "t": "앞에서 꺼냄",
+  "ctx": "[];          // 아직 ‘처음으로 정답’을 못 낸 문항 큐 ("
+ },
+ "jst_006": {
+  "t": "시도 횟수",
+  "ctx": "(); let attempts = {};         // id -> "
+ },
+ "jst_007": {
+  "t": "첫 시도에 틀린 문항",
+  "ctx": " 0; let firstWrongIds = new Set();   // "
+ },
+ "jst_008": {
+  "t": "약점",
+  "ctx": "rongIds = new Set();   // 첫 시도에 틀린 문항 = "
+ },
+ "jst_009": {
+  "t": "집중 복습 대상",
+  "ctx": "gIds = new Set();   // 첫 시도에 틀린 문항 = 약점("
+ },
+ "jst_010": {
+  "t": "세션 내 최고 점수",
+  "ctx": "r = null; let bestScore = 0;         // "
+ },
+ "jst_011": {
+  "t": "재도전 비교용,",
+  "ctx": "t bestScore = 0;         // 세션 내 최고 점수 ("
+ },
+ "jst_012": {
+  "t": "미사용",
+  "ctx": "   // 세션 내 최고 점수 (재도전 비교용, localStorage "
+ },
+ "jst_013": {
+  "t": "복습 정답은 절반 점수",
+  "ctx": " gain = Math.round(gain/2);          // "
+ },
+ "jst_014": {
+  "t": "콤보 보너스",
+  "ctx": " (streak>=2) ? (streak-1)*3 : 0;     // "
+ },
+ "jst_015": {
+  "t": "가 아니어도 최종적으로 익힌 것으로 카운트",
+  "ctx": " masteredIds.add(id);          // ‘처음으로’"
+ },
+ "jst_016": {
+  "t": "큐에서 제거",
+  "ctx": "운트     pending.shift();              // "
+ },
+ "jst_017": {
+  "t": "연속 정답!",
+  "ctx": "      comboEl.textContent = `🔥 ${streak}"
+ },
+ "jst_018": {
+  "t": "보너스",
+  "ctx": "tContent = `🔥 ${streak}연속 정답! +${bonus} "
+ },
+ "jst_019": {
+  "t": "약점으로 기록",
+  "ctx": "f(firstTry) firstWrongIds.add(id);   // "
+ },
+ "jst_020": {
+  "t": "왜 생각해볼 만한가",
+  "ctx": "= >${c.d}</div>       <div class= >💭 <b>"
+ },
+ "jst_021": {
+  "t": "첫 시도에 모두 정답!",
+  "ctx": " ;     list.innerHTML = `<div class= >🌟 "
+ },
+ "jst_022": {
+  "t": "약점이 없어 따로 복습할 항목이 없습니다. 멋져요.",
+  "ctx": "TML = `<div class= >🌟 첫 시도에 모두 정답!<span>"
+ },
+ "jst_023": {
+  "t": "개",
+  "ctx": " {     cnt.textContent = `(${ids.length}"
+ },
+ "jst_024": {
+  "t": "정답",
+  "ctx": "= >Q. ${q.q}</div>         <div class= >"
+ },
+ "jst_025": {
+  "t": "최고 점수 경신!",
+  "ctx": "re;     note.innerHTML = prev>0 ? `🏆 <b>"
+ },
+ "jst_026": {
+  "t": "이전",
+  "ctx": "nerHTML = prev>0 ? `🏆 <b>최고 점수 경신!</b> ("
+ },
+ "jst_027": {
+  "t": "점",
+  "ctx": "prev>0 ? `🏆 <b>최고 점수 경신!</b> (이전 ${prev}"
+ },
+ "jst_028": {
+  "t": "첫 기록",
+  "ctx": "`🏆 <b>최고 점수 경신!</b> (이전 ${prev}점)` : `🏆 "
+ },
+ "jst_029": {
+  "t": "다시 도전해 깨보세요!",
+  "ctx": "${prev}점)` : `🏆 첫 기록 <b>${score}점</b> — "
+ },
+ "jst_030": {
+  "t": "현재 최고 점수",
+  "ctx": "보세요!`;   } else {     note.innerHTML = `"
+ },
+ "jst_031": {
+  "t": "이번엔",
+  "ctx": "HTML = `현재 최고 점수 <b>${bestScore}점</b> · "
+ }
+}

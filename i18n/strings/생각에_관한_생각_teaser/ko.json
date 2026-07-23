@@ -1,0 +1,1194 @@
+{
+ "_meta": {
+  "source": "apps/생각에_관한_생각_teaser.html",
+  "slug": "생각에_관한_생각_teaser"
+ },
+ "title_001": {
+  "t": "생각에 관한 생각 · 도파민 마스터 퀴즈",
+  "ctx": "<title>"
+ },
+ "html_001": {
+  "t": "대니얼 카너먼 · 2011 · 행동경제학의 고전",
+  "ctx": "class=\"hero\">       <div class=\"eyebrow\""
+ },
+ "html_002": {
+  "t": "우리는 생각보다 훨씬 덜 합리적이다",
+  "ctx": "ass=\"p3\">?</span></div>       <h1><small"
+ },
+ "html_003": {
+  "t": "생각에 관한 생각 마스터 퀴즈",
+  "ctx": "   <h1><small>우리는 생각보다 훨씬 덜 합리적이다</small"
+ },
+ "html_004": {
+  "t": "“인생에서 그 무엇도, 당신이 그것을 생각하는 그 순간만큼",
+  "ctx": " 생각 마스터 퀴즈</h1>       <div class=\"quote\""
+ },
+ "html_005": {
+  "t": "중요하지는 않다.”",
+  "ctx": "     “인생에서 그 무엇도, 당신이 그것을 생각하는 그 순간만큼<br"
+ },
+ "html_006": {
+  "t": "— 대니얼 카너먼",
+  "ctx": "생각하는 그 순간만큼<br>중요하지는 않다.”<br>         <b"
+ },
+ "html_007": {
+  "t": "노벨 경제학상 심리학자가 밝힌 마음의 작동 원리·편향·키워드를",
+  "ctx": "  <b>— 대니얼 카너먼</b>       </div>       <p"
+ },
+ "html_008": {
+  "t": "30개의 퀴즈",
+  "ctx": "<p>노벨 경제학상 심리학자가 밝힌 마음의 작동 원리·편향·키워드를 <b"
+ },
+ "html_009": {
+  "t": "로 익힙니다.\n        쉬운 것부터 시작해 점점 어려워지고,",
+  "ctx": "심리학자가 밝힌 마음의 작동 원리·편향·키워드를 <b>30개의 퀴즈</b"
+ },
+ "html_010": {
+  "t": "틀린 문제는 맞힐 때까지 다시 돌아옵니다.",
+  "ctx": ">로 익힙니다.         쉬운 것부터 시작해 점점 어려워지고, <b"
+ },
+ "html_011": {
+  "t": "총",
+  "ctx": "s=\"meta-row\">         <span class=\"chip\""
+ },
+ "html_012": {
+  "t": "30문항",
+  "ctx": "ta-row\">         <span class=\"chip\">총 <b"
+ },
+ "html_013": {
+  "t": "쉬움 → 어려움",
+  "ctx": "문항</b></span>         <span class=\"chip\""
+ },
+ "html_014": {
+  "t": "실시간",
+  "ctx": "어려움</span>         <span class=\"chip\"><b"
+ },
+ "html_015": {
+  "t": "생각의 지도",
+  "ctx": "an>         <span class=\"chip\"><b>실시간</b"
+ },
+ "html_016": {
+  "t": "문제마다",
+  "ctx": "생각의 지도</span>         <span class=\"chip\""
+ },
+ "html_017": {
+  "t": "쉬운 해설",
+  "ctx": "span>         <span class=\"chip\">문제마다 <b"
+ },
+ "html_018": {
+  "t": "생각 여행 시작하기 →",
+  "ctx": "=\"btn btn-primary\" onclick=\"startQuiz()\""
+ },
+ "html_019": {
+  "t": "점수",
+  "ctx": "   <div class=\"stat\"><span class=\"label\""
+ },
+ "html_020": {
+  "t": "연속 정답",
+  "ctx": "align-items:center;\"><span class=\"label\""
+ },
+ "html_021": {
+  "t": "마스터",
+  "ctx": "ign-items:flex-end;\"><span class=\"label\""
+ },
+ "html_022": {
+  "t": "직관 ←",
+  "ctx": "\">         <div class=\"axis-label\"><span"
+ },
+ "html_023": {
+  "t": "생각의 지도 ·",
+  "ctx": "lass=\"axis-label\"><span>직관 ←</span><span"
+ },
+ "html_024": {
+  "t": "→ 통찰",
+  "ctx": "의 지도 · <b id=\"pctTxt\">0%</b></span><span"
+ },
+ "html_025": {
+  "t": "쉬움",
+  "ctx": "d\">         <span class=\"diff\" id=\"diff\""
+ },
+ "html_026": {
+  "t": "다음 →",
+  "ctx": "y\" id=\"nextBtn\" onclick=\"nextQuestion()\""
+ },
+ "html_027": {
+  "t": "여기까지가 무료 미리보기예요",
+  "ctx": ">     <div class=\"lk-ic\">🔒</div>     <h3"
+ },
+ "html_028": {
+  "t": "🔑 구독하고 전체 열기",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_029": {
+  "t": "요약 리포트 미리보기 →",
+  "ctx": "class=\"cta ghost\" onclick=\"openReport()\""
+ },
+ "html_030": {
+  "t": "생각의 지배자",
+  "ctx": ">       <div class=\"rank\" id=\"rankTitle\""
+ },
+ "html_031": {
+  "t": "최종 점수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_032": {
+  "t": "첫 시도 정답률",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_033": {
+  "t": "최고 연속 정답",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_034": {
+  "t": "총 도전 횟수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_035": {
+  "t": "📖 전체 요약 리포트 보기",
+  "ctx": "\"btn btn-primary\" onclick=\"openReport()\""
+ },
+ "html_036": {
+  "t": "🖼 결과 카드 저장",
+  "ctx": "btn btn-ghost\" onclick=\"makeShareCard()\""
+ },
+ "html_037": {
+  "t": "다시 도전 ↻",
+  "ctx": "ss=\"btn btn-ghost\" onclick=\"startQuiz()\""
+ },
+ "html_038": {
+  "t": "처음으로",
+  "ctx": "class=\"btn btn-ghost\" onclick=\"goHome()\""
+ },
+ "html_039": {
+  "t": "완독 리포트 · INFOGRAPHIC",
+  "ctx": "s=\"rep-hero\">       <div class=\"eyebrow\""
+ },
+ "html_040": {
+  "t": "생각에 관한 생각 한눈에 보기",
+  "ctx": "ow\">완독 리포트 · INFOGRAPHIC</div>       <h2"
+ },
+ "html_041": {
+  "t": "책 전체를",
+  "ctx": "      <h2>생각에 관한 생각 한눈에 보기</h2>       <p"
+ },
+ "html_042": {
+  "t": "‘하나의 흐름’",
+  "ctx": ">생각에 관한 생각 한눈에 보기</h2>       <p>책 전체를 <b"
+ },
+ "html_043": {
+  "t": "으로 꿰면 절대 안 잊습니다. 모든 것의 출발점은",
+  "ctx": "눈에 보기</h2>       <p>책 전체를 <b>‘하나의 흐름’</b"
+ },
+ "html_044": {
+  "t": "두 개의 사고 시스템",
+  "ctx": "나의 흐름’</b>으로 꿰면 절대 안 잊습니다. 모든 것의 출발점은 <b"
+ },
+ "html_045": {
+  "t": "입니다.",
+  "ctx": " 절대 안 잊습니다. 모든 것의 출발점은 <b>두 개의 사고 시스템</b"
+ },
+ "html_046": {
+  "t": "큰 전제",
+  "ctx": "<div class=\"ch step s0\"><span class=\"cn\""
+ },
+ "html_047": {
+  "t": "🧠 마음엔 두 시스템이 있다",
+  "ctx": " step s0\"><span class=\"cn\">큰 전제</span><b"
+ },
+ "html_048": {
+  "t": "빠른 1 · 느린 2",
+  "ctx": ">큰 전제</span><b>🧠 마음엔 두 시스템이 있다</b><small"
+ },
+ "html_049": {
+  "t": "1단계",
+  "ctx": "<div class=\"ch step s1\"><span class=\"cn\""
+ },
+ "html_050": {
+  "t": "⚡ 시스템 1이 대부분을 처리",
+  "ctx": "h step s1\"><span class=\"cn\">1단계</span><b"
+ },
+ "html_051": {
+  "t": "자동 · 직관 · 즉각 · WYSIATI",
+  "ctx": ">1단계</span><b>⚡ 시스템 1이 대부분을 처리</b><small"
+ },
+ "html_052": {
+  "t": "2단계",
+  "ctx": "<div class=\"ch step s2\"><span class=\"cn\""
+ },
+ "html_053": {
+  "t": "🎣 어림짐작이 편향을 낳는다",
+  "ctx": "h step s2\"><span class=\"cn\">2단계</span><b"
+ },
+ "html_054": {
+  "t": "앵커링 · 가용성 · 대표성 · 평균 회귀",
+  "ctx": "\">2단계</span><b>🎣 어림짐작이 편향을 낳는다</b><small"
+ },
+ "html_055": {
+  "t": "근접 원리",
+  "ctx": "s=\"ch step s3\">         <span class=\"cn\""
+ },
+ "html_056": {
+  "t": "💔 손실·프레이밍이 선택을 왜곡",
+  "ctx": "         <span class=\"cn\">근접 원리</span><b"
+ },
+ "html_057": {
+  "t": "전망 이론 / 손실 회피 / 소유 효과",
+  "ctx": "><b>💔 손실·프레이밍이 선택을 왜곡</b>         <small"
+ },
+ "html_058": {
+  "t": "결과",
+  "ctx": "<div class=\"ch step s4\"><span class=\"cn\""
+ },
+ "html_059": {
+  "t": "🎞️ 기억 자아가 삶을 판단한다",
+  "ctx": "ch step s4\"><span class=\"cn\">결과</span><b"
+ },
+ "html_060": {
+  "t": "“편향을 알아차리면 달라진다”",
+  "ctx": ">결과</span><b>🎞️ 기억 자아가 삶을 판단한다</b><small"
+ },
+ "html_061": {
+  "t": "핵심 개념 8",
+  "ctx": "/div>     </div>      <h3 class=\"rep-h3\""
+ },
+ "html_062": {
+  "t": "목차 한눈에 보기",
+  "ctx": "concepts\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_063": {
+  "t": "탭하면 요약이 열립니다",
+  "ctx": "ss=\"rep-h3\">목차 한눈에 보기 <span class=\"hint\""
+ },
+ "html_064": {
+  "t": "책 속, 생각해볼 사례 3",
+  "ctx": " id=\"toc\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_065": {
+  "t": "이 책이 우리에게 던지는 질문 3",
+  "ctx": "d=\"cases\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_066": {
+  "t": "내가 틀린 부분 집중 복습",
+  "ctx": " id=\"weakWrap\">       <h3 class=\"rep-h3\""
+ },
+ "html_067": {
+  "t": "📺 더 깊이 알고 싶다면",
+  "ctx": "/div>      <div class=\"deepen\">       <b"
+ },
+ "html_068": {
+  "t": "에서 대니얼 카너먼 본인의 강연을 볼 수 있습니다.",
+  "ctx": "f=\"#\" target=\"_blank\" rel=\"noopener\"></a"
+ },
+ "html_069": {
+  "t": "📄 PDF로 저장",
+  "ctx": "d=\"pdfBtn\" onclick=\"downloadReportPDF()\""
+ },
+ "html_070": {
+  "t": "결과로",
+  "ctx": "\"btn btn-ghost\" onclick=\"show('result')\""
+ },
+ "html_071": {
+  "t": "📚 다른 책 퀴즈 보기 →",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_072": {
+  "t": "“의미와재미공장” 미미팩토리",
+  "ctx": "class=\"footer\">     <div class=\"factory\""
+ },
+ "html_073": {
+  "t": "(주식회사 연:결 패밀리회사)",
+  "ctx": "재미공장” 미미팩토리</div>     <div class=\"affil\""
+ },
+ "html_074": {
+  "t": "책의 핵심을 도파민으로 익히는 반복 마스터 퀴즈",
+  "ctx": ":결 패밀리회사)</div>     <div class=\"tagline\""
+ },
+ "html_075": {
+  "t": "본 앱은 도서의 핵심 개념을 학습 목적으로 재구성한 2차적 학습 콘텐츠입니다. 온전한 독서 경험은 원서로 만나보세요.",
+  "ctx": "퀴즈</div>     <div class=\"copyright-note\""
+ },
+ "html_076": {
+  "t": "생각에 관한 생각 · 도서 정보",
+  "ctx": "40135544\" target=\"_blank\" rel=\"noopener\""
+ },
+ "js_001": {
+  "t": "\"}))}},Hn={name:\"font-size\",initialValue:\"0\",prefix:!1,type:wt.TYPE_VALUE,format:\"length\"},In={name:\"font-weight\",initialValue:\"normal\",type:wt.VALUE,prefix:!1,parse:function(e){if(Ve(e))return e.number;if(qe(e))switch(e.value){case\"bold\":return 700;case\"normal\":default:return 400}return 400}},Pn={name:\"font-variant\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return e.filter(qe).map((function(e){return e.value}))}};!function(e){e.NORMAL=\"normal\",e.ITALIC=\"italic\",e.OBLIQUE=\"oblique\"}(Nn||(Nn={}));var On,kn={name:\"font-style\",initialValue:\"normal\",prefix:!1,type:wt.IDENT_VALUE,parse:function(e){switch(e){case\"oblique\":return Nn.OBLIQUE;case\"italic\":return Nn.ITALIC;case\"normal\":default:return Nn.NORMAL}}},Rn=function(e,t){return 0!=(e&t)},Mn={name:\"content\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){if(0===e.length)return[];var t=e[0];return t.type===d.IDENT_TOKEN&&\"none\"===t.value?[]:e}},Dn={name:\"counter-increment\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;for(var r=[],n=e.filter(We),o=0;o<n.length;o++){var s=n[o],i=n[o+1];if(s.type===d.IDENT_TOKEN){var a=i&&Ve(i)?i.number:1;r.push({counter:s.value,increment:a})}}return r}},Kn={name:\"counter-reset\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return[];for(var t=[],r=e.filter(We),n=0;n<r.length;n++){var o=r[n],s=r[n+1];if(qe(o)&&\"none\"!==o.value){var i=s&&Ve(s)?s.number:0;t.push({counter:o.value,reset:i})}}return t}},zn={name:\"quotes\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;var r=[],n=e.filter(Ge);if(n.length%2!=0)return null;for(var o=0;o<n.length;o+=2){var s=n[o].value,i=n[o+1].value;r.push({open:s,close:i})}return r}},Vn=function(e,t,r){if(!e)return\"\";var n=e[Math.min(t,e.length-1)];return n?r?n.open:n.close:\"\"},qn={name:\"box-shadow\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return 1===e.length&&Xe(e[0],\"none\")?[]:Ye(e).map((function(e){for(var t={color:255,offsetX:rt,offsetY:rt,blur:rt,spread:rt,inset:!1},r=0,n=0;n<e.length;n++){var o=e[n];Xe(o,\"inset\")?t.inset=!0:$e(o)?(0===r?t.offsetX=o:1===r?t.offsetY=o:2===r?t.blur=o:t.spread=o,r++):t.color=ft(o)}return t}))}},Gn=function(){function e(e){this.backgroundClip=Jn(xt,e.backgroundClip),this.backgroundColor=Jn(Et,e.backgroundColor),this.backgroundImage=Jn(ur,e.backgroundImage),this.backgroundOrigin=Jn(cr,e.backgroundOrigin),this.backgroundPosition=Jn(lr,e.backgroundPosition),this.backgroundRepeat=Jn(fr,e.backgroundRepeat),this.backgroundSize=Jn(mr,e.backgroundSize),this.borderTopColor=Jn(vr,e.borderTopColor),this.borderRightColor=Jn(wr,e.borderRightColor),this.borderBottomColor=Jn(br,e.borderBottomColor),this.borderLeftColor=Jn(Br,e.borderLeftColor),this.borderTopLeftRadius=Jn(_r,e.borderTopLeftRadius),this.borderTopRightRadius=Jn(Cr,e.borderTopRightRadius),this.borderBottomRightRadius=Jn(xr,e.borderBottomRightRadius),this.borderBottomLeftRadius=Jn(Er,e.borderBottomLeftRadius),this.borderTopStyle=Jn(Fr,e.borderTopStyle),this.borderRightStyle=Jn(Ur,e.borderRightStyle),this.borderBottomStyle=Jn(Sr,e.borderBottomStyle),this.borderLeftStyle=Jn(Lr,e.borderLeftStyle),this.borderTopWidth=Jn(Hr,e.borderTopWidth),this.borderRightWidth=Jn(Ir,e.borderRightWidth),this.borderBottomWidth=Jn(Pr,e.borderBottomWidth),this.borderLeftWidth=Jn(Or,e.borderLeftWidth),this.boxShadow=Jn(qn,e.boxShadow),this.color=Jn(kr,e.color),this.display=Jn(Rr,e.display),this.float=Jn(Kr,e.cssFloat),this.fontFamily=Jn(Tn,e.fontFamily),this.fontSize=Jn(Hn,e.fontSize),this.fontStyle=Jn(kn,e.fontStyle),this.fontVariant=Jn(Pn,e.fontVariant),this.fontWeight=Jn(In,e.fontWeight),this.letterSpacing=Jn(zr,e.letterSpacing),this.lineBreak=Jn(qr,e.lineBreak),this.lineHeight=Jn(Gr,e.lineHeight),this.listStyleImage=Jn(Xr,e.listStyleImage),this.listStylePosition=Jn(Jr,e.listStylePosition),this.listStyleType=Jn(Zr,e.listStyleType),this.marginTop=Jn(en,e.marginTop),this.marginRight=Jn(tn,e.marginRight),this.marginBottom=Jn(rn,e.marginBottom),this.marginLeft=Jn(nn,e.marginLeft),this.opacity=Jn(Un,e.opacity);var t=Jn(sn,e.overflow);this.overflowX=t[0],this.overflowY=t[t.length>1?1:0],this.overflowWrap=Jn(An,e.overflowWrap),this.paddingTop=Jn(cn,e.paddingTop),this.paddingRight=Jn(ln,e.paddingRight),this.paddingBottom=Jn(dn,e.paddingBottom),this.paddingLeft=Jn(fn,e.paddingLeft),this.position=Jn(gn,e.position),this.textAlign=Jn(pn,e.textAlign),this.textDecorationColor=Jn(Sn,e.textDecorationColor||e.color),this.textDecorationLine=Jn(Ln,e.textDecorationLine),this.textShadow=Jn(yn,e.textShadow),this.textTransform=Jn(wn,e.textTransform),this.transform=Jn(bn,e.transform),this.transformOrigin=Jn(Cn,e.transformOrigin),this.visibility=Jn(En,e.visibility),this.wordBreak=Jn(Qn,e.wordBreak),this.zIndex=Jn(Fn,e.zIndex)}return e.prototype.isVisible=function(){return this.display>0&&this.opacity>0&&this.visibility===vn.VISIBLE},e.prototype.isTransparent=function(){return ht(this.backgroundColor)},e.prototype.isTransformed=function(){return null!==this.transform},e.prototype.isPositioned=function(){return this.position!==hn.STATIC},e.prototype.isPositionedWithZIndex=function(){return this.isPositioned()&&!this.zIndex.auto},e.prototype.isFloating=function(){return this.float!==Nr.NONE},e.prototype.isInlineLevel=function(){return Rn(this.display,4)||Rn(this.display,33554432)||Rn(this.display,268435456)||Rn(this.display,536870912)||Rn(this.display,67108864)||Rn(this.display,134217728)},e}(),Xn=function(e){this.content=Jn(Mn,e.content),this.quotes=Jn(zn,e.quotes)},Wn=function(e){this.counterIncrement=Jn(Dn,e.counterIncrement),this.counterReset=Jn(Kn,e.counterReset)},Jn=function(e,t){var r=new De,n=null!=t?t.toString():e.initialValue;r.write(n);var o=new Ke(r.read());switch(e.type){case wt.IDENT_VALUE:var s=o.parseComponentValue();return e.parse(qe(s)?s.value:e.initialValue);case wt.VALUE:return e.parse(o.parseComponentValue());case wt.LIST:return e.parse(o.parseComponentValues());case wt.TOKEN_VALUE:return o.parseComponentValue();case wt.TYPE_VALUE:switch(e.format){case\"angle\":return ut(o.parseComponentValue());case\"color\":return ft(o.parseComponentValue());case\"image\":return ir(o.parseComponentValue());case\"length\":var i=o.parseComponentValue();return $e(i)?i:rt;case\"length-percentage\":var a=o.parseComponentValue();return et(a)?a:rt}}throw new Error(\"Attempting to parse unsupported css format type \"+e.format)},Yn=function(e){this.styles=new Gn(window.getComputedStyle(e,null)),this.textNodes=[],this.elements=[],null!==this.styles.transform&&So(e)&&(e.style.transform=\"none\"),this.bounds=i(e),this.flags=0},Zn=function(e,t){this.text=e,this.bounds=t},$n=function(e){var t=e.ownerDocument;if(t){var r=t.createElement(\"html2canvaswrapper\");r.appendChild(e.cloneNode(!0));var n=e.parentNode;if(n){n.replaceChild(r,e);var o=i(r);return r.firstChild&&n.replaceChild(r.firstChild,r),o}}return new s(0,0,0,0)},eo=function(e,t,r){var n=e.ownerDocument;if(!n)throw new Error(\"Node has no owner document\");var o=n.createRange();return o.setStart(e,t),o.setEnd(e,t+r),s.fromClientRect(o.getBoundingClientRect())},to=function(e,t){return 0!==t.letterSpacing?a(e).map((function(e){return A(e)})):ro(e,t)},ro=function(e,t){for(var r,n=function(e,t){var r=a(e),n=ie(r,t),o=n[0],s=n[1],i=n[2],A=r.length,u=0,c=0;return{next:function(){if(c>=A)return{done:!0,value:null};for(var e=G;c<A&&(e=se(r,s,o,++c,i))===G;);if(e!==G||c===A){var t=new ae(r,e,u,c);return u=c,{value:t,done:!1}}return{done:!0,value:null}}}}(e,{lineBreak:t.lineBreak,wordBreak:t.overflowWrap===on.BREAK_WORD?\"break-word\":t.wordBreak}),o=[];!(r=n.next()).done;)r.value&&o.push(r.value.slice());return o},no=function(e,t){this.text=oo(e.data,t.textTransform),this.textBounds=function(e,t,r){var n=to(e,t),o=[],s=0;return n.forEach((function(e){if(t.textDecorationLine.length||e.trim().length>0)if(Pt.SUPPORT_RANGE_BOUNDS)o.push(new Zn(e,eo(r,s,e.length)));else{var n=r.splitText(e.length);o.push(new Zn(e,$n(r))),r=n}else Pt.SUPPORT_RANGE_BOUNDS||(r=r.splitText(e.length));s+=e.length})),o}(this.text,t,e)},oo=function(e,t){switch(t){case mn.LOWERCASE:return e.toLowerCase();case mn.CAPITALIZE:return e.replace(so,io);case mn.UPPERCASE:return e.toUpperCase();default:return e}},so=/(^|\\s|:|-|\\(|\\))([a-z])/g,io=function(e,t,r){return e.length>0?t+r.toUpperCase():e},ao=function(e){function r(t){var r=e.call(this,t)||this;return r.src=t.currentSrc||t.src,r.intrinsicWidth=t.naturalWidth,r.intrinsicHeight=t.naturalHeight,kt.getInstance().addImage(r.src),r}return t(r,e),r}(Yn),Ao=function(e){function r(t){var r=e.call(this,t)||this;return r.canvas=t,r.intrinsicWidth=t.width,r.intrinsicHeight=t.height,r}return t(r,e),r}(Yn),uo=function(e){function r(t){var r=e.call(this,t)||this,n=new XMLSerializer;return r.svg=\"data:image/svg+xml,\"+encodeURIComponent(n.serializeToString(t)),r.intrinsicWidth=t.width.baseVal.value,r.intrinsicHeight=t.height.baseVal.value,kt.getInstance().addImage(r.svg),r}return t(r,e),r}(Yn),co=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),lo=function(e){function r(t){var r=e.call(this,t)||this;return r.start=t.start,r.reversed=\"boolean\"==typeof t.reversed&&!0===t.reversed,r}return t(r,e),r}(Yn),fo=[{type:d.DIMENSION_TOKEN,flags:0,unit:\"px\",number:3}],ho=[{type:d.PERCENTAGE_TOKEN,flags:0,number:50}],po=\"checkbox\",mo=\"radio\",go=\"password\",yo=707406591,vo=function(e){function r(t){var r,n,o,i=e.call(this,t)||this;switch(i.type=t.type.toLowerCase(),i.checked=t.checked,i.value=0===(o=(n=t).type===go?new Array(n.value.length+1).join(\"•\"):n.value).length?n.placeholder||\"\":o,i.type!==po&&i.type!==mo||(i.styles.backgroundColor=3739148031,i.styles.borderTopColor=i.styles.borderRightColor=i.styles.borderBottomColor=i.styles.borderLeftColor=2779096575,i.styles.borderTopWidth=i.styles.borderRightWidth=i.styles.borderBottomWidth=i.styles.borderLeftWidth=1,i.styles.borderTopStyle=i.styles.borderRightStyle=i.styles.borderBottomStyle=i.styles.borderLeftStyle=pr.SOLID,i.styles.backgroundClip=[bt.BORDER_BOX],i.styles.backgroundOrigin=[0],i.bounds=(r=i.bounds).width>r.height?new s(r.left+(r.width-r.height)/2,r.top,r.height,r.height):r.width<r.height?new s(r.left,r.top+(r.height-r.width)/2,r.width,r.width):r),i.type){case po:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=fo;break;case mo:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=ho}return i}return t(r,e),r}(Yn),wo=function(e){function r(t){var r=e.call(this,t)||this,n=t.options[t.selectedIndex||0];return r.value=n&&n.text||\"\",r}return t(r,e),r}(Yn),bo=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),Bo=function(e){return ft(Ke.create(e).parseComponentValue())},jo=function(e){function r(t){var r=e.call(this,t)||this;r.src=t.src,r.width=parseInt(t.width,10)||0,r.height=parseInt(t.height,10)||0,r.backgroundColor=r.styles.backgroundColor;try{if(t.contentWindow&&t.contentWindow.document&&t.contentWindow.document.documentElement){r.tree=Eo(t.contentWindow.document.documentElement);var n=t.contentWindow.document.documentElement?Bo(getComputedStyle(t.contentWindow.document.documentElement).backgroundColor):_t.TRANSPARENT,o=t.contentWindow.document.body?Bo(getComputedStyle(t.contentWindow.document.body).backgroundColor):_t.TRANSPARENT;r.backgroundColor=ht(n)?ht(o)?r.styles.backgroundColor:o:n}}catch(e){}return r}return t(r,e),r}(Yn),_o=[\"OL\",\"UL\",\"MENU\"],Co=function(e,t,r){for(var n=e.firstChild,o=void 0;n;n=o)if(o=n.nextSibling,Fo(n)&&n.data.trim().length>0)t.textNodes.push(new no(n,t.styles));else if(Uo(n)){var s=xo(n);s.styles.isVisible()&&(No(n,s,r)?s.flags|=4:Qo(s.styles)&&(s.flags|=2),-1!==_o.indexOf(n.tagName)&&(s.flags|=8),t.elements.push(s),zo(n)||Po(n)||Vo(n)||Co(n,s,r))}},xo=function(e){return Ro(e)?new ao(e):ko(e)?new Ao(e):Po(e)?new uo(e):To(e)?new co(e):Ho(e)?new lo(e):Io(e)?new vo(e):Vo(e)?new wo(e):zo(e)?new bo(e):Mo(e)?new jo(e):new Yn(e)},Eo=function(e){var t=xo(e);return t.flags|=4,Co(e,t,t),t},No=function(e,t,r){return t.styles.isPositionedWithZIndex()||t.styles.opacity<1||t.styles.isTransformed()||Oo(e)&&r.styles.isTransparent()},Qo=function(e){return e.isPositioned()||e.isFloating()},Fo=function(e){return e.nodeType===Node.TEXT_NODE},Uo=function(e){return e.nodeType===Node.ELEMENT_NODE},So=function(e){return Uo(e)&&void 0!==e.style&&!Lo(e)},Lo=function(e){return\"object\"==typeof e.className},To=function(e){return\"LI\"===e.tagName},Ho=function(e){return\"OL\"===e.tagName},Io=function(e){return\"INPUT\"===e.tagName},Po=function(e){return\"svg\"===e.tagName},Oo=function(e){return\"BODY\"===e.tagName},ko=function(e){return\"CANVAS\"===e.tagName},Ro=function(e){return\"IMG\"===e.tagName},Mo=function(e){return\"IFRAME\"===e.tagName},Do=function(e){return\"STYLE\"===e.tagName},Ko=function(e){return\"SCRIPT\"===e.tagName},zo=function(e){return\"TEXTAREA\"===e.tagName},Vo=function(e){return\"SELECT\"===e.tagName},qo=function(){function e(){this.counters={}}return e.prototype.getCounterValue=function(e){var t=this.counters[e];return t&&t.length?t[t.length-1]:1},e.prototype.getCounterValues=function(e){return this.counters[e]||[]},e.prototype.pop=function(e){var t=this;e.forEach((function(e){return t.counters[e].pop()}))},e.prototype.parse=function(e){var t=this,r=e.counterIncrement,n=e.counterReset,o=!0;null!==r&&r.forEach((function(e){var r=t.counters[e.counter];r&&0!==e.increment&&(o=!1,r[Math.max(0,r.length-1)]+=e.increment)}));var s=[];return o&&n.forEach((function(e){var r=t.counters[e.counter];s.push(e.counter),r||(r=t.counters[e.counter]=[]),r.push(e.reset)})),s},e}(),Go={integers:[1e3,900,500,400,100,90,50,40,10,9,5,4,1],values:[\"M\",\"CM\",\"D\",\"CD\",\"C\",\"XC\",\"L\",\"XL\",\"X\",\"IX\",\"V\",\"IV\",\"I\"]},Xo={integers:[9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"Ք\",\"Փ\",\"Ւ\",\"Ց\",\"Ր\",\"Տ\",\"Վ\",\"Ս\",\"Ռ\",\"Ջ\",\"Պ\",\"Չ\",\"Ո\",\"Շ\",\"Ն\",\"Յ\",\"Մ\",\"Ճ\",\"Ղ\",\"Ձ\",\"Հ\",\"Կ\",\"Ծ\",\"Խ\",\"Լ\",\"Ի\",\"Ժ\",\"Թ\",\"Ը\",\"Է\",\"Զ\",\"Ե\",\"Դ\",\"Գ\",\"Բ\",\"Ա\"]},Wo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,400,300,200,100,90,80,70,60,50,40,30,20,19,18,17,16,15,10,9,8,7,6,5,4,3,2,1],values:[\"י׳\",\"ט׳\",\"ח׳\",\"ז׳\",\"ו׳\",\"ה׳\",\"ד׳\",\"ג׳\",\"ב׳\",\"א׳\",\"ת\",\"ש\",\"ר\",\"ק\",\"צ\",\"פ\",\"ע\",\"ס\",\"נ\",\"מ\",\"ל\",\"כ\",\"יט\",\"יח\",\"יז\",\"טז\",\"טו\",\"י\",\"ט\",\"ח\",\"ז\",\"ו\",\"ה\",\"ד\",\"ג\",\"ב\",\"א\"]},Jo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"ჵ\",\"ჰ\",\"ჯ\",\"ჴ\",\"ხ\",\"ჭ\",\"წ\",\"ძ\",\"ც\",\"ჩ\",\"შ\",\"ყ\",\"ღ\",\"ქ\",\"ფ\",\"ჳ\",\"ტ\",\"ს\",\"რ\",\"ჟ\",\"პ\",\"ო\",\"ჲ\",\"ნ\",\"მ\",\"ლ\",\"კ\",\"ი\",\"თ\",\"ჱ\",\"ზ\",\"ვ\",\"ე\",\"დ\",\"გ\",\"ბ\",\"ა\"]},Yo=function(e,t,r,n,o,s){return e<t||e>r?is(e,o,s.length>0):n.integers.reduce((function(t,r,o){for(;e>=r;)e-=r,t+=n.values[o];return t}),\"\")+s},Zo=function(e,t,r,n){var o=\"\";do{r||e--,o=n(e)+o,e/=t}while(e*t>=t);return o},$o=function(e,t,r,n,o){var s=r-t+1;return(e<0?\"-\":\"\")+(Zo(Math.abs(e),s,n,(function(e){return A(Math.floor(e%s)+t)}))+o)},es=function(e,t,r){void 0===r&&(r=\". \");var n=t.length;return Zo(Math.abs(e),n,!1,(function(e){return t[Math.floor(e%n)]}))+r},ts=function(e,t,r,n,o,s){if(e<-9999||e>9999)return is(e,Wr.CJK_DECIMAL,o.length>0);var i=Math.abs(e),a=o;if(0===i)return t[0]+a;for(var A=0;i>0&&A<=4;A++){var u=i%10;0===u&&Rn(s,1)&&\"\"!==a?a=t[u]+a:u>1||1===u&&0===A||1===u&&1===A&&Rn(s,2)||1===u&&1===A&&Rn(s,4)&&e>100||1===u&&A>1&&Rn(s,8)?a=t[u]+(A>0?r[A-1]:\"\")+a:1===u&&A>0&&(a=r[A-1]+a),i=Math.floor(i/10)}return(e<0?n:\"\")+a},rs=\"十百千萬\",ns=\"拾佰仟萬\",os=\"マイナス\",ss=\"마이너스\",is=function(e,t,r){var n=r?\". \":\"\",o=r?\"、\":\"\",s=r?\", \":\"\",i=r?\" \":\"\";switch(t){case Wr.DISC:return\"•\"+i;case Wr.CIRCLE:return\"◦\"+i;case Wr.SQUARE:return\"◾\"+i;case Wr.DECIMAL_LEADING_ZERO:var a=$o(e,48,57,!0,n);return a.length<4?\"0\"+a:a;case Wr.CJK_DECIMAL:return es(e,\"〇一二三四五六七八九\",o);case Wr.LOWER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n).toLowerCase();case Wr.UPPER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n);case Wr.LOWER_GREEK:return $o(e,945,969,!1,n);case Wr.LOWER_ALPHA:return $o(e,97,122,!1,n);case Wr.UPPER_ALPHA:return $o(e,65,90,!1,n);case Wr.ARABIC_INDIC:return $o(e,1632,1641,!0,n);case Wr.ARMENIAN:case Wr.UPPER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n);case Wr.LOWER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n).toLowerCase();case Wr.BENGALI:return $o(e,2534,2543,!0,n);case Wr.CAMBODIAN:case Wr.KHMER:return $o(e,6112,6121,!0,n);case Wr.CJK_EARTHLY_BRANCH:return es(e,\"子丑寅卯辰巳午未申酉戌亥\",o);case Wr.CJK_HEAVENLY_STEM:return es(e,\"甲乙丙丁戊己庚辛壬癸\",o);case Wr.CJK_IDEOGRAPHIC:case Wr.TRAD_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"負\",o,14);case Wr.TRAD_CHINESE_FORMAL:return ts(e,\"零壹貳參肆伍陸柒捌玖\",ns,\"負\",o,15);case Wr.SIMP_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"负\",o,14);case Wr.SIMP_CHINESE_FORMAL:return ts(e,\"零壹贰叁肆伍陆柒捌玖\",ns,\"负\",o,15);case Wr.JAPANESE_INFORMAL:return ts(e,\"〇一二三四五六七八九\",\"十百千万\",os,o,0);case Wr.JAPANESE_FORMAL:return ts(e,\"零壱弐参四伍六七八九\",\"拾百千万\",os,o,7);case Wr.KOREAN_HANGUL_FORMAL:return ts(e,\"영일이삼사오육칠팔구\",\"십백천만\",ss,s,7);case Wr.KOREAN_HANJA_INFORMAL:return ts(e,\"零一二三四五六七八九\",\"十百千萬\",ss,s,0);case Wr.KOREAN_HANJA_FORMAL:return ts(e,\"零壹貳參四五六七八九\",\"拾百千\",ss,s,7);case Wr.DEVANAGARI:return $o(e,2406,2415,!0,n);case Wr.GEORGIAN:return Yo(e,1,19999,Jo,Wr.DECIMAL,n);case Wr.GUJARATI:return $o(e,2790,2799,!0,n);case Wr.GURMUKHI:return $o(e,2662,2671,!0,n);case Wr.HEBREW:return Yo(e,1,10999,Wo,Wr.DECIMAL,n);case Wr.HIRAGANA:return es(e,\"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん\");case Wr.HIRAGANA_IROHA:return es(e,\"いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす\");case Wr.KANNADA:return $o(e,3302,3311,!0,n);case Wr.KATAKANA:return es(e,\"アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン\",o);case Wr.KATAKANA_IROHA:return es(e,\"イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセス\",o);case Wr.LAO:return $o(e,3792,3801,!0,n);case Wr.MONGOLIAN:return $o(e,6160,6169,!0,n);case Wr.MYANMAR:return $o(e,4160,4169,!0,n);case Wr.ORIYA:return $o(e,2918,2927,!0,n);case Wr.PERSIAN:return $o(e,1776,1785,!0,n);case Wr.TAMIL:return $o(e,3046,3055,!0,n);case Wr.TELUGU:return $o(e,3174,3183,!0,n);case Wr.THAI:return $o(e,3664,3673,!0,n);case Wr.TIBETAN:return $o(e,3872,3881,!0,n);case Wr.DECIMAL:default:return $o(e,48,57,!0,n)}},as=\"data-html2canvas-ignore\",As=function(){function e(e,t){if(this.options=t,this.scrolledElements=[],this.referenceElement=e,this.counters=new qo,this.quoteDepth=0,!e.ownerDocument)throw new Error(\"Cloned element does not have an owner document\");this.documentElement=this.cloneNode(e.ownerDocument.documentElement)}return e.prototype.toIFrame=function(e,t){var r=this,s=cs(e,t);if(!s.contentWindow)return Promise.reject(\"Unable to find iframe window\");var i=e.defaultView.pageXOffset,a=e.defaultView.pageYOffset,A=s.contentWindow,u=A.document,c=ls(s).then((function(){return n(r,void 0,void 0,(function(){var e;return o(this,(function(r){switch(r.label){case 0:return this.scrolledElements.forEach(ps),A&&(A.scrollTo(t.left,t.top),!/(iPad|iPhone|iPod)/g.test(navigator.userAgent)||A.scrollY===t.top&&A.scrollX===t.left||(u.documentElement.style.top=-t.top+\"px\",u.documentElement.style.left=-t.left+\"px\",u.documentElement.style.position=\"absolute\")),e=this.options.onclone,void 0===this.clonedReferenceElement?[2,Promise.reject(\"Error finding the \"+this.referenceElement.nodeName+\" in the cloned document\")]:u.fonts&&u.fonts.ready?[4,u.fonts.ready]:[3,2];case 1:r.sent(),r.label=2;case 2:return\"function\"==typeof e?[2,Promise.resolve().then((function(){return e(u)})).then((function(){return s}))]:[2,s]}}))}))}));return u.open(),u.write(fs(document.doctype)+\"<html></html>\"),hs(this.referenceElement.ownerDocument,i,a),u.replaceChild(u.adoptNode(this.documentElement),u.documentElement),u.close(),c},e.prototype.createElementClone=function(e){if(ko(e))return this.createCanvasClone(e);if(Do(e))return this.createStyleClone(e);var t=e.cloneNode(!1);return Ro(t)&&\"lazy\"===t.loading&&(t.loading=\"eager\"),t},e.prototype.createStyleClone=function(e){try{var t=e.sheet;if(t&&t.cssRules){var r=[].slice.call(t.cssRules,0).reduce((function(e,t){return t&&\"string\"==typeof t.cssText?e+t.cssText:e}),\"\"),n=e.cloneNode(!1);return n.textContent=r,n}}catch(e){if(Ot.getInstance(this.options.id).error(\"Unable to access cssRules property\",e),\"SecurityError\"!==e.name)throw e}return e.cloneNode(!1)},e.prototype.createCanvasClone=function(e){if(this.options.inlineImages&&e.ownerDocument){var t=e.ownerDocument.createElement(\"img\");try{return t.src=e.toDataURL(),t}catch(e){Ot.getInstance(this.options.id).info(\"Unable to clone canvas contents, canvas is tainted\")}}var r=e.cloneNode(!1);try{r.width=e.width,r.height=e.height;var n=e.getContext(\"2d\"),o=r.getContext(\"2d\");return o&&(n?o.putImageData(n.getImageData(0,0,e.width,e.height),0,0):o.drawImage(e,0,0)),r}catch(e){}return r},e.prototype.cloneNode=function(e){if(Fo(e))return document.createTextNode(e.data);if(!e.ownerDocument)return e.cloneNode(!1);var t=e.ownerDocument.defaultView;if(t&&Uo(e)&&(So(e)||Lo(e))){var r=this.createElementClone(e),n=t.getComputedStyle(e),o=t.getComputedStyle(e,\":before\"),s=t.getComputedStyle(e,\":after\");this.referenceElement===e&&So(r)&&(this.clonedReferenceElement=r),Oo(r)&&vs(r);for(var i=this.counters.parse(new Wn(n)),a=this.resolvePseudoContent(e,r,o,On.BEFORE),A=e.firstChild;A;A=A.nextSibling)Uo(A)&&(Ko(A)||A.hasAttribute(as)||\"function\"==typeof this.options.ignoreElements&&this.options.ignoreElements(A))||this.options.copyStyles&&Uo(A)&&Do(A)||r.appendChild(this.cloneNode(A));a&&r.insertBefore(a,r.firstChild);var u=this.resolvePseudoContent(e,r,s,On.AFTER);return u&&r.appendChild(u),this.counters.pop(i),n&&(this.options.copyStyles||Lo(e))&&!Mo(e)&&ds(n,r),0===e.scrollTop&&0===e.scrollLeft||this.scrolledElements.push([r,e.scrollLeft,e.scrollTop]),(zo(e)||Vo(e))&&(zo(r)||Vo(r))&&(r.value=e.value),r}return e.cloneNode(!1)},e.prototype.resolvePseudoContent=function(e,t,r,n){var o=this;if(r){var s=r.content,i=t.ownerDocument;if(i&&s&&\"none\"!==s&&\"-moz-alt-content\"!==s&&\"none\"!==r.display){this.counters.parse(new Wn(r));var a=new Xn(r),A=i.createElement(\"html2canvaspseudoelement\");ds(r,A),a.content.forEach((function(t){if(t.type===d.STRING_TOKEN)A.appendChild(i.createTextNode(t.value));else if(t.type===d.URL_TOKEN){var r=i.createElement(\"img\");r.src=t.value,r.style.opacity=\"1\",A.appendChild(r)}else if(t.type===d.FUNCTION){if(\"attr\"===t.name){var n=t.values.filter(qe);n.length&&A.appendChild(i.createTextNode(e.getAttribute(n[0].value)||\"\"))}else if(\"counter\"===t.name){var s=t.values.filter(Je),u=s[0],c=s[1];if(u&&qe(u)){var l=o.counters.getCounterValue(u.value),f=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL;A.appendChild(i.createTextNode(is(l,f,!1)))}}else if(\"counters\"===t.name){var h=t.values.filter(Je),p=(u=h[0],h[1]);if(c=h[2],u&&qe(u)){var m=o.counters.getCounterValues(u.value),g=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL,y=p&&p.type===d.STRING_TOKEN?p.value:\"\",v=m.map((function(e){return is(e,g,!1)})).join(y);A.appendChild(i.createTextNode(v))}}}else if(t.type===d.IDENT_TOKEN)switch(t.value){case\"open-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,o.quoteDepth++,!0)));break;case\"close-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,--o.quoteDepth,!1)));break;default:A.appendChild(i.createTextNode(t.value))}})),A.className=ms+\" \"+gs;var u=n===On.BEFORE?\" \"+ms:\" \"+gs;return Lo(t)?t.className.baseValue+=u:t.className+=u,A}}},e.destroy=function(e){return!!e.parentNode&&(e.parentNode.removeChild(e),!0)},e}();!function(e){e[e.BEFORE=0]=\"BEFORE\",e[e.AFTER=1]=\"AFTER\"}(On||(On={}));var us,cs=function(e,t){var r=e.createElement(\"iframe\");return r.className=\"html2canvas-container\",r.style.visibility=\"hidden\",r.style.position=\"fixed\",r.style.left=\"-10000px\",r.style.top=\"0px\",r.style.border=\"0\",r.width=t.width.toString(),r.height=t.height.toString(),r.scrolling=\"no\",r.setAttribute(as,\"true\"),e.body.appendChild(r),r},ls=function(e){return new Promise((function(t,r){var n=e.contentWindow;if(!n)return r(\"No window assigned for iframe\");var o=n.document;n.onload=e.onload=o.onreadystatechange=function(){n.onload=e.onload=o.onreadystatechange=null;var r=setInterval((function(){o.body.childNodes.length>0&&\"complete\"===o.readyState&&(clearInterval(r),t(e))}),50)}}))},ds=function(e,t){for(var r=e.length-1;r>=0;r--){var n=e.item(r);\"content\"!==n&&t.style.setProperty(n,e.getPropertyValue(n))}return t},fs=function(e){var t=\"\";return e&&(t+=\"<!DOCTYPE \",e.name&&(t+=e.name),e.internalSubset&&(t+=e.internalSubset),e.publicId&&(t+=",
+  "ctx": "n(e){return-1===e.indexOf(\" \")?e:\"'\"+e+\""
+ },
+ "js_002": {
+  "t": "2026-07-17 · 생각에 관한 생각",
+  "ctx": "=app&utm_campaign=thinking\",   edition: "
+ },
+ "js_003": {
+  "t": "저자",
+  "ctx": "nst QUESTIONS = [   {id:1, level:1, tag:"
+ },
+ "js_004": {
+  "t": "『생각에 관한 생각』을 쓴 사람은 누구일까요?",
+  "ctx": "TIONS = [   {id:1, level:1, tag:\"저자\", q:"
+ },
+ "js_005": {
+  "t": "대니얼 카너먼",
+  "ctx": "에 관한 생각』을 쓴 사람은 누구일까요?\",    options:[{t:"
+ },
+ "js_006": {
+  "t": "세계적 경영학자 피터 드러커",
+  "ctx": "\",    options:[{t:\"대니얼 카너먼\",ok:true},{t:"
+ },
+ "js_007": {
+  "t": "진화생물학자 리처드 도킨스",
+  "ctx": " 카너먼\",ok:true},{t:\"세계적 경영학자 피터 드러커\"},{t:"
+ },
+ "js_008": {
+  "t": "베스트셀러 작가 맬컴 글래드웰",
+  "ctx": "적 경영학자 피터 드러커\"},{t:\"진화생물학자 리처드 도킨스\"},{t:"
+ },
+ "js_009": {
+  "t": "<b>대니얼 카너먼</b>은 심리학자이면서 2002년 <b>노벨 경제학상</b>을 받은 행동경제학의 아버지입니다.",
+  "ctx": "드 도킨스\"},{t:\"베스트셀러 작가 맬컴 글래드웰\"}],    ctx:"
+ },
+ "js_010": {
+  "t": "수상",
+  "ctx": "행동경제학의 아버지입니다.\"},   {id:2, level:1, tag:"
+ },
+ "js_011": {
+  "t": "카너먼이 2002년에 받은 상은 무엇일까요?",
+  "ctx": "버지입니다.\"},   {id:2, level:1, tag:\"수상\", q:"
+ },
+ "js_012": {
+  "t": "노벨 경제학상",
+  "ctx": "먼이 2002년에 받은 상은 무엇일까요?\",    options:[{t:"
+ },
+ "js_013": {
+  "t": "심리학 공로로 받은 노벨 생리의학상",
+  "ctx": "\",    options:[{t:\"노벨 경제학상\",ok:true},{t:"
+ },
+ "js_014": {
+  "t": "문학에 주어지는 노벨 문학상",
+  "ctx": "\",ok:true},{t:\"심리학 공로로 받은 노벨 생리의학상\"},{t:"
+ },
+ "js_015": {
+  "t": "수학계 최고 영예인 필즈상",
+  "ctx": " 받은 노벨 생리의학상\"},{t:\"문학에 주어지는 노벨 문학상\"},{t:"
+ },
+ "js_016": {
+  "t": "심리학자가 <b>노벨 경제학상</b>을 받은 건 이례적인 일. 인간의 <b>비합리적 판단</b>을 밝힌 공로였습니다.",
+  "ctx": " 노벨 문학상\"},{t:\"수학계 최고 영예인 필즈상\"}],    ctx:"
+ },
+ "js_017": {
+  "t": "두 시스템",
+  "ctx": "b>을 밝힌 공로였습니다.\"},   {id:3, level:1, tag:"
+ },
+ "js_018": {
+  "t": "이 책이 인간의 사고를 나누는 두 축은 무엇일까요?",
+  "ctx": "니다.\"},   {id:3, level:1, tag:\"두 시스템\", q:"
+ },
+ "js_019": {
+  "t": "빠른 시스템 1과 느린 시스템 2",
+  "ctx": "간의 사고를 나누는 두 축은 무엇일까요?\",    options:[{t:"
+ },
+ "js_020": {
+  "t": "좌뇌와 우뇌",
+  "ctx": "ns:[{t:\"빠른 시스템 1과 느린 시스템 2\",ok:true},{t:"
+ },
+ "js_021": {
+  "t": "의식과 무의식",
+  "ctx": "템 1과 느린 시스템 2\",ok:true},{t:\"좌뇌와 우뇌\"},{t:"
+ },
+ "js_022": {
+  "t": "감성과 이성",
+  "ctx": ",ok:true},{t:\"좌뇌와 우뇌\"},{t:\"의식과 무의식\"},{t:"
+ },
+ "js_023": {
+  "t": "카너먼은 마음을 <b>시스템 1(빠른 생각)</b>과 <b>시스템 2(느린 생각)</b>라는 두 등장인물로 설명합니다.",
+  "ctx": "뇌\"},{t:\"의식과 무의식\"},{t:\"감성과 이성\"}],    ctx:"
+ },
+ "js_024": {
+  "t": "시스템 1",
+  "ctx": "두 등장인물로 설명합니다.\"},   {id:4, level:1, tag:"
+ },
+ "js_025": {
+  "t": "저절로 빠르게 작동하며 힘이 거의 들지 않는 사고는?",
+  "ctx": "니다.\"},   {id:4, level:1, tag:\"시스템 1\", q:"
+ },
+ "js_026": {
+  "t": "곰곰이 따져 보는 시스템 2",
+  "ctx": "는?\",    options:[{t:\"시스템 1\",ok:true},{t:"
+ },
+ "js_027": {
+  "t": "규칙을 검산하는 시스템 3",
+  "ctx": "스템 1\",ok:true},{t:\"곰곰이 따져 보는 시스템 2\"},{t:"
+ },
+ "js_028": {
+  "t": "감정을 억누르는 시스템 0",
+  "ctx": "이 따져 보는 시스템 2\"},{t:\"규칙을 검산하는 시스템 3\"},{t:"
+ },
+ "js_029": {
+  "t": "<b>시스템 1</b>은 자동으로 즉각 반응합니다. 2 더하기 2를 보면 곧바로 4가 떠오르듯이요.",
+  "ctx": "는 시스템 3\"},{t:\"감정을 억누르는 시스템 0\"}],    ctx:"
+ },
+ "js_030": {
+  "t": "시스템 2",
+  "ctx": "곧바로 4가 떠오르듯이요.\"},   {id:5, level:1, tag:"
+ },
+ "js_031": {
+  "t": "집중과 노력이 필요한 복잡한 계산을 맡는 사고는?",
+  "ctx": "이요.\"},   {id:5, level:1, tag:\"시스템 2\", q:"
+ },
+ "js_032": {
+  "t": "저절로 튀어나오는 시스템 1",
+  "ctx": "는?\",    options:[{t:\"시스템 2\",ok:true},{t:"
+ },
+ "js_033": {
+  "t": "본능에 가까운 시스템 0",
+  "ctx": "스템 2\",ok:true},{t:\"저절로 튀어나오는 시스템 1\"},{t:"
+ },
+ "js_034": {
+  "t": "꿈을 꾸는 무의식 시스템 3",
+  "ctx": "절로 튀어나오는 시스템 1\"},{t:\"본능에 가까운 시스템 0\"},{t:"
+ },
+ "js_035": {
+  "t": "<b>시스템 2</b>는 17 곱하기 24 같은 계산처럼 <b>주의와 노력</b>이 드는 일을 맡습니다. 좀 게으른 게 흠이죠.",
+  "ctx": " 시스템 0\"},{t:\"꿈을 꾸는 무의식 시스템 3\"}],    ctx:"
+ },
+ "js_036": {
+  "t": "게으른 시스템 2",
+  "ctx": ". 좀 게으른 게 흠이죠.\"},   {id:6, level:1, tag:"
+ },
+ "js_037": {
+  "t": "카너먼이 시스템 2를 두고 지적한 성격에 가장 가까운 것은?",
+  "ctx": "},   {id:6, level:1, tag:\"게으른 시스템 2\", q:"
+ },
+ "js_038": {
+  "t": "웬만하면 시스템 1의 답을 그냥 승인하는 게으름뱅이",
+  "ctx": " 두고 지적한 성격에 가장 가까운 것은?\",    options:[{t:"
+ },
+ "js_039": {
+  "t": "늘 부지런히 검산하는 감시자",
+  "ctx": "하면 시스템 1의 답을 그냥 승인하는 게으름뱅이\",ok:true},{t:"
+ },
+ "js_040": {
+  "t": "실수를 모르는 완벽한 계산기",
+  "ctx": "으름뱅이\",ok:true},{t:\"늘 부지런히 검산하는 감시자\"},{t:"
+ },
+ "js_041": {
+  "t": "감정에 휘둘리는 변덕쟁이",
+  "ctx": "지런히 검산하는 감시자\"},{t:\"실수를 모르는 완벽한 계산기\"},{t:"
+ },
+ "js_042": {
+  "t": "시스템 2는 힘든 걸 싫어해 대개 시스템 1의 답을 <b>그냥 통과</b>시킵니다. 그 틈으로 편향이 새어 들죠.",
+  "ctx": " 완벽한 계산기\"},{t:\"감정에 휘둘리는 변덕쟁이\"}],    ctx:"
+ },
+ "js_043": {
+  "t": "보이는 정보만으로 성급히 결론짓는 시스템 1의 경향을 뭐라 부를까요?",
+  "ctx": ".\"},   {id:7, level:1, tag:\"WYSIATI\", q:"
+ },
+ "js_044": {
+  "t": "본 것이 전부다",
+  "ctx": "짓는 시스템 1의 경향을 뭐라 부를까요?\",    options:[{t:"
+ },
+ "js_045": {
+  "t": "아는 만큼만 보인다는 태도",
+  "ctx": ",    options:[{t:\"본 것이 전부다\",ok:true},{t:"
+ },
+ "js_046": {
+  "t": "모르는 것이 약이라는 생각",
+  "ctx": "이 전부다\",ok:true},{t:\"아는 만큼만 보인다는 태도\"},{t:"
+ },
+ "js_047": {
+  "t": "백문이 불여일견이라는 믿음",
+  "ctx": "는 만큼만 보인다는 태도\"},{t:\"모르는 것이 약이라는 생각\"},{t:"
+ },
+ "js_048": {
+  "t": "<b>WYSIATI</b>(본 것이 전부다). 시스템 1은 없는 정보는 무시하고 <b>있는 것만으로</b> 이야기를 짓습니다.",
+  "ctx": "약이라는 생각\"},{t:\"백문이 불여일견이라는 믿음\"}],    ctx:"
+ },
+ "js_049": {
+  "t": "인지적 편안함",
+  "ctx": "/b> 이야기를 짓습니다.\"},   {id:8, level:1, tag:"
+ },
+ "js_050": {
+  "t": "익숙하고 쉽게 읽히는 정보를 우리가 더 잘 믿는 현상은?",
+  "ctx": ".\"},   {id:8, level:1, tag:\"인지적 편안함\", q:"
+ },
+ "js_051": {
+  "t": "낯설수록 더 신뢰하는 경향",
+  "ctx": "\",    options:[{t:\"인지적 편안함\",ok:true},{t:"
+ },
+ "js_052": {
+  "t": "어려울수록 진실이라는 믿음",
+  "ctx": "적 편안함\",ok:true},{t:\"낯설수록 더 신뢰하는 경향\"},{t:"
+ },
+ "js_053": {
+  "t": "정보가 많을수록 정확하다는 착각",
+  "ctx": "설수록 더 신뢰하는 경향\"},{t:\"어려울수록 진실이라는 믿음\"},{t:"
+ },
+ "js_054": {
+  "t": "익숙하고 또렷한 문장은 <b>인지적 편안함</b> 때문에 더 진실처럼 느껴집니다. 익숙함은 진실이 아니에요.",
+  "ctx": "는 믿음\"},{t:\"정보가 많을수록 정확하다는 착각\"}],    ctx:"
+ },
+ "js_055": {
+  "t": "앵커링",
+  "ctx": "익숙함은 진실이 아니에요.\"},   {id:9, level:1, tag:"
+ },
+ "js_056": {
+  "t": "처음 본 숫자가 이후의 판단을 끌어당기는 현상은?",
+  "ctx": "아니에요.\"},   {id:9, level:1, tag:\"앵커링\", q:"
+ },
+ "js_057": {
+  "t": "기준점 효과",
+  "ctx": "숫자가 이후의 판단을 끌어당기는 현상은?\",    options:[{t:"
+ },
+ "js_058": {
+  "t": "후광이 번지는 효과",
+  "ctx": "?\",    options:[{t:\"기준점 효과\",ok:true},{t:"
+ },
+ "js_059": {
+  "t": "다수를 따르는 밴드왜건 효과",
+  "ctx": "t:\"기준점 효과\",ok:true},{t:\"후광이 번지는 효과\"},{t:"
+ },
+ "js_060": {
+  "t": "나중 정보에 끌리는 최신 효과",
+  "ctx": ":\"후광이 번지는 효과\"},{t:\"다수를 따르는 밴드왜건 효과\"},{t:"
+ },
+ "js_061": {
+  "t": "<b>앵커링(기준점 효과)</b>. 터무니없는 숫자라도 먼저 보면 우리의 추정치가 그 <b>근처에 머뭅니다.</b>",
+  "ctx": "왜건 효과\"},{t:\"나중 정보에 끌리는 최신 효과\"}],    ctx:"
+ },
+ "js_062": {
+  "t": "가용성",
+  "ctx": "근처에 머뭅니다.</b>\"},   {id:10, level:1, tag:"
+ },
+ "js_063": {
+  "t": "쉽게 떠오르는 사례로 확률을 어림하는 지름길은?",
+  "ctx": "</b>\"},   {id:10, level:1, tag:\"가용성\", q:"
+ },
+ "js_064": {
+  "t": "가용성 어림짐작",
+  "ctx": "오르는 사례로 확률을 어림하는 지름길은?\",    options:[{t:"
+ },
+ "js_065": {
+  "t": "대표성에 기대는 어림짐작",
+  "ctx": ",    options:[{t:\"가용성 어림짐작\",ok:true},{t:"
+ },
+ "js_066": {
+  "t": "첫 숫자에 매달리는 어림짐작",
+  "ctx": "성 어림짐작\",ok:true},{t:\"대표성에 기대는 어림짐작\"},{t:"
+ },
+ "js_067": {
+  "t": "감정이 앞서는 어림짐작",
+  "ctx": "표성에 기대는 어림짐작\"},{t:\"첫 숫자에 매달리는 어림짐작\"},{t:"
+ },
+ "js_068": {
+  "t": "<b>가용성 휴리스틱</b>. 생생한 사고 뉴스를 접하면 실제보다 그 위험을 <b>크게 느낍니다.</b>",
+  "ctx": "매달리는 어림짐작\"},{t:\"감정이 앞서는 어림짐작\"}],    ctx:"
+ },
+ "js_069": {
+  "t": "알라딘 「생각에 관한 생각」 도서정보",
+  "ctx": "*/ const SOURCES = {   ko:       {label:"
+ },
+ "js_070": {
+  "t": "나무위키 「생각에 관한 생각」",
+  "ctx": "?ItemId=140135544\"},   namu:     {label:"
+ },
+ "js_071": {
+  "t": "Wikipedia 「Dual process theory」(시스템 1·2)",
+  "ctx": "i/Daniel_Kahneman\"},   dual:     {label:"
+ },
+ "js_072": {
+  "t": "Wikipedia 「Prospect theory」(전망 이론)",
+  "ctx": "al_process_theory\"},   prospect: {label:"
+ },
+ "js_073": {
+  "t": "Wikipedia 「Anchoring effect」(기준점 효과)",
+  "ctx": "i/Prospect_theory\"},   anchor:   {label:"
+ },
+ "js_074": {
+  "t": "Talks at Google · 대니얼 카너먼 강연",
+  "ctx": "/Anchoring_effect\"},   ebs:      {label:"
+ },
+ "js_075": {
+  "t": "카너먼은 동료 아모스 트버스키와 함께 인간 판단의 오류를 연구했어요. 트버스키가 먼저 세상을 떠나 노벨상은 카너먼이 단독 수상했습니다.",
+  "ctx": "const EXTRA = {   1:{src:\"author\", note:"
+ },
+ "js_076": {
+  "t": "심리학자가 경제학상을 받은 건, 인간이 늘 합리적이라는 경제학의 전제를 실험으로 흔들었기 때문입니다.",
+  "ctx": "너먼이 단독 수상했습니다.\"},   2:{src:\"book\", note:"
+ },
+ "js_077": {
+  "t": "시스템 1·2는 실제 뇌의 두 부위가 아니라, 이해를 돕는 <b>비유적 등장인물</b>이에요. 이 틀 하나로 책 전체가 꿰집니다.",
+  "ctx": "으로 흔들었기 때문입니다.\"},   3:{src:\"dual\", note:"
+ },
+ "js_078": {
+  "t": "무서운 사진에 흠칫하거나 쉬운 덧셈이 바로 떠오르는 것 모두 시스템 1. 끄고 싶어도 꺼지지 않습니다.",
+  "ctx": "나로 책 전체가 꿰집니다.\"},   4:{src:\"dual\", note:"
+ },
+ "js_079": {
+  "t": "시스템 2는 용량이 작아요. 걸으며 어려운 곱셈을 하면 발걸음이 멈추는 것도 그래서입니다.",
+  "ctx": " 싶어도 꺼지지 않습니다.\"},   5:{src:\"dual\", note:"
+ },
+ "js_080": {
+  "t": "시스템 2가 게으른 게 문제의 핵심. 검산해야 할 때조차 시스템 1의 직감을 그냥 믿어 버립니다.",
+  "ctx": "멈추는 것도 그래서입니다.\"},   6:{src:\"dual\", note:"
+ },
+ "js_081": {
+  "t": "WYSIATI는 자신감의 근원이자 편향의 근원. 정보가 적을수록 오히려 이야기가 매끄러워 더 확신하게 됩니다.",
+  "ctx": "감을 그냥 믿어 버립니다.\"},   7:{src:\"book\", note:"
+ },
+ "js_082": {
+  "t": "또렷한 글씨, 반복된 문구, 운율 있는 문장일수록 더 진실처럼 느껴져요. 광고가 반복되는 이유죠.",
+  "ctx": "러워 더 확신하게 됩니다.\"},   8:{src:\"book\", note:"
+ },
+ "js_083": {
+  "t": "판사에게 주사위를 굴리게 한 뒤 형량을 물으면, 나온 숫자에 판결이 끌렸다는 실험도 있습니다. 앵커링은 그만큼 셉니다.",
+  "ctx": "고가 반복되는 이유죠.\"},   9:{src:\"anchor\", note:"
+ },
+ "js_084": {
+  "t": "가용성은 최근성·생생함에 휘둘려요. 이혼 뉴스가 많으면 이혼율을 실제보다 높게 어림합니다.",
+  "ctx": "앵커링은 그만큼 셉니다.\"},   10:{src:\"book\", note:"
+ },
+ "js_085": {
+  "t": "어림짐작",
+  "ctx": "{at:0,  label:\"두 시스템\"},   {at:6,  label:"
+ },
+ "js_086": {
+  "t": "편향의 덫",
+  "ctx": " {at:6,  label:\"어림짐작\"},   {at:12, label:"
+ },
+ "js_087": {
+  "t": "선택의 심리",
+  "ctx": "{at:12, label:\"편향의 덫\"},   {at:18, label:"
+ },
+ "js_088": {
+  "t": "두 자아",
+  "ctx": "at:18, label:\"선택의 심리\"},   {at:24, label:"
+ },
+ "js_089": {
+  "t": "생각 마스터",
+  "ctx": " {at:24, label:\"두 자아\"},   {at:30, label:"
+ },
+ "js_090": {
+  "t": "보통",
+  "ctx": "]; const DIFF_LABEL = {1:[\"쉬움\",\"l1\"],2:["
+ },
+ "js_091": {
+  "t": "어려움",
+  "ctx": "LABEL = {1:[\"쉬움\",\"l1\"],2:[\"보통\",\"l2\"],3:["
+ },
+ "js_092": {
+  "t": "· 복습",
+  "ctx": "ds.size+' / '+TOTAL_Q + (attempts[id] ? "
+ },
+ "js_093": {
+  "t": "🎯 정답!",
+  "ctx": ")      verdict.textContent = firstTry ? "
+ },
+ "js_094": {
+  "t": "✅ 이제 익혔어요!",
+  "ctx": "dict.textContent = firstTry ? '🎯 정답!' : "
+ },
+ "js_095": {
+  "t": "❌ 다시 도전!",
+  "ctx": "ing.push(id);     verdict.textContent = "
+ },
+ "js_096": {
+  "t": "↻ 이 문제는 뒤에서 다시 나옵니다",
+  "ctx": "getElementById('requeue').textContent = "
+ },
+ "js_097": {
+  "t": "시스템 1과 시스템 2",
+  "ctx": "==== */ const CONCEPTS = [   {ic:\"🧠\", h:"
+ },
+ "js_098": {
+  "t": "마음엔 빠르고 자동적인 시스템 1과 느리고 노력이 드는 시스템 2가 있습니다. 이 책의 대전제예요.",
+  "ctx": "EPTS = [   {ic:\"🧠\", h:\"시스템 1과 시스템 2\", p:"
+ },
+ "js_099": {
+  "t": "본 것이 전부다 (WYSIATI)",
+  "ctx": "이 책의 대전제예요.\", src:\"dual\"},   {ic:\"👀\", h:"
+ },
+ "js_100": {
+  "t": "시스템 1은 없는 정보는 무시하고 있는 정보만으로 매끄러운 이야기를 지어내 과신하게 만듭니다.",
+  "ctx": "},   {ic:\"👀\", h:\"본 것이 전부다 (WYSIATI)\", p:"
+ },
+ "js_101": {
+  "t": "앵커링(기준점 효과)",
+  "ctx": " 과신하게 만듭니다.\", src:\"book\"},   {ic:\"⚓\", h:"
+ },
+ "js_102": {
+  "t": "먼저 본 숫자가 뒤이은 추정을 끌어당깁니다. 무관한 숫자마저 판단을 움직이는 강력한 편향이에요.",
+  "ctx": ":\"book\"},   {ic:\"⚓\", h:\"앵커링(기준점 효과)\", p:"
+ },
+ "js_103": {
+  "t": "가용성·대표성 어림짐작",
+  "ctx": "력한 편향이에요.\", src:\"anchor\"},   {ic:\"🔦\", h:"
+ },
+ "js_104": {
+  "t": "쉽게 떠오르거나 전형적으로 보이면 확률을 잘못 어림합니다. 편리한 지름길이 편향을 낳습니다.",
+  "ctx": "nchor\"},   {ic:\"🔦\", h:\"가용성·대표성 어림짐작\", p:"
+ },
+ "js_105": {
+  "t": "평균으로의 회귀",
+  "ctx": "이 편향을 낳습니다.\", src:\"book\"},   {ic:\"📉\", h:"
+ },
+ "js_106": {
+  "t": "극단 뒤엔 평범이 따라옵니다. 이를 모르면 없는 인과(칭찬·벌의 효과 등)를 지어내게 됩니다.",
+  "ctx": "src:\"book\"},   {ic:\"📉\", h:\"평균으로의 회귀\", p:"
+ },
+ "js_107": {
+  "t": "손실 회피와 전망 이론",
+  "ctx": "를 지어내게 됩니다.\", src:\"book\"},   {ic:\"💔\", h:"
+ },
+ "js_108": {
+  "t": "같은 크기라도 잃는 고통이 얻는 기쁨보다 큽니다. 전망 이론은 이 비대칭을 그래프로 담았어요.",
+  "ctx": "\"book\"},   {ic:\"💔\", h:\"손실 회피와 전망 이론\", p:"
+ },
+ "js_109": {
+  "t": "프레이밍과 소유 효과",
+  "ctx": " 담았어요.\", src:\"prospect\"},   {ic:\"🖼️\", h:"
+ },
+ "js_110": {
+  "t": "같은 사실도 표현의 틀에 따라, 내 것이 되는 순간에 따라 가치 판단이 달라집니다.",
+  "ctx": "spect\"},   {ic:\"🖼️\", h:\"프레이밍과 소유 효과\", p:"
+ },
+ "js_111": {
+  "t": "경험 자아 vs 기억 자아",
+  "ctx": "달라집니다.\", src:\"prospect\"},   {ic:\"🎞️\", h:"
+ },
+ "js_112": {
+  "t": "순간을 사는 자아와 이야기를 기억하는 자아는 다릅니다. 정점-종점 법칙이 기억을 좌우해요.",
+  "ctx": "ct\"},   {ic:\"🎞️\", h:\"경험 자아 vs 기억 자아\", p:"
+ },
+ "js_113": {
+  "t": "1부",
+  "ctx": "/* 목차(클릭하면 요약 오픈) */ const TOC = [   {n:"
+ },
+ "js_114": {
+  "t": "마음엔 두 등장인물이 있습니다. 빠르고 자동적인 시스템 1, 느리고 노력이 드는 시스템 2.",
+  "ctx": ":\"1부\", t:\"두 시스템\", beats:[     {e:\"🧠\", x:"
+ },
+ "js_115": {
+  "t": "시스템 1은 인상·직관을 끊임없이 만들어 내고, 시스템 2는 대개 그걸 그냥 승인합니다.",
+  "ctx": "템 1, 느리고 노력이 드는 시스템 2.\"},     {e:\"⚡\", x:"
+ },
+ "js_116": {
+  "t": "시스템 2는 용량이 작고 게을러요. 그래서 자기 통제와 집중은 쉽게 바닥납니다.",
+  "ctx": "시스템 2는 대개 그걸 그냥 승인합니다.\"},     {e:\"🔋\", x:"
+ },
+ "js_117": {
+  "t": "WYSIATI: 시스템 1은 있는 정보만으로 이야기를 지어 과도한 확신을 낳습니다.",
+  "ctx": "서 자기 통제와 집중은 쉽게 바닥납니다.\"},     {e:\"👀\", x:"
+ },
+ "js_118": {
+  "t": "인지적 편안함·연상 작용·점화가 우리도 모르게 판단의 밑그림을 그립니다.",
+  "ctx": " 이야기를 지어 과도한 확신을 낳습니다.\"},     {e:\"🧩\", x:"
+ },
+ "js_119": {
+  "t": "2부",
+  "ctx": "화가 우리도 모르게 판단의 밑그림을 그립니다.\"},   ]},   {n:"
+ },
+ "js_120": {
+  "t": "어림짐작과 편향",
+  "ctx": "르게 판단의 밑그림을 그립니다.\"},   ]},   {n:\"2부\", t:"
+ },
+ "js_121": {
+  "t": "앵커링: 먼저 본 숫자가 이후 추정을 끌어당깁니다. 무관한 숫자마저요.",
+  "ctx": "부\", t:\"어림짐작과 편향\", beats:[     {e:\"⚓\", x:"
+ },
+ "js_122": {
+  "t": "가용성: 쉽게 떠오르는 사례로 확률을 어림하다 위험을 과대·과소평가합니다.",
+  "ctx": "추정을 끌어당깁니다. 무관한 숫자마저요.\"},     {e:\"🔦\", x:"
+ },
+ "js_123": {
+  "t": "대표성: 전형적 이미지에 맞으면 기저율을 무시하고 단정합니다(린다 문제).",
+  "ctx": "어림하다 위험을 과대·과소평가합니다.\"},     {e:\"🧑‍🔬\", x:"
+ },
+ "js_124": {
+  "t": "평균 회귀와 작은 수의 법칙: 우연을 인과로 착각하는 함정.",
+  "ctx": "저율을 무시하고 단정합니다(린다 문제).\"},     {e:\"📉\", x:"
+ },
+ "js_125": {
+  "t": "결론: 우리는 확률이 아니라 그럴듯한 이야기로 판단합니다.",
+  "ctx": "의 법칙: 우연을 인과로 착각하는 함정.\"},     {e:\"🎯\", x:"
+ },
+ "js_126": {
+  "t": "3부",
+  "ctx": " 확률이 아니라 그럴듯한 이야기로 판단합니다.\"},   ]},   {n:"
+ },
+ "js_127": {
+  "t": "과신",
+  "ctx": " 그럴듯한 이야기로 판단합니다.\"},   ]},   {n:\"3부\", t:"
+ },
+ "js_128": {
+  "t": "서사 오류: 과거를 매끄러운 이야기로 정리하며 세상을 실제보다 이해했다고 믿습니다.",
+  "ctx": " {n:\"3부\", t:\"과신\", beats:[     {e:\"📖\", x:"
+ },
+ "js_129": {
+  "t": "타당성 착각: 근거가 빈약해도 확신에 찬 예측을 내놓습니다.",
+  "ctx": "며 세상을 실제보다 이해했다고 믿습니다.\"},     {e:\"🔮\", x:"
+ },
+ "js_130": {
+  "t": "단순 공식이 전문가 직관을 이기는 경우가 많아요. 일관성이 힘입니다.",
+  "ctx": " 빈약해도 확신에 찬 예측을 내놓습니다.\"},     {e:\"🤖\", x:"
+ },
+ "js_131": {
+  "t": "믿을 만한 직관의 조건: 규칙적 환경 + 충분한 피드백 학습.",
+  "ctx": "기는 경우가 많아요. 일관성이 힘입니다.\"},     {e:\"🧯\", x:"
+ },
+ "js_132": {
+  "t": "계획 오류·낙관 편향: 일정과 성공 가능성을 습관적으로 과대평가합니다.",
+  "ctx": " 규칙적 환경 + 충분한 피드백 학습.\"},     {e:\"🏗️\", x:"
+ },
+ "js_133": {
+  "t": "4부",
+  "ctx": "정과 성공 가능성을 습관적으로 과대평가합니다.\"},   ]},   {n:"
+ },
+ "js_134": {
+  "t": "선택",
+  "ctx": "성을 습관적으로 과대평가합니다.\"},   ]},   {n:\"4부\", t:"
+ },
+ "js_135": {
+  "t": "베르누이의 오류: 기대효용 이론은 실제 인간의 선택을 설명하지 못합니다.",
+  "ctx": " {n:\"4부\", t:\"선택\", beats:[     {e:\"🎲\", x:"
+ },
+ "js_136": {
+  "t": "전망 이론: 기준점을 두고, 손실을 이득보다 크게 느낍니다(손실 회피).",
+  "ctx": " 실제 인간의 선택을 설명하지 못합니다.\"},     {e:\"💔\", x:"
+ },
+ "js_137": {
+  "t": "소유 효과: 내 것이 되는 순간 가치가 뛰어 팔 값과 살 값이 벌어집니다.",
+  "ctx": "을 이득보다 크게 느낍니다(손실 회피).\"},     {e:\"☕\", x:"
+ },
+ "js_138": {
+  "t": "네 갈래 유형: 확실한 손실 앞에선 오히려 도박을, 작은 확률엔 복권과 보험을.",
+  "ctx": "치가 뛰어 팔 값과 살 값이 벌어집니다.\"},     {e:\"🃏\", x:"
+ },
+ "js_139": {
+  "t": "프레이밍: 같은 사실도 이득 틀·손실 틀에 따라 선택이 뒤집힙니다.",
+  "ctx": " 도박을, 작은 확률엔 복권과 보험을.\"},     {e:\"🖼️\", x:"
+ },
+ "js_140": {
+  "t": "5부",
+  "ctx": " 이득 틀·손실 틀에 따라 선택이 뒤집힙니다.\"},   ]},   {n:"
+ },
+ "js_141": {
+  "t": "경험 자아는 순간을 살고, 기억 자아는 나중에 이야기를 씁니다.",
+  "ctx": ":\"5부\", t:\"두 자아\", beats:[     {e:\"🎞️\", x:"
+ },
+ "js_142": {
+  "t": "정점-종점 법칙: 고통의 기억은 가장 아팠던 순간과 마지막 느낌으로 정해집니다.",
+  "ctx": ", 기억 자아는 나중에 이야기를 씁니다.\"},     {e:\"🏥\", x:"
+ },
+ "js_143": {
+  "t": "지속시간 무시: 얼마나 오래였는지는 기억에 거의 반영되지 않습니다.",
+  "ctx": "팠던 순간과 마지막 느낌으로 정해집니다.\"},     {e:\"⏳\", x:"
+ },
+ "js_144": {
+  "t": "초점 착각: 무엇이든 생각하는 순간엔 그 중요성이 과대평가됩니다.",
+  "ctx": "였는지는 기억에 거의 반영되지 않습니다.\"},     {e:\"🌴\", x:"
+ },
+ "js_145": {
+  "t": "결론: 편향을 완전히 없앨 순 없어도, 알아차리면 더 나은 판단에 다가섭니다.",
+  "ctx": "하는 순간엔 그 중요성이 과대평가됩니다.\"},     {e:\"🧭\", x:"
+ },
+ "js_146": {
+  "t": "방망이와 공 문제",
+  "ctx": "해볼 사례 3 */ const CASES = [   {ic:\"🏏\", t:"
+ },
+ "js_147": {
+  "t": "방망이와 공이 합쳐서 1달러 10센트, 방망이가 공보다 1달러 비싸다면 공은 얼마일까요. 많은 사람이 반사적으로 10센트라 답하지만 정답은 5센트입니다. 시스템 1이 내놓은 답을 시스템 2가 검산하지 않고 통과시킨 것이죠.",
+  "ctx": "t CASES = [   {ic:\"🏏\", t:\"방망이와 공 문제\", d:"
+ },
+ "js_148": {
+  "t": "똑똑한 사람도 걸려드는 이 단순한 문제가, 우리의 게으른 시스템 2를 가장 선명하게 보여 줍니다.",
+  "ctx": "이 내놓은 답을 시스템 2가 검산하지 않고 통과시킨 것이죠.\", why:"
+ },
+ "js_149": {
+  "t": "린다 문제 (결합 오류)",
+  "ctx": "스템 2를 가장 선명하게 보여 줍니다.\"},   {ic:\"🧑‍💼\", t:"
+ },
+ "js_150": {
+  "t": "철학을 전공하고 사회 정의에 관심이 많던 린다는, 그냥 은행원일까요 아니면 페미니스트 은행원일까요. 대다수가 후자를 택하지만, 조건이 붙을수록 확률은 낮아지므로 논리적으로 틀린 답입니다.",
+  "ctx": "다.\"},   {ic:\"🧑‍💼\", t:\"린다 문제 (결합 오류)\", d:"
+ },
+ "js_151": {
+  "t": "그럴듯한 이야기가 확률의 법칙을 이겨 버리는 순간을, 실험으로 또렷하게 잡아낸 사례입니다.",
+  "ctx": "조건이 붙을수록 확률은 낮아지므로 논리적으로 틀린 답입니다.\", why:"
+ },
+ "js_152": {
+  "t": "대장내시경 기억 실험",
+  "ctx": "을, 실험으로 또렷하게 잡아낸 사례입니다.\"},   {ic:\"🏥\", t:"
+ },
+ "js_153": {
+  "t": "검사 막바지의 통증을 살짝 남긴 채 시간을 조금 더 늘린 환자들이, 짧지만 아프게 끝난 환자들보다 검사를 덜 고통스럽게 기억했습니다. 전체 고통의 양보다 정점과 끝이 기억을 지배한 것이죠.",
+  "ctx": "사례입니다.\"},   {ic:\"🏥\", t:\"대장내시경 기억 실험\", d:"
+ },
+ "js_154": {
+  "t": "경험 자아와 기억 자아가 어긋난다는 것을, 그리고 정점-종점 법칙을 증명한 대표 실험입니다.",
+  "ctx": "다. 전체 고통의 양보다 정점과 끝이 기억을 지배한 것이죠.\", why:"
+ },
+ "js_155": {
+  "t": "나는 내 직관을 어디까지 믿어도 될까? 그 분야는 규칙적이고, 나는 충분한 피드백을 받아 왔는가?",
+  "ctx": "책이 우리에게 던지는 질문 3 */ const ASKS = [   {q:"
+ },
+ "js_156": {
+  "t": "직관이 통하는 영역(체스·응급)과 통하지 않는 영역(주식·정치 예측)을 구분해 보세요.",
+  "ctx": "까? 그 분야는 규칙적이고, 나는 충분한 피드백을 받아 왔는가?\", h:"
+ },
+ "js_157": {
+  "t": "나는 손실 회피 때문에 이미 끝난 무언가를 붙잡고 있지는 않은가?",
+  "ctx": "과 통하지 않는 영역(주식·정치 예측)을 구분해 보세요.\"},   {q:"
+ },
+ "js_158": {
+  "t": "매몰 비용과 소유 효과를 떠올리며, 지금 새로 시작한다면 같은 선택을 할지 물어보세요.",
+  "ctx": "는 손실 회피 때문에 이미 끝난 무언가를 붙잡고 있지는 않은가?\", h:"
+ },
+ "js_159": {
+  "t": "나는 경험 자아를 위해 사는가, 기억 자아를 위해 사는가?",
+  "ctx": "며, 지금 새로 시작한다면 같은 선택을 할지 물어보세요.\"},   {q:"
+ },
+ "js_160": {
+  "t": "사진을 남기려다 순간을 놓친 적은 없는지, 무엇이 진짜 나를 행복하게 하는지 돌아보세요.",
+  "ctx": "q:\"나는 경험 자아를 위해 사는가, 기억 자아를 위해 사는가?\", h:"
+ },
+ "js_161": {
+  "t": "🧠 생각의 지배자",
+  "ctx": ");   let rank, sub;   if(acc>=90){ rank="
+ },
+ "js_162": {
+  "t": "카너먼의 통찰을 완벽히 꿰뚫었습니다",
+  "ctx": "b;   if(acc>=90){ rank='🧠 생각의 지배자'; sub="
+ },
+ "js_163": {
+  "t": "🔍 편향 사냥꾼",
+  "ctx": "완벽히 꿰뚫었습니다'; }   else if(acc>=75){ rank="
+ },
+ "js_164": {
+  "t": "핵심 논리를 거의 다 잡았어요",
+  "ctx": " else if(acc>=75){ rank='🔍 편향 사냥꾼'; sub="
+ },
+ "js_165": {
+  "t": "🌱 메타인지 견습생",
+  "ctx": " 거의 다 잡았어요'; }   else if(acc>=55){ rank="
+ },
+ "js_166": {
+  "t": "뼈대를 익혔습니다 — 한 번 더!",
+  "ctx": "lse if(acc>=55){ rank='🌱 메타인지 견습생'; sub="
+ },
+ "js_167": {
+  "t": "🐣 직관 여행자",
+  "ctx": "b='뼈대를 익혔습니다 — 한 번 더!'; }   else { rank="
+ },
+ "js_168": {
+  "t": "반복할수록 점수가 오릅니다",
+  "ctx": " 번 더!'; }   else { rank='🐣 직관 여행자'; sub="
+ },
+ "js_169": {
+  "t": "완독 리포트",
+  "ctx": "onst fname = ((h2 && h2.textContent) || "
+ },
+ "js_170": {
+  "t": "한눈에 보기",
+  "ctx": "&& h2.textContent) || '완독 리포트').replace("
+ },
+ "js_171": {
+  "t": "리포트.pdf",
+  "ctx": "'완독 리포트').replace('한눈에 보기','').trim() + "
+ },
+ "js_172": {
+  "t": "📄 PDF 만드는 중…",
+  "ctx": "tn){ btn.disabled=true; btn.textContent="
+ },
+ "js_173": {
+  "t": "PDF 생성 중 문제가 발생했어요. 이 HTML 파일을 내려받아 브라우저에서 직접 열고 다시 눌러 주세요.",
+  "ctx": "     }   }).catch(function(){     alert("
+ },
+ "js_174": {
+  "t": "무료로는 <b>",
+  "ctx": "t = TOTAL_Q - fl;       msg.innerHTML = "
+ },
+ "js_175": {
+  "t": "문항</b>까지 풀 수 있어요.",
+  "ctx": "fl;       msg.innerHTML = '무료로는 <b>'+fl+"
+ },
+ "js_176": {
+  "t": "나머지 <b>",
+  "ctx": " <b>'+fl+'문항</b>까지 풀 수 있어요. ' +         "
+ },
+ "js_177": {
+  "t": "문항</b>과 <b>완독 요약 리포트</b>는 구독자 전용입니다.",
+  "ctx": ">까지 풀 수 있어요. ' +         '나머지 <b>'+rest+"
+ },
+ "js_178": {
+  "t": "지금까지 쌓은 <b>생각의 진행도</b>는 위 게이지에 그대로 남아 있어요.",
+  "ctx": "b>완독 요약 리포트</b>는 구독자 전용입니다. ' +         "
+ },
+ "js_179": {
+  "t": "<h3>완독 리포트 전체는 구독자 전용이에요</h3>",
+  "ctx": " = '<div class=\"lk-ic\">🔒</div>' +       "
+ },
+ "js_180": {
+  "t": "<p>인과의 흐름과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>",
+  "ctx": "'<h3>완독 리포트 전체는 구독자 전용이에요</h3>' +       "
+ },
+ "js_181": {
+  "t": "목차 요약 · 사례 · 질문 · 약점 복습 · PDF 저장은 구독하면 모두 열립니다.</p>",
+  "ctx": "과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>' +       "
+ },
+ "js_182": {
+  "t": "\" target=\"_blank\" rel=\"noopener\">🔑 구독하고 완독 리포트 전체 열기</a>",
+  "ctx": "     '<a class=\"cta\" href=\"' + _sub() + "
+ },
+ "js_183": {
+  "t": "생각에 관한 생각",
+  "ctx": " 250, '120px serif', '#5fd0c7');   ctxt("
+ },
+ "js_184": {
+  "t": "대니얼 카너먼 · 마스터 퀴즈",
+  "ctx": "to Serif KR\",serif', '#ffffff');   ctxt("
+ },
+ "js_185": {
+  "t": "📚 매일 새 책 퀴즈  ·",
+  "ctx": "(/^https?:\\/\\//,'') : '';   if(su) ctxt("
+ },
+ "js_186": {
+  "t": "thinking_퀴즈결과.png",
+  "ctx": "nt('a');     a.href = url; a.download = "
+ },
+ "js_187": {
+  "t": "💌 VIP 초대 —",
+  "ctx": "ursor:pointer;\";     d.textContent=(vip?"
+ },
+ "js_188": {
+  "t": "🎁 지금 이 책 풀버전 무료 오픈 중!",
+  "ctx": "\";     d.textContent=(vip?\"💌 VIP 초대 — \":"
+ },
+ "js_189": {
+  "t": "전체판(잠금 없음)으로 이동 →",
+  "ctx": "\"💌 VIP 초대 — \":\"🎁 지금 이 책 풀버전 무료 오픈 중! \")+"
+ },
+ "jst_001": {
+  "t": "무료로 풀 수 있는 문항 수",
+  "ctx": "    freeLimit: 10,           // teaser: "
+ },
+ "jst_002": {
+  "t": "아직",
+  "ctx": "3:30};    let pending = [];          // "
+ },
+ "jst_003": {
+  "t": "처음으로 정답",
+  "ctx": "};    let pending = [];          // 아직 ‘"
+ },
+ "jst_004": {
+  "t": "을 못 낸 문항 큐",
+  "ctx": "t pending = [];          // 아직 ‘처음으로 정답’"
+ },
+ "jst_005": {
+  "t": "앞에서 꺼냄",
+  "ctx": "[];          // 아직 ‘처음으로 정답’을 못 낸 문항 큐 ("
+ },
+ "jst_006": {
+  "t": "시도 횟수",
+  "ctx": "(); let attempts = {};         // id -> "
+ },
+ "jst_007": {
+  "t": "첫 시도에 틀린 문항",
+  "ctx": " 0; let firstWrongIds = new Set();   // "
+ },
+ "jst_008": {
+  "t": "약점",
+  "ctx": "rongIds = new Set();   // 첫 시도에 틀린 문항 = "
+ },
+ "jst_009": {
+  "t": "집중 복습 대상",
+  "ctx": "gIds = new Set();   // 첫 시도에 틀린 문항 = 약점("
+ },
+ "jst_010": {
+  "t": "세션 내 최고 점수",
+  "ctx": "r = null; let bestScore = 0;         // "
+ },
+ "jst_011": {
+  "t": "재도전 비교용,",
+  "ctx": "t bestScore = 0;         // 세션 내 최고 점수 ("
+ },
+ "jst_012": {
+  "t": "미사용",
+  "ctx": "   // 세션 내 최고 점수 (재도전 비교용, localStorage "
+ },
+ "jst_013": {
+  "t": "복습 정답은 절반 점수",
+  "ctx": " gain = Math.round(gain/2);          // "
+ },
+ "jst_014": {
+  "t": "콤보 보너스",
+  "ctx": " (streak>=2) ? (streak-1)*3 : 0;     // "
+ },
+ "jst_015": {
+  "t": "가 아니어도 최종적으로 익힌 것으로 카운트",
+  "ctx": " masteredIds.add(id);          // ‘처음으로’"
+ },
+ "jst_016": {
+  "t": "큐에서 제거",
+  "ctx": "운트     pending.shift();              // "
+ },
+ "jst_017": {
+  "t": "연속 정답!",
+  "ctx": "      comboEl.textContent = `🔥 ${streak}"
+ },
+ "jst_018": {
+  "t": "보너스",
+  "ctx": "tContent = `🔥 ${streak}연속 정답! +${bonus} "
+ },
+ "jst_019": {
+  "t": "약점으로 기록",
+  "ctx": "f(firstTry) firstWrongIds.add(id);   // "
+ },
+ "jst_020": {
+  "t": "왜 생각해볼 만한가",
+  "ctx": "= >${c.d}</div>       <div class= >💭 <b>"
+ },
+ "jst_021": {
+  "t": "첫 시도에 모두 정답!",
+  "ctx": " ;     list.innerHTML = `<div class= >🌟 "
+ },
+ "jst_022": {
+  "t": "약점이 없어 따로 복습할 항목이 없습니다. 멋져요.",
+  "ctx": "TML = `<div class= >🌟 첫 시도에 모두 정답!<span>"
+ },
+ "jst_023": {
+  "t": "개",
+  "ctx": " {     cnt.textContent = `(${ids.length}"
+ },
+ "jst_024": {
+  "t": "정답",
+  "ctx": "= >Q. ${q.q}</div>         <div class= >"
+ },
+ "jst_025": {
+  "t": "최고 점수 경신!",
+  "ctx": "re;     note.innerHTML = prev>0 ? `🏆 <b>"
+ },
+ "jst_026": {
+  "t": "이전",
+  "ctx": "nerHTML = prev>0 ? `🏆 <b>최고 점수 경신!</b> ("
+ },
+ "jst_027": {
+  "t": "점",
+  "ctx": "prev>0 ? `🏆 <b>최고 점수 경신!</b> (이전 ${prev}"
+ },
+ "jst_028": {
+  "t": "첫 기록",
+  "ctx": "`🏆 <b>최고 점수 경신!</b> (이전 ${prev}점)` : `🏆 "
+ },
+ "jst_029": {
+  "t": "다시 도전해 깨보세요!",
+  "ctx": "${prev}점)` : `🏆 첫 기록 <b>${score}점</b> — "
+ },
+ "jst_030": {
+  "t": "현재 최고 점수",
+  "ctx": "보세요!`;   } else {     note.innerHTML = `"
+ },
+ "jst_031": {
+  "t": "이번엔",
+  "ctx": "HTML = `현재 최고 점수 <b>${bestScore}점</b> · "
+ }
+}

@@ -1,0 +1,1206 @@
+{
+ "_meta": {
+  "source": "apps/삼체_teaser.html",
+  "slug": "삼체_teaser"
+ },
+ "title_001": {
+  "t": "삼체 도파민 마스터 퀴즈",
+  "ctx": "<title>"
+ },
+ "html_001": {
+  "t": "류츠신 · 2008 · 2015 휴고상(아시아 최초)",
+  "ctx": "class=\"hero\">       <div class=\"eyebrow\""
+ },
+ "html_002": {
+  "t": "삼체",
+  "ctx": "   <div class=\"pillars\"><span class=\"p1\""
+ },
+ "html_003": {
+  "t": "침공",
+  "ctx": "pan class=\"p1\">삼체</span><span class=\"p2\""
+ },
+ "html_004": {
+  "t": "각성",
+  "ctx": "pan class=\"p2\">침공</span><span class=\"p3\""
+ },
+ "html_005": {
+  "t": "인류가 우주에서 혼자가 아님을 알게 된 순간부터",
+  "ctx": "ss=\"p3\">각성</span></div>       <h1><small"
+ },
+ "html_006": {
+  "t": "삼체 마스터 퀴즈",
+  "ctx": "<small>인류가 우주에서 혼자가 아님을 알게 된 순간부터</small"
+ },
+ "html_007": {
+  "t": "“이곳으로 오라. 내가 당신들이 이 세계를 얻도록 돕겠다.”",
+  "ctx": ">삼체 마스터 퀴즈</h1>       <div class=\"quote\""
+ },
+ "html_008": {
+  "t": "— 예원제가 삼체 문명에 보낸 답신, 《삼체》",
+  "ctx": ". 내가 당신들이 이 세계를 얻도록 돕겠다.”<br>         <b"
+ },
+ "html_009": {
+  "t": "문화대혁명의 상처에서 시작해 인류 최초의 외계 신호, 그리고 되돌릴 수 없는 침공의 카운트다운까지 — 류츠신의 하드SF 대서사를",
+  "ctx": "명에 보낸 답신, 《삼체》</b>       </div>       <p"
+ },
+ "html_010": {
+  "t": "30개의 퀴즈",
+  "ctx": "되돌릴 수 없는 침공의 카운트다운까지 — 류츠신의 하드SF 대서사를 <b"
+ },
+ "html_011": {
+  "t": "로 익힙니다.\n        쉬운 것부터 시작해 점점 깊어지고,",
+  "ctx": "의 카운트다운까지 — 류츠신의 하드SF 대서사를 <b>30개의 퀴즈</b"
+ },
+ "html_012": {
+  "t": "틀린 문제는 완전히 이해할 때까지 다시 등장합니다.",
+  "ctx": "b>로 익힙니다.         쉬운 것부터 시작해 점점 깊어지고, <b"
+ },
+ "html_013": {
+  "t": "총",
+  "ctx": "s=\"meta-row\">         <span class=\"chip\""
+ },
+ "html_014": {
+  "t": "30문항",
+  "ctx": "ta-row\">         <span class=\"chip\">총 <b"
+ },
+ "html_015": {
+  "t": "쉬움 → 깊어짐",
+  "ctx": "문항</b></span>         <span class=\"chip\""
+ },
+ "html_016": {
+  "t": "실시간",
+  "ctx": "깊어짐</span>         <span class=\"chip\"><b"
+ },
+ "html_017": {
+  "t": "삼체 해독도",
+  "ctx": "an>         <span class=\"chip\"><b>실시간</b"
+ },
+ "html_018": {
+  "t": "문제마다",
+  "ctx": "삼체 해독도</span>         <span class=\"chip\""
+ },
+ "html_019": {
+  "t": "쉬운 해설",
+  "ctx": "span>         <span class=\"chip\">문제마다 <b"
+ },
+ "html_020": {
+  "t": "삼체의 진실 파헤치기 →",
+  "ctx": "=\"btn btn-primary\" onclick=\"startQuiz()\""
+ },
+ "html_021": {
+  "t": "점수",
+  "ctx": "   <div class=\"stat\"><span class=\"label\""
+ },
+ "html_022": {
+  "t": "연속 정답",
+  "ctx": "align-items:center;\"><span class=\"label\""
+ },
+ "html_023": {
+  "t": "마스터",
+  "ctx": "ign-items:flex-end;\"><span class=\"label\""
+ },
+ "html_024": {
+  "t": "혼돈 ←",
+  "ctx": "\">         <div class=\"axis-label\"><span"
+ },
+ "html_025": {
+  "t": "삼체 해독도 ·",
+  "ctx": "lass=\"axis-label\"><span>혼돈 ←</span><span"
+ },
+ "html_026": {
+  "t": "→ 각성",
+  "ctx": " 해독도 · <b id=\"pctTxt\">0%</b></span><span"
+ },
+ "html_027": {
+  "t": "쉬움",
+  "ctx": "d\">         <span class=\"diff\" id=\"diff\""
+ },
+ "html_028": {
+  "t": "다음 →",
+  "ctx": "y\" id=\"nextBtn\" onclick=\"nextQuestion()\""
+ },
+ "html_029": {
+  "t": "여기까지가 무료 미리보기예요",
+  "ctx": "    <div class=\"lk-ic\">🔒</div>       <h3"
+ },
+ "html_030": {
+  "t": "🔑 구독하고 전체 열기",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_031": {
+  "t": "요약 리포트 미리보기 →",
+  "ctx": "class=\"cta ghost\" onclick=\"openReport()\""
+ },
+ "html_032": {
+  "t": "지자 해독자",
+  "ctx": ">       <div class=\"rank\" id=\"rankTitle\""
+ },
+ "html_033": {
+  "t": "최종 점수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_034": {
+  "t": "첫 시도 정답률",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_035": {
+  "t": "최고 연속 정답",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_036": {
+  "t": "총 도전 횟수",
+  "ctx": "      <div class=\"sb\"><div class=\"label\""
+ },
+ "html_037": {
+  "t": "📖 전체 요약 리포트 보기",
+  "ctx": "\"btn btn-primary\" onclick=\"openReport()\""
+ },
+ "html_038": {
+  "t": "🖼 결과 카드 저장",
+  "ctx": "btn btn-ghost\" onclick=\"makeShareCard()\""
+ },
+ "html_039": {
+  "t": "다시 도전 ↻",
+  "ctx": "ss=\"btn btn-ghost\" onclick=\"startQuiz()\""
+ },
+ "html_040": {
+  "t": "처음으로",
+  "ctx": "class=\"btn btn-ghost\" onclick=\"goHome()\""
+ },
+ "html_041": {
+  "t": "완독 리포트 · INFOGRAPHIC",
+  "ctx": "s=\"rep-hero\">       <div class=\"eyebrow\""
+ },
+ "html_042": {
+  "t": "삼체 한눈에 보기",
+  "ctx": "ow\">완독 리포트 · INFOGRAPHIC</div>       <h2"
+ },
+ "html_043": {
+  "t": "책 전체를",
+  "ctx": "</div>       <h2>삼체 한눈에 보기</h2>       <p"
+ },
+ "html_044": {
+  "t": "‘침공까지의 사슬’",
+  "ctx": "    <h2>삼체 한눈에 보기</h2>       <p>책 전체를 <b"
+ },
+ "html_045": {
+  "t": "하나로 꿰면 절대 안 잊습니다. 모든 출발점은",
+  "ctx": " 보기</h2>       <p>책 전체를 <b>‘침공까지의 사슬’</b"
+ },
+ "html_046": {
+  "t": "문화대혁명의 상처",
+  "ctx": "까지의 사슬’</b> 하나로 꿰면 절대 안 잊습니다. 모든 출발점은 <b"
+ },
+ "html_047": {
+  "t": "입니다.",
+  "ctx": "나로 꿰면 절대 안 잊습니다. 모든 출발점은 <b>문화대혁명의 상처</b"
+ },
+ "html_048": {
+  "t": "출발점",
+  "ctx": "<div class=\"ch step s0\"><span class=\"cn\""
+ },
+ "html_049": {
+  "t": "😢 문화대혁명의 상처",
+  "ctx": "h step s0\"><span class=\"cn\">출발점</span><b"
+ },
+ "html_050": {
+  "t": "예원제, 아버지의 죽음을 목격하다",
+  "ctx": "=\"cn\">출발점</span><b>😢 문화대혁명의 상처</b><small"
+ },
+ "html_051": {
+  "t": "1단계",
+  "ctx": "<div class=\"ch step s1\"><span class=\"cn\""
+ },
+ "html_052": {
+  "t": "📡 홍안 기지의 신호",
+  "ctx": "h step s1\"><span class=\"cn\">1단계</span><b"
+ },
+ "html_053": {
+  "t": "인류 최초로 외계 문명과 접촉하다",
+  "ctx": "=\"cn\">1단계</span><b>📡 홍안 기지의 신호</b><small"
+ },
+ "html_054": {
+  "t": "2단계",
+  "ctx": "<div class=\"ch step s2\"><span class=\"cn\""
+ },
+ "html_055": {
+  "t": "🎮 삼체 게임 속으로",
+  "ctx": "h step s2\"><span class=\"cn\">2단계</span><b"
+ },
+ "html_056": {
+  "t": "가상현실 속에서 삼체문제를 체험하다",
+  "ctx": "=\"cn\">2단계</span><b>🎮 삼체 게임 속으로</b><small"
+ },
+ "html_057": {
+  "t": "3단계",
+  "ctx": "s=\"ch step s3\">         <span class=\"cn\""
+ },
+ "html_058": {
+  "t": "⚔️ ETO의 균열",
+  "ctx": "\">         <span class=\"cn\">3단계</span><b"
+ },
+ "html_059": {
+  "t": "강림파 / 구원파 / 생존파로 갈라지다",
+  "ctx": "계</span><b>⚔️ ETO의 균열</b>         <small"
+ },
+ "html_060": {
+  "t": "결과",
+  "ctx": "<div class=\"ch step s4\"><span class=\"cn\""
+ },
+ "html_061": {
+  "t": "🛰️ 지자의 경고 · 방위의 시작",
+  "ctx": "ch step s4\"><span class=\"cn\">결과</span><b"
+ },
+ "html_062": {
+  "t": "“삼체 — 인류, 이제 홀로가 아니다”",
+  "ctx": "결과</span><b>🛰️ 지자의 경고 · 방위의 시작</b><small"
+ },
+ "html_063": {
+  "t": "핵심 개념 8",
+  "ctx": "/div>     </div>      <h3 class=\"rep-h3\""
+ },
+ "html_064": {
+  "t": "목차 한눈에 보기",
+  "ctx": "concepts\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_065": {
+  "t": "탭하면 요약이 열립니다",
+  "ctx": "ss=\"rep-h3\">목차 한눈에 보기 <span class=\"hint\""
+ },
+ "html_066": {
+  "t": "책 속, 생각해볼 사례 3",
+  "ctx": " id=\"toc\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_067": {
+  "t": "이 책이 우리에게 던지는 질문 3",
+  "ctx": "d=\"cases\"></div>      <h3 class=\"rep-h3\""
+ },
+ "html_068": {
+  "t": "내가 틀린 부분 집중 복습",
+  "ctx": " id=\"weakWrap\">       <h3 class=\"rep-h3\""
+ },
+ "html_069": {
+  "t": "📺 더 깊이 알고 싶다면",
+  "ctx": "/div>      <div class=\"deepen\">       <b"
+ },
+ "html_070": {
+  "t": "유튜브 '삼체 문명' 해설 영상",
+  "ctx": "QMSt3hvA\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_071": {
+  "t": "을 통해 핵심 개념을 다시 확인해 보세요.\n      류츠신의 도서",
+  "ctx": "ank\" rel=\"noopener\">유튜브 '삼체 문명' 해설 영상</a"
+ },
+ "html_072": {
+  "t": "알라딘 도서 페이지",
+  "ctx": "31013607\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_073": {
+  "t": "도 참고하세요.",
+  "ctx": "et=\"_blank\" rel=\"noopener\">알라딘 도서 페이지</a"
+ },
+ "html_074": {
+  "t": "📄 PDF로 저장",
+  "ctx": "d=\"pdfBtn\" onclick=\"downloadReportPDF()\""
+ },
+ "html_075": {
+  "t": "결과로",
+  "ctx": "\"btn btn-ghost\" onclick=\"show('result')\""
+ },
+ "html_076": {
+  "t": "📚 다른 책 퀴즈 보기 →",
+  "ctx": " href=\"#\" target=\"_blank\" rel=\"noopener\""
+ },
+ "html_077": {
+  "t": "“의미와재미공장” 미미팩토리",
+  "ctx": "class=\"footer\">     <div class=\"factory\""
+ },
+ "html_078": {
+  "t": "(주식회사 연:결 패밀리회사)",
+  "ctx": "재미공장” 미미팩토리</div>     <div class=\"affil\""
+ },
+ "html_079": {
+  "t": "책의 핵심을 도파민으로 익히는 반복 마스터 퀴즈",
+  "ctx": ":결 패밀리회사)</div>     <div class=\"tagline\""
+ },
+ "html_080": {
+  "t": "본 앱은 도서의 핵심 개념을 학습 목적으로 재구성한 2차적 학습 콘텐츠입니다. 온전한 독서 경험은 원서로 만나보세요.",
+  "ctx": "퀴즈</div>     <div class=\"copyright-note\""
+ },
+ "html_081": {
+  "t": "삼체 · 도서 구매",
+  "ctx": "31013607\" target=\"_blank\" rel=\"noopener\""
+ },
+ "js_001": {
+  "t": "\"}))}},Hn={name:\"font-size\",initialValue:\"0\",prefix:!1,type:wt.TYPE_VALUE,format:\"length\"},In={name:\"font-weight\",initialValue:\"normal\",type:wt.VALUE,prefix:!1,parse:function(e){if(Ve(e))return e.number;if(qe(e))switch(e.value){case\"bold\":return 700;case\"normal\":default:return 400}return 400}},Pn={name:\"font-variant\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return e.filter(qe).map((function(e){return e.value}))}};!function(e){e.NORMAL=\"normal\",e.ITALIC=\"italic\",e.OBLIQUE=\"oblique\"}(Nn||(Nn={}));var On,kn={name:\"font-style\",initialValue:\"normal\",prefix:!1,type:wt.IDENT_VALUE,parse:function(e){switch(e){case\"oblique\":return Nn.OBLIQUE;case\"italic\":return Nn.ITALIC;case\"normal\":default:return Nn.NORMAL}}},Rn=function(e,t){return 0!=(e&t)},Mn={name:\"content\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){if(0===e.length)return[];var t=e[0];return t.type===d.IDENT_TOKEN&&\"none\"===t.value?[]:e}},Dn={name:\"counter-increment\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;for(var r=[],n=e.filter(We),o=0;o<n.length;o++){var s=n[o],i=n[o+1];if(s.type===d.IDENT_TOKEN){var a=i&&Ve(i)?i.number:1;r.push({counter:s.value,increment:a})}}return r}},Kn={name:\"counter-reset\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return[];for(var t=[],r=e.filter(We),n=0;n<r.length;n++){var o=r[n],s=r[n+1];if(qe(o)&&\"none\"!==o.value){var i=s&&Ve(s)?s.number:0;t.push({counter:o.value,reset:i})}}return t}},zn={name:\"quotes\",initialValue:\"none\",prefix:!0,type:wt.LIST,parse:function(e){if(0===e.length)return null;var t=e[0];if(t.type===d.IDENT_TOKEN&&\"none\"===t.value)return null;var r=[],n=e.filter(Ge);if(n.length%2!=0)return null;for(var o=0;o<n.length;o+=2){var s=n[o].value,i=n[o+1].value;r.push({open:s,close:i})}return r}},Vn=function(e,t,r){if(!e)return\"\";var n=e[Math.min(t,e.length-1)];return n?r?n.open:n.close:\"\"},qn={name:\"box-shadow\",initialValue:\"none\",type:wt.LIST,prefix:!1,parse:function(e){return 1===e.length&&Xe(e[0],\"none\")?[]:Ye(e).map((function(e){for(var t={color:255,offsetX:rt,offsetY:rt,blur:rt,spread:rt,inset:!1},r=0,n=0;n<e.length;n++){var o=e[n];Xe(o,\"inset\")?t.inset=!0:$e(o)?(0===r?t.offsetX=o:1===r?t.offsetY=o:2===r?t.blur=o:t.spread=o,r++):t.color=ft(o)}return t}))}},Gn=function(){function e(e){this.backgroundClip=Jn(xt,e.backgroundClip),this.backgroundColor=Jn(Et,e.backgroundColor),this.backgroundImage=Jn(ur,e.backgroundImage),this.backgroundOrigin=Jn(cr,e.backgroundOrigin),this.backgroundPosition=Jn(lr,e.backgroundPosition),this.backgroundRepeat=Jn(fr,e.backgroundRepeat),this.backgroundSize=Jn(mr,e.backgroundSize),this.borderTopColor=Jn(vr,e.borderTopColor),this.borderRightColor=Jn(wr,e.borderRightColor),this.borderBottomColor=Jn(br,e.borderBottomColor),this.borderLeftColor=Jn(Br,e.borderLeftColor),this.borderTopLeftRadius=Jn(_r,e.borderTopLeftRadius),this.borderTopRightRadius=Jn(Cr,e.borderTopRightRadius),this.borderBottomRightRadius=Jn(xr,e.borderBottomRightRadius),this.borderBottomLeftRadius=Jn(Er,e.borderBottomLeftRadius),this.borderTopStyle=Jn(Fr,e.borderTopStyle),this.borderRightStyle=Jn(Ur,e.borderRightStyle),this.borderBottomStyle=Jn(Sr,e.borderBottomStyle),this.borderLeftStyle=Jn(Lr,e.borderLeftStyle),this.borderTopWidth=Jn(Hr,e.borderTopWidth),this.borderRightWidth=Jn(Ir,e.borderRightWidth),this.borderBottomWidth=Jn(Pr,e.borderBottomWidth),this.borderLeftWidth=Jn(Or,e.borderLeftWidth),this.boxShadow=Jn(qn,e.boxShadow),this.color=Jn(kr,e.color),this.display=Jn(Rr,e.display),this.float=Jn(Kr,e.cssFloat),this.fontFamily=Jn(Tn,e.fontFamily),this.fontSize=Jn(Hn,e.fontSize),this.fontStyle=Jn(kn,e.fontStyle),this.fontVariant=Jn(Pn,e.fontVariant),this.fontWeight=Jn(In,e.fontWeight),this.letterSpacing=Jn(zr,e.letterSpacing),this.lineBreak=Jn(qr,e.lineBreak),this.lineHeight=Jn(Gr,e.lineHeight),this.listStyleImage=Jn(Xr,e.listStyleImage),this.listStylePosition=Jn(Jr,e.listStylePosition),this.listStyleType=Jn(Zr,e.listStyleType),this.marginTop=Jn(en,e.marginTop),this.marginRight=Jn(tn,e.marginRight),this.marginBottom=Jn(rn,e.marginBottom),this.marginLeft=Jn(nn,e.marginLeft),this.opacity=Jn(Un,e.opacity);var t=Jn(sn,e.overflow);this.overflowX=t[0],this.overflowY=t[t.length>1?1:0],this.overflowWrap=Jn(An,e.overflowWrap),this.paddingTop=Jn(cn,e.paddingTop),this.paddingRight=Jn(ln,e.paddingRight),this.paddingBottom=Jn(dn,e.paddingBottom),this.paddingLeft=Jn(fn,e.paddingLeft),this.position=Jn(gn,e.position),this.textAlign=Jn(pn,e.textAlign),this.textDecorationColor=Jn(Sn,e.textDecorationColor||e.color),this.textDecorationLine=Jn(Ln,e.textDecorationLine),this.textShadow=Jn(yn,e.textShadow),this.textTransform=Jn(wn,e.textTransform),this.transform=Jn(bn,e.transform),this.transformOrigin=Jn(Cn,e.transformOrigin),this.visibility=Jn(En,e.visibility),this.wordBreak=Jn(Qn,e.wordBreak),this.zIndex=Jn(Fn,e.zIndex)}return e.prototype.isVisible=function(){return this.display>0&&this.opacity>0&&this.visibility===vn.VISIBLE},e.prototype.isTransparent=function(){return ht(this.backgroundColor)},e.prototype.isTransformed=function(){return null!==this.transform},e.prototype.isPositioned=function(){return this.position!==hn.STATIC},e.prototype.isPositionedWithZIndex=function(){return this.isPositioned()&&!this.zIndex.auto},e.prototype.isFloating=function(){return this.float!==Nr.NONE},e.prototype.isInlineLevel=function(){return Rn(this.display,4)||Rn(this.display,33554432)||Rn(this.display,268435456)||Rn(this.display,536870912)||Rn(this.display,67108864)||Rn(this.display,134217728)},e}(),Xn=function(e){this.content=Jn(Mn,e.content),this.quotes=Jn(zn,e.quotes)},Wn=function(e){this.counterIncrement=Jn(Dn,e.counterIncrement),this.counterReset=Jn(Kn,e.counterReset)},Jn=function(e,t){var r=new De,n=null!=t?t.toString():e.initialValue;r.write(n);var o=new Ke(r.read());switch(e.type){case wt.IDENT_VALUE:var s=o.parseComponentValue();return e.parse(qe(s)?s.value:e.initialValue);case wt.VALUE:return e.parse(o.parseComponentValue());case wt.LIST:return e.parse(o.parseComponentValues());case wt.TOKEN_VALUE:return o.parseComponentValue();case wt.TYPE_VALUE:switch(e.format){case\"angle\":return ut(o.parseComponentValue());case\"color\":return ft(o.parseComponentValue());case\"image\":return ir(o.parseComponentValue());case\"length\":var i=o.parseComponentValue();return $e(i)?i:rt;case\"length-percentage\":var a=o.parseComponentValue();return et(a)?a:rt}}throw new Error(\"Attempting to parse unsupported css format type \"+e.format)},Yn=function(e){this.styles=new Gn(window.getComputedStyle(e,null)),this.textNodes=[],this.elements=[],null!==this.styles.transform&&So(e)&&(e.style.transform=\"none\"),this.bounds=i(e),this.flags=0},Zn=function(e,t){this.text=e,this.bounds=t},$n=function(e){var t=e.ownerDocument;if(t){var r=t.createElement(\"html2canvaswrapper\");r.appendChild(e.cloneNode(!0));var n=e.parentNode;if(n){n.replaceChild(r,e);var o=i(r);return r.firstChild&&n.replaceChild(r.firstChild,r),o}}return new s(0,0,0,0)},eo=function(e,t,r){var n=e.ownerDocument;if(!n)throw new Error(\"Node has no owner document\");var o=n.createRange();return o.setStart(e,t),o.setEnd(e,t+r),s.fromClientRect(o.getBoundingClientRect())},to=function(e,t){return 0!==t.letterSpacing?a(e).map((function(e){return A(e)})):ro(e,t)},ro=function(e,t){for(var r,n=function(e,t){var r=a(e),n=ie(r,t),o=n[0],s=n[1],i=n[2],A=r.length,u=0,c=0;return{next:function(){if(c>=A)return{done:!0,value:null};for(var e=G;c<A&&(e=se(r,s,o,++c,i))===G;);if(e!==G||c===A){var t=new ae(r,e,u,c);return u=c,{value:t,done:!1}}return{done:!0,value:null}}}}(e,{lineBreak:t.lineBreak,wordBreak:t.overflowWrap===on.BREAK_WORD?\"break-word\":t.wordBreak}),o=[];!(r=n.next()).done;)r.value&&o.push(r.value.slice());return o},no=function(e,t){this.text=oo(e.data,t.textTransform),this.textBounds=function(e,t,r){var n=to(e,t),o=[],s=0;return n.forEach((function(e){if(t.textDecorationLine.length||e.trim().length>0)if(Pt.SUPPORT_RANGE_BOUNDS)o.push(new Zn(e,eo(r,s,e.length)));else{var n=r.splitText(e.length);o.push(new Zn(e,$n(r))),r=n}else Pt.SUPPORT_RANGE_BOUNDS||(r=r.splitText(e.length));s+=e.length})),o}(this.text,t,e)},oo=function(e,t){switch(t){case mn.LOWERCASE:return e.toLowerCase();case mn.CAPITALIZE:return e.replace(so,io);case mn.UPPERCASE:return e.toUpperCase();default:return e}},so=/(^|\\s|:|-|\\(|\\))([a-z])/g,io=function(e,t,r){return e.length>0?t+r.toUpperCase():e},ao=function(e){function r(t){var r=e.call(this,t)||this;return r.src=t.currentSrc||t.src,r.intrinsicWidth=t.naturalWidth,r.intrinsicHeight=t.naturalHeight,kt.getInstance().addImage(r.src),r}return t(r,e),r}(Yn),Ao=function(e){function r(t){var r=e.call(this,t)||this;return r.canvas=t,r.intrinsicWidth=t.width,r.intrinsicHeight=t.height,r}return t(r,e),r}(Yn),uo=function(e){function r(t){var r=e.call(this,t)||this,n=new XMLSerializer;return r.svg=\"data:image/svg+xml,\"+encodeURIComponent(n.serializeToString(t)),r.intrinsicWidth=t.width.baseVal.value,r.intrinsicHeight=t.height.baseVal.value,kt.getInstance().addImage(r.svg),r}return t(r,e),r}(Yn),co=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),lo=function(e){function r(t){var r=e.call(this,t)||this;return r.start=t.start,r.reversed=\"boolean\"==typeof t.reversed&&!0===t.reversed,r}return t(r,e),r}(Yn),fo=[{type:d.DIMENSION_TOKEN,flags:0,unit:\"px\",number:3}],ho=[{type:d.PERCENTAGE_TOKEN,flags:0,number:50}],po=\"checkbox\",mo=\"radio\",go=\"password\",yo=707406591,vo=function(e){function r(t){var r,n,o,i=e.call(this,t)||this;switch(i.type=t.type.toLowerCase(),i.checked=t.checked,i.value=0===(o=(n=t).type===go?new Array(n.value.length+1).join(\"•\"):n.value).length?n.placeholder||\"\":o,i.type!==po&&i.type!==mo||(i.styles.backgroundColor=3739148031,i.styles.borderTopColor=i.styles.borderRightColor=i.styles.borderBottomColor=i.styles.borderLeftColor=2779096575,i.styles.borderTopWidth=i.styles.borderRightWidth=i.styles.borderBottomWidth=i.styles.borderLeftWidth=1,i.styles.borderTopStyle=i.styles.borderRightStyle=i.styles.borderBottomStyle=i.styles.borderLeftStyle=pr.SOLID,i.styles.backgroundClip=[bt.BORDER_BOX],i.styles.backgroundOrigin=[0],i.bounds=(r=i.bounds).width>r.height?new s(r.left+(r.width-r.height)/2,r.top,r.height,r.height):r.width<r.height?new s(r.left,r.top+(r.height-r.width)/2,r.width,r.width):r),i.type){case po:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=fo;break;case mo:i.styles.borderTopRightRadius=i.styles.borderTopLeftRadius=i.styles.borderBottomRightRadius=i.styles.borderBottomLeftRadius=ho}return i}return t(r,e),r}(Yn),wo=function(e){function r(t){var r=e.call(this,t)||this,n=t.options[t.selectedIndex||0];return r.value=n&&n.text||\"\",r}return t(r,e),r}(Yn),bo=function(e){function r(t){var r=e.call(this,t)||this;return r.value=t.value,r}return t(r,e),r}(Yn),Bo=function(e){return ft(Ke.create(e).parseComponentValue())},jo=function(e){function r(t){var r=e.call(this,t)||this;r.src=t.src,r.width=parseInt(t.width,10)||0,r.height=parseInt(t.height,10)||0,r.backgroundColor=r.styles.backgroundColor;try{if(t.contentWindow&&t.contentWindow.document&&t.contentWindow.document.documentElement){r.tree=Eo(t.contentWindow.document.documentElement);var n=t.contentWindow.document.documentElement?Bo(getComputedStyle(t.contentWindow.document.documentElement).backgroundColor):_t.TRANSPARENT,o=t.contentWindow.document.body?Bo(getComputedStyle(t.contentWindow.document.body).backgroundColor):_t.TRANSPARENT;r.backgroundColor=ht(n)?ht(o)?r.styles.backgroundColor:o:n}}catch(e){}return r}return t(r,e),r}(Yn),_o=[\"OL\",\"UL\",\"MENU\"],Co=function(e,t,r){for(var n=e.firstChild,o=void 0;n;n=o)if(o=n.nextSibling,Fo(n)&&n.data.trim().length>0)t.textNodes.push(new no(n,t.styles));else if(Uo(n)){var s=xo(n);s.styles.isVisible()&&(No(n,s,r)?s.flags|=4:Qo(s.styles)&&(s.flags|=2),-1!==_o.indexOf(n.tagName)&&(s.flags|=8),t.elements.push(s),zo(n)||Po(n)||Vo(n)||Co(n,s,r))}},xo=function(e){return Ro(e)?new ao(e):ko(e)?new Ao(e):Po(e)?new uo(e):To(e)?new co(e):Ho(e)?new lo(e):Io(e)?new vo(e):Vo(e)?new wo(e):zo(e)?new bo(e):Mo(e)?new jo(e):new Yn(e)},Eo=function(e){var t=xo(e);return t.flags|=4,Co(e,t,t),t},No=function(e,t,r){return t.styles.isPositionedWithZIndex()||t.styles.opacity<1||t.styles.isTransformed()||Oo(e)&&r.styles.isTransparent()},Qo=function(e){return e.isPositioned()||e.isFloating()},Fo=function(e){return e.nodeType===Node.TEXT_NODE},Uo=function(e){return e.nodeType===Node.ELEMENT_NODE},So=function(e){return Uo(e)&&void 0!==e.style&&!Lo(e)},Lo=function(e){return\"object\"==typeof e.className},To=function(e){return\"LI\"===e.tagName},Ho=function(e){return\"OL\"===e.tagName},Io=function(e){return\"INPUT\"===e.tagName},Po=function(e){return\"svg\"===e.tagName},Oo=function(e){return\"BODY\"===e.tagName},ko=function(e){return\"CANVAS\"===e.tagName},Ro=function(e){return\"IMG\"===e.tagName},Mo=function(e){return\"IFRAME\"===e.tagName},Do=function(e){return\"STYLE\"===e.tagName},Ko=function(e){return\"SCRIPT\"===e.tagName},zo=function(e){return\"TEXTAREA\"===e.tagName},Vo=function(e){return\"SELECT\"===e.tagName},qo=function(){function e(){this.counters={}}return e.prototype.getCounterValue=function(e){var t=this.counters[e];return t&&t.length?t[t.length-1]:1},e.prototype.getCounterValues=function(e){return this.counters[e]||[]},e.prototype.pop=function(e){var t=this;e.forEach((function(e){return t.counters[e].pop()}))},e.prototype.parse=function(e){var t=this,r=e.counterIncrement,n=e.counterReset,o=!0;null!==r&&r.forEach((function(e){var r=t.counters[e.counter];r&&0!==e.increment&&(o=!1,r[Math.max(0,r.length-1)]+=e.increment)}));var s=[];return o&&n.forEach((function(e){var r=t.counters[e.counter];s.push(e.counter),r||(r=t.counters[e.counter]=[]),r.push(e.reset)})),s},e}(),Go={integers:[1e3,900,500,400,100,90,50,40,10,9,5,4,1],values:[\"M\",\"CM\",\"D\",\"CD\",\"C\",\"XC\",\"L\",\"XL\",\"X\",\"IX\",\"V\",\"IV\",\"I\"]},Xo={integers:[9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"Ք\",\"Փ\",\"Ւ\",\"Ց\",\"Ր\",\"Տ\",\"Վ\",\"Ս\",\"Ռ\",\"Ջ\",\"Պ\",\"Չ\",\"Ո\",\"Շ\",\"Ն\",\"Յ\",\"Մ\",\"Ճ\",\"Ղ\",\"Ձ\",\"Հ\",\"Կ\",\"Ծ\",\"Խ\",\"Լ\",\"Ի\",\"Ժ\",\"Թ\",\"Ը\",\"Է\",\"Զ\",\"Ե\",\"Դ\",\"Գ\",\"Բ\",\"Ա\"]},Wo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,400,300,200,100,90,80,70,60,50,40,30,20,19,18,17,16,15,10,9,8,7,6,5,4,3,2,1],values:[\"י׳\",\"ט׳\",\"ח׳\",\"ז׳\",\"ו׳\",\"ה׳\",\"ד׳\",\"ג׳\",\"ב׳\",\"א׳\",\"ת\",\"ש\",\"ר\",\"ק\",\"צ\",\"פ\",\"ע\",\"ס\",\"נ\",\"מ\",\"ל\",\"כ\",\"יט\",\"יח\",\"יז\",\"טז\",\"טו\",\"י\",\"ט\",\"ח\",\"ז\",\"ו\",\"ה\",\"ד\",\"ג\",\"ב\",\"א\"]},Jo={integers:[1e4,9e3,8e3,7e3,6e3,5e3,4e3,3e3,2e3,1e3,900,800,700,600,500,400,300,200,100,90,80,70,60,50,40,30,20,10,9,8,7,6,5,4,3,2,1],values:[\"ჵ\",\"ჰ\",\"ჯ\",\"ჴ\",\"ხ\",\"ჭ\",\"წ\",\"ძ\",\"ც\",\"ჩ\",\"შ\",\"ყ\",\"ღ\",\"ქ\",\"ფ\",\"ჳ\",\"ტ\",\"ს\",\"რ\",\"ჟ\",\"პ\",\"ო\",\"ჲ\",\"ნ\",\"მ\",\"ლ\",\"კ\",\"ი\",\"თ\",\"ჱ\",\"ზ\",\"ვ\",\"ე\",\"დ\",\"გ\",\"ბ\",\"ა\"]},Yo=function(e,t,r,n,o,s){return e<t||e>r?is(e,o,s.length>0):n.integers.reduce((function(t,r,o){for(;e>=r;)e-=r,t+=n.values[o];return t}),\"\")+s},Zo=function(e,t,r,n){var o=\"\";do{r||e--,o=n(e)+o,e/=t}while(e*t>=t);return o},$o=function(e,t,r,n,o){var s=r-t+1;return(e<0?\"-\":\"\")+(Zo(Math.abs(e),s,n,(function(e){return A(Math.floor(e%s)+t)}))+o)},es=function(e,t,r){void 0===r&&(r=\". \");var n=t.length;return Zo(Math.abs(e),n,!1,(function(e){return t[Math.floor(e%n)]}))+r},ts=function(e,t,r,n,o,s){if(e<-9999||e>9999)return is(e,Wr.CJK_DECIMAL,o.length>0);var i=Math.abs(e),a=o;if(0===i)return t[0]+a;for(var A=0;i>0&&A<=4;A++){var u=i%10;0===u&&Rn(s,1)&&\"\"!==a?a=t[u]+a:u>1||1===u&&0===A||1===u&&1===A&&Rn(s,2)||1===u&&1===A&&Rn(s,4)&&e>100||1===u&&A>1&&Rn(s,8)?a=t[u]+(A>0?r[A-1]:\"\")+a:1===u&&A>0&&(a=r[A-1]+a),i=Math.floor(i/10)}return(e<0?n:\"\")+a},rs=\"十百千萬\",ns=\"拾佰仟萬\",os=\"マイナス\",ss=\"마이너스\",is=function(e,t,r){var n=r?\". \":\"\",o=r?\"、\":\"\",s=r?\", \":\"\",i=r?\" \":\"\";switch(t){case Wr.DISC:return\"•\"+i;case Wr.CIRCLE:return\"◦\"+i;case Wr.SQUARE:return\"◾\"+i;case Wr.DECIMAL_LEADING_ZERO:var a=$o(e,48,57,!0,n);return a.length<4?\"0\"+a:a;case Wr.CJK_DECIMAL:return es(e,\"〇一二三四五六七八九\",o);case Wr.LOWER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n).toLowerCase();case Wr.UPPER_ROMAN:return Yo(e,1,3999,Go,Wr.DECIMAL,n);case Wr.LOWER_GREEK:return $o(e,945,969,!1,n);case Wr.LOWER_ALPHA:return $o(e,97,122,!1,n);case Wr.UPPER_ALPHA:return $o(e,65,90,!1,n);case Wr.ARABIC_INDIC:return $o(e,1632,1641,!0,n);case Wr.ARMENIAN:case Wr.UPPER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n);case Wr.LOWER_ARMENIAN:return Yo(e,1,9999,Xo,Wr.DECIMAL,n).toLowerCase();case Wr.BENGALI:return $o(e,2534,2543,!0,n);case Wr.CAMBODIAN:case Wr.KHMER:return $o(e,6112,6121,!0,n);case Wr.CJK_EARTHLY_BRANCH:return es(e,\"子丑寅卯辰巳午未申酉戌亥\",o);case Wr.CJK_HEAVENLY_STEM:return es(e,\"甲乙丙丁戊己庚辛壬癸\",o);case Wr.CJK_IDEOGRAPHIC:case Wr.TRAD_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"負\",o,14);case Wr.TRAD_CHINESE_FORMAL:return ts(e,\"零壹貳參肆伍陸柒捌玖\",ns,\"負\",o,15);case Wr.SIMP_CHINESE_INFORMAL:return ts(e,\"零一二三四五六七八九\",rs,\"负\",o,14);case Wr.SIMP_CHINESE_FORMAL:return ts(e,\"零壹贰叁肆伍陆柒捌玖\",ns,\"负\",o,15);case Wr.JAPANESE_INFORMAL:return ts(e,\"〇一二三四五六七八九\",\"十百千万\",os,o,0);case Wr.JAPANESE_FORMAL:return ts(e,\"零壱弐参四伍六七八九\",\"拾百千万\",os,o,7);case Wr.KOREAN_HANGUL_FORMAL:return ts(e,\"영일이삼사오육칠팔구\",\"십백천만\",ss,s,7);case Wr.KOREAN_HANJA_INFORMAL:return ts(e,\"零一二三四五六七八九\",\"十百千萬\",ss,s,0);case Wr.KOREAN_HANJA_FORMAL:return ts(e,\"零壹貳參四五六七八九\",\"拾百千\",ss,s,7);case Wr.DEVANAGARI:return $o(e,2406,2415,!0,n);case Wr.GEORGIAN:return Yo(e,1,19999,Jo,Wr.DECIMAL,n);case Wr.GUJARATI:return $o(e,2790,2799,!0,n);case Wr.GURMUKHI:return $o(e,2662,2671,!0,n);case Wr.HEBREW:return Yo(e,1,10999,Wo,Wr.DECIMAL,n);case Wr.HIRAGANA:return es(e,\"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん\");case Wr.HIRAGANA_IROHA:return es(e,\"いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす\");case Wr.KANNADA:return $o(e,3302,3311,!0,n);case Wr.KATAKANA:return es(e,\"アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン\",o);case Wr.KATAKANA_IROHA:return es(e,\"イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセス\",o);case Wr.LAO:return $o(e,3792,3801,!0,n);case Wr.MONGOLIAN:return $o(e,6160,6169,!0,n);case Wr.MYANMAR:return $o(e,4160,4169,!0,n);case Wr.ORIYA:return $o(e,2918,2927,!0,n);case Wr.PERSIAN:return $o(e,1776,1785,!0,n);case Wr.TAMIL:return $o(e,3046,3055,!0,n);case Wr.TELUGU:return $o(e,3174,3183,!0,n);case Wr.THAI:return $o(e,3664,3673,!0,n);case Wr.TIBETAN:return $o(e,3872,3881,!0,n);case Wr.DECIMAL:default:return $o(e,48,57,!0,n)}},as=\"data-html2canvas-ignore\",As=function(){function e(e,t){if(this.options=t,this.scrolledElements=[],this.referenceElement=e,this.counters=new qo,this.quoteDepth=0,!e.ownerDocument)throw new Error(\"Cloned element does not have an owner document\");this.documentElement=this.cloneNode(e.ownerDocument.documentElement)}return e.prototype.toIFrame=function(e,t){var r=this,s=cs(e,t);if(!s.contentWindow)return Promise.reject(\"Unable to find iframe window\");var i=e.defaultView.pageXOffset,a=e.defaultView.pageYOffset,A=s.contentWindow,u=A.document,c=ls(s).then((function(){return n(r,void 0,void 0,(function(){var e;return o(this,(function(r){switch(r.label){case 0:return this.scrolledElements.forEach(ps),A&&(A.scrollTo(t.left,t.top),!/(iPad|iPhone|iPod)/g.test(navigator.userAgent)||A.scrollY===t.top&&A.scrollX===t.left||(u.documentElement.style.top=-t.top+\"px\",u.documentElement.style.left=-t.left+\"px\",u.documentElement.style.position=\"absolute\")),e=this.options.onclone,void 0===this.clonedReferenceElement?[2,Promise.reject(\"Error finding the \"+this.referenceElement.nodeName+\" in the cloned document\")]:u.fonts&&u.fonts.ready?[4,u.fonts.ready]:[3,2];case 1:r.sent(),r.label=2;case 2:return\"function\"==typeof e?[2,Promise.resolve().then((function(){return e(u)})).then((function(){return s}))]:[2,s]}}))}))}));return u.open(),u.write(fs(document.doctype)+\"<html></html>\"),hs(this.referenceElement.ownerDocument,i,a),u.replaceChild(u.adoptNode(this.documentElement),u.documentElement),u.close(),c},e.prototype.createElementClone=function(e){if(ko(e))return this.createCanvasClone(e);if(Do(e))return this.createStyleClone(e);var t=e.cloneNode(!1);return Ro(t)&&\"lazy\"===t.loading&&(t.loading=\"eager\"),t},e.prototype.createStyleClone=function(e){try{var t=e.sheet;if(t&&t.cssRules){var r=[].slice.call(t.cssRules,0).reduce((function(e,t){return t&&\"string\"==typeof t.cssText?e+t.cssText:e}),\"\"),n=e.cloneNode(!1);return n.textContent=r,n}}catch(e){if(Ot.getInstance(this.options.id).error(\"Unable to access cssRules property\",e),\"SecurityError\"!==e.name)throw e}return e.cloneNode(!1)},e.prototype.createCanvasClone=function(e){if(this.options.inlineImages&&e.ownerDocument){var t=e.ownerDocument.createElement(\"img\");try{return t.src=e.toDataURL(),t}catch(e){Ot.getInstance(this.options.id).info(\"Unable to clone canvas contents, canvas is tainted\")}}var r=e.cloneNode(!1);try{r.width=e.width,r.height=e.height;var n=e.getContext(\"2d\"),o=r.getContext(\"2d\");return o&&(n?o.putImageData(n.getImageData(0,0,e.width,e.height),0,0):o.drawImage(e,0,0)),r}catch(e){}return r},e.prototype.cloneNode=function(e){if(Fo(e))return document.createTextNode(e.data);if(!e.ownerDocument)return e.cloneNode(!1);var t=e.ownerDocument.defaultView;if(t&&Uo(e)&&(So(e)||Lo(e))){var r=this.createElementClone(e),n=t.getComputedStyle(e),o=t.getComputedStyle(e,\":before\"),s=t.getComputedStyle(e,\":after\");this.referenceElement===e&&So(r)&&(this.clonedReferenceElement=r),Oo(r)&&vs(r);for(var i=this.counters.parse(new Wn(n)),a=this.resolvePseudoContent(e,r,o,On.BEFORE),A=e.firstChild;A;A=A.nextSibling)Uo(A)&&(Ko(A)||A.hasAttribute(as)||\"function\"==typeof this.options.ignoreElements&&this.options.ignoreElements(A))||this.options.copyStyles&&Uo(A)&&Do(A)||r.appendChild(this.cloneNode(A));a&&r.insertBefore(a,r.firstChild);var u=this.resolvePseudoContent(e,r,s,On.AFTER);return u&&r.appendChild(u),this.counters.pop(i),n&&(this.options.copyStyles||Lo(e))&&!Mo(e)&&ds(n,r),0===e.scrollTop&&0===e.scrollLeft||this.scrolledElements.push([r,e.scrollLeft,e.scrollTop]),(zo(e)||Vo(e))&&(zo(r)||Vo(r))&&(r.value=e.value),r}return e.cloneNode(!1)},e.prototype.resolvePseudoContent=function(e,t,r,n){var o=this;if(r){var s=r.content,i=t.ownerDocument;if(i&&s&&\"none\"!==s&&\"-moz-alt-content\"!==s&&\"none\"!==r.display){this.counters.parse(new Wn(r));var a=new Xn(r),A=i.createElement(\"html2canvaspseudoelement\");ds(r,A),a.content.forEach((function(t){if(t.type===d.STRING_TOKEN)A.appendChild(i.createTextNode(t.value));else if(t.type===d.URL_TOKEN){var r=i.createElement(\"img\");r.src=t.value,r.style.opacity=\"1\",A.appendChild(r)}else if(t.type===d.FUNCTION){if(\"attr\"===t.name){var n=t.values.filter(qe);n.length&&A.appendChild(i.createTextNode(e.getAttribute(n[0].value)||\"\"))}else if(\"counter\"===t.name){var s=t.values.filter(Je),u=s[0],c=s[1];if(u&&qe(u)){var l=o.counters.getCounterValue(u.value),f=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL;A.appendChild(i.createTextNode(is(l,f,!1)))}}else if(\"counters\"===t.name){var h=t.values.filter(Je),p=(u=h[0],h[1]);if(c=h[2],u&&qe(u)){var m=o.counters.getCounterValues(u.value),g=c&&qe(c)?Zr.parse(c.value):Wr.DECIMAL,y=p&&p.type===d.STRING_TOKEN?p.value:\"\",v=m.map((function(e){return is(e,g,!1)})).join(y);A.appendChild(i.createTextNode(v))}}}else if(t.type===d.IDENT_TOKEN)switch(t.value){case\"open-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,o.quoteDepth++,!0)));break;case\"close-quote\":A.appendChild(i.createTextNode(Vn(a.quotes,--o.quoteDepth,!1)));break;default:A.appendChild(i.createTextNode(t.value))}})),A.className=ms+\" \"+gs;var u=n===On.BEFORE?\" \"+ms:\" \"+gs;return Lo(t)?t.className.baseValue+=u:t.className+=u,A}}},e.destroy=function(e){return!!e.parentNode&&(e.parentNode.removeChild(e),!0)},e}();!function(e){e[e.BEFORE=0]=\"BEFORE\",e[e.AFTER=1]=\"AFTER\"}(On||(On={}));var us,cs=function(e,t){var r=e.createElement(\"iframe\");return r.className=\"html2canvas-container\",r.style.visibility=\"hidden\",r.style.position=\"fixed\",r.style.left=\"-10000px\",r.style.top=\"0px\",r.style.border=\"0\",r.width=t.width.toString(),r.height=t.height.toString(),r.scrolling=\"no\",r.setAttribute(as,\"true\"),e.body.appendChild(r),r},ls=function(e){return new Promise((function(t,r){var n=e.contentWindow;if(!n)return r(\"No window assigned for iframe\");var o=n.document;n.onload=e.onload=o.onreadystatechange=function(){n.onload=e.onload=o.onreadystatechange=null;var r=setInterval((function(){o.body.childNodes.length>0&&\"complete\"===o.readyState&&(clearInterval(r),t(e))}),50)}}))},ds=function(e,t){for(var r=e.length-1;r>=0;r--){var n=e.item(r);\"content\"!==n&&t.style.setProperty(n,e.getPropertyValue(n))}return t},fs=function(e){var t=\"\";return e&&(t+=\"<!DOCTYPE \",e.name&&(t+=e.name),e.internalSubset&&(t+=e.internalSubset),e.publicId&&(t+=",
+  "ctx": "n(e){return-1===e.indexOf(\" \")?e:\"'\"+e+\""
+ },
+ "js_002": {
+  "t": "2026-07-07 · vol.12 삼체",
+  "ctx": "um=app&utm_campaign=samche\",   edition: "
+ },
+ "js_003": {
+  "t": "저자·책 소개",
+  "ctx": "nst QUESTIONS = [   {id:1, level:1, tag:"
+ },
+ "js_004": {
+  "t": "《삼체》의 저자와 원제(중국어 제목)는 무엇일까요?",
+  "ctx": " = [   {id:1, level:1, tag:\"저자·책 소개\", q:"
+ },
+ "js_005": {
+  "t": "류츠신(劉慈欣) / 三体(삼체)",
+  "ctx": "저자와 원제(중국어 제목)는 무엇일까요?\",    options:[{t:"
+ },
+ "js_006": {
+  "t": "테드 창 / Story of Your Life",
+  "ctx": "ons:[{t:\"류츠신(劉慈欣) / 三体(삼체)\",ok:true},{t:"
+ },
+ "js_007": {
+  "t": "옥타비아 버틀러 / Kindred",
+  "ctx": "rue},{t:\"테드 창 / Story of Your Life\"},{t:"
+ },
+ "js_008": {
+  "t": "아서 클라크 / Rendezvous with Rama",
+  "ctx": "Your Life\"},{t:\"옥타비아 버틀러 / Kindred\"},{t:"
+ },
+ "js_009": {
+  "t": "<b>류츠신(刘慈欣)</b>이 2006년 중국 SF 잡지에 연재하고 2008년 단행본으로 출간한 하드SF 소설로, 원제는 <b>三体(삼체)</b>입니다. '지구의 과거' 3부작의 첫 번째 책으로, 2015년 아시아 작가 최초로 휴고상을 받았습니다.",
+  "ctx": "서 클라크 / Rendezvous with Rama\"}],    ctx:"
+ },
+ "js_010": {
+  "t": "수상·의의",
+  "ctx": "초로 휴고상을 받았습니다.\"},   {id:2, level:1, tag:"
+ },
+ "js_011": {
+  "t": "《삼체》가 2015년에 받은, SF 문학 최고 권위의 상은 무엇일까요?",
+  "ctx": "니다.\"},   {id:2, level:1, tag:\"수상·의의\", q:"
+ },
+ "js_012": {
+  "t": "휴고상(Hugo Award) 장편소설상 — 아시아 작가 최초로 수상한 영예로운 상",
+  "ctx": "SF 문학 최고 권위의 상은 무엇일까요?\",    options:[{t:"
+ },
+ "js_013": {
+  "t": "노벨문학상 — 전 세계 문학적 성과를 폭넓게 인정받아 수상",
+  "ctx": "설상 — 아시아 작가 최초로 수상한 영예로운 상\",ok:true},{t:"
+ },
+ "js_014": {
+  "t": "맨부커상 — 영어로 번역된 소설 작품 가운데 최고작으로 선정되어 수상",
+  "ctx": ":\"노벨문학상 — 전 세계 문학적 성과를 폭넓게 인정받아 수상\"},{t:"
+ },
+ "js_015": {
+  "t": "전미도서비평가협회상 — 미국 비평가들의 만장일치 추천을 받아 수상",
+  "ctx": " — 영어로 번역된 소설 작품 가운데 최고작으로 선정되어 수상\"},{t:"
+ },
+ "js_016": {
+  "t": "번역가 켄 리우(Ken Liu)의 영어 번역본이 <b>2015년 휴고상 장편소설상</b>을 수상하며, 류츠신은 아시아 작가 최초로 이 상을 받은 SF 작가가 되었습니다.",
+  "ctx": "회상 — 미국 비평가들의 만장일치 추천을 받아 수상\"}],    ctx:"
+ },
+ "js_017": {
+  "t": "문화대혁명",
+  "ctx": " SF 작가가 되었습니다.\"},   {id:3, level:1, tag:"
+ },
+ "js_018": {
+  "t": "소설의 시작점에서, 예원제의 아버지는 어떤 사건으로 목숨을 잃을까요?",
+  "ctx": "니다.\"},   {id:3, level:1, tag:\"문화대혁명\", q:"
+ },
+ "js_019": {
+  "t": "문화대혁명 시기, 홍위병의 규탄대회에서 폭행당해 사망",
+  "ctx": "아버지는 어떤 사건으로 목숨을 잃을까요?\",    options:[{t:"
+ },
+ "js_020": {
+  "t": "노환으로 오랜 투병 끝에 가족들이 지켜보는 가운데 병원에서 조용히 사망",
+  "ctx": "혁명 시기, 홍위병의 규탄대회에서 폭행당해 사망\",ok:true},{t:"
+ },
+ "js_021": {
+  "t": "타고 가던 차량이 사고를 당해 갑작스럽게 사망",
+  "ctx": "오랜 투병 끝에 가족들이 지켜보는 가운데 병원에서 조용히 사망\"},{t:"
+ },
+ "js_022": {
+  "t": "해외 유학을 떠난 뒤 오랫동안 소식이 끊겨 실종 처리되어 사망",
+  "ctx": "사망\"},{t:\"타고 가던 차량이 사고를 당해 갑작스럽게 사망\"},{t:"
+ },
+ "js_023": {
+  "t": "소설은 <b>1967년 무렵 문화대혁명</b>의 폭력적인 규탄대회 장면에서 시작합니다. 물리학 교수인 아버지가 홍위병에게 맞아 죽는 것을 예원제가 목격하는 이 장면이, 훗날 그녀의 운명적 선택의 씨앗이 됩니다.",
+  "ctx": " 떠난 뒤 오랫동안 소식이 끊겨 실종 처리되어 사망\"}],    ctx:"
+ },
+ "js_024": {
+  "t": "홍안 기지",
+  "ctx": "적 선택의 씨앗이 됩니다.\"},   {id:4, level:1, tag:"
+ },
+ "js_025": {
+  "t": "예원제가 배치된 비밀 군사기지 '홍안 기지'의 원래 목적은 무엇일까요?",
+  "ctx": "니다.\"},   {id:4, level:1, tag:\"홍안 기지\", q:"
+ },
+ "js_026": {
+  "t": "외계 문명을 탐사하고 전파를 송신하는 극비 프로젝트",
+  "ctx": "'홍안 기지'의 원래 목적은 무엇일까요?\",    options:[{t:"
+ },
+ "js_027": {
+  "t": "핵무기를 실험하고 개발하기 위해 세워진 대규모 군사 연구소",
+  "ctx": " 문명을 탐사하고 전파를 송신하는 극비 프로젝트\",ok:true},{t:"
+ },
+ "js_028": {
+  "t": "일반 시민의 안전을 위해 날씨를 관측하는 평범한 기상 관측소",
+  "ctx": ":\"핵무기를 실험하고 개발하기 위해 세워진 대규모 군사 연구소\"},{t:"
+ },
+ "js_029": {
+  "t": "사상범을 가두고 재교육하기 위해 운영되는 강제노동 수용소",
+  "ctx": "\"일반 시민의 안전을 위해 날씨를 관측하는 평범한 기상 관측소\"},{t:"
+ },
+ "js_030": {
+  "t": "<b>레이더펑 산 정상</b>의 홍안 기지는 외계 문명 탐사를 목적으로 한 극비 시설입니다. 천체물리학 지식을 가진 예원제는 이곳에서 전파 송신 연구를 이어가게 됩니다.",
+  "ctx": "을 가두고 재교육하기 위해 운영되는 강제노동 수용소\"}],    ctx:"
+ },
+ "js_031": {
+  "t": "인류 최초 접촉",
+  "ctx": " 연구를 이어가게 됩니다.\"},   {id:5, level:1, tag:"
+ },
+ "js_032": {
+  "t": "예원제는 어떤 방법으로 전파 신호를 증폭시켜 우주로 송신할 수 있었을까요?",
+  "ctx": "\"},   {id:5, level:1, tag:\"인류 최초 접촉\", q:"
+ },
+ "js_033": {
+  "t": "태양을 거대한 반사판처럼 이용해 전파 신호를 증폭하는 방법",
+  "ctx": " 증폭시켜 우주로 송신할 수 있었을까요?\",    options:[{t:"
+ },
+ "js_034": {
+  "t": "인공위성 여러 대를 동시에 가동해 신호를 증폭하는 방법",
+  "ctx": "한 반사판처럼 이용해 전파 신호를 증폭하는 방법\",ok:true},{t:"
+ },
+ "js_035": {
+  "t": "지구 자기장을 이용해 신호를 왜곡 없이 전달하는 방법",
+  "ctx": "{t:\"인공위성 여러 대를 동시에 가동해 신호를 증폭하는 방법\"},{t:"
+ },
+ "js_036": {
+  "t": "달 표면에 거대한 안테나를 설치해 반사시키는 방법",
+  "ctx": ",{t:\"지구 자기장을 이용해 신호를 왜곡 없이 전달하는 방법\"},{t:"
+ },
+ "js_037": {
+  "t": "예원제는 <b>태양의 전자기적 특성을 거울처럼 활용</b>해 전파를 크게 증폭시켜 송신하는 방법을 알아냅니다. 이 발견이 인류 최초로 외계 문명과 접촉하는 계기가 됩니다.",
+  "ctx": "\"달 표면에 거대한 안테나를 설치해 반사시키는 방법\"}],    ctx:"
+ },
+ "js_038": {
+  "t": "삼체 행성",
+  "ctx": " 접촉하는 계기가 됩니다.\"},   {id:6, level:1, tag:"
+ },
+ "js_039": {
+  "t": "삼체 문명이 살고 있는 행성은 어떤 특징을 가지고 있을까요?",
+  "ctx": "니다.\"},   {id:6, level:1, tag:\"삼체 행성\", q:"
+ },
+ "js_040": {
+  "t": "세 개의 태양 주위를 불규칙하게 도는 3중성계 행성",
+  "ctx": "는 행성은 어떤 특징을 가지고 있을까요?\",    options:[{t:"
+ },
+ "js_041": {
+  "t": "태양이 하나도 없이 완전한 어둠 속을 떠도는 행성",
+  "ctx": "개의 태양 주위를 불규칙하게 도는 3중성계 행성\",ok:true},{t:"
+ },
+ "js_042": {
+  "t": "지구와 거의 똑같이 하나의 태양과 하나의 달만 가진 평범한 행성",
+  "ctx": "e},{t:\"태양이 하나도 없이 완전한 어둠 속을 떠도는 행성\"},{t:"
+ },
+ "js_043": {
+  "t": "두 개의 달을 가졌지만 태양은 단 하나뿐인 조용한 행성",
+  "ctx": "구와 거의 똑같이 하나의 태양과 하나의 달만 가진 평범한 행성\"},{t:"
+ },
+ "js_044": {
+  "t": "삼체 행성은 <b>세 개의 태양(3중성계)</b> 주위를 예측할 수 없이 불규칙하게 공전합니다. 이 때문에 기후가 극단적으로 요동치는 '안정기'와 '난세'가 반복되며, 문명이 수백 번 무너지고 다시 세워졌습니다.",
+  "ctx": "개의 달을 가졌지만 태양은 단 하나뿐인 조용한 행성\"}],    ctx:"
+ },
+ "js_045": {
+  "t": "경고와 답신",
+  "ctx": "너지고 다시 세워졌습니다.\"},   {id:7, level:1, tag:"
+ },
+ "js_046": {
+  "t": "삼체 문명으로부터 처음 응답을 받았을 때, 그 내용은 무엇이었을까요?",
+  "ctx": "다.\"},   {id:7, level:1, tag:\"경고와 답신\", q:"
+ },
+ "js_047": {
+  "t": "‘대답하지 마라, 대답하면 위치가 발각되어 침략당한다’는 경고",
+  "ctx": " 받았을 때, 그 내용은 무엇이었을까요?\",    options:[{t:"
+ },
+ "js_048": {
+  "t": "‘우리는 평화를 원하니 언제든 편하게 연락해도 좋다’는 환영 인사",
+  "ctx": ", 대답하면 위치가 발각되어 침략당한다’는 경고\",ok:true},{t:"
+ },
+ "js_049": {
+  "t": "지구의 과학기술을 무상으로 전수해 주겠다는 제안",
+  "ctx": "리는 평화를 원하니 언제든 편하게 연락해도 좋다’는 환영 인사\"},{t:"
+ },
+ "js_050": {
+  "t": "삼체 문명의 위치를 알려주는 좌표 정보",
+  "ctx": "사\"},{t:\"지구의 과학기술을 무상으로 전수해 주겠다는 제안\"},{t:"
+ },
+ "js_051": {
+  "t": "8년을 기다린 끝에 도착한 응답은 뜻밖의 <b>경고</b>였습니다: 대답하는 순간 위치가 발각되어 지구가 침략당할 것이라는 내용. 하지만 예원제는 인류에 대한 실망 때문에 이 경고를 무시하고 답신을 보냅니다.",
+  "ctx": "\"},{t:\"삼체 문명의 위치를 알려주는 좌표 정보\"}],    ctx:"
+ },
+ "js_052": {
+  "t": "ETO 결성",
+  "ctx": "무시하고 답신을 보냅니다.\"},   {id:8, level:1, tag:"
+ },
+ "js_053": {
+  "t": "예원제가 환경운동가 마이크 에반스와 함께 결성한 조직 ETO는 무엇을 뜻할까요?",
+  "ctx": "다.\"},   {id:8, level:1, tag:\"ETO 결성\", q:"
+ },
+ "js_054": {
+  "t": "지구삼체운동(Earth-Trisolaris Organization) — 삼체 문명을 돕는 지구인 조직",
+  "ctx": " 결성한 조직 ETO는 무엇을 뜻할까요?\",    options:[{t:"
+ },
+ "js_055": {
+  "t": "지구 방위를 위한 국제 우주군 연합체",
+  "ctx": "zation) — 삼체 문명을 돕는 지구인 조직\",ok:true},{t:"
+ },
+ "js_056": {
+  "t": "환경 보호를 목적으로 한 국제 비정부기구",
+  "ctx": ",ok:true},{t:\"지구 방위를 위한 국제 우주군 연합체\"},{t:"
+ },
+ "js_057": {
+  "t": "외계 문명의 존재를 은폐하려는 정부 비밀조직",
+  "ctx": "군 연합체\"},{t:\"환경 보호를 목적으로 한 국제 비정부기구\"},{t:"
+ },
+ "js_058": {
+  "t": "예원제와 마이크 에반스는 <b>지구삼체운동(ETO)</b>을 결성합니다. 이들은 삼체 문명을 인류보다 우월한 존재로 여기며, 지구 정복을 돕는 '제5열' 역할을 자처합니다.",
+  "ctx": "{t:\"외계 문명의 존재를 은폐하려는 정부 비밀조직\"}],    ctx:"
+ },
+ "js_059": {
+  "t": "삼체 게임",
+  "ctx": "5열' 역할을 자처합니다.\"},   {id:9, level:1, tag:"
+ },
+ "js_060": {
+  "t": "조직이 만든 가상현실 게임 '삼체'는 어떤 목적으로 만들어졌을까요?",
+  "ctx": "니다.\"},   {id:9, level:1, tag:\"삼체 게임\", q:"
+ },
+ "js_061": {
+  "t": "삼체문제를 체험하게 해 동조자를 모으고 시험하는 장치",
+  "ctx": "'삼체'는 어떤 목적으로 만들어졌을까요?\",    options:[{t:"
+ },
+ "js_062": {
+  "t": "일반 대중에게 천문학 지식을 알기 쉽게 알려주는 교육용 콘텐츠",
+  "ctx": "제를 체험하게 해 동조자를 모으고 시험하는 장치\",ok:true},{t:"
+ },
+ "js_063": {
+  "t": "삼체 문명과 실시간으로 소통할 수 있는 통신 수단",
+  "ctx": "일반 대중에게 천문학 지식을 알기 쉽게 알려주는 교육용 콘텐츠\"},{t:"
+ },
+ "js_064": {
+  "t": "지구 방위군을 훈련시키기 위한 군사 시뮬레이션",
+  "ctx": "\"},{t:\"삼체 문명과 실시간으로 소통할 수 있는 통신 수단\"},{t:"
+ },
+ "js_065": {
+  "t": "가상현실 게임 <b>'삼체'</b>는 플레이어가 안정기·난세를 오가는 3중성계 행성에서 문명을 이어가도록 체험시킵니다. ETO는 이 게임으로 지적이고 공감 능력 있는 동조자를 찾아냅니다.",
+  "ctx": "t:\"지구 방위군을 훈련시키기 위한 군사 시뮬레이션\"}],    ctx:"
+ },
+ "js_066": {
+  "t": "3부작 구성",
+  "ctx": "는 동조자를 찾아냅니다.\"},   {id:10, level:1, tag:"
+ },
+ "js_067": {
+  "t": "《삼체》가 속한 '지구의 과거' 3부작의 전체 구성으로 맞는 것은?",
+  "ctx": ".\"},   {id:10, level:1, tag:\"3부작 구성\", q:"
+ },
+ "js_068": {
+  "t": "1부 삼체문제 → 2부 암흑의 숲 → 3부 사신의 영생",
+  "ctx": "거' 3부작의 전체 구성으로 맞는 것은?\",    options:[{t:"
+ },
+ "js_069": {
+  "t": "1부 홍안 기지 → 2부 지자의 역습 → 3부 인류의 최후",
+  "ctx": "체문제 → 2부 암흑의 숲 → 3부 사신의 영생\",ok:true},{t:"
+ },
+ "js_070": {
+  "t": "1부 지자 → 2부 면벽자 → 3부 삼체 함대",
+  "ctx": ":\"1부 홍안 기지 → 2부 지자의 역습 → 3부 인류의 최후\"},{t:"
+ },
+ "js_071": {
+  "t": "1부 삼체문제 → 2부 삼체 게임 → 3부 지구 침공",
+  "ctx": "최후\"},{t:\"1부 지자 → 2부 면벽자 → 3부 삼체 함대\"},{t:"
+ },
+ "js_072": {
+  "t": "《삼체》는 <b>1부 삼체문제 → 2부 암흑의 숲 → 3부 사신의 영생</b>으로 이어지는 3부작의 첫 권입니다. 이 앱은 1부의 내용만을 다룹니다.",
+  "ctx": "부 삼체문제 → 2부 삼체 게임 → 3부 지구 침공\"}],    ctx:"
+ },
+ "js_073": {
+  "t": "알라딘 「삼체」 도서 페이지",
+  "ctx": "===== */ const SOURCES = {   ko: {label:"
+ },
+ "js_074": {
+  "t": "위키백과 · 류츠신",
+  "ctx": "ody_Problem_(novel)\"},   kowiki: {label:"
+ },
+ "js_075": {
+  "t": "https://ko.wikipedia.org/wiki/류츠신",
+  "ctx": ")\"},   kowiki: {label:\"위키백과 · 류츠신\", url:"
+ },
+ "js_076": {
+  "t": "나무위키 · 삼체(소설)",
+  "ctx": "ikipedia.org/wiki/류츠신\"},   namu: {label:"
+ },
+ "js_077": {
+  "t": "https://namu.wiki/w/삼체(소설)",
+  "ctx": "\"},   namu: {label:\"나무위키 · 삼체(소설)\", url:"
+ },
+ "js_078": {
+  "t": "China Daily · Hugo Award 수상 기사",
+  "ctx": "ia.org/wiki/Liu_Cixin\"},   news: {label:"
+ },
+ "js_079": {
+  "t": "유튜브 · 『삼체』 문명 해설 영상",
+  "ctx": "6/content_21709761.htm\"},   ebs: {label:"
+ },
+ "js_080": {
+  "t": "류츠신은 중국 산시성 출신으로, 발전소 엔지니어로 일하며 SF를 써온 독특한 경력의 작가입니다.",
+  "ctx": "t EXTRA = {   1:{src:\"authorwiki\", note:"
+ },
+ "js_081": {
+  "t": "휴고상 시상식에서는 번역자 켄 리우가 류츠신을 대신해 소감을 대독했습니다.",
+  "ctx": "독특한 경력의 작가입니다.\"},   2:{src:\"news\", note:"
+ },
+ "js_082": {
+  "t": "이 도입부는 원래 챕터 순서상 중간에 있었지만, 영어 번역판에서는 맨 앞으로 재배치됐습니다.",
+  "ctx": " 대신해 소감을 대독했습니다.\"},   3:{src:\"en\", note:"
+ },
+ "js_083": {
+  "t": "홍안 기지의 실제 모델은 냉전 시기 각국의 전파천문학 감청 시설에서 아이디어를 얻은 것으로 알려져 있습니다.",
+  "ctx": " 맨 앞으로 재배치됐습니다.\"},   4:{src:\"lit\", note:"
+ },
+ "js_084": {
+  "t": "태양을 반사판처럼 쓰는 아이디어는 태양의 강한 전자기 활동을 증폭 매체로 활용한다는 설정입니다.",
+  "ctx": "얻은 것으로 알려져 있습니다.\"},   5:{src:\"en\", note:"
+ },
+ "js_085": {
+  "t": "3중성계는 실제 천문학에서도 궤도 예측이 매우 어려운 '삼체문제'로 알려진 난제입니다.",
+  "ctx": "체로 활용한다는 설정입니다.\"},   6:{src:\"lit\", note:"
+ },
+ "js_086": {
+  "t": "경고를 무시하는 이 선택이, 이후 3부작 전체를 관통하는 갈등의 시작점이 됩니다.",
+  "ctx": "체문제'로 알려진 난제입니다.\"},   7:{src:\"en\", note:"
+ },
+ "js_087": {
+  "t": "ETO는 스스로를 삼체 문명의 '제5열(fifth column)'로 규정합니다.",
+  "ctx": "하는 갈등의 시작점이 됩니다.\"},   8:{src:\"en\", note:"
+ },
+ "js_088": {
+  "t": "게임 속에서 '안정기'와 '난세'를 반복 경험하게 해, 플레이어가 삼체 문명에 감정적으로 공감하도록 설계되었습니다.",
+  "ctx": "lumn)'로 규정합니다.\"},   9:{src:\"namu\", note:"
+ },
+ "js_089": {
+  "t": "한국어판은 류츠신 지음, 이현아 옮김으로 출간되어 있습니다.",
+  "ctx": " 공감하도록 설계되었습니다.\"},   10:{src:\"ko\", note:"
+ },
+ "js_090": {
+  "t": "홍안 기지의 신호",
+  "ctx": "0,  label:\"문화대혁명의 상처\"},   {at:6,  label:"
+ },
+ "js_091": {
+  "t": "삼체 게임 속으로",
+  "ctx": ",  label:\"홍안 기지의 신호\"},   {at:12,  label:"
+ },
+ "js_092": {
+  "t": "ETO의 균열",
+  "ctx": ",  label:\"삼체 게임 속으로\"},   {at:18,  label:"
+ },
+ "js_093": {
+  "t": "지자의 경고",
+  "ctx": "18,  label:\"ETO의 균열\"},   {at:24,  label:"
+ },
+ "js_094": {
+  "t": "지구 방위 시작",
+  "ctx": ":24,  label:\"지자의 경고\"},   {at:30,  label:"
+ },
+ "js_095": {
+  "t": "보통",
+  "ctx": "h; const DIFF_LABEL = {1:[\"쉬움\",\"l1\"],2:["
+ },
+ "js_096": {
+  "t": "어려움",
+  "ctx": "LABEL = {1:[\"쉬움\",\"l1\"],2:[\"보통\",\"l2\"],3:["
+ },
+ "js_097": {
+  "t": "· 복습",
+  "ctx": "ds.size+' / '+TOTAL_Q + (attempts[id] ? "
+ },
+ "js_098": {
+  "t": "🎯 정답!",
+  "ctx": ")      verdict.textContent = firstTry ? "
+ },
+ "js_099": {
+  "t": "✅ 이제 익혔어요!",
+  "ctx": "dict.textContent = firstTry ? '🎯 정답!' : "
+ },
+ "js_100": {
+  "t": "❌ 다시 도전!",
+  "ctx": "ing.push(id);     verdict.textContent = "
+ },
+ "js_101": {
+  "t": "↻ 이 문제는 뒤에서 다시 나옵니다",
+  "ctx": "getElementById('requeue').textContent = "
+ },
+ "js_102": {
+  "t": "삼체 문제",
+  "ctx": "==== */ const CONCEPTS = [   {ic:\"🌀\", h:"
+ },
+ "js_103": {
+  "t": "세 개의 태양이 불규칙하게 뜨고 지는 삼체 행성. 안정기와 난세가 반복되며 문명이 수백 번 무너지고 다시 세워집니다.",
+  "ctx": "st CONCEPTS = [   {ic:\"🌀\", h:\"삼체 문제\", p:"
+ },
+ "js_104": {
+  "t": "태양을 거울처럼 이용해 전파를 증폭시켜 우주로 송신한 인류 최초의 외계 교신 시도.",
+  "ctx": "src:\"lit\"},   {ic:\"📡\", h:\"홍안 기지의 신호\", p:"
+ },
+ "js_105": {
+  "t": "지자(智子/Sophon)",
+  "ctx": "초의 외계 교신 시도.\", src:\"en\"},   {ic:\"👁️\", h:"
+ },
+ "js_106": {
+  "t": "양성자를 2차원으로 펼쳐 만든 초지능 컴퓨터. 지구의 입자가속기 실험을 방해해 과학 발전을 봉쇄합니다.",
+  "ctx": "\"en\"},   {ic:\"👁️\", h:\"지자(智子/Sophon)\", p:"
+ },
+ "js_107": {
+  "t": "삼체문제를 체험하게 만든 가상현실 게임. ETO가 동조자를 모으고 시험하는 장치로 사용됩니다.",
+  "ctx": ".\", src:\"lit\"},   {ic:\"🎮\", h:\"삼체 게임\", p:"
+ },
+ "js_108": {
+  "t": "ETO의 세 파벌",
+  "ctx": "장치로 사용됩니다.\", src:\"namu\"},   {ic:\"⚔️\", h:"
+ },
+ "js_109": {
+  "t": "강림파(전멸 지지)·구원파(삼체를 구원자로 믿음)·생존파(생존 최우선)로 갈라진 지구삼체운동.",
+  "ctx": "c:\"namu\"},   {ic:\"⚔️\", h:\"ETO의 세 파벌\", p:"
+ },
+ "js_110": {
+  "t": "우주배경복사 이상",
+  "ctx": " 갈라진 지구삼체운동.\", src:\"en\"},   {ic:\"🕸️\", h:"
+ },
+ "js_111": {
+  "t": "지자가 만들어낸 노이즈로 과학자들이 겪는 미스터리. 연쇄 자살 사건의 배경이 됩니다.",
+  "ctx": "src:\"en\"},   {ic:\"🕸️\", h:\"우주배경복사 이상\", p:"
+ },
+ "js_112": {
+  "t": "오퍼레이션 구쟁",
+  "ctx": "건의 배경이 됩니다.\", src:\"lit\"},   {ic:\"🛥️\", h:"
+ },
+ "js_113": {
+  "t": "나노와이어로 심판일호 유조선을 절단해 ETO의 데이터와 지도부를 제거하는 작전.",
+  "ctx": "src:\"lit\"},   {ic:\"🛥️\", h:\"오퍼레이션 구쟁\", p:"
+ },
+ "js_114": {
+  "t": "한계: 인물 묘사 비판",
+  "ctx": "도부를 제거하는 작전.\", src:\"en\"},   {ic:\"⚠️\", h:"
+ },
+ "js_115": {
+  "t": "과학적 상상력은 압도적이지만, 여성 인물 묘사와 캐릭터 서술의 깊이는 아쉽다는 평가도 있습니다.",
+  "ctx": ":\"en\"},   {ic:\"⚠️\", h:\"한계: 인물 묘사 비판\", p:"
+ },
+ "js_116": {
+  "t": "파트 1",
+  "ctx": "/* 목차(클릭하면 요약 오픈) */ const TOC = [   {n:"
+ },
+ "js_117": {
+  "t": "문화대혁명의 상흔",
+  "ctx": " 요약 오픈) */ const TOC = [   {n:\"파트 1\", t:"
+ },
+ "js_118": {
+  "t": "예원제, 아버지가 홍위병 규탄대회에서 맞아 죽는 것을 목격합니다.",
+  "ctx": "\", t:\"문화대혁명의 상흔\", beats:[     {e:\"😢\", x:"
+ },
+ "js_119": {
+  "t": "몽골의 강제노동 수용소로 보내진 뒤, 천체물리학 지식 덕분에 특수 기지로 발탁됩니다.",
+  "ctx": "탄대회에서 맞아 죽는 것을 목격합니다.\"},     {e:\"🏔️\", x:"
+ },
+ "js_120": {
+  "t": "레이더펑 산 정상의 극비 군사시설 '홍안 기지'에 배치됩니다.",
+  "ctx": " 지식 덕분에 특수 기지로 발탁됩니다.\"},     {e:\"🛰️\", x:"
+ },
+ "js_121": {
+  "t": "핵심: 인류에 대한 실망이 훗날 돌이킬 수 없는 선택으로 이어지는 씨앗이 심어집니다.",
+  "ctx": "비 군사시설 '홍안 기지'에 배치됩니다.\"},     {e:\"✨\", x:"
+ },
+ "js_122": {
+  "t": "파트 2",
+  "ctx": "수 없는 선택으로 이어지는 씨앗이 심어집니다.\"},   ]},   {n:"
+ },
+ "js_123": {
+  "t": "태양을 거대한 반사판처럼 이용해 전파를 증폭시키는 방법을 알아냅니다.",
+  "ctx": ", t:\"홍안 기지의 신호\", beats:[     {e:\"☀️\", x:"
+ },
+ "js_124": {
+  "t": "8년 만에, 삼체 문명으로부터 응답이 도착합니다: '대답하지 마라!'",
+  "ctx": "해 전파를 증폭시키는 방법을 알아냅니다.\"},     {e:\"📡\", x:"
+ },
+ "js_125": {
+  "t": "예원제는 경고를 무시하고 답신을 보내며, 삼체 문명을 지구로 초청합니다.",
+  "ctx": " 응답이 도착합니다: '대답하지 마라!'\"},     {e:\"💌\", x:"
+ },
+ "js_126": {
+  "t": "삼체 행성은 세 개의 태양이 불규칙하게 뜨고 지는 알파 센타우리의 세계임이 드러납니다.",
+  "ctx": "보내며, 삼체 문명을 지구로 초청합니다.\"},     {e:\"🌌\", x:"
+ },
+ "js_127": {
+  "t": "핵심: 한 사람의 절망이 인류 전체의 운명을 바꾸는 순간입니다.",
+  "ctx": "는 알파 센타우리의 세계임이 드러납니다.\"},     {e:\"🔥\", x:"
+ },
+ "js_128": {
+  "t": "파트 3",
+  "ctx": "절망이 인류 전체의 운명을 바꾸는 순간입니다.\"},   ]},   {n:"
+ },
+ "js_129": {
+  "t": "현재 시점, 나노소재 연구자 왕먀오가 과학자들의 의문의 자살 사건에 휘말립니다.",
+  "ctx": "\", t:\"삼체 게임 속으로\", beats:[     {e:\"🔬\", x:"
+ },
+ "js_130": {
+  "t": "왕먀오의 시야에 정체불명의 카운트다운 숫자가 나타나 그를 압박합니다.",
+  "ctx": "자들의 의문의 자살 사건에 휘말립니다.\"},     {e:\"👁️\", x:"
+ },
+ "js_131": {
+  "t": "그는 삼체문제를 체험하는 VR 게임 '삼체'에 접속해 안정기·난세의 규칙을 배웁니다.",
+  "ctx": "운트다운 숫자가 나타나 그를 압박합니다.\"},     {e:\"🎮\", x:"
+ },
+ "js_132": {
+  "t": "형사 스창과 함께 사건의 배후에 감춰진 조직, ETO의 흔적을 추적합니다.",
+  "ctx": "접속해 안정기·난세의 규칙을 배웁니다.\"},     {e:\"🕵️\", x:"
+ },
+ "js_133": {
+  "t": "핵심: 게임 속 가상의 위기가 실제 우주적 위협의 예고편이었습니다.",
+  "ctx": "춰진 조직, ETO의 흔적을 추적합니다.\"},     {e:\"⚡\", x:"
+ },
+ "js_134": {
+  "t": "파트 4",
+  "ctx": " 위기가 실제 우주적 위협의 예고편이었습니다.\"},   ]},   {n:"
+ },
+ "js_135": {
+  "t": "지구삼체운동(ETO)의 지도자 예원제와 환경운동가 마이크 에반스의 실체가 드러납니다.",
+  "ctx": " 4\", t:\"ETO의 균열\", beats:[     {e:\"🌍\", x:"
+ },
+ "js_136": {
+  "t": "조직은 강림파(전멸 지지)·구원파(구세주로 믿음)·생존파(생존 우선)로 갈라져 있습니다.",
+  "ctx": "가 마이크 에반스의 실체가 드러납니다.\"},     {e:\"⚔️\", x:"
+ },
+ "js_137": {
+  "t": "구원파는 삼체문제를 수학적으로 풀어 삼체 문명을 구하려 합니다.",
+  "ctx": "·생존파(생존 우선)로 갈라져 있습니다.\"},     {e:\"🧮\", x:"
+ },
+ "js_138": {
+  "t": "왕먀오는 심판일호라는 개조 유조선에서 조직의 실체와 마주합니다.",
+  "ctx": "적으로 풀어 삼체 문명을 구하려 합니다.\"},     {e:\"🚢\", x:"
+ },
+ "js_139": {
+  "t": "핵심: 하나의 신념이 세 개의 서로 다른 결말로 갈라집니다.",
+  "ctx": " 유조선에서 조직의 실체와 마주합니다.\"},     {e:\"🗝️\", x:"
+ },
+ "js_140": {
+  "t": "파트 5",
+  "ctx": "신념이 세 개의 서로 다른 결말로 갈라집니다.\"},   ]},   {n:"
+ },
+ "js_141": {
+  "t": "지자와 방위의 시작",
+  "ctx": "로 다른 결말로 갈라집니다.\"},   ]},   {n:\"파트 5\", t:"
+ },
+ "js_142": {
+  "t": "지자(智子)가 양성자를 펼쳐 만든 초지능 컴퓨터임이 밝혀지고, 지구의 과학 발전이 봉쇄된 이유가 드러납니다.",
+  "ctx": ", t:\"지자와 방위의 시작\", beats:[     {e:\"🧬\", x:"
+ },
+ "js_143": {
+  "t": "오퍼레이션 구쟁 — 나노와이어로 유조선을 절단해 ETO의 통신 기록 전체를 확보합니다.",
+  "ctx": "과학 발전이 봉쇄된 이유가 드러납니다.\"},     {e:\"✂️\", x:"
+ },
+ "js_144": {
+  "t": "삼체 함대가 약 450년 후 지구에 도착한다는 사실이 인류 전체에 알려집니다.",
+  "ctx": "ETO의 통신 기록 전체를 확보합니다.\"},     {e:\"🛡️\", x:"
+ },
+ "js_145": {
+  "t": "핵심: 이야기는 끝이 아니라, 인류 방위의 시작을 알리는 서곡입니다.",
+  "ctx": "착한다는 사실이 인류 전체에 알려집니다.\"},     {e:\"🌅\", x:"
+ },
+ "js_146": {
+  "t": "우주가 깜빡이는 순간",
+  "ctx": "해볼 사례 3 */ const CASES = [   {ic:\"🌌\", t:"
+ },
+ "js_147": {
+  "t": "왕먀오가 눈으로 우주 전체가 깜빡이는 것처럼 보는 체험을 합니다. 실제로는 지자가 그의 시야에 개입한 결과입니다.",
+  "ctx": "CASES = [   {ic:\"🌌\", t:\"우주가 깜빡이는 순간\", d:"
+ },
+ "js_148": {
+  "t": "보이는 것이 항상 진짜 현실은 아니라는 것을, 그리고 압도적인 기술 격차 앞에서 개인이 느끼는 무력감을 보여줍니다.",
+  "ctx": "을 합니다. 실제로는 지자가 그의 시야에 개입한 결과입니다.\", why:"
+ },
+ "js_149": {
+  "t": "8년을 기다린 답신",
+  "ctx": "앞에서 개인이 느끼는 무력감을 보여줍니다.\"},   {ic:\"📻\", t:"
+ },
+ "js_150": {
+  "t": "예원제가 삼체로부터 첫 응답을 받기까지 8년이 걸렸고, 그 응답조차 '대답하지 말라'는 경고였습니다.",
+  "ctx": " 보여줍니다.\"},   {ic:\"📻\", t:\"8년을 기다린 답신\", d:"
+ },
+ "js_151": {
+  "t": "인류에 대한 실망이 누적된 끝에, 그녀는 경고를 무시하고 돌이킬 수 없는 선택을 합니다 — 절망이 개인의 손에서 문명의 운명을 바꿀 수 있음을 보여줍니다.",
+  "ctx": "년이 걸렸고, 그 응답조차 '대답하지 말라'는 경고였습니다.\", why:"
+ },
+ "js_152": {
+  "t": "나노와이어로 거대한 유조선을 종잇장처럼 절단하는 작전이 실행됩니다.",
+  "ctx": "을 보여줍니다.\"},   {ic:\"✂️\", t:\"오퍼레이션 구쟁\", d:"
+ },
+ "js_153": {
+  "t": "첨단 기술이 윤리적 딜레마 없이 순수한 도구로 쓰일 때 얼마나 냉정한 결과를 낳는지를 상징적으로 보여줍니다.",
+  "ctx": "어로 거대한 유조선을 종잇장처럼 절단하는 작전이 실행됩니다.\", why:"
+ },
+ "js_154": {
+  "t": "만약 내가 예원제처럼 인류에게 깊이 실망한다면, 나는 어떤 선택을 할 것인가?",
+  "ctx": "책이 우리에게 던지는 질문 3 */ const ASKS = [   {q:"
+ },
+ "js_155": {
+  "t": "그녀의 선택은 개인의 절망이 공동체 전체의 운명과 연결될 때 얼마나 위험한지 보여줍니다.",
+  "ctx": "제처럼 인류에게 깊이 실망한다면, 나는 어떤 선택을 할 것인가?\", h:"
+ },
+ "js_156": {
+  "t": "기술이 비약적으로 발전해도 풀 수 없는 문제(삼체문제처럼)가 있다면, 인류는 그것을 어떻게 마주해야 할까?",
+  "ctx": "체 전체의 운명과 연결될 때 얼마나 위험한지 보여줍니다.\"},   {q:"
+ },
+ "js_157": {
+  "t": "삼체 문명조차 수백 번의 문명 붕괴를 겪으며 답을 찾지 못했습니다. 불확실성 앞에서의 태도를 생각해보게 합니다.",
+  "ctx": "(삼체문제처럼)가 있다면, 인류는 그것을 어떻게 마주해야 할까?\", h:"
+ },
+ "js_158": {
+  "t": "지구 전체가 하나의 압도적 위협에 직면했을 때, 개인주의와 집단주의 중 무엇이 우선되어야 할까?",
+  "ctx": "못했습니다. 불확실성 앞에서의 태도를 생각해보게 합니다.\"},   {q:"
+ },
+ "js_159": {
+  "t": "소설은 단기적 개인의 이익보다 장기적 집단의 생존을 강조하는 서사를 택합니다. 이 선택에 동의하는지 생각해보세요.",
+  "ctx": " 직면했을 때, 개인주의와 집단주의 중 무엇이 우선되어야 할까?\", h:"
+ },
+ "js_160": {
+  "t": "삼체 문명의 계략을 완전히 꿰뚫었습니다",
+  "ctx": " sub;   if(acc>=90){ rank='지자 해독자'; sub="
+ },
+ "js_161": {
+  "t": "홍안의 후계자",
+  "ctx": "완전히 꿰뚫었습니다'; }   else if(acc>=75){ rank="
+ },
+ "js_162": {
+  "t": "삼체 세계관의 핵심을 거의 다 잡았어요",
+  "ctx": "  else if(acc>=75){ rank='홍안의 후계자'; sub="
+ },
+ "js_163": {
+  "t": "삼체 게임 생존자",
+  "ctx": " 거의 다 잡았어요'; }   else if(acc>=55){ rank="
+ },
+ "js_164": {
+  "t": "뼈대를 익혔습니다 — 한 번 더!",
+  "ctx": "else if(acc>=55){ rank='삼체 게임 생존자'; sub="
+ },
+ "js_165": {
+  "t": "레이더펑의 신참",
+  "ctx": "b='뼈대를 익혔습니다 — 한 번 더!'; }   else { rank="
+ },
+ "js_166": {
+  "t": "반복할수록 더 깊이 익힙니다",
+  "ctx": " 번 더!'; }   else { rank='레이더펑의 신참'; sub="
+ },
+ "js_167": {
+  "t": "완독 리포트",
+  "ctx": "onst fname = ((h2 && h2.textContent) || "
+ },
+ "js_168": {
+  "t": "한눈에 보기",
+  "ctx": "&& h2.textContent) || '완독 리포트').replace("
+ },
+ "js_169": {
+  "t": "리포트.pdf",
+  "ctx": "'완독 리포트').replace('한눈에 보기','').trim() + "
+ },
+ "js_170": {
+  "t": "📄 PDF 만드는 중…",
+  "ctx": "tn){ btn.disabled=true; btn.textContent="
+ },
+ "js_171": {
+  "t": "PDF 생성 중 문제가 발생했어요. 이 HTML 파일을 내려받아 브라우저에서 직접 열고 다시 눌러 주세요.",
+  "ctx": "     }   }).catch(function(){     alert("
+ },
+ "js_172": {
+  "t": "무료로는 <b>",
+  "ctx": "t = TOTAL_Q - fl;       msg.innerHTML = "
+ },
+ "js_173": {
+  "t": "문항</b>까지 풀 수 있어요.",
+  "ctx": "fl;       msg.innerHTML = '무료로는 <b>'+fl+"
+ },
+ "js_174": {
+  "t": "나머지 <b>",
+  "ctx": " <b>'+fl+'문항</b>까지 풀 수 있어요. ' +         "
+ },
+ "js_175": {
+  "t": "문항</b>과 <b>완독 요약 리포트</b>는 구독자 전용입니다.",
+  "ctx": ">까지 풀 수 있어요. ' +         '나머지 <b>'+rest+"
+ },
+ "js_176": {
+  "t": "지금까지 쌓은 <b>삼체 해독도</b>는 위 게이지에 그대로 남아 있어요.",
+  "ctx": "b>완독 요약 리포트</b>는 구독자 전용입니다. ' +         "
+ },
+ "js_177": {
+  "t": "<h3>완독 리포트 전체는 구독자 전용이에요</h3>",
+  "ctx": " = '<div class=\"lk-ic\">🔒</div>' +       "
+ },
+ "js_178": {
+  "t": "<p>인과의 사슬과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>",
+  "ctx": "'<h3>완독 리포트 전체는 구독자 전용이에요</h3>' +       "
+ },
+ "js_179": {
+  "t": "목차 요약 · 사례 · 질문 · 약점 복습 · PDF 저장은 구독하면 모두 열립니다.</p>",
+  "ctx": "과 핵심 개념 일부는 미리 확인하실 수 있어요.<br>' +       "
+ },
+ "js_180": {
+  "t": "\" target=\"_blank\" rel=\"noopener\">🔑 구독하고 완독 리포트 전체 열기</a>",
+  "ctx": "     '<a class=\"cta\" href=\"' + _sub() + "
+ },
+ "js_181": {
+  "t": "완독 마스터 퀴즈",
+  "ctx": "||'center'; g.fillText(t,x,y); }   ctxt("
+ },
+ "js_182": {
+  "t": "류츠신 · 인류 최초 접촉 마스터 퀴즈",
+  "ctx": "to Serif KR\",serif', '#ffffff');   ctxt("
+ },
+ "js_183": {
+  "t": "📚 매일 새 책 퀴즈  ·",
+  "ctx": "(/^https?:\\/\\//,'') : '';   if(su) ctxt("
+ },
+ "js_184": {
+  "t": "삼체_퀴즈결과.png",
+  "ctx": "nt('a');     a.href = url; a.download = "
+ },
+ "js_185": {
+  "t": "💌 VIP 초대 —",
+  "ctx": "ursor:pointer;\";     d.textContent=(vip?"
+ },
+ "js_186": {
+  "t": "🎁 지금 이 책 풀버전 무료 오픈 중!",
+  "ctx": "\";     d.textContent=(vip?\"💌 VIP 초대 — \":"
+ },
+ "js_187": {
+  "t": "전체판(잠금 없음)으로 이동 →",
+  "ctx": "\"💌 VIP 초대 — \":\"🎁 지금 이 책 풀버전 무료 오픈 중! \")+"
+ },
+ "jst_001": {
+  "t": "무료로 풀 수 있는 문항 수",
+  "ctx": "    freeLimit: 10,           // teaser: "
+ },
+ "jst_002": {
+  "t": "아직",
+  "ctx": "3:30};    let pending = [];          // "
+ },
+ "jst_003": {
+  "t": "처음으로 정답",
+  "ctx": "};    let pending = [];          // 아직 ‘"
+ },
+ "jst_004": {
+  "t": "을 못 낸 문항 큐",
+  "ctx": "t pending = [];          // 아직 ‘처음으로 정답’"
+ },
+ "jst_005": {
+  "t": "앞에서 꺼냄",
+  "ctx": "[];          // 아직 ‘처음으로 정답’을 못 낸 문항 큐 ("
+ },
+ "jst_006": {
+  "t": "시도 횟수",
+  "ctx": "(); let attempts = {};         // id -> "
+ },
+ "jst_007": {
+  "t": "첫 시도에 틀린 문항",
+  "ctx": " 0; let firstWrongIds = new Set();   // "
+ },
+ "jst_008": {
+  "t": "약점",
+  "ctx": "rongIds = new Set();   // 첫 시도에 틀린 문항 = "
+ },
+ "jst_009": {
+  "t": "집중 복습 대상",
+  "ctx": "gIds = new Set();   // 첫 시도에 틀린 문항 = 약점("
+ },
+ "jst_010": {
+  "t": "세션 내 최고 점수",
+  "ctx": "r = null; let bestScore = 0;         // "
+ },
+ "jst_011": {
+  "t": "재도전 비교용,",
+  "ctx": "t bestScore = 0;         // 세션 내 최고 점수 ("
+ },
+ "jst_012": {
+  "t": "미사용",
+  "ctx": "   // 세션 내 최고 점수 (재도전 비교용, localStorage "
+ },
+ "jst_013": {
+  "t": "복습 정답은 절반 점수",
+  "ctx": " gain = Math.round(gain/2);          // "
+ },
+ "jst_014": {
+  "t": "콤보 보너스",
+  "ctx": " (streak>=2) ? (streak-1)*3 : 0;     // "
+ },
+ "jst_015": {
+  "t": "가 아니어도 최종적으로 익힌 것으로 카운트",
+  "ctx": " masteredIds.add(id);          // ‘처음으로’"
+ },
+ "jst_016": {
+  "t": "큐에서 제거",
+  "ctx": "운트     pending.shift();              // "
+ },
+ "jst_017": {
+  "t": "연속 정답!",
+  "ctx": "      comboEl.textContent = `🔥 ${streak}"
+ },
+ "jst_018": {
+  "t": "보너스",
+  "ctx": "tContent = `🔥 ${streak}연속 정답! +${bonus} "
+ },
+ "jst_019": {
+  "t": "약점으로 기록",
+  "ctx": "f(firstTry) firstWrongIds.add(id);   // "
+ },
+ "jst_020": {
+  "t": "왜 생각해볼 만한가",
+  "ctx": "= >${c.d}</div>       <div class= >💭 <b>"
+ },
+ "jst_021": {
+  "t": "첫 시도에 모두 정답!",
+  "ctx": " ;     list.innerHTML = `<div class= >🌟 "
+ },
+ "jst_022": {
+  "t": "약점이 없어 따로 복습할 항목이 없습니다. 멋져요.",
+  "ctx": "TML = `<div class= >🌟 첫 시도에 모두 정답!<span>"
+ },
+ "jst_023": {
+  "t": "개",
+  "ctx": " {     cnt.textContent = `(${ids.length}"
+ },
+ "jst_024": {
+  "t": "정답",
+  "ctx": "= >Q. ${q.q}</div>         <div class= >"
+ },
+ "jst_025": {
+  "t": "최고 점수 경신!",
+  "ctx": "re;     note.innerHTML = prev>0 ? `🏆 <b>"
+ },
+ "jst_026": {
+  "t": "이전",
+  "ctx": "nerHTML = prev>0 ? `🏆 <b>최고 점수 경신!</b> ("
+ },
+ "jst_027": {
+  "t": "점",
+  "ctx": "prev>0 ? `🏆 <b>최고 점수 경신!</b> (이전 ${prev}"
+ },
+ "jst_028": {
+  "t": "첫 기록",
+  "ctx": "`🏆 <b>최고 점수 경신!</b> (이전 ${prev}점)` : `🏆 "
+ },
+ "jst_029": {
+  "t": "다시 도전해 깨보세요!",
+  "ctx": "${prev}점)` : `🏆 첫 기록 <b>${score}점</b> — "
+ },
+ "jst_030": {
+  "t": "현재 최고 점수",
+  "ctx": "보세요!`;   } else {     note.innerHTML = `"
+ },
+ "jst_031": {
+  "t": "이번엔",
+  "ctx": "HTML = `현재 최고 점수 <b>${bestScore}점</b> · "
+ }
+}
