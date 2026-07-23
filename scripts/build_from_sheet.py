@@ -601,6 +601,27 @@ def localize_new(entry):
         log(f"🌏 다국어화 예외(생산은 정상): {e}")
 
 
+def publish_korean(entry):
+    """한국어판 즉시 발행: 다국어화(수십 분 소요) 전에 산출물을 먼저 커밋·푸시해
+    배포를 앞당긴다. 실패해도 run_daily.sh의 최종 커밋이 보완한다."""
+    try:
+        paths = ["apps/", "apps.json", "홍보초안/"]
+        paths += [c["manifest"] for c in _load_platforms().values()
+                  if os.path.exists(os.path.join(ROOT, c["manifest"]))]
+        subprocess.run(["git", "add"] + paths, cwd=ROOT, capture_output=True)
+        if subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=ROOT).returncode == 0:
+            return
+        subprocess.run(["git", "commit", "-m",
+                        f"🏭 신작: {entry['title']} 한국어판 즉시 발행\n\n"
+                        "Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>"],
+                       cwd=ROOT, capture_output=True)
+        subprocess.run(["git", "pull", "--rebase", "--autostash"], cwd=ROOT, capture_output=True)
+        subprocess.run(["git", "push"], cwd=ROOT, capture_output=True)
+        log("🚀 한국어판 선발행 푸시 완료 — 다국어화는 이어서 진행")
+    except Exception as e:
+        log(f"선발행 실패(run_daily 최종 커밋이 보완): {e}")
+
+
 def main():
     tabs = read_sheet()
     sync_platforms(tabs)   # 시트 '플랫폼' 열 → 플랫폼 매니페스트 동기화 (생산과 무관하게 매 실행)
@@ -619,6 +640,7 @@ def main():
         notify(item, "완료", f"{site}/{entry['teaser']}" if site else entry["teaser"])
         log("✅ 생산 완료!")
         register_platform(item, entry)
+        publish_korean(entry)
         localize_new(entry)
     else:
         # 1회 재시도
@@ -628,6 +650,7 @@ def main():
         if entry:
             notify(item, "완료", entry["teaser"]); log("✅ 재시도 성공!")
             register_platform(item, entry)
+            publish_korean(entry)
             localize_new(entry)
         else:
             notify(item, "실패"); log("❌ 최종 실패 — 시트에 '실패' 기록")
