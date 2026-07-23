@@ -960,6 +960,18 @@
       "teaser": "apps/에너지_버스_teaser.html",
       "premium": "apps/에너지_버스_quiz.html",
       "desc": "존 고든의 『에너지 버스』 10가지 규칙을, 주인공 조지가 운전사 조이를 만나 인생을 바꾸는 여정으로 따라가며 익히는 도파민 반복 마스터 퀴즈 "
+    },
+    {
+      "id": "독학력",
+      "type": "quiz",
+      "title": "독학력",
+      "author": "고요엘",
+      "date": "2026-07-23",
+      "color1": "#ff8ad0",
+      "color2": "#b78bf5",
+      "teaser": "apps/독학력_teaser.html",
+      "premium": "apps/독학력_quiz.html",
+      "desc": "고요엘의 『독학력』(AI 시대 우리에게 필요한 단 하나의 힘)을, 목적 명확화·수단 총동원·메타인지·아웃풋으로 이어지는 하나의 사슬로 익히는 도"
     }
   ]
 }
