@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>손병호게임 · 둘이 친해지는 손가락 게임 🖐</title>
+<meta name="description" content="둘이 나란히 보며 즐기는 손병호게임. 준비된 질문 100개, 직접 만들기, 사지선다 골라담기로 친구·연인·가족과 더 가까워지세요.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== 팔레트: rose-dusk (장미의 황혼) — 사랑·관계·감정 ===== */
+:root{
+  --bg:#1a1016; --bg2:#271722; --card:#301c2b; --line:#4a2c42;
+  --ink:#f8ecf1; --sub:#c9a3b4;
+  --accent:#f0708f; --accent2:#b04a7a; --point:#ffc2a8;
+  --ok:#5abf8b; --bad:#e4574f;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--ink);
+  background:
+    radial-gradient(120% 80% at 82% -8%, rgba(255,194,168,.12), transparent 55%),
+    radial-gradient(120% 90% at 8% 112%, rgba(240,112,143,.16), transparent 55%),
+    linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;
+  min-height:100dvh;
+  transition:background .9s ease;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:520px; margin:0 auto; padding:20px 16px 8px; min-height:100dvh; display:flex; flex-direction:column;}
+.jua{font-family:'Jua',sans-serif;}
+.grad{
+  background:linear-gradient(105deg,var(--point),var(--accent) 48%,var(--accent2));
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+button{font-family:inherit; cursor:pointer; border:none; color:inherit;}
+button:focus-visible, [tabindex]:focus-visible{outline:3px solid var(--point); outline-offset:2px;}
+.hidden{display:none !important;}
+.word{word-break:keep-all;}
+
+/* ===== 화면 전환 ===== */
+.screen{flex:1; display:flex; flex-direction:column; animation:fadeIn .5s ease;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+/* ===== 헤더 ===== */
+.brandline{font-size:11px; letter-spacing:.32em; text-indent:.32em; color:var(--sub); text-align:center; margin-bottom:6px;}
+.title{font-size:38px; line-height:1.1; text-align:center; margin:2px 0 6px;}
+.subtitle{text-align:center; color:var(--sub); font-size:14px; line-height:1.6; margin-bottom:18px;}
+
+/* ===== 카드 공통 ===== */
+.panel{
+  background:linear-gradient(180deg,var(--card),color-mix(in srgb,var(--card) 82%, #000));
+  border:1px solid var(--line); border-radius:20px; padding:18px;
+  box-shadow:0 12px 30px -18px rgba(0,0,0,.7);
+}
+
+/* ===== 셋업 ===== */
+.rules{margin:0 0 18px; color:var(--sub); font-size:13.5px; line-height:1.75;}
+.rules b{color:var(--point);}
+.rules li{margin:5px 0;}
+.namegrid{display:flex; gap:12px; margin-bottom:8px;}
+.namebox{flex:1; text-align:center;}
+.namebox label{display:block; font-size:12px; color:var(--sub); margin-bottom:7px; letter-spacing:.04em;}
+.dot{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; vertical-align:middle;}
+.dot.a{background:var(--point);} .dot.b{background:var(--accent);}
+input[type=text]{
+  width:100%; text-align:center; font-family:'Jua',sans-serif; font-size:20px;
+  background:rgba(255,255,255,.05); border:1.5px solid var(--line); border-radius:14px;
+  color:var(--ink); padding:12px 10px; transition:border-color .2s, box-shadow .2s;
+}
+input[type=text]:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(240,112,143,.22);}
+
+/* ===== 큰 버튼 ===== */
+.big{
+  width:100%; padding:17px; border-radius:16px; font-family:'Jua',sans-serif; font-size:19px;
+  color:#2a0f1c; background:linear-gradient(100deg,var(--point),var(--accent));
+  box-shadow:0 10px 24px -10px var(--accent); transition:transform .12s, box-shadow .3s;
+}
+.big:active{transform:scale(.97);}
+.ghost{
+  background:rgba(255,255,255,.06); border:1.5px solid var(--line); color:var(--ink);
+  border-radius:14px; padding:13px; font-size:15px; font-family:'Jua',sans-serif;
+  transition:transform .12s, background .2s, border-color .2s;
+}
+.ghost:active{transform:scale(.96);}
+
+/* ===== 게임 상단 ===== */
+.topbar{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px;}
+.levelseg{display:flex; gap:6px; background:rgba(255,255,255,.05); padding:5px; border-radius:14px; border:1px solid var(--line);}
+.levelseg button{
+  font-family:'Jua',sans-serif; font-size:13px; padding:7px 11px; border-radius:10px; color:var(--sub);
+  background:transparent; transition:all .25s;
+}
+.levelseg button.on{color:#2a0f1c; background:linear-gradient(100deg,var(--point),var(--accent)); box-shadow:0 4px 12px -4px var(--accent);}
+.roundtag{font-family:'Jua',sans-serif; font-size:14px; color:var(--sub); white-space:nowrap;}
+.roundtag b{color:var(--point); font-size:18px;}
+
+/* ===== 질문 카드 ===== */
+.qcard{
+  text-align:center; padding:30px 20px; margin-bottom:14px; min-height:150px;
+  display:flex; flex-direction:column; justify-content:center; position:relative; overflow:hidden;
+}
+.qcard::before{
+  content:"🖐"; position:absolute; right:-6px; top:-10px; font-size:66px; opacity:.08; transform:rotate(12deg);
+}
+.qhint{font-size:12px; color:var(--sub); letter-spacing:.03em; margin-bottom:12px;}
+.stmt{font-family:'Jua',sans-serif; font-size:25px; line-height:1.45;}
+.stmt b{color:var(--point);}
+
+/* ===== 플레이어 패널 ===== */
+.players{display:flex; flex-direction:column; gap:11px; margin-bottom:14px;}
+.pl{padding:14px 15px; display:flex; align-items:center; gap:12px; transition:opacity .3s, border-color .3s;}
+.pl .who{display:flex; flex-direction:column; gap:8px; min-width:0; flex:1;}
+.pl .name{font-family:'Jua',sans-serif; font-size:18px; display:flex; align-items:center; gap:2px; max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.fingers{display:flex; gap:6px;}
+.fg{
+  width:22px; height:22px; border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, var(--point), var(--accent));
+  box-shadow:0 0 10px -1px var(--accent); transition:all .35s cubic-bezier(.34,1.56,.64,1);
+}
+.fg.folded{background:rgba(255,255,255,.07); box-shadow:none; transform:scale(.62); opacity:.5;}
+.plbtns{display:flex; flex-direction:column; gap:7px;}
+.foldbtn{
+  font-family:'Jua',sans-serif; font-size:15px; padding:11px 15px; border-radius:13px; white-space:nowrap;
+  color:#2a0f1c; background:linear-gradient(100deg,var(--point),var(--accent));
+  box-shadow:0 8px 18px -9px var(--accent); transition:transform .12s;
+}
+.foldbtn:active{transform:scale(.94);}
+.passbtn{
+  font-size:12.5px; padding:6px 12px; border-radius:11px; color:var(--sub);
+  background:rgba(255,255,255,.05); border:1px solid var(--line);
+}
+.pl.done{opacity:.7;}
+.pl.done .foldbtn, .pl.done .passbtn{pointer-events:none;}
+.answered{
+  font-family:'Jua',sans-serif; font-size:14px; padding:11px 15px; border-radius:13px; text-align:center;
+  background:rgba(255,255,255,.06); border:1px solid var(--line); color:var(--sub);
+}
+.answered.fold{color:var(--point); border-color:var(--accent);}
+
+/* ===== 소스 버튼 (다음 질문 뽑기) ===== */
+.sources{display:flex; gap:8px; margin-bottom:8px;}
+.sources .ghost{flex:1; padding:14px 4px; font-size:14px; display:flex; flex-direction:column; gap:3px; align-items:center;}
+.sources .ico{font-size:20px;}
+.pulse{animation:pulse 1.6s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(240,112,143,0);} 50%{box-shadow:0 0 0 5px rgba(240,112,143,.18);}}
+
+/* ===== 팝 ===== */
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92) rotate(-1.2deg); opacity:.5;} 60%{transform:scale(1.02) rotate(.4deg);} 100%{transform:scale(1) rotate(0); opacity:1;}}
+
+/* ===== 토스트 ===== */
+.toast{
+  position:fixed; left:50%; top:20px; transform:translateX(-50%) translateY(-24px);
+  background:rgba(48,28,43,.97); border:1.5px solid var(--accent); color:var(--ink);
+  padding:12px 20px; border-radius:99px; font-size:14px; font-family:'Jua',sans-serif;
+  opacity:0; pointer-events:none; transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; text-align:center;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+/* ===== 오버레이(직접만들기·골라담기) ===== */
+.overlay{
+  position:fixed; inset:0; background:rgba(12,7,10,.72); backdrop-filter:blur(3px);
+  display:flex; align-items:center; justify-content:center; padding:20px; z-index:50; animation:fadeIn .3s;
+}
+.sheet{width:100%; max-width:480px; max-height:82vh; overflow:auto;}
+.sheet h3{font-family:'Jua',sans-serif; font-size:20px; margin:0 0 4px; text-align:center;}
+.sheet .desc{color:var(--sub); font-size:12.5px; text-align:center; margin-bottom:16px; line-height:1.6;}
+.choice{
+  width:100%; text-align:left; padding:15px 16px; margin-bottom:9px; border-radius:14px;
+  background:rgba(255,255,255,.05); border:1.5px solid var(--line); color:var(--ink);
+  font-size:15px; line-height:1.5; transition:transform .12s, border-color .2s, background .2s; word-break:keep-all;
+}
+.choice:active{transform:scale(.98);} .choice:hover{border-color:var(--accent);}
+.choice b{color:var(--point);}
+.closex{display:block; width:100%; text-align:center; margin-top:6px; color:var(--sub); background:none; font-size:13px; padding:10px;}
+
+/* ===== 완주(결과) 화면 ===== */
+.endcard{text-align:center; padding:26px 22px;}
+.crown{font-size:56px; margin-bottom:6px;}
+.endtitle{font-family:'Jua',sans-serif; font-size:26px; line-height:1.35; margin-bottom:6px;}
+.endname{font-size:29px;}
+.endsub{color:var(--sub); font-size:14px; line-height:1.7; margin-bottom:18px;}
+.score{display:flex; gap:12px; margin-bottom:18px;}
+.score .s{flex:1; padding:14px 8px; border-radius:14px; background:rgba(255,255,255,.05); border:1px solid var(--line);}
+.score .s .n{font-family:'Jua',sans-serif; font-size:15px; display:flex; align-items:center; justify-content:center; gap:4px;}
+.score .s .v{font-family:'Jua',sans-serif; font-size:30px; color:var(--point); margin-top:4px;}
+.mission{
+  background:linear-gradient(180deg,rgba(240,112,143,.14),rgba(240,112,143,.04));
+  border:1.5px dashed var(--accent); border-radius:16px; padding:16px; margin-bottom:18px;
+}
+.mission .lab{font-size:12px; letter-spacing:.15em; color:var(--accent); margin-bottom:8px;}
+.mission .txt{font-family:'Jua',sans-serif; font-size:17px; line-height:1.5;}
+.endbtns{display:flex; flex-direction:column; gap:9px;}
+
+/* ===== 푸터 ===== */
+.footer{text-align:center; margin-top:22px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+@media (max-width:360px){ .stmt{font-size:22px;} .title{font-size:33px;} }
+</style>
+</head>
+<body>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<div class="wrap">
+
+  <!-- ===================== 셋업 ===================== -->
+  <section id="setup" class="screen">
+    <div class="brandline">둘 이 · 친 해 지 기</div>
+    <h1 class="title jua"><span class="grad">손병호게임</span> 🖐</h1>
+    <p class="subtitle word">나란히 앉아 손가락 다섯 개를 펴세요.<br>솔직하게 접다 보면, 어느새 더 가까워져요.</p>
+
+    <div class="panel" style="margin-bottom:16px;">
+      <ol class="rules">
+        <li>두 사람 모두 손가락 <b>5개</b>를 편 채로 시작해요.</li>
+        <li>질문을 뽑고 — <b>해당되면 손가락을 접어요</b> (솔직하게 🤫).</li>
+        <li>질문은 <b>🎲 랜덤 · ✍️ 직접 만들기 · 📋 골라담기(4지선다)</b> 중에 골라요.</li>
+        <li>먼저 <b>5개를 다 접은 사람</b>이 오늘의 <b>솔직왕</b> 👑 — 작은 미션이 기다려요!</li>
+      </ol>
+      <div class="namegrid">
+        <div class="namebox">
+          <label><span class="dot a"></span>플레이어 1</label>
+          <input id="n1" type="text" maxlength="6" value="나" aria-label="플레이어 1 이름">
+        </div>
+        <div class="namebox">
+          <label><span class="dot b"></span>플레이어 2</label>
+          <input id="n2" type="text" maxlength="6" value="너" aria-label="플레이어 2 이름">
+        </div>
+      </div>
+    </div>
+
+    <button class="big" onclick="startGame()">함께 시작하기 ✨</button>
+  </section>
+
+  <!-- ===================== 게임 ===================== -->
+  <section id="game" class="screen hidden">
+    <div class="topbar">
+      <div class="levelseg" role="tablist" aria-label="깊이 선택">
+        <button data-lv="1" class="on" onclick="setLevel(1)">가볍게</button>
+        <button data-lv="2" onclick="setLevel(2)">가까이</button>
+        <button data-lv="3" onclick="setLevel(3)">진심으로</button>
+      </div>
+      <div class="roundtag">Q <b id="roundNo">1</b></div>
+    </div>
+
+    <div class="panel qcard pop" id="qcard">
+      <div class="qhint">해당되면 각자 손가락을 접으세요 🤫</div>
+      <div class="stmt" id="stmt">준비됐나요?</div>
+    </div>
+
+    <div class="players">
+      <div class="panel pl" id="pl0">
+        <div class="who">
+          <div class="name"><span class="dot a"></span><span id="nm0">나</span></div>
+          <div class="fingers" id="fg0" aria-label="플레이어1 손가락"></div>
+        </div>
+        <div class="plbtns" id="btns0">
+          <button class="foldbtn" onclick="fold(0)">접어 👇</button>
+          <button class="passbtn" onclick="pass(0)">안 접어요</button>
+        </div>
+      </div>
+      <div class="panel pl" id="pl1">
+        <div class="who">
+          <div class="name"><span class="dot b"></span><span id="nm1">너</span></div>
+          <div class="fingers" id="fg1" aria-label="플레이어2 손가락"></div>
+        </div>
+        <div class="plbtns" id="btns1">
+          <button class="foldbtn" onclick="fold(1)">접어 👇</button>
+          <button class="passbtn" onclick="pass(1)">안 접어요</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sources" id="sources">
+      <button class="ghost" onclick="nextRandom()"><span class="ico">🎲</span>랜덤</button>
+      <button class="ghost" onclick="openPick()"><span class="ico">📋</span>골라담기</button>
+      <button class="ghost" onclick="openCustom()"><span class="ico">✍️</span>직접</button>
+    </div>
+    <div style="text-align:center; color:var(--sub); font-size:11.5px; padding:2px 0 6px;">
+      다음 질문을 위에서 뽑으세요 · 안 눌러도 넘어갈 수 있어요
+    </div>
+  </section>
+
+  <!-- ===================== 결과 ===================== -->
+  <section id="end" class="screen hidden">
+    <div class="panel endcard">
+      <div class="crown">👑</div>
+      <div class="endtitle">오늘의 솔직왕<br><span class="endname grad jua" id="winName">—</span></div>
+      <div class="endsub word" id="endSub">가장 먼저 다섯 손가락을 다 접었어요.<br>그만큼 오늘 제일 솔직했다는 뜻!</div>
+      <div class="score">
+        <div class="s"><div class="n"><span class="dot a"></span><span id="sc0n">나</span></div><div class="v" id="sc0v">0</div></div>
+        <div class="s"><div class="n"><span class="dot b"></span><span id="sc1n">너</span></div><div class="v" id="sc1v">0</div></div>
+      </div>
+      <div class="mission">
+        <div class="lab">💌 오늘의 미션</div>
+        <div class="txt word" id="missionTxt"></div>
+      </div>
+      <div class="endbtns">
+        <button class="big" onclick="restart()">한 판 더 🔁</button>
+        <button class="ghost" onclick="shareApp()">친구에게 공유하기 💬</button>
+        <button class="ghost" onclick="toSetup()">처음으로</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== 오버레이: 골라담기 ===== -->
+<div id="pickOverlay" class="overlay hidden">
+  <div class="panel sheet">
+    <h3>📋 마음에 드는 질문 고르기</h3>
+    <div class="desc">네 개 중 하나를 골라 이번 라운드 질문으로!</div>
+    <div id="pickList"></div>
+    <button class="closex" onclick="closeOverlay('pickOverlay')">닫기</button>
+  </div>
+</div>
+
+<!-- ===== 오버레이: 직접 만들기 ===== -->
+<div id="customOverlay" class="overlay hidden">
+  <div class="panel sheet">
+    <h3>✍️ 우리만의 질문 만들기</h3>
+    <div class="desc">‘~한/인 사람’ 형태로 적으면 자연스러워요.<br>예) <b>최근에 크게 웃은</b> → “…한 사람, 접어!”</div>
+    <input id="customInput" type="text" maxlength="40" placeholder="예: 오늘 이 사람에게 고마운 게 있는" style="margin-bottom:12px;">
+    <button class="big" onclick="submitCustom()">이 질문으로 하기</button>
+    <button class="closex" onclick="closeOverlay('customOverlay')">닫기</button>
+  </div>
+</div>
+
+<!-- ===== 미미팩토리 브랜드 푸터 ===== -->
+<div class="wrap" style="min-height:auto; padding-top:0; padding-bottom:22px;">
+  <div class="footer">
+    <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+    <div class="mf-logo">미미팩토리</div>
+    <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+  </div>
+</div>
+
+<script>
+/* ================= 데이터: 준비된 질문 100개 =================
+   각 항목은 "…한/인" 절. 화면에는 "<b>절</b> 사람, 접어!"로 렌더.
+   레벨 1(가볍게 34) · 2(가까이 33) · 3(진심 33) = 총 100 */
+const CARDS = {
+1:[
+"오늘 아침을 거른","지금 폰 배터리가 30% 아래인","라면에 밥 말아 먹는 걸 좋아하는","최근 3일 안에 배달 음식을 시킨",
+"민트초코를 좋아하는","탕수육은 찍먹인","스스로 아침형 인간이라 생각하는","알람을 두 개 이상 맞춰두는",
+"지금 입은 옷에 주머니가 있는","노래방 애창곡이 확실히 있는","하루라도 커피 없으면 힘든","청소보다 설거지가 더 싫은",
+"겨울보다 여름이 좋은","강아지파인","매운 음식을 잘 못 먹는","최근에 새 앱을 깔아본",
+"사진 찍을 때 브이를 하는","지금 폰 케이스를 끼고 있는","엘리베이터에서 닫힘 버튼을 꼭 누르는","계획 세우는 걸 좋아하는",
+"웹툰을 매주 챙겨 보는","최근 한 달 안에 영화관에 간","집에서 실내화를 신는","물을 하루 1리터 이상 마시는",
+"여행 갈 때 짐을 많이 싸는","콘서트나 페스티벌에 가본","좋아하는 계절 음식이 있는","SNS를 하루 세 번 넘게 여는",
+"아이스 아메리카노를 겨울에도 마시는","최근에 새로운 취미가 생긴","요리를 곧잘 하는","스스로 길치라고 생각하는",
+"음악을 들으며 걷는 걸 좋아하는","지금 손톱이 짧은"
+],
+2:[
+"첫인상과 실제 성격이 다르다는 말을 들어본","화가 나면 오히려 말이 없어지는","거절을 잘 못 하는","혼자 있는 시간이 꼭 필요한",
+"친구보다 가족에게 더 무뚝뚝한","눈물이 많은 편인","여행은 계획파보다 즉흥파인","낯을 많이 가리는",
+"한번 삐지면 오래가는","칭찬을 들으면 어쩔 줄 모르는","잠들기 전 생각이 많아지는","어릴 때 꿈이 지금과 완전히 다른",
+"최근 1년 안에 크게 후회한 일이 있는","좋아하는 사람 앞에서 더 어색해지는","다툰 뒤 사과를 먼저 하는 편인","혼밥·혼영·혼행을 즐기는",
+"스트레스를 먹는 걸로 푸는","남의 눈치를 잘 보는","오래된 물건을 잘 못 버리는","여행지에서 길을 잃어본",
+"밤이 되면 감성이 폭발하는","무서운 영화를 일부러 찾아보는","좋아하는 노래 가사를 곱씹는","새로운 사람 만나는 게 설레는",
+"최근에 누군가에게 서운했던","결정을 남에게 미루는 편인","화해의 손을 먼저 내미는","나이보다 어리다는 말을 듣는",
+"옛 사진을 보며 추억에 잠기는","목표를 세우면 끝까지 해내는","즉흥적으로 떠난 여행이 있는","감정을 숨기는 게 익숙한",
+"남몰래 응원하는 사람이 있는"
+],
+3:[
+"지금 이 사람에게 고마운 게 있는","최근에 이 사람을 문득 떠올린 적 있는","이 사람에게 아직 못 한 말이 있는","첫사랑을 아직 기억하는",
+"누군가를 몰래 좋아해 본","짝사랑을 해본","‘사랑한다’는 말을 아껴 쓰는","헤어진 사람이 가끔 생각나는",
+"고백을 받아본","고백을 먼저 해본","가족에게 사랑한다 말한 지 오래된","부모님께 미안한 게 있는",
+"어릴 적 상처가 아직 남아 있는","최근 한 달 안에 남몰래 운 적 있는","지금 마음속에 걱정 하나를 안고 있는","아직 누군가를 용서하지 못한",
+"후회되는 이별이 있는","이 사람과 더 자주 보고 싶은","이 사람의 장점을 세 개 넘게 말할 수 있는","이 사람에게 서운했던 적이 있는",
+"이 사람 덕분에 크게 웃은 날이 있는","힘들 때 이 사람이 떠오른 적 있는","이 사람을 진심으로 믿는","죽기 전에 꼭 하고 싶은 게 있는",
+"아무에게도 말 못 한 비밀이 있는","지금의 삶이 꽤 만족스러운","다시 돌아가고 싶은 순간이 있는","요즘 자주 외롭다고 느끼는",
+"이 사람에게 사과하고 싶은 게 있는","지금 이 순간이 행복한","이 사람과 오래오래 함께이고 싶은","최근에 진심으로 감사한 순간이 있던",
+"지금 이 사람에게 ‘사랑한다’ 말할 수 있는"
+]
+};
+
+const MISSIONS = [
+"오늘 새로 알게 된 서로의 한 가지를 말해보기.",
+"가장 의외였던 대답 하나를 골라 이야기 나누기.",
+"진 사람이 이긴 사람에게 칭찬 세 개 하기 🥰",
+"서로에게 가장 고마웠던 순간을 한 문장으로.",
+"다음에 함께 하고 싶은 걸 하나씩 말하기.",
+"오늘 대화 중 가장 웃겼던 순간을 다시 떠올려보기 😆",
+"눈을 3초간 마주치고 ‘고마워’ 한마디 하기.",
+"서로의 손가락이 왜 접혔는지, 딱 하나만 물어보기."
+];
+
+/* 레벨별 색 변주 (rose-dusk 안에서 따뜻→깊게) */
+const THEMES = {
+1:{accent:"#ff9e7a", accent2:"#e0708f", point:"#ffd3b0", bg:"#1c1015", bg2:"#2a1720", card:"#331d29"},
+2:{accent:"#f0708f", accent2:"#b04a7a", point:"#ffc2a8", bg:"#1a1016", bg2:"#271722", card:"#301c2b"},
+3:{accent:"#e05aa8", accent2:"#8a3a86", point:"#ffa8c8", bg:"#160c14", bg2:"#241030", card:"#2b1430"}
+};
+
+/* ================= 상태 ================= */
+let players = [{name:"나",folded:0},{name:"너",folded:0}];
+let level = 1;
+let round = 0;
+let decks = {1:[],2:[],3:[]};    // 셔플 덱
+let answered = [false,false];    // 이번 라운드 각자 응답 여부
+
+/* ================= 유틸 ================= */
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function vibrate(p){ if(navigator.vibrate) try{ navigator.vibrate(p); }catch(e){} }
+let _tt;
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2000); }
+function repop(el){ el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+
+function applyTheme(lv){
+  const t=THEMES[lv], r=document.documentElement.style;
+  r.setProperty('--accent',t.accent); r.setProperty('--accent2',t.accent2); r.setProperty('--point',t.point);
+  r.setProperty('--bg',t.bg); r.setProperty('--bg2',t.bg2); r.setProperty('--card',t.card);
+}
+
+/* ================= 화면 ================= */
+function show(id){ ['setup','game','end'].forEach(s=>document.getElementById(s).classList.toggle('hidden', s!==id)); }
+
+function startGame(){
+  const n1=(document.getElementById('n1').value||'').trim()||'나';
+  const n2=(document.getElementById('n2').value||'').trim()||'너';
+  players=[{name:n1,folded:0},{name:n2,folded:0}];
+  document.getElementById('nm0').textContent=n1;
+  document.getElementById('nm1').textContent=n2;
+  level=1; round=0; decks={1:[],2:[],3:[]};
+  setLevelUI(1); applyTheme(1);
+  renderFingers();
+  show('game');
+  nextRandom(true);
+  vibrate(20);
+}
+
+function toSetup(){ show('setup'); }
+
+/* ================= 손가락 ================= */
+function renderFingers(){
+  [0,1].forEach(i=>{
+    const box=document.getElementById('fg'+i); box.innerHTML='';
+    for(let k=0;k<5;k++){
+      const d=document.createElement('span');
+      d.className='fg'+(k<players[i].folded?' folded':'');
+      box.appendChild(d);
+    }
+  });
+}
+
+/* ================= 레벨 ================= */
+function setLevelUI(lv){
+  document.querySelectorAll('.levelseg button').forEach(b=>b.classList.toggle('on', +b.dataset.lv===lv));
+}
+function setLevel(lv){
+  if(lv===level) return;
+  level=lv; setLevelUI(lv); applyTheme(lv);
+  const names={1:'가볍게 몸풀기 🌤',2:'조금 더 가까이 🔥',3:'이제 진심으로 💗'};
+  toast(names[lv]); vibrate([15,30,15]);
+}
+
+/* ================= 라운드 진행 ================= */
+function resetRoundButtons(){
+  answered=[false,false];
+  [0,1].forEach(i=>{
+    document.getElementById('pl'+i).classList.remove('done');
+    document.getElementById('btns'+i).innerHTML=
+      '<button class="foldbtn" onclick="fold('+i+')">접어 👇</button>'+
+      '<button class="passbtn" onclick="pass('+i+')">안 접어요</button>';
+  });
+  document.getElementById('sources').classList.remove('pulse');
+}
+
+function setStatement(clause){
+  round++;
+  document.getElementById('roundNo').textContent=round;
+  document.getElementById('stmt').innerHTML=esc(clause)+' <b>사람, 접어!</b>';
+  repop(document.getElementById('qcard'));
+  resetRoundButtons();
+}
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function drawFromDeck(){
+  if(!decks[level] || decks[level].length===0){ decks[level]=shuffle([...CARDS[level]]); }
+  return decks[level].pop();
+}
+function nextRandom(first){
+  setStatement(drawFromDeck());
+  if(!first) vibrate(22);
+}
+
+/* 골라담기 (4지선다) */
+function openPick(){
+  const pool=[...CARDS[level]]; shuffle(pool);
+  const four=pool.slice(0,4);
+  const list=document.getElementById('pickList'); list.innerHTML='';
+  four.forEach(c=>{
+    const b=document.createElement('button');
+    b.className='choice'; b.innerHTML=esc(c)+' <b>사람, 접어!</b>';
+    b.onclick=()=>{ closeOverlay('pickOverlay'); setStatement(c); vibrate(22); };
+    list.appendChild(b);
+  });
+  openOverlay('pickOverlay');
+}
+
+/* 직접 만들기 */
+function openCustom(){ document.getElementById('customInput').value=''; openOverlay('customOverlay'); setTimeout(()=>document.getElementById('customInput').focus(),120); }
+function submitCustom(){
+  let v=(document.getElementById('customInput').value||'').trim();
+  if(!v){ toast('질문을 적어주세요 ✍️'); return; }
+  v=v.replace(/\s*(사람)?\s*(접어)?[!.]*$/,''); // 끝의 '사람 접어!' 중복 제거
+  if(!v){ toast('질문을 적어주세요 ✍️'); return; }
+  CARDS[level].push(v);           // 이후 랜덤/골라담기에도 등장
+  closeOverlay('customOverlay');
+  setStatement(v); vibrate([15,30,15]);
+  toast('우리만의 질문 추가! 💗');
+}
+
+function openOverlay(id){ document.getElementById(id).classList.remove('hidden'); }
+function closeOverlay(id){ document.getElementById(id).classList.add('hidden'); }
+
+/* ================= 접기 / 패스 ================= */
+function markDone(i, label, isFold){
+  answered[i]=true;
+  document.getElementById('pl'+i).classList.add('done');
+  document.getElementById('btns'+i).innerHTML='<div class="answered'+(isFold?' fold':'')+'">'+label+'</div>';
+  if(answered[0]&&answered[1]) document.getElementById('sources').classList.add('pulse');
+}
+
+function fold(i){
+  if(answered[i]) return;
+  if(players[i].folded>=5) return;
+  players[i].folded++;
+  renderFingers();
+  const box=document.getElementById('fg'+i); repop(box);
+  markDone(i,'접었어요 ✓ ('+players[i].folded+'/5)',true);
+  vibrate(28);
+  if(players[i].folded>=5){ endGame(i); return; }
+  if(players[i].folded===4) toast(players[i].name+' 한 개 남았어요! 😳');
+}
+
+function pass(i){
+  if(answered[i]) return;
+  markDone(i,'패스 ✓',false);
+  vibrate(12);
+}
+
+/* ================= 결과 ================= */
+function endGame(winIdx){
+  const w=players[winIdx];
+  document.getElementById('winName').textContent=w.name;
+  document.getElementById('sc0n').textContent=players[0].name;
+  document.getElementById('sc1n').textContent=players[1].name;
+  document.getElementById('sc0v').textContent=players[0].folded;
+  document.getElementById('sc1v').textContent=players[1].folded;
+  document.getElementById('endSub').innerHTML=
+    '<b style="color:var(--point)">'+esc(w.name)+'</b> 님이 먼저 다섯 손가락을 다 접었어요.<br>그만큼 오늘 제일 솔직했다는 뜻 💗';
+  document.getElementById('missionTxt').textContent=MISSIONS[Math.floor(Math.random()*MISSIONS.length)];
+  show('end');
+  vibrate([60,80,60,80,140]);
+}
+
+function restart(){
+  players.forEach(p=>p.folded=0);
+  round=0; level=1; decks={1:[],2:[],3:[]};
+  setLevelUI(1); applyTheme(1); renderFingers();
+  show('game'); nextRandom(true); vibrate(20);
+}
+
+/* ================= 공유 ================= */
+function shareApp(){
+  const url='https://mimifactory.vibekr.com/apps/손병호게임_friend.html';
+  const text='손병호게임 — 둘이 친해지는 손가락 게임 🖐 준비된 질문 100개!';
+  if(navigator.share){ navigator.share({title:'손병호게임',text:text,url:url}).catch(()=>{}); }
+  else{
+    const full=text+'\n'+url;
+    if(navigator.clipboard){ navigator.clipboard.writeText(full).then(()=>toast('링크를 복사했어요 💬')).catch(()=>toast(url)); }
+    else toast(url);
+  }
+}
+
+/* 엔터로 이름 입력 후 시작 / 커스텀 제출 */
+document.getElementById('n2').addEventListener('keydown',e=>{ if(e.key==='Enter') startGame(); });
+document.getElementById('customInput').addEventListener('keydown',e=>{ if(e.key==='Enter') submitCustom(); });
+</script>
+</body>
+</html>
