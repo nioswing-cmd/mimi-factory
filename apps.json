@@ -948,6 +948,18 @@
       "teaser": "apps/손병호게임_friend.html",
       "premium": "apps/손병호게임_friend.html",
       "desc": "둘이 나란히 앉아 손가락을 접으며 서로의 솔직한 이야기를 꺼내는 친해지기 손병호게임 — 준비된 질문 100개에 직접 만들기·사지선다 골라담기까지"
+    },
+    {
+      "id": "에너지_버스",
+      "type": "quiz",
+      "title": "에너지 버스",
+      "author": "존 고든",
+      "date": "2026-07-23",
+      "color1": "#5ee7d8",
+      "color2": "#7aa6ff",
+      "teaser": "apps/에너지_버스_teaser.html",
+      "premium": "apps/에너지_버스_quiz.html",
+      "desc": "존 고든의 『에너지 버스』 10가지 규칙을, 주인공 조지가 운전사 조이를 만나 인생을 바꾸는 여정으로 따라가며 익히는 도파민 반복 마스터 퀴즈 "
     }
   ]
 }
