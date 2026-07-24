@@ -241,6 +241,18 @@
    "desc": "Master Hesse’s Demian with dopamine-fueled repeat quizzes."
   },
   {
+   "id": "self-study",
+   "type": "test",
+   "title": "Self-Study Power — Master Quiz",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-24",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/self-study.html",
+   "premium": "apps/self-study.html",
+   "desc": "Master self-study — the one power you need in the AI age — through a quiz."
+  },
+  {
    "id": "36-questions",
    "type": "test",
    "title": "36 Questions to Open Up",
@@ -325,6 +337,18 @@
    "desc": "The Gwanggaeto and Jingyeong steles — reclaiming an ancient history that was erased."
   },
   {
+   "id": "love-languages",
+   "type": "test",
+   "title": "Love Languages: My Type & Compatibility",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-24",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/love-languages.html",
+   "premium": "apps/love-languages.html",
+   "desc": "Find your love language, then check your compatibility with someone special."
+  },
+  {
    "id": "norwegian-wood",
    "type": "test",
    "title": "Norwegian Wood Master Quiz",
@@ -373,6 +397,18 @@
    "desc": "Master the science of 1%-a-day compounding habits in 30 quizzes"
   },
   {
+   "id": "energy-bus",
+   "type": "test",
+   "title": "The Energy Bus Master Quiz",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-24",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/energy-bus.html",
+   "premium": "apps/energy-bus.html",
+   "desc": "From a flat-tire morning, 10 life-changing rules — a 30-question quiz and a Reading Report."
+  },
+  {
    "id": "questions-for-two",
    "type": "test",
    "title": "100 Questions for Two",
@@ -395,6 +431,18 @@
    "teaser": "apps/sensitivity-meter.html",
    "premium": "apps/sensitivity-meter.html",
    "desc": "How loud are your senses? 20 questions read your Sense · Empathy · Thought · Environment in real time."
+  },
+  {
+   "id": "gohaeng-balance",
+   "type": "test",
+   "title": "Five Elements Balance Test",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-24",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/gohaeng-balance.html",
+   "premium": "apps/gohaeng-balance.html",
+   "desc": "20 questions to measure the Wood, Fire, Earth, Metal, and Water energies inside you."
   },
   {
    "id": "our-twisted-hero",
@@ -431,6 +479,18 @@
    "teaser": "apps/selfish-gene.html",
    "premium": "apps/selfish-gene.html",
    "desc": "Evolution through the gene’s eyes, in 30 dopamine repeat-quizzes"
+  },
+  {
+   "id": "stranger",
+   "type": "test",
+   "title": "The Stranger",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-24",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/stranger.html",
+   "premium": "apps/stranger.html",
+   "desc": "The story of a man who won’t even fake his grief — read Camus’s The Stranger through a dopamine repeat quiz."
   },
   {
    "id": "origin-of-species",

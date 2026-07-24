@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>愛的語言 — 我的愛情類型＆速配指數</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.3/confetti.browser.min.js"></script>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+  :root{
+    --bg0:#170d33; --bg1:#241046; --bg2:#3a1761;
+    --ink:#f6f1ff; --ink-soft:#c2b2e6; --ink-dim:#9683c4;
+    --glass:rgba(255,255,255,.06); --glass-line:rgba(255,255,255,.14);
+    --W:#FFD166; --Q:#4ECDC4; --G:#FF6BAA; --S:#8BE06C; --T:#FF8C5A;
+    --shadow:0 18px 50px rgba(0,0,0,.45);
+    --r:24px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  .npick{transition:all .25s ease}
+  .npick.sel{border-color:var(--G)!important;background:rgba(255,107,170,.16)!important}
+  html,body{height:100%}
+  body{
+    font-family:'Noto Sans KR',system-ui,sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(900px 600px at 12% -8%, rgba(255,107,170,.20), transparent 60%),
+      radial-gradient(800px 600px at 110% 8%, rgba(78,205,196,.18), transparent 55%),
+      radial-gradient(700px 700px at 50% 120%, rgba(255,209,102,.14), transparent 60%),
+      linear-gradient(160deg,var(--bg0),var(--bg1) 55%,var(--bg2));
+    background-attachment:fixed;
+    min-height:100vh;
+    display:flex;align-items:flex-start;justify-content:center;
+    padding:28px 16px 60px;
+    overflow-x:hidden;
+  }
+  .app{width:100%;max-width:560px}
+  h1,h2,h3,.jua,.big{font-family:'Jua',sans-serif;font-weight:400;letter-spacing:.2px}
+
+  /* ---- screen system ---- */
+  .screen{display:none;animation:pop .45s cubic-bezier(.2,.9,.3,1.3)}
+  .screen.on{display:block}
+  @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+
+  .card{
+    background:var(--glass);
+    border:1px solid var(--glass-line);
+    border-radius:var(--r);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    box-shadow:var(--shadow);
+    padding:30px 24px;
+  }
+
+  /* ---- home ---- */
+  .hero-emoji{font-size:74px;text-align:center;line-height:1;filter:drop-shadow(0 8px 20px rgba(255,107,170,.4));animation:float 3.4s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+  .home h1{font-size:clamp(30px,8vw,44px);text-align:center;margin:14px 0 6px;line-height:1.15}
+  .home .grad{background:linear-gradient(92deg,var(--W),var(--G) 45%,var(--Q));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .home p.sub{text-align:center;color:var(--ink-soft);font-size:15px;line-height:1.6;margin-bottom:22px}
+  .lang-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:26px}
+  .chip{font-size:13px;padding:7px 12px;border-radius:999px;border:1px solid var(--glass-line);background:rgba(255,255,255,.05);display:flex;align-items:center;gap:5px}
+  .btn{
+    width:100%;border:0;cursor:pointer;font-family:'Jua',sans-serif;
+    font-size:19px;color:#1b0e36;padding:17px;border-radius:18px;
+    background:linear-gradient(92deg,var(--W),var(--G) 55%,var(--T));
+    box-shadow:0 12px 30px rgba(255,107,170,.35);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(255,107,170,.5)}
+  .btn:active{transform:translateY(1px) scale(.99)}
+  .btn.ghost{background:rgba(255,255,255,.08);color:var(--ink);box-shadow:none;border:1px solid var(--glass-line);font-size:16px;margin-top:12px}
+  .btn.ghost:hover{background:rgba(255,255,255,.14)}
+
+  /* ---- gauge ---- */
+  .gauge-wrap{margin-bottom:20px}
+  .gauge-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .gauge-top .q-count{font-family:'Jua';font-size:15px;color:var(--ink-soft)}
+  .gauge{height:12px;border-radius:999px;overflow:hidden;display:flex;background:rgba(255,255,255,.08)}
+  .gauge i{height:100%;transition:flex-grow .5s cubic-bezier(.2,.9,.3,1.3);flex-grow:0;flex-basis:0}
+  .gauge i.W{background:var(--W)} .gauge i.Q{background:var(--Q)} .gauge i.G{background:var(--G)} .gauge i.S{background:var(--S)} .gauge i.T{background:var(--T)}
+
+  /* ---- quiz ---- */
+  .q-num{font-family:'Jua';font-size:14px;color:var(--ink-dim);text-align:center;margin-bottom:6px}
+  .q-text{font-family:'Jua';font-size:clamp(20px,5.6vw,26px);text-align:center;line-height:1.4;margin-bottom:24px}
+  .opt{
+    width:100%;text-align:left;border:1px solid var(--glass-line);cursor:pointer;
+    background:rgba(255,255,255,.05);color:var(--ink);
+    padding:18px 18px;border-radius:18px;margin-bottom:12px;font-size:16px;line-height:1.5;
+    display:flex;gap:12px;align-items:center;
+    transition:transform .12s ease,background .2s ease,border-color .2s ease;
+  }
+  .opt:hover{background:rgba(255,255,255,.12);transform:translateX(3px)}
+  .opt .ic{font-size:24px;flex-shrink:0}
+  .opt.picked{animation:bump .35s ease}
+  @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
+
+  /* ---- result ---- */
+  .crown{text-align:center;font-size:13px;letter-spacing:3px;color:var(--ink-dim);margin-bottom:4px}
+  .res-emoji{font-size:72px;text-align:center;line-height:1;animation:float 3.4s ease-in-out infinite}
+  .res-title{font-family:'Jua';font-size:clamp(26px,7vw,36px);text-align:center;margin:8px 0 2px}
+  .res-tag{text-align:center;color:var(--ink-soft);font-size:15px;margin-bottom:22px}
+  .bars{margin:6px 0 22px}
+  .bar-row{margin-bottom:12px}
+  .bar-row .lab{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;color:var(--ink-soft)}
+  .bar-row .lab b{font-family:'Jua';color:var(--ink);font-weight:400}
+  .track{height:14px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+  .track i{display:block;height:100%;width:0;border-radius:999px;transition:width 1s cubic-bezier(.2,.9,.3,1.3)}
+  .sec{margin-top:18px;padding-top:16px;border-top:1px solid var(--glass-line)}
+  .sec h4{font-family:'Jua';font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:7px}
+  .sec p{font-size:14.5px;line-height:1.65;color:var(--ink-soft)}
+
+  /* ---- match ---- */
+  .match h2{font-size:26px;text-align:center;margin-bottom:4px}
+  .match .sub{text-align:center;color:var(--ink-soft);font-size:14px;margin-bottom:22px}
+  .picker{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin-bottom:18px}
+  .picker .vs{font-family:'Jua';font-size:22px;color:var(--ink-dim)}
+  .sel-box label{display:block;font-size:12px;color:var(--ink-dim);margin-bottom:6px;text-align:center}
+  select{
+    width:100%;font-family:'Noto Sans KR';font-size:14px;color:var(--ink);
+    background:rgba(255,255,255,.07);border:1px solid var(--glass-line);
+    border-radius:14px;padding:13px 12px;appearance:none;cursor:pointer;text-align:center;
+  }
+  select option{background:#2a1450;color:#fff}
+  .score-ring{text-align:center;margin:6px 0 14px}
+  .score-ring .pct{font-family:'Jua';font-size:54px;line-height:1;
+    background:linear-gradient(92deg,var(--W),var(--G),var(--Q));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .score-ring .label{font-family:'Jua';font-size:18px;margin-top:2px}
+  .heat{height:10px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden;margin:10px auto 0;max-width:240px}
+  .heat i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(92deg,var(--T),var(--G),var(--W));transition:width .9s ease}
+  .one-line{text-align:center;font-size:15px;color:var(--ink-soft);line-height:1.6;margin:14px 4px 0}
+  .check{list-style:none}
+  .check li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.55;color:var(--ink-soft);padding:9px 0;border-bottom:1px dashed rgba(255,255,255,.1)}
+  .check li:last-child{border-bottom:0}
+  .check li .bx{flex-shrink:0;width:22px;height:22px;border-radius:7px;background:rgba(255,255,255,.08);border:1px solid var(--glass-line);display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:1px;cursor:pointer;transition:.15s}
+  .check li .bx.done{background:linear-gradient(92deg,var(--S),var(--Q));color:#16331f;border-color:transparent}
+  .footnote{text-align:center;color:var(--ink-dim);font-size:12px;margin-top:24px;line-height:1.6}
+  .topbar{display:flex;justify-content:center;margin-bottom:14px}
+  .topbar button{background:none;border:1px solid var(--glass-line);color:var(--ink-soft);font-size:12.5px;border-radius:999px;padding:7px 14px;cursor:pointer}
+  .topbar button:hover{background:rgba(255,255,255,.08)}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+  /* ---- brand footer ---- */
+  .site-footer{margin-top:26px;text-align:center;padding:8px 0 4px;user-select:none}
+  .ff-dots{display:flex;gap:7px;justify-content:center;margin-bottom:14px}
+  .ff-dots span{width:8px;height:8px;border-radius:50%;display:block;animation:ffpulse 2.4s ease-in-out infinite}
+  .ff-dots span:nth-child(1){background:var(--W);animation-delay:0s}
+  .ff-dots span:nth-child(2){background:var(--Q);animation-delay:.24s}
+  .ff-dots span:nth-child(3){background:var(--G);animation-delay:.48s}
+  .ff-dots span:nth-child(4){background:var(--S);animation-delay:.72s}
+  .ff-dots span:nth-child(5){background:var(--T);animation-delay:.96s}
+  @keyframes ffpulse{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.5);opacity:1}}
+  .ff-tag{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:4px;
+    color:var(--ink-dim);margin-bottom:7px}
+  .ff-tag::before,.ff-tag::after{content:"";width:22px;height:1px;background:linear-gradient(90deg,transparent,var(--glass-line))}
+  .ff-tag::after{transform:scaleX(-1)}
+  .ff-brand{font-family:'Jua',sans-serif;font-size:26px;line-height:1;
+    background:linear-gradient(92deg,var(--W),var(--G) 50%,var(--T));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 4px 14px rgba(255,107,170,.3))}
+  .ff-sub{font-size:12px;color:var(--ink-dim);margin-top:9px;letter-spacing:.3px}
+  .ff-sub .colon{color:var(--Q);font-weight:700;padding:0 1px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HOME -->
+  <section id="home" class="screen on home">
+    <div class="card">
+      <div class="hero-emoji">💗</div>
+      <h1>你的 <span class="grad">愛的語言</span>是<br>什麼呢？</h1>
+      <p class="sub">用選擇找出你的愛情類型。<br>還有和重要的人之間，甜蜜的速配指數。</p>
+      <div class="lang-chips">
+        <span class="chip" style="color:var(--W)">🌟 肯定的言語</span>
+        <span class="chip" style="color:var(--Q)">⏳ 共度的時光</span>
+        <span class="chip" style="color:var(--G)">🎁 禮物</span>
+        <span class="chip" style="color:var(--S)">🤲 服務行動</span>
+        <span class="chip" style="color:var(--T)">🤗 身體接觸</span>
+      </div>
+      <div style="margin:16px 0 4px;font-size:12px;color:var(--ink-dim)">選擇題目數</div>
+      <div id="nPicks" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px">
+        <button class="npick sel" data-n="10" style="flex:1;max-width:110px;padding:11px 4px;border-radius:12px;border:1.6px solid var(--glass-line);background:var(--glass);color:inherit;font-family:inherit;cursor:pointer"><b style="font-size:18px">10</b><br><span style="font-size:10.5px;opacity:.7">簡易 · 1分鐘</span></button>
+        <button class="npick" data-n="20" style="flex:1;max-width:110px;padding:11px 4px;border-radius:12px;border:1.6px solid var(--glass-line);background:var(--glass);color:inherit;font-family:inherit;cursor:pointer"><b style="font-size:18px">20</b><br><span style="font-size:10.5px;opacity:.7">標準 · 2分鐘</span></button>
+        <button class="npick" data-n="30" style="flex:1;max-width:110px;padding:11px 4px;border-radius:12px;border:1.6px solid var(--glass-line);background:var(--glass);color:inherit;font-family:inherit;cursor:pointer"><b style="font-size:18px">30</b><br><span style="font-size:10.5px;opacity:.7">精準 · 3分鐘</span></button>
+      </div>
+      <button class="btn" onclick="startQuiz()">找出我的愛情類型 →</button>
+      <button class="btn ghost" onclick="go('match'); buildMatchOptions()">直接看速配指數</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="screen">
+    <div class="card">
+      <div class="gauge-wrap">
+        <div class="gauge-top">
+          <span class="q-count" id="qcount">1 / 10</span>
+          <span class="q-count" style="color:var(--ink-dim)">即時心動指數</span>
+        </div>
+        <div class="gauge" id="gauge">
+          <i class="W"></i><i class="Q"></i><i class="G"></i><i class="S"></i><i class="T"></i>
+        </div>
+      </div>
+      <div class="q-num" id="qnum"></div>
+      <div class="q-text" id="qtext"></div>
+      <div id="opts"></div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="screen">
+    <div class="card">
+      <div class="crown">YOUR LOVE LANGUAGE</div>
+      <div class="res-emoji" id="resEmoji">💗</div>
+      <div class="res-title" id="resTitle"></div>
+      <div class="res-tag" id="resTag"></div>
+      <div class="bars" id="bars"></div>
+      <div class="sec"><h4 id="h_you"></h4><p id="p_you"></p></div>
+      <div class="sec"><h4>💞 這樣被愛最有感</h4><p id="p_recv"></p></div>
+      <div class="sec"><h4>🌿 小提醒</h4><p id="p_care"></p></div>
+      <button class="btn" style="margin-top:22px" onclick="go('match'); buildMatchOptions()">和重要的人看速配指數 →</button>
+      <button class="btn ghost" onclick="resetAll()">重新開始</button>
+    </div>
+  </section>
+
+  <!-- MATCH -->
+  <section id="match" class="screen match">
+    <div class="card">
+      <div class="topbar"><button onclick="go('home')">← 回首頁</button></div>
+      <h2>💞 我們的速配指數</h2>
+      <p class="sub">選出兩人心中第一順位的愛的語言</p>
+      <div class="picker">
+        <div class="sel-box"><label>我</label><select id="selMe"></select></div>
+        <div class="vs">×</div>
+        <div class="sel-box"><label>對方</label><select id="selYou"></select></div>
+      </div>
+      <button class="btn" onclick="runMatch()">查看速配指數 ✨</button>
+
+      <div id="matchOut" style="display:none">
+        <div class="score-ring">
+          <div class="pct" id="mPct">0%</div>
+          <div class="label" id="mLabel"></div>
+          <div class="heat"><i id="mHeat"></i></div>
+        </div>
+        <p class="one-line" id="mOneline"></p>
+        <div class="sec"><h4>💌 貼心建議</h4><p id="mAdvice"></p></div>
+        <div class="sec"><h4>✅ 我們可以一起努力的事</h4><ul class="check" id="mChecklist"></ul></div>
+      </div>
+      <div class="footnote">這是好玩的心理測驗，真正的答案在兩人的對話裡 🤍</div>
+    </div>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/zh-tw/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 多巴胺實驗室 — 去看其他測驗 →</a></div>
+  <footer class="site-footer">
+    <div class="ff-dots"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="ff-tag">意義與趣味工廠</div>
+    <div class="ff-brand">咪咪工廠</div>
+    <div class="ff-sub">YEON<span class="colon">:</span>GYEOL股份有限公司 家族公司</div>
+  </footer>
+
+</div>
+
+<script>
+/* ============ DATA ============ */
+const LANG = {
+  W:{name:"肯定的言語", emoji:"🌟", color:"var(--W)", tag:"一句話就能點亮一整天的人",
+     you:"真心的話語對你來說就是氧氣。「你做得很好」「謝謝你」這樣一句話，能觸及內心深處，讚美與鼓勵讓你更加閃閃發光。",
+     recv:"請具體地稱讚對方。比起「你好棒」，不如說「今天簡報那個部分真的讓我印象深刻」。一則訊息、一封手寫信，都是很大的力量。",
+     care:"沒有言語時容易覺得愛淡了。請記得，對方可能只是不擅長表達而已。"},
+  Q:{name:"共度的時光", emoji:"⏳", color:"var(--Q)", tag:"在身邊才算是愛的人",
+     you:"全心全意共度的時光，對你來說是愛最大的證明。放下手機、四目相對的那一刻，內心就滿滿的。",
+     recv:"就算短暫也好，請主動邀約不受打擾的兩人時光。散一圈步、面對面吃頓晚餐就足夠了。",
+     care:"對方忙碌時很容易累積失落感。比起時間的長短，試著一起約定「專注的品質」吧。"},
+  G:{name:"禮物", emoji:"🎁", color:"var(--G)", tag:"珍藏心意證明的人",
+     you:"對你來說禮物不是物品，而是「有把我放在心上的證據」。就算再小，你也能準確讀出裡面藏的心意。",
+     recv:"請告訴對方，重點不是價格，而是「想起我的痕跡」。路上看到的小東西也能帶來大大的感動。",
+     care:"沒收到禮物時不要懷疑對方的愛。對方可能正用另一種語言默默愛著你。"},
+  S:{name:"服務行動", emoji:"🤲", color:"var(--S)", tag:"被行動證明時才安心的人",
+     you:"「交給我吧」這句話和實際的幫忙，對你來說是最深的愛。比起言語，行動；比起承諾，實踐，更能打動你的心。",
+     recv:"請具體說出你需要的幫忙。開口請求不是軟弱，而是親密的邀請。",
+     care:"對方沒幫忙時很容易聯想到「是不是不愛我了」。試著先具體提出請求吧。"},
+  T:{name:"身體接觸", emoji:"🤗", color:"var(--T)", tag:"用體溫確認愛的人",
+     you:"牽手、擁抱這種溫暖的接觸讓你安心。身邊的溫度比任何言語都更快讓心安定下來。",
+     recv:"請自然地主動要求輕微的接觸。靠個肩、牽個手這種小小的訊號，都是很大的安慰。",
+     care:"接觸變少時容易覺得疏遠了。也請溫柔留意對方的狀態和情況。"}
+};
+const ORDER = ["W","Q","G","S","T"];
+
+/* 10 forced-choice questions = every pair once */
+const QUESTIONS = [
+  {t:"心情跌到谷底的日子，更能安慰你的是？", a:{k:"W",ic:"🌟",txt:"「你已經做得很好了」這句真心話"}, b:{k:"Q",ic:"⏳",txt:"什麼都不說、只是陪在身邊的時光"}},
+  {t:"特別的日子，更讓你心動的是？", a:{k:"W",ic:"🌟",txt:"對方一字一字寫給我的手寫信"}, b:{k:"G",ic:"🎁",txt:"用心挑選的小禮物"}},
+  {t:"疲憊的一天結束後，更讓你感謝的是？", a:{k:"W",ic:"🌟",txt:"「今天真的辛苦了，我以你為榮」這句話"}, b:{k:"S",ic:"🤲",txt:"不發一語準備好的溫暖一餐"}},
+  {t:"想確認愛的時候，更打動你的是？", a:{k:"W",ic:"🌟",txt:"「我愛你」這句溫柔的話"}, b:{k:"T",ic:"🤗",txt:"緊緊的擁抱"}},
+  {t:"約會的重頭戲是？", a:{k:"Q",ic:"⏳",txt:"只屬於兩人、深入交心的對話時光"}, b:{k:"G",ic:"🎁",txt:"驚喜準備的禮物"}},
+  {t:"對方忙碌時，更讓你印象深刻的是？", a:{k:"Q",ic:"⏳",txt:"就算只有一下下也要抽空陪我"}, b:{k:"S",ic:"🤲",txt:"幫我把事情處理掉的協助"}},
+  {t:"悠閒的週末午後，最幸福的畫面是？", a:{k:"Q",ic:"⏳",txt:"面對面聊天聊個沒完"}, b:{k:"T",ic:"🤗",txt:"窩在沙發上緊緊依偎"}},
+  {t:"紀念日更讓你感動的是？", a:{k:"G",ic:"🎁",txt:"正中我喜好的禮物"}, b:{k:"S",ic:"🤲",txt:"一整天都在照顧我的用心"}},
+  {t:"想念的心意，你希望怎麼被接收？", a:{k:"G",ic:"🎁",txt:"用一份塞進手心的小禮物"}, b:{k:"T",ic:"🤗",txt:"見面就緊緊撲上來的擁抱"}},
+  {t:"身體不舒服時最能安慰你的是？", a:{k:"S",ic:"🤲",txt:"幫我準備藥和熬粥的照顧"}, b:{k:"T",ic:"🤗",txt:"摸額頭、牽著手的溫度"}},
+  {t:"吵架後和好時，更能讓心情舒緩的是？", a:{k:"W",ic:"🌟",txt:"真心的道歉和貼心的話語"}, b:{k:"Q",ic:"⏳",txt:"留在身邊、重新一起相處的時光"}},
+  {t:"完成某件事時，更開心的是？", a:{k:"W",ic:"🌟",txt:"「我就知道你辦得到」的祝賀訊息"}, b:{k:"G",ic:"🎁",txt:"包含祝賀心意的禮物"}},
+  {t:"自信心低落的日子，更能給你力量的是？", a:{k:"W",ic:"🌟",txt:"「你已經做得很好了」的鼓勵"}, b:{k:"S",ic:"🤲",txt:"幫你減輕負擔的實際協助"}},
+  {t:"睡前，更讓你感到溫暖的是？", a:{k:"W",ic:"🌟",txt:"「我愛你，晚安」的貼心問候"}, b:{k:"T",ic:"🤗",txt:"輕拍後背的溫暖手心"}},
+  {t:"過紀念日時，更有意義的是？", a:{k:"Q",ic:"⏳",txt:"像兩人小旅行般共度的時光"}, b:{k:"G",ic:"🎁",txt:"值得長久珍藏的紀念禮物"}},
+  {t:"累到不行時，更讓你安慰的是？", a:{k:"Q",ic:"⏳",txt:"在旁邊陪你一起休息"}, b:{k:"S",ic:"🤲",txt:"俐落地把你該做的事處理掉"}},
+  {t:"一起看電影時，更喜歡的是？", a:{k:"Q",ic:"⏳",txt:"看完後分享感想的對話時光"}, b:{k:"T",ic:"🤗",txt:"看的過程中一直靠在肩上"}},
+  {t:"生日時更讓你感動的是？", a:{k:"G",ic:"🎁",txt:"用心挑選的驚喜禮物"}, b:{k:"S",ic:"🤲",txt:"包辦一整天的細心照顧"}},
+  {t:"壓力大到快爆炸的日子，更能舒緩的是？", a:{k:"S",ic:"🤲",txt:"幫忙把家事代勞的協助"}, b:{k:"T",ic:"🤗",txt:"什麼都不說、只是抱緊你的擁抱"}},
+  {t:"旅行中更讓你心動的瞬間是？", a:{k:"G",ic:"🎁",txt:"偷偷買了當地限定紀念品給我的時候"}, b:{k:"T",ic:"🤗",txt:"看著夕陽、緊緊牽著的手"}},
+  {t:"紀念日早晨，更讓你心跳加速的是？", a:{k:"G",ic:"💝",txt:"枕邊放著的用心禮物盒"}, b:{k:"T",ic:"🫂",txt:"一睜眼就抱緊你的早安擁抱"}},
+  {t:"疲憊一週結束的星期五晚上，更喜歡的是？", a:{k:"G",ic:"🍰",txt:"下班路上買回來給我的驚喜甜點"}, b:{k:"Q",ic:"⏳",txt:"沒有約定、兩人漫長的夜晚"}},
+  {t:"搬家那天，更讓你感謝的人是？", a:{k:"G",ic:"🎁",txt:"用心挑選喬遷禮物的人"}, b:{k:"S",ic:"🤲",txt:"一早就來幫忙搬東西的人"}},
+  {t:"面對大考前，更能給你力量的是？", a:{k:"G",ic:"🍀",txt:"說著祝你好運、遞來的小護身符禮物"}, b:{k:"W",ic:"🌟",txt:"「你一定會考上」這句篤定的話"}},
+  {t:"感冒臥床的日子，更能安慰你的是？", a:{k:"Q",ic:"⏳",txt:"坐在旁邊陪你一整天"}, b:{k:"S",ic:"🥣",txt:"熬好粥、連藥都買好的照顧"}},
+  {t:"吵架後和好時，更需要的是？", a:{k:"Q",ic:"🗣️",txt:"面對面充分聊開的時光"}, b:{k:"T",ic:"🤗",txt:"不發一語先抱住你的懷抱"}},
+  {t:"我的生日，更讓你久久難忘的是？", a:{k:"Q",ic:"⏳",txt:"把一整天空出來陪我的心意"}, b:{k:"W",ic:"💌",txt:"字字句句充滿真心的手寫信"}},
+  {t:"累到快虛脫的一天，更好的收尾是？", a:{k:"S",ic:"🧽",txt:"不聲不響就把碗洗好、家打掃乾淨"}, b:{k:"T",ic:"💆",txt:"在沙發上幫你按摩肩膀的手"}},
+  {t:"犯錯而自信全失時，更需要的是？", a:{k:"S",ic:"🤲",txt:"默默陪你一起收拾善後的行動"}, b:{k:"W",ic:"🌟",txt:"「誰都有可能這樣」的安慰"}},
+  {t:"許久不見的日子，更讓你開心的問候是？", a:{k:"T",ic:"🫂",txt:"跑過來緊緊抱住你的擁抱"}, b:{k:"W",ic:"🌟",txt:"說著「我好想你」的那個聲音"}},
+];
+
+/* 15 symmetric match combos */
+function key(x,y){return [x,y].sort().join("");}
+const MATCH = {
+  WW:{pct:88,label:"用言語綻放的關係",one:"使用同一種語言的兩人，讚美會帶來讚美的良性循環。",
+      advice:"你們是很擅長把真心放進言語裡的一對。不過太習慣稱讚後可能會變得無感，記得用新的說法和具體的細節，保持新鮮感。",
+      checks:["每天交換一句「具體的」稱讚","覺得委屈時用言語說開，別悶著","對理所當然的事也說聲「謝謝」"]},
+  WQ:{pct:78,label:"在對話中越來越深的關係",one:"用言語表達的愛，加上共度時光的愛。深入的對話讓兩人都被填滿。",
+      advice:"一個人想要言語，一個人想要時間。幸好，「一起聊天」是同時滿足兩人的神奇交集，請刻意留出這段時間。",
+      checks:["訂下不受打擾的「聊天時間」","稱讚要在一起的時候看著對方的眼睛說","再忙的一週也用短短的通話報平安"]},
+  WG:{pct:74,label:"用心意表達的關係",one:"言語與禮物，都是熱愛「表達」的浪漫組合。",
+      advice:"你們是表達豐富的一對，愛意很容易外顯。送禮物時附上一句短訊，兩人的語言就能同時傳達到位。",
+      checks:["送禮物時多加一句手寫小卡","感謝的心意再用言語確認一次","兩手空空的日子就用貼心話語補上"]},
+  WS:{pct:70,label:"言語與行動相遇的關係",one:"用言語表達的人，和用行動證明的人，兩者的平衡。",
+      advice:"一個人想說給對方聽，一個人想做給對方看。服務型可以在幫忙後加一句「因為愛你才做的」，表達型則對幫忙說一句「真的很謝謝你」。",
+      checks:["做完之後也用言語傳達心意","收到幫忙時具體表達感謝","承認彼此愛的方式本來就不同"]},
+  WT:{pct:79,label:"言語與溫度流動的關係",one:"貼心的話語加上溫暖的接觸，滿滿都是安心感的組合。",
+      advice:"言語和身體接觸一起用，效果加倍。一邊擁抱一邊說「我愛你」的那一瞬間，最能讓兩人同時感到幸福。",
+      checks:["擁抱時一起說出貼心話語","身體接觸讓人有負擔的日子就用言語補上","早晨／睡前固定一套簡短的愛的表達"]},
+  QQ:{pct:90,label:"分享時光的關係",one:"光是在一起就很滿足，安靜又深厚的一對。",
+      advice:"兩人都把時間看得最重要，所以摩擦很少。只是別讓「在一起的時間」變成各自滑手機的時間，記得顧好共度活動的品質。",
+      checks:["訂出放下手機的「完整30分鐘」","一起開始一項新的興趣","每週固定一次只屬於兩人的約會"]},
+  QG:{pct:69,label:"贈送瞬間的關係",one:"共度的時光和其中的小禮物互相輝映。",
+      advice:"時間型想要「一起」，禮物型想要「證明」。互送裝著約會回憶的小紀念品，兩種語言就能自然地連結起來。",
+      checks:["留下共度那天的小紀念品","比起禮物本身，也享受「一起挑選」的時光","忙碌時用小小的紙條傳達心意"]},
+  QS:{pct:76,label:"在身邊相助的關係",one:"陪在身邊、又捲起袖子幫忙，穩固可靠的組合。",
+      advice:"服務型的幫忙有時會變成「一個人處理」，讓時間型感到孤單。把事情「一起」做，就能同時填滿幫忙與時光。",
+      checks:["連家事也用「一起做」的方式進行","幫忙前先問一句「要一起做嗎？」","再忙的日子也要一起坐一下，就算很短"]},
+  QT:{pct:84,label:"緊緊相依的關係",one:"共度的時光加上溫暖的接觸，是最溫馨的組合之一。",
+      advice:"在一起時自然而然增加身體接觸，讓兩人都感到滿足。只是若只是黏在一起卻沒有活動，時間型可能會覺得可惜，記得也安排共同的「體驗」。",
+      checks:["一起散步或做飯時牽著手","享受並肩而坐的安靜時光","身體接觸的頻率彼此舒服地調整"]},
+  GG:{pct:80,label:"互贈心意的關係",one:"彼此交換證明心意的禮物，是心動不斷的一對。",
+      advice:"很懂得禮物的喜悅的兩人。別讓花費壓力越積越多，訂下「小而常」的規則，就能讓心動長久維持。",
+      checks:["比起價格，以「意義」為主互相贈送","訂下減輕送禮壓力的專屬規則","收到禮物時充分展現開心的樣子"]},
+  GS:{pct:72,label:"分享用心的關係",one:"禮物這種證明和行動這種服務，兩者都是用心型。",
+      advice:"一個人用物品，一個人用幫忙表達用心。發現彼此「用心的語言」不同，誤會就會消失。",
+      checks:["把對方的幫忙當成「禮物」一樣珍惜","禮物中加入實用的用心","具體說出哪裡讓你感謝"]},
+  GT:{pct:75,label:"心動與溫度的關係",one:"禮物的心動加上溫暖的接觸，是很貼心的組合。",
+      advice:"送禮物時附上擁抱，兩人的心意會在同一瞬間傳達到位。因為表達豐富，是愛意很容易被看見的一對。",
+      checks:["禮物親手交到手中時搭配擁抱","身體接觸尷尬的日子就用小禮物代替","常常稱讚彼此的表達方式"]},
+  SS:{pct:86,label:"互相照顧的關係",one:"不發一語卻默默照顧彼此的兩人，累積出深厚穩固的信任。",
+      advice:"用行動去愛的一對，非常可靠。只是兩人都不太表達，容易「以為對方懂」而累積委屈，記得幫忙後也用言語確認心意。",
+      checks:["幫忙後補一句「因為愛你才做的」","別把對方的付出視為理所當然","偶爾也試著用言語表達愛"]},
+  ST:{pct:81,label:"照顧與溫度的關係",one:"照顧的手和溫暖的接觸相遇，滿滿都是溫馨感。",
+      advice:"服務型的照顧加上接觸型的溫度，安心感是最高等級。幫忙時輕拍一下肩膀的接觸，就能同時滿足兩人。",
+      checks:["照顧對方時搭配溫暖的接觸","疲憊的日子光是擁抱就足夠了","用行動與溫度取代言語傳達安慰"]},
+  TT:{pct:89,label:"溫度滿溢的關係",one:"用相貼的體溫確認愛，是最溫馨的一對。",
+      advice:"光靠接觸就能快速安心的兩人。只是吵架後別只用身體接觸帶過，把哪裡覺得委屈也用言語說開，關係會更穩固。",
+      checks:["衝突時和好擁抱＋對話一起進行","再忙的日子也別忘了簡短的接觸問候","對方疲憊時體貼調整接觸的力道"]},
+};
+
+/* ============ STATE ============ */
+let qi = 0;
+let score = {W:0,Q:0,G:0,S:0,T:0};
+let myTop = null;
+
+/* ============ NAV ============ */
+function go(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ============ QUIZ ============ */
+
+let chosenN=10, deck=[];
+document.querySelectorAll('.npick').forEach(p=>{
+  p.addEventListener('click',()=>{
+    document.querySelectorAll('.npick').forEach(x=>x.classList.remove('sel'));
+    p.classList.add('sel'); chosenN=+p.dataset.n;
+  });
+});
+function shuffleArr(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildDeck(n){
+  const per=n/10;                      // 每對抽取的題目數 (1~3)
+  const groups={};
+  QUESTIONS.forEach(q=>{const k=[q.a.k,q.b.k].sort().join('');(groups[k]=groups[k]||[]).push(q);});
+  const d=[];
+  Object.values(groups).forEach(g=>{shuffleArr(g.slice()).slice(0,per).forEach(q=>d.push(q));});
+  return shuffleArr(d);
+}
+
+function startQuiz(){
+  deck=buildDeck(chosenN);
+  qi=0; score={W:0,Q:0,G:0,S:0,T:0}; updateGauge();
+  go('quiz'); renderQ();
+}
+function renderQ(){
+  const q = deck[qi];
+  document.getElementById('qcount').textContent = (qi+1)+" / "+deck.length;
+  document.getElementById('qnum').textContent = "Q"+(qi+1);
+  document.getElementById('qtext').textContent = q.t;
+  const wrap = document.getElementById('opts');
+  wrap.innerHTML = "";
+  [q.a,q.b].forEach(o=>{
+    const b=document.createElement('button');
+    b.className="opt";
+    b.innerHTML = `<span class="ic">${o.ic}</span><span>${o.txt}</span>`;
+    b.style.borderColor = `color-mix(in srgb, ${LANG[o.k].color} 45%, transparent)`;
+    b.onclick=()=>pick(o.k,b);
+    wrap.appendChild(b);
+  });
+}
+function pick(k,el){
+  score[k]++;
+  el.classList.add('picked');
+  if(window.confetti){
+    const rect=el.getBoundingClientRect();
+    confetti({particleCount:18,spread:55,startVelocity:24,scalar:.8,
+      origin:{x:(rect.left+rect.width/2)/window.innerWidth, y:(rect.top+rect.height/2)/window.innerHeight}});
+  }
+  updateGauge();
+  setTimeout(()=>{
+    qi++;
+    if(qi>=deck.length){ showResult(); }
+    else { renderQ(); }
+  },340);
+}
+function updateGauge(){
+  const total = Math.max(1, Object.values(score).reduce((a,b)=>a+b,0));
+  ORDER.forEach(k=>{
+    const bar = document.querySelector('.gauge i.'+k);
+    bar.style.flexGrow = score[k];
+  });
+}
+
+/* ============ RESULT ============ */
+function showResult(){
+  const sorted = [...ORDER].sort((a,b)=>score[b]-score[a]);
+  myTop = sorted[0];
+  const L = LANG[myTop];
+  document.getElementById('resEmoji').textContent = L.emoji;
+  document.getElementById('resTitle').textContent = L.name;
+  document.getElementById('resTitle').style.color = L.color;
+  document.getElementById('resTag').textContent = L.tag;
+  document.getElementById('h_you').textContent = "💫 你是這樣的人";
+  document.getElementById('p_you').textContent = L.you;
+  document.getElementById('p_recv').textContent = L.recv;
+  document.getElementById('p_care').textContent = L.care;
+
+  // bars
+  const max = Math.max(...Object.values(score),1);
+  const bars = document.getElementById('bars');
+  bars.innerHTML="";
+  sorted.forEach(k=>{
+    const pct = Math.round(score[k]/8*100); // each lang max 8
+    const row=document.createElement('div');
+    row.className="bar-row";
+    row.innerHTML=`<div class="lab"><b>${LANG[k].emoji} ${LANG[k].name}</b><span>${score[k]}分</span></div>
+      <div class="track"><i style="background:${LANG[k].color}"></i></div>`;
+    bars.appendChild(row);
+    requestAnimationFrame(()=>{ setTimeout(()=>{ row.querySelector('i').style.width = (score[k]/max*100)+"%"; },80); });
+  });
+
+  go('result');
+  // big celebration
+  if(window.confetti){
+    const colors=['#FFD166','#4ECDC4','#FF6BAA','#8BE06C','#FF8C5A'];
+    confetti({particleCount:120,spread:90,origin:{y:.3},colors});
+    setTimeout(()=>confetti({particleCount:80,spread:120,startVelocity:35,origin:{y:.4},colors}),250);
+  }
+}
+
+/* ============ MATCH ============ */
+function buildMatchOptions(){
+  const opts = ORDER.map(k=>`<option value="${k}">${LANG[k].emoji} ${LANG[k].name}</option>`).join("");
+  const selMe=document.getElementById('selMe'), selYou=document.getElementById('selYou');
+  selMe.innerHTML=opts; selYou.innerHTML=opts;
+  if(myTop){ selMe.value=myTop; }
+  selYou.value = ORDER.find(k=>k!==selMe.value);
+  document.getElementById('matchOut').style.display="none";
+}
+function runMatch(){
+  const me=document.getElementById('selMe').value;
+  const you=document.getElementById('selYou').value;
+  const m = MATCH[key(me,you)];
+  const out=document.getElementById('matchOut');
+  out.style.display="block";
+
+  // animated percent
+  document.getElementById('mLabel').textContent = m.label;
+  document.getElementById('mOneline').textContent = m.one;
+  document.getElementById('mAdvice').textContent = m.advice;
+  const ul=document.getElementById('mChecklist');
+  ul.innerHTML="";
+  m.checks.forEach(c=>{
+    const li=document.createElement('li');
+    li.innerHTML=`<span class="bx" role="checkbox" tabindex="0"></span><span>${c}</span>`;
+    const bx=li.querySelector('.bx');
+    const toggle=()=>{bx.classList.toggle('done'); bx.textContent=bx.classList.contains('done')?'✓':'';};
+    bx.onclick=toggle;
+    bx.onkeydown=(e)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}};
+    ul.appendChild(li);
+  });
+
+  // count up animation
+  const target=m.pct; let cur=0;
+  const pctEl=document.getElementById('mPct');
+  const heat=document.getElementById('mHeat');
+  const step=()=>{ cur+=Math.ceil((target-cur)/6); if(cur>=target)cur=target; pctEl.textContent=cur+"%"; if(cur<target)requestAnimationFrame(step); };
+  pctEl.textContent="0%"; step();
+  setTimeout(()=>{heat.style.width=target+"%";},120);
+
+  if(window.confetti && target>=80){
+    confetti({particleCount:90,spread:80,origin:{y:.35},colors:['#FF6BAA','#FFD166','#4ECDC4','#FF8C5A','#8BE06C']});
+  }
+  out.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* ============ RESET ============ */
+function resetAll(){ myTop=null; go('home'); }
+</script>
+</body>
+</html>

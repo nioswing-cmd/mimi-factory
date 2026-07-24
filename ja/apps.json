@@ -241,6 +241,18 @@
    "desc": "ヘッセ『デミアン』の核心を、ドーパミンの反復クイズで身につける。"
   },
   {
+   "id": "self-study",
+   "type": "test",
+   "title": "独学力 マスタークイズ",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-24",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/self-study.html",
+   "premium": "apps/self-study.html",
+   "desc": "AI時代に必要なたった一つの力『独学力』を、クイズで身につける"
+  },
+  {
    "id": "36-questions",
    "type": "test",
    "title": "心を開く36の質問",
@@ -397,6 +409,18 @@
    "desc": "愛と破滅、そして救い — トルストイの大長編を30問で"
   },
   {
+   "id": "energy-bus",
+   "type": "test",
+   "title": "エネルギー・バス マスタークイズ",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-24",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/energy-bus.html",
+   "premium": "apps/energy-bus.html",
+   "desc": "パンクした朝から人生を変える10のルール — 30問のクイズと読了レポート。"
+  },
+  {
    "id": "questions-for-two",
    "type": "test",
    "title": "となりの席の質問 100",
@@ -419,6 +443,18 @@
    "teaser": "apps/sensitivity-meter.html",
    "premium": "apps/sensitivity-meter.html",
    "desc": "あなたの感覚ボリュームはいくつ？20問で感覚 · 共感 · 思考 · 環境をリアルタイム測定。"
+  },
+  {
+   "id": "gohaeng-balance",
+   "type": "test",
+   "title": "五行バランステスト",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-24",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/gohaeng-balance.html",
+   "premium": "apps/gohaeng-balance.html",
+   "desc": "占いを使わず20問で、あなたを動かす五つのエネルギーのバランスを測定します。"
   },
   {
    "id": "our-twisted-hero",
@@ -455,6 +491,18 @@
    "teaser": "apps/selfish-gene.html",
    "premium": "apps/selfish-gene.html",
    "desc": "遺伝子の目で見た進化を、30問のドーパミン反復クイズで"
+  },
+  {
+   "id": "stranger",
+   "type": "test",
+   "title": "異邦人",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-24",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/stranger.html",
+   "premium": "apps/stranger.html",
+   "desc": "悲しみさえ演じない男の物語 — カミュ『異邦人』を反復クイズで読む"
   },
   {
    "id": "origin-of-species",

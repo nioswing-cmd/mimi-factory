@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Languages — My Type & Compatibility</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.3/confetti.browser.min.js"></script>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+  :root{
+    --bg0:#170d33; --bg1:#241046; --bg2:#3a1761;
+    --ink:#f6f1ff; --ink-soft:#c2b2e6; --ink-dim:#9683c4;
+    --glass:rgba(255,255,255,.06); --glass-line:rgba(255,255,255,.14);
+    --W:#FFD166; --Q:#4ECDC4; --G:#FF6BAA; --S:#8BE06C; --T:#FF8C5A;
+    --shadow:0 18px 50px rgba(0,0,0,.45);
+    --r:24px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  .npick{transition:all .25s ease}
+  .npick.sel{border-color:var(--G)!important;background:rgba(255,107,170,.16)!important}
+  html,body{height:100%}
+  body{
+    font-family:'Noto Sans KR',system-ui,sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(900px 600px at 12% -8%, rgba(255,107,170,.20), transparent 60%),
+      radial-gradient(800px 600px at 110% 8%, rgba(78,205,196,.18), transparent 55%),
+      radial-gradient(700px 700px at 50% 120%, rgba(255,209,102,.14), transparent 60%),
+      linear-gradient(160deg,var(--bg0),var(--bg1) 55%,var(--bg2));
+    background-attachment:fixed;
+    min-height:100vh;
+    display:flex;align-items:flex-start;justify-content:center;
+    padding:28px 16px 60px;
+    overflow-x:hidden;
+  }
+  .app{width:100%;max-width:560px}
+  h1,h2,h3,.jua,.big{font-family:'Jua',sans-serif;font-weight:400;letter-spacing:.2px}
+
+  /* ---- screen system ---- */
+  .screen{display:none;animation:pop .45s cubic-bezier(.2,.9,.3,1.3)}
+  .screen.on{display:block}
+  @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+
+  .card{
+    background:var(--glass);
+    border:1px solid var(--glass-line);
+    border-radius:var(--r);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    box-shadow:var(--shadow);
+    padding:30px 24px;
+  }
+
+  /* ---- home ---- */
+  .hero-emoji{font-size:74px;text-align:center;line-height:1;filter:drop-shadow(0 8px 20px rgba(255,107,170,.4));animation:float 3.4s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+  .home h1{font-size:clamp(30px,8vw,44px);text-align:center;margin:14px 0 6px;line-height:1.15}
+  .home .grad{background:linear-gradient(92deg,var(--W),var(--G) 45%,var(--Q));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .home p.sub{text-align:center;color:var(--ink-soft);font-size:15px;line-height:1.6;margin-bottom:22px}
+  .lang-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:26px}
+  .chip{font-size:13px;padding:7px 12px;border-radius:999px;border:1px solid var(--glass-line);background:rgba(255,255,255,.05);display:flex;align-items:center;gap:5px}
+  .btn{
+    width:100%;border:0;cursor:pointer;font-family:'Jua',sans-serif;
+    font-size:19px;color:#1b0e36;padding:17px;border-radius:18px;
+    background:linear-gradient(92deg,var(--W),var(--G) 55%,var(--T));
+    box-shadow:0 12px 30px rgba(255,107,170,.35);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(255,107,170,.5)}
+  .btn:active{transform:translateY(1px) scale(.99)}
+  .btn.ghost{background:rgba(255,255,255,.08);color:var(--ink);box-shadow:none;border:1px solid var(--glass-line);font-size:16px;margin-top:12px}
+  .btn.ghost:hover{background:rgba(255,255,255,.14)}
+
+  /* ---- gauge ---- */
+  .gauge-wrap{margin-bottom:20px}
+  .gauge-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .gauge-top .q-count{font-family:'Jua';font-size:15px;color:var(--ink-soft)}
+  .gauge{height:12px;border-radius:999px;overflow:hidden;display:flex;background:rgba(255,255,255,.08)}
+  .gauge i{height:100%;transition:flex-grow .5s cubic-bezier(.2,.9,.3,1.3);flex-grow:0;flex-basis:0}
+  .gauge i.W{background:var(--W)} .gauge i.Q{background:var(--Q)} .gauge i.G{background:var(--G)} .gauge i.S{background:var(--S)} .gauge i.T{background:var(--T)}
+
+  /* ---- quiz ---- */
+  .q-num{font-family:'Jua';font-size:14px;color:var(--ink-dim);text-align:center;margin-bottom:6px}
+  .q-text{font-family:'Jua';font-size:clamp(20px,5.6vw,26px);text-align:center;line-height:1.4;margin-bottom:24px}
+  .opt{
+    width:100%;text-align:left;border:1px solid var(--glass-line);cursor:pointer;
+    background:rgba(255,255,255,.05);color:var(--ink);
+    padding:18px 18px;border-radius:18px;margin-bottom:12px;font-size:16px;line-height:1.5;
+    display:flex;gap:12px;align-items:center;
+    transition:transform .12s ease,background .2s ease,border-color .2s ease;
+  }
+  .opt:hover{background:rgba(255,255,255,.12);transform:translateX(3px)}
+  .opt .ic{font-size:24px;flex-shrink:0}
+  .opt.picked{animation:bump .35s ease}
+  @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
+
+  /* ---- result ---- */
+  .crown{text-align:center;font-size:13px;letter-spacing:3px;color:var(--ink-dim);margin-bottom:4px}
+  .res-emoji{font-size:72px;text-align:center;line-height:1;animation:float 3.4s ease-in-out infinite}
+  .res-title{font-family:'Jua';font-size:clamp(26px,7vw,36px);text-align:center;margin:8px 0 2px}
+  .res-tag{text-align:center;color:var(--ink-soft);font-size:15px;margin-bottom:22px}
+  .bars{margin:6px 0 22px}
+  .bar-row{margin-bottom:12px}
+  .bar-row .lab{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;color:var(--ink-soft)}
+  .bar-row .lab b{font-family:'Jua';color:var(--ink);font-weight:400}
+  .track{height:14px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+  .track i{display:block;height:100%;width:0;border-radius:999px;transition:width 1s cubic-bezier(.2,.9,.3,1.3)}
+  .sec{margin-top:18px;padding-top:16px;border-top:1px solid var(--glass-line)}
+  .sec h4{font-family:'Jua';font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:7px}
+  .sec p{font-size:14.5px;line-height:1.65;color:var(--ink-soft)}
+
+  /* ---- match ---- */
+  .match h2{font-size:26px;text-align:center;margin-bottom:4px}
+  .match .sub{text-align:center;color:var(--ink-soft);font-size:14px;margin-bottom:22px}
+  .picker{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin-bottom:18px}
+  .picker .vs{font-family:'Jua';font-size:22px;color:var(--ink-dim)}
+  .sel-box label{display:block;font-size:12px;color:var(--ink-dim);margin-bottom:6px;text-align:center}
+  select{
+    width:100%;font-family:'Noto Sans KR';font-size:14px;color:var(--ink);
+    background:rgba(255,255,255,.07);border:1px solid var(--glass-line);
+    border-radius:14px;padding:13px 12px;appearance:none;cursor:pointer;text-align:center;
+  }
+  select option{background:#2a1450;color:#fff}
+  .score-ring{text-align:center;margin:6px 0 14px}
+  .score-ring .pct{font-family:'Jua';font-size:54px;line-height:1;
+    background:linear-gradient(92deg,var(--W),var(--G),var(--Q));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .score-ring .label{font-family:'Jua';font-size:18px;margin-top:2px}
+  .heat{height:10px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden;margin:10px auto 0;max-width:240px}
+  .heat i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(92deg,var(--T),var(--G),var(--W));transition:width .9s ease}
+  .one-line{text-align:center;font-size:15px;color:var(--ink-soft);line-height:1.6;margin:14px 4px 0}
+  .check{list-style:none}
+  .check li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.55;color:var(--ink-soft);padding:9px 0;border-bottom:1px dashed rgba(255,255,255,.1)}
+  .check li:last-child{border-bottom:0}
+  .check li .bx{flex-shrink:0;width:22px;height:22px;border-radius:7px;background:rgba(255,255,255,.08);border:1px solid var(--glass-line);display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:1px;cursor:pointer;transition:.15s}
+  .check li .bx.done{background:linear-gradient(92deg,var(--S),var(--Q));color:#16331f;border-color:transparent}
+  .footnote{text-align:center;color:var(--ink-dim);font-size:12px;margin-top:24px;line-height:1.6}
+  .topbar{display:flex;justify-content:center;margin-bottom:14px}
+  .topbar button{background:none;border:1px solid var(--glass-line);color:var(--ink-soft);font-size:12.5px;border-radius:999px;padding:7px 14px;cursor:pointer}
+  .topbar button:hover{background:rgba(255,255,255,.08)}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+  /* ---- brand footer ---- */
+  .site-footer{margin-top:26px;text-align:center;padding:8px 0 4px;user-select:none}
+  .ff-dots{display:flex;gap:7px;justify-content:center;margin-bottom:14px}
+  .ff-dots span{width:8px;height:8px;border-radius:50%;display:block;animation:ffpulse 2.4s ease-in-out infinite}
+  .ff-dots span:nth-child(1){background:var(--W);animation-delay:0s}
+  .ff-dots span:nth-child(2){background:var(--Q);animation-delay:.24s}
+  .ff-dots span:nth-child(3){background:var(--G);animation-delay:.48s}
+  .ff-dots span:nth-child(4){background:var(--S);animation-delay:.72s}
+  .ff-dots span:nth-child(5){background:var(--T);animation-delay:.96s}
+  @keyframes ffpulse{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.5);opacity:1}}
+  .ff-tag{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:4px;
+    color:var(--ink-dim);margin-bottom:7px}
+  .ff-tag::before,.ff-tag::after{content:"";width:22px;height:1px;background:linear-gradient(90deg,transparent,var(--glass-line))}
+  .ff-tag::after{transform:scaleX(-1)}
+  .ff-brand{font-family:'Jua',sans-serif;font-size:26px;line-height:1;
+    background:linear-gradient(92deg,var(--W),var(--G) 50%,var(--T));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 4px 14px rgba(255,107,170,.3))}
+  .ff-sub{font-size:12px;color:var(--ink-dim);margin-top:9px;letter-spacing:.3px}
+  .ff-sub .colon{color:var(--Q);font-weight:700;padding:0 1px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HOME -->
+  <section id="home" class="screen on home">
+    <div class="card">
+      <div class="hero-emoji">💗</div>
+      <h1>What’s your <span class="grad">Love Language</span>?<br>Let’s find out.</h1>
+      <p class="sub">Discover your love type through your choices.<br>Then check your sweet compatibility with someone special.</p>
+      <div class="lang-chips">
+        <span class="chip" style="color:var(--W)">🌟 Words of Affirmation</span>
+        <span class="chip" style="color:var(--Q)">⏳ Quality Time</span>
+        <span class="chip" style="color:var(--G)">🎁 Gifts</span>
+        <span class="chip" style="color:var(--S)">🤲 Acts of Service</span>
+        <span class="chip" style="color:var(--T)">🤗 Physical Touch</span>
+      </div>
+      <div style="margin:16px 0 4px;font-size:12px;color:var(--ink-dim)">Choose your question count</div>
+      <div id="nPicks" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px">
+        <button class="npick sel" data-n="10" style="flex:1;max-width:110px;padding:11px 4px;border-radius:12px;border:1.6px solid var(--glass-line);background:var(--glass);color:inherit;font-family:inherit;cursor:pointer"><b style="font-size:18px">10</b><br><span style="font-size:10.5px;opacity:.7">Quick · 1 min</span></button>
+        <button class="npick" data-n="20" style="flex:1;max-width:110px;padding:11px 4px;border-radius:12px;border:1.6px solid var(--glass-line);background:var(--glass);color:inherit;font-family:inherit;cursor:pointer"><b style="font-size:18px">20</b><br><span style="font-size:10.5px;opacity:.7">Standard · 2 min</span></button>
+        <button class="npick" data-n="30" style="flex:1;max-width:110px;padding:11px 4px;border-radius:12px;border:1.6px solid var(--glass-line);background:var(--glass);color:inherit;font-family:inherit;cursor:pointer"><b style="font-size:18px">30</b><br><span style="font-size:10.5px;opacity:.7">Deep dive · 3 min</span></button>
+      </div>
+      <button class="btn" onclick="startQuiz()">Find my love language →</button>
+      <button class="btn ghost" onclick="go('match'); buildMatchOptions()">Check compatibility now</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="screen">
+    <div class="card">
+      <div class="gauge-wrap">
+        <div class="gauge-top">
+          <span class="q-count" id="qcount">1 / 10</span>
+          <span class="q-count" style="color:var(--ink-dim)">Live heart gauge</span>
+        </div>
+        <div class="gauge" id="gauge">
+          <i class="W"></i><i class="Q"></i><i class="G"></i><i class="S"></i><i class="T"></i>
+        </div>
+      </div>
+      <div class="q-num" id="qnum"></div>
+      <div class="q-text" id="qtext"></div>
+      <div id="opts"></div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="screen">
+    <div class="card">
+      <div class="crown">YOUR LOVE LANGUAGE</div>
+      <div class="res-emoji" id="resEmoji">💗</div>
+      <div class="res-title" id="resTitle"></div>
+      <div class="res-tag" id="resTag"></div>
+      <div class="bars" id="bars"></div>
+      <div class="sec"><h4 id="h_you"></h4><p id="p_you"></p></div>
+      <div class="sec"><h4>💞 How to love them right</h4><p id="p_recv"></p></div>
+      <div class="sec"><h4>🌿 A gentle heads-up</h4><p id="p_care"></p></div>
+      <button class="btn" style="margin-top:22px" onclick="go('match'); buildMatchOptions()">Check compatibility with someone special →</button>
+      <button class="btn ghost" onclick="resetAll()">Start over</button>
+    </div>
+  </section>
+
+  <!-- MATCH -->
+  <section id="match" class="screen match">
+    <div class="card">
+      <div class="topbar"><button onclick="go('home')">← Home</button></div>
+      <h2>💞 Our Compatibility</h2>
+      <p class="sub">Pick both of your top love languages</p>
+      <div class="picker">
+        <div class="sel-box"><label>Me</label><select id="selMe"></select></div>
+        <div class="vs">×</div>
+        <div class="sel-box"><label>Them</label><select id="selYou"></select></div>
+      </div>
+      <button class="btn" onclick="runMatch()">Check compatibility ✨</button>
+
+      <div id="matchOut" style="display:none">
+        <div class="score-ring">
+          <div class="pct" id="mPct">0%</div>
+          <div class="label" id="mLabel"></div>
+          <div class="heat"><i id="mHeat"></i></div>
+        </div>
+        <p class="one-line" id="mOneline"></p>
+        <div class="sec"><h4>💌 Sweet advice</h4><p id="mAdvice"></p></div>
+        <div class="sec"><h4>✅ Things to try together</h4><ul class="check" id="mChecklist"></ul></div>
+      </div>
+      <div class="footnote">This is just for fun. The real answer lives in your conversations with each other 🤍</div>
+    </div>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/en/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 Dopamine Lab — Try another test →</a></div>
+  <footer class="site-footer">
+    <div class="ff-dots"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="ff-tag">The Meaning & Fun Factory</div>
+    <div class="ff-brand">MIMI FACTORY</div>
+    <div class="ff-sub">YEON<span class="colon">:</span>GYEOL Inc. Family Company</div>
+  </footer>
+
+</div>
+
+<script>
+/* ============ DATA ============ */
+const LANG = {
+  W:{name:"Words of Affirmation", emoji:"🌟", color:"var(--W)", tag:"Someone whose whole day turns on a single sentence",
+     you:"Sincere words are oxygen to you. A simple “great job” or “thank you” reaches deep, and praise and encouragement make you glow.",
+     recv:"Praise them specifically. Instead of “nice job,” try “that part of your presentation today really stuck with me.” A text or a handwritten note goes a long way too.",
+     care:"Silence can feel like love fading. Remember your partner might just be clumsy with words, not short on feelings."},
+  Q:{name:"Quality Time", emoji:"⏳", color:"var(--Q)", tag:"Someone for whom love means being there",
+     you:"Undivided time together is your clearest proof of love. The moment a phone gets put down and eyes meet yours, your heart fills right up.",
+     recv:"Ask for uninterrupted time together, even if it’s brief. A walk around the block or a sit-down dinner is enough.",
+     care:"It’s easy to feel hurt when your partner’s busy. Try agreeing on “focused quality” over sheer quantity of time."},
+  G:{name:"Gifts", emoji:"🎁", color:"var(--G)", tag:"Someone who treasures tokens of the heart",
+     you:"To you, a gift isn’t an object — it’s proof someone was thinking of you. Even something tiny carries a meaning you catch instantly.",
+     recv:"Tell them it’s not the price tag, it’s the “thought that counts” trace. Something small spotted on the street can mean the world.",
+     care:"Don’t doubt the love just because gifts are missing. Your partner may already be showing love in a different language."},
+  S:{name:"Acts of Service", emoji:"🤲", color:"var(--S)", tag:"Someone who feels reassured by actions, not words",
+     you:"“I’ve got this” followed by real help is the deepest love you know. Action over words, follow-through over promises — that’s what moves you.",
+     recv:"Ask specifically for the help you need. Asking isn’t weakness — it’s an invitation to closeness.",
+     care:"It’s easy to leap to “they don’t love me” when help doesn’t come. Try making a specific ask first."},
+  T:{name:"Physical Touch", emoji:"🤗", color:"var(--T)", tag:"Someone who confirms love through warmth",
+     you:"A held hand, a warm hug — that’s what settles you. The warmth beside you calms your heart faster than any words could.",
+     recv:"Ask naturally for light touch. Leaning a shoulder in or holding hands is a small signal that means a lot.",
+     care:"Less touch can feel like distance growing. Be gentle about checking in on your partner’s mood and circumstances too."}
+};
+const ORDER = ["W","Q","G","S","T"];
+
+/* 10 forced-choice questions = every pair once */
+const QUESTIONS = [
+  {t:"On a day you’re feeling low, what comforts you more?", a:{k:"W",ic:"🌟",txt:"A heartfelt “you’re doing great, you know that?”"}, b:{k:"Q",ic:"⏳",txt:"Someone just sitting quietly beside you"}},
+  {t:"On a special day, what excites you more?", a:{k:"W",ic:"🌟",txt:"A handwritten note addressed just to you"}, b:{k:"G",ic:"🎁",txt:"A small gift picked out with care"}},
+  {t:"At the end of an exhausting day, what means more?", a:{k:"W",ic:"🌟",txt:"A “you worked so hard today, I’m proud of you”"}, b:{k:"S",ic:"🤲",txt:"A warm meal made without a word"}},
+  {t:"When you need reassurance of love, what lands harder?", a:{k:"W",ic:"🌟",txt:"A tender “I love you”"}, b:{k:"T",ic:"🤗",txt:"A tight, wordless hug"}},
+  {t:"What’s the highlight of a date?", a:{k:"Q",ic:"⏳",txt:"A deep conversation, just the two of you"}, b:{k:"G",ic:"🎁",txt:"A surprise gift, prepared in secret"}},
+  {t:"When your partner’s swamped, what stays with you more?", a:{k:"Q",ic:"⏳",txt:"Even a few stolen minutes together"}, b:{k:"S",ic:"🤲",txt:"Them handling one of your tasks for you"}},
+  {t:"On a lazy weekend afternoon, what’s the happiest scene?", a:{k:"Q",ic:"⏳",txt:"Sitting face to face, talking endlessly"}, b:{k:"T",ic:"🤗",txt:"Curled up together on the couch"}},
+  {t:"On an anniversary, what moves you more?", a:{k:"G",ic:"🎁",txt:"A gift that nails your exact taste"}, b:{k:"S",ic:"🤲",txt:"Effort spent looking after you all day long"}},
+  {t:"How do you want “I missed you” delivered?", a:{k:"G",ic:"🎁",txt:"As a small gift pressed into your hand"}, b:{k:"T",ic:"🤗",txt:"As a hug the second you’re in sight"}},
+  {t:"When you’re sick, what comforts you most?", a:{k:"S",ic:"🤲",txt:"Medicine fetched and soup simmered for you"}, b:{k:"T",ic:"🤗",txt:"A hand on your forehead, fingers laced with yours"}},
+  {t:"Making up after a fight, what eases things more?", a:{k:"W",ic:"🌟",txt:"A sincere apology and gentle words"}, b:{k:"Q",ic:"⏳",txt:"Staying close and easing back into togetherness"}},
+  {t:"When you’ve accomplished something, what’s more joyful?", a:{k:"W",ic:"🌟",txt:"A “I knew you’d pull it off” message"}, b:{k:"G",ic:"🎁",txt:"A gift chosen to mark the celebration"}},
+  {t:"On a low-confidence day, what helps more?", a:{k:"W",ic:"🌟",txt:"A “you’re doing better than you think” pep talk"}, b:{k:"S",ic:"🤲",txt:"Real, practical help that lightens the load"}},
+  {t:"Right before sleep, what feels cozier?", a:{k:"W",ic:"🌟",txt:"A gentle “love you, sleep well”"}, b:{k:"T",ic:"🤗",txt:"A warm hand patting your back"}},
+  {t:"On an anniversary, what feels more meaningful?", a:{k:"Q",ic:"⏳",txt:"Time spent together like a mini getaway"}, b:{k:"G",ic:"🎁",txt:"A keepsake gift to hold onto for years"}},
+  {t:"When you’re running on empty, what comforts more?", a:{k:"Q",ic:"⏳",txt:"Them resting right there beside you"}, b:{k:"S",ic:"🤲",txt:"Them quietly clearing your to-do list"}},
+  {t:"When watching a movie together, what’s better?", a:{k:"Q",ic:"⏳",txt:"Talking it over together once it ends"}, b:{k:"T",ic:"🤗",txt:"Leaning your head on their shoulder the whole time"}},
+  {t:"On your birthday, what moves you more?", a:{k:"G",ic:"🎁",txt:"A surprise gift picked with real thought"}, b:{k:"S",ic:"🤲",txt:"Care that follows you through the whole day"}},
+  {t:"On a seriously stressful day, what helps you unwind?", a:{k:"S",ic:"🤲",txt:"Them taking chores off your hands"}, b:{k:"T",ic:"🤗",txt:"A wordless hug"}},
+  {t:"While traveling, what’s the more exciting moment?", a:{k:"G",ic:"🎁",txt:"Them secretly buying a souvenir found only there"}, b:{k:"T",ic:"🤗",txt:"A hand held tight while watching the sunset"}},
+  {t:"On the morning of an anniversary, what’s more thrilling?", a:{k:"G",ic:"💝",txt:"A thoughtfully wrapped box waiting by your pillow"}, b:{k:"T",ic:"🫂",txt:"A good-morning hug the second you open your eyes"}},
+  {t:"On a Friday night after a rough week, what’s better?", a:{k:"G",ic:"🍰",txt:"A surprise dessert picked up just for you on the way home"}, b:{k:"Q",ic:"⏳",txt:"A long, plan-free night together, just the two of you"}},
+  {t:"On moving day, who do you appreciate more?", a:{k:"G",ic:"🎁",txt:"Someone who carefully picked a housewarming gift"}, b:{k:"S",ic:"🤲",txt:"Someone who showed up early to help carry boxes"}},
+  {t:"Before a big exam, what gives you more strength?", a:{k:"G",ic:"🍀",txt:"A tiny good-luck charm handed over “just in case”"}, b:{k:"W",ic:"🌟",txt:"A confident “there’s no way you don’t pass this”"}},
+  {t:"Home sick with a fever, what comforts more?", a:{k:"Q",ic:"⏳",txt:"Them sitting with you the entire day"}, b:{k:"S",ic:"🥣",txt:"Soup on the stove and medicine already bought"}},
+  {t:"Making up after a fight, what do you need more?", a:{k:"Q",ic:"🗣️",txt:"Sitting down and really talking it through"}, b:{k:"T",ic:"🤗",txt:"A wordless hug that comes first"}},
+  {t:"On your birthday, what sticks with you longer?", a:{k:"Q",ic:"⏳",txt:"Them clearing the whole day just for you"}, b:{k:"W",ic:"💌",txt:"Sentences of a handwritten note, poured from the heart"}},
+  {t:"After a bone-tired day, what’s the better ending?", a:{k:"S",ic:"🧽",txt:"Coming home to dishes and cleaning already done, no words needed"}, b:{k:"T",ic:"💆",txt:"Hands working the knots out of your shoulders on the couch"}},
+  {t:"After a mistake tanks your confidence, what helps more?", a:{k:"S",ic:"🤲",txt:"Quietly helping clean up the aftermath, side by side"}, b:{k:"W",ic:"🌟",txt:"A soothing “anyone could’ve done that”"}},
+  {t:"Reuniting after a while apart, what greeting feels better?", a:{k:"T",ic:"🫂",txt:"A running, full-force hug"}, b:{k:"W",ic:"🌟",txt:"A voice saying “I missed you”"}},
+];
+
+/* 15 symmetric match combos */
+function key(x,y){return [x,y].sort().join("");}
+const MATCH = {
+  WW:{pct:88,label:"Bonded through words",one:"Two people speaking the same language. Praise sparks more praise, in a loop that keeps giving.",
+      advice:"You’re both naturals at putting real feeling into your words. Just watch that praise doesn’t go stale from repetition — keep it fresh with new phrasing and specific details.",
+      checks:["Trade one specific compliment, once a day","When hurt, say it out loud instead of going quiet","Say “thank you” even for the little, expected things"]},
+  WQ:{pct:78,label:"Deepened through conversation",one:"Love in words meets love in presence. Deep conversation fills you both up.",
+      advice:"One of you wants words, the other wants time. Luckily, “talking together” is the magic overlap that satisfies both — make space for it on purpose.",
+      checks:["Block off an uninterrupted “talk time”","Deliver praise eye-to-eye when you’re together","Even in busy weeks, keep in touch with a short call"]},
+  WG:{pct:74,label:"Bonded through expression",one:"Words and gifts — a romantic pairing where both of you love to express.",
+      advice:"You’re an expressive couple, so love shows easily on the surface. Tuck a short note in with every gift, and both your languages land at once.",
+      checks:["Add a handwritten line to every gift","Say thank you out loud, on top of the gift","On empty-handed days, fill the gap with warm words"]},
+  WS:{pct:70,label:"Where words meet action",one:"A balance between someone who speaks their love and someone who shows it.",
+      advice:"One of you wants to be told, the other wants to do. After helping out, the acts-of-service half should add “I did it because I love you” — and the words half should answer with a real “thank you.”",
+      checks:["After doing something, say the feeling out loud too","Thank help received with specific detail","Recognize that you simply love differently"]},
+  WT:{pct:79,label:"Where words and warmth flow together",one:"Tender words and warm touch — a pairing full of reassurance.",
+      advice:"Words and touch double each other’s effect. A hug paired with “I love you” is the single moment that makes you both happiest at once.",
+      checks:["Pair every hug with a tender word","On days touch feels like too much, fill in with words","Build a short affection ritual for morning and bedtime"]},
+  QQ:{pct:90,label:"Bonded through shared time",one:"A quiet, deep couple who feels complete just being together.",
+      advice:"You both prize time above all, so friction is rare. Just make sure “being together” doesn’t turn into two people staring at separate phones — protect the quality of what you actually do together.",
+      checks:["Carve out a phone-down “full 30 minutes”","Start a new hobby you can do together","Lock in one just-the-two-of-you date, weekly"]},
+  QG:{pct:69,label:"Bonded through gifted moments",one:"Time together blends naturally with the small gifts inside it.",
+      advice:"The time half wants “together,” the gift half wants a “keepsake.” Trade small souvenirs from your shared memories, and the two languages link up naturally.",
+      checks:["Keep a small souvenir from days spent together","Enjoy “picking it out together” as much as the gift itself","On busy days, send a short note to bridge the gap"]},
+  QS:{pct:76,label:"Bonded through steady help",one:"Being there and rolling up your sleeves — a dependable pairing.",
+      advice:"Acts-of-service help can turn into “doing it alone,” which can leave the time half feeling lonely. Do the task “together” and you fill both needs at once.",
+      checks:["Turn chores into something you do together","Before helping, ask “want to do this together?” first","On busy days, sit together even briefly"]},
+  QT:{pct:84,label:"Bonded, side by side",one:"Shared time and warm touch — one of the coziest pairings there is.",
+      advice:"Touch naturally weaves into your time together, filling you both up. Just don’t let “together” mean only sitting still — make room for shared experiences too.",
+      checks:["Hold hands while walking or cooking together","Enjoy quiet time spent simply side by side","Match your touch frequency to what’s comfortable for both"]},
+  GG:{pct:80,label:"Bonded through giving",one:"A couple who keeps handing each other tokens of love — the excitement never runs dry.",
+      advice:"You both know the joy of a gift well. Make “small and often” your rule so cost never piles up, and the thrill lasts.",
+      checks:["Trade gifts on “meaning,” not price","Set your own rule to keep gift-giving pressure-free","Show real delight when you receive one"]},
+  GS:{pct:72,label:"Bonded through care",one:"The token of a gift and the devotion of an act — both of you show care deeply.",
+      advice:"One shows care through objects, the other through help. Once you spot that your “care languages” differ, the misunderstandings disappear.",
+      checks:["Treasure your partner’s help like a gift","Add a practical touch to the gifts you give","Say exactly what you’re grateful for"]},
+  GT:{pct:75,label:"Bonded through spark and warmth",one:"A sweet pairing where the thrill of a gift meets the warmth of touch.",
+      advice:"Hand over a gift with a hug, and the feeling lands instantly for both of you. You’re an expressive couple, so the love is easy to see.",
+      checks:["Pass gifts hand to hand, wrapped in a hug","On days touch feels awkward, a small gift fills in","Compliment each other’s way of showing love often"]},
+  SS:{pct:86,label:"Bonded through looking after each other",one:"Two people who take care of things without a word. Deep, solid trust builds up over time.",
+      advice:"You’re a dependable couple who loves through action. Just watch that low expression on both sides doesn’t breed quiet resentment — say the feeling out loud after helping, too.",
+      checks:["After helping, add “I did it because I love you”","Don’t take your partner’s devotion for granted","Every so often, say the love out loud too"]},
+  ST:{pct:81,label:"Bonded through care and warmth",one:"Attentive care meets warm touch, and comfort overflows.",
+      advice:"Add the touch half’s warmth to the service half’s care, and the sense of security peaks. A simple shoulder pat while helping out satisfies you both.",
+      checks:["Pair caretaking with a warm touch","On exhausting days, a hug alone is enough","Comfort through action and warmth instead of words"]},
+  TT:{pct:89,label:"Bonded through warmth",one:"The coziest pairing of all — love confirmed through touch alone.",
+      advice:"You both settle down fast with touch alone. Just don’t let a hug paper over a fight — talk through what actually stung, and the bond grows sturdier.",
+      checks:["Pair a reconciliation hug with real conversation","Even on busy days, don’t skip a quick touch hello","Read your partner’s energy before reaching for touch"]},
+};
+
+/* ============ STATE ============ */
+let qi = 0;
+let score = {W:0,Q:0,G:0,S:0,T:0};
+let myTop = null;
+
+/* ============ NAV ============ */
+function go(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ============ QUIZ ============ */
+
+let chosenN=10, deck=[];
+document.querySelectorAll('.npick').forEach(p=>{
+  p.addEventListener('click',()=>{
+    document.querySelectorAll('.npick').forEach(x=>x.classList.remove('sel'));
+    p.classList.add('sel'); chosenN=+p.dataset.n;
+  });
+});
+function shuffleArr(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildDeck(n){
+  const per=n/10;                      // Questions to draw per pair (1~3)
+  const groups={};
+  QUESTIONS.forEach(q=>{const k=[q.a.k,q.b.k].sort().join('');(groups[k]=groups[k]||[]).push(q);});
+  const d=[];
+  Object.values(groups).forEach(g=>{shuffleArr(g.slice()).slice(0,per).forEach(q=>d.push(q));});
+  return shuffleArr(d);
+}
+
+function startQuiz(){
+  deck=buildDeck(chosenN);
+  qi=0; score={W:0,Q:0,G:0,S:0,T:0}; updateGauge();
+  go('quiz'); renderQ();
+}
+function renderQ(){
+  const q = deck[qi];
+  document.getElementById('qcount').textContent = (qi+1)+" / "+deck.length;
+  document.getElementById('qnum').textContent = "Q"+(qi+1);
+  document.getElementById('qtext').textContent = q.t;
+  const wrap = document.getElementById('opts');
+  wrap.innerHTML = "";
+  [q.a,q.b].forEach(o=>{
+    const b=document.createElement('button');
+    b.className="opt";
+    b.innerHTML = `<span class="ic">${o.ic}</span><span>${o.txt}</span>`;
+    b.style.borderColor = `color-mix(in srgb, ${LANG[o.k].color} 45%, transparent)`;
+    b.onclick=()=>pick(o.k,b);
+    wrap.appendChild(b);
+  });
+}
+function pick(k,el){
+  score[k]++;
+  el.classList.add('picked');
+  if(window.confetti){
+    const rect=el.getBoundingClientRect();
+    confetti({particleCount:18,spread:55,startVelocity:24,scalar:.8,
+      origin:{x:(rect.left+rect.width/2)/window.innerWidth, y:(rect.top+rect.height/2)/window.innerHeight}});
+  }
+  updateGauge();
+  setTimeout(()=>{
+    qi++;
+    if(qi>=deck.length){ showResult(); }
+    else { renderQ(); }
+  },340);
+}
+function updateGauge(){
+  const total = Math.max(1, Object.values(score).reduce((a,b)=>a+b,0));
+  ORDER.forEach(k=>{
+    const bar = document.querySelector('.gauge i.'+k);
+    bar.style.flexGrow = score[k];
+  });
+}
+
+/* ============ RESULT ============ */
+function showResult(){
+  const sorted = [...ORDER].sort((a,b)=>score[b]-score[a]);
+  myTop = sorted[0];
+  const L = LANG[myTop];
+  document.getElementById('resEmoji').textContent = L.emoji;
+  document.getElementById('resTitle').textContent = L.name;
+  document.getElementById('resTitle').style.color = L.color;
+  document.getElementById('resTag').textContent = L.tag;
+  document.getElementById('h_you').textContent = "💫 You’re the type who…";
+  document.getElementById('p_you').textContent = L.you;
+  document.getElementById('p_recv').textContent = L.recv;
+  document.getElementById('p_care').textContent = L.care;
+
+  // bars
+  const max = Math.max(...Object.values(score),1);
+  const bars = document.getElementById('bars');
+  bars.innerHTML="";
+  sorted.forEach(k=>{
+    const pct = Math.round(score[k]/8*100); // each lang max 8
+    const row=document.createElement('div');
+    row.className="bar-row";
+    row.innerHTML=`<div class="lab"><b>${LANG[k].emoji} ${LANG[k].name}</b><span>${score[k]}pts</span></div>
+      <div class="track"><i style="background:${LANG[k].color}"></i></div>`;
+    bars.appendChild(row);
+    requestAnimationFrame(()=>{ setTimeout(()=>{ row.querySelector('i').style.width = (score[k]/max*100)+"%"; },80); });
+  });
+
+  go('result');
+  // big celebration
+  if(window.confetti){
+    const colors=['#FFD166','#4ECDC4','#FF6BAA','#8BE06C','#FF8C5A'];
+    confetti({particleCount:120,spread:90,origin:{y:.3},colors});
+    setTimeout(()=>confetti({particleCount:80,spread:120,startVelocity:35,origin:{y:.4},colors}),250);
+  }
+}
+
+/* ============ MATCH ============ */
+function buildMatchOptions(){
+  const opts = ORDER.map(k=>`<option value="${k}">${LANG[k].emoji} ${LANG[k].name}</option>`).join("");
+  const selMe=document.getElementById('selMe'), selYou=document.getElementById('selYou');
+  selMe.innerHTML=opts; selYou.innerHTML=opts;
+  if(myTop){ selMe.value=myTop; }
+  selYou.value = ORDER.find(k=>k!==selMe.value);
+  document.getElementById('matchOut').style.display="none";
+}
+function runMatch(){
+  const me=document.getElementById('selMe').value;
+  const you=document.getElementById('selYou').value;
+  const m = MATCH[key(me,you)];
+  const out=document.getElementById('matchOut');
+  out.style.display="block";
+
+  // animated percent
+  document.getElementById('mLabel').textContent = m.label;
+  document.getElementById('mOneline').textContent = m.one;
+  document.getElementById('mAdvice').textContent = m.advice;
+  const ul=document.getElementById('mChecklist');
+  ul.innerHTML="";
+  m.checks.forEach(c=>{
+    const li=document.createElement('li');
+    li.innerHTML=`<span class="bx" role="checkbox" tabindex="0"></span><span>${c}</span>`;
+    const bx=li.querySelector('.bx');
+    const toggle=()=>{bx.classList.toggle('done'); bx.textContent=bx.classList.contains('done')?'✓':'';};
+    bx.onclick=toggle;
+    bx.onkeydown=(e)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}};
+    ul.appendChild(li);
+  });
+
+  // count up animation
+  const target=m.pct; let cur=0;
+  const pctEl=document.getElementById('mPct');
+  const heat=document.getElementById('mHeat');
+  const step=()=>{ cur+=Math.ceil((target-cur)/6); if(cur>=target)cur=target; pctEl.textContent=cur+"%"; if(cur<target)requestAnimationFrame(step); };
+  pctEl.textContent="0%"; step();
+  setTimeout(()=>{heat.style.width=target+"%";},120);
+
+  if(window.confetti && target>=80){
+    confetti({particleCount:90,spread:80,origin:{y:.35},colors:['#FF6BAA','#FFD166','#4ECDC4','#FF8C5A','#8BE06C']});
+  }
+  out.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* ============ RESET ============ */
+function resetAll(){ myTop=null; go('home'); }
+</script>
+</body>
+</html>

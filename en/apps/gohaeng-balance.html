@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Five Elements Balance Test — Dopamine Lab</title>
+<meta property="og:title" content="Five Elements Balance Test — the Wood, Fire, Earth, Metal, Water inside you">
+<meta property="og:description" content="No horoscope required — 20 questions measure the balance of five energies that drive you.">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#161311; --bg2:#221d18; --card:#2a231c; --line:#41372c;
+  --ink:#efe6d4; --sub:#b3a893; --accent:#b0413e; --accent2:#7d5a3c;
+  --point:#e0b13e; --ok:#5cb87a; --bad:#d8544c;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 85% -10%, rgba(224,177,62,.10), transparent 55%),
+             radial-gradient(100% 80% at 5% 110%, rgba(176,65,62,.10), transparent 50%),
+             linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--point),var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:5vh;}
+.hero h1{font-size:42px;line-height:1.18;margin:16px 0 8px;}
+.hero .hanja{font-size:24px;letter-spacing:10px;color:var(--point);font-family:'Jua',sans-serif;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;overflow-wrap:break-word;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;overflow-wrap:break-word;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;overflow-wrap:break-word;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#211a10;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--point),#c98a3a);
+  box-shadow:0 10px 26px -8px rgba(224,177,62,.5);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+
+.pillars{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px 10px;margin-bottom:16px;}
+.prow{display:flex;justify-content:space-between;align-items:flex-end;height:74px;gap:9px;}
+.pcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end;}
+.pbar{width:100%;max-width:34px;height:0%;border-radius:8px 8px 3px 3px;transition:height .5s cubic-bezier(.22,1,.36,1);min-height:4px;}
+.pcol .plab{font-family:'Jua',sans-serif;font-size:13px;color:var(--sub);}
+.pillars .cap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:9px;opacity:.8;}
+.count{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);text-align:center;margin-bottom:8px;}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent);}
+.qtext{font-size:21px;font-weight:700;line-height:1.45;margin-top:8px;overflow-wrap:break-word;}
+.qhint{font-size:13px;color:var(--sub);margin-top:8px;}
+.opts{display:flex;flex-direction:column;gap:11px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:16px;
+  font-size:16px;color:var(--ink);text-align:left;cursor:pointer;font-family:inherit;line-height:1.5;overflow-wrap:break-word;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.opt:active{transform:scale(.97);}
+.opt .ab{display:inline-block;font-family:'Jua',sans-serif;color:var(--sub);margin-right:8px;}
+
+
+.res-hero{text-align:center;margin-top:10px;}
+.res-emo{font-size:64px;}
+.res-type{font-family:'Jua',sans-serif;font-size:33px;margin:10px 0 4px;}
+.res-tag{color:var(--sub);font-size:14.5px;line-height:1.65;overflow-wrap:break-word;}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:20px;}
+.crow{display:flex;align-items:center;gap:10px;margin-top:11px;font-size:14px;}
+.crow:first-child{margin-top:0;}
+.crow .cl{width:86px;font-family:'Jua',sans-serif;}
+.cbar{flex:1;height:12px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;}
+.cfill{height:100%;width:0;border-radius:99px;transition:width .9s cubic-bezier(.22,1,.36,1);}
+.crow .cv{width:34px;text-align:right;font-family:'Jua',sans-serif;color:var(--point);}
+.tips{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px 18px;margin-top:14px;font-size:14.5px;line-height:1.75;overflow-wrap:break-word;}
+.tips b{color:var(--point);}
+.tips .row{margin-top:10px;}
+.tips .row:first-child{margin-top:0;}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(42,35,28,.97);border:1.5px solid var(--point);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(224,177,62,.5));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#a3937b;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#a3937b;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 Dopamine Lab · Old Mysticism, Reinvented</span>
+      <h1><span class="grad">Five Elements</span> Balance Test</h1>
+      <div class="hanja">木火土金水</div>
+      <p class="sub">No birth chart needed.<br>Borrowing the ancient language of the “Five Elements,”<br><b>this measures the balance of five energies</b>that drive you.</p>
+    </div>
+    <div class="pitch">
+      <b>What are the five energies?</b><br>
+      🌱 The power to grow · 🔥 The power to blaze · ⛰ The power to hold steady · ⚔️ The power to cut through · 🌊 The power to flow.<br>
+      After 20 either-or questions, <b>we’ll reveal your strongest energy and the one you need to fill</b>.
+    </div>
+    <button class="btn" onclick="startQuiz()">☯️ Start the 20-Question Test</button>
+    <p class="note">※ This isn’t a birth-date horoscope. It borrows Five Elements symbolism for a <b>personality test</b>—
+    every choice is data, so the more honest you are, the more accurate it gets.</p>
+  </section>
+
+  
+  <section id="scQuiz" class="screen">
+    <div class="pillars">
+      <div class="prow" id="prow"></div>
+      <div class="cap">Five pillars grow in real time — which pillar means what stays a secret!</div>
+    </div>
+    <div class="count" id="qCount">1 / 20</div>
+    <div class="qcard">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qhint">👉 Pick whichever feels more like you</div>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="res-emo" id="resEmo"></div>
+      <div class="res-type" id="resType"></div>
+      <p class="res-tag" id="resTag"></p>
+    </div>
+    <div class="chart" id="chart"></div>
+    <div class="tips" id="tips"></div>
+    <button class="btn" onclick="copyResult()">📋 Copy & share my result</button>
+    <button class="btn ghost" onclick="location.reload()">Take it again</button>
+    <p class="note">※ This result reinterprets the Five Elements’ generating/overcoming cycle in the language of modern self-understanding.</p>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/en/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 Dopamine Lab — see more tests →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>T H E   M E A N I N G   &   F U N   F A C T O R Y</span></div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+  </div>
+</div>
+
+<script>
+
+const QUESTIONS=[
+ {q:"When a brilliant idea hits, I…", a:{t:"make a plan and quietly grow it",k:"M"}, b:{t:"can’t wait to tell everyone right away",k:"H"}},
+ {q:"Which moment pulls you in more?", a:{t:"watching something grow like a sprout",k:"M"}, b:{t:"a moment that bursts into flame",k:"H"}},
+ {q:"Facing big change, I…", a:{t:"get excited — I want to try the new path",k:"M"}, b:{t:"get cautious — I secure what matters first",k:"T"}},
+ {q:"My natural role on a team is…", a:{t:"the one proposing new directions",k:"M"}, b:{t:"the one keeping things steady when they wobble",k:"T"}},
+ {q:"When I hit a dead end, I…", a:{t:"find a detour and keep moving forward",k:"M"}, b:{t:"find the root cause, cut it out, and reorganize",k:"G"}},
+ {q:"My desk usually looks more like…", a:{t:"a little cluttered with things in progress",k:"M"}, b:{t:"squared away with only what’s needed",k:"G"}},
+ {q:"My own way of growing is…", a:{t:"diving in and learning by doing",k:"M"}, b:{t:"observing and understanding fully before moving",k:"S"}},
+ {q:"My travel style is…", a:{t:"keep walking, always chasing someplace new",k:"M"}, b:{t:"settle into one place and soak it in deeply",k:"S"}},
+ {q:"At a gathering, I’m usually the one who…", a:{t:"hypes up the room and makes it bigger",k:"H"}, b:{t:"quietly looks after people and puts them at ease",k:"T"}},
+ {q:"The happier moment is…", a:{t:"standing in the spotlight, all eyes on me",k:"H"}, b:{t:"quiet peace with my people, nothing going on",k:"T"}},
+ {q:"When I get angry, I…", a:{t:"burn hot and say it on the spot",k:"H"}, b:{t:"go cold, tidy up, and draw the line",k:"G"}},
+ {q:"When I work, I…", a:{t:"power through in one intense burst",k:"H"}, b:{t:"follow the standards and order precisely",k:"G"}},
+ {q:"The person I’m drawn to is…", a:{t:"someone bursting with energy who warms up the room",k:"H"}, b:{t:"someone unreadable, which makes me curious",k:"S"}},
+ {q:"When stress piles up, I…", a:{t:"go out, move around, and burn it off",k:"H"}, b:{t:"go quiet and cut off contact for a while",k:"S"}},
+ {q:"When a friend asks for too much, I…", a:{t:"tend to go along with it anyway",k:"T"}, b:{t:"tend to say no when it’s a no",k:"G"}},
+ {q:"What makes a good leader?", a:{t:"one who trusts and waits",k:"T"}, b:{t:"one who calls it clearly",k:"G"}},
+ {q:"On a day off, I…", a:{t:"feel best sticking to a familiar routine",k:"T"}, b:{t:"like letting my thoughts drift wherever",k:"S"}},
+ {q:"Comforting someone I love, I…", a:{t:"stay close and make sure they’ve eaten",k:"T"}, b:{t:"find the words that read their heart",k:"S"}},
+ {q:"When I make a decision, I…", a:{t:"set a standard and cut fast",k:"G"}, b:{t:"take my time and watch how things unfold",k:"S"}},
+ {q:"My real strength is…", a:{t:"the power to untangle a mess into order",k:"G"}, b:{t:"an eye that reads what others can’t see",k:"S"}},
+];
+
+const ELEM={
+ M:{emo:"🌱",hanja:"木",name:"Wood — The Pioneer",color:"#7fbf5f",
+    tag:"The power to grow. The energy to start, reach outward, and grow around any obstacle.",
+    up:"You feel most alive starting something new and growing. Standing still is your worst stress.",
+    fill:"Low on Wood, life can feel stuck in place. A tiny fresh start — a new walking route, a new hobby — is the cure."},
+ H:{emo:"🔥",hanja:"火",name:"Fire — The Igniter",color:"#e06a4e",
+    tag:"The power to blaze. The energy to express, spread, and warm up people and rooms.",
+    up:"Passion and expression are your weapon. Managing the burnout after the blaze is a lifelong project.",
+    fill:"Low on Fire, life goes lukewarm. Start by saying what you love out loud — expression is the spark."},
+ T:{emo:"⛰",hanja:"土",name:"Earth — The Anchor",color:"#d9a95f",
+    tag:"The power to hold steady. The energy to protect, embrace, and become the center when things wobble.",
+    up:"People feel safe near you. Just don’t let your own place go empty while you look after everyone else.",
+    fill:"Low on Earth, you feel unmoored. Small routines — regular meals, regular sleep — become your ground."},
+ G:{emo:"⚔️",hanja:"金",name:"Metal — The Decider",color:"#c9ccd4",
+    tag:"The power to cut through. The energy to set standards, clear the clutter, and bring things to a close.",
+    up:"Clarity is your gift. Just keep a sheath for that blade so it never turns on people close to you.",
+    fill:"Low on Metal, unfinished things pile up. Pick one thing to finish today and practice closing it out."},
+ S:{emo:"🌊",hanja:"水",name:"Water — The Observer",color:"#6fa8dc",
+    tag:"The power to flow. The energy to watch, seep in, and read what’s invisible to others.",
+    up:"Depth and flexibility are your weapon. Just don’t stay submerged in thought so long that you never start.",
+    fill:"Low on Water, you run without reflecting. Take 10 minutes a day to do nothing and let your thoughts flow."},
+};
+const ORDER=["M","H","T","G","S"];
+
+const FEEDS={M:"H",H:"T",T:"G",G:"S",S:"M"};
+
+let idx=0, score={M:0,H:0,T:0,G:0,S:0}, pillarMap=[];
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1800);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+let deck=[];
+function startQuiz(){
+  idx=0; score={M:0,H:0,T:0,G:0,S:0};
+  deck=shuffle([...QUESTIONS]);
+  pillarMap=shuffle([...ORDER]); // Pillar order is randomized too — so position can’t give it away
+  const pr=$('prow'); pr.innerHTML="";
+  pillarMap.forEach((k,i)=>{
+    pr.innerHTML+="<div class='pcol'><div class='pbar' id='pb"+i+"' style='background:linear-gradient(180deg,"+ELEM[k].color+",rgba(255,255,255,.06))'></div><div class='plab'>?</div></div>";
+  });
+  show('scQuiz'); render();
+}
+function render(){
+  const Q=deck[idx];
+  $('qCount').textContent=(idx+1)+" / "+deck.length;
+  $('qNum').textContent="Q"+(idx+1);
+  const qt=$('qText'); qt.textContent=Q.q;
+  qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const pair=Math.random()<.5?[Q.a,Q.b]:[Q.b,Q.a];
+  const box=$('opts'); box.innerHTML="";
+  pair.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button";
+    b.innerHTML="<span class='ab'>"+(i===0?"A":"B")+"</span>"+o.t;
+    b.addEventListener('click',()=>pick(o.k));
+    box.appendChild(b);
+  });
+}
+function pick(k){
+  vibrate(22); score[k]++;
+  pillarMap.forEach((el,i)=>{ $('pb'+i).style.height=(score[el]/8*100)+"%"; });
+  idx++;
+  if(idx>=deck.length){ setTimeout(showResult,450); return; }
+  setTimeout(render,240);
+}
+function showResult(){
+  const sorted=[...ORDER].sort((a,b)=>score[b]-score[a]);
+  const top=sorted[0], low=sorted[4];
+  const T=ELEM[top], L=ELEM[low];
+  show('scResult'); vibrate([30,50,30,50,90]);
+  $('resEmo').textContent=T.emo;
+  $('resType').innerHTML="<span class='grad'>"+T.name+"</span>";
+  $('resTag').textContent=T.tag;
+  const ch=$('chart'); ch.innerHTML="";
+  ORDER.forEach((k,i)=>{
+    const e=ELEM[k], pct=Math.round(score[k]/8*100);
+    ch.innerHTML+="<div class='crow'><span class='cl'>"+e.emo+" "+e.hanja+" "+e.name.slice(5)+"</span><div class='cbar'><div class='cfill' id='cf"+i+"' data-w='"+pct+"' style='background:linear-gradient(90deg,"+e.color+"cc,"+e.color+")'></div></div><span class='cv'>"+score[k]+"</span></div>";
+  });
+  setTimeout(()=>{ ORDER.forEach((k,i)=>{ const f=$('cf'+i); f.style.width=f.dataset.w+"%"; }); },150);
+  const feeds=ELEM[FEEDS[top]];
+  $('tips').innerHTML=
+    "<div class='row'><b>"+T.emo+" Right now, you’re</b> — "+T.up+"</div>"+
+    "<div class='row'><b>"+L.emo+" The energy worth building</b> — "+L.fill+"</div>"+
+    "<div class='row'><b>☯️ Wisdom of the Cycle</b> — In the Five Elements, "+T.hanja+"feeds "+feeds.hanja+". Your "+T.name.slice(0,4)+" energy has the power to awaken the “"+feeds.name.slice(5)+"” side in the people around you.</div>";
+  window._resText="☯️ Five Elements Balance Test\nMy dominant energy: "+T.name+" "+T.emo+"\n"+T.tag+"\nBalance: "+ORDER.map(k=>ELEM[k].hanja+" "+score[k]).join(" · ")+"\n\nMeasure your Five Elements → https://mimifactory.vibekr.com/en/apps/gohaeng-balance.html";
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("Copied! Paste it anywhere 📋")); }
+  else toast("Press and hold to copy");
+  vibrate(20);
+}
+</script>
+</body>
+</html>

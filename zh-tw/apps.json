@@ -241,6 +241,18 @@
    "desc": "用多巴胺反覆測驗，記住赫塞《德米安》的核心。"
   },
   {
+   "id": "self-study",
+   "type": "test",
+   "title": "自學力 大師測驗",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-24",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/self-study.html",
+   "premium": "apps/self-study.html",
+   "desc": "透過測驗，精通 AI 時代你唯一需要的那股力量 — 自學力"
+  },
+  {
    "id": "36-questions",
    "type": "test",
    "title": "打開心房的36個問題",
@@ -325,6 +337,18 @@
    "desc": "廣開土太王陵碑與真鏡大師塔碑——從碑文奪回被抹去的古代史"
   },
   {
+   "id": "love-languages",
+   "type": "test",
+   "title": "愛的語言診斷測驗",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-24",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/love-languages.html",
+   "premium": "apps/love-languages.html",
+   "desc": "選出你的愛情類型，看看和重要的人有多速配"
+  },
+  {
    "id": "norwegian-wood",
    "type": "test",
    "title": "挪威的森林 大師測驗",
@@ -373,6 +397,18 @@
    "desc": "用 30 道測驗掌握每天 1%、複利成長的習慣科學"
   },
   {
+   "id": "energy-bus",
+   "type": "test",
+   "title": "能量巴士 大師測驗",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-24",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/energy-bus.html",
+   "premium": "apps/energy-bus.html",
+   "desc": "從爆胎的早晨開始，改變人生的 10 條規則 — 30 道測驗與完讀報告。"
+  },
+  {
    "id": "movie-protagonist",
    "type": "test",
    "title": "電影主角體驗",
@@ -409,6 +445,18 @@
    "desc": "你的感官音量開多大？20 題即時測量感覺 · 共感 · 思考 · 環境。"
   },
   {
+   "id": "gohaeng-balance",
+   "type": "test",
+   "title": "五行平衡測驗",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-24",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/gohaeng-balance.html",
+   "premium": "apps/gohaeng-balance.html",
+   "desc": "不靠命理，20題測出驅動你的五種能量的平衡。"
+  },
+  {
    "id": "our-twisted-hero",
    "type": "test",
    "title": "《我們扭曲的英雄》大師測驗",
@@ -443,6 +491,18 @@
    "teaser": "apps/selfish-gene.html",
    "premium": "apps/selfish-gene.html",
    "desc": "用基因的眼光看演化，30 道多巴胺反覆測驗"
+  },
+  {
+   "id": "stranger",
+   "type": "test",
+   "title": "異鄉人",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-24",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/stranger.html",
+   "premium": "apps/stranger.html",
+   "desc": "連悲傷都不肯演出的男人的故事 — 用反覆測驗讀懂卡繆《異鄉人》"
   },
   {
    "id": "origin-of-species",

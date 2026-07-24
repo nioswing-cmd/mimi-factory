@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>五行バランステスト — ドーパミン実験室</title>
+<meta property="og:title" content="五行バランステスト — 私の中の木火土金水">
+<meta property="og:description" content="占いを知らなくても20問だけで — あなたを動かす五つのエネルギーのバランスを測定します。">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansJP-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/MPLUSRounded1c-Bold-sub.woff2') format('woff2');font-weight:400;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg:#161311; --bg2:#221d18; --card:#2a231c; --line:#41372c;
+  --ink:#efe6d4; --sub:#b3a893; --accent:#b0413e; --accent2:#7d5a3c;
+  --point:#e0b13e; --ok:#5cb87a; --bad:#d8544c;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);min-height:100dvh;
+  background:radial-gradient(120% 70% at 85% -10%, rgba(224,177,62,.10), transparent 55%),
+             radial-gradient(100% 80% at 5% 110%, rgba(176,65,62,.10), transparent 50%),
+             linear-gradient(160deg,var(--bg),var(--bg2));
+  background-attachment:fixed;}
+.wrap{max-width:520px;margin:0 auto;padding:22px 18px 30px;min-height:100dvh;display:flex;flex-direction:column;}
+.grad{background:linear-gradient(100deg,var(--point),var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+h1{font-family:'Jua',sans-serif;font-weight:400;}
+.screen{display:none;flex:1;flex-direction:column;animation:fadeIn .5s ease;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.pop{animation:pop .42s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92);opacity:.4;}60%{transform:scale(1.02);}100%{transform:scale(1);opacity:1;}}
+
+.badge{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+  border:1px solid var(--line);border-radius:99px;padding:6px 14px;}
+.hero{text-align:center;margin-top:5vh;}
+.hero h1{font-size:42px;line-height:1.18;margin:16px 0 8px;}
+.hero .hanja{font-size:24px;letter-spacing:10px;color:var(--point);font-family:'Jua',sans-serif;}
+.sub{color:var(--sub);font-size:15px;line-height:1.65;}
+.pitch{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:18px;
+  padding:15px 16px;margin:20px 0 0;font-size:14px;line-height:1.65;}
+.pitch b{color:var(--point);}
+.note{font-size:12px;color:var(--sub);line-height:1.6;margin-top:14px;text-align:center;opacity:.85;}
+
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'Jua',sans-serif;
+  font-size:19px;color:#211a10;padding:17px;border-radius:16px;margin-top:18px;
+  background:linear-gradient(100deg,var(--point),#c98a3a);
+  box-shadow:0 10px 26px -8px rgba(224,177,62,.5);transition:transform .2s;}
+.btn:active{transform:scale(.97);}
+.btn.ghost{background:transparent;color:var(--sub);box-shadow:none;border:1.5px solid var(--line);font-size:16px;margin-top:12px;}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--point);outline-offset:3px;}
+
+
+.pillars{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px 10px;margin-bottom:16px;}
+.prow{display:flex;justify-content:space-between;align-items:flex-end;height:74px;gap:9px;}
+.pcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end;}
+.pbar{width:100%;max-width:34px;height:0%;border-radius:8px 8px 3px 3px;transition:height .5s cubic-bezier(.22,1,.36,1);min-height:4px;}
+.pcol .plab{font-family:'Jua',sans-serif;font-size:13px;color:var(--sub);}
+.pillars .cap{font-size:11.5px;color:var(--sub);text-align:center;margin-top:9px;opacity:.8;}
+.count{font-family:'Jua',sans-serif;font-size:14px;color:var(--sub);text-align:center;margin-bottom:8px;}
+
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;margin-bottom:14px;}
+.qnum{font-family:'Jua',sans-serif;font-size:14px;color:var(--accent);}
+.qtext{font-size:21px;font-weight:700;line-height:1.45;margin-top:8px;}
+.qhint{font-size:13px;color:var(--sub);margin-top:8px;}
+.opts{display:flex;flex-direction:column;gap:11px;}
+.opt{background:var(--card);border:2px solid var(--line);border-radius:15px;padding:16px;
+  font-size:16px;color:var(--ink);text-align:left;cursor:pointer;font-family:inherit;line-height:1.5;
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+.opt:active{transform:scale(.97);}
+.opt .ab{display:inline-block;font-family:'Jua',sans-serif;color:var(--sub);margin-right:8px;}
+
+
+.res-hero{text-align:center;margin-top:10px;}
+.res-emo{font-size:64px;}
+.res-type{font-family:'Jua',sans-serif;font-size:33px;margin:10px 0 4px;}
+.res-tag{color:var(--sub);font-size:14.5px;line-height:1.65;}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:20px;}
+.crow{display:flex;align-items:center;gap:10px;margin-top:11px;font-size:14px;}
+.crow:first-child{margin-top:0;}
+.crow .cl{width:86px;font-family:'Jua',sans-serif;}
+.cbar{flex:1;height:12px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;}
+.cfill{height:100%;width:0;border-radius:99px;transition:width .9s cubic-bezier(.22,1,.36,1);}
+.crow .cv{width:34px;text-align:right;font-family:'Jua',sans-serif;color:var(--point);}
+.tips{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px 18px;margin-top:14px;font-size:14.5px;line-height:1.75;}
+.tips b{color:var(--point);}
+.tips .row{margin-top:10px;}
+.tips .row:first-child{margin-top:0;}
+
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-16px);
+  background:rgba(42,35,28,.97);border:1.5px solid var(--point);color:var(--ink);
+  padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;
+  transition:opacity .4s,transform .4s;z-index:50;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center;margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(224,177,62,.5));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px;letter-spacing:.42em;text-indent:.42em;color:#a3937b;font-weight:500;white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif;font-size:27px;line-height:1;margin-bottom:9px;
+  background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px;letter-spacing:.1em;color:#a3937b;}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <section id="scHome" class="screen on">
+    <div class="hero">
+      <span class="badge">🧪 ドーパミン実験室・迷信の再解釈</span>
+      <h1><span class="grad">五行バランス</span> テスト</h1>
+      <div class="hanja">木火土金水</div>
+      <p class="sub">占いの知識は不要です。<br>東洋の古い言葉「五行」を借りて、<br><b>あなたを動かす五つのエネルギーのバランス</b>を測定します。</p>
+    </div>
+    <div class="pitch">
+      <b>五つのエネルギーとは？</b><br>
+      🌱 育つ力・🔥 燃え上がる力・⛰ 支える力・⚔️ 断ち切る力・🌊 流れる力。<br>
+      20問の二択が終わると <b>最も強いエネルギーと満たすべきエネルギー</b>をお伝えします。
+    </div>
+    <button class="btn" onclick="startQuiz()">☯️ 20問測定スタート</button>
+    <p class="note">※ 生年月日で見る占いではありません。五行の象徴を借りた <b>傾向テスト</b>で、
+    選択がそのままデータになります — 正直に選ぶほど正確になります。</p>
+  </section>
+
+  
+  <section id="scQuiz" class="screen">
+    <div class="pillars">
+      <div class="prow" id="prow"></div>
+      <div class="cap">五本の柱がリアルタイムで育ちます — どの柱がどのエネルギーかは秘密！</div>
+    </div>
+    <div class="count" id="qCount">1 / 20</div>
+    <div class="qcard">
+      <div class="qnum" id="qNum">Q1</div>
+      <div class="qtext" id="qText"></div>
+      <div class="qhint">👉 より自分らしい方を選んでください</div>
+    </div>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  
+  <section id="scResult" class="screen">
+    <div class="res-hero">
+      <div class="res-emo" id="resEmo"></div>
+      <div class="res-type" id="resType"></div>
+      <p class="res-tag" id="resTag"></p>
+    </div>
+    <div class="chart" id="chart"></div>
+    <div class="tips" id="tips"></div>
+    <button class="btn" onclick="copyResult()">📋 結果をコピーしてシェア</button>
+    <button class="btn ghost" onclick="location.reload()">もう一度測定する</button>
+    <p class="note">※ 五行の相生・相剋の概念を現代的な自己理解の言葉に再解釈した結果です。</p>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/ja/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 ドーパミン実験室 — 他のテストも見てみる →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意 味 と 面 白 さ の 工 場</span></div>
+    <div class="mf-logo">ミミファクトリー</div>
+    <div class="mf-caption">株式会社ヨンギョル ファミリーカンパニー</div>
+  </div>
+</div>
+
+<script>
+
+const QUESTIONS=[
+ {q:"ひらめきが浮かんだとき、私は？", a:{t:"計画を立てて静かに育てていく",k:"M"}, b:{t:"すぐ人に話したくてうずうずする",k:"H"}},
+ {q:"より惹かれる瞬間は？", a:{t:"新芽のように何かが育っていく過程",k:"M"}, b:{t:"炎のようにパッと燃え上がる瞬間",k:"H"}},
+ {q:"大きな変化を前にした私は？", a:{t:"わくわくする — 新しい道を進んでみたい",k:"M"}, b:{t:"慎重になる — 守るものから整える",k:"T"}},
+ {q:"チームでの私の自然な役割は？", a:{t:"新しい方向を提案する人",k:"M"}, b:{t:"揺れるときに軸を支える人",k:"T"}},
+ {q:"行き詰まった問題に出会うと？", a:{t:"回り道してでも前へ進み続ける",k:"M"}, b:{t:"原因を見つけて断ち切り、整理し直す",k:"G"}},
+ {q:"自分の机の状態に近いのは？", a:{t:"進行中のもので少し散らかっている",k:"M"}, b:{t:"必要なものだけがきちんと整っている",k:"G"}},
+ {q:"自分なりの成長の仕方は？", a:{t:"とにかくぶつかって経験から学ぶ",k:"M"}, b:{t:"十分に観察し理解してから動く",k:"S"}},
+ {q:"旅のスタイルは？", a:{t:"歩き続けて新しい場所を開拓",k:"M"}, b:{t:"一か所に留まり深く馴染む",k:"S"}},
+ {q:"集まりで私はたいてい？", a:{t:"場を盛り上げて広げていく側",k:"H"}, b:{t:"静かに気を配り心地よくする側",k:"T"}},
+ {q:"より幸せな瞬間は？", a:{t:"舞台の上のように注目され輝くとき",k:"H"}, b:{t:"大切な人たちと何事もなく穏やかなとき",k:"T"}},
+ {q:"怒ったときの私は？", a:{t:"その場で熱く表現する",k:"H"}, b:{t:"冷たく整理して線を引く",k:"G"}},
+ {q:"仕事をするときの私は？", a:{t:"勢いのあるエネルギーで一気に終わらせる",k:"H"}, b:{t:"基準と順序どおり正確に行う",k:"G"}},
+ {q:"惹かれるのはどんな人？", a:{t:"エネルギーに満ちて周りを温める人",k:"H"}, b:{t:"深さが読めず気になってしまう人",k:"S"}},
+ {q:"ストレスが溜まると？", a:{t:"外に出て遊び、体を動かして発散する",k:"H"}, b:{t:"連絡を減らして静かに引きこもる",k:"S"}},
+ {q:"友人の無理なお願いに私は？", a:{t:"たいてい受け止めてあげる方",k:"T"}, b:{t:"違うことは違うとはっきり言う方",k:"G"}},
+ {q:"良いリーダーとはどんな人？", a:{t:"信じて待ってくれるリーダー",k:"T"}, b:{t:"明確に判断してくれるリーダー",k:"G"}},
+ {q:"休みの日の私は？", a:{t:"いつものルーティン通りに過ごすと落ち着く",k:"T"}, b:{t:"思うままに流れに任せるのが好き",k:"S"}},
+ {q:"大切な人を慰めるとき私は？", a:{t:"そばにいて、まずご飯を用意する",k:"T"}, b:{t:"心の機微を読んだ言葉をかける",k:"S"}},
+ {q:"決定を下すとき私は？", a:{t:"基準を立てて素早く決める",k:"G"}, b:{t:"時間をかけて流れを見守る",k:"S"}},
+ {q:"自分の本当の強みは？", a:{t:"乱れたものを整理する力",k:"G"}, b:{t:"目に見えないものを読み取る目",k:"S"}},
+];
+
+const ELEM={
+ M:{emo:"🌱",hanja:"木",name:"木（もく） — 開拓者",color:"#7fbf5f",
+    tag:"育つ力。始まり、伸びていき、行き詰まれば回り道してでも育つエネルギー。",
+    up:"新しいことを始め成長するとき最も生き生きする人。停滞が最悪のストレスです。",
+    fill:"木が不足すると人生が足踏みしているように感じます。ごく小さな新しい始まり（新しい散歩道、新しい学び）が良薬です。"},
+ H:{emo:"🔥",hanja:"火",name:"火（か） — 点火者",color:"#e06a4e",
+    tag:"燃え上がる力。表現し、広げ、人と場を温めるエネルギー。",
+    up:"情熱と表現が武器。ただしパッと燃え上がった後のバーンアウト管理が一生の課題です。",
+    fill:"火が不足すると人生がぬるくなります。好きなことを声に出して言うことから — 表現が火種です。"},
+ T:{emo:"⛰",hanja:"土",name:"土（ど） — 支持者",color:"#d9a95f",
+    tag:"支える力。守り、包み、揺れるものたちの中心になるエネルギー。",
+    up:"そばにいると安心する人。ただし人の世話ばかりで自分の居場所が空にならないよう気をつけて。",
+    fill:"土が不足すると心がふわふわと落ち着きません。規則正しい食事・睡眠のような些細なルーティンが大地になってくれます。"},
+ G:{emo:"⚔️",hanja:"金",name:"金（きん） — 決断者",color:"#c9ccd4",
+    tag:"断ち切る力。基準を立て、無駄をそぎ落とし、終わりをつけるエネルギー。",
+    up:"明瞭さが才能。ただしその刃が自分や身近な人に向かないよう、鞘も用意しておきましょう。",
+    fill:"金が不足すると片付いていないことが積み重なります。「今日終わらせること一つ」を決めて締めくくりを練習してみましょう。"},
+ S:{emo:"🌊",hanja:"水",name:"水（すい） — 洞察者",color:"#6fa8dc",
+    tag:"流れる力。観察し、染み込み、見えないものを読み取るエネルギー。",
+    up:"深さと柔軟さが武器。ただし思考の海に長く潜りすぎると始動が遅れます。",
+    fill:"水が不足すると省みることなく走り続けてしまいます。1日10分、何もせず思考が流れるままにしてみましょう。"},
+};
+const ORDER=["M","H","T","G","S"];
+
+const FEEDS={M:"H",H:"T",T:"G",G:"S",S:"M"};
+
+let idx=0, score={M:0,H:0,T:0,G:0,S:0}, pillarMap=[];
+const $=id=>document.getElementById(id);
+function vibrate(p){if(navigator.vibrate)try{navigator.vibrate(p);}catch(e){}}
+let _tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),1800);}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+let deck=[];
+function startQuiz(){
+  idx=0; score={M:0,H:0,T:0,G:0,S:0};
+  deck=shuffle([...QUESTIONS]);
+  pillarMap=shuffle([...ORDER]); // 柱の順番もランダム — 位置でも見分けられないように
+  const pr=$('prow'); pr.innerHTML="";
+  pillarMap.forEach((k,i)=>{
+    pr.innerHTML+="<div class='pcol'><div class='pbar' id='pb"+i+"' style='background:linear-gradient(180deg,"+ELEM[k].color+",rgba(255,255,255,.06))'></div><div class='plab'>?</div></div>";
+  });
+  show('scQuiz'); render();
+}
+function render(){
+  const Q=deck[idx];
+  $('qCount').textContent=(idx+1)+" / "+deck.length;
+  $('qNum').textContent="Q"+(idx+1);
+  const qt=$('qText'); qt.textContent=Q.q;
+  qt.parentElement.classList.remove('pop'); void qt.offsetWidth; qt.parentElement.classList.add('pop');
+  const pair=Math.random()<.5?[Q.a,Q.b]:[Q.b,Q.a];
+  const box=$('opts'); box.innerHTML="";
+  pair.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className="opt"; b.type="button";
+    b.innerHTML="<span class='ab'>"+(i===0?"A":"B")+"</span>"+o.t;
+    b.addEventListener('click',()=>pick(o.k));
+    box.appendChild(b);
+  });
+}
+function pick(k){
+  vibrate(22); score[k]++;
+  pillarMap.forEach((el,i)=>{ $('pb'+i).style.height=(score[el]/8*100)+"%"; });
+  idx++;
+  if(idx>=deck.length){ setTimeout(showResult,450); return; }
+  setTimeout(render,240);
+}
+function showResult(){
+  const sorted=[...ORDER].sort((a,b)=>score[b]-score[a]);
+  const top=sorted[0], low=sorted[4];
+  const T=ELEM[top], L=ELEM[low];
+  show('scResult'); vibrate([30,50,30,50,90]);
+  $('resEmo').textContent=T.emo;
+  $('resType').innerHTML="<span class='grad'>"+T.name+"</span>";
+  $('resTag').textContent=T.tag;
+  const ch=$('chart'); ch.innerHTML="";
+  ORDER.forEach((k,i)=>{
+    const e=ELEM[k], pct=Math.round(score[k]/8*100);
+    ch.innerHTML+="<div class='crow'><span class='cl'>"+e.emo+" "+e.hanja+" "+e.name.slice(5)+"</span><div class='cbar'><div class='cfill' id='cf"+i+"' data-w='"+pct+"' style='background:linear-gradient(90deg,"+e.color+"cc,"+e.color+")'></div></div><span class='cv'>"+score[k]+"</span></div>";
+  });
+  setTimeout(()=>{ ORDER.forEach((k,i)=>{ const f=$('cf'+i); f.style.width=f.dataset.w+"%"; }); },150);
+  const feeds=ELEM[FEEDS[top]];
+  $('tips').innerHTML=
+    "<div class='row'><b>"+T.emo+" 今のあなた</b> — "+T.up+"</div>"+
+    "<div class='row'><b>"+L.emo+" 満たすと良いエネルギー</b> — "+L.fill+"</div>"+
+    "<div class='row'><b>☯️ 相生の知恵</b> — 五行では "+T.hanja+"は "+feeds.hanja+"を生かします。あなたの "+T.name.slice(0,4)+" エネルギーは周りの人の「"+feeds.name.slice(5)+"」気質を呼び覚ます力があります。</div>";
+  window._resText="☯️ 五行バランステスト\nあなたの主エネルギー： "+T.name+" "+T.emo+"\n"+T.tag+"\nバランス： "+ORDER.map(k=>ELEM[k].hanja+" "+score[k]).join(" · ")+"\n\n私の五行を測定する → https://mimifactory.vibekr.com/apps/gohaeng-balance.html";
+}
+function copyResult(){
+  if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("コピー完了！どこにでも貼り付けてください📋")); }
+  else toast("長押しでコピーしてください");
+  vibrate(20);
+}
+</script>
+</body>
+</html>

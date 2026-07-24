@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>愛の言語 — あなたの愛のタイプ & 相性</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.3/confetti.browser.min.js"></script>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansJP-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/MPLUSRounded1c-Bold-sub.woff2') format('woff2');font-weight:400;font-display:swap;}
+</style>
+<style>
+  :root{
+    --bg0:#170d33; --bg1:#241046; --bg2:#3a1761;
+    --ink:#f6f1ff; --ink-soft:#c2b2e6; --ink-dim:#9683c4;
+    --glass:rgba(255,255,255,.06); --glass-line:rgba(255,255,255,.14);
+    --W:#FFD166; --Q:#4ECDC4; --G:#FF6BAA; --S:#8BE06C; --T:#FF8C5A;
+    --shadow:0 18px 50px rgba(0,0,0,.45);
+    --r:24px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  .npick{transition:all .25s ease}
+  .npick.sel{border-color:var(--G)!important;background:rgba(255,107,170,.16)!important}
+  html,body{height:100%}
+  body{
+    font-family:'Noto Sans KR',system-ui,sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(900px 600px at 12% -8%, rgba(255,107,170,.20), transparent 60%),
+      radial-gradient(800px 600px at 110% 8%, rgba(78,205,196,.18), transparent 55%),
+      radial-gradient(700px 700px at 50% 120%, rgba(255,209,102,.14), transparent 60%),
+      linear-gradient(160deg,var(--bg0),var(--bg1) 55%,var(--bg2));
+    background-attachment:fixed;
+    min-height:100vh;
+    display:flex;align-items:flex-start;justify-content:center;
+    padding:28px 16px 60px;
+    overflow-x:hidden;
+  }
+  .app{width:100%;max-width:560px}
+  h1,h2,h3,.jua,.big{font-family:'Jua',sans-serif;font-weight:400;letter-spacing:.2px}
+
+  /* ---- screen system ---- */
+  .screen{display:none;animation:pop .45s cubic-bezier(.2,.9,.3,1.3)}
+  .screen.on{display:block}
+  @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+
+  .card{
+    background:var(--glass);
+    border:1px solid var(--glass-line);
+    border-radius:var(--r);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    box-shadow:var(--shadow);
+    padding:30px 24px;
+  }
+
+  /* ---- home ---- */
+  .hero-emoji{font-size:74px;text-align:center;line-height:1;filter:drop-shadow(0 8px 20px rgba(255,107,170,.4));animation:float 3.4s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+  .home h1{font-size:clamp(30px,8vw,44px);text-align:center;margin:14px 0 6px;line-height:1.15}
+  .home .grad{background:linear-gradient(92deg,var(--W),var(--G) 45%,var(--Q));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .home p.sub{text-align:center;color:var(--ink-soft);font-size:15px;line-height:1.6;margin-bottom:22px}
+  .lang-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:26px}
+  .chip{font-size:13px;padding:7px 12px;border-radius:999px;border:1px solid var(--glass-line);background:rgba(255,255,255,.05);display:flex;align-items:center;gap:5px}
+  .btn{
+    width:100%;border:0;cursor:pointer;font-family:'Jua',sans-serif;
+    font-size:19px;color:#1b0e36;padding:17px;border-radius:18px;
+    background:linear-gradient(92deg,var(--W),var(--G) 55%,var(--T));
+    box-shadow:0 12px 30px rgba(255,107,170,.35);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(255,107,170,.5)}
+  .btn:active{transform:translateY(1px) scale(.99)}
+  .btn.ghost{background:rgba(255,255,255,.08);color:var(--ink);box-shadow:none;border:1px solid var(--glass-line);font-size:16px;margin-top:12px}
+  .btn.ghost:hover{background:rgba(255,255,255,.14)}
+
+  /* ---- gauge ---- */
+  .gauge-wrap{margin-bottom:20px}
+  .gauge-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .gauge-top .q-count{font-family:'Jua';font-size:15px;color:var(--ink-soft)}
+  .gauge{height:12px;border-radius:999px;overflow:hidden;display:flex;background:rgba(255,255,255,.08)}
+  .gauge i{height:100%;transition:flex-grow .5s cubic-bezier(.2,.9,.3,1.3);flex-grow:0;flex-basis:0}
+  .gauge i.W{background:var(--W)} .gauge i.Q{background:var(--Q)} .gauge i.G{background:var(--G)} .gauge i.S{background:var(--S)} .gauge i.T{background:var(--T)}
+
+  /* ---- quiz ---- */
+  .q-num{font-family:'Jua';font-size:14px;color:var(--ink-dim);text-align:center;margin-bottom:6px}
+  .q-text{font-family:'Jua';font-size:clamp(20px,5.6vw,26px);text-align:center;line-height:1.4;margin-bottom:24px}
+  .opt{
+    width:100%;text-align:left;border:1px solid var(--glass-line);cursor:pointer;
+    background:rgba(255,255,255,.05);color:var(--ink);
+    padding:18px 18px;border-radius:18px;margin-bottom:12px;font-size:16px;line-height:1.5;
+    display:flex;gap:12px;align-items:center;
+    transition:transform .12s ease,background .2s ease,border-color .2s ease;
+  }
+  .opt:hover{background:rgba(255,255,255,.12);transform:translateX(3px)}
+  .opt .ic{font-size:24px;flex-shrink:0}
+  .opt.picked{animation:bump .35s ease}
+  @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
+
+  /* ---- result ---- */
+  .crown{text-align:center;font-size:13px;letter-spacing:3px;color:var(--ink-dim);margin-bottom:4px}
+  .res-emoji{font-size:72px;text-align:center;line-height:1;animation:float 3.4s ease-in-out infinite}
+  .res-title{font-family:'Jua';font-size:clamp(26px,7vw,36px);text-align:center;margin:8px 0 2px}
+  .res-tag{text-align:center;color:var(--ink-soft);font-size:15px;margin-bottom:22px}
+  .bars{margin:6px 0 22px}
+  .bar-row{margin-bottom:12px}
+  .bar-row .lab{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;color:var(--ink-soft)}
+  .bar-row .lab b{font-family:'Jua';color:var(--ink);font-weight:400}
+  .track{height:14px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+  .track i{display:block;height:100%;width:0;border-radius:999px;transition:width 1s cubic-bezier(.2,.9,.3,1.3)}
+  .sec{margin-top:18px;padding-top:16px;border-top:1px solid var(--glass-line)}
+  .sec h4{font-family:'Jua';font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:7px}
+  .sec p{font-size:14.5px;line-height:1.65;color:var(--ink-soft)}
+
+  /* ---- match ---- */
+  .match h2{font-size:26px;text-align:center;margin-bottom:4px}
+  .match .sub{text-align:center;color:var(--ink-soft);font-size:14px;margin-bottom:22px}
+  .picker{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin-bottom:18px}
+  .picker .vs{font-family:'Jua';font-size:22px;color:var(--ink-dim)}
+  .sel-box label{display:block;font-size:12px;color:var(--ink-dim);margin-bottom:6px;text-align:center}
+  select{
+    width:100%;font-family:'Noto Sans KR';font-size:14px;color:var(--ink);
+    background:rgba(255,255,255,.07);border:1px solid var(--glass-line);
+    border-radius:14px;padding:13px 12px;appearance:none;cursor:pointer;text-align:center;
+  }
+  select option{background:#2a1450;color:#fff}
+  .score-ring{text-align:center;margin:6px 0 14px}
+  .score-ring .pct{font-family:'Jua';font-size:54px;line-height:1;
+    background:linear-gradient(92deg,var(--W),var(--G),var(--Q));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .score-ring .label{font-family:'Jua';font-size:18px;margin-top:2px}
+  .heat{height:10px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden;margin:10px auto 0;max-width:240px}
+  .heat i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(92deg,var(--T),var(--G),var(--W));transition:width .9s ease}
+  .one-line{text-align:center;font-size:15px;color:var(--ink-soft);line-height:1.6;margin:14px 4px 0}
+  .check{list-style:none}
+  .check li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.55;color:var(--ink-soft);padding:9px 0;border-bottom:1px dashed rgba(255,255,255,.1)}
+  .check li:last-child{border-bottom:0}
+  .check li .bx{flex-shrink:0;width:22px;height:22px;border-radius:7px;background:rgba(255,255,255,.08);border:1px solid var(--glass-line);display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:1px;cursor:pointer;transition:.15s}
+  .check li .bx.done{background:linear-gradient(92deg,var(--S),var(--Q));color:#16331f;border-color:transparent}
+  .footnote{text-align:center;color:var(--ink-dim);font-size:12px;margin-top:24px;line-height:1.6}
+  .topbar{display:flex;justify-content:center;margin-bottom:14px}
+  .topbar button{background:none;border:1px solid var(--glass-line);color:var(--ink-soft);font-size:12.5px;border-radius:999px;padding:7px 14px;cursor:pointer}
+  .topbar button:hover{background:rgba(255,255,255,.08)}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+  /* ---- brand footer ---- */
+  .site-footer{margin-top:26px;text-align:center;padding:8px 0 4px;user-select:none}
+  .ff-dots{display:flex;gap:7px;justify-content:center;margin-bottom:14px}
+  .ff-dots span{width:8px;height:8px;border-radius:50%;display:block;animation:ffpulse 2.4s ease-in-out infinite}
+  .ff-dots span:nth-child(1){background:var(--W);animation-delay:0s}
+  .ff-dots span:nth-child(2){background:var(--Q);animation-delay:.24s}
+  .ff-dots span:nth-child(3){background:var(--G);animation-delay:.48s}
+  .ff-dots span:nth-child(4){background:var(--S);animation-delay:.72s}
+  .ff-dots span:nth-child(5){background:var(--T);animation-delay:.96s}
+  @keyframes ffpulse{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.5);opacity:1}}
+  .ff-tag{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:4px;
+    color:var(--ink-dim);margin-bottom:7px}
+  .ff-tag::before,.ff-tag::after{content:"";width:22px;height:1px;background:linear-gradient(90deg,transparent,var(--glass-line))}
+  .ff-tag::after{transform:scaleX(-1)}
+  .ff-brand{font-family:'Jua',sans-serif;font-size:26px;line-height:1;
+    background:linear-gradient(92deg,var(--W),var(--G) 50%,var(--T));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 4px 14px rgba(255,107,170,.3))}
+  .ff-sub{font-size:12px;color:var(--ink-dim);margin-top:9px;letter-spacing:.3px}
+  .ff-sub .colon{color:var(--Q);font-weight:700;padding:0 1px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HOME -->
+  <section id="home" class="screen on home">
+    <div class="card">
+      <div class="hero-emoji">💗</div>
+      <h1>あなたの <span class="grad">愛の言語</span>、<br>なんでしょう？</h1>
+      <p class="sub">選択でわかる、あなたの愛のタイプ。<br>そして大切なあの人との、やさしい相性まで。</p>
+      <div class="lang-chips">
+        <span class="chip" style="color:var(--W)">🌟 認める言葉</span>
+        <span class="chip" style="color:var(--Q)">⏳ 一緒の時間</span>
+        <span class="chip" style="color:var(--G)">🎁 贈り物</span>
+        <span class="chip" style="color:var(--S)">🤲 尽くすこと</span>
+        <span class="chip" style="color:var(--T)">🤗 スキンシップ</span>
+      </div>
+      <div style="margin:16px 0 4px;font-size:12px;color:var(--ink-dim)">問題数を選ぶ</div>
+      <div id="nPicks" style="display:flex;gap:8px;justify-content:center;margin-bottom:6px">
+        <button class="npick sel" data-n="10" style="flex:1;max-width:110px;padding:11px 4px;border-radius:12px;border:1.6px solid var(--glass-line);background:var(--glass);color:inherit;font-family:inherit;cursor:pointer"><b style="font-size:18px">10</b><br><span style="font-size:10.5px;opacity:.7">かんたん · 1分</span></button>
+        <button class="npick" data-n="20" style="flex:1;max-width:110px;padding:11px 4px;border-radius:12px;border:1.6px solid var(--glass-line);background:var(--glass);color:inherit;font-family:inherit;cursor:pointer"><b style="font-size:18px">20</b><br><span style="font-size:10.5px;opacity:.7">標準 · 2分</span></button>
+        <button class="npick" data-n="30" style="flex:1;max-width:110px;padding:11px 4px;border-radius:12px;border:1.6px solid var(--glass-line);background:var(--glass);color:inherit;font-family:inherit;cursor:pointer"><b style="font-size:18px">30</b><br><span style="font-size:10.5px;opacity:.7">しっかり · 3分</span></button>
+      </div>
+      <button class="btn" onclick="startQuiz()">わたしの愛のタイプを探す →</button>
+      <button class="btn ghost" onclick="go('match'); buildMatchOptions()">すぐに相性をみる</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="screen">
+    <div class="card">
+      <div class="gauge-wrap">
+        <div class="gauge-top">
+          <span class="q-count" id="qcount">1 / 10</span>
+          <span class="q-count" style="color:var(--ink-dim)">リアルタイム気持ちゲージ</span>
+        </div>
+        <div class="gauge" id="gauge">
+          <i class="W"></i><i class="Q"></i><i class="G"></i><i class="S"></i><i class="T"></i>
+        </div>
+      </div>
+      <div class="q-num" id="qnum"></div>
+      <div class="q-text" id="qtext"></div>
+      <div id="opts"></div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="screen">
+    <div class="card">
+      <div class="crown">YOUR LOVE LANGUAGE</div>
+      <div class="res-emoji" id="resEmoji">💗</div>
+      <div class="res-title" id="resTitle"></div>
+      <div class="res-tag" id="resTag"></div>
+      <div class="bars" id="bars"></div>
+      <div class="sec"><h4 id="h_you"></h4><p id="p_you"></p></div>
+      <div class="sec"><h4>💞 こう愛されると満たされます</h4><p id="p_recv"></p></div>
+      <div class="sec"><h4>🌿 ちょっとだけ注意</h4><p id="p_care"></p></div>
+      <button class="btn" style="margin-top:22px" onclick="go('match'); buildMatchOptions()">大切なあの人との相性をみる →</button>
+      <button class="btn ghost" onclick="resetAll()">はじめからやり直す</button>
+    </div>
+  </section>
+
+  <!-- MATCH -->
+  <section id="match" class="screen match">
+    <div class="card">
+      <div class="topbar"><button onclick="go('home')">← ホームへ</button></div>
+      <h2>💞 ふたりの相性</h2>
+      <p class="sub">ふたりの一番の愛の言語を選んでください</p>
+      <div class="picker">
+        <div class="sel-box"><label>わたし</label><select id="selMe"></select></div>
+        <div class="vs">×</div>
+        <div class="sel-box"><label>あいて</label><select id="selYou"></select></div>
+      </div>
+      <button class="btn" onclick="runMatch()">相性をたしかめる ✨</button>
+
+      <div id="matchOut" style="display:none">
+        <div class="score-ring">
+          <div class="pct" id="mPct">0%</div>
+          <div class="label" id="mLabel"></div>
+          <div class="heat"><i id="mHeat"></i></div>
+        </div>
+        <p class="one-line" id="mOneline"></p>
+        <div class="sec"><h4>💌 やさしいアドバイス</h4><p id="mAdvice"></p></div>
+        <div class="sec"><h4>✅ ふたりで試してみること</h4><ul class="check" id="mChecklist"></ul></div>
+      </div>
+      <div class="footnote">遊び感覚の診断です。本当の答えは、ふたりの会話の中にありますよ 🤍</div>
+    </div>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/ja/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 ドーパミン実験室 — ほかのテストを見に行く →</a></div>
+  <footer class="site-footer">
+    <div class="ff-dots"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="ff-tag">意味と面白さの工場</div>
+    <div class="ff-brand">ミミファクトリー</div>
+    <div class="ff-sub">㈱ヨン<span class="colon">:</span>ギョル ファミリーカンパニー</div>
+  </footer>
+
+</div>
+
+<script>
+/* ============ DATA ============ */
+const LANG = {
+  W:{name:"認める言葉", emoji:"🌟", color:"var(--W)", tag:"ひとことで一日まるごと生き返る人",
+     you:"心のこもった言葉が、あなたには酸素です。「よくやったね」「ありがとう」のひとことが心の奥まで届き、ほめ言葉と応援が、あなたをもっと輝かせます。",
+     recv:"具体的にほめてください。「すごいね」より「今日の発表、あそこが本当に印象に残った」のように。ひと言のメッセージや手紙も大きな力になります。",
+     care:"言葉がないと、愛が冷めたと感じやすいタイプ。相手は表現が苦手なだけかもしれない、と覚えておいてください。"},
+  Q:{name:"一緒の時間", emoji:"⏳", color:"var(--Q)", tag:"そばにいてこそ愛を感じる人",
+     you:"まるごと一緒に過ごした時間が、あなたには一番の愛の証です。スマホを置いて目を合わせるその瞬間、心が満たされていきます。",
+     recv:"短くても、じゃまされないふたりだけの時間を求めましょう。散歩ひとまわり、向かい合った夕食で十分です。",
+     care:"忙しい相手にさみしさが積もりやすいタイプ。時間の長さより「集中の質」を、ふたりで約束してみて。"},
+  G:{name:"贈り物", emoji:"🎁", color:"var(--G)", tag:"気持ちのしるしを大切にしまっておく人",
+     you:"あなたにとって贈り物は、モノではなく「わたしを思ってくれた証拠」です。小さなものでも、そこに込められた気持ちを正確に受け取ります。",
+     recv:"値段ではなく「わたしを思い出してくれた跡」が大事だと伝えて。道で見かけた小さなものでも、大きな感動になります。",
+     care:"贈り物がないとき、愛を疑わないで。相手は別の言語で、もう愛を伝えているのかもしれません。"},
+  S:{name:"尽くすこと", emoji:"🤲", color:"var(--S)", tag:"行動で示されると安心する人",
+     you:"「わたしがやるよ」のひとことと、実際の手助けが、あなたには一番深い愛です。言葉より行動、約束より実行に心が動きます。",
+     recv:"必要な手助けを、具体的にお願いしましょう。お願いは弱さではなく、親しさへの招待です。",
+     care:"相手が手伝ってくれないと「愛されてないのかな」と飛躍しやすいタイプ。まずは具体的にお願いしてみて。"},
+  T:{name:"スキンシップ", emoji:"🤗", color:"var(--T)", tag:"ぬくもりで心をたしかめる人",
+     you:"手をつなぎ、抱きしめる温かな触れ合いが、あなたを安心させます。そばのぬくもりは、どんな言葉より早く心を落ち着かせます。",
+     recv:"軽い触れ合いを、自然に求めましょう。肩をあずけたり手をつないだり、小さな合図が大きな慰めになります。",
+     care:"触れ合いが減ると、遠ざかったと感じやすいタイプ。相手の体調や状況も、やさしく気づかってあげて。"}
+};
+const ORDER = ["W","Q","G","S","T"];
+
+/* 10 forced-choice questions = every pair once */
+const QUESTIONS = [
+  {t:"気分がすっかり落ちこんだ日、より慰められるのは？", a:{k:"W",ic:"🌟",txt:"「あなたは十分がんばってるよ」という心からの言葉"}, b:{k:"Q",ic:"⏳",txt:"なにも言わず、そばにいてくれる時間"}},
+  {t:"特別な日、よりときめくのは？", a:{k:"W",ic:"🌟",txt:"わたしに向けて丁寧に書かれた手紙"}, b:{k:"G",ic:"🎁",txt:"気持ちを込めて選んだ小さな贈り物"}},
+  {t:"くたくたな一日の終わり、よりありがたいのは？", a:{k:"W",ic:"🌟",txt:"「今日は本当におつかれさま、誇らしいよ」のひとこと"}, b:{k:"S",ic:"🤲",txt:"なにも言わず用意された、温かいごはん"}},
+  {t:"愛をたしかめたいとき、より響くのは？", a:{k:"W",ic:"🌟",txt:"「愛してる」というやさしい言葉"}, b:{k:"T",ic:"🤗",txt:"ぎゅっと包む抱擁"}},
+  {t:"デートのハイライトは？", a:{k:"Q",ic:"⏳",txt:"ふたりきりで交わす深い会話の時間"}, b:{k:"G",ic:"🎁",txt:"サプライズで用意された贈り物"}},
+  {t:"相手が忙しいとき、より心に残るのは？", a:{k:"Q",ic:"⏳",txt:"少しでも時間をつくって一緒にいてくれること"}, b:{k:"S",ic:"🤲",txt:"わたしの用事を代わりに片づけてくれる手助け"}},
+  {t:"ゆったりした週末の午後、いちばん幸せな場面は？", a:{k:"Q",ic:"⏳",txt:"向かい合って、いつまでも話しつづけること"}, b:{k:"T",ic:"🤗",txt:"ソファでぴったりくっついてゴロゴロ"}},
+  {t:"記念日により感動するのは？", a:{k:"G",ic:"🎁",txt:"わたしの好みをつかんだ贈り物"}, b:{k:"S",ic:"🤲",txt:"一日じゅうわたしを気づかってくれる心づかい"}},
+  {t:"会いたかった気持ち、どう受け取りたい？", a:{k:"G",ic:"🎁",txt:"手にそっと渡される小さな贈り物で"}, b:{k:"T",ic:"🤗",txt:"会ったとたん飛びこむ抱擁で"}},
+  {t:"体調をくずしたとき、いちばん慰められるのは？", a:{k:"S",ic:"🤲",txt:"薬を用意し、おかゆを作ってくれる手"}, b:{k:"T",ic:"🤗",txt:"額に手を当て、手を握ってくれるぬくもり"}},
+  {t:"けんかのあと仲直りするとき、より心がほどけるのは？", a:{k:"W",ic:"🌟",txt:"心からの謝罪とやさしい言葉"}, b:{k:"Q",ic:"⏳",txt:"そばにとどまって、また一緒に過ごす時間"}},
+  {t:"なにかを成しとげたとき、より嬉しいのは？", a:{k:"W",ic:"🌟",txt:"「あなたならやれると思ってた」というお祝いメッセージ"}, b:{k:"G",ic:"🎁",txt:"お祝いの気持ちを込めた贈り物"}},
+  {t:"自信をなくした日、より力になるのは？", a:{k:"W",ic:"🌟",txt:"「あなたは十分よくやってる」という励まし"}, b:{k:"S",ic:"🤲",txt:"負担を軽くしてくれる実際の手助け"}},
+  {t:"眠りにつく前、よりあたたかいのは？", a:{k:"W",ic:"🌟",txt:"「愛してる、おやすみ」のやさしいあいさつ"}, b:{k:"T",ic:"🤗",txt:"背中をとんとんしてくれる温かな手"}},
+  {t:"記念日を過ごすとき、より意味があるのは？", a:{k:"Q",ic:"⏳",txt:"ふたり旅のように一緒に過ごした時間"}, b:{k:"G",ic:"🎁",txt:"長く手元に残る記念の贈り物"}},
+  {t:"くたくたに疲れているとき、より慰められるのは？", a:{k:"Q",ic:"⏳",txt:"となりで一緒に休んでくれること"}, b:{k:"S",ic:"🤲",txt:"わたしのやることをてきぱき片づけてくれること"}},
+  {t:"一緒に映画を見るとき、よりいいのは？", a:{k:"Q",ic:"⏳",txt:"見終わって感想を語りあう時間"}, b:{k:"T",ic:"🤗",txt:"見ているあいだ、ずっと肩によりかかること"}},
+  {t:"誕生日により感動するのは？", a:{k:"G",ic:"🎁",txt:"心をこめて選んだサプライズの贈り物"}, b:{k:"S",ic:"🤲",txt:"一日まるごと気づかってくれる心づかい"}},
+  {t:"ストレスでくたくたな日、より癒やされるのは？", a:{k:"S",ic:"🤲",txt:"家事を代わりにやってくれる手助け"}, b:{k:"T",ic:"🤗",txt:"なにも言わず抱きしめてくれる抱擁"}},
+  {t:"旅先でよりときめく瞬間は？", a:{k:"G",ic:"🎁",txt:"そこでしか買えないおみやげを、こっそり買って渡してくれるとき"}, b:{k:"T",ic:"🤗",txt:"夕日を見ながら、ぎゅっと握ってくれる手"}},
+  {t:"記念日の朝、より胸が高鳴るのは？", a:{k:"G",ic:"💝",txt:"枕もとに置かれた、心のこもった贈り物の箱"}, b:{k:"T",ic:"🫂",txt:"目が覚めた瞬間の、おはようのハグ"}},
+  {t:"疲れた一週間が終わった金曜の夜、よりいいのは？", a:{k:"G",ic:"🍰",txt:"帰り道に買ってきてくれた、わたしへのサプライズスイーツ"}, b:{k:"Q",ic:"⏳",txt:"予定を入れず、ふたりで過ごす長い長い夜"}},
+  {t:"引っ越しの日、より心強いのは？", a:{k:"G",ic:"🎁",txt:"新居祝いの品を、丁寧に選んできてくれた人"}, b:{k:"S",ic:"🤲",txt:"朝から来て、一緒に荷物を運んでくれた人"}},
+  {t:"大事な試験を控えたわたしに、より力をくれるのは？", a:{k:"G",ic:"🍀",txt:"幸運を祈って渡してくれた、小さなお守り"}, b:{k:"W",ic:"🌟",txt:"「あなたなら受かって当たり前」という確信の言葉"}},
+  {t:"ひどい風邪で寝こんだ日、より慰められるのは？", a:{k:"Q",ic:"⏳",txt:"となりに座って、一日じゅう一緒にいてくれること"}, b:{k:"S",ic:"🥣",txt:"おかゆを作り、薬まで買っておいてくれる手"}},
+  {t:"けんかのあと仲直りするとき、より必要なのは？", a:{k:"Q",ic:"🗣️",txt:"向かい合って、じゅうぶんに話しあう時間"}, b:{k:"T",ic:"🤗",txt:"なにも言わず、先に抱きしめてくれる腕"}},
+  {t:"わたしの誕生日、より長く心に残るのは？", a:{k:"Q",ic:"⏳",txt:"一日まるごと空けて、わたしと過ごしてくれること"}, b:{k:"W",ic:"💌",txt:"心をぎゅっと込めた手紙の文章"}},
+  {t:"へとへとな一日の、よりよい締めくくりは？", a:{k:"S",ic:"🧽",txt:"なにも言わず皿洗いと掃除を終えてくれた部屋"}, b:{k:"T",ic:"💆",txt:"ソファで肩をもんでくれる手"}},
+  {t:"失敗して自信がどん底のとき、より必要なのは？", a:{k:"S",ic:"🤲",txt:"だまって後始末を一緒にしてくれる行動"}, b:{k:"W",ic:"🌟",txt:"「誰にでもあることだよ」というなぐさめ"}},
+  {t:"ひさしぶりに会った日、よりうれしいあいさつは？", a:{k:"T",ic:"🫂",txt:"かけ寄ってぎゅっと抱きしめる抱擁"}, b:{k:"W",ic:"🌟",txt:"「会いたかった」と伝えてくれる声"}},
+];
+
+/* 15 symmetric match combos */
+function key(x,y){return [x,y].sort().join("");}
+const MATCH = {
+  WW:{pct:88,label:"言葉で花ひらく関係",one:"同じ言語を話すふたり。ほめ言葉がほめ言葉を呼ぶ、いい循環が生まれます。",
+      advice:"おたがいの言葉に本音をこめるのが得意なカップル。ただ、ほめ言葉に慣れると鈍くなることも。新しい表現と具体的なディテールで、新鮮さを守ってください。",
+      checks:["一日一回、具体的なほめ言葉をひとつ交わす","さみしいときは沈黙より言葉で伝える","当たり前のことにも「ありがとう」を口にする"]},
+  WQ:{pct:78,label:"会話で深まる関係",one:"語る愛と、寄りそう愛。深い会話の中で、ふたりとも満たされます。",
+      advice:"ひとりは言葉を、ひとりは時間を求めます。さいわい「一緒の会話」は、ふたつを同時に満たす魔法の接点。その時間を意識してつくりましょう。",
+      checks:["じゃまの入らない「会話タイム」を決めておく","ほめ言葉は、一緒にいるとき目を見て伝える","忙しい週も、短い通話で近況をつなぐ"]},
+  WG:{pct:74,label:"気持ちを表す関係",one:"言葉と贈り物、どちらも「表現」を愛するロマンチックな組み合わせ。",
+      advice:"表現ゆたかなカップルで、愛が外に伝わりやすい。贈り物に短いメッセージを添えれば、ふたりの言語が一度に届きます。",
+      checks:["贈り物に手書きカードを一行そえる","ありがとうは、言葉でもう一度たしかめる","手ぶらの日は、やさしい言葉で満たす"]},
+  WS:{pct:70,label:"言葉と行動が出会う関係",one:"言葉で伝える人と、行動で示す人のバランス。",
+      advice:"ひとりは聞かせたく、ひとりはしてあげたい。尽くすタイプは手助けのあとに「好きだからやったよ」を、表現タイプは手助けに「本当にありがとう」をひとことそえて。",
+      checks:["行動したあと、気持ちも言葉で伝える","受けた手助けには、具体的に感謝を表す","おたがいの愛し方のちがいを認める"]},
+  WT:{pct:79,label:"言葉とぬくもりが流れる関係",one:"やさしい言葉とあたたかな触れ合い。安心感にあふれた組み合わせ。",
+      advice:"言葉とスキンシップは、一緒に使うと効果が倍に。抱きしめながら「愛してる」と伝える一瞬が、ふたりを同時にいちばん幸せにします。",
+      checks:["抱きしめるとき、やさしい言葉もそえる","スキンシップが負担な日は、言葉でおぎなう","朝と寝る前に、短い愛情表現の習慣を"]},
+  QQ:{pct:90,label:"時間を分けあう関係",one:"一緒にいるだけで満たされる、しずかで深いカップル。",
+      advice:"ふたりとも時間をいちばん大切にするので、ぶつかりが少なめ。ただ「一緒にいる時間」がそれぞれスマホを見る時間にならないよう、過ごし方の質を大切に。",
+      checks:["スマホを置く「まるごと30分」をつくる","一緒に楽しめる新しい趣味をひとつ始める","週に一度、ふたりだけの約束を固定する"]},
+  QG:{pct:69,label:"瞬間を贈りあう関係",one:"一緒に過ごした時間と、その中の小さな贈り物が溶けあいます。",
+      advice:"時間タイプは「一緒」を、贈り物タイプは「しるし」を求めます。デートの思い出を込めた小さなおみやげを交わせば、ふたつの言語が自然につながります。",
+      checks:["一緒に過ごした日の、小さな記念の品を残す","贈り物より「一緒に選ぶ時間」も楽しむ","忙しいときは、小さなメモで気持ちを伝える"]},
+  QS:{pct:76,label:"そばで支えあう関係",one:"一緒にいてくれて、手を貸して助けてくれる、頼もしい組み合わせ。",
+      advice:"尽くすタイプの手助けが、ときに「ひとりで片づける」になり、時間タイプをさみしくさせることも。用事を「一緒に」やれば、手助けと時間を一度に満たせます。",
+      checks:["家事も「一緒に」やるやり方で","手伝う前に「一緒にやろうか？」とまず聞く","忙しい日も、短くても並んで座る"]},
+  QT:{pct:84,label:"くっついていたい関係",one:"一緒の時間とあたたかな触れ合い、いちばん心地よい組み合わせのひとつ。",
+      advice:"一緒にいると自然にスキンシップが増えて、ふたりとも満たされます。ただ、活動なしでくっつくだけだと時間タイプが物足りないことも。一緒の「体験」も大切に。",
+      checks:["一緒に歩いたり料理したりしながら手をつなぐ","ならんで過ごす、しずかな時間を楽しむ","スキンシップの頻度は、おたがい心地よく合わせる"]},
+  GG:{pct:80,label:"気持ちを贈りあう関係",one:"おたがいにしるしを渡しあう、ときめきの絶えないカップル。",
+      advice:"贈り物の喜びをよく知るふたり。費用の負担がたまらないよう「小さく、こまめに」をルールにすれば、ときめきを長く守れます。",
+      checks:["値段より「意味」を中心に贈りあう","贈り物の負担を減らす、ふたりだけのルールを決める","もらった贈り物に、喜ぶ姿をたっぷり見せる"]},
+  GS:{pct:72,label:"真心を分けあう関係",one:"贈り物というしるしと、行動という尽くし。どちらも真心タイプ。",
+      advice:"ひとりはモノで、ひとりは手助けで真心を示します。おたがいの真心の「言語」がちがうと気づけば、誤解が消えていきます。",
+      checks:["相手の手助けを「贈り物」のように大切に受け取る","贈り物に、実用的な心づかいをそえる","なにがありがたいのか、具体的に言葉にする"]},
+  GT:{pct:75,label:"ときめきとぬくもりの関係",one:"贈り物のときめきに、あたたかな触れ合いが加わる、やさしい組み合わせ。",
+      advice:"贈り物を渡すとき抱擁をそえれば、ふたりの気持ちが一瞬で伝わります。表現ゆたかなぶん、愛が目に見えやすいカップルです。",
+      checks:["贈り物は、抱きしめながら手から手へ渡す","スキンシップが照れくさい日は、小さな贈り物で","おたがいの表現のしかたを、よくほめあう"]},
+  SS:{pct:86,label:"たがいを世話しあう関係",one:"なにも言わず気づかうふたり。深く、ゆるがない信頼が育ちます。",
+      advice:"行動で愛するカップルで、とても頼もしい。ただ、ふたりとも表現が少なく「わかってくれてるはず」でさみしさがたまることも。手助けのあと、気持ちも言葉でたしかめて。",
+      checks:["手伝ったあと「好きだからやったよ」とそえる","相手の尽くしを当たり前と思わない","たまには言葉でも愛を伝えてみる"]},
+  ST:{pct:81,label:"いたわりとぬくもりの関係",one:"気づかう手と、あたたかな触れ合いが出会い、心地よさがあふれます。",
+      advice:"尽くすタイプの世話に、スキンシップタイプのぬくもりが加われば、安心感は最高。手伝うときに、そっと肩をたたく触れ合いひとつで、ふたりとも満たされます。",
+      checks:["気づかうとき、あたたかな触れ合いも一緒に","疲れた日は、抱きしめるだけで十分","言葉のかわりに、行動とぬくもりで慰めを伝える"]},
+  TT:{pct:89,label:"ぬくもりに満ちた関係",one:"触れあうぬくもりで愛をたしかめる、いちばん心地よいカップル。",
+      advice:"触れ合いだけで、すばやく安心するふたり。ただ、けんかのあとはスキンシップだけでおおわず、なにがさみしかったかを言葉でもほどけば、もっとゆるがなくなります。",
+      checks:["仲直りは、ハグと会話を一緒に","忙しい日も、短いスキンシップのあいさつを忘れない","相手が疲れているときは、触れ合いの強さを気づかう"]},
+};
+
+/* ============ STATE ============ */
+let qi = 0;
+let score = {W:0,Q:0,G:0,S:0,T:0};
+let myTop = null;
+
+/* ============ NAV ============ */
+function go(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ============ QUIZ ============ */
+
+let chosenN=10, deck=[];
+document.querySelectorAll('.npick').forEach(p=>{
+  p.addEventListener('click',()=>{
+    document.querySelectorAll('.npick').forEach(x=>x.classList.remove('sel'));
+    p.classList.add('sel'); chosenN=+p.dataset.n;
+  });
+});
+function shuffleArr(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildDeck(n){
+  const per=n/10;                      // ペアごとに出す問題数 (1~3)
+  const groups={};
+  QUESTIONS.forEach(q=>{const k=[q.a.k,q.b.k].sort().join('');(groups[k]=groups[k]||[]).push(q);});
+  const d=[];
+  Object.values(groups).forEach(g=>{shuffleArr(g.slice()).slice(0,per).forEach(q=>d.push(q));});
+  return shuffleArr(d);
+}
+
+function startQuiz(){
+  deck=buildDeck(chosenN);
+  qi=0; score={W:0,Q:0,G:0,S:0,T:0}; updateGauge();
+  go('quiz'); renderQ();
+}
+function renderQ(){
+  const q = deck[qi];
+  document.getElementById('qcount').textContent = (qi+1)+" / "+deck.length;
+  document.getElementById('qnum').textContent = "Q"+(qi+1);
+  document.getElementById('qtext').textContent = q.t;
+  const wrap = document.getElementById('opts');
+  wrap.innerHTML = "";
+  [q.a,q.b].forEach(o=>{
+    const b=document.createElement('button');
+    b.className="opt";
+    b.innerHTML = `<span class="ic">${o.ic}</span><span>${o.txt}</span>`;
+    b.style.borderColor = `color-mix(in srgb, ${LANG[o.k].color} 45%, transparent)`;
+    b.onclick=()=>pick(o.k,b);
+    wrap.appendChild(b);
+  });
+}
+function pick(k,el){
+  score[k]++;
+  el.classList.add('picked');
+  if(window.confetti){
+    const rect=el.getBoundingClientRect();
+    confetti({particleCount:18,spread:55,startVelocity:24,scalar:.8,
+      origin:{x:(rect.left+rect.width/2)/window.innerWidth, y:(rect.top+rect.height/2)/window.innerHeight}});
+  }
+  updateGauge();
+  setTimeout(()=>{
+    qi++;
+    if(qi>=deck.length){ showResult(); }
+    else { renderQ(); }
+  },340);
+}
+function updateGauge(){
+  const total = Math.max(1, Object.values(score).reduce((a,b)=>a+b,0));
+  ORDER.forEach(k=>{
+    const bar = document.querySelector('.gauge i.'+k);
+    bar.style.flexGrow = score[k];
+  });
+}
+
+/* ============ RESULT ============ */
+function showResult(){
+  const sorted = [...ORDER].sort((a,b)=>score[b]-score[a]);
+  myTop = sorted[0];
+  const L = LANG[myTop];
+  document.getElementById('resEmoji').textContent = L.emoji;
+  document.getElementById('resTitle').textContent = L.name;
+  document.getElementById('resTitle').style.color = L.color;
+  document.getElementById('resTag').textContent = L.tag;
+  document.getElementById('h_you').textContent = "💫 あなたはこんな人";
+  document.getElementById('p_you').textContent = L.you;
+  document.getElementById('p_recv').textContent = L.recv;
+  document.getElementById('p_care').textContent = L.care;
+
+  // bars
+  const max = Math.max(...Object.values(score),1);
+  const bars = document.getElementById('bars');
+  bars.innerHTML="";
+  sorted.forEach(k=>{
+    const pct = Math.round(score[k]/8*100); // each lang max 8
+    const row=document.createElement('div');
+    row.className="bar-row";
+    row.innerHTML=`<div class="lab"><b>${LANG[k].emoji} ${LANG[k].name}</b><span>${score[k]}点</span></div>
+      <div class="track"><i style="background:${LANG[k].color}"></i></div>`;
+    bars.appendChild(row);
+    requestAnimationFrame(()=>{ setTimeout(()=>{ row.querySelector('i').style.width = (score[k]/max*100)+"%"; },80); });
+  });
+
+  go('result');
+  // big celebration
+  if(window.confetti){
+    const colors=['#FFD166','#4ECDC4','#FF6BAA','#8BE06C','#FF8C5A'];
+    confetti({particleCount:120,spread:90,origin:{y:.3},colors});
+    setTimeout(()=>confetti({particleCount:80,spread:120,startVelocity:35,origin:{y:.4},colors}),250);
+  }
+}
+
+/* ============ MATCH ============ */
+function buildMatchOptions(){
+  const opts = ORDER.map(k=>`<option value="${k}">${LANG[k].emoji} ${LANG[k].name}</option>`).join("");
+  const selMe=document.getElementById('selMe'), selYou=document.getElementById('selYou');
+  selMe.innerHTML=opts; selYou.innerHTML=opts;
+  if(myTop){ selMe.value=myTop; }
+  selYou.value = ORDER.find(k=>k!==selMe.value);
+  document.getElementById('matchOut').style.display="none";
+}
+function runMatch(){
+  const me=document.getElementById('selMe').value;
+  const you=document.getElementById('selYou').value;
+  const m = MATCH[key(me,you)];
+  const out=document.getElementById('matchOut');
+  out.style.display="block";
+
+  // animated percent
+  document.getElementById('mLabel').textContent = m.label;
+  document.getElementById('mOneline').textContent = m.one;
+  document.getElementById('mAdvice').textContent = m.advice;
+  const ul=document.getElementById('mChecklist');
+  ul.innerHTML="";
+  m.checks.forEach(c=>{
+    const li=document.createElement('li');
+    li.innerHTML=`<span class="bx" role="checkbox" tabindex="0"></span><span>${c}</span>`;
+    const bx=li.querySelector('.bx');
+    const toggle=()=>{bx.classList.toggle('done'); bx.textContent=bx.classList.contains('done')?'✓':'';};
+    bx.onclick=toggle;
+    bx.onkeydown=(e)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}};
+    ul.appendChild(li);
+  });
+
+  // count up animation
+  const target=m.pct; let cur=0;
+  const pctEl=document.getElementById('mPct');
+  const heat=document.getElementById('mHeat');
+  const step=()=>{ cur+=Math.ceil((target-cur)/6); if(cur>=target)cur=target; pctEl.textContent=cur+"%"; if(cur<target)requestAnimationFrame(step); };
+  pctEl.textContent="0%"; step();
+  setTimeout(()=>{heat.style.width=target+"%";},120);
+
+  if(window.confetti && target>=80){
+    confetti({particleCount:90,spread:80,origin:{y:.35},colors:['#FF6BAA','#FFD166','#4ECDC4','#FF8C5A','#8BE06C']});
+  }
+  out.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* ============ RESET ============ */
+function resetAll(){ myTop=null; go('home'); }
+</script>
+</body>
+</html>
