@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>喜好默契二選一 · 兩人品味大對決</title>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+  :root{
+    --bg1:#161227; --bg2:#241640;
+    --warm1:#ff8a5b; --warm2:#ff5e6c;   
+    --cool1:#5b8aff; --cool2:#3fd6e0;   
+    --gold:#ffd56b;
+    --cream:#fff6ec; --muted:#cdbfe0; --card:#221a3a;
+  }
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{
+    font-family:'Noto Sans KR',sans-serif; color:var(--cream);
+    background:
+      radial-gradient(120% 80% at 82% -10%, rgba(255,138,91,.10), transparent 55%),
+      radial-gradient(120% 90% at 12% 110%, rgba(91,138,255,.12), transparent 55%),
+      linear-gradient(160deg,var(--bg1),var(--bg2));
+    background-attachment:fixed; min-height:100dvh; overflow-x:hidden;
+  }
+  .wrap{max-width:520px; margin:0 auto; min-height:100dvh; display:flex; flex-direction:column; padding:22px 20px 16px;}
+  .screen{display:none; flex:1; flex-direction:column; animation:fadeIn .5s ease;}
+  .screen.on{display:flex;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+  /* ---------- HOME ---------- */
+  .eyebrow{font-size:13px; letter-spacing:.26em; color:var(--gold); text-align:center; margin-top:16px; font-weight:500; opacity:.85;}
+  .title{
+    font-family:'Jua'; font-size:clamp(40px,13vw,58px); line-height:1.05; text-align:center; margin:10px 0 6px;
+    background:linear-gradient(105deg,#ff8a5b,#ff5e6c 40%,#5b8aff 78%);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .sub{text-align:center; color:var(--muted); font-size:15px; line-height:1.6; margin-bottom:22px;}
+  .sub b{color:var(--cream); font-weight:700;}
+  .names{display:flex; gap:10px; margin:0 0 22px;}
+  .names input{
+    flex:1; min-width:0; border:1.5px solid rgba(255,255,255,.16); background:rgba(255,255,255,.05);
+    color:var(--cream); border-radius:14px; padding:14px; font-size:15px; font-family:inherit; text-align:center; transition:border-color .2s;
+  }
+  .names input::placeholder{color:rgba(255,255,255,.4);}
+  .names input:focus{outline:none; border-color:var(--warm1);}
+  .names .vs{align-self:center; color:var(--gold); font-family:'Jua'; font-size:20px;}
+  .startbtn{
+    border:none; cursor:pointer; font-family:'Jua'; font-size:21px; color:#1a1230; padding:18px; border-radius:18px;
+    background:linear-gradient(100deg,var(--warm1),var(--cool1)); box-shadow:0 16px 40px -14px rgba(120,120,255,.5);
+    transition:transform .14s ease;
+  }
+  .startbtn:active{transform:scale(.96);}
+  .home-tip{margin-top:auto; padding-top:20px; text-align:center; color:var(--muted); font-size:12.5px; line-height:1.6; opacity:.85;}
+  .home-tip b{color:var(--cream);}
+  .qcount-label{text-align:center; font-size:13px; color:var(--muted); margin-bottom:10px;}
+  .qcounts{display:flex; gap:8px; justify-content:center; margin-bottom:22px; flex-wrap:wrap;}
+  .qc{border:1.5px solid rgba(255,255,255,.16); background:rgba(255,255,255,.05); color:var(--cream); font-family:'Jua'; font-size:16px; min-width:54px; padding:11px 14px; border-radius:14px; cursor:pointer; transition:transform .12s, background .2s, color .2s, border-color .2s, box-shadow .2s;}
+  .qc.on{background:linear-gradient(100deg,var(--warm1),var(--cool1)); color:#1a1230; border-color:transparent; box-shadow:0 8px 20px -8px var(--cool1);}
+  .qc:active{transform:scale(.93);}
+  .handoff-inner{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;}
+  .ho-emoji{font-size:64px; margin-bottom:14px; animation:pop .6s ease;}
+  .ho-done{font-family:'Jua'; font-size:26px; margin-bottom:14px;}
+  .ho-msg{color:var(--muted); font-size:15px; line-height:1.75; margin-bottom:28px; max-width:330px; }
+  .ho-msg b{color:var(--cream);}
+  .handoff-inner .startbtn{width:100%; max-width:300px;}
+
+  /* ---------- PLAY topbar ---------- */
+  .topbar{display:flex; align-items:center; gap:12px; margin-bottom:14px;}
+  .homebtn{
+    display:flex; align-items:center; gap:5px; flex-shrink:0; border:none; cursor:pointer; height:40px;
+    padding:0 14px 0 11px; border-radius:12px; font-family:'Jua'; font-size:14px; color:var(--cream);
+    background:rgba(255,255,255,.09); transition:background .2s, transform .12s;
+  }
+  .homebtn:active{transform:scale(.93); background:rgba(255,255,255,.2);}
+  .homebtn .hicon{font-size:16px;}
+  .gaugewrap{flex:1;}
+  .gaugelabel{display:flex; justify-content:space-between; font-size:12px; color:var(--muted); margin-bottom:6px;}
+  .gaugelabel .chemi{color:var(--gold); font-weight:700; font-family:'Jua';}
+  .gauge{height:9px; border-radius:99px; background:rgba(255,255,255,.1); overflow:hidden;}
+  .gaugefill{height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg,#ff5e8a,var(--gold)); box-shadow:0 0 14px 1px var(--gold); transition:width .55s cubic-bezier(.22,1,.36,1);}
+  .endbtn{
+    flex-shrink:0; border:1.5px solid rgba(255,255,255,.16); background:transparent; color:var(--muted);
+    height:40px; padding:0 12px; border-radius:12px; font-family:inherit; font-size:13px; cursor:pointer; transition:background .2s;
+  }
+  .endbtn:active{background:rgba(255,255,255,.08);}
+
+  .turn{text-align:center; font-size:14px; margin:4px 0 14px; color:var(--muted); min-height:22px;}
+  .turn b{color:var(--cream); font-family:'Jua'; font-size:17px;
+    background:linear-gradient(100deg,var(--warm1),var(--cool1)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+
+  /* ---------- CARD (balance split) ---------- */
+  .cardzone{flex:1; display:flex; align-items:center; justify-content:center; min-height:0;}
+  .card{
+    width:100%; border-radius:28px; position:relative; overflow:hidden; cursor:pointer;
+    background:var(--card); border:1.5px solid rgba(255,255,255,.12);
+    box-shadow:0 28px 70px -30px rgba(0,0,0,.85), inset 0 1px 0 rgba(255,255,255,.08);
+    min-height:420px; display:flex; flex-direction:column;
+  }
+  .bqlabel{
+    position:absolute; top:0; left:0; right:0; z-index:3; text-align:center;
+    padding:12px; font-size:12px; letter-spacing:.16em; color:var(--gold); font-weight:500;
+    pointer-events:none;
+  }
+  .bsplit{flex:1; display:flex; flex-direction:column; position:relative;}
+  .opt{
+    flex:1; border:none; cursor:pointer; color:var(--cream); font-family:inherit; position:relative;
+    display:flex; align-items:center; justify-content:center; text-align:center; padding:30px 22px;
+    transition:flex .35s ease, filter .25s ease, opacity .25s; overflow:hidden;
+  }
+  .opt:disabled{cursor:default;}
+  .optA{background:linear-gradient(150deg,var(--warm1),var(--warm2));}
+  .optB{background:linear-gradient(150deg,var(--cool1),var(--cool2));}
+  .opt .optlabel{
+    position:absolute; top:14px; left:16px; font-family:'Jua'; font-size:22px; opacity:.55;
+  }
+  .optA .optlabel{top:auto; bottom:14px;}
+  .opttext{font-family:'Jua'; font-size:clamp(20px,5.6vw,27px); line-height:1.35;  max-width:90%; text-shadow:0 2px 8px rgba(0,0,0,.25);}
+  .opt .picks{position:absolute; right:14px; display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; max-width:60%;}
+  .optA .picks{top:14px;}
+  .optB .picks{bottom:14px;}
+  .pickchip{
+    font-size:12px; font-weight:700; padding:4px 10px; border-radius:99px;
+    background:rgba(255,255,255,.92); color:#222; font-family:'Noto Sans KR';
+    animation:pop .4s cubic-bezier(.34,1.56,.64,1);
+  }
+  .opt.win{flex:1.9; filter:saturate(1.15) brightness(1.05);}
+  .opt.lose{flex:.7; filter:grayscale(.4) brightness(.7); opacity:.85;}
+  .opt.pressed{animation:flash .4s ease;}
+  @keyframes flash{0%{filter:brightness(1.4);}100%{filter:brightness(1);}}
+
+  .vsbadge{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:4;
+    width:60px; height:60px; border-radius:50%; background:var(--card); border:3px solid rgba(255,255,255,.9);
+    display:flex; align-items:center; justify-content:center; font-family:'Jua'; font-size:22px; color:#fff;
+    box-shadow:0 8px 22px rgba(0,0,0,.4); transition:transform .3s;
+  }
+  .bsplit.decided .vsbadge{transform:translate(-50%,-50%) scale(.7); opacity:.6;}
+
+  .bresult{
+    position:absolute; bottom:0; left:0; right:0; z-index:5; text-align:center;
+    padding:14px; font-family:'Jua'; font-size:18px; transform:translateY(120%); transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+    background:linear-gradient(0deg, rgba(20,12,30,.92), transparent);
+    pointer-events:none;
+  }
+  .bresult.show{transform:translateY(0);}
+
+  .tapcue{
+    position:absolute; bottom:64px; left:0; right:0; text-align:center; z-index:5;
+    font-size:12.5px; color:var(--cream); opacity:0; transition:opacity .4s; pointer-events:none;
+  }
+  .tapcue.show{opacity:.85; animation:cuePulse 1.7s ease-in-out infinite;}
+  @keyframes cuePulse{0%,100%{opacity:.5;}50%{opacity:.95;}}
+
+  /* ---------- envelope ---------- */
+  .envelope{position:absolute; inset:0; z-index:8; border-radius:28px; display:flex; align-items:center; justify-content:center; perspective:1000px; overflow:hidden;}
+  .envelope.gone{opacity:0; transform:scale(1.05); pointer-events:none; transition:opacity .45s ease, transform .45s ease;}
+  .env-pocket{position:absolute; inset:0; border-radius:28px; background:linear-gradient(150deg,#a06bff,#ff6bd0);}
+  .env-pocket::after{content:""; position:absolute; left:0; right:0; top:34%; bottom:0; background:linear-gradient(170deg, rgba(255,255,255,.13), rgba(0,0,0,.10)); clip-path:polygon(0 14%, 50% 64%, 100% 14%, 100% 100%, 0 100%);}
+  .env-flap{position:absolute; top:0; left:0; right:0; height:48%; background:linear-gradient(165deg,#b07bff,#ff7bd6); clip-path:polygon(0 0, 100% 0, 50% 100%); transform-origin:top center; transform:rotateX(0deg); transition:transform .55s cubic-bezier(.6,-0.28,.34,1.4), filter .5s; z-index:4; backface-visibility:hidden; filter:brightness(1.07);}
+  .envelope.open .env-flap{transform:rotateX(179deg); filter:brightness(.78);}
+  .env-seal{position:relative; z-index:5; width:58px; height:58px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,.95); color:#c44ec4; font-family:'Jua'; font-size:24px; box-shadow:0 8px 22px rgba(0,0,0,.28); transition:transform .35s ease, opacity .3s;}
+  .envelope.open .env-seal{transform:scale(0) rotate(45deg); opacity:0;}
+  .env-hint{position:absolute; left:0; right:0; bottom:24px; text-align:center; color:rgba(34,16,52,.85); font-family:'Jua'; font-size:14px; animation:hintPulse 1.5s ease-in-out infinite;}
+  .envelope.open .env-hint{opacity:0; transition:opacity .2s;}
+  @keyframes hintPulse{0%,100%{transform:translateY(0); opacity:.7;}50%{transform:translateY(-4px); opacity:1;}}
+  .envelope.incoming{animation:envIn .42s cubic-bezier(.34,1.4,.5,1);}
+  @keyframes envIn{0%{transform:translateY(44px) scale(.92); opacity:0;}100%{transform:translateY(0) scale(1); opacity:1;}}
+  @keyframes pop{0%{transform:scale(.9); opacity:.4;}60%{transform:scale(1.04);}100%{transform:scale(1); opacity:1;}}
+
+  /* ---------- toast ---------- */
+  .toast{position:fixed; left:50%; top:84px; transform:translateX(-50%) translateY(-20px); background:rgba(34,26,58,.96); border:1.5px solid var(--gold); color:var(--cream); padding:13px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none; transition:opacity .4s, transform .4s; z-index:50; max-width:90vw;}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  /* ---------- DONE ---------- */
+  .done-inner{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;}
+  .done-emoji{font-size:60px; margin-bottom:6px; animation:pop .6s ease;}
+  .chemi-big{font-family:'Jua'; font-size:84px; line-height:1; margin:4px 0;
+    background:linear-gradient(105deg,#ff5e8a,var(--gold) 60%,#5b8aff); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+  .grade{font-family:'Jua'; font-size:26px; margin-bottom:10px;}
+  .done-inner p{color:var(--muted); font-size:15px; line-height:1.7; margin-bottom:24px; max-width:330px; }
+  .done-inner .startbtn{width:100%; max-width:300px;}
+  .subrow{display:flex; gap:10px; width:100%; max-width:300px; margin-top:10px;}
+  .subrow .ghost{flex:1; border:1.5px solid rgba(255,255,255,.16); background:transparent; color:var(--muted); font-family:inherit; font-size:14px; padding:12px; border-radius:14px; cursor:pointer;}
+  .subrow .ghost:active{background:rgba(255,255,255,.08);}
+
+  
+  #done .done-inner{justify-content:flex-start; padding-top:8px;}
+  .rep-title{font-family:'Jua'; font-size:22px; margin-bottom:8px;}
+  .rep-title span{color:#ff5e8a;}
+  .donut{position:relative; width:180px; height:180px; margin:2px auto 2px;}
+  .donut-center{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;}
+  .dc-emoji{font-size:34px; line-height:1;}
+  .dc-pct{font-family:'Jua'; font-size:36px; line-height:1.1; background:linear-gradient(105deg,#ff5e8a,#ffd56b 60%,#5b8aff); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+  .repbox{width:100%; max-width:360px; background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.1); border-radius:18px; padding:16px; margin-top:14px;}
+  .repbox-h{font-family:'Jua'; font-size:15px; margin-bottom:12px; text-align:left; color:var(--gold);}
+  .catrow{display:flex; align-items:center; gap:10px; margin-bottom:9px;}
+  .catname{font-size:12.5px; width:98px; text-align:left; flex-shrink:0; color:var(--cream);}
+  .catbar{flex:1; height:9px; border-radius:99px; background:rgba(255,255,255,.12); overflow:hidden;}
+  .catfill{height:100%; border-radius:99px;}
+  .catpct{font-size:12px; width:36px; text-align:right; color:var(--muted); flex-shrink:0; font-weight:700;}
+  .catnote{font-size:12px; color:var(--muted); line-height:1.6; margin-top:10px; text-align:left;}
+  .catnote b{color:var(--cream);}
+  .hi{text-align:left; font-size:14px; line-height:1.5; padding:9px 0;}
+  .hi+.hi{border-top:1px solid rgba(255,255,255,.08);}
+  .hi-tag{font-family:'Jua'; font-size:13px; margin-bottom:3px; color:var(--gold);}
+  .hi b{color:var(--cream);}
+  .diffitem{padding:10px 0; border-top:1px solid rgba(255,255,255,.08); text-align:left;}
+  .diffitem:first-of-type{border-top:none;}
+  .di-row{font-size:13.5px; line-height:1.5; display:flex; gap:7px; align-items:baseline;  color:var(--cream);}
+  .di-row+.di-row{margin-top:4px;}
+  .who{font-size:11px; font-weight:700; padding:2px 9px; border-radius:99px; flex-shrink:0;}
+  .di-a .who{background:rgba(255,138,91,.28); color:#ffcdb0;}
+  .di-b .who{background:rgba(91,138,255,.28); color:#bcd0ff;}
+  .alltogether{text-align:center; color:var(--gold); font-size:14px; padding:6px 0;}
+
+  /* ---------- FOOTER ---------- */
+  .footer{text-align:center; margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+  .mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+  .mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+  .mf-eyebrow::after{transform:scaleX(-1);}
+  .mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+  .mf-logo{font-family:'Jua'; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em; background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+  .mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+  @media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ HOME ============ -->
+  <section class="screen on" id="home">
+    <div class="eyebrow">漫長旅途，兩人喜好大對決</div>
+    <h1 class="title">喜好默契二選一</h1>
+    <p class="sub">兩人先偷偷選 <b>再同時公開！</b><br>從各領域的默契 <b>契合度</b>都幫你算出來。</p>
+
+    <div class="names">
+      <input id="nameA" type="text" maxlength="6" placeholder="我" aria-label="第一位的名字">
+      <span class="vs">&amp;</span>
+      <input id="nameB" type="text" maxlength="6" placeholder="你" aria-label="第二位的名字">
+    </div>
+
+    <div class="qcount-label">要玩幾題呢？</div>
+    <div class="qcounts" id="qcounts">
+      <button class="qc" data-n="5">5</button>
+      <button class="qc on" data-n="10">10</button>
+      <button class="qc" data-n="20">20</button>
+      <button class="qc" data-n="30">30</button>
+      <button class="qc" data-n="50">50</button>
+      <button class="qc" data-n="100">100</button>
+      <button class="qc" data-n="300">全部</button>
+    </div>
+
+    <button class="startbtn" id="startBtn">⚔️ 開始契合對決</button>
+
+    <div class="home-tip">一個人先全部作答 → 把手機交給對方 → 換人作答後 → <b>契合度公開！</b> 🎉</div>
+  </section>
+
+  <!-- ============ PLAY ============ -->
+  <section class="screen" id="play">
+    <div class="topbar">
+      <button class="homebtn" id="backHome" aria-label="回首頁"><span class="hicon">🏠</span>首頁</button>
+      <div class="gaugewrap">
+        <div class="gaugelabel"><span class="chemi" id="roundLabel">—</span><span id="countLabel">0/0</span></div>
+        <div class="gauge"><div class="gaugefill" id="gaugeFill"></div></div>
+      </div>
+    </div>
+
+    <div class="turn" id="turnLine">點一下畫面，打開第一封信 ✉️</div>
+
+    <div class="cardzone">
+      <div class="card" id="card">
+        <div class="bqlabel" id="bqlabel">你的選擇是？</div>
+        <div class="bsplit" id="bsplit">
+          <button class="opt optA" id="optA">
+            <span class="optlabel">A</span>
+            <span class="opttext" id="optAtext"></span>
+            <span class="picks" id="picksA"></span>
+          </button>
+          <button class="opt optB" id="optB">
+            <span class="optlabel">B</span>
+            <span class="opttext" id="optBtext"></span>
+            <span class="picks" id="picksB"></span>
+          </button>
+          <div class="vsbadge">VS</div>
+        </div>
+        <div class="bresult" id="bresult"></div>
+        <div class="tapcue" id="tapcue">點一下畫面看下一封信 ✉️</div>
+
+        <div class="envelope" id="envelope">
+          <div class="env-pocket"></div>
+          <div class="env-flap"></div>
+          <div class="env-seal">⚔</div>
+          <div class="env-hint" id="envHint">點這裡！打開第一回合 ✉️</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HANDOFF ============ -->
+  <section class="screen" id="handoff">
+    <div class="handoff-inner">
+      <div class="ho-emoji">🤝</div>
+      <div class="ho-done" id="hoDone"></div>
+      <div class="ho-msg" id="hoMsg"></div>
+      <button class="startbtn" id="hoBtn"></button>
+    </div>
+  </section>
+
+  <!-- ============ DONE ============ -->
+  <section class="screen" id="done">
+    <div class="done-inner" id="doneInner"></div>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/zh-tw/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 多巴胺實驗室 — 去看看其他測驗 →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意 義 與 趣 味 工 廠</span></div>
+    <div class="mf-logo">咪咪工廠</div>
+    <div class="mf-caption">YEON:GYEOL股份有限公司 家族公司</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+const BAL=[
+ {a:"一輩子只吃韓式料理",b:"一輩子只吃西式料理",c:"food"},
+ {a:"炸雞",b:"披薩",c:"food"},
+ {a:"炸醬麵",b:"炒碼麵",c:"food"},
+ {a:"糖醋肉整個淋醬",b:"糖醋肉沾醬吃",c:"food"},
+ {a:"一輩子只吃甜食",b:"一輩子只吃辣食",c:"food"},
+ {a:"泡麵先吃麵",b:"泡麵先喝湯",c:"food"},
+ {a:"一輩子不能吃肉",b:"一輩子不能吃水果",c:"food"},
+ {a:"熱美式咖啡",b:"冰美式咖啡",c:"food"},
+ {a:"一輩子不吃早餐",b:"一輩子戒掉宵夜",c:"food"},
+ {a:"薄荷巧克力擁護派",b:"薄荷巧克力反對派",c:"food"},
+ {a:"溫柔體貼但沒能力的人",b:"有能力但很冷淡的人",c:"love"},
+ {a:"秒回訊息的戀愛",b:"偶爾聯絡的戀愛",c:"love"},
+ {a:"身高高但長相普通",b:"身高矮但長得好看",c:"love"},
+ {a:"和初戀重逢",b:"遇見新的緣分",c:"love"},
+ {a:"一輩子單身",b:"一輩子暗戀",c:"love"},
+ {a:"天天黏在一起的關係",b:"保持適當距離的關係",c:"love"},
+ {a:"大12歲的年上",b:"小12歲的年下",c:"love"},
+ {a:"飛天的能力",b:"隱形的能力",c:"power"},
+ {a:"瞬間移動",b:"時間靜止",c:"power"},
+ {a:"回到過去",b:"前往未來",c:"power"},
+ {a:"讀取別人的心",b:"預知未來",c:"power"},
+ {a:"通曉所有語言",b:"和所有動物對話",c:"power"},
+ {a:"消除記憶的能力",b:"喚醒記憶的能力",c:"power"},
+ {a:"樂透頭獎一次",b:"一輩子不生病",c:"power"},
+ {a:"月薪25萬工作6天",b:"月薪8萬工作3天",c:"work"},
+ {a:"做喜歡的事但薪水低",b:"做討厭的事但收入高",c:"work"},
+ {a:"威力彩頭獎一次",b:"每月領10萬領一輩子",c:"work"},
+ {a:"一輩子在家上班",b:"一輩子進辦公室上班",c:"work"},
+ {a:"無能的主管",b:"無能的同事",c:"work"},
+ {a:"不用加班但午休只有30分鐘",b:"常常加班但午休有2小時",c:"work"},
+ {a:"當包租公/包租婆",b:"成為名人",c:"work"},
+ {a:"夏天穿羽絨外套",b:"冬天穿短袖",c:"daily"},
+ {a:"一輩子不刷牙",b:"一輩子不洗澡",c:"daily"},
+ {a:"有100隻蚊子的房間",b:"有10隻蟑螂的房間",c:"daily"},
+ {a:"一輩子只穿同一件衣服",b:"一輩子只吃同一種食物",c:"daily"},
+ {a:"一週不能用手機",b:"三天不能睡覺",c:"daily"},
+ {a:"放屁聲音超大",b:"放屁味道超臭",c:"daily"},
+ {a:"一輩子五音不全",b:"一輩子肢體不協調",c:"daily"},
+ {a:"我的腳超臭",b:"我的口氣超臭",c:"daily"},
+ {a:"所有人都能看我的日記",b:"我能看所有人的日記",c:"value"},
+ {a:"知道自己的死期",b:"到最後都不知道",c:"value"},
+ {a:"一輩子只能說實話",b:"一輩子只能說謊話",c:"value"},
+ {a:"黑歷史全部消失",b:"提前看到未來一年",c:"value"},
+ {a:"一輩子只能用敬語",b:"一輩子只能用平語",c:"daily"},
+ {a:"一輩子住在永遠是冬天的國家",b:"一輩子住在永遠是夏天的國家",c:"daily"},
+ {a:"說走就走的旅行",b:"按計畫走的旅行",c:"travel"},
+ {a:"海外住一個月",b:"國內玩一整年",c:"travel"},
+ {a:"飯店渡假",b:"露營",c:"travel"},
+ {a:"飛機靠窗座位",b:"飛機走道座位",c:"travel"},
+ {a:"旅行以美食為主",b:"旅行以景點為主",c:"travel"},
+ {a:"一個人的旅行",b:"大家一起的旅行",c:"travel"},
+ {a:"行李帶好帶滿",b:"行李輕便到極致",c:"travel"},
+ {a:"回去喜歡的地方",b:"每次都去新地方",c:"travel"},
+ {a:"六福村",b:"劍湖山世界",c:"travel"},
+ {a:"拍滿滿的旅行照",b:"只用眼睛記住就好",c:"travel"},
+ {a:"大家都喜歡我但全是假的",b:"大家都討厭我但有一個真心朋友",c:"value"},
+ {a:"有錢但很孤單",b:"沒錢但很和睦",c:"value"},
+ {a:"天才但短命",b:"平凡但長壽",c:"value"},
+ {a:"很紅但沒實力",b:"有實力但沒名氣",c:"value"},
+ {a:"年輕10歲",b:"戶頭多2000萬",c:"value"},
+ {a:"所有考試都考100分",b:"所有運動都拿第一",c:"daily"},
+ {a:"長得好看",b:"很聰明",c:"value"},
+ {a:"身高190",b:"智商190",c:"value"},
+ {a:"一輩子只聽得到稱讚",b:"一輩子只聽得到真話",c:"value"},
+ {a:"IG追蹤數破百萬",b:"戶頭多200萬",c:"value"},
+ {a:"讚很多但酸民留言也很多",b:"完全沒有反應",c:"daily"},
+ {a:"被已讀不回",b:"訊息永遠不已讀",c:"daily"},
+ {a:"我的搜尋紀錄被公開",b:"我的通話紀錄被公開",c:"daily"},
+ {a:"YouTube一輩子沒廣告",b:"Netflix一輩子免費",c:"daily"},
+ {a:"一輩子WiFi很慢",b:"手機電量永遠只剩50%",c:"daily"},
+ {a:"一輩子只能吃泡麵",b:"一輩子只能吃麵包",c:"food"},
+ {a:"夏天海邊",b:"冬天山裡",c:"travel"},
+ {a:"早起型人類",b:"夜貓型人類",c:"daily"},
+ {a:"照計畫過生活",b:"隨心所欲過生活",c:"value"},
+ {a:"極簡生活",b:"滿滿生活",c:"daily"},
+ {a:"狗狗",b:"貓咪",c:"daily"},
+ {a:"辣炒年糕",b:"不辣炒年糕",c:"food"},
+ {a:"可樂",b:"雪碧",c:"food"},
+ {a:"水冷麵",b:"拌冷麵",c:"food"},
+ {a:"旅行同伴最重要",b:"旅行地點最重要",c:"travel"},
+ {a:"一輩子做同一份工作",b:"每5年換一次工作",c:"work"},
+ {a:"有錢但沒時間",b:"有時間但沒錢",c:"value"},
+ {a:"排隊2小時的名店",b:"不用等的普通店",c:"food"},
+ {a:"下雨天兜風",b:"晴天散步",c:"daily"},
+ {a:"KTV唱新歌",b:"KTV唱拿手歌",c:"daily"},
+ {a:"和陌生人冒險",b:"和熟人待在熟悉的地方",c:"value"},
+ {a:"超熱的渡假勝地",b:"超冷的雪景勝地",c:"travel"},
+ {a:"凌晨的感性",b:"夕陽的感性",c:"daily"},
+ {a:"電影院最前排",b:"電影院最後排",c:"daily"},
+ {a:"超強方向感",b:"超強廚藝",c:"daily"},
+ {a:"寫信給過去的自己",b:"寫信給未來的自己",c:"value"},
+ {a:"環遊世界一年",b:"深度住一座城市一年",c:"travel"},
+ {a:"刮刮樂",b:"自己選樂透號碼",c:"daily"},
+ {a:"一輩子沒有音樂",b:"一輩子沒有電影",c:"daily"},
+ {a:"一見鍾情的愛情",b:"日久生情的愛情",c:"love"},
+ {a:"不用說也懂的默契",b:"什麼都說出來的關係",c:"love"},
+ {a:"一輩子可靠的朋友",b:"一輩子心動的戀人",c:"love"},
+ {a:"保留所有回憶",b:"只刪除不好的記憶",c:"value"},
+ {a:"讓此刻停留",b:"持續向前邁進",c:"value"},
+ {a:"這趟旅行永遠持續",b:"再出發更精彩的旅行",c:"travel"},
+ {a:"抒情歌手",b:"饒舌歌手",c:"celeb"},
+ {a:"偶像",b:"樂團",c:"celeb"},
+ {a:"追完整部韓劇",b:"看遍好萊塢電影",c:"celeb"},
+ {a:"看綜藝",b:"看紀錄片",c:"celeb"},
+ {a:"演唱會站票區",b:"演唱會指定座位",c:"celeb"},
+ {a:"最愛的演唱會一輩子免費",b:"最愛的周邊一輩子免費",c:"celeb"},
+ {a:"和明星當朋友",b:"自己成為明星",c:"celeb"},
+ {a:"很紅的明星",b:"實力派明星",c:"celeb"},
+ {a:"愛情電影",b:"動作電影",c:"celeb"},
+ {a:"溫馨的情境喜劇",b:"緊張的驚悚片",c:"celeb"},
+ {a:"旋律好聽的歌",b:"歌詞好聽的歌",c:"celeb"},
+ {a:"現場舞台",b:"MV",c:"celeb"},
+ {a:"台語老歌",b:"抒情歌",c:"celeb"},
+ {a:"舞跳得好的舞者歌手",b:"唱得好的實力唱將",c:"celeb"},
+ {a:"在電影院看",b:"用OTT在家看",c:"celeb"},
+ {a:"看字幕版",b:"看配音版",c:"celeb"},
+ {a:"追完整季美劇",b:"餘韻悠長的短片",c:"celeb"},
+ {a:"追星偶像",b:"追星演員",c:"celeb"},
+ {a:"音樂祭",b:"個人演唱會",c:"celeb"},
+ {a:"告示牌冠軍曲",b:"只有我知道的隱藏神曲",c:"celeb"},
+ {a:"很搞笑的諧星",b:"會唱歌的歌手",c:"celeb"},
+ {a:"被說長得像明星",b:"被說像天才",c:"celeb"},
+ {a:"電台DJ",b:"YouTube創作者",c:"celeb"},
+ {a:"從前的經典名作",b:"最近的話題作",c:"celeb"},
+ {a:"K-POP",b:"西洋歌",c:"celeb"},
+ {a:"華麗的音樂劇",b:"濃烈的舞台劇",c:"celeb"},
+ {a:"先知道結局再看",b:"一路不知道結局",c:"celeb"},
+ {a:"本命的自拍照",b:"本命的直拍",c:"celeb"},
+ {a:"華麗的舞台服",b:"自然的日常穿搭",c:"celeb"},
+ {a:"一輩子都能追演唱會",b:"音樂串流一輩子免費",c:"celeb"},
+ {a:"畫畫",b:"寫作",c:"hobby"},
+ {a:"閱讀",b:"看電影",c:"hobby"},
+ {a:"爬山",b:"跑步",c:"hobby"},
+ {a:"自己下廚",b:"到處找美食",c:"hobby"},
+ {a:"拍照",b:"拍影片",c:"hobby"},
+ {a:"演奏樂器",b:"唱歌",c:"hobby"},
+ {a:"電玩遊戲",b:"桌遊",c:"hobby"},
+ {a:"手作類興趣",b:"數位創作類興趣",c:"hobby"},
+ {a:"種植物",b:"養寵物",c:"hobby"},
+ {a:"一個人去咖啡廳",b:"和朋友聊天",c:"hobby"},
+ {a:"看展覽・逛博物館",b:"去遊樂園",c:"hobby"},
+ {a:"古典音樂",b:"爵士樂",c:"hobby"},
+ {a:"收集各種東西",b:"極簡清空",c:"hobby"},
+ {a:"密室逃脫・解謎",b:"動態運動",c:"hobby"},
+ {a:"寫日記",b:"拍Vlog",c:"hobby"},
+ {a:"烘焙",b:"調酒",c:"hobby"},
+ {a:"跑步",b:"瑜珈",c:"hobby"},
+ {a:"邊分析邊看作品",b:"單純輕鬆享受",c:"hobby"},
+ {a:"凌晨運動",b:"夜間散步",c:"hobby"},
+ {a:"手寫字",b:"素描",c:"hobby"},
+ {a:"KTV",b:"網咖",c:"hobby"},
+ {a:"挑戰登頂的登山",b:"步道散步",c:"hobby"},
+ {a:"音樂祭",b:"安靜的美術館",c:"hobby"},
+ {a:"逛古著店",b:"逛大型購物中心",c:"hobby"},
+ {a:"兜風",b:"騎腳踏車",c:"hobby"},
+ {a:"收集香水",b:"收集茶葉",c:"hobby"},
+ {a:"手帳裝飾",b:"手機殼裝飾",c:"hobby"},
+ {a:"攀岩",b:"游泳",c:"hobby"},
+ {a:"看夜空星星",b:"盯著營火發呆",c:"hobby"},
+ {a:"組樂高",b:"組模型",c:"hobby"},
+ {a:"咖啡廳巡禮",b:"美食巡禮",c:"hobby"},
+ {a:"投幣式KTV",b:"大頭貼機台",c:"hobby"},
+ {a:"在家健身",b:"去健身房",c:"hobby"},
+ {a:"學畫畫",b:"學樂器",c:"hobby"},
+ {a:"舒適的豪華露營",b:"真正的重裝徒步露營",c:"hobby"},
+ {a:"和孔子吃一頓午餐",b:"和鄭成功吃一頓晚餐",c:"hero"},
+ {a:"愛因斯坦的頭腦",b:"莫札特的才華",c:"hero"},
+ {a:"見到歷史偉人",b:"成為未來的偉人",c:"hero"},
+ {a:"跟達文西學畫畫",b:"跟莎士比亞學寫作",c:"hero"},
+ {a:"成為偉大的科學家",b:"成為偉大的藝術家",c:"hero"},
+ {a:"像賈伯斯一樣的革新者",b:"像巴菲特一樣的投資家",c:"hero"},
+ {a:"拿破崙的行動力",b:"甘地的平靜心",c:"hero"},
+ {a:"在歷史留名",b:"安靜幸福地生活",c:"hero"},
+ {a:"獲得諾貝爾獎",b:"拿下奧運金牌",c:"hero"},
+ {a:"發明家愛迪生",b:"探險家哥倫布",c:"hero"},
+ {a:"和蘇格拉底辯論",b:"欣賞貝多芬的演奏",c:"hero"},
+ {a:"成為偉人傳記的主角",b:"受人喜愛的平凡人",c:"hero"},
+ {a:"天才型偉人",b:"努力型偉人",c:"hero"},
+ {a:"一個領域的傳奇",b:"多個領域的全才",c:"hero"},
+ {a:"留下偉大成就但孤單",b:"沒有成就但幸福",c:"hero"},
+ {a:"像達文西一樣多才多藝",b:"一個領域的頂尖職人",c:"hero"},
+ {a:"成為偉大的老師",b:"成為偉大的學生",c:"hero"},
+ {a:"改變歷史的英雄",b:"記錄歷史的作家",c:"hero"},
+ {a:"居禮夫人的堅持",b:"畢卡索的創造力",c:"hero"},
+ {a:"背誦偉人的名言",b:"創造屬於自己的名言",c:"hero"},
+ {a:"靠能力被評價",b:"靠努力被評價",c:"value"},
+ {a:"過程比較重要",b:"結果比較重要",c:"value"},
+ {a:"自由但不穩定",b:"穩定但受拘束",c:"value"},
+ {a:"正義的世界",b:"和平的世界",c:"value"},
+ {a:"直白的毒舌",b:"溫柔的謊言",c:"value"},
+ {a:"對所有人都公平",b:"對自己人特別好",c:"value"},
+ {a:"快速的失敗",b:"緩慢的成功",c:"value"},
+ {a:"用頭腦決定",b:"用心決定",c:"value"},
+ {a:"一輩子當學生",b:"一輩子當老師",c:"value"},
+ {a:"不後悔的挑戰",b:"安全的選擇",c:"value"},
+ {a:"和很多人淺淺相處",b:"和少數人深深相處",c:"value"},
+ {a:"被稱讚的人生",b:"被尊敬的人生",c:"value"},
+ {a:"第一名但孤單",b:"第二名但夥伴很多",c:"value"},
+ {a:"走艱難的正道",b:"走輕鬆的捷徑",c:"value"},
+ {a:"知道真相的痛苦",b:"不知道的幸福",c:"value"},
+ {a:"付出的人",b:"接受的人",c:"value"},
+ {a:"創造改變的人",b:"適應改變的人",c:"value"},
+ {a:"遠大的夢想、渺小的機率",b:"微小的夢想、很大的機率",c:"value"},
+ {a:"被記住的人生",b:"被遺忘的人生",c:"value"},
+ {a:"堅守原則",b:"隨情況變通",c:"value"},
+ {a:"自己一個人發光",b:"一起發光",c:"value"},
+ {a:"被討厭的勇氣",b:"被喜愛的安穩",c:"value"},
+ {a:"挑戰後失敗",b:"不挑戰卻後悔",c:"value"},
+ {a:"誠實而吃虧",b:"說謊而得利",c:"value"},
+ {a:"堅持自己的信念",b:"跟隨多數意見",c:"value"},
+ {a:"深耕一條路",b:"廣泛涉獵多條路",c:"value"},
+ {a:"結果好就一切都好",b:"過程必須問心無愧",c:"value"},
+ {a:"改變世界",b:"改變自己",c:"value"},
+ {a:"有影響力的人",b:"不受影響的人",c:"value"},
+ {a:"想走得快就一個人走",b:"想走得遠就一起走",c:"value"},
+ {a:"完美的計畫",b:"迅速的執行",c:"value"},
+ {a:"為了被認可而活",b:"為了讓自己滿足而活",c:"value"},
+ {a:"承認彼此的不同",b:"追求彼此的相同",c:"value"},
+ {a:"就算吃虧也要正直",b:"佔便宜但適可而止",c:"value"},
+ {a:"負責到底",b:"快速收手重新開始",c:"value"},
+ {a:"有意義的辛苦",b:"舒適卻沒有意義",c:"value"},
+ {a:"謹慎的烏龜",b:"快速的兔子",c:"value"},
+ {a:"幫忙保守秘密",b:"說出真相",c:"value"},
+ {a:"追逐夢想",b:"選擇現實",c:"value"},
+ {a:"為所有人著想的選擇",b:"為自己著想的選擇",c:"value"},
+ {a:"靠過去的回憶生活",b:"靠未來的希望生活",c:"value"},
+ {a:"明知道還是配合演出",b:"不知情卻真心相信",c:"value"},
+ {a:"緩慢但確實",b:"快速且勇於挑戰",c:"value"},
+ {a:"因為人情而吃虧",b:"因為冷靜而得利",c:"value"},
+ {a:"內心的平靜",b:"熾熱的熱情",c:"value"},
+ {a:"一輩子甜點免費",b:"一輩子咖啡免費",c:"food"},
+ {a:"辣度封頂",b:"甜度爆表",c:"food"},
+ {a:"生魚片",b:"壽司",c:"food"},
+ {a:"牛小腸",b:"豬大腸",c:"food"},
+ {a:"辣炒年糕",b:"血腸",c:"food"},
+ {a:"五花肉",b:"牛肉",c:"food"},
+ {a:"一輩子吃外送",b:"一輩子吃家常菜",c:"food"},
+ {a:"泡菜鍋",b:"大醬湯",c:"food"},
+ {a:"早餐吃麵包",b:"早餐吃飯",c:"food"},
+ {a:"水果",b:"蔬菜",c:"food"},
+ {a:"啤酒",b:"燒酒",c:"food"},
+ {a:"韓式甜點",b:"西式甜點",c:"food"},
+ {a:"熱湯",b:"清涼冷湯",c:"food"},
+ {a:"滿滿起司",b:"辣醬調味",c:"food"},
+ {a:"冰淇淋",b:"剉冰",c:"food"},
+ {a:"每天聯絡",b:"只在見面時專注",c:"love"},
+ {a:"驚喜活動",b:"平淡的日常",c:"love"},
+ {a:"很會表達的戀人",b:"沉默寡言的戀人",c:"love"},
+ {a:"和我相似的人",b:"和我完全相反的人",c:"love"},
+ {a:"一起享受興趣的戀人",b:"尊重彼此時間的戀人",c:"love"},
+ {a:"第一印象很強烈的人",b:"越了解越有魅力的人",c:"love"},
+ {a:"主導型的戀人",b:"配合型的戀人",c:"love"},
+ {a:"就算遠距離也真心",b:"待在附近常常見面",c:"love"},
+ {a:"社群公開戀愛",b:"秘密戀愛",c:"love"},
+ {a:"約會就是吃美食",b:"約會就是玩活動",c:"love"},
+ {a:"用言語表達愛",b:"用行動表達愛",c:"love"},
+ {a:"紀念日大肆慶祝",b:"平常就對彼此好",c:"love"},
+ {a:"溫柔的訊息",b:"驚喜禮物",c:"love"},
+ {a:"一起成長的愛情",b:"如實接受的愛情",c:"love"},
+ {a:"坦率的戀人",b:"體貼的戀人",c:"love"},
+ {a:"手寫信",b:"語音訊息",c:"love"},
+ {a:"一起去旅行",b:"一起窩在家",c:"love"},
+ {a:"愛吃醋的戀人",b:"灑脫的戀人",c:"love"},
+ {a:"計畫型約會",b:"即興型約會",c:"love"},
+ {a:"一輩子只愛一個人",b:"談多段戀愛經驗",c:"love"},
+ {a:"時光倒流",b:"窺探未來",c:"power"},
+ {a:"治癒所有傷痛",b:"預防所有疾病",c:"power"},
+ {a:"與動物對話",b:"與植物對話",c:"power"},
+ {a:"操控夢境",b:"儲存記憶",c:"power"},
+ {a:"操控天氣",b:"操控情緒",c:"power"},
+ {a:"複製任何東西",b:"消除任何東西",c:"power"},
+ {a:"瞬間學習能力",b:"永恆記憶力",c:"power"},
+ {a:"透視能力",b:"千里眼",c:"power"},
+ {a:"變身能力",b:"分身能力",c:"power"},
+ {a:"快轉時間",b:"暫停時間",c:"power"},
+ {a:"早上多睡一點",b:"熬夜到天亮",c:"daily"},
+ {a:"整理收納派",b:"亂中有序派",c:"daily"},
+ {a:"提前準備型",b:"拖到最後衝刺型",c:"daily"},
+ {a:"鬧鐘一響就起床",b:"貪睡鍵按五次",c:"daily"},
+ {a:"照計畫表生活",b:"看心情過日子",c:"daily"},
+ {a:"寧願熱一點",b:"寧願冷一點",c:"daily"},
+ {a:"早上洗澡",b:"晚上洗澡",c:"daily"},
+ {a:"筆記狂",b:"靠腦袋記",c:"daily"},
+ {a:"衣服馬上洗",b:"累積一次洗",c:"daily"},
+ {a:"喜歡待在家",b:"喜歡往外跑",c:"daily"},
+ {a:"秒速決定",b:"謹慎糾結",c:"daily"},
+ {a:"一定要睡飽",b:"睡少也沒差",c:"daily"},
+ {a:"喜歡嶄新的東西",b:"喜歡用慣的舊東西",c:"daily"},
+ {a:"群組通知開著",b:"群組設靜音",c:"daily"},
+ {a:"手機桌布用照片",b:"手機桌布用純色",c:"daily"},
+ {a:"行程排滿滿",b:"行程留空檔",c:"travel"},
+ {a:"城市旅行",b:"大自然旅行",c:"travel"},
+ {a:"美食旅行",b:"活動體驗旅行",c:"travel"},
+ {a:"重遊熟悉的地方",b:"挑戰全新地點",c:"travel"},
+ {a:"豪華飯店",b:"文青風民宿",c:"travel"},
+ {a:"團體套裝旅遊",b:"自由背包旅行",c:"travel"},
+ {a:"溫暖度假勝地",b:"異國風情城市",c:"travel"},
+ {a:"事先規劃行程",b:"到當地再隨性決定",c:"travel"},
+ {a:"火車旅行",b:"自駕旅行",c:"travel"},
+ {a:"知名拍照景點",b:"在地人巷弄",c:"travel"}
+];
+
+/* ---------------- STATE ---------------- */
+const CAT_LABELS={food:'🍽️ 飲食喜好',love:'💕 戀愛風格',power:'✨ 想像力',work:'💰 金錢與工作',daily:'🎲 生活感',travel:'✈️ 旅行風格',value:'🌿 人生價值觀',celeb:'🌟 流行文化喜好',hobby:'🎨 興趣．喜好',hero:'🏛️ 人物．偉人'};
+let order=[], names=["我","你"];
+let nQ=10;                      // 已選題數
+let round=0;                    // 0: 第一位，1: 第二位
+let pos=0;                      // 本輪目前位置
+let answers=[[],[]];            // answers[round][i] = 'A' | 'B'
+let phase='closed';             // 'closed' | 'choosing' | 'moving'
+let isOpen=false;
+
+const $=id=>document.getElementById(id);
+function vibrate(ms){ if(navigator.vibrate) try{navigator.vibrate(ms);}catch(e){} }
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function show(scr){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); $(scr).classList.add('on'); }
+let _tt; function toast(m){ const t=$('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2000); }
+
+
+$('qcounts').addEventListener('click',e=>{
+ const b=e.target.closest('.qc'); if(!b) return;
+ document.querySelectorAll('.qc').forEach(x=>x.classList.remove('on'));
+ b.classList.add('on'); nQ=parseInt(b.dataset.n,10);
+});
+
+
+$('startBtn').addEventListener('click',()=>{
+ const a=$('nameA').value.trim(), b=$('nameB').value.trim();
+ names=[a||"我", b||"你"];
+ startGame();
+});
+
+function startGame(){
+ order=shuffle(BAL.map((_,i)=>i)).slice(0, Math.min(nQ, BAL.length));
+ round=0; pos=0; answers=[[],[]];
+ beginRound();
+}
+
+function beginRound(){
+ pos=0; isOpen=false;
+ prepareQuestion();
+ resetEnvelope(false);
+ $('roundLabel').textContent=names[round]+' 順序';
+ $('countLabel').textContent='0/'+order.length;
+ $('gaugeFill').style.width='0%';
+ $('envHint').textContent='點這裡！開啟第一題 ✉️';
+ $('turnLine').innerHTML='<b>'+names[round]+'</b>，點一下畫面開始！';
+ show('play');
+}
+
+
+function prepareQuestion(){
+ const q=BAL[order[pos]];
+ phase='closed';
+ $('optAtext').textContent=q.a;
+ $('optBtext').textContent=q.b;
+ $('picksA').innerHTML=''; $('picksB').innerHTML='';
+ $('optA').className='opt optA'; $('optB').className='opt optB';
+ $('optA').disabled=false; $('optB').disabled=false;
+ $('bsplit').classList.remove('decided');
+ $('bresult').classList.remove('show'); $('bresult').textContent='';
+ $('tapcue').classList.remove('show');
+ $('bqlabel').textContent='你的選擇是？';
+}
+
+function resetEnvelope(incoming){
+ const env=$('envelope');
+ env.classList.remove('open','gone','incoming');
+ void env.offsetWidth;
+ if(incoming) env.classList.add('incoming');
+ isOpen=false;
+}
+
+function openEnvelope(){
+ if(isOpen) return;
+ const env=$('envelope');
+ env.classList.add('open'); vibrate(28);
+ setTimeout(()=>{
+   env.classList.add('gone');
+   isOpen=true; phase='choosing';
+   $('bqlabel').textContent='Q'+(pos+1)+'．你的選擇是？';
+   $('turnLine').innerHTML='<b>'+names[round]+'</b> — 點選你喜歡的一邊！';
+ },360);
+}
+
+function pick(side){
+ if(phase!=='choosing') return;
+ phase='moving';
+ answers[round][pos]=side;
+ vibrate(20);
+ const win = side==='A'?$('optA'):$('optB');
+ const lose= side==='A'?$('optB'):$('optA');
+ win.classList.add('pressed','win'); lose.classList.add('lose');
+ $('optA').disabled=true; $('optB').disabled=true;
+ $('bsplit').classList.add('decided');
+ $('countLabel').textContent=(pos+1)+'/'+order.length;
+ $('gaugeFill').style.width=((pos+1)/order.length*100)+'%';
+ setTimeout(()=>{
+   pos++;
+   if(pos<order.length){
+     prepareQuestion();
+     resetEnvelope(true);
+     $('envHint').textContent='✉️';
+     $('turnLine').innerHTML='下一個信封開啟中…';
+     setTimeout(openEnvelope, 430);   // 從第二次開始自動開啟
+   }else if(round===0){
+     handoff();
+   }else{
+     finish();
+   }
+ },540);
+}
+
+
+$('card').addEventListener('click',()=>{ if(phase==='closed' && !isOpen) openEnvelope(); });
+$('optA').addEventListener('click',(e)=>{ e.stopPropagation(); pick('A'); });
+$('optB').addEventListener('click',(e)=>{ e.stopPropagation(); pick('B'); });
+$('backHome').addEventListener('click',()=>{ show('home'); });
+
+
+function handoff(){
+ $('hoDone').textContent='✓ '+names[0]+' 完成！';
+ $('hoMsg').innerHTML='現在請把手機交給 <b>'+names[1]+'</b>。<br>回答完同樣的 '+order.length+'題後，就會公開契合度。<br><span style="opacity:.65">(前一位的答案是秘密喔 🤫)</span>';
+ $('hoBtn').textContent='我是 '+names[1]+' －開始！';
+ show('handoff');
+ vibrate([20,40,20]);
+}
+$('hoBtn').addEventListener('click',()=>{ round=1; beginRound(); });
+
+
+function gradeOf(pct){
+ if(pct>=90) return {e:'💞',g:'命中注定的靈魂伴侶',d:'品味幾乎一模一樣，根本是心電感應等級！'};
+ if(pct>=70) return {e:'🧡',g:'絕配拍檔',d:'默契超合拍，一起出門超輕鬆！'};
+ if(pct>=50) return {e:'😊',g:'普通還行的默契',d:'合的時候很合，不合的時候也不合，剛剛好的平衡！'};
+ if(pct>=30) return {e:'😆',g:'鬥嘴拉鋸戰',d:'品味常常不一樣，所以才更不會膩吧？'};
+ return {e:'⚡',g:'完全相反的魅力',d:'品味完全不同！彼此一定能學到很多。'};
+}
+
+function finish(){
+
+ let matched=0; const history=[];
+ for(let i=0;i<order.length;i++){
+   const q=BAL[order[i]];
+   const p0=answers[0][i], p1=answers[1][i];
+   const same=(p0===p1); if(same) matched++;
+   history.push({c:q.c, same, p0, p1, q});
+ }
+ const answered=order.length;
+ const pct=answered?Math.round(matched/answered*100):0;
+ const G=gradeOf(pct);
+
+
+ const byCat={};
+ history.forEach(h=>{ (byCat[h.c]=byCat[h.c]||{t:0,m:0}); byCat[h.c].t++; if(h.same) byCat[h.c].m++; });
+ const cats=Object.keys(byCat).map(c=>({c, pct:Math.round(byCat[c].m/byCat[c].t*100), t:byCat[c].t})).sort((x,y)=>y.pct-x.pct);
+ const catRows=cats.map(o=>{
+   const col=o.pct>=67?'#ffd56b':(o.pct>=34?'#ff8a5b':'#5b8aff');
+   return '<div class="catrow"><span class="catname">'+CAT_LABELS[o.c]+'</span><div class="catbar"><div class="catfill" style="width:'+o.pct+'%;background:'+col+';box-shadow:0 0 10px '+col+'aa;"></div></div><span class="catpct">'+o.pct+'%</span></div>';
+ }).join('');
+ const topCat=cats[0], lowCat=cats[cats.length-1];
+
+
+ const sames=history.filter(h=>h.same), diffs=history.filter(h=>!h.same);
+ let highlight='';
+ if(sames.length){
+   const s=sames[Math.floor(Math.random()*sames.length)];
+   const t=s.p0==='A'?s.q.a:s.q.b;
+   highlight='<div class="hi hi-same"><div class="hi-tag">💞 兩人選了一樣的答案</div><b>「'+t+'”</b></div>';
+ }
+ let diffList='';
+ if(diffs.length){
+   diffList=diffs.map(d=>{
+     const t0=d.p0==='A'?d.q.a:d.q.b, t1=d.p1==='A'?d.q.a:d.q.b;
+     return '<div class="diffitem"><div class="di-row di-a"><span class="who">'+names[0]+'</span>'+t0+'</div><div class="di-row di-b"><span class="who">'+names[1]+'</span>'+t1+'</div></div>';
+   }).join('');
+ }else{
+   diffList='<div class="alltogether">完全一致！沒有任何一題選得不一樣 💞</div>';
+ }
+
+ const R=72, C=2*Math.PI*R, off=C*(1-pct/100);
+ $('doneInner').innerHTML=
+   '<div class="rep-title">'+names[0]+' <span>❤</span> '+names[1]+' 契合度</div>'+
+   '<div class="donut"><svg width="180" height="180" viewBox="0 0 180 180">'+
+     '<defs><linearGradient id="dg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ff5e8a"/><stop offset="55%" stop-color="#ffd56b"/><stop offset="100%" stop-color="#5b8aff"/></linearGradient></defs>'+
+     '<circle cx="90" cy="90" r="'+R+'" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="13"/>'+
+     '<circle cx="90" cy="90" r="'+R+'" fill="none" stroke="url(#dg)" stroke-width="13" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" transform="rotate(-90 90 90)" id="donutFg"/>'+
+   '</svg><div class="donut-center"><div class="dc-emoji">'+G.e+'</div><div class="dc-pct">'+pct+'%</div></div></div>'+
+   '<div class="grade">'+G.g+'</div>'+
+   '<p>'+answered+'題中，<b style="color:var(--cream)">'+matched+'</b>次選擇相同！<br>'+G.d+'</p>'+
+   '<div class="repbox"><div class="repbox-h">各領域契合度</div>'+catRows+
+     '<div class="catnote">最合拍的領域是 <b>'+CAT_LABELS[topCat.c]+'</b>'+(cats.length>1?'，差異最大的是 <b>'+CAT_LABELS[lowCat.c]+'</b>':'')+' 🌟</div></div>'+
+   (highlight?'<div class="repbox">'+highlight+'</div>':'')+
+   '<div class="repbox"><div class="repbox-h">⚡ 意見不合的 '+diffs.length+'題</div>'+diffList+'</div>'+
+   '<button class="startbtn" id="againBtn">🔀 換新題目再玩一次</button>'+
+   '<div class="subrow"><button class="ghost" id="homeBtn2">回首頁</button></div>';
+ show('done');
+ requestAnimationFrame(()=>{ const fg=$('donutFg'); if(fg){ fg.style.transition='stroke-dashoffset 1.1s cubic-bezier(.22,1,.36,1)'; fg.style.strokeDashoffset=off; } });
+ vibrate([20,40,20]);
+ $('againBtn').onclick=startGame;
+ $('homeBtn2').onclick=()=>show('home');
+}
+
+</script>
+</body>
+</html>

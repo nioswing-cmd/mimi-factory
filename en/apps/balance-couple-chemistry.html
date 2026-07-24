@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Balance Chemistry · Taste Showdown for Two</title>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+  :root{
+    --bg1:#161227; --bg2:#241640;
+    --warm1:#ff8a5b; --warm2:#ff5e6c;   
+    --cool1:#5b8aff; --cool2:#3fd6e0;   
+    --gold:#ffd56b;
+    --cream:#fff6ec; --muted:#cdbfe0; --card:#221a3a;
+  }
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{
+    font-family:'Noto Sans KR',sans-serif; color:var(--cream);
+    background:
+      radial-gradient(120% 80% at 82% -10%, rgba(255,138,91,.10), transparent 55%),
+      radial-gradient(120% 90% at 12% 110%, rgba(91,138,255,.12), transparent 55%),
+      linear-gradient(160deg,var(--bg1),var(--bg2));
+    background-attachment:fixed; min-height:100dvh; overflow-x:hidden;
+  }
+  .wrap{max-width:520px; margin:0 auto; min-height:100dvh; display:flex; flex-direction:column; padding:22px 20px 16px;}
+  .screen{display:none; flex:1; flex-direction:column; animation:fadeIn .5s ease;}
+  .screen.on{display:flex;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+  /* ---------- HOME ---------- */
+  .eyebrow{font-size:13px; letter-spacing:.26em; color:var(--gold); text-align:center; margin-top:16px; font-weight:500; opacity:.85;}
+  .title{
+    font-family:'Jua'; font-size:clamp(40px,13vw,58px); line-height:1.05; text-align:center; margin:10px 0 6px;
+    background:linear-gradient(105deg,#ff8a5b,#ff5e6c 40%,#5b8aff 78%);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .sub{text-align:center; color:var(--muted); font-size:15px; line-height:1.6; margin-bottom:22px;}
+  .sub b{color:var(--cream); font-weight:700;}
+  .names{display:flex; gap:10px; margin:0 0 22px;}
+  .names input{
+    flex:1; min-width:0; border:1.5px solid rgba(255,255,255,.16); background:rgba(255,255,255,.05);
+    color:var(--cream); border-radius:14px; padding:14px; font-size:15px; font-family:inherit; text-align:center; transition:border-color .2s;
+  }
+  .names input::placeholder{color:rgba(255,255,255,.4);}
+  .names input:focus{outline:none; border-color:var(--warm1);}
+  .names .vs{align-self:center; color:var(--gold); font-family:'Jua'; font-size:20px;}
+  .startbtn{
+    border:none; cursor:pointer; font-family:'Jua'; font-size:21px; color:#1a1230; padding:18px; border-radius:18px;
+    background:linear-gradient(100deg,var(--warm1),var(--cool1)); box-shadow:0 16px 40px -14px rgba(120,120,255,.5);
+    transition:transform .14s ease;
+  }
+  .startbtn:active{transform:scale(.96);}
+  .home-tip{margin-top:auto; padding-top:20px; text-align:center; color:var(--muted); font-size:12.5px; line-height:1.6; opacity:.85;}
+  .home-tip b{color:var(--cream);}
+  .qcount-label{text-align:center; font-size:13px; color:var(--muted); margin-bottom:10px;}
+  .qcounts{display:flex; gap:8px; justify-content:center; margin-bottom:22px; flex-wrap:wrap;}
+  .qc{border:1.5px solid rgba(255,255,255,.16); background:rgba(255,255,255,.05); color:var(--cream); font-family:'Jua'; font-size:16px; min-width:54px; padding:11px 14px; border-radius:14px; cursor:pointer; transition:transform .12s, background .2s, color .2s, border-color .2s, box-shadow .2s;}
+  .qc.on{background:linear-gradient(100deg,var(--warm1),var(--cool1)); color:#1a1230; border-color:transparent; box-shadow:0 8px 20px -8px var(--cool1);}
+  .qc:active{transform:scale(.93);}
+  .handoff-inner{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;}
+  .ho-emoji{font-size:64px; margin-bottom:14px; animation:pop .6s ease;}
+  .ho-done{font-family:'Jua'; font-size:26px; margin-bottom:14px;}
+  .ho-msg{color:var(--muted); font-size:15px; line-height:1.75; margin-bottom:28px; max-width:330px; overflow-wrap:break-word;}
+  .ho-msg b{color:var(--cream);}
+  .handoff-inner .startbtn{width:100%; max-width:300px;}
+
+  /* ---------- PLAY topbar ---------- */
+  .topbar{display:flex; align-items:center; gap:12px; margin-bottom:14px;}
+  .homebtn{
+    display:flex; align-items:center; gap:5px; flex-shrink:0; border:none; cursor:pointer; height:40px;
+    padding:0 14px 0 11px; border-radius:12px; font-family:'Jua'; font-size:14px; color:var(--cream);
+    background:rgba(255,255,255,.09); transition:background .2s, transform .12s;
+  }
+  .homebtn:active{transform:scale(.93); background:rgba(255,255,255,.2);}
+  .homebtn .hicon{font-size:16px;}
+  .gaugewrap{flex:1;}
+  .gaugelabel{display:flex; justify-content:space-between; font-size:12px; color:var(--muted); margin-bottom:6px;}
+  .gaugelabel .chemi{color:var(--gold); font-weight:700; font-family:'Jua';}
+  .gauge{height:9px; border-radius:99px; background:rgba(255,255,255,.1); overflow:hidden;}
+  .gaugefill{height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg,#ff5e8a,var(--gold)); box-shadow:0 0 14px 1px var(--gold); transition:width .55s cubic-bezier(.22,1,.36,1);}
+  .endbtn{
+    flex-shrink:0; border:1.5px solid rgba(255,255,255,.16); background:transparent; color:var(--muted);
+    height:40px; padding:0 12px; border-radius:12px; font-family:inherit; font-size:13px; cursor:pointer; transition:background .2s;
+  }
+  .endbtn:active{background:rgba(255,255,255,.08);}
+
+  .turn{text-align:center; font-size:14px; margin:4px 0 14px; color:var(--muted); min-height:22px;}
+  .turn b{color:var(--cream); font-family:'Jua'; font-size:17px;
+    background:linear-gradient(100deg,var(--warm1),var(--cool1)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+
+  /* ---------- CARD (balance split) ---------- */
+  .cardzone{flex:1; display:flex; align-items:center; justify-content:center; min-height:0;}
+  .card{
+    width:100%; border-radius:28px; position:relative; overflow:hidden; cursor:pointer;
+    background:var(--card); border:1.5px solid rgba(255,255,255,.12);
+    box-shadow:0 28px 70px -30px rgba(0,0,0,.85), inset 0 1px 0 rgba(255,255,255,.08);
+    min-height:420px; display:flex; flex-direction:column;
+  }
+  .bqlabel{
+    position:absolute; top:0; left:0; right:0; z-index:3; text-align:center;
+    padding:12px; font-size:12px; letter-spacing:.16em; color:var(--gold); font-weight:500;
+    pointer-events:none;
+  }
+  .bsplit{flex:1; display:flex; flex-direction:column; position:relative;}
+  .opt{
+    flex:1; border:none; cursor:pointer; color:var(--cream); font-family:inherit; position:relative;
+    display:flex; align-items:center; justify-content:center; text-align:center; padding:30px 22px;
+    transition:flex .35s ease, filter .25s ease, opacity .25s; overflow:hidden;
+  }
+  .opt:disabled{cursor:default;}
+  .optA{background:linear-gradient(150deg,var(--warm1),var(--warm2));}
+  .optB{background:linear-gradient(150deg,var(--cool1),var(--cool2));}
+  .opt .optlabel{
+    position:absolute; top:14px; left:16px; font-family:'Jua'; font-size:22px; opacity:.55;
+  }
+  .optA .optlabel{top:auto; bottom:14px;}
+  .opttext{font-family:'Jua'; font-size:clamp(20px,5.6vw,27px); line-height:1.35; overflow-wrap:break-word; max-width:90%; text-shadow:0 2px 8px rgba(0,0,0,.25);}
+  .opt .picks{position:absolute; right:14px; display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; max-width:60%;}
+  .optA .picks{top:14px;}
+  .optB .picks{bottom:14px;}
+  .pickchip{
+    font-size:12px; font-weight:700; padding:4px 10px; border-radius:99px;
+    background:rgba(255,255,255,.92); color:#222; font-family:'Noto Sans KR';
+    animation:pop .4s cubic-bezier(.34,1.56,.64,1);
+  }
+  .opt.win{flex:1.9; filter:saturate(1.15) brightness(1.05);}
+  .opt.lose{flex:.7; filter:grayscale(.4) brightness(.7); opacity:.85;}
+  .opt.pressed{animation:flash .4s ease;}
+  @keyframes flash{0%{filter:brightness(1.4);}100%{filter:brightness(1);}}
+
+  .vsbadge{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:4;
+    width:60px; height:60px; border-radius:50%; background:var(--card); border:3px solid rgba(255,255,255,.9);
+    display:flex; align-items:center; justify-content:center; font-family:'Jua'; font-size:22px; color:#fff;
+    box-shadow:0 8px 22px rgba(0,0,0,.4); transition:transform .3s;
+  }
+  .bsplit.decided .vsbadge{transform:translate(-50%,-50%) scale(.7); opacity:.6;}
+
+  .bresult{
+    position:absolute; bottom:0; left:0; right:0; z-index:5; text-align:center;
+    padding:14px; font-family:'Jua'; font-size:18px; transform:translateY(120%); transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+    background:linear-gradient(0deg, rgba(20,12,30,.92), transparent);
+    pointer-events:none;
+  }
+  .bresult.show{transform:translateY(0);}
+
+  .tapcue{
+    position:absolute; bottom:64px; left:0; right:0; text-align:center; z-index:5;
+    font-size:12.5px; color:var(--cream); opacity:0; transition:opacity .4s; pointer-events:none;
+  }
+  .tapcue.show{opacity:.85; animation:cuePulse 1.7s ease-in-out infinite;}
+  @keyframes cuePulse{0%,100%{opacity:.5;}50%{opacity:.95;}}
+
+  /* ---------- envelope ---------- */
+  .envelope{position:absolute; inset:0; z-index:8; border-radius:28px; display:flex; align-items:center; justify-content:center; perspective:1000px; overflow:hidden;}
+  .envelope.gone{opacity:0; transform:scale(1.05); pointer-events:none; transition:opacity .45s ease, transform .45s ease;}
+  .env-pocket{position:absolute; inset:0; border-radius:28px; background:linear-gradient(150deg,#a06bff,#ff6bd0);}
+  .env-pocket::after{content:""; position:absolute; left:0; right:0; top:34%; bottom:0; background:linear-gradient(170deg, rgba(255,255,255,.13), rgba(0,0,0,.10)); clip-path:polygon(0 14%, 50% 64%, 100% 14%, 100% 100%, 0 100%);}
+  .env-flap{position:absolute; top:0; left:0; right:0; height:48%; background:linear-gradient(165deg,#b07bff,#ff7bd6); clip-path:polygon(0 0, 100% 0, 50% 100%); transform-origin:top center; transform:rotateX(0deg); transition:transform .55s cubic-bezier(.6,-0.28,.34,1.4), filter .5s; z-index:4; backface-visibility:hidden; filter:brightness(1.07);}
+  .envelope.open .env-flap{transform:rotateX(179deg); filter:brightness(.78);}
+  .env-seal{position:relative; z-index:5; width:58px; height:58px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,.95); color:#c44ec4; font-family:'Jua'; font-size:24px; box-shadow:0 8px 22px rgba(0,0,0,.28); transition:transform .35s ease, opacity .3s;}
+  .envelope.open .env-seal{transform:scale(0) rotate(45deg); opacity:0;}
+  .env-hint{position:absolute; left:0; right:0; bottom:24px; text-align:center; color:rgba(34,16,52,.85); font-family:'Jua'; font-size:14px; animation:hintPulse 1.5s ease-in-out infinite;}
+  .envelope.open .env-hint{opacity:0; transition:opacity .2s;}
+  @keyframes hintPulse{0%,100%{transform:translateY(0); opacity:.7;}50%{transform:translateY(-4px); opacity:1;}}
+  .envelope.incoming{animation:envIn .42s cubic-bezier(.34,1.4,.5,1);}
+  @keyframes envIn{0%{transform:translateY(44px) scale(.92); opacity:0;}100%{transform:translateY(0) scale(1); opacity:1;}}
+  @keyframes pop{0%{transform:scale(.9); opacity:.4;}60%{transform:scale(1.04);}100%{transform:scale(1); opacity:1;}}
+
+  /* ---------- toast ---------- */
+  .toast{position:fixed; left:50%; top:84px; transform:translateX(-50%) translateY(-20px); background:rgba(34,26,58,.96); border:1.5px solid var(--gold); color:var(--cream); padding:13px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none; transition:opacity .4s, transform .4s; z-index:50; max-width:90vw;}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  /* ---------- DONE ---------- */
+  .done-inner{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;}
+  .done-emoji{font-size:60px; margin-bottom:6px; animation:pop .6s ease;}
+  .chemi-big{font-family:'Jua'; font-size:84px; line-height:1; margin:4px 0;
+    background:linear-gradient(105deg,#ff5e8a,var(--gold) 60%,#5b8aff); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+  .grade{font-family:'Jua'; font-size:26px; margin-bottom:10px;}
+  .done-inner p{color:var(--muted); font-size:15px; line-height:1.7; margin-bottom:24px; max-width:330px; overflow-wrap:break-word;}
+  .done-inner .startbtn{width:100%; max-width:300px;}
+  .subrow{display:flex; gap:10px; width:100%; max-width:300px; margin-top:10px;}
+  .subrow .ghost{flex:1; border:1.5px solid rgba(255,255,255,.16); background:transparent; color:var(--muted); font-family:inherit; font-size:14px; padding:12px; border-radius:14px; cursor:pointer;}
+  .subrow .ghost:active{background:rgba(255,255,255,.08);}
+
+  
+  #done .done-inner{justify-content:flex-start; padding-top:8px;}
+  .rep-title{font-family:'Jua'; font-size:22px; margin-bottom:8px;}
+  .rep-title span{color:#ff5e8a;}
+  .donut{position:relative; width:180px; height:180px; margin:2px auto 2px;}
+  .donut-center{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;}
+  .dc-emoji{font-size:34px; line-height:1;}
+  .dc-pct{font-family:'Jua'; font-size:36px; line-height:1.1; background:linear-gradient(105deg,#ff5e8a,#ffd56b 60%,#5b8aff); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+  .repbox{width:100%; max-width:360px; background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.1); border-radius:18px; padding:16px; margin-top:14px;}
+  .repbox-h{font-family:'Jua'; font-size:15px; margin-bottom:12px; text-align:left; color:var(--gold);}
+  .catrow{display:flex; align-items:center; gap:10px; margin-bottom:9px;}
+  .catname{font-size:12.5px; width:98px; text-align:left; flex-shrink:0; color:var(--cream);}
+  .catbar{flex:1; height:9px; border-radius:99px; background:rgba(255,255,255,.12); overflow:hidden;}
+  .catfill{height:100%; border-radius:99px;}
+  .catpct{font-size:12px; width:36px; text-align:right; color:var(--muted); flex-shrink:0; font-weight:700;}
+  .catnote{font-size:12px; color:var(--muted); line-height:1.6; margin-top:10px; text-align:left;}
+  .catnote b{color:var(--cream);}
+  .hi{text-align:left; font-size:14px; line-height:1.5; padding:9px 0;}
+  .hi+.hi{border-top:1px solid rgba(255,255,255,.08);}
+  .hi-tag{font-family:'Jua'; font-size:13px; margin-bottom:3px; color:var(--gold);}
+  .hi b{color:var(--cream);}
+  .diffitem{padding:10px 0; border-top:1px solid rgba(255,255,255,.08); text-align:left;}
+  .diffitem:first-of-type{border-top:none;}
+  .di-row{font-size:13.5px; line-height:1.5; display:flex; gap:7px; align-items:baseline; overflow-wrap:break-word; color:var(--cream);}
+  .di-row+.di-row{margin-top:4px;}
+  .who{font-size:11px; font-weight:700; padding:2px 9px; border-radius:99px; flex-shrink:0;}
+  .di-a .who{background:rgba(255,138,91,.28); color:#ffcdb0;}
+  .di-b .who{background:rgba(91,138,255,.28); color:#bcd0ff;}
+  .alltogether{text-align:center; color:var(--gold); font-size:14px; padding:6px 0;}
+
+  /* ---------- FOOTER ---------- */
+  .footer{text-align:center; margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+  .mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+  .mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+  .mf-eyebrow::after{transform:scaleX(-1);}
+  .mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+  .mf-logo{font-family:'Jua'; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em; background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+  .mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+  @media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ HOME ============ -->
+  <section class="screen on" id="home">
+    <div class="eyebrow">A long trip, a taste showdown for two</div>
+    <h1 class="title">Balance Chemistry</h1>
+    <p class="sub">You each pick in secret <b>Then reveal together!</b><br>See your chemistry by category — <b>compatibility</b>score included.</p>
+
+    <div class="names">
+      <input id="nameA" type="text" maxlength="6" placeholder="Me" aria-label="First player’s name">
+      <span class="vs">&amp;</span>
+      <input id="nameB" type="text" maxlength="6" placeholder="You" aria-label="Second player’s name">
+    </div>
+
+    <div class="qcount-label">How many rounds should we play?</div>
+    <div class="qcounts" id="qcounts">
+      <button class="qc" data-n="5">5</button>
+      <button class="qc on" data-n="10">10</button>
+      <button class="qc" data-n="20">20</button>
+      <button class="qc" data-n="30">30</button>
+      <button class="qc" data-n="50">50</button>
+      <button class="qc" data-n="100">100</button>
+      <button class="qc" data-n="300">All</button>
+    </div>
+
+    <button class="startbtn" id="startBtn">⚔️ Start the Compatibility Battle</button>
+
+    <div class="home-tip">One of you goes first → hand off the phone → the other plays → <b>Reveal your compatibility!</b> 🎉</div>
+  </section>
+
+  <!-- ============ PLAY ============ -->
+  <section class="screen" id="play">
+    <div class="topbar">
+      <button class="homebtn" id="backHome" aria-label="Back to home"><span class="hicon">🏠</span>Home</button>
+      <div class="gaugewrap">
+        <div class="gaugelabel"><span class="chemi" id="roundLabel">—</span><span id="countLabel">0/0</span></div>
+        <div class="gauge"><div class="gaugefill" id="gaugeFill"></div></div>
+      </div>
+    </div>
+
+    <div class="turn" id="turnLine">Tap the screen to open the first envelope ✉️</div>
+
+    <div class="cardzone">
+      <div class="card" id="card">
+        <div class="bqlabel" id="bqlabel">What’s your pick?</div>
+        <div class="bsplit" id="bsplit">
+          <button class="opt optA" id="optA">
+            <span class="optlabel">A</span>
+            <span class="opttext" id="optAtext"></span>
+            <span class="picks" id="picksA"></span>
+          </button>
+          <button class="opt optB" id="optB">
+            <span class="optlabel">B</span>
+            <span class="opttext" id="optBtext"></span>
+            <span class="picks" id="picksB"></span>
+          </button>
+          <div class="vsbadge">VS</div>
+        </div>
+        <div class="bresult" id="bresult"></div>
+        <div class="tapcue" id="tapcue">Tap to open the next envelope ✉️</div>
+
+        <div class="envelope" id="envelope">
+          <div class="env-pocket"></div>
+          <div class="env-flap"></div>
+          <div class="env-seal">⚔</div>
+          <div class="env-hint" id="envHint">Tap here! Open the first round ✉️</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HANDOFF ============ -->
+  <section class="screen" id="handoff">
+    <div class="handoff-inner">
+      <div class="ho-emoji">🤝</div>
+      <div class="ho-done" id="hoDone"></div>
+      <div class="ho-msg" id="hoMsg"></div>
+      <button class="startbtn" id="hoBtn"></button>
+    </div>
+  </section>
+
+  <!-- ============ DONE ============ -->
+  <section class="screen" id="done">
+    <div class="done-inner" id="doneInner"></div>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/en/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 Dopamine Lab — check out more quizzes →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>T H E   M E A N I N G   &   F U N   F A C T O R Y</span></div>
+    <div class="mf-logo">MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL Inc. Family Company</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+const BAL=[
+ {a:"Korean food forever",b:"Western food forever",c:"food"},
+ {a:"Fried chicken",b:"Pizza",c:"food"},
+ {a:"Jajangmyeon (black bean noodles)",b:"Jjamppong (spicy seafood noodles)",c:"food"},
+ {a:"Sweet & sour pork — sauce poured on",b:"Sweet & sour pork — sauce for dipping",c:"food"},
+ {a:"Sweets forever",b:"Spicy food forever",c:"food"},
+ {a:"Noodles first, broth after",b:"Broth first, noodles after",c:"food"},
+ {a:"No meat, ever",b:"No fruit, ever",c:"food"},
+ {a:"Hot coffee",b:"Iced coffee",c:"food"},
+ {a:"Skip breakfast forever",b:"No late-night snacks, ever",c:"food"},
+ {a:"Mint choc chip, yes",b:"Mint choc chip, no",c:"food"},
+ {a:"Sweet but no ambition",b:"Successful but cold",c:"love"},
+ {a:"Texts all day, every day",b:"Texts only now and then",c:"love"},
+ {a:"Tall with an average face",b:"Short but drop-dead gorgeous",c:"love"},
+ {a:"Reunite with your first love",b:"Meet someone brand new",c:"love"},
+ {a:"Single forever",b:"Unrequited love forever",c:"love"},
+ {a:"Joined at the hip, every day",b:"A little space between you",c:"love"},
+ {a:"12 years older",b:"12 years younger",c:"love"},
+ {a:"The power of flight",b:"The power of invisibility",c:"power"},
+ {a:"Teleportation",b:"Freezing time",c:"power"},
+ {a:"Travel to the past",b:"Travel to the future",c:"power"},
+ {a:"Read minds",b:"See the future",c:"power"},
+ {a:"Speak every language",b:"Talk to every animal",c:"power"},
+ {a:"The power to erase memories",b:"The power to restore memories",c:"power"},
+ {a:"One lottery jackpot",b:"Never get sick, ever",c:"power"},
+ {a:"Big paycheck, 6-day week",b:"Smaller paycheck, 3-day week",c:"work"},
+ {a:"Dream job, low pay",b:"Job you hate, big pay",c:"work"},
+ {a:"One massive lottery jackpot",b:"A steady paycheck for life",c:"work"},
+ {a:"Work from home forever",b:"Commute to the office forever",c:"work"},
+ {a:"An incompetent boss",b:"An incompetent coworker",c:"work"},
+ {a:"No overtime, but a 30-min lunch",b:"Lots of overtime, but a 2-hour lunch",c:"work"},
+ {a:"Become a landlord",b:"Become famous",c:"work"},
+ {a:"Wear a puffer coat in summer",b:"Wear short sleeves in winter",c:"daily"},
+ {a:"Never brush your teeth again",b:"Never shower again",c:"daily"},
+ {a:"A room with 100 mosquitoes",b:"A room with 10 cockroaches",c:"daily"},
+ {a:"The same outfit forever",b:"The same meal forever",c:"daily"},
+ {a:"A week with no phone",b:"Three days with no sleep",c:"daily"},
+ {a:"Your farts are deafening",b:"Your farts smell horrific",c:"daily"},
+ {a:"Tone-deaf forever",b:"Two left feet forever",c:"daily"},
+ {a:"Your feet reek",b:"Your breath reeks",c:"daily"},
+ {a:"Everyone reads your diary",b:"You read everyone’s diary",c:"value"},
+ {a:"Know the day you’ll die",b:"Never find out",c:"value"},
+ {a:"Only speak the truth, forever",b:"Only lie, forever",c:"value"},
+ {a:"Erase your cringe past",b:"Preview the next year",c:"value"},
+ {a:"Speak formally to everyone, forever",b:"Speak casually to everyone, forever",c:"daily"},
+ {a:"Live somewhere winter, forever",b:"Live somewhere summer, forever",c:"daily"},
+ {a:"Spontaneous trips",b:"Meticulously planned trips",c:"travel"},
+ {a:"A month living abroad",b:"A year of unlimited trips at home",c:"travel"},
+ {a:"A hotel staycation",b:"Camping",c:"travel"},
+ {a:"Window seat",b:"Aisle seat",c:"travel"},
+ {a:"Travel centered on food",b:"Travel centered on sights",c:"travel"},
+ {a:"A solo trip",b:"A trip with everyone",c:"travel"},
+ {a:"Pack everything but the kitchen sink",b:"Pack light, just the essentials",c:"travel"},
+ {a:"Revisit a favorite place",b:"Somewhere new every time",c:"travel"},
+ {a:"A sprawling outdoor theme park",b:"A glitzy indoor theme park",c:"travel"},
+ {a:"Take a ton of photos",b:"Just soak it in with your eyes",c:"travel"},
+ {a:"Everyone loves you, but it’s all fake",b:"Everyone hates you, but one true friend",c:"value"},
+ {a:"Rich but lonely",b:"Poor but close-knit",c:"value"},
+ {a:"A genius, but a short life",b:"Ordinary, but a long life",c:"value"},
+ {a:"Popular but talentless",b:"Talented but unknown",c:"value"},
+ {a:"Turn back 10 years",b:"A fortune in the bank",c:"value"},
+ {a:"Ace every test",b:"Win every sport",c:"daily"},
+ {a:"Good looks",b:"Smarts",c:"value"},
+ {a:"Six-foot-three",b:"A 190 IQ",c:"value"},
+ {a:"Only hear praise, forever",b:"Only hear the truth, forever",c:"value"},
+ {a:"1 million Instagram followers",b:"A nice chunk of savings",c:"value"},
+ {a:"Tons of likes, tons of hate comments",b:"Total silence, no reaction",c:"daily"},
+ {a:"Left on read",b:"Never opened at all",c:"daily"},
+ {a:"Your search history goes public",b:"Your call history goes public",c:"daily"},
+ {a:"No YouTube ads, ever",b:"Free Netflix, forever",c:"daily"},
+ {a:"Slow Wi-Fi forever",b:"Phone battery stuck at 50%, forever",c:"daily"},
+ {a:"Instant noodles forever",b:"Bread forever",c:"food"},
+ {a:"A summer beach",b:"A winter mountain",c:"travel"},
+ {a:"An early bird",b:"A night owl",c:"daily"},
+ {a:"A life lived by the plan",b:"A life lived on a whim",c:"value"},
+ {a:"Minimalist living",b:"Maximalist living",c:"daily"},
+ {a:"Dogs",b:"Cats",c:"daily"},
+ {a:"Spicy tteokbokki",b:"Mild tteokbokki",c:"food"},
+ {a:"Cola",b:"Lemon-lime soda",c:"food"},
+ {a:"Cold noodle soup (mul-naengmyeon)",b:"Spicy mixed cold noodles (bibim-naengmyeon)",c:"food"},
+ {a:"Travel’s about who you’re with",b:"Travel’s about where you go",c:"travel"},
+ {a:"The same job forever",b:"A new career every 5 years",c:"work"},
+ {a:"Rich but no time",b:"Time but no money",c:"value"},
+ {a:"A 2-hour wait at a famous spot",b:"A so-so place with no wait",c:"food"},
+ {a:"A drive on a rainy day",b:"A walk on a sunny day",c:"daily"},
+ {a:"A brand-new song at karaoke",b:"Your go-to karaoke anthem",c:"daily"},
+ {a:"An adventure with a stranger",b:"Familiar comfort with a close friend",c:"value"},
+ {a:"A scorching hot resort",b:"A freezing snowy landscape",c:"travel"},
+ {a:"Late-night, before-dawn vibes",b:"Golden-hour sunset vibes",c:"daily"},
+ {a:"Front row at the movies",b:"Back row at the movies",c:"daily"},
+ {a:"A great sense of direction",b:"Great cooking skills",c:"daily"},
+ {a:"A letter to your past self",b:"A letter to your future self",c:"value"},
+ {a:"A year traveling the world",b:"A year deep in one city",c:"travel"},
+ {a:"Scratching a lottery ticket",b:"Picking lottery numbers",c:"daily"},
+ {a:"No music, ever",b:"No movies, ever",c:"daily"},
+ {a:"Love at first sight",b:"Love that grows slowly",c:"love"},
+ {a:"Understand each other without words",b:"Tell each other everything",c:"love"},
+ {a:"A rock-solid lifelong friend",b:"A lifelong partner who still gives butterflies",c:"love"},
+ {a:"Keep every memory",b:"Erase just the bad ones",c:"value"},
+ {a:"Freeze this exact moment",b:"Keep moving forward",c:"value"},
+ {a:"This trip never ends",b:"An even better trip, next time",c:"travel"},
+ {a:"A ballad singer",b:"A hip-hop rapper",c:"celeb"},
+ {a:"A K-pop idol",b:"A band",c:"celeb"},
+ {a:"Binge a K-drama",b:"Binge Hollywood movies",c:"celeb"},
+ {a:"Watch a variety show",b:"Watch a documentary",c:"celeb"},
+ {a:"Standing at the concert",b:"Seated at the concert",c:"celeb"},
+ {a:"Free concerts for your bias, forever",b:"Free merch for your bias, forever",c:"celeb"},
+ {a:"Befriend a celebrity",b:"Become a celebrity yourself",c:"celeb"},
+ {a:"A wildly popular celebrity",b:"A celebrity respected for pure talent",c:"celeb"},
+ {a:"Romance movies",b:"Action movies",c:"celeb"},
+ {a:"A cozy sitcom",b:"An edge-of-your-seat thriller",c:"celeb"},
+ {a:"A song with a great melody",b:"A song with great lyrics",c:"celeb"},
+ {a:"A live performance",b:"A music video",c:"celeb"},
+ {a:"Trot (retro pop)",b:"Ballads",c:"celeb"},
+ {a:"A dancer with incredible moves",b:"A vocalist with an incredible voice",c:"celeb"},
+ {a:"Watch it in theaters",b:"Stream it at home",c:"celeb"},
+ {a:"Watch with subtitles",b:"Watch dubbed",c:"celeb"},
+ {a:"Binge a multi-season series",b:"A short film that lingers",c:"celeb"},
+ {a:"Stan a K-pop idol",b:"Stan an actor",c:"celeb"},
+ {a:"A music festival",b:"A solo concert",c:"celeb"},
+ {a:"A number-one hit",b:"A hidden gem only you know",c:"celeb"},
+ {a:"A hilarious comedian",b:"A singer who can really sing",c:"celeb"},
+ {a:"“You look like a celebrity”",b:"“You seem like a genius”",c:"celeb"},
+ {a:"A radio DJ",b:"A YouTube creator",c:"celeb"},
+ {a:"An old-school classic",b:"This season’s biggest buzz",c:"celeb"},
+ {a:"K-pop",b:"Pop songs",c:"celeb"},
+ {a:"A dazzling musical",b:"A raw, gripping play",c:"celeb"},
+ {a:"Know the ending going in",b:"Stay spoiler-free to the end",c:"celeb"},
+ {a:"A selfie from your bias",b:"A solo fancam of your bias",c:"celeb"},
+ {a:"A dazzling stage outfit",b:"A natural everyday look",c:"celeb"},
+ {a:"Front-row concerts, forever",b:"Free music streaming, forever",c:"celeb"},
+ {a:"Painting",b:"Writing",c:"hobby"},
+ {a:"Reading",b:"Watching movies",c:"hobby"},
+ {a:"Hiking",b:"Running",c:"hobby"},
+ {a:"Cooking from scratch",b:"Restaurant-hopping",c:"hobby"},
+ {a:"Taking photos",b:"Filming videos",c:"hobby"},
+ {a:"Playing an instrument",b:"Singing",c:"hobby"},
+ {a:"Video games",b:"Board games",c:"hobby"},
+ {a:"Making things by hand",b:"Making things digitally",c:"hobby"},
+ {a:"Growing plants",b:"Raising a pet",c:"hobby"},
+ {a:"A solo café trip",b:"Catching up with a friend",c:"hobby"},
+ {a:"Museums and exhibits",b:"Theme parks",c:"hobby"},
+ {a:"Classical music",b:"Jazz",c:"hobby"},
+ {a:"Collecting things",b:"Decluttering everything",c:"hobby"},
+ {a:"Escape rooms and puzzles",b:"Physical sports",c:"hobby"},
+ {a:"Journaling",b:"Filming vlogs",c:"hobby"},
+ {a:"Baking",b:"Mixing cocktails",c:"hobby"},
+ {a:"Running",b:"Yoga",c:"hobby"},
+ {a:"Watching to analyze the craft",b:"Watching just to relax",c:"hobby"},
+ {a:"A pre-dawn workout",b:"A nighttime walk",c:"hobby"},
+ {a:"Calligraphy",b:"Sketching",c:"hobby"},
+ {a:"Karaoke",b:"A gaming café (PC bang)",c:"hobby"},
+ {a:"Hiking to the summit",b:"A gentle trail walk",c:"hobby"},
+ {a:"A music festival",b:"A quiet art gallery",c:"hobby"},
+ {a:"Browsing vintage shops",b:"Shopping at the mall",c:"hobby"},
+ {a:"A drive",b:"Biking",c:"hobby"},
+ {a:"Collecting perfume",b:"Collecting tea",c:"hobby"},
+ {a:"Decorating a planner",b:"Decorating your phone",c:"hobby"},
+ {a:"Climbing",b:"Swimming",c:"hobby"},
+ {a:"Stargazing",b:"Staring into a campfire",c:"hobby"},
+ {a:"Building LEGO",b:"Building model kits",c:"hobby"},
+ {a:"A café-hopping tour",b:"A food tour",c:"hobby"},
+ {a:"Coin karaoke",b:"Photo booth strips",c:"hobby"},
+ {a:"Working out at home",b:"Hitting the gym",c:"hobby"},
+ {a:"Learning art",b:"Learning an instrument",c:"hobby"},
+ {a:"Comfy glamping",b:"Real backpacking",c:"hobby"},
+ {a:"Lunch with King Solomon",b:"Dinner with Admiral Nelson",c:"hero"},
+ {a:"Einstein’s brain",b:"Mozart’s talent",c:"hero"},
+ {a:"Meet a legend from history",b:"Become a legend of the future",c:"hero"},
+ {a:"Learn to paint from da Vinci",b:"Learn to write from Shakespeare",c:"hero"},
+ {a:"Become a great scientist",b:"Become a great artist",c:"hero"},
+ {a:"An innovator like Steve Jobs",b:"An investor like Warren Buffett",c:"hero"},
+ {a:"Napoleon’s drive",b:"Gandhi’s composure",c:"hero"},
+ {a:"Leave your name in history",b:"Live quietly and happily",c:"hero"},
+ {a:"Win a Nobel Prize",b:"Win Olympic gold",c:"hero"},
+ {a:"Edison the inventor",b:"Columbus the explorer",c:"hero"},
+ {a:"A debate with Socrates",b:"A live performance by Beethoven",c:"hero"},
+ {a:"Become the hero of a history book",b:"An ordinary, well-loved person",c:"hero"},
+ {a:"A born-genius legend",b:"A hard-won legend",c:"hero"},
+ {a:"A legend in one field",b:"A master of many",c:"hero"},
+ {a:"Great achievements, but lonely",b:"No achievements, but happy",c:"hero"},
+ {a:"A polymath like da Vinci",b:"The top master of one craft",c:"hero"},
+ {a:"Become a great teacher",b:"Become a great student",c:"hero"},
+ {a:"A hero who changed history",b:"A writer who chronicled history",c:"hero"},
+ {a:"Marie Curie’s persistence",b:"Picasso’s creativity",c:"hero"},
+ {a:"Memorize a legend’s quotes",b:"Coin your own quote",c:"hero"},
+ {a:"Be judged by talent",b:"Be judged by effort",c:"value"},
+ {a:"The process matters most",b:"The result matters most",c:"value"},
+ {a:"Free, but unstable",b:"Stable, but confined",c:"value"},
+ {a:"A just world",b:"A peaceful world",c:"value"},
+ {a:"Blunt honesty",b:"A kind lie",c:"value"},
+ {a:"Fair to everyone",b:"Special to your own people",c:"value"},
+ {a:"Fail fast",b:"Succeed slowly",c:"value"},
+ {a:"Decide with your head",b:"Decide with your heart",c:"value"},
+ {a:"A life spent learning",b:"A life spent teaching",c:"value"},
+ {a:"A bold try, no regrets",b:"The safe choice",c:"value"},
+ {a:"Wide but shallow connections",b:"Few but deep connections",c:"value"},
+ {a:"A life full of praise",b:"A life full of respect",c:"value"},
+ {a:"First place, but lonely",b:"Second place, with plenty of company",c:"value"},
+ {a:"The right path, the hard way",b:"The easy path, good enough",c:"value"},
+ {a:"The pain of knowing the truth",b:"The happiness of not knowing",c:"value"},
+ {a:"A giver",b:"A receiver",c:"value"},
+ {a:"Someone who drives change",b:"Someone who adapts to change",c:"value"},
+ {a:"A big dream, slim odds",b:"A small dream, sure odds",c:"value"},
+ {a:"A life people remember",b:"A life that fades away",c:"value"},
+ {a:"Stick to your principles",b:"Adapt to the situation",c:"value"},
+ {a:"Shine on your own",b:"Shine together",c:"value"},
+ {a:"The courage to be disliked",b:"The comfort of being loved",c:"value"},
+ {a:"Try and fail",b:"Never try, and regret it",c:"value"},
+ {a:"Honest, even at a cost",b:"Dishonest, but it pays off",c:"value"},
+ {a:"Stand by your beliefs",b:"Go with the majority",c:"value"},
+ {a:"One path, deeply",b:"Many paths, broadly",c:"value"},
+ {a:"A good outcome justifies it all",b:"The process has to be clean",c:"value"},
+ {a:"Change the world",b:"Change yourself",c:"value"},
+ {a:"Someone with influence",b:"Someone unswayed by others",c:"value"},
+ {a:"Go fast, go alone",b:"Go far, go together",c:"value"},
+ {a:"A flawless plan",b:"Fast execution",c:"value"},
+ {a:"Live for recognition",b:"Live for your own satisfaction",c:"value"},
+ {a:"Accept the differences",b:"Pursue common ground",c:"value"},
+ {a:"Do right, even at a loss",b:"Come out ahead, within reason",c:"value"},
+ {a:"See it through to the end",b:"Cut losses and start fresh",c:"value"},
+ {a:"Meaningful struggle",b:"Comfortable emptiness",c:"value"},
+ {a:"The careful tortoise",b:"The speedy hare",c:"value"},
+ {a:"Keep the secret",b:"Tell the truth",c:"value"},
+ {a:"Chase the dream",b:"Choose reality",c:"value"},
+ {a:"A choice for everyone",b:"A choice for yourself",c:"value"},
+ {a:"Live on past memories",b:"Live on future hope",c:"value"},
+ {a:"Play along, even though you know",b:"Truly believe, not knowing",c:"value"},
+ {a:"Slow and sure",b:"Fast and bold",c:"value"},
+ {a:"Lose out because you care",b:"Come out ahead by staying cold",c:"value"},
+ {a:"Peace of mind",b:"Burning passion",c:"value"},
+ {a:"Free dessert, forever",b:"Free coffee, forever",c:"food"},
+ {a:"The ultimate spice challenge",b:"The ultimate sugar rush",c:"food"},
+ {a:"Sashimi",b:"Sushi",c:"food"},
+ {a:"Gopchang (grilled intestines)",b:"Makchang (grilled tripe)",c:"food"},
+ {a:"Tteokbokki",b:"Sundae (Korean blood sausage)",c:"food"},
+ {a:"Grilled pork belly",b:"Beef",c:"food"},
+ {a:"Delivery food forever",b:"Home-cooked meals forever",c:"food"},
+ {a:"Kimchi stew",b:"Soybean paste stew",c:"food"},
+ {a:"Bread for breakfast",b:"Rice for breakfast",c:"food"},
+ {a:"Fruit",b:"Vegetables",c:"food"},
+ {a:"Beer",b:"Soju",c:"food"},
+ {a:"Korean-style desserts",b:"Western-style desserts",c:"food"},
+ {a:"A steaming hot soup",b:"A cold, refreshing broth",c:"food"},
+ {a:"Loaded with cheese",b:"Spicy sauce",c:"food"},
+ {a:"Ice cream",b:"Shaved ice (bingsu)",c:"food"},
+ {a:"Text every single day",b:"Only focus when you’re together",c:"love"},
+ {a:"Surprise moments",b:"Quiet everyday life",c:"love"},
+ {a:"An affectionate, expressive partner",b:"A quiet, steady partner",c:"love"},
+ {a:"Someone just like you",b:"Someone totally opposite",c:"love"},
+ {a:"A partner who shares your hobbies",b:"A partner who respects your space",c:"love"},
+ {a:"Someone with a striking first impression",b:"Someone who grows on you",c:"love"},
+ {a:"A partner who takes the lead",b:"A partner who goes with the flow",c:"love"},
+ {a:"Long-distance, but all in",b:"Close by, all the time",c:"love"},
+ {a:"A relationship out loud on social media",b:"A relationship kept secret",c:"love"},
+ {a:"Dates built around food",b:"Dates built around activities",c:"love"},
+ {a:"Love said out loud",b:"Love shown through actions",c:"love"},
+ {a:"Go big on anniversaries",b:"Show up well every day",c:"love"},
+ {a:"A sweet text",b:"A surprise gift",c:"love"},
+ {a:"Love that grows together",b:"Love just as you are",c:"love"},
+ {a:"An upfront partner",b:"A considerate partner",c:"love"},
+ {a:"A handwritten letter",b:"A voice message",c:"love"},
+ {a:"Travel together",b:"Stay in together",c:"love"},
+ {a:"The jealous type",b:"The chill type",c:"love"},
+ {a:"Planned-out dates",b:"Spontaneous dates",c:"love"},
+ {a:"One person, forever",b:"Meet lots of people",c:"love"},
+ {a:"Rewind time",b:"Peek into the future",c:"power"},
+ {a:"Heal any wound",b:"Prevent any illness",c:"power"},
+ {a:"Talk to animals",b:"Talk to plants",c:"power"},
+ {a:"Control dreams",b:"Save memories",c:"power"},
+ {a:"Control the weather",b:"Control emotions",c:"power"},
+ {a:"Duplicate anything",b:"Erase anything",c:"power"},
+ {a:"Instant learning",b:"Perfect memory forever",c:"power"},
+ {a:"X-ray vision",b:"Clairvoyance",c:"power"},
+ {a:"Shapeshifting",b:"Cloning yourself",c:"power"},
+ {a:"Fast-forward time",b:"Pause time",c:"power"},
+ {a:"Sleep in",b:"Stay up all night",c:"daily"},
+ {a:"Neat freak",b:"Comfortable with mess",c:"daily"},
+ {a:"Prep way ahead",b:"Cram at the last minute",c:"daily"},
+ {a:"Up on the first alarm",b:"Hit snooze five times",c:"daily"},
+ {a:"Live by the schedule",b:"Go with the day’s mood",c:"daily"},
+ {a:"I’d rather be hot",b:"I’d rather be cold",c:"daily"},
+ {a:"Morning shower",b:"Night shower",c:"daily"},
+ {a:"Note-taking addict",b:"Remember it by heart",c:"daily"},
+ {a:"Laundry right away",b:"Laundry all at once",c:"daily"},
+ {a:"Home is where it’s at",b:"Out and about",c:"daily"},
+ {a:"Quick decisions",b:"Careful deliberation",c:"daily"},
+ {a:"Need a lot of sleep",b:"Fine on little sleep",c:"daily"},
+ {a:"Love it brand-new",b:"Love it well-worn",c:"daily"},
+ {a:"Group chat notifications on",b:"Group chat on mute",c:"daily"},
+ {a:"Photo lock screen",b:"Plain color lock screen",c:"daily"},
+ {a:"Packed schedule",b:"Easy-going schedule",c:"travel"},
+ {a:"City trips",b:"Nature trips",c:"travel"},
+ {a:"Food-focused trips",b:"Adventure-activity trips",c:"travel"},
+ {a:"Revisit a favorite spot",b:"Try somewhere new",c:"travel"},
+ {a:"Luxury hotel",b:"Cozy boutique guesthouse",c:"travel"},
+ {a:"Group package tour",b:"Free-and-easy backpacking",c:"travel"},
+ {a:"A warm beach resort",b:"An exotic city",c:"travel"},
+ {a:"Plan the trip in advance",b:"Wing it on the ground",c:"travel"},
+ {a:"Train travel",b:"Road trip",c:"travel"},
+ {a:"Famous photo spots",b:"Back alleys locals love",c:"travel"}
+];
+
+/* ---------------- STATE ---------------- */
+const CAT_LABELS={food:'🍽️ Food Taste',love:'💕 Love Style',power:'✨ Imagination',work:'💰 Money & Work',daily:'🎲 Everyday Vibe',travel:'✈️ Travel Style',value:'🌿 Life Values',celeb:'🌟 Pop Culture Taste',hobby:'🎨 Hobbies & Taste',hero:'🏛️ Icons & Figures'};
+let order=[], names=["Me","You"];
+let nQ=10;                      // Number of questions selected
+let round=0;                    // 0: First person, 1: Second person
+let pos=0;                      // Current position in round
+let answers=[[],[]];            // answers[round][i] = 'A' | 'B'
+let phase='closed';             // 'closed' | 'choosing' | 'moving'
+let isOpen=false;
+
+const $=id=>document.getElementById(id);
+function vibrate(ms){ if(navigator.vibrate) try{navigator.vibrate(ms);}catch(e){} }
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function show(scr){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); $(scr).classList.add('on'); }
+let _tt; function toast(m){ const t=$('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2000); }
+
+
+$('qcounts').addEventListener('click',e=>{
+ const b=e.target.closest('.qc'); if(!b) return;
+ document.querySelectorAll('.qc').forEach(x=>x.classList.remove('on'));
+ b.classList.add('on'); nQ=parseInt(b.dataset.n,10);
+});
+
+
+$('startBtn').addEventListener('click',()=>{
+ const a=$('nameA').value.trim(), b=$('nameB').value.trim();
+ names=[a||"Me", b||"You"];
+ startGame();
+});
+
+function startGame(){
+ order=shuffle(BAL.map((_,i)=>i)).slice(0, Math.min(nQ, BAL.length));
+ round=0; pos=0; answers=[[],[]];
+ beginRound();
+}
+
+function beginRound(){
+ pos=0; isOpen=false;
+ prepareQuestion();
+ resetEnvelope(false);
+ $('roundLabel').textContent=names[round]+' Turn';
+ $('countLabel').textContent='0/'+order.length;
+ $('gaugeFill').style.width='0%';
+ $('envHint').textContent='Tap here! Open envelope #1 ✉️';
+ $('turnLine').innerHTML='<b>'+names[round]+'</b>, tap the screen to start!';
+ show('play');
+}
+
+
+function prepareQuestion(){
+ const q=BAL[order[pos]];
+ phase='closed';
+ $('optAtext').textContent=q.a;
+ $('optBtext').textContent=q.b;
+ $('picksA').innerHTML=''; $('picksB').innerHTML='';
+ $('optA').className='opt optA'; $('optB').className='opt optB';
+ $('optA').disabled=false; $('optB').disabled=false;
+ $('bsplit').classList.remove('decided');
+ $('bresult').classList.remove('show'); $('bresult').textContent='';
+ $('tapcue').classList.remove('show');
+ $('bqlabel').textContent='What’s your pick?';
+}
+
+function resetEnvelope(incoming){
+ const env=$('envelope');
+ env.classList.remove('open','gone','incoming');
+ void env.offsetWidth;
+ if(incoming) env.classList.add('incoming');
+ isOpen=false;
+}
+
+function openEnvelope(){
+ if(isOpen) return;
+ const env=$('envelope');
+ env.classList.add('open'); vibrate(28);
+ setTimeout(()=>{
+   env.classList.add('gone');
+   isOpen=true; phase='choosing';
+   $('bqlabel').textContent='Q'+(pos+1)+'. What’s your pick?';
+   $('turnLine').innerHTML='<b>'+names[round]+'</b> — tap the one you like!';
+ },360);
+}
+
+function pick(side){
+ if(phase!=='choosing') return;
+ phase='moving';
+ answers[round][pos]=side;
+ vibrate(20);
+ const win = side==='A'?$('optA'):$('optB');
+ const lose= side==='A'?$('optB'):$('optA');
+ win.classList.add('pressed','win'); lose.classList.add('lose');
+ $('optA').disabled=true; $('optB').disabled=true;
+ $('bsplit').classList.add('decided');
+ $('countLabel').textContent=(pos+1)+'/'+order.length;
+ $('gaugeFill').style.width=((pos+1)/order.length*100)+'%';
+ setTimeout(()=>{
+   pos++;
+   if(pos<order.length){
+     prepareQuestion();
+     resetEnvelope(true);
+     $('envHint').textContent='✉️';
+     $('turnLine').innerHTML='Opening the next envelope…';
+     setTimeout(openEnvelope, 430);   // From the second question on, envelopes open automatically
+   }else if(round===0){
+     handoff();
+   }else{
+     finish();
+   }
+ },540);
+}
+
+
+$('card').addEventListener('click',()=>{ if(phase==='closed' && !isOpen) openEnvelope(); });
+$('optA').addEventListener('click',(e)=>{ e.stopPropagation(); pick('A'); });
+$('optB').addEventListener('click',(e)=>{ e.stopPropagation(); pick('B'); });
+$('backHome').addEventListener('click',()=>{ show('home'); });
+
+
+function handoff(){
+ $('hoDone').textContent='✓ '+names[0]+' Done!';
+ $('hoMsg').innerHTML='Now hand the phone to <b>'+names[1]+'</b>.<br>Answer the same '+order.length+' questions to reveal your match.<br><span style="opacity:.65">(Your partner’s answers stay secret 🤫)</span>';
+ $('hoBtn').textContent='I’m '+names[1]+' — let’s go!';
+ show('handoff');
+ vibrate([20,40,20]);
+}
+$('hoBtn').addEventListener('click',()=>{ round=1; beginRound(); });
+
+
+function gradeOf(pct){
+ if(pct>=90) return {e:'💞',g:'Destined Soulmates',d:'Your tastes are basically identical. This is telepathy-level sync!'};
+ if(pct>=70) return {e:'🧡',g:'Perfect Match',d:'You just click. Hanging out would be effortless.'};
+ if(pct>=50) return {e:'😊',g:'Decent Chemistry',d:'You click sometimes, clash sometimes — a solid balance!'};
+ if(pct>=30) return {e:'😆',g:'Bicker-and-Banter',d:'Your tastes clash a lot. Maybe that’s why you never get bored of each other?'};
+ return {e:'⚡',g:'Opposites Attract',d:'Totally different tastes! You’ve got a lot to learn from each other.'};
+}
+
+function finish(){
+
+ let matched=0; const history=[];
+ for(let i=0;i<order.length;i++){
+   const q=BAL[order[i]];
+   const p0=answers[0][i], p1=answers[1][i];
+   const same=(p0===p1); if(same) matched++;
+   history.push({c:q.c, same, p0, p1, q});
+ }
+ const answered=order.length;
+ const pct=answered?Math.round(matched/answered*100):0;
+ const G=gradeOf(pct);
+
+
+ const byCat={};
+ history.forEach(h=>{ (byCat[h.c]=byCat[h.c]||{t:0,m:0}); byCat[h.c].t++; if(h.same) byCat[h.c].m++; });
+ const cats=Object.keys(byCat).map(c=>({c, pct:Math.round(byCat[c].m/byCat[c].t*100), t:byCat[c].t})).sort((x,y)=>y.pct-x.pct);
+ const catRows=cats.map(o=>{
+   const col=o.pct>=67?'#ffd56b':(o.pct>=34?'#ff8a5b':'#5b8aff');
+   return '<div class="catrow"><span class="catname">'+CAT_LABELS[o.c]+'</span><div class="catbar"><div class="catfill" style="width:'+o.pct+'%;background:'+col+';box-shadow:0 0 10px '+col+'aa;"></div></div><span class="catpct">'+o.pct+'%</span></div>';
+ }).join('');
+ const topCat=cats[0], lowCat=cats[cats.length-1];
+
+
+ const sames=history.filter(h=>h.same), diffs=history.filter(h=>!h.same);
+ let highlight='';
+ if(sames.length){
+   const s=sames[Math.floor(Math.random()*sames.length)];
+   const t=s.p0==='A'?s.q.a:s.q.b;
+   highlight='<div class="hi hi-same"><div class="hi-tag">💞 You both picked the same</div><b>“'+t+'”</b></div>';
+ }
+ let diffList='';
+ if(diffs.length){
+   diffList=diffs.map(d=>{
+     const t0=d.p0==='A'?d.q.a:d.q.b, t1=d.p1==='A'?d.q.a:d.q.b;
+     return '<div class="diffitem"><div class="di-row di-a"><span class="who">'+names[0]+'</span>'+t0+'</div><div class="di-row di-b"><span class="who">'+names[1]+'</span>'+t1+'</div></div>';
+   }).join('');
+ }else{
+   diffList='<div class="alltogether">Perfect match! Not a single question where you differed 💞</div>';
+ }
+
+ const R=72, C=2*Math.PI*R, off=C*(1-pct/100);
+ $('doneInner').innerHTML=
+   '<div class="rep-title">'+names[0]+' <span>❤</span> '+names[1]+' Compatibility</div>'+
+   '<div class="donut"><svg width="180" height="180" viewBox="0 0 180 180">'+
+     '<defs><linearGradient id="dg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ff5e8a"/><stop offset="55%" stop-color="#ffd56b"/><stop offset="100%" stop-color="#5b8aff"/></linearGradient></defs>'+
+     '<circle cx="90" cy="90" r="'+R+'" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="13"/>'+
+     '<circle cx="90" cy="90" r="'+R+'" fill="none" stroke="url(#dg)" stroke-width="13" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" transform="rotate(-90 90 90)" id="donutFg"/>'+
+   '</svg><div class="donut-center"><div class="dc-emoji">'+G.e+'</div><div class="dc-pct">'+pct+'%</div></div></div>'+
+   '<div class="grade">'+G.g+'</div>'+
+   '<p>'+answered+' questions, you matched on <b style="color:var(--cream)">'+matched+'</b> of them!<br>'+G.d+'</p>'+
+   '<div class="repbox"><div class="repbox-h">Compatibility by Category</div>'+catRows+
+     '<div class="catnote">Your best match category is <b>'+CAT_LABELS[topCat.c]+'</b>'+(cats.length>1?', and you differ most on <b>'+CAT_LABELS[lowCat.c]+'</b>':'')+' 🌟</div></div>'+
+   (highlight?'<div class="repbox">'+highlight+'</div>':'')+
+   '<div class="repbox"><div class="repbox-h">⚡ Disagreed on '+diffs.length+' questions</div>'+diffList+'</div>'+
+   '<button class="startbtn" id="againBtn">🔀 Try New Questions</button>'+
+   '<div class="subrow"><button class="ghost" id="homeBtn2">Home</button></div>';
+ show('done');
+ requestAnimationFrame(()=>{ const fg=$('donutFg'); if(fg){ fg.style.transition='stroke-dashoffset 1.1s cubic-bezier(.22,1,.36,1)'; fg.style.strokeDashoffset=off; } });
+ vibrate([20,40,20]);
+ $('againBtn').onclick=startGame;
+ $('homeBtn2').onclick=()=>show('home');
+}
+
+</script>
+</body>
+</html>

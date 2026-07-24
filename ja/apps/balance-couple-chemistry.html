@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>相性バランス・ふたりの好み対決</title>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansJP-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/MPLUSRounded1c-Bold-sub.woff2') format('woff2');font-weight:400;font-display:swap;}
+</style>
+<style>
+  :root{
+    --bg1:#161227; --bg2:#241640;
+    --warm1:#ff8a5b; --warm2:#ff5e6c;   
+    --cool1:#5b8aff; --cool2:#3fd6e0;   
+    --gold:#ffd56b;
+    --cream:#fff6ec; --muted:#cdbfe0; --card:#221a3a;
+  }
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{
+    font-family:'Noto Sans KR',sans-serif; color:var(--cream);
+    background:
+      radial-gradient(120% 80% at 82% -10%, rgba(255,138,91,.10), transparent 55%),
+      radial-gradient(120% 90% at 12% 110%, rgba(91,138,255,.12), transparent 55%),
+      linear-gradient(160deg,var(--bg1),var(--bg2));
+    background-attachment:fixed; min-height:100dvh; overflow-x:hidden;
+  }
+  .wrap{max-width:520px; margin:0 auto; min-height:100dvh; display:flex; flex-direction:column; padding:22px 20px 16px;}
+  .screen{display:none; flex:1; flex-direction:column; animation:fadeIn .5s ease;}
+  .screen.on{display:flex;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+  /* ---------- HOME ---------- */
+  .eyebrow{font-size:13px; letter-spacing:.26em; color:var(--gold); text-align:center; margin-top:16px; font-weight:500; opacity:.85;}
+  .title{
+    font-family:'Jua'; font-size:clamp(40px,13vw,58px); line-height:1.05; text-align:center; margin:10px 0 6px;
+    background:linear-gradient(105deg,#ff8a5b,#ff5e6c 40%,#5b8aff 78%);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .sub{text-align:center; color:var(--muted); font-size:15px; line-height:1.6; margin-bottom:22px;}
+  .sub b{color:var(--cream); font-weight:700;}
+  .names{display:flex; gap:10px; margin:0 0 22px;}
+  .names input{
+    flex:1; min-width:0; border:1.5px solid rgba(255,255,255,.16); background:rgba(255,255,255,.05);
+    color:var(--cream); border-radius:14px; padding:14px; font-size:15px; font-family:inherit; text-align:center; transition:border-color .2s;
+  }
+  .names input::placeholder{color:rgba(255,255,255,.4);}
+  .names input:focus{outline:none; border-color:var(--warm1);}
+  .names .vs{align-self:center; color:var(--gold); font-family:'Jua'; font-size:20px;}
+  .startbtn{
+    border:none; cursor:pointer; font-family:'Jua'; font-size:21px; color:#1a1230; padding:18px; border-radius:18px;
+    background:linear-gradient(100deg,var(--warm1),var(--cool1)); box-shadow:0 16px 40px -14px rgba(120,120,255,.5);
+    transition:transform .14s ease;
+  }
+  .startbtn:active{transform:scale(.96);}
+  .home-tip{margin-top:auto; padding-top:20px; text-align:center; color:var(--muted); font-size:12.5px; line-height:1.6; opacity:.85;}
+  .home-tip b{color:var(--cream);}
+  .qcount-label{text-align:center; font-size:13px; color:var(--muted); margin-bottom:10px;}
+  .qcounts{display:flex; gap:8px; justify-content:center; margin-bottom:22px; flex-wrap:wrap;}
+  .qc{border:1.5px solid rgba(255,255,255,.16); background:rgba(255,255,255,.05); color:var(--cream); font-family:'Jua'; font-size:16px; min-width:54px; padding:11px 14px; border-radius:14px; cursor:pointer; transition:transform .12s, background .2s, color .2s, border-color .2s, box-shadow .2s;}
+  .qc.on{background:linear-gradient(100deg,var(--warm1),var(--cool1)); color:#1a1230; border-color:transparent; box-shadow:0 8px 20px -8px var(--cool1);}
+  .qc:active{transform:scale(.93);}
+  .handoff-inner{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;}
+  .ho-emoji{font-size:64px; margin-bottom:14px; animation:pop .6s ease;}
+  .ho-done{font-family:'Jua'; font-size:26px; margin-bottom:14px;}
+  .ho-msg{color:var(--muted); font-size:15px; line-height:1.75; margin-bottom:28px; max-width:330px; }
+  .ho-msg b{color:var(--cream);}
+  .handoff-inner .startbtn{width:100%; max-width:300px;}
+
+  /* ---------- PLAY topbar ---------- */
+  .topbar{display:flex; align-items:center; gap:12px; margin-bottom:14px;}
+  .homebtn{
+    display:flex; align-items:center; gap:5px; flex-shrink:0; border:none; cursor:pointer; height:40px;
+    padding:0 14px 0 11px; border-radius:12px; font-family:'Jua'; font-size:14px; color:var(--cream);
+    background:rgba(255,255,255,.09); transition:background .2s, transform .12s;
+  }
+  .homebtn:active{transform:scale(.93); background:rgba(255,255,255,.2);}
+  .homebtn .hicon{font-size:16px;}
+  .gaugewrap{flex:1;}
+  .gaugelabel{display:flex; justify-content:space-between; font-size:12px; color:var(--muted); margin-bottom:6px;}
+  .gaugelabel .chemi{color:var(--gold); font-weight:700; font-family:'Jua';}
+  .gauge{height:9px; border-radius:99px; background:rgba(255,255,255,.1); overflow:hidden;}
+  .gaugefill{height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg,#ff5e8a,var(--gold)); box-shadow:0 0 14px 1px var(--gold); transition:width .55s cubic-bezier(.22,1,.36,1);}
+  .endbtn{
+    flex-shrink:0; border:1.5px solid rgba(255,255,255,.16); background:transparent; color:var(--muted);
+    height:40px; padding:0 12px; border-radius:12px; font-family:inherit; font-size:13px; cursor:pointer; transition:background .2s;
+  }
+  .endbtn:active{background:rgba(255,255,255,.08);}
+
+  .turn{text-align:center; font-size:14px; margin:4px 0 14px; color:var(--muted); min-height:22px;}
+  .turn b{color:var(--cream); font-family:'Jua'; font-size:17px;
+    background:linear-gradient(100deg,var(--warm1),var(--cool1)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+
+  /* ---------- CARD (balance split) ---------- */
+  .cardzone{flex:1; display:flex; align-items:center; justify-content:center; min-height:0;}
+  .card{
+    width:100%; border-radius:28px; position:relative; overflow:hidden; cursor:pointer;
+    background:var(--card); border:1.5px solid rgba(255,255,255,.12);
+    box-shadow:0 28px 70px -30px rgba(0,0,0,.85), inset 0 1px 0 rgba(255,255,255,.08);
+    min-height:420px; display:flex; flex-direction:column;
+  }
+  .bqlabel{
+    position:absolute; top:0; left:0; right:0; z-index:3; text-align:center;
+    padding:12px; font-size:12px; letter-spacing:.16em; color:var(--gold); font-weight:500;
+    pointer-events:none;
+  }
+  .bsplit{flex:1; display:flex; flex-direction:column; position:relative;}
+  .opt{
+    flex:1; border:none; cursor:pointer; color:var(--cream); font-family:inherit; position:relative;
+    display:flex; align-items:center; justify-content:center; text-align:center; padding:30px 22px;
+    transition:flex .35s ease, filter .25s ease, opacity .25s; overflow:hidden;
+  }
+  .opt:disabled{cursor:default;}
+  .optA{background:linear-gradient(150deg,var(--warm1),var(--warm2));}
+  .optB{background:linear-gradient(150deg,var(--cool1),var(--cool2));}
+  .opt .optlabel{
+    position:absolute; top:14px; left:16px; font-family:'Jua'; font-size:22px; opacity:.55;
+  }
+  .optA .optlabel{top:auto; bottom:14px;}
+  .opttext{font-family:'Jua'; font-size:clamp(20px,5.6vw,27px); line-height:1.35;  max-width:90%; text-shadow:0 2px 8px rgba(0,0,0,.25);}
+  .opt .picks{position:absolute; right:14px; display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; max-width:60%;}
+  .optA .picks{top:14px;}
+  .optB .picks{bottom:14px;}
+  .pickchip{
+    font-size:12px; font-weight:700; padding:4px 10px; border-radius:99px;
+    background:rgba(255,255,255,.92); color:#222; font-family:'Noto Sans KR';
+    animation:pop .4s cubic-bezier(.34,1.56,.64,1);
+  }
+  .opt.win{flex:1.9; filter:saturate(1.15) brightness(1.05);}
+  .opt.lose{flex:.7; filter:grayscale(.4) brightness(.7); opacity:.85;}
+  .opt.pressed{animation:flash .4s ease;}
+  @keyframes flash{0%{filter:brightness(1.4);}100%{filter:brightness(1);}}
+
+  .vsbadge{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:4;
+    width:60px; height:60px; border-radius:50%; background:var(--card); border:3px solid rgba(255,255,255,.9);
+    display:flex; align-items:center; justify-content:center; font-family:'Jua'; font-size:22px; color:#fff;
+    box-shadow:0 8px 22px rgba(0,0,0,.4); transition:transform .3s;
+  }
+  .bsplit.decided .vsbadge{transform:translate(-50%,-50%) scale(.7); opacity:.6;}
+
+  .bresult{
+    position:absolute; bottom:0; left:0; right:0; z-index:5; text-align:center;
+    padding:14px; font-family:'Jua'; font-size:18px; transform:translateY(120%); transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+    background:linear-gradient(0deg, rgba(20,12,30,.92), transparent);
+    pointer-events:none;
+  }
+  .bresult.show{transform:translateY(0);}
+
+  .tapcue{
+    position:absolute; bottom:64px; left:0; right:0; text-align:center; z-index:5;
+    font-size:12.5px; color:var(--cream); opacity:0; transition:opacity .4s; pointer-events:none;
+  }
+  .tapcue.show{opacity:.85; animation:cuePulse 1.7s ease-in-out infinite;}
+  @keyframes cuePulse{0%,100%{opacity:.5;}50%{opacity:.95;}}
+
+  /* ---------- envelope ---------- */
+  .envelope{position:absolute; inset:0; z-index:8; border-radius:28px; display:flex; align-items:center; justify-content:center; perspective:1000px; overflow:hidden;}
+  .envelope.gone{opacity:0; transform:scale(1.05); pointer-events:none; transition:opacity .45s ease, transform .45s ease;}
+  .env-pocket{position:absolute; inset:0; border-radius:28px; background:linear-gradient(150deg,#a06bff,#ff6bd0);}
+  .env-pocket::after{content:""; position:absolute; left:0; right:0; top:34%; bottom:0; background:linear-gradient(170deg, rgba(255,255,255,.13), rgba(0,0,0,.10)); clip-path:polygon(0 14%, 50% 64%, 100% 14%, 100% 100%, 0 100%);}
+  .env-flap{position:absolute; top:0; left:0; right:0; height:48%; background:linear-gradient(165deg,#b07bff,#ff7bd6); clip-path:polygon(0 0, 100% 0, 50% 100%); transform-origin:top center; transform:rotateX(0deg); transition:transform .55s cubic-bezier(.6,-0.28,.34,1.4), filter .5s; z-index:4; backface-visibility:hidden; filter:brightness(1.07);}
+  .envelope.open .env-flap{transform:rotateX(179deg); filter:brightness(.78);}
+  .env-seal{position:relative; z-index:5; width:58px; height:58px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,.95); color:#c44ec4; font-family:'Jua'; font-size:24px; box-shadow:0 8px 22px rgba(0,0,0,.28); transition:transform .35s ease, opacity .3s;}
+  .envelope.open .env-seal{transform:scale(0) rotate(45deg); opacity:0;}
+  .env-hint{position:absolute; left:0; right:0; bottom:24px; text-align:center; color:rgba(34,16,52,.85); font-family:'Jua'; font-size:14px; animation:hintPulse 1.5s ease-in-out infinite;}
+  .envelope.open .env-hint{opacity:0; transition:opacity .2s;}
+  @keyframes hintPulse{0%,100%{transform:translateY(0); opacity:.7;}50%{transform:translateY(-4px); opacity:1;}}
+  .envelope.incoming{animation:envIn .42s cubic-bezier(.34,1.4,.5,1);}
+  @keyframes envIn{0%{transform:translateY(44px) scale(.92); opacity:0;}100%{transform:translateY(0) scale(1); opacity:1;}}
+  @keyframes pop{0%{transform:scale(.9); opacity:.4;}60%{transform:scale(1.04);}100%{transform:scale(1); opacity:1;}}
+
+  /* ---------- toast ---------- */
+  .toast{position:fixed; left:50%; top:84px; transform:translateX(-50%) translateY(-20px); background:rgba(34,26,58,.96); border:1.5px solid var(--gold); color:var(--cream); padding:13px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none; transition:opacity .4s, transform .4s; z-index:50; max-width:90vw;}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  /* ---------- DONE ---------- */
+  .done-inner{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;}
+  .done-emoji{font-size:60px; margin-bottom:6px; animation:pop .6s ease;}
+  .chemi-big{font-family:'Jua'; font-size:84px; line-height:1; margin:4px 0;
+    background:linear-gradient(105deg,#ff5e8a,var(--gold) 60%,#5b8aff); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+  .grade{font-family:'Jua'; font-size:26px; margin-bottom:10px;}
+  .done-inner p{color:var(--muted); font-size:15px; line-height:1.7; margin-bottom:24px; max-width:330px; }
+  .done-inner .startbtn{width:100%; max-width:300px;}
+  .subrow{display:flex; gap:10px; width:100%; max-width:300px; margin-top:10px;}
+  .subrow .ghost{flex:1; border:1.5px solid rgba(255,255,255,.16); background:transparent; color:var(--muted); font-family:inherit; font-size:14px; padding:12px; border-radius:14px; cursor:pointer;}
+  .subrow .ghost:active{background:rgba(255,255,255,.08);}
+
+  
+  #done .done-inner{justify-content:flex-start; padding-top:8px;}
+  .rep-title{font-family:'Jua'; font-size:22px; margin-bottom:8px;}
+  .rep-title span{color:#ff5e8a;}
+  .donut{position:relative; width:180px; height:180px; margin:2px auto 2px;}
+  .donut-center{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;}
+  .dc-emoji{font-size:34px; line-height:1;}
+  .dc-pct{font-family:'Jua'; font-size:36px; line-height:1.1; background:linear-gradient(105deg,#ff5e8a,#ffd56b 60%,#5b8aff); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+  .repbox{width:100%; max-width:360px; background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.1); border-radius:18px; padding:16px; margin-top:14px;}
+  .repbox-h{font-family:'Jua'; font-size:15px; margin-bottom:12px; text-align:left; color:var(--gold);}
+  .catrow{display:flex; align-items:center; gap:10px; margin-bottom:9px;}
+  .catname{font-size:12.5px; width:98px; text-align:left; flex-shrink:0; color:var(--cream);}
+  .catbar{flex:1; height:9px; border-radius:99px; background:rgba(255,255,255,.12); overflow:hidden;}
+  .catfill{height:100%; border-radius:99px;}
+  .catpct{font-size:12px; width:36px; text-align:right; color:var(--muted); flex-shrink:0; font-weight:700;}
+  .catnote{font-size:12px; color:var(--muted); line-height:1.6; margin-top:10px; text-align:left;}
+  .catnote b{color:var(--cream);}
+  .hi{text-align:left; font-size:14px; line-height:1.5; padding:9px 0;}
+  .hi+.hi{border-top:1px solid rgba(255,255,255,.08);}
+  .hi-tag{font-family:'Jua'; font-size:13px; margin-bottom:3px; color:var(--gold);}
+  .hi b{color:var(--cream);}
+  .diffitem{padding:10px 0; border-top:1px solid rgba(255,255,255,.08); text-align:left;}
+  .diffitem:first-of-type{border-top:none;}
+  .di-row{font-size:13.5px; line-height:1.5; display:flex; gap:7px; align-items:baseline;  color:var(--cream);}
+  .di-row+.di-row{margin-top:4px;}
+  .who{font-size:11px; font-weight:700; padding:2px 9px; border-radius:99px; flex-shrink:0;}
+  .di-a .who{background:rgba(255,138,91,.28); color:#ffcdb0;}
+  .di-b .who{background:rgba(91,138,255,.28); color:#bcd0ff;}
+  .alltogether{text-align:center; color:var(--gold); font-size:14px; padding:6px 0;}
+
+  /* ---------- FOOTER ---------- */
+  .footer{text-align:center; margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+  .mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+  .mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+  .mf-eyebrow::after{transform:scaleX(-1);}
+  .mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+  .mf-logo{font-family:'Jua'; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em; background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+  .mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+  @media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ HOME ============ -->
+  <section class="screen on" id="home">
+    <div class="eyebrow">長い旅、ふたりの好み対決</div>
+    <h1 class="title">相性バランス</h1>
+    <p class="sub">ふたりでこっそり選んで <b>同時に公開!</b><br>分野別の相性で <b>相性</b>まで教えます。</p>
+
+    <div class="names">
+      <input id="nameA" type="text" maxlength="6" placeholder="私" aria-label="ひとり目の名前">
+      <span class="vs">&amp;</span>
+      <input id="nameB" type="text" maxlength="6" placeholder="あなた" aria-label="ふたり目の名前">
+    </div>
+
+    <div class="qcount-label">何問解きますか？</div>
+    <div class="qcounts" id="qcounts">
+      <button class="qc" data-n="5">5</button>
+      <button class="qc on" data-n="10">10</button>
+      <button class="qc" data-n="20">20</button>
+      <button class="qc" data-n="30">30</button>
+      <button class="qc" data-n="50">50</button>
+      <button class="qc" data-n="100">100</button>
+      <button class="qc" data-n="300">全部</button>
+    </div>
+
+    <button class="startbtn" id="startBtn">⚔️ 相性対決スタート</button>
+
+    <div class="home-tip">ひとりが先に全部解いて → スマホを渡して → もうひとりが解いたら → <b>相性を公開！</b> 🎉</div>
+  </section>
+
+  <!-- ============ PLAY ============ -->
+  <section class="screen" id="play">
+    <div class="topbar">
+      <button class="homebtn" id="backHome" aria-label="ホームへ"><span class="hicon">🏠</span>ホーム</button>
+      <div class="gaugewrap">
+        <div class="gaugelabel"><span class="chemi" id="roundLabel">—</span><span id="countLabel">0/0</span></div>
+        <div class="gauge"><div class="gaugefill" id="gaugeFill"></div></div>
+      </div>
+    </div>
+
+    <div class="turn" id="turnLine">画面をタップして最初の封筒を開けよう ✉️</div>
+
+    <div class="cardzone">
+      <div class="card" id="card">
+        <div class="bqlabel" id="bqlabel">あなたの選択は？</div>
+        <div class="bsplit" id="bsplit">
+          <button class="opt optA" id="optA">
+            <span class="optlabel">A</span>
+            <span class="opttext" id="optAtext"></span>
+            <span class="picks" id="picksA"></span>
+          </button>
+          <button class="opt optB" id="optB">
+            <span class="optlabel">B</span>
+            <span class="opttext" id="optBtext"></span>
+            <span class="picks" id="picksB"></span>
+          </button>
+          <div class="vsbadge">VS</div>
+        </div>
+        <div class="bresult" id="bresult"></div>
+        <div class="tapcue" id="tapcue">画面をタップすると次の封筒 ✉️</div>
+
+        <div class="envelope" id="envelope">
+          <div class="env-pocket"></div>
+          <div class="env-flap"></div>
+          <div class="env-seal">⚔</div>
+          <div class="env-hint" id="envHint">ここをタップ！最初の対決を開封 ✉️</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HANDOFF ============ -->
+  <section class="screen" id="handoff">
+    <div class="handoff-inner">
+      <div class="ho-emoji">🤝</div>
+      <div class="ho-done" id="hoDone"></div>
+      <div class="ho-msg" id="hoMsg"></div>
+      <button class="startbtn" id="hoBtn"></button>
+    </div>
+  </section>
+
+  <!-- ============ DONE ============ -->
+  <section class="screen" id="done">
+    <div class="done-inner" id="doneInner"></div>
+  </section>
+
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/ja/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 ドーパミン実験室 — 他のテストを見に行く →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意 味 と 面 白 さ の 工 場</span></div>
+    <div class="mf-logo">ミミファクトリー</div>
+    <div class="mf-caption">株式会社ヨンギョル ファミリーカンパニー</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+const BAL=[
+ {a:"一生和食だけ食べる",b:"一生洋食だけ食べる",c:"food"},
+ {a:"フライドチキン",b:"ピザ",c:"food"},
+ {a:"醤油ラーメン",b:"味噌ラーメン",c:"food"},
+ {a:"カツ ソースかけ派",b:"カツ ソースつけ派",c:"food"},
+ {a:"一生甘い物だけ",b:"一生辛い物だけ",c:"food"},
+ {a:"ラーメンは麺から",b:"ラーメンはスープから",c:"food"},
+ {a:"一生肉が食べられない",b:"一生果物が食べられない",c:"food"},
+ {a:"ホットコーヒー",b:"アイスコーヒー",c:"food"},
+ {a:"一生朝食抜き",b:"一生夜食禁止",c:"food"},
+ {a:"ミントチョコ派",b:"ミントチョコ反対派",c:"food"},
+ {a:"優しいけど能力がない人",b:"能力はあるけど無愛想な人",c:"love"},
+ {a:"連絡をまめにする恋愛",b:"連絡がたまにしかない恋愛",c:"love"},
+ {a:"背が高くて普通の顔",b:"背が低くてイケメン/美人",c:"love"},
+ {a:"初恋の人と再会",b:"新しい出会いを見つける",c:"love"},
+ {a:"一生ひとり",b:"一生片思い",c:"love"},
+ {a:"毎日べったりの仲",b:"ほどよく距離を置く仲",c:"love"},
+ {a:"干支ひとまわり上の年上",b:"干支ひとまわり下の年下",c:"love"},
+ {a:"空を飛ぶ能力",b:"透明人間になる能力",c:"power"},
+ {a:"瞬間移動",b:"時間停止",c:"power"},
+ {a:"過去に行く",b:"未来に行く",c:"power"},
+ {a:"人の心を読む",b:"未来を予知する",c:"power"},
+ {a:"すべての言語が通じる",b:"すべての動物と話せる",c:"power"},
+ {a:"記憶を消す能力",b:"記憶を蘇らせる能力",c:"power"},
+ {a:"宝くじ1等一回",b:"一生病気知らず",c:"power"},
+ {a:"月給100万円で週6日勤務",b:"月給30万円で週3日勤務",c:"work"},
+ {a:"好きな仕事で薄給",b:"嫌いな仕事で高収入",c:"work"},
+ {a:"宝くじ高額当選一回",b:"毎月50万円が一生続く",c:"work"},
+ {a:"一生在宅勤務",b:"一生出社勤務",c:"work"},
+ {a:"無能な上司",b:"無能な同僚",c:"work"},
+ {a:"残業なしだけど昼休み30分",b:"残業多いけど昼休み2時間",c:"work"},
+ {a:"大家さんになる",b:"有名人になる",c:"work"},
+ {a:"夏にダウンを着る",b:"冬に半袖を着る",c:"daily"},
+ {a:"一生歯磨きしない",b:"一生シャワーを浴びない",c:"daily"},
+ {a:"蚊が100匹いる部屋",b:"ゴキブリが10匹いる部屋",c:"daily"},
+ {a:"一生同じ服だけ",b:"一生同じ食べ物だけ",c:"daily"},
+ {a:"スマホなしで1週間",b:"睡眠なしで3日間",c:"daily"},
+ {a:"おならの音がとても大きい",b:"おならの匂いがとてもきつい",c:"daily"},
+ {a:"一生音痴",b:"一生運動音痴",c:"daily"},
+ {a:"自分の足の匂いがひどい",b:"自分の口臭がひどい",c:"daily"},
+ {a:"みんなが自分の日記を読める",b:"自分がみんなの日記を読める",c:"value"},
+ {a:"自分の死ぬ日を知る",b:"最後まで知らない",c:"value"},
+ {a:"一生本当のことしか言えない",b:"一生嘘しか言えない",c:"value"},
+ {a:"黒歴史が全部消える",b:"未来の1年を先取りで見る",c:"value"},
+ {a:"一生敬語だけ",b:"一生タメ口だけ",c:"daily"},
+ {a:"一生冬の国で暮らす",b:"一生夏の国で暮らす",c:"daily"},
+ {a:"思いつきの旅",b:"計画通りの旅",c:"travel"},
+ {a:"海外で1ヶ月暮らす",b:"国内1年間乗り放題の旅",c:"travel"},
+ {a:"ホテルでのんびりステイ",b:"キャンプ",c:"travel"},
+ {a:"飛行機の窓側席",b:"飛行機の通路側席",c:"travel"},
+ {a:"旅行はグルメ重視",b:"旅行は観光地重視",c:"travel"},
+ {a:"ひとり旅",b:"みんなで行く旅",c:"travel"},
+ {a:"荷物をたっぷり詰める",b:"荷物は最小限に軽く",c:"travel"},
+ {a:"良かった場所にまた行く",b:"毎回新しい場所に行く",c:"travel"},
+ {a:"ディズニーランド",b:"USJ",c:"travel"},
+ {a:"旅の写真をたくさん残す",b:"目に焼き付けるだけ",c:"travel"},
+ {a:"みんなが自分を好きだけど全部嘘",b:"みんなが自分を嫌いだけど本物の友達がひとり",c:"value"},
+ {a:"お金持ちだけど孤独",b:"貧しいけど仲良し",c:"value"},
+ {a:"天才だけど短命",b:"平凡だけど長生き",c:"value"},
+ {a:"人気はあるけど実力がない",b:"実力はあるけど無名",c:"value"},
+ {a:"10歳若返る",b:"通帳に1億円",c:"value"},
+ {a:"すべてのテストで満点",b:"すべてのスポーツで1位",c:"daily"},
+ {a:"イケメン/美人",b:"頭がいい",c:"value"},
+ {a:"身長190cm",b:"IQ190",c:"value"},
+ {a:"一生褒め言葉しか聞かない",b:"一生本当のことしか聞かない",c:"value"},
+ {a:"インスタフォロワー100万人",b:"通帳に1000万円",c:"value"},
+ {a:"いいねは多いけどアンチコメントも多い",b:"何の反応もない",c:"daily"},
+ {a:"LINEを既読スルーされる",b:"LINEを未読スルーされる",c:"daily"},
+ {a:"自分の検索履歴を公開",b:"自分の通話履歴を公開",c:"daily"},
+ {a:"YouTube広告一生なし",b:"Netflix一生無料",c:"daily"},
+ {a:"一生Wi-Fiが遅い",b:"一生スマホの充電が50%まで",c:"daily"},
+ {a:"一生ラーメンだけ",b:"一生パンだけ",c:"food"},
+ {a:"夏の海",b:"冬の山",c:"travel"},
+ {a:"朝型人間",b:"夜型人間",c:"daily"},
+ {a:"計画通りに生きる人生",b:"思いつきで生きる人生",c:"value"},
+ {a:"ミニマルライフ",b:"マキシマルライフ",c:"daily"},
+ {a:"犬",b:"猫",c:"daily"},
+ {a:"カレー激辛",b:"カレー甘口",c:"food"},
+ {a:"コーラ",b:"サイダー",c:"food"},
+ {a:"ざるそば",b:"ぶっかけそば",c:"food"},
+ {a:"旅は同行者が大事",b:"旅は行き先が大事",c:"travel"},
+ {a:"一生同じ職業",b:"5年ごとに新しい職業",c:"work"},
+ {a:"お金はあるけど時間がない",b:"時間はあるけどお金がない",c:"value"},
+ {a:"人気店で2時間待ち",b:"すぐ入れる普通の店",c:"food"},
+ {a:"雨の日のドライブ",b:"晴れた日の散歩",c:"daily"},
+ {a:"カラオケで新曲",b:"カラオケで十八番(オハコ)",c:"daily"},
+ {a:"知らない人との冒険",b:"親しい人との安心感",c:"value"},
+ {a:"すごく暑いリゾート地",b:"すごく寒い雪景色の地",c:"travel"},
+ {a:"明け方の感傷",b:"夕焼けの感傷",c:"daily"},
+ {a:"映画館の最前列",b:"映画館の最後列",c:"daily"},
+ {a:"道に迷わない能力",b:"料理が上手な能力",c:"daily"},
+ {a:"過去の自分への手紙",b:"未来の自分への手紙",c:"value"},
+ {a:"世界一周1年",b:"ひとつの街を深く1年",c:"travel"},
+ {a:"スクラッチくじを削る",b:"宝くじの番号を選ぶ",c:"daily"},
+ {a:"一生音楽なしで",b:"一生映画なしで",c:"daily"},
+ {a:"一目惚れの恋",b:"じわじわ染み込む恋",c:"love"},
+ {a:"言わなくても伝わる仲",b:"何でも話す仲",c:"love"},
+ {a:"頼れる一生の友達",b:"ときめく一生の恋人",c:"love"},
+ {a:"思い出を全部残す",b:"嫌な記憶だけ消す",c:"value"},
+ {a:"今この瞬間を止める",b:"ずっと前へ進み続ける",c:"value"},
+ {a:"この旅がずっと続く",b:"もっと素敵な旅にまた出る",c:"travel"},
+ {a:"バラード歌手",b:"ヒップホップラッパー",c:"celeb"},
+ {a:"アイドル",b:"バンド",c:"celeb"},
+ {a:"日本のドラマ一気見",b:"ハリウッド映画一気見",c:"celeb"},
+ {a:"バラエティ番組を見る",b:"ドキュメンタリーを見る",c:"celeb"},
+ {a:"コンサートのスタンディング席",b:"コンサートの指定席",c:"celeb"},
+ {a:"推しのライブが一生無料",b:"推しのグッズが一生無料",c:"celeb"},
+ {a:"芸能人と友達になる",b:"自分が芸能人になる",c:"celeb"},
+ {a:"人気の多い芸能人",b:"実力派の芸能人",c:"celeb"},
+ {a:"ラブストーリー映画",b:"アクション映画",c:"celeb"},
+ {a:"ほのぼのしたシットコム",b:"ハラハラするスリラー",c:"celeb"},
+ {a:"メロディがいい曲",b:"歌詞がいい曲",c:"celeb"},
+ {a:"ライブステージ",b:"ミュージックビデオ",c:"celeb"},
+ {a:"演歌",b:"バラード",c:"celeb"},
+ {a:"ダンスが上手いダンス歌手",b:"歌が上手いボーカリスト",c:"celeb"},
+ {a:"映画館で見る",b:"配信サービスで家見",c:"celeb"},
+ {a:"字幕で見る",b:"吹き替えで見る",c:"celeb"},
+ {a:"海外ドラマシリーズ一気見",b:"余韻が残る短編映画",c:"celeb"},
+ {a:"アイドル推し活",b:"俳優推し活",c:"celeb"},
+ {a:"音楽フェス",b:"単独コンサート",c:"celeb"},
+ {a:"ビルボード1位の曲",b:"自分だけが知る隠れた名曲",c:"celeb"},
+ {a:"面白いお笑い芸人",b:"歌う歌手",c:"celeb"},
+ {a:"芸能人に似てると言われること",b:"天才っぽいと言われること",c:"celeb"},
+ {a:"ラジオDJ",b:"YouTuber",c:"celeb"},
+ {a:"昔の名作",b:"最近の話題作",c:"celeb"},
+ {a:"K-POP",b:"洋楽",c:"celeb"},
+ {a:"華やかなミュージカル",b:"濃密な演劇",c:"celeb"},
+ {a:"結末を先に知って見る",b:"最後まで知らずに見る",c:"celeb"},
+ {a:"推しの自撮り",b:"推しの個人直(ファンカム)",c:"celeb"},
+ {a:"華やかなステージ衣装",b:"自然体な普段着",c:"celeb"},
+ {a:"ライブ参戦が一生無料",b:"音楽ストリーミングが一生無料",c:"celeb"},
+ {a:"絵を描く",b:"文章を書く",c:"hobby"},
+ {a:"読書",b:"映画鑑賞",c:"hobby"},
+ {a:"登山",b:"ランニング",c:"hobby"},
+ {a:"自分で料理する",b:"グルメ店巡り",c:"hobby"},
+ {a:"写真を撮る",b:"動画を撮る",c:"hobby"},
+ {a:"楽器演奏",b:"歌を歌う",c:"hobby"},
+ {a:"ビデオゲーム",b:"ボードゲーム",c:"hobby"},
+ {a:"手作りの趣味",b:"デジタルで作る趣味",c:"hobby"},
+ {a:"植物を育てる",b:"ペットを飼う",c:"hobby"},
+ {a:"ひとりでカフェに行く",b:"友達とおしゃべり",c:"hobby"},
+ {a:"展示・博物館めぐり",b:"遊園地に行く",c:"hobby"},
+ {a:"クラシック音楽",b:"ジャズ",c:"hobby"},
+ {a:"あれこれ集める",b:"ミニマルに手放す",c:"hobby"},
+ {a:"脱出ゲーム・パズル",b:"体を動かすスポーツ",c:"hobby"},
+ {a:"日記を書く",b:"Vlogを撮る",c:"hobby"},
+ {a:"お菓子作り",b:"カクテル作り",c:"hobby"},
+ {a:"ランニング",b:"ヨガ",c:"hobby"},
+ {a:"作品を分析しながら見る",b:"気軽に楽しむ",c:"hobby"},
+ {a:"早朝の運動",b:"夜の散歩",c:"hobby"},
+ {a:"カリグラフィー",b:"ドローイング",c:"hobby"},
+ {a:"カラオケ",b:"ネットカフェ",c:"hobby"},
+ {a:"山頂を目指す登山",b:"ハイキングコースの散歩",c:"hobby"},
+ {a:"音楽フェス",b:"静かな美術館",c:"hobby"},
+ {a:"ヴィンテージショップ巡り",b:"大型モールでショッピング",c:"hobby"},
+ {a:"ドライブ",b:"自転車に乗る",c:"hobby"},
+ {a:"香水集め",b:"茶葉集め",c:"hobby"},
+ {a:"手帳デコ",b:"スマホデコ",c:"hobby"},
+ {a:"クライミング",b:"水泳",c:"hobby"},
+ {a:"夜空の星を見る",b:"焚き火でぼーっとする",c:"hobby"},
+ {a:"レゴ組み立て",b:"プラモデル組み立て",c:"hobby"},
+ {a:"カフェ巡り",b:"グルメ巡り",c:"hobby"},
+ {a:"ひとりカラオケ",b:"プリクラ",c:"hobby"},
+ {a:"家で宅トレ",b:"ジムに行く",c:"hobby"},
+ {a:"絵画を習う",b:"楽器を習う",c:"hobby"},
+ {a:"快適なグランピング",b:"ガチのバックパッキング",c:"hobby"},
+ {a:"徳川家康と昼食",b:"坂本龍馬と夕食",c:"hero"},
+ {a:"アインシュタインの頭脳",b:"モーツァルトの才能",c:"hero"},
+ {a:"歴史上の偉人に会う",b:"未来の偉人になる",c:"hero"},
+ {a:"ダ・ヴィンチに絵を習う",b:"シェイクスピアに文章を習う",c:"hero"},
+ {a:"偉大な科学者になる",b:"偉大な芸術家になる",c:"hero"},
+ {a:"ジョブズのような革新者",b:"バフェットのような投資家",c:"hero"},
+ {a:"ナポレオンの推進力",b:"ガンジーの平静心",c:"hero"},
+ {a:"歴史に名を残す",b:"静かに幸せに生きる",c:"hero"},
+ {a:"ノーベル賞を取る",b:"オリンピック金メダルを取る",c:"hero"},
+ {a:"発明家エジソン",b:"探検家コロンブス",c:"hero"},
+ {a:"ソクラテスと討論",b:"ベートーヴェンの演奏鑑賞",c:"hero"},
+ {a:"偉人伝の主人公になる",b:"愛される平凡な人",c:"hero"},
+ {a:"天才型の偉人",b:"努力型の偉人",c:"hero"},
+ {a:"ひとつの分野の伝説",b:"多分野のオールラウンダー",c:"hero"},
+ {a:"大きな功績を残すが孤独",b:"功績はないが幸せ",c:"hero"},
+ {a:"ダ・ヴィンチのように多才",b:"ひとつの分野の最高の職人",c:"hero"},
+ {a:"偉大な師になる",b:"偉大な弟子になる",c:"hero"},
+ {a:"歴史を変えた英雄",b:"歴史を記録した作家",c:"hero"},
+ {a:"キュリー夫人の粘り強さ",b:"ピカソの創造力",c:"hero"},
+ {a:"偉人の名言を覚える",b:"自分だけの名言を作る",c:"hero"},
+ {a:"能力で評価される",b:"努力で評価される",c:"value"},
+ {a:"過程が大事",b:"結果が大事",c:"value"},
+ {a:"自由だけど不安定",b:"安定してるけど束縛される",c:"value"},
+ {a:"正義のある世界",b:"平和な世界",c:"value"},
+ {a:"正直な毒舌",b:"優しい嘘",c:"value"},
+ {a:"みんなに公平に",b:"大切な人に特別に",c:"value"},
+ {a:"早い失敗",b:"遅い成功",c:"value"},
+ {a:"頭で決める",b:"心で決める",c:"value"},
+ {a:"一生学び続ける",b:"一生教え続ける",c:"value"},
+ {a:"後悔のない挑戦",b:"安全な選択",c:"value"},
+ {a:"多くの人と浅く",b:"少ない人と深く",c:"value"},
+ {a:"褒められる人生",b:"尊敬される人生",c:"value"},
+ {a:"1位だけど孤独",b:"2位だけど仲間が多い",c:"value"},
+ {a:"正しい道を険しく",b:"楽な道をほどほどに",c:"value"},
+ {a:"真実を知る苦しみ",b:"知らない幸せ",c:"value"},
+ {a:"与える人",b:"受け取る人",c:"value"},
+ {a:"変化を作る人",b:"変化にうまく適応する人",c:"value"},
+ {a:"大きな夢と小さな確率",b:"小さな夢と大きな確率",c:"value"},
+ {a:"記憶される人生",b:"忘れられる人生",c:"value"},
+ {a:"原則を守る",b:"状況に合わせる",c:"value"},
+ {a:"ひとりで輝く",b:"一緒に輝く",c:"value"},
+ {a:"嫌われる勇気",b:"愛される安定",c:"value"},
+ {a:"挑戦して失敗する",b:"挑戦せずに後悔する",c:"value"},
+ {a:"正直で損をする",b:"嘘で得をする",c:"value"},
+ {a:"自分の信念を守る",b:"多数派の意見に従う",c:"value"},
+ {a:"深みのある一本道",b:"広く知る多くの道",c:"value"},
+ {a:"結果が良ければすべて良し",b:"過程が正しくあるべき",c:"value"},
+ {a:"世の中を変える",b:"自分を変える",c:"value"},
+ {a:"影響力のある人",b:"影響を受けない人",c:"value"},
+ {a:"早く行くならひとりで",b:"遠くへ行くなら一緒に",c:"value"},
+ {a:"完璧な計画",b:"素早い実行",c:"value"},
+ {a:"認められるために生きる",b:"自分が満足するために生きる",c:"value"},
+ {a:"違いを認める",b:"同じであることを求める",c:"value"},
+ {a:"損しても正しく",b:"得はするけどほどほどに",c:"value"},
+ {a:"最後まで責任を取る",b:"さっさと諦めて新しく始める",c:"value"},
+ {a:"意味のある苦労",b:"楽な無意味",c:"value"},
+ {a:"慎重なカメ",b:"素早いウサギ",c:"value"},
+ {a:"秘密を守ってあげる",b:"本当のことを言ってあげる",c:"value"},
+ {a:"夢を追う",b:"現実を選ぶ",c:"value"},
+ {a:"みんなのための選択",b:"自分のための選択",c:"value"},
+ {a:"過去の思い出で生きる",b:"未来の希望で生きる",c:"value"},
+ {a:"分かっていて騙されてあげる",b:"知らずに心から信じる",c:"value"},
+ {a:"ゆっくり確実に",b:"素早くチャレンジ精神で",c:"value"},
+ {a:"情のせいで損をする",b:"冷静で得をする",c:"value"},
+ {a:"心の平和",b:"熱い情熱",c:"value"},
+ {a:"一生デザート無料",b:"一生コーヒー無料",c:"food"},
+ {a:"激辛の極み",b:"激甘の極み",c:"food"},
+ {a:"刺身",b:"寿司",c:"food"},
+ {a:"ホルモン",b:"せんまい",c:"food"},
+ {a:"たこ焼き",b:"お好み焼き",c:"food"},
+ {a:"豚バラ肉",b:"牛肉",c:"food"},
+ {a:"一生出前(デリバリー)",b:"一生家庭料理",c:"food"},
+ {a:"味噌汁",b:"豚汁",c:"food"},
+ {a:"パンで朝食",b:"ご飯で朝食",c:"food"},
+ {a:"果物",b:"野菜",c:"food"},
+ {a:"ビール",b:"焼酎",c:"food"},
+ {a:"和菓子",b:"洋菓子",c:"food"},
+ {a:"熱いスープ",b:"冷たい冷製スープ",c:"food"},
+ {a:"チーズたっぷり",b:"辛いタレ",c:"food"},
+ {a:"アイスクリーム",b:"かき氷",c:"food"},
+ {a:"毎日連絡する",b:"会う時だけ集中する",c:"love"},
+ {a:"サプライズイベント",b:"穏やかな日常",c:"love"},
+ {a:"表現豊かな恋人",b:"無口な恋人",c:"love"},
+ {a:"自分と似た人",b:"自分と正反対の人",c:"love"},
+ {a:"趣味を一緒にする恋人",b:"お互いの時間を尊重する恋人",c:"love"},
+ {a:"第一印象が強烈な人",b:"知るほど魅力的な人",c:"love"},
+ {a:"リードする恋人",b:"合わせてくれる恋人",c:"love"},
+ {a:"遠距離でも本気",b:"近くで頻繁に",c:"love"},
+ {a:"SNS公開の恋愛",b:"秘密の恋愛",c:"love"},
+ {a:"デートはグルメ",b:"デートはアクティビティ",c:"love"},
+ {a:"愛は言葉で表現",b:"愛は行動で表現",c:"love"},
+ {a:"記念日を盛大に祝う",b:"普段からちゃんとする",c:"love"},
+ {a:"優しいメッセージ",b:"サプライズプレゼント",c:"love"},
+ {a:"共に成長する愛",b:"ありのままの愛",c:"love"},
+ {a:"正直な恋人",b:"気遣う恋人",c:"love"},
+ {a:"手紙",b:"ボイスメッセージ",c:"love"},
+ {a:"一緒に旅行に行く",b:"一緒に家でまったり",c:"love"},
+ {a:"嫉妬する恋人",b:"クールな恋人",c:"love"},
+ {a:"計画的なデート",b:"即興的なデート",c:"love"},
+ {a:"一生ひとりだけ",b:"いろんな出会いを経験する",c:"love"},
+ {a:"時間を戻す",b:"未来をのぞき見る",c:"power"},
+ {a:"すべての傷を癒す",b:"すべての病気を予防する",c:"power"},
+ {a:"動物と話す",b:"植物と話す",c:"power"},
+ {a:"夢を操る",b:"記憶を保存する",c:"power"},
+ {a:"天気を操る",b:"感情を操る",c:"power"},
+ {a:"何でも複製する",b:"何でも消し去る",c:"power"},
+ {a:"一瞬で習得する能力",b:"永遠の記憶力",c:"power"},
+ {a:"透視能力",b:"千里眼",c:"power"},
+ {a:"変身能力",b:"分身の術",c:"power"},
+ {a:"時間早送り",b:"時間一時停止",c:"power"},
+ {a:"朝寝坊する",b:"徹夜する",c:"daily"},
+ {a:"整理整頓派",b:"散らかっても気にしない派",c:"daily"},
+ {a:"早め早めの準備",b:"直前に一気に片付け",c:"daily"},
+ {a:"アラーム一発で起床",b:"スヌーズ5回",c:"daily"},
+ {a:"スケジュール通りに生きる",b:"その日の気分で生きる",c:"daily"},
+ {a:"暑い方がいい",b:"寒い方がいい",c:"daily"},
+ {a:"朝シャワー",b:"夜シャワー",c:"daily"},
+ {a:"メモ魔",b:"頭で覚える",c:"daily"},
+ {a:"洗濯はすぐする",b:"まとめて一気に",c:"daily"},
+ {a:"家にいる方が好き",b:"外に出る方が好き",c:"daily"},
+ {a:"素早い決断",b:"慎重な悩み",c:"daily"},
+ {a:"たくさん寝ないとダメ",b:"少しの睡眠で平気",c:"daily"},
+ {a:"新しい物が好き",b:"使い込んだ物が好き",c:"daily"},
+ {a:"グループ通知オン",b:"グループ通知オフ",c:"daily"},
+ {a:"スマホの壁紙は写真",b:"スマホの壁紙は単色",c:"daily"},
+ {a:"びっしりの予定",b:"余裕のある予定",c:"travel"},
+ {a:"都市旅行",b:"自然の旅",c:"travel"},
+ {a:"グルメ旅行",b:"アクティビティ旅行",c:"travel"},
+ {a:"慣れた場所にまた行く",b:"初めての場所に挑戦",c:"travel"},
+ {a:"ラグジュアリーホテル",b:"雰囲気のいいゲストハウス",c:"travel"},
+ {a:"団体パッケージ旅行",b:"自由気ままなバックパック旅行",c:"travel"},
+ {a:"暖かいリゾート地",b:"エキゾチックな都市",c:"travel"},
+ {a:"事前に組む旅行計画",b:"現地で即興",c:"travel"},
+ {a:"電車旅",b:"車旅",c:"travel"},
+ {a:"有名フォトスポット",b:"地元民の路地",c:"travel"}
+];
+
+/* ---------------- STATE ---------------- */
+const CAT_LABELS={food:'🍽️ 食の好み',love:'💕 恋愛スタイル',power:'✨ 想像力',work:'💰 お金と仕事',daily:'🎲 日常センス',travel:'✈️ 旅スタイル',value:'🌿 人生観',celeb:'🌟 カルチャー趣味',hobby:'🎨 趣味・好み',hero:'🏛️ 偉人・人物'};
+let order=[], names=["私","あなた"];
+let nQ=10;                      // 選択した問題数
+let round=0;                    // 0: ひとり目、1: ふたり目
+let pos=0;                      // ラウンド内の現在位置
+let answers=[[],[]];            // answers[round][i] = 'A' | 'B'
+let phase='closed';             // 'closed' | 'choosing' | 'moving'
+let isOpen=false;
+
+const $=id=>document.getElementById(id);
+function vibrate(ms){ if(navigator.vibrate) try{navigator.vibrate(ms);}catch(e){} }
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function show(scr){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); $(scr).classList.add('on'); }
+let _tt; function toast(m){ const t=$('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2000); }
+
+
+$('qcounts').addEventListener('click',e=>{
+ const b=e.target.closest('.qc'); if(!b) return;
+ document.querySelectorAll('.qc').forEach(x=>x.classList.remove('on'));
+ b.classList.add('on'); nQ=parseInt(b.dataset.n,10);
+});
+
+
+$('startBtn').addEventListener('click',()=>{
+ const a=$('nameA').value.trim(), b=$('nameB').value.trim();
+ names=[a||"私", b||"あなた"];
+ startGame();
+});
+
+function startGame(){
+ order=shuffle(BAL.map((_,i)=>i)).slice(0, Math.min(nQ, BAL.length));
+ round=0; pos=0; answers=[[],[]];
+ beginRound();
+}
+
+function beginRound(){
+ pos=0; isOpen=false;
+ prepareQuestion();
+ resetEnvelope(false);
+ $('roundLabel').textContent=names[round]+' さんの番';
+ $('countLabel').textContent='0/'+order.length;
+ $('gaugeFill').style.width='0%';
+ $('envHint').textContent='ここをタップ！最初の問題を開封 ✉️';
+ $('turnLine').innerHTML='<b>'+names[round]+'</b>さん、画面をタップしてスタート！';
+ show('play');
+}
+
+
+function prepareQuestion(){
+ const q=BAL[order[pos]];
+ phase='closed';
+ $('optAtext').textContent=q.a;
+ $('optBtext').textContent=q.b;
+ $('picksA').innerHTML=''; $('picksB').innerHTML='';
+ $('optA').className='opt optA'; $('optB').className='opt optB';
+ $('optA').disabled=false; $('optB').disabled=false;
+ $('bsplit').classList.remove('decided');
+ $('bresult').classList.remove('show'); $('bresult').textContent='';
+ $('tapcue').classList.remove('show');
+ $('bqlabel').textContent='あなたの選択は？';
+}
+
+function resetEnvelope(incoming){
+ const env=$('envelope');
+ env.classList.remove('open','gone','incoming');
+ void env.offsetWidth;
+ if(incoming) env.classList.add('incoming');
+ isOpen=false;
+}
+
+function openEnvelope(){
+ if(isOpen) return;
+ const env=$('envelope');
+ env.classList.add('open'); vibrate(28);
+ setTimeout(()=>{
+   env.classList.add('gone');
+   isOpen=true; phase='choosing';
+   $('bqlabel').textContent='Q'+(pos+1)+'問目。あなたの選択は？';
+   $('turnLine').innerHTML='<b>'+names[round]+'</b>さん — 好きな方をタップ！';
+ },360);
+}
+
+function pick(side){
+ if(phase!=='choosing') return;
+ phase='moving';
+ answers[round][pos]=side;
+ vibrate(20);
+ const win = side==='A'?$('optA'):$('optB');
+ const lose= side==='A'?$('optB'):$('optA');
+ win.classList.add('pressed','win'); lose.classList.add('lose');
+ $('optA').disabled=true; $('optB').disabled=true;
+ $('bsplit').classList.add('decided');
+ $('countLabel').textContent=(pos+1)+'/'+order.length;
+ $('gaugeFill').style.width=((pos+1)/order.length*100)+'%';
+ setTimeout(()=>{
+   pos++;
+   if(pos<order.length){
+     prepareQuestion();
+     resetEnvelope(true);
+     $('envHint').textContent='✉️';
+     $('turnLine').innerHTML='次の封筒を開封中…';
+     setTimeout(openEnvelope, 430);   // 2回目からは自動的に開封
+   }else if(round===0){
+     handoff();
+   }else{
+     finish();
+   }
+ },540);
+}
+
+
+$('card').addEventListener('click',()=>{ if(phase==='closed' && !isOpen) openEnvelope(); });
+$('optA').addEventListener('click',(e)=>{ e.stopPropagation(); pick('A'); });
+$('optB').addEventListener('click',(e)=>{ e.stopPropagation(); pick('B'); });
+$('backHome').addEventListener('click',()=>{ show('home'); });
+
+
+function handoff(){
+ $('hoDone').textContent='✓ '+names[0]+' 完了！';
+ $('hoMsg').innerHTML='今度はスマホを<b>'+names[1]+'</b>さんに渡してください。<br>同じ '+order.length+'問題を解くと相性が公開されます。<br><span style="opacity:.65">(前の人の答えは秘密です 🤫)</span>';
+ $('hoBtn').textContent='自分が '+names[1]+' — スタート！';
+ show('handoff');
+ vibrate([20,40,20]);
+}
+$('hoBtn').addEventListener('click',()=>{ round=1; beginRound(); });
+
+
+function gradeOf(pct){
+ if(pct>=90) return {e:'💞',g:'運命のソウルメイト',d:'好みがほぼ同じ。もはやテレパシー級！'};
+ if(pct>=70) return {e:'🧡',g:'ぴったり相性',d:'息もぴったりの仲。一緒にいると楽そう。'};
+ if(pct>=50) return {e:'😊',g:'まずまずの相性',d:'合う時は合って、違う時は違う。ちょうどいいバランス！'};
+ if(pct>=30) return {e:'😆',g:'ちょっとすれ違う駆け引き',d:'好みがよく分かれますね。だから飽きない仲かも？'};
+ return {e:'⚡',g:'正反対の魅力',d:'全然違う好み！お互いから学べることが多そう。'};
+}
+
+function finish(){
+
+ let matched=0; const history=[];
+ for(let i=0;i<order.length;i++){
+   const q=BAL[order[i]];
+   const p0=answers[0][i], p1=answers[1][i];
+   const same=(p0===p1); if(same) matched++;
+   history.push({c:q.c, same, p0, p1, q});
+ }
+ const answered=order.length;
+ const pct=answered?Math.round(matched/answered*100):0;
+ const G=gradeOf(pct);
+
+
+ const byCat={};
+ history.forEach(h=>{ (byCat[h.c]=byCat[h.c]||{t:0,m:0}); byCat[h.c].t++; if(h.same) byCat[h.c].m++; });
+ const cats=Object.keys(byCat).map(c=>({c, pct:Math.round(byCat[c].m/byCat[c].t*100), t:byCat[c].t})).sort((x,y)=>y.pct-x.pct);
+ const catRows=cats.map(o=>{
+   const col=o.pct>=67?'#ffd56b':(o.pct>=34?'#ff8a5b':'#5b8aff');
+   return '<div class="catrow"><span class="catname">'+CAT_LABELS[o.c]+'</span><div class="catbar"><div class="catfill" style="width:'+o.pct+'%;background:'+col+';box-shadow:0 0 10px '+col+'aa;"></div></div><span class="catpct">'+o.pct+'%</span></div>';
+ }).join('');
+ const topCat=cats[0], lowCat=cats[cats.length-1];
+
+
+ const sames=history.filter(h=>h.same), diffs=history.filter(h=>!h.same);
+ let highlight='';
+ if(sames.length){
+   const s=sames[Math.floor(Math.random()*sames.length)];
+   const t=s.p0==='A'?s.q.a:s.q.b;
+   highlight='<div class="hi hi-same"><div class="hi-tag">💞 ふたりとも同じものを選びました</div><b>「'+t+'”</b></div>';
+ }
+ let diffList='';
+ if(diffs.length){
+   diffList=diffs.map(d=>{
+     const t0=d.p0==='A'?d.q.a:d.q.b, t1=d.p1==='A'?d.q.a:d.q.b;
+     return '<div class="diffitem"><div class="di-row di-a"><span class="who">'+names[0]+'</span>'+t0+'</div><div class="di-row di-b"><span class="who">'+names[1]+'</span>'+t1+'</div></div>';
+   }).join('');
+ }else{
+   diffList='<div class="alltogether">完全一致！分かれた質問がひとつもありません 💞</div>';
+ }
+
+ const R=72, C=2*Math.PI*R, off=C*(1-pct/100);
+ $('doneInner').innerHTML=
+   '<div class="rep-title">'+names[0]+' <span>❤</span> '+names[1]+' の相性</div>'+
+   '<div class="donut"><svg width="180" height="180" viewBox="0 0 180 180">'+
+     '<defs><linearGradient id="dg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ff5e8a"/><stop offset="55%" stop-color="#ffd56b"/><stop offset="100%" stop-color="#5b8aff"/></linearGradient></defs>'+
+     '<circle cx="90" cy="90" r="'+R+'" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="13"/>'+
+     '<circle cx="90" cy="90" r="'+R+'" fill="none" stroke="url(#dg)" stroke-width="13" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" transform="rotate(-90 90 90)" id="donutFg"/>'+
+   '</svg><div class="donut-center"><div class="dc-emoji">'+G.e+'</div><div class="dc-pct">'+pct+'%</div></div></div>'+
+   '<div class="grade">'+G.g+'</div>'+
+   '<p>'+answered+'問中 <b style="color:var(--cream)">'+matched+'回</b>同じ選択！<br>'+G.d+'</p>'+
+   '<div class="repbox"><div class="repbox-h">分野別の相性</div>'+catRows+
+     '<div class="catnote">最も相性がいい分野は<b>'+CAT_LABELS[topCat.c]+'</b>'+(cats.length>1?'、最も意見が分かれるのは<b>'+CAT_LABELS[lowCat.c]+'</b>':'')+' 🌟</div></div>'+
+   (highlight?'<div class="repbox">'+highlight+'</div>':'')+
+   '<div class="repbox"><div class="repbox-h">⚡ 意見が分かれた '+diffs.length+'個の質問</div>'+diffList+'</div>'+
+   '<button class="startbtn" id="againBtn">🔀 新しい問題でもう一度</button>'+
+   '<div class="subrow"><button class="ghost" id="homeBtn2">ホームへ</button></div>';
+ show('done');
+ requestAnimationFrame(()=>{ const fg=$('donutFg'); if(fg){ fg.style.transition='stroke-dashoffset 1.1s cubic-bezier(.22,1,.36,1)'; fg.style.strokeDashoffset=off; } });
+ vibrate([20,40,20]);
+ $('againBtn').onclick=startGame;
+ $('homeBtn2').onclick=()=>show('home');
+}
+
+</script>
+</body>
+</html>
