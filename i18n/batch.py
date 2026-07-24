@@ -267,6 +267,14 @@ def build_and_verify(slug, out):
 
 def process(rel, slug):
     is_landing = slug in LANDING_OUT
+    # 0) 사전 점검 — 표준 푸터(mf-logo)가 없는 원본은 검증 ⑦을 절대 통과할 수 없다.
+    # 번역을 시작하기 전에 걸러서 헛돈(번역 3회 + 수정 재시도)을 막는다. 원본에
+    # 푸터를 추가한 뒤 다시 큐에 들어오면 정상 처리된다.
+    if not is_landing:
+        src_html = open(os.path.join(ROOT, rel), encoding="utf-8").read()
+        if "mf-logo" not in src_html:
+            log("  ⏭ 스킵: 원본에 표준 푸터(mf-logo) 없음 — 생산측 수정 필요 (번역 비용 지출 안 함)")
+            return False
     # 1) 추출
     r = run([sys.executable, "-X", "utf8", "i18n/extract.py", rel, slug])
     if r.returncode != 0:
