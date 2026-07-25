@@ -30,9 +30,15 @@ for lang in ["ja", "en", "zh-tw"]:
     old_tr = json.load(open(f"{D}/{lang}.json", encoding="utf-8"))
     by_val = collections.defaultdict(list)
     for k, v in old_ko.items():
+        if k.startswith("_"):
+            continue
         by_val[val(v)].append(k)
     out, miss = {}, []
     for k, v in new_ko.items():
+        if k.startswith("_"):
+            if k in old_tr:
+                out[k] = old_tr[k]
+            continue
         ok = None
         cand = by_val.get(val(v), [])
         while cand:
