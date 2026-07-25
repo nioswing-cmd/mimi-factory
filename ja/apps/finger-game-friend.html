@@ -408,8 +408,8 @@ const THEMES = {
 let players = [{name:"わたし",folded:0},{name:"あなた",folded:0}];
 let level = 1;
 let round = 0;
-let decks = {1:[],2:[],3:[]};    // シャッフルデッキ
-let answered = [false,false];    // 今ラウンドの各自の回答状況
+let decks = {1:[],2:[],3:[]};    // shuffled decks
+let answered = [false,false];    // per-round answered flags
 
 
 function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
@@ -515,9 +515,9 @@ function openCustom(){ document.getElementById('customInput').value=''; openOver
 function submitCustom(){
   let v=(document.getElementById('customInput').value||'').trim();
   if(!v){ toast('質問を書いてください ✍️'); return; }
-  v=v.replace(/\s*(人)?\s*(折って)?[!.]*$/,''); // 末尾の「人 折って！」の重複を削除
+  v=v.replace(/\s*(人)?\s*(折って)?[!.]*$/,''); // strip trailing duplicate suffix
   if(!v){ toast('質問を書いてください ✍️'); return; }
-  CARDS[level].push(v);           // 以降ランダム/選んで出すにも登場
+  CARDS[level].push(v);           // also appears in random/pick decks
   closeOverlay('customOverlay');
   setStatement(v); vibrate([15,30,15]);
   toast('ふたりだけの質問を追加！ 💗');
@@ -531,7 +531,12 @@ function markDone(i, label, isFold){
   answered[i]=true;
   document.getElementById('pl'+i).classList.add('done');
   document.getElementById('btns'+i).innerHTML='<div class="answered'+(isFold?' fold':'')+'">'+label+'</div>';
-  if(answered[0]&&answered[1]) document.getElementById('sources').classList.add('pulse');
+  if(answered[0]&&answered[1]){
+    // judge only at round end — the other player can still fold this round
+    const fin=[0,1].filter(k=>players[k].folded>=5);
+    if(fin.length){ setTimeout(()=>endGame(fin),800); return; }
+    document.getElementById('sources').classList.add('pulse');
+  }
 }
 
 function fold(i){
@@ -542,7 +547,10 @@ function fold(i){
   const box=document.getElementById('fg'+i); repop(box);
   markDone(i,'折りました ✓ ('+players[i].folded+'/5)',true);
   vibrate(28);
-  if(players[i].folded>=5){ endGame(i); return; }
+  if(players[i].folded>=5){
+    if(!(answered[0]&&answered[1])) toast(players[i].name+'  指を5本ぜんぶ折りました！👑 相手の答えも待ちましょう');
+    return;
+  }
   if(players[i].folded===4) toast(players[i].name+' あと1本！ 😳');
 }
 
@@ -553,15 +561,16 @@ function pass(i){
 }
 
 
-function endGame(winIdx){
-  const w=players[winIdx];
-  document.getElementById('winName').textContent=w.name;
+function endGame(winners){
+  document.getElementById('winName').textContent=winners.map(k=>players[k].name).join(' & ');
   document.getElementById('sc0n').textContent=players[0].name;
   document.getElementById('sc1n').textContent=players[1].name;
   document.getElementById('sc0v').textContent=players[0].folded;
   document.getElementById('sc1v').textContent=players[1].folded;
   document.getElementById('endSub').innerHTML=
-    '<b style="color:var(--point)">'+esc(w.name)+'</b>さんが先に5本の指をすべて折りました。<br>それだけ今日いちばん正直だったということ 💗';
+    winners.length>1
+    ? 'ふたりとも5本の指をぜんぶ折りました。<br>今日は<b style="color:var(--point)">ふたりとも正直王</b>💗'
+    : '<b style="color:var(--point)">'+esc(players[winners[0]].name)+'</b>さんが先に5本の指をすべて折りました。<br>それだけ今日いちばん正直だったということ 💗';
   document.getElementById('missionTxt').textContent=MISSIONS[Math.floor(Math.random()*MISSIONS.length)];
   show('end');
   vibrate([60,80,60,80,140]);

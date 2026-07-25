@@ -716,16 +716,16 @@
   "ctx": "ut').value||'').trim();   if(!v){ toast("
  },
  "js_118": {
-  "t": "사람 접어!",
-  "ctx": "ace(/\\s*(사람)?\\s*(접어)?[!.]*$/,''); // 끝의 "
- },
- "js_119": {
   "t": "우리만의 질문 추가! 💗",
   "ctx": "tement(v); vibrate([15,30,15]);   toast("
  },
- "js_120": {
+ "js_119": {
   "t": "접었어요 ✓ (",
   "ctx": "tById('fg'+i); repop(box);   markDone(i,"
+ },
+ "js_120": {
+  "t": "다섯 개 모두 접었어요! 👑 상대도 마저 답해요",
+  "ctx": "0]&&answered[1])) toast(players[i].name+"
  },
  "js_121": {
   "t": "한 개 남았어요! 😳",
@@ -736,47 +736,31 @@
   "ctx": "   if(answered[i]) return;   markDone(i,"
  },
  "js_123": {
-  "t": "</b> 님이 먼저 다섯 손가락을 다 접었어요.<br>그만큼 오늘 제일 솔직했다는 뜻 💗",
-  "ctx": "tyle=\"color:var(--point)\">'+esc(w.name)+"
+  "t": "두 사람 모두 다섯 손가락을 다 접었어요.<br>오늘은 <b style=\"color:var(--point)\">둘 다 솔직왕</b> 💗",
+  "ctx": ").innerHTML=     winners.length>1     ? "
  },
  "js_124": {
+  "t": "</b> 님이 먼저 다섯 손가락을 다 접었어요.<br>그만큼 오늘 제일 솔직했다는 뜻 💗",
+  "ctx": "point)\">'+esc(players[winners[0]].name)+"
+ },
+ "js_125": {
   "t": "https://mimifactory.vibekr.com/apps/손병호게임_friend.html",
   "ctx": "=== */ function shareApp(){   const url="
  },
- "js_125": {
+ "js_126": {
   "t": "손병호게임 — 둘이 친해지는 손가락 게임 🖐 준비된 질문 100개!",
   "ctx": "m/apps/손병호게임_friend.html';   const text="
  },
- "js_126": {
+ "js_127": {
   "t": "링크를 복사했어요 💬",
   "ctx": "lipboard.writeText(full).then(()=>toast("
  },
  "jst_001": {
-  "t": "셔플 덱",
-  "ctx": " 0; let decks = {1:[],2:[],3:[]};    // "
- },
- "jst_002": {
-  "t": "이번 라운드 각자 응답 여부",
-  "ctx": "플 덱 let answered = [false,false];    // "
- },
- "jst_003": {
   "t": "사람",
   "ctx": " toast( ); return; }   v=v.replace(/\\s*("
  },
- "jst_004": {
+ "jst_002": {
   "t": "접어",
   "ctx": "); return; }   v=v.replace(/\\s*(사람)?\\s*("
- },
- "jst_005": {
-  "t": "끝의 '사람 접어!' 중복 제거",
-  "ctx": "replace(/\\s*(사람)?\\s*(접어)?[!.]*$/, ); // "
- },
- "jst_006": {
-  "t": "이후 랜덤",
-  "ctx": " }   CARDS[level].push(v);           // "
- },
- "jst_007": {
-  "t": "골라담기에도 등장",
-  "ctx": "ARDS[level].push(v);           // 이후 랜덤/"
  }
 }

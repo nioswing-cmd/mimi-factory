@@ -408,8 +408,8 @@ const THEMES = {
 let players = [{name:"Me",folded:0},{name:"You",folded:0}];
 let level = 1;
 let round = 0;
-let decks = {1:[],2:[],3:[]};    // Shuffle deck
-let answered = [false,false];    // Each player’s answer this round
+let decks = {1:[],2:[],3:[]};    // shuffled decks
+let answered = [false,false];    // per-round answered flags
 
 
 function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
@@ -515,9 +515,9 @@ function openCustom(){ document.getElementById('customInput').value=''; openOver
 function submitCustom(){
   let v=(document.getElementById('customInput').value||'').trim();
   if(!v){ toast('Write a question first ✍️'); return; }
-  v=v.replace(/\s*(fold)?\s*(finger)?[!.]*$/,''); // strip trailing 'fold a finger!' duplicate
+  v=v.replace(/\s*(fold)?\s*(finger)?[!.]*$/,''); // strip trailing duplicate suffix
   if(!v){ toast('Write a question first ✍️'); return; }
-  CARDS[level].push(v);           // then random/shows up in pick-4 too
+  CARDS[level].push(v);           // also appears in random/pick decks
   closeOverlay('customOverlay');
   setStatement(v); vibrate([15,30,15]);
   toast('Your own question, added! 💗');
@@ -531,7 +531,12 @@ function markDone(i, label, isFold){
   answered[i]=true;
   document.getElementById('pl'+i).classList.add('done');
   document.getElementById('btns'+i).innerHTML='<div class="answered'+(isFold?' fold':'')+'">'+label+'</div>';
-  if(answered[0]&&answered[1]) document.getElementById('sources').classList.add('pulse');
+  if(answered[0]&&answered[1]){
+    // judge only at round end — the other player can still fold this round
+    const fin=[0,1].filter(k=>players[k].folded>=5);
+    if(fin.length){ setTimeout(()=>endGame(fin),800); return; }
+    document.getElementById('sources').classList.add('pulse');
+  }
 }
 
 function fold(i){
@@ -542,7 +547,10 @@ function fold(i){
   const box=document.getElementById('fg'+i); repop(box);
   markDone(i,'Folded ✓ ('+players[i].folded+'/5)',true);
   vibrate(28);
-  if(players[i].folded>=5){ endGame(i); return; }
+  if(players[i].folded>=5){
+    if(!(answered[0]&&answered[1])) toast(players[i].name+'  folded all five! 👑 Wait for the other player’s answer');
+    return;
+  }
   if(players[i].folded===4) toast(players[i].name+' One finger left! 😳');
 }
 
@@ -553,15 +561,16 @@ function pass(i){
 }
 
 
-function endGame(winIdx){
-  const w=players[winIdx];
-  document.getElementById('winName').textContent=w.name;
+function endGame(winners){
+  document.getElementById('winName').textContent=winners.map(k=>players[k].name).join(' & ');
   document.getElementById('sc0n').textContent=players[0].name;
   document.getElementById('sc1n').textContent=players[1].name;
   document.getElementById('sc0v').textContent=players[0].folded;
   document.getElementById('sc1v').textContent=players[1].folded;
   document.getElementById('endSub').innerHTML=
-    '<b style="color:var(--point)">'+esc(w.name)+'</b> folded all five fingers first.<br>Which means they were the most honest today 💗';
+    winners.length>1
+    ? 'You both folded all five fingers.<br>Today you’re <b style="color:var(--point)">both Honesty Kings</b> 💗'
+    : '<b style="color:var(--point)">'+esc(players[winners[0]].name)+'</b> folded all five fingers first.<br>Which means they were the most honest today 💗';
   document.getElementById('missionTxt').textContent=MISSIONS[Math.floor(Math.random()*MISSIONS.length)];
   show('end');
   vibrate([60,80,60,80,140]);
