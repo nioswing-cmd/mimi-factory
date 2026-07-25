@@ -74,8 +74,12 @@ def check(slug, lang, html_path):
         results.append(("⑥ 로케일 포맷", "SKIP", "가격·날짜 노출 없음"))
 
     # 7) 로컬라이즈 푸터 존재 (</body> 직전 근방)
-    tail = html[html.rfind("mf-logo"):]
-    footer_ok = html.rfind("mf-logo") > 0 and not HANGUL.search(tail[:400])
+    # 표준 푸터(mf-logo) 또는 책퀴즈 표준 푸터(class="factory") 둘 다 인정
+    pos = html.rfind("mf-logo")
+    if pos < 0:
+        pos = html.rfind('class="factory"')
+    tail = html[pos:]
+    footer_ok = pos > 0 and not HANGUL.search(tail[:400])
     add("⑦ 로컬라이즈 푸터", footer_ok, "")
 
     # 8) CDN 잔존 (자체 호스팅 원칙)

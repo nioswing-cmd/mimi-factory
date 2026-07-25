@@ -272,8 +272,8 @@ def process(rel, slug):
     # 푸터를 추가한 뒤 다시 큐에 들어오면 정상 처리된다.
     if not is_landing:
         src_html = open(os.path.join(ROOT, rel), encoding="utf-8").read()
-        if "mf-logo" not in src_html:
-            log("  ⏭ 스킵: 원본에 표준 푸터(mf-logo) 없음 — 생산측 수정 필요 (번역 비용 지출 안 함)")
+        if "mf-logo" not in src_html and 'class="factory"' not in src_html:
+            log("  ⏭ 스킵: 표준 푸터(mf-logo/factory) 없음 — 생산측 수정 필요 (번역 비용 지출 안 함)")
             return False
     # 1) 추출
     r = run([sys.executable, "-X", "utf8", "i18n/extract.py", rel, slug])
