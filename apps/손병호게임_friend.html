@@ -408,8 +408,8 @@ const THEMES = {
 let players = [{name:"나",folded:0},{name:"너",folded:0}];
 let level = 1;
 let round = 0;
-let decks = {1:[],2:[],3:[]};    // 셔플 덱
-let answered = [false,false];    // 이번 라운드 각자 응답 여부
+let decks = {1:[],2:[],3:[]};    // shuffled decks
+let answered = [false,false];    // per-round answered flags
 
 /* ================= 유틸 ================= */
 function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
@@ -517,7 +517,7 @@ function submitCustom(){
   if(!v){ toast('질문을 적어주세요 ✍️'); return; }
   v=v.replace(/\s*(사람)?\s*(접어)?[!.]*$/,''); // strip trailing duplicate suffix
   if(!v){ toast('질문을 적어주세요 ✍️'); return; }
-  CARDS[level].push(v);           // 이후 랜덤/골라담기에도 등장
+  CARDS[level].push(v);           // also appears in random/pick decks
   closeOverlay('customOverlay');
   setStatement(v); vibrate([15,30,15]);
   toast('우리만의 질문 추가! 💗');
@@ -532,7 +532,7 @@ function markDone(i, label, isFold){
   document.getElementById('pl'+i).classList.add('done');
   document.getElementById('btns'+i).innerHTML='<div class="answered'+(isFold?' fold':'')+'">'+label+'</div>';
   if(answered[0]&&answered[1]){
-    // 라운드 종료 시점에만 승부 판정 — 한쪽이 먼저 5개를 접어도 상대가 접을 기회를 보장
+    // judge only at round end — the other player can still fold this round
     const fin=[0,1].filter(k=>players[k].folded>=5);
     if(fin.length){ setTimeout(()=>endGame(fin),800); return; }
     document.getElementById('sources').classList.add('pulse');
