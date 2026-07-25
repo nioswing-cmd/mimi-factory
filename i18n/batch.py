@@ -324,6 +324,30 @@ def process(rel, slug):
             merged.update(obj)
         if failed:
             log(f"  ✗ {lang} 번역 실패: {failed}"); return False
+        # 누락 보완 ① 한글이 없는 값(기호·숫자·영문 등)은 원문 그대로 유지
+        han = re.compile(r"[가-힣]")
+        for k in [k for k in ko_slim if k not in merged and not han.search(str(ko_slim[k]))]:
+            merged[k] = str(ko_slim[k])
+        # 누락 보완 ② 남은 누락 키만 모아 소형 재호출 1회
+        missing = [k for k in ko_slim if k not in merged]
+        if missing:
+            sub = json.dumps({k: ko_slim[k] for k in missing}, ensure_ascii=False, indent=0)
+            o2 = parse_json_out(claude_oneshot(
+                translate_prompt(slug, is_landing, lang, sub, rules, glossary,
+                                 app_file, ident_keys, want_app=False, part=(1, 1)),
+                timeout=600))
+            if isinstance(o2, dict):
+                merged.update({k: v for k, v in o2.items() if k in missing and isinstance(v, str)})
+            log(f"    ↺ {lang} 누락 키 {len(missing)}개 보완 호출")
+        # 누락 보완 ③ _app 블록만 소형 재호출 1회
+        if (not is_landing) and not isinstance(merged.get("_app"), dict):
+            o3 = parse_json_out(claude_oneshot(
+                translate_prompt(slug, is_landing, lang, "{}", rules, glossary,
+                                 app_file, [], want_app=True, part=(1, 1)),
+                timeout=600))
+            if isinstance(o3, dict) and isinstance(o3.get("_app"), dict):
+                merged["_app"] = o3["_app"]
+                log(f"    ↺ {lang} _app 블록 보완 호출")
         err = write_lang_json(slug, lang, merged, ko_keys, is_landing)
         if err:
             log(f"  ✗ {lang} 번역 실패: {err}"); return False
