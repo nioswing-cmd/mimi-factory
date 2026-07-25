@@ -23,15 +23,18 @@ NEW_TR = {
     },
 }
 
+def val(v):
+    return v["t"] if isinstance(v, dict) else v
+
 for lang in ["ja", "en", "zh-tw"]:
     old_tr = json.load(open(f"{D}/{lang}.json", encoding="utf-8"))
     by_val = collections.defaultdict(list)
     for k, v in old_ko.items():
-        by_val[v["t"]].append(k)
+        by_val[val(v)].append(k)
     out, miss = {}, []
     for k, v in new_ko.items():
         ok = None
-        cand = by_val.get(v["t"], [])
+        cand = by_val.get(val(v), [])
         while cand:
             c = cand.pop(0)
             if c in old_tr:
@@ -40,11 +43,11 @@ for lang in ["ja", "en", "zh-tw"]:
         if ok is not None:
             out[k] = old_tr[ok]
         else:
-            hit = next((tr[lang] for pat, tr in NEW_TR.items() if pat in v["t"]), None)
+            hit = next((tr[lang] for pat, tr in NEW_TR.items() if pat in val(v)), None)
             if hit is not None:
                 out[k] = hit
             else:
-                miss.append((k, v["t"][:40]))
+                miss.append((k, val(v)[:40]))
     json.dump(out, open(f"{D}/{lang}.json", "w", encoding="utf-8"),
               ensure_ascii=False, indent=1)
     print(lang, "keys:", len(out), "unmatched:", miss)
