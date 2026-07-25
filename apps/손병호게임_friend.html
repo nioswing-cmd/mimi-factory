@@ -531,7 +531,12 @@ function markDone(i, label, isFold){
   answered[i]=true;
   document.getElementById('pl'+i).classList.add('done');
   document.getElementById('btns'+i).innerHTML='<div class="answered'+(isFold?' fold':'')+'">'+label+'</div>';
-  if(answered[0]&&answered[1]) document.getElementById('sources').classList.add('pulse');
+  if(answered[0]&&answered[1]){
+    // 라운드 종료 시점에만 승부 판정 — 한쪽이 먼저 5개를 접어도 상대가 접을 기회를 보장
+    const fin=[0,1].filter(k=>players[k].folded>=5);
+    if(fin.length){ setTimeout(()=>endGame(fin),800); return; }
+    document.getElementById('sources').classList.add('pulse');
+  }
 }
 
 function fold(i){
@@ -542,7 +547,10 @@ function fold(i){
   const box=document.getElementById('fg'+i); repop(box);
   markDone(i,'접었어요 ✓ ('+players[i].folded+'/5)',true);
   vibrate(28);
-  if(players[i].folded>=5){ endGame(i); return; }
+  if(players[i].folded>=5){
+    if(!(answered[0]&&answered[1])) toast(players[i].name+' 다섯 개 모두 접었어요! 👑 상대도 마저 답해요');
+    return;
+  }
   if(players[i].folded===4) toast(players[i].name+' 한 개 남았어요! 😳');
 }
 
@@ -553,15 +561,16 @@ function pass(i){
 }
 
 /* ================= 결과 ================= */
-function endGame(winIdx){
-  const w=players[winIdx];
-  document.getElementById('winName').textContent=w.name;
+function endGame(winners){
+  document.getElementById('winName').textContent=winners.map(k=>players[k].name).join(' & ');
   document.getElementById('sc0n').textContent=players[0].name;
   document.getElementById('sc1n').textContent=players[1].name;
   document.getElementById('sc0v').textContent=players[0].folded;
   document.getElementById('sc1v').textContent=players[1].folded;
   document.getElementById('endSub').innerHTML=
-    '<b style="color:var(--point)">'+esc(w.name)+'</b> 님이 먼저 다섯 손가락을 다 접었어요.<br>그만큼 오늘 제일 솔직했다는 뜻 💗';
+    winners.length>1
+    ? '두 사람 모두 다섯 손가락을 다 접었어요.<br>오늘은 <b style="color:var(--point)">둘 다 솔직왕</b> 💗'
+    : '<b style="color:var(--point)">'+esc(players[winners[0]].name)+'</b> 님이 먼저 다섯 손가락을 다 접었어요.<br>그만큼 오늘 제일 솔직했다는 뜻 💗';
   document.getElementById('missionTxt').textContent=MISSIONS[Math.floor(Math.random()*MISSIONS.length)];
   show('end');
   vibrate([60,80,60,80,140]);
