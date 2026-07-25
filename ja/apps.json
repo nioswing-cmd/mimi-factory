@@ -1,6 +1,18 @@
 {
  "apps": [
   {
+   "id": "kim-jiyoung-born-1982",
+   "type": "test",
+   "title": "82年生まれ、キム・ジヨン ドーパミンマスタークイズ",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-25",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/kim-jiyoung-born-1982.html",
+   "premium": "apps/kim-jiyoung-born-1982.html",
+   "desc": "ひとりの女性の人生に刻まれた、日常の性差別を読み解くクイズ"
+  },
+  {
    "id": "adhd-test",
    "type": "test",
    "title": "ADHD傾向テスト",
@@ -145,6 +157,18 @@
    "desc": "与える人は本当に損をするだけ？ ギバー・テイカー・マッチャーの秘密を反復クイズで"
   },
   {
+   "id": "what-am-i",
+   "type": "test",
+   "title": "私とは何か ドーパミンマスタークイズ",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-25",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/what-am-i.html",
+   "premium": "apps/what-am-i.html",
+   "desc": "分人主義で読み解く、本当の自分探しをやめる一冊"
+  },
+  {
    "id": "dealbreaker-button",
    "type": "test",
    "title": "私の限界ボタン",
@@ -181,6 +205,18 @@
    "desc": "崩れた翌日、どう立ち直る？ 12問でわかる回復スピード4タイプ"
   },
   {
+   "id": "the-dwarf-launches-a-little-ball",
+   "type": "test",
+   "title": "小人が撃ち上げた小さなボール",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-25",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/the-dwarf-launches-a-little-ball.html",
+   "premium": "apps/the-dwarf-launches-a-little-ball.html",
+   "desc": "産業化の影で生きた小人一家の物語をクイズで読む"
+  },
+  {
    "id": "emotion-resolution",
    "type": "test",
    "title": "感情解像度テスト",
@@ -205,6 +241,18 @@
    "desc": "私についての10問、相手はどこまで当てられる？外れたらそこから会話が始まります。"
   },
   {
+   "id": "old-man-and-the-sea",
+   "type": "test",
+   "title": "老人と海 ドーパミンマスタークイズ",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-25",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/old-man-and-the-sea.html",
+   "premium": "apps/old-man-and-the-sea.html",
+   "desc": "海にただ一人立ち向かった老人の物語を、くり返しクイズで身につける"
+  },
+  {
    "id": "analects",
    "type": "test",
    "title": "論語 マスタークイズ",
@@ -215,6 +263,18 @@
    "teaser": "apps/analects.html",
    "premium": "apps/analects.html",
    "desc": "孔子『論語』の核心を、ドーパミン反復クイズで身につける"
+  },
+  {
+   "id": "nicomachean-ethics",
+   "type": "test",
+   "title": "ニコマコス倫理学 ドーパミンマスタークイズ",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-25",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/nicomachean-ethics.html",
+   "premium": "apps/nicomachean-ethics.html",
+   "desc": "アリストテレスが説いた「善く生きる」ための2400年の智慧を反復クイズで身につける"
   },
   {
    "id": "multiple-intelligences",
@@ -419,6 +479,18 @@
    "teaser": "apps/energy-bus.html",
    "premium": "apps/energy-bus.html",
    "desc": "パンクした朝から人生を変える10のルール — 30問のクイズと読了レポート。"
+  },
+  {
+   "id": "movie-main-character",
+   "type": "test",
+   "title": "映画の主人公になる",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-25",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/movie-main-character.html",
+   "premium": "apps/movie-main-character.html",
+   "desc": "ふたり並んで演じる、日本映画名場面仲良しゲーム"
   },
   {
    "id": "questions-for-two",

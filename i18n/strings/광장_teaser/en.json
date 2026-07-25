@@ -1,8 +1,4 @@
 {
- "_meta": {
-  "lang": "en",
-  "note": "Quiz-to-read-a-book tone · curly apostrophes only · glossary locked"
- },
  "title_001": "The Square Dopamine Master Quiz · Choe In-hun",
  "html_001": "Choe In-hun · 1960 · A classic of division literature born of the April Revolution",
  "html_002": "One man wandering between the private room and the square, in search of a true life",
@@ -99,7 +95,7 @@
  "js_018": "Which two spaces does the novel set against each other?",
  "js_019": "The private room and the square",
  "js_020": "The city and the countryside",
- "js_021": "The school and the factory",
+ "js_021": "The classroom and the assembly line",
  "js_022": "The ideal and the real world",
  "js_023": "The novel’s backbone is the contrast between the <b>private room</b> and the <b>square</b> — a person’s private space versus the shared public space.",
  "js_024": "The private room",
@@ -149,7 +145,7 @@
  "js_068": "In 1960, just after the April Revolution",
  "js_069": "The 1930s under Japanese rule",
  "js_070": "1951, in the thick of the Korean War",
- "js_071": "1972, under the Yushin regime",
+ "js_071": "1972, under the Yushin dictatorship regime",
  "js_072": "The Square appeared in <b>1960</b> in the magazine Saebyeok (‘Dawn’). It came out as a book the following year.",
  "js_073": "Wikipedia “The Square (novel)”",
  "js_074": "https://en.wikipedia.org/wiki/The_Square_(novel)",

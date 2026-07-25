@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Demian Dopamine Master Quiz</title>
+<script>
+/* html2pdf bundle removed for preview performance */
+window.html2pdf = function() {
+  return {
+    set: function() { return this; },
+    from: function() { return this; },
+    outputPdf: function() { return Promise.resolve(new Blob()); },
+    save: function() { return Promise.resolve(); }
+  };
+};
+</script>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSans-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/Fredoka-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+</style>
+<style>
+  :root{
+    --bg:#0b1722; --bg2:#0e2031; --panel:#15293b; --panel2:#1b3148;
+    --edge:#2c455c;
+    --ink:#f1e8d4; --body:#bccadb; --muted:#7d92a7;
+    --gold:#e3b34e; --gold-deep:#bd8a2c;
+    --green:#5cc28d; --green-deep:#2f6f4d;
+    --rust:#d96a4a; --rust-deep:#9b3f27;
+    --steelblue:#8fb0cc;
+    --shadow:0 18px 45px rgba(0,0,0,.45);
+    --r:18px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:"Noto Sans KR",sans-serif;
+    color:var(--body);
+    background:
+      repeating-linear-gradient(0deg, rgba(227,179,78,.045) 0 1px, transparent 1px 46px),
+      radial-gradient(1200px 600px at 80% -10%, rgba(143,176,204,.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(217,106,74,.10), transparent 55%),
+      linear-gradient(160deg, var(--bg) 0%, var(--bg2) 100%);
+    background-attachment:fixed;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:22px 18px 40px;}
+  h1,h2,h3{font-family:"Noto Serif KR",serif;color:var(--ink);margin:0;}
+  .eyebrow{font-size:12px;letter-spacing:.32em;color:var(--gold);font-weight:700;text-transform:uppercase;}
+
+  /* ---------- HOME ---------- */
+  .hero{
+    text-align:center;padding:46px 24px 38px;border-radius:24px;
+    background:linear-gradient(170deg, rgba(27,49,72,.9), rgba(15,32,49,.92));
+    border:1px solid rgba(227,179,78,.22);box-shadow:var(--shadow);position:relative;overflow:hidden;
+  }
+  .hero::after{content:"";position:absolute;inset:0;background:
+    repeating-linear-gradient(0deg, rgba(227,179,78,.05) 0 1px, transparent 1px 30px);pointer-events:none;}
+  .pillars{display:flex;justify-content:center;gap:10px;margin:6px 0 18px;}
+  .pillars span{
+    font-family:"Noto Serif KR",serif;font-weight:900;font-size:30px;
+    width:62px;height:62px;line-height:62px;border-radius:14px;display:inline-block;
+    border:1px solid rgba(255,255,255,.10);
+  }
+  .pillars .p1{color:var(--steelblue);background:rgba(143,176,204,.12);}
+  .pillars .p2{color:var(--rust);background:rgba(217,106,74,.14);}
+  .pillars .p3{color:var(--gold);background:rgba(227,179,78,.14);}
+  .hero h1{font-size:clamp(30px,7vw,46px);font-weight:900;line-height:1.18;letter-spacing:-.01em;}
+  .hero h1 small{display:block;font-size:15px;font-weight:500;color:var(--muted);letter-spacing:.18em;margin-bottom:10px;font-family:"Noto Sans KR";}
+  .hero p{color:var(--body);font-size:15px;line-height:1.7;max-width:460px;margin:16px auto 0;position:relative;}
+  .quote{
+    margin:22px auto 4px;max-width:500px;font-family:"Noto Serif KR",serif;
+    font-size:15px;color:var(--ink);font-style:italic;line-height:1.7;
+    border-left:3px solid var(--gold);padding:10px 0 10px 16px;text-align:left;position:relative;
+  }
+  .quote b{color:var(--gold);font-style:normal;}
+  .btn{
+    appearance:none;border:none;cursor:pointer;font-family:"Noto Sans KR";font-weight:700;
+    border-radius:14px;padding:16px 30px;font-size:16px;transition:transform .12s ease, box-shadow .2s ease, filter .2s ease;
+  }
+  .btn-primary{
+    color:#23160a;background:linear-gradient(180deg, #f0c560, var(--gold-deep));
+    box-shadow:0 10px 26px rgba(227,179,78,.32);
+  }
+  .btn-primary:hover{transform:translateY(-2px);filter:brightness(1.05);}
+  .btn-ghost{background:rgba(255,255,255,.06);color:var(--body);border:1px solid rgba(255,255,255,.14);}
+  .btn-ghost:hover{background:rgba(255,255,255,.12);}
+  .start-row{margin-top:26px;position:relative;}
+  .meta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px;position:relative;}
+  .chip{font-size:12.5px;color:var(--muted);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);padding:7px 13px;border-radius:999px;}
+  .chip b{color:var(--gold);}
+
+  /* ---------- QUIZ HUD ---------- */
+  .hud{
+    background:linear-gradient(170deg, rgba(27,49,72,.92), rgba(15,32,49,.92));
+    border:1px solid rgba(227,179,78,.20);border-radius:20px;padding:18px 18px 20px;box-shadow:var(--shadow);
+    position:sticky;top:10px;z-index:5;backdrop-filter:blur(6px);
+  }
+  .hud-top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:12px;}
+  .stat{display:flex;flex-direction:column;}
+  .stat .label{font-size:11px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;}
+  .stat .val{font-family:"Noto Serif KR",serif;font-weight:900;font-size:24px;color:var(--ink);line-height:1.1;}
+  .stat .val.gold{color:var(--gold);}
+  .combo{font-size:12px;color:var(--rust);font-weight:700;min-height:16px;transition:opacity .2s;}
+  .combo.show{animation:pop .35s ease;}
+
+  /* east-west axis journey bar (signature) */
+  .axis{position:relative;margin-top:6px;}
+  .axis-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:6px;}
+  .axis-label b{color:var(--gold);}
+  .track{position:relative;height:14px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden;border:1px solid rgba(255,255,255,.08);}
+  .fill{position:absolute;left:0;top:0;bottom:0;width:0%;
+    background:linear-gradient(90deg, var(--green-deep), var(--green), var(--gold));
+    border-radius:999px;transition:width .6s cubic-bezier(.22,1,.36,1);}
+  .milestones{display:flex;justify-content:space-between;margin-top:8px;}
+  .ms{font-size:10px;color:var(--muted);text-align:center;flex:1;line-height:1.25;transition:color .4s;}
+  .ms.reached{color:var(--gold);font-weight:700;}
+  .ms .dot{display:block;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.18);margin:0 auto 4px;transition:.4s;}
+  .ms.reached .dot{background:var(--gold);box-shadow:0 0 10px rgba(227,179,78,.7);}
+
+  /* ---------- QUESTION CARD ---------- */
+  .card{
+    margin-top:16px;background:var(--panel);border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;padding:24px 22px;box-shadow:var(--shadow);
+  }
+  .qhead{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+  .diff{font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:999px;letter-spacing:.05em;}
+  .diff.l1{color:var(--green);background:rgba(92,194,141,.14);}
+  .diff.l2{color:var(--gold);background:rgba(227,179,78,.14);}
+  .diff.l3{color:var(--rust);background:rgba(217,106,74,.16);}
+  .qno{font-size:12px;color:var(--muted);}
+  .qtag{font-size:11.5px;color:var(--steelblue);background:rgba(143,176,204,.12);padding:5px 11px;border-radius:999px;margin-left:auto;}
+  .question{font-family:"Noto Serif KR",serif;font-weight:700;font-size:20px;line-height:1.5;color:var(--ink);margin:2px 0 18px;}
+  .opts{display:flex;flex-direction:column;gap:10px;}
+  .opt{
+    text-align:left;cursor:pointer;font-family:"Noto Sans KR";font-size:15px;line-height:1.5;color:var(--body);
+    background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.10);border-radius:13px;
+    padding:14px 15px;display:flex;gap:12px;align-items:flex-start;transition:.16s;
+  }
+  .opt:hover:not(:disabled){border-color:rgba(227,179,78,.5);background:rgba(227,179,78,.06);transform:translateX(2px);}
+  .opt .key{flex:none;width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.08);
+    color:var(--muted);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;}
+  .opt:disabled{cursor:default;}
+  .opt.correct{border-color:var(--green);background:rgba(92,194,141,.14);color:#dff3e8;}
+  .opt.correct .key{background:var(--green);color:#0b2417;}
+  .opt.wrong{border-color:var(--rust);background:rgba(217,106,74,.14);color:#f6ddd3;}
+  .opt.wrong .key{background:var(--rust);color:#2b0f06;}
+  .opt.dim{opacity:.45;}
+
+  /* explanation */
+  .explain{margin-top:16px;border-radius:14px;padding:16px 16px 14px;border:1px solid;visibility:hidden;opacity:0;transition:opacity .22s ease;min-height:0;max-height:0;overflow:hidden;margin-top:0;padding:0;border-width:0;}
+  .explain.ok{background:rgba(92,194,141,.08);border-color:rgba(92,194,141,.35);visibility:visible;opacity:1;max-height:600px;min-height:0;padding:16px 16px 14px;margin-top:16px;border-width:1px;}
+  .explain.no{background:rgba(217,106,74,.08);border-color:rgba(217,106,74,.35);visibility:visible;opacity:1;max-height:600px;min-height:0;padding:16px 16px 14px;margin-top:16px;border-width:1px;}
+  .explain .verdict{font-family:"Noto Serif KR",serif;font-weight:900;font-size:16px;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+  .explain.ok .verdict{color:var(--green);}
+  .explain.no .verdict{color:var(--rust);}
+  .explain .ctx{font-size:14.5px;line-height:1.75;color:var(--body);}
+  .explain .ctx b{color:var(--ink);}
+  .next-row{display:flex;justify-content:flex-end;margin-top:16px;visibility:hidden;opacity:0;transition:opacity .18s ease;}
+  .requeue{font-size:12.5px;color:var(--rust);margin-right:auto;align-self:center;}
+
+  /* ---------- RESULT ---------- */
+  .result{text-align:center;}
+  .badge{
+    width:120px;height:120px;border-radius:50%;margin:6px auto 14px;display:flex;align-items:center;justify-content:center;
+    font-size:54px;background:radial-gradient(circle at 35% 30%, #f3cd72, var(--gold-deep));
+    box-shadow:0 0 0 8px rgba(227,179,78,.12), 0 16px 40px rgba(227,179,78,.35);
+  }
+  .rank{font-family:"Noto Serif KR",serif;font-weight:900;font-size:30px;color:var(--ink);}
+  .rank-sub{color:var(--gold);font-weight:700;margin-top:4px;font-size:14px;letter-spacing:.05em;}
+  .scoreboard{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0 8px;}
+  .sb{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:15px;padding:16px;}
+  .sb .label{font-size:11.5px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;}
+  .sb .num{font-family:"Noto Serif KR",serif;font-weight:900;font-size:30px;color:var(--ink);margin-top:5px;}
+  .sb .num.gold{color:var(--gold);}
+  .sb .num.green{color:var(--green);}
+  .best-note{font-size:13px;color:var(--muted);margin-top:10px;min-height:18px;}
+  .best-note b{color:var(--gold);}
+  .res-btns{display:flex;gap:12px;justify-content:center;margin-top:22px;flex-wrap:wrap;}
+
+  /* ---------- REPORT ---------- */
+  .rep-hero{text-align:center;padding:30px 20px 8px;}
+  .rep-hero h2{font-size:clamp(26px,6vw,36px);font-weight:900;margin:6px 0;}
+  .rep-hero p{color:var(--body);font-size:14.5px;line-height:1.7;max-width:480px;margin:8px auto 0;}
+  .rep-hero p b,.deepen b{color:var(--gold);}
+  .rep-h3{font-family:"Noto Serif KR",serif;color:var(--ink);font-size:20px;margin:34px 4px 14px;font-weight:900;
+    border-left:4px solid var(--gold);padding-left:12px;}
+  .rep-h3 span{font-size:13px;color:var(--rust);font-weight:700;margin-left:6px;}
+  .rep-h3 span.hint{color:var(--muted);font-weight:400;}
+
+  
+  .toc{display:flex;flex-direction:column;gap:8px;}
+  .toc-item{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:13px;overflow:hidden;}
+  .toc-head{width:100%;text-align:left;cursor:pointer;background:none;border:none;color:var(--ink);
+    font-family:"Noto Sans KR";padding:14px 16px;display:flex;align-items:center;gap:10px;font-size:15px;transition:background .15s;}
+  .toc-head:hover{background:rgba(255,255,255,.04);}
+  .toc-head .nn{font-size:11.5px;font-weight:700;color:var(--gold);background:rgba(227,179,78,.14);
+    padding:4px 9px;border-radius:999px;flex:none;}
+  .toc-head .tt{font-family:"Noto Serif KR",serif;font-weight:700;}
+  .toc-head .chev{margin-left:auto;color:var(--muted);transition:transform .25s;}
+  .toc-item.open .toc-head .chev{transform:rotate(180deg);}
+  .toc-panel{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+  .toc-panel .inner{margin:0 16px 15px;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);
+    color:var(--body);font-size:13.5px;line-height:1.75;}
+  .toc-panel .beat{display:flex;gap:10px;align-items:flex-start;padding:9px 0;
+    border-bottom:1px solid rgba(255,255,255,.05);}
+  .toc-panel .beat:last-child{border-bottom:none;}
+  .toc-panel .beat .be{flex:none;font-size:18px;line-height:1.5;width:24px;text-align:center;}
+  .toc-panel .beat .bx{font-size:14px;line-height:1.65;color:var(--body);}
+
+  
+  .cases{display:grid;grid-template-columns:1fr;gap:12px;}
+  .case{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:15px;padding:16px;}
+  .case .ct{font-family:"Noto Serif KR",serif;color:var(--ink);font-weight:700;font-size:15.5px;
+    display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+  .case .ct .ci{font-size:20px;}
+  .case .cd{color:var(--body);font-size:13.5px;line-height:1.65;margin-bottom:11px;}
+  .case .cw{font-size:12.5px;color:var(--gold);background:rgba(227,179,78,.08);
+    border:1px solid rgba(227,179,78,.22);border-radius:11px;padding:10px 12px;line-height:1.6;}
+  .case .cw b{color:var(--ink);font-weight:700;}
+
+  
+  .qs{display:flex;flex-direction:column;gap:12px;}
+  .qcard{background:rgba(143,176,204,.07);border:1px solid rgba(143,176,204,.28);border-radius:15px;padding:16px;}
+  .qcard .qq{font-family:"Noto Serif KR",serif;color:var(--ink);font-weight:700;font-size:15.5px;
+    line-height:1.5;margin-bottom:8px;display:flex;gap:9px;}
+  .qcard .qq .qnum{color:var(--steelblue);flex:none;}
+  .qcard .qh{color:var(--muted);font-size:13px;line-height:1.65;}
+
+  .chain{display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:18px;}
+  .chain .step{width:100%;max-width:560px;border-radius:15px;padding:15px 18px;text-align:center;border:1px solid;position:relative;}
+  .chain .cn{display:inline-block;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+    padding:3px 9px;border-radius:999px;margin-bottom:7px;}
+  .chain b{display:block;font-family:"Noto Serif KR",serif;font-size:17px;color:var(--ink);line-height:1.4;}
+  .chain small{display:block;color:var(--muted);font-size:12.5px;margin-top:5px;}
+  .chain .arrow{color:var(--gold);font-size:20px;line-height:1;font-weight:700;opacity:.8;}
+  .s0{background:rgba(143,176,204,.10);border-color:rgba(143,176,204,.4);}
+  .s0 .cn{background:rgba(143,176,204,.2);color:var(--steelblue);}
+  .s1{background:rgba(92,194,141,.09);border-color:rgba(92,194,141,.35);}
+  .s1 .cn{background:rgba(92,194,141,.18);color:var(--green);}
+  .s2{background:rgba(227,179,78,.08);border-color:rgba(227,179,78,.32);}
+  .s2 .cn{background:rgba(227,179,78,.18);color:var(--gold);}
+  .s3{background:rgba(217,106,74,.10);border-color:rgba(217,106,74,.4);}
+  .s3 .cn{background:rgba(217,106,74,.2);color:var(--rust);}
+  .s4{background:linear-gradient(180deg,rgba(227,179,78,.16),rgba(217,106,74,.12));border-color:rgba(227,179,78,.5);}
+  .s4 .cn{background:var(--gold);color:#23160a;}
+
+  .concepts{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .concept{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:15px;padding:16px;}
+  .concept .ic{font-size:24px;}
+  .concept h4{font-family:"Noto Serif KR",serif;color:var(--ink);font-size:15.5px;margin:8px 0 6px;font-weight:700;}
+  .concept p{color:var(--body);font-size:13px;line-height:1.6;margin:0 0 10px;}
+  .src{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--gold);text-decoration:none;
+    border:1px solid rgba(227,179,78,.35);padding:5px 10px;border-radius:999px;transition:.15s;}
+  .src:hover{background:rgba(227,179,78,.12);}
+  .src::before{content:"🔗";font-size:11px;}
+
+  .weak{display:flex;flex-direction:column;gap:12px;}
+  .weak-item{background:rgba(217,106,74,.07);border:1px solid rgba(217,106,74,.3);border-radius:15px;padding:16px;}
+  .weak-item .wq{font-family:"Noto Serif KR",serif;color:var(--ink);font-weight:700;font-size:15px;line-height:1.5;margin-bottom:8px;}
+  .weak-item .wans{font-size:13.5px;color:var(--green);font-weight:700;margin-bottom:8px;}
+  .weak-item .wans b{color:#dff3e8;font-weight:700;}
+  .weak-item .wnote{font-size:13.5px;color:var(--body);line-height:1.65;margin-bottom:6px;}
+  .weak-item .wnote b{color:var(--ink);}
+  .weak-item .wctx{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:10px;}
+  .perfect{text-align:center;padding:22px;background:rgba(92,194,141,.08);border:1px solid rgba(92,194,141,.35);
+    border-radius:15px;color:var(--green);font-weight:700;}
+  .perfect span{display:block;color:var(--body);font-weight:400;font-size:13px;margin-top:6px;}
+
+  .deepen{margin:26px 0 4px;text-align:center;font-size:13.5px;color:var(--body);line-height:1.7;
+    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;}
+  .deepen a{color:var(--gold);font-weight:700;text-decoration:underline;}
+
+  /* footer */
+  .footer{text-align:center;margin-top:30px;font-size:12px;color:var(--muted);line-height:1.7;}
+  .footer b{color:var(--gold);font-weight:700;}
+  .footer .factory{font-family:"Noto Serif KR",serif;color:var(--ink);font-weight:700;letter-spacing:.01em;}
+  .footer .affil{color:var(--gold);font-size:11.5px;margin-top:2px;}
+  .footer .tagline{margin-top:6px;color:var(--muted);}
+
+  .hidden{display:none !important;}
+
+  @keyframes pop{0%{transform:scale(.7);opacity:0;}60%{transform:scale(1.12);}100%{transform:scale(1);opacity:1;}}
+  @keyframes rise{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  .card,.hero,.result{animation:rise .4s ease;}
+
+  @media (max-width:560px){
+    .pillars span{width:52px;height:52px;line-height:52px;font-size:25px;}
+    .question{font-size:18px;}
+    .scoreboard{grid-template-columns:1fr 1fr;}
+    .concepts{grid-template-columns:1fr;}
+    .ms{font-size:9px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+
+  
+  @media print {
+    @page { margin: 14mm; }
+    :root{
+      --bg:#fff; --bg2:#fff; --panel:#fff; --panel2:#fff; --edge:#cfcfcf;
+      --ink:#15110f; --body:#2c2c2c; --muted:#666;
+      --gold:#b23a64; --gold-deep:#b23a64;
+      --green:#1f7a4d; --rust:#c0392b; --steelblue:#6c4f9e;
+    }
+    body{ background:#fff !important; color:#222 !important; }
+    .wrap{ max-width:100% !important; padding:0 !important; }
+    #home, #quiz, #result, .res-btns, .hud, .combo, .badge { display:none !important; }
+    #report{ display:block !important; }
+    .rep-hero, .card{ box-shadow:none !important; }
+    .concept,.case,.qcard,.toc-item,.weak-item,.ch.step,.deepen{
+      background:#fff !important; box-shadow:none !important; border:1px solid #ddd !important;
+      break-inside:avoid; page-break-inside:avoid;
+    }
+    .toc-panel{ max-height:none !important; overflow:visible !important; }
+    .toc-item .chev{ display:none !important; }
+    .rep-h3{ break-after:avoid; page-break-after:avoid; }
+    .chain .arrow{ color:#999 !important; }
+    .src, a{ color:#0a58ca !important; border-color:#9bb !important; }
+    .footer{ display:block !important; color:#555 !important; margin-top:14px; }
+  }
+
+  
+  body.pdf-export #report{
+    --bg:#fff; --bg2:#fff; --panel:#fff; --panel2:#fff; --edge:#cfcfcf;
+    --ink:#15110f; --body:#2c2c2c; --muted:#666;
+    --gold:#b23a64; --gold-deep:#b23a64; --green:#1f7a4d; --rust:#c0392b; --steelblue:#6c4f9e;
+    background:#fff; color:#2c2c2c; padding:16px; border-radius:0;
+  }
+  body.pdf-export #report .res-btns,
+  body.pdf-export #report .toc-head .chev{ display:none !important; }
+  body.pdf-export #report .toc-panel{ max-height:none !important; overflow:visible !important; }
+  body.pdf-export #report .concept,
+  body.pdf-export #report .case,
+  body.pdf-export #report .qcard,
+  body.pdf-export #report .toc-item,
+  body.pdf-export #report .weak-item,
+  body.pdf-export #report .ch.step,
+  body.pdf-export #report .deepen{
+    box-shadow:none !important; border:1px solid #ddd !important;
+    break-inside:avoid; page-break-inside:avoid;
+  }
+  body.pdf-export #report .src{ border-color:#bcd !important; }
+
+  
+  .edition{ display:inline-block; margin:0 auto 14px; padding:5px 12px; border-radius:999px;
+    font-size:12px; letter-spacing:.4px; color:var(--gold); position:relative;
+    background:rgba(227,179,78,.10); border:1px solid rgba(227,179,78,.35); }
+  .lock-overlay{ margin:18px auto 0; max-width:760px; padding:26px 22px; border-radius:20px; text-align:center;
+    background:linear-gradient(160deg, rgba(27,49,72,.96), rgba(15,32,49,.98));
+    border:1px solid rgba(227,179,78,.35); box-shadow:0 18px 50px rgba(0,0,0,.4); }
+  .lock-overlay .lk-ic{ font-size:40px; }
+  .lock-overlay h3{ margin:10px 0 6px; font-size:20px; color:var(--ink); }
+  .lock-overlay p{ margin:0 0 16px; color:var(--body); font-size:14.5px; line-height:1.7; }
+  .lock-overlay .lk-btns{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+  .cta{ display:inline-block; padding:13px 22px; border-radius:14px; font-weight:700;
+    font-size:15px; text-decoration:none; cursor:pointer; border:none; font-family:"Noto Sans KR";
+    background:linear-gradient(135deg,#e3b34e,#f0c560); color:#231a08;
+    box-shadow:0 8px 22px rgba(227,179,78,.35); }
+  .cta.ghost{ background:transparent; color:var(--gold); border:1px solid rgba(227,179,78,.5); box-shadow:none; }
+  .blurred{ filter:blur(6px); pointer-events:none; user-select:none; opacity:.55; }
+  .rep-lock{ margin:6px 0 22px; padding:24px 20px; border-radius:20px; text-align:center;
+    background:linear-gradient(160deg, rgba(27,49,72,.96), rgba(15,32,49,.98));
+    border:1px solid rgba(227,179,78,.4); box-shadow:0 18px 50px rgba(0,0,0,.4); }
+  .rep-lock .lk-ic{ font-size:36px; }
+  .rep-lock h3{ margin:8px 0 6px; font-size:19px; color:var(--ink); }
+  .rep-lock p{ margin:0 0 16px; color:var(--body); font-size:14px; line-height:1.7; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ HOME ============ -->
+  <section id="home">
+    <div class="hero">
+      <div class="edition" id="editionTag"></div>
+      <div class="eyebrow">Hermann Hesse · 1919 · A bible for the youth movement</div>
+      <div class="pillars"><span class="p1">Bird</span><span class="p2">Egg</span><span class="p3">Fly</span></div>
+      <h1><small>A soul’s journey, soaring to find its true self</small>Demian Master Quiz</h1>
+      <div class="quote">
+        “The bird fights its way out of the egg. The egg is the world.<br>Whoever would be born must first destroy a world.”<br>
+        <b>— Max Demian’s awakening</b>
+      </div>
+      <p>Inside Sinclair’s journey of individuation, <b>30 quizzes drill its key questions, symbols, and philosophy</b> until they’re yours for good.
+        From the world of light to the world of darkness — and on to wholeness. <b>Master every question you miss until you get it right.</b></p>
+      <div class="meta-row">
+        <span class="chip">Total <b>30 questions</b></span>
+        <span class="chip">Easy → Hard</span>
+        <span class="chip"><b>Real-time</b> growth gauge</span>
+        <span class="chip">Every question, <b>a deep explanation</b></span>
+      </div>
+      <div class="start-row">
+        <button class="btn btn-primary" onclick="startQuiz()">Crack the egg and begin →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section id="quiz" class="hidden">
+    <div class="hud">
+      <div class="hud-top">
+        <div class="stat"><span class="label">Score</span><span class="val gold" id="score">0</span></div>
+        <div class="stat" style="text-align:center;align-items:center;"><span class="label">Streak</span><span class="val" id="streak">0</span></div>
+        <div class="stat" style="text-align:right;align-items:flex-end;"><span class="label">Mastered</span><span class="val" id="mastered">0 / 30</span></div>
+      </div>
+      <div class="combo" id="combo"></div>
+      <div class="axis">
+        <div class="axis-label"><span>West ←</span><span>Soul’s journey · <b id="pctTxt">0%</b></span><span>→ East</span></div>
+        <div class="track"><div class="fill" id="fill"></div></div>
+        <div class="milestones" id="milestones"></div>
+      </div>
+    </div>
+
+    <div class="card" id="qcard">
+      <div class="qhead">
+        <span class="diff" id="diff">Easy</span>
+        <span class="qno" id="qno"></span>
+        <span class="qtag" id="qtag"></span>
+      </div>
+      <div class="question" id="question"></div>
+      <div class="opts" id="opts"></div>
+
+      <div class="explain" id="explain">
+        <div class="verdict" id="verdict"></div>
+        <div class="ctx" id="ctx"></div>
+      </div>
+
+      <div class="next-row" id="nextRow">
+        <span class="requeue" id="requeue"></span>
+        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Next →</button>
+      </div>
+    </div>
+  </section>
+
+    <div class="lock-overlay hidden" id="lockOverlay">
+      <div class="lk-ic">🔒</div>
+      <h3>That’s the end of the free preview</h3>
+      <p id="lockMsg"></p>
+      <div class="lk-btns">
+        <a class="cta" id="lockSubBtn" href="#" target="_blank" rel="noopener">🔑 Subscribe to open everything</a>
+        <button class="cta ghost" onclick="openReport()">Preview the summary report →</button>
+      </div>
+    </div>
+
+  <!-- ============ RESULT ============ -->
+  <section id="result" class="hidden">
+    <div class="result">
+      <div class="badge">🏛️</div>
+      <div class="rank" id="rankTitle">The Eye of Abraxas</div>
+      <div class="rank-sub" id="rankSub"></div>
+      <div class="scoreboard">
+        <div class="sb"><div class="label">Final score</div><div class="num gold" id="rScore">0</div></div>
+        <div class="sb"><div class="label">First-try accuracy</div><div class="num green" id="rAcc">0%</div></div>
+        <div class="sb"><div class="label">Best streak</div><div class="num" id="rStreak">0</div></div>
+        <div class="sb"><div class="label">Total attempts</div><div class="num" id="rTries">0</div></div>
+      </div>
+      <div class="best-note" id="bestNote"></div>
+      <div class="res-btns">
+        <button class="btn btn-primary" onclick="openReport()">📖 See the full summary report</button>
+        <button class="btn btn-ghost" onclick="startQuiz()">Try again ↻</button>
+        <button class="btn btn-ghost" onclick="goHome()">Back to start</button>
+      </div>
+    </div>
+  </section>
+
+  
+  <section id="report" class="hidden">
+    <div class="rep-hero">
+      <div class="eyebrow">Reading Report · INFOGRAPHIC</div>
+      <h2>Demian at a Glance</h2>
+      <p>String the whole book onto one <b>‘chain of cause and effect’</b> and you’ll never forget it. It all begins with <b>the split of the two worlds around you</b>.</p>
+    </div>
+
+    
+    <div class="chain">
+      <div class="ch step s0"><span class="cn">Ultimate Cause</span><b>🥚 The split of two worlds</b><small>The bright world vs the dark world</small></div>
+      <div class="arrow">↓</div>
+      <div class="ch step s1"><span class="cn">Stage 1</span><b>😰 Falling into the world of evil</b><small>Kromer’s bullying · guilt</small></div>
+      <div class="arrow">↓</div>
+      <div class="ch step s2"><span class="cn">Stage 2</span><b>✨ Meeting Demian · awakening of the self</b><small>Reinterpreting Cain · thinking for yourself</small></div>
+      <div class="arrow">↓</div>
+      <div class="ch step s3">
+        <span class="cn">Proximate Cause</span><b>👁️ Abraxas · the inner voice</b>
+        <small>The god of integration beyond good and evil</small>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="ch step s4"><span class="cn">Result</span><b>🦋 The true self, complete (individuation)</b><small>“To live what wants to rise up out of me”</small></div>
+    </div>
+
+    <h3 class="rep-h3">Key Concepts</h3>
+    <div class="concepts" id="concepts"></div>
+
+    <h3 class="rep-h3">Contents at a Glance <span class="hint">Tap to open the summary</span></h3>
+    <div class="toc" id="toc"></div>
+
+    <h3 class="rep-h3">3 Cases from the Book to Ponder</h3>
+    <div class="cases" id="cases"></div>
+
+    <h3 class="rep-h3">3 Questions This Book Asks You</h3>
+    <div class="qs" id="asks"></div>
+
+    
+    <div id="weakWrap">
+      <h3 class="rep-h3">Focused Review of What You Missed <span id="weakCount"></span></h3>
+      <div class="weak" id="weakList"></div>
+    </div>
+
+    <div class="deepen">
+      <b>📺 Want to go deeper</b>
+      <a id="ebsLink" href="#" target="_blank" rel="noopener"></a>  opens up Hermann Hesse’s life and literary world for you.
+    </div>
+
+    <div class="res-btns">
+      <button class="btn btn-primary" id="pdfBtn" onclick="downloadReportPDF()">📄 Save as PDF</button>
+      <button class="btn btn-ghost" onclick="startQuiz()">Try again ↻</button>
+      <button class="btn btn-ghost" onclick="show('result')">Back to results</button>
+      <button class="btn btn-ghost" onclick="goHome()">Back to start</button>
+    </div>
+  </section>
+
+  <div class="footer">
+    <div class="factory">“The Meaning & Fun Factory” MIMI FACTORY</div>
+    <div class="affil">(YEON:GYEOL Inc. Family Company)</div>
+    <div class="tagline">The repeat-master quiz that drills a book’s core with dopamine</div>
+  </div>
+
+</div>
+
+<script>
+const APP_CONFIG = {
+  mode: "teaser",            // "free" | "teaser" | "premium"
+  freeLimit: 10,             // teaser: how many questions are free to solve
+  subscribeUrl: "https://blog.naver.com/4u_doumi",
+  catalogUrl: "https://mimifactory.vibekr.com/en/quiz.html",
+  utm: "utm_source=quizbook&utm_medium=app&utm_campaign=demian",
+  edition: "2026-07-09 · Demian",
+  accessCodeHash: ""
+};
+function _sub(){ const u=APP_CONFIG.subscribeUrl; if(!u) return '#';
+  return u + (u.includes('?')?'&':'?') + APP_CONFIG.utm; }
+function _cat(){ const u=APP_CONFIG.catalogUrl; if(!u) return '#';
+  return u + (u.includes('?')?'&':'?') + APP_CONFIG.utm; }
+
+const QUESTIONS = [{id:1,level:1,tag:"Character",q:"What’s the name of the protagonist of Demian?",options:[{t:"Emil Sinclair",ok:true},{t:"Max Demian"},{t:"Franz Kromer"},{t:"Karl Pistorius"}],
+   ctx:"<b>Emil Sinclair</b> opens the book by looking back on his own coming of age. It was first published under the pen name Sinclair rather than Hermann Hesse’s real name."},{id:2,level:1,tag:"Character",q:"What’s the name of the mysterious friend who psychologically awakens and teaches Sinclair?",options:[{t:"Max Demian",ok:true},{t:"Jerome Pistorius"},{t:"Beatrice"},{t:"Frau Eva"}],
+   ctx:"<b>Max Demian</b> is Sinclair’s spiritual mentor and teacher. He reinterprets the story of Cain and Abel and opens Sinclair’s eyes."},{id:3,level:1,tag:"Event",q:"What’s the name of the bully who first pulls Sinclair into the world of evil?",options:[{t:"Franz Kromer",ok:true},{t:"Jerome Pistorius"},{t:"Max Demian"},{t:"Henkel"}],
+   ctx:"<b>Franz Kromer</b>, the son of a wool-shop owner, torments young Sinclair and blurs the line between good and evil. But he suddenly disappears once Demian shows up."},{id:4,level:1,tag:"Concept",q:"Which biblical figure does Demian reinterpret?",options:[{t:"Cain",ok:true},{t:"Solomon"},{t:"Job"},{t:"David"}],
+   ctx:"<b>Cain</b> is usually seen as the villain who killed his brother Abel, but Demian recasts him as a figure of strong inner power. The fact that people envied him, he says, means Cain was no ordinary man."},{id:5,level:1,tag:"Symbol",q:"What does the recurring line “the bird fights its way out of the egg” actually mean?",options:[{t:"Breaking your old shell to grow into your true self",ok:true},{t:"Advice to stay somewhere safe and familiar"},{t:"That resisting others is always the right thing"},{t:"A message to win back the happiness of childhood"}],
+   ctx:"A bird breaking out of its egg means <b>you must overcome your own world and become a new being</b>. It symbolizes the process of personal growth and individuation."},{id:6,level:1,tag:"Background",q:"What era forms the backdrop of Demian?",options:[{t:"Around World War I",ok:true},{t:"During World War II"},{t:"The era of medieval religious conflict"},{t:"The early Industrial Revolution"}],
+   ctx:"Written when Hermann Hesse was 42, this novel offered spiritual comfort and direction to <b>the young Germans devastated by World War I</b>."},{id:7,level:1,tag:"Character",q:"Who is the musician, drawn to mysticism, who has a spiritual influence on Sinclair?",options:[{t:"Pistorius",ok:true},{t:"Knauer"},{t:"Henkel"},{t:"Sinclair’s Latin teacher"}],
+   ctx:"<b>Pistorius</b> is a church organist who first studied theology, then fell into mystical religious ideas and walked a new path. Through him, Sinclair discovers ancient religions and Gnosticism."},{id:8,level:1,tag:"Character",q:"What best describes Beatrice, the woman Sinclair made his ideal to reclaim a moral life?",options:[{t:"An ideal Sinclair painted in his own mind",ok:true},{t:"A real friend Sinclair knew in daily life"},{t:"Demian’s younger sister he later met"},{t:"A close pupil who studied under Pistorius"}],
+   ctx:"Beatrice is <b>an ideal woman Sinclair painted in his own mind</b>. Through his love and reverence for her, he struggles to rebuild his collapsed inner world."},{id:9,level:1,tag:"Concept",q:"What are the two worlds that ruled Sinclair’s childhood?",options:[{t:"The world of light and the world of darkness",ok:true},{t:"A materially rich world and a poor one"},{t:"The city and the countryside"},{t:"Christianity and Islam"}],
+   ctx:"His parents’ embrace is the <b>bright, moral world</b>; outside it lies the <b>dark, forbidden world of evil</b>. As he grows, Sinclair has to overcome this either-or divide."},{id:10,level:1,tag:"Character",q:"Which classmate, studying theology and on the brink of suicide, is helped by Sinclair?",options:[{t:"Knauer",ok:true},{t:"Henkel"},{t:"Demian’s cousin Max"},{t:"Werner"}],
+   ctx:"<b>Knauer</b> shows that Sinclair has grown enough to pass on to someone else the help he once received from Demian — just as Demian was once Sinclair’s teacher."}];
+
+
+const SOURCES = {wiki:{label:"Wikipedia: Demian",url:"https://ko.wikipedia.org/wiki/%EB%8D%B0%EB%AF%B8%EC%95%88"},ebs:{label:"EBS Documentary: Hermann Hesse",url:"https://www.ebs.co.kr/tv/show?prodId=348"},brunch1:{label:"Brunch: The True Meaning of Demian",url:"https://brunch.co.kr/@jooshine/181"},brunch2:{label:"Brunch: Hermann Hesse and Psychoanalysis",url:"https://brunch.co.kr/@bookrenam/67"}};
+
+
+const EXTRA = {1:{src:"wiki",note:"Hesse first published this novel under the pen name Sinclair, meaning to keep some distance in his autobiographical confession."},2:{src:"wiki",note:"Demian appears only as a deeply mysterious figure; his true nature stays ambiguous and symbolic."},3:{src:"wiki",note:"The relationship with Kromer can be read as Sinclair’s inner weakness made external."},4:{src:"wiki",note:"The reinterpretation of Cain sharply departs from orthodox Christian reading — and that shows Demian’s radical way of thinking."},5:{src:"wiki",note:"This line ties into the symbolic system of the Gnostic tradition; bird imagery stands for the soul’s ascent."},6:{src:"wiki",note:"When Hesse criticized World War I, this novel was his courageous voice — and it later led to his rehabilitation."},7:{src:"wiki",note:"Pistorius stands on the border between theology and mysticism — an emblem of a soul that refuses dogma."},8:{src:"wiki",note:"Beatrice is a name inspired by the ideal woman in Dante’s Divine Comedy."},9:{src:"wiki",note:"This dualistic divide is a pattern not only of personal development but of the whole history of civilization."},10:{src:"wiki",note:"Knauer plays an important mirror role, showing how much Sinclair has grown."}};
+
+
+const MILESTONES = [{at:0,label:"The bird cracks the egg",msg:"It begins!"},{at:7,label:"The world of light",msg:"Young Sinclair’s moral life"},{at:15,label:"The world of darkness",msg:"Tasting evil and desire"},{at:22,label:"The ideal of Beatrice",msg:"Trying to return to a moral life"},{at:30,label:"Flight toward Abraxas",msg:"Complete! You found your true self."}];
+const DIFF_LABEL = {1:["Easy","l1"],2:["Medium","l2"],3:["Hard","l3"]};
+const BASE_PTS = {1:10, 2:20, 3:30};
+const TOTAL_Q = (APP_CONFIG.mode==='teaser') ? 30 : QUESTIONS.length;
+
+
+let pending = [];          // not yet ‘correct on first try’queue of unmastered questions ( (taken from the front)
+let masteredIds = new Set();
+let attempts = {};         // id -> attempt count
+let score = 0, streak = 0, bestStreak = 0;
+let totalTries = 0, firstTryCorrect = 0;
+let firstWrongIds = new Set();   // questions missed on first try = weak spots(targets for focused review)
+let answered = false;
+let cur = null;
+let bestScore = 0;         // best score this session (for retry comparison, localStorage unused)
+let hasPlayed = false;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+
+function show(id){
+  ['home','quiz','result','report'].forEach(s=>document.getElementById(s).classList.toggle('hidden', s!==id));
+  window.scrollTo({top:0, behavior: reduceMotion ? 'auto':'smooth'});
+}
+function goHome(){ show('home'); }
+
+
+function startQuiz(){
+
+  const ordered = [...QUESTIONS].sort((a,b)=> a.level - b.level || a.id - b.id);
+  pending = ordered.map(q=>q.id);
+  masteredIds = new Set();
+  attempts = {};
+  score = 0; streak = 0; bestStreak = 0;
+  totalTries = 0; firstTryCorrect = 0;
+  firstWrongIds = new Set();
+  buildMilestones();
+  updateHUD();
+  show('quiz');
+  loadNext();
+}
+
+function buildMilestones(){
+  const box = document.getElementById('milestones');
+  box.innerHTML = MILESTONES.map(m=>`<div class="ms" data-at="${m.at}"><span class="dot"></span>${m.label}</div>`).join('');
+}
+
+
+function loadNext(){
+  if(_teaserLocked()){ showLock(); return; }
+  if(pending.length === 0){ finish(); return; }
+  const id = pending[0];
+  cur = QUESTIONS.find(q=>q.id===id);
+  answered = false;
+
+  const [dl, dc] = DIFF_LABEL[cur.level];
+  const diffEl = document.getElementById('diff');
+  diffEl.textContent = dl; diffEl.className = 'diff '+dc;
+  document.getElementById('qtag').textContent = '# '+cur.tag;
+  document.getElementById('qno').textContent =
+    'Mastered '+masteredIds.size+' / '+TOTAL_Q + (attempts[id] ? ' · review' : '');
+  document.getElementById('question').textContent = cur.q;
+
+
+  const shuffled = shuffle([...cur.options]);
+  const keys = ['A','B','C','D','E'];
+  const opts = document.getElementById('opts');
+  opts.innerHTML = '';
+  shuffled.forEach((o,i)=>{
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.innerHTML = `<span class="key">${keys[i]}</span><span>${o.t}</span>`;
+    b.onclick = ()=>answer(b, o.ok);
+    opts.appendChild(b);
+  });
+
+
+  const ex2=document.getElementById('explain'); ex2.className='explain'; ex2.style.cssText='';
+  document.getElementById('nextRow').style.cssText='visibility:hidden;opacity:0';
+  document.getElementById('requeue').textContent='';
+}
+
+
+function answer(btn, isCorrect){
+  if(answered) return;
+  answered = true;
+  const id = cur.id;
+  attempts[id] = (attempts[id]||0) + 1;
+  totalTries++;
+  const firstTry = attempts[id] === 1;
+
+
+  const opts = document.getElementById('opts').querySelectorAll('.opt');
+  opts.forEach(o=>{
+    o.disabled = true;
+    const label = o.querySelector('span:last-child').textContent;
+    const opt = cur.options.find(x=>x.t===label);
+    if(opt && opt.ok) o.classList.add('correct');
+    else o.classList.add('dim');
+  });
+  if(!isCorrect) btn.classList.add('wrong');
+
+
+  const explain = document.getElementById('explain');
+  const verdict = document.getElementById('verdict');
+  const ctx = document.getElementById('ctx');
+  const comboEl = document.getElementById('combo');
+
+  if(isCorrect){
+    streak++;
+    if(streak > bestStreak) bestStreak = streak;
+    let gain = BASE_PTS[cur.level];
+    if(!firstTry) gain = Math.round(gain/2);          // review answers score half
+    const bonus = (streak>=2) ? (streak-1)*3 : 0;     // combo bonus
+    gain += bonus;
+    score += gain;
+
+    if(firstTry) firstTryCorrect++;
+    masteredIds.add(id);          // ‘Back to start’ counts as mastered in the end, even if not the first time
+    pending.shift();              // remove from queue (Mastered)
+
+    verdict.textContent = firstTry ? '🎯 Correct!' : '✅ Got it now!';
+    explain.className = 'explain ok';
+    if(bonus>0){
+      comboEl.textContent = `🔥 ${streak} in a row! +${bonus} bonus`;
+      comboEl.classList.remove('show'); void comboEl.offsetWidth; comboEl.classList.add('show');
+    } else comboEl.textContent = '';
+    if(!reduceMotion) burst(btn);
+  } else {
+    streak = 0;
+    comboEl.textContent = '';
+    if(firstTry) firstWrongIds.add(id);   // record as a weak spot
+
+    pending.shift();
+    pending.push(id);
+    verdict.textContent = '❌ Try again!';
+    explain.className = 'explain no';
+    document.getElementById('requeue').textContent = '↻ This one comes back later';
+  }
+
+  ctx.innerHTML = cur.ctx;
+  /* explain visibility controlled by CSS class */
+  document.getElementById('nextRow').style.cssText='visibility:visible;opacity:1';
+  updateHUD();
+}
+
+function nextQuestion(){ loadNext(); }
+
+
+const CONCEPTS = [{ic:"🦋",h:"Individuation",p:"Owning and embracing every side of yourself to form a true, singular self.",src:"wiki"},{ic:"☯️",h:"Beyond Dualism",p:"Moving past the good-vs-evil, light-vs-dark split into a whole consciousness that holds both.",src:"wiki"},{ic:"✨",h:"The Mark (Mal)",p:"A mysterious sign of recognition — and a signal of connection — felt by those who reach the soul’s depth.",src:"brunch2"},{ic:"👁️",h:"Abraxas",p:"The absolute divinity that holds both god and devil, good and evil — the transcending of every contradiction.",src:"wiki"},{ic:"🗣️",h:"The Voice of the Soul",p:"The true desire and calling that rises from within you, beyond social expectation and moral rules.",src:"brunch1"},{ic:"🙏",h:"The Inner Mentor",p:"The outer teacher ultimately lives inside your own soul; real growth begins with finding inner wisdom.",src:"wiki"},{ic:"🐦",h:"The Bird and the Egg",p:"The soul’s struggle and growth as it breaks its old shell to soar into a new dimension.",src:"wiki"},{ic:"⚠️",h:"The Danger of the Collective",p:"A warning about mob madness and faceless obedience that threaten a person’s independence.",src:"brunch2"}];
+
+function srcLink(key){
+  const s = SOURCES[key];
+  return `<a class="src" href="${s.url}" target="_blank" rel="noopener">${s.label}</a>`;
+}
+
+
+const TOC = [{n:"Ch. 1",t:"The World of Light",beats:[{e:"👶",x:"Young Sinclair, safe in his parents’ home, lives in a bright, moral world"},{e:"🚶",x:"His first pull into the dark world comes when he meets Franz Kromer"},{e:"😰",x:"Tormented by Kromer, he’s swallowed by guilt and shame"},{e:"🆘",x:"He cries out for rescue in a desperate, heartfelt prayer"}]},{n:"Ch. 2",t:"The Savior Appears",beats:[{e:"✨",x:"The mysterious transfer student Max Demian arrives"},{e:"💬",x:"Demian reinterprets the story of Cain and Abel"},{e:"🧠",x:"Sinclair’s self-awareness awakens; he starts thinking critically"},{e:"🔓",x:"A mysterious release frees him from Kromer’s bullying"}]},{n:"Ch. 3",t:"The Dark World",beats:[{e:"🌙",x:"He meets the theology student Pistorius and touches mysticism and Gnosticism"},{e:"🍷",x:"He sinks into wine, music, and pleasure as his soul goes astray"},{e:"💔",x:"He pictures the ideal Beatrice and reaches for a moral life"},{e:"🎨",x:"He paints a bird breaking from its egg and sends it to Demian"}]},{n:"Ch. 4",t:"A Meeting of Souls",beats:[{e:"🌟",x:"In a mystical meeting of souls, Demian and Frau Eva reappear"},{e:"❤️",x:"Frau Eva gives him deep comfort and reflection"},{e:"🪞",x:"He faces his contradictions and shadow, beginning the path to wholeness"},{e:"🚀",x:"His soul takes flight toward his true self — toward Abraxas"}]},{n:"Ch. 5",t:"Completion and Growth",beats:[{e:"⚡",x:"In an age of war, he witnesses countless marked youths awakening"},{e:"🔄",x:"Demian’s last lesson: the teacher lives inside your own soul"},{e:"🌍",x:"He realizes individuation is hard, yet beautiful at the same time"},{e:"🌅",x:"Reborn, Sinclair resolves to live as his true self"}]}];
+
+/* 3 Cases from the Book to Ponder */
+const CASES = [{ic:"🥊",t:"Facing Kromer",d:"The way young Sinclair breaks free from Kromer’s bullying shows how we can each recover our own inner strength.",why:"Because it reveals that outer evil can be a mirror reflecting our own inner weakness"},{ic:"🕊️",t:"Beatrice’s Ideal and Its Limits",d:"Think about why Sinclair, after chasing a moral ideal, still had to walk the path of wholeness.",why:"It holds a universal truth: chasing only one side (the good) makes real growth impossible — we have to own every side of ourselves."},{ic:"🚂",t:"The Young Men on the Train Before the War",d:"What could the sense of connection Sinclair felt seeing so many marked young men actually mean?",why:"Because the voice of the soul lives in everyone, across eras and cultures — and in that universality, we learn we’re not alone."}];
+
+/* 3 Questions This Book Asks You */
+const ASKS = [{q:"In my life, what is the ‘Kromer’ that keeps holding me down?",h:"Look calmly at whether it’s something outside you — or a reflection of your own weakness."},{q:"Could the morality or ideal I chase be smothering my true self?",h:"Check whether the ‘right image’ society set really matches where your soul wants to go."},{q:"Which do I reject more — my ‘bright side’ or my ‘dark side’ — and how could I integrate the two?",h:"Accepting every side of yourself can bring more strength than trying to be a perfect person."}];
+
+function toggleToc(i){
+  const item = document.querySelectorAll('.toc-item')[i];
+  const panel = item.querySelector('.toc-panel');
+  const opening = !item.classList.contains('open');
+  item.classList.toggle('open');
+  item.querySelector('.toc-head').setAttribute('aria-expanded', opening ? 'true':'false');
+  panel.style.maxHeight = opening ? (panel.scrollHeight + 8) + 'px' : '0px';
+}
+
+function openReport(){
+
+  document.getElementById('concepts').innerHTML = CONCEPTS.map(c=>`
+    <div class="concept">
+      <div class="ic">${c.ic}</div>
+      <h4>${c.h}</h4>
+      <p>${c.p}</p>
+      ${srcLink(c.src)}
+    </div>`).join('');
+
+
+  document.getElementById('toc').innerHTML = TOC.map((t,i)=>`
+    <div class="toc-item">
+      <button class="toc-head" onclick="toggleToc(${i})" aria-expanded="false">
+        <span class="nn">${t.n}</span><span class="tt">${t.t}</span>
+        <span class="chev">▾</span>
+      </button>
+      <div class="toc-panel"><div class="inner">${t.beats.map(b=>`<div class="beat"><span class="be">${b.e}</span><span class="bx">${b.x}</span></div>`).join('')}</div></div>
+    </div>`).join('');
+
+  // 3 Cases from the Book to Ponder
+  document.getElementById('cases').innerHTML = CASES.map(c=>`
+    <div class="case">
+      <div class="ct"><span class="ci">${c.ic}</span>${c.t}</div>
+      <div class="cd">${c.d}</div>
+      <div class="cw">💭 <b>Why it’s worth pondering</b> — ${c.why}</div>
+    </div>`).join('');
+
+
+  document.getElementById('asks').innerHTML = ASKS.map((a,i)=>`
+    <div class="qcard">
+      <div class="qq"><span class="qnum">Q${i+1}.</span><span>${a.q}</span></div>
+      <div class="qh">${a.h}</div>
+    </div>`).join('');
+
+
+  const ids = [...firstWrongIds].sort((a,b)=>a-b);
+  const wrap = document.getElementById('weakWrap');
+  const cnt = document.getElementById('weakCount');
+  const list = document.getElementById('weakList');
+  if(ids.length === 0){
+    cnt.textContent = '';
+    list.innerHTML = `<div class="perfect">🌟 All correct on the first try!<span>No weak spots — nothing to review. Nicely done.</span></div>`;
+  } else {
+    cnt.textContent = `(${ids.length})`;
+    list.innerHTML = ids.map(id=>{
+      const q = QUESTIONS.find(x=>x.id===id);
+      const ans = q.options.find(o=>o.ok).t;
+      const ex = EXTRA[id];
+      return `<div class="weak-item">
+        <div class="wq">Q. ${q.q}</div>
+        <div class="wans">Answer → <b>${ans}</b></div>
+        <div class="wnote">💡 ${ex.note}</div>
+        <div class="wctx">${q.ctx}</div>
+        ${srcLink(ex.src)}
+      </div>`;
+    }).join('');
+  }
+
+
+  const ebs = SOURCES.ebs;
+  const a = document.getElementById('ebsLink');
+  a.href = ebs.url; a.textContent = ebs.label;
+
+  applyReportLock();
+  show('report');
+}
+
+
+function _teaserLocked(){
+  return APP_CONFIG.mode === 'teaser' && masteredIds.size >= APP_CONFIG.freeLimit;
+}
+function showLock(){
+  var qc = document.getElementById('qcard');
+  qc.style.filter = 'blur(5px)';
+  qc.style.pointerEvents = 'none';
+  document.getElementById('lockOverlay').classList.remove('hidden');
+  window.scrollTo({ top: document.getElementById('lockOverlay').offsetTop - 80,
+    behavior: reduceMotion ? 'auto' : 'smooth' });
+}
+function applyReportLock(){
+  if(APP_CONFIG.mode !== 'teaser') return;
+  document.querySelectorAll('#concepts .concept').forEach(function(el,i){
+    if(i >= 3) el.classList.add('blurred');
+  });
+  ['toc','cases','asks','weakWrap'].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.classList.add('blurred');
+  });
+  var deep = document.querySelector('#report .deepen'); if(deep) deep.classList.add('blurred');
+  if(!document.getElementById('reportLock')){
+    var lock = document.createElement('div');
+    lock.id = 'reportLock'; lock.className = 'rep-lock';
+    lock.innerHTML = '<div class="lk-ic">🔒</div>' +
+      '<h3>The full Reading Report is for subscribers only</h3>' +
+      '<p>You can preview the chain of cause and effect and some of the key concepts.<br>' +
+      'The contents summary · cases to ponder · questions it asks · weak-spot review · PDF save all unlock when you subscribe.</p>' +
+      '<a class="cta" href="' + _sub() + '" target="_blank" rel="noopener">🔑 Subscribe and open the full Reading Report</a>';
+    var concepts = document.getElementById('concepts');
+    concepts.parentNode.insertBefore(lock, concepts.nextSibling);
+  }
+  var pdf = document.getElementById('pdfBtn'); if(pdf) pdf.style.display = 'none';
+}
+(function(){
+  var ed = document.getElementById('editionTag');
+  if(ed && APP_CONFIG.edition){ ed.textContent = '🗓 ' + APP_CONFIG.edition; }
+  else if(ed){ ed.style.display='none'; }
+  var sb = document.getElementById('lockSubBtn'); if(sb) sb.href = _sub();
+  var cn = document.getElementById('catBtn'); if(cn) cn.href = _cat();
+  if(APP_CONFIG.mode === 'teaser'){
+    var fl = APP_CONFIG.freeLimit;
+    var msg = document.getElementById('lockMsg');
+    if(msg){
+      var rest = TOTAL_Q - fl;
+      msg.innerHTML = 'The free preview lets you solve <b>'+fl+' questions</b>. ' +
+        'The remaining <b>'+rest+' questions</b> and the <b>full Reading Report</b> are for subscribers only. ' +
+        'The <b>journey of the soul</b> you’ve built so far stays right there on the gauge above.';
+    }
+  }
+})();
+
+
+function updateHUD(){
+  document.getElementById('score').textContent = score;
+  document.getElementById('streak').textContent = streak;
+  document.getElementById('mastered').textContent = masteredIds.size + ' / ' + TOTAL_Q;
+  const pct = Math.round(masteredIds.size / TOTAL_Q * 100);
+  document.getElementById('fill').style.width = pct + '%';
+  document.getElementById('pctTxt').textContent = pct + '%';
+
+  document.querySelectorAll('.ms').forEach(el=>{
+    el.classList.toggle('reached', masteredIds.size >= +el.dataset.at);
+  });
+}
+
+
+function finish(){
+  hasPlayed = true;
+  const acc = Math.round(firstTryCorrect / QUESTIONS.length * 100);
+  let rank, sub;
+  if(acc>=90){ rank='The Eye of Abraxas'; sub='You’ve seen through Demian completely'; }
+  else if(acc>=75){ rank='One Who Bears the Mark'; sub='You caught nearly every key insight'; }
+  else if(acc>=55){ rank='Cracking the Egg'; sub='You’ve got the skeleton — one more round!'; }
+  else { rank='Curious Sinclair'; sub='The more you repeat, the deeper the insight'; }
+
+  document.getElementById('rankTitle').textContent = rank;
+  document.getElementById('rankSub').textContent = sub;
+  document.getElementById('rScore').textContent = score;
+  document.getElementById('rAcc').textContent = acc + '%';
+  document.getElementById('rStreak').textContent = bestStreak;
+  document.getElementById('rTries').textContent = totalTries;
+
+  const note = document.getElementById('bestNote');
+  if(score > bestScore){
+    const prev = bestScore;
+    bestScore = score;
+    note.innerHTML = prev>0 ? `🏆 <b>New high score!</b> (previous ${prev} pts)` : `🏆 first record <b>${score} pts</b> — Try again and beat it!`;
+  } else {
+    note.innerHTML = `current high score <b>${bestScore} pts</b> · this time ${score} pts`;
+  }
+
+  show('result');
+  if(!reduceMotion) finale();
+}
+
+
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+(function(){
+  const COLORS=['#e3b34e','#5cc28d','#8fb0cc','#d96a4a','#f0c560','#ff6b9d','#a78bfa','#34d399'];
+  let cvs=null, ctx2d=null, particles=[], raf=null;
+
+  function ensureCanvas(){
+    if(cvs) return;
+    cvs=document.createElement('canvas');
+    cvs.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999';
+    document.body.appendChild(cvs);
+    resize();
+    window.addEventListener('resize', resize);
+    ctx2d=cvs.getContext('2d');
+  }
+  function resize(){ if(cvs){ cvs.width=window.innerWidth; cvs.height=window.innerHeight; } }
+
+  
+  function spawn(ox, oy, count, speedMin, speedMax, spreadDeg){
+    const half = spreadDeg * Math.PI/180 / 2;
+    for(let i=0;i<count;i++){
+      const angle = -Math.PI/2 + (Math.random()*2-1)*half;  
+      const speed = speedMin + Math.random()*(speedMax-speedMin);
+      particles.push({
+        x: ox, y: oy,
+        vx: Math.cos(angle)*speed,
+        vy: Math.sin(angle)*speed,
+        color: COLORS[Math.floor(Math.random()*COLORS.length)],
+        w: 5+Math.random()*7,
+        h: 3+Math.random()*4,
+        life: 1,
+        decay: 0.010 + Math.random()*0.016,
+        gravity: 0.20 + Math.random()*0.08,
+        drag: 0.97,
+        rot: Math.random()*Math.PI*2,
+        rotV: (Math.random()-.5)*0.28,
+        shape: Math.random()<.65 ? 'rect' : 'circle'
+      });
+    }
+  }
+
+  function loop(){
+    ctx2d.clearRect(0,0,cvs.width,cvs.height);
+    particles=particles.filter(p=>p.life>0.02);
+    if(!particles.length){ raf=null; return; }
+    particles.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      p.vy+=p.gravity;
+      p.vx*=p.drag; p.vy*=p.drag;
+      p.life-=p.decay;
+      p.rot+=p.rotV;
+      ctx2d.save();
+      ctx2d.globalAlpha=Math.pow(Math.max(0,p.life), 0.6);
+      ctx2d.fillStyle=p.color;
+      ctx2d.translate(p.x, p.y);
+      ctx2d.rotate(p.rot);
+      if(p.shape==='rect'){
+        ctx2d.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      } else {
+        ctx2d.beginPath();
+        ctx2d.ellipse(0,0,p.w/2,p.h/2,0,0,Math.PI*2);
+        ctx2d.fill();
+      }
+      ctx2d.restore();
+    });
+    raf=requestAnimationFrame(loop);
+  }
+
+  function fire(ox, oy, count, speedMin, speedMax, spreadDeg){
+    ensureCanvas();
+    spawn(ox, oy, count, speedMin, speedMax, spreadDeg);
+    if(!raf) raf=requestAnimationFrame(loop);
+  }
+
+  
+  window._confettiBurst=function(el){
+    const r=el.getBoundingClientRect();
+    const cx=r.left+r.width/2, cy=r.top+r.height/2;
+    fire(cx, cy, 45, 8, 18, 90);               
+    setTimeout(()=>fire(cx, cy, 20, 5, 12, 50), 80); 
+  };
+
+  
+  window._confettiFinale=function(){
+    const w=window.innerWidth, h=window.innerHeight;
+    
+    fire(w*.2, h*.75, 100, 12, 24, 70);
+    
+    setTimeout(()=>fire(w*.8, h*.75, 100, 12, 24, 70), 250);
+    
+    setTimeout(()=>{
+      fire(w*.5, h*.65, 130, 14, 28, 110);
+      fire(w*.35, h*.7, 60, 10, 20, 60);
+      fire(w*.65, h*.7, 60, 10, 20, 60);
+    }, 500);
+    
+    setTimeout(()=>fire(w*.5, h*.5, 80, 8, 18, 140), 900);
+  };
+})();
+
+function burst(el){ if(!reduceMotion) window._confettiBurst(el); }
+function finale(){ if(!reduceMotion) window._confettiFinale(); }
+
+
+function downloadReportPDF(){
+
+  document.querySelectorAll('.toc-panel').forEach(p=>{ p.style.maxHeight='none'; });
+  const el = document.getElementById('report');
+  const btn = document.getElementById('pdfBtn');
+  const h2 = document.querySelector('#report .rep-hero h2');
+  const fname = ((h2 && h2.textContent) || 'Reading Report').replace('at a Glance','').trim() + ' Report.pdf';
+
+
+  if(typeof html2pdf === 'undefined'){ window.print(); return; }
+
+  document.body.classList.add('pdf-export');
+  if(btn){ btn.disabled=true; btn.textContent='📄 Making PDF…'; }
+  const opt = {
+    margin:[8,8,10,8],
+    filename:fname,
+    image:{type:'jpeg', quality:0.96},
+    html2canvas:{scale:2, backgroundColor:'#ffffff', useCORS:true, windowWidth:760, scrollY:0},
+    jsPDF:{unit:'mm', format:'a4', orientation:'portrait'},
+    pagebreak:{mode:['css','legacy']}
+  };
+  html2pdf().set(opt).from(el).outputPdf('blob').then(function(blob){
+    var url = URL.createObjectURL(blob);
+    try{
+      var a = document.createElement('a');
+      a.href = url; a.download = fname;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+    }catch(e){
+
+      window.open(url, '_blank');
+    }
+  }).catch(function(){
+    alert('Something went wrong making the PDF. Download this HTML file, open it directly in your browser, and tap again.');
+  }).then(function(){
+    document.body.classList.remove('pdf-export');
+    if(btn){ btn.disabled=false; btn.textContent='📄 Save as PDF'; }
+  });
+}
+</script>
+
+<div style="text-align:center;margin:30px 16px 36px">
+  <a id="catBtn" href="https://mimifactory.vibekr.com/en/quiz.html?utm_source=quizbook&utm_medium=app" target="_blank" rel="noopener" style="display:inline-block;padding:11px 22px;border-radius:999px;background:rgba(127,127,127,.14);border:1px solid rgba(127,127,127,.35);color:inherit;text-decoration:none;font-weight:700;font-size:14px">📚 See other book quizzes →</a>
+</div>
+<script id="promoBanner">
+
+(function(){
+  function full(){ try{ return localStorage.getItem("mf_vip")==="1"; }catch(e){ return false; } }
+  var slug = decodeURIComponent(location.pathname).split("/").pop().replace("_teaser.html","");
+  function show(vip){
+    if(document.getElementById("promoBar")) return;
+    var full_url = location.pathname.replace("_teaser.html","_quiz.html");
+    var d=document.createElement("div");
+    d.id="promoBar";
+    d.style.cssText="position:sticky;top:0;z-index:99;text-align:center;padding:10px 14px;font-size:13.5px;font-weight:700;color:#241505;background:linear-gradient(100deg,#ffd166,#e8b45f);cursor:pointer;";
+    d.textContent=(vip?"💌 VIP invite — ":"🎁 The full version of this book is free right now! ")+"Go to the full version (no lock) →";
+    d.onclick=function(){ location.href=full_url; };
+    document.body.prepend(d);
+  }
+  if(full()){ show(true); return; }
+  try{
+    fetch("../promo-api.php?action=get&t="+Date.now()).then(function(r){return r.json();}).then(function(j){
+      if(j && (j.open || (j.books && j.books.indexOf(slug)>=0))) show(false);
+    }).catch(function(){});
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

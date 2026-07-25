@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>デミアン ドーパミン・マスタークイズ</title>
+<script>
+/* html2pdf bundle removed for preview performance */
+window.html2pdf = function() {
+  return {
+    set: function() { return this; },
+    from: function() { return this; },
+    outputPdf: function() { return Promise.resolve(new Blob()); },
+    save: function() { return Promise.resolve(); }
+  };
+};
+</script>
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansJP-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/MPLUSRounded1c-Bold-sub.woff2') format('woff2');font-weight:400;font-display:swap;}
+</style>
+<style>
+  :root{
+    --bg:#0b1722; --bg2:#0e2031; --panel:#15293b; --panel2:#1b3148;
+    --edge:#2c455c;
+    --ink:#f1e8d4; --body:#bccadb; --muted:#7d92a7;
+    --gold:#e3b34e; --gold-deep:#bd8a2c;
+    --green:#5cc28d; --green-deep:#2f6f4d;
+    --rust:#d96a4a; --rust-deep:#9b3f27;
+    --steelblue:#8fb0cc;
+    --shadow:0 18px 45px rgba(0,0,0,.45);
+    --r:18px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:"Noto Sans KR",sans-serif;
+    color:var(--body);
+    background:
+      repeating-linear-gradient(0deg, rgba(227,179,78,.045) 0 1px, transparent 1px 46px),
+      radial-gradient(1200px 600px at 80% -10%, rgba(143,176,204,.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(217,106,74,.10), transparent 55%),
+      linear-gradient(160deg, var(--bg) 0%, var(--bg2) 100%);
+    background-attachment:fixed;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:22px 18px 40px;}
+  h1,h2,h3{font-family:"Noto Serif KR",serif;color:var(--ink);margin:0;}
+  .eyebrow{font-size:12px;letter-spacing:.32em;color:var(--gold);font-weight:700;text-transform:uppercase;}
+
+  /* ---------- HOME ---------- */
+  .hero{
+    text-align:center;padding:46px 24px 38px;border-radius:24px;
+    background:linear-gradient(170deg, rgba(27,49,72,.9), rgba(15,32,49,.92));
+    border:1px solid rgba(227,179,78,.22);box-shadow:var(--shadow);position:relative;overflow:hidden;
+  }
+  .hero::after{content:"";position:absolute;inset:0;background:
+    repeating-linear-gradient(0deg, rgba(227,179,78,.05) 0 1px, transparent 1px 30px);pointer-events:none;}
+  .pillars{display:flex;justify-content:center;gap:10px;margin:6px 0 18px;}
+  .pillars span{
+    font-family:"Noto Serif KR",serif;font-weight:900;font-size:30px;
+    width:62px;height:62px;line-height:62px;border-radius:14px;display:inline-block;
+    border:1px solid rgba(255,255,255,.10);
+  }
+  .pillars .p1{color:var(--steelblue);background:rgba(143,176,204,.12);}
+  .pillars .p2{color:var(--rust);background:rgba(217,106,74,.14);}
+  .pillars .p3{color:var(--gold);background:rgba(227,179,78,.14);}
+  .hero h1{font-size:clamp(30px,7vw,46px);font-weight:900;line-height:1.18;letter-spacing:-.01em;}
+  .hero h1 small{display:block;font-size:15px;font-weight:500;color:var(--muted);letter-spacing:.18em;margin-bottom:10px;font-family:"Noto Sans KR";}
+  .hero p{color:var(--body);font-size:15px;line-height:1.7;max-width:460px;margin:16px auto 0;position:relative;}
+  .quote{
+    margin:22px auto 4px;max-width:500px;font-family:"Noto Serif KR",serif;
+    font-size:15px;color:var(--ink);font-style:italic;line-height:1.7;
+    border-left:3px solid var(--gold);padding:10px 0 10px 16px;text-align:left;position:relative;
+  }
+  .quote b{color:var(--gold);font-style:normal;}
+  .btn{
+    appearance:none;border:none;cursor:pointer;font-family:"Noto Sans KR";font-weight:700;
+    border-radius:14px;padding:16px 30px;font-size:16px;transition:transform .12s ease, box-shadow .2s ease, filter .2s ease;
+  }
+  .btn-primary{
+    color:#23160a;background:linear-gradient(180deg, #f0c560, var(--gold-deep));
+    box-shadow:0 10px 26px rgba(227,179,78,.32);
+  }
+  .btn-primary:hover{transform:translateY(-2px);filter:brightness(1.05);}
+  .btn-ghost{background:rgba(255,255,255,.06);color:var(--body);border:1px solid rgba(255,255,255,.14);}
+  .btn-ghost:hover{background:rgba(255,255,255,.12);}
+  .start-row{margin-top:26px;position:relative;}
+  .meta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px;position:relative;}
+  .chip{font-size:12.5px;color:var(--muted);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);padding:7px 13px;border-radius:999px;}
+  .chip b{color:var(--gold);}
+
+  /* ---------- QUIZ HUD ---------- */
+  .hud{
+    background:linear-gradient(170deg, rgba(27,49,72,.92), rgba(15,32,49,.92));
+    border:1px solid rgba(227,179,78,.20);border-radius:20px;padding:18px 18px 20px;box-shadow:var(--shadow);
+    position:sticky;top:10px;z-index:5;backdrop-filter:blur(6px);
+  }
+  .hud-top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:12px;}
+  .stat{display:flex;flex-direction:column;}
+  .stat .label{font-size:11px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;}
+  .stat .val{font-family:"Noto Serif KR",serif;font-weight:900;font-size:24px;color:var(--ink);line-height:1.1;}
+  .stat .val.gold{color:var(--gold);}
+  .combo{font-size:12px;color:var(--rust);font-weight:700;min-height:16px;transition:opacity .2s;}
+  .combo.show{animation:pop .35s ease;}
+
+  /* east-west axis journey bar (signature) */
+  .axis{position:relative;margin-top:6px;}
+  .axis-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:6px;}
+  .axis-label b{color:var(--gold);}
+  .track{position:relative;height:14px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden;border:1px solid rgba(255,255,255,.08);}
+  .fill{position:absolute;left:0;top:0;bottom:0;width:0%;
+    background:linear-gradient(90deg, var(--green-deep), var(--green), var(--gold));
+    border-radius:999px;transition:width .6s cubic-bezier(.22,1,.36,1);}
+  .milestones{display:flex;justify-content:space-between;margin-top:8px;}
+  .ms{font-size:10px;color:var(--muted);text-align:center;flex:1;line-height:1.25;transition:color .4s;}
+  .ms.reached{color:var(--gold);font-weight:700;}
+  .ms .dot{display:block;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.18);margin:0 auto 4px;transition:.4s;}
+  .ms.reached .dot{background:var(--gold);box-shadow:0 0 10px rgba(227,179,78,.7);}
+
+  /* ---------- QUESTION CARD ---------- */
+  .card{
+    margin-top:16px;background:var(--panel);border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;padding:24px 22px;box-shadow:var(--shadow);
+  }
+  .qhead{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+  .diff{font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:999px;letter-spacing:.05em;}
+  .diff.l1{color:var(--green);background:rgba(92,194,141,.14);}
+  .diff.l2{color:var(--gold);background:rgba(227,179,78,.14);}
+  .diff.l3{color:var(--rust);background:rgba(217,106,74,.16);}
+  .qno{font-size:12px;color:var(--muted);}
+  .qtag{font-size:11.5px;color:var(--steelblue);background:rgba(143,176,204,.12);padding:5px 11px;border-radius:999px;margin-left:auto;}
+  .question{font-family:"Noto Serif KR",serif;font-weight:700;font-size:20px;line-height:1.5;color:var(--ink);margin:2px 0 18px;}
+  .opts{display:flex;flex-direction:column;gap:10px;}
+  .opt{
+    text-align:left;cursor:pointer;font-family:"Noto Sans KR";font-size:15px;line-height:1.5;color:var(--body);
+    background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.10);border-radius:13px;
+    padding:14px 15px;display:flex;gap:12px;align-items:flex-start;transition:.16s;
+  }
+  .opt:hover:not(:disabled){border-color:rgba(227,179,78,.5);background:rgba(227,179,78,.06);transform:translateX(2px);}
+  .opt .key{flex:none;width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.08);
+    color:var(--muted);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;}
+  .opt:disabled{cursor:default;}
+  .opt.correct{border-color:var(--green);background:rgba(92,194,141,.14);color:#dff3e8;}
+  .opt.correct .key{background:var(--green);color:#0b2417;}
+  .opt.wrong{border-color:var(--rust);background:rgba(217,106,74,.14);color:#f6ddd3;}
+  .opt.wrong .key{background:var(--rust);color:#2b0f06;}
+  .opt.dim{opacity:.45;}
+
+  /* explanation */
+  .explain{margin-top:16px;border-radius:14px;padding:16px 16px 14px;border:1px solid;visibility:hidden;opacity:0;transition:opacity .22s ease;min-height:0;max-height:0;overflow:hidden;margin-top:0;padding:0;border-width:0;}
+  .explain.ok{background:rgba(92,194,141,.08);border-color:rgba(92,194,141,.35);visibility:visible;opacity:1;max-height:600px;min-height:0;padding:16px 16px 14px;margin-top:16px;border-width:1px;}
+  .explain.no{background:rgba(217,106,74,.08);border-color:rgba(217,106,74,.35);visibility:visible;opacity:1;max-height:600px;min-height:0;padding:16px 16px 14px;margin-top:16px;border-width:1px;}
+  .explain .verdict{font-family:"Noto Serif KR",serif;font-weight:900;font-size:16px;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+  .explain.ok .verdict{color:var(--green);}
+  .explain.no .verdict{color:var(--rust);}
+  .explain .ctx{font-size:14.5px;line-height:1.75;color:var(--body);}
+  .explain .ctx b{color:var(--ink);}
+  .next-row{display:flex;justify-content:flex-end;margin-top:16px;visibility:hidden;opacity:0;transition:opacity .18s ease;}
+  .requeue{font-size:12.5px;color:var(--rust);margin-right:auto;align-self:center;}
+
+  /* ---------- RESULT ---------- */
+  .result{text-align:center;}
+  .badge{
+    width:120px;height:120px;border-radius:50%;margin:6px auto 14px;display:flex;align-items:center;justify-content:center;
+    font-size:54px;background:radial-gradient(circle at 35% 30%, #f3cd72, var(--gold-deep));
+    box-shadow:0 0 0 8px rgba(227,179,78,.12), 0 16px 40px rgba(227,179,78,.35);
+  }
+  .rank{font-family:"Noto Serif KR",serif;font-weight:900;font-size:30px;color:var(--ink);}
+  .rank-sub{color:var(--gold);font-weight:700;margin-top:4px;font-size:14px;letter-spacing:.05em;}
+  .scoreboard{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0 8px;}
+  .sb{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:15px;padding:16px;}
+  .sb .label{font-size:11.5px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;}
+  .sb .num{font-family:"Noto Serif KR",serif;font-weight:900;font-size:30px;color:var(--ink);margin-top:5px;}
+  .sb .num.gold{color:var(--gold);}
+  .sb .num.green{color:var(--green);}
+  .best-note{font-size:13px;color:var(--muted);margin-top:10px;min-height:18px;}
+  .best-note b{color:var(--gold);}
+  .res-btns{display:flex;gap:12px;justify-content:center;margin-top:22px;flex-wrap:wrap;}
+
+  /* ---------- REPORT ---------- */
+  .rep-hero{text-align:center;padding:30px 20px 8px;}
+  .rep-hero h2{font-size:clamp(26px,6vw,36px);font-weight:900;margin:6px 0;}
+  .rep-hero p{color:var(--body);font-size:14.5px;line-height:1.7;max-width:480px;margin:8px auto 0;}
+  .rep-hero p b,.deepen b{color:var(--gold);}
+  .rep-h3{font-family:"Noto Serif KR",serif;color:var(--ink);font-size:20px;margin:34px 4px 14px;font-weight:900;
+    border-left:4px solid var(--gold);padding-left:12px;}
+  .rep-h3 span{font-size:13px;color:var(--rust);font-weight:700;margin-left:6px;}
+  .rep-h3 span.hint{color:var(--muted);font-weight:400;}
+
+  
+  .toc{display:flex;flex-direction:column;gap:8px;}
+  .toc-item{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:13px;overflow:hidden;}
+  .toc-head{width:100%;text-align:left;cursor:pointer;background:none;border:none;color:var(--ink);
+    font-family:"Noto Sans KR";padding:14px 16px;display:flex;align-items:center;gap:10px;font-size:15px;transition:background .15s;}
+  .toc-head:hover{background:rgba(255,255,255,.04);}
+  .toc-head .nn{font-size:11.5px;font-weight:700;color:var(--gold);background:rgba(227,179,78,.14);
+    padding:4px 9px;border-radius:999px;flex:none;}
+  .toc-head .tt{font-family:"Noto Serif KR",serif;font-weight:700;}
+  .toc-head .chev{margin-left:auto;color:var(--muted);transition:transform .25s;}
+  .toc-item.open .toc-head .chev{transform:rotate(180deg);}
+  .toc-panel{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+  .toc-panel .inner{margin:0 16px 15px;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);
+    color:var(--body);font-size:13.5px;line-height:1.75;}
+  .toc-panel .beat{display:flex;gap:10px;align-items:flex-start;padding:9px 0;
+    border-bottom:1px solid rgba(255,255,255,.05);}
+  .toc-panel .beat:last-child{border-bottom:none;}
+  .toc-panel .beat .be{flex:none;font-size:18px;line-height:1.5;width:24px;text-align:center;}
+  .toc-panel .beat .bx{font-size:14px;line-height:1.65;color:var(--body);}
+
+  
+  .cases{display:grid;grid-template-columns:1fr;gap:12px;}
+  .case{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:15px;padding:16px;}
+  .case .ct{font-family:"Noto Serif KR",serif;color:var(--ink);font-weight:700;font-size:15.5px;
+    display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+  .case .ct .ci{font-size:20px;}
+  .case .cd{color:var(--body);font-size:13.5px;line-height:1.65;margin-bottom:11px;}
+  .case .cw{font-size:12.5px;color:var(--gold);background:rgba(227,179,78,.08);
+    border:1px solid rgba(227,179,78,.22);border-radius:11px;padding:10px 12px;line-height:1.6;}
+  .case .cw b{color:var(--ink);font-weight:700;}
+
+  
+  .qs{display:flex;flex-direction:column;gap:12px;}
+  .qcard{background:rgba(143,176,204,.07);border:1px solid rgba(143,176,204,.28);border-radius:15px;padding:16px;}
+  .qcard .qq{font-family:"Noto Serif KR",serif;color:var(--ink);font-weight:700;font-size:15.5px;
+    line-height:1.5;margin-bottom:8px;display:flex;gap:9px;}
+  .qcard .qq .qnum{color:var(--steelblue);flex:none;}
+  .qcard .qh{color:var(--muted);font-size:13px;line-height:1.65;}
+
+  .chain{display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:18px;}
+  .chain .step{width:100%;max-width:560px;border-radius:15px;padding:15px 18px;text-align:center;border:1px solid;position:relative;}
+  .chain .cn{display:inline-block;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+    padding:3px 9px;border-radius:999px;margin-bottom:7px;}
+  .chain b{display:block;font-family:"Noto Serif KR",serif;font-size:17px;color:var(--ink);line-height:1.4;}
+  .chain small{display:block;color:var(--muted);font-size:12.5px;margin-top:5px;}
+  .chain .arrow{color:var(--gold);font-size:20px;line-height:1;font-weight:700;opacity:.8;}
+  .s0{background:rgba(143,176,204,.10);border-color:rgba(143,176,204,.4);}
+  .s0 .cn{background:rgba(143,176,204,.2);color:var(--steelblue);}
+  .s1{background:rgba(92,194,141,.09);border-color:rgba(92,194,141,.35);}
+  .s1 .cn{background:rgba(92,194,141,.18);color:var(--green);}
+  .s2{background:rgba(227,179,78,.08);border-color:rgba(227,179,78,.32);}
+  .s2 .cn{background:rgba(227,179,78,.18);color:var(--gold);}
+  .s3{background:rgba(217,106,74,.10);border-color:rgba(217,106,74,.4);}
+  .s3 .cn{background:rgba(217,106,74,.2);color:var(--rust);}
+  .s4{background:linear-gradient(180deg,rgba(227,179,78,.16),rgba(217,106,74,.12));border-color:rgba(227,179,78,.5);}
+  .s4 .cn{background:var(--gold);color:#23160a;}
+
+  .concepts{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .concept{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:15px;padding:16px;}
+  .concept .ic{font-size:24px;}
+  .concept h4{font-family:"Noto Serif KR",serif;color:var(--ink);font-size:15.5px;margin:8px 0 6px;font-weight:700;}
+  .concept p{color:var(--body);font-size:13px;line-height:1.6;margin:0 0 10px;}
+  .src{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--gold);text-decoration:none;
+    border:1px solid rgba(227,179,78,.35);padding:5px 10px;border-radius:999px;transition:.15s;}
+  .src:hover{background:rgba(227,179,78,.12);}
+  .src::before{content:"🔗";font-size:11px;}
+
+  .weak{display:flex;flex-direction:column;gap:12px;}
+  .weak-item{background:rgba(217,106,74,.07);border:1px solid rgba(217,106,74,.3);border-radius:15px;padding:16px;}
+  .weak-item .wq{font-family:"Noto Serif KR",serif;color:var(--ink);font-weight:700;font-size:15px;line-height:1.5;margin-bottom:8px;}
+  .weak-item .wans{font-size:13.5px;color:var(--green);font-weight:700;margin-bottom:8px;}
+  .weak-item .wans b{color:#dff3e8;font-weight:700;}
+  .weak-item .wnote{font-size:13.5px;color:var(--body);line-height:1.65;margin-bottom:6px;}
+  .weak-item .wnote b{color:var(--ink);}
+  .weak-item .wctx{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:10px;}
+  .perfect{text-align:center;padding:22px;background:rgba(92,194,141,.08);border:1px solid rgba(92,194,141,.35);
+    border-radius:15px;color:var(--green);font-weight:700;}
+  .perfect span{display:block;color:var(--body);font-weight:400;font-size:13px;margin-top:6px;}
+
+  .deepen{margin:26px 0 4px;text-align:center;font-size:13.5px;color:var(--body);line-height:1.7;
+    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;}
+  .deepen a{color:var(--gold);font-weight:700;text-decoration:underline;}
+
+  /* footer */
+  .footer{text-align:center;margin-top:30px;font-size:12px;color:var(--muted);line-height:1.7;}
+  .footer b{color:var(--gold);font-weight:700;}
+  .footer .factory{font-family:"Noto Serif KR",serif;color:var(--ink);font-weight:700;letter-spacing:.01em;}
+  .footer .affil{color:var(--gold);font-size:11.5px;margin-top:2px;}
+  .footer .tagline{margin-top:6px;color:var(--muted);}
+
+  .hidden{display:none !important;}
+
+  @keyframes pop{0%{transform:scale(.7);opacity:0;}60%{transform:scale(1.12);}100%{transform:scale(1);opacity:1;}}
+  @keyframes rise{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  .card,.hero,.result{animation:rise .4s ease;}
+
+  @media (max-width:560px){
+    .pillars span{width:52px;height:52px;line-height:52px;font-size:25px;}
+    .question{font-size:18px;}
+    .scoreboard{grid-template-columns:1fr 1fr;}
+    .concepts{grid-template-columns:1fr;}
+    .ms{font-size:9px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+
+  
+  @media print {
+    @page { margin: 14mm; }
+    :root{
+      --bg:#fff; --bg2:#fff; --panel:#fff; --panel2:#fff; --edge:#cfcfcf;
+      --ink:#15110f; --body:#2c2c2c; --muted:#666;
+      --gold:#b23a64; --gold-deep:#b23a64;
+      --green:#1f7a4d; --rust:#c0392b; --steelblue:#6c4f9e;
+    }
+    body{ background:#fff !important; color:#222 !important; }
+    .wrap{ max-width:100% !important; padding:0 !important; }
+    #home, #quiz, #result, .res-btns, .hud, .combo, .badge { display:none !important; }
+    #report{ display:block !important; }
+    .rep-hero, .card{ box-shadow:none !important; }
+    .concept,.case,.qcard,.toc-item,.weak-item,.ch.step,.deepen{
+      background:#fff !important; box-shadow:none !important; border:1px solid #ddd !important;
+      break-inside:avoid; page-break-inside:avoid;
+    }
+    .toc-panel{ max-height:none !important; overflow:visible !important; }
+    .toc-item .chev{ display:none !important; }
+    .rep-h3{ break-after:avoid; page-break-after:avoid; }
+    .chain .arrow{ color:#999 !important; }
+    .src, a{ color:#0a58ca !important; border-color:#9bb !important; }
+    .footer{ display:block !important; color:#555 !important; margin-top:14px; }
+  }
+
+  
+  body.pdf-export #report{
+    --bg:#fff; --bg2:#fff; --panel:#fff; --panel2:#fff; --edge:#cfcfcf;
+    --ink:#15110f; --body:#2c2c2c; --muted:#666;
+    --gold:#b23a64; --gold-deep:#b23a64; --green:#1f7a4d; --rust:#c0392b; --steelblue:#6c4f9e;
+    background:#fff; color:#2c2c2c; padding:16px; border-radius:0;
+  }
+  body.pdf-export #report .res-btns,
+  body.pdf-export #report .toc-head .chev{ display:none !important; }
+  body.pdf-export #report .toc-panel{ max-height:none !important; overflow:visible !important; }
+  body.pdf-export #report .concept,
+  body.pdf-export #report .case,
+  body.pdf-export #report .qcard,
+  body.pdf-export #report .toc-item,
+  body.pdf-export #report .weak-item,
+  body.pdf-export #report .ch.step,
+  body.pdf-export #report .deepen{
+    box-shadow:none !important; border:1px solid #ddd !important;
+    break-inside:avoid; page-break-inside:avoid;
+  }
+  body.pdf-export #report .src{ border-color:#bcd !important; }
+
+  
+  .edition{ display:inline-block; margin:0 auto 14px; padding:5px 12px; border-radius:999px;
+    font-size:12px; letter-spacing:.4px; color:var(--gold); position:relative;
+    background:rgba(227,179,78,.10); border:1px solid rgba(227,179,78,.35); }
+  .lock-overlay{ margin:18px auto 0; max-width:760px; padding:26px 22px; border-radius:20px; text-align:center;
+    background:linear-gradient(160deg, rgba(27,49,72,.96), rgba(15,32,49,.98));
+    border:1px solid rgba(227,179,78,.35); box-shadow:0 18px 50px rgba(0,0,0,.4); }
+  .lock-overlay .lk-ic{ font-size:40px; }
+  .lock-overlay h3{ margin:10px 0 6px; font-size:20px; color:var(--ink); }
+  .lock-overlay p{ margin:0 0 16px; color:var(--body); font-size:14.5px; line-height:1.7; }
+  .lock-overlay .lk-btns{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+  .cta{ display:inline-block; padding:13px 22px; border-radius:14px; font-weight:700;
+    font-size:15px; text-decoration:none; cursor:pointer; border:none; font-family:"Noto Sans KR";
+    background:linear-gradient(135deg,#e3b34e,#f0c560); color:#231a08;
+    box-shadow:0 8px 22px rgba(227,179,78,.35); }
+  .cta.ghost{ background:transparent; color:var(--gold); border:1px solid rgba(227,179,78,.5); box-shadow:none; }
+  .blurred{ filter:blur(6px); pointer-events:none; user-select:none; opacity:.55; }
+  .rep-lock{ margin:6px 0 22px; padding:24px 20px; border-radius:20px; text-align:center;
+    background:linear-gradient(160deg, rgba(27,49,72,.96), rgba(15,32,49,.98));
+    border:1px solid rgba(227,179,78,.4); box-shadow:0 18px 50px rgba(0,0,0,.4); }
+  .rep-lock .lk-ic{ font-size:36px; }
+  .rep-lock h3{ margin:8px 0 6px; font-size:19px; color:var(--ink); }
+  .rep-lock p{ margin:0 0 16px; color:var(--body); font-size:14px; line-height:1.7; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ HOME ============ -->
+  <section id="home">
+    <div class="hero">
+      <div class="edition" id="editionTag"></div>
+      <div class="eyebrow">ヘルマン・ヘッセ · 1919 · 青年運動のバイブル</div>
+      <div class="pillars"><span class="p1">鳥</span><span class="p2">卵</span><span class="p3">飛ぶ</span></div>
+      <h1><small>本当の自己を求めて飛翔する、魂の旅</small>デミアン マスタークイズ</h1>
+      <div class="quote">
+        「鳥は卵の中から抜け出ようと闘う。卵は世界だ。<br>生まれ出ようとする者は、一つの世界を破壊しなければならない。」<br>
+        <b>— マックス・デミアンの気づき</b>
+      </div>
+      <p>シンクレアの個性化の旅の中で、 <b>核心の問い・象徴・哲学を30問のクイズ</b>で完全に自分のものにします。
+        明るい世界から暗い世界へ、そして統合へ。 <b>間違えた問題は、正解できるまでマスターしましょう。</b></p>
+      <div class="meta-row">
+        <span class="chip">全 <b>30問</b></span>
+        <span class="chip">やさしい → むずかしい</span>
+        <span class="chip"><b>リアルタイム</b> 成長ゲージ</span>
+        <span class="chip">問題ごとに <b>深い解説</b></span>
+      </div>
+      <div class="start-row">
+        <button class="btn btn-primary" onclick="startQuiz()">殻を破って始める →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section id="quiz" class="hidden">
+    <div class="hud">
+      <div class="hud-top">
+        <div class="stat"><span class="label">スコア</span><span class="val gold" id="score">0</span></div>
+        <div class="stat" style="text-align:center;align-items:center;"><span class="label">連続正解</span><span class="val" id="streak">0</span></div>
+        <div class="stat" style="text-align:right;align-items:flex-end;"><span class="label">マスター</span><span class="val" id="mastered">0 / 30</span></div>
+      </div>
+      <div class="combo" id="combo"></div>
+      <div class="axis">
+        <div class="axis-label"><span>西 ←</span><span>魂の旅 · <b id="pctTxt">0%</b></span><span>→ 東</span></div>
+        <div class="track"><div class="fill" id="fill"></div></div>
+        <div class="milestones" id="milestones"></div>
+      </div>
+    </div>
+
+    <div class="card" id="qcard">
+      <div class="qhead">
+        <span class="diff" id="diff">やさしい</span>
+        <span class="qno" id="qno"></span>
+        <span class="qtag" id="qtag"></span>
+      </div>
+      <div class="question" id="question"></div>
+      <div class="opts" id="opts"></div>
+
+      <div class="explain" id="explain">
+        <div class="verdict" id="verdict"></div>
+        <div class="ctx" id="ctx"></div>
+      </div>
+
+      <div class="next-row" id="nextRow">
+        <span class="requeue" id="requeue"></span>
+        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">次へ →</button>
+      </div>
+    </div>
+  </section>
+
+    <div class="lock-overlay hidden" id="lockOverlay">
+      <div class="lk-ic">🔒</div>
+      <h3>無料プレビューはここまでです</h3>
+      <p id="lockMsg"></p>
+      <div class="lk-btns">
+        <a class="cta" id="lockSubBtn" href="#" target="_blank" rel="noopener">🔑 購読してすべて開く</a>
+        <button class="cta ghost" onclick="openReport()">まとめレポートをプレビュー →</button>
+      </div>
+    </div>
+
+  <!-- ============ RESULT ============ -->
+  <section id="result" class="hidden">
+    <div class="result">
+      <div class="badge">🏛️</div>
+      <div class="rank" id="rankTitle">アプラクサスの眼</div>
+      <div class="rank-sub" id="rankSub"></div>
+      <div class="scoreboard">
+        <div class="sb"><div class="label">最終スコア</div><div class="num gold" id="rScore">0</div></div>
+        <div class="sb"><div class="label">一発正解率</div><div class="num green" id="rAcc">0%</div></div>
+        <div class="sb"><div class="label">最高連続正解</div><div class="num" id="rStreak">0</div></div>
+        <div class="sb"><div class="label">総挑戦回数</div><div class="num" id="rTries">0</div></div>
+      </div>
+      <div class="best-note" id="bestNote"></div>
+      <div class="res-btns">
+        <button class="btn btn-primary" onclick="openReport()">📖 まとめレポート全文を見る</button>
+        <button class="btn btn-ghost" onclick="startQuiz()">もう一度挑戦 ↻</button>
+        <button class="btn btn-ghost" onclick="goHome()">最初に戻る</button>
+      </div>
+    </div>
+  </section>
+
+  
+  <section id="report" class="hidden">
+    <div class="rep-hero">
+      <div class="eyebrow">読了レポート · INFOGRAPHIC</div>
+      <h2>デミアンをひと目で</h2>
+      <p>本全体を <b>「因果の鎖」</b> ひとつにつなげば、もう忘れません。すべての出発点は <b>自分を取り巻く二つの世界の分裂</b>です。</p>
+    </div>
+
+    
+    <div class="chain">
+      <div class="ch step s0"><span class="cn">究極の原因</span><b>🥚 二つの世界の分裂</b><small>明るい世界 vs 暗い世界</small></div>
+      <div class="arrow">↓</div>
+      <div class="ch step s1"><span class="cn">ステップ1</span><b>😰 悪の世界への転落</b><small>クローマーのいじめ · 罪悪感</small></div>
+      <div class="arrow">↓</div>
+      <div class="ch step s2"><span class="cn">ステップ2</span><b>✨ デミアンとの出会い · 自我の目覚め</b><small>カインの読み直し · 自分で考える</small></div>
+      <div class="arrow">↓</div>
+      <div class="ch step s3">
+        <span class="cn">近接の原因</span><b>👁️ アプラクサス · 内なる声</b>
+        <small>善と悪を超えた統合の神</small>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="ch step s4"><span class="cn">結果</span><b>🦋 本当の自己の完成（個性化）</b><small>「自分の中から湧き出ようとするものを生きる」</small></div>
+    </div>
+
+    <h3 class="rep-h3">核心となる概念</h3>
+    <div class="concepts" id="concepts"></div>
+
+    <h3 class="rep-h3">目次をひと目で <span class="hint">タップで要約が開きます</span></h3>
+    <div class="toc" id="toc"></div>
+
+    <h3 class="rep-h3">本の中の、考えてみたい事例3つ</h3>
+    <div class="cases" id="cases"></div>
+
+    <h3 class="rep-h3">この本が私たちに投げかける問い3つ</h3>
+    <div class="qs" id="asks"></div>
+
+    
+    <div id="weakWrap">
+      <h3 class="rep-h3">間違えたところを集中復習 <span id="weakCount"></span></h3>
+      <div class="weak" id="weakList"></div>
+    </div>
+
+    <div class="deepen">
+      <b>📺 もっと深く知りたいなら</b>
+      <a id="ebsLink" href="#" target="_blank" rel="noopener"></a> では、ヘルマン・ヘッセの人生と文学の世界に出会えます。
+    </div>
+
+    <div class="res-btns">
+      <button class="btn btn-primary" id="pdfBtn" onclick="downloadReportPDF()">📄 PDFで保存</button>
+      <button class="btn btn-ghost" onclick="startQuiz()">もう一度挑戦 ↻</button>
+      <button class="btn btn-ghost" onclick="show('result')">結果へ</button>
+      <button class="btn btn-ghost" onclick="goHome()">最初に戻る</button>
+    </div>
+  </section>
+
+  <div class="footer">
+    <div class="factory">「意味と面白さの工場」ミミファクトリー</div>
+    <div class="affil">（株式会社ヨンギョル ファミリーカンパニー）</div>
+    <div class="tagline">本の核心をドーパミンで身につける反復マスタークイズ</div>
+  </div>
+
+</div>
+
+<script>
+const APP_CONFIG = {
+  mode: "teaser",            // "free" | "teaser" | "premium"
+  freeLimit: 10,             // teaser: 無料で解ける問題数
+  subscribeUrl: "https://blog.naver.com/4u_doumi",
+  catalogUrl: "https://mimifactory.vibekr.com/ja/quiz.html",
+  utm: "utm_source=quizbook&utm_medium=app&utm_campaign=demian",
+  edition: "2026-07-09 · デミアン",
+  accessCodeHash: ""
+};
+function _sub(){ const u=APP_CONFIG.subscribeUrl; if(!u) return '#';
+  return u + (u.includes('?')?'&':'?') + APP_CONFIG.utm; }
+function _cat(){ const u=APP_CONFIG.catalogUrl; if(!u) return '#';
+  return u + (u.includes('?')?'&':'?') + APP_CONFIG.utm; }
+
+const QUESTIONS = [{id:1,level:1,tag:"人物",q:"『デミアン』の主人公の名前は？",options:[{t:"エミール・シンクレア",ok:true},{t:"マックス・デミアン"},{t:"フランツ・クローマー"},{t:"カール・ピストーリウス"}],
+   ctx:"<b>エミール・シンクレア</b>は、自分の成長の過程を振り返る形で物語を始めます。最初はヘルマン・ヘッセの本名ではなく、シンクレアという筆名で出版されました。"},{id:2,level:1,tag:"人物",q:"シンクレアを心理的に目覚めさせ、導く神秘的な友人の名前は？",options:[{t:"マックス・デミアン",ok:true},{t:"ジェローム・ピストーリウス"},{t:"ベアトリーチェ"},{t:"エヴァ夫人"}],
+   ctx:"<b>マックス・デミアン</b>はシンクレアの精神的なメンターであり師です。彼はカインとアベルの物語を新しく読み解き、シンクレアの目を開かせます。"},{id:3,level:1,tag:"出来事",q:"シンクレアを初めて悪の世界へ引き込む不良の名前は？",options:[{t:"フランツ・クローマー",ok:true},{t:"ジェローム・ピストーリウス"},{t:"マックス・デミアン"},{t:"ヘンケル"}],
+   ctx:"<b>フランツ・クローマー</b>は羊毛店の主人の息子で、幼いシンクレアをいじめ、善と悪の境界線を曖昧にします。しかしデミアンの登場とともに、突然いなくなります。"},{id:4,level:1,tag:"概念",q:"デミアンが新しく読み解く聖書の人物は、次のうちどれ？",options:[{t:"カイン",ok:true},{t:"ソロモン"},{t:"ヨブ"},{t:"ダビデ"}],
+   ctx:"<b>カイン</b>は普通、兄弟のアベルを殺した悪人とされますが、デミアンはカインを強い内なる力を持つ人物として読み直します。誰かが彼を妬んだということは、彼が平凡ではなかった証だ、と。"},{id:5,level:1,tag:"象徴",q:"本の中で繰り返し現れる「鳥は卵から抜け出ようと闘う」という一節が意味することは？",options:[{t:"既存の枠を打ち破り、本当の自分へと成長していくこと",ok:true},{t:"安全な環境にとどまるべきだという助言"},{t:"他人への抵抗は無条件に正しいという意味"},{t:"子ども時代の幸せを取り戻すべきというメッセージ"}],
+   ctx:"鳥が卵を破って出るとは、<b>自分の世界を乗り越え、新しい存在にならなければならない</b>という意味です。これは個人の成長と個性化の過程を象徴しています。"},{id:6,level:1,tag:"背景",q:"デミアンの背景となる時代状況は？",options:[{t:"第一次世界大戦の前後の時期",ok:true},{t:"第二次世界大戦のさなか"},{t:"中世の宗教紛争の時期"},{t:"産業革命の初期"}],
+   ctx:"ヘルマン・ヘッセが42歳のときに書いたこの小説は、<b>第一次世界大戦で疲弊したドイツの若者たち</b>に精神的な慰めと方向を示しました。"},{id:7,level:1,tag:"人物",q:"音楽家でありながら神秘主義に傾倒し、シンクレアに霊的な影響を与える人物は？",options:[{t:"ピストーリウス",ok:true},{t:"クナウアー"},{t:"ヘンケル"},{t:"シンクレアのラテン語教師"}],
+   ctx:"<b>ピストーリウス</b>は教会のオルガン奏者で、はじめは神学を学びますが、神秘主義的な宗教思想に傾き、新しい道を歩みます。シンクレアは彼を通して古代宗教と霊知思想を知ります。"},{id:8,level:1,tag:"人物",q:"シンクレアが理想とし、道徳的な生を取り戻そうとした女性ベアトリーチェの特徴は？",options:[{t:"実在せず、シンクレアが心に描いた理想の存在",ok:true},{t:"シンクレアの現実の親しい友人"},{t:"デミアンの年下の妹"},{t:"ピストーリウスの熱心な弟子"}],
+   ctx:"ベアトリーチェは<b>シンクレアが心の中に描いた理想の女性</b>です。彼女への愛と敬意を通して、彼は崩れた自分の内面を立て直そうとします。"},{id:9,level:1,tag:"概念",q:"シンクレアの幼年時代を支配した二つの世界とは？",options:[{t:"明るい世界と暗い世界",ok:true},{t:"物質的に豊かな世界と貧しい世界"},{t:"都会と田舎"},{t:"キリスト教とイスラム教"}],
+   ctx:"両親のふところは<b>明るく道徳的な世界</b>、その外は<b>暗く禁じられた悪の世界</b>として区分されます。成長するにつれ、シンクレアはこの二分法的な区分を乗り越えねばなりません。"},{id:10,level:1,tag:"人物",q:"神学を学ぶ中で自殺の危機に陥り、シンクレアに助けられた同級生は？",options:[{t:"クナウアー",ok:true},{t:"ヘンケル"},{t:"デミアンのいとこマックス"},{t:"ヴェルナー"}],
+   ctx:"<b>クナウアー</b>は、シンクレアがかつてデミアンから受けた助けを、今度は他の人に与えられる大人になったことを示します。まるでデミアンがシンクレアの師であったように。"}];
+
+
+const SOURCES = {wiki:{label:"ウィキペディア: デミアン",url:"https://ko.wikipedia.org/wiki/%EB%8D%B0%EB%AF%B8%EC%95%88"},ebs:{label:"EBSドキュメンタリー: ヘルマン・ヘッセ",url:"https://www.ebs.co.kr/tv/show?prodId=348"},brunch1:{label:"Brunch: デミアンの本当の意味",url:"https://brunch.co.kr/@jooshine/181"},brunch2:{label:"Brunch: ヘルマン・ヘッセと精神分析",url:"https://brunch.co.kr/@bookrenam/67"}};
+
+
+const EXTRA = {1:{src:"wiki",note:"ヘッセがこの小説を最初にシンクレアという筆名で発表したのは、自伝的な告白に距離を置くためでした。"},2:{src:"wiki",note:"デミアンは作中できわめて神秘的な人物としてのみ現れ、その正体は曖昧で象徴的です。"},3:{src:"wiki",note:"クローマーとの関係は、シンクレアの内なる弱さを外に映し出したものと見ることができます。"},4:{src:"wiki",note:"カインの読み直しはキリスト教の正統な解釈と大きく食い違い、それがデミアンの革新的な思考を示しています。"},5:{src:"wiki",note:"この一節は霊知思想（グノーシス）の象徴体系ともつながり、鳥の図像は魂の上昇を表します。"},6:{src:"wiki",note:"ヘッセが第一次世界大戦を批判したとき、この小説は彼の勇気ある声であり、のちの名誉回復につながります。"},7:{src:"wiki",note:"ピストーリウスは神学と神秘主義の境に立つ人物で、ドグマを拒む魂の表れです。"},8:{src:"wiki",note:"ベアトリーチェは、ダンテの『神曲』に登場する理想の女性から着想を得た名前です。"},9:{src:"wiki",note:"この二元論的な区分は、個人の発達だけでなく、文明史全体のパターンでもあります。"},10:{src:"wiki",note:"クナウアーは、シンクレアが成長したことを示す大切な鏡の役割を果たします。"}};
+
+
+const MILESTONES = [{at:0,label:"鳥、殻を破る",msg:"はじまります！"},{at:7,label:"明るい世界",msg:"幼いシンクレアの道徳的な生"},{at:15,label:"暗い世界",msg:"悪と欲望の経験"},{at:22,label:"ベアトリーチェの理想",msg:"道徳的な生への回帰の試み"},{at:30,label:"アプラクサスへの飛翔",msg:"完成！本当の自己を見つけました。"}];
+const DIFF_LABEL = {1:["やさしい","l1"],2:["ふつう","l2"],3:["むずかしい","l3"]};
+const BASE_PTS = {1:10, 2:20, 3:30};
+const TOTAL_Q = (APP_CONFIG.mode==='teaser') ? 30 : QUESTIONS.length;
+
+
+let pending = [];          // まだ ‘初回正解’していない問題のキュー（ (前から取り出す)
+let masteredIds = new Set();
+let attempts = {};         // id -> 試行回数
+let score = 0, streak = 0, bestStreak = 0;
+let totalTries = 0, firstTryCorrect = 0;
+let firstWrongIds = new Set();   // 初回で間違えた問題 = 弱点(集中復習の対象)
+let answered = false;
+let cur = null;
+let bestScore = 0;         // セッション内の最高スコア (再挑戦の比較用、 localStorage 未使用)
+let hasPlayed = false;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+
+function show(id){
+  ['home','quiz','result','report'].forEach(s=>document.getElementById(s).classList.toggle('hidden', s!==id));
+  window.scrollTo({top:0, behavior: reduceMotion ? 'auto':'smooth'});
+}
+function goHome(){ show('home'); }
+
+
+function startQuiz(){
+
+  const ordered = [...QUESTIONS].sort((a,b)=> a.level - b.level || a.id - b.id);
+  pending = ordered.map(q=>q.id);
+  masteredIds = new Set();
+  attempts = {};
+  score = 0; streak = 0; bestStreak = 0;
+  totalTries = 0; firstTryCorrect = 0;
+  firstWrongIds = new Set();
+  buildMilestones();
+  updateHUD();
+  show('quiz');
+  loadNext();
+}
+
+function buildMilestones(){
+  const box = document.getElementById('milestones');
+  box.innerHTML = MILESTONES.map(m=>`<div class="ms" data-at="${m.at}"><span class="dot"></span>${m.label}</div>`).join('');
+}
+
+
+function loadNext(){
+  if(_teaserLocked()){ showLock(); return; }
+  if(pending.length === 0){ finish(); return; }
+  const id = pending[0];
+  cur = QUESTIONS.find(q=>q.id===id);
+  answered = false;
+
+  const [dl, dc] = DIFF_LABEL[cur.level];
+  const diffEl = document.getElementById('diff');
+  diffEl.textContent = dl; diffEl.className = 'diff '+dc;
+  document.getElementById('qtag').textContent = '# '+cur.tag;
+  document.getElementById('qno').textContent =
+    'マスター '+masteredIds.size+' / '+TOTAL_Q + (attempts[id] ? ' · 復習' : '');
+  document.getElementById('question').textContent = cur.q;
+
+
+  const shuffled = shuffle([...cur.options]);
+  const keys = ['A','B','C','D','E'];
+  const opts = document.getElementById('opts');
+  opts.innerHTML = '';
+  shuffled.forEach((o,i)=>{
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.innerHTML = `<span class="key">${keys[i]}</span><span>${o.t}</span>`;
+    b.onclick = ()=>answer(b, o.ok);
+    opts.appendChild(b);
+  });
+
+
+  const ex2=document.getElementById('explain'); ex2.className='explain'; ex2.style.cssText='';
+  document.getElementById('nextRow').style.cssText='visibility:hidden;opacity:0';
+  document.getElementById('requeue').textContent='';
+}
+
+
+function answer(btn, isCorrect){
+  if(answered) return;
+  answered = true;
+  const id = cur.id;
+  attempts[id] = (attempts[id]||0) + 1;
+  totalTries++;
+  const firstTry = attempts[id] === 1;
+
+
+  const opts = document.getElementById('opts').querySelectorAll('.opt');
+  opts.forEach(o=>{
+    o.disabled = true;
+    const label = o.querySelector('span:last-child').textContent;
+    const opt = cur.options.find(x=>x.t===label);
+    if(opt && opt.ok) o.classList.add('correct');
+    else o.classList.add('dim');
+  });
+  if(!isCorrect) btn.classList.add('wrong');
+
+
+  const explain = document.getElementById('explain');
+  const verdict = document.getElementById('verdict');
+  const ctx = document.getElementById('ctx');
+  const comboEl = document.getElementById('combo');
+
+  if(isCorrect){
+    streak++;
+    if(streak > bestStreak) bestStreak = streak;
+    let gain = BASE_PTS[cur.level];
+    if(!firstTry) gain = Math.round(gain/2);          // 復習の正解は半分の点数
+    const bonus = (streak>=2) ? (streak-1)*3 : 0;     // コンボボーナス
+    gain += bonus;
+    score += gain;
+
+    if(firstTry) firstTryCorrect++;
+    masteredIds.add(id);          // ‘最初に戻る’でなくても、最終的に習得したものとしてカウント
+    pending.shift();              // キューから削除 (マスター)
+
+    verdict.textContent = firstTry ? '🎯 正解！' : '✅ これで覚えました！';
+    explain.className = 'explain ok';
+    if(bonus>0){
+      comboEl.textContent = `🔥 ${streak}連続正解！ +${bonus} ボーナス`;
+      comboEl.classList.remove('show'); void comboEl.offsetWidth; comboEl.classList.add('show');
+    } else comboEl.textContent = '';
+    if(!reduceMotion) burst(btn);
+  } else {
+    streak = 0;
+    comboEl.textContent = '';
+    if(firstTry) firstWrongIds.add(id);   // 弱点として記録
+
+    pending.shift();
+    pending.push(id);
+    verdict.textContent = '❌ もう一度！';
+    explain.className = 'explain no';
+    document.getElementById('requeue').textContent = '↻ この問題はあとでまた出ます';
+  }
+
+  ctx.innerHTML = cur.ctx;
+  /* explain visibility controlled by CSS class */
+  document.getElementById('nextRow').style.cssText='visibility:visible;opacity:1';
+  updateHUD();
+}
+
+function nextQuestion(){ loadNext(); }
+
+
+const CONCEPTS = [{ic:"🦋",h:"個性化（Individuation）",p:"さまざまな自分を認め、包み込みながら、本当の個としての自己をかたちづくる過程。",src:"wiki"},{ic:"☯️",h:"二元論の克服",p:"善と悪、明と暗の二分法を超え、両方を抱きしめる統合された意識へ進むこと。",src:"wiki"},{ic:"✨",h:"しるし（Mal）",p:"魂の次元に達した人が感じる、神秘的な認識のしるしであり、つながりの合図。",src:"brunch2"},{ic:"👁️",h:"アプラクサス",p:"善と悪、神と悪魔をともに抱く絶対的な神性。あらゆる矛盾を超えるもの。",src:"wiki"},{ic:"🗣️",h:"魂の声",p:"社会の期待や道徳の規範を超えて、自分の内から湧き上がる本当の欲求と使命。",src:"brunch1"},{ic:"🙏",h:"内なるメンター",p:"外の師は結局、自分の魂の中にいる。本当の成長は内なる知恵を探すことから始まる。",src:"wiki"},{ic:"🐦",h:"鳥と卵",p:"古い殻を破り、新しい次元へ飛び立とうとする魂の闘いと成長。",src:"wiki"},{ic:"⚠️",h:"集団の危うさ",p:"個人の独立性を脅かす集団の狂気と、没個性的な服従の危険を警告する。",src:"brunch2"}];
+
+function srcLink(key){
+  const s = SOURCES[key];
+  return `<a class="src" href="${s.url}" target="_blank" rel="noopener">${s.label}</a>`;
+}
+
+
+const TOC = [{n:"第1章",t:"明るい世界",beats:[{e:"👶",x:"幼いシンクレア、両親のもとで道徳的に明るい世界を生きる"},{e:"🚶",x:"フランツ・クローマーとの出会いで、初めて悪の世界に引き込まれる"},{e:"😰",x:"クローマーのいじめに苦しみ、罪悪感と羞恥に包まれる"},{e:"🆘",x:"魂の切実な祈りで救いを叫ぶ"}]},{n:"第2章",t:"救い手の出現",beats:[{e:"✨",x:"神秘的な転校生マックス・デミアンが現れる"},{e:"💬",x:"デミアンがカインとアベルの物語を新しく読み解く"},{e:"🧠",x:"シンクレアの自我が目覚め、批判的に考えはじめる"},{e:"🔓",x:"クローマーのいじめから、神秘的に解放される"}]},{n:"第3章",t:"暗い世界",beats:[{e:"🌙",x:"神学生ピストーリウスと出会い、神秘主義と霊知思想に触れる"},{e:"🍷",x:"酒・音楽・快楽の世界に溺れ、魂が荒れていく"},{e:"💔",x:"理想の存在ベアトリーチェを思い描き、道徳的な生を求める"},{e:"🎨",x:"殻を破って出る鳥の絵を描き、デミアンへ送る"}]},{n:"第4章",t:"魂の出会い",beats:[{e:"🌟",x:"神秘的な魂の出会いの中で、デミアンとエヴァ夫人が再び現れる"},{e:"❤️",x:"エヴァ夫人から、深い慰めと省察を受け取る"},{e:"🪞",x:"自分の矛盾と影に向き合い、統合への道を歩みはじめる"},{e:"🚀",x:"本当の自己へ、アプラクサスへと魂が飛び立つ"}]},{n:"第5章",t:"完成と成長",beats:[{e:"⚡",x:"戦争の時代、しるしを持つ多くの若者たちの目覚めを目撃する"},{e:"🔄",x:"デミアンの最後の教え——師は自分の魂の中にいる"},{e:"🌍",x:"個性化の道は険しく、同時に美しいと気づく"},{e:"🌅",x:"新しい存在として生まれ変わり、自分を生きると決める"}]}];
+
+/* 本の中の、考えてみたい事例3つ */
+const CASES = [{ic:"🥊",t:"クローマーとの対峙",d:"幼いシンクレアがクローマーのいじめから抜け出す過程は、私たちがどうやって自分の内なる力を取り戻せるかを示してくれます。",why:"外の悪は、自分の内なる弱さを映す鏡かもしれない——そう気づかせてくれるから"},{ic:"🕊️",t:"ベアトリーチェの理想とその限界",d:"道徳的な理想を求めたシンクレアが、それでも統合の道を歩まねばならなかった理由を考えてみましょう。",why:"片方（善）だけを求めても本当の成長はできず、自分のすべての面を認めるべきだという普遍的な真理を含んでいます。"},{ic:"🚂",t:"戦争前、列車の中の若者たち",d:"しるしを持つ多くの若者を見てシンクレアが感じたつながりは、どんな意味を持つのでしょう。",why:"魂の声は時代や文化を超えて誰の中にもあり、その普遍性の中で自分はひとりではないと気づけるからです。"}];
+
+/* この本が私たちに投げかける問い3つ */
+const ASKS = [{q:"私の人生で、「クローマー」のように私を押さえつけているものは何でしょう？",h:"それが外からのものか、それとも自分自身の弱さの反映か、落ち着いて見つめてみてください。"},{q:"私が求める道徳や理想が、本当の自分を押さえつけてはいないでしょうか？",h:"社会が決めた「正しい姿」が、本当に自分の魂の望む方向と一致しているか確かめてみましょう。"},{q:"自分の中の「明るい面」と「暗い面」、どちらをより拒んでいて、二つをどう統合できるでしょう？",h:"完璧な人になろうとするより、自分のすべての姿を受け入れるほうが、大きな力をもたらしてくれます。"}];
+
+function toggleToc(i){
+  const item = document.querySelectorAll('.toc-item')[i];
+  const panel = item.querySelector('.toc-panel');
+  const opening = !item.classList.contains('open');
+  item.classList.toggle('open');
+  item.querySelector('.toc-head').setAttribute('aria-expanded', opening ? 'true':'false');
+  panel.style.maxHeight = opening ? (panel.scrollHeight + 8) + 'px' : '0px';
+}
+
+function openReport(){
+
+  document.getElementById('concepts').innerHTML = CONCEPTS.map(c=>`
+    <div class="concept">
+      <div class="ic">${c.ic}</div>
+      <h4>${c.h}</h4>
+      <p>${c.p}</p>
+      ${srcLink(c.src)}
+    </div>`).join('');
+
+
+  document.getElementById('toc').innerHTML = TOC.map((t,i)=>`
+    <div class="toc-item">
+      <button class="toc-head" onclick="toggleToc(${i})" aria-expanded="false">
+        <span class="nn">${t.n}</span><span class="tt">${t.t}</span>
+        <span class="chev">▾</span>
+      </button>
+      <div class="toc-panel"><div class="inner">${t.beats.map(b=>`<div class="beat"><span class="be">${b.e}</span><span class="bx">${b.x}</span></div>`).join('')}</div></div>
+    </div>`).join('');
+
+  // 本の中の、考えてみたい事例3つ
+  document.getElementById('cases').innerHTML = CASES.map(c=>`
+    <div class="case">
+      <div class="ct"><span class="ci">${c.ic}</span>${c.t}</div>
+      <div class="cd">${c.d}</div>
+      <div class="cw">💭 <b>なぜ考える価値があるか</b> — ${c.why}</div>
+    </div>`).join('');
+
+
+  document.getElementById('asks').innerHTML = ASKS.map((a,i)=>`
+    <div class="qcard">
+      <div class="qq"><span class="qnum">Q${i+1}.</span><span>${a.q}</span></div>
+      <div class="qh">${a.h}</div>
+    </div>`).join('');
+
+
+  const ids = [...firstWrongIds].sort((a,b)=>a-b);
+  const wrap = document.getElementById('weakWrap');
+  const cnt = document.getElementById('weakCount');
+  const list = document.getElementById('weakList');
+  if(ids.length === 0){
+    cnt.textContent = '';
+    list.innerHTML = `<div class="perfect">🌟 すべて初回で正解！<span>弱点がないので、復習する項目はありません。お見事です。</span></div>`;
+  } else {
+    cnt.textContent = `(${ids.length}個)`;
+    list.innerHTML = ids.map(id=>{
+      const q = QUESTIONS.find(x=>x.id===id);
+      const ans = q.options.find(o=>o.ok).t;
+      const ex = EXTRA[id];
+      return `<div class="weak-item">
+        <div class="wq">Q. ${q.q}</div>
+        <div class="wans">正解 → <b>${ans}</b></div>
+        <div class="wnote">💡 ${ex.note}</div>
+        <div class="wctx">${q.ctx}</div>
+        ${srcLink(ex.src)}
+      </div>`;
+    }).join('');
+  }
+
+
+  const ebs = SOURCES.ebs;
+  const a = document.getElementById('ebsLink');
+  a.href = ebs.url; a.textContent = ebs.label;
+
+  applyReportLock();
+  show('report');
+}
+
+
+function _teaserLocked(){
+  return APP_CONFIG.mode === 'teaser' && masteredIds.size >= APP_CONFIG.freeLimit;
+}
+function showLock(){
+  var qc = document.getElementById('qcard');
+  qc.style.filter = 'blur(5px)';
+  qc.style.pointerEvents = 'none';
+  document.getElementById('lockOverlay').classList.remove('hidden');
+  window.scrollTo({ top: document.getElementById('lockOverlay').offsetTop - 80,
+    behavior: reduceMotion ? 'auto' : 'smooth' });
+}
+function applyReportLock(){
+  if(APP_CONFIG.mode !== 'teaser') return;
+  document.querySelectorAll('#concepts .concept').forEach(function(el,i){
+    if(i >= 3) el.classList.add('blurred');
+  });
+  ['toc','cases','asks','weakWrap'].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.classList.add('blurred');
+  });
+  var deep = document.querySelector('#report .deepen'); if(deep) deep.classList.add('blurred');
+  if(!document.getElementById('reportLock')){
+    var lock = document.createElement('div');
+    lock.id = 'reportLock'; lock.className = 'rep-lock';
+    lock.innerHTML = '<div class="lk-ic">🔒</div>' +
+      '<h3>読了レポートの全文は購読者限定です</h3>' +
+      '<p>因果の鎖と主要な概念の一部は、先にご覧いただけます。<br>' +
+      '目次まとめ · 考えてみたい事例 · 投げかける問い · 弱点復習 · PDF保存は、購読するとすべて開きます。</p>' +
+      '<a class="cta" href="' + _sub() + '" target="_blank" rel="noopener">🔑 購読して読了レポートの全文を開く</a>';
+    var concepts = document.getElementById('concepts');
+    concepts.parentNode.insertBefore(lock, concepts.nextSibling);
+  }
+  var pdf = document.getElementById('pdfBtn'); if(pdf) pdf.style.display = 'none';
+}
+(function(){
+  var ed = document.getElementById('editionTag');
+  if(ed && APP_CONFIG.edition){ ed.textContent = '🗓 ' + APP_CONFIG.edition; }
+  else if(ed){ ed.style.display='none'; }
+  var sb = document.getElementById('lockSubBtn'); if(sb) sb.href = _sub();
+  var cn = document.getElementById('catBtn'); if(cn) cn.href = _cat();
+  if(APP_CONFIG.mode === 'teaser'){
+    var fl = APP_CONFIG.freeLimit;
+    var msg = document.getElementById('lockMsg');
+    if(msg){
+      var rest = TOTAL_Q - fl;
+      msg.innerHTML = '無料では<b>'+fl+'問</b>まで解けます。 ' +
+        '残りの<b>'+rest+'問</b>と<b>読了レポート</b>は購読者限定です。 ' +
+        'ここまで積み上げた<b>魂の旅</b>は、上のゲージにそのまま残っています。';
+    }
+  }
+})();
+
+
+function updateHUD(){
+  document.getElementById('score').textContent = score;
+  document.getElementById('streak').textContent = streak;
+  document.getElementById('mastered').textContent = masteredIds.size + ' / ' + TOTAL_Q;
+  const pct = Math.round(masteredIds.size / TOTAL_Q * 100);
+  document.getElementById('fill').style.width = pct + '%';
+  document.getElementById('pctTxt').textContent = pct + '%';
+
+  document.querySelectorAll('.ms').forEach(el=>{
+    el.classList.toggle('reached', masteredIds.size >= +el.dataset.at);
+  });
+}
+
+
+function finish(){
+  hasPlayed = true;
+  const acc = Math.round(firstTryCorrect / QUESTIONS.length * 100);
+  let rank, sub;
+  if(acc>=90){ rank='アプラクサスの眼'; sub='デミアンを完全に見抜きました'; }
+  else if(acc>=75){ rank='しるしを持つ者'; sub='核心の洞察をほぼ捉えました'; }
+  else if(acc>=55){ rank='殻を破っている途中'; sub='骨組みは身につきました — もう一度！'; }
+  else { rank='好奇心いっぱいのシンクレア'; sub='繰り返すほど洞察は深まります'; }
+
+  document.getElementById('rankTitle').textContent = rank;
+  document.getElementById('rankSub').textContent = sub;
+  document.getElementById('rScore').textContent = score;
+  document.getElementById('rAcc').textContent = acc + '%';
+  document.getElementById('rStreak').textContent = bestStreak;
+  document.getElementById('rTries').textContent = totalTries;
+
+  const note = document.getElementById('bestNote');
+  if(score > bestScore){
+    const prev = bestScore;
+    bestScore = score;
+    note.innerHTML = prev>0 ? `🏆 <b>最高スコア更新！</b> (前回 ${prev}点)` : `🏆 初記録 <b>${score}点</b> — もう一度挑戦して更新しましょう！`;
+  } else {
+    note.innerHTML = `現在の最高スコア <b>${bestScore}点</b> · 今回は ${score}点`;
+  }
+
+  show('result');
+  if(!reduceMotion) finale();
+}
+
+
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+(function(){
+  const COLORS=['#e3b34e','#5cc28d','#8fb0cc','#d96a4a','#f0c560','#ff6b9d','#a78bfa','#34d399'];
+  let cvs=null, ctx2d=null, particles=[], raf=null;
+
+  function ensureCanvas(){
+    if(cvs) return;
+    cvs=document.createElement('canvas');
+    cvs.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999';
+    document.body.appendChild(cvs);
+    resize();
+    window.addEventListener('resize', resize);
+    ctx2d=cvs.getContext('2d');
+  }
+  function resize(){ if(cvs){ cvs.width=window.innerWidth; cvs.height=window.innerHeight; } }
+
+  
+  function spawn(ox, oy, count, speedMin, speedMax, spreadDeg){
+    const half = spreadDeg * Math.PI/180 / 2;
+    for(let i=0;i<count;i++){
+      const angle = -Math.PI/2 + (Math.random()*2-1)*half;  
+      const speed = speedMin + Math.random()*(speedMax-speedMin);
+      particles.push({
+        x: ox, y: oy,
+        vx: Math.cos(angle)*speed,
+        vy: Math.sin(angle)*speed,
+        color: COLORS[Math.floor(Math.random()*COLORS.length)],
+        w: 5+Math.random()*7,
+        h: 3+Math.random()*4,
+        life: 1,
+        decay: 0.010 + Math.random()*0.016,
+        gravity: 0.20 + Math.random()*0.08,
+        drag: 0.97,
+        rot: Math.random()*Math.PI*2,
+        rotV: (Math.random()-.5)*0.28,
+        shape: Math.random()<.65 ? 'rect' : 'circle'
+      });
+    }
+  }
+
+  function loop(){
+    ctx2d.clearRect(0,0,cvs.width,cvs.height);
+    particles=particles.filter(p=>p.life>0.02);
+    if(!particles.length){ raf=null; return; }
+    particles.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      p.vy+=p.gravity;
+      p.vx*=p.drag; p.vy*=p.drag;
+      p.life-=p.decay;
+      p.rot+=p.rotV;
+      ctx2d.save();
+      ctx2d.globalAlpha=Math.pow(Math.max(0,p.life), 0.6);
+      ctx2d.fillStyle=p.color;
+      ctx2d.translate(p.x, p.y);
+      ctx2d.rotate(p.rot);
+      if(p.shape==='rect'){
+        ctx2d.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      } else {
+        ctx2d.beginPath();
+        ctx2d.ellipse(0,0,p.w/2,p.h/2,0,0,Math.PI*2);
+        ctx2d.fill();
+      }
+      ctx2d.restore();
+    });
+    raf=requestAnimationFrame(loop);
+  }
+
+  function fire(ox, oy, count, speedMin, speedMax, spreadDeg){
+    ensureCanvas();
+    spawn(ox, oy, count, speedMin, speedMax, spreadDeg);
+    if(!raf) raf=requestAnimationFrame(loop);
+  }
+
+  
+  window._confettiBurst=function(el){
+    const r=el.getBoundingClientRect();
+    const cx=r.left+r.width/2, cy=r.top+r.height/2;
+    fire(cx, cy, 45, 8, 18, 90);               
+    setTimeout(()=>fire(cx, cy, 20, 5, 12, 50), 80); 
+  };
+
+  
+  window._confettiFinale=function(){
+    const w=window.innerWidth, h=window.innerHeight;
+    
+    fire(w*.2, h*.75, 100, 12, 24, 70);
+    
+    setTimeout(()=>fire(w*.8, h*.75, 100, 12, 24, 70), 250);
+    
+    setTimeout(()=>{
+      fire(w*.5, h*.65, 130, 14, 28, 110);
+      fire(w*.35, h*.7, 60, 10, 20, 60);
+      fire(w*.65, h*.7, 60, 10, 20, 60);
+    }, 500);
+    
+    setTimeout(()=>fire(w*.5, h*.5, 80, 8, 18, 140), 900);
+  };
+})();
+
+function burst(el){ if(!reduceMotion) window._confettiBurst(el); }
+function finale(){ if(!reduceMotion) window._confettiFinale(); }
+
+
+function downloadReportPDF(){
+
+  document.querySelectorAll('.toc-panel').forEach(p=>{ p.style.maxHeight='none'; });
+  const el = document.getElementById('report');
+  const btn = document.getElementById('pdfBtn');
+  const h2 = document.querySelector('#report .rep-hero h2');
+  const fname = ((h2 && h2.textContent) || '読了レポート').replace('ひと目で','').trim() + ' レポート.pdf';
+
+
+  if(typeof html2pdf === 'undefined'){ window.print(); return; }
+
+  document.body.classList.add('pdf-export');
+  if(btn){ btn.disabled=true; btn.textContent='📄 PDF作成中…'; }
+  const opt = {
+    margin:[8,8,10,8],
+    filename:fname,
+    image:{type:'jpeg', quality:0.96},
+    html2canvas:{scale:2, backgroundColor:'#ffffff', useCORS:true, windowWidth:760, scrollY:0},
+    jsPDF:{unit:'mm', format:'a4', orientation:'portrait'},
+    pagebreak:{mode:['css','legacy']}
+  };
+  html2pdf().set(opt).from(el).outputPdf('blob').then(function(blob){
+    var url = URL.createObjectURL(blob);
+    try{
+      var a = document.createElement('a');
+      a.href = url; a.download = fname;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+    }catch(e){
+
+      window.open(url, '_blank');
+    }
+  }).catch(function(){
+    alert('PDF生成中に問題が発生しました。このHTMLファイルをダウンロードし、ブラウザで直接開いてもう一度押してください。');
+  }).then(function(){
+    document.body.classList.remove('pdf-export');
+    if(btn){ btn.disabled=false; btn.textContent='📄 PDFで保存'; }
+  });
+}
+</script>
+
+<div style="text-align:center;margin:30px 16px 36px">
+  <a id="catBtn" href="https://mimifactory.vibekr.com/ja/quiz.html?utm_source=quizbook&utm_medium=app" target="_blank" rel="noopener" style="display:inline-block;padding:11px 22px;border-radius:999px;background:rgba(127,127,127,.14);border:1px solid rgba(127,127,127,.35);color:inherit;text-decoration:none;font-weight:700;font-size:14px">📚 ほかの本のクイズを見る →</a>
+</div>
+<script id="promoBanner">
+
+(function(){
+  function full(){ try{ return localStorage.getItem("mf_vip")==="1"; }catch(e){ return false; } }
+  var slug = decodeURIComponent(location.pathname).split("/").pop().replace("_teaser.html","");
+  function show(vip){
+    if(document.getElementById("promoBar")) return;
+    var full_url = location.pathname.replace("_teaser.html","_quiz.html");
+    var d=document.createElement("div");
+    d.id="promoBar";
+    d.style.cssText="position:sticky;top:0;z-index:99;text-align:center;padding:10px 14px;font-size:13.5px;font-weight:700;color:#241505;background:linear-gradient(100deg,#ffd166,#e8b45f);cursor:pointer;";
+    d.textContent=(vip?"💌 VIP招待 — ":"🎁 いまこの本のフル版を無料公開中！ ")+"全編（ロックなし）へ移動 →";
+    d.onclick=function(){ location.href=full_url; };
+    document.body.prepend(d);
+  }
+  if(full()){ show(true); return; }
+  try{
+    fetch("../promo-api.php?action=get&t="+Date.now()).then(function(r){return r.json();}).then(function(j){
+      if(j && (j.open || (j.books && j.books.indexOf(slug)>=0))) show(false);
+    }).catch(function(){});
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
