@@ -52,6 +52,7 @@ jobs:
             data/promo.json
             .claude/**
             .github/**
+            _archive/**
             scripts/**
             i18n/**
             reports/**
