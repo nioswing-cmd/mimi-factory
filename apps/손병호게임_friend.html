@@ -515,7 +515,7 @@ function openCustom(){ document.getElementById('customInput').value=''; openOver
 function submitCustom(){
   let v=(document.getElementById('customInput').value||'').trim();
   if(!v){ toast('질문을 적어주세요 ✍️'); return; }
-  v=v.replace(/\s*(사람)?\s*(접어)?[!.]*$/,''); // 끝의 '사람 접어!' 중복 제거
+  v=v.replace(/\s*(사람)?\s*(접어)?[!.]*$/,''); // strip trailing duplicate suffix
   if(!v){ toast('질문을 적어주세요 ✍️'); return; }
   CARDS[level].push(v);           // 이후 랜덤/골라담기에도 등장
   closeOverlay('customOverlay');
