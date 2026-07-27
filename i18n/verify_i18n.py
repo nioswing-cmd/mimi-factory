@@ -35,7 +35,17 @@ def check(slug, lang, html_path):
         results.append((name, "PASS" if ok else "FAIL", detail))
 
     # 1) 미번역 잔존 (한글)
-    leftovers = sorted({m.group(0) for m in re.finditer(r"[가-힣][가-힣 ]{0,20}", html)})
+    # 나무위키·알라딘·한국민족문화대백과·민음사는 한국어 문서명/검색어로만 열린다.
+    # 이 URL 들의 한글은 '번역 누락'이 아니라 그래야 맞는 것이다. 실제로 번역기가
+    # 이걸 번역해 링크가 404 로 죽은 적이 있어(광장·82년생 등) 원문으로 되돌렸는데,
+    # 그 정상 상태를 검사기가 다시 실패로 잡으면 영원히 통과할 수 없다. 그래서 뺀다.
+    # (표시 문구 label 은 여전히 검사 대상 — URL 값만 가린다)
+    scan = re.sub(
+        r'''((?:href|url)\s*[:=]\s*)(["'])(https?://[^"']*?(?:namu\.wiki|aladin\.co\.kr'''
+        r'''|encykorea\.aks\.ac\.kr|minumsa\.minumsa\.com)[^"']*?)(\2)''',
+        lambda m: m.group(1) + m.group(2) + "\x00KOURL\x00" + m.group(4),
+        html)
+    leftovers = sorted({m.group(0) for m in re.finditer(r"[가-힣][가-힣 ]{0,20}", scan)})
     add("① 한글 잔존 0", not leftovers, f"{len(leftovers)}건: {leftovers[:5]}" if leftovers else "잔존 없음")
 
     # 2) 키 누락/추가
@@ -44,6 +54,24 @@ def check(slug, lang, html_path):
     add("② 키 일치", ko_k == tr_k, f"누락 {len(ko_k-tr_k)} / 잉여 {len(tr_k-ko_k)}")
 
     # 3) 선택지 길이 균형 (정답 있는 퀴즈만 — options[].ok 구조 감지)
+    #
+    # 예전 방식은 max() 로 최장을 골랐다. 그러면 길이가 같아도(동점) 앞에 있는 것이
+    # 뽑혀, 정답이 우연히 먼저 오면 '정답=최장'으로 집계됐다. 인명 문제처럼 선택지가
+    # 전부 3글자인 경우 100% 가 나온다 — 실제로 82년생 김지영 zh-tw 가 그랬다.
+    # 길이로 답을 찍을 수 있으려면 '눈에 띄게' 길어야 하므로, 2등보다
+    # 최소 2글자 이상이면서 15% 이상 긴 경우만 센다.
+    def _is_tell(opts):
+        lens = sorted((len(t) for t, _ in opts), reverse=True)
+        if len(lens) < 2:
+            return False
+        top, second = lens[0], lens[1]
+        gap = top - second
+        if gap < max(2, second * 0.15):
+            return False
+        # 최장이 유일하고, 그게 정답일 때만
+        longest = [o for o in opts if len(o[0]) == top]
+        return len(longest) == 1 and bool(longest[0][1])
+
     def _longest_ratio(doc):
         blocks = re.findall(r"options:\[(.*?)\]", doc)
         if not blocks:
@@ -51,17 +79,20 @@ def check(slug, lang, html_path):
         longest_correct = 0
         for b in blocks:
             opts = re.findall(r'\{t:"((?:[^"\\]|\\.)*)"(,ok:true)?\}', b)
-            if opts and max(opts, key=lambda o: len(o[0]))[1]:
+            if opts and _is_tell(opts):
                 longest_correct += 1
         return longest_correct / max(1, len(blocks)) * 100
 
     ratio = _longest_ratio(html)
     if ratio is not None:
-        # 기준: 25~35% 밴드 안이거나, 한국어 원본 비율에서 ±10%p 이내(원본 계승)
+        # 이 검사의 목적은 '길이로 정답을 찍을 수 있는가' 하나다. 따라서 비율이
+        # 낮은 건 문제가 아니라 잘 만든 것이다. 예전 기준(25~35% 밴드)은 0% 처럼
+        # 완벽하게 균형 잡힌 번역을 오히려 탈락시켰다. 높을 때만 잡는다.
         ko_src = open(os.path.join(ROOT, ko["_meta"]["source"]), encoding="utf-8").read()
         ko_ratio = _longest_ratio(ko_src) or 0
-        ok3 = (25 <= ratio <= 35) or (abs(ratio - ko_ratio) <= 10)
-        add("③ 정답=최장 비율(원본 계승)", ok3, f"{ratio:.0f}% (원본 {ko_ratio:.0f}%)")
+        ok3 = ratio <= 35 or ratio <= ko_ratio + 10
+        add("③ 정답=최장 비율", ok3,
+            f"{ratio:.0f}% (원본 {ko_ratio:.0f}%) — 35% 이하면 정상")
     else:
         results.append(("③ 선택지 길이 균형", "SKIP", "정답형 퀴즈 아님(카드/진단 앱)"))
 
