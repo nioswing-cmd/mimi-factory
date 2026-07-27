@@ -10,6 +10,9 @@ i18n/strings/{app}/ko.json 을 만든다. HTML 구조·클래스·스크립트 �
 """
 import json, os, re, sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import build   # vendor_scripts — 라이브러리 구간 판별 기준을 빌더·검증기와 공유
+
 HANGUL = re.compile(r"[가-힣]")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -23,8 +26,21 @@ dropped = []      # (kind, 길이, 앞부분) — main()에서 요약 출력
 
 
 def split_scripts(html):
-    """(비스크립트 조각들, 스크립트 본문들) — style은 비번역으로 제외."""
-    scripts = re.findall(r"<script[^>]*>(.*?)</script>", html, re.S)
+    """(비스크립트 조각들, 번역 대상 스크립트 본문들) — style·라이브러리는 제외.
+
+    라이브러리(html2canvas 등) 안에도 한글이 데이터로 들어있다 — CSS 한국식
+    번호매기기용 "마이너스", "십백천만" 등. 이걸 번역 대상으로 잡으면 모델이
+    "minus"로 바꿔버려 라이브러리가 깨진다(실제로 19개 빌드에서 PDF 저장 기능
+    사망). 판별 기준은 build.vendor_scripts 와 공유한다.
+    """
+    vendor_spans = build.vendor_scripts(html)
+    scripts = []
+    for m in re.finditer(r"<script[^>]*>(.*?)</script>", html, re.S):
+        if m.span(1) in vendor_spans:
+            dropped.append(("vendor", len(m.group(1)),
+                            m.group(1).lstrip()[:60].replace("\n", " ")))
+        else:
+            scripts.append(m.group(1))
     rest = re.sub(r"<script[^>]*>.*?</script>", "\x00SCRIPT\x00", html, flags=re.S)
     rest = re.sub(r"<style[^>]*>.*?</style>", "\x00STYLE\x00", rest, flags=re.S)
     return rest, scripts

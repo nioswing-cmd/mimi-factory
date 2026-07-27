@@ -94,12 +94,33 @@ def check(slug, lang, html_path):
     # 8) CDN 잔존 (자체 호스팅 원칙)
     add("⑧ 구글폰트 CDN 제거", "fonts.googleapis.com" not in html, "")
 
-    # 9) JS 문법
-    scripts = re.findall(r"<script[^>]*>(.*?)</script>", html, re.S)
+    # 9) JS 문법 — 앱 스크립트 전부 + 라이브러리 본문까지 검사한다.
+    #    이전에는 마스킹된 html에서 '가장 긴' 블록 하나만 봐서, 앱 스크립트가 여러 개면
+    #    나머지가 통째로 검사되지 않았다. 또 라이브러리는 마스킹돼 아예 빠져 있었는데,
+    #    번역이 라이브러리 내부 문자열("마이너스"→"minus")을 건드려 깨뜨린 사례가
+    #    19개 빌드에서 실제로 나왔다(PDF 저장 기능 사망). 그래서 둘 다 검사한다.
     tmp = os.path.join(tempfile.gettempdir(), "_i18n_check.js")
-    open(tmp, "w", encoding="utf-8").write(max(scripts, key=len))
-    r = subprocess.run(["node", "--check", tmp], capture_output=True, text=True)
-    add("⑨ JS 문법(node --check)", r.returncode == 0, r.stderr[:120])
+
+    def _syntax_error(js):
+        open(tmp, "w", encoding="utf-8").write(js)
+        r = subprocess.run(["node", "--check", tmp], capture_output=True, text=True)
+        if r.returncode == 0:
+            return None
+        lines = [l for l in (r.stderr or "").strip().splitlines() if "Error" in l]
+        return (lines[-1] if lines else "문법 오류")[:70]
+
+    bad = []
+    for i, s in enumerate(re.findall(r"<script[^>]*>(.*?)</script>", html, re.S)):
+        if not s.strip() or "\x00VENDOR" in s:
+            continue
+        err = _syntax_error(s)
+        if err:
+            bad.append(f"앱 블록{i}: {err}")
+    for i, s in enumerate(_vendor):
+        err = _syntax_error(s)
+        if err:
+            bad.append(f"라이브러리{i}(번역이 건드림): {err}")
+    add("⑨ JS 문법(node --check)", not bad, "; ".join(bad)[:220])
 
     return results
 
