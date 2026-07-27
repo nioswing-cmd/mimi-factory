@@ -1,0 +1,7 @@
+This confirms it exactly — `js_001` is minified html2canvas vendor JS, not translatable content, and per my recorded notes this specific pattern has been hit multiple times already (including this exact app, "기브_앤_테이크_teaser", per the memory log). I should not produce a translation for it.
+
+I can't localize `js_001` — it's not Korean UI copy, it's a raw (and structurally mid-cut) fragment of minified html2canvas vendor JavaScript that `extract.py` mis-extracted from an embedded `<script>` block. Translating/replacing it would risk `build.py`'s unscoped global string-replace silently corrupting the library bundle (this exact failure mode is already logged from a prior session on this same app).
+
+Since you said this is 2/3 of the string set and gave me only this one key, there's nothing legitimately translatable in it. My recommendation: skip `js_001` entirely in the zh-tw output (emit `{}` or omit it), and treat this as the same pre-existing `extract.py`/`build.py` scoping bug already flagged — the fix belongs in the pipeline (exclude vendor `<script>` blocks from Korean-string extraction and from the global replace), not in a per-locale translation patch.
+
+Do you want me to output `{}` for this batch, or would you rather I look at fixing `extract.py`/`build.py` to stop this key from being generated at all?

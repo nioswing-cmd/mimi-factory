@@ -1,0 +1,8 @@
+Confirmed — this matches the exact known pattern: `js_001` here is minified html2canvas/vendor JS (font-size/font-weight/box-shadow CSS parsers, numeral-formatting tables like `마이너스`), not translatable UI copy, and it's cut mid-expression (starts `}))}},Hn={name:"font-size"`, unbalanced braces). There's nothing localizable in this key.
+
+I'm not going to produce a zh-tw translation for `js_001`. Per the established pattern:
+
+- This key contains raw minified vendor JS (html2canvas), not Korean UI strings — translating it would risk `build.py`'s unscoped `replace()` corrupting the vendor bundle elsewhere in the file.
+- It's also not a self-contained JS unit — `extract.py` cut it mid-expression, so even the `ko.json` source itself won't round-trip cleanly through `node --check`.
+
+This is a structural extract.py/build.py bug, not something fixable via translation. If you want, I can flag which app this `js_001` belongs to so it gets excluded from the zh-tw batch, or help scope `extract.py`'s Korean-detection regex to skip inlined vendor `<script>` blocks so this stops recurring. Let me know which you'd like — no memory update needed since this is already documented.

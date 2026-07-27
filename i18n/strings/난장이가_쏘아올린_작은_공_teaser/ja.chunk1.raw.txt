@@ -1,0 +1,5 @@
+This confirms it — this is a known, recurring structural issue (not just for this app, confirmed across multiple teaser apps today already). I'll skip translating `js_001` and flag it as before.
+
+I'm not going to output a JSON translation for `js_001` — it's a mid-expression substring of minified html2canvas vendor JS (confirmed: starts with unbalanced `}))}},Hn=...`, ends mid-argument `t+=`), not Korean UI copy. Per my notes, this exact pattern has now recurred across several teaser apps today (기브_앤_테이크, 기버_1, and now this one), and any hand-translation of it either does nothing meaningful or risks `build.py`'s unscoped global replace corrupting the vendor bundle elsewhere in the HTML.
+
+**Recommendation:** this needs a pipeline fix, not a per-app translation patch — `extract.py` should skip vendor/inlined `<script>` blocks when scanning for Hangul, and `verify_i18n.py` checks ⑤/⑨ should validate the real built `<script>` block rather than the isolated `js_001` substring. Want me to open that as a follow-up task, or continue with the rest of the queued locale batches for now?

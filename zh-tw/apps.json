@@ -1,6 +1,18 @@
 {
  "apps": [
   {
+   "id": "kim-jiyoung-born-1982",
+   "type": "test",
+   "title": "82年生金智英大師測驗",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-25",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/kim-jiyoung-born-1982.html",
+   "premium": "apps/kim-jiyoung-born-1982.html",
+   "desc": "透過30道多巴胺大師測驗，重新認識金智英的一生。"
+  },
+  {
    "id": "adhd-test",
    "type": "test",
    "title": "ADHD 傾向測驗",

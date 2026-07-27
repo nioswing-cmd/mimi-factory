@@ -1,6 +1,18 @@
 {
  "apps": [
   {
+   "id": "kim-jiyoung-born-1982",
+   "type": "test",
+   "title": "Kim Jiyoung, Born 1982 Master Quiz",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-25",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/kim-jiyoung-born-1982.html",
+   "premium": "apps/kim-jiyoung-born-1982.html",
+   "desc": "Relive Kim Jiyoung’s life story through 30 dopamine-driven quizzes."
+  },
+  {
    "id": "adhd-test",
    "type": "test",
    "title": "ADHD Tendency Test",
@@ -145,6 +157,18 @@
    "desc": "Master Adam Grant’s Givers, Takers, and Matchers — 30 quizzes and one Reading Report."
   },
   {
+   "id": "what-am-i",
+   "type": "test",
+   "title": "Who Am I, Really? Dopamine Master Quiz",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-25",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/what-am-i.html",
+   "premium": "apps/what-am-i.html",
+   "desc": "A repeat-play master quiz on dividualism — every self you have is the real you"
+  },
+  {
    "id": "dealbreaker-button",
    "type": "test",
    "title": "My Dealbreaker Button",
@@ -179,6 +203,18 @@
    "teaser": "apps/recovery-speed.html",
    "premium": "apps/recovery-speed.html",
    "desc": "The morning after you fall apart — how fast do you bounce back? 12 questions, 4 types."
+  },
+  {
+   "id": "the-dwarf-launches-a-little-ball",
+   "type": "test",
+   "title": "The Dwarf Launches a Little Ball Dopamine Master Quiz",
+   "author": "MIMI FACTORY",
+   "date": "2026-07-25",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/the-dwarf-launches-a-little-ball.html",
+   "premium": "apps/the-dwarf-launches-a-little-ball.html",
+   "desc": "Learn the dwarf family’s story of eviction and hope through 30 repeat-to-master quizzes"
   },
   {
    "id": "emotion-resolution",
