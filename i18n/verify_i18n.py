@@ -7,6 +7,9 @@
 """
 import datetime, json, os, re, subprocess, sys, tempfile
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import build   # mask_vendor — 라이브러리 구간 판별 기준을 빌더와 공유
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HANGUL = re.compile(r"[가-힣]")
 
@@ -16,7 +19,13 @@ SIMPLIFIED = set("么这为说读书电视软视频发国过时门问题东车�
 
 
 def check(slug, lang, html_path):
-    html = open(os.path.join(ROOT, html_path), encoding="utf-8").read()
+    full = open(os.path.join(ROOT, html_path), encoding="utf-8").read()
+    # 서드파티 압축 라이브러리(html2canvas 등)는 검사 대상에서 제외한다.
+    # 라이브러리가 CSS 한국식 번호매기기를 지원하느라 '영일이삼사오육칠팔구',
+    # '십백천만', '마이너스'와 "keep-all" 문자열을 품고 있어, 그대로 검사하면
+    # 번역 누락·keep-all 잔존으로 오탐이 나 배포가 영구히 막힌다. 판별 기준은
+    # build.py 와 동일(압축 여부 = 줄바꿈 밀도).
+    html, _vendor = build.mask_vendor(full)
     d = os.path.join(ROOT, "i18n", "strings", slug)
     ko = json.load(open(os.path.join(d, "ko.json"), encoding="utf-8"))
     tr = json.load(open(os.path.join(d, f"{lang}.json"), encoding="utf-8"))

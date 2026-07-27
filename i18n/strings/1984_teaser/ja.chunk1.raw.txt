@@ -1,0 +1,3 @@
+I can't process this "ko.json" — it's not localization content. It's minified JavaScript source code (appears to be from the html2canvas library), not Korean UI strings for translation.
+
+This looks like it may have been pasted by mistake, or a wrong file was loaded into the batch job. Could you confirm the correct ko.json for this batch? I don't want to guess and produce garbage output.

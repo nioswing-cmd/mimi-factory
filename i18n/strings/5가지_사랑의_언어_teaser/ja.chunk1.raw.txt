@@ -1,0 +1,7 @@
+Empty output. This "ko.json" content is not localization strings — it's minified JavaScript library code (html2canvas source), not translatable UI text. I won't process it as a translation task.
+
+Let me check if there's an actual source file this should have come from.
+
+I can't complete this request: the `[ko.json]` content you provided is minified JavaScript library code (appears to be the `html2canvas` library bundle), not a set of Korean UI strings to localize. There's no `js_001`-style key with human-readable Korean text — the "value" is thousands of characters of obfuscated JS source code.
+
+This looks like the wrong file content got pasted in. Could you check the actual `ko.json` path (likely something under `i18n/strings/...`) and re-share the correct string batch? If you tell me which project/quiz this batch belongs to, I can also read the file directly from disk instead of via paste.

@@ -13,6 +13,46 @@ import json, os, re, shutil, sys, tempfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# ── 서드파티 압축 라이브러리 보호 ─────────────────────────────────
+# 티저 앱들은 html2canvas(약 90만 자)를 <script>에 통째로 인라인한다. 이 구간은
+# 번역·주석제거 대상이 아닌데도 그대로 두면 아래 문제가 생긴다.
+#   - 한글 주석 제거 정규식이 압축 코드 안의 /*…*/ 짝을 잘못 잡아 코드를 삭제
+#     → node --check 문법 오류 (원본은 통과하는데 빌드 산출물만 깨짐)
+#   - 라이브러리가 CSS 한국식 번호매기기를 지원하느라 '영일이삼사오육칠팔구',
+#     '십백천만', '마이너스'와 "keep-all" 문자열을 품고 있어 검증이 오탐
+# 실측 분리도: 라이브러리는 줄바꿈 밀도 0.00000(90만 자에 줄바꿈 4개),
+# 앱 자체 코드는 0.02 수준 — 4자릿수 차이라 오분류 여지가 없다.
+VENDOR_MIN_LEN = 20000
+
+
+def vendor_scripts(html):
+    """압축된 서드파티 <script> 본문 구간 [(start, end), ...]."""
+    spans = []
+    for m in re.finditer(r"<script[^>]*>(.*?)</script>", html, re.S):
+        b = m.group(1)
+        if len(b) > VENDOR_MIN_LEN and b.count("\n") * 2000 <= len(b):
+            spans.append(m.span(1))
+    return spans
+
+
+def mask_vendor(html):
+    """라이브러리 본문을 자리표시자로 치환. 반환: (마스킹된 html, 원본조각들)"""
+    out, saved, last = [], [], 0
+    for i, (s, e) in enumerate(vendor_scripts(html)):
+        out.append(html[last:s])
+        out.append("\x00VENDOR%d\x00" % i)
+        saved.append(html[s:e])
+        last = e
+    out.append(html[last:])
+    return "".join(out), saved
+
+
+def unmask_vendor(html, saved):
+    for i, b in enumerate(saved):
+        html = html.replace("\x00VENDOR%d\x00" % i, b)
+    return html
+
+
 FONT_FACE = {
     "ja": """<style id="i18nFonts">
 /* self-hosted subset fonts (OFL) — reuse original family names */
@@ -63,6 +103,10 @@ def build(slug, lang, outname=None):
     tmp = os.path.join(tempfile.gettempdir(), f"i18n_{slug}_{lang}.html")
     shutil.copy(src, tmp)
     html = open(tmp, encoding="utf-8").read()
+
+    # 0) 서드파티 압축 라이브러리 격리 — 이하 모든 치환·정규식에서 제외한다.
+    #    맨 마지막(파일 쓰기 직전)에 원본 그대로 복원한다.
+    html, vendor = mask_vendor(html)
 
     # 1) 문자열 치환 — 긴 원문부터 (부분 문자열 충돌 방지)
     pairs = []
@@ -116,7 +160,8 @@ def build(slug, lang, outname=None):
         assert i > 0, "<style> 블록을 찾지 못함"
         html = html[:i] + face + "\n" + html[i:]
 
-    # 5) 출력 (repo /{lang}/... = 배포 경로)
+    # 5) 라이브러리 복원 후 출력 (repo /{lang}/... = 배포 경로)
+    html = unmask_vendor(html, vendor)
     out_dir = os.path.join(ROOT, lang) if is_landing else os.path.join(ROOT, lang, "apps")
     os.makedirs(out_dir, exist_ok=True)
     out = os.path.join(out_dir, f"{outname}.html")

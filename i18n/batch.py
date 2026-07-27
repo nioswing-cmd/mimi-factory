@@ -87,7 +87,11 @@ def claude_oneshot(prompt, timeout=900):
         try:
             # 번역은 기계적 작업 — extended thinking을 꺼서 출력 토큰 낭비 방지
             env = dict(os.environ, MAX_THINKING_TOKENS="0")
-            r = run([CLAUDE, "-p", "--model", MODEL, "--output-format", "json"],
+            # --tools "" 로 내장 도구를 전부 끈다. 도구가 열려 있으면 모델이 결과를
+            # 파일로 저장하거나 검증 명령을 돌리려다 승인 프롬프트에 걸려, JSON 대신
+            # "승인해달라"는 문장만 뱉는다(= 파싱 실패 → 청크 재호출 → 사용량 낭비).
+            # 이 호출은 원래 설계부터 도구 없는 1턴 번역이다.
+            r = run([CLAUDE, "-p", "--model", MODEL, "--output-format", "json", "--tools", ""],
                     timeout=timeout, stdin_text=prompt, env=env)
         except subprocess.TimeoutExpired:
             if attempt == 1:
@@ -151,20 +155,37 @@ def save_raw(slug, lang, ci, text):
 
 
 def parse_json_out(text):
-    """모델 출력에서 JSON 오브젝트 하나를 추출."""
+    """모델 출력에서 JSON 오브젝트를 추출.
+
+    출력이 여러 조각으로 쪼개져 와도(예: 본문 JSON 다음에 "_app" 블록을 따로
+    안내하는 경우) 모두 모아 하나로 합친다. 종전에는 첫 '{' ~ 마지막 '}'를
+    통째로 잘라 json.loads 했기 때문에, 조각이 2개 이상이면 그 사이의 설명문
+    까지 딸려 들어가 'Extra data'로 전부 실패했다(청크 전체 재호출 → 헛돈).
+    """
     if not text:
         return None
-    t = text.strip()
-    if t.startswith("```"):
-        t = re.sub(r"^```[a-zA-Z-]*\s*", "", t)
-        t = re.sub(r"\s*```\s*$", "", t)
-    i, j = t.find("{"), t.rfind("}")
-    if i < 0 or j <= i:
-        return None
-    try:
-        return json.loads(t[i:j + 1])
-    except Exception:
-        return None
+    s = text.strip()
+    dec = json.JSONDecoder()
+    merged, idx, found = {}, 0, False
+    while True:
+        i = s.find("{", idx)
+        if i < 0:
+            break
+        try:
+            obj, end = dec.raw_decode(s, i)
+        except Exception:
+            idx = i + 1   # 이 '{'로 시작하는 유효한 오브젝트 없음 — 다음 후보로
+            continue
+        if isinstance(obj, dict):
+            # 조각 바로 앞이 '"키":' 로 끝나면 그 키 아래로 넣는다 ('"_app": {...}' 형태)
+            m = re.search(r'"([A-Za-z_][\w-]*)"\s*:\s*$', s[max(0, i - 40):i])
+            if m:
+                merged[m.group(1)] = obj
+            else:
+                merged.update(obj)
+            found = True
+        idx = end
+    return merged if found else None
 
 
 def write_lang_json(slug, lang, obj, ko_keys, is_landing):
