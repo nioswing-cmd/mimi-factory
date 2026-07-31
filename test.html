@@ -144,6 +144,25 @@
   .card h3{position:relative;font-size:17px;font-weight:700;line-height:1.3;margin-top:20px}
   .card .a{position:relative;font-size:11px;color:var(--sub);margin-top:4px}
   .card .d{position:relative;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--sub);margin-top:7px;opacity:.8}
+
+  /* ── 표지 그림 (apps.json 의 cover 필드가 있을 때만) ── */
+  .cv{
+    position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;
+    object-fit:cover;object-position:center 10%;   /* 상징이 위쪽에 있어 윗부분을 살린다 */
+  }
+  .card .scrim{
+    position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg,
+      rgba(6,10,22,.22) 0%, rgba(6,10,22,.38) 32%, rgba(6,10,22,.78) 62%,
+      rgba(6,10,22,.93) 100%);
+  }
+  .card.has-cover::before{display:none}
+  .card.has-cover .no,.card.has-cover h3,.card.has-cover .a,.card.has-cover .d{z-index:2}
+  .card.has-cover .no{text-shadow:0 1px 4px rgba(0,0,0,.95)}
+  .card.has-cover h3{text-shadow:0 1px 3px rgba(0,0,0,.92),0 2px 12px rgba(0,0,0,.7)}
+  .card.has-cover .a{color:#d6dcf0;text-shadow:0 1px 3px rgba(0,0,0,.92)}
+  .card.has-cover .d{color:#b7c1dc;opacity:1;text-shadow:0 1px 3px rgba(0,0,0,.92)}
+
   .empty{grid-column:1/-1;text-align:center;color:var(--sub);font-size:13px;padding:36px 0;line-height:1.8}
 
   .subscribe{
@@ -253,8 +272,10 @@ function render(){
     `<div class="empty">실험실이 비어 있어요.<br>새로운 실험이 곧 시작됩니다 ⚗️</div>`;
   list.forEach((a,i)=>{
     const c = document.createElement("div");
-    c.className="card"; c.style.setProperty("--tc",grad(a));
+    c.className = a.cover ? "card has-cover" : "card";
+    c.style.setProperty("--tc",grad(a));
     c.innerHTML = `
+      ${a.cover ? `<img class="cv" src="${a.cover}" alt="" loading="lazy" decoding="async"><i class="scrim"></i>` : ""}
       <span class="no">EXP-${String(i+1).padStart(3,"0")}</span>
       <h3>${a.title}</h3>
       <div class="a">${a.author}</div>

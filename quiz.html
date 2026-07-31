@@ -134,9 +134,24 @@
   }
   .book .bt .a{font-size:9.5px;color:rgba(255,255,255,.85);margin-top:7px;letter-spacing:.05em;text-shadow:0 1px 4px rgba(0,0,0,.5)}
   .book .tape{
-    position:absolute;top:7px;right:7px;z-index:2;font-size:8.5px;font-weight:700;letter-spacing:.08em;
+    position:absolute;top:7px;right:7px;z-index:3;font-size:8.5px;font-weight:700;letter-spacing:.08em;
     color:#0d1526;background:var(--amber);padding:2px 7px;border-radius:999px;
   }
+
+  /* ── 표지 그림 (apps.json 의 cover 필드가 있을 때만) ── */
+  .cv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;display:block}
+  .book .scrim{
+    position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg,
+      rgba(8,12,22,.05) 0%, rgba(8,12,22,.12) 38%, rgba(8,12,22,.55) 58%,
+      rgba(8,12,22,.86) 80%, rgba(8,12,22,.95) 100%);
+  }
+  .book.has-cover::after{display:none}
+  .book.has-cover::before{z-index:2}
+  .book.has-cover .bt{z-index:2;justify-content:flex-end;padding-bottom:11px}
+  .book.has-cover .bt h3{text-shadow:0 1px 3px rgba(0,0,0,.92),0 2px 12px rgba(0,0,0,.7)}
+  .book.has-cover .bt .a{color:rgba(255,255,255,.94);text-shadow:0 1px 3px rgba(0,0,0,.92)}
+
   .empty{text-align:center;color:var(--sub);font-size:13px;padding:38px 0;line-height:1.8}
 
   .subscribe{
@@ -242,6 +257,7 @@ async function load(){
 }
 
 function grad(a){return `linear-gradient(160deg,${a.color1||"#e8b45f"},${a.color2||"#a06b2a"})`}
+function coverImg(a){return a.cover ? `<img class="cv" src="${a.cover}" alt="" loading="lazy" decoding="async">` : ""}
 function open(a){ if(navigator.vibrate) navigator.vibrate(28); location.href = bookOpen(a) ? (a.premium || a.teaser) : (a.teaser || a.premium); }
 
 function renderNew(){
@@ -249,7 +265,7 @@ function renderNew(){
   const el = document.getElementById("newbook");
   el.innerHTML = `
     <div class="newbook" style="--nc:${grad(a)}">
-      <div class="cover"><div class="ct">${a.title}</div></div>
+      <div class="cover">${a.cover ? coverImg(a) : `<div class="ct">${a.title}</div>`}</div>
       <div class="info">
         <span class="badge">${bookOpen(a)?'🎁 지금 풀버전 무료':'🕯️ 이 달의 신간'}</span>
         <h2>${a.title}</h2>
@@ -273,8 +289,10 @@ function render(){
     `<div class="empty" style="grid-column:1/-1">이 서가엔 아직 책이 없어요.<br>내일 새벽, 공장이 새 책을 구워올 거예요 🕯️</div>`;
   list.forEach(a=>{
     const b = document.createElement("div");
-    b.className="book"; b.style.setProperty("--bc",grad(a));
+    b.className = a.cover ? "book has-cover" : "book";
+    b.style.setProperty("--bc",grad(a));
     b.innerHTML = `
+      ${a.cover ? coverImg(a)+'<i class="scrim"></i>' : ""}
       <span class="tape"${bookOpen(a)?' style="background:linear-gradient(100deg,#ffd166,#e8b45f);color:#241505;font-weight:700;"':''}>${bookOpen(a)?'🎁 풀버전':'QUIZ'}</span>
       <div class="bt"><h3>${a.title}</h3><div class="a">${a.author}</div></div>`;
     b.onclick = ()=>open(a);
