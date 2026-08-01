@@ -12,3 +12,8 @@ __pycache__/
 # i18n 원본 폰트 (재다운로드 가능한 대용량 바이너리)
 i18n/fonts_src/*.ttf
 i18n_batch.log
+
+# 작업용 임시 폴더 — 원본 백업 HTML·스크립트가 들어 있어 공개 리포에 올리지 않는다
+.tmp/
+_archive/cover-backup-*/
+*.bak-*

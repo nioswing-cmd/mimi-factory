@@ -370,6 +370,230 @@
     max-width:640px; margin-left:auto; margin-right:auto; }
   .copyright-note a{ color:var(--steelblue); }
 </style>
+<!-- mmf-cover-bg:start -->
+<style id="mmf-cover-css">
+/* 표지를 첫 화면 배경으로 깐다. 밝기는 표지별 아핀 톤매핑으로 안전 밴드에 넣고,
+   글자 보호 스크림은 "본문 칼럼 안쪽"에만 강하게 건다.
+   - ::before        : 표지 (blur + 톤매핑 + 채도)
+   - ::after         : rgb(cap) + mix-blend-mode:darken -> 극단 하이라이트만 컷
+   - .mmf-scrim      : 전역 약한 스크림 (카드 바깥 포함)
+   - .mmf-scrim2     : 본문 칼럼에만 걸리는 글자보호 스크림 (좌우 마스크)
+   - 마스크 2종      : 표지는 m0~m2 에서 사라지고, 스크림은 그보다 늦게(n0~n2) 사라진다.
+     (같이 사라지면 페이지 하단 — 카드 밖 푸터 글자 — 에서 표지만 남아 대비가 깨진다) */
+#mmf-cover-bg{
+  position:fixed; inset:0; z-index:-1; pointer-events:none;
+  opacity:0; transition:opacity .5s ease; isolation:isolate;
+  --mmf-cover:url("../covers/%EB%82%9C%EC%9E%A5%EC%9D%B4%EA%B0%80_%EC%8F%98%EC%95%84%EC%98%AC%EB%A6%B0_%EC%9E%91%EC%9D%80_%EA%B3%B5.webp");
+  --mmf-l0:0%; --mmf-l:0%; --mmf-r:100%; --mmf-r0:100%;
+  --mmf-mimg:linear-gradient(180deg,#000 0%,#000 38%,rgba(0,0,0,.55) 68%,transparent 88%);
+  --mmf-mscr:linear-gradient(180deg,#000 0%,#000 52%,rgba(0,0,0,.6) 82%,transparent 100%);
+}
+#mmf-cover-bg::before,#mmf-cover-bg::after{
+  content:"";position:absolute;
+  -webkit-mask-image:var(--mmf-mimg); mask-image:var(--mmf-mimg);
+}
+#mmf-cover-bg::before{
+  z-index:0; inset:-6%;
+  background-image:var(--mmf-cover);
+  background-size:cover; background-position:center 20%; background-repeat:no-repeat;
+  filter:blur(calc(6px + 1.1vw)) brightness(0.721) contrast(1.574) brightness(0.6) saturate(1.72);
+}
+#mmf-cover-bg::after{
+  z-index:1; inset:0;
+  background:rgb(140,140,140);
+  mix-blend-mode:darken;
+}
+#mmf-cover-bg>.mmf-scrim{
+  z-index:2; position:absolute; inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.00) 0%,rgba(0,0,0,.06) 55%,rgba(0,0,0,.18) 100%);
+  -webkit-mask-image:var(--mmf-mscr); mask-image:var(--mmf-mscr);
+}
+/* 세로 페이드(마스크)와 가로 칼럼(마스크)을 한 요소에 겹치면 mask-composite 가 필요해
+   구형 브라우저에서 조용히 반대로 동작한다. 겹치지 않게 2겹으로 중첩한다. */
+#mmf-cover-bg>.mmf-scrim2w{
+  z-index:3; position:absolute; inset:0;
+  -webkit-mask-image:var(--mmf-mscr); mask-image:var(--mmf-mscr);
+}
+#mmf-cover-bg .mmf-scrim2{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,0.280) 0%,rgba(0,0,0,0.644) 55%,rgba(0,0,0,0.700) 100%);
+  -webkit-mask-image:linear-gradient(90deg,transparent var(--mmf-l0),#000 var(--mmf-l),#000 var(--mmf-r),transparent var(--mmf-r0));
+          mask-image:linear-gradient(90deg,transparent var(--mmf-l0),#000 var(--mmf-l),#000 var(--mmf-r),transparent var(--mmf-r0));
+}
+html.mmf-cover-on #mmf-cover-bg{opacity:0.70;}
+@media (prefers-reduced-motion:reduce){#mmf-cover-bg{transition:none;}}
+@media print{#mmf-cover-bg{display:none!important;}}
+</style>
+<script id="mmf-cover-js">
+(function(){
+  "use strict";
+  var GLASS=1, GK=0.40, GKIN=0.8, GBLUR="blur(5px) saturate(1.15)", GSHADOW=0.6, GMIN=0.30;
+  function boot(){
+    try{
+      var d=document, root=d.documentElement, body=d.body;
+      if(!body || d.getElementById('mmf-cover-bg')) return;
+      var layer=d.createElement('div');
+      layer.id='mmf-cover-bg';
+      layer.setAttribute('aria-hidden','true');
+      var scrim=d.createElement('div'); scrim.className='mmf-scrim';
+      var wrap2=d.createElement('div'); wrap2.className='mmf-scrim2w';
+      var scrim2=d.createElement('div'); scrim2.className='mmf-scrim2';
+      wrap2.appendChild(scrim2);
+      layer.appendChild(scrim); layer.appendChild(wrap2);
+      body.insertBefore(layer, body.firstChild);
+
+      /* opacity 는 등장 애니메이션(opacity:0 에서 시작) 때문에 판정에 쓰지 않는다 */
+      function rendered(el){
+        if(!el) return false;
+        var cs=getComputedStyle(el);
+        if(cs.display==='none'||cs.visibility==='hidden') return false;
+        var r=el.getBoundingClientRect();
+        return r.width>8 && r.height>8;
+      }
+      function onScreen(el){
+        if(!rendered(el)) return false;
+        var r=el.getBoundingClientRect();
+        return r.top < innerHeight && r.bottom > 0 && r.left < innerWidth && r.right > 0;
+      }
+      /* 첫 화면 후보: 로드 시점에 실제로 그려져 있는 첫 번째 것 */
+      var home=null;
+      var sels=['#home','#startScreen','#screen-home','#intro','#start','#cover',
+                'section.screen.on','.screen.on','section.home','.home',
+                'section#home','main>section','.wrap>section','.app>section','body>section','section'];
+      for(var i=0;i<sels.length && !home;i++){
+        var list=d.querySelectorAll(sels[i]);
+        for(var j=0;j<list.length;j++){ if(rendered(list[j])){ home=list[j]; break; } }
+      }
+      if(!home){
+        var h=d.querySelector('.hero,.card,h1');
+        home=h?(h.closest('section')||h.parentElement):body.firstElementChild;
+      }
+      if(!home) return;
+
+      /* ---------- 1) 본문 칼럼 폭 측정 -> 칼럼 스크림 마스크 ---------- */
+      var lastCol='';
+      function colBox(){
+        var vw=innerWidth||1, r=home.getBoundingClientRect();
+        var l=r.left, rt=r.right;
+        var kids=home.querySelectorAll('*');
+        for(var i=0;i<kids.length;i++){
+          var q=kids[i].getBoundingClientRect();
+          if(q.width>60 && q.height>40){ if(q.left<l) l=q.left; if(q.right>rt) rt=q.right; }
+        }
+        if(!(rt>l)){ l=0; rt=vw; }
+        var pad=18, fade=Math.max(60, vw*0.07);
+        var L=Math.max(0,l-pad), R=Math.min(vw,rt+pad);
+        var pc=function(x){ return (Math.max(-20,Math.min(120,x/vw*100))).toFixed(2)+'%'; };
+        var v=[pc(L-fade),pc(L),pc(R),pc(R+fade)].join('|');
+        /* MutationObserver 가 style 변경을 감시하므로, 값이 같을 때도 쓰면
+           setProperty -> mutation -> ping -> colBox 무한 rAF 루프가 된다 */
+        if(v===lastCol) return;
+        lastCol=v;
+        var st=layer.style, n=v.split('|');
+        st.setProperty('--mmf-l0', n[0]);
+        st.setProperty('--mmf-l',  n[1]);
+        st.setProperty('--mmf-r',  n[2]);
+        st.setProperty('--mmf-r0', n[3]);
+      }
+
+      /* ---------- 2) 첫 화면 카드 반투명화(글래스) ---------- */
+      function scaleAlphas(str,k){
+        if(!str || str==='none') return str;
+        return str.replace(/\brgba?\(\s*([^()]*)\)/gi, function(m, inner){
+          var nums, a=1;
+          if(inner.indexOf('/')>=0){
+            var sp=inner.split('/');
+            nums=sp[0].trim().split(/[\s,]+/).filter(Boolean).map(parseFloat);
+            var at=sp[1].trim();
+            a = at.charAt(at.length-1)==='%' ? parseFloat(at)/100 : parseFloat(at);
+          } else {
+            nums=inner.trim().split(/[\s,]+/).filter(Boolean).map(parseFloat);
+            if(nums.length>3) a=nums[3];
+          }
+          if(nums.length<3) return m;
+          for(var i=0;i<3;i++) if(isNaN(nums[i])) return m;
+          if(isNaN(a)) a=1;
+          var na=Math.max(0,Math.min(1,a*k));
+          return 'rgba('+nums[0]+','+nums[1]+','+nums[2]+','+(Math.round(na*1000)/1000)+')';
+        });
+      }
+      function maxAlpha(str){
+        var mx=0, re=/rgba?\(\s*([^()]*)\)/gi, mm;
+        while((mm=re.exec(str))){
+          var q=mm[1].replace('/',' ').trim().split(/[\s,]+/).filter(Boolean).map(parseFloat);
+          var av = q.length>3 ? q[3] : 1;
+          if(!isNaN(av) && av>mx) mx=av;
+        }
+        return mx;
+      }
+      function glassify(){
+        if(!GLASS) return;
+        var hw=home.getBoundingClientRect().width||1;
+        var els=home.querySelectorAll('*'), done=[];
+        for(var i=0;i<els.length;i++){
+          var el=els[i], tag=el.tagName;
+          if(tag==='BUTTON'||tag==='INPUT'||tag==='SELECT'||tag==='TEXTAREA'||tag==='IMG'||tag==='SVG') continue;
+          if(el.dataset.mmfGlass) continue;
+          var r=el.getBoundingClientRect();
+          if(r.width < Math.max(200, hw*0.5) || r.height < 70) continue;
+          var cs=getComputedStyle(el);
+          if((cs.webkitBackgroundClip||cs.backgroundClip)==='text') continue;
+          var bc=cs.backgroundColor||'', bi=cs.backgroundImage||'none';
+          var alpha = bc && bc!=='transparent' ? maxAlpha(bc) : 0;
+          var hasGrad = bi!=='none' && /gradient/i.test(bi);
+          /* 이미 반투명한 카드(예: rgba(255,255,255,.06) 글래스)는 건드리지 않는다.
+             더 투명하게 만들면 글자 대비만 깎이고 얻을 게 없다. */
+          var eff = 1-(1-alpha)*(1-(hasGrad?maxAlpha(bi):0));
+          if(eff < GMIN) continue;
+          /* 이미 위쪽 조상이 글래스면 더 약하게 (겹치면 불투명도가 곱해진다) */
+          var nested=false;
+          for(var t=0;t<done.length;t++) if(done[t].contains(el)){ nested=true; break; }
+          var k = nested ? GKIN : GK;
+          if(alpha>0.001) el.style.setProperty('background-color', scaleAlphas(bc,k), 'important');
+          if(hasGrad) el.style.setProperty('background-image', scaleAlphas(bi,k), 'important');
+          if(GBLUR){
+            el.style.setProperty('-webkit-backdrop-filter', GBLUR, 'important');
+            el.style.setProperty('backdrop-filter', GBLUR, 'important');
+          }
+          if(GSHADOW<1 && cs.boxShadow && cs.boxShadow!=='none')
+            el.style.setProperty('box-shadow', scaleAlphas(cs.boxShadow,GSHADOW), 'important');
+          el.dataset.mmfGlass='1';
+          done.push(el);
+        }
+      }
+
+      var raf=0, last=null;
+      function apply(){
+        raf=0;
+        colBox();
+        var on=onScreen(home);
+        if(on===last) return;
+        last=on;
+        root.classList.toggle('mmf-cover-on', on);
+      }
+      function ping(){ if(!raf) raf=requestAnimationFrame(apply); }
+      /* 글래스 처리가 실패해도 배경 레이어 자체는 살아 있어야 한다 */
+      function safeGlass(){ try{ glassify(); }catch(e){} }
+      apply();
+      safeGlass();
+      addEventListener('load', function(){ safeGlass(); ping(); });
+      addEventListener('scroll', ping, {passive:true});
+      addEventListener('resize', ping, {passive:true});
+      addEventListener('click', function(){ setTimeout(ping,0); setTimeout(ping,320); }, true);
+      [80,400,1200].forEach(function(t){ setTimeout(function(){ safeGlass(); ping(); },t); });
+      try{
+        new MutationObserver(ping).observe(body,{
+          subtree:true, childList:true, attributes:true,
+          attributeFilter:['class','style','hidden']
+        });
+      }catch(e){}
+    }catch(e){}
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
+  else boot();
+})();
+</script>
+<!-- mmf-cover-bg:end -->
 </head>
 <body>
 <div class="wrap">
