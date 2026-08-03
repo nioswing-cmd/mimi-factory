@@ -1262,6 +1262,18 @@
       "teaser": "apps/사기_열전_teaser.html",
       "premium": "apps/사기_열전_quiz.html",
       "desc": "사마천 『사기』 열전 일흔 편의 인물과 고사를 30문항 도파민 퀴즈로 반복해 익히고, 인과의 사슬·핵심 개념·목차 요약·약점 복습까지 담긴 완독"
+    },
+    {
+      "id": "징비록",
+      "type": "quiz",
+      "title": "징비록",
+      "author": "류성룡",
+      "date": "2026-08-04",
+      "color1": "#5ee7d8",
+      "color2": "#7aa6ff",
+      "teaser": "apps/징비록_teaser.html",
+      "premium": "apps/징비록_quiz.html",
+      "desc": "임진왜란 일곱 해를 겪은 재상 류성룡이 남긴 『징비록』의 핵심을 30문항 도파민 퀴즈로 익히고, 전쟁의 인과와 목차 요약까지 완독 리포트로 정리"
     }
   ]
 }
