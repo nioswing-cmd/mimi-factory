@@ -1274,6 +1274,18 @@
       "teaser": "apps/징비록_teaser.html",
       "premium": "apps/징비록_quiz.html",
       "desc": "임진왜란 일곱 해를 겪은 재상 류성룡이 남긴 『징비록』의 핵심을 30문항 도파민 퀴즈로 익히고, 전쟁의 인과와 목차 요약까지 완독 리포트로 정리"
+    },
+    {
+      "id": "백범일지",
+      "type": "quiz",
+      "title": "백범일지",
+      "author": "김구",
+      "date": "2026-08-04",
+      "color1": "#ff8ad0",
+      "color2": "#b78bf5",
+      "teaser": "apps/백범일지_teaser.html",
+      "premium": "apps/백범일지_quiz.html",
+      "desc": "황해도 상놈의 아들에서 임시정부 주석까지 — 김구가 두 아들에게 남긴 『백범일지』의 핵심을 30문항 도파민 퀴즈로 익히고, 마지막에 인과의 사슬"
     }
   ]
 }
