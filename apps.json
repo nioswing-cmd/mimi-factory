@@ -1286,6 +1286,18 @@
       "teaser": "apps/백범일지_teaser.html",
       "premium": "apps/백범일지_quiz.html",
       "desc": "황해도 상놈의 아들에서 임시정부 주석까지 — 김구가 두 아들에게 남긴 『백범일지』의 핵심을 30문항 도파민 퀴즈로 익히고, 마지막에 인과의 사슬"
+    },
+    {
+      "id": "난중일기",
+      "type": "quiz",
+      "title": "난중일기",
+      "author": "이순신",
+      "date": "2026-08-04",
+      "color1": "#ffd36e",
+      "color2": "#ff8a5c",
+      "teaser": "apps/난중일기_teaser.html",
+      "premium": "apps/난중일기_quiz.html",
+      "desc": "이순신이 임진년 정월부터 무술년 십일월까지 전쟁터에서 매일 적은 『난중일기』를, 날씨·군량·명량의 열세 척까지 30문항으로 익히고 완독 인포그래"
     }
   ]
 }
