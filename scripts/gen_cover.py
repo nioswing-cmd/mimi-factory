@@ -26,7 +26,7 @@
   MMF_IMAGE_MODEL 이미지 모델 (기본 google/gemini-3-pro-image)
   CLAUDE_MODEL    장면 묘사를 지을 모델 (기본 claude-opus-5)
 """
-import base64, io, json, os, subprocess, sys, time
+import base64, io, json, os, re, subprocess, sys, time
 
 import requests
 from PIL import Image, ImageOps
@@ -112,8 +112,9 @@ SCENE_BRIEF = """너는 책 표지 아트디렉터다. 아래 앱의 표지 그�
     이 스타일로 지을 때는 반드시 "ONE single ..." 로 시작하고 배경을 텅 비운다.
   · 3-인쇄질감: 리소그래프 2색 인쇄 느낌. 문학·고전에 어울린다.
 
-아래 JSON 한 줄만 출력한다. 다른 말·설명·코드펜스 금지.
-{{"style":"<스타일코드>","scene":"<영어 장면 묘사 한 문장>"}}"""
+아래 두 줄만 출력한다. 다른 말·설명·코드펜스·따옴표 금지.
+STYLE: <스타일코드>
+SCENE: <영어 장면 묘사 한 문장>"""
 
 TYPE_KO = {"quiz": "밤의 서재(독서 퀴즈)", "test": "도파민 실험실(심리 테스트)",
            "friend": "둘의 피크닉(친구와 하는 게임)"}
@@ -144,16 +145,15 @@ def make_scene(app):
         return None, None
 
     out = (r.stdout or "").strip()
-    # 코드펜스나 앞뒤 잡말이 섞여도 첫 { … } 만 건져낸다
-    i, j = out.find("{"), out.rfind("}")
-    if i < 0 or j <= i:
+    # 줄 단위로 판다. 자유 문장이라 JSON 으로 받으면 따옴표·줄바꿈에서 깨진다
+    # (2026-08-04 '강대국의 흥망' 에서 실제로 Unterminated string 이 났다).
+    m_style = re.search(r"^\s*STYLE\s*:\s*(.+)$", out, re.M | re.I)
+    m_scene = re.search(r"^\s*SCENE\s*:\s*(.+(?:\n(?!\s*STYLE\s*:).*)*)$", out, re.M | re.I)
+    if not m_scene:
         log(f"  장면 묘사 형식 이상: {out[:200]}")
         return None, None
-    try:
-        d = json.loads(out[i:j + 1])
-    except Exception as e:
-        log(f"  장면 묘사 JSON 파싱 실패: {e} / {out[i:j+1][:200]}")
-        return None, None
+    d = {"style": (m_style.group(1).strip().strip('"').strip("'") if m_style else None),
+         "scene": " ".join(m_scene.group(1).split()).strip().strip('"').strip("'")}
 
     raw_style = d.get("style")
     style = fixed or norm_style(raw_style)
@@ -223,6 +223,9 @@ def main():
         aid = a["id"]
         t0 = time.time()
         style, scene = make_scene(a)
+        if not scene:                      # 한 번은 다시 물어본다
+            log(f"  {aid}: 장면 묘사 재시도")
+            style, scene = make_scene(a)
         if not scene:
             log(f"[{i}/{len(todo)}] 실패 {aid}: 장면 묘사를 못 지었다")
             fail.append(aid)
