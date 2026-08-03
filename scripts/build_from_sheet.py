@@ -601,11 +601,54 @@ def localize_new(entry):
         log(f"🌏 다국어화 예외(생산은 정상): {e}")
 
 
+# ── 4.5. 표지 생성 + 표지배경 주입 ────────────────────────
+# 2026-07-31 표지, 2026-08-01 표지배경은 원래 일회성 스크립트로만 돌렸던 탓에
+# 그 뒤 생산된 신작에는 하나도 붙지 않았다(2026-08-04 발견, 10권 누락).
+# 생산 때마다 여기서 자동으로 붙인다. 표지는 부가 기능이라 실패해도 생산은 계속한다.
+COVER_BG_ENV = {           # 2026-08-01 사장님 승인 세기 — 바꾸지 말 것
+    "MMF_GK": "0.40", "MMF_SK": "0.70", "MMF_IMGOP": "0.70", "MMF_SM": "1.5",
+}
+
+
+def make_cover(entry):
+    """신작 1개의 표지를 만들고 첫 화면 배경으로 깐다."""
+    aid = entry.get("id")
+    if not aid:
+        return
+    try:
+        log("🎨 표지 생성 시작…")
+        r = subprocess.run([sys.executable, "scripts/gen_cover.py", "--only", aid],
+                           cwd=ROOT, capture_output=True, text=True, timeout=1800)
+        sys.stdout.write(r.stdout or "")
+        if r.returncode != 0:
+            log(f"표지 생성 실패(생산은 계속): {(r.stderr or '')[-500:]}")
+            return
+
+        cov = os.path.join(ROOT, "covers", aid + ".webp")
+        if not os.path.exists(cov):
+            log("표지 파일이 생기지 않았다 — 배경 주입 생략")
+            return
+
+        targets = [entry[k] for k in ("teaser", "premium") if entry.get(k)]
+        if not targets:
+            return
+        env = dict(os.environ, **COVER_BG_ENV)
+        r2 = subprocess.run([sys.executable, "scripts/inject_cover_bg.py", "--only"] + targets,
+                            cwd=ROOT, capture_output=True, text=True, timeout=600, env=env)
+        sys.stdout.write(r2.stdout or "")
+        if r2.returncode != 0:
+            log(f"표지배경 주입 실패(생산은 계속): {(r2.stderr or '')[-500:]}")
+            return
+        log("🎨 표지 + 배경 주입 완료")
+    except Exception as e:
+        log(f"표지 단계 예외(생산은 정상): {e}")
+
+
 def publish_korean(entry):
     """한국어판 즉시 발행: 다국어화(수십 분 소요) 전에 산출물을 먼저 커밋·푸시해
     배포를 앞당긴다. 실패해도 run_daily.sh의 최종 커밋이 보완한다."""
     try:
-        paths = ["apps/", "apps.json", "홍보초안/"]
+        paths = ["apps/", "apps.json", "covers/", "홍보초안/"]
         paths += [c["manifest"] for c in _load_platforms().values()
                   if os.path.exists(os.path.join(ROOT, c["manifest"]))]
         subprocess.run(["git", "add"] + paths, cwd=ROOT, capture_output=True)
@@ -640,6 +683,7 @@ def main():
         notify(item, "완료", f"{site}/{entry['teaser']}" if site else entry["teaser"])
         log("✅ 생산 완료!")
         register_platform(item, entry)
+        make_cover(entry)
         publish_korean(entry)
         localize_new(entry)
     else:
@@ -650,6 +694,7 @@ def main():
         if entry:
             notify(item, "완료", entry["teaser"]); log("✅ 재시도 성공!")
             register_platform(item, entry)
+            make_cover(entry)
             publish_korean(entry)
             localize_new(entry)
         else:
