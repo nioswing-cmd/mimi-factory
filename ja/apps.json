@@ -445,6 +445,18 @@
    "desc": "崩壊した文明と生き延びた社会 — 30問で核心をつかむ反復クイズ"
   },
   {
+   "id": "one-hundred-years-of-solitude",
+   "type": "test",
+   "title": "百年の孤独 ドーパミンマスタークイズ",
+   "author": "MIMI FACTORY",
+   "date": "2026-08-07",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/one-hundred-years-of-solitude.html",
+   "premium": "apps/one-hundred-years-of-solitude.html",
+   "desc": "ガブリエル・ガルシア＝マルケス『百年の孤独』の要点をクイズで完全マスター"
+  },
+  {
    "id": "hakubon-ilji",
    "type": "test",
    "title": "白凡逸志マスタークイズ",
@@ -505,6 +517,18 @@
    "desc": "広開土王碑と真鏡大師塔碑 — 消された古代史を、碑文から取り戻す"
   },
   {
+   "id": "shiki-retsuden",
+   "type": "test",
+   "title": "史記列伝ドーパミンマスタークイズ",
+   "author": "MIMI FACTORY",
+   "date": "2026-08-07",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/shiki-retsuden.html",
+   "premium": "apps/shiki-retsuden.html",
+   "desc": "司馬遷が描いた七十篇の人間ドラマを、反復クイズで身につける"
+  },
+  {
    "id": "love-languages",
    "type": "test",
    "title": "愛の言語",
@@ -515,6 +539,30 @@
    "teaser": "apps/love-languages.html",
    "premium": "apps/love-languages.html",
    "desc": "選択でわかる、あなたの愛のタイプと相性。"
+  },
+  {
+   "id": "sapiens-quiz",
+   "type": "test",
+   "title": "サピエンス ドーパミンマスタークイズ",
+   "author": "MIMI FACTORY",
+   "date": "2026-08-07",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/sapiens-quiz.html",
+   "premium": "apps/sapiens-quiz.html",
+   "desc": "『サピエンス全史』の核心を反復クイズで身につける学習アプリ"
+  },
+  {
+   "id": "the-three-body-problem",
+   "type": "test",
+   "title": "三体ドーパミンマスタークイズ",
+   "author": "MIMI FACTORY",
+   "date": "2026-08-07",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/the-three-body-problem.html",
+   "premium": "apps/the-three-body-problem.html",
+   "desc": "劉慈欣のハードSF大叙事詩を反復クイズで身につける"
   },
   {
    "id": "norwegian-wood",
@@ -541,6 +589,18 @@
    "desc": "ノーベル賞心理学者が明かす心のクセ・バイアスを、ドーパミン反復クイズで身につける"
   },
   {
+   "id": "boy-comes-quiz",
+   "type": "test",
+   "title": "少年が来る マスタークイズ",
+   "author": "MIMI FACTORY",
+   "date": "2026-08-07",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/boy-comes-quiz.html",
+   "premium": "apps/boy-comes-quiz.html",
+   "desc": "ハン・ガンのノーベル文学賞受賞作、五月の光州の記憶を身につけるドーパミンクイズ"
+  },
+  {
    "id": "finger-game-friend",
    "type": "test",
    "title": "指折りゲーム",
@@ -551,6 +611,18 @@
    "teaser": "apps/finger-game-friend.html",
    "premium": "apps/finger-game-friend.html",
    "desc": "ふたりで仲良くなる指のゲーム — 質問100問"
+  },
+  {
+   "id": "almond",
+   "type": "test",
+   "title": "アーモンド マスタークイズ",
+   "author": "MIMI FACTORY",
+   "date": "2026-08-07",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/almond.html",
+   "premium": "apps/almond.html",
+   "desc": "感情を感じられない少年の成長物語をドーパミンで学ぶ反復クイズ"
   },
   {
    "id": "atomic-habits",

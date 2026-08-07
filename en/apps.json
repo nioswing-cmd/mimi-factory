@@ -445,6 +445,18 @@
    "desc": "The finger game that brings two people closer — 100 questions"
   },
   {
+   "id": "almond",
+   "type": "test",
+   "title": "Almond Master Quiz",
+   "author": "MIMI FACTORY",
+   "date": "2026-08-07",
+   "color1": "#7aa6ff",
+   "color2": "#b78bf5",
+   "teaser": "apps/almond.html",
+   "premium": "apps/almond.html",
+   "desc": "Learn the boy who couldn’t feel — and the emotions that finally woke him up"
+  },
+  {
    "id": "atomic-habits",
    "type": "test",
    "title": "Atomic Habits Master Quiz",
