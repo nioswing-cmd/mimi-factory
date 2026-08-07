@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>映画の主人公になる · ふたり並んで演じる仲良しゲーム</title>
+<meta name="description" content="日本映画100場面の男女の役をランダムに引いて、ふたり並んで座ってセリフとト書きを即興で演じる仲良しゲーム。">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansJP-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/MPLUSRounded1c-Bold-sub.woff2') format('woff2');font-weight:400;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#160f26; --bg2:#2a1330;
+  --accent1:#ffd56b; --accent2:#ff8a5b;
+  --cream:#fff6ec; --muted:#cdbfe0;
+  --card:#241a3d;
+  --gold:#ffcf6b;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html,body{height:100%;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 82% -8%, rgba(255,180,90,.12), transparent 55%),
+    radial-gradient(120% 90% at 10% 112%, rgba(255,94,138,.14), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  transition:background .9s ease;
+  min-height:100dvh;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:540px; margin:0 auto; min-height:100dvh; padding:18px 16px 30px; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(105deg,#ffd56b,#ff8a5b 45%,#ff5e8a);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1,h2,h3,.jua{font-family:'Jua',sans-serif; font-weight:400;}
+.screen{display:none; animation:fadeIn .5s ease; flex:1; flex-direction:column;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+
+.topbar{display:flex; align-items:center; gap:10px; margin-bottom:12px;}
+.brandpill{
+  font-family:'Jua'; font-size:13px; letter-spacing:.02em;
+  padding:5px 12px; border-radius:99px; border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.04); color:var(--muted); white-space:nowrap;
+}
+.chem-wrap{flex:1;}
+.chem-top{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:5px;}
+.chem-label{font-size:11px; color:var(--muted); letter-spacing:.04em;}
+.chem-val{font-family:'Jua'; font-size:14px;}
+.gauge{height:10px; border-radius:99px; background:rgba(255,255,255,.10); overflow:hidden;}
+.gaugefill{
+  height:100%; width:0%; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  box-shadow:0 0 14px 1px var(--accent2);
+  transition:width .6s cubic-bezier(.22,1,.36,1), box-shadow .6s;
+}
+
+
+.intro{flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; gap:16px;}
+.filmstrip{font-size:13px; letter-spacing:.5em; text-indent:.5em; color:var(--muted); opacity:.8;}
+.title-lg{font-size:min(15vw,58px); line-height:1.02; letter-spacing:-.01em;}
+.subtitle{font-size:15px; color:var(--muted); line-height:1.6; }
+.howto{
+  text-align:left; background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.09);
+  border-radius:18px; padding:16px 18px; font-size:13.5px; color:var(--muted); line-height:1.85;
+}
+.howto b{color:var(--cream);}
+.names{display:flex; gap:10px;}
+.name-in{
+  flex:1; background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.12);
+  border-radius:14px; padding:13px 14px; color:var(--cream); font-size:15px; font-family:'Noto Sans KR';
+  text-align:center; transition:border-color .2s;
+}
+.name-in::placeholder{color:#8b7fa8;}
+.name-in:focus{outline:none; border-color:var(--accent2);}
+
+
+.btn{
+  border:none; border-radius:16px; padding:17px 20px; font-family:'Jua'; font-size:18px;
+  color:#2a1530; cursor:pointer; width:100%;
+  background:linear-gradient(105deg,var(--accent1),var(--accent2));
+  box-shadow:0 8px 24px -8px var(--accent2);
+  transition:transform .15s cubic-bezier(.34,1.56,.64,1), box-shadow .2s, filter .2s;
+}
+.btn:hover{filter:brightness(1.05);}
+.btn:active{transform:scale(.96);}
+.btn.ghost{
+  background:rgba(255,255,255,.06); color:var(--cream); box-shadow:none;
+  border:1.5px solid rgba(255,255,255,.16); font-size:15px; padding:14px;
+}
+.btn:focus-visible{outline:3px solid #fff; outline-offset:2px;}
+.btn-row{display:flex; gap:10px;}
+.btn-row .btn{width:auto; flex:1;}
+
+
+.draw-stage{flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:20px;}
+.reel{
+  width:100%; max-width:400px; height:150px; border-radius:22px;
+  background:rgba(0,0,0,.22); border:1.5px solid rgba(255,255,255,.10);
+  display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative;
+}
+.reel-text{font-family:'Jua'; font-size:26px; padding:0 16px; }
+.reel.spin .reel-text{animation:flick .09s steps(1) infinite;}
+@keyframes flick{50%{opacity:.15;}}
+.draw-hint{font-size:14px; color:var(--muted); line-height:1.7; }
+
+
+.pop{animation:pop .45s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92) rotate(-1deg); opacity:.3;}60%{transform:scale(1.02);}100%{transform:scale(1) rotate(0); opacity:1;}}
+.scene-scroll{flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding-bottom:6px;}
+.card{
+  background:linear-gradient(165deg, var(--card), rgba(20,14,34,.9));
+  border:1px solid rgba(255,255,255,.10); border-radius:22px; padding:20px 18px 22px;
+  box-shadow:0 20px 50px -24px rgba(0,0,0,.7);
+}
+.card-head{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:4px;}
+.tag{font-size:11.5px; padding:4px 11px; border-radius:99px; background:rgba(255,255,255,.08); color:var(--gold); letter-spacing:.02em; white-space:nowrap;}
+.no{font-size:11.5px; color:var(--muted); margin-left:auto;}
+.movie{font-family:'Jua'; font-size:26px; line-height:1.15; margin:6px 0 3px; }
+.situation{font-size:13.5px; color:var(--muted); line-height:1.65;  margin-bottom:14px;}
+.roles{display:flex; gap:9px; margin-bottom:6px;}
+.role{
+  flex:1; text-align:center; border-radius:14px; padding:11px 8px; font-size:13px;
+  border:1.5px solid rgba(255,255,255,.10); background:rgba(255,255,255,.04); line-height:1.4;
+}
+.role .who{font-family:'Jua'; font-size:12px; color:var(--muted); display:block; margin-bottom:3px;}
+.role .p{font-family:'Jua'; font-size:17px;}
+.role.rA{border-color:rgba(127,223,255,.4); background:rgba(127,223,255,.09);}
+.role.rA .p{color:#9fe6ff;}
+.role.rB{border-color:rgba(255,158,203,.42); background:rgba(255,158,203,.10);}
+.role.rB .p{color:#ffb0d4;}
+.swap{
+  display:block; margin:2px auto 16px; background:none; border:none; color:var(--muted);
+  font-size:12px; text-decoration:underline; cursor:pointer; padding:6px;
+}
+.script{display:flex; flex-direction:column; gap:12px;}
+.line{display:flex; gap:10px; animation:fadeIn .4s ease backwards;}
+.line .lbl{
+  flex-shrink:0; width:42px; text-align:center; font-family:'Jua'; font-size:12px; padding-top:2px;
+}
+.line.a .lbl{color:#9fe6ff;}
+.line.b .lbl{color:#ffb0d4;}
+.line .body{flex:1;}
+.line .say{font-size:15.5px; line-height:1.6; }
+.line .dir{font-size:12.5px; color:var(--muted); font-style:italic; margin-top:3px; }
+.line .dir::before{content:"🎬 "; font-style:normal;}
+.tip{margin-top:15px; font-size:12px; color:var(--muted); background:rgba(255,255,255,.04); border-radius:12px; padding:10px 12px; line-height:1.6; }
+.tip b{color:var(--gold);}
+
+
+.rate-box{text-align:center; margin-top:16px; padding-top:16px; border-top:1px dashed rgba(255,255,255,.13);}
+.rate-q{font-family:'Jua'; font-size:16px; margin-bottom:12px;}
+.chem-btns{display:flex; gap:8px;}
+.chem-btns .cb{
+  flex:1; border:1.5px solid rgba(255,255,255,.14); background:rgba(255,255,255,.04);
+  border-radius:14px; padding:11px 4px; cursor:pointer; color:var(--cream);
+  font-family:'Noto Sans KR'; transition:transform .15s cubic-bezier(.34,1.56,.64,1), background .2s, border-color .2s;
+}
+.cb:active{transform:scale(.94);}
+.cb .em{font-size:24px; display:block; margin-bottom:3px;}
+.cb .cl{font-size:11px; color:var(--muted);}
+
+
+.footer-actions{padding-top:14px;}
+
+
+.report{flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; gap:16px;}
+.badge{
+  width:120px; height:120px; margin:0 auto; border-radius:50%;
+  background:conic-gradient(from 200deg, var(--accent1), var(--accent2), #ff5e8a, var(--accent1));
+  display:flex; align-items:center; justify-content:center; font-size:52px;
+  box-shadow:0 0 40px -6px var(--accent2); animation:pop .6s cubic-bezier(.34,1.56,.64,1);
+}
+.rep-title{font-size:30px; line-height:1.1;}
+.rep-verdict{font-size:15px; color:var(--muted); line-height:1.7; }
+.stat-row{display:flex; gap:10px;}
+.stat{flex:1; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); border-radius:16px; padding:14px 8px;}
+.stat .sv{font-family:'Jua'; font-size:26px;} .stat .sl{font-size:11px; color:var(--muted); margin-top:2px;}
+
+
+.toast{
+  position:fixed; left:50%; top:74px; transform:translateX(-50%) translateY(-20px);
+  background:rgba(36,26,61,.97); border:1.5px solid var(--accent2); color:var(--cream);
+  padding:12px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none;
+  transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; text-align:center;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+.lp{padding:9px 14px;border-radius:99px;border:1.5px solid rgba(167,139,250,.4);background:rgba(36,26,61,.6);color:var(--cream);font-size:13px;cursor:pointer;font-family:inherit;}
+.lp.sel{border-color:var(--accent2);background:rgba(122,166,255,.18);font-weight:700;}
+
+
+.footer{text-align:center; margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em; background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+.disclaimer{font-size:10.5px; color:#8578a0; text-align:center; margin-top:14px; line-height:1.6; }
+
+@media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+</style>
+<!-- mmf-cover-bg:start -->
+<style id="mmf-cover-css">
+
+#mmf-cover-bg{
+  position:fixed; inset:0; z-index:-1; pointer-events:none;
+  opacity:0; transition:opacity .5s ease; isolation:isolate;
+  --mmf-cover:url("../covers/%EC%98%81%ED%99%94%EC%86%8D_%EC%A3%BC%EC%9D%B8%EA%B3%B5%EB%90%98%EA%B8%B0.webp");
+  --mmf-l0:0%; --mmf-l:0%; --mmf-r:100%; --mmf-r0:100%;
+  --mmf-mimg:linear-gradient(180deg,#000 0%,#000 38%,rgba(0,0,0,.55) 68%,transparent 88%);
+  --mmf-mscr:linear-gradient(180deg,#000 0%,#000 52%,rgba(0,0,0,.6) 82%,transparent 100%);
+}
+#mmf-cover-bg::before,#mmf-cover-bg::after{
+  content:"";position:absolute;
+  -webkit-mask-image:var(--mmf-mimg); mask-image:var(--mmf-mimg);
+}
+#mmf-cover-bg::before{
+  z-index:0; inset:-6%;
+  background-image:var(--mmf-cover);
+  background-size:cover; background-position:center 20%; background-repeat:no-repeat;
+  filter:blur(calc(6px + 1.1vw)) brightness(0.611) contrast(1.884) brightness(0.6) saturate(2.35);
+}
+#mmf-cover-bg::after{
+  z-index:1; inset:0;
+  background:rgb(140,140,140);
+  mix-blend-mode:darken;
+}
+#mmf-cover-bg>.mmf-scrim{
+  z-index:2; position:absolute; inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.00) 0%,rgba(0,0,0,.06) 55%,rgba(0,0,0,.18) 100%);
+  -webkit-mask-image:var(--mmf-mscr); mask-image:var(--mmf-mscr);
+}
+
+#mmf-cover-bg>.mmf-scrim2w{
+  z-index:3; position:absolute; inset:0;
+  -webkit-mask-image:var(--mmf-mscr); mask-image:var(--mmf-mscr);
+}
+#mmf-cover-bg .mmf-scrim2{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,0.280) 0%,rgba(0,0,0,0.644) 55%,rgba(0,0,0,0.700) 100%);
+  -webkit-mask-image:linear-gradient(90deg,transparent var(--mmf-l0),#000 var(--mmf-l),#000 var(--mmf-r),transparent var(--mmf-r0));
+          mask-image:linear-gradient(90deg,transparent var(--mmf-l0),#000 var(--mmf-l),#000 var(--mmf-r),transparent var(--mmf-r0));
+}
+html.mmf-cover-on #mmf-cover-bg{opacity:0.70;}
+@media (prefers-reduced-motion:reduce){#mmf-cover-bg{transition:none;}}
+@media print{#mmf-cover-bg{display:none!important;}}
+</style>
+<script id="mmf-cover-js">
+(function(){
+  "use strict";
+  var GLASS=1, GK=0.40, GKIN=0.8, GBLUR="blur(5px) saturate(1.15)", GSHADOW=0.6, GMIN=0.30;
+  function boot(){
+    try{
+      var d=document, root=d.documentElement, body=d.body;
+      if(!body || d.getElementById('mmf-cover-bg')) return;
+      var layer=d.createElement('div');
+      layer.id='mmf-cover-bg';
+      layer.setAttribute('aria-hidden','true');
+      var scrim=d.createElement('div'); scrim.className='mmf-scrim';
+      var wrap2=d.createElement('div'); wrap2.className='mmf-scrim2w';
+      var scrim2=d.createElement('div'); scrim2.className='mmf-scrim2';
+      wrap2.appendChild(scrim2);
+      layer.appendChild(scrim); layer.appendChild(wrap2);
+      body.insertBefore(layer, body.firstChild);
+
+      
+      function rendered(el){
+        if(!el) return false;
+        var cs=getComputedStyle(el);
+        if(cs.display==='none'||cs.visibility==='hidden') return false;
+        var r=el.getBoundingClientRect();
+        return r.width>8 && r.height>8;
+      }
+      function onScreen(el){
+        if(!rendered(el)) return false;
+        var r=el.getBoundingClientRect();
+        return r.top < innerHeight && r.bottom > 0 && r.left < innerWidth && r.right > 0;
+      }
+      
+      var home=null;
+      var sels=['#home','#startScreen','#screen-home','#intro','#start','#cover',
+                'section.screen.on','.screen.on','section.home','.home',
+                'section#home','main>section','.wrap>section','.app>section','body>section','section'];
+      for(var i=0;i<sels.length && !home;i++){
+        var list=d.querySelectorAll(sels[i]);
+        for(var j=0;j<list.length;j++){ if(rendered(list[j])){ home=list[j]; break; } }
+      }
+      if(!home){
+        var h=d.querySelector('.hero,.card,h1');
+        home=h?(h.closest('section')||h.parentElement):body.firstElementChild;
+      }
+      if(!home) return;
+
+      
+      var lastCol='';
+      function colBox(){
+        var vw=innerWidth||1, r=home.getBoundingClientRect();
+        var l=r.left, rt=r.right;
+        var kids=home.querySelectorAll('*');
+        for(var i=0;i<kids.length;i++){
+          var q=kids[i].getBoundingClientRect();
+          if(q.width>60 && q.height>40){ if(q.left<l) l=q.left; if(q.right>rt) rt=q.right; }
+        }
+        if(!(rt>l)){ l=0; rt=vw; }
+        var pad=18, fade=Math.max(60, vw*0.07);
+        var L=Math.max(0,l-pad), R=Math.min(vw,rt+pad);
+        var pc=function(x){ return (Math.max(-20,Math.min(120,x/vw*100))).toFixed(2)+'%'; };
+        var v=[pc(L-fade),pc(L),pc(R),pc(R+fade)].join('|');
+        
+        if(v===lastCol) return;
+        lastCol=v;
+        var st=layer.style, n=v.split('|');
+        st.setProperty('--mmf-l0', n[0]);
+        st.setProperty('--mmf-l',  n[1]);
+        st.setProperty('--mmf-r',  n[2]);
+        st.setProperty('--mmf-r0', n[3]);
+      }
+
+      
+      function scaleAlphas(str,k){
+        if(!str || str==='none') return str;
+        return str.replace(/\brgba?\(\s*([^()]*)\)/gi, function(m, inner){
+          var nums, a=1;
+          if(inner.indexOf('/')>=0){
+            var sp=inner.split('/');
+            nums=sp[0].trim().split(/[\s,]+/).filter(Boolean).map(parseFloat);
+            var at=sp[1].trim();
+            a = at.charAt(at.length-1)==='%' ? parseFloat(at)/100 : parseFloat(at);
+          } else {
+            nums=inner.trim().split(/[\s,]+/).filter(Boolean).map(parseFloat);
+            if(nums.length>3) a=nums[3];
+          }
+          if(nums.length<3) return m;
+          for(var i=0;i<3;i++) if(isNaN(nums[i])) return m;
+          if(isNaN(a)) a=1;
+          var na=Math.max(0,Math.min(1,a*k));
+          return 'rgba('+nums[0]+','+nums[1]+','+nums[2]+','+(Math.round(na*1000)/1000)+')';
+        });
+      }
+      function maxAlpha(str){
+        var mx=0, re=/rgba?\(\s*([^()]*)\)/gi, mm;
+        while((mm=re.exec(str))){
+          var q=mm[1].replace('/',' ').trim().split(/[\s,]+/).filter(Boolean).map(parseFloat);
+          var av = q.length>3 ? q[3] : 1;
+          if(!isNaN(av) && av>mx) mx=av;
+        }
+        return mx;
+      }
+      function glassify(){
+        if(!GLASS) return;
+        var hw=home.getBoundingClientRect().width||1;
+        var els=home.querySelectorAll('*'), done=[];
+        for(var i=0;i<els.length;i++){
+          var el=els[i], tag=el.tagName;
+          if(tag==='BUTTON'||tag==='INPUT'||tag==='SELECT'||tag==='TEXTAREA'||tag==='IMG'||tag==='SVG') continue;
+          if(el.dataset.mmfGlass) continue;
+          var r=el.getBoundingClientRect();
+          if(r.width < Math.max(200, hw*0.5) || r.height < 70) continue;
+          var cs=getComputedStyle(el);
+          if((cs.webkitBackgroundClip||cs.backgroundClip)==='text') continue;
+          var bc=cs.backgroundColor||'', bi=cs.backgroundImage||'none';
+          var alpha = bc && bc!=='transparent' ? maxAlpha(bc) : 0;
+          var hasGrad = bi!=='none' && /gradient/i.test(bi);
+          
+          var eff = 1-(1-alpha)*(1-(hasGrad?maxAlpha(bi):0));
+          if(eff < GMIN) continue;
+          
+          var nested=false;
+          for(var t=0;t<done.length;t++) if(done[t].contains(el)){ nested=true; break; }
+          var k = nested ? GKIN : GK;
+          if(alpha>0.001) el.style.setProperty('background-color', scaleAlphas(bc,k), 'important');
+          if(hasGrad) el.style.setProperty('background-image', scaleAlphas(bi,k), 'important');
+          if(GBLUR){
+            el.style.setProperty('-webkit-backdrop-filter', GBLUR, 'important');
+            el.style.setProperty('backdrop-filter', GBLUR, 'important');
+          }
+          if(GSHADOW<1 && cs.boxShadow && cs.boxShadow!=='none')
+            el.style.setProperty('box-shadow', scaleAlphas(cs.boxShadow,GSHADOW), 'important');
+          el.dataset.mmfGlass='1';
+          done.push(el);
+        }
+      }
+
+      var raf=0, last=null;
+      function apply(){
+        raf=0;
+        colBox();
+        var on=onScreen(home);
+        if(on===last) return;
+        last=on;
+        root.classList.toggle('mmf-cover-on', on);
+      }
+      function ping(){ if(!raf) raf=requestAnimationFrame(apply); }
+      
+      function safeGlass(){ try{ glassify(); }catch(e){} }
+      apply();
+      safeGlass();
+      addEventListener('load', function(){ safeGlass(); ping(); });
+      addEventListener('scroll', ping, {passive:true});
+      addEventListener('resize', ping, {passive:true});
+      addEventListener('click', function(){ setTimeout(ping,0); setTimeout(ping,320); }, true);
+      [80,400,1200].forEach(function(t){ setTimeout(function(){ safeGlass(); ping(); },t); });
+      try{
+        new MutationObserver(ping).observe(body,{
+          subtree:true, childList:true, attributes:true,
+          attributeFilter:['class','style','hidden']
+        });
+      }catch(e){}
+    }catch(e){}
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
+  else boot();
+})();
+</script>
+<!-- mmf-cover-bg:end -->
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <div class="topbar" id="topbar" style="display:none;">
+    <div class="brandpill">🎬 <span id="tbNames">ふたりの俳優</span></div>
+    <div class="chem-wrap">
+      <div class="chem-top">
+        <span class="chem-label">私たちの相性</span>
+        <span class="chem-val"><span id="chemPct">0</span>%</span>
+      </div>
+      <div class="gauge"><div class="gaugefill" id="chemFill"></div></div>
+    </div>
+  </div>
+
+  
+  <section class="screen on" id="scIntro">
+    <div class="intro">
+      <div class="filmstrip">▮ ▯ ▮ ▯ ▮ ▯ ▮</div>
+      <h1 class="title-lg"><span class="grad">映画の中の<br>主人公になる</span></h1>
+      <p class="subtitle">ふたり並んで座り、日本映画100場面の男女の役を<br>ランダムに引いて <b>セリフとト書きを即興で演技</b>する<br>仲良しゲーム 🎭</p>
+      <div class="howto">
+        <b>🍿 遊び方</b><br>
+        ① ふたりで並んで画面を見ます。<br>
+        ② <b>場面を引く</b>を押すと、映画・役・セリフがランダムに表示。<br>
+        ③ 割り当てられた <b class="grad">青の役 / ピンクの役</b>を演じてセリフとト書きを演技！<br>
+        ④ 演技のあとは <b>相性</b>を押してゲージを満たし、次の場面へ。
+      </div>
+      <div class="names">
+        <input class="name-in" id="p1" maxlength="6" placeholder="俳優①">
+        <input class="name-in" id="p2" maxlength="6" placeholder="俳優②">
+      </div>
+      <div class="lenpick" style="display:flex;gap:8px;justify-content:center;margin:14px 0 6px">
+        <button class="lp" onclick="setLen('short',this)">⚡ 短いセリフ</button>
+        <button class="lp" onclick="setLen('long',this)">📜 長いセリフ</button>
+        <button class="lp sel" onclick="setLen('random',this)">🎲 ランダム</button>
+      </div>
+      <p style="font-size:11.5px;color:#9a8fc0;text-align:center;margin:0 0 12px;">長いセリフは場面が倍深くなります（8フレーズ前後）</p>
+      <button class="btn" onclick="startGame()">🎬 最初の場面を開く</button>
+      <p class="disclaimer">※ すべてのセリフ・ト書きは各映画の雰囲気を借りて作った <b>ミミファクトリー創作アレンジ</b>です。実際の映画の台本ではありません。</p>
+    </div>
+  </section>
+
+  
+  <section class="screen" id="scDraw">
+    <div class="draw-stage">
+      <div class="reel" id="reel"><div class="reel-text" id="reelText">🎞️</div></div>
+      <p class="draw-hint" id="drawHint">ボタンを押すと110の名場面からひとつがランダムに開きます。</p>
+      <button class="btn" id="drawBtn" onclick="drawScene()">🎲 場面を引く</button>
+    </div>
+  </section>
+
+  
+  <section class="screen" id="scScene">
+    <div class="scene-scroll">
+      <div class="card pop" id="card"><!-- JS --></div>
+    </div>
+  </section>
+
+  
+  <section class="screen" id="scReport">
+    <div class="report">
+      <div class="badge">🏆</div>
+      <h2 class="rep-title grad" id="repTitle">相性爆発！</h2>
+      <p class="rep-verdict" id="repVerdict"></p>
+      <div class="stat-row">
+        <div class="stat"><div class="sv" id="stActed">0</div><div class="sl">演じた場面</div></div>
+        <div class="stat"><div class="sv" id="stChem">0%</div><div class="sl">最終相性</div></div>
+        <div class="stat"><div class="sv" id="stFav">–</div><div class="sl">ベスト相性ジャンル</div></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn ghost" onclick="shareResult()">📋 結果をコピー</button>
+        <button class="btn" onclick="keepPlaying()">🎬 もっと遊ぶ</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer-actions" id="footerActions" style="display:none;">
+    <div class="btn-row">
+      <button class="btn ghost" style="flex:.7;" onclick="reDraw()">🔄 もう一度引く</button>
+      <button class="btn" onclick="goRate()">✅ 演技完了</button>
+    </div>
+  </div>
+
+  
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/ja/friend.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧺 ふたりのピクニック — 他のゲームを見に行く →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意 味 と 面 白 さ の 工 場</span></div>
+    <div class="mf-logo">ミミファクトリー</div>
+    <div class="mf-caption">株式会社ヨンギョル ファミリーカンパニー</div>
+  </div>
+</div>
+
+<script>
+
+const SCENES=[
+{m:"春の日の手紙",g:"💛 初恋",s:"バス停、雨が上がったあと。ずっと胸に秘めていた言葉を切り出す瞬間。",ra:"先に好きになった側",rb:"気づいていない側",ln:[
+ {r:"a",t:"あの…傘、一緒に入る？ いや、実は傘は口実で。",d:"傘を半分差し出しかけて止まる"},
+ {r:"b",t:"口実なら…本当は何なの？"},
+ {r:"a",t:"本当は、バス停三つ分くらい長く一緒にいても平気ってこと。",d:"耳を赤くして目をそらす"},
+ {r:"b",t:"…じゃあ今日は終点まで行こう。",d:"小さく笑って隣をつつく"}]},
+{m:"定食屋の季節",g:"👨‍👩‍👧 家族",s:"遅い夜の定食屋。久しぶりに向かい合う親と大人になった子ども。",ra:"親",rb:"子ども",ln:[
+ {r:"a",t:"ちゃんと食べてるの。顔がやつれたね。",d:"汁物にご飯をよそい足す"},
+ {r:"b",t:"母さんはいつもご飯ご飯って。私もう三十だよ。"},
+ {r:"a",t:"三十でも私の目には八歳よ。ゆっくり食べて、熱いから。"},
+ {r:"b",t:"…母さんも少し食べなよ。",d:"箸を親の手に握らせる"}]},
+{m:"路地の決闘",g:"🔥 アクション",s:"雨降る裏路地。長年の因縁を持つふたりが向かい合う。",ra:"追う者",rb:"追われる者",ln:[
+ {r:"a",t:"三年待った。逃げ道はここまでだ。",d:"拳をゆっくり握る"},
+ {r:"b",t:"待ったのは俺も同じだ。後悔する覚悟はできてるのか。"},
+ {r:"a",t:"後悔は勝った奴がするもんだ。",d:"一歩前に踏み出す"},
+ {r:"b",t:"なら…今夜はふたりとも後悔するな。",d:"雨водуを拭いながら構えを低くする"}]},
+{m:"最後の乗車券",g:"🚂 別れ",s:"駅のホーム、発車まであと三分。つかめなかった愛を見送る場所。",ra:"去る側",rb:"残る側",ln:[
+ {r:"a",t:"泣くなよ。お前が泣くと、俺、乗れなくなる。",d:"手の甲で相手の目元を拭う"},
+ {r:"b",t:"泣いてない。これはただ…風のせい。"},
+ {r:"a",t:"風、よく吹くよな、俺たち。",d:"発車のベルが鳴る"},
+ {r:"b",t:"行け。行って、元気で。俺のことは気にするな。",d:"背中を押しながらも手は離せない"}]},
+{m:"怪しい下宿",g:"😂 コメディ",s:"下宿の台所。こっそりラーメンを作っていて見つかったふたり。",ra:"見つかった側",rb:"見つけた側",ln:[
+ {r:"a",t:"これは…これはラーメンじゃなくて、ただお湯を沸かしてただけです。",d:"鍋を背中に隠す"},
+ {r:"b",t:"お湯から卵とネギが生えてくるんですか？"},
+ {r:"a",t:"最近の水がいいので。オーガニックです。",d:"平静を装って箸を持つ"},
+ {r:"b",t:"…一口だけ。一口だけちょうだい。",d:"そっと座る"}]},
+{m:"刑事の夜",g:"🕶️ ノワール",s:"取調室。向かい合う刑事と容疑者。煙草の煙が漂う。",ra:"刑事",rb:"容疑者",ln:[
+ {r:"a",t:"嘘は三回までしか我慢しない。もう二回ついたな。",d:"書類をパタンと閉じる"},
+ {r:"b",t:"じゃあ最後の一回は取っておかないとですね、刑事さん。"},
+ {r:"a",t:"頭はいいのに、その頭のせいでここまで来たな。",d:"体を前に傾ける"},
+ {r:"b",t:"…あるいは、あなたをここまで連れてきたのかもしれませんよ。",d:"口角を上げる"}]},
+{m:"海辺のあの夏",g:"🌊 青春",s:"夜の海、砂浜。二十歳のふたりの友人が星を数える。",ra:"夢が大きい側",rb:"怖がりな側",ln:[
+ {r:"a",t:"俺、東京に行くよ。ここじゃ俺の星が見えないから。"},
+ {r:"b",t:"…じゃあ私は？ 私はどうすればいいの。"},
+ {r:"a",t:"一緒に行こうよ、バカだな。なんでお前を置いていくんだよ。",d:"肩をポンと叩く"},
+ {r:"b",t:"本当だよね？ あとで違うこと言うのなしだからね。",d:"小指を差し出す"}]},
+{m:"宮中の影",g:"🏯 時代劇",s:"深夜の宮中。禁じられた仲のふたりがひそかに会う。",ra:"身分の高い側",rb:"身分の低い側",ln:[
+ {r:"a",t:"この刻限にここまで参るとは、首がいくつあると思うておる。",d:"低くささやきながら周囲をうかがう"},
+ {r:"b",t:"首がひとつしかないからこそ惜しくないのです、こうしてお会いできるなら。"},
+ {r:"a",t:"…塀を越えよ。誰も知らぬ道がある。",d:"袖の中から鍵を握らせる"},
+ {r:"b",t:"どこへでも参ります。その御手さえ離されなければ。",d:"頭を下げて手を包み込む"}]},
+{m:"タクシーの中の告白",g:"🚕 ロマンス",s:"明け方のタクシーの後部座席。ほろ酔いのふたり、行き先はまだひとつ。",ra:"先に酔った側",rb:"しらふのふりをする側",ln:[
+ {r:"a",t:"運転手さん、この人の家先にお願いします。…行くなって言えば行かないくせに。",d:"窓の外に向かってつぶやく"},
+ {r:"b",t:"誰も行くなとは言ってない。酔ったなら寝てろ。"},
+ {r:"a",t:"行かないで。今のは、酔って言ったんじゃない。",d:"腕をつかむ"},
+ {r:"b",t:"…運転手さん、次の信号で戻ってください。",d:"小さく笑って手を握り返す"}]},
+{m:"屋上部屋の戦争",g:"😂 コメディ",s:"狭い屋上部屋。リモコンひとつをめぐる攻防戦。",ra:"ドラマ派",rb:"サッカー派",ln:[
+ {r:"a",t:"今日は私の番。先週譲ったでしょ。",d:"リモコンをひったくる"},
+ {r:"b",t:"延長戦なんだよ！人生がかかった試合なんだ！"},
+ {r:"a",t:"私のドラマも今日結婚式なんだけど！",d:"リモコンを背中に隠す"},
+ {r:"b",t:"…じゃんけん。負けた方がチキンおごり。",d:"拳を差し出す"}]},
+{m:"初雪の日の約束",g:"❄️ メロドラマ",s:"初雪の広場。一年前別れた場所で再び出会う。",ra:"先に来た側",rb:"遅れて来た側",ln:[
+ {r:"a",t:"来るとは思わなかった。ただ、雪が降ったから来てみた。",d:"白い息を吐きながら足踏みする"},
+ {r:"b",t:"一年待った人がそんなこと言うんだ。"},
+ {r:"a",t:"…そう。本当は毎日ここに来てた。",d:"目をそらせない"},
+ {r:"b",t:"バカ。じゃあもっと早く電話すればよかったのに。",d:"マフラーをほどいて相手の首に巻いてあげる"}]},
+{m:"田舎のバス停",g:"👵 家族",s:"バスが一日一本しか来ない田舎のバス停。祖母と孫。",ra:"祖母",rb:"孫",ln:[
+ {r:"a",t:"バス来たら振り返らず乗りな。わかったね。",d:"手にゆで卵を握らせる"},
+ {r:"b",t:"おばあちゃんはなんでいつも振り返るなって言うの。"},
+ {r:"a",t:"振り返ると足が動かなくなるんだよ。私もそうだった。",d:"遠い山を見つめる"},
+ {r:"b",t:"…私、休みにまた来るね。約束。",d:"祖母をぎゅっと抱きしめる"}]},
+{m:"レコーディングスタジオの夜",g:"🎤 音楽",s:"小さなスタジオ、深夜三時。完成しない曲をめぐって言い争うふたり。",ra:"作曲家",rb:"ボーカル",ln:[
+ {r:"a",t:"もう一回だけ。このフレーズ、お前の声じゃなきゃダメなんだ。"},
+ {r:"b",t:"喉、もう限界。これ本当にそんなに大事なこと？"},
+ {r:"a",t:"大事だよ。この曲、お前に聴かせるために作ったんだから。",d:"ヘッドホンを外して置く"},
+ {r:"b",t:"…え？ 今なんて言った。",d:"マイクの前で立ち止まる"}]},
+{m:"病室の窓辺",g:"🏥 感動",s:"夕暮れの病室。長く患う友のそばに寄り添う場所。",ra:"病んでいる側",rb:"付き添う側",ln:[
+ {r:"a",t:"おい、お前ずっとここにいたら会社クビになるぞ。行けよ。",d:"布団を引き上げる"},
+ {r:"b",t:"クビになったらなったまでだよ。お前より会社が大事かよ。"},
+ {r:"a",t:"…すまない。俺のせいで。",d:"天井を見つめる"},
+ {r:"b",t:"悪いと思うなら早く治って。それが返すってことだから。",d:"手をぎゅっと握る"}]},
+{m:"屋台の真実",g:"🍢 人生",s:"雨降る夜の屋台。日本酒一本を前にした古い友人。",ra:"打ち明ける側",rb:"聞き役",ln:[
+ {r:"a",t:"実は…会社辞めたんだ。二ヶ月になる。",d:"杯を見下ろす"},
+ {r:"b",t:"…なんで今まで言わなかったんだよ。二ヶ月もひとりで抱え込んで。"},
+ {r:"a",t:"恥ずかしくて。お前にはなおさら。",d:"酒を一気に飲み干す"},
+ {r:"b",t:"恥ずかしくなんかないよ。ほら、もう一杯。今日は俺がおごる。",d:"杯を満たしてあげる"}]},
+{m:"キーパーの夏",g:"⚽ スポーツ",s:"PK戦直前。ベンチで互いに最後の言葉をかける。",ra:"キャプテン",rb:"新米キーパー",ln:[
+ {r:"a",t:"震えるな。決めるか外すかはあいつらの仕事、止めるのはお前の仕事だ。"},
+ {r:"b",t:"先輩、俺が失敗したらどうしよう。俺のせいで負けたら…"},
+ {r:"a",t:"負けるならみんなで負けるんだよ。お前ひとりで背負うことじゃない。",d:"グローブを直してあげる"},
+ {r:"b",t:"…はい。ひとつは絶対止めます。",d:"ゴール前に歩いていく"}]},
+{m:"図書館のメモ",g:"💛 初恋",s:"試験期間の図書館。本の間でメモがやり取りされる。",ra:"メモを送った側",rb:"メモを受け取った側",ln:[
+ {r:"a",t:"（ささやいて）その本、読み終わったら…私と同じものを見たってことだね。",d:"隣の席にそっと座る"},
+ {r:"b",t:"こんな広い図書館で、なんでよりによってここに座るの。"},
+ {r:"a",t:"ここが一番…よく見えるから。本が。",d:"つい本のページをめくる"},
+ {r:"b",t:"本が？ 本当に本？",d:"ペンで相手の手の甲をトントンと叩く"}]},
+{m:"引っ越しの日",g:"📦 別れ",s:"がらんとした部屋、最後の荷物。一緒に暮らしたふたりの最後の朝。",ra:"去る側",rb:"残る側",ln:[
+ {r:"a",t:"コップは置いていくよ。朝、水を飲むとき、ひとつは要るだろ。",d:"段ボールをテープで閉じる"},
+ {r:"b",t:"…要らない。私、あんまり水飲まないし。"},
+ {r:"a",t:"嘘つけ。お前、毎晩台所行ってただろ。",d:"コップを食卓に置く"},
+ {r:"b",t:"…あれは水を飲みに行ってたんじゃない。あなたが眠ってるか見に行ってたの。",d:"コップを静かに握る"}]},
+{m:"屋上の決着",g:"🕶️ ノワール",s:"高層ビルの屋上、風が強い。裏切りの真実と向き合う夜。",ra:"疑う側",rb:"疑われる側",ln:[
+ {r:"a",t:"お前が流したんだろ。あの名簿、お前しか知らなかったはずだ。",d:"手すりをつかむ"},
+ {r:"b",t:"俺が流したなら、今ここに立ってるわけないだろ。"},
+ {r:"a",t:"…じゃあ誰なんだ。俺に嘘つく気なら今すぐ飛び降りろ。",d:"胸ぐらをつかむ"},
+ {r:"b",t:"飛び降りてもいいけど、その前にこれだけ見てくれ。",d:"懐から写真を取り出す"}]},
+{m:"結婚式前夜",g:"💍 ロマンス",s:"結婚式前夜、控室の廊下。揺れる心。",ra:"明日結婚する側",rb:"古い友人",ln:[
+ {r:"a",t:"俺、明日結婚するんだ。なのになんでお前の顔ばっかり浮かぶんだろう。"},
+ {r:"b",t:"…その言葉、今日言っちゃいけないやつじゃない。"},
+ {r:"a",t:"わかってる。だから今日しか言えないんだ。",d:"うつむく"},
+ {r:"b",t:"明日、きれいに笑ってね。私…一番後ろの席から見てるから。",d:"背を向けて涙をこらえる"}]},
+{m:"ラーメンを作る夜",g:"🍜 日常ロマンス",s:"ひとり暮らしの台所。夜通しラーメンひとつを分け合う。",ra:"料理が下手な側",rb:"受け止める側",ln:[
+ {r:"a",t:"見て。完璧でしょ。三分半、半熟卵。",d:"得意げに鍋を差し出す"},
+ {r:"b",t:"麺、伸びきってるけど？ これが半熟？"},
+ {r:"a",t:"…おいしそうに食べてくれるのが本当の腕前だって、知らなかったでしょ。",d:"箸を握らせる"},
+ {r:"b",t:"いいから、食べよう。こんな夜は何食べてもうまいから。",d:"先にひと口すする"}]},
+{m:"校庭の最後のチャイム",g:"🏫 青春",s:"卒業式のあと、がらんとした校庭。三年間共に過ごしたふたり。",ra:"告白できなかった側",rb:"知らなかった側",ln:[
+ {r:"a",t:"三年間ずっと言いたいことがあったんだけど、今日を逃したらもう二度と言えない気がして。"},
+ {r:"b",t:"…何。なんで今になってそんな顔するの。"},
+ {r:"a",t:"好きだった。一年の春から、ずっと今まで。",d:"スニーカーの先で地面をほじる"},
+ {r:"b",t:"バカ。私もずっとここでお前を待ってたのに。",d:"手を差し出す"}]},
+{m:"梅雨の傘",g:"☔ メロドラマ",s:"降りしきる梅雨の雨。傘ひとつで肩が濡れていく。",ra:"傘を持つ側",rb:"濡れる側",ln:[
+ {r:"a",t:"こっちに寄って。そのままだと全部濡れるよ。",d:"傘を相手側に傾ける"},
+ {r:"b",t:"そしたらお前が濡れるだろ。いいよ。"},
+ {r:"a",t:"俺は濡れてもいい。お前はダメだ。",d:"自分の肩はもうすっかり濡れている"},
+ {r:"b",t:"…そんなこと、そんな平気な顔で言わないでよ。",d:"腕を組んでぴったり寄り添う"}]},
+{m:"老舗の店主",g:"🍲 人生",s:"三十年続いた食堂、閉店最後の日。常連客と店主。",ra:"店主",rb:"長年の常連",ln:[
+ {r:"a",t:"この席、二十年間あんたの席だったね。今日で最後だ。",d:"汁物をもう一杯よそう"},
+ {r:"b",t:"…女将さん、俺がここで初任給のお祝いしたの覚えてます？"},
+ {r:"a",t:"覚えてるよ。あの時のあんたの顔、どれだけ紅潮してたか。",d:"目元をぬぐう"},
+ {r:"b",t:"あの青年がもう子どもの父親ですよ。全部…ここで育ちました。",d:"箸を持ったまま止まる"}]},
+{m:"徹夜の研究室",g:"🔬 青春",s:"明かりの消えた研究室、実験失敗の直後。疲れ切った同僚ふたり。",ra:"諦めようとする側",rb:"引き止める側",ln:[
+ {r:"a",t:"今回もダメだった。俺、もうやめる。才能ないんだ。",d:"崩れるように椅子に座る"},
+ {r:"b",t:"才能？ 三年間毎日ここに来てる人間が言う言葉か。"},
+ {r:"a",t:"…お前がなんでここにいるのかわからない。俺みたいな奴のそばに。"},
+ {r:"b",t:"お前が諦めないところを見たくて。それだけのためにここにいる。",d:"コーヒーを差し出す"}]},
+{m:"空港の五分間",g:"✈️ ロマンス",s:"出国ゲート前。最終搭乗案内が流れる。",ra:"去る側",rb:"見送る側",ln:[
+ {r:"a",t:"二年なんてあっという間だよ。目をつぶって開けたら、もう戻ってる。"},
+ {r:"b",t:"二年間目をつぶって生きろってこと？ 意味わかんない。"},
+ {r:"a",t:"…じゃあ毎日電話する。時差なんて関係なく。",d:"キャリーバッグの取っ手を強く握る"},
+ {r:"b",t:"約束して。指切りで。",d:"指切りしてハンコまで押す"}]},
+{m:"祖父の自転車",g:"🚲 家族",s:"田舎道、古い自転車の後ろに孫を乗せて。",ra:"祖父",rb:"孫",ln:[
+ {r:"a",t:"しっかりつかまってろ。この道は険しいぞ。",d:"ペダルをゆっくり踏む"},
+ {r:"b",t:"おじいちゃん大変でしょ。私、歩くよ。"},
+ {r:"a",t:"いいんだ。この足でお前の父さんも乗せた。まだまだいけるさ。",d:"からから笑う"},
+ {r:"b",t:"…おじいちゃん、ずっとずっと乗せてね。",d:"背中に顔をうずめる"}]},
+{m:"元恋人の結婚式",g:"💔 メロドラマ",s:"結婚式場のロビー。招待客として出会う元恋人。",ra:"招待客として来た側",rb:"今日の花嫁／花婿",ln:[
+ {r:"a",t:"おめでとう。本気だよ。…この言葉を言いに、ここまで来た。",d:"祝儀袋を差し出す"},
+ {r:"b",t:"…来るとは思わなかった。来ないでほしかったけど、また来てくれて嬉しくもあって。"},
+ {r:"a",t:"一度だけ笑ってくれ。それで俺、帰るから。",d:"無理に笑う"},
+ {r:"b",t:"…幸せになって。あなたも、必ず。",d:"唇を噛む"}]},
+{m:"町の銭湯",g:"😂 コメディ",s:"銭湯の脱衣所。互いに背中を流し合ってひと悶着。",ra:"強くこする側",rb:"我慢する側",ln:[
+ {r:"a",t:"じっとして。これくらい擦らないと垢が出ないんだよ。",d:"垢すりタオルに力を込める"},
+ {r:"b",t:"痛い！肉まで擦る気か！？"},
+ {r:"a",t:"人生ってのは元々痛いもんだ。背中も、人生も。",d:"平然と擦り続ける"},
+ {r:"b",t:"…哲学はいいから、優しく！優しくして！",d:"体をよじる"}]},
+{m:"山荘の一夜",g:"🏔️ スリラー",s:"雪に閉ざされた山荘。停電した夜、互いを疑い始める。",ra:"先に来た側",rb:"あとから来た側",ln:[
+ {r:"a",t:"あなた…さっき外で何してた。足跡がなんでふたつあるの。",d:"ろうそくを持ったまま後ずさる"},
+ {r:"b",t:"足跡？ 俺、外に出てないけど。"},
+ {r:"a",t:"…じゃあ、あの窓の外に立ってるのは誰。",d:"声が震える"},
+ {r:"b",t:"動くな。灯り消して、息潜めて。",d:"ろうそくを一気に消す"}]},
+{m:"コンビニの夜勤",g:"🏪 日常",s:"深夜のコンビニ。常連客とバイト店員の短い会話。",ra:"夜勤バイト",rb:"毎日来る客",ln:[
+ {r:"a",t:"今日もおにぎりに牛乳。一日も欠かさないんですね。"},
+ {r:"b",t:"…ここの明かりが、家より温かくて。"},
+ {r:"a",t:"じゃあもうひとつどうぞ。これは私のおごりです。",d:"ホットスナックをそっと温めて渡す"},
+ {r:"b",t:"…なんでそんなに優しくするんですか。ぐっとくる。",d:"袋をぎゅっと握る"}]},
+{m:"雨の中のバイク",g:"🏍️ 青春",s:"豪雨の中のバイク一台。後ろにしがみついたまま。",ra:"運転する側",rb:"後ろに乗る側",ln:[
+ {r:"a",t:"しっかりつかまって！この雨で手離したら大変なことになる！"},
+ {r:"b",t:"これ以上つかまれないくらいつかまってる！",d:"両腕で腰を抱く"},
+ {r:"a",t:"怖かったら目つぶってて。着いたら起こすから。",d:"速度を落とす"},
+ {r:"b",t:"…怖くない。ただ、このままもう少し行こう。",d:"背中に額をつける"}]},
+{m:"古い映画館",g:"🎬 ロマンス",s:"閉館間際の古い映画館。最終上映、観客はふたりだけ。",ra:"映画好きな側",rb:"連れて来られた方",ln:[
+ {r:"a",t:"この映画館で百本は観た。今日が最終上映日らしい。"},
+ {r:"b",t:"…だからわざわざ私を連れて来たの?"},
+ {r:"a",t:"うん。最後は君と観たかった。",d:"ポップコーンを差し出す"},
+ {r:"b",t:"…じゃあ次の映画館は私が探すよ。私たち、これからも一緒に観よう。",d:"肩にもたれかかる"}]},
+{m:"厨房のふたり",g:"👨‍🍳 ロマンス",s:"レストランの閉店後の厨房。余った食材で作った夜食を前に。",ra:"シェフ",rb:"見習いコック",ln:[
+ {r:"a",t:"閉店後に食べるパスタが一番うまいんだ。座って、作ってあげる。"},
+ {r:"b",t:"…シェフが自分で? 私にですか?"},
+ {r:"a",t:"今日は君が一番頑張ってたじゃないか。これくらい当然だよ。",d:"皿を差し出す"},
+ {r:"b",t:"これ…レシピにない味なんですけど。",d:"ひと口食べて目を見開く"}]},
+{m:"路地裏コンビニの前",g:"👦 成長",s:"町のコンビニの前のベンチ。幼なじみと大人になって向き合う。",ra:"地元に残った方",rb:"帰ってきた方",ln:[
+ {r:"a",t:"おい、ほんと久しぶりだな。東京行ってから顔も出さずに。"},
+ {r:"b",t:"…悪い。生きるってやつが、そうさせたんだよ。"},
+ {r:"a",t:"いいよ。来たなら来たでいい。このベンチ、まだ残してあるぞ、お前の場所。",d:"飲み物を投げてよこす"},
+ {r:"b",t:"…このコンビニも、お前も、何にも変わってないな。",d:"ベンチにごろんと寝転がる"}]},
+{m:"面接会場の廊下",g:"💼 成長",s:"大手企業の面接会場の廊下。同じ枠を争う二人の競争相手。",ra:"緊張している方",rb:"余裕がある方",ln:[
+ {r:"a",t:"…手が震えが止まらなくて。この枠、自分にとっては最後のチャンスなので。"},
+ {r:"b",t:"ライバルにそんな話していいんですか?"},
+ {r:"a",t:"ライバルでも、誰かに話したかったんです。",d:"水筒をいじる"},
+ {r:"b",t:"…これどうぞ。手が震える時は飴が一番効きますよ。",d:"ポケットから飴を取り出して渡す"}]},
+{m:"花火が上がる橋の上",g:"🎆 ロマンス",s:"川沿いの橋、花火が上がる夜。並んで欄干にもたれて。",ra:"先に誘った方",rb:"ついてきた方",ln:[
+ {r:"a",t:"あの花火、数秒で消えるんだよ。でもそれがかえって綺麗じゃない?"},
+ {r:"b",t:"…どうして綺麗なものはすぐ消えちゃうんだろう。"},
+ {r:"a",t:"だから今をちゃんと見ておかなきゃ。君と、この瞬間も。",d:"そっと手を握る"},
+ {r:"b",t:"…じゃあ目を閉じちゃだめだね。君を見失いそうで。",d:"手を握り返す"}]},
+{m:"産婦人科の待合室",g:"🤰 家族",s:"産婦人科の待合室。エコー写真を初めて見るふたり。",ra:"浮かれている方",rb:"呆然としている方",ln:[
+ {r:"a",t:"見て、ここ、豆粒くらいの。これが私たちの子だよ。",d:"写真を目の前に突き出す"},
+ {r:"b",t:"…これが? この点みたいなのが? 私、本当に父親/母親になるの?"},
+ {r:"a",t:"うん。怖いよね? 私も怖い。でも嬉しい。",d:"お腹に手を当てる"},
+ {r:"b",t:"…ちゃんとやれるかな、私たち。",d:"写真をそっと握りしめる"}]},
+{m:"屋上菜園",g:"🌱 日常",s:"マンションの屋上菜園。レタスをめぐって芽生えた隣人のよしみ。",ra:"先に育てていた方",rb:"新しく越してきた方",ln:[
+ {r:"a",t:"レタス、少し摘んでいきなよ。一人じゃ食べきれないくらい育っちゃって。"},
+ {r:"b",t:"…こんな見ず知らずの人に、あげちゃっていいんですか?"},
+ {r:"a",t:"隣に住む人が見ず知らずのままじゃ、世の中寂しすぎるでしょ。",d:"袋いっぱいに詰めてあげる"},
+ {r:"b",t:"…じゃあ今度は私が豚肉持ってきます。一緒に巻いて食べましょう。",d:"照れくさそうに笑う"}]},
+{m:"教室の窓際の午後",g:"📚 青春",s:"放課後の誰もいない教室。掃除当番で残った二人。",ra:"片想いしている方",rb:"鈍感な方",ln:[
+ {r:"a",t:"…この窓際の席、お前の席だから、掃除係替わってもらったんだ。"},
+ {r:"b",t:"え? なんで? ここ日差し強くてみんな嫌がる席なのに。"},
+ {r:"a",t:"お前が座る席だから。それじゃだめか?",d:"ほうきをいじる"},
+ {r:"b",t:"…ちょっと。そんなこと言われたら掃除できないだろ。",d:"顔が赤くなる"}]},
+{m:"宅配ボックスの前",g:"📦 日常ロマンス",s:"玄関先。誤配達の荷物をきっかけに始まった隣人の縁。",ra:"荷物を受け取った方",rb:"荷主",ln:[
+ {r:"a",t:"これ、お隣宛でしたよ。ずっと外に置いておくと傷むと思って預かってました。"},
+ {r:"b",t:"…何日も届かなくて、なくなったのかと思ってました。ありがとうございます。"},
+ {r:"a",t:"中身アイスだったので、ひとつ食べちゃいました。すみません。",d:"きまり悪そうに笑う"},
+ {r:"b",t:"…じゃあ残りのひとつ、一緒に食べますか? 溶ける前に。",d:"箱を開けながら笑う"}]},
+{m:"山火事監視小屋",g:"🌲 ドラマ",s:"人里離れた山の監視小屋。ふた季節を共に守った二人。",ra:"先輩",rb:"新人",ln:[
+ {r:"a",t:"この山で冬を越すと、人間少し図太くなるんだ。お前もそうだろ。"},
+ {r:"b",t:"…最初は怖いだけでした。今はこの静けさが好きです。"},
+ {r:"a",t:"下山しても、この静けさ忘れるなよ。街はうるさくて、人を見失わせる。",d:"遠くの尾根を見つめる"},
+ {r:"b",t:"…先輩は? 先輩は下山しないんですか?",d:"隣に腰を下ろす"}]},
+{m:"古書店のはしご",g:"📖 ロマンス",s:"古びた古書店。高い書棚の間、はしごの上と下で。",ra:"はしごの上",rb:"下で支える方",ln:[
+ {r:"a",t:"この本? 上から三段目。…あ、揺れてる。",d:"はしごがぐらつく"},
+ {r:"b",t:"支えるから! 手を離さないで!",d:"両手ではしごをつかむ"},
+ {r:"a",t:"…ありがとう。支えてくれなかったら大変なことになってた。",d:"ゆっくり降りてくる"},
+ {r:"b",t:"落ちても受け止めてたよ。…本はさすがに無理だけど。",d:"わざとそっぽを向く"}]},
+{m:"川辺の釣り場",g:"🎣 家族",s:"早朝の川辺。口数の少ない父と息子の釣り。",ra:"父",rb:"息子",ln:[
+ {r:"a",t:"…魚は焦る奴のところには来ない。待つんだ。"},
+ {r:"b",t:"父さんはいつも待てって言うよね。人生も、釣りも。"},
+ {r:"a",t:"待ってれば来るものがある。お前もそうやって来たんだ。",d:"浮きを見つめる"},
+ {r:"b",t:"…父さん。実は、話したいことがあってついてきたんだ。",d:"釣り竿を下に置く"}]},
+{m:"停電したエレベーター",g:"😂 コメディ",s:"止まったエレベーター。閉じ込められた見知らぬ二人。",ra:"平静を装う方",rb:"パニックの方",ln:[
+ {r:"a",t:"大丈夫です。すぐ来ますよ。…たぶん。"},
+ {r:"b",t:"たぶん?! たぶんって! 私、閉所恐怖症なんです!",d:"壁を叩く"},
+ {r:"a",t:"はい、私の手を握って。一緒に数を数えましょう。ひとつ、ふたつ…",d:"手を差し出す"},
+ {r:"b",t:"…三つまで数えたら本当に落ち着くんですか?",d:"手をぎゅっと握る"}]},
+{m:"別れた後のカフェ",g:"☕ メロドラマ",s:"別れて半年、偶然同じカフェで。残った私物を返しに。",ra:"私物を返す方",rb:"受け取る方",ln:[
+ {r:"a",t:"これ…あなたの。引き出しから何度も出てくるから。",d:"小さな箱を差し出す"},
+ {r:"b",t:"…半年も経つのに、まだこれ持ってたんだ。"},
+ {r:"a",t:"捨てようとしたけど。捨てたら本当に終わる気がして。",d:"カップだけをいじる"},
+ {r:"b",t:"…終わってるでしょ、もう。私たち。",d:"箱を開けられずにいる"}]},
+{m:"自衛隊の面会所",g:"🎖️ 家族",s:"駐屯地の面会所。短い二時間を前にした恋人/家族。",ra:"面会に来た方",rb:"隊員",ln:[
+ {r:"a",t:"痩せたね。ご飯ちゃんと出るの? これ全部食べて、買ってきたから。",d:"食べ物をたくさん広げる"},
+ {r:"b",t:"二時間でこれ全部どう食べろって。…ゆっくり見せてよ、顔を。"},
+ {r:"a",t:"…あなたがいないと家が静かすぎて。早く帰ってきて。",d:"手を握る"},
+ {r:"b",t:"すぐ帰るよ。目をつぶってれば除隊だから。",d:"頭を撫でる"}]},
+{m:"練習室の鏡",g:"💃 青春",s:"ダンス練習室。デビューオーディションを控えた二人の練習生。",ra:"揺らいでいる方",rb:"支える方",ln:[
+ {r:"a",t:"今度も落ちたら、私、本当に田舎に帰るから。"},
+ {r:"b",t:"…5年も耐えたのに、最後にそんなこと言うの?"},
+ {r:"a",t:"耐えてたんじゃなくて、あなたが隣にいたから耐えられたんだよ。",d:"鏡の中で互いを見つめる"},
+ {r:"b",t:"じゃあ今回も耐えよう。あと一回だけ。",d:"手を取り合って構えを取る"}]},
+{m:"甕置き場の上の月",g:"🌕 時代劇",s:"武家屋敷の塀の中。月夜に出会った若様と姫。",ra:"塀を越えてきた方",rb:"待っていた方",ln:[
+ {r:"a",t:"この塀がこんなに高いとは。姫に会おうとして足を折るところであった。",d:"着物の乱れを直す"},
+ {r:"b",t:"誰が越えて来いと申しましたか。…それでも、来てくれて。"},
+ {r:"a",t:"千里の塀があろうと越えたであろう。",d:"袖の中の文を渡す"},
+ {r:"b",t:"…この夜が明けなければよいのに。",d:"月を見上げる"}]},
+{m:"救急救命室の明け方",g:"🚑 感動",s:"救急救命室の廊下。手術室の扉の前で夜を明かす二人。",ra:"耐える方",rb:"崩れ落ちる方",ln:[
+ {r:"a",t:"泣くな。まだ何も終わってない。すぐ出てくるよ。"},
+ {r:"b",t:"…もし。もし何かあったら私どうすればいいの。"},
+ {r:"a",t:"もしはない。私がここにいるだろ。手を握って。",d:"両手で包み込む"},
+ {r:"b",t:"…あなたがいなかったら、私ここに立っていられなかった。",d:"肩にもたれて崩れ落ちる"}]},
+{m:"同窓会のトイレ",g:"😂 コメディ",s:"20年ぶりの同窓会。トイレで出くわした昔のライバル。",ra:"見栄を張る方",rb:"現実的な方",ln:[
+ {r:"a",t:"おい、俺最近事業大成功なんだよ。車も新しくしてさ。見ただろ?"},
+ {r:"b",t:"…その車、外で見たけどレンタカーのステッカー貼ってたけど?"},
+ {r:"a",t:"…あ、あれは整備に出してて、ちょっと借りてるだけで。",d:"ネクタイを直す"},
+ {r:"b",t:"もういいから、20年ぶりなんだし普通に飲もうぜ。見栄なしで。",d:"肩を組む"}]},
+{m:"捨てられた子犬",g:"🐶 感動",s:"雨の路地裏。段ボール箱の中の子犬をめぐって出会う二人。",ra:"連れて帰ろうとする方",rb:"迷っている方",ln:[
+ {r:"a",t:"…この雨に放っておいたらこの子死んじゃいます。私が連れて帰ります。"},
+ {r:"b",t:"私もずっと見てたんです。でも勇気が出なくて。"},
+ {r:"a",t:"じゃあ一緒に飼いましょう。一匹を二人で世話すればいいじゃないですか。",d:"子犬を胸に抱く"},
+ {r:"b",t:"…それって、これから頻繁に会うってことですよね?",d:"傘を子犬の方へ傾ける"}]},
+{m:"屋上部屋の星空",g:"⭐ 青春",s:"屋上部屋の屋根。就活も恋も先の見えない二人の無職の夜。",ra:"楽天的な方",rb:"悲観的な方",ln:[
+ {r:"a",t:"見て、あの星。何光年も前の光が今届いてるんだって。私たちもそうなるよ。"},
+ {r:"b",t:"…何それ。私たちの光はいつ届くわけ。"},
+ {r:"a",t:"ちょっと遅れてるだけで、来ないわけじゃない。待ってみよう。",d:"缶ビールを合わせる"},
+ {r:"b",t:"…あなたが隣にいると、遅れるのも我慢できるもんだね。",d:"屋根にごろんと寝転ぶ"}]},
+{m:"手術同意書",g:"🏥 家族",s:"家族控室。手術同意書を前に揺れる兄弟。",ra:"決断すべき方",rb:"そばに寄り添う方",ln:[
+ {r:"a",t:"俺がこれにサインしたら…俺が決めたことになるじゃないか。できないよ。",d:"ペンを持つ手が震える"},
+ {r:"b",t:"一人で決めるんじゃない。ここに私の手も添えるから。"},
+ {r:"a",t:"…兄さん/姉さん。うちの母さん、大丈夫かな。",d:"うつむく"},
+ {r:"b",t:"大丈夫にしよう。私たちで。さあ、一緒に持って書こう。",d:"ペンの上に手を重ねる"}]},
+{m:"初出勤の満員電車",g:"🚇 成長",s:"満員電車。初出勤の朝、偶然ぶつかった二人。",ra:"緊張の新人",rb:"ベテラン社員",ln:[
+ {r:"a",t:"…すみません。初出勤で、どこで降りればいいかも分からなくて。"},
+ {r:"b",t:"バレバレですよ。ネクタイが曲がってるあたりから。…ちょっと貸して。",d:"ネクタイを直してあげる"},
+ {r:"a",t:"ありがとうございます。出社ってこんなに怖いものだと思いませんでした。"},
+ {r:"b",t:"みんなそうですよ。3年経てばこの地獄の満員電車も懐かしくなります。降りますよ、ここ。",d:"肩をポンと叩く"}]},
+{m:"廃校の校庭",g:"🏫 再会",s:"閉校した母校の校庭。30年ぶりに立った場所。",ra:"先に来た側",rb:"遅れて来た方",ln:[
+ {r:"a",t:"ここ、毎日ここで遊んでたよな。ブランコもそのままだ。"},
+ {r:"b",t:"…錆びてもう乗れないよ。私たちみたいに古くなった、これも。"},
+ {r:"a",t:"それでも座ってみなよ。一回だけ。",d:"ブランコをそっと押す"},
+ {r:"b",t:"…子供の頃はこのブランコ、空まで届くと思ってたのに。",d:"そっと腰を下ろす"}]},
+{m:"放送局の控室",g:"🎙️ ドラマ",s:"生放送3分前。舞台恐怖症に震える新人と先輩。",ra:"震える新人",rb:"先輩",ln:[
+ {r:"a",t:"先輩、足が動きません。出て行けそうにないです。"},
+ {r:"b",t:"あの扉の向こうにはカメラじゃなく、人がいると思え。たった一人。"},
+ {r:"a",t:"…一人ですか?"},
+ {r:"b",t:"ああ。今日つらい思いをしてる誰か一人。その人にだけ話すんだ。さあ、行け。",d:"背中をそっと押す"}]},
+{m:"葬儀場の菊の花",g:"🕯️ 感動",s:"静かな告別式場。故人の古い友人二人が向き合う。",ra:"先に来た友人",rb:"遅れて来た友人",ln:[
+ {r:"a",t:"…あいつ、最後までお前の話してたよ。会いたいって。"},
+ {r:"b",t:"…俺はどうしていつも遅いんだろう。生きてるうちに来ればよかった。"},
+ {r:"a",t:"今来たのも来たってことだよ。あいつも分かってるさ、お前が来たこと。",d:"肩を抱く"},
+ {r:"b",t:"…俺たち三人、本当によかったのにな。もう二人か。",d:"菊の花を供える"}]},
+{m:"遊園地のメリーゴーランド",g:"🎠 ロマンス",s:"夕暮れの遊園地。最終回のメリーゴーランドに並んで乗る。",ra:"先に誘った方",rb:"恥ずかしがる方",ln:[
+ {r:"a",t:"三十にもなってメリーゴーランドなんて、笑えるよな? でも君とは乗ってみたかった。"},
+ {r:"b",t:"…みんな見てるじゃない。恥ずかしいよ。"},
+ {r:"a",t:"見ればいいさ。俺、今世界で一番幸せなんだから。",d:"隣の馬をつかむ"},
+ {r:"b",t:"…回るのがどうしてこんなに酔わないんだろう。あなたのせいかな。",d:"そっと微笑む"}]},
+{m:"工事現場のコンテナ",g:"👷 人生",s:"工事現場の飯場の脇のコンテナ。疲れた一日の終わりの二人の作業員。",ra:"先輩",rb:"来たばかりの若者",ln:[
+ {r:"a",t:"先輩",d:"軟膏を差し出す"},
+ {r:"b",t:"…先輩。俺、この仕事、続けられますかね。"},
+ {r:"a",t:"この手が固くなれば耐えられないものはない。飯には困らせないよ、この仕事は。",d:"どぶろくを注いでやる"},
+ {r:"b",t:"…ありがとうございます。今日先輩がいなかったら逃げてました。",d:"杯を受け取る"}]},
+{m:"手を見ろ。まめができてる。最初はみんなそうだ。これ塗れ。",g:"📕 ロマンス",s:"小さなブックカフェの閉店時間。毎日来る常連客と店主。",ra:"店主",rb:"常連客",ln:[
+ {r:"a",t:"今日も一番遅くまでいますね。…この本、読み終わりました?"},
+ {r:"b",t:"…実は、本より、この席が好きで来てるんです。静かで。"},
+ {r:"a",t:"じゃあ閉店後も座っててください。私も片付けながらいますから。",d:"温かいお茶を差し出す"},
+ {r:"b",t:"…じゃあ毎日閉店まで居てもいいんですか?",d:"湯呑みを両手で包む"}]},
+{m:"バスターミナルの最終便",g:"🚌 別れ",s:"田舎のバスターミナル。最終便を前に交わす最後の挨拶。",ra:"去る側",rb:"残る側",ln:[
+ {r:"a",t:"終バス逃したらいけないから。…私、もう行くね。"},
+ {r:"b",t:"…あと一本だけ見送っちゃだめ? 一本だけ。"},
+ {r:"a",t:"見送ったら、また見送りたくなる。それで行けなくなる。",d:"バスの扉の前で立ち止まる"},
+ {r:"b",t:"…わかった。行って。着いたら連絡して。絶対。",d:"手を振りかけて止まる"}]},
+{m:"美容室の鏡の前",g:"💇 日常",s:"町の美容室。大きな決心をして来た客と美容師。",ra:"美容師",rb:"長い髪を切りに来た客",ln:[
+ {r:"a",t:"本当に全部切っちゃうんですか? 10年伸ばした髪ですよ。"},
+ {r:"b",t:"…はい。今日、全部整理したくて。髪も、心も。"},
+ {r:"a",t:"…何かあったんですね。綺麗に切ってあげます、新しい門出に。",d:"ハサミを手に取る"},
+ {r:"b",t:"…ありがとうございます。切ってください。振り返らないように。",d:"鏡の中の自分を見つめる"}]},
+{m:"屋上の物干し場",g:"🧺 日常ロマンス",s:"屋上の物干し台。風で飛ばされた服がきっかけで。",ra:"服の持ち主",rb:"拾ってくれた隣人",ln:[
+ {r:"a",t:"これ、下の階まで飛んできてましたよ。…あなたのですよね?",d:"洗濯物を差し出す"},
+ {r:"b",t:"あら、ありがとうございます。風が強くてしょっちゅう飛んでっちゃって。"},
+ {r:"a",t:"洗濯ばさみ、余分にあるんですけど、少し差し上げましょうか? ご近所同士ですし。",d:"ポケットから洗濯ばさみを取り出す"},
+ {r:"b",t:"…じゃあ今度は私、お惣菜をお裾分けしますね。",d:"洗濯物を受け取りながら笑う"}]},
+{m:"シェアハウスの廊下",g:"🚪 青春",s:"狭いシェアハウスの廊下。壁一枚隔てた隣人が初めて顔を合わせる。",ra:"先に住んでいた方",rb:"新しく来た方",ln:[
+ {r:"a",t:"夜に泣く声が聞こえてたけど。…いや、責めてるわけじゃなくて。"},
+ {r:"b",t:"…すみません。壁が薄いの忘れてました。"},
+ {r:"a",t:"いいんですよ。私も最初は毎日泣いてました。これどうぞ。",d:"カップ麺をドアの前に置く"},
+ {r:"b",t:"…知らない人にこんなに親切にしてもいいんですか?",d:"ラーメンをそっと手に取る"}]},
+{m:"信号待ちの偶然",g:"🚦 ロマンス",s:"横断歩道の信号待ち。毎日同じ時刻に出くわしていた二人。",ra:"先に声をかけた方",rb:"驚いた方",ln:[
+ {r:"a",t:"あの…私たち毎日ここで会ってますよね。8時15分に。"},
+ {r:"b",t:"…え? どうしてそれを知ってるんですか。"},
+ {r:"a",t:"毎日見てましたから。今日は信号が変わる前に声をかけてみようと。",d:"きまり悪そうに笑う"},
+ {r:"b",t:"…信号、青ですけど、私たちまだ渡ってないですね。",d:"足を踏み出さない"}]},
+{m:"おばあちゃんの手打ちうどん",g:"🍜 家族",s:"古いうどん屋の厨房。手打ちうどんを教わろうとする孫娘と祖母。",ra:"祖母",rb:"孫",ln:[
+ {r:"a",t:"生地は手の力じゃなく、心を込めて伸ばすんだよ。ほら、こうやって。",d:"手の甲に手を重ねる"},
+ {r:"b",t:"…おばあちゃん、私がこれ習って何しようとしてるか分かる?"},
+ {r:"a",t:"わからないよ。何、急に。"},
+ {r:"b",t:"…おばあちゃんがいなくなっても、この味覚えておきたくて。だから習うの。",d:"生地を伸ばしながら目が潤む"}]},
+{m:"年末のコンビニ",g:"🎄 感動",s:"除夜の鐘が鳴る夜。誰もいないコンビニの二人。",ra:"夜勤バイト",rb:"行き場のない客",ln:[
+ {r:"a",t:"…あけましておめでとうございます。この時間にお客さんも珍しいですね。"},
+ {r:"b",t:"…家に帰っても誰もいないので。ここのほうがまだ暖かくて。"},
+ {r:"a",t:"…じゃあこれ、一緒に食べましょう。どうせ廃棄になるものなので。",d:"温かい肉まんを半分に分ける"},
+ {r:"b",t:"…この肉まん、今年食べた中で一番美味しいです。",d:"湯気の立つ肉まんを受け取る"}]},
+{m:"非常階段の話し合い",g:"💼 スリラー",s:"会社の非常階段。不正を知った同僚二人の密かな会話。",ra:"告発しようとする方",rb:"止める方",ln:[
+ {r:"a",t:"見ただろ。あの書類。俺たちが黙ってたら共犯だ。"},
+ {r:"b",t:"…暴露したら私たち二人とも終わりだよ。分かってるでしょ、この会社がどんなとこか。"},
+ {r:"a",t:"終わっても、正しいことは正しい。お前は俺と一緒に行くか、行かないか。",d:"USBを手に握りしめる"},
+ {r:"b",t:"…一人で行かせない。一緒に行こう。その代わり、計画から立てよう。",d:"周りを見回す"}]},
+{m:"海上の灯台",g:"🌊 ドラマ",s:"離島の灯台。交代を控えた二人の灯台守。",ra:"去る灯台守",rb:"残る灯台守",ln:[
+ {r:"a",t:"この灯り、30年守ってきた。もう君の番だ。"},
+ {r:"b",t:"…怖いです。この広い夜を一人で守る自信が。"},
+ {r:"a",t:"一人じゃない。あの灯りを見て来る船、みんな君の仲間だ。",d:"灯台のガラスを拭く"},
+ {r:"b",t:"…先輩。この灯り、絶対に消しません。",d:"灯台に手を当てる"}]},
+{m:"予備校の屋上",g:"📐 青春",s:"受験予備校の屋上。成績表を受け取った二人の浪人生。",ra:"慰める側",rb:"崩れ落ちる側",ln:[
+ {r:"a",t:"成績表が人生表じゃない。ただの紙切れだって。"},
+ {r:"b",t:"…1年を注ぎ込んだのに、たったこれだけ。私、本当にダメなのかな。"},
+ {r:"a",t:"ダメなら、隣で私がなるまで一緒にいるよ。",d:"屋上の手すりに並んで立つ"},
+ {r:"b",t:"…どうして私にそこまでしてくれるの。",d:"成績表を握りつぶす"}]},
+{m:"商店街の露店",g:"🥬 人生",s:"早朝の商店街。隣の露店の商人同士が交わす情。",ra:"古株の商人",rb:"新米の商人",ln:[
+ {r:"a",t:"初めての商売だろ？顔に書いてある。これ、うちの常連さん紹介してやるよ。"},
+ {r:"b",t:"…え？私、ライバルじゃないですか。なんで助けてくれるんですか。"},
+ {r:"a",t:"この市場で30年やってみな。一人で育つ商売なんてないから。",d:"熱いおでんの汁を渡す"},
+ {r:"b",t:"…この汁、体の芯まで温まります。ありがとうございます。",d:"カップを両手で受け取る"}]},
+{m:"入院室の窓辺",g:"🌸 メロドラマ",s:"春の入院室。窓の外の桜を一緒に見る二人。",ra:"患者",rb:"毎日来る人",ln:[
+ {r:"a",t:"…あの桜が全部散る前に、私、外に出られるかな。"},
+ {r:"b",t:"当たり前だろ。俺があの木の下に場所取っといてやる。"},
+ {r:"a",t:"…約束。守るの難しい約束だってわかってるけど、信じたい。",d:"窓に手を当てる"},
+ {r:"b",t:"…つらかったら俺がおぶってでも連れてくよ。桜、一緒に見なきゃ。",d:"手を重ねる"}]},
+{m:"路地裏の理髪店",g:"💈 人生",s:"古びた理髪店。30年来の常連客と年老いた理髪師。",ra:"理髪師",rb:"常連客",ln:[
+ {r:"a",t:"あんたも白髪増えたな。…歳月ってやつだな。"},
+ {r:"b",t:"…兄さんの手も昔とは違うでしょう。そのハサミ、いつまで続けるつもりですか。"},
+ {r:"a",t:"お前の髪は死ぬまで俺が切る。約束しただろ。",d:"ハサミを優しく動かす"},
+ {r:"b",t:"…じゃあ私も長生きしないとですね。兄さんのお客でいるために。",d:"鏡の中で互いを見つめる"}]},
+{m:"電気の消えたオフィス",g:"💻 ロマンス",s:"残業中のオフィス、二人きりの夜。モニターの光の下。",ra:"先に残っていた側",rb:"気づいた側",ln:[
+ {r:"a",t:"…また私だけ残ってる。あ、いや。二人だけ、か。"},
+ {r:"b",t:"…私、わざと帰らなかったんです。一人にしたら徹夜しそうで。"},
+ {r:"a",t:"…心配してくれたんですか？私のこと？",d:"タイピングを止める"},
+ {r:"b",t:"…コーヒー淹れてきますね。それで話しましょう、なんでこんな遅くまでやってるのか。",d:"そっと立ち上がる"}]},
+{m:"引っ越しトラックの助手席",g:"🚚 成長",s:"引っ越しの日、トラックの助手席。慣れ親しんだ町を離れる兄妹。",ra:"しっかり者を装う兄/姉",rb:"泣く弟/妹",ln:[
+ {r:"a",t:"泣くなよ。新しい町に行けばもっといいことあるから。兄さん/姉さんが全部見せてやる。"},
+ {r:"b",t:"…でも友達は。ここに置いていくんじゃん。"},
+ {r:"a",t:"友達はまた作ればいい。俺/私は置いていかないだろ、お前のそばにいるだろ。",d:"頭をくしゃっとなでる"},
+ {r:"b",t:"…兄さん/姉さんは本当に行かないよね？私を置いて。",d:"袖をつかむ"}]},
+{m:"警察署の留置場",g:"🚔 ノワール",s:"留置場の鉄格子を挟んで。兄弟のような二人。",ra:"外にいる側",rb:"中にいる側",ln:[
+ {r:"a",t:"…なんで全部かぶったんだ。お前がやったことじゃないだろ。"},
+ {r:"b",t:"…誰かがここに入らなきゃいけなかった。お前は外にいるべきだ。"},
+ {r:"a",t:"バカ野郎。誰がお前にそうしろって言った。俺が全部明らかにしてやる。",d:"鉄格子をつかむ"},
+ {r:"b",t:"…明らかにするな。ただ、俺の分まで元気に生きろ。それでいい。",d:"背を向ける"}]},
+{m:"山頂の標識石",g:"⛰️ 友情",s:"苦労して登った山頂。標識石の前に並んで立つ二人の友人。",ra:"先に登った側",rb:"やっと追いついた側",ln:[
+ {r:"a",t:"見ろ、着いたじゃん。死ぬとか言ってたくせに。この景色、見合うだろ？"},
+ {r:"b",t:"…はぁはぁ。もう二度と来ない。でもお前が引っ張ってくれたから来られたんだよ、これ。"},
+ {r:"a",t:"人生もこうだよ。一人じゃ来られなくても、二人なら来られる。",d:"肩を組む"},
+ {r:"b",t:"…なあ、写真撮ろう。この苦労の証拠、残さないと。",d:"標識石に手を当てる"}]},
+{m:"路地裏のたこ焼き屋",g:"🌶️ 青春",s:"学校前のたこ焼き屋。最後の試験が終わった午後。",ra:"告白を準備した側",rb:"鈍感な方",ln:[
+ {r:"a",t:"…このたこ焼き屋、3年間ずっと通ったよね。今日で最後か。"},
+ {r:"b",t:"卒業してもまた来ればいいじゃん。なんでそんな寂しそうな顔するの。"},
+ {r:"a",t:"…その時もお前と来たいからだよ。卒業しても、ずっと。",d:"だし汁をただかき混ぜる"},
+ {r:"b",t:"…それって今、告白したの？たこ焼き屋で？",d:"たこ焼きを落とす"}]},
+{m:"産後ケアセンターの廊下",g:"👶 家族",s:"産後ケアセンターの窓辺。ガラス越しに赤ちゃんを見つめる新米夫婦。",ra:"浮かれている方",rb:"緊張している方",ln:[
+ {r:"a",t:"見て、あの一番小さい子。うちの子だよ。指見て。"},
+ {r:"b",t:"…小さすぎる。私がちゃんと抱っこできなかったらどうしよう。怖い。"},
+ {r:"a",t:"二人でいれば大丈夫。転んでも一緒に転べばいいんだから。",d:"肩を抱く"},
+ {r:"b",t:"…そうだね。私たち三人になったね。これで本当の家族だ。",d:"ガラスに手を当てる"}]},
+{m:"古びたピアノ教室",g:"🎹 感動",s:"閉店する町のピアノ教室。最後の生徒と年老いた先生。",ra:"先生",rb:"生徒",ln:[
+ {r:"a",t:"このピアノで習った子が何人いたか。今日、君が最後だね。"},
+ {r:"b",t:"…先生。私、実はこれを習って、先生になりたかったんです。"},
+ {r:"a",t:"…そうか。ならこのピアノ、君が持っていきなさい。君の教室に置きなさい。",d:"鍵盤を撫でる"},
+ {r:"b",t:"…先生の分まで、私が子どもたちに教えます。",d:"鍵盤に手を置く"}]},
+{m:"雪積もる歩哨所",g:"❄️ 友情",s:"真冬の夜間歩哨。共に夜を明かす二人の哨兵。",ra:"先輩",rb:"新人",ln:[
+ {r:"a",t:"手、冷たいだろ。これはめろ。俺は手、冷たくないから、元々。",d:"手袋を外して差し出す"},
+ {r:"b",t:"…いえ。班長がはめてください。"},
+ {r:"a",t:"命令だ。はめろ。お前の手が凍ったら俺が困る。",d:"無理やり手にはめさせる"},
+ {r:"b",t:"…こういう夜は、後で懐かしくなりそうです。",d:"息を吹きかける"}]},
+{m:"屋上のテント",g:"⛺ 青春",s:"屋上に張ったテントの中。家出した二人の友人の一夜。",ra:"先に出てきた側",rb:"ついてきた側",ln:[
+ {r:"a",t:"家出ると気持ちいいだろ？誰も俺たちに文句言わない。"},
+ {r:"b",t:"…気持ちいいけど、お母さんからご飯食べたかってメッセージ来た。"},
+ {r:"a",t:"…うちの母さんも。…なあ、俺たちただ一日だけいて帰ろうか。",d:"スマホをいじる"},
+ {r:"b",t:"…うん。一日だけ。でもこの夜は私たちだけの秘密ね。",d:"小指を絡める"}]},
+{m:"タクシー会社の車庫",g:"🚕 人生",s:"早朝のタクシー車庫。交代する二人の運転手の短い会話。",ra:"夜勤を終えた側",rb:"日勤を始める側",ln:[
+ {r:"a",t:"今夜は変わったお客が多かったよ。座席に傘一本置いていったよ。",d:"鍵を渡す"},
+ {r:"b",t:"…兄さんはいつ休むんですか。毎日この時間に会いますね、俺たち。"},
+ {r:"a",t:"休んで何するんだよ。家に誰もいないのに。むしろこっちの方がマシだ。",d:"肩を叩く"},
+ {r:"b",t:"…今夜はうちでご飯食べていってください。兄さん、本当に。",d:"鍵を受け取りながら引き止める"}]},
+{m:"舞台裏の楽屋",g:"🎭 ドラマ",s:"千秋楽直前の楽屋。長年連れ添った二人の役者。",ra:"引退する側",rb:"残る側",ln:[
+ {r:"a",t:"…今日が私の最後の舞台。この化粧、最後にするんだね。",d:"鏡の中の顔に白粉を塗る"},
+ {r:"b",t:"…先輩なしで俺一人、この舞台どうやって立てばいいんですか。"},
+ {r:"a",t:"お前はもう準備できてる。俺が20年見てきたんだから。心配するな。",d:"肩をぽんぽんと叩く"},
+ {r:"b",t:"…先輩。カーテンコールの時、一度だけ一緒に挨拶しましょう。",d:"手を握る"}]},
+{m:"雨降る整備工場",g:"🔧 日常ロマンス",s:"町の自動車整備工場。常連客とぶっきらぼうな整備士。",ra:"整備士",rb:"よく来る客",ln:[
+ {r:"a",t:"また来たんですか。今度は何が問題で。…車、随分頻繁に壊れますね。"},
+ {r:"b",t:"…実は車、どこも悪くないんです。ただ、ここに来るのが好きで。"},
+ {r:"a",t:"…は？今なんて言いました。",d:"工具を置く"},
+ {r:"b",t:"…コーヒー一杯もらいに来てるんです。毎回。",d:"意味もなく車のドアを触る"}]},
+{m:"夜間開園の水族館",g:"🐠 ロマンス",s:"夜の水族館。青い水槽の前に並んで立つ二人。",ra:"連れてきた側",rb:"感嘆する側",ln:[
+ {r:"a",t:"夜に来ると人もいなくて、水の光だけが残る。お前に見せたかったんだ。"},
+ {r:"b",t:"…水の中にいるみたい。私たちだけ、海の底に。"},
+ {r:"a",t:"あの魚たちにもつがいがいるんだって。一生一匹だけと過ごすらしい。",d:"水槽に手を当てる"},
+ {r:"b",t:"…うらやましい。ああやってずっとそばにいられるの。",d:"肩に寄りかかる"}]},
+{m:"祖母の家の縁側",g:"🏡 家族",s:"田舎の祖母の家の縁側。連休最終日、出発前の朝。",ra:"祖母",rb:"旅立つ孫",ln:[
+ {r:"a",t:"渋滞するよ、早く行きな。これトランクに積んで。漬物とごま油。",d:"風呂敷包みを抱えさせる"},
+ {r:"b",t:"…おばあちゃん、こんなに全部持たせたらおばあちゃんは何食べるの。"},
+ {r:"a",t:"私はこんなのなくても平気。お前が食べるの見るのが私のご飯なんだよ。",d:"背中をさすってあげる"},
+ {r:"b",t:"…今度はもっと長くいてから帰るね。本当に。",d:"風呂敷包みを抱えて振り返る"}]},
+{m:"競技場のロッカールーム",g:"🥊 スポーツ",s:"試合直前のロッカールーム。ラストマッチを控えたベテランとコーチ。",ra:"コーチ",rb:"ベテラン選手",ln:[
+ {r:"a",t:"…無理するな。今回が最後だって、観客もみんな知ってる。楽しめ。"},
+ {r:"b",t:"…コーチ。俺、最後だから、一度だけ勝ちたいです。"},
+ {r:"a",t:"…なら勝て。20年共にした俺のためにも。",d:"グローブを締めてやる"},
+ {r:"b",t:"…はい。今日は、俺たち二人のために戦います。",d:"拳を合わせる"}]},
+{m:"閉店間際の書店",g:"📚 感動",s:"閉店する町の本屋。最後の客と店主。",ra:"書店の店主",rb:"長年の客",ln:[
+ {r:"a",t:"…この本、20年売れなかったんです。今日、お持ちになりますか。差し上げますよ。"},
+ {r:"b",t:"…どうして売らなかったんですか、20年も。"},
+ {r:"a",t:"…ぴったりの人が来るのを待ってたんです。今日、あなたのような気がします。",d:"本を手渡す"},
+ {r:"b",t:"…なら、この本屋、私の記憶の中では閉まらないことにします。",d:"本を胸に抱く"}]},
+{m:"消防署の待機室",g:"🚒 ドラマ",s:"出動の合間のわずかな休息。疲れ果てた二人の消防士。",ra:"先輩",rb:"新人",ln:[
+ {r:"a",t:"さっきの火事、怖かったろ。最初はみんなそうだ。まだ手震えてるな、お前。"},
+ {r:"b",t:"…あの子を救えなかったらどうしようって思って。"},
+ {r:"a",t:"救ったじゃないか。それでいいんだ。今日お前は一人の命を救った。",d:"肩をポンと叩く"},
+ {r:"b",t:"…先輩がいなかったら俺も出られませんでした。ありがとうございます。",d:"頭を下げる"}]},
+{m:"列車の食堂車",g:"🚆 ロマンス",s:"長距離列車の食堂車。偶然相席になった二人。",ra:"先に座っていた側",rb:"相席した側",ln:[
+ {r:"a",t:"…ここしか席がなくて。ご迷惑でなければ座ってもいいですか。"},
+ {r:"b",t:"…はい。どうせ終着駅まであと3時間もありますし。"},
+ {r:"a",t:"…3時間あれば、見知らぬ人が知り合いになるのにちょうどいい時間ですね。",d:"コーヒーを二つ頼む"},
+ {r:"b",t:"…なら降りても知り合いのままでいられますか、私たち。",d:"窓の外の景色を見る"}]},
+{m:"釣り船の上の夜明け",g:"🎣 友情",s:"夜明け前の釣り船。大喧嘩の後、仲直りする二人の友人。",ra:"先に謝る側",rb:"すねている側",ln:[
+ {r:"a",t:"…昨日のあの言葉、悪かった。カッとなって出ただけだ。本心じゃない。"},
+ {r:"b",t:"…30年来の友達にそんなこと言うか。俺、本当に傷ついたぞ。"},
+ {r:"a",t:"わかってる。だから朝からお前をこの船に引っ張り出したんだ。機嫌直せって。",d:"魔法瓶のコーヒーを注いでやる"},
+ {r:"b",t:"…日が昇る。おい、あれ見ろよ。…今回だけは機嫌直してやるよ。",d:"水平線を指さす"}]},
+{m:"薬局のカウンター",g:"💊 日常ロマンス",s:"夜遅くの薬局。毎日風邪薬を買いに来る客と薬剤師。",ra:"薬剤師",rb:"常連客",ln:[
+ {r:"a",t:"また風邪ですか？今週だけで3回目ですね。ご飯はちゃんと食べてます？"},
+ {r:"b",t:"…一人暮らしだと、ご飯が面倒で。"},
+ {r:"a",t:"…これ、薬よりこっちの方がいいです。温かいものでも食べてください。",d:"小さなお粥をカウンターに置く"},
+ {r:"b",t:"…薬剤師さんはなんでこんなに人のこと気にかけるんですか。",d:"お粥をじっと見つめる"}]},
+{m:"屋上庭園のベンチ",g:"🌷 再会",s:"病院の屋上庭園。ずっと前に別れた二人が偶然に。",ra:"先に気づいた側",rb:"後で気づいた側",ln:[
+ {r:"a",t:"…もしかして。だよね？10年前の、あの時の。"},
+ {r:"b",t:"…まさか。よりによってこんな所で再会するなんて。"},
+ {r:"a",t:"…あの時言えなかったことがあるんだけど。今言ってもいい？",d:"ベンチの隣に座る"},
+ {r:"b",t:"…10年も抱えてたの？その言葉。",d:"ゆっくり振り返る"}]},
+{m:"牧場の朝",g:"🐄 家族",s:"早朝の牧場。牛の世話をする父と帰ってきた息子。",ra:"父",rb:"都会から帰ってきた息子",ln:[
+ {r:"a",t:"…牛は飼い主の足音がわかるんだ。3年ぶりなのにお前を歓迎してる、見てみろ。"},
+ {r:"b",t:"…父さん。俺、都会で全部失敗して帰ってきました。合わせる顔がないです。"},
+ {r:"a",t:"失敗が何だ。この牧場はいつもここにある。お前も、この牛も。",d:"牛を撫でる"},
+ {r:"b",t:"…父さんのそばで、最初からもう一度学びます。",d:"シャベルを手に取る"}]},
+{m:"郵便局の窓口",g:"✉️ メロドラマ",s:"小さな郵便局。出せなかった手紙を持った客と局員。",ra:"郵便局員",rb:"手紙を持った客",ln:[
+ {r:"a",t:"…この手紙、宛先が書いてないですけど。どちらへお送りしましょうか。"},
+ {r:"b",t:"…送る先がないんです。ただ、書きたくて書いたんです。もう去った人に。"},
+ {r:"a",t:"…それでもお預かりしておきますね。いつか送る場所ができるかもしれませんから。",d:"手紙を大切に受け取る"},
+ {r:"b",t:"…ありがとうございます。この言葉、誰にも言えなかったんです。",d:"窓口に手を置く"}]},
+{m:"町のテコンドー道場",g:"🥋 成長",s:"夕方のテコンドー道場。怖がりな子どもとぶっきらぼうな館長。",ra:"館長",rb:"怖がりな子ども",ln:[
+ {r:"a",t:"拳は人を殴るために習うんじゃない。自分を守るために習うんだ。"},
+ {r:"b",t:"…でも僕、いつも負けてます。先輩たちに。"},
+ {r:"a",t:"今日逃げなかったこと自体が勝ちだ。それが本当の勇気だ。",d:"頭に手を置く"},
+ {r:"b",t:"…館長。僕、本当に強くなれますか？",d:"拳をぎゅっと握る"}]},
+{m:"バス終点の屋台",g:"🍜 人生",s:"バス終点前の屋台。一日の終わりを迎える二人。",ra:"屋台のおばさん",rb:"毎日来る終バスの客",ln:[
+ {r:"a",t:"今日も終バスで来たね。熱いおでん一つあげるよ、座りな。"},
+ {r:"b",t:"…おばさん、この屋台がなかったら俺、毎日どこで一息ついてたんだろう。"},
+ {r:"a",t:"一息つく場所くらい、一つはないとね、人間。ほら、汁もっと。",d:"汁を注いでやる"},
+ {r:"b",t:"…この汁一杯が、一日を乗り切らせてくれるんです。本当に。",d:"両手でカップを包む"}]},
+{m:"取り壊し間近の町",g:"🏚️ ドラマ",s:"再開発で消える路地。最後に歩く二人の幼なじみ。",ra:"離れたくない側",rb:"先に受け入れた側",ln:[
+ {r:"a",t:"…ここの塀、俺たちが背比べしてた跡、まだあるよ。見て。"},
+ {r:"b",t:"…全部壊すって。来月には。何も残らない。"},
+ {r:"a",t:"…写真撮ろう。全部なくなっても、記憶には残るように。",d:"塀に手を当てる"},
+ {r:"b",t:"…そうだね。なくなるのは路地であって、俺たちの子供時代じゃない。",d:"並んで塀に寄りかかる"}]},
+{m:"深夜ラジオブース",g:"📻 ロマンス",s:"明け方のラジオブース。DJと毎日メッセージを送っていたリスナー。",ra:"ラジオDJ",rb:"訪ねてきたリスナー",ln:[
+ {r:"a",t:"…3年間毎日メッセージを送ってくれたその方が、本当にここに来たんですか？"},
+ {r:"b",t:"…声だけで聞いてた人を、一度は見てみたくて。"},
+ {r:"a",t:"…実は私もです。毎日そのメッセージ読みながら、顔が気になってました。",d:"ヘッドホンを外す"},
+ {r:"b",t:"…これからはメッセージじゃなくて、直接話してもいいですか？",d:"ブースのドアに寄りかかる"}]},
+{m:"雪降る屋台",g:"❄️ メロドラマ",s:"初雪の夜の屋台。別れた恋人が偶然隣の席に。",ra:"先に座っていた側",rb:"後から入ってきた側",ln:[
+ {r:"a",t:"…ここしか席なくてさ。隣、座ってもいい？"},
+ {r:"b",t:"…いいよ。でもなんでよりによって、雪の日にここで会うかな。"},
+ {r:"a",t:"…俺たちが初めて会った日も雪降ってたじゃん。覚えてる？",d:"日本酒を注ぐ"},
+ {r:"b",t:"…覚えてる。全部覚えてるから、それが問題なの。",d:"杯を受け取る"}]},
+{m:"登校路の坂道",g:"🎒 青春",s:"毎日登った通学路の坂道。卒業を控えた二人の友人。",ra:"先に告白する側",rb:"聞く側",ln:[
+ {r:"a",t:"この坂、3年間ずっとお前を待って一緒に登ったよな。"},
+ {r:"b",t:"…そうだね。毎日あのコンビニの前に立ってたよね、お前。"},
+ {r:"a",t:"…卒業したらこの坂、登らないんだろうな。それでもお前を待ちたい。",d:"つま先で地面を蹴る"},
+ {r:"b",t:"…じゃあ別の坂でも作ろうよ。私たちが登る坂。",d:"手を握る"}]},
+{m:"古びた写真館",g:"📷 家族",s:"古い写真館。家族写真を撮りに来た老夫婦と写真家。",ra:"写真家",rb:"老夫婦の一人",ln:[
+ {r:"a",t:"…はい、笑ってください。50年連れ添われた方々だからか、本当によく似てますね。"},
+ {r:"b",t:"…この人と写真撮るのも久しぶりだな。ずっと忙しかったから、私たち。"},
+ {r:"a",t:"…今日のこの写真、お二人の一生残りますよ。しっかり手を握ってください。",d:"シャッターに手を置く"},
+ {r:"b",t:"…あなた、手つないで。写真屋さんがつなげって。",d:"震える手を差し出す"}]},
+{m:"路地の階段、夜",g:"🌙 ロマンス",s:"急な坂の町の階段。送っていく夜道。",ra:"送っていく側",rb:"送られる側",ln:[
+ {r:"a",t:"…この階段、こんなに高いって知らなかった。毎日これ上り下りしてるの？"},
+ {r:"b",t:"…うん。でも今日は全然つらくないな。なんでだろ。"},
+ {r:"a",t:"…じゃあ明日も送っていこうか？この階段、一緒に上れるように。",d:"一段上から手を差し伸べる"},
+ {r:"b",t:"…その手、毎日つないでもいい?",d:"手を握り返す"}]},
+{m:"水没する村、最後の日",g:"🌊 感動",s:"ダム建設で沈む村。水没する前、最後の夜。",ra:"離れたくない老人",rb:"迎えに来た子",ln:[
+ {r:"a",t:"…この家でお前は生まれたんだ。水に沈むなんて、足が動かん。"},
+ {r:"b",t:"…父さん/母さん。もう本当に行かなきゃ。水が来る前に。"},
+ {r:"a",t:"…この庭の土、一握りだけ持っていこう。それでいい。",d:"土をハンカチに包む"},
+ {r:"b",t:"…その土、新しい家の植木鉢に植えよう。そしたらここが、そこにあることになるよ。",d:"支える"}]},
+{m:"炭運びのボランティア",g:"🧡 感動",s:"冬の下町。炭配りのボランティアで初めて出会った二人。",ra:"ボランティア古参",rb:"初参加のボランティア",ln:[
+ {r:"a",t:"顔に炭がついてますよ。初めてでしょう? そんな運び方じゃ腰やられますよ。",d:"グローブを直してあげる"},
+ {r:"b",t:"手袋を締め直してあげる"},
+ {r:"a",t:"…重いのに、なぜか気分がいいんです。どうしてでしょう。",d:"これ一つが、あの家の一晩を暖めるからですよ。その味なんです。"},
+ {r:"b",t:"炭を手渡す",d:"…じゃあ私、来週も来ます。一緒に運べばいいですよね?"}]},
+{m:"炭を受け取る",g:"刑務所の面会室",s:"🔒 ドラマ",ra:"面会に来た方",rb:"刑務所の面会室、ガラス越し。長く待った二人。",ln:[
+ {r:"a",t:"面会に来た側"},
+ {r:"b",t:"服役している側"},
+ {r:"a",t:"…痩せたな。ちゃんと食べてるのか? 毎週来てたの、知ってるよな?",d:"ガラスに手を当てる"},
+ {r:"b",t:"…なんでそんなに来るんだよ。俺のことなんか忘れて生きろって言ってるのに。",d:"ガラスに手を当てる"}]},
+{m:"…あと半年。それだけ数えて生きてるよ、俺。",g:"…出所したら、本当にまともな人間になって出るから。待っててくれてありがとう。",s:"ガラス越しに手を重ねる",ra:"実家の縁側での再会",rb:"🏠 再会",ln:[
+ {r:"a",t:"久しぶりに訪れた実家。年老いた親と、成功して帰ってきた子。"},
+ {r:"b",t:"帰ってきた子"},
+ {r:"a",t:"待っていた親",d:"…父さん/母さん。私、やっと落ち着きました。迎えに来ました。"},
+ {r:"b",t:"…いい。私はここが好きなんだ。でも、お前の顔見たらそれでいい、それで。",d:"…どうしてこんなに老けたの。私、遅すぎましたよね。"}]},
+{m:"しわだらけの手を握る",g:"…遅くなんかない。こうして来たじゃないか。ご飯でも食べてけ。全部用意してある。",s:"背中をさする",ra:"最後の授業の教室",rb:"🍎 感動",ln:[
+ {r:"a",t:"定年退職する先生の最後の授業。昔の教え子が訪ねてくる。"},
+ {r:"b",t:"退職する先生"},
+ {r:"a",t:"訪ねてきた教え子",d:"…40年をこの教室で過ごしたな。今日が最後の授業だ。"},
+ {r:"b",t:"…先生。私のこと覚えてますか? 一番後ろの席で、いつも居眠りしてた子です。",d:"…忘れるわけないだろう。あの子がこんなに大きくなって、訪ねてきてくれたんだから。"}]}
+];
+const EXT={
+"春の日の手紙":[
+ {r:"a",t:"眼鏡をかけ直す",d:"…先生のおかげでまともな人間になれました。それを伝えに来ました。"},
+ {r:"b",t:"深くお辞儀をする"},
+ {r:"a",t:"終点まで行ったら…その次はどうしよう。降りる口実がないのに。",d:"バス路線図を見上げる"},
+ {r:"b",t:"口実探すのはもうやめて。さっきから何か言いたそうな顔してるよ。",d:"…好きだ。去年の春から。傘は本当に口実だった。"}],
+"定食屋の季節":[
+ {r:"a",t:"うつむく"},
+ {r:"b",t:"知ってた。だから今日、私も傘持ってこなかったの。"},
+ {r:"a",t:"濡れたバッグをちらっと見せる",d:"会社は続けられそうか。辛かったら辛いって言っていいんだぞ。"},
+ {r:"b",t:"…実は結構きつい。母さんの豚汁食べたら、やっと言葉が出てきた。",d:"やっぱりな。顔に全部書いてあるっての。"}],
+"路地の決闘":[
+ {r:"a",t:"キムチを乗せてあげる",d:"…月に一回は来るよ。この豚汁食べに。母さんに会いに。"},
+ {r:"b",t:"汁を大きくすくう"},
+ {r:"a",t:"…あの日、なんであんなことしたの。それだけ言って。それで終わりにできるかもしれない。",d:"拳を開かない"},
+ {r:"b",t:"…お前を守るためだったって言ったら、信じるか。",d:"は? 3年ぶりに言うことがそれ?"}],
+"最後の乗車券":[
+ {r:"a",t:"雨の中で立ち止まる"},
+ {r:"b",t:"あの日お前が知ってたら、お前も巻き込まれてた。…もう真実を教えてやるよ。"},
+ {r:"a",t:"懐から古い封筒を取り出す",d:"…着いたら手紙書くよ。電話は、声聞いたら崩れそうで。"},
+ {r:"b",t:"手紙いいね。返事の宛先、絶対書いて送って。",d:"…なのになんでまだ手を離せないんだろう。電車、乗り遅れるよ。"}],
+"怪しい下宿":[
+ {r:"a",t:"重ねた手を見下ろす",d:"…次の電車にしなよ。あと10分、10分だけもっといて。"},
+ {r:"b",t:"手に力を込める"},
+ {r:"a",t:"…美味しいでしょう? 実は私、ラーメン作るのだけは得意なんです。",d:"小指を差し出す"},
+ {r:"b",t:"得意げな顔をする",d:"認める。でも大家さんが来たら二人とも追い出されますよ。"}],
+"刑事の夜":[
+ {r:"a",t:"じゃあ共犯ですね、私たち。秘密にしましょう。",d:"…来週は私が作ります。卵二個入れて。"},
+ {r:"b",t:"指切りをする"},
+ {r:"a",t:"最後のチャンスだ。あの夜どこにいた。",d:"写真を一枚差し出す"},
+ {r:"b",t:"…この写真、どこで手に入れたんですか。これ、あの夜のじゃないですよ。",d:"それをお前がどうして知ってる? 時間も場所も言ってないのに。"}],
+"海辺のあの夏":[
+ {r:"a",t:"椅子を引き寄せて座る"},
+ {r:"b",t:"…弁護士呼んでください。いや、その前に…一つだけ言います。"},
+ {r:"a",t:"初めて目をそらす",d:"東京行ったら真っ先に何するか決めたんだ。屋根裏部屋でも借りること。"},
+ {r:"b",t:"…屋根裏部屋に私の場所もある?",d:"当たり前だろ。半分こ。家賃も半分、夢も半分。"}],
+"宮中の影":[
+ {r:"a",t:"砂に部屋の間取りを描く",d:"…わかった。その代わり怖い時は、あなたから先に手を差し出して。約束。"},
+ {r:"b",t:"波音に笑い声が混じる"},
+ {r:"a",t:"三日後、満月が昇れば、西の門が一刻だけ開く。"},
+ {r:"b",t:"改めて周囲を見回す",d:"…本当に全てを捨てられるのですか。この宮も、その地位も。"}],
+"タクシーの中の告白":[
+ {r:"a",t:"地位が私を守ってくれたことなど一度もない。私を生かしたのはお前だった。",d:"…では私、三日後、西の門で命を懸けます。"},
+ {r:"b",t:"深く頭を下げる"},
+ {r:"a",t:"…別れようって言ったの、取り消しちゃダメ? うちに帰る道が短すぎる。"},
+ {r:"b",t:"窓の外の灯りを数える",d:"運転手さん、すみません、東京湾沿いをもう一周してもらえますか。"}],
+"屋上部屋の戦争":[
+ {r:"a",t:"…お前、今の、どういう意味かわかって言ってるんだよな?",d:"握った手に力を込める"},
+ {r:"b",t:"じゃんけんとか言うな。お前いつも後出しじゃないか!"},
+ {r:"a",t:"拳を下ろす",d:"納得いかないなら証拠出せよ。さあ、もう一回。三本勝負。"},
+ {r:"b",t:"…わかった。負けた方が唐揚げにビールまでおごる。オーケー?",d:"手を開く"}],
+"初雪の日の約束":[
+ {r:"a",t:"オーケー。でも何頼んでも半分こだからな? 俺たちいつも半分こだし。"},
+ {r:"b",t:"にやりと笑って拳を上げる"},
+ {r:"a",t:"…このマフラー、私があげたやつじゃん。まだつけてるの?",d:"捨てようとしたけど、冬になると手が勝手に伸びるんだよな。"},
+ {r:"b",t:"…私たちもう一回始めたら、今度はうまくやれるかな。",d:"雪を見つめる"}],
+"田舎のバス停":[
+ {r:"a",t:"知らない。でも1年間毎日来てたんでしょ? それって答え出てるんじゃないの?",d:"マフラーを半分分けて巻く"},
+ {r:"b",t:"卵二つとも食べなさい。バスの中で腹が減ったら惨めだから。"},
+ {r:"a",t:"風呂敷包みを結び直す",d:"…おばあちゃん、冬は暖房ちゃんとつけてね。我慢しないで。"},
+ {r:"b",t:"私の心配なんかいいから。お前は勉強頑張れ。…バス来たぞ。",d:"土埃の立つ道を見つめる"}],
+"レコーディングスタジオの夜":[
+ {r:"a",t:"…おばあちゃん。私、振り返らないから。その代わり窓からは見るから。",d:"涙をぬぐいながら乗り込む"},
+ {r:"b",t:"録音室の夜"},
+ {r:"a",t:"…聞いたじゃん。この曲のタイトル、お前の名前の頭文字だって。"},
+ {r:"b",t:"楽譜を差し出す",d:"…正気? これ今言う? 私、声かれてるんだけど。"}],
+"病室の窓辺":[
+ {r:"a",t:"かすれ声でもいい。いや、その方が本物っぽい。一回だけ歌って。"},
+ {r:"b",t:"…最後のフレーズはあなたも一緒に歌って。それならやる。"},
+ {r:"a",t:"ヘッドホンをかけ直す",d:"病室の窓辺"},
+ {r:"b",t:"…窓の外、桜咲いてたよ。あれ見たくてカーテン開けてもらったんだ。",d:"来年は下で見よう。レジャーシート敷いて、お弁当作って。"}],
+"屋台の真実":[
+ {r:"a",t:"…お弁当はあなたが作ってよ。料理下手なの知ってるけど、それでも。"},
+ {r:"b",t:"ふっと笑う"},
+ {r:"a",t:"オーケー。その代わり、それまでご飯残すなよ。契約な。",d:"小指を差し出す"},
+ {r:"b",t:"…実は来週、面接が一つあるんだ。小さいところだけど。",d:"ほら見ろ。2ヶ月間ただ遊んでたわけじゃないだろ、お前。"}],
+"キーパーの夏":[
+ {r:"a",t:"落ちたらどうしよう。この歳でまたやり直しになるのかな。"},
+ {r:"b",t:"空のグラスをいじる"},
+ {r:"a",t:"落ちたらまた飲もうぜ、ここで。俺のおごる酒は無限おかわりだから。",d:"肩に腕を回す"},
+ {r:"b",t:"あいつら5番、左にしか蹴らない。さっき二回ともそうだった。覚えとけ。",d:"…先輩はそれ、いつ全部見てたんですか。"}],
+"図書館のメモ":[
+ {r:"a",t:"お前がゴールしか見てない時、俺はお前を見てたからな。",d:"水筒を渡す"},
+ {r:"b",t:"…先輩。俺が止めたら、胴上げは先輩が一番手ですよ。"},
+ {r:"a",t:"グローブを合わせる"},
+ {r:"b",t:"…試験終わったら何する? いや、これも本に聞いてみたんだけどさ。",d:"本で顔を隠す"}],
+"引っ越しの日":[
+ {r:"a",t:"本って知りたがりだね。試験終わったら…暇だよ。",d:"じゃあ本が言うには、駅前に新しくできたカフェに行ってみたいんだって。"},
+ {r:"b",t:"…わかった。本を連れて出てきなよ。土曜日の2時。"},
+ {r:"a",t:"メモを折って栞に挟む",d:"…その言葉、今言われたら、この段ボール全部持って出られないんだけど。"},
+ {r:"b",t:"玄関前で立ち止まる",d:"だから今言ったんだよ。行かせないために。"}],
+"屋上の決着":[
+ {r:"a",t:"…引っ越し業者さんになんて言おう。",d:"段ボールを下ろす"},
+ {r:"b",t:"荷物だけ送って。お前は残れ。コップは…もう二つ必要だな。"},
+ {r:"a",t:"コップを握りしめて笑う",d:"…この写真、何。これ会長の息子じゃん。お前なんでこれ持ってるの。"},
+ {r:"b",t:"写真をひったくる",d:"手を差し出す"}],
+"結婚式前夜":[
+ {r:"a",t:"名簿を漏らしたやつ、それがこいつだ。俺はそれを探ってて、お前に疑われたんだよ。"},
+ {r:"b",t:"…だったらなんで早く言わなかったの。私にだけでも。"},
+ {r:"a",t:"胸ぐらを離す",d:"お前まで危険になるからだよ。…もう一緒に終わらせよう。お前と俺、昔みたいに。"},
+ {r:"b",t:"…10年も友達でいて、なんで一度も言わなかったの。",d:"お前が幸せそうだったから。俺の一言でそれが揺らぐのが怖かった。"}],
+"ラーメンを作る夜":[
+ {r:"a",t:"…揺らいでるのは今だよ。どうしよう、私。"},
+ {r:"b",t:"ブーケのリボンをいじる"},
+ {r:"a",t:"…明日の朝まで考えて。どっちを選んでも、俺はお前の味方だ。いつもそうだったろ。",d:"背を向けて涙を隠す"},
+ {r:"b",t:"…ねえ、あなた、ラーメン食べに来るって言って、もう三回目だよね? 今週だけで。",d:"…あなたのラーメンが美味しいからだよ。伸びた麺が好みなんだ、もともと。"}],
+"校庭の最後のチャイム":[
+ {r:"a",t:"嘘。さっき伸びたって言ったらからかったじゃん。",d:"箸を止める"},
+ {r:"b",t:"…じゃあ訂正するよ。ラーメンじゃなくて、ラーメン作る人に会いに来てる。"},
+ {r:"a",t:"スープだけ見つめる",d:"…待ってたって? あなたが? いつから。"},
+ {r:"b",t:"差し出された手を見つめる",d:"2年の体育祭。転んだ私を起こしてくれた時から。"}],
+"梅雨の傘":[
+ {r:"a",t:"…じゃあ私たち2年間、お互い馬鹿みたいに様子見してただけ?",d:"呆れたように笑う"},
+ {r:"b",t:"うん。だからもう無駄にするのはやめよう。手、つながないの?"},
+ {r:"a",t:"手をさらに差し出す"},
+ {r:"b",t:"…着いた。あなたの家。でも雨、強くなってきたね。",d:"軒下で立ち止まる"}],
+"老舗の店主":[
+ {r:"a",t:"…上がってタオルでも貸そうか。肩、びしょ濡れじゃん。"},
+ {r:"b",t:"大丈夫。でも傘は置いていくね。明日あなたが使ってきて。"},
+ {r:"a",t:"…じゃあ明日も迎えに来て。傘返さなきゃだから。",d:"傘を受け取りながら笑う"},
+ {r:"b",t:"…あなたにだけ教えるけどさ、このスープの秘訣。大したことない。朝4時だよ。",d:"朝4時ですか?"}],
+"徹夜の研究室":[
+ {r:"a",t:"毎朝4時に最初の湯を沸かしてきた。30年間。真心が秘訣ってわけだ。"},
+ {r:"b",t:"古い鍋を撫でる"},
+ {r:"a",t:"…大将。この鍋、写真撮っていいですか? うちの子に見せたくて。",d:"スマホを取り出す"},
+ {r:"b",t:"…コーヒー、すっかり冷めてる。これ何時間も前に淹れといたやつでしょ。",d:"お前が失敗する頃に必要だと思って。3時間前にな。"}],
+"空港の五分間":[
+ {r:"a",t:"…俺が失敗するって、わかってたのかよ。",d:"カップを置く"},
+ {r:"b",t:"ああ。でも明日もまた出てくるってこともわかってる。それがお前だから。さあ、データもう一回見よう。",d:"椅子を引き寄せて座る"},
+ {r:"a",t:"…最終搭乗案内だ。本当に行かなきゃ。"},
+ {r:"b",t:"キャリーケースを立てる",d:"待って。これ。飛行機の中で開けて。"}],
+"祖父の自転車":[
+ {r:"a",t:"小さな封筒を握らせる"},
+ {r:"b",t:"…何これ。今開けちゃダメ?"},
+ {r:"a",t:"ダメ。空の上で開けて。そうすれば、お前は引き返せないから。",d:"背中を押しながら涙を隠す"},
+ {r:"b",t:"あの角を曲がったらお前の好きなコスモス道だぞ。目、しっかり開けとけ。",d:"…おじいちゃん、私が小さい時もここで花の名前教えてくれたよね。覚えてる。"}],
+"元恋人の結婚式":[
+ {r:"a",t:"覚えてるか。お前の父さんもその歳の時、同じこと聞いてきたんだ。"},
+ {r:"b",t:"ペダルを緩める"},
+ {r:"a",t:"…じゃあ将来、私の子どももこの道乗せてあげてね。三代目として。",d:"背中をぎゅっと抱きしめる"},
+ {r:"b",t:"…もう行きなよ。みんな待ってるだろ。俺、もう本当に行くから。",d:"…ありがとう。あの頃の私、あなたのおかげでいい人間だった。"}],
+"町の銭湯":[
+ {r:"a",t:"俺もだよ。…あの人、いい人なんだろ? だったらそれでいい。",d:"式場の方を見る"},
+ {r:"b",t:"…うん。あなたもきっと、私より先に幸せになってね。そうじゃないと私も気が楽にならない。"},
+ {r:"a",t:"最後に笑ってみせる",d:"さあ、全部洗ったぞ。次はお前の番。俺の背中洗ってみろ。"},
+ {r:"b",t:"背中を差し出す",d:"…復讐の時間だな。この握力、耐えられるか?"}],
+"山荘の一夜":[
+ {r:"a",t:"痛っ! おい! 優しくしろよ! さっき俺がやったのはこんなもんじゃなかっただろ!",d:"飛び跳ねる"},
+ {r:"b",t:"人生ってもともと痛いもんだろ。背中も、人生も。さあ、コーヒー牛乳は負けた方がおごり。"},
+ {r:"a",t:"あかすりタオルを振る",d:"山小屋の一夜"},
+ {r:"b",t:"(ささやきながら)…窓の外、まだいる?",d:"暗闇の中で息をひそめる"}],
+"コンビニの夜勤":[
+ {r:"a",t:"しっ。…足音。ドアの方だ。こっち来て、ゆっくり。"},
+ {r:"b",t:"…待って。あれ、ドアノブ回ってない?"},
+ {r:"a",t:"懐中電灯を強く握る",d:"きまり悪そうに笑う"},
+ {r:"b",t:"三数えたら裏口に走れ。いち…に…",d:"手を引っ張る"}],
+"雨の中のバイク":[
+ {r:"a",t:"…実は私、お客さんが来る時間に合わせて肉まん温めておくんです。",d:"…え? 毎日ですか?"},
+ {r:"b",t:"照れくさそうに笑う"},
+ {r:"a",t:"…じゃあ明日からは2時に来ます。15分は…話してから帰る。",d:"おにぎりをいじる"},
+ {r:"b",t:"雨の中のバイク",d:"…雨止んだよ。なのになんでまだぎゅっとつかんでるの。"}],
+"古い映画館":[
+ {r:"a",t:"速度をさらに緩める"},
+ {r:"b",t:"…癖。いや、ただ。離したくなくて。"},
+ {r:"a",t:"じゃあ離さないで。俺、もう一周するから。遠回りして。",d:"ハンドルを切る"},
+ {r:"b",t:"…いいね。でも次はヘルメット二つ買おう。長く乗れるように。",d:"背中に寄りかかって笑う"}],
+"厨房のふたり":[
+ {r:"a",t:"…映画始まるよ。でも私この映画100回は見てるんだよね。ネタバレしていい?"},
+ {r:"b",t:"やめて。…でも結末って悲しい、幸せ? それだけ教えて。"},
+ {r:"a",t:"二人で一緒に見て初めて幸せになる結末だよ。",d:"スクリーンの光が顔に映る"},
+ {r:"b",t:"…じゃあ私たち今、結末を見てるってことだね。",d:"手の甲に手を重ねる"}],
+"路地裏コンビニの前":[
+ {r:"a",t:"…レシピにない味? それ、塩の代わりに入れてるものが一つあるにはある。"},
+ {r:"b",t:"何ですか? 私も学びたいです、その味。"},
+ {r:"a",t:"教えられない。それは食べる人を見ながら入れるものだから。",d:"エプロンを外す"},
+ {r:"b",t:"…シェフ。じゃあ私、明日も閉店まで残ります。教わるまで。",d:"空の皿を握りしめる"}],
+"面接会場の廊下":[
+ {r:"a",t:"なあ、覚えてるか。俺たちここでアイス賭けて五目並べしてたの。",d:"覚えてる。私いつも負けてたじゃん。…一勝負する? 今。"},
+ {r:"b",t:"五目盤なんてどこにあるんだよ、今。…待てよ、あった。店の中に。20年も前のが。"},
+ {r:"a",t:"埃をかぶった碁盤を取り出す"},
+ {r:"b",t:"…この町は本当、時間が止まってるね。いいよ、アイス賭けよう。",d:"縁台に碁盤を広げる"}],
+"花火が上がる橋の上":[
+ {r:"a",t:"…飴、ありがとうございました。でももう私の番なので。入らないと。",d:"立ち上がって身なりを整える"},
+ {r:"b",t:"あの。さっき手が震えるって言ってましたよね。一つだけ教えます。"},
+ {r:"a",t:"…はい?",d:"最後のチャンスだと思う人が一番切実に話すんです。それ、面接官も分かってます。頑張ってきてください。"},
+ {r:"b",t:"拳を軽く上げてみせる",d:"…最後の花火だって。一番大きいのが上がるって。"}],
+"産婦人科の待合室":[
+ {r:"a",t:"空を指さす"},
+ {r:"b",t:"なのになんで空じゃなくて俺を見てるの。"},
+ {r:"a",t:"一番大きいのがここにあるのに、何を空なんか見てるの。"},
+ {r:"b",t:"花火の音に声がかき消される",d:"…今なんて言った? 花火の音で聞こえなかった。もう一回言って。"}],
+"屋上菜園":[
+ {r:"a",t:"一歩近づく"},
+ {r:"b",t:"名前どうしよう。まずマタニティネームから決めよう。まめすけ、どう? 今豆粒くらいだし。"},
+ {r:"a",t:"…まめすけ。いいね。でも私、本当にちゃんとやれるかな。父親/母親の役目。",d:"うちの親も最初は分からなかったんだって。産んでから覚えたって。俺たちもそれでいい。"},
+ {r:"b",t:"…まめすけ。不器用でも許してね。私たちも親は初めてなの。",d:"エコー写真に向かってささやく"}],
+"教室の窓際の午後":[
+ {r:"a",t:"焼肉いいですね。あ、レタスの水やりは朝にしてください。真昼にやると葉が茹だっちゃうので。",d:"…私も一つ植えてみようかな。この隣の空いてるところに。"},
+ {r:"b",t:"じゃあ唐辛子植えましょう。レタスと唐辛子があれば包み野菜の完成ですね。"},
+ {r:"a",t:"空の植木鉢を渡す"},
+ {r:"b",t:"…引っ越してきてよかったです。都会でこんなご近所ができるなんて。",d:"土に触れてみる"}],
+"宅配ボックスの前":[
+ {r:"a",t:"…掃除はもういいから、ちょっとこっち来て。夕焼け、見て。"},
+ {r:"b",t:"窓の外を指さす"},
+ {r:"a",t:"わあ。…ねえ、さっきの話、本当? 私の席だったから席替えたって。",d:"…うん。3月から。お前が窓際で居眠りしてるの見るのが好きだった。"},
+ {r:"b",t:"…どうかしてる。もうここで居眠りできないじゃん。あなたのこと思い出しちゃって。",d:"窓枠に腰かけて笑う"}],
+"山火事監視小屋":[
+ {r:"a",t:"…このアイス、この町じゃ売ってないよね。私もこれ好きなんだけど。"},
+ {r:"b",t:"本当ですか? これ知ってる人初めて見ました。廃盤になるって噂で買いだめしてたんです。"},
+ {r:"a",t:"廃盤!? やだ。…ねえ、どこで注文したのかだけ教えてください。",d:"スプーンを持ったまま真剣になる"},
+ {r:"b",t:"…一緒に頼みましょう、次は。送料も浮きますし。連絡先…教えてくれます?",d:"スマホを差し出す"}],
+"古書店のはしご":[
+ {r:"a",t:"…俺? 俺はこの山が家なんだ。下りたらむしろ道に迷う。"},
+ {r:"b",t:"それどういう意味ですか。山で道に迷わない人が。"},
+ {r:"a",t:"山には道が一つしかない。上りか下りか。街は多すぎるんだよ。",d:"双眼鏡を下ろす"},
+ {r:"b",t:"…じゃあ俺、たまに登ってきます。兄さんが道に迷わないように、俺が道になります。",d:"水筒のコーヒーを注ぐ"}],
+"川辺の釣り場":[
+ {r:"a",t:"…でもこの本、なんで探してるの? 絶版になって20年も経ってるのに。",d:"子どもの頃、父が読んでくれた本なんです。どうしてももう一度手に入れたくて。"},
+ {r:"b",t:"…そんな本を俺が見つけてあげたんだな。誇らしいな。"},
+ {r:"a",t:"本の埃をふっと吹く",d:"うん。だから最初のページに名前書いて。見つけてくれた人として覚えておきたいから。"},
+ {r:"b",t:"ペンを差し出す",d:"浮きが水中にすっと沈んでいく"}],
+"停電したエレベーター":[
+ {r:"a",t:"…数を数えるの、効果あるよね?もう300まで数えたよ、私たち。"},
+ {r:"b",t:"…でも変だね。もう全然怖くない。"},
+ {r:"a",t:"私の手が温かいからだよ。うちのおばあちゃんが言ってた、手が温かい人は信じていいって。"},
+ {r:"b",t:"…明かりついた。でも…もう少しだけ手、握っててもいい?",d:"明るくなったエレベーターの中で向き合う"}],
+"別れた後のカフェ":[
+ {r:"a",t:"…開けてみて。中に何が入ってるか、私も忘れちゃった。",d:"コーヒーをかき混ぜるだけ"},
+ {r:"b",t:"…映画のチケットだ。私たち観られなかった映画。あの日ケンカして入れなかった。",d:"箱からチケットを二枚取り出す"},
+ {r:"a",t:"…ああ。あれか。あの映画、まだたまに再上映してるよ。"},
+ {r:"b",t:"…気になるな、結末。…観に行く?チケットは買い直して、これは記念に取っておこう。",d:"チケットをそっと置く"}],
+"自衛隊の面会所":[
+ {r:"a",t:"そうだ、写真持ってきたよ。あなたがいない間に撮ったやつ。桜も、初雪も。",d:"写真の束を取り出す"},
+ {r:"b",t:"…私がいない季節が、こんなにあったんだね。"},
+ {r:"a",t:"だから二倍撮ったの。あなたの分まで。帰ってくるまで撮り続けるつもり。"},
+ {r:"b",t:"…帰ってきたら、真っ先に写真館行こう。私たち二人で撮った写真、ないもんね。",d:"写真を大切に胸に抱く"}],
+"練習室の鏡":[
+ {r:"a",t:"…でももし、もし片方だけ受かったらどうしよう。"},
+ {r:"b",t:"その話はしないでおこうって言ったじゃない。"},
+ {r:"a",t:"違う、決めた。あなたが受かったら、私は心から拍手する。だからあなたもそうして。",d:"鏡の中の相手を見る"},
+ {r:"b",t:"…バカ。二人とも受かる未来を描かない理由がどこにあるの。よし、最初から。ファイブ、シックス、セブン、エイト!",d:"音楽をもう一度かける"}],
+"甕置き場の上の月":[
+ {r:"a",t:"文はお読みになりましたか。私の想い、文字では半分も書ききれませなんだが。",d:"月明かりに顔が浮かび上がる"},
+ {r:"b",t:"…百度読み返し、紙がすり切れました。ですがどう返事をすればよいものか。"},
+ {r:"a",t:"返事などいりませぬ。今のその顔が答えにございます。",d:"一歩、近づく"},
+ {r:"b",t:"…鶏が鳴く前にお発ちください。ですが…今しばらく、今しばらくだけここに。",d:"そっと袖を掴む"}],
+"救急救命室の明け方":[
+ {r:"a",t:"…手術室の明かりが消えた。先生が出てくる。",d:"勢いよく立ち上がる"},
+ {r:"b",t:"…私、見られない。先に表情だけ見てきて。どう?",d:"ぎゅっと目をつぶる"},
+ {r:"a",t:"…笑ってる。先生、笑ってるよ。うまくいったって。うまくいったって!",d:"肩を揺さぶる"},
+ {r:"b",t:"…本当に?本当に?…ああ、力抜けた。ちょっと支えて。",d:"座り込みながら手を伸ばす"}],
+"同窓会のトイレ":[
+ {r:"a",t:"…実は事業失敗したんだ。二回も。今三回目やってる。",d:"鏡を見る"},
+ {r:"b",t:"おい、二回失敗して三回目やってるのがすごいんだよ。普通は立ち直れない。"},
+ {r:"a",t:"…お前にだけはうまくいってるふりしたかったのに。昔いつもお前に負けてたから。"},
+ {r:"b",t:"馬鹿野郎、俺なんか始めることすらできなかった。会社勤め20年目だぞ。お前が俺の憧れなんだよ。行くぞ、俺のおごりだ。",d:"背中を押しながら出ていく"}],
+"捨てられた子犬":[
+ {r:"a",t:"まず名前つけよう。雨の日に会ったから…しずく?雲?いや、傘?"},
+ {r:"b",t:"傘って何よ。…春雨はどう?春雨。"},
+ {r:"a",t:"春雨。…いいね。この子も気に入ってるみたい。しっぽ振ってるの見て。",d:"犬が腕の中でくうんと鳴く"},
+ {r:"b",t:"…春雨の予防接種、私が調べておくね。その、連絡先聞かないと一緒に育てられないし。",d:"スマホを取り出しながら顔が赤くなる"}],
+"屋上部屋の星空":[
+ {r:"a",t:"なあ、賭けしようぜ。どっちが先に就職するか。負けたほうが初任給でおごり。"},
+ {r:"b",t:"…初任給?スケールでかいね。いいよ、でも勝ったほうは何してもらえるの。"},
+ {r:"a",t:"勝ったほうは…負けたほうの面接用スーツ買ってあげる。どう。",d:"缶を軽くぶつけ合う"},
+ {r:"b",t:"…それいいね。どっちが勝っても、二人ともスーツ着て出勤ってことか。",d:"星を見上げて笑う"}],
+"手術同意書":[
+ {r:"a",t:"…書いたよ。あとは結果待つだけだね。",d:"ペンを置く"},
+ {r:"b",t:"よくやった。母さんいつも言ってたじゃん。うちの兄弟が一緒にいれば怖いものなしだって。"},
+ {r:"a",t:"…小さい頃母さんが私たちの手を引いて病院通いしてたのに、今は私たちが母さんを。",d:"手術室のドアを見つめる"},
+ {r:"b",t:"…母さんが出てきたら、三人で旅行行こう。母さんが行きたがってた海。その話しながら待とう。",d:"肩に腕を回す"}],
+"初出勤の満員電車":[
+ {r:"a",t:"…あの、ありがとうございます、もう一つだけ聞いてもいいですか。お昼ってどうしてるんですか。一人で食べるんですか。"},
+ {r:"b",t:"初日はだいたい先輩が連れて行ってくれるよ。心配性だね、新人さん。"},
+ {r:"a",t:"…顔に出てますよね。昨日一睡もできなかったんです。",d:"つり革をぎゅっと握る"},
+ {r:"b",t:"私も初日そうだったよ。そうだ、私あのビルの3階にいるから。お昼難民になったら連絡して。",d:"名刺をそっと差し出す"}],
+"廃校の校庭":[
+ {r:"a",t:"…ブランコの横に、私たちのタイムカプセル埋めたの、覚えてる?",d:"花壇の隅を指さす"},
+ {r:"b",t:"そうだ!30年経ったね。…まさかまだあるかな?"},
+ {r:"a",t:"掘ってみよう。実は私、それ掘るためにお前呼んだんだ。一人で開けたくなくて。",d:"小さなシャベルを取り出す"},
+ {r:"b",t:"…おい、本当にあった!缶だ!何書いたか全然覚えてない。ドキドキする。",d:"錆びた缶を大事に持ち上げる"}],
+"放送局の控室":[
+ {r:"a",t:"…終わりました、先輩。私、やり遂げました。緊張せず、最後まで。",d:"上気した顔で駆けてくる"},
+ {r:"b",t:"見てたよ。モニターで全部見てた。あの一人に語りかけるみたいにやってたね。"},
+ {r:"a",t:"…でもあの一人、実は先輩だと思ってやってました。"},
+ {r:"b",t:"…こいつめ。来週からお前のコーナーができるってさ。ここからが本当のスタートだ。",d:"肩を叩きながら笑う"}],
+"葬儀場の菊の花":[
+ {r:"a",t:"…あいつ言ってたんだ。私たち三人、60になったら沖縄で一ヶ月暮らそうって。"},
+ {r:"b",t:"…その約束のために積立まで始めたのに、あいつめ。"},
+ {r:"a",t:"…行こう。私たち二人だけでも。あいつの写真持って。",d:"遺影を見つめる"},
+ {r:"b",t:"…そうだね。三人で行くってことだよ、それ。ほら、お前が沖縄行くんだ。いいなあ。",d:"遺影に向かって無理に笑う"}],
+"遊園地のメリーゴーランド":[
+ {r:"a",t:"…もう一周乗ろうか。係の人が最終便だって。私たちしかいないって。"},
+ {r:"b",t:"…うん。でも今度はお前が後ろに乗って。私が前で見てるから、お前を。"},
+ {r:"a",t:"おお。もう恥ずかしくないの?",d:"木馬を乗り換える"},
+ {r:"b",t:"うん。考えてみたら、世界で一番幸せな人の隣の席が、私の席だった。",d:"音楽が再び流れ出す"}],
+"工事現場のコンテナ":[
+ {r:"a",t:"…あんたの手、元々何してた手なんだ。ペン持ってた手みたいだけど。",d:"日本酒を注ぎ足す"},
+ {r:"b",t:"…会社勤めしてました。クビになりましたけど。子供が二人いるんで、何かしないとと思って。"},
+ {r:"a",t:"子供が二人。…なら、このマメは父親の勲章だな。恥ずかしい手じゃないよ。",d:"自分のタコを見せる"},
+ {r:"b",t:"…兄さん。明日も来ます。明後日も。この手が固くなるまで。",d:"杯を一気に飲み干す"}],
+"手を見ろ。まめができてる。最初はみんなそうだ。これ塗れ。":[
+ {r:"a",t:"…あの席、実は私の指定席だったんです。社長になる前、お客さんだった頃。"},
+ {r:"b",t:"…だからあの席だけ照明が温かいんだね。どうりで。"},
+ {r:"a",t:"気づきましたね。…コーヒーもう一杯どうですか。今度はお客さんじゃなく、ただの人と人として。",d:"スクリーンの光が顔に映る"},
+ {r:"b",t:"…いいですね。じゃあ私も常連じゃなく、ただ名前で呼びます。私は…。",d:"椅子を一つ引いてあげる"}],
+"バスターミナルの最終便":[
+ {r:"a",t:"…バスの運転手さんが5分待ってくれるって。田舎の人情だね、これも。",d:"バス停に再び立つ"},
+ {r:"b",t:"5分か。…じゃあ手短に言うね。私、来月東京に行くの。あなたのいるところへ。"},
+ {r:"a",t:"…え?本当に?こっちの仕事はどうするの。",d:"バスのドアを掴んだまま固まる"},
+ {r:"b",t:"整理したの。あなたを見送って後悔するの、一回で十分だった。…さあ、乗って。すぐまた会えるから。",d:"笑いながら背中を押す"}],
+"美容室の鏡の前":[
+ {r:"a",t:"…はい、できました。どうですか、気に入りました?",d:"鏡を向けて見せる"},
+ {r:"b",t:"…なんか変な感じ。でも軽いです。頭も、心も、不思議と。"},
+ {r:"a",t:"短い髪のほうが似合う人っているんですよ。新しい顔が本当の顔になる人。",d:"肩の髪の毛を払ってあげる"},
+ {r:"b",t:"…ありがとうございます。来月また来ます。この髪型、しばらく続けてみます。",d:"鏡の中の自分に初めて笑いかける"}],
+"屋上の物干し場":[
+ {r:"a",t:"…あ、この服、日向じゃなく陰干ししてくださいね。色落ちしますよ、こういうのは。"},
+ {r:"b",t:"あら、洗濯上手ですね。一人暮らし長いんですか。"},
+ {r:"a",t:"10年目です。洗濯とラーメンだけは博士になりました。他はまだめちゃくちゃですけど。",d:"きまり悪そうに笑う"},
+ {r:"b",t:"…じゃあおかずは私が博士です。物々交換しません?洗濯教わって、おかずあげます。",d:"洗濯ばさみをいじる"}],
+"シェアハウスの廊下":[
+ {r:"a",t:"…試験、何の準備してるんですか。私は公務員試験3年目。あ、準備だけ3年目ってことです。",d:"壁にもたれて座る"},
+ {r:"b",t:"私もです。…ここの人たちって皆、何年目かで挨拶するんですね。"},
+ {r:"a",t:"だから泣き声聞こえても誰も何も言わないんです。皆泣いたことあるから。",d:"カップ麺にお湯を注いであげる"},
+ {r:"b",t:"…麺ができる3分間だけ、試験の話じゃなく別の話をしましょう。私たち。",d:"廊下の床に向かい合って座る"}],
+"信号待ちの偶然":[
+ {r:"a",t:"…信号、もう三回変わってますよ。私たちずっと渡らずにいます。"},
+ {r:"b",t:"…どこまで行くんですか。私はあそこの交差点の会社まで。"},
+ {r:"a",t:"私も同じ方向です。実は…知ってました。毎日同じ方向だってこと。",d:"耳が赤くなる"},
+ {r:"b",t:"…じゃあ明日からここで会って一緒に歩きましょう。8時15分。遅れないでくださいね。",d:"青信号で並んで足を踏み出す"}],
+"おばあちゃんの手打ちうどん":[
+ {r:"a",t:"…なんで泣くのよ。生地に涙入ったら塩辛くなるでしょ。",d:"手の甲で孫の頬を拭いてあげる"},
+ {r:"b",t:"…おばあちゃんがそんなこと言うから泣くんじゃない。いなくなる時なんて言うから。"},
+ {r:"a",t:"人は皆いつかいなくなる。でも味は残る。だから手に刻みなさい。涙じゃなく手に。",d:"生地をもう一度握らせる"},
+ {r:"b",t:"…わかった。その代わり今日全部教えて。出汁の取り方まで。夜通しでも。",d:"袖をまくり上げる"}],
+"年末のコンビニ":[
+ {r:"a",t:"…5、4、3、2、1。新年だね。私たち、今年最初の会話をした相手なんだね、お互い。"},
+ {r:"b",t:"…そうだね。最初の人だね。",d:"肉まんの湯気が立ちのぼる"},
+ {r:"a",t:"新年の願い事した?私はしたよ。去年より寂しくなりませんようにって。"},
+ {r:"b",t:"…もう叶い始めてる気がするけど、その願い。今この瞬間。",d:"カップ麺を二つレジに置く"}],
+"非常階段の話し合い":[
+ {r:"a",t:"…計画?よし。まずこのUSB、コピーを三つ作ろう。一つは記者、一つは弁護士。"},
+ {r:"b",t:"残りの一つは?"},
+ {r:"a",t:"お前が持ってろ。俺に何かあったら、お前が判断してくれ。",d:"USBを握らせる"},
+ {r:"b",t:"…何かあったりしない。俺がそばにいるから。月曜に一緒に公にしよう。",d:"USBをぎゅっと握りしめる"}],
+"海上の灯台":[
+ {r:"a",t:"…そうだ、これ。30年分の航海日誌だ。どの夜にどんな船が通ったか、全部書いてある。",d:"古びたノートを差し出す"},
+ {r:"b",t:"…これ、全部私にくださるんですか。"},
+ {r:"a",t:"灯台守の遺産なんて大したもんじゃないさ。夜と灯りと記録だけだよ。",d:"水平線を見つめる"},
+ {r:"b",t:"…先輩。毎年最初のページに手紙を書きます。この灯台は元気ですって。読みに来てください。",d:"ノートを胸に抱く"}],
+"予備校の屋上":[
+ {r:"a",t:"…なあ、お前去年の今頃何点だったか覚えてるか。今より40点も低かったんだぞ。"},
+ {r:"b",t:"…それをどうして知ってるの。"},
+ {r:"a",t:"お前の成績表、毎月こっそり見てたんだよ。お前が泣くから、伸びてるの自分で気づけないから。",d:"手帳を開いて見せる"},
+ {r:"b",t:"…これ全部書き留めてたの?…私、ダメなんじゃなくて、伸びてるんだ。私。",d:"丸めた成績表をもう一度伸ばす"}],
+"商店街の露店":[
+ {r:"a",t:"そうだ、明け方はあの路地の入り口のトラックで仕入れるんだ。あそこが一番新鮮だよ。俺の名前出して。",d:"軍手をはめ直す"},
+ {r:"b",t:"…おじさんの名前出したら安くしてくれるんですか。"},
+ {r:"a",t:"安くするんじゃなく、騙さないってことさ。素人だってバレたら鮮度落ちたの渡すからな、あそこは。",d:"からから笑う"},
+ {r:"b",t:"…今日教わったこと、いつか返します。今度私の隣に素人が来たら、私もおでんの汁あげます。",d:"コップを空にして深くお辞儀する"}],
+"入院室の窓辺":[
+ {r:"a",t:"…お医者さん、何て言ってた。正直に話して。あなたの顔見たら全部わかるから。"},
+ {r:"b",t:"…来週もう一回検査しようって。でも数値は良くなってきてるって。本当だよ。"},
+ {r:"a",t:"…じゃあ桜、来年の分も予約していいかな。",d:"窓の外を見る"},
+ {r:"b",t:"来年の分、再来年の分、10年分全部予約して。場所取りは私の専門でしょ。",d:"手をもっと強く握る"}],
+"路地裏の理髪店":[
+ {r:"a",t:"…そうだ、お宅の息子さん今年大学に入ったんだって。今度連れてきて。面接の前に。",d:"はさみの音が静かになる"},
+ {r:"b",t:"…師匠が息子の初誕生日にファーストヘアカットしてくれたのに、もう大学生ですよ。"},
+ {r:"a",t:"その髪の毛、まだあの引き出しにあるよ。あんたが預けたまま取りに来なかったから。",d:"古びた引き出しを指さす"},
+ {r:"b",t:"…それはそのまま師匠が持っててください。うちの三代分の髪を、この椅子が全部知ってるんですね。",d:"鏡の中で笑う"}],
+"電気の消えたオフィス":[
+ {r:"a",t:"…実はこのプロジェクトが終わったら地方転勤なんです。だから徹夜してでも早く終わらせようと思って。"},
+ {r:"b",t:"…え?地方ですか?いつですか。",d:"コーヒーを置きかけて止まる"},
+ {r:"a",t:"来月。…だから最近、残業が嫌じゃなかったんです。オフィスに残ってくれる人がいたから。"},
+ {r:"b",t:"…そのプロジェクト、ゆっくりやりましょう。いや、私も一緒にやります。二人でやったら…もっと時間かかりますね。",d:"椅子を引きずって隣に座る"}],
+"引っ越しトラックの助手席":[
+ {r:"a",t:"…見て、あそこにうちの学校が見える。最後に挨拶して。元気でって。"},
+ {r:"b",t:"…元気でね、学校。元気でね、お好み焼き屋さん。…ねえ、私涙出ない。おかしいな。"},
+ {r:"a",t:"さっき全部泣いちゃったからだよ。…そうだ、これ。あなたの友達の連絡先、全部聞いておいたから。",d:"メモを差し出す"},
+ {r:"b",t:"…いつの間にこれ全部。…最高だよ。新しい町行ったら真っ先に手紙書くから。",d:"メモをぎゅっと握りしめる"}],
+"警察署の留置場":[
+ {r:"a",t:"…元気に暮らせって?お前なしで?それのどこが元気に暮らすことだよ。",d:"鉄格子の前にへたり込む"},
+ {r:"b",t:"…立てよ。皆見てるだろ。お前までこうなったら、俺本当に耐えられない。"},
+ {r:"a",t:"弁護士雇った。真犯人の目撃者も見つけた。お前もうすぐ出てこられる。だからその中で余計なこと考えるな。",d:"書類封筒を掲げてみせる"},
+ {r:"b",t:"…おい。…ありがとな。出たら、ラーメンおごれよ。お前の好きなあの店の。",d:"鉄格子越しに拳を差し出す"}],
+"山頂の標識石":[
+ {r:"a",t:"はい、チーズ!…おい、お前目つぶってるじゃん。もう一回。",d:"スマホを構える"},
+ {r:"b",t:"風のせいだよ!…ねえ、次はどこ行く?せっかく始めたんだし。"},
+ {r:"a",t:"おお、もう二度と来ないって言ってたのに。次は屋久島。縦走。二泊三日。",d:"にやりと笑う"},
+ {r:"b",t:"…どうかしてるよ。でもいいね。お前とならどこでも頂上まで行けそう。",d:"山頂の標識に並んで寄りかかり写真を撮る"}],
+"路地裏のたこ焼き屋":[
+ {r:"a",t:"…うん。告白だよ。お好み焼き屋でごめんね、でも私たちの思い出、全部ここにあるから。"},
+ {r:"b",t:"…落としたお好み焼きもったいない。じゃなくて。今、心臓が破裂しそう。"},
+ {r:"a",t:"…返事はゆっくりでいいよ。卒業式まであと3日あるから。",d:"おでんの汁を注いであげる"},
+ {r:"b",t:"3日なんて待てないよ。…おばちゃん、ここお好み焼き一人前追加!こいつと私、付き合うことになった記念に!",d:"店中に響き渡る声で叫ぶ"}],
+"産後ケアセンターの廊下":[
+ {r:"a",t:"…看護師さんが言ってたけど、うちの子、夜一番泣かないんだって。おとなしいって。",d:"ガラスから目が離せない"},
+ {r:"b",t:"…誰に似ておとなしいんだろ。私たち二人とも気が短いのに。"},
+ {r:"a",t:"おばあちゃん似かもね。…そうだ、お母さんに電話した?孫生まれたって。",d:"スマホを取り出す"},
+ {r:"b",t:"…さっきしたら泣かれた。30分も。…私たちも、誰かが泣いたら駆けつける立場になったんだね。",d:"ガラス越しに赤ちゃんに手を振る"}],
+"古びたピアノ教室":[
+ {r:"a",t:"…最後に一曲、一緒に弾こうか。あなたが最初に習った曲。覚えてる?",d:"椅子の隣の席を空けてあげる"},
+ {r:"b",t:"…猫踏んじゃったですか?忘れるわけないですよ。百回は怒られましたもん。"},
+ {r:"a",t:"そう、それ。あなたが低いド、私が高いド。用意。",d:"鍵盤に手を乗せる"},
+ {r:"b",t:"…先生。私の教室の開講式の日、この曲、このピアノで一緒に弾きましょう。最初の曲として。",d:"演奏が始まる"}],
+"雪積もる歩哨所":[
+ {r:"a",t:"…おい、見ろ。本当に雪だ。静かでいいな、こういう夜勤も悪くない。",d:"白い息が広がる"},
+ {r:"b",t:"…先輩は除隊したら何するつもりですか。"},
+ {r:"a",t:"大学戻らなきゃな。そうだ、お前うちの大学の近く住んでるって言ってたよな。除隊したら一回メシ食おう。娑婆で。"},
+ {r:"b",t:"…本当ですか?その約束信じて残りの勤務、乗り切ります。",d:"手袋をはめた手で敬礼する"}],
+"屋上のテント":[
+ {r:"a",t:"…なあ、俺たち何で家出てきたんだっけ。ケンカした理由、忘れた。"},
+ {r:"b",t:"私も。成績のことだったかな、ゲームのことだったかな。"},
+ {r:"a",t:"…帰ったらお母さんに何て言おう。ラーメン食べてくるって出てきたのに。",d:"テントのジッパーを少し開ける"},
+ {r:"b",t:"正直に言いなよ。友達と星見てきたって。…ねえ、本当に星見える。一つ、二つ…。",d:"テントの外に顔を出す"}],
+"タクシー会社の車庫":[
+ {r:"a",t:"…本当に?手料理?私、人の家でご飯食べさせてもらうの20年ぶりなんだけど。",d:"鍵を握った手が止まる"},
+ {r:"b",t:"うちの子供たちに言っておいたよ。今日おじさんが来るって。兄さんの話、よくしてるから、俺。"},
+ {r:"a",t:"…おじさんか。はは、まいったな。何買っていけばいいんだ。子供たち何が好きなんだ。",d:"つい咳払いをする"},
+ {r:"b",t:"手ぶらで来いよ。兄さんが来ること自体がプレゼントだから。…兄さん、もう一人じゃないよ。わかった?",d:"肩を叩く"}],
+"舞台裏の楽屋":[
+ {r:"a",t:"…カーテンコール一緒にって?主役はお前だろ。最後の拍手はお前のものだよ。",d:"パフを置く"},
+ {r:"b",t:"私の舞台は全部先輩のものです。セリフ忘れるたびに、後ろで口の形で教えてくれたじゃないですか。"},
+ {r:"a",t:"…気づいてたのか、それ。",d:"鏡の中で目が合う"},
+ {r:"b",t:"全部わかってました。だから今日の最後の挨拶、手を繋いでやりましょう。お客さんたちにも知ってもらわないと、本当の主役が誰か。",d:"舞台のほうから拍手が聞こえてくる"}],
+"雨降る整備工場":[
+ {r:"a",t:"…コーヒー飲みに来ただけなら、そう言ってくれればよかったのに。エンジンオイル代いくらすると思ってるんですか。",d:"タオルで手を拭く"},
+ {r:"b",t:"言ったら…コーヒーだけ渡して帰されるじゃないですか。車の修理してる間は、そばにいられるから。"},
+ {r:"a",t:"…まいったな。じゃあこれからどうするんですか。あの車、もう直すところないのに。",d:"ボンネットを閉める"},
+ {r:"b",t:"…じゃあこれからは車じゃなく、ただ私に会いに来ちゃダメですか。コーヒーは私が買ってきます。",d:"傘をいじる"}],
+"夜間開園の水族館":[
+ {r:"a",t:"…閉館のアナウンスだ。もうこんな時間か。",d:"水槽の青い光が揺れる"},
+ {r:"b",t:"…名残惜しいね。今度の夜間開館の時、また来ようか。"},
+ {r:"a",t:"そうしよう。でも今度は…手を繋いで歩こう。今日ずっと繋ぎたかったのに繋げなかった。",d:"水槽だけを見つめながら言う"},
+ {r:"b",t:"…バカ。今繋げばいいじゃない。まだ5分あるよ。",d:"先に手を差し出す"}],
+"祖母の家の縁側":[
+ {r:"a",t:"…そうだ、これも。あんたが小さい頃使ってた布団。新しく洗っておいたから。東京は寒いっていうし。",d:"花柄の布団を乗せる"},
+ {r:"b",t:"おばあちゃん、車に場所ない…。いや、いいや。積むよ。全部積む。",d:"布団を受け取って抱きしめる"},
+ {r:"a",t:"…行ったらご飯ちゃんと食べてね。体壊さないでね。電話…たまにしてね。",d:"庭先までついてくる"},
+ {r:"b",t:"…たまにじゃなくて毎週するよ。日曜の夜ごとに。おばあちゃんのドラマ終わる時間に。",d:"バックミラーの中のおばあちゃんが小さくなるまで手を振る"}],
+"競技場のロッカールーム":[
+ {r:"a",t:"…12ラウンドまで行くな。膝が持たない。6ラウンド以内に決めろ。",d:"ワセリンを塗ってあげる"},
+ {r:"b",t:"…コーチ。もし俺が負けたら、俺たち何しましょうか。明日から。"},
+ {r:"a",t:"負けたら?釣りにでも行くか。お前と俺で。20年ぶりに休むことになるな。",d:"マウスピースを渡す"},
+ {r:"b",t:"…それも悪くないですね。でも今日は勝って、釣りは来週行きましょう。",d:"リングへ続くドアを開ける"}],
+"閉店間際の書店":[
+ {r:"a",t:"…そうだ、その本の最初のページに何か書いてあるはずです。20年前の持ち主が書いたメモ。"},
+ {r:"b",t:"…『この本を手に取ったあなたへ。今日一日もよく頑張りました。』…これ、店長さんの字ですよね。",d:"最初のページを開いてみる"},
+ {r:"a",t:"…バレたね。売れるのを待ってたんじゃなくて、その挨拶をくれる人を待ってたのかも。",d:"…40年をこの教室で過ごしたな。今日が最後の授業だ。"},
+ {r:"b",t:"…私も裏表紙に一行書きますね。次の人へ。この書店があったよって。",d:"ペンを取り出す"}],
+"消防署の待機室":[
+ {r:"a",t:"…そういえば、あの子の保護者から連絡があったって。子どもがお礼にって、消防士さんの絵を描いてくれたらしいよ。",d:"スマホの写真を見せる"},
+ {r:"b",t:"…これ私ですか？顔がじゃがいもみたいなんですけど。…なのに、なんで涙が出るんだろう。",d:"写真を拡大して見る"},
+ {r:"a",t:"そのじゃがいもの絵が給料より嬉しいんだよ。それをもらうために、俺たちこの仕事してるんだから。"},
+ {r:"b",t:"…先輩。この写真、印刷してロッカーに貼ります。つらい時に見れるように。",d:"出動ベルが鳴る"}],
+"列車の食堂車":[
+ {r:"a",t:"…もう二時間経ったんですね。三時間ってこんなに短かったっけ、今日は。"},
+ {r:"b",t:"…不思議ですよね。知らない人とこんなに話が合うなんて。"},
+ {r:"a",t:"私、来月もこの新幹線に乗るんです。同じ時間、同じ曜日に。",d:"車窓の夕焼けを見る"},
+ {r:"b",t:"…あら、私もです。じゃあ私たち…食堂車で会いましょう。今度は偶然じゃなくて約束で。",d:"コーヒーカップを軽く合わせる"}],
+"釣り船の上の夜明け":[
+ {r:"a",t:"…お、おっ！当たった！お前の竿！早く！",d:"あたふたと指差す"},
+ {r:"b",t:"うわっ！これでかい！おい、タモ！タモ持ってこい！",d:"釣り竿が弓のようにしなる"},
+ {r:"a",t:"…釣ったぞ！いやあ、大物だな！30年釣りやってこんなの初めて見た！",d:"跳ねる魚を持ち上げる"},
+ {r:"b",t:"…仲直りの記念だ、これ。鍋作って一杯やろう。昨日のことは汁に流して。",d:"クーラーボックスを開ける"}],
+"薬局のカウンター":[
+ {r:"a",t:"…風邪じゃなくて過労ですよ。薬より睡眠が必要な体です、今。"},
+ {r:"b",t:"…寝たらまた仕事じゃないですか。いっそ寝ない方がましです。"},
+ {r:"a",t:"…そんな話がありますか。はい、このビタミンはサービス。代わりに条件があります。",d:"薬袋に何かを追加で入れる"},
+ {r:"b",t:"条件って？"},
+ {r:"a",t:"今度は具合悪くてじゃなくて、ただ通りがかりに寄ってください。元気な顔も見たいので。",d:"袋を渡しながら微笑む"},
+ {r:"b",t:"…それって処方箋なしでいいやつですよね？明日すぐ来ます。",d:"袋を大切に受け取る"}],
+"屋上庭園のベンチ":[
+ {r:"a",t:"…あの時の言葉。ごめんっていう意味だったんです。あの頃、私が未熟すぎて。"},
+ {r:"b",t:"…10年越しの謝罪を病院の屋上で受け取るとはね。人生って本当に。"},
+ {r:"a",t:"…受け取ってくれますか？遅くなったけど。",d:"そっと隣を見る"},
+ {r:"b",t:"受け取ります。代わりに条件。下のカフェでコーヒー一杯。10年分の利息です。",d:"先に立ち上がって手を差し出す"}],
+"牧場の朝":[
+ {r:"a",t:"…最初から学ぶことなんて何もない。お前はもう知ってる。体が覚えてるんだ、ここで育った体が。",d:"餌を分けて持つ"},
+ {r:"b",t:"…父さんは俺が街に出るって言った時、なんで止めなかったの。"},
+ {r:"a",t:"出てみないとここが見えないからな。俺もそうだった。お前のじいさんの元に戻ってきたんだ。",d:"牛が息子の方に顔を向ける"},
+ {r:"b",t:"…じゃあ俺もいつか自分の息子を待つことになるんだね。この牧場で。",d:"父の隣に並んで立つ"}],
+"郵便局の窓口":[
+ {r:"a",t:"…実はここに、そういう手紙だけ集めておく引き出しがあるんです。宛先のない手紙たち。",d:"小さな引き出しを開ける"},
+ {r:"b",t:"…これ全部…出せなかった気持ちなんですか？"},
+ {r:"a",t:"はい。でも不思議なんですよ。みんな書き終えると、少し顔が軽くなって帰っていくんです。あなたみたいに。",d:"手紙を引き出しにしまう"},
+ {r:"b",t:"…来年の今頃、また来ます。その時は宛先のある手紙を持って。新しく始めた暮らしの近況を。",d:"窓口にぺこりとお辞儀する"}],
+"町のテコンドー道場":[
+ {r:"a",t:"強くなれるかって？この館長が保証する。ただし条件が一つある。"},
+ {r:"b",t:"…何ですか？"},
+ {r:"a",t:"明日も来い。明後日も来い。逃げずに来ること、それが稽古の全てだ。",d:"道着の帯を結び直してくれる"},
+ {r:"b",t:"…はい！明日一番に来ます！館長、あと…蹴りもう一回だけ見せてください！",d:"目を輝かせる"}],
+"バス終点の屋台":[
+ {r:"a",t:"…そういえば、来月からここに店出せないの。区役所が整理するんだって、この通り。"},
+ {r:"b",t:"…え？じゃあおばさんは。この屋台はどうなるんですか。",d:"スマホを取り出す"},
+ {r:"a",t:"分からないよ。30年もここにいたのに。…でもおでんの出汁はどこでだって作れるでしょ、私なら。",d:"無理に笑う"},
+ {r:"b",t:"…おばさん。私、区役所の相談窓口に勤めてるんです。方法があるか、調べてみます。この出汁、失いたくないです。",d:"手帳を取り出して書き始める"}],
+"取り壊し間近の町":[
+ {r:"a",t:"…撮った。でも写真には写らないものもあるね。この路地の匂いみたいな。"},
+ {r:"b",t:"夕方ごとの晩ご飯の匂い。どこの家の味噌汁か全部分かったよね、私たち。"},
+ {r:"a",t:"…ねえ、最後にもう一周しよう。学校に行ってた道を。あの順番のままで。",d:"路地の奥を指差す"},
+ {r:"b",t:"いいよ。文房具屋の跡地、貸本屋の跡地、お前が転んで泣いてた電柱まで。全部に挨拶して行こう。",d:"肩を並べて歩く"}],
+"深夜ラジオブース":[
+ {r:"a",t:"…ちょっと待って、3分後にCM明けです。私また戻らないと。",d:"時計を見る"},
+ {r:"b",t:"じゃあ手短に言いますね。今日の最後のお便り、まだ送ってません。直接言おうと思って。"},
+ {r:"a",t:"…直接ですか？",d:"ヘッドホンを持ったまま止まる"},
+ {r:"b",t:"3年間お便り送ってた理由です。放送終わったら、コーヒー一杯飲みながら話してもいいですか？最初のリスナーとして。",d:"ブースのガラスに手を当てる"}],
+"雪降る屋台":[
+ {r:"a",t:"…元気だった？この言葉言うのに半年かかったよ。",d:"グラスをもてあそぶ"},
+ {r:"b",t:"…元気なふりしてた。あなたは。"},
+ {r:"a",t:"…俺もふりしてた。実はこの屋台、お前のこと思い出して通れなかったんだ。",d:"おでんの出汁から湯気が上がる"},
+ {r:"b",t:"…おばさん、ここお酒もう一本。…今日はふりするのやめよう、俺たち。雪も降ってるし。",d:"空いたグラスを満たしてくれる"}],
+"登校路の坂道":[
+ {r:"a",t:"…俺たちが登る坂って。それって今、俺と付き合おうって言ってるんだよな？"},
+ {r:"b",t:"…三年待ったのに気づいてくれなかったらどうしようかと。",d:"先に握った手に力を込める"},
+ {r:"a",t:"うわ、心臓爆発しそう。…ねえ、卒業式の日ここで写真撮ろう。最初のカップル写真。"},
+ {r:"b",t:"いいよ。それで10年後もまた来よう。この坂が俺たちの始まりだったこと、忘れないように。",d:"坂の上の夕焼けを見る"}],
+"古びた写真館":[
+ {r:"a",t:"…はい、撮りますよ。せーの…あ、ちょっと待って。おじいちゃん、先に涙拭いてくださいね。",d:"シャッターから手を離す"},
+ {r:"b",t:"…いやあ、ごめんね。この人の手を握ったら昔を思い出しちゃって。",d:"ハンカチを取り出す"},
+ {r:"a",t:"ゆっくりでいいですよ。50年待った写真なんですから、5分くらいどうってことないです。",d:"照明をやわらかく落とす"},
+ {r:"b",t:"…あなた、笑いましょう。泣き顔じゃなくて笑顔で残しましょうよ、私たち。",d:"しわの寄った両手が重なる"}],
+"路地の階段、夜":[
+ {r:"a",t:"…毎日手をつないでいいかって？じゃあ毎日迎えに来ないとだけど。覚悟はできてるのか？"},
+ {r:"b",t:"覚悟も何も。望むところだよ。",d:"つないだ手を振る"},
+ {r:"a",t:"…でもうちまだ階段二段残ってる。今日は早く上りすぎたな。",d:"歩みを緩める"},
+ {r:"b",t:"…じゃあ明日からはあの下からゆっくり上ろう。一番遅い足取りで。",d:"階段に並んで腰かける"}],
+"水没する村、最後の日":[
+ {r:"a",t:"…あの柿の木。お前が生まれた年に植えたんだ。あいつも水の底に沈むんだな。",d:"庭の木を見上げる"},
+ {r:"b",t:"…父さん/母さん。あの木の枝、一本折って持っていく。新しい家の庭に接ぎ木するから。"},
+ {r:"a",t:"…生きるのか、それ？生きるならな…そうか、それと土も一緒に持っていこう。",d:"震える手で枝をつかむ"},
+ {r:"b",t:"生きるよ。生かしてみせる。この村がそこでまた育つんだ。",d:"枝をそっと包む"}],
+"炭運びのボランティア":[
+ {r:"a",t:"…来週もまた来るって言いましたよね。その約束守る人、十人に一人ですよ。",d:"炭の跡がついた手袋を脱ぐ"},
+ {r:"b",t:"俺はその一人です。…でも来週来たら、あの家のおばあちゃんにまた会えますか？"},
+ {r:"a",t:"さっきの家？笑顔がきれいな方。…おばあちゃんが心に残ったんだね。"},
+ {r:"b",t:"うどん茹でてくれるって言ってたんです、今度来たら。…その約束のためにも来ないと。",d:"夕暮れの路地の明かりを見る"}],
+"炭を受け取る":[
+ {r:"a",t:"…そういえば、母さん元気にしてるよ。お前のこと心配で夜眠れないみたいだけど、ご飯はちゃんと食べてる。"},
+ {r:"b",t:"…母さんには、俺がここにいるって…何て言ったの。"},
+ {r:"a",t:"遠くへ働きに行ったって言った。でも分かってる感じだった。何も聞いてこなかったよ。",d:"ガラスに額を当てる"},
+ {r:"b",t:"…出たら真っ先に母さんの手を握って、それからお前の手を握るよ。6ヶ月。数えてる。",d:"面会終了のベルが鳴る"}],
+"…あと半年。それだけ数えて生きてるよ、俺。":[
+ {r:"a",t:"…お膳見て。お前の好きなものばっかり作った。味噌汁、卵焼き、焼き魚。",d:"台所からお膳を運んでくる"},
+ {r:"b",t:"…これいつの間に。俺が帰るって連絡したの今朝なのに。"},
+ {r:"a",t:"お前の部屋もそのままだよ。いつでも来られるように、毎週掃除してた。",d:"部屋のドアを開けて見せる"},
+ {r:"b",t:"…母さん/父さん。迎えに来てもらう話、なしにする。代わりに俺、ここに頻繁に来るよ。このお膳の前に。",d:"箸を持ち上げようとして喉が詰まる"}],
+"しわだらけの手を握る":[
+ {r:"a",t:"…そういえば、君があの時出した宿題。将来の夢を書くやつ。俺、まだ持ってるんだ。",d:"古びたファイルを取り出す"},
+ {r:"b",t:"…まさかそれを40年もですか？何て書いたんですか、俺。"},
+ {r:"a",t:"『先生みたいな大人』。一番後ろの席で居眠りしてたやつがこう書いてたんだよ。",d:"黄ばんだ紙を渡す"},
+ {r:"b",t:"…先生。俺その宿題、まだやってる途中です。一生かけてやります。",d:"紙を両手で受け取る"}]
+};
+const MOODS={"初恋":"『花束みたいな恋をした』『四月は君の嘘』","ロマンス":"『君の名前で僕を呼んで』『きみと、波にのれたら』","日常ロマンス":"『パーフェクト・ワールド』『今日から俺は』","メロドラマ":"『世界の中心で、愛をさけぶ』『四月物語』","別れ":"『花様年華』『イマジン』","家族":"『万引き家族』『そして父になる』","感動":"『家族はつらいよ』『奇跡』","人生":"『リトル・フォレスト』『幸せのパン』","青春":"『桐島、部活やめるってよ』『青春18×2』","成長":"『少年の君』『ちはやふる』","友情":"『桐島』『フラガール』","コメディ":"『カメラを止めるな！』『翔んで埼玉』","アクション":"『るろうに剣心』『藁の楯』","ノワール":"『アウトレイジ』『新参者』","スリラー":"『告白』『インシテミル』","時代劇":"『花戦さ』『関ヶ原』","音楽":"『スウィングガールズ』『リンダ リンダ リンダ』","スポーツ":"『シコふんじゃった。』『ウォーターボーイズ』","ドラマ":"『そして父になる』『万引き家族』","再会":"『花束みたいな恋をした』『Love Letter』","日常":"『かもめ食堂』『めがね』"};
+
+function vibrate(ms){ if(navigator.vibrate) try{ navigator.vibrate(ms); }catch(e){} }
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+let _tt;
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2200); }
+const HUES=[{a1:"#ffd56b",a2:"#ff8a5b"},{a1:"#7fdfff",a2:"#5b8aff"},{a1:"#a0f0a0",a2:"#4fd1a0"},{a1:"#ff9ecb",a2:"#ff6b9e"},{a1:"#ffb38a",a2:"#ff7a5b"},{a1:"#c9a3ff",a2:"#9a6bff"}];
+function varyHue(i){ const h=HUES[i%HUES.length], r=document.documentElement.style; r.setProperty('--accent1',h.a1); r.setProperty('--accent2',h.a2); }
+
+let names={a:"俳優①", b:"俳優②"};
+let lenMode='random', curLen='short';
+function setLen(m,el){ lenMode=m; document.querySelectorAll('.lp').forEach(b=>b.classList.remove('sel')); el.classList.add('sel'); vibrate(15); }
+function moodOf(g){ const w=g.split(' ').pop(); return MOODS[w]||'邦画'; }
+let deck=[], deckPos=0, current=null, acted=0, chem=0, swapped=false, drawing=false;
+let genreScore={}; // ジャンル別ケミ合計
+const MILESTONE=8;
+let nextReport=MILESTONE;
+
+function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); document.getElementById(id).classList.add('on'); }
+
+function startGame(){
+  const n1=document.getElementById('p1').value.trim(), n2=document.getElementById('p2').value.trim();
+  names.a = n1 || "俳優①"; names.b = n2 || "俳優②";
+  document.getElementById('tbNames').textContent = names.a + " · " + names.b;
+  document.getElementById('topbar').style.display='flex';
+  deck = shuffle([...Array(SCENES.length).keys()]); deckPos=0;
+  show('scDraw');
+  toast('🎬 お二人、並んで座ってください！');
+}
+
+function drawScene(){
+  if(drawing) return; drawing=true;
+  vibrate(28);
+  const reel=document.getElementById('reel'), rt=document.getElementById('reelText'), btn=document.getElementById('drawBtn');
+  btn.disabled=true; reel.classList.add('spin');
+  const teasers=SCENES.map(s=>s.m);
+  let ticks=0;
+  const iv=setInterval(()=>{
+    rt.textContent = teasers[Math.floor(Math.random()*teasers.length)];
+    ticks++;
+  }, 90);
+  setTimeout(()=>{
+    clearInterval(iv); reel.classList.remove('spin'); btn.disabled=false; drawing=false;
+    if(deckPos>=deck.length){ deck=shuffle(deck); deckPos=0; }
+    const idx=deck[deckPos++];
+    current=SCENES[idx];
+    curLen = lenMode==='random' ? (Math.random()<0.5?'short':'long') : lenMode;
+    swapped=false;
+    varyHue(acted);
+    renderScene();
+    show('scScene');
+    document.getElementById('footerActions').style.display='block';
+    vibrate([20,30]);
+  }, 950);
+}
+
+function renderScene(){
+  const s=current;
+  const roleA = swapped ? s.rb : s.ra;
+  const roleB = swapped ? s.ra : s.rb;
+
+  const script = (curLen==='long' && EXT[s.m]) ? s.ln.concat(EXT[s.m]) : s.ln;
+  let lines = script.map((l,li)=>{
+    const isA = l.r==='a';
+
+    const actorSide = isA ? 'a' : 'b';
+    const actorName = actorSide==='a' ? names.a : names.b;
+    const cls = actorSide==='a' ? 'a':'b';
+    return `<div class="line ${cls}" style="animation-delay:${li*0.09}s">
+        <div class="lbl">${actorName}</div>
+        <div class="body">
+          <div class="say">"${l.t}"</div>
+          ${l.d?`<div class="dir">${l.d}</div>`:''}
+        </div>
+      </div>`;
+  }).join('');
+
+  const roleForActorA = s.ra, roleForActorB = s.rb;
+
+  document.getElementById('card').innerHTML = `
+    <div class="card-head">
+      <span class="tag">${s.g}</span>
+      <span class="tag">${curLen==='long'?'📜 長いセリフ':'⚡ 短いセリフ'}</span>
+      <span class="no">${acted+1}番目のシーン・全体 ${SCENES.length}</span>
+    </div>
+    <div class="movie grad">${s.m}</div>
+    <div class="situation">📍 ${s.s}</div>
+    <div class="origin" style="font-size:11px;color:#9a8fc0;margin:6px 0 2px;">🎬 ミミファクトリー オリジナル脚本・ ${moodOf(s.g)} ムード</div>
+    <div class="roles">
+      <div class="role rA"><span class="who">${names.a} さん</span><span class="p">${roleForActorA}</span></div>
+      <div class="role rB"><span class="who">${names.b} さん</span><span class="p">${roleForActorB}</span></div>
+    </div>
+    <button class="swap" onclick="swapRoles()">🔁 役を交代してもう一度</button>
+    <div class="script">${lines}</div>
+    <div class="tip">💡 <b>演技のコツ</b> — セリフを読むんじゃなくて、実際にその状況だと思って <b>目を見て</b> 話してみてください。 🎬 ト書きは体で表現！恥ずかしいほどケミは上がります。</div>
+    <div class="rate-box">
+      <div class="rate-q">演技どうでした？ケミを押してください 👇</div>
+      <div class="chem-btns">
+        <button class="cb" onclick="rate(6,'😳')"><span class="em">😳</span><span class="cl">むずむず</span></button>
+        <button class="cb" onclick="rate(10,'😆')"><span class="em">😆</span><span class="cl">大爆笑</span></button>
+        <button class="cb" onclick="rate(14,'🥰')"><span class="em">🥰</span><span class="cl">没入最高</span></button>
+        <button class="cb" onclick="rate(18,'🔥')"><span class="em">🔥</span><span class="cl">ケミ爆発</span></button>
+      </div>
+    </div>`;
+  const card=document.getElementById('card');
+  card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
+}
+
+function swapRoles(){ swapped=!swapped; renderScene(); vibrate(20); toast('🔁 役を交代しました'); }
+
+function goRate(){
+
+  document.querySelector('.rate-box').scrollIntoView({behavior:'smooth', block:'center'});
+  toast('👇 ケミを押して次のシーンへ！');
+}
+
+function reDraw(){
+  document.getElementById('footerActions').style.display='none';
+  show('scDraw');
+  drawScene(); // 待ち時間なしですぐロール開始
+}
+
+function rate(pts, emoji){
+  acted++;
+  const g = current.g;
+  genreScore[g] = (genreScore[g]||0) + pts;
+  chem = Math.min(100, chem + pts);
+  const fill=document.getElementById('chemFill');
+  fill.style.width = chem + '%';
+  document.getElementById('chemPct').textContent = chem;
+  vibrate([20,40,20]);
+  toast(emoji + ' ケミ +' + pts + '%!');
+
+  if(acted % 5 === 0){ toast('🎉 ' + acted + 'シーン突破！ケミ ' + chem + '%'); vibrate([30,50,30,50,80]); }
+  document.getElementById('footerActions').style.display='none';
+  if(acted >= nextReport || chem >= 100){ setTimeout(showReport, 500); return; }
+  setTimeout(()=>show('scDraw'), 350);
+}
+
+function bestGenre(){
+  let best='–', mx=-1;
+  for(const k in genreScore){ if(genreScore[k]>mx){ mx=genreScore[k]; best=k; } }
+  return best;
+}
+
+function showReport(){
+  document.getElementById('footerActions').style.display='none';
+  document.getElementById('stActed').textContent = acted;
+  document.getElementById('stChem').textContent = chem + '%';
+  const bg = bestGenre();
+  document.getElementById('stFav').textContent = bg.split(' ')[0]; // 絵文字だけ
+  let title, verdict;
+  if(chem>=100){ title='ケミ爆発 💯'; verdict='お二人はもう名コンビ！目配せだけで通じ合ってますね。次の映画も一緒に撮りましょう？'; }
+  else if(chem>=70){ title='最高の呼吸 🎭'; verdict='ちょっとした場面ももう阿吽の呼吸！お互いの知らなかった表情、今日たくさん発見したはず。'; }
+  else if(chem>=40){ title='芽生えるケミ 🌱'; verdict='少しずつ心が開いてきてます。恥ずかしさを超えたら、本当の面白さが始まります。もう一回？'; }
+  else { title='今からスタート 🎬'; verdict='まだお互い探り合い中！あと数シーン演じれば、きっと弾ける瞬間が来ます。'; }
+  document.getElementById('repTitle').textContent = title;
+  document.getElementById('repVerdict').textContent = verdict;
+  show('scReport');
+  vibrate([60,80,60,80,120]);
+  toast('🏆 今日の名演技、お疲れさまでした！');
+}
+
+function keepPlaying(){ nextReport = acted + MILESTONE; show('scDraw'); toast('🎬 次のシーン行きましょうか！'); }
+
+function shareResult(){
+  const bg=bestGenre();
+  const txt = `🎬 映画の主人公になる\n${names.a} × ${names.b}\n\n演じた場面: ${acted}個\n私たちの相性: ${chem}%\nベスト相性ジャンル: ${bg}\n\n二人で並んで楽しむ仲良くなりゲーム 🎭\nhttps://mimifactory.vibekr.com/apps/映画の中の_主人公になる_friend.html`;
+  if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(()=>toast('📋 結果をコピーしました！'), ()=>toast('コピー失敗…長押しでコピーしてください')); }
+  else toast('結果を長押ししてコピーしてください');
+}
+</script>
+</body>
+</html>
+

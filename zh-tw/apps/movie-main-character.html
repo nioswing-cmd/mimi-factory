@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>電影主角體驗 · 兩人並肩即興演戲的破冰遊戲</title>
+<meta name="description" content="隨機抽出 100+ 電影場景的男女角色,兩人並肩而坐,即興演出台詞與舞台指示的破冰遊戲。">
+<style id="i18nFonts">
+/* self-hosted subset fonts (OFL) — reuse original family names */
+@font-face{font-family:'Noto Sans KR';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+@font-face{font-family:'Jua';src:url('../fonts/NotoSansTC-sub.woff2') format('woff2');font-weight:700;font-display:swap;}
+</style>
+<style>
+:root{
+  --bg1:#160f26; --bg2:#2a1330;
+  --accent1:#ffd56b; --accent2:#ff8a5b;
+  --cream:#fff6ec; --muted:#cdbfe0;
+  --card:#241a3d;
+  --gold:#ffcf6b;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html,body{height:100%;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--cream);
+  background:
+    radial-gradient(120% 80% at 82% -8%, rgba(255,180,90,.12), transparent 55%),
+    radial-gradient(120% 90% at 10% 112%, rgba(255,94,138,.14), transparent 55%),
+    linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  transition:background .9s ease;
+  min-height:100dvh;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:540px; margin:0 auto; min-height:100dvh; padding:18px 16px 30px; display:flex; flex-direction:column;}
+.grad{
+  background:linear-gradient(105deg,#ffd56b,#ff8a5b 45%,#ff5e8a);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+h1,h2,h3,.jua{font-family:'Jua',sans-serif; font-weight:400;}
+.screen{display:none; animation:fadeIn .5s ease; flex:1; flex-direction:column;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+
+.topbar{display:flex; align-items:center; gap:10px; margin-bottom:12px;}
+.brandpill{
+  font-family:'Jua'; font-size:13px; letter-spacing:.02em;
+  padding:5px 12px; border-radius:99px; border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.04); color:var(--muted); white-space:nowrap;
+}
+.chem-wrap{flex:1;}
+.chem-top{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:5px;}
+.chem-label{font-size:11px; color:var(--muted); letter-spacing:.04em;}
+.chem-val{font-family:'Jua'; font-size:14px;}
+.gauge{height:10px; border-radius:99px; background:rgba(255,255,255,.10); overflow:hidden;}
+.gaugefill{
+  height:100%; width:0%; border-radius:99px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  box-shadow:0 0 14px 1px var(--accent2);
+  transition:width .6s cubic-bezier(.22,1,.36,1), box-shadow .6s;
+}
+
+
+.intro{flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; gap:16px;}
+.filmstrip{font-size:13px; letter-spacing:.5em; text-indent:.5em; color:var(--muted); opacity:.8;}
+.title-lg{font-size:min(15vw,58px); line-height:1.02; letter-spacing:-.01em;}
+.subtitle{font-size:15px; color:var(--muted); line-height:1.6; }
+.howto{
+  text-align:left; background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.09);
+  border-radius:18px; padding:16px 18px; font-size:13.5px; color:var(--muted); line-height:1.85;
+}
+.howto b{color:var(--cream);}
+.names{display:flex; gap:10px;}
+.name-in{
+  flex:1; background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.12);
+  border-radius:14px; padding:13px 14px; color:var(--cream); font-size:15px; font-family:'Noto Sans KR';
+  text-align:center; transition:border-color .2s;
+}
+.name-in::placeholder{color:#8b7fa8;}
+.name-in:focus{outline:none; border-color:var(--accent2);}
+
+
+.btn{
+  border:none; border-radius:16px; padding:17px 20px; font-family:'Jua'; font-size:18px;
+  color:#2a1530; cursor:pointer; width:100%;
+  background:linear-gradient(105deg,var(--accent1),var(--accent2));
+  box-shadow:0 8px 24px -8px var(--accent2);
+  transition:transform .15s cubic-bezier(.34,1.56,.64,1), box-shadow .2s, filter .2s;
+}
+.btn:hover{filter:brightness(1.05);}
+.btn:active{transform:scale(.96);}
+.btn.ghost{
+  background:rgba(255,255,255,.06); color:var(--cream); box-shadow:none;
+  border:1.5px solid rgba(255,255,255,.16); font-size:15px; padding:14px;
+}
+.btn:focus-visible{outline:3px solid #fff; outline-offset:2px;}
+.btn-row{display:flex; gap:10px;}
+.btn-row .btn{width:auto; flex:1;}
+
+
+.draw-stage{flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; gap:20px;}
+.reel{
+  width:100%; max-width:400px; height:150px; border-radius:22px;
+  background:rgba(0,0,0,.22); border:1.5px solid rgba(255,255,255,.10);
+  display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative;
+}
+.reel-text{font-family:'Jua'; font-size:26px; padding:0 16px; }
+.reel.spin .reel-text{animation:flick .09s steps(1) infinite;}
+@keyframes flick{50%{opacity:.15;}}
+.draw-hint{font-size:14px; color:var(--muted); line-height:1.7; }
+
+
+.pop{animation:pop .45s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(.92) rotate(-1deg); opacity:.3;}60%{transform:scale(1.02);}100%{transform:scale(1) rotate(0); opacity:1;}}
+.scene-scroll{flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding-bottom:6px;}
+.card{
+  background:linear-gradient(165deg, var(--card), rgba(20,14,34,.9));
+  border:1px solid rgba(255,255,255,.10); border-radius:22px; padding:20px 18px 22px;
+  box-shadow:0 20px 50px -24px rgba(0,0,0,.7);
+}
+.card-head{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:4px;}
+.tag{font-size:11.5px; padding:4px 11px; border-radius:99px; background:rgba(255,255,255,.08); color:var(--gold); letter-spacing:.02em; white-space:nowrap;}
+.no{font-size:11.5px; color:var(--muted); margin-left:auto;}
+.movie{font-family:'Jua'; font-size:26px; line-height:1.15; margin:6px 0 3px; }
+.situation{font-size:13.5px; color:var(--muted); line-height:1.65;  margin-bottom:14px;}
+.roles{display:flex; gap:9px; margin-bottom:6px;}
+.role{
+  flex:1; text-align:center; border-radius:14px; padding:11px 8px; font-size:13px;
+  border:1.5px solid rgba(255,255,255,.10); background:rgba(255,255,255,.04); line-height:1.4;
+}
+.role .who{font-family:'Jua'; font-size:12px; color:var(--muted); display:block; margin-bottom:3px;}
+.role .p{font-family:'Jua'; font-size:17px;}
+.role.rA{border-color:rgba(127,223,255,.4); background:rgba(127,223,255,.09);}
+.role.rA .p{color:#9fe6ff;}
+.role.rB{border-color:rgba(255,158,203,.42); background:rgba(255,158,203,.10);}
+.role.rB .p{color:#ffb0d4;}
+.swap{
+  display:block; margin:2px auto 16px; background:none; border:none; color:var(--muted);
+  font-size:12px; text-decoration:underline; cursor:pointer; padding:6px;
+}
+.script{display:flex; flex-direction:column; gap:12px;}
+.line{display:flex; gap:10px; animation:fadeIn .4s ease backwards;}
+.line .lbl{
+  flex-shrink:0; width:42px; text-align:center; font-family:'Jua'; font-size:12px; padding-top:2px;
+}
+.line.a .lbl{color:#9fe6ff;}
+.line.b .lbl{color:#ffb0d4;}
+.line .body{flex:1;}
+.line .say{font-size:15.5px; line-height:1.6; }
+.line .dir{font-size:12.5px; color:var(--muted); font-style:italic; margin-top:3px; }
+.line .dir::before{content:"🎬 "; font-style:normal;}
+.tip{margin-top:15px; font-size:12px; color:var(--muted); background:rgba(255,255,255,.04); border-radius:12px; padding:10px 12px; line-height:1.6; }
+.tip b{color:var(--gold);}
+
+
+.rate-box{text-align:center; margin-top:16px; padding-top:16px; border-top:1px dashed rgba(255,255,255,.13);}
+.rate-q{font-family:'Jua'; font-size:16px; margin-bottom:12px;}
+.chem-btns{display:flex; gap:8px;}
+.chem-btns .cb{
+  flex:1; border:1.5px solid rgba(255,255,255,.14); background:rgba(255,255,255,.04);
+  border-radius:14px; padding:11px 4px; cursor:pointer; color:var(--cream);
+  font-family:'Noto Sans KR'; transition:transform .15s cubic-bezier(.34,1.56,.64,1), background .2s, border-color .2s;
+}
+.cb:active{transform:scale(.94);}
+.cb .em{font-size:24px; display:block; margin-bottom:3px;}
+.cb .cl{font-size:11px; color:var(--muted);}
+
+
+.footer-actions{padding-top:14px;}
+
+
+.report{flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; gap:16px;}
+.badge{
+  width:120px; height:120px; margin:0 auto; border-radius:50%;
+  background:conic-gradient(from 200deg, var(--accent1), var(--accent2), #ff5e8a, var(--accent1));
+  display:flex; align-items:center; justify-content:center; font-size:52px;
+  box-shadow:0 0 40px -6px var(--accent2); animation:pop .6s cubic-bezier(.34,1.56,.64,1);
+}
+.rep-title{font-size:30px; line-height:1.1;}
+.rep-verdict{font-size:15px; color:var(--muted); line-height:1.7; }
+.stat-row{display:flex; gap:10px;}
+.stat{flex:1; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); border-radius:16px; padding:14px 8px;}
+.stat .sv{font-family:'Jua'; font-size:26px;} .stat .sl{font-size:11px; color:var(--muted); margin-top:2px;}
+
+
+.toast{
+  position:fixed; left:50%; top:74px; transform:translateX(-50%) translateY(-20px);
+  background:rgba(36,26,61,.97); border:1.5px solid var(--accent2); color:var(--cream);
+  padding:12px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none;
+  transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; text-align:center;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+.lp{padding:9px 14px;border-radius:99px;border:1.5px solid rgba(167,139,250,.4);background:rgba(36,26,61,.6);color:var(--cream);font-size:13px;cursor:pointer;font-family:inherit;}
+.lp.sel{border-color:var(--accent2);background:rgba(122,166,255,.18);font-weight:700;}
+
+
+.footer{text-align:center; margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em; background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+.disclaimer{font-size:10.5px; color:#8578a0; text-align:center; margin-top:14px; line-height:1.6; }
+
+@media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+</style>
+<!-- mmf-cover-bg:start -->
+<style id="mmf-cover-css">
+
+#mmf-cover-bg{
+  position:fixed; inset:0; z-index:-1; pointer-events:none;
+  opacity:0; transition:opacity .5s ease; isolation:isolate;
+  --mmf-cover:url("../covers/%EC%98%81%ED%99%94%EC%86%8D_%EC%A3%BC%EC%9D%B8%EA%B3%B5%EB%90%98%EA%B8%B0.webp");
+  --mmf-l0:0%; --mmf-l:0%; --mmf-r:100%; --mmf-r0:100%;
+  --mmf-mimg:linear-gradient(180deg,#000 0%,#000 38%,rgba(0,0,0,.55) 68%,transparent 88%);
+  --mmf-mscr:linear-gradient(180deg,#000 0%,#000 52%,rgba(0,0,0,.6) 82%,transparent 100%);
+}
+#mmf-cover-bg::before,#mmf-cover-bg::after{
+  content:"";position:absolute;
+  -webkit-mask-image:var(--mmf-mimg); mask-image:var(--mmf-mimg);
+}
+#mmf-cover-bg::before{
+  z-index:0; inset:-6%;
+  background-image:var(--mmf-cover);
+  background-size:cover; background-position:center 20%; background-repeat:no-repeat;
+  filter:blur(calc(6px + 1.1vw)) brightness(0.611) contrast(1.884) brightness(0.6) saturate(2.35);
+}
+#mmf-cover-bg::after{
+  z-index:1; inset:0;
+  background:rgb(140,140,140);
+  mix-blend-mode:darken;
+}
+#mmf-cover-bg>.mmf-scrim{
+  z-index:2; position:absolute; inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.00) 0%,rgba(0,0,0,.06) 55%,rgba(0,0,0,.18) 100%);
+  -webkit-mask-image:var(--mmf-mscr); mask-image:var(--mmf-mscr);
+}
+
+#mmf-cover-bg>.mmf-scrim2w{
+  z-index:3; position:absolute; inset:0;
+  -webkit-mask-image:var(--mmf-mscr); mask-image:var(--mmf-mscr);
+}
+#mmf-cover-bg .mmf-scrim2{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,0.280) 0%,rgba(0,0,0,0.644) 55%,rgba(0,0,0,0.700) 100%);
+  -webkit-mask-image:linear-gradient(90deg,transparent var(--mmf-l0),#000 var(--mmf-l),#000 var(--mmf-r),transparent var(--mmf-r0));
+          mask-image:linear-gradient(90deg,transparent var(--mmf-l0),#000 var(--mmf-l),#000 var(--mmf-r),transparent var(--mmf-r0));
+}
+html.mmf-cover-on #mmf-cover-bg{opacity:0.70;}
+@media (prefers-reduced-motion:reduce){#mmf-cover-bg{transition:none;}}
+@media print{#mmf-cover-bg{display:none!important;}}
+</style>
+<script id="mmf-cover-js">
+(function(){
+  "use strict";
+  var GLASS=1, GK=0.40, GKIN=0.8, GBLUR="blur(5px) saturate(1.15)", GSHADOW=0.6, GMIN=0.30;
+  function boot(){
+    try{
+      var d=document, root=d.documentElement, body=d.body;
+      if(!body || d.getElementById('mmf-cover-bg')) return;
+      var layer=d.createElement('div');
+      layer.id='mmf-cover-bg';
+      layer.setAttribute('aria-hidden','true');
+      var scrim=d.createElement('div'); scrim.className='mmf-scrim';
+      var wrap2=d.createElement('div'); wrap2.className='mmf-scrim2w';
+      var scrim2=d.createElement('div'); scrim2.className='mmf-scrim2';
+      wrap2.appendChild(scrim2);
+      layer.appendChild(scrim); layer.appendChild(wrap2);
+      body.insertBefore(layer, body.firstChild);
+
+      
+      function rendered(el){
+        if(!el) return false;
+        var cs=getComputedStyle(el);
+        if(cs.display==='none'||cs.visibility==='hidden') return false;
+        var r=el.getBoundingClientRect();
+        return r.width>8 && r.height>8;
+      }
+      function onScreen(el){
+        if(!rendered(el)) return false;
+        var r=el.getBoundingClientRect();
+        return r.top < innerHeight && r.bottom > 0 && r.left < innerWidth && r.right > 0;
+      }
+      
+      var home=null;
+      var sels=['#home','#startScreen','#screen-home','#intro','#start','#cover',
+                'section.screen.on','.screen.on','section.home','.home',
+                'section#home','main>section','.wrap>section','.app>section','body>section','section'];
+      for(var i=0;i<sels.length && !home;i++){
+        var list=d.querySelectorAll(sels[i]);
+        for(var j=0;j<list.length;j++){ if(rendered(list[j])){ home=list[j]; break; } }
+      }
+      if(!home){
+        var h=d.querySelector('.hero,.card,h1');
+        home=h?(h.closest('section')||h.parentElement):body.firstElementChild;
+      }
+      if(!home) return;
+
+      
+      var lastCol='';
+      function colBox(){
+        var vw=innerWidth||1, r=home.getBoundingClientRect();
+        var l=r.left, rt=r.right;
+        var kids=home.querySelectorAll('*');
+        for(var i=0;i<kids.length;i++){
+          var q=kids[i].getBoundingClientRect();
+          if(q.width>60 && q.height>40){ if(q.left<l) l=q.left; if(q.right>rt) rt=q.right; }
+        }
+        if(!(rt>l)){ l=0; rt=vw; }
+        var pad=18, fade=Math.max(60, vw*0.07);
+        var L=Math.max(0,l-pad), R=Math.min(vw,rt+pad);
+        var pc=function(x){ return (Math.max(-20,Math.min(120,x/vw*100))).toFixed(2)+'%'; };
+        var v=[pc(L-fade),pc(L),pc(R),pc(R+fade)].join('|');
+        
+        if(v===lastCol) return;
+        lastCol=v;
+        var st=layer.style, n=v.split('|');
+        st.setProperty('--mmf-l0', n[0]);
+        st.setProperty('--mmf-l',  n[1]);
+        st.setProperty('--mmf-r',  n[2]);
+        st.setProperty('--mmf-r0', n[3]);
+      }
+
+      
+      function scaleAlphas(str,k){
+        if(!str || str==='none') return str;
+        return str.replace(/\brgba?\(\s*([^()]*)\)/gi, function(m, inner){
+          var nums, a=1;
+          if(inner.indexOf('/')>=0){
+            var sp=inner.split('/');
+            nums=sp[0].trim().split(/[\s,]+/).filter(Boolean).map(parseFloat);
+            var at=sp[1].trim();
+            a = at.charAt(at.length-1)==='%' ? parseFloat(at)/100 : parseFloat(at);
+          } else {
+            nums=inner.trim().split(/[\s,]+/).filter(Boolean).map(parseFloat);
+            if(nums.length>3) a=nums[3];
+          }
+          if(nums.length<3) return m;
+          for(var i=0;i<3;i++) if(isNaN(nums[i])) return m;
+          if(isNaN(a)) a=1;
+          var na=Math.max(0,Math.min(1,a*k));
+          return 'rgba('+nums[0]+','+nums[1]+','+nums[2]+','+(Math.round(na*1000)/1000)+')';
+        });
+      }
+      function maxAlpha(str){
+        var mx=0, re=/rgba?\(\s*([^()]*)\)/gi, mm;
+        while((mm=re.exec(str))){
+          var q=mm[1].replace('/',' ').trim().split(/[\s,]+/).filter(Boolean).map(parseFloat);
+          var av = q.length>3 ? q[3] : 1;
+          if(!isNaN(av) && av>mx) mx=av;
+        }
+        return mx;
+      }
+      function glassify(){
+        if(!GLASS) return;
+        var hw=home.getBoundingClientRect().width||1;
+        var els=home.querySelectorAll('*'), done=[];
+        for(var i=0;i<els.length;i++){
+          var el=els[i], tag=el.tagName;
+          if(tag==='BUTTON'||tag==='INPUT'||tag==='SELECT'||tag==='TEXTAREA'||tag==='IMG'||tag==='SVG') continue;
+          if(el.dataset.mmfGlass) continue;
+          var r=el.getBoundingClientRect();
+          if(r.width < Math.max(200, hw*0.5) || r.height < 70) continue;
+          var cs=getComputedStyle(el);
+          if((cs.webkitBackgroundClip||cs.backgroundClip)==='text') continue;
+          var bc=cs.backgroundColor||'', bi=cs.backgroundImage||'none';
+          var alpha = bc && bc!=='transparent' ? maxAlpha(bc) : 0;
+          var hasGrad = bi!=='none' && /gradient/i.test(bi);
+          
+          var eff = 1-(1-alpha)*(1-(hasGrad?maxAlpha(bi):0));
+          if(eff < GMIN) continue;
+          
+          var nested=false;
+          for(var t=0;t<done.length;t++) if(done[t].contains(el)){ nested=true; break; }
+          var k = nested ? GKIN : GK;
+          if(alpha>0.001) el.style.setProperty('background-color', scaleAlphas(bc,k), 'important');
+          if(hasGrad) el.style.setProperty('background-image', scaleAlphas(bi,k), 'important');
+          if(GBLUR){
+            el.style.setProperty('-webkit-backdrop-filter', GBLUR, 'important');
+            el.style.setProperty('backdrop-filter', GBLUR, 'important');
+          }
+          if(GSHADOW<1 && cs.boxShadow && cs.boxShadow!=='none')
+            el.style.setProperty('box-shadow', scaleAlphas(cs.boxShadow,GSHADOW), 'important');
+          el.dataset.mmfGlass='1';
+          done.push(el);
+        }
+      }
+
+      var raf=0, last=null;
+      function apply(){
+        raf=0;
+        colBox();
+        var on=onScreen(home);
+        if(on===last) return;
+        last=on;
+        root.classList.toggle('mmf-cover-on', on);
+      }
+      function ping(){ if(!raf) raf=requestAnimationFrame(apply); }
+      
+      function safeGlass(){ try{ glassify(); }catch(e){} }
+      apply();
+      safeGlass();
+      addEventListener('load', function(){ safeGlass(); ping(); });
+      addEventListener('scroll', ping, {passive:true});
+      addEventListener('resize', ping, {passive:true});
+      addEventListener('click', function(){ setTimeout(ping,0); setTimeout(ping,320); }, true);
+      [80,400,1200].forEach(function(t){ setTimeout(function(){ safeGlass(); ping(); },t); });
+      try{
+        new MutationObserver(ping).observe(body,{
+          subtree:true, childList:true, attributes:true,
+          attributeFilter:['class','style','hidden']
+        });
+      }catch(e){}
+    }catch(e){}
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
+  else boot();
+})();
+</script>
+<!-- mmf-cover-bg:end -->
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<div class="wrap">
+
+  
+  <div class="topbar" id="topbar" style="display:none;">
+    <div class="brandpill">🎬 <span id="tbNames">兩位演員</span></div>
+    <div class="chem-wrap">
+      <div class="chem-top">
+        <span class="chem-label">我們的默契</span>
+        <span class="chem-val"><span id="chemPct">0</span>%</span>
+      </div>
+      <div class="gauge"><div class="gaugefill" id="chemFill"></div></div>
+    </div>
+  </div>
+
+  
+  <section class="screen on" id="scIntro">
+    <div class="intro">
+      <div class="filmstrip">▮ ▯ ▮ ▯ ▮ ▯ ▮</div>
+      <h1 class="title-lg"><span class="grad">電影裡的<br>主角體驗</span></h1>
+      <p class="subtitle">兩人並肩而坐,從電影場景中隨機抽出男女角色<br>即興演出 <b>台詞與舞台指示</b>的<br>破冰變熟遊戲 🎭</p>
+      <div class="howto">
+        <b>🍿 玩法</b><br>
+        ① 兩人並肩看著螢幕。<br>
+        ② <b>抽場景</b> 按一下,電影、角色、台詞就隨機登場。<br>
+        ③ 扮演分配到的 <b class="grad">藍色角色 / 粉紅角色</b>,演出台詞與舞台指示!<br>
+        ④ 演完後按下 <b>默契</b>,填滿量表,進入下一個場景。
+      </div>
+      <div class="names">
+        <input class="name-in" id="p1" maxlength="6" placeholder="演員 ①">
+        <input class="name-in" id="p2" maxlength="6" placeholder="演員 ②">
+      </div>
+      <div class="lenpick" style="display:flex;gap:8px;justify-content:center;margin:14px 0 6px">
+        <button class="lp" onclick="setLen('short',this)">⚡ 短台詞</button>
+        <button class="lp" onclick="setLen('long',this)">📜 長台詞</button>
+        <button class="lp sel" onclick="setLen('random',this)">🎲 隨機</button>
+      </div>
+      <p style="font-size:11.5px;color:#9a8fc0;text-align:center;margin:0 0 12px;">長台詞讓場景深度加倍(約 8 個來回)</p>
+      <button class="btn" onclick="startGame()">🎬 開啟第一個場景</button>
+      <p class="disclaimer">※ 所有台詞與舞台指示,都是借各種電影氛圍創作的 <b>咪咪工廠原創改編</b>,並非真實電影劇本。</p>
+    </div>
+  </section>
+
+  
+  <section class="screen" id="scDraw">
+    <div class="draw-stage">
+      <div class="reel" id="reel"><div class="reel-text" id="reelText">🎞️</div></div>
+      <p class="draw-hint" id="drawHint">按下按鈕,就會從 110 個經典場景中隨機開啟一個。</p>
+      <button class="btn" id="drawBtn" onclick="drawScene()">🎲 抽場景</button>
+    </div>
+  </section>
+
+  
+  <section class="screen" id="scScene">
+    <div class="scene-scroll">
+      <div class="card pop" id="card"><!-- JS --></div>
+    </div>
+  </section>
+
+  
+  <section class="screen" id="scReport">
+    <div class="report">
+      <div class="badge">🏆</div>
+      <h2 class="rep-title grad" id="repTitle">默契爆棚!</h2>
+      <p class="rep-verdict" id="repVerdict"></p>
+      <div class="stat-row">
+        <div class="stat"><div class="sv" id="stActed">0</div><div class="sl">演出場景數</div></div>
+        <div class="stat"><div class="sv" id="stChem">0%</div><div class="sl">最終默契</div></div>
+        <div class="stat"><div class="sv" id="stFav">–</div><div class="sl">最佳默契類型</div></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn ghost" onclick="shareResult()">📋 複製結果</button>
+        <button class="btn" onclick="keepPlaying()">🎬 再玩一場</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer-actions" id="footerActions" style="display:none;">
+    <div class="btn-row">
+      <button class="btn ghost" style="flex:.7;" onclick="reDraw()">🔄 重新抽</button>
+      <button class="btn" onclick="goRate()">✅ 演出完成</button>
+    </div>
+  </div>
+
+  
+  <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/zh-tw/friend.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧺 兩人的野餐 — 看看其他遊戲 →</a></div>
+  <div class="footer">
+    <div class="mf-eyebrow"><span>意義與趣味工廠</span></div>
+    <div class="mf-logo">咪咪工廠 MIMI FACTORY</div>
+    <div class="mf-caption">YEON:GYEOL股份有限公司 家族公司</div>
+  </div>
+</div>
+
+<script>
+
+const SCENES=[
+{m:"春日的信",g:"💛 初戀",s:"公車站,雨停之後。準備說出藏在心裡好久的話的那一刻。",ra:"先動心的一方",rb:"沒察覺的一方",ln:[
+ {r:"a",t:"那個…要一起撐傘嗎?不,其實傘只是藉口。",d:"把傘伸出一半又停住"},
+ {r:"b",t:"藉口的話…那真正的是什麼?"},
+ {r:"a",t:"真正的是,就算多坐過三站也沒關係。",d:"耳朵紅通通地別過視線"},
+ {r:"b",t:"…那今天就坐到終點站吧。",d:"淺淺一笑,拍了拍旁邊的座位"}]},
+{m:"小吃店的季節",g:"👨‍👩‍👧 家庭",s:"深夜的小吃店。久違地面對面坐下的父母與長大的孩子。",ra:"父母",rb:"孩子",ln:[
+ {r:"a",t:"有沒有好好吃飯啊?臉都瘦了一圈。",d:"往碗裡多添了些飯"},
+ {r:"b",t:"媽總是飯飯飯的。我都三十歲了。"},
+ {r:"a",t:"就算三十歲,在我眼裡還是八歲。慢慢吃,很燙。"},
+ {r:"b",t:"…媽你也吃點。",d:"把湯匙塞到父母手裡"}]},
+{m:"巷弄裡的決鬥",g:"🔥 動作",s:"下著雨的後巷。積怨已久的兩人面對面站著。",ra:"追捕的一方",rb:"被追的一方",ln:[
+ {r:"a",t:"我等了三年。逃跑到此為止。",d:"慢慢握緊拳頭"},
+ {r:"b",t:"我等的時間也一樣長。準備好後悔了嗎?"},
+ {r:"a",t:"後悔是贏的人才有資格的。",d:"向前踏出一步"},
+ {r:"b",t:"那…今晚兩個人都會後悔了。",d:"抹去雨水,壓低了姿勢"}]},
+{m:"最後一張車票",g:"🚂 離別",s:"火車月台,出發前三分鐘。送走那份沒能留住的愛的地方。",ra:"離開的一方",rb:"留下的一方",ln:[
+ {r:"a",t:"別哭。看你哭我就上不了車了。",d:"用手背擦去對方的眼角"},
+ {r:"b",t:"我沒哭。這只是…風的關係。"},
+ {r:"a",t:"風還真常吹啊,我們。",d:"火車的汽笛聲響起"},
+ {r:"b",t:"走吧。走了以後,好好過。別再掛念我。",d:"推著對方的背,手卻放不開"}]},
+{m:"可疑的租屋處",g:"😂 喜劇",s:"租屋處的廚房。偷偷煮泡麵被逮個正著的兩人。",ra:"被逮到的一方",rb:"抓包的一方",ln:[
+ {r:"a",t:"這個…這不是泡麵,我只是在燒水而已。",d:"把鍋子藏到背後"},
+ {r:"b",t:"水裡會長出雞蛋跟蔥嗎?"},
+ {r:"a",t:"最近的水很讚啦。有機的。",d:"裝作若無其事地拿起筷子"},
+ {r:"b",t:"…就一口。就給我夾一口就好。",d:"悄悄坐了下來"}]},
+{m:"刑警的夜晚",g:"🕶️ 黑色電影",s:"偵訊室。面對面坐著的刑警與嫌犯。菸霧在兩人之間繚繞。",ra:"刑警",rb:"嫌犯",ln:[
+ {r:"a",t:"謊話我只忍到第三次。你已經說了兩次。",d:"啪地一聲闔上文件"},
+ {r:"b",t:"那最後一次我得省著點用了,刑警先生。"},
+ {r:"a",t:"腦子是聰明,可就是那顆腦子把你帶到了這裡。",d:"身體往前傾"},
+ {r:"b",t:"…又或者,是把你帶到這裡的也說不定。",d:"揚起了嘴角"}]},
+{m:"海邊的那個夏天",g:"🌊 青春",s:"夜晚的海,沙灘上。二十歲的兩個朋友數著星星。",ra:"懷抱大夢的一方",rb:"膽子小的一方",ln:[
+ {r:"a",t:"我要去台北。在這裡看不到我的星星。"},
+ {r:"b",t:"…那我呢?那我怎麼辦。"},
+ {r:"a",t:"一起去啊,笨蛋。我怎麼會丟下你。",d:"拍了拍對方的肩"},
+ {r:"b",t:"真的喔?以後不准反悔。",d:"伸出了小指"}]},
+{m:"宮廷的暗影",g:"🏯 古裝",s:"深夜的宮殿。身分不容相戀的兩人偷偷相會。",ra:"身分尊貴的一方",rb:"身分卑微的一方",ln:[
+ {r:"a",t:"這種時辰還來到此處,你當自己有幾顆腦袋?",d:"壓低聲音,環顧四周"},
+ {r:"b",t:"正因只有一顆頭才更捨不得,能這樣見您一面。"},
+ {r:"a",t:"…翻過那道牆。有一條無人知曉的路。",d:"從袖中取出鑰匙塞到對方手裡"},
+ {r:"b",t:"無論去往何處我都願意。只要您不放開那隻手。",d:"低下頭,將對方的手包覆起來"}]},
+{m:"計程車裡的告白",g:"🚕 浪漫",s:"凌晨的計程車後座。都帶著醉意的兩人,目的地還是同一個。",ra:"先醉的一方",rb:"裝清醒的一方",ln:[
+ {r:"a",t:"司機先生,先送這個人回家。…明明只要說一句別走就不會走的。",d:"對著窗外喃喃自語"},
+ {r:"b",t:"誰叫你別走了。喝醉了就睡吧。"},
+ {r:"a",t:"別走。剛剛那句,不是喝醉了才說的。",d:"抓住了對方的手臂"},
+ {r:"b",t:"…司機先生,下個紅綠燈請掉頭。",d:"淺淺一笑,握住了對方的手"}]},
+{m:"頂樓加蓋戰爭",g:"😂 喜劇",s:"狹小的頂樓加蓋。為了一支遙控器展開的角力戰。",ra:"追劇派",rb:"足球派",ln:[
+ {r:"a",t:"今天輪到我了。上週我讓給你了耶。",d:"一把搶過遙控器"},
+ {r:"b",t:"這是延長賽耶!這是攸關人生的比賽!"},
+ {r:"a",t:"我的劇今天也要辦婚禮了耶!",d:"把遙控器藏到背後"},
+ {r:"b",t:"…猜拳。輸的人請吃炸雞。",d:"伸出拳頭"}]},
+{m:"下雪那天的約定",g:"❄️ 愛情",s:"下著初雪的廣場。在一年前分手的地方重逢。",ra:"先到的一方",rb:"晚到的一方",ln:[
+ {r:"a",t:"沒想到你會來。只是,下雪了就來看看。",d:"呵著白氣,跺著腳"},
+ {r:"b",t:"等了一年的人竟然說這種話。"},
+ {r:"a",t:"…好吧。其實我每天都來這裡。",d:"無法別開視線"},
+ {r:"b",t:"笨蛋。那早該打通電話啊。",d:"解下圍巾,替對方圍上"}]},
+{m:"鄉下的公車站",g:"👵 家庭",s:"一天只有一班公車經過的鄉下車站。奶奶與孫子。",ra:"奶奶",rb:"孫子",ln:[
+ {r:"a",t:"車來了就別回頭,直接上車。知道嗎?",d:"把水煮蛋塞到手裡"},
+ {r:"b",t:"奶奶為什麼一直叫我別回頭。"},
+ {r:"a",t:"一回頭腳就邁不開了。我以前也是這樣。",d:"望向遠山"},
+ {r:"b",t:"…放假我還會再來。真的。",d:"緊緊抱住奶奶"}]},
+{m:"錄音室的夜晚",g:"🎤 音樂",s:"小小的錄音室,凌晨三點。為了一首沒能完成的歌爭執的兩人。",ra:"作曲人",rb:"主唱",ln:[
+ {r:"a",t:"再一次就好。這一段,非你的聲音不可。"},
+ {r:"b",t:"我嗓子都啞了。這真的那麼重要嗎?"},
+ {r:"a",t:"重要。這首歌,是為了唱給你聽才寫的。",d:"摘下耳機放到一旁"},
+ {r:"b",t:"…什麼?你剛剛說什麼。",d:"在麥克風前停下"}]},
+{m:"病房的窗邊",g:"🏥 感動",s:"黃昏的病房。守在久病朋友身旁的地方。",ra:"生病的一方",rb:"守候的一方",ln:[
+ {r:"a",t:"喂,你一直待在這裡會被公司炒魷魚。快走。",d:"把棉被往上拉"},
+ {r:"b",t:"被炒就被炒啊。公司難道比你重要?"},
+ {r:"a",t:"…對不起。都是因為我。",d:"望著天花板"},
+ {r:"b",t:"覺得抱歉就快點好起來。那就是還我了。",d:"緊緊握住對方的手"}]},
+{m:"路邊攤的真相",g:"🍢 人生",s:"下著雨的夜晚,路邊攤。面前擺著一瓶高粱的老朋友。",ra:"傾訴的一方",rb:"傾聽的一方",ln:[
+ {r:"a",t:"我其實…把工作辭了。已經兩個月了。",d:"低頭望著酒杯"},
+ {r:"b",t:"…怎麼現在才說。一個人悶了兩個月。"},
+ {r:"a",t:"丟臉啊。對你更是。",d:"一口氣把高粱灌下"},
+ {r:"b",t:"丟什麼臉。來,再一杯。今天我請。",d:"替對方把酒杯斟滿"}]},
+{m:"守門員的夏天",g:"⚽ 運動",s:"PK大戰前一刻。在板凳上對彼此說出最後一句話。",ra:"隊長",rb:"最年輕的守門員",ln:[
+ {r:"a",t:"別發抖。進不進是他們的事,守不守得住是你的事。"},
+ {r:"b",t:"學長,我要是失誤了怎麼辦。要是因為我輸了…"},
+ {r:"a",t:"輸就一起輸。你不是一個人在場上拚。",d:"替對方重新戴好手套"},
+ {r:"b",t:"…好。我一定守下一球。",d:"朝球門走去"}]},
+{m:"圖書館的紙條",g:"💛 初戀",s:"考試期間的圖書館。紙條在書本之間傳來傳去。",ra:"傳紙條的一方",rb:"收紙條的一方",ln:[
+ {r:"a",t:"(悄聲說)那本書看完的話…就代表你跟我看了同一本呢。",d:"悄悄在旁邊的座位坐下"},
+ {r:"b",t:"這麼大的圖書館,你幹嘛偏偏坐這裡。"},
+ {r:"a",t:"這裡…看得最清楚嘛。書。",d:"沒事找事地翻著書頁"},
+ {r:"b",t:"書?真的是書?",d:"用筆輕輕點了一下對方的手背"}]},
+{m:"搬家那天",g:"📦 離別",s:"空蕩蕩的房間,最後一件行李。曾一起生活的兩人最後的早晨。",ra:"離開的一方",rb:"留下的一方",ln:[
+ {r:"a",t:"杯子我留下來給你。早上喝水總得有一個吧。",d:"用膠帶封起紙箱"},
+ {r:"b",t:"…不用。我很少喝水。"},
+ {r:"a",t:"騙人。你每天凌晨都往廚房跑。",d:"把杯子放到餐桌上"},
+ {r:"b",t:"…那不是去喝水的。是去看你睡了沒。",d:"靜靜地握住杯子"}]},
+{m:"頂樓上的攤牌",g:"🕶️ 黑色電影",s:"高樓的頂樓,風很強。直面背叛真相的夜晚。",ra:"起疑的一方",rb:"被懷疑的一方",ln:[
+ {r:"a",t:"是你洩漏的吧。那份名單,只有你一個人知道。",d:"抓住了欄杆"},
+ {r:"b",t:"要是我洩漏的,現在幹嘛還站在這裡。"},
+ {r:"a",t:"…那是誰。要是敢對我說謊,現在就跳下去。",d:"揪住對方的衣領"},
+ {r:"b",t:"跳下去也行,不過在那之前先看這個。",d:"從懷裡掏出一張照片"}]},
+{m:"婚禮前一天",g:"💍 浪漫",s:"婚禮前一晚,新娘休息室的走廊。動搖的心。",ra:"明天要結婚的一方",rb:"多年的老友",ln:[
+ {r:"a",t:"我明天就要結婚了。可是為什麼一直浮現你的臉。"},
+ {r:"b",t:"…這句話,今天是不該說的吧。"},
+ {r:"a",t:"我知道。所以只有今天能說。",d:"垂下了頭"},
+ {r:"b",t:"明天要笑得漂亮點。我…會在最後一排看著。",d:"轉過身,把眼淚吞了回去"}]},
+{m:"煮泡麵的夜晚",g:"🍜 日常戀愛",s:"套房的廚房。整夜分著吃一碗泡麵。",ra:"不會做菜的一方",rb:"包容的一方",ln:[
+ {r:"a",t:"你看。完美吧。三分三十秒,半熟蛋。",d:"得意地把鍋子端出來"},
+ {r:"b",t:"麵都糊掉了耶?這叫半熟?"},
+ {r:"a",t:"…吃得香才是真本事,這你就不懂了吧。",d:"把筷子塞到對方手裡"},
+ {r:"b",t:"別說了,吃吧。這種夜晚吃什麼都好吃。",d:"先夾了一口"}]},
+{m:"操場上最後的鐘聲",g:"🏫 青春",s:"畢業典禮後空無一人的操場。一起走過三年的兩人。",ra:"沒能告白的一方",rb:"毫不知情的一方",ln:[
+ {r:"a",t:"整整三年一直有話想對你說,覺得今天不說就永遠說不出口了。"},
+ {r:"b",t:"…什麼話。為什麼現在才露出那種表情。"},
+ {r:"a",t:"我一直喜歡你。從一年級的春天,直到現在。",d:"用球鞋鞋尖磨著地面"},
+ {r:"b",t:"笨蛋。我不也一直在這裡等你嗎。",d:"伸出手"}]},
+{m:"梅雨中的傘",g:"☔ 愛情",s:"傾盆而下的梅雨。共撐一把傘,肩膀都濕了。",ra:"撐傘的一方",rb:"淋濕的一方",ln:[
+ {r:"a",t:"靠過來這邊。再這樣下去會全身濕透。",d:"把傘往對方那邊傾"},
+ {r:"b",t:"那樣你會淋濕啊。不用了。"},
+ {r:"a",t:"我濕了沒關係。你不行。",d:"自己的肩膀早就全濕了"},
+ {r:"b",t:"…那種話你怎麼能說得這麼若無其事。",d:"挽起手臂緊緊靠了過去"}]},
+{m:"老店的老闆",g:"🍲 人生",s:"開了三十年的小吃店,結束營業的最後一天。常客與老闆。",ra:"老闆",rb:"多年老主顧",ln:[
+ {r:"a",t:"這個位子,當了你二十年的位子。今天是最後一次了。",d:"又盛了一碗湯給他"},
+ {r:"b",t:"…老闆,還記得我在這裡用第一份薪水請客那次嗎?"},
+ {r:"a",t:"當然記得。那時候你臉紅得有多興奮啊。",d:"拭去眼角的淚"},
+ {r:"b",t:"那個小夥子現在都當爸爸了。全都…是在這裡長大的。",d:"拿著湯匙停住了"}]},
+{m:"熬夜的研究室",g:"🔬 青春",s:"熄了燈的研究室,實驗剛失敗。兩個疲憊的夥伴。",ra:"想放棄的一方",rb:"挽留的一方",ln:[
+ {r:"a",t:"這次又失敗了。我不做了。我沒有天分。",d:"癱坐到椅子上"},
+ {r:"b",t:"天分?一個連續三年每天都來的人說得出這種話?"},
+ {r:"a",t:"…我不懂你為什麼待在這裡。待在我這種人身邊。"},
+ {r:"b",t:"為了看你不放棄。就為了看這一件事,我才待在這裡。",d:"遞上一杯咖啡"}]},
+{m:"機場的五分鐘",g:"✈️ 浪漫",s:"出境登機口前。最後的登機廣播響起。",ra:"離開的一方",rb:"送機的一方",ln:[
+ {r:"a",t:"兩年一下子就過了。閉上眼再睜開,我就回來了。"},
+ {r:"b",t:"要我閉著眼睛過兩年?這說得通嗎。"},
+ {r:"a",t:"…那我每天都打電話給你。不管時差。",d:"緊緊握住行李箱的把手"},
+ {r:"b",t:"答應我。打勾勾。",d:"勾起手指還蓋了章"}]},
+{m:"爺爺的腳踏車",g:"🚲 家庭",s:"鄉間小路上,舊腳踏車後座載著孫女。",ra:"爺爺",rb:"孫女",ln:[
+ {r:"a",t:"抓緊了。這條路很顛。",d:"慢慢踩著踏板"},
+ {r:"b",t:"爺爺你會累啦。我用走的就好。"},
+ {r:"a",t:"不用。這雙腿以前也載過你爸。還很勇健呢。",d:"呵呵地笑了"},
+ {r:"b",t:"…爺爺,你要載我好久好久喔。",d:"把臉埋進他的背"}]},
+{m:"舊情人的婚禮",g:"💔 愛情",s:"婚禮會場大廳。以賓客身分重逢的舊情人。",ra:"來當賓客的一方",rb:"今天的新娘/新郎",ln:[
+ {r:"a",t:"恭喜你。是真心的。…我就是為了說這句話才來的。",d:"遞上紅包袋"},
+ {r:"b",t:"…沒想到你會來。原本希望你別來,可你來了,又覺得有點感謝。"},
+ {r:"a",t:"就對我笑一次吧。笑了我就走。",d:"努力擠出笑容"},
+ {r:"b",t:"…要幸福。你也是,一定要。",d:"咬住嘴唇"}]},
+{m:"社區的澡堂",g:"😂 喜劇",s:"澡堂更衣室。幫彼此搓背時鬧起的拌嘴。",ra:"使勁搓的一方",rb:"忍痛的一方",ln:[
+ {r:"a",t:"別動啦。要搓到這種力道才搓得出汙垢啊。",d:"在搓澡巾上使力"},
+ {r:"b",t:"好痛!你是要連皮都搓掉嗎?!"},
+ {r:"a",t:"人生本來就是會痛的。背也好,人生也好。",d:"面不改色地繼續搓"},
+ {r:"b",t:"…哲學就免了,輕一點!拜託輕一點!",d:"把身子扭來扭去"}]},
+{m:"山莊的一夜",g:"🏔️ 驚悚",s:"被大雪困住的山莊。停電的夜裡,兩人開始互相懷疑。",ra:"先到的一方",rb:"後來才到的一方",ln:[
+ {r:"a",t:"你…剛才在外面做什麼。腳印怎麼會有兩排。",d:"拿著蠟燭向後退"},
+ {r:"b",t:"腳印?我根本沒出去過啊。"},
+ {r:"a",t:"…那站在那扇窗外的,是誰。",d:"聲音在發抖"},
+ {r:"b",t:"別動。熄燈,屏住呼吸。",d:"一口氣吹熄蠟燭"}]},
+{m:"便利商店的深夜",g:"🏪 日常",s:"凌晨的便利商店。常客與打工店員的簡短對話。",ra:"夜班工讀生",rb:"每天都來的客人",ln:[
+ {r:"a",t:"今天也是飯糰配牛奶。您一天都沒少來過呢。"},
+ {r:"b",t:"…因為這裡的燈光,比家裡還溫暖。"},
+ {r:"a",t:"那再吃一個吧。這個算我請的。",d:"偷偷把熱狗棒加熱後遞過去"},
+ {r:"b",t:"…為什麼對我這麼好。都要讓人鼻酸了。",d:"緊緊握住袋子"}]},
+{m:"雨中的機車",g:"🏍️ 青春",s:"暴雨中一輛機車。緊緊攀在後座上。",ra:"騎車的一方",rb:"坐在後座的一方",ln:[
+ {r:"a",t:"抓緊了!這種雨裡放手可不得了!"},
+ {r:"b",t:"已經不能抓得比這更緊了!",d:"用雙臂環住對方的腰"},
+ {r:"a",t:"害怕的話就閉上眼。到了我叫你。",d:"放慢了速度"},
+ {r:"b",t:"…我不怕。只是,就這樣再多騎一會兒吧。",d:"把額頭貼在他的背上"}]},
+{m:"老戲院",g:"🎬 浪漫",s:"即將歇業的老戲院。最後一場放映,只有兩名觀眾。",ra:"熱愛電影的一方",rb:"被拉來的一方",ln:[
+ {r:"a",t:"我在這間戲院看過上百部電影。聽說今天是最後一天了。"},
+ {r:"b",t:"…所以你才特地把我帶來?"},
+ {r:"a",t:"嗯。最後一場,我想和你一起看。",d:"遞上爆米花"},
+ {r:"b",t:"…那下一間戲院換我來找。我們,繼續一起看下去吧。",d:"靠上他的肩"}]},
+{m:"廚房裡的兩個人",g:"👨‍🍳 浪漫",s:"餐廳打烊後的廚房。面對用剩餘食材做的宵夜。",ra:"主廚",rb:"菜鳥廚師",ln:[
+ {r:"a",t:"打烊後吃的義大利麵最好吃了。坐下,我做給你。"},
+ {r:"b",t:"…主廚您親自下廚?為了我?"},
+ {r:"a",t:"今天你最辛苦了。這點小事總該做的。",d:"把盤子推過去"},
+ {r:"b",t:"這個…是食譜上沒有的味道耶。",d:"吃了一口,眼睛睜大了"}]},
+{m:"巷口柑仔店前",g:"👦 成長",s:"社區柑仔店前的長板凳。兒時玩伴長大成人後對坐。",ra:"守著故鄉的一方",rb:"回來的一方",ln:[
+ {r:"a",t:"喂,真的好久不見了。你去了台北後就連個影子都不露。"},
+ {r:"b",t:"…對不起。生活這種東西,真是的。"},
+ {r:"a",t:"算了。回來就好。這張板凳我還沒拆掉,你的位子還留著。",d:"拋了瓶飲料給他"},
+ {r:"b",t:"…這間柑仔店,還有你,一點都沒變呢。",d:"往板凳上大字型躺下"}]},
+{m:"面試會場的走廊",g:"💼 成長",s:"大企業面試會場的走廊。為了同一個職缺相遇的兩名競爭者。",ra:"緊張的一方",rb:"從容的一方",ln:[
+ {r:"a",t:"…我的手一直在抖。這個職缺,對我來說是最後的機會。"},
+ {r:"b",t:"對競爭對手說這種話好嗎?"},
+ {r:"a",t:"就算是競爭對手,我也想找個人說說。",d:"手裡把玩著水瓶"},
+ {r:"b",t:"…這個給你。手抖的時候,糖果最有效了。",d:"從口袋裡掏出糖果遞過去"}]},
+{m:"煙火下的橋上",g:"🎆 浪漫",s:"河邊的橋上,煙火綻放的夜晚。並肩倚著欄杆。",ra:"帶對方來的一方",rb:"跟著來的一方",ln:[
+ {r:"a",t:"那煙火,幾秒鐘就消失了。但那樣不是更美嗎?"},
+ {r:"b",t:"…為什麼美麗的東西都消失得那麼快呢。"},
+ {r:"a",t:"所以更要好好把此刻看進眼裡。還有和你的這一瞬間。",d:"悄悄牽起對方的手"},
+ {r:"b",t:"…那我可不能閉上眼了。怕會錯過你。",d:"回握住對方的手"}]},
+{m:"婦產科候診室",g:"🤰 家庭",s:"婦產科候診室。第一次看到超音波照片的兩人。",ra:"興奮雀躍的一方",rb:"還沒回過神的一方",ln:[
+ {r:"a",t:"你看你看,這裡豆子那麼一點大的。這就是我們的孩子。",d:"把照片湊到對方鼻尖前"},
+ {r:"b",t:"…這個?這像個小點的東西?我真的要當爸爸/媽媽了嗎?"},
+ {r:"a",t:"嗯。很怕吧?我也怕。可是好開心。",d:"把手放到肚子上"},
+ {r:"b",t:"…我們,能做得好嗎。",d:"小心翼翼地捧著照片"}]},
+{m:"頂樓菜園",g:"🌱 日常",s:"公寓頂樓的菜園。因為一把生菜而生的鄰里情誼。",ra:"先開始耕種的一方",rb:"剛搬來的一方",ln:[
+ {r:"a",t:"摘些生菜回去吧。一個人吃長得太多了。"},
+ {r:"b",t:"…就這樣隨便送給陌生人好嗎?"},
+ {r:"a",t:"要是連鄰居都是陌生人,這世界不就太孤單了嗎。",d:"裝了滿滿一袋給對方"},
+ {r:"b",t:"…那下次換我帶五花肉來。我們一起包著吃。",d:"害羞地笑了"}]},
+{m:"教室窗邊的午後",g:"📚 青春",s:"放學後空蕩蕩的教室。輪到打掃而留下來的兩人。",ra:"暗戀的一方",rb:"沒察覺的一方",ln:[
+ {r:"a",t:"…這個窗邊的位子,因為是你的座位,我才換來打掃的。"},
+ {r:"b",t:"咦?為什麼?這裡陽光很曬,大家都不喜歡耶。"},
+ {r:"a",t:"因為是你坐的位子。這個理由不行嗎?",d:"手裡撥弄著掃把"},
+ {r:"b",t:"…喂。你這樣說,我還怎麼打掃啦。",d:"臉紅了起來"}]},
+{m:"宅配包裹前",g:"📦 日常戀愛",s:"玄關前。因為一個送錯的包裹而開始的鄰里緣分。",ra:"收到包裹的一方",rb:"包裹主人的一方",ln:[
+ {r:"a",t:"這是隔壁的包裹。怕一直放在外面會壞掉,我就先幫你收著了。"},
+ {r:"b",t:"…好幾天沒收到,我還以為弄丟了。謝謝你。"},
+ {r:"a",t:"裡面是冰淇淋,我吃掉了一個。對不起。",d:"尷尬地笑了"},
+ {r:"b",t:"…那剩下那個,要一起吃嗎?趁還沒融化。",d:"邊打開盒子邊笑了"}]},
+{m:"森林防火瞭望台",g:"🌲 劇情",s:"偏遠山區的瞭望台。一起守了兩個季節的兩人。",ra:"老鳥",rb:"菜鳥",ln:[
+ {r:"a",t:"在這座山裡熬過一個冬天,人就會變得堅強一些。你也是。"},
+ {r:"b",t:"…一開始只覺得害怕。現在卻喜歡上這份寧靜了。"},
+ {r:"a",t:"就算下山了,也別忘了這份寧靜。城市太吵,會讓人迷失自己。",d:"望向遠處的山稜"},
+ {r:"b",t:"…那大哥你呢?你不下山嗎?",d:"在他身旁坐下"}]},
+{m:"二手書店的梯子",g:"📖 浪漫",s:"老舊的二手書店。高高的書架之間,一個在梯子上一個在梯子下。",ra:"梯子上的一方",rb:"在下面接應的一方",ln:[
+ {r:"a",t:"是這本嗎?從上面數第三格。…啊,晃起來了。",d:"梯子搖晃了一下"},
+ {r:"b",t:"我來扶著!別放手!",d:"用雙手抓住梯子"},
+ {r:"a",t:"…謝謝你。要是你沒扶著,差點就出大事了。",d:"慢慢地爬下來"},
+ {r:"b",t:"就算你掉下來,我也會接住你的。…書就不好說了。",d:"故意裝作若無其事"}]},
+{m:"河邊的釣魚場",g:"🎣 家庭",s:"清晨的河邊。話不多的父親與兒子一起釣魚。",ra:"父親",rb:"兒子",ln:[
+ {r:"a",t:"…魚兒不會靠近性急的人。等著吧。"},
+ {r:"b",t:"爸總是叫我等。人生也是,釣魚也是。"},
+ {r:"a",t:"等著等著,總會有東西上門。你也是這樣來的。",d:"凝視著浮標"},
+ {r:"b",t:"…爸。其實我是有話想說,才跟著你來的。",d:"放下釣竿"}]},
+{m:"電梯停電",g:"😂 喜劇",s:"停住的電梯。困在裡面的兩個陌生人。",ra:"假裝鎮定的一方",rb:"陷入恐慌的一方",ln:[
+ {r:"a",t:"沒事的。很快就會來了。…大概吧。"},
+ {r:"b",t:"大概?!什麼叫大概!我有幽閉恐懼症耶!",d:"用力敲牆"},
+ {r:"a",t:"來,握住我的手。我們一起數。一、二…",d:"伸出手"},
+ {r:"b",t:"…數到三,真的就會沒事了吧?",d:"緊緊握住手"}]},
+{m:"分手後的咖啡廳",g:"☕ 愛情",s:"分手半年後,偶然來到同一家咖啡廳。為了歸還留下的東西。",ra:"歸還物品的一方",rb:"接收的一方",ln:[
+ {r:"a",t:"這個…是你的。一直從抽屜裡翻出來。",d:"把小盒子推過去"},
+ {r:"b",t:"…都過了半年,你竟然還留著這個?"},
+ {r:"a",t:"本想丟掉。但一丟好像就真的結束了。",d:"只是摸著杯子"},
+ {r:"b",t:"…我們早就結束了,不是嗎。",d:"遲遲打不開盒子"}]},
+{m:"部隊會客室",g:"🎖️ 家庭",s:"部隊會客室。只剩短短兩小時的戀人/家人。",ra:"來會客的一方",rb:"軍人",ln:[
+ {r:"a",t:"瘦了耶。伙食還好嗎?這些都吃掉,我買來的。",d:"攤開一大堆食物"},
+ {r:"b",t:"兩小時哪吃得完這些。…慢慢看,看你的臉就好。"},
+ {r:"a",t:"…你不在,家裡好安靜。快點回來。",d:"握住手"},
+ {r:"b",t:"很快就回去了。閉上眼睛一下下就退伍了。",d:"摸摸頭"}]},
+{m:"練習室的鏡子",g:"💃 青春",s:"舞蹈練習室。面臨出道試鏡的兩名練習生。",ra:"動搖的一方",rb:"撐住對方的一方",ln:[
+ {r:"a",t:"這次要是再落選,我真的要回老家了。"},
+ {r:"b",t:"…都撐了五年,到最後你竟然說這種話?"},
+ {r:"a",t:"不是我撐住的,是因為有你在旁邊,才撐得下去。",d:"在鏡中看著彼此"},
+ {r:"b",t:"那這次也撐住。就再一次就好。",d:"牽起手,擺好姿勢"}]},
+{m:"醬缸台上的月",g:"🌕 古裝",s:"貴族宅院的圍牆內。月夜裡相遇的公子與千金。",ra:"翻牆而入的一方",rb:"等待的一方",ln:[
+ {r:"a",t:"沒想到這牆這麼高。為了見姑娘,腿都差點摔斷了。",d:"拍拍衣衫整理儀容"},
+ {r:"b",t:"誰叫你翻牆過來了。…不過,還是謝謝你來。"},
+ {r:"a",t:"就算千里高牆阻擋,我也會翻過來的。",d:"遞出袖中的書信"},
+ {r:"b",t:"…真希望這一夜永遠不要天亮。",d:"抬頭望月"}]},
+{m:"急診室的凌晨",g:"🚑 感動",s:"急診室走廊。在手術室門前徹夜守候的兩個人。",ra:"撐住的一方",rb:"崩潰的一方",ln:[
+ {r:"a",t:"別哭。什麼都還沒結束。很快就會出來了。"},
+ {r:"b",t:"…萬一。萬一出了什麼事,我該怎麼辦。"},
+ {r:"a",t:"沒有萬一。我不是在這裡嗎。握住我的手。",d:"用雙手包住"},
+ {r:"b",t:"…要是沒有你,我根本站不住這裡。",d:"靠在肩上崩潰"}]},
+{m:"同學會的洗手間",g:"😂 喜劇",s:"睽違二十年的同學會。在洗手間遇見昔日的死對頭。",ra:"愛逞強的一方",rb:"務實的一方",ln:[
+ {r:"a",t:"欸,我最近生意超好。車也換新的了。看到沒?"},
+ {r:"b",t:"…那台車,我在外面看到貼著租車公司的貼紙耶?"},
+ {r:"a",t:"…那、那是因為車送修,暫時借的啦。",d:"重新繫好領帶"},
+ {r:"b",t:"算了啦,都睽違二十年了,就單純喝一杯吧。別再逞強了。",d:"搭著對方的肩"}]},
+{m:"被遺棄的小狗",g:"🐶 感動",s:"下雨的巷子。因紙箱裡的小狗而相遇的兩個人。",ra:"想帶走的一方",rb:"猶豫的一方",ln:[
+ {r:"a",t:"…這樣淋雨,牠會死掉的。我帶牠走。"},
+ {r:"b",t:"我也一直在旁邊看著。只是提不起勇氣。"},
+ {r:"a",t:"那我們一起養吧。一隻狗兩個人照顧就好啦。",d:"把小狗抱進懷裡"},
+ {r:"b",t:"…那意思是,我們得常常見面囉?",d:"把傘往小狗那邊傾斜"}]},
+{m:"頂樓加蓋的星空夜",g:"⭐ 青春",s:"頂樓加蓋的屋頂。就業和戀愛都茫然無望的兩個無業青年的夜晚。",ra:"樂天的一方",rb:"悲觀的一方",ln:[
+ {r:"a",t:"你看那顆星。聽說那是幾光年前的光現在才照到。我們也會這樣的。"},
+ {r:"b",t:"…什麼跟什麼。那我們的光,什麼時候才會照到。"},
+ {r:"a",t:"只是晚了一點,又不是不會來。我們等等看吧。",d:"碰了碰啤酒罐"},
+ {r:"b",t:"…有你在旁邊,就算晚一點,也還撐得住。",d:"在屋頂上大字型躺下"}]},
+{m:"手術同意書",g:"🏥 家庭",s:"家屬等候室。在手術同意書前動搖的兄弟。",ra:"必須做決定的一方",rb:"陪在身邊的一方",ln:[
+ {r:"a",t:"我要是簽了這個…就等於是我做的決定。我做不到。",d:"握筆的手在發抖"},
+ {r:"b",t:"不是你一個人做決定。我的手也放上來。"},
+ {r:"a",t:"…哥/姐。媽她,會沒事吧。",d:"垂下了頭"},
+ {r:"b",t:"我們一起讓她沒事。來,一起握著筆寫。",d:"把手疊在筆上"}]},
+{m:"第一天上班的捷運",g:"🚇 成長",s:"擠滿人的捷運。第一天上班的路上,偶然撞在一起的兩個人。",ra:"緊張的新人",rb:"資深上班族",ln:[
+ {r:"a",t:"…對不起。第一天上班,我連該在哪站下車都不知道。"},
+ {r:"b",t:"看得出來。從歪掉的領帶就知道了。…來,給我。",d:"幫忙把領帶弄正"},
+ {r:"a",t:"謝謝你。我沒想到去公司會這麼可怕。"},
+ {r:"b",t:"大家都這樣。過個三年,連這班擠死人的捷運你都會懷念。下車囉,到了。",d:"拍了拍對方的肩"}]},
+{m:"廢棄學校的操場",g:"🏫 重逢",s:"已經關閉的母校操場。睽違三十年,再次站上的地方。",ra:"先到的一方",rb:"遲來的一方",ln:[
+ {r:"a",t:"這裡,我們以前每天都在這裡玩啊。鞦韆也還是老樣子。"},
+ {r:"b",t:"…都鏽壞了,不能盪了。它也跟我們一樣老了。"},
+ {r:"a",t:"還是坐坐看嘛。就一次。",d:"輕輕推了一下鞦韆"},
+ {r:"b",t:"…小時候還以為這鞦韆能盪到天上呢。",d:"小心翼翼地坐下"}]},
+{m:"電視台的休息室",g:"🎙️ 劇情",s:"直播前三分鐘。因怯場而發抖的新人與前輩。",ra:"發抖的新人",rb:"前輩",ln:[
+ {r:"a",t:"前輩,我的腿動不了。我好像上不了場。"},
+ {r:"b",t:"想像那扇門後面不是攝影機,而是一個人。就一個人。"},
+ {r:"a",t:"…一個人?"},
+ {r:"b",t:"嗯。今天過得很辛苦的某個人。你只對那個人說話就好。來,上場。",d:"輕輕推了一下背"}]},
+{m:"殯儀館的菊花",g:"🕯️ 感動",s:"安靜的靈堂。故人的兩位老友相對而坐。",ra:"先到的朋友",rb:"晚到的朋友",ln:[
+ {r:"a",t:"…他到最後都還在說你的事。說很想見你。"},
+ {r:"b",t:"…我為什麼總是遲到。早該趁他還在的時候來的。"},
+ {r:"a",t:"現在來也是來了。他也會知道的,知道你來了。",d:"摟住肩膀"},
+ {r:"b",t:"…我們三個以前多好啊。現在只剩兩個了。",d:"放下菊花"}]},
+{m:"遊樂園的旋轉木馬",g:"🎠 浪漫",s:"傍晚的遊樂園。並肩坐上最後一班旋轉木馬。",ra:"先提議要坐的一方",rb:"害羞的一方",ln:[
+ {r:"a",t:"都三十歲了還坐旋轉木馬,很好笑吧?但我就是想跟你一起坐坐看。"},
+ {r:"b",t:"…會被別人看到啦。好丟臉。"},
+ {r:"a",t:"看就看啊。反正我現在是全世界最幸福的人。",d:"抓住旁邊的木馬"},
+ {r:"b",t:"…轉起來怎麼一點都不暈。是因為你嗎。",d:"淺淺一笑"}]},
+{m:"工地的貨櫃屋",g:"👷 人生",s:"工地食堂旁的貨櫃屋。辛苦一天結束後的兩名工人。",ra:"老鳥",rb:"剛來不久的年輕人",ln:[
+ {r:"a",t:"手給我看看。起水泡了嘛。剛開始都這樣。擦這個。",d:"遞過藥膏"},
+ {r:"b",t:"…大哥。這份工作,我做得下去嗎。"},
+ {r:"a",t:"這雙手練硬了,就沒什麼撐不過去的。這份工作,不會讓你餓肚子。",d:"倒了杯米酒給他"},
+ {r:"b",t:"…謝謝大哥。今天要是沒有大哥,我早就逃跑了。",d:"接過酒杯"}]},
+{m:"書咖啡廳打烊",g:"📕 浪漫",s:"小小書咖啡廳的打烊時間。每天都來的客人與老闆。",ra:"老闆",rb:"常客",ln:[
+ {r:"a",t:"今天又待到最晚呢。…這本書,你讀完了嗎?"},
+ {r:"b",t:"…其實,比起書,我是喜歡這個位子才來的。很安靜。"},
+ {r:"a",t:"那打烊後也可以再坐一會兒。我也會邊整理邊陪你。",d:"放下一杯溫熱的茶"},
+ {r:"b",t:"…那我每天都待到打烊,也可以嗎?",d:"捧住茶杯"}]},
+{m:"客運站的末班車",g:"🚌 離別",s:"鄉下的客運站。末班車前,互道的最後一聲再見。",ra:"離開的一方",rb:"留下的一方",ln:[
+ {r:"a",t:"不能錯過末班車。…我先走了。"},
+ {r:"b",t:"…能不能再放過一班就好?就一班。"},
+ {r:"a",t:"放過一班,就會想再放過下一班。這樣下去就走不了了。",d:"在客運門前停住"},
+ {r:"b",t:"…好。走吧。到了要傳訊息給我。一定喔。",d:"揮著手,又停了下來"}]},
+{m:"美髮店的鏡子前",g:"💇 日常",s:"社區的美髮店。下了很大決心前來的客人與髮型師。",ra:"髮型師",rb:"來剪掉長髮的客人",ln:[
+ {r:"a",t:"真的要全部剪掉嗎?這可是留了十年的頭髮耶。"},
+ {r:"b",t:"…嗯。今天,我想全部做個了結。頭髮,還有心情。"},
+ {r:"a",t:"…看來是發生了什麼事呢。我會幫你剪得漂漂亮亮的,重新出發。",d:"拿起剪刀"},
+ {r:"b",t:"…謝謝你。剪吧。剪得讓我不會再回頭。",d:"看著鏡中的自己"}]},
+{m:"頂樓曬衣場",g:"🧺 日常戀愛",s:"頂樓的曬衣架。因一件被風吹走的衣服而結緣。",ra:"衣服的主人",rb:"撿回衣服的鄰居",ln:[
+ {r:"a",t:"這個飄到我樓下來了。…是你的沒錯吧?",d:"把衣服遞過去"},
+ {r:"b",t:"哎呀,謝謝你。風太大了,老是被吹走。"},
+ {r:"a",t:"我還有多的曬衣夾,要不要分你一些?都是鄰居嘛。",d:"從口袋裡拿出曬衣夾"},
+ {r:"b",t:"…那我下次分一些小菜給你。",d:"一邊接過衣服一邊笑"}]},
+{m:"雅房走廊",g:"🚪 青春",s:"狹窄的雅房走廊。只隔著一道牆的鄰居第一次碰面。",ra:"先住進來的一方",rb:"剛搬來的一方",ln:[
+ {r:"a",t:"晚上好像聽到你在哭。…不是,我不是在說你什麼。"},
+ {r:"b",t:"…對不起。我忘了牆很薄。"},
+ {r:"a",t:"沒關係。我剛來的時候也是每天哭。這個給你吃。",d:"把泡麵放在門口"},
+ {r:"b",t:"…對一個陌生人這麼好,真的可以嗎?",d:"小心翼翼地拿起泡麵"}]},
+{m:"紅綠燈前的偶遇",g:"🚦 浪漫",s:"在斑馬線前等紅綠燈。每天同一時刻都會遇見的兩個人。",ra:"先開口搭話的一方",rb:"被嚇到的一方",ln:[
+ {r:"a",t:"那個…我們每天都在這裡遇到耶。八點十五分。"},
+ {r:"b",t:"…咦?你怎麼會知道。"},
+ {r:"a",t:"因為我每天都有看到啊。今天想趁燈號變之前跟你搭話。",d:"尷尬地笑了"},
+ {r:"b",t:"…燈都綠了,我們卻還沒過馬路呢。",d:"遲遲不邁開腳步"}]},
+{m:"奶奶的手工刀削麵",g:"🍜 家庭",s:"老麵店的廚房。想學手工刀削麵的孫女和奶奶。",ra:"奶奶",rb:"孫女",ln:[
+ {r:"a",t:"麵團不是靠手勁,是用心桿出來的。來,像這樣。",d:"把手疊在她的手背上"},
+ {r:"b",t:"…奶奶,你知道我學這個是為了什麼嗎?"},
+ {r:"a",t:"不知道。怎麼了,突然這樣。"},
+ {r:"b",t:"…就算奶奶不在了,也想記住這個味道。所以才學的。",d:"一邊桿著麵團,眼眶漸漸泛紅"}]},
+{m:"年末的便利商店",g:"🎄 感動",s:"跨年鐘聲響起的夜晚。空蕩便利商店裡的兩個人。",ra:"夜班工讀生",rb:"無處可去的客人",ln:[
+ {r:"a",t:"…新年快樂。這種時間還有客人上門,真是的。"},
+ {r:"b",t:"…因為回家也沒人在。這裡好歹還算暖和。"},
+ {r:"a",t:"…那這個,跟我一起吃吧。反正也是要報廢的。",d:"把熱騰騰的包子剝成兩半"},
+ {r:"b",t:"…這個包子,是今年吃過最好吃的了。",d:"接過冒著熱氣的包子"}]},
+{m:"逃生梯上的攤牌",g:"💼 驚悚",s:"公司的逃生梯。發現弊案的兩名同事私下的對話。",ra:"想揭發的一方",rb:"出言勸阻的一方",ln:[
+ {r:"a",t:"你也看到了。那份文件。我們要是閉嘴不說,就是共犯。"},
+ {r:"b",t:"…一旦捅出去,我們兩個都完了。你也清楚,這間公司是什麼德行。"},
+ {r:"a",t:"就算完了,對的還是對的。你到底要不要跟我一起走。",d:"把 USB 握在手裡"},
+ {r:"b",t:"…我不會讓你一個人去的。一起走。不過,先把計畫定好。",d:"環顧四周"}]},
+{m:"海上的燈塔",g:"🌊 劇情",s:"孤島上的燈塔。即將交班的兩名燈塔守。",ra:"要離開的守燈人",rb:"留下來的守燈人",ln:[
+ {r:"a",t:"這盞燈,我守了三十年。現在輪到你了。"},
+ {r:"b",t:"…我很怕。沒把握能一個人守著這片遼闊的夜。"},
+ {r:"a",t:"你不是一個人。那些看著燈光駛來的船,全都是你的夥伴。",d:"擦拭著燈塔的玻璃"},
+ {r:"b",t:"…前輩。這盞燈,我絕對不會讓它熄滅。",d:"把手按在燈塔上"}]},
+{m:"補習班頂樓",g:"📐 青春",s:"升學補習班的頂樓。拿到成績單的兩名重考生。",ra:"出言安慰的一方",rb:"整個崩潰的一方",ln:[
+ {r:"a",t:"成績單又不是你的人生表。不過就是一張紙罷了。"},
+ {r:"b",t:"…我拚了整整一年,結果就只有這樣。我大概真的不行吧。"},
+ {r:"a",t:"不行的話,我就陪在你身邊,陪到你做到為止。",d:"並肩站在頂樓的欄杆邊"},
+ {r:"b",t:"…你為什麼要為我做到這種地步。",d:"把成績單揉成一團"}]},
+{m:"傳統市場的攤位",g:"🥬 人生",s:"清晨的傳統市場。隔壁攤販之間流露的人情。",ra:"資深的老攤販",rb:"剛入行的新攤販",ln:[
+ {r:"a",t:"第一次做生意吧?全寫在臉上了。這樣,我把我這攤的熟客介紹給你。"},
+ {r:"b",t:"…啊?我可是你的競爭對手耶。你為什麼要幫我。"},
+ {r:"a",t:"在這市場待個三十年你就懂。沒有哪門生意是靠一個人做起來的。",d:"遞上一碗熱騰騰的甜不辣湯"},
+ {r:"b",t:"…這湯,連身子都暖起來了。謝謝你。",d:"雙手接過杯子"}]},
+{m:"病房的窗外",g:"🌸 愛情",s:"春日的病房。一起望著窗外櫻花的兩個人。",ra:"病人",rb:"每天都來陪伴的人",ln:[
+ {r:"a",t:"…在那些櫻花全謝之前,我出得了門嗎。"},
+ {r:"b",t:"當然出得去。我會在那棵樹下幫你佔好位子。"},
+ {r:"a",t:"…約好囉。明知道是個難以實現的約定,還是想相信。",d:"把手貼在窗上"},
+ {r:"b",t:"…真撐不住的話,我背也要背你出去。櫻花,得一起看才行。",d:"把手輕輕疊放上去"}]},
+{m:"巷口的理髮店",g:"💈 人生",s:"老理髮店。三十年的老主顧和年邁的理髮師。",ra:"理髮師",rb:"常客",ln:[
+ {r:"a",t:"你現在也白髮不少了呢。…歲月真是不饒人。"},
+ {r:"b",t:"…大哥你的手也不比從前了。這剪刀還打算拿到什麼時候。"},
+ {r:"a",t:"你的頭髮,我剪到死為止。我們約好了的。",d:"輕柔地擺弄著剪刀"},
+ {r:"b",t:"…那我也得長命一點才行。想繼續當大哥你的客人的話。",d:"在鏡中看著彼此"}]},
+{m:"熄了燈的辦公室",g:"💻 浪漫",s:"加班的辦公室,只剩兩人的夜晚。在螢幕的光線下。",ra:"先留下來的一方",rb:"察覺到的一方",ln:[
+ {r:"a",t:"…又只剩我一個了。啊,不對。只剩我們兩個。"},
+ {r:"b",t:"…我是故意沒走的。怕你一個人會熬通宵。"},
+ {r:"a",t:"…你是在擔心我嗎?擔心我?",d:"停下打字的手"},
+ {r:"b",t:"…我去泡杯咖啡來。然後我們聊聊,你為什麼忙到這麼晚。",d:"悄悄站起身"}]},
+{m:"搬家貨車的副駕駛座",g:"🚚 成長",s:"搬家的那天,貨車副駕駛座。要離開熟悉社區的一對兄妹。",ra:"硬裝穩重的哥哥/姊姊",rb:"哭泣的弟妹",ln:[
+ {r:"a",t:"別哭。到了新社區,好玩的東西更多。哥哥/姊姊會全部帶你去看。"},
+ {r:"b",t:"…可是朋友們呢。我們把他們留在這裡走了耶。"},
+ {r:"a",t:"朋友再交就有了。可我沒有丟下你啊,我就在你身邊。",d:"揉亂了對方的頭髮"},
+ {r:"b",t:"…哥哥/姊姊你真的不會走吧?不會丟下我吧。",d:"抓住了衣袖"}]},
+{m:"警局的拘留所",g:"🚔 黑色電影",s:"隔著拘留所的鐵欄。曾情同手足的兩個人。",ra:"在外頭的一方",rb:"在裡頭的一方",ln:[
+ {r:"a",t:"…你為什麼把罪全攬下來。那又不是你做的。"},
+ {r:"b",t:"…總得有人進來這裡。而你,得待在外面。"},
+ {r:"a",t:"你這笨蛋。誰要你這麼做了。我會把真相全都揭開。",d:"抓住鐵欄"},
+ {r:"b",t:"…別揭了。你就,替我好好活下去。那樣就夠了。",d:"轉過身去"}]},
+{m:"山頂的標示石",g:"⛰️ 友情",s:"好不容易爬上的山頂。並肩站在標示石前的兩個好友。",ra:"先登頂的一方",rb:"勉強跟上的一方",ln:[
+ {r:"a",t:"你看,不是到了嗎。剛剛還喊著要死要活的。這景色值回票價了吧?"},
+ {r:"b",t:"…呼、呼。我再也不來了。不過這回,是你拉著我才上來的。"},
+ {r:"a",t:"人生也是這樣。一個人到不了的地方,兩個人就到得了。",d:"搭著對方的肩"},
+ {r:"b",t:"…欸,來拍張照吧。這份辛苦總得留個證據。",d:"把手按在標示石上"}]},
+{m:"巷口的辣炒年糕店",g:"🌶️ 青春",s:"學校前的辣炒年糕店。最後一場考試結束的午後。",ra:"準備告白的一方",rb:"沒察覺的一方",ln:[
+ {r:"a",t:"…這家辣炒年糕店,我們整整來了三年。今天是最後一次了呢。"},
+ {r:"b",t:"畢業了再來就好啦。幹嘛擺出那種難過的表情。"},
+ {r:"a",t:"…因為那時候我也想跟你一起來。就算畢業了,也一直一起來。",d:"只顧著攪動甜不辣湯"},
+ {r:"b",t:"…你剛剛那是在告白嗎?在辣炒年糕店裡?",d:"手一鬆,年糕掉了下來"}]},
+{m:"月子中心的走廊",g:"👶 家庭",s:"月子中心的窗邊。隔著玻璃望著寶寶的新手爸媽。",ra:"興奮雀躍的一方",rb:"緊張的一方",ln:[
+ {r:"a",t:"你看你看,那邊最小的那個。是我們的孩子。你看看那小手指。"},
+ {r:"b",t:"…好小。萬一我抱錯姿勢怎麼辦。好可怕。"},
+ {r:"a",t:"有我們兩個就夠了。就算跌倒,一起跌就好了嘛。",d:"摟住肩膀"},
+ {r:"b",t:"…對啊。我們變成三個人了呢。現在真的是一家人了。",d:"把手貼在玻璃上"}]},
+{m:"老舊的鋼琴教室",g:"🎹 感動",s:"即將歇業的社區鋼琴教室。最後一名學生和年邁的老師。",ra:"老師",rb:"學生",ln:[
+ {r:"a",t:"用這台鋼琴學過的孩子多得數不清。今天,你是最後一個了。"},
+ {r:"b",t:"…老師。其實我學這個,是想成為像你一樣的老師。"},
+ {r:"a",t:"…是嗎?那這台鋼琴,你帶走吧。放在你自己的教室裡。",d:"輕輕撫過琴鍵"},
+ {r:"b",t:"…連老師你的那份,我都會一起教下去,教那些孩子。",d:"把手放在琴鍵上"}]},
+{m:"積雪的哨所",g:"❄️ 友情",s:"隆冬的夜間哨所。一起守夜熬通宵的兩名哨兵。",ra:"老鳥",rb:"菜鳥",ln:[
+ {r:"a",t:"手很冷吧。這個戴上。我手不怕冷,天生的。",d:"脫下手套遞過去"},
+ {r:"b",t:"…不用了。金班長,您戴上吧。"},
+ {r:"a",t:"這是命令。戴上。你手要是凍僵了,我心裡也不好受。",d:"硬把手套套到他手上"},
+ {r:"b",t:"…這樣的夜晚,以後大概會讓人懷念吧。",d:"呼出一口白氣"}]},
+{m:"頂樓的帳篷",g:"⛺ 青春",s:"搭在頂樓的帳篷裡。兩個離家出走的朋友的一夜。",ra:"先離家的一方",rb:"跟著出來的一方",ln:[
+ {r:"a",t:"離開家是不是很爽?沒人管得著我們。"},
+ {r:"b",t:"…爽是爽啦,可我媽傳訊息來問我吃飯了沒。"},
+ {r:"a",t:"…我媽也是。…欸,不然我們就待一天就回去好不好?",d:"手指不停摩挲著手機"},
+ {r:"b",t:"…嗯。就一天。不過今晚這件事,是我們之間的秘密。",d:"勾起小指打勾勾"}]},
+{m:"計程車行的車庫",g:"🚕 人生",s:"清晨的計程車車庫。兩名交班司機的簡短對話。",ra:"剛下夜班的一方",rb:"要接日班的一方",ln:[
+ {r:"a",t:"今晚碰到各式各樣的客人。還有人把一把傘忘在座位上。",d:"遞出鑰匙"},
+ {r:"b",t:"…大哥你什麼時候才休息啊。我們每天都在這個時間碰面耶。"},
+ {r:"a",t:"休息又能幹嘛。家裡又沒人。還不如這樣。",d:"拍了拍他的肩膀"},
+ {r:"b",t:"…今晚到我家吃頓飯再走吧。大哥,我說真的。",d:"接過鑰匙時順勢握住了他的手"}]},
+{m:"後台的化妝間",g:"🎭 劇情",s:"舞台劇最後一場開演前的化妝間。兩名資深演員。",ra:"即將引退的一方",rb:"留下的一方",ln:[
+ {r:"a",t:"…今天是我最後一次登台了。這身妝,是最後一次上了呢。",d:"對著鏡中的臉撲上妝粉"},
+ {r:"b",t:"…沒有前輩你,我一個人要怎麼站上這個舞台。"},
+ {r:"a",t:"你早就準備好了。我看了你二十年了。別擔心。",d:"輕拍他的肩膀安慰"},
+ {r:"b",t:"…前輩。謝幕的時候,就這麼一次,跟我一起鞠躬吧。",d:"握住手"}]},
+{m:"下著雨的修車廠",g:"🔧 日常戀愛",s:"社區的汽車修理廠。老主顧和木訥的技師。",ra:"技師",rb:"常來的客人",ln:[
+ {r:"a",t:"又來啦。這次是哪裡出問題。…你這車還真是常故障。"},
+ {r:"b",t:"…其實車好得很。我只是,喜歡來這裡而已。"},
+ {r:"a",t:"…你說什麼?你剛剛說什麼。",d:"放下手中的工具"},
+ {r:"b",t:"…我是來討一杯咖啡喝的。每一次都是。",d:"沒事似地摸了摸車門"}]},
+{m:"水族館的夜間開放",g:"🐠 浪漫",s:"夜晚的水族館。並肩站在藍色水槽前的兩個人。",ra:"帶對方來的一方",rb:"看得入迷的一方",ln:[
+ {r:"a",t:"晚上來這裡,一個人都沒有,只剩下水光。我一直想帶你來看。"},
+ {r:"b",t:"…感覺像在水裡一樣。只有我們兩個,在海底。"},
+ {r:"a",t:"聽說那些魚也都有伴。一輩子只跟一條魚相伴。",d:"把手貼在水槽上"},
+ {r:"b",t:"…真羨慕。能像那樣一輩子相依相伴。",d:"把頭靠在對方肩上"}]},
+{m:"奶奶家的木板廳",g:"🏡 家庭",s:"鄉下奶奶家的簷廊。過年結束、要離開前的早晨。",ra:"奶奶",rb:"要離開的孫子",ln:[
+ {r:"a",t:"要塞車了,快走吧。這些放後車廂。泡菜還有香油。",d:"把包袱塞進他懷裡"},
+ {r:"b",t:"…奶奶,你全都打包給我,那你自己吃什麼。"},
+ {r:"a",t:"我沒這些也無所謂。看你吃,就是我的飯了。",d:"輕輕撫著他的背"},
+ {r:"b",t:"…下次我會多待一陣子再走。真的。",d:"抱著包袱回頭望"}]},
+{m:"競技場的更衣室",g:"🥊 運動",s:"比賽開始前的更衣室。即將迎來最後一戰的老將和教練。",ra:"教練",rb:"老將選手",ln:[
+ {r:"a",t:"…別太勉強。這是你最後一場,觀眾都知道。好好享受吧。"},
+ {r:"b",t:"…教練。正因為是最後一場,我就想贏這麼一次。"},
+ {r:"a",t:"…那就贏吧。就算是為了陪你二十年的我也好。",d:"幫他綁緊拳套"},
+ {r:"b",t:"…好。今天,我為我們兩個而戰。",d:"兩人碰了碰拳"}]},
+{m:"即將歇業的書店",g:"📚 感動",s:"即將關門的社區書店。最後一名客人和老闆。",ra:"書店老闆",rb:"老主顧",ln:[
+ {r:"a",t:"…這本書,擺了二十年都沒賣掉。今天要帶走嗎?我就送給你吧。"},
+ {r:"b",t:"…你為什麼二十年來都沒把它賣掉。"},
+ {r:"a",t:"…我一直在等一個剛剛好的人出現。今天，我想就是你了。",d:"把書遞過去"},
+ {r:"b",t:"…那這間書店，在我記憶裡就當作永遠不打烊吧。",d:"把書抱在胸前"}]},
+{m:"消防局待命室",g:"🚒 劇情",s:"出勤之間的短暫休息。兩名疲憊的消防員。",ra:"老鳥",rb:"菜鳥",ln:[
+ {r:"a",t:"剛才那場火，很可怕吧。一開始都這樣。你看，手到現在還在抖。"},
+ {r:"b",t:"…我一直在想，要是那孩子沒被我救出來該怎麼辦。"},
+ {r:"a",t:"你救出來了啊。這樣就夠了。今天你救了一個人。",d:"拍了拍對方的肩"},
+ {r:"b",t:"…要不是有前輩，我自己也出不來。謝謝你。",d:"低下頭"}]},
+{m:"火車餐車",g:"🚆 浪漫",s:"長途火車的餐車。偶然併桌的兩個人。",ra:"先坐著的一方",rb:"併桌的一方",ln:[
+ {r:"a",t:"…只剩這個位子了。不打擾的話，我可以坐嗎。"},
+ {r:"b",t:"…好啊。反正到終點站還有整整三個小時呢。"},
+ {r:"a",t:"…三個小時，剛好夠陌生人變成熟人呢。",d:"點了兩杯咖啡"},
+ {r:"b",t:"…那下車以後，我們還能是熟人嗎。",d:"望著窗外的風景"}]},
+{m:"漁船上的清晨",g:"🎣 友情",s:"破曉時分的漁船。大吵一架後和好的兩個朋友。",ra:"先道歉的一方",rb:"鬧彆扭的一方",ln:[
+ {r:"a",t:"…昨天那句話，對不起。是一時氣話。我不是真心的。"},
+ {r:"b",t:"…你居然對認識三十年的朋友說那種話。我真的很難過。"},
+ {r:"a",t:"我知道。所以才一大早把你拖上這條船。想讓你消消氣。",d:"倒了保溫瓶裡的咖啡"},
+ {r:"b",t:"…太陽出來了。喂，你看那個。…我原諒你，就這一次。",d:"指向地平線"}]},
+{m:"藥局櫃檯",g:"💊 日常戀愛",s:"深夜的藥局。每天來買感冒藥的客人和藥師。",ra:"藥師",rb:"常客",ln:[
+ {r:"a",t:"又感冒了？這禮拜已經第三次了。有好好吃飯嗎？"},
+ {r:"b",t:"…一個人住，懶得弄飯。"},
+ {r:"a",t:"…這個，比吃藥還有用。至少吃點熱的吧。",d:"把一小碗粥放到櫃檯上"},
+ {r:"b",t:"…藥師怎麼這麼會關心別人。",d:"怔怔地看著那碗粥"}]},
+{m:"頂樓花園長椅",g:"🌷 重逢",s:"醫院的頂樓花園。很久以前分開的兩個人偶然相遇。",ra:"先認出對方的一方",rb:"後認出對方的一方",ln:[
+ {r:"a",t:"…請問。是你吧？十年前，那時候的那個。"},
+ {r:"b",t:"…天啊。偏偏在這種地方又碰見了。"},
+ {r:"a",t:"…當年有句話沒說出口。現在說，可以嗎。",d:"在長椅旁坐下"},
+ {r:"b",t:"…那句話，你藏了整整十年？",d:"慢慢轉過頭來"}]},
+{m:"牧場的早晨",g:"🐄 家庭",s:"清晨的牧場。照顧牛的父親和歸來的兒子。",ra:"父親",rb:"從城市回來的兒子",ln:[
+ {r:"a",t:"…牛認得主人的腳步聲。都三年了，牠還這麼歡迎你，你看。"},
+ {r:"b",t:"…爸。我在城裡什麼都失敗了才回來的。沒臉見你。"},
+ {r:"a",t:"失敗算什麼。這座牧場一直在這裡。你也是，這頭牛也是。",d:"撫摸著牛"},
+ {r:"b",t:"…我就在爸身邊，從頭再學一遍。",d:"拿起鏟子"}]},
+{m:"郵局窗口",g:"✉️ 愛情",s:"小小的郵局。拿著寄不出去的信的客人和職員。",ra:"郵局職員",rb:"拿著信的客人",ln:[
+ {r:"a",t:"…這封信，上面沒寫地址呢。要幫你寄到哪裡呢。"},
+ {r:"b",t:"…沒有地方可寄。就只是，想寫才寫的。寫給一個已經離開的人。"},
+ {r:"a",t:"…那我還是幫你收著吧。說不定哪天，就有能寄的地方了。",d:"小心翼翼地接過那封信"},
+ {r:"b",t:"…謝謝你。這些話，我從來沒對任何人說過。",d:"把手放在窗口上"}]},
+{m:"社區跆拳道館",g:"🥋 成長",s:"傍晚的跆拳道館。膽小的孩子和木訥的館長。",ra:"館長",rb:"膽小的孩子",ln:[
+ {r:"a",t:"拳頭不是學來打別人的。是學來保護你自己的。"},
+ {r:"b",t:"…可是我每次都輸耶。都輸給哥哥們。"},
+ {r:"a",t:"今天沒逃跑，就已經算贏了。那才是真正的勇氣。",d:"把手放到他頭上"},
+ {r:"b",t:"…館長。我真的能變強嗎？",d:"緊緊握起拳頭"}]},
+{m:"公車總站夜市攤",g:"🍜 人生",s:"公車總站前的夜市攤。迎接一天結束的兩個人。",ra:"老闆娘",rb:"每天搭末班車來的客人",ln:[
+ {r:"a",t:"今天也搭末班車來啦。給你一份熱騰騰的黑輪，坐吧。"},
+ {r:"b",t:"…阿姨，要是沒有這個攤子，我每天要去哪裡喘口氣呢。"},
+ {r:"a",t:"人總得有個喘氣的地方嘛。來，湯再加一點。",d:"幫他添了湯"},
+ {r:"b",t:"…就這一碗湯，讓人撐過了一整天。真的。",d:"雙手捧著杯子"}]},
+{m:"即將拆遷的社區",g:"🏚️ 劇情",s:"即將因都更消失的小巷。最後一次走過的兩個兒時玩伴。",ra:"捨不得離開的一方",rb:"先接受了的一方",ln:[
+ {r:"a",t:"…這面牆上，我們量身高的刻痕還在。你看。"},
+ {r:"b",t:"…聽說全要拆了。下個月就拆。什麼都不會留下。"},
+ {r:"a",t:"…拍張照吧。就算全消失了，也還留在我們記憶裡。",d:"把手貼在牆上"},
+ {r:"b",t:"…也對。消失的是小巷，不是我們的童年。",d:"並肩靠在牆上"}]},
+{m:"深夜電台錄音室",g:"📻 浪漫",s:"凌晨的電台錄音室。DJ 和每天投稿的聽眾。",ra:"電台 DJ",rb:"上門來的聽眾",ln:[
+ {r:"a",t:"…三年來每天投稿的那位，真的來到這裡了嗎？"},
+ {r:"b",t:"…只用聲音認識的人，總想見上一面。"},
+ {r:"a",t:"…其實我也是。每天讀著那些投稿，一直很好奇你長什麼樣。",d:"摘下耳機"},
+ {r:"b",t:"…現在不透過投稿，直接聊聊，可以嗎？",d:"靠在錄音室的門上"}]},
+{m:"飄雪的路邊攤",g:"❄️ 愛情",s:"初雪之夜的路邊攤。分手的戀人偶然坐到了鄰座。",ra:"先坐著的一方",rb:"後進來的一方",ln:[
+ {r:"a",t:"…只剩這個位子了。我坐你旁邊，你會介意嗎？"},
+ {r:"b",t:"…不介意。可是為什麼偏偏，在下雪天在這裡碰上。"},
+ {r:"a",t:"…我們第一次見面那天也下雪啊。你記得嗎？",d:"倒了杯高粱"},
+ {r:"b",t:"…記得。全都記得，這才是問題所在。",d:"接過酒杯"}]},
+{m:"上學路的坡道",g:"🎒 青春",s:"每天要爬的上學坡道。即將畢業的兩個朋友。",ra:"先告白的一方",rb:"聽的一方",ln:[
+ {r:"a",t:"這條坡道，三年來我都等你一起爬上去的。"},
+ {r:"b",t:"…對啊。你每天都站在那間超商前面等我。"},
+ {r:"a",t:"…畢業以後就不會再爬這條坡了。但我還是想等你。",d:"用腳尖踢了踢地面"},
+ {r:"b",t:"…那我們就造一條別的坡道吧。屬於我們要一起爬的坡。",d:"握住手"}]},
+{m:"老照相館",g:"📷 家庭",s:"老舊的照相館。來拍全家福的老夫妻和攝影師。",ra:"攝影師",rb:"老夫妻其中一人",ln:[
+ {r:"a",t:"…來，笑一個。不愧是一起生活五十年的人，長得真像呢。"},
+ {r:"b",t:"…跟這個人拍照也好久沒有了。我們啊，一直都好忙。"},
+ {r:"a",t:"…今天這張照片，會陪兩位一輩子。手牽緊喔。",d:"把手放到快門上"},
+ {r:"b",t:"…老伴，牽手。攝影師先生叫我們牽的。",d:"伸出顫抖的手"}]},
+{m:"巷弄石階夜晚",g:"🌙 浪漫",s:"陡峭的山城石階。送人回家的夜路。",ra:"送人回去的一方",rb:"被送回去的一方",ln:[
+ {r:"a",t:"…沒想到這石階這麼高。你每天都這樣上上下下？"},
+ {r:"b",t:"…嗯。不過今天一點都不累呢。為什麼呢。"},
+ {r:"a",t:"…那明天也送你回去吧？這石階，我們一起爬。",d:"站在高一階的地方伸出手"},
+ {r:"b",t:"…這隻手，我每天都牽，可以嗎？",d:"兩手交握在一起"}]},
+{m:"淹沒村落的最後一天",g:"🌊 感動",s:"將因建壩而沉入水底的村子。被水淹沒前的最後一夜。",ra:"捨不得離開的老人",rb:"來接他的子女",ln:[
+ {r:"a",t:"…你就是在這間屋子裡出生的。說要沉到水裡，我這腳實在邁不開。"},
+ {r:"b",t:"…爸/媽。現在真的該走了。趁水還沒漲上來。"},
+ {r:"a",t:"…就帶這院子裡一把土走吧。那樣就夠了。",d:"把土裝進手帕裡"},
+ {r:"b",t:"…那把土，種進新家的花盆裡吧。這樣這裡就在那裡了。",d:"攙扶著他"}]},
+{m:"搬煤球的志工",g:"🧡 感動",s:"冬天的山城。在搬煤球志工活動中初次相遇的兩個人。",ra:"資深志工",rb:"第一次來的志工",ln:[
+ {r:"a",t:"臉上全沾到煤球了。第一次來吧？這樣搬會閃到腰喔。",d:"替對方重新戴好手套"},
+ {r:"b",t:"…明明很重，卻莫名地覺得開心。為什麼呢？"},
+ {r:"a",t:"因為這一塊，能讓那戶人家暖上一整夜啊。就是這股滋味。",d:"把煤球遞過去"},
+ {r:"b",t:"…那我下禮拜也來。一起搬就行了吧？",d:"接過煤球"}]},
+{m:"監獄會客室",g:"🔒 劇情",s:"監獄會客室的玻璃兩端。等了很久的兩個人。",ra:"來會客的一方",rb:"被關著的一方",ln:[
+ {r:"a",t:"…瘦了呢。飯有好好吃嗎？我每週都來，你知道吧？"},
+ {r:"b",t:"…幹嘛一直來。不是叫你忘了我這種人好好過日子嗎。"},
+ {r:"a",t:"…只剩六個月了。我就數著那個過日子。",d:"把手貼在玻璃上"},
+ {r:"b",t:"…等我出去，一定重新做人再出去。謝謝你等我。",d:"隔著玻璃把手貼上去"}]},
+{m:"老家簷廊重逢",g:"🏠 重逢",s:"久違造訪的老家。年邁的父母和功成名就歸來的子女。",ra:"歸來的子女",rb:"等待著的父母",ln:[
+ {r:"a",t:"…媽/爸。我現在總算站穩腳跟了。來接你們的。"},
+ {r:"b",t:"…不用了。我喜歡這裡。不過啊，看到你的臉就夠了，這樣就好。"},
+ {r:"a",t:"…怎麼老成這樣了。是我來得太晚了吧。",d:"握住那雙滿是皺紋的手"},
+ {r:"b",t:"…哪裡晚。你不是回來了嗎。吃頓飯再走。都準備好了。",d:"輕拍著他的背"}]},
+{m:"最後一堂課的教室",g:"🍎 感動",s:"退休老師的最後一堂課。從前的學生前來探望。",ra:"退休的老師",rb:"來探望的學生",ln:[
+ {r:"a",t:"…在這間教室待了四十年呢。今天是最後一堂課了。"},
+ {r:"b",t:"…老師。您還記得我嗎？坐最後一排、每天都在打瞌睡的那個。"},
+ {r:"a",t:"…怎麼會忘。那孩子都長這麼大來看我了。",d:"扶正了眼鏡"},
+ {r:"b",t:"…是老師讓我成了像樣的人。我就是來說這句話的。",d:"深深地低下頭"}]}
+];
+const EXT={
+"春日的信":[
+ {r:"a",t:"坐到終點站…之後該怎麼辦。都沒有下車的藉口了。",d:"抬頭望著公車路線圖"},
+ {r:"b",t:"別再找藉口了。你從剛才就一副有話要說的臉。"},
+ {r:"a",t:"…我喜歡你。從去年春天開始。傘真的只是藉口。",d:"把頭深深低下"},
+ {r:"b",t:"我知道。我也是為了這個，今天才故意沒帶傘。",d:"悄悄把淋濕的包包給他看"}],
+"小吃店的季節":[
+ {r:"a",t:"公司還待得下去嗎。累的話，說累也沒關係。"},
+ {r:"b",t:"…其實有點累。喝了媽煮的湯，這才說得出口。"},
+ {r:"a",t:"我就知道。臉上全寫著呢，還瞞什麼。",d:"夾了塊蘿蔔泡菜放上去"},
+ {r:"b",t:"…我一個月會回來一次。來喝這碗湯。來看媽。",d:"大大地舀了一口湯"}],
+"巷弄裡的決鬥":[
+ {r:"a",t:"…那天你為什麼那樣。就說這個。說了，我或許就能了結。",d:"拳頭一直沒鬆開"},
+ {r:"b",t:"…如果我說那是為了保護你，你會信嗎。"},
+ {r:"a",t:"什麼？隔了三年，你要說的就是這個？",d:"在雨中停住了"},
+ {r:"b",t:"那天你要是知道了，也會跟著遭殃。…現在我告訴你真相。",d:"從懷裡掏出一個舊信封"}],
+"最後一張車票":[
+ {r:"a",t:"…到了我會寫信給你。打電話怕一聽到你的聲音就崩潰。"},
+ {r:"b",t:"寫信好。回信的地址，一定要寫上寄來。"},
+ {r:"a",t:"…可是為什麼還放不開手呢。火車要錯過了。",d:"低頭看著交握的手"},
+ {r:"b",t:"…搭下一班吧。就十分鐘，再多待十分鐘就走。",d:"手上使了勁"}],
+"可疑的租屋處":[
+ {r:"a",t:"…好吃吧？其實我煮泡麵可是一絕喔。",d:"露出得意的表情"},
+ {r:"b",t:"認同。不過老闆娘來了，我們兩個都會被趕出去。"},
+ {r:"a",t:"那我們就是共犯了。保守秘密喔。",d:"伸出了小指"},
+ {r:"b",t:"…下禮拜換我煮。加兩顆蛋。",d:"伸出手指打了勾勾"}],
+"刑警的夜晚":[
+ {r:"a",t:"最後的機會了。那天晚上你在哪裡。",d:"把一張照片推了過去"},
+ {r:"b",t:"…這張照片,你從哪弄來的。這不是那天晚上啊。"},
+ {r:"a",t:"你怎麼會知道?我時間地點都沒說啊。",d:"把椅子拉過來坐下"},
+ {r:"b",t:"…幫我叫律師。不,在那之前…我只說一件事。",d:"第一次別開視線"}],
+"海邊的那個夏天":[
+ {r:"a",t:"到台北後最先要做什麼,我都想好了。就算租個頂樓加蓋也好。"},
+ {r:"b",t:"…頂樓加蓋裡也有我的位置嗎?"},
+ {r:"a",t:"當然。一人一半。房租一半,夢想也一半。",d:"在沙上畫出房間格局"},
+ {r:"b",t:"…好。不過害怕的時候你要先伸手。說好囉。",d:"笑聲混進了浪濤聲裡"}],
+"宮廷的暗影":[
+ {r:"a",t:"三天後圓月升起時,西門會開啟一炷香的時間。",d:"再次環顧四周"},
+ {r:"b",t:"…您當真能捨棄一切嗎。這座宮殿,還有那個位子。"},
+ {r:"a",t:"那位子何曾護佑過我。讓我活下去的,是你。"},
+ {r:"b",t:"…那麼小人,三天後便在西門豁出性命。",d:"深深行了一禮"}],
+"計程車裡的告白":[
+ {r:"a",t:"…我說要你還我的那句,可以取消嗎?回我家的路太短了。",d:"數著窗外的燈火"},
+ {r:"b",t:"司機大哥,不好意思,可以沿著河邊那座橋繞一圈嗎。"},
+ {r:"a",t:"…你現在說的那句,是懂它的意思才說的吧?"},
+ {r:"b",t:"嗯。因為我有把握明天早上不會後悔,才這麼說的。",d:"握住的手加重了力道"}],
+"頂樓加蓋戰爭":[
+ {r:"a",t:"猜什麼拳。你每次都慢出啊!",d:"收回拳頭"},
+ {r:"b",t:"不服就拿證據來。來,再一次。三戰兩勝。"},
+ {r:"a",t:"…好。輸的人請炸雞加啤酒。說定?",d:"鬆開手"},
+ {r:"b",t:"說定。不過不管點什麼都一人一半?我們一向都一人一半嘛。",d:"咧嘴一笑舉起拳頭"}],
+"下雪那天的約定":[
+ {r:"a",t:"…這條圍巾,是我送你的吧。你還在圍著啊?"},
+ {r:"b",t:"本來想丟掉的,可一到冬天,手就先去找它了。"},
+ {r:"a",t:"…如果我們重新開始,這次能做好嗎。",d:"望著雪花"},
+ {r:"b",t:"不知道。不過你說你這一年每天都來。那不是早有答案了嗎?",d:"把圍巾分一半圍上"}],
+"鄉下的公車站":[
+ {r:"a",t:"兩顆蛋都吃掉。在車上餓肚子最難受了。",d:"把包袱重新繫好"},
+ {r:"b",t:"…奶奶,冬天一定要開暖氣。別捨不得。"},
+ {r:"a",t:"擔心我做什麼。你好好念書就是了。…公車來了。",d:"望著揚起塵土的路"},
+ {r:"b",t:"…奶奶。我不會回頭的。不過我會從窗戶看你。",d:"抹著眼淚上了車"}],
+"錄音室的夜晚":[
+ {r:"a",t:"…你聽出來了吧。這首歌的歌名,就是你名字的縮寫。",d:"遞出樂譜"},
+ {r:"b",t:"…你瘋了?現在才說是怎樣。我嗓子都啞了。"},
+ {r:"a",t:"啞著也沒關係。不,那樣更真實。就唱一次給我聽。"},
+ {r:"b",t:"…最後一句你也要一起唱。那我就唱。",d:"重新戴上耳機"}],
+"病房的窗邊":[
+ {r:"a",t:"…窗外櫻花開了。我就是為了看那個,才請人拉開窗簾。"},
+ {r:"b",t:"明年到樹下看吧。鋪上野餐墊,包好飯捲。"},
+ {r:"a",t:"…飯捲你來包。我知道你不會做菜,但還是想你包。",d:"噗哧一笑"},
+ {r:"b",t:"說定。不過在那之前你不准剩飯。這是契約。",d:"勾起小指"}],
+"路邊攤的真相":[
+ {r:"a",t:"…其實下週有場面試。雖然是間小公司啦。"},
+ {r:"b",t:"你看吧。這兩個月你也不是白白閒著嘛。"},
+ {r:"a",t:"沒上的話怎麼辦。這把年紀還能重新來過嗎。",d:"把玩著空杯"},
+ {r:"b",t:"沒上就再約這裡見唄。我請的酒無限續杯。",d:"攬住肩膀"}],
+"守門員的夏天":[
+ {r:"a",t:"他們的5號只會往左踢。剛剛兩次都是。記住了。"},
+ {r:"b",t:"…哥你什麼時候看到這些的。"},
+ {r:"a",t:"因為你只盯著球門的時候,我一直盯著你。",d:"遞出水瓶"},
+ {r:"b",t:"…哥。我要是守住了,第一個把哥你拋起來慶祝。",d:"手套互碰"}],
+"圖書館的紙條":[
+ {r:"a",t:"…考完試要做什麼?啊不,這也是我問書的。",d:"用書遮住臉"},
+ {r:"b",t:"這本書還真好奇。考完試…我很閒。"},
+ {r:"a",t:"那書說啊,它想去學校前面新開的咖啡廳看看。"},
+ {r:"b",t:"…好。帶著書出來吧。週六兩點。",d:"把紙條摺好夾進書籤處"}],
+"搬家那天":[
+ {r:"a",t:"…你現在說這句話,我這些箱子就搬不出去了。",d:"在玄關前停下"},
+ {r:"b",t:"所以我現在才說。就是不想讓你走。"},
+ {r:"a",t:"…那我要怎麼跟搬家貨車的大哥說啊。",d:"放下箱子"},
+ {r:"b",t:"行李送走就好。你留下。水杯…現在得要兩個了。",d:"緊握著杯子笑了"}],
+"頂樓上的攤牌":[
+ {r:"a",t:"…這照片,怎麼回事。這不是會長的兒子嗎。你怎麼會有這個。",d:"一把奪過照片"},
+ {r:"b",t:"把名單交出去的,就是那傢伙。我就是在查這件事,才惹來你的懷疑。"},
+ {r:"a",t:"…那你為什麼不早說。哪怕只跟我說也好。",d:"放開揪住的衣領"},
+ {r:"b",t:"因為連你都會有危險。…現在一起了結吧。你跟我,像從前一樣。",d:"伸出手"}],
+"婚禮前一天":[
+ {r:"a",t:"…當了十年朋友,你為什麼一次都沒說過。"},
+ {r:"b",t:"因為你看起來很幸福。我怕我一句話就把那份幸福給動搖了。"},
+ {r:"a",t:"…被動搖的是現在啊。我該怎麼辦。",d:"把玩著捧花的緞帶"},
+ {r:"b",t:"…想到明天早上吧。不管你選哪邊,我都站在你這邊。一如既往。",d:"轉過身藏起眼淚"}],
+"煮泡麵的夜晚":[
+ {r:"a",t:"…不過你啊,說來吃泡麵,這已經第三次了吧?光這禮拜。"},
+ {r:"b",t:"…因為你煮的泡麵好吃啊。我本來就愛吃泡爛的麵。"},
+ {r:"a",t:"騙人。你剛剛還笑說麵爛掉了。",d:"停下筷子"},
+ {r:"b",t:"…那我更正。我不是來吃泡麵的,是來看煮泡麵的人。",d:"只盯著湯"}],
+"操場上最後的鐘聲":[
+ {r:"a",t:"…你說你等我?你?從什麼時候開始。",d:"望著伸出的手"},
+ {r:"b",t:"從二年級運動會開始。從你扶起跌倒的我那時候。"},
+ {r:"a",t:"…那我們兩年來都像傻瓜一樣互相在觀望嗎?",d:"哭笑不得地笑了"},
+ {r:"b",t:"嗯。所以別再浪費時間了。手,你要不要牽?",d:"把手又伸近了些"}],
+"梅雨中的傘":[
+ {r:"a",t:"…到了。你家。不過雨更大了。",d:"在屋簷下停住"},
+ {r:"b",t:"…要不要進來拿條毛巾。你肩膀都濕了。"},
+ {r:"a",t:"沒關係。不過傘我留給你。明天你撐著來。"},
+ {r:"b",t:"…那明天也來接我。我得把傘還你嘛。",d:"接過傘笑了"}],
+"老店的老闆":[
+ {r:"a",t:"…我只跟你說,這湯頭的祕訣啊。沒什麼特別。就是凌晨四點。"},
+ {r:"b",t:"凌晨四點?"},
+ {r:"a",t:"每天凌晨四點就起第一鍋水。三十年。用心才是祕訣。",d:"撫摸著老舊的湯鍋"},
+ {r:"b",t:"…老闆。這口鍋我可以拍張照嗎?想給我孩子看看。",d:"掏出手機"}],
+"熬夜的研究室":[
+ {r:"a",t:"…咖啡都涼了。你這是幾個小時前就沖好的啊。"},
+ {r:"b",t:"想說你差不多要失敗的時候會需要。三個小時前沖的。"},
+ {r:"a",t:"…你早知道我會失敗?",d:"放下杯子"},
+ {r:"b",t:"嗯。不過我也知道你明天還會再來。因為那就是你。來,再看一次數據吧。",d:"拉來椅子坐下"}],
+"機場的五分鐘":[
+ {r:"a",t:"…最後登機廣播了。真的得走了。",d:"把行李箱立起來"},
+ {r:"b",t:"等等。這個。上飛機再打開。",d:"把小信封塞進手裡"},
+ {r:"a",t:"…這是什麼。現在打開不行嗎?"},
+ {r:"b",t:"不行。在天上打開。這樣你才沒辦法回頭跑出來。",d:"推著背藏起眼淚"}],
+"爺爺的腳踏車":[
+ {r:"a",t:"轉過那個彎就是你最愛的波斯菊小路了。眼睛睜大點。"},
+ {r:"b",t:"…爺爺,我小時候你也在這裡教我花的名字。我記得。"},
+ {r:"a",t:"你還記得啊。你爸在你這年紀時也問過一模一樣的問題。",d:"放慢踏板"},
+ {r:"b",t:"…那以後也載我的孩子走這條路。傳到第三代。",d:"緊緊抱住背"}],
+"舊情人的婚禮":[
+ {r:"a",t:"…進去吧。大家都在等你。我這就真的走了。"},
+ {r:"b",t:"…謝謝你。那段日子的我,因為有你才成了個好人。"},
+ {r:"a",t:"我也是。…那個人,是好人吧?那就夠了。",d:"望向禮堂那邊"},
+ {r:"b",t:"…嗯。你也一定要,比我先幸福起來。這樣我才安心。",d:"最後露出一個笑容"}],
+"社區的澡堂":[
+ {r:"a",t:"來,搓完了。換你了。來搓我的背。",d:"把背湊過去"},
+ {r:"b",t:"…復仇的時刻到了。這握力,你撐得住嗎?"},
+ {r:"a",t:"哎唷!喂!輕點!我剛剛搓的可沒這麼用力啊!",d:"彈跳起來"},
+ {r:"b",t:"人生本來就是會痛的嘛。搓背也是,人生也是。來,香蕉牛奶輸的人請。",d:"揮著搓澡巾"}],
+"山莊的一夜":[
+ {r:"a",t:"(低聲)…窗外,還在嗎?",d:"在黑暗中屏住呼吸"},
+ {r:"b",t:"噓。…腳步聲。在門那邊。過來,慢慢地。"},
+ {r:"a",t:"…等等。那個門把是不是在轉?",d:"緊握手電筒"},
+ {r:"b",t:"數到三就往後門跑。一…二…",d:"拉起手往前帶"}],
+"便利商店的深夜":[
+ {r:"a",t:"…其實我啊,都會配合客人來的時間,先把關東煮熱好。"},
+ {r:"b",t:"…咦?每天嗎?"},
+ {r:"a",t:"凌晨兩點十五分。你一次都沒遲到過。比時鐘還準。",d:"尷尬地笑了"},
+ {r:"b",t:"…那我從明天起兩點就來。那十五分鐘…就聊聊天再走。",d:"把玩著三角飯糰"}],
+"雨中的機車":[
+ {r:"a",t:"…雨停了。可你怎麼還抓這麼緊。",d:"把速度又放慢了些"},
+ {r:"b",t:"…習慣。不,就是。不想放手。"},
+ {r:"a",t:"那就別放。我再繞一圈。繞遠一點。",d:"轉動車把"},
+ {r:"b",t:"…好。不過下次買兩頂安全帽吧。這樣才能騎久一點。",d:"靠著背笑了"}],
+"老戲院":[
+ {r:"a",t:"…電影開始了。不過我這部看了不下一百次。可以爆雷嗎?"},
+ {r:"b",t:"不要。…不過結局是難過的還是幸福的?就告訴我這個。"},
+ {r:"a",t:"是兩個人一起看才會變幸福的結局。",d:"螢幕的光映在臉上"},
+ {r:"b",t:"…那我們現在,就是在看那個結局囉。",d:"把手疊在手背上"}],
+"廚房裡的兩個人":[
+ {r:"a",t:"…食譜上沒有的味道?那個嘛,確實有樣東西是拿來代替鹽的。"},
+ {r:"b",t:"是什麼?我也想學,那個味道。"},
+ {r:"a",t:"教不了你。那是要看著吃的人才放進去的。",d:"解下圍裙"},
+ {r:"b",t:"…主廚。那我明天也留到打烊。留到學會為止。",d:"緊握著空盤子"}],
+"巷口柑仔店前":[
+ {r:"a",t:"喂,你還記得嗎。我們以前在這裡賭冰淇淋下五子棋。"},
+ {r:"b",t:"記得啊。我每次都輸。…要來一盤嗎?現在。"},
+ {r:"a",t:"現在哪來的棋盤。…等等,有。在雜貨店裡。放了二十年。",d:"拿出積滿灰塵的棋盤"},
+ {r:"b",t:"…這個小鎮還真是,時間都不走的。真好,來賭冰淇淋吧。",d:"在木板凳上攤開棋盤"}],
+"面試會場的走廊":[
+ {r:"a",t:"…謝謝你的糖果。不過現在輪到我了。我得進去了。",d:"起身整理衣裝"},
+ {r:"b",t:"那個。你剛剛說手在抖對吧。我告訴你一件事。"},
+ {r:"a",t:"…嗯?"},
+ {r:"b",t:"把這當成最後一次機會的人,說起話來最誠懇。那份誠懇,面試官也看得出來。加油喔。",d:"微微舉起拳頭示意"}],
+"煙火下的橋上":[
+ {r:"a",t:"…聽說是最後一發煙火。說是最大的那一發要放了。",d:"指向天空"},
+ {r:"b",t:"可你為什麼不看天空,盯著我看。"},
+ {r:"a",t:"最大的那個就在這裡,幹嘛看天空。",d:"聲音被煙火聲蓋過"},
+ {r:"b",t:"…你剛剛說什麼?煙火聲太大我沒聽到。再說一次。",d:"上前一步"}],
+"婦產科候診室":[
+ {r:"a",t:"名字要取什麼呢。先從胎名開始定吧。叫豆豆怎麼樣,現在也才豆子那麼大。"},
+ {r:"b",t:"…豆豆。真好。不過我真的做得好嗎。當爸/當媽這件事。"},
+ {r:"a",t:"我們的爸媽起初也不懂。生了才學會的。我們也這樣就行。"},
+ {r:"b",t:"…豆豆啊。就算我們笨手笨腳也要體諒。我們也是第一次當父母。",d:"對著超音波照片輕聲說"}],
+"頂樓菜園":[
+ {r:"a",t:"五花肉很棒吧。對了,萵苣的水要早上澆。中午澆的話葉子會被燙熟。"},
+ {r:"b",t:"…我也來種一株看看?就種這旁邊的空位。"},
+ {r:"a",t:"那就種辣椒吧。有萵苣加辣椒,生菜包肉就齊全了。",d:"遞出空花盆"},
+ {r:"b",t:"…搬來這裡真是搬對了。沒想到在都市裡也能有這樣的鄰居。",d:"摸了摸泥土"}],
+"教室窗邊的午後":[
+ {r:"a",t:"…別掃了,過來一下。夕陽下山了。",d:"指向窗外"},
+ {r:"b",t:"哇。…喂,不過你剛剛那句話是真的嗎?說是為了坐我旁邊才換位子的。"},
+ {r:"a",t:"…嗯。從三月開始。我喜歡看你在窗邊打瞌睡。"},
+ {r:"b",t:"…我大概瘋了。我以後在這裡沒辦法打瞌睡了。會想到你。",d:"坐在窗台上笑了"}],
+"宅配包裹前":[
+ {r:"a",t:"…不過這款冰淇淋,這附近沒地方在賣吧。我也喜歡吃這個。"},
+ {r:"b",t:"真的嗎?我第一次遇到知道這個的人。聽說要停產,我才囤起來的。"},
+ {r:"a",t:"停產?!不行。…那個,你就告訴我你從哪訂的就好。",d:"拿著湯匙,神情認真起來"},
+ {r:"b",t:"…下次一起訂吧。順便省運費。電話…可以給我嗎?",d:"遞出手機"}],
+"森林防火瞭望台":[
+ {r:"a",t:"…我?這座山就是我的家。下了山反而會迷路。"},
+ {r:"b",t:"這是什麼話。你可是在山裡從不迷路的人。"},
+ {r:"a",t:"山裡只有一條路。不是上坡就是下坡。都市的路太多了。",d:"放下望遠鏡"},
+ {r:"b",t:"…那我偶爾上來看你。為了不讓哥你迷路,我來當你的路。",d:"倒出保溫瓶裡的咖啡"}],
+"二手書店的梯子":[
+ {r:"a",t:"…不過這本書,你為什麼要找?都絕版超過二十年了。"},
+ {r:"b",t:"是小時候爸爸念給我聽的書。我一直很想再擁有它。"},
+ {r:"a",t:"…這樣一本書是我幫你找到的呢。還挺有成就感的。",d:"呼地吹去書上的灰塵"},
+ {r:"b",t:"嗯。所以在第一頁寫上你的名字吧。讓我記得是誰幫我找到的。",d:"遞出筆"}],
+"河邊的釣魚場":[
+ {r:"a",t:"…說吧。要是重要到得放下釣竿的話。",d:"目光沒離開浮標"},
+ {r:"b",t:"…我打算辭掉公司的工作,去試試想做的事。因為我想活得像爸爸您一樣。"},
+ {r:"a",t:"…像我?像我這樣一輩子替別人打工的人?",d:"第一次望向兒子"},
+ {r:"b",t:"不。是像個懂得等待的人。…爸,您會等我的吧?",d:"浮標倏地沉入水裡"}],
+"電梯停電":[
+ {r:"a",t:"…數數字有效吧?我們已經數到三百了。"},
+ {r:"b",t:"…不過很奇怪呢。我現在一點都不害怕了。"},
+ {r:"a",t:"因為我的手很溫暖啊。我奶奶說過,手溫暖的人可以信任。"},
+ {r:"b",t:"…燈亮了。不過…手可以再多牽一會兒嗎?",d:"在恢復明亮的電梯裡對望"}],
+"分手後的咖啡廳":[
+ {r:"a",t:"…打開看看。裡面裝了什麼,連我都忘了。",d:"只是攪著咖啡"},
+ {r:"b",t:"…是電影票耶。我們沒看成的那部。那天吵架沒能進場的。",d:"從盒子裡拿出兩張票"},
+ {r:"a",t:"…啊。原來是那個。那部電影,現在偶爾還會重映呢。"},
+ {r:"b",t:"…有點好奇耶。結局。…要不要去看?票重新買,這張就留著當紀念。",d:"把票輕輕放下"}],
+"部隊會客室":[
+ {r:"a",t:"對了,我帶了照片來。你不在的時候拍的。有櫻花,也有初雪。",d:"拿出一疊照片"},
+ {r:"b",t:"…我不在的季節,竟然有這麼多。"},
+ {r:"a",t:"所以我拍了兩倍。連你的份一起。在你回來之前,我會一直拍下去。"},
+ {r:"b",t:"…退伍後,第一件事就是去照相館。我們兩個一起拍的照片,一張都沒有嘛。",d:"把照片珍惜地收進懷裡"}],
+"練習室的鏡子":[
+ {r:"a",t:"…可是萬一,萬一我們兩個只有一個上榜怎麼辦。"},
+ {r:"b",t:"不是說好不要想那個了嗎。"},
+ {r:"a",t:"不,我決定了。如果你上了,我會真心為你鼓掌。所以你也要這樣。",d:"看著鏡中的對方"},
+ {r:"b",t:"…傻瓜。為什麼不能想我們兩個都上的畫面。來,從頭開始。Five、six、seven、eight!",d:"重新放起音樂"}],
+"醬缸台上的月":[
+ {r:"a",t:"書信可讀過了?我這份心意,筆墨連一半都寫不盡。",d:"臉龐在月光下顯露出來"},
+ {r:"b",t:"…讀了上百遍,紙都磨破了。只是,不知該如何回信才好。"},
+ {r:"a",t:"不需要回信。此刻你這副神情,便是答覆了。",d:"上前一步"},
+ {r:"b",t:"…雞鳴之前您得走了。可是…再一會兒,請再多待一會兒吧。",d:"輕輕拉住衣袖"}],
+"急診室的凌晨":[
+ {r:"a",t:"…手術室的燈熄了。醫師出來了。",d:"猛地站起來"},
+ {r:"b",t:"…我不敢看。你先幫我看醫師的表情。怎麼樣。",d:"把眼睛緊緊閉上"},
+ {r:"a",t:"…他在笑。醫師在笑。說順利。說順利!",d:"搖著對方的肩膀"},
+ {r:"b",t:"…真的?真的吧?啊…腿都軟了。扶我一下。",d:"癱坐下去,伸出手"}],
+"同學會的洗手間":[
+ {r:"a",t:"…其實我創業失敗了。兩次。現在是在做第三次。",d:"看著鏡子"},
+ {r:"b",t:"喂,失敗兩次還能做第三次才厲害好嗎。一般人早就爬不起來了。"},
+ {r:"a",t:"…我本來只想在你面前裝得很成功。以前不是老是輸給你嗎。"},
+ {r:"b",t:"你這傢伙,我連開始都沒開始過。當上班族當了整整二十年。你才是我的夢想。走,我請客。",d:"推著背走出去"}],
+"被遺棄的小狗":[
+ {r:"a",t:"先取名字吧。因為是下雨天遇見的…叫小樓?雲朵?不對,雨傘?"},
+ {r:"b",t:"雨傘算什麼啊。…叫春雨怎麼樣。春雨。"},
+ {r:"a",t:"春雨。…很好。牠也說好。你看牠在搖尾巴。",d:"小狗在懷裡嗚嗚叫"},
+ {r:"b",t:"…春雨的預防針我來打聽。那個…要知道你的聯絡方式,才能一起養嘛。",d:"拿出手機,臉紅了起來"}],
+"頂樓加蓋的星空夜":[
+ {r:"a",t:"喂,我們來打賭吧。看誰先找到工作。輸的人用第一份薪水請客。"},
+ {r:"b",t:"…第一份薪水?格局很大嘛。好啊,那贏的人要送什麼。"},
+ {r:"a",t:"贏的人…要幫輸的人買面試西裝。怎麼樣。",d:"把罐子碰在一起"},
+ {r:"b",t:"…這個好。不管誰贏,反正我們兩個都會穿著西裝去上班嘛。",d:"望著星星笑了"}],
+"手術同意書":[
+ {r:"a",t:"…簽好了。接下來就只剩等待了。",d:"放下筆"},
+ {r:"b",t:"做得好。媽不是老說嗎。我們兄弟只要在一起,就沒什麼好怕的。"},
+ {r:"a",t:"…小時候是媽牽著我們的手跑醫院,現在換我們牽媽了。",d:"望著手術室的門"},
+ {r:"b",t:"…媽出來以後,我們三個去旅行吧。去媽一直想去的那片海。就聊著這個等吧。",d:"把手臂搭在肩上"}],
+"第一天上班的捷運":[
+ {r:"a",t:"…那個,謝謝你,我能再多問一件事嗎?午餐都怎麼解決?自己一個人吃嗎?"},
+ {r:"b",t:"第一天通常組裡的人會帶你去。你還真是操心呢,新人。"},
+ {r:"a",t:"…很明顯吧。我昨晚一夜都沒睡。",d:"緊緊握住門把"},
+ {r:"b",t:"我第一天也是這樣。對了,我在那棟樓的三樓上班。午餐要是搞砸了就聯絡我。",d:"悄悄遞出名片"}],
+"廢棄學校的操場":[
+ {r:"a",t:"…我們在鞦韆旁邊埋過時光膠囊,你記得嗎?",d:"指向花圃的角落"},
+ {r:"b",t:"對耶!都三十年了。…該不會還在吧?"},
+ {r:"a",t:"挖挖看吧。其實我就是為了挖那個才把你叫來的。因為不想一個人打開。",d:"拿出一把小鏟子"},
+ {r:"b",t:"…喂,真的還在!是個鐵罐!裡面寫了什麼我一點都不記得。好緊張。",d:"小心翼翼地捧起生鏽的鐵罐"}],
+"電視台的休息室":[
+ {r:"a",t:"…結束了,前輩。我做到了。沒有發抖,一路撐到最後。",d:"紅著臉跑了過來"},
+ {r:"b",t:"我看到了。從螢幕上全看到了。你就像對著那一個人在說話似的。"},
+ {r:"a",t:"…可是那一個人,其實我是把他當成前輩在說的。"},
+ {r:"b",t:"…你這傢伙。聽說下週開始你有自己的單元了。現在才是真正的開始。",d:"拍著肩膀笑了"}],
+"殯儀館的菊花":[
+ {r:"a",t:"…他說過的。等我們三個都六十歲,就去花蓮住上一個月。"},
+ {r:"b",t:"…就為了那個約定,我還去存了定存呢,這傢伙。"},
+ {r:"a",t:"…走吧。就算只剩我們兩個。帶著他的照片。",d:"望著遺照"},
+ {r:"b",t:"…對。這樣就是我們三個一起去了。喂,你要去花蓮囉。真好。",d:"對著遺照努力擠出笑容"}],
+"遊樂園的旋轉木馬":[
+ {r:"a",t:"…要不要再坐一圈?工作人員說這是最後一班了。說只剩我們了。"},
+ {r:"b",t:"…好。不過這次你坐後面。我在前面看著你。"},
+ {r:"a",t:"喔。現在不害羞了?",d:"換了旋轉木馬的位子"},
+ {r:"b",t:"嗯。想一想才發現,世界上最幸福的人身邊的位子,就是我的位子。",d:"音樂再次流洩而出"}],
+"工地的貨櫃屋":[
+ {r:"a",t:"…你這雙手,原本是做什麼的手?看起來像握筆的手。",d:"把米酒斟滿"},
+ {r:"b",t:"…以前是上班族。不過被裁了。家裡有兩個孩子,總得做點什麼。"},
+ {r:"a",t:"兩個孩子。…那這些水泡就是當爸爸的勳章嘛。這不是雙丟臉的手。",d:"亮出自己手上的繭"},
+ {r:"b",t:"…大哥。我明天也會來。後天也是。直到這雙手長出繭來。",d:"一口把杯子喝乾"}],
+"書咖啡廳打烊":[
+ {r:"a",t:"…那個位子,其實以前是我的固定座位。在當上老闆之前,還是客人的時候。"},
+ {r:"b",t:"…難怪只有那個位子的燈光特別溫暖。原來如此。"},
+ {r:"a",t:"你發現了呢。…要不要再來一杯咖啡。這次不當客人,就以人對人的方式。",d:"解下圍裙"},
+ {r:"b",t:"…好啊。那我也不當常客,就用名字來稱呼吧。我叫…。",d:"拉出一張椅子讓座"}],
+"客運站的末班車":[
+ {r:"a",t:"…公車司機說會等五分鐘。這也算是鄉下的人情味啊。",d:"重新站回站牌前"},
+ {r:"b",t:"五分鐘。…那我快說。我下個月要上台北。去你所在的地方。"},
+ {r:"a",t:"…什麼?真的?那這裡的工作怎麼辦。",d:"抓著公車車門僵住了"},
+ {r:"b",t:"都處理好了。送走你之後再後悔,一次就夠了。…上車吧。反正我們很快就會再見面。",d:"笑著推了推背"}],
+"美髮店的鏡子前":[
+ {r:"a",t:"…好,完成了。怎麼樣,喜歡嗎?",d:"拿鏡子照給對方看"},
+ {r:"b",t:"…有點不習慣。可是好輕。頭也是,心也是,好奇怪。"},
+ {r:"a",t:"有些人其實更適合短髮。那種新面貌才是本來面貌的人。",d:"拍掉肩上的碎髮"},
+ {r:"b",t:"…謝謝你。我下個月會再來。這個髮型,我想一直維持這個長度看看。",d:"第一次對著鏡中的自己露出笑容"}],
+"頂樓曬衣場":[
+ {r:"a",t:"…不過這件衣服,不能曬太陽,要晾在陰涼處。這種材質會褪色。"},
+ {r:"b",t:"哎呀,你很會洗衣服嘛。看來一個人在外面住很久了。"},
+ {r:"a",t:"第十年了。洗衣服和泡麵我都成了博士。其他的到現在還是一團糟。",d:"尷尬地笑了"},
+ {r:"b",t:"…那小菜方面我可是博士。我們要不要交換家教?我學洗衣服,送你小菜。",d:"擺弄著曬衣夾"}],
+"雅房走廊":[
+ {r:"a",t:"…你在準備什麼考試?我是準備公職第三年。啊,是準備了三年的意思啦。",d:"靠著牆坐下"},
+ {r:"b",t:"我也是。…這裡的人打招呼,都是用準備了幾年來自我介紹呢。"},
+ {r:"a",t:"所以就算聽到有人在哭,也沒人會說什麼。因為大家都哭過。",d:"幫忙往杯麵裡倒熱水"},
+ {r:"b",t:"…就趁泡麵熟的這三分鐘,我們別聊考試,聊點別的吧。",d:"在走廊地板上面對面坐下"}],
+"紅綠燈前的偶遇":[
+ {r:"a",t:"…紅綠燈都變第三次了。我們還是一直沒過馬路。"},
+ {r:"b",t:"…你要走到哪裡?我是在那邊十字路口的公司。"},
+ {r:"a",t:"我也是那個方向。其實…我早就知道了。我們每天都是同一個方向。",d:"耳朵紅了起來"},
+ {r:"b",t:"…那從明天開始就在這裡碰面一起走吧。八點十五分。別遲到了。",d:"綠燈亮起,兩人並肩邁出腳步"}],
+"奶奶的手工刀削麵":[
+ {r:"a",t:"…哭什麼哭。眼淚掉進麵團裡會變鹹的。",d:"用手背幫孫女擦臉頰"},
+ {r:"b",t:"…還不是因為奶奶老說那種話。什麼等我不在的時候。"},
+ {r:"a",t:"人終究都會走。可是味道會留下來。所以要把它刻在手上。不是刻在眼淚裡,是刻在手上。",d:"再次把麵團塞進她手裡"},
+ {r:"b",t:"…知道了。但今天要全部教我。連高湯也要。教到天亮也行。",d:"捲起袖子"}],
+"年末的便利商店":[
+ {r:"a",t:"…五、四、三、二、一。新年了呢。我們是彼此今年第一個說話的人。"},
+ {r:"b",t:"…真的耶。是第一個人呢。",d:"熱包子冒著白煙"},
+ {r:"a",t:"許新年願望了嗎?我許了。希望今年可以比去年不那麼孤單。"},
+ {r:"b",t:"…那個願望好像已經在實現了呢。就是現在。",d:"把兩碗杯麵放到結帳櫃檯上"}],
+"逃生梯上的攤牌":[
+ {r:"a",t:"…計畫?好。首先把這個隨身碟複製成三份。一份給記者,一份給律師。"},
+ {r:"b",t:"剩下那份呢?"},
+ {r:"a",t:"你拿著。萬一我出了什麼事,由你來判斷。",d:"把隨身碟塞進對方手裡"},
+ {r:"b",t:"…不會出什麼事的。因為有我在你身邊。星期一我們一起把它爆出來。",d:"緊緊握住隨身碟"}],
+"海上的燈塔":[
+ {r:"a",t:"…對了,這個。是三十年的航海日誌。哪個夜晚有哪艘船經過,全都記在裡面。",d:"遞出一本破舊的筆記本"},
+ {r:"b",t:"…這些您要全部給我嗎?"},
+ {r:"a",t:"燈塔守的遺產能有什麼。不過就是夜晚、燈光和記錄罷了。",d:"望向海平線"},
+ {r:"b",t:"…前輩。我每年都會在第一頁寫封信。說這座燈塔一切安好。您要來讀喔。",d:"把筆記本抱在胸前"}],
+"補習班頂樓":[
+ {r:"a",t:"…喂,你記得去年這個時候考幾分嗎?比現在低了四十分。"},
+ {r:"b",t:"…你怎麼會知道那個。"},
+ {r:"a",t:"你的成績單,我每個月都偷偷看。因為你老是哭,因為你自己看不到你在進步。",d:"翻開手帳給對方看"},
+ {r:"b",t:"…你把這些全記下來了?喂…原來不是我好像不行,而是我好像正在做到。我。",d:"把揉皺的成績單重新攤平"}],
+"傳統市場的攤位":[
+ {r:"a",t:"對了,清晨去那條巷口的貨車那邊進貨。那裡的最新鮮。報我的名字。",d:"重新戴好工作手套"},
+ {r:"b",t:"…報您的名字就會算便宜嗎?"},
+ {r:"a",t:"不是算便宜,是不會騙你。要是被看出是菜鳥,那邊會塞不新鮮的給你。",d:"哈哈大笑"},
+ {r:"b",t:"…我今天學到的,以後一定會回報。以後要是有菜鳥來到我身邊,我也會請他喝碗黑輪湯。",d:"喝乾杯子,恭敬地鞠了個躬"}],
+"病房的窗外":[
+ {r:"a",t:"…醫師怎麼說。老實告訴我。看你的表情我全都知道。"},
+ {r:"b",t:"…他說下週再檢查一次。不過數值正在好轉。是真的。"},
+ {r:"a",t:"…那櫻花,明年的也可以先預約了嗎。",d:"望向窗外"},
+ {r:"b",t:"明年的、後年的,十年份全都預約下來。佔位子可是我的專長嘛。",d:"把手握得更緊"}],
+"巷口的理髮店":[
+ {r:"a",t:"…對了,聽說你兒子這次考上大學了。帶他來剪個頭髮吧。在第一次聯誼之前。",d:"剪刀聲漸漸緩了下來"},
+ {r:"b",t:"…大哥在我兒子週歲宴時幫他剪了胎毛,現在都已經是大學生了。"},
+ {r:"a",t:"那撮頭髮,還在那個抽屜裡。你當初寄放著就沒來拿走嘛。",d:"指向那個老舊的抽屜"},
+ {r:"b",t:"…那就請大哥留著吧。我們家三代人的頭髮,這張椅子全都知道呢。",d:"在鏡子裡笑了"}],
+"熄了燈的辦公室":[
+ {r:"a",t:"…其實這個專案結束後,我就要被外派到外地了。所以我想就算熬夜也要趕快做完。"},
+ {r:"b",t:"…什麼?外地?什麼時候?",d:"放下咖啡的手停住了"},
+ {r:"a",t:"下個月。…所以最近我一點都不討厭加班。因為辦公室裡還有一個留下來的人。"},
+ {r:"b",t:"…那個專案,你慢慢做吧。不,我也一起做。兩個人做的話…會拖得更久呢。",d:"拉過椅子坐到旁邊"}],
+"搬家貨車的副駕駛座":[
+ {r:"a",t:"…你看你看,那邊看得到我們學校。最後跟它道個別吧。說聲保重。"},
+ {r:"b",t:"…再見了,學校。再見了,辣炒年糕店。…哥/姊,我沒有掉眼淚。好奇怪。"},
+ {r:"a",t:"剛才已經哭完了才會這樣。…對了,這個。你朋友們的聯絡方式,我全都幫你收集好了。",d:"遞出一張紙條"},
+ {r:"b",t:"…什麼時候弄的這些。…哥/姊最棒了。到了新地方,我第一件事就是寫信。",d:"把紙條緊緊握住"}],
+"警局的拘留所":[
+ {r:"a",t:"…叫我好好活?沒有你?那算什麼好好活。",d:"在鐵欄杆前癱坐下來"},
+ {r:"b",t:"…起來。有人在看。連你都這樣,我真的撐不下去了。"},
+ {r:"a",t:"我找到律師了。真兇的目擊者也找到了。你很快就能出來。所以在裡面別亂想。",d:"舉起一個公文袋給對方看"},
+ {r:"b",t:"…喂。…謝了。出去以後,請我吃碗麵吧。你最愛的那家。",d:"隔著鐵欄杆伸出拳頭"}],
+"山頂的標示石":[
+ {r:"a",t:"來,笑一個！…喂,你眼睛閉起來了。再一次。",d:"舉起手機"},
+ {r:"b",t:"是風害的啦!…不過我們下次去哪?反正都開始了。"},
+ {r:"a",t:"喔,還說再也不來了呢。下一座是玉山。縱走。三天兩夜。",d:"咧嘴一笑"},
+ {r:"b",t:"…真是瘋了。可是我願意。只要跟你一起,不管哪座山頂都到得了。",d:"並肩靠著標示石拍照"}],
+"巷口的辣炒年糕店":[
+ {r:"a",t:"…嗯。就是告白沒錯。在辣炒年糕店告白很抱歉,可是我們的回憶全都在這裡。"},
+ {r:"b",t:"…掉在地上的年糕好可惜。不,不是這個。我現在心臟快要炸開了。"},
+ {r:"a",t:"…你可以慢慢回答。反正離畢業典禮還有三天。",d:"倒了碗黑輪湯給對方"},
+ {r:"b",t:"什麼三天。…阿姨,這裡加點一份辣炒年糕!慶祝我跟他,在一起了!",d:"扯開嗓子大喊,整間店都聽得見"}],
+"月子中心的走廊":[
+ {r:"a",t:"…護理師說,我們家寶寶晚上最不愛哭。說很乖。",d:"目光離不開玻璃窗"},
+ {r:"b",t:"…到底像誰才這麼乖。我們兩個明明都是急性子。"},
+ {r:"a",t:"大概像奶奶吧。…對了,打電話給媽了嗎?就說看到孫子了。",d:"拿出手機"},
+ {r:"b",t:"…剛才打了,她哭了。哭了三十分鐘。…我們現在也變成有人一哭就會飛奔過去的人了呢。",d:"隔著玻璃向寶寶揮手"}],
+"老舊的鋼琴教室":[
+ {r:"a",t:"…最後一起彈一首吧。你最初學的那首。還記得嗎。",d:"讓出旁邊的琴椅位子"},
+ {r:"b",t:"…筷子進行曲嗎?那怎麼可能忘記。我被罵了上百次呢。"},
+ {r:"a",t:"對,就是那首。你彈低音Do,我彈高音Do。準備。",d:"把手放上琴鍵"},
+ {r:"b",t:"…老師。等我的音樂教室開幕那天,我們就用這架鋼琴一起彈這首曲子。當作第一首。",d:"演奏開始了"}],
+"積雪的哨所":[
+ {r:"a",t:"…喂,你看那邊。真的下雪了。這麼安靜真好,就是為了這種感覺才站夜哨。",d:"呼出的白氣散開來"},
+ {r:"b",t:"…金兵長,您退伍後打算做什麼?"},
+ {r:"a",t:"當然是復學啊。對了,你說過你住在我學校附近吧。退伍後在外面一起吃頓飯吧。"},
+ {r:"b",t:"…真的嗎?我會靠著這個約定,撐過剩下的軍旅生活的。",d:"戴著手套的手敬了個禮"}],
+"頂樓的帳篷":[
+ {r:"a",t:"…喂,話說我們幹嘛跑出來著。忘了,忘了生氣的理由。"},
+ {r:"b",t:"我也是。是因為成績,還是因為打電動來著。"},
+ {r:"a",t:"…回去要怎麼跟媽說。當初是說去吃個泡麵就出來的。",d:"把帳篷拉鍊拉開一點"},
+ {r:"b",t:"就老實說吧。說跟朋友去看星星了。…喂,不過真的看得到星星耶。一顆、兩顆…。",d:"把頭探出帳篷外"}],
+"計程車行的車庫":[
+ {r:"a",t:"…真的嗎?家常菜?我已經二十年沒在別人家吃過飯了。",d:"握著鑰匙的手停住了"},
+ {r:"b",t:"我跟我家孩子們說了。說今天叔叔要來。我常跟他們提起大哥你。"},
+ {r:"a",t:"…叔叔。呵,真是。該買點什麼去呢。孩子們喜歡什麼。",d:"沒來由地清了清喉嚨"},
+ {r:"b",t:"空手來就好。你人來就是禮物了。…哥,你現在不是一個人了。知道嗎?",d:"拍了拍他的肩膀"}],
+"後台的化妝間":[
+ {r:"a",t:"…要一起謝幕?主角是你啊。最後的掌聲是你的。",d:"放下粉撲"},
+ {r:"b",t:"我的舞台全是前輩給的。每次忘詞,你都在後面用嘴型提示我啊。"},
+ {r:"a",t:"…那件事,你都知道啊。",d:"在鏡子裡對上了眼神"},
+ {r:"b",t:"全都知道。所以今天最後的謝幕,我們牽著手一起。也讓觀眾知道,誰才是真正的主角。",d:"舞台那頭傳來掌聲"}],
+"下著雨的修車廠":[
+ {r:"a",t:"…如果是來喝咖啡,你說一聲不就好了。機油多貴啊。",d:"拿毛巾擦手"},
+ {r:"b",t:"說了…你就只會給杯咖啡打發我走。修車的時候,至少能待在你旁邊嘛。"},
+ {r:"a",t:"…真是的。那現在怎麼辦。那台車,已經沒地方好修了耶。",d:"闔上引擎蓋"},
+ {r:"b",t:"…那以後別為了車,就單純來看我不行嗎?咖啡我來買。",d:"把玩著雨傘"}],
+"水族館的夜間開放":[
+ {r:"a",t:"…是閉館廣播。不知不覺都這麼晚了。",d:"水族箱的藍光晃動著"},
+ {r:"b",t:"…好捨不得。下次夜間開放,我們再來一次好嗎?"},
+ {r:"a",t:"好啊。不過下次…我們牽著手逛吧。今天一整天都想牽,卻沒牽成。",d:"只望著水族箱說話"},
+ {r:"b",t:"…傻瓜。現在牽不就好了。還剩五分鐘呢。",d:"先伸出了手"}],
+"奶奶家的木板廳":[
+ {r:"a",t:"…對了,還有這個。你小時候蓋的棉被。我重新洗過了。聽說台北很冷。",d:"把花紋棉被放上去"},
+ {r:"b",t:"奶奶,車上沒位子了…。不,我載。全都載走。",d:"接過棉被抱在懷裡"},
+ {r:"a",t:"…到了要好好吃飯。別生病。電話…偶爾打一下。",d:"一路送到了院子"},
+ {r:"b",t:"…不是偶爾,我每週都打。每個星期天晚上。就在奶奶的連續劇播完的時候。",d:"揮著手,直到後視鏡裡的奶奶變得好小"}],
+"競技場的更衣室":[
+ {r:"a",t:"…別撐到第十二回合。你的膝蓋撐不住。六回合內定勝負。",d:"幫他抹上凡士林"},
+ {r:"b",t:"…教練。萬一我輸了,我們接下來要做什麼。從明天開始。"},
+ {r:"a",t:"輸了?那就去釣魚吧。你跟我。二十年來第一次休息。",d:"遞上牙套"},
+ {r:"b",t:"…那也不賴。不過今天先贏,釣魚下週再去。",d:"打開通往擂台的門"}],
+"即將歇業的書店":[
+ {r:"a",t:"…對了,那本書的第一頁應該寫了些字。二十年前的主人留下的字條。"},
+ {r:"b",t:"…『致拿起這本書的你。今天這一天,你也撐過來了。』…這個,是老闆您的字吧?",d:"翻開第一頁看"},
+ {r:"a",t:"…被發現了。我等的不是把書賣掉,或許是在等一個能收下那句問候的人。",d:"扶正了眼鏡"},
+ {r:"b",t:"…我也要在最後一頁寫一行。給下一個人。就說,這間書店曾經存在過。",d:"拿出筆來"}],
+"消防局待命室":[
+ {r:"a",t:"…對了,那孩子的家長聯絡來了。說孩子很感謝,還畫了消防員叔叔的圖。",d:"拿出手機照片給他看"},
+ {r:"b",t:"…這是我?臉畫得像顆馬鈴薯。…可是,為什麼會流眼淚呢。",d:"把照片放大來看"},
+ {r:"a",t:"那張馬鈴薯的圖,比薪水還珍貴。我們幹這行,就是為了收到這個。"},
+ {r:"b",t:"…前輩。我要把這張照片印出來貼在置物櫃上。累的時候就看一看。",d:"出勤鈴響了起來"}],
+"火車餐車":[
+ {r:"a",t:"…已經過了兩個小時了。三個小時怎麼這麼短,今天。"},
+ {r:"b",t:"…很神奇吧。跟一個陌生人竟然這麼聊得來。"},
+ {r:"a",t:"我下個月還會搭這班火車。同樣的時間,同樣的星期。",d:"望著窗外的晚霞"},
+ {r:"b",t:"…哎呀,我也是。那我們…在餐車見吧。這次不是偶然,是約好的。",d:"輕輕碰了碰咖啡杯"}],
+"漁船上的清晨":[
+ {r:"a",t:"…欸、欸!上鉤了!喂,你的釣竿!快!",d:"手忙腳亂地指著"},
+ {r:"b",t:"喔喔!這隻好大!喂,撈網!把撈網拿來!",d:"釣竿彎得像弓一樣"},
+ {r:"a",t:"…抓到了!哇,超大一隻!釣了三十年魚,第一次看到這種的!",d:"舉起活蹦亂跳的魚"},
+ {r:"b",t:"…這算和好的紀念。煮鍋辣魚湯,配杯高粱吧。昨天的事,就拌進湯裡吃掉。",d:"打開冰桶"}],
+"藥局櫃檯":[
+ {r:"a",t:"…不是感冒,是過勞。你現在需要的不是藥,是睡眠。"},
+ {r:"b",t:"…一睡著又得上班了。倒不如不要睡還比較好。"},
+ {r:"a",t:"…哪有這種話。來,這罐維他命免費送。不過有個條件。",d:"在藥袋裡多放了些東西"},
+ {r:"b",t:"條件?"},
+ {r:"a",t:"下次別等生病了才來,經過就順道進來坐坐。也讓我看看你沒生病的樣子。",d:"遞出藥袋,笑了"},
+ {r:"b",t:"…那個不用處方箋也可以吧?我明天馬上就來。",d:"珍惜地接過藥袋"}],
+"頂樓花園長椅":[
+ {r:"a",t:"…那時候那句話。其實是想說對不起。那個年紀的我太笨拙了。"},
+ {r:"b",t:"…積了十年的道歉,竟然在醫院頂樓收到。人生啊,真是的。"},
+ {r:"a",t:"…你願意接受嗎?雖然遲了。",d:"小心翼翼地看向旁邊"},
+ {r:"b",t:"我接受。不過有條件。到樓下咖啡廳喝杯咖啡。當作十年份的利息。",d:"先站起身,伸出了手"}],
+"牧場的早晨":[
+ {r:"a",t:"…不用從頭學。你早就會了。身體記得,在這裡長大的身體。",d:"分著拿起飼料草"},
+ {r:"b",t:"…當初我說要去城市,爸你為什麼不攔我。"},
+ {r:"a",t:"出去闖過,才看得見這裡。我也是這樣。後來回到了你爺爺身邊。",d:"牛把頭轉向兒子這邊"},
+ {r:"b",t:"…那我總有一天,也會在這座牧場等我的兒子吧。",d:"與父親並肩站著"}],
+"郵局窗口":[
+ {r:"a",t:"…其實這裡有個抽屜,專門收這種信。沒有地址的信。",d:"打開一個小抽屜"},
+ {r:"b",t:"…這些全是…寄不出去的心意嗎?"},
+ {r:"a",t:"是啊。可是很神奇吧。大家寫完之後,臉色都輕鬆了一些才離開。就像你這樣。",d:"把信放進抽屜"},
+ {r:"b",t:"…明年這個時候我會再來。那時會帶著有地址的信。是新生活的問候。",d:"對著窗口鞠了個躬"}],
+"社區跆拳道館":[
+ {r:"a",t:"問能不能變強?我這個館長掛保證。不過有一個條件。"},
+ {r:"b",t:"…是什麼?"},
+ {r:"a",t:"明天也要來。後天也要來。不逃避、每天都來,這就是訓練的全部。",d:"幫他重新繫好道服的腰帶"},
+ {r:"b",t:"…好!我明天第一個到!館長,不過…再讓我看一次踢腿嘛!",d:"眼睛閃閃發亮"}],
+"公車總站夜市攤":[
+ {r:"a",t:"…對了,下個月起這裡沒辦法擺了。區公所說要整頓,這條巷子。"},
+ {r:"b",t:"…什麼?那阿姨你怎麼辦。這個路邊攤怎麼辦。",d:"放下杯子"},
+ {r:"a",t:"不知道。都待了三十年了。…不過不管到哪,我總是會繼續煮我的黑輪湯吧。",d:"努力擠出笑容"},
+ {r:"b",t:"…阿姨。我在區公所的陳情科上班。有沒有辦法,我來幫你查。這鍋湯,不能沒了。",d:"拿出記事本開始寫"}],
+"即將拆遷的社區":[
+ {r:"a",t:"…拍好了。可是有些東西照片拍不進去呢。像是這條巷子的味道。"},
+ {r:"b",t:"每到傍晚飄來煮飯的香味。從前我們光聞就知道,是誰家在煮什麼菜呢。"},
+ {r:"a",t:"…喂,我們最後再繞一圈吧。走以前上學的那條路。照原本的順序。",d:"指向巷子深處"},
+ {r:"b",t:"好。文具店的舊址、漫畫店的舊址、還有你跌倒大哭的那根電線桿。全都道別完再走。",d:"肩並著肩走著"}],
+"深夜電台錄音室":[
+ {r:"a",t:"…等等,三分鐘後廣告就結束了。我得再進去了。",d:"看了看時鐘"},
+ {r:"b",t:"那我長話短說。今天最後一則點播故事,我還沒寄出。想當面跟你說。"},
+ {r:"a",t:"…當面?",d:"拿著耳機停住了"},
+ {r:"b",t:"我寄了三年故事的理由。等節目結束,一起喝杯咖啡的時候說,可以嗎?以第一位聽眾的身分。",d:"把手貼在錄音室的玻璃上"}],
+"飄雪的路邊攤":[
+ {r:"a",t:"…你過得好嗎?這句話,我花了半年才說出口。",d:"把玩著酒杯"},
+ {r:"b",t:"…你是裝作過得好吧。"},
+ {r:"a",t:"…我也是裝的。其實這個路邊攤,一想到你就不敢經過。",d:"黑輪湯冒著熱氣"},
+ {r:"b",t:"…阿姨,再來一瓶高粱。…今天別再裝了,我們。都下雪了。",d:"幫他把空杯斟滿"}],
+"上學路的坡道":[
+ {r:"a",t:"…說什麼我們要一起爬的那座山坡。那是在跟我告白對吧?"},
+ {r:"b",t:"…都等了三年了,你要是沒察覺我該怎麼辦。",d:"在先牽起的手上使了點力"},
+ {r:"a",t:"哇,心臟快跳出來了。…喂,畢業典禮那天我們在這裡拍照吧。第一張情侶照。"},
+ {r:"b",t:"好。然後十年後也要來。別忘了,這座山坡是我們的起點。",d:"望著山坡上的晚霞"}],
+"老照相館":[
+ {r:"a",t:"…來,要拍囉。一、二…等等。爺爺,先把眼淚擦一擦。",d:"把手從快門上移開"},
+ {r:"b",t:"…哎呀,不好意思。一牽起這個人的手,就想起了以前。",d:"拿出手帕"},
+ {r:"a",t:"慢慢來。都是等了五十年的照片了,再多等五分鐘根本不算什麼。",d:"把燈光柔和地調暗"},
+ {r:"b",t:"…老伴,我們笑吧。別留下哭的臉,留下笑的臉吧,我們。",d:"兩雙布滿皺紋的手交疊在一起"}],
+"巷弄石階夜晚":[
+ {r:"a",t:"…問能不能每天牽?那你可得每天來接我。有這個覺悟嗎?"},
+ {r:"b",t:"什麼覺悟。這是我的心願。",d:"晃了晃牽著的手"},
+ {r:"a",t:"…不過我們家還剩兩階。今天走得太快了。",d:"放慢了腳步"},
+ {r:"b",t:"…那明天起,就從最下面開始慢慢走吧。用最慢的腳步。",d:"並排坐在階梯上"}],
+"淹沒村落的最後一天":[
+ {r:"a",t:"…那棵柿子樹。是你出生那年種的。那傢伙也要被水淹了吧。",d:"抬頭望著院子裡的樹"},
+ {r:"b",t:"…爸/媽。我折那棵樹的一根枝條帶走。好嫁接到新家的院子裡。"},
+ {r:"a",t:"…那樣能活嗎?能活的話…好,那就連著泥土一起帶走吧。",d:"用顫抖的手握住枝條"},
+ {r:"b",t:"會活的。我會讓它活下去。這個村子會在那裡重新長大。",d:"小心翼翼地把枝條包起來"}],
+"搬煤球的志工":[
+ {r:"a",t:"…你說下週還會再來對吧?能守住這句話的人,十個裡才一個。",d:"脫下沾著煤球痕跡的手套"},
+ {r:"b",t:"我就是那一個。…不過下週再來,還能見到那戶人家的奶奶嗎?"},
+ {r:"a",t:"剛才那戶嗎?笑起來很好看的那位。…那位奶奶讓你放不下心啊。"},
+ {r:"b",t:"她說下次來要煮麵給我吃。…光為了那個約定,我也一定要來。",d:"望著巷子裡低垂的燈光"}],
+"監獄會客室":[
+ {r:"a",t:"…對了,媽她過得好。雖然擔心你睡不好覺,但飯還是吃得下。"},
+ {r:"b",t:"…關於我在這裡的事…你跟媽怎麼說的。"},
+ {r:"a",t:"我說你去遠方工作了。不過她好像知道。什麼都沒問。",d:"把額頭靠在玻璃上"},
+ {r:"b",t:"…出去以後,我第一個先牽媽的手,然後再牽你的手。六個月。我數著呢。",d:"會面結束的鈴聲響起"}],
+"老家簷廊重逢":[
+ {r:"a",t:"…看看這桌菜。全做了你以前愛吃的。滷肉、煎蛋捲、煎白帶魚。",d:"從廚房把飯菜端出來"},
+ {r:"b",t:"…這什麼時候做的。我今天早上才通知說要來耶。"},
+ {r:"a",t:"你的房間也還是老樣子。為了讓你隨時能回來,我每週都打掃。",d:"打開房門給他看"},
+ {r:"b",t:"…媽/爸。我不接你去住了。我改成常常回來這裡。回到這桌飯菜前。",d:"拿起碗筷,喉頭一哽"}],
+"最後一堂課的教室":[
+ {r:"a",t:"…對了,你那時候交的作業。寫未來志願的那份。我到現在還留著。",d:"拿出一個老舊的文件夾"},
+ {r:"b",t:"…您該不會留了四十年吧?我當時寫了什麼?"},
+ {r:"a",t:"『像老師一樣的大人』。坐在最後一排打瞌睡的傢伙,居然這樣寫。",d:"遞出泛黃的紙"},
+ {r:"b",t:"…老師。那份作業,我到現在還在做。我會做一輩子。",d:"用雙手接過那張紙"}]
+};
+const MOODS={"初戀":"「建築學概論」·「假如愛有天意」","浪漫":"「你的婚禮」·「真愛每一天」","日常戀愛":"「愛上變身情人」·「最糟的一天」","愛情":"「春逝」·「晚秋」","離別":"「分手的決心」·「王牌冤家」","家庭":"「國際市場」·「夢想之地」","感動":"「七號房的禮物」·「和諧」","人生":"「小公女」·「威基基兄弟」","青春":"「衝三小二十歲」·「足球王」","成長":"「我們的世界」·「蜂鳥」","友情":"「陽光姊妹淘」·「朋友」","喜劇":"「雞不可失」·「幸運鑰匙」","動作":"「大叔」·「犯罪都市」","黑色電影":"「新世界」·「局內人」","驚悚":"「追擊者」·「殺人回憶」","古裝":"「光海，成為王的男人」·「思悼」","音樂":"「曾經,愛是唯一」·「再次出發」","運動":"「國家代表」·「朝韓夢之隊」","劇情":"「奇蹟」·「辯護人」","重逢":"「建築學概論」·「情書」","日常":"「小森林」·「海鷗食堂」"};
+
+function vibrate(ms){ if(navigator.vibrate) try{ navigator.vibrate(ms); }catch(e){} }
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+let _tt;
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2200); }
+const HUES=[{a1:"#ffd56b",a2:"#ff8a5b"},{a1:"#7fdfff",a2:"#5b8aff"},{a1:"#a0f0a0",a2:"#4fd1a0"},{a1:"#ff9ecb",a2:"#ff6b9e"},{a1:"#ffb38a",a2:"#ff7a5b"},{a1:"#c9a3ff",a2:"#9a6bff"}];
+function varyHue(i){ const h=HUES[i%HUES.length], r=document.documentElement.style; r.setProperty('--accent1',h.a1); r.setProperty('--accent2',h.a2); }
+
+let names={a:"演員 ①", b:"演員 ②"};
+let lenMode='random', curLen='short';
+function setLen(m,el){ lenMode=m; document.querySelectorAll('.lp').forEach(b=>b.classList.remove('sel')); el.classList.add('sel'); vibrate(15); }
+function moodOf(g){ const w=g.split(' ').pop(); return MOODS[w]||'韓國電影'; }
+let deck=[], deckPos=0, current=null, acted=0, chem=0, swapped=false, drawing=false;
+let genreScore={}; // 各類型默契總和
+const MILESTONE=8;
+let nextReport=MILESTONE;
+
+function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); document.getElementById(id).classList.add('on'); }
+
+function startGame(){
+  const n1=document.getElementById('p1').value.trim(), n2=document.getElementById('p2').value.trim();
+  names.a = n1 || "演員 ①"; names.b = n2 || "演員 ②";
+  document.getElementById('tbNames').textContent = names.a + " · " + names.b;
+  document.getElementById('topbar').style.display='flex';
+  deck = shuffle([...Array(SCENES.length).keys()]); deckPos=0;
+  show('scDraw');
+  toast('🎬 兩位演員,請並肩坐好!');
+}
+
+function drawScene(){
+  if(drawing) return; drawing=true;
+  vibrate(28);
+  const reel=document.getElementById('reel'), rt=document.getElementById('reelText'), btn=document.getElementById('drawBtn');
+  btn.disabled=true; reel.classList.add('spin');
+  const teasers=SCENES.map(s=>s.m);
+  let ticks=0;
+  const iv=setInterval(()=>{
+    rt.textContent = teasers[Math.floor(Math.random()*teasers.length)];
+    ticks++;
+  }, 90);
+  setTimeout(()=>{
+    clearInterval(iv); reel.classList.remove('spin'); btn.disabled=false; drawing=false;
+    if(deckPos>=deck.length){ deck=shuffle(deck); deckPos=0; }
+    const idx=deck[deckPos++];
+    current=SCENES[idx];
+    curLen = lenMode==='random' ? (Math.random()<0.5?'short':'long') : lenMode;
+    swapped=false;
+    varyHue(acted);
+    renderScene();
+    show('scScene');
+    document.getElementById('footerActions').style.display='block';
+    vibrate([20,30]);
+  }, 950);
+}
+
+function renderScene(){
+  const s=current;
+  const roleA = swapped ? s.rb : s.ra;
+  const roleB = swapped ? s.ra : s.rb;
+
+  const script = (curLen==='long' && EXT[s.m]) ? s.ln.concat(EXT[s.m]) : s.ln;
+  let lines = script.map((l,li)=>{
+    const isA = l.r==='a';
+
+    const actorSide = isA ? 'a' : 'b';
+    const actorName = actorSide==='a' ? names.a : names.b;
+    const cls = actorSide==='a' ? 'a':'b';
+    return `<div class="line ${cls}" style="animation-delay:${li*0.09}s">
+        <div class="lbl">${actorName}</div>
+        <div class="body">
+          <div class="say">"${l.t}"</div>
+          ${l.d?`<div class="dir">${l.d}</div>`:''}
+        </div>
+      </div>`;
+  }).join('');
+
+  const roleForActorA = s.ra, roleForActorB = s.rb;
+
+  document.getElementById('card').innerHTML = `
+    <div class="card-head">
+      <span class="tag">${s.g}</span>
+      <span class="tag">${curLen==='long'?'📜 長台詞':'⚡ 短台詞'}</span>
+      <span class="no">${acted+1} 個場景 · 共 ${SCENES.length}</span>
+    </div>
+    <div class="movie grad">${s.m}</div>
+    <div class="situation">📍 ${s.s}</div>
+    <div class="origin" style="font-size:11px;color:#9a8fc0;margin:6px 0 2px;">🎬 咪咪工廠原創劇本 · ${moodOf(s.g)} 氛圍</div>
+    <div class="roles">
+      <div class="role rA"><span class="who">${names.a} </span><span class="p">${roleForActorA}</span></div>
+      <div class="role rB"><span class="who">${names.b} </span><span class="p">${roleForActorB}</span></div>
+    </div>
+    <button class="swap" onclick="swapRoles()">🔁 交換角色再看一次</button>
+    <div class="script">${lines}</div>
+    <div class="tip">💡 <b>演戲小訣竅</b> — 別只是照唸台詞,把自己當成真的在那個情境裡 <b>看著對方的眼睛</b> 說出來。 🎬 舞台指示用身體演出來!越害羞肉麻,默契越高。</div>
+    <div class="rate-box">
+      <div class="rate-q">剛剛演得如何?選一個默契吧 👇</div>
+      <div class="chem-btns">
+        <button class="cb" onclick="rate(6,'😳')"><span class="em">😳</span><span class="cl">有點肉麻</span></button>
+        <button class="cb" onclick="rate(10,'😆')"><span class="em">😆</span><span class="cl">笑翻了</span></button>
+        <button class="cb" onclick="rate(14,'🥰')"><span class="em">🥰</span><span class="cl">超級入戲</span></button>
+        <button class="cb" onclick="rate(18,'🔥')"><span class="em">🔥</span><span class="cl">默契爆棚</span></button>
+      </div>
+    </div>`;
+  const card=document.getElementById('card');
+  card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
+}
+
+function swapRoles(){ swapped=!swapped; renderScene(); vibrate(20); toast('🔁 交換了角色'); }
+
+function goRate(){
+
+  document.querySelector('.rate-box').scrollIntoView({behavior:'smooth', block:'center'});
+  toast('👇 點擊默契,前往下一個場景!');
+}
+
+function reDraw(){
+  document.getElementById('footerActions').style.display='none';
+  show('scDraw');
+  drawScene(); // 不等待,直接開始滾動
+}
+
+function rate(pts, emoji){
+  acted++;
+  const g = current.g;
+  genreScore[g] = (genreScore[g]||0) + pts;
+  chem = Math.min(100, chem + pts);
+  const fill=document.getElementById('chemFill');
+  fill.style.width = chem + '%';
+  document.getElementById('chemPct').textContent = chem;
+  vibrate([20,40,20]);
+  toast(emoji + ' 默契 +' + pts + '%!');
+
+  if(acted % 5 === 0){ toast('🎉 ' + acted + '場景突破!默契 ' + chem + '%'); vibrate([30,50,30,50,80]); }
+  document.getElementById('footerActions').style.display='none';
+  if(acted >= nextReport || chem >= 100){ setTimeout(showReport, 500); return; }
+  setTimeout(()=>show('scDraw'), 350);
+}
+
+function bestGenre(){
+  let best='–', mx=-1;
+  for(const k in genreScore){ if(genreScore[k]>mx){ mx=genreScore[k]; best=k; } }
+  return best;
+}
+
+function showReport(){
+  document.getElementById('footerActions').style.display='none';
+  document.getElementById('stActed').textContent = acted;
+  document.getElementById('stChem').textContent = chem + '%';
+  const bg = bestGenre();
+  document.getElementById('stFav').textContent = bg.split(' ')[0]; // 只取表情符號
+  let title, verdict;
+  if(chem>=100){ title='默契爆棚 💯'; verdict='兩位已經是實力派搭檔了!光靠眼神就能心領神會。下一部電影也要一起拍吧?'; }
+  else if(chem>=70){ title='天衣無縫 🎭'; verdict='大部分的場景都一個眼神就對上!今天一定發現了不少對方過去沒見過的表情吧。'; }
+  else if(chem>=40){ title='萌芽的默契 🌱'; verdict='心正一點一點打開中。跨過那股尷尬,真正的樂趣才開始。再來一場?'; }
+  else { title='才正要開始 🎬'; verdict='還在互相摸索中!再多演幾個場景,一定會有笑到爆的瞬間。'; }
+  document.getElementById('repTitle').textContent = title;
+  document.getElementById('repVerdict').textContent = verdict;
+  show('scReport');
+  vibrate([60,80,60,80,120]);
+  toast('🏆 今天的精湛演出,辛苦了!');
+}
+
+function keepPlaying(){ nextReport = acted + MILESTONE; show('scDraw'); toast('🎬 來看下一個場景吧!'); }
+
+function shareResult(){
+  const bg=bestGenre();
+  const txt = `🎬 電影主角體驗\n${names.a} × ${names.b}\n\n演出場景數: ${acted} 個\n我們的默契: ${chem}%\n最佳默契類型: ${bg}\n\n兩人並肩而坐、一起玩的破冰遊戲 🎭\nhttps://mimifactory.vibekr.com/apps/電影裡的_主角體驗_friend.html`;
+  if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(()=>toast('📋 結果已複製!'), ()=>toast('複製失敗QQ 請長按複製')); }
+  else toast('請長按結果進行複製');
+}
+</script>
+</body>
+</html>
+
