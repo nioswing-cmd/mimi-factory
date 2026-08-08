@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-08",
+  "updated": "2026-08-09",
   "apps": [
     {
       "id": "삼체",
@@ -1399,6 +1399,20 @@
       "premium": "apps/침묵의_봄_quiz.html",
       "desc": "해양생물학자 레이첼 카슨이 1962년에 던진 경고 『침묵의 봄』을, 내일을 위한 우화에서 죽음의 비술·흙과 물·울새의 침묵을 지나 가지 않은 길",
       "cover": "covers/침묵의_봄.webp",
+      "cover_style": "3-인쇄질감"
+    },
+    {
+      "id": "이중나선",
+      "type": "quiz",
+      "title": "이중나선",
+      "author": "제임스 왓슨",
+      "date": "2026-08-09",
+      "color1": "#8affc1",
+      "color2": "#5ee7d8",
+      "teaser": "apps/이중나선_teaser.html",
+      "premium": "apps/이중나선_quiz.html",
+      "desc": "DNA 이중나선을 밝혀낸 1953년의 경주를, 나폴리의 사진 한 장부터 『네이처』의 한 쪽까지 30문항으로 따라가며 왓슨의 회고와 프랭클린의 몫",
+      "cover": "covers/이중나선.webp",
       "cover_style": "3-인쇄질감"
     }
   ]
