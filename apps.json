@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-09",
+  "updated": "2026-08-10",
   "apps": [
     {
       "id": "삼체",
@@ -1413,6 +1413,20 @@
       "premium": "apps/이중나선_quiz.html",
       "desc": "DNA 이중나선을 밝혀낸 1953년의 경주를, 나폴리의 사진 한 장부터 『네이처』의 한 쪽까지 30문항으로 따라가며 왓슨의 회고와 프랭클린의 몫",
       "cover": "covers/이중나선.webp",
+      "cover_style": "3-인쇄질감"
+    },
+    {
+      "id": "소크라테스의_변명",
+      "type": "quiz",
+      "title": "소크라테스의 변명",
+      "author": "플라톤",
+      "date": "2026-08-10",
+      "color1": "#c3a1ff",
+      "color2": "#ff8ad0",
+      "teaser": "apps/소크라테스의_변명_teaser.html",
+      "premium": "apps/소크라테스의_변명_quiz.html",
+      "desc": "기원전 399년 아테네 법정에서 일흔의 소크라테스가 한 최후 변론 『소크라테스의 변명』을, 수십 년 묵은 소문과 『구름』에서 델포이의 신탁·등에",
+      "cover": "covers/소크라테스의_변명.webp",
       "cover_style": "3-인쇄질감"
     }
   ]
