@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-10",
+  "updated": "2026-08-11",
   "apps": [
     {
       "id": "삼체",
@@ -1427,6 +1427,20 @@
       "premium": "apps/소크라테스의_변명_quiz.html",
       "desc": "기원전 399년 아테네 법정에서 일흔의 소크라테스가 한 최후 변론 『소크라테스의 변명』을, 수십 년 묵은 소문과 『구름』에서 델포이의 신탁·등에",
       "cover": "covers/소크라테스의_변명.webp",
+      "cover_style": "3-인쇄질감"
+    },
+    {
+      "id": "도덕경",
+      "type": "quiz",
+      "title": "도덕경",
+      "author": "노자",
+      "date": "2026-08-11",
+      "color1": "#7aa6ff",
+      "color2": "#b78bf5",
+      "teaser": "apps/도덕경_teaser.html",
+      "premium": "apps/도덕경_quiz.html",
+      "desc": "오천 자밖에 안 되는 노자 『도덕경』을, 첫 구절 ‘도가도 비상도’부터 상선약수·무위·반자도지동·소국과민을 지나 마왕퇴 백서본과 곽점 죽간본이 ",
+      "cover": "covers/도덕경.webp",
       "cover_style": "3-인쇄질감"
     }
   ]
