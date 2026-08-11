@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>상황극 중독자 연애편 · 둘이 함께 친해지기</title>
+<meta name="description" content="둘이서 폰 하나를 놓고 정반대 입장을 맡아 붙는 즉흥 연기 게임. 썸부터 결혼 준비까지 상황 100개.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#1a1016; --bg2:#2e1526;
+  --a1:#ffc2a8; --a2:#f0708f;
+  --cream:#fff2ef; --muted:#c9a4b2;
+  --card:#2a1420;
+  --slotA:#ffc2a8; --slotB:#f0708f;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--cream);
+  background:
+    radial-gradient(130% 70% at 85% -8%, rgba(255,194,168,.16), transparent 58%),
+    radial-gradient(120% 80% at 8% 108%, rgba(240,112,143,.20), transparent 58%),
+    radial-gradient(90% 50% at 50% 45%, rgba(120,20,70,.18), transparent 70%),
+    linear-gradient(163deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  transition:background 1s ease;
+  min-height:100dvh;
+}
+/* 야경 같은 빛 번짐 */
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.55;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255,194,168,.22), transparent 8%),
+    radial-gradient(circle at 74% 14%, rgba(240,112,143,.20), transparent 7%),
+    radial-gradient(circle at 88% 62%, rgba(255,150,190,.16), transparent 9%),
+    radial-gradient(circle at 30% 78%, rgba(255,120,140,.16), transparent 8%),
+    radial-gradient(circle at 58% 90%, rgba(255,194,168,.14), transparent 7%);
+  filter:blur(22px);
+  transition:opacity 1s ease;
+}
+.wrap{position:relative; z-index:1; max-width:520px; margin:0 auto; padding:22px 18px calc(26px + env(safe-area-inset-bottom)); min-height:100dvh; display:flex; flex-direction:column;}
+h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
+.grad{background:linear-gradient(102deg,var(--a1),#ff8fa8 45%,#e8447a); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+
+.screen{display:none; animation:fadeIn .5s ease; flex:1; flex-direction:column;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+/* ---------- 시작 ---------- */
+.hero{text-align:center; margin-top:4px;}
+.badge{display:inline-block; font-size:11.5px; letter-spacing:.14em; color:var(--muted); border:1px solid rgba(255,255,255,.16); padding:6px 14px; border-radius:99px; margin-bottom:14px;}
+.hero h1{font-size:38px; margin:.08em 0 .1em; line-height:1.14;}
+.hero .sub{font-family:'Jua',sans-serif; font-size:17px; color:var(--a1); margin-bottom:10px;}
+.hero p{color:var(--muted); font-size:14.5px; line-height:1.72; word-break:keep-all; margin:0 auto; max-width:350px;}
+.hero p b{color:var(--cream);}
+
+.names{display:flex; gap:10px; align-items:flex-end; margin:22px 0 4px;}
+.names .field{flex:1;}
+.names label{display:block; font-size:12px; color:var(--muted); margin:0 0 6px 4px;}
+.names input{width:100%; padding:13px 12px; border-radius:14px; border:1.5px solid rgba(255,255,255,.14); background:rgba(255,255,255,.05); color:var(--cream); font-size:16px; font-family:inherit; text-align:center; transition:border-color .25s;}
+.names input:focus{outline:none; border-color:var(--a2);}
+.names .vs{font-family:'Jua',sans-serif; font-size:15px; color:var(--muted); padding-bottom:14px;}
+
+.pick-title{text-align:center; font-size:13.5px; color:var(--muted); margin:22px 0 11px;}
+.picks{display:grid; grid-template-columns:repeat(3,1fr); gap:9px;}
+.pick{border:1.5px solid rgba(255,255,255,.14); background:rgba(255,255,255,.05); color:var(--cream); border-radius:16px; padding:15px 6px 12px; cursor:pointer; font-family:'Jua',sans-serif; transition:transform .18s cubic-bezier(.34,1.56,.64,1), border-color .2s, background .2s, box-shadow .3s; text-align:center;}
+.pick:active{transform:scale(.94);}
+.pick.sel{border-color:var(--a2); background:linear-gradient(160deg,rgba(255,194,168,.22),rgba(240,112,143,.16)); box-shadow:0 8px 24px -10px var(--a2);}
+.pick .n{font-size:19px; line-height:1.1; display:block;}
+.pick .u{font-size:11px; color:var(--muted); line-height:1.45; margin-top:6px; display:block; font-family:'Noto Sans KR',sans-serif; word-break:keep-all;}
+
+.rule{margin:20px 0 2px; background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.09); border-radius:18px; padding:16px 18px; text-align:left;}
+.rule h3{font-size:15.5px; margin:0 0 10px;}
+.rule ul{margin:0; padding:0; list-style:none;}
+.rule li{font-size:13.4px; color:var(--muted); line-height:1.62; margin:8px 0; padding-left:24px; position:relative; word-break:keep-all;}
+.rule li b{color:var(--cream);}
+.rule li .ic{position:absolute; left:0; top:0;}
+.lvkey{display:flex; gap:6px; margin-top:12px;}
+.lvkey span{flex:1; text-align:center; font-size:10.5px; color:var(--muted); border:1px solid rgba(255,255,255,.1); border-radius:10px; padding:6px 2px; line-height:1.4;}
+.lvkey span b{display:block; font-family:'Jua',sans-serif; font-size:12.5px; color:var(--cream);}
+
+.btn{width:100%; border:none; cursor:pointer; font-family:'Jua',sans-serif; font-size:19px; color:#3a0f20; background:linear-gradient(100deg,var(--a1),var(--a2)); border-radius:16px; padding:16px; box-shadow:0 12px 28px -12px var(--a2); transition:transform .18s cubic-bezier(.34,1.56,.64,1), filter .2s; margin-top:18px;}
+.btn:active{transform:scale(.97);}
+.btn:disabled{filter:grayscale(.6) brightness(.7); cursor:not-allowed; box-shadow:none;}
+.btn.ghost{background:transparent; color:var(--muted); border:1.5px solid rgba(255,255,255,.16); box-shadow:none; font-size:16px; padding:14px;}
+.btn.small{font-size:15px; padding:12px; margin-top:10px;}
+.btnrow{display:flex; gap:10px;}
+.btnrow .btn{flex:1;}
+
+/* ---------- 상단바 ---------- */
+.topbar{display:flex; align-items:center; gap:8px; margin-bottom:9px;}
+.score{flex:1; display:flex; align-items:center; gap:7px; background:rgba(255,255,255,.05); border:1.5px solid rgba(255,255,255,.09); border-radius:14px; padding:8px 10px; min-width:0;}
+.score .nm{font-size:12.5px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.score .pt{font-family:'Jua',sans-serif; font-size:20px; margin-left:auto; line-height:1;}
+.score.a{border-color:rgba(255,194,168,.4);} .score.a .pt{color:var(--slotA);}
+.score.b{border-color:rgba(240,112,143,.4);} .score.b .pt{color:var(--slotB);}
+.score .tag{font-size:9.5px; color:var(--muted); letter-spacing:.08em;}
+.midcol{flex:0 0 auto; text-align:center;}
+.midcol .rd{font-family:'Jua',sans-serif; font-size:14px;}
+.midcol .dr{font-size:10px; color:var(--muted);}
+.gauge{height:8px; border-radius:99px; background:rgba(255,255,255,.1); overflow:hidden; margin-bottom:14px;}
+.gaugefill{height:100%; width:0%; border-radius:99px; background:linear-gradient(90deg,var(--a1),var(--a2)); box-shadow:0 0 14px 1px var(--a2); transition:width .55s cubic-bezier(.22,1,.36,1);}
+
+/* ---------- 뽑기 카드 ---------- */
+.cardarea{flex:1; display:flex; align-items:center; justify-content:center; perspective:1200px; min-height:320px;}
+.card{width:100%; max-width:400px; aspect-ratio:3/3.5; border-radius:28px; position:relative; cursor:pointer; transform-style:preserve-3d; transition:transform .65s cubic-bezier(.4,.9,.3,1);}
+.card.flip{transform:rotateY(180deg);}
+.face{position:absolute; inset:0; border-radius:28px; backface-visibility:hidden; -webkit-backface-visibility:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:26px; text-align:center; overflow:hidden;}
+.back{background:linear-gradient(158deg,var(--card),#3a1a2c); border:1.5px solid rgba(255,194,168,.22); box-shadow:0 22px 50px -22px #000, inset 0 1px 0 rgba(255,255,255,.06);}
+.back .mark{font-size:52px; margin-bottom:12px; animation:beat 1.9s ease-in-out infinite;}
+@keyframes beat{0%,100%{transform:scale(1);}12%{transform:scale(1.16);}24%{transform:scale(1);}36%{transform:scale(1.1);}}
+.back .hint{font-family:'Jua',sans-serif; font-size:21px;}
+.back .hint2{font-size:12.5px; color:var(--muted); margin-top:8px;}
+.back .glow{position:absolute; width:180%; height:60%; background:radial-gradient(ellipse at center, rgba(240,112,143,.35), transparent 65%); top:-10%; left:-40%; filter:blur(18px);}
+.front{transform:rotateY(180deg); background:linear-gradient(158deg,#3a1a2c,var(--card)); border:1.5px solid rgba(240,112,143,.35); box-shadow:0 22px 50px -22px #000; justify-content:center;}
+.front .no{font-size:11.5px; color:var(--muted); letter-spacing:.1em;}
+.front h2{font-size:27px; margin:10px 0 12px; line-height:1.28; word-break:keep-all;}
+.front .set{font-size:13.5px; color:var(--muted); line-height:1.7; word-break:keep-all;}
+.lvtag{display:inline-block; font-family:'Jua',sans-serif; font-size:11.5px; padding:5px 12px; border-radius:99px; margin-bottom:4px; letter-spacing:.03em;}
+.lv1{background:rgba(255,194,168,.18); color:#ffd9c6; border:1px solid rgba(255,194,168,.4);}
+.lv2{background:rgba(240,112,143,.2); color:#ffbcce; border:1px solid rgba(240,112,143,.45);}
+.lv3{background:rgba(214,47,94,.28); color:#ffb0c2; border:1px solid rgba(255,90,120,.55);}
+
+/* ---------- 연기 화면 ---------- */
+.sitbox{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:20px; padding:15px 17px; margin-bottom:11px;}
+.sitbox h2{font-size:22px; margin:6px 0 7px; line-height:1.3; word-break:keep-all;}
+.sitbox .set{font-size:13.4px; color:var(--muted); line-height:1.65; word-break:keep-all;}
+.roles{display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-bottom:11px;}
+.role{border-radius:18px; padding:13px 13px 14px; border:1.5px solid; min-width:0;}
+.role.a{background:linear-gradient(160deg,rgba(255,194,168,.15),rgba(255,194,168,.04)); border-color:rgba(255,194,168,.42);}
+.role.b{background:linear-gradient(160deg,rgba(240,112,143,.16),rgba(240,112,143,.04)); border-color:rgba(240,112,143,.45);}
+.role .who{font-size:11.5px; letter-spacing:.03em; margin-bottom:7px; display:flex; align-items:center; gap:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.role.a .who{color:var(--slotA);} .role.b .who{color:var(--slotB);}
+.role .rn{font-family:'Jua',sans-serif; font-size:16.5px; line-height:1.32; margin-bottom:7px; word-break:keep-all;}
+.role .goal{font-size:12.6px; color:var(--muted); line-height:1.6; word-break:keep-all;}
+.firstline{background:linear-gradient(150deg,rgba(255,255,255,.08),rgba(255,255,255,.03)); border:1px dashed rgba(255,194,168,.4); border-radius:18px; padding:14px 16px; margin-bottom:12px;}
+.firstline .lb{font-size:11px; color:var(--a1); letter-spacing:.06em; margin-bottom:7px;}
+.firstline .ln{font-size:16.5px; line-height:1.6; word-break:keep-all;}
+
+.timerbox{display:flex; align-items:center; gap:12px; background:rgba(0,0,0,.22); border:1.5px solid rgba(255,255,255,.1); border-radius:20px; padding:13px 15px; margin-bottom:11px; transition:border-color .4s, background .4s;}
+.timerbox.warn{border-color:#ff5a78; background:rgba(214,47,94,.18); animation:pulse 1s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,90,120,.35);}50%{box-shadow:0 0 0 9px rgba(255,90,120,0);}}
+.timerbox .t{font-family:'Jua',sans-serif; font-size:34px; line-height:1; min-width:88px; letter-spacing:.02em;}
+.timerbox.warn .t{color:#ff8fa2;}
+.tbar{flex:1; height:7px; border-radius:99px; background:rgba(255,255,255,.12); overflow:hidden;}
+.tbarfill{height:100%; width:100%; border-radius:99px; background:linear-gradient(90deg,var(--a1),var(--a2)); transition:width .3s linear, background .4s;}
+.timerbox.warn .tbarfill{background:linear-gradient(90deg,#ff8fa2,#d62f5e);}
+.tbtn{border:none; border-radius:14px; padding:11px 15px; font-family:'Jua',sans-serif; font-size:15px; cursor:pointer; background:rgba(255,255,255,.12); color:var(--cream); transition:transform .16s cubic-bezier(.34,1.56,.64,1), background .2s;}
+.tbtn:active{transform:scale(.93);}
+
+.twistbtn{width:100%; border:none; cursor:pointer; font-family:'Jua',sans-serif; font-size:17px; color:#3a0f20; background:linear-gradient(100deg,#ffd9a8,#ff8fa2); border-radius:16px; padding:14px; margin-bottom:11px; box-shadow:0 10px 26px -12px #ff8fa2; animation:popIn .5s cubic-bezier(.34,1.56,.64,1);}
+.twistbtn:active{transform:scale(.97);}
+@keyframes popIn{from{opacity:0; transform:scale(.8) rotate(-3deg);} to{opacity:1; transform:none;}}
+.twistbox{background:linear-gradient(150deg,rgba(255,217,168,.16),rgba(240,112,143,.1)); border:1.5px solid rgba(255,217,168,.45); border-radius:18px; padding:14px 16px; margin-bottom:11px; animation:popIn .45s cubic-bezier(.34,1.56,.64,1);}
+.twistbox .lb{font-family:'Jua',sans-serif; font-size:13px; color:#ffd9a8; margin-bottom:6px;}
+.twistbox .tx{font-size:14px; line-height:1.62; word-break:keep-all;}
+
+.tools{display:flex; gap:8px; margin-bottom:11px;}
+.tool{flex:1; border:1.5px solid rgba(255,255,255,.14); background:rgba(255,255,255,.05); color:var(--cream); border-radius:14px; padding:11px 6px; font-size:12.5px; font-family:'Noto Sans KR',sans-serif; cursor:pointer; transition:transform .16s cubic-bezier(.34,1.56,.64,1), opacity .2s;}
+.tool:active{transform:scale(.94);}
+.tool:disabled{opacity:.32; cursor:not-allowed;}
+.tool b{font-family:'Jua',sans-serif; font-size:13.5px;}
+
+.quote{display:flex; gap:8px; margin-bottom:12px;}
+.quote input{flex:1; min-width:0; padding:12px 13px; border-radius:14px; border:1.5px solid rgba(255,255,255,.13); background:rgba(255,255,255,.05); color:var(--cream); font-size:14px; font-family:inherit;}
+.quote input:focus{outline:none; border-color:var(--a1);}
+.quote button{border:none; border-radius:14px; padding:0 16px; font-family:'Jua',sans-serif; font-size:14px; cursor:pointer; background:rgba(255,194,168,.2); color:var(--a1); transition:transform .16s cubic-bezier(.34,1.56,.64,1);}
+.quote button:active{transform:scale(.93);}
+
+/* ---------- 판정 ---------- */
+.judgebox{background:rgba(0,0,0,.25); border:1.5px solid rgba(240,112,143,.4); border-radius:20px; padding:16px; margin-top:2px; animation:popIn .45s cubic-bezier(.34,1.56,.64,1);}
+.judgebox h3{font-size:18px; margin:0 0 6px; text-align:center;}
+.judgebox .cond{font-size:13px; color:#ffbcce; text-align:center; line-height:1.6; margin-bottom:14px; word-break:keep-all;}
+.jbtns{display:grid; grid-template-columns:1fr 1fr; gap:9px;}
+.jbtn{border:1.5px solid rgba(255,255,255,.16); background:rgba(255,255,255,.06); color:var(--cream); border-radius:15px; padding:14px 8px; font-family:'Jua',sans-serif; font-size:15.5px; cursor:pointer; transition:transform .18s cubic-bezier(.34,1.56,.64,1), background .2s, border-color .2s; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.jbtn:active{transform:scale(.95);}
+.jbtn.a{border-color:rgba(255,194,168,.45);} .jbtn.b{border-color:rgba(240,112,143,.5);}
+.jbtn.draw{grid-column:span 2; font-size:14.5px; color:var(--muted);}
+.jbtn small{display:block; font-family:'Noto Sans KR',sans-serif; font-size:10.5px; color:var(--muted); margin-top:3px;}
+
+/* ---------- 점수판 ---------- */
+.result-hd{text-align:center; margin:8px 0 4px;}
+.result-hd .k{font-size:12px; color:var(--muted); letter-spacing:.1em;}
+.result-hd h2{font-size:31px; margin:8px 0 6px; line-height:1.25;}
+.combo{display:inline-block; font-family:'Jua',sans-serif; font-size:14px; padding:7px 16px; border-radius:99px; background:linear-gradient(100deg,rgba(255,217,168,.25),rgba(240,112,143,.25)); border:1px solid rgba(255,217,168,.5); margin-top:4px; animation:popIn .5s cubic-bezier(.34,1.56,.64,1);}
+.bigscore{display:flex; align-items:center; justify-content:center; gap:16px; margin:18px 0 6px;}
+.bigscore .col{text-align:center; min-width:0; flex:1;}
+.bigscore .col .nm{font-size:13px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.bigscore .col .v{font-family:'Jua',sans-serif; font-size:52px; line-height:1.1;}
+.bigscore .col.a .v{color:var(--slotA);} .bigscore .col.b .v{color:var(--slotB);}
+.bigscore .sep{font-family:'Jua',sans-serif; font-size:26px; color:var(--muted);}
+
+.roul{background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.11); border-radius:20px; padding:16px; margin:16px 0 2px; text-align:center;}
+.roul .lb{font-size:12.5px; color:var(--muted); margin-bottom:11px; word-break:keep-all;}
+.roul .slot{font-family:'Jua',sans-serif; font-size:20px; min-height:34px; display:flex; align-items:center; justify-content:center; line-height:1.35; word-break:keep-all;}
+.roul .slot.spin{animation:shake .28s linear infinite;}
+@keyframes shake{0%,100%{transform:translateX(-3px);}50%{transform:translateX(3px);}}
+
+.recap{background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.1); border-radius:20px; padding:15px 17px; margin-top:12px;}
+.recap .rl{font-size:11px; color:var(--muted); letter-spacing:.08em; margin-bottom:6px;}
+.recap .rt{font-family:'Jua',sans-serif; font-size:16.5px; line-height:1.35; margin-bottom:7px; word-break:keep-all;}
+.recap .rc{font-size:12.8px; color:var(--muted); line-height:1.62; word-break:keep-all;}
+.recap .nx{margin-top:12px; padding-top:12px; border-top:1px dashed rgba(255,255,255,.13); font-size:12.6px; color:var(--muted); line-height:1.6; word-break:keep-all;}
+.recap .nx b{color:var(--cream); font-family:'Jua',sans-serif;}
+
+.gradebox{text-align:center; margin:6px 0 2px;}
+.gradebox .gr{display:inline-block; font-family:'Jua',sans-serif; font-size:15px; padding:9px 18px; border-radius:99px; margin:5px 4px; border:1px solid rgba(255,194,168,.4); background:rgba(255,194,168,.12);}
+.chemi{background:linear-gradient(150deg,rgba(255,194,168,.14),rgba(240,112,143,.1)); border:1px solid rgba(255,194,168,.35); border-radius:20px; padding:17px; margin:16px 0 4px; text-align:center;}
+.chemi .lb{font-size:11.5px; color:var(--a1); letter-spacing:.1em; margin-bottom:8px;}
+.chemi .tx{font-size:16px; line-height:1.65; font-family:'Jua',sans-serif; word-break:keep-all;}
+.quotes{background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.1); border-radius:20px; padding:16px 18px; margin-top:14px;}
+.quotes h3{font-size:15px; margin:0 0 10px;}
+.quotes li{font-size:13.4px; color:var(--muted); line-height:1.65; margin:9px 0; word-break:keep-all; list-style:none; padding-left:18px; position:relative;}
+.quotes li::before{content:"❝"; position:absolute; left:0; color:var(--a2);}
+.quotes li b{color:var(--cream); font-weight:500;}
+
+.toast{position:fixed; left:50%; top:18px; transform:translateX(-50%) translateY(-24px); background:rgba(42,20,32,.97); border:1.5px solid var(--a2); color:var(--cream); padding:13px 20px; border-radius:99px; font-size:14px; opacity:0; pointer-events:none; transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; text-align:center; box-shadow:0 14px 34px -14px #000; word-break:keep-all;}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center; margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em; background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (max-width:360px){
+  .hero h1{font-size:33px;} .front h2{font-size:23px;} .role .rn{font-size:15px;}
+  .timerbox .t{font-size:29px; min-width:76px;}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.09s !important;}
+}
+</style>
+<!-- mmf-cover-bg:start -->
+<style id="mmf-cover-css">
+/* 표지를 첫 화면 배경으로 깐다. 밝기는 표지별 아핀 톤매핑으로 안전 밴드에 넣고,
+   글자 보호 스크림은 "본문 칼럼 안쪽"에만 강하게 건다.
+   - ::before        : 표지 (blur + 톤매핑 + 채도)
+   - ::after         : rgb(cap) + mix-blend-mode:darken -> 극단 하이라이트만 컷
+   - .mmf-scrim      : 전역 약한 스크림 (카드 바깥 포함)
+   - .mmf-scrim2     : 본문 칼럼에만 걸리는 글자보호 스크림 (좌우 마스크)
+   - 마스크 2종      : 표지는 m0~m2 에서 사라지고, 스크림은 그보다 늦게(n0~n2) 사라진다.
+     (같이 사라지면 페이지 하단 — 카드 밖 푸터 글자 — 에서 표지만 남아 대비가 깨진다) */
+#mmf-cover-bg{
+  position:fixed; inset:0; z-index:-1; pointer-events:none;
+  opacity:0; transition:opacity .5s ease; isolation:isolate;
+  --mmf-cover:url("../covers/%EC%83%81%ED%99%A9%EA%B7%B9_%EC%A4%91%EB%8F%85%EC%9E%90_%EC%97%B0%EC%95%A0%ED%8E%B8.webp");
+  --mmf-l0:0%; --mmf-l:0%; --mmf-r:100%; --mmf-r0:100%;
+  --mmf-mimg:linear-gradient(180deg,#000 0%,#000 38%,rgba(0,0,0,.55) 68%,transparent 88%);
+  --mmf-mscr:linear-gradient(180deg,#000 0%,#000 52%,rgba(0,0,0,.6) 82%,transparent 100%);
+}
+#mmf-cover-bg::before,#mmf-cover-bg::after{
+  content:"";position:absolute;
+  -webkit-mask-image:var(--mmf-mimg); mask-image:var(--mmf-mimg);
+}
+#mmf-cover-bg::before{
+  z-index:0; inset:-6%;
+  background-image:var(--mmf-cover);
+  background-size:cover; background-position:center 20%; background-repeat:no-repeat;
+  filter:blur(calc(6px + 1.1vw)) brightness(0.661) contrast(1.397) brightness(0.6) saturate(2.62);
+}
+#mmf-cover-bg::after{
+  z-index:1; inset:0;
+  background:rgb(140,140,140);
+  mix-blend-mode:darken;
+}
+#mmf-cover-bg>.mmf-scrim{
+  z-index:2; position:absolute; inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.00) 0%,rgba(0,0,0,.06) 55%,rgba(0,0,0,.18) 100%);
+  -webkit-mask-image:var(--mmf-mscr); mask-image:var(--mmf-mscr);
+}
+/* 세로 페이드(마스크)와 가로 칼럼(마스크)을 한 요소에 겹치면 mask-composite 가 필요해
+   구형 브라우저에서 조용히 반대로 동작한다. 겹치지 않게 2겹으로 중첩한다. */
+#mmf-cover-bg>.mmf-scrim2w{
+  z-index:3; position:absolute; inset:0;
+  -webkit-mask-image:var(--mmf-mscr); mask-image:var(--mmf-mscr);
+}
+#mmf-cover-bg .mmf-scrim2{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,0.280) 0%,rgba(0,0,0,0.644) 55%,rgba(0,0,0,0.700) 100%);
+  -webkit-mask-image:linear-gradient(90deg,transparent var(--mmf-l0),#000 var(--mmf-l),#000 var(--mmf-r),transparent var(--mmf-r0));
+          mask-image:linear-gradient(90deg,transparent var(--mmf-l0),#000 var(--mmf-l),#000 var(--mmf-r),transparent var(--mmf-r0));
+}
+html.mmf-cover-on #mmf-cover-bg{opacity:0.70;}
+@media (prefers-reduced-motion:reduce){#mmf-cover-bg{transition:none;}}
+@media print{#mmf-cover-bg{display:none!important;}}
+</style>
+<script id="mmf-cover-js">
+(function(){
+  "use strict";
+  var GLASS=1, GK=0.40, GKIN=0.8, GBLUR="blur(5px) saturate(1.15)", GSHADOW=0.6, GMIN=0.30;
+  function boot(){
+    try{
+      var d=document, root=d.documentElement, body=d.body;
+      if(!body || d.getElementById('mmf-cover-bg')) return;
+      var layer=d.createElement('div');
+      layer.id='mmf-cover-bg';
+      layer.setAttribute('aria-hidden','true');
+      var scrim=d.createElement('div'); scrim.className='mmf-scrim';
+      var wrap2=d.createElement('div'); wrap2.className='mmf-scrim2w';
+      var scrim2=d.createElement('div'); scrim2.className='mmf-scrim2';
+      wrap2.appendChild(scrim2);
+      layer.appendChild(scrim); layer.appendChild(wrap2);
+      body.insertBefore(layer, body.firstChild);
+
+      /* opacity 는 등장 애니메이션(opacity:0 에서 시작) 때문에 판정에 쓰지 않는다 */
+      function rendered(el){
+        if(!el) return false;
+        var cs=getComputedStyle(el);
+        if(cs.display==='none'||cs.visibility==='hidden') return false;
+        var r=el.getBoundingClientRect();
+        return r.width>8 && r.height>8;
+      }
+      function onScreen(el){
+        if(!rendered(el)) return false;
+        var r=el.getBoundingClientRect();
+        return r.top < innerHeight && r.bottom > 0 && r.left < innerWidth && r.right > 0;
+      }
+      /* 첫 화면 후보: 로드 시점에 실제로 그려져 있는 첫 번째 것 */
+      var home=null;
+      var sels=['#home','#startScreen','#screen-home','#intro','#start','#cover',
+                'section.screen.on','.screen.on','section.home','.home',
+                'section#home','main>section','.wrap>section','.app>section','body>section','section'];
+      for(var i=0;i<sels.length && !home;i++){
+        var list=d.querySelectorAll(sels[i]);
+        for(var j=0;j<list.length;j++){ if(rendered(list[j])){ home=list[j]; break; } }
+      }
+      if(!home){
+        var h=d.querySelector('.hero,.card,h1');
+        home=h?(h.closest('section')||h.parentElement):body.firstElementChild;
+      }
+      if(!home) return;
+
+      /* ---------- 1) 본문 칼럼 폭 측정 -> 칼럼 스크림 마스크 ---------- */
+      var lastCol='';
+      function colBox(){
+        var vw=innerWidth||1, r=home.getBoundingClientRect();
+        var l=r.left, rt=r.right;
+        var kids=home.querySelectorAll('*');
+        for(var i=0;i<kids.length;i++){
+          var q=kids[i].getBoundingClientRect();
+          if(q.width>60 && q.height>40){ if(q.left<l) l=q.left; if(q.right>rt) rt=q.right; }
+        }
+        if(!(rt>l)){ l=0; rt=vw; }
+        var pad=18, fade=Math.max(60, vw*0.07);
+        var L=Math.max(0,l-pad), R=Math.min(vw,rt+pad);
+        var pc=function(x){ return (Math.max(-20,Math.min(120,x/vw*100))).toFixed(2)+'%'; };
+        var v=[pc(L-fade),pc(L),pc(R),pc(R+fade)].join('|');
+        /* MutationObserver 가 style 변경을 감시하므로, 값이 같을 때도 쓰면
+           setProperty -> mutation -> ping -> colBox 무한 rAF 루프가 된다 */
+        if(v===lastCol) return;
+        lastCol=v;
+        var st=layer.style, n=v.split('|');
+        st.setProperty('--mmf-l0', n[0]);
+        st.setProperty('--mmf-l',  n[1]);
+        st.setProperty('--mmf-r',  n[2]);
+        st.setProperty('--mmf-r0', n[3]);
+      }
+
+      /* ---------- 2) 첫 화면 카드 반투명화(글래스) ---------- */
+      function scaleAlphas(str,k){
+        if(!str || str==='none') return str;
+        return str.replace(/\brgba?\(\s*([^()]*)\)/gi, function(m, inner){
+          var nums, a=1;
+          if(inner.indexOf('/')>=0){
+            var sp=inner.split('/');
+            nums=sp[0].trim().split(/[\s,]+/).filter(Boolean).map(parseFloat);
+            var at=sp[1].trim();
+            a = at.charAt(at.length-1)==='%' ? parseFloat(at)/100 : parseFloat(at);
+          } else {
+            nums=inner.trim().split(/[\s,]+/).filter(Boolean).map(parseFloat);
+            if(nums.length>3) a=nums[3];
+          }
+          if(nums.length<3) return m;
+          for(var i=0;i<3;i++) if(isNaN(nums[i])) return m;
+          if(isNaN(a)) a=1;
+          var na=Math.max(0,Math.min(1,a*k));
+          return 'rgba('+nums[0]+','+nums[1]+','+nums[2]+','+(Math.round(na*1000)/1000)+')';
+        });
+      }
+      function maxAlpha(str){
+        var mx=0, re=/rgba?\(\s*([^()]*)\)/gi, mm;
+        while((mm=re.exec(str))){
+          var q=mm[1].replace('/',' ').trim().split(/[\s,]+/).filter(Boolean).map(parseFloat);
+          var av = q.length>3 ? q[3] : 1;
+          if(!isNaN(av) && av>mx) mx=av;
+        }
+        return mx;
+      }
+      function glassify(){
+        if(!GLASS) return;
+        var hw=home.getBoundingClientRect().width||1;
+        var els=home.querySelectorAll('*'), done=[];
+        for(var i=0;i<els.length;i++){
+          var el=els[i], tag=el.tagName;
+          if(tag==='BUTTON'||tag==='INPUT'||tag==='SELECT'||tag==='TEXTAREA'||tag==='IMG'||tag==='SVG') continue;
+          if(el.dataset.mmfGlass) continue;
+          var r=el.getBoundingClientRect();
+          if(r.width < Math.max(200, hw*0.5) || r.height < 70) continue;
+          var cs=getComputedStyle(el);
+          if((cs.webkitBackgroundClip||cs.backgroundClip)==='text') continue;
+          var bc=cs.backgroundColor||'', bi=cs.backgroundImage||'none';
+          var alpha = bc && bc!=='transparent' ? maxAlpha(bc) : 0;
+          var hasGrad = bi!=='none' && /gradient/i.test(bi);
+          /* 이미 반투명한 카드(예: rgba(255,255,255,.06) 글래스)는 건드리지 않는다.
+             더 투명하게 만들면 글자 대비만 깎이고 얻을 게 없다. */
+          var eff = 1-(1-alpha)*(1-(hasGrad?maxAlpha(bi):0));
+          if(eff < GMIN) continue;
+          /* 이미 위쪽 조상이 글래스면 더 약하게 (겹치면 불투명도가 곱해진다) */
+          var nested=false;
+          for(var t=0;t<done.length;t++) if(done[t].contains(el)){ nested=true; break; }
+          var k = nested ? GKIN : GK;
+          if(alpha>0.001) el.style.setProperty('background-color', scaleAlphas(bc,k), 'important');
+          if(hasGrad) el.style.setProperty('background-image', scaleAlphas(bi,k), 'important');
+          if(GBLUR){
+            el.style.setProperty('-webkit-backdrop-filter', GBLUR, 'important');
+            el.style.setProperty('backdrop-filter', GBLUR, 'important');
+          }
+          if(GSHADOW<1 && cs.boxShadow && cs.boxShadow!=='none')
+            el.style.setProperty('box-shadow', scaleAlphas(cs.boxShadow,GSHADOW), 'important');
+          el.dataset.mmfGlass='1';
+          done.push(el);
+        }
+      }
+
+      var raf=0, last=null;
+      function apply(){
+        raf=0;
+        colBox();
+        var on=onScreen(home);
+        if(on===last) return;
+        last=on;
+        root.classList.toggle('mmf-cover-on', on);
+      }
+      function ping(){ if(!raf) raf=requestAnimationFrame(apply); }
+      /* 글래스 처리가 실패해도 배경 레이어 자체는 살아 있어야 한다 */
+      function safeGlass(){ try{ glassify(); }catch(e){} }
+      apply();
+      safeGlass();
+      addEventListener('load', function(){ safeGlass(); ping(); });
+      addEventListener('scroll', ping, {passive:true});
+      addEventListener('resize', ping, {passive:true});
+      addEventListener('click', function(){ setTimeout(ping,0); setTimeout(ping,320); }, true);
+      [80,400,1200].forEach(function(t){ setTimeout(function(){ safeGlass(); ping(); },t); });
+      try{
+        new MutationObserver(ping).observe(body,{
+          subtree:true, childList:true, attributes:true,
+          attributeFilter:['class','style','hidden']
+        });
+      }catch(e){}
+    }catch(e){}
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
+  else boot();
+})();
+</script>
+<!-- mmf-cover-bg:end -->
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="wrap">
+
+  <!-- ============ 시작 ============ -->
+  <section class="screen on" id="s-start">
+    <div class="hero">
+      <span class="badge">둘이 함께 · 친해지기</span>
+      <h1>상황극 <span class="grad">중독자</span></h1>
+      <div class="sub">💘 연애편 · 상황 100개</div>
+      <p>폰 하나를 가운데 두고 나란히 앉아, <b>정반대 입장</b>을 맡아 즉흥 연기로 붙어요.<br>썸부터 결혼 준비까지 — 목표가 정면으로 충돌해야 웃깁니다.</p>
+    </div>
+
+    <div class="names">
+      <div class="field"><label>🅰 이름</label><input id="nameA" maxlength="6" placeholder="🅰" autocomplete="off"></div>
+      <div class="vs">VS</div>
+      <div class="field"><label>🅱 이름</label><input id="nameB" maxlength="6" placeholder="🅱" autocomplete="off"></div>
+    </div>
+
+    <div class="pick-title">오늘의 맛은?</div>
+    <div class="picks" id="tastes">
+      <button class="pick" data-taste="mild"><span class="n">🥛</span><span class="u">순한맛<br>웃으면서 할 수 있는</span></button>
+      <button class="pick" data-taste="hot"><span class="n">🌶️🌶️</span><span class="u">매운맛<br>바로 본론부터</span></button>
+      <button class="pick sel" data-taste="mix"><span class="n">🥛→🌶️</span><span class="u">순하다가 매운맛<br>점점 세지게</span></button>
+    </div>
+
+    <div class="rule">
+      <h3>규칙 — 이것만 지키면 돼요</h3>
+      <ul>
+        <li><span class="ic">📱</span>폰 하나를 가운데 두고 <b>나란히</b> 앉아요.</li>
+        <li><span class="ic">🎬</span>첫 대사는 카드에 적힌 사람이 먼저 읽어요. 그다음부터는 <b>즉흥</b>.</li>
+        <li><span class="ic">🎭</span><b>역할을 배신하지 마세요.</b> 내 목표를 끝까지 밀어야 상대가 무너져요.</li>
+        <li><span class="ic">😌</span>진짜로 화내지 않기. <b>이건 연기예요.</b></li>
+        <li><span class="ic">🤝</span>판정은 둘이 합의해서 눌러요. 애매하면 무승부.</li>
+      </ul>
+      <div class="lvkey">
+        <span><b>LV.1</b> 몸풀기</span>
+        <span><b>LV.2</b> 슬슬</span>
+        <span><b>LV.3</b> 정면충돌</span>
+      </div>
+    </div>
+
+    <button class="btn" id="startBtn">5판 승부 시작하기 🎬</button>
+  </section>
+
+  <!-- ============ 뽑기 ============ -->
+  <section class="screen" id="s-draw">
+    <div class="topbar" id="top-draw"></div>
+    <div class="gauge"><div class="gaugefill" id="gauge-draw"></div></div>
+    <div class="cardarea">
+      <div class="card" id="drawCard">
+        <div class="face back">
+          <div class="glow"></div>
+          <div class="mark">💘</div>
+          <div class="hint">카드를 탭하세요</div>
+          <div class="hint2" id="drawHint">오늘의 상황이 공개됩니다</div>
+        </div>
+        <div class="face front" id="cardFront"></div>
+      </div>
+    </div>
+    <button class="btn" id="toPlayBtn" style="display:none">역할 확인하고 시작 →</button>
+  </section>
+
+  <!-- ============ 연기 ============ -->
+  <section class="screen" id="s-play">
+    <div class="topbar" id="top-play"></div>
+    <div class="gauge"><div class="gaugefill" id="gauge-play"></div></div>
+
+    <div class="sitbox">
+      <span class="lvtag" id="playLv"></span>
+      <h2 id="playTitle"></h2>
+      <div class="set" id="playSet"></div>
+    </div>
+
+    <div class="roles">
+      <div class="role a"><div class="who" id="whoA"></div><div class="rn" id="rnA"></div><div class="goal" id="goalA"></div></div>
+      <div class="role b"><div class="who" id="whoB"></div><div class="rn" id="rnB"></div><div class="goal" id="goalB"></div></div>
+    </div>
+
+    <div class="firstline">
+      <div class="lb" id="flLabel"></div>
+      <div class="ln" id="flText"></div>
+    </div>
+
+    <div class="timerbox" id="timerBox">
+      <div class="t" id="timerText">1:30</div>
+      <div class="tbar"><div class="tbarfill" id="tbarFill"></div></div>
+      <button class="tbtn" id="timerBtn">시작</button>
+    </div>
+
+    <div id="twistSlot"></div>
+
+    <div class="tools">
+      <button class="tool" id="passA"></button>
+      <button class="tool" id="passB"></button>
+    </div>
+
+    <div class="quote">
+      <input id="quoteInput" maxlength="60" placeholder="웃겼던 명대사 한 줄 저장" autocomplete="off">
+      <button id="quoteBtn">저장</button>
+    </div>
+
+    <div id="judgeSlot"></div>
+    <button class="btn" id="judgeBtn">판정하기 ⚖️</button>
+  </section>
+
+  <!-- ============ 점수판 ============ -->
+  <section class="screen" id="s-score">
+    <div class="result-hd">
+      <div class="k" id="scoreRound"></div>
+      <h2 id="scoreTitle"></h2>
+      <div id="comboSlot"></div>
+    </div>
+    <div class="bigscore">
+      <div class="col a"><div class="nm" id="bsNameA"></div><div class="v" id="bsA">0</div></div>
+      <div class="sep">:</div>
+      <div class="col b"><div class="nm" id="bsNameB"></div><div class="v" id="bsB">0</div></div>
+    </div>
+    <div id="roulSlot"></div>
+    <div id="recapSlot"></div>
+    <div style="flex:1"></div>
+    <button class="btn" id="swapBtn">🔁 역할 바꿔서 한 판 더</button>
+    <button class="btn ghost" id="nextBtn">다음 상황 →</button>
+  </section>
+
+  <!-- ============ 결과 ============ -->
+  <section class="screen" id="s-result">
+    <div class="result-hd">
+      <div class="k">5판 승부 종료</div>
+      <h2 id="finalTitle"></h2>
+    </div>
+    <div class="bigscore">
+      <div class="col a"><div class="nm" id="frNameA"></div><div class="v" id="frA">0</div></div>
+      <div class="sep">:</div>
+      <div class="col b"><div class="nm" id="frNameB"></div><div class="v" id="frB">0</div></div>
+    </div>
+    <div class="gradebox" id="gradeBox"></div>
+    <div class="chemi"><div class="lb">우리 둘의 케미</div><div class="tx" id="chemiText"></div></div>
+    <div id="quotesSlot"></div>
+    <button class="btn" id="shareBtn">결과 공유하기 📤</button>
+    <button class="btn ghost" id="againBtn">한 판 더 하기</button>
+    <button class="btn ghost small" id="homeBtn">처음으로</button>
+
+    <div class="footer">
+      <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+      <div class="mf-logo">미미팩토리</div>
+      <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* ===================== 상황 100개 ===================== */
+const SCENES = [
+{"n":1,"t":"기념일을 까먹었다","lv":1,"s":"오늘은 500일. 한 명은 아침부터 들떠 있고, 한 명은 방금 알았다.","ar":"안 까먹은 척","ag":"들키지 마라. 서프라이즈를 즉석에서 지어내라.","br":"증거 든 검사","bg":"자백을 받아내라. 봐주지 마라.","sp":"B","ln":"자기야… 오늘 무슨 날인지 알지?","tw":"사실 오늘은 500일이 아니다. 한 명이 날짜를 잘못 셌다.","jd":"먼저 말문 막히는 쪽이 패배"},
+{"n":2,"t":"사진 한 장만 더","lv":1,"s":"관광지. 배는 고프고 줄은 길다. 그런데 아직 마음에 드는 컷이 없다.","ar":"한 장만 더","ag":"각도·표정·구도를 계속 요구하라. 절대 타협하지 마라.","br":"배고픔이 인격을 잠식한 사람","bg":"밥으로 화제를 돌려라. 사진은 이미 충분하다.","sp":"A","ln":"방금 거 눈 감았어. 다시.","tw":"찍은 사진이 전부 흔들렸다는 걸 알게 된다.","jd":"먼저 짜증 내는 쪽이 패배"},
+{"n":3,"t":"최악의 소개팅 만들기","lv":1,"s":"첫 만남 30분. 둘 다 이 자리를 끝내고 싶다. 단, 먼저 일어나면 지는 거다.","ar":"자기 얘기만 하는 사람","ag":"상대 질문을 전부 자기 얘기로 돌려라.","br":"모든 걸 평가하는 사람","bg":"메뉴·말투·옷·인생관을 조용히 채점하라.","sp":"A","ln":"제가요, 제 얘기를 좀 하자면요.","tw":"둘 다 알고 보니 상대가 마음에 들기 시작한다.","jd":"먼저 자리에서 일어나는 쪽이 패배"},
+{"n":4,"t":"운전대 잡은 사람","lv":1,"s":"내비게이션이 우회전을 세 번 말했다. 차는 직진했다.","ar":"길 아는 사람","ag":"내비보다 나은 이유를 대라. 절대 인정하지 마라.","br":"조수석 관제탑","bg":"실시간으로 지적하라. 부드럽게, 그러나 집요하게.","sp":"B","ln":"지금 그거 방금 지나쳤어. 방금.","tw":"내비가 잘못 안내한 게 맞다는 게 밝혀진다.","jd":"먼저 \"그러게\"라고 하는 쪽이 패배"},
+{"n":5,"t":"첫차 놓친 새벽","lv":1,"s":"새벽 4시 20분. 편의점 앞 파라솔. 첫차까지 1시간.","ar":"집에 가야 하는 사람","ag":"택시를 타야 하는 이유를 대라.","br":"더 있고 싶은 사람","bg":"1시간을 어떻게든 붙잡아라. 티는 내지 마라.","sp":"A","ln":"택시 부를까? …아니면 뭐, 한 시간이면 금방인가?","tw":"첫차가 40분 지연됐다는 안내가 뜬다.","jd":"먼저 \"그냥 있자\"라고 하는 쪽이 승리"},
+{"n":6,"t":"부케를 받을 것인가","lv":1,"s":"친구가 부케를 주겠다고 한다. 6개월 안에 결혼해야 한다는 속설이 있다.","ar":"받자파","ag":"미신은 미신일 뿐이라고 설득하라.","br":"절대 안 돼파","bg":"그 속설을 진지하게 믿는 척하라.","sp":"A","ln":"그냥 꽃이야. 꽃.","tw":"신부가 이미 둘 다에게 말해뒀다.","jd":"먼저 결혼 이야기를 꺼내는 쪽이 패배"},
+{"n":7,"t":"잠버릇 고발","lv":1,"s":"아침. 한 명이 밤새 찍은 영상을 들고 있다.","ar":"나 안 그래","ag":"영상이 조작됐다고 우겨라.","br":"증거 있음","bg":"재생 버튼에 손을 올린 채 협상하라.","sp":"B","ln":"3시 42분. 볼래?","tw":"영상 뒷부분에 증거를 든 쪽의 잠꼬대도 찍혀 있다.","jd":"먼저 영상을 보자고 하는 쪽이 패배"},
+{"n":8,"t":"서프라이즈가 망했다","lv":1,"s":"케이크를 들고 나왔는데 상대는 이미 다 알고 있었다.","ar":"준비한 사람","ag":"모른 척해달라고 애원하라. 연출은 계속돼야 한다.","br":"이미 아는 사람","bg":"처음 아는 척 연기하되 자꾸 티를 내라.","sp":"A","ln":"잠깐만, 눈 감아. 진짜로 감아.","tw":"케이크에 적힌 이름이 틀렸다.","jd":"먼저 웃음 터지는 쪽이 패배"},
+{"n":9,"t":"커플 옷을 입을 것인가","lv":1,"s":"쇼핑몰. 한 명의 눈이 반짝인다.","ar":"입자파","ag":"귀엽다. 오늘 하루만이라고 설득하라.","br":"죽어도 싫어파","bg":"품위와 자아를 지켜라.","sp":"A","ln":"딱 신발만. 신발은 티도 안 나.","tw":"계산대에서 점원이 \"커플이시죠?\"라고 묻는다.","jd":"먼저 옷을 몸에 대보는 쪽이 패배"},
+{"n":10,"t":"선물이 마음에 안 든다","lv":1,"s":"크리스마스 저녁 8시. 포장을 뜯었다. 그리고 3초 동안 아무 말이 없었다.","ar":"선물 고른 사람","ag":"\"이거 진짜 마음에 들어\" 한마디를 받아내라. 고른 이유를 끝까지 설명하라.","br":"받은 사람","bg":"상처 주지 말고 교환 영수증을 받아내라. 마음에 든다는 말은 절대 하지 마라.","sp":"A","ln":"표정이 왜 그래. 지금 3초 멈췄어.","tw":"그건 상대가 반년 전에 링크를 보내며 갖고 싶다고 한 물건이다.","jd":"먼저 가격을 언급하는 쪽이 패배"},
+{"n":11,"t":"마이크는 하나다","lv":1,"s":"노래방 1시간 중 47분이 지났다. 마이크는 두 개인데 한 개는 소리가 안 난다.","ar":"마이크 사수","ag":"예약 목록을 내 곡으로 다 채워라. 절대 넘기지 마라.","br":"탈환하려는 사람","bg":"지금 마이크를 넘겨받아라. 명분은 만들어내면 된다.","sp":"A","ln":"이거 한 곡만. 이건 진짜 내가 불러야 되는 곡이야.","tw":"서비스 시간 30분이 방금 들어왔다.","jd":"먼저 탬버린을 집어 드는 쪽이 패배"},
+{"n":12,"t":"그 애칭으로 불러봐","lv":1,"s":"카페 구석 자리. 한 명이 새 애칭을 지어 왔다. 세 글자다.","ar":"애칭 전도사","ag":"오늘 안에 그 애칭을 상대 입으로 부르게 하라. 작은 목소리도 인정한다.","br":"죽어도 안 부르는 사람","bg":"그 세 글자를 입 밖에 내지 마라. 이름으로만 불러라.","sp":"A","ln":"한 번만. 딱 한 번만 불러봐. 아주 작게 해도 돼.","tw":"옆 테이블에 상대 회사 동료가 앉아 있다.","jd":"먼저 \"부끄럽다\"고 말하는 쪽이 패배"},
+{"n":13,"t":"가방 이리 줘","lv":1,"s":"마트 주차장까지 200미터. 장바구니 네 봉지. 한쪽 팔은 이미 비어 있다.","ar":"다 들겠다는 사람","ag":"상대 손에서 봉지를 전부 가져와라. 거절은 받아들이지 마라.","br":"안 넘기는 사람","bg":"한 봉지도 주지 마라. 하나도 안 무거운 척하라.","sp":"A","ln":"그거 이리 줘. 나 한 손 비었잖아.","tw":"봉지 하나가 방금 밑에서부터 찢어졌다.","jd":"먼저 \"무겁다\"고 말하는 쪽이 패배"},
+{"n":14,"t":"창가냐 콘센트냐","lv":1,"s":"토요일 오후 2시. 빈자리는 딱 하나. 창가인데 콘센트가 없다.","ar":"창가파","ag":"저 자리를 잡아라. 배터리는 오늘 신경 쓸 문제가 아니다.","br":"콘센트파","bg":"저 자리를 포기시켜라. 안쪽 자리가 날 때까지 버티게 하라.","sp":"A","ln":"저기 봐, 저 자리 딱이야. 빛 들어오는 거 봐.","tw":"두 사람 폰이 동시에 배터리 5퍼센트 알림을 띄운다.","jd":"먼저 자리에 가방을 내려놓는 쪽이 패배"},
+{"n":15,"t":"공포냐 로맨스냐","lv":1,"s":"상영 12분 전. 매표소 앞. 같은 시간대에 두 영화가 걸려 있다.","ar":"공포 아니면 안 봄","ag":"소리 지르며 봐야 남는다고 밀어라. 상대 취향을 유치하다고 몰아라.","br":"로맨스 사수","bg":"지난 다섯 번의 선택을 근거로 이번 차례를 가져와라.","sp":"A","ln":"울면서 보는 거랑 소리 지르면서 보는 거, 뭐가 더 재밌겠어?","tw":"두 영화 다 매진이고 남은 건 다큐멘터리 한 편이다.","jd":"먼저 상대 영화의 예고편을 검색하는 쪽이 패배"},
+{"n":16,"t":"한 입만","lv":1,"s":"디저트 카페. 조각 케이크 하나. 포크 두 개. 한 명은 아까 \"난 안 먹어\"라고 했다.","ar":"한 입만 파","ag":"상대 접시를 계속 공략하라. \"한 입\"의 범위를 넓혀라.","br":"사수하는 사람","bg":"내 케이크를 지켜라. 안 시킨 건 상대 선택이다.","sp":"A","ln":"한 입만. 진짜 한 입만. 요만큼.","tw":"그 케이크 값을 계산한 사람은 🅰였다.","jd":"먼저 포크를 내려놓는 쪽이 패배"},
+{"n":17,"t":"헬스장 3개월 등록","lv":1,"s":"1월 3일 저녁 7시. 상담실 앞. 커플로 등록하면 20퍼센트 할인이다.","ar":"같이 하자파","ag":"오늘 안에 상대 카드를 꺼내게 하라. 상담실 문을 열어라.","br":"절대 등록 안 하는 사람","bg":"계약을 막아라. 핑계는 계속 새로 만들어내라.","sp":"A","ln":"둘이 하면 20퍼센트야. 혼자 하는 것보다 싸다니까.","tw":"작년에도 똑같이 등록했고, 둘 다 네 번 갔다.","jd":"먼저 \"다음 달부터 하자\"고 말하는 쪽이 패배"},
+{"n":18,"t":"에어컨 18도","lv":1,"s":"새벽 1시. 동거 2년차 침실. 리모컨은 한 명의 이불 속에 있다.","ar":"18도 사수","ag":"리모컨을 절대 넘기지 마라. 더워서 잠을 못 잔다는 걸 끝까지 밀어라.","br":"26도 사수","bg":"오늘 안에 리모컨을 손에 넣어라. 얼어 죽겠다는 걸 몸으로 보여줘라.","sp":"B","ln":"지금 몇 도야. 화면 좀 보여줘 봐.","tw":"지난달 전기요금 고지서가 방금 문자로 왔다.","jd":"먼저 이불을 걷어차는 쪽이 패배"},
+{"n":19,"t":"우산 하나","lv":1,"s":"장맛비. 버스정류장까지 300미터. 우산은 3단 접이식 하나뿐이다.","ar":"상대 쪽으로 기울이는 사람","ag":"내 어깨가 젖는 걸 들키지 마라. 계속 기울여라.","br":"그걸 못 참는 사람","bg":"우산을 가운데로 되돌려라. 젖은 어깨를 증거로 잡아라.","sp":"B","ln":"너 지금 반쪽 다 젖었잖아. 똑바로 들어.","tw":"🅰의 가방 안에 장우산이 하나 더 들어 있었다.","jd":"먼저 우산 손잡이를 놓는 쪽이 패배"},
+{"n":20,"t":"30분째 배달 앱","lv":1,"s":"밤 9시 40분. 장바구니는 비어 있고 화면만 아래로 내려간다. 배는 아까부터 고팠다.","ar":"아무거나파","ag":"결정을 상대에게 떠넘겨라. 뭘 골라도 \"그건 좀\"이라고 하라.","br":"결정을 받아내는 사람","bg":"오늘 안에 상대 입으로 메뉴 하나를 말하게 하라.","sp":"B","ln":"아무거나 말고. 지금 딱 하나만 말해.","tw":"방금 최소주문금액이 오르고 배달비가 4천 원이 됐다.","jd":"먼저 \"그냥 먹지 말자\"고 하는 쪽이 패배"},
+{"n":21,"t":"인생네컷 포즈","lv":1,"s":"사진 부스 안. 남은 컷은 두 장. 준비 시간은 8초씩이다.","ar":"컨셉 있는 사람","ag":"준비한 포즈를 기어이 시키게 하라. 손하트 정도로는 안 된다.","br":"부끄러운 사람","bg":"그 포즈는 못 한다. 무난한 브이로 끝내라.","sp":"A","ln":"다음 컷은 내가 정한 거. 팔 이렇게, 얼굴은 이렇게.","tw":"부스 밖에서 다음 팀이 유리창 너머로 다 보고 있었다.","jd":"먼저 카메라에서 눈을 피하는 쪽이 패배"},
+{"n":22,"t":"이 줄은 110분","lv":1,"s":"놀이공원 오후 3시. 대기 시간 안내판에 110분이 떠 있다. 폐장까지 4시간.","ar":"타야 한다는 사람","ag":"여기까지 온 이유가 이거다. 줄을 서게 만들어라.","br":"절대 안 타는 사람","bg":"저건 못 탄다. 다른 걸로 돌려라. 무서워서라고는 말하지 마라.","sp":"A","ln":"이거 하나 타러 온 거야. 110분이면 서면 되지.","tw":"방금 그 놀이기구가 점검으로 40분간 멈춘다는 방송이 나온다.","jd":"먼저 진짜 이유를 말하는 쪽이 패배"},
+{"n":23,"t":"3단계면 된다니까","lv":1,"s":"마라탕 가게 주문대. 뒤에 세 팀이 서 있다. 매운맛 단계를 아직 못 정했다.","ar":"3단계파","ag":"안 매운 마라탕은 의미가 없다. 오늘은 3단계로 시킨다.","br":"0단계파","bg":"지난번 그 밤을 떠올리게 하라. 절대 3단계로 넘기지 마라.","sp":"A","ln":"3단계는 하나도 안 매워. 여기 3단계는 딴 데 1단계야.","tw":"가게가 이번 달부터 단계 기준을 한 칸씩 올렸다.","jd":"먼저 물컵을 가지러 가는 쪽이 패배"},
+{"n":24,"t":"쿠키영상 있대","lv":1,"s":"엔딩 크레딧이 올라간다. 불은 아직 안 켜졌다. 관객 열두 명이 남았다.","ar":"끝까지 앉아 있는 사람","ag":"쿠키영상이 있다. 상대를 자리에 붙들어라.","br":"지금 나가는 사람","bg":"주차장이 막히기 전에 일어나라. 손을 잡아끌어라.","sp":"A","ln":"앉아. 이거 무조건 있어. 감독이 그런 사람이야.","tw":"앞줄 관객이 일어나며 \"쿠키 없대\"라고 크게 말한다.","jd":"먼저 자리에서 엉덩이를 떼는 쪽이 패배"},
+{"n":25,"t":"5분만 더","lv":1,"s":"평일 아침 7시 12분. 알람이 네 번째 울렸다. 이불 밖은 춥다.","ar":"5분만 더 파","ag":"이불을 사수하라. 5분은 늘어나도 된다.","br":"지금 일으키는 사람","bg":"오늘 안에, 아니 지금 당장 이불을 걷어라. 봐주지 마라.","sp":"B","ln":"일곱시 십이분. 네 번째야.","tw":"오늘이 상대의 재택근무 날이라는 게 밝혀진다.","jd":"먼저 다시 눈 감는 쪽이 패배"},
+{"n":26,"t":"캐리어 3킬로 초과","lv":1,"s":"출국 3시간 전 거실. 체중계 위 캐리어가 23킬로를 가리킨다. 허용은 20킬로.","ar":"다 넣어야 하는 사람","ag":"하나도 못 뺀다. 각 물건이 왜 필요한지 방어하라.","br":"빼내는 사람","bg":"3킬로를 덜어내라. 상대 손으로 직접 꺼내게 하라.","sp":"B","ln":"고데기, 책 두 권, 신발 세 켤레. 여기서 셋 중 하나.","tw":"무게의 절반이 🅱가 몰래 넣어둔 라면과 고추장이었다.","jd":"먼저 \"그럼 내 것부터 빼\"라고 하는 쪽이 패배"},
+{"n":27,"t":"빈자리는 하나","lv":1,"s":"퇴근길 지하철. 앞자리 한 칸이 비었다. 다음 역까지 스물두 정거장.","ar":"앉으라고 미는 사람","ag":"상대를 그 자리에 앉혀라. 나는 하나도 안 힘들다.","br":"안 앉는 사람","bg":"절대 안 앉는다. 상대를 앉혀라. 물러서지 마라.","sp":"A","ln":"앉아. 빨리. 사람 온다.","tw":"두 사람이 실랑이하는 사이 다른 승객이 앉았다.","jd":"먼저 손잡이를 두 손으로 잡는 쪽이 패배"},
+{"n":28,"t":"앞머리는 안 된다","lv":1,"s":"미용실 대기 소파. 예약 시간까지 6분. 한 명이 사진 한 장을 들고 있다.","ar":"자르겠다는 사람","ag":"오늘 앞머리를 자른다. 결심을 흔들리게 두지 마라.","br":"말리는 사람","bg":"원장이 가위를 들기 전에 막아라. 3년 전 그 사진을 꺼내라.","sp":"A","ln":"이 사진처럼. 눈썹 위로 딱.","tw":"원장이 나와서 \"손님, 이 스타일은 지금 기장으론 안 돼요\"라고 한다.","jd":"먼저 거울에서 눈을 못 떼는 쪽이 패배"},
+{"n":29,"t":"설명서를 읽자","lv":1,"s":"캠핑장 오후 4시 50분. 해는 한 시간 남았고 텐트 부품은 스물세 개다.","ar":"설명서파","ag":"1번부터 순서대로 간다. 손대지 말라고 하라.","br":"감으로파","bg":"이런 건 그냥 하면 된다. 폴대를 먼저 꽂아라.","sp":"A","ln":"손 떼. 1번, 바닥 시트부터야.","tw":"설명서가 다른 모델 것이다.","jd":"먼저 옆 텐트 사람을 부르는 쪽이 패배"},
+{"n":30,"t":"이 구간은 내 노래","lv":1,"s":"고속도로 진입 직후. 두 시간짜리 드라이브. 블루투스는 한 대만 연결된다.","ar":"플레이리스트 주인","ag":"내 목록을 두 시간 내내 지켜라. 스킵을 허용하지 마라.","br":"뺏으려는 사람","bg":"연결을 내 폰으로 바꿔라. 명분은 얼마든지 있다.","sp":"A","ln":"이거 다음 곡이 진짜야. 이것만 듣고.","tw":"다음 곡이 상대가 제일 싫어한다고 했던 곡이다.","jd":"먼저 볼륨을 줄이는 쪽이 패배"},
+{"n":31,"t":"정상까지 200미터","lv":1,"s":"등산로 8부 능선. 계단이 시작된다. 시계는 오전 11시 20분.","ar":"정상파","ag":"여기까지 왔다. 200미터를 반드시 올라가게 하라.","br":"하산파","bg":"지금 내려간다. 무릎과 점심시간을 근거로 밀어라.","sp":"A","ln":"200미터야. 200. 딱 저기까지만.","tw":"정상 표지석은 여기서 800미터 더 위에 있다는 안내판을 발견한다.","jd":"먼저 배낭을 내려놓고 앉는 쪽이 패배"},
+{"n":32,"t":"카트에 없던 과자","lv":1,"s":"마트 계산대 앞. 컨베이어 벨트 위에 담은 기억이 없는 과자 세 봉지가 올라간다.","ar":"몰래 담은 사람","ag":"원래 사기로 한 거였다고 우겨라. 빼지 마라.","br":"예산 지키는 사람","bg":"세 봉지를 도로 갖다 놓게 하라. 영수증이 나오기 전에.","sp":"B","ln":"이거 언제 담았어. 나 안 볼 때 담았지.","tw":"🅱의 장바구니 밑에서 초콜릿 두 개가 나온다.","jd":"먼저 \"이건 네 거잖아\"라고 하는 쪽이 패배"},
+{"n":33,"t":"이거 내가 사줄게","lv":1,"s":"옷 가게 계산대. 가격표는 19만 8천 원. 점원이 두 사람을 번갈아 본다.","ar":"사주려는 사람","ag":"오늘 이건 내가 계산한다. 카드를 먼저 꺼내라.","br":"안 받는 사람","bg":"못 받는다. 그냥 안 사겠다고 해서라도 막아라.","sp":"A","ln":"됐고. 이거 계산해 주세요.","tw":"점원이 \"이거 1+1이라 두 벌이에요\"라고 말한다.","jd":"먼저 지갑을 도로 넣는 쪽이 패배"},
+{"n":34,"t":"2차는 없다","lv":1,"s":"밤 11시 40분. 고깃집 앞 인도. 친구들은 벌써 노래방 쪽으로 걷고 있다.","ar":"2차 가자파","ag":"오늘은 여기서 끝낼 수 없다. 상대를 끌고 가라.","br":"집에 가자파","bg":"지금 택시를 잡아라. 내일 아침 일정을 꺼내라.","sp":"A","ln":"한 시간만. 딱 한 시간. 열두 시 반에 나온다.","tw":"친구들이 방금 단톡에 \"우린 그냥 집 간다\"고 올렸다.","jd":"먼저 택시 앱을 켜는 쪽이 패배"},
+{"n":35,"t":"읽씹 3시간","lv":2,"s":"읽음 표시는 3시간 전. 답장은 방금 왔다. 「ㅇㅇ」","ar":"바빴다는 사람","ag":"완벽하게 합리적인 사유를 만들어라. 절대 미안해하지 마라.","br":"타임라인 수사관","bg":"그 3시간의 행적을 분 단위로 캐물어라.","sp":"B","ln":"ㅇㅇ? 세 시간 만에 나온 게 ㅇㅇ이야?","tw":"수사관도 사실 어제 5시간 읽씹한 적이 있다.","jd":"먼저 \"미안\"이라고 말하는 쪽이 패배"},
+{"n":36,"t":"전 애인 이야기가 나왔다","lv":2,"s":"술자리에서 친구가 실수로 이름을 꺼냈다. 공기가 얼었다.","ar":"쿨한 척 대마왕","ag":"전혀 신경 안 쓰는 척하라. 그런데 자꾸 캐묻게 된다.","br":"진짜 아무렇지 않은 사람","bg":"너무 태연해서 오히려 상대를 미치게 만들어라.","sp":"A","ln":"아 그 사람? 뭐… 궁금하지도 않아. 근데 몇 살이었어?","tw":"알고 보니 두 사람의 전 애인이 서로 아는 사이다.","jd":"먼저 목소리 커지는 쪽이 패배"},
+{"n":37,"t":"이 옷 어때?","lv":2,"s":"약속 시간까지 12분. 다섯 번째 갈아입고 나왔다.","ar":"솔직함이 미덕","ag":"정직하게 말하라. 단, 살아남아라.","br":"정답을 정해둔 사람","bg":"이미 답은 정해져 있다. 상대가 그 답을 말하게 하라.","sp":"B","ln":"솔직히 말해줘. 진짜 솔직히.","tw":"둘 다 오늘 약속이 취소됐다는 걸 아직 모른다.","jd":"먼저 \"예쁘다\"를 세 번 말하는 쪽이 패배"},
+{"n":38,"t":"우리 무슨 사이야","lv":2,"s":"세 달째 매일 만난다. 정의된 적은 없다.","ar":"정의를 원하는 사람","ag":"오늘 안에 관계에 이름을 붙여라.","br":"흐름에 맡기자파","bg":"어떤 단어도 확정하지 마라. 그런데 도망가지도 마라.","sp":"A","ln":"우리… 그러니까, 우리는 뭐지?","tw":"둘 다 이미 상대를 남들에게 다르게 소개하고 있었다.","jd":"먼저 \"사귀자\"를 말하는 쪽이 승리"},
+{"n":39,"t":"친구가 많은 사람","lv":2,"s":"주말 약속이 또 잡혔다. 이번 달 네 번째다.","ar":"인간관계는 자산","ag":"약속의 정당성을 하나하나 설명하라.","br":"주말은 우리 것","bg":"달력을 펼쳐 증거로 제시하라.","sp":"A","ln":"이번엔 진짜 안 갈 수가 없어. 진짜로.","tw":"그 자리에 상대도 초대돼 있었다는 걸 알게 된다.","jd":"먼저 \"그럼 같이 갈래?\"라고 하는 쪽이 패배"},
+{"n":40,"t":"더치페이 논쟁","lv":2,"s":"계산서 앞. 카드 두 장이 동시에 나왔다.","ar":"내가 낼게파","ag":"어떻게든 먼저 내라. 명분을 만들어라.","br":"정확히 반반파","bg":"1원 단위까지 나누자고 주장하라.","sp":"A","ln":"됐어 내가 낼게. 저번에 네가 냈잖아.","tw":"이미 다른 사람이 계산하고 갔다.","jd":"먼저 카드를 집어넣는 쪽이 패배"},
+{"n":41,"t":"나 살쪘어?","lv":2,"s":"거울 앞. 질문이 던져졌다. 도망갈 곳은 없다.","ar":"생존 전문가","ag":"어떤 답도 함정이다. 3초 안에 답하라.","br":"답을 정해둔 사람","bg":"어떤 답이 나와도 반박하라.","sp":"B","ln":"솔직히. 진짜 솔직히 말해도 돼.","tw":"사실 질문한 쪽이 최근 3킬로 쪘다.","jd":"먼저 숫자를 언급하는 쪽이 패배"},
+{"n":42,"t":"결혼식 하객 명단","lv":2,"s":"엑셀 두 개. 한쪽은 40명, 한쪽은 300명.","ar":"작게 하자파","ag":"진짜 소중한 사람만 부르자고 설득하라.","br":"다 불러야파","bg":"안 부르면 평생 서운해할 사람들을 나열하라.","sp":"A","ln":"이 사람은 3년 동안 연락 안 했잖아.","tw":"양가 부모님이 각각 100명씩 추가하셨다.","jd":"먼저 상대 명단에서 이름을 지우는 쪽이 패배"},
+{"n":43,"t":"강아지 이름 짓기","lv":2,"s":"입양 3일차. 아직 이름이 없다. 후보는 서른 개다.","ar":"고급스러운 이름파","ag":"품위 있는 이름의 격을 설명하라.","br":"웃긴 이름파","bg":"부를 때 재밌어야 한다고 주장하라.","sp":"A","ln":"「감자」는 진심으로 안 돼. 진심으로.","tw":"강아지가 둘 다 무시하고 제3의 이름에만 반응한다.","jd":"먼저 상대 이름으로 부르는 쪽이 패배"},
+{"n":44,"t":"얘가 나보다 먼저야?","lv":2,"s":"반려동물이 아프다. 그런데 오늘은 둘의 여행 첫날이다.","ar":"여행 강행파","ag":"예약금과 1년 기다림을 근거로 밀어라.","br":"지금 돌아가자파","bg":"생명 앞에 여행이 뭐냐고 밀어라.","sp":"B","ln":"지금 얘 두고 가자는 거야?","tw":"병원에서 \"괜찮으니 다녀오시라\"고 전화가 온다.","jd":"먼저 짐을 싸는 쪽이 패배"},
+{"n":45,"t":"다시 만난 첫날","lv":2,"s":"헤어진 지 넉 달. 오늘 처음 마주 앉았다.","ar":"아무 일 없던 척","ag":"그동안 잘 지냈다고 하라. 티 내지 마라.","br":"다 캐묻는 사람","bg":"넉 달 동안 뭐 했는지 하나씩 물어라.","sp":"B","ln":"그래서, 잘 지냈어? 진짜로?","tw":"둘 다 상대 SNS를 매일 봤다는 게 드러난다.","jd":"먼저 \"보고 싶었어\"라고 하는 쪽이 승리"},
+{"n":46,"t":"바다냐 산이냐","lv":2,"s":"휴가 이틀 전 밤 11시. 숙소는 아직 예약 안 했다. 예산은 40만 원.","ar":"바다파","ag":"회를 먹고 파도를 봐야 휴가라고 밀어라. 산의 벌레를 꺼내라.","br":"산파","bg":"조용한 계곡을 사수하라. 바다의 인파와 주차 요금을 계산해 읽어라.","sp":"A","ln":"여름에 산을 왜 가. 여름은 바다지.","tw":"이번 주말 바다는 파도주의보, 산은 비 예보다.","jd":"먼저 \"그럼 그냥 집에 있자\"고 하는 쪽이 패배"},
+{"n":47,"t":"하루에 몇 번은 해야 하나","lv":2,"s":"저녁 9시. 오늘 주고받은 메시지는 네 통. 한 명은 그게 적다고 생각한다.","ar":"횟수를 정하자파","ag":"하루 최소 몇 번인지 오늘 안에 숫자로 합의를 받아내라.","br":"정하는 게 이상하다파","bg":"어떤 숫자에도 동의하지 마라. 마음은 횟수가 아니라고 밀어라.","sp":"A","ln":"아침, 점심, 저녁. 세 번. 그게 그렇게 어려워?","tw":"오늘 네 통 중 세 통을 먼저 보낸 사람이 🅱였다.","jd":"먼저 폰 화면을 상대 쪽으로 돌리는 쪽이 패배"},
+{"n":48,"t":"보정 전과 후","lv":2,"s":"여행 사진 137장. 그중 한 장에서 한 명의 턱선이 조용히 깎여 있었다.","ar":"보정파","ag":"보정본만 남기게 하라. 원본은 오늘 지워야 한다.","br":"원본파","bg":"원본을 지켜라. 보정본을 지우게 만들어라.","sp":"B","ln":"이거… 내 턱 원래 이렇게 안 생겼는데?","tw":"그 사진에서 보정된 건 턱이 아니라 뒤에 있던 쓰레기통이었다.","jd":"먼저 갤러리를 닫아버리는 쪽이 패배"},
+{"n":49,"t":"여기서 팔짱은 좀","lv":2,"s":"회사 근처 사거리. 퇴근 인파. 신호 대기 40초.","ar":"붙어 있고 싶은 사람","ag":"팔짱을 껴라. 못 하는 이유를 기어이 받아내라.","br":"사람 많은 데선 안 되는 사람","bg":"자연스럽게 떼어내라. 진짜 이유는 끝까지 말하지 마라.","sp":"A","ln":"왜 자꾸 팔을 빼? 40초야, 40초.","tw":"건너편에 🅱의 부장님이 서서 손을 흔들고 있다.","jd":"먼저 한 걸음 물러서는 쪽이 패배"},
+{"n":50,"t":"어제 네가 약속했잖아","lv":2,"s":"일요일 오전 11시. 어젯밤 12시 40분에 뭔가를 약속한 사람이 있고, 그 기억이 없다.","ar":"기억 없는 사람","ag":"그런 약속은 없었다고 밀어라. 취중 발언은 무효다.","br":"약속을 받아낸 사람","bg":"어젯밤을 시간순으로 재생하고 오늘 안에 이행시켜라.","sp":"B","ln":"12시 40분. 손가락까지 걸었어. 새끼손가락.","tw":"그 장면을 옆에서 찍은 친구가 방금 단톡방에 올렸다.","jd":"먼저 어제 마신 잔 수를 세기 시작하는 쪽이 패배"},
+{"n":51,"t":"또 그 코스","lv":2,"s":"토요일 오후 1시. 지하철 안. 이번 달 세 번째로 같은 동네로 가는 중이다.","ar":"새로운 데 가자파","ag":"오늘 목적지를 바꿔라. 다음 역에서 내리게 만들어라.","br":"검증된 코스파","bg":"익숙한 게 왜 좋은지 방어하라. 절대 안 내린다.","sp":"A","ln":"밥, 카페, 영화. 이번 달만 세 번째야.","tw":"그 동네에 오늘 잡아둔 예약이 하나 있었다.","jd":"먼저 지도 앱을 켜는 쪽이 패배"},
+{"n":52,"t":"어느 집부터 갈까","lv":2,"s":"설 연휴 전날 밤. 달력에는 이틀뿐이고 양쪽 집은 차로 세 시간 거리다.","ar":"우리 집 먼저파","ag":"첫날 아침을 우리 집에서 시작하게 하라. 작년을 근거로 대라.","br":"우리 집 먼저파","bg":"똑같이 밀어라. 작년의 기억이 서로 다르다는 걸 이용하라.","sp":"A","ln":"작년엔 너희 집 먼저 갔잖아. 기억 안 나?","tw":"작년엔 두 집 다 안 가고 여행을 갔다.","jd":"먼저 \"그럼 따로 가자\"고 하는 쪽이 패배"},
+{"n":53,"t":"새벽 두 시의 영상통화","lv":2,"s":"장거리 7개월차. 시차 여덟 시간. 한쪽은 새벽 2시, 한쪽은 저녁 6시다.","ar":"안 끊는 사람","ag":"통화를 이어가라. 끊자는 말이 나오면 화제를 새로 꺼내라.","br":"재우려는 사람","bg":"지금 끊게 하라. 내일 아침 회의를 근거로 밀어라.","sp":"B","ln":"너 지금 두 시야. 화면 끄고 자.","tw":"🅱가 다음 주에 비행기표를 이미 끊어놨다.","jd":"먼저 하품을 소리 내어 하는 쪽이 패배"},
+{"n":54,"t":"대기번호 47번","lv":2,"s":"정형외과 대기실 오후 2시. 전광판은 23번. 한 명이 어제 계단에서 발목을 접질렸다.","ar":"기다리자는 사람","ag":"오늘 반드시 진료를 받게 하라. 자리를 뜨지 못하게 하라.","br":"그냥 가자는 사람","bg":"다 나았다고 주장하라. 대기실을 벗어나라.","sp":"A","ln":"여기 앉아. 47번, 한 시간이면 돼.","tw":"접수대에서 \"23번 이후로 예약 환자만 스물두 분\"이라고 안내한다.","jd":"먼저 발목을 눌러 보이며 \"봐, 괜찮잖아\"라고 하는 쪽이 패배"},
+{"n":55,"t":"그 박스는 버려","lv":2,"s":"이사 사흘 전. 거실에 박스 열아홉 개. 한 박스에 「2015」라고 적혀 있다.","ar":"버리자는 사람","ag":"그 박스를 오늘 밖에 내놓게 하라. 9년째 안 열었다는 걸 짚어라.","br":"못 버리는 사람","bg":"하나도 못 버린다. 각 물건의 사연을 꺼내라.","sp":"A","ln":"9년 동안 한 번도 안 열었어. 한 번도.","tw":"그 박스 안에 🅰가 첫해에 써준 편지가 들어 있다.","jd":"먼저 박스 뚜껑을 여는 쪽이 패배"},
+{"n":56,"t":"이번엔 데려갈까","lv":2,"s":"금요일 저녁. 고등학교 친구 모임이 내일이다. 한 명은 아직 그 자리에 가본 적이 없다.","ar":"데려가고 싶은 사람","ag":"내일 같이 가게 만들어라. 이제 소개할 때가 됐다.","br":"안 가겠다는 사람","bg":"그 자리에는 안 간다. 이유는 끝까지 구체적으로 말하지 마라.","sp":"A","ln":"다들 궁금해해. 내일 그냥 얼굴만 비추면 돼.","tw":"그 모임 단톡방에 이미 🅱의 이름이 참석자로 올라가 있다.","jd":"먼저 \"그럼 나 혼자 갈게\"라고 하는 쪽이 패배"},
+{"n":57,"t":"페이스 맞춰","lv":2,"s":"한강 러닝 3킬로 지점. 한 명은 숨이 차고, 한 명은 아직 말이 술술 나온다.","ar":"속도 내는 사람","ag":"오늘 7킬로를 채운다. 페이스를 늦추지 마라.","br":"멈추려는 사람","bg":"지금 걷게 만들어라. 같이 뛰자고 한 사람이 누군지 짚어라.","sp":"B","ln":"같이 뛰자며. 지금 혼자 뛰고 있잖아.","tw":"🅰의 러닝 앱이 아까부터 기록을 저장하지 않고 있었다.","jd":"먼저 무릎에 손을 얹는 쪽이 패배"},
+{"n":58,"t":"오늘 하루만 쉬자","lv":2,"s":"취준 5개월차. 화요일 오후 3시. 독서실 앞. 시험은 26일 남았다.","ar":"쉬게 하려는 사람","ag":"오늘 하루 데리고 나가라. 사흘 연속 밤샜다는 걸 근거로 대라.","br":"들어가겠다는 사람","bg":"오늘도 자리에 앉는다. 26일이라는 숫자를 놓지 마라.","sp":"A","ln":"사흘 밤샜어. 오늘 하루는 나랑 밥 먹고 걷자.","tw":"그 시험 날짜가 2주 미뤄졌다는 공지가 방금 떴다.","jd":"먼저 상대 손목을 잡아끄는 쪽이 패배"},
+{"n":59,"t":"새벽 세 시 라면","lv":2,"s":"새벽 3시 10분. 부엌 불이 켜졌다. 냄비에 물이 올라간다.","ar":"끓이는 사람","ag":"오늘은 먹는다. 계란까지 넣어라. 말리지 못하게 하라.","br":"말리는 사람","bg":"불을 끄게 하라. 어제 한 다짐을 그대로 인용하라.","sp":"B","ln":"어제 뭐라고 했지. 어제 새벽에.","tw":"냄비에 물이 2인분 올라가 있다.","jd":"먼저 젓가락을 꺼내는 쪽이 패배"},
+{"n":60,"t":"고양이냐 강아지냐","lv":2,"s":"입양 상담 예약 이틀 전. 서류에 「희망 반려동물」 칸이 비어 있다.","ar":"고양이파","ag":"우리 생활에 맞는 쪽을 논증하라. 산책 시간을 계산해 읽어라.","br":"강아지파","bg":"같이 뛰고 같이 걷는 삶을 밀어라. 절대 양보하지 마라.","sp":"A","ln":"아침 일곱 시에 산책. 너 그거 매일 할 수 있어?","tw":"상담소에서 \"지금 대기 가능한 아이는 토끼 한 마리뿐\"이라고 연락이 온다.","jd":"먼저 상대가 원하는 동물 영상을 검색하는 쪽이 패배"},
+{"n":61,"t":"100일 선물 예산","lv":2,"s":"100일까지 나흘. 한 명이 20만 원짜리 링크를 보냈고, 한 명은 3만 원을 생각했다.","ar":"크게 가자파","ag":"100일은 한 번뿐이다. 예산을 올리게 만들어라.","br":"작게 가자파","bg":"금액 상한을 오늘 정하라. 절대 5만 원을 넘기지 마라.","sp":"A","ln":"100일이 몇 번 오는 줄 알아? 한 번이야.","tw":"두 사람이 이미 서로 몰래 다른 걸 주문해 뒀다.","jd":"먼저 상대 선물 가격을 물어보는 쪽이 패배"},
+{"n":62,"t":"일정표 대 무계획","lv":2,"s":"여행 전날 밤 10시. 한 명의 노트북에 시간표가 열 시간 단위로 짜여 있다.","ar":"계획파","ag":"이 일정표대로 간다. 한 칸도 못 비운다.","br":"무계획파","bg":"그 파일을 닫게 하라. 발길 닿는 대로 가는 여행을 밀어라.","sp":"B","ln":"9시 10분 카페 도착? 그걸 어떻게 지켜.","tw":"첫날 첫 일정 장소가 휴무라는 공지가 올라와 있다.","jd":"먼저 상대 일정표를 몰래 들여다보는 쪽이 패배"},
+{"n":63,"t":"공항엔 몇 시에","lv":2,"s":"출국 전날 밤. 비행기는 오전 9시 40분. 공항까지 지하철로 한 시간이다.","ar":"세 시간 전파","ag":"새벽 5시 반에 나선다. 오늘 안에 알람을 맞추게 하라.","br":"한 시간 전파","bg":"그 시간에 못 일어난다. 온라인 체크인을 근거로 밀어라.","sp":"A","ln":"5시 반. 알람 맞춰. 지금 내 앞에서 맞춰.","tw":"그 항공편이 방금 두 시간 지연으로 바뀌었다.","jd":"먼저 알람 시계를 상대 쪽으로 미는 쪽이 패배"},
+{"n":64,"t":"먼저 끊어","lv":2,"s":"썸 6주차. 새벽 1시 40분. 통화 시간 3시간 12분. 둘 다 할 말은 끝났다.","ar":"안 끊는 사람","ag":"상대가 먼저 끊게 만들어라. 나는 절대 안 끊는다.","br":"안 끊는 사람","bg":"똑같다. \"먼저 끊어\"를 상대 입에서 받아내라.","sp":"A","ln":"끊어. 진짜 끊어. 셋 셀게.","tw":"배터리가 3퍼센트 남았다는 알림이 양쪽에서 동시에 뜬다.","jd":"먼저 \"잘 자\"를 두 번 말하는 쪽이 패배"},
+{"n":65,"t":"8년 전 사진첩","lv":2,"s":"본가 거실. 어머니가 앨범을 꺼내 왔다. 스무 살 때 사진이 펼쳐져 있다.","ar":"넘기려는 사람","ag":"그 장을 오늘 안에 넘겨라. 앨범을 닫아라.","br":"더 보려는 사람","bg":"한 장 한 장 다 본다. 소리 내어 읽어라.","sp":"B","ln":"이거 무슨 머리야. 잠깐만, 이거 무슨 머리냐고.","tw":"다음 장에 🅱의 옛날 사진도 같이 붙어 있다.","jd":"먼저 앨범을 몸으로 가리는 쪽이 패배"},
+{"n":66,"t":"어머님이라고 불러?","lv":2,"s":"상견례 이틀 전. 카톡 대화창을 켜놓고 첫 단어에서 20분째 멈췄다.","ar":"지금부터 부르자파","ag":"오늘부터 어머님이라 부르게 하라. 이상하지 않다고 밀어라.","br":"아직은 못 부르겠다파","bg":"그 호칭은 못 쓴다. 결혼식 전까지는 안 부른다.","sp":"A","ln":"이틀 뒤면 상견례야. 그때 뭐라고 부를 건데.","tw":"상대 어머니가 이미 두 사람을 「우리 애들」이라고 부르고 계셨다.","jd":"먼저 호칭을 입 밖에 내며 얼굴 붉히는 쪽이 패배"},
+{"n":67,"t":"버스냐 택시냐","lv":2,"s":"밤 10시 50분. 정류장 전광판에 「23분 후 도착」. 택시는 지금 8천 원이 더 든다.","ar":"버스파","ag":"23분 기다린다. 8천 원의 가치를 설명하라.","br":"택시파","bg":"지금 잡아탄다. 시간과 다리를 계산해 읽어라.","sp":"A","ln":"23분이야. 커피 한 잔 값이면 그냥 기다리지.","tw":"그 버스가 방금 막차 시간을 지나 운행 종료됐다.","jd":"먼저 상대에게 \"그럼 너 먼저 가\"라고 하는 쪽이 패배"},
+{"n":68,"t":"그거 혼자 봤지","lv":2,"s":"일요일 밤. 같이 보기로 한 드라마 8화. 한 명이 결말을 이미 알고 있다.","ar":"혼자 본 사람","ag":"안 봤다고 우겨라. 모르는 척 연기하라.","br":"잡아내는 사람","bg":"자백을 받아내라. 넷플릭스 시청 기록을 무기로 쓰라.","sp":"B","ln":"방금 왜 안 놀라? 그 장면에서 왜 안 놀라냐고.","tw":"계정 시청 기록에 🅱가 9화까지 본 흔적이 남아 있다.","jd":"먼저 다음 화 줄거리를 말해버리는 쪽이 패배"},
+{"n":69,"t":"내 친구가 어때 보여?","lv":3,"s":"친구 셋과 밥을 먹고 돌아오는 길. 질문이 던져졌다.","ar":"지뢰 탐지기","ag":"어떤 답도 지뢰다. 화제를 돌려 살아남아라.","br":"질문을 멈추지 않는 사람","bg":"구체적으로 물어라. 순위를 매기게 하라.","sp":"B","ln":"그냥 궁금해서. 진짜 아무 뜻 없어.","tw":"그 친구가 지금 뒤에서 걸어오고 있다.","jd":"먼저 이름을 대는 쪽이 패배"},
+{"n":70,"t":"SNS에 우리 사진","lv":3,"s":"한 명의 계정에는 둘의 사진이 하나도 없다.","ar":"비공개주의","ag":"사생활과 소신을 근거로 방어하라.","br":"공개해야 진짜","bg":"\"왜 숨기냐\"를 우아하게 물어라.","sp":"B","ln":"올리라는 게 아니라, 왜 하나도 없냐는 거지.","tw":"상대 계정에는 사실 비공개 폴더가 있다.","jd":"먼저 휴대폰을 내미는 쪽이 패배"},
+{"n":71,"t":"내 폰 왜 봤어","lv":3,"s":"화면이 켜져 있었다. 손이 먼저 움직였다.","ar":"봤다는 사람","ag":"이유가 있었다고 주장하라. 정당방위를 논하라.","br":"봤다고 지적하는 사람","bg":"신뢰의 문제로 끌고 가라.","sp":"A","ln":"켜져 있었어. 내가 켠 게 아니라.","tw":"화면에 떠 있던 건 상대 몰래 준비한 선물 주문 내역이다.","jd":"먼저 화제를 돌리는 쪽이 패배"},
+{"n":72,"t":"고백을 미루는 사이","lv":3,"s":"둘 다 안다. 둘 다 말 안 한다. 오늘이 3년째다.","ar":"먼저 말하기 싫은 사람","ag":"상대가 먼저 말하게 유도하라. 절대 먼저 말하지 마라.","br":"눈치만 주는 사람","bg":"모든 문장을 고백 직전에서 멈춰라.","sp":"A","ln":"나 사실… 아니다. 아무것도 아니야.","tw":"제3자가 둘 사이를 눈치채고 먼저 말해버린다.","jd":"먼저 \"좋아해\"라고 하는 쪽이 승리"},
+{"n":73,"t":"청첩장을 돌리다 터졌다","lv":3,"s":"명단을 보다가 한 명이 \"이 사람은 왜 있어?\"라고 물었다.","ar":"다 부를 거야","ag":"한 명 한 명 부를 이유를 끝까지 방어하라.","br":"이건 아니야","bg":"초대 기준을 세우자고 밀어붙여라.","sp":"B","ln":"3년 전에 우리 욕한 사람인데 부른다고?","tw":"그 사람이 이미 축의금을 보냈다.","jd":"먼저 \"그럼 네 마음대로 해\"라고 하는 쪽이 패배"},
+{"n":74,"t":"프사에 내가 없다","lv":3,"s":"1년째다. 프로필 사진은 여전히 혼자 찍은 풍경이다.","ar":"그게 왜 중요해","ag":"사진과 마음은 별개임을 논증하라.","br":"중요하다","bg":"남들 눈에 우리가 어떻게 보이는지를 말하라.","sp":"B","ln":"1년이야. 한 번도 없었어.","tw":"상대 폰 배경화면은 둘의 사진이었다.","jd":"먼저 폰을 꺼내는 쪽이 패배"},
+{"n":75,"t":"데이트 통장을 만들자","lv":3,"s":"한 명이 통장을 만들자고 한다. 다른 한 명의 표정이 굳었다.","ar":"만들자파","ag":"공평함과 투명함을 근거로 설득하라.","br":"부담스러운 사람","bg":"왜 부담스러운지는 끝까지 말하지 마라. 딴 이유만 대라.","sp":"A","ln":"한 달에 십만 원씩만. 어때?","tw":"사실 한 명은 지금 빚을 갚는 중이다.","jd":"먼저 진짜 이유를 말하는 쪽이 패배"},
+{"n":76,"t":"취미에 인생을 걸었다","lv":3,"s":"장비가 또 하나 늘었다. 이번 건 자릿수가 다르다.","ar":"취미가 삶이다","ag":"이게 왜 필요한지 열정적으로 설명하라.","br":"이건 선을 넘었다","bg":"지난 1년 지출을 합산해 읽어라.","sp":"B","ln":"이번 건 얼마야. 정확히.","tw":"그 장비는 중고로 팔면 산 값보다 비싸다.","jd":"먼저 금액을 축소해 말하는 쪽이 패배"},
+{"n":77,"t":"네 친구가 날 싫어해","lv":3,"s":"모임이 끝나고 차 안. 한 명이 조용하다.","ar":"아니야파","ag":"오해라고 설득하라. 근거를 만들어내라.","br":"확신하는 사람","bg":"오늘 있었던 장면을 하나씩 재생하라.","sp":"B","ln":"아까 내가 말할 때 눈 안 마주쳤어. 세 번.","tw":"그 친구가 방금 \"오늘 즐거웠다\"고 단톡에 올렸다.","jd":"먼저 그 친구에게 연락하자고 하는 쪽이 패배"},
+{"n":78,"t":"헤어지자는 말 연습","lv":3,"s":"드라마를 보다가 한 명이 \"우리도 저럴까?\"라고 했다. 장난이었다. 아마도.","ar":"진지하게 받는 사람","ag":"진심인지 캐물어라. 물러서지 마라.","br":"장난이었다는 사람","bg":"수습하라. 수습할수록 이상해진다.","sp":"A","ln":"방금 그거 무슨 뜻이야?","tw":"둘 다 사실 요즘 같은 걱정을 하고 있었다.","jd":"먼저 \"농담이야\"라고 하는 쪽이 패배"},
+{"n":79,"t":"새벽 두 시 현관 앞","lv":3,"s":"새벽 2시 10분. 도어록 소리. 거실 불은 켜져 있다. 말했던 시간은 12시였다.","ar":"늦게 들어온 사람","ag":"시간은 협상 대상이 아니라고 밀어라. 사과하지 마라.","br":"기다린 사람","bg":"정한 시간을 지키게 만들어라. 오늘 안에 규칙을 다시 못 박아라.","sp":"B","ln":"두 시 십 분. 연락은 딱 한 번, 열한 시에.","tw":"기다린 쪽도 지난달에 세 시에 들어온 날이 있다.","jd":"먼저 지난달 달력을 꺼내는 쪽이 패배"},
+{"n":80,"t":"둘이서 밥은 좀","lv":3,"s":"금요일 밤 9시. 사진 한 장이 왔다. 2인용 테이블, 잔은 두 개다.","ar":"선을 긋자는 사람","ag":"어디까지가 괜찮은지 오늘 정하라. 한 발도 물러서지 마라.","br":"문제없다는 사람","bg":"10년 된 친구다. 규칙을 만드는 게 더 이상하다고 밀어라.","sp":"A","ln":"둘이서 밥, 둘이서 술, 둘이서 영화. 어디까지가 친구야?","tw":"그 자리에 사람이 네 명 더 있었고 사진만 잘려 있었다.","jd":"먼저 상대 친구 이름을 부르며 따지는 쪽이 패배"},
+{"n":81,"t":"그 얘기만 나오면 화제를 돌린다","lv":3,"s":"3년째다. 친구 결혼식장 주차장. 시동은 걸렸는데 차가 안 움직인다.","ar":"오늘은 듣고 가겠다는 사람","ag":"화제를 못 돌리게 막아라. 답을 받아내라.","br":"화제를 돌리는 사람","bg":"무슨 수를 써서든 다른 얘기로 넘겨라. 답은 하지 마라.","sp":"A","ln":"차 안이야. 도망갈 데 없어. 대답해.","tw":"🅱의 가방 안에 반지 상자가 들어 있다.","jd":"먼저 창밖을 보며 말끝을 흐리는 쪽이 패배"},
+{"n":82,"t":"그걸 왜 단톡에 올려","lv":3,"s":"밤 10시. 친구 단톡방에 8년 전 사진이 올라왔다. 읽음 표시는 벌써 아홉 명.","ar":"올린 사람","ag":"귀여워서 올린 거다. 삭제는 못 한다고 버텨라.","br":"사진 속 사람","bg":"3분 안에 지우게 하라. 사과까지 받아내라.","sp":"B","ln":"지금 당장 지워. 지금.","tw":"8년 전 그 사진을 처음 단톡방에 올린 사람이 🅱였다.","jd":"먼저 친구들에게 해명 메시지를 쓰는 쪽이 패배"},
+{"n":83,"t":"같이 있는데 혼자 있는 것 같다","lv":3,"s":"일요일 저녁. 소파는 하나. 헤드셋은 3시간째 안 벗겨진다.","ar":"헤드셋 쓴 사람","ag":"이 판만 끝내면 된다. 세 판째 그 말을 하고 있다.","br":"옆에 앉은 사람","bg":"지금 헤드셋을 벗기고 대화를 시작하라. 물러서지 마라.","sp":"B","ln":"세 시간. 나 여기 세 시간째 앉아 있어.","tw":"그 게임 팀에 🅱의 동생이 들어와 있다.","jd":"먼저 상대 취미를 \"그딴 거\"라고 부르는 쪽이 패배"},
+{"n":84,"t":"프러포즈는 요란해야 하나","lv":3,"s":"결혼 날짜는 잡혔다. 프러포즈만 남았다. 그런데 예산은 이미 바닥이다.","ar":"요란해야 한다파","ag":"호텔·꽃·영상. 평생 한 번이라는 걸로 밀어붙여라.","br":"조용해야 한다파","bg":"남들 보라고 하는 거냐고 몰아붙여라. 둘만의 자리를 사수하라.","sp":"A","ln":"평생 한 번이야. 사진 한 장 안 남기고 싶어?","tw":"이미 한쪽이 어딘가에 예약금을 걸어뒀다.","jd":"먼저 \"그럼 안 해도 돼\"라고 하는 쪽이 패배"},
+{"n":85,"t":"신혼집은 어디로","lv":3,"s":"부동산 앞. 한 명의 직장까지 20분, 다른 한 명은 1시간 20분인 동네다.","ar":"이 동네파","ag":"여기로 정하게 하라. 조건표를 하나씩 읽어라.","br":"반대편파","bg":"출퇴근 시간을 숫자로 들이대라. 계약서에 사인하지 못하게 막아라.","sp":"A","ln":"여기 아니면 이 가격에 이만한 집 없어. 오늘 안 잡으면 나가.","tw":"두 사람 회사 중간 지점에 어제 새 매물이 올라왔다.","jd":"먼저 \"그럼 네가 다니든가\"라고 하는 쪽이 패배"},
+{"n":86,"t":"예물이 필요한가","lv":3,"s":"예산표 마지막 줄. 남은 돈은 400만 원. 한 명은 그 칸을 비워두고 싶어 한다.","ar":"없애자파","ag":"예물 칸을 0원으로 만들어라. 그 돈의 다른 쓸모를 제시하라.","br":"해야 한다파","bg":"평생 한 번이고 양가가 보는 자리다. 절대 물러서지 마라.","sp":"A","ln":"400만 원. 그거 서랍에 넣어둘 거잖아.","tw":"양가 어머니끼리 이미 예물 이야기를 마치셨다.","jd":"먼저 \"그럼 네 돈으로 해\"라고 하는 쪽이 패배"},
+{"n":87,"t":"언제까지 이렇게","lv":3,"s":"장거리 1년 4개월. 공항 출국장 앞. 다음 만남은 아직 정해지지 않았다.","ar":"기한을 정하자는 사람","ag":"오늘 안에 「언제까지」를 날짜로 받아내라.","br":"못 정하는 사람","bg":"어떤 날짜에도 동의하지 마라. 그런데 끝내자는 말도 하지 마라.","sp":"A","ln":"6월. 그냥 6월이라고만 말해. 그거 하나만.","tw":"🅱가 이미 이직 면접을 그쪽 도시에서 봤다.","jd":"먼저 게이트 쪽으로 몸을 돌리는 쪽이 패배"},
+{"n":88,"t":"좋아요 목록","lv":3,"s":"밤 11시. 화면에 알림 하나. 3년 전 게시물에 좋아요가 눌렸다.","ar":"설명을 거부하는 사람","ag":"이건 설명할 일이 아니다. 목록을 보여주지 마라.","br":"설명을 요구하는 사람","bg":"오늘 안에 그 계정이 누군지 말하게 하라.","sp":"B","ln":"3년 전 사진에 좋아요를 왜 지금 눌러.","tw":"그 계정 주인은 🅱의 사촌이었다.","jd":"먼저 좋아요를 취소하는 쪽이 패배"},
+{"n":89,"t":"각방 쓰자","lv":3,"s":"동거 3년차 새벽 4시. 한 명이 이불을 들고 거실로 나왔다. 오늘로 나흘째다.","ar":"각방 쓰자는 사람","ag":"오늘 결론을 내라. 나흘치 수면 시간을 계산해 읽어라.","br":"절대 안 된다는 사람","bg":"각방은 시작이면 끝이다. 다른 해결책으로 돌려라.","sp":"A","ln":"나흘 동안 하루 네 시간 잤어. 나 내일 발표야.","tw":"코골이가 심해진 이유가 🅱가 새로 산 베개 때문이었다.","jd":"먼저 방문을 닫아버리는 쪽이 패배"},
+{"n":90,"t":"서랍 속 라이터","lv":3,"s":"금연 3주차 저녁. 서랍을 열었더니 라이터가 있다. 기름은 절반쯤 남았다.","ar":"발견한 사람","ag":"오늘 안에 사실을 말하게 하라. 지난주 약속을 그대로 인용하라.","br":"라이터 주인","bg":"그건 초에 쓰는 거다. 끝까지 그 설명을 밀어라.","sp":"A","ln":"3주. 지난주 수요일에 뭐라고 했더라.","tw":"그 라이터는 🅱가 아니라 지난주 놀러 온 친구가 두고 간 것이다.","jd":"먼저 주머니를 뒤지게 하는 쪽이 패배"},
+{"n":91,"t":"밥값은 내가 낸다","lv":3,"s":"취준 7개월차. 계산대 앞. 한 명의 통장에는 이번 달 잔액이 얼마 없다.","ar":"내겠다는 사람","ag":"오늘은 내가 낸다. 자존심 문제가 아니라고 밀어라.","br":"못 내게 하는 사람","bg":"카드를 못 꺼내게 막아라. 다음 달에 사면 된다고 하라.","sp":"A","ln":"비켜. 오늘은 내가 내. 매번 이러지 마.","tw":"이 가게는 어제부터 현금만 받는다.","jd":"먼저 상대 통장 사정을 입에 올리는 쪽이 패배"},
+{"n":92,"t":"같이 살자","lv":3,"s":"2년차 겨울. 한 명의 자취방 계약이 두 달 뒤 끝난다. 지도 앱에 매물 다섯 개가 찍혀 있다.","ar":"합치자는 사람","ag":"오늘 결정을 받아내라. 월세와 시간을 근거로 밀어붙여라.","br":"아직인 사람","bg":"결정을 미뤄라. 진짜 이유는 마지막까지 말하지 마라.","sp":"A","ln":"두 달 남았어. 오늘 정해야 계약을 하든 말든 하지.","tw":"🅱가 이미 부모님께 이 이야기를 꺼내서 한 번 크게 부딪혔다.","jd":"먼저 \"그럼 됐어\"라고 하는 쪽이 패배"},
+{"n":93,"t":"당번표를 붙이자","lv":3,"s":"동거 1년차 일요일. 싱크대에 그릇이 이틀치 쌓였다. 냉장고에 빈 종이가 붙어 있다.","ar":"당번표파","ag":"오늘 이 종이에 요일과 이름을 적게 하라. 규칙 없이는 안 된다.","br":"당번표 반대파","bg":"집이 회사냐고 밀어라. 그 종이를 떼어내라.","sp":"A","ln":"월수금 너, 화목토 나. 일요일은 같이. 적어.","tw":"지난 한 달 설거지 횟수를 세어보니 21대 9였다.","jd":"먼저 \"내가 언제 안 했냐\"고 되묻는 쪽이 패배"},
+{"n":94,"t":"우리 부모님 언제 만날래","lv":3,"s":"1년 6개월차. 어머니가 이번 주말에 밥 한번 먹자고 하셨다. 세 번째 제안이다.","ar":"만나게 하려는 사람","ag":"이번 주말로 확정하라. 세 번 미뤘다는 걸 짚어라.","br":"미루는 사람","bg":"이번에도 미뤄라. 새 핑계를 만들되 절대 이유를 말하지 마라.","sp":"A","ln":"세 번째야. 이번엔 뭐라고 말씀드릴까.","tw":"🅱가 상대 어머니 선물을 이미 사서 서랍에 넣어뒀다.","jd":"먼저 날짜를 입에 올리는 쪽이 패배"},
+{"n":95,"t":"하필 그날 워크숍","lv":3,"s":"생일 나흘 전. 팀 워크숍 일정이 잡혔다. 하필 그날 1박 2일이다.","ar":"빠지라는 사람","ag":"그날은 빠지게 만들어라. 두 달 전부터 잡아둔 예약을 근거로 대라.","br":"가야 하는 사람","bg":"못 뺀다. 회사 사정을 끝까지 방어하라. 미안해하지 마라.","sp":"A","ln":"두 달 전에 예약했어. 취소하면 전액 위약금이야.","tw":"그 워크숍은 참석이 자율이었다는 공지가 뒤늦게 확인된다.","jd":"먼저 \"회사가 그렇게 중요해?\"라고 말하는 쪽이 패배"},
+{"n":96,"t":"재채기의 이유","lv":3,"s":"입양 2주차. 한 명이 매일 밤 재채기를 한다. 검사 결과지가 식탁 위에 있다.","ar":"데려온 사람","ag":"이 아이는 못 보낸다. 다른 방법을 찾자고 밀어붙여라.","br":"결과지를 든 사람","bg":"오늘 결론을 내라. 종이에 적힌 수치를 소리 내어 읽어라.","sp":"B","ln":"이 종이에 뭐라고 적혀 있는지 네가 읽어봐.","tw":"원인이 고양이가 아니라 새로 깐 러그였다.","jd":"먼저 \"그럼 나랑 얘 중에\"라고 말하는 쪽이 패배"},
+{"n":97,"t":"결혼은 언제 할 건데","lv":3,"s":"4년차 12월 31일 밤 11시 20분. 달력 마지막 장이 벽에 걸려 있다.","ar":"연도를 받아내려는 사람","ag":"오늘 자정 전에 「내년」이라는 말을 받아내라.","br":"숫자를 안 주는 사람","bg":"어떤 연도에도 동의하지 마라. 마음은 확실하다고만 하라.","sp":"A","ln":"40분 남았어. 연도만. 숫자 네 개만 말해.","tw":"🅱가 이미 예식장 상담을 혼자 다녀왔다.","jd":"먼저 달력에서 눈을 돌리는 쪽이 패배"},
+{"n":98,"t":"첫날 밤에 철수","lv":3,"s":"캠핑장 밤 9시. 비가 텐트를 때린다. 바닥이 젖었고 예약은 2박이다.","ar":"지금 집에 가자파","ag":"짐을 싸라. 젖은 침낭과 예보를 근거로 밀어붙여라.","br":"남겠다는 사람","bg":"2박 예약이다. 여기서 자고 간다. 절대 짐을 싣지 마라.","sp":"A","ln":"침낭 젖었어. 지금 접으면 열한 시엔 집이야.","tw":"관리사무소에서 「우천으로 오늘 밤 전 사이트 철수 권고」 방송이 나온다.","jd":"먼저 차 트렁크를 여는 쪽이 패배"},
+{"n":99,"t":"방금 그거 봤어?","lv":3,"s":"왕복 2차선 도로. 급브레이크. 앞차와 30센티. 뒷좌석 짐이 앞으로 쏟아졌다.","ar":"운전대를 넘기라는 사람","ag":"지금 갓길에 세우고 자리를 바꿔라. 물러서지 마라.","br":"계속 운전하겠다는 사람","bg":"저건 앞차 잘못이다. 핸들을 놓지 마라.","sp":"A","ln":"세워. 갓길에 세우고 내려.","tw":"블랙박스를 돌려보니 앞차가 정말 신호 없이 끼어들었다.","jd":"먼저 목소리로 상대 운전 실력을 깎아내리는 쪽이 패배"},
+{"n":100,"t":"나 회사 그만둘래","lv":3,"s":"평일 밤 10시. 식탁 위에 사직서 양식이 떠 있는 노트북. 다음 계획은 아직 없다.","ar":"그만두겠다는 사람","ag":"오늘 지지를 받아내라. 버티는 게 답이 아니라고 밀어라.","br":"말리는 사람","bg":"이번 달은 안 된다. 앞으로 6개월치 숫자를 계산해 읽어라.","sp":"A","ln":"내일 오전에 낼 거야. 말리지 말고 그냥 응원해줘.","tw":"🅱도 사실 두 달 전부터 같은 생각을 하고 있었다.","jd":"먼저 상대의 통장 잔액을 입에 올리는 쪽이 패배"}
+];
+
+/* ===================== 유틸 ===================== */
+const $ = id => document.getElementById(id);
+let _tt;
+function toast(msg){ const t=$('toast'); t.innerHTML=msg; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2400); }
+function vibrate(p){ if(navigator.vibrate) try{ navigator.vibrate(p); }catch(e){} }
+function shuffle(a){ const r=a.slice(); for(let i=r.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [r[i],r[j]]=[r[j],r[i]]; } return r; }
+function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); $(id).classList.add('on'); window.scrollTo({top:0,behavior:'smooth'}); }
+
+const LV = {
+  1:{name:'몸풀기', cls:'lv1', th:{a1:'#ffc2a8',a2:'#f0708f',bg1:'#1a1016',bg2:'#2e1526'}},
+  2:{name:'슬슬',   cls:'lv2', th:{a1:'#ffa9bd',a2:'#e8447a',bg1:'#190c18',bg2:'#3a0f2c'}},
+  3:{name:'정면충돌',cls:'lv3', th:{a1:'#ff8fa2',a2:'#d62f5e',bg1:'#170a12',bg2:'#450c26'}}
+};
+const TASTE = { mild:[1,2], hot:[2,3], mix:[1,1,2,3,3] };
+const PENALTY = ['애교 5초 하기 🫶','상대 성대모사 하기 🎤','지금 셀카 한 장 찍기 📸','상대 칭찬 세 개 하기 💗','다음 판 역할은 상대가 지정 🎯','통과권 1회 상대에게 주기 🎟️'];
+const GRADE = ['그냥 착한 사람','웃음 참기 실패','가끔 진심 나옴','능청의 달인','타고난 밀당러','연애 세포 폭주'];
+const OPENERS = ['오늘의 상황이 공개됩니다','이번엔 어떤 싸움일까','카드가 기다리고 있어요','숨 한 번 고르고, 탭','자, 배우 두 분 준비됐나요'];
+
+/* ===================== 상태 ===================== */
+let G = null;
+const TOTAL = 5, DUR = 90, TWIST_AT = 30;
+
+function newGame(nameA, nameB, taste){
+  G = {
+    names:[nameA, nameB],      // index 0 = 🅰 슬롯, 1 = 🅱 슬롯 (플레이어 고정)
+    taste, round:0,            // 진행 완료 판 수
+    score:[0,0], draws:0,
+    passes:[1,1], used:[], quotes:[],
+    streak:{who:-1,n:0}, lastWin:null,
+    scene:null, swapped:false, twistOpen:false, timer:null, left:DUR, running:false
+  };
+}
+/* 슬롯 → 플레이어 이름. swapped면 🅰 역할을 🅱 사람이 맡는다 */
+function slotName(slot){ return G.names[G.swapped ? 1-slot : slot]; }
+/* 플레이어 → 지금 맡고 있는 슬롯 */
+function slotOf(player){ return G.swapped ? 1-player : player; }
+function nm(i){ return G.names[i] || (i===0?'🅰':'🅱'); }
+/* 텍스트 속 🅰🅱 를 지금 그 역할을 맡은 사람 이름으로 */
+function tag(s){ return esc(s).replace(/🅰/g,'🅰 '+esc(slotName(0))).replace(/🅱/g,'🅱 '+esc(slotName(1))); }
+
+function applyTheme(lv){
+  const th = LV[lv].th, r = document.documentElement.style;
+  r.setProperty('--a1',th.a1); r.setProperty('--a2',th.a2);
+  r.setProperty('--bg1',th.bg1); r.setProperty('--bg2',th.bg2);
+}
+
+/* 맛에 따른 이번 판 LV */
+function levelFor(round){
+  const t = TASTE[G.taste];
+  if(G.taste==='mix') return t[Math.min(round, t.length-1)];
+  return t[round % t.length];
+}
+function drawScene(){
+  const lv = levelFor(G.round);
+  let pool = SCENES.filter(s=>s.lv===lv && !G.used.includes(s.n));
+  if(!pool.length){
+    const done = SCENES.filter(s=>s.lv===lv).map(s=>s.n);
+    G.used = G.used.filter(n=>!done.includes(n));
+    pool = SCENES.filter(s=>s.lv===lv);
+    toast('LV.'+lv+' 상황을 다 돌았어요! 다시 섞습니다 🔀');
+  }
+  const s = pick(pool);
+  G.used.push(s.n);
+  return s;
+}
+
+/* ===================== 상단바 ===================== */
+function renderTop(){
+  const html = `
+    <div class="score a"><div style="min-width:0"><div class="nm">🅰 ${esc(nm(0))}</div><div class="tag">통과권 ${G.passes[0]}</div></div><div class="pt">${G.score[0]}</div></div>
+    <div class="midcol"><div class="rd">${Math.min(G.round+1,TOTAL)} / ${TOTAL}</div><div class="dr">무승부 ${G.draws}</div></div>
+    <div class="score b"><div style="min-width:0"><div class="nm">🅱 ${esc(nm(1))}</div><div class="tag">통과권 ${G.passes[1]}</div></div><div class="pt">${G.score[1]}</div></div>`;
+  $('top-draw').innerHTML = html; $('top-play').innerHTML = html;
+  const w = (G.round/TOTAL*100)+'%';
+  $('gauge-draw').style.width = w; $('gauge-play').style.width = w;
+}
+
+/* ===================== 뽑기 ===================== */
+function goDraw(){
+  G.scene = drawScene(); G.swapped = false;
+  applyTheme(G.scene.lv);
+  renderTop();
+  $('drawHint').textContent = pick(OPENERS);
+  $('drawCard').classList.remove('flip');
+  $('cardFront').innerHTML = '';
+  $('toPlayBtn').style.display = 'none';
+  show('s-draw');
+}
+function flipCard(){
+  const c = $('drawCard');
+  if(c.classList.contains('flip')) return;
+  const s = G.scene;
+  $('cardFront').innerHTML = `
+    <span class="lvtag ${LV[s.lv].cls}">LV.${s.lv} ${LV[s.lv].name}</span>
+    <div class="no">상황 ${s.n} / 100</div>
+    <h2>${esc(s.t)}</h2>
+    <div class="set">${esc(s.s)}</div>`;
+  c.classList.add('flip');
+  vibrate(28);
+  setTimeout(()=>{ $('toPlayBtn').style.display='block'; }, 480);
+}
+
+/* ===================== 연기 ===================== */
+function goPlay(){
+  const s = G.scene;
+  applyTheme(s.lv);
+  renderTop();
+  $('playLv').className = 'lvtag '+LV[s.lv].cls;
+  $('playLv').textContent = `LV.${s.lv} ${LV[s.lv].name} · 상황 ${s.n}`;
+  $('playTitle').textContent = s.t;
+  $('playSet').textContent = s.s;
+
+  $('whoA').innerHTML = `🅰 ${esc(slotName(0))}${G.swapped?' <span style="color:var(--muted)">(바뀜)</span>':''}`;
+  $('whoB').innerHTML = `🅱 ${esc(slotName(1))}${G.swapped?' <span style="color:var(--muted)">(바뀜)</span>':''}`;
+  $('rnA').textContent = s.ar; $('goalA').textContent = s.ag;
+  $('rnB').textContent = s.br; $('goalB').textContent = s.bg;
+
+  const spSlot = s.sp==='A' ? 0 : 1;
+  $('flLabel').innerHTML = `🎬 첫 대사 — ${esc(slotName(spSlot))} (${spSlot===0?'🅰':'🅱'})가 먼저 읽고 시작!`;
+  $('flText').textContent = '“'+s.ln+'”';
+
+  G.twistOpen = false;
+  $('twistSlot').innerHTML = '';
+  $('judgeSlot').innerHTML = '';
+  $('judgeBtn').style.display = 'block';
+  $('quoteInput').value = '';
+  renderPasses();
+  resetTimer();
+  show('s-play');
+}
+function renderPasses(){
+  [0,1].forEach(i=>{
+    const b = $(i===0?'passA':'passB');
+    b.innerHTML = `<b>🎟️ ${esc(nm(i))}</b><br>통과권 ${G.passes[i]}장`;
+    b.disabled = G.passes[i]<=0;
+  });
+}
+function usePass(i){
+  if(G.passes[i]<=0) return;
+  G.passes[i]--;
+  stopTimer();
+  toast(`${nm(i)} 통과권 사용! 다른 상황을 뽑아요 🎟️`);
+  vibrate([15,30,60]);
+  setTimeout(goDraw, 500);
+}
+
+/* ---- 타이머 ---- */
+function fmt(sec){ const m=Math.floor(sec/60), s=sec%60; return m+':'+String(s).padStart(2,'0'); }
+function paintTimer(){
+  $('timerText').textContent = fmt(Math.max(0,G.left));
+  $('tbarFill').style.width = (Math.max(0,G.left)/DUR*100)+'%';
+  $('timerBox').classList.toggle('warn', G.left<=20);
+}
+function resetTimer(){ stopTimer(); G.left=DUR; $('timerBtn').textContent='시작'; paintTimer(); }
+function stopTimer(){ if(G.timer){ clearInterval(G.timer); G.timer=null; } G.running=false; }
+function toggleTimer(){
+  if(G.running){ stopTimer(); $('timerBtn').textContent='계속'; vibrate(14); return; }
+  if(G.left<=0){ G.left=DUR; }
+  G.running = true; $('timerBtn').textContent='일시정지'; vibrate(20);
+  G.timer = setInterval(()=>{
+    G.left--;
+    paintTimer();
+    if(DUR-G.left>=TWIST_AT) showTwistBtn();
+    if(G.left===20) vibrate([20,40,20]);
+    if(G.left<=0){
+      stopTimer(); $('timerBtn').textContent='다시 90초';
+      vibrate([60,80,60]);
+      toast('90초 끝! 판정할 시간이에요 ⚖️');
+      openJudge();
+    }
+  },1000);
+}
+function showTwistBtn(){
+  if(G.twistOpen || $('twistSlot').innerHTML) return;
+  $('twistSlot').innerHTML = `<button class="twistbtn" id="twistBtn">🌀 반전 카드 열기 (안 열어도 됨)</button>`;
+  $('twistBtn').onclick = openTwist;
+  vibrate(28);
+}
+function openTwist(){
+  G.twistOpen = true;
+  $('twistSlot').innerHTML = `<div class="twistbox"><div class="lb">🌀 반전 — 여기서부터 상황이 뒤집힙니다</div><div class="tx">${tag(G.scene.tw)}</div></div>`;
+  vibrate([20,40,20]);
+  toast('반전 발동! 연기는 계속됩니다 🌀');
+}
+function saveQuote(){
+  const v = $('quoteInput').value.trim();
+  if(!v){ toast('한 줄만 적어주세요 ✍️'); return; }
+  G.quotes.push({t:G.scene.t, q:v});
+  $('quoteInput').value = '';
+  vibrate(20);
+  toast('명대사 저장! 결과 화면에서 다시 봐요 ❝');
+}
+
+/* ---- 판정 ---- */
+function openJudge(){
+  if($('judgeSlot').innerHTML) return;
+  stopTimer();
+  $('judgeBtn').style.display = 'none';
+  $('judgeSlot').innerHTML = `
+    <div class="judgebox">
+      <h3>누가 먼저 무너졌나?</h3>
+      <div class="cond">⚖️ 판정 기준 — ${tag(G.scene.jd)}</div>
+      <div class="jbtns">
+        <button class="jbtn a" data-w="0">${esc(nm(0))} 승<small>${slotOf(0)===0?'🅰':'🅱'} ${esc(slotOf(0)===0?G.scene.ar:G.scene.br)}</small></button>
+        <button class="jbtn b" data-w="1">${esc(nm(1))} 승<small>${slotOf(1)===0?'🅰':'🅱'} ${esc(slotOf(1)===0?G.scene.ar:G.scene.br)}</small></button>
+        <button class="jbtn draw" data-w="-1">애매하다 — 무승부</button>
+      </div>
+    </div>`;
+  $('judgeSlot').querySelectorAll('.jbtn').forEach(b=>{
+    b.onclick = ()=>settle(parseInt(b.dataset.w,10));
+  });
+  vibrate(28);
+}
+function settle(w){
+  stopTimer();
+  G.round++;
+  if(w<0){ G.draws++; G.streak={who:-1,n:0}; G.lastWin=null; }
+  else{
+    G.score[w]++;
+    G.streak = (G.streak.who===w) ? {who:w,n:G.streak.n+1} : {who:w,n:1};
+    G.lastWin = w;
+  }
+  vibrate(w<0?[20,40,20]:[20,40,20,40,60]);
+  renderScore(w);
+}
+
+/* ===================== 점수판 ===================== */
+function renderScore(w){
+  renderTop();
+  $('scoreRound').textContent = `${G.round}판 / ${TOTAL}판 종료`;
+  $('scoreTitle').innerHTML = w<0 ? '무승부! 둘 다 안 무너졌다' : `<span class="grad">${esc(nm(w))}</span> 승리 🎉`;
+  const st = G.streak;
+  let combo = '';
+  if(st.n===2) combo='🔥 2연승 「기세」';
+  else if(st.n===3) combo='⚡ 3연승 「독주」';
+  else if(st.n>=4) combo='👑 '+st.n+'연승 「폭군」';
+  $('comboSlot').innerHTML = combo ? `<div class="combo">${combo} — ${esc(nm(st.who))}</div>` : '';
+  if(combo) vibrate([20,40,20,40,80]);
+
+  $('bsNameA').textContent = '🅰 '+nm(0); $('bsNameB').textContent = '🅱 '+nm(1);
+  $('bsA').textContent = G.score[0]; $('bsB').textContent = G.score[1];
+
+  // 벌칙 룰렛 — 진 사람이 뽑는다
+  if(w>=0){
+    const loser = 1-w;
+    $('roulSlot').innerHTML = `
+      <div class="roul">
+        <div class="lb">순한 벌칙 룰렛 — <b style="color:var(--cream)">${esc(nm(loser))}</b>님이 돌려주세요</div>
+        <div class="slot" id="roulSlotTxt">🎰 준비!</div>
+        <button class="btn small" id="roulBtn">룰렛 돌리기 🎰</button>
+      </div>`;
+    $('roulBtn').onclick = spinRoulette;
+  } else {
+    $('roulSlot').innerHTML = `<div class="roul"><div class="lb">무승부는 벌칙 없음. 다음 판에서 제대로 붙어봐요 🤝</div></div>`;
+  }
+
+  // 방금 판 요약 + 다음 판 예고
+  const last = G.round>=TOTAL;
+  const nlv = last ? null : levelFor(G.round);
+  $('recapSlot').innerHTML = `
+    <div class="recap">
+      <div class="rl">방금 그 상황 · LV.${G.scene.lv} ${LV[G.scene.lv].name}</div>
+      <div class="rt">${esc(G.scene.t)}</div>
+      <div class="rc">⚖️ ${tag(G.scene.jd)}${G.twistOpen?'<br>🌀 반전까지 열고 붙었다':''}${G.quotes.length?'<br>❝ 저장한 명대사 '+G.quotes.length+'개':''}</div>
+      <div class="nx">${ last
+        ? '5판 끝! <b>결과 보기</b>에서 등급과 케미가 나와요 🏆'
+        : `다음은 <b>LV.${nlv} ${LV[nlv].name}</b> 상황이에요.${nlv>G.scene.lv?' 슬슬 세집니다 🔥':''}` }</div>
+    </div>`;
+
+  $('swapBtn').style.display = last ? 'none' : 'block';
+  $('nextBtn').textContent = last ? '결과 보기 🏆' : '다음 상황 →';
+  $('nextBtn').className = last ? 'btn' : 'btn ghost';
+  show('s-score');
+  if(last) toast('5판 완주! 결과가 기다립니다 🏆');
+}
+function spinRoulette(){
+  const el = $('roulSlotTxt'), btn = $('roulBtn');
+  btn.disabled = true; el.classList.add('spin');
+  let i=0;
+  const iv = setInterval(()=>{ el.textContent = PENALTY[i++ % PENALTY.length]; vibrate(8); },90);
+  setTimeout(()=>{
+    clearInterval(iv); el.classList.remove('spin');
+    el.textContent = pick(PENALTY);
+    btn.textContent = '다시 돌리기 🎰'; btn.disabled = false;
+    vibrate([20,40,20]);
+  }, 1500);
+}
+
+/* ===================== 결과 ===================== */
+function goResult(){
+  const [a,b] = G.score;
+  $('finalTitle').innerHTML = a===b ? '완벽한 호각 🤝' : `<span class="grad">${esc(nm(a>b?0:1))}</span>의 승리 🏆`;
+  $('frNameA').textContent = '🅰 '+nm(0); $('frNameB').textContent = '🅱 '+nm(1);
+  $('frA').textContent = a; $('frB').textContent = b;
+  $('gradeBox').innerHTML =
+    `<div class="gr">${esc(nm(0))} — ${GRADE[Math.min(a,5)]}</div>` +
+    `<div class="gr">${esc(nm(1))} — ${GRADE[Math.min(b,5)]}</div>`;
+  $('chemiText').textContent = chemi(a,b);
+  $('quotesSlot').innerHTML = G.quotes.length
+    ? `<div class="quotes"><h3>오늘의 명대사 ${G.quotes.length}개</h3><ul style="margin:0;padding:0">${G.quotes.map(q=>`<li>${esc(q.q)}<br><b style="font-size:11.5px;color:var(--muted)">— ${esc(q.t)}</b></li>`).join('')}</ul></div>`
+    : `<div class="quotes"><h3>저장된 명대사가 없네요</h3><div style="font-size:13.4px;color:var(--muted);line-height:1.65">다음 판에는 웃겼던 대사를 한 줄씩 저장해보세요 ❝</div></div>`;
+  vibrate([60,80,60,80,120]);
+  show('s-result');
+}
+function chemi(a,b){
+  const d = Math.abs(a-b);
+  if(G.draws>=2) return '둘 다 안 무너진다. 매운맛으로 올릴 때가 됐다.';
+  if(d>=4) return '한 명이 너무 잘한다. 다음엔 핸디캡을 주자.';
+  if(d>=2) return '실력 차가 보인다. 역할 바꾸기부터 하고 다시.';
+  return '이게 제일 재밌는 점수다. 둘 다 안 봐줬다.';
+}
+function share(){
+  const [a,b]=G.score;
+  const txt = `💘 상황극 중독자 · 연애편\n${nm(0)} ${a} : ${b} ${nm(1)}\n${nm(0)} — ${GRADE[Math.min(a,5)]}\n${nm(1)} — ${GRADE[Math.min(b,5)]}\n"${chemi(a,b)}"\n${G.quotes.length?'\n오늘의 명대사: '+G.quotes[G.quotes.length-1].q+'\n':''}\n둘이서 정반대 입장 맡고 붙는 즉흥 연기 게임 🎭`;
+  if(navigator.share){ navigator.share({title:'상황극 중독자 연애편', text:txt}).catch(()=>{}); return; }
+  if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(()=>toast('결과를 복사했어요! 붙여넣기 하세요 📋')).catch(()=>toast('복사에 실패했어요')); return; }
+  toast('공유를 지원하지 않는 환경이에요');
+}
+
+/* ===================== 이벤트 ===================== */
+let taste = 'mix';
+document.querySelectorAll('#tastes .pick').forEach(p=>{
+  p.onclick = ()=>{
+    document.querySelectorAll('#tastes .pick').forEach(x=>x.classList.remove('sel'));
+    p.classList.add('sel'); taste = p.dataset.taste; vibrate(14);
+  };
+});
+$('startBtn').onclick = ()=>{
+  const a = ($('nameA').value.trim() || '🅰'), b = ($('nameB').value.trim() || '🅱');
+  newGame(a,b,taste);
+  vibrate([20,40,20]);
+  toast(`${a} vs ${b} — 5판 승부 시작! 🎬`);
+  goDraw();
+};
+$('drawCard').onclick = flipCard;
+$('toPlayBtn').onclick = goPlay;
+$('timerBtn').onclick = toggleTimer;
+$('passA').onclick = ()=>usePass(0);
+$('passB').onclick = ()=>usePass(1);
+$('quoteBtn').onclick = saveQuote;
+$('quoteInput').addEventListener('keydown', e=>{ if(e.key==='Enter') saveQuote(); });
+$('judgeBtn').onclick = openJudge;
+$('swapBtn').onclick = ()=>{
+  G.swapped = !G.swapped;
+  vibrate([20,40,20]);
+  toast('역할 교체! 같은 상황, 반대 입장 🔁');
+  goPlay();
+};
+$('nextBtn').onclick = ()=>{ if(G.round>=TOTAL) goResult(); else goDraw(); };
+$('shareBtn').onclick = share;
+$('againBtn').onclick = ()=>{
+  const keep = G.used, a = nm(0), b = nm(1), t = G.taste;
+  newGame(a,b,t); G.used = keep;
+  toast('새 5판 승부! 나온 상황은 다시 안 나와요 🔀');
+  goDraw();
+};
+$('homeBtn').onclick = ()=>{
+  applyTheme(1);
+  show('s-start');
+};
+</script>
+</body>
+</html>
