@@ -152,6 +152,20 @@ MATERIAL_DIR = os.path.join(ROOT, "자료")
 MATERIAL_MAX = 20000
 
 
+def _cap(text, where):
+    """자료가 상한을 넘으면 잘라내되, **조용히 자르지 않는다.**
+
+    🔴 그냥 `text[:MATERIAL_MAX]` 로 자르면 뒤쪽 내용이 사라진 것을 아무도 모른다.
+       화면엔 「생산 완료」로 뜨는데 자료 후반부(예: 상황 100개 중 뒤 30개)가 통째로 빠진다.
+       자르는 순간 로그로 알려야 사람이 자료를 나누든 상한을 올리든 판단할 수 있다.
+    """
+    if len(text) > MATERIAL_MAX:
+        log(f"⚠️ 자료가 상한을 넘어 잘렸다 ({where}): {len(text)}자 → {MATERIAL_MAX}자. "
+            f"뒷부분이 생산에 반영되지 않는다 — 자료를 나누거나 MATERIAL_MAX를 올려라")
+        return text[:MATERIAL_MAX]
+    return text
+
+
 def fetch_gdoc(url):
     """링크 공유(뷰어)된 구글독스 본문을 텍스트로 받아온다. 실패 시 RuntimeError."""
     m = re.search(r"docs\.google\.com/document/d/([\w-]+)", url)
@@ -167,7 +181,7 @@ def fetch_gdoc(url):
     text = text.lstrip("﻿").strip()
     if not text or text[:1] == "<":
         raise RuntimeError("문서 대신 로그인 페이지가 왔습니다 — 공유 설정(링크 있는 모든 사용자·뷰어)을 확인하세요")
-    return text[:MATERIAL_MAX]
+    return _cap(text, "구글독스")
 
 
 # PDF·이미지 자료 지원 — Claude가 Read 도구로 직접 읽으므로 텍스트 추출 불필요
@@ -240,7 +254,7 @@ def load_material(item, slug):
             text = open(path, encoding="utf-8").read().strip()
             if text:
                 log(f"제공 자료 사용: {name} ({len(text)}자)")
-                return {"text": text[:MATERIAL_MAX]}
+                return {"text": _cap(text, name)}
     for ext in MATERIAL_FILE_EXTS:
         path = os.path.join(MATERIAL_DIR, title + ext)
         if os.path.isfile(path):
