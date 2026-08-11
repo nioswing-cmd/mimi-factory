@@ -149,7 +149,9 @@ def category_of(ytype):
 
 
 MATERIAL_DIR = os.path.join(ROOT, "자료")
-MATERIAL_MAX = 20000
+# 2026-08-11 20000 → 60000. 상황 100개짜리 자료(약 2만4천 자)가 상한에 걸려
+# 뒷부분이 통째로 잘렸다. 프롬프트가 길어지지만 Opus 5 에게는 부담이 아니다.
+MATERIAL_MAX = 60000
 
 
 def _cap(text, where):
