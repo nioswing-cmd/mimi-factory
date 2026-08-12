@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>영화속 주인공되기 · 짜릿편 — 둘이 나란히 읽는 친해지기 게임</title>
+<meta name="description" content="청춘·우정·대결·웃음. 기세가 부딪치는 장면 50개를, 둘이 배역 하나씩 맡아 소리 내어 읽는 친해지기 게임.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Jua&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#0a0f1a; --bg2:#0c1c26;
+  --accent1:#3ee0c4; --accent2:#ffd84d;
+  --cream:#e9f7f4; --muted:#7b96a6;
+  --card:#0d1723;
+  --rA:#3ee0c4; --rB:#ffd84d;
+  --now:#3ee0c4;
+  --dial:30px;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html,body{height:100%;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--cream);
+  background:
+    radial-gradient(80% 42% at 50% -6%, rgba(255,216,77,.17), transparent 62%),
+    radial-gradient(90% 55% at 8% 104%, rgba(62,224,196,.15), transparent 58%),
+    linear-gradient(172deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  transition:background .7s ease;
+  min-height:100dvh;
+  -webkit-font-smoothing:antialiased;
+}
+/* 한밤의 골목 : 젖은 아스팔트 입자 */
+body::after{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:5; opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23p)'/%3E%3C/svg%3E");
+}
+/* 골목 끝 가로등 불빛 + 사방의 어둠 */
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:4;
+  background:
+    linear-gradient(196deg, rgba(255,216,77,.09) 0%, transparent 34%),
+    radial-gradient(100% 62% at 50% 40%, transparent 34%, rgba(2,6,12,.72) 100%);
+}
+.wrap{max-width:540px; margin:0 auto; min-height:100dvh; padding:16px 16px 28px; display:flex; flex-direction:column; position:relative; z-index:6;}
+.grad{background:linear-gradient(100deg,var(--accent1),#9af0dd 34%,var(--accent2)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+h1,h2,h3{font-family:'Black Han Sans',sans-serif; font-weight:400; letter-spacing:-.01em;}
+.jua{font-family:'Jua',sans-serif;}
+.screen{display:none; animation:slideIn .32s cubic-bezier(.2,.9,.3,1); flex:1; flex-direction:column;}
+.screen.on{display:flex;}
+@keyframes slideIn{from{opacity:0; transform:translateX(16px);} to{opacity:1; transform:none;}}
+.pop{animation:pop .3s cubic-bezier(.3,1.7,.5,1);}
+@keyframes pop{0%{transform:scale(.94) skewX(-1.6deg); opacity:.2;}60%{transform:scale(1.025) skewX(.4deg);}100%{transform:scale(1) skewX(0); opacity:1;}}
+
+/* ===== 상단 바 ===== */
+.topbar{display:flex; align-items:center; gap:11px; margin-bottom:14px; min-height:34px;}
+.topbar.hide{visibility:hidden;}
+.brandpill{font-family:'Black Han Sans'; font-size:14px; padding:7px 13px; border-radius:3px; border:1.5px solid rgba(62,224,196,.35); background:rgba(62,224,196,.09); color:var(--accent1); white-space:nowrap; letter-spacing:.02em;}
+.chem-wrap{flex:1;}
+.chem-top{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:5px;}
+.chem-label{font-size:12px; color:var(--muted); letter-spacing:.06em;}
+.chem-val{font-family:'Black Han Sans'; font-size:15px; color:var(--accent2);}
+.gauge{height:10px; border-radius:2px; background:rgba(233,247,244,.09); overflow:hidden; border:1px solid rgba(233,247,244,.06);}
+.gaugefill{height:100%; width:0%; background:linear-gradient(90deg,var(--accent1),var(--accent2)); box-shadow:0 0 16px 1px var(--accent1); transition:width .45s cubic-bezier(.2,.9,.3,1), box-shadow .4s;}
+
+/* ===== 인트로 ===== */
+.intro{flex:1; display:flex; flex-direction:column; justify-content:center; gap:15px; text-align:center;}
+.filmstrip{font-size:12px; letter-spacing:.5em; text-indent:.5em; color:var(--muted); opacity:.85;}
+.title-lg{font-size:min(16vw,60px); line-height:1.0;}
+.ep{display:inline-block; font-family:'Black Han Sans'; font-size:17px; padding:8px 20px; border-radius:3px; background:linear-gradient(100deg,var(--accent1),var(--accent2)); color:#06121b; box-shadow:0 0 26px -6px var(--accent1); letter-spacing:.03em;}
+.subtitle{font-size:15.5px; color:var(--muted); line-height:1.75; word-break:keep-all;}
+.subtitle b{color:var(--cream); font-weight:700;}
+.howto{text-align:left; background:rgba(62,224,196,.045); border:1px solid rgba(62,224,196,.16); border-left:4px solid var(--accent1); border-radius:3px; padding:16px 18px; font-size:14.5px; color:var(--muted); line-height:1.9; word-break:keep-all;}
+.howto b{color:var(--cream); font-weight:700;}
+.howto li{list-style:none; padding-left:16px; text-indent:-16px;}
+.howto li::before{content:"› "; color:var(--accent2); font-weight:700;}
+.names{display:flex; gap:10px; align-items:center;}
+.name-in{flex:1 1 0; min-width:0; width:100%; background:rgba(233,247,244,.05); border:2px solid rgba(233,247,244,.13); border-radius:3px; padding:14px 12px; color:var(--cream); font-size:16px; font-family:'Noto Sans KR'; font-weight:700; text-align:center; transition:border-color .18s, box-shadow .18s;}
+.name-in::placeholder{color:#5d7686; font-weight:400;}
+.name-in:focus{outline:none;}
+.name-in.a:focus{border-color:var(--rA); box-shadow:0 0 18px -6px var(--rA);}
+.name-in.b:focus{border-color:var(--rB); box-shadow:0 0 18px -6px var(--rB);}
+.sec-t{font-size:12.5px; color:var(--muted); letter-spacing:.08em; text-align:left; margin-bottom:-4px;}
+.chips{display:flex; flex-wrap:wrap; gap:7px;}
+.chip{padding:9px 13px; border-radius:3px; border:1.5px solid rgba(233,247,244,.13); background:rgba(233,247,244,.04); color:var(--muted); font-size:13.5px; font-family:inherit; cursor:pointer; transition:transform .12s cubic-bezier(.3,1.7,.5,1), background .18s, border-color .18s, color .18s;}
+.chip:active{transform:scale(.93);}
+.chip.sel{border-color:var(--accent1); background:rgba(62,224,196,.16); color:var(--cream); font-weight:700; box-shadow:0 0 16px -7px var(--accent1);}
+
+/* ===== 버튼 ===== */
+.btn{border:none; border-radius:3px; padding:18px 20px; font-family:'Black Han Sans'; font-size:19px; color:#06121b; cursor:pointer; width:100%; letter-spacing:.02em;
+  background:linear-gradient(100deg,var(--accent1),var(--accent2) 96%); box-shadow:0 0 28px -10px var(--accent1);
+  transition:transform .12s cubic-bezier(.3,1.7,.5,1), box-shadow .18s, filter .18s;}
+.btn:hover{filter:brightness(1.08); box-shadow:0 0 32px -8px var(--accent2);}
+.btn:active{transform:scale(.96);}
+.btn.ghost{background:rgba(233,247,244,.05); color:var(--cream); box-shadow:none; border:2px solid rgba(233,247,244,.16); font-size:16px; padding:15px;}
+.btn.ghost:hover{border-color:var(--accent1); filter:none;}
+.btn:disabled{opacity:.4; cursor:default;}
+.btn:focus-visible,.chip:focus-visible,.cb:focus-visible,.iconbtn:focus-visible,.name-in:focus-visible,.swapbtn:focus-visible{outline:3px solid #fff; outline-offset:2px;}
+.btn-row{display:flex; gap:10px;} .btn-row .btn{width:auto; flex:1;}
+.footer-actions{padding-top:14px;}
+#sceneReveal .footer-actions{margin-top:auto;}
+
+/* ===== 뽑기 ===== */
+.draw-stage{flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:18px; text-align:center;}
+.reel{width:100%; max-width:410px; height:154px; border-radius:3px; background:rgba(2,7,13,.5); border:2px solid rgba(62,224,196,.18); display:flex; align-items:center; justify-content:center; overflow:hidden; box-shadow:inset 0 0 44px -18px var(--accent1);}
+.reel-text{font-family:'Black Han Sans'; font-size:27px; padding:0 16px; word-break:keep-all; color:var(--accent1); line-height:1.25;}
+.reel.spin{border-color:rgba(255,216,77,.4);}
+.reel.spin .reel-text{animation:flick .07s steps(1) infinite; color:var(--accent2);}
+@keyframes flick{50%{opacity:.12; transform:translateX(-2px);}}
+.draw-hint{font-size:14.5px; color:var(--muted); line-height:1.75; word-break:keep-all;}
+
+/* ===== 장면 카드 (각진 카드) ===== */
+.card{background:linear-gradient(164deg,var(--card),rgba(4,10,17,.95)); border:2px solid rgba(62,224,196,.2); border-radius:3px; padding:21px 19px 23px; box-shadow:0 22px 54px -26px #000, 0 0 40px -22px var(--accent1); clip-path:polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));}
+.card-head{display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+.tag{font-size:12.5px; padding:5px 11px; border-radius:2px; background:rgba(255,216,77,.13); border:1px solid rgba(255,216,77,.3); color:var(--accent2); white-space:nowrap; font-weight:500;}
+.no{font-size:12px; color:var(--muted); margin-left:auto; letter-spacing:.06em;}
+.movie{font-family:'Black Han Sans'; font-size:31px; line-height:1.14; margin:12px 0 7px; word-break:keep-all;}
+.situation{font-size:14.5px; color:var(--muted); line-height:1.75; word-break:keep-all; margin-bottom:16px;}
+.roles{display:flex; gap:9px; align-items:stretch;}
+.role{flex:1; text-align:center; border-radius:3px; padding:13px 8px; font-size:14px; border:2px solid rgba(233,247,244,.1); background:rgba(233,247,244,.04); line-height:1.5; word-break:keep-all; font-weight:500;}
+.role .who{font-family:'Black Han Sans'; font-size:16px; display:block; margin-bottom:4px; font-weight:400;}
+.role.rA{border-color:rgba(62,224,196,.5); background:rgba(62,224,196,.09);} .role.rA .who{color:var(--rA);}
+.role.rB{border-color:rgba(255,216,77,.5); background:rgba(255,216,77,.09);} .role.rB .who{color:var(--rB);}
+.swapbtn{display:block; margin:13px auto 0; background:rgba(233,247,244,.05); border:1.5px solid rgba(233,247,244,.16); color:var(--muted); font-size:14px; font-family:inherit; padding:10px 17px; border-radius:3px; cursor:pointer; transition:transform .12s cubic-bezier(.3,1.7,.5,1), border-color .18s, color .18s;}
+.swapbtn:active{transform:scale(.93);}
+.swapbtn:hover{border-color:var(--accent2); color:var(--cream);}
+
+/* ===== 연기 화면 ===== */
+.stagebox{flex:1; display:flex; flex-direction:column; border-radius:3px; border:3px solid var(--now); background:linear-gradient(172deg,rgba(233,247,244,.045),rgba(2,7,13,.3)); box-shadow:0 0 40px -12px var(--now), inset 0 0 52px -24px var(--now); padding:17px 16px 16px; transition:border-color .28s ease, box-shadow .28s ease;}
+.act-top{display:flex; align-items:center; gap:8px;}
+.dots{display:flex; gap:6px; margin-left:auto;}
+.dot{width:16px; height:5px; border-radius:1px; background:rgba(233,247,244,.16); transition:background .22s, transform .22s;}
+.dot.on{background:var(--now); transform:scaleY(1.6);}
+.mini-title{font-size:12.5px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.mini-sit{font-size:12.5px; color:var(--muted); opacity:.75; line-height:1.55; margin:6px 0 13px; word-break:keep-all;}
+.turn{font-family:'Black Han Sans'; font-size:21px; color:var(--now); display:flex; align-items:center; gap:8px; margin-bottom:14px; flex-wrap:wrap; text-shadow:0 0 22px var(--now);}
+.turn .mark{font-size:25px; text-shadow:none;}
+.turn .role-of{font-size:13.5px; color:var(--muted); font-family:'Noto Sans KR'; text-shadow:none;}
+.linebox{flex:1; display:flex; flex-direction:column; justify-content:center; padding:6px 2px 12px;}
+.say{font-family:'Black Han Sans'; font-size:var(--dial); line-height:1.5; word-break:keep-all; letter-spacing:-.015em; animation:linein .28s cubic-bezier(.2,.9,.3,1);}
+@keyframes linein{from{opacity:0; transform:translateX(22px);} to{opacity:1; transform:none;}}
+.dir{margin-top:17px; font-size:14.5px; color:var(--muted); line-height:1.7; word-break:keep-all; font-style:italic;}
+.dir .dirtag{font-style:normal; font-size:11px; letter-spacing:.06em; padding:3px 9px; border-radius:2px; border:1px solid rgba(255,216,77,.32); color:var(--accent2); margin-right:7px; white-space:nowrap;}
+.dir.none{display:none;}
+.act-tools{display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;}
+.iconbtn{background:rgba(233,247,244,.05); border:1.5px solid rgba(233,247,244,.14); color:var(--muted); border-radius:3px; padding:8px 12px; font-size:13px; font-family:inherit; cursor:pointer; transition:transform .12s cubic-bezier(.3,1.7,.5,1), color .18s, border-color .18s, background .18s;}
+.iconbtn:active{transform:scale(.92);}
+.iconbtn.starred{color:var(--accent2); border-color:rgba(255,216,77,.55); background:rgba(255,216,77,.13);}
+.sizes{display:flex; gap:5px; margin-left:auto;}
+.sizes .iconbtn.sel{color:var(--cream); border-color:var(--accent1); background:rgba(62,224,196,.16);}
+
+/* ===== 케미 평가 ===== */
+.rate-stage{flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; gap:14px;}
+.rate-q{font-size:26px; line-height:1.32; word-break:keep-all;}
+.rate-sub{font-size:14.5px; color:var(--muted); line-height:1.7; word-break:keep-all;}
+.chem-btns{display:flex; gap:9px;}
+.cb{flex:1; border:2px solid rgba(233,247,244,.14); background:rgba(233,247,244,.04); border-radius:3px; padding:16px 4px; cursor:pointer; color:var(--cream); font-family:'Noto Sans KR'; transition:transform .12s cubic-bezier(.3,1.7,.5,1), background .18s, border-color .18s, box-shadow .18s;}
+.cb:active{transform:scale(.93);}
+.cb:hover{border-color:var(--accent1); box-shadow:0 0 22px -10px var(--accent1);}
+.cb .em{font-size:31px; display:block; margin-bottom:5px;}
+.cb .cl{font-size:13px; font-family:'Black Han Sans'; letter-spacing:.02em;}
+
+/* ===== 결과 ===== */
+.report{flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; gap:15px;}
+.badge{width:120px; height:120px; margin:0 auto; background:conic-gradient(from 210deg, var(--accent1), var(--accent2), #1a8f7d, var(--accent1)); display:flex; align-items:center; justify-content:center; font-size:50px; box-shadow:0 0 46px -8px var(--accent1); animation:pop .45s cubic-bezier(.3,1.7,.5,1); clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);}
+.rep-title{font-size:32px; line-height:1.14;}
+.rep-verdict{font-size:15px; color:var(--muted); line-height:1.8; word-break:keep-all;}
+.stat-row{display:flex; gap:9px;}
+.stat{flex:1; background:rgba(233,247,244,.05); border:1.5px solid rgba(233,247,244,.1); border-top:3px solid var(--accent1); border-radius:3px; padding:14px 6px;}
+.stat .sv{font-family:'Black Han Sans'; font-size:26px; line-height:1.2;} .stat .sl{font-size:11.5px; color:var(--muted); margin-top:3px;}
+.starlist{text-align:left; background:rgba(233,247,244,.04); border:1.5px solid rgba(233,247,244,.1); border-left:4px solid var(--accent2); border-radius:3px; padding:14px 16px; font-size:14px; line-height:1.95; color:var(--muted); max-height:158px; overflow-y:auto;}
+.starlist b{color:var(--cream); font-weight:700;}
+.starlist .st-h{font-family:'Black Han Sans'; color:var(--accent2); font-size:13.5px; display:block; margin-bottom:4px;}
+
+/* 토스트 */
+.toast{position:fixed; left:50%; top:72px; transform:translateX(-50%) translateY(-16px); background:rgba(7,17,26,.97); border:2px solid var(--accent1); color:var(--cream); padding:13px 21px; border-radius:3px; font-size:14.5px; opacity:0; pointer-events:none; transition:opacity .25s, transform .25s; z-index:60; max-width:90vw; text-align:center; word-break:keep-all; box-shadow:0 0 34px -12px var(--accent1);}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+/* 푸터 */
+.disclaimer{font-size:11px; color:#5d7686; text-align:center; margin-top:20px; line-height:1.7; word-break:keep-all;}
+.footer{text-align:center; margin-top:18px; padding-top:18px; border-top:1px solid rgba(233,247,244,.09);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em; background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar hide" id="topbar">
+    <div class="brandpill">🔥 짜릿편</div>
+    <div class="chem-wrap">
+      <div class="chem-top"><span class="chem-label" id="progLabel">장면 0 / 5</span><span class="chem-val" id="chemVal">🔥 케미 —</span></div>
+      <div class="gauge"><div class="gaugefill" id="gauge"></div></div>
+    </div>
+  </div>
+
+  <!-- ① 시작 -->
+  <section class="screen on" id="s-intro">
+    <div class="intro">
+      <div class="filmstrip">M I M I F A C T O R Y</div>
+      <h1 class="title-lg grad">영화속<br>주인공되기</h1>
+      <div><span class="ep">🔥 짜릿편</span></div>
+      <p class="subtitle">청춘 · 우정 · 대결 · 웃음.<br>기세가 부딪치는 <b>50장면</b>을<br>둘이 배역 하나씩 맡아 소리 내어 읽습니다.</p>
+
+      <div class="names">
+        <input class="name-in a" id="nameA" maxlength="6" placeholder="🅰 이름" autocomplete="off">
+        <input class="name-in b" id="nameB" maxlength="6" placeholder="🅱 이름" autocomplete="off">
+      </div>
+
+      <div class="sec-t">🎭 장르 고르기</div>
+      <div class="chips" id="genreChips"></div>
+
+      <div class="howto">
+        <b>이렇게 하세요</b>
+        <ul>
+          <li>폰 하나를 가운데 두고 마주 앉거나 나란히 앉습니다.</li>
+          <li>자기 차례의 대사만 소리 내어 읽습니다. 괄호 안 지문은 읽지 말고 <b>몸으로 합니다.</b></li>
+          <li>잘하려 하지 마세요. 어색한 게 정상이고, 그게 제일 웃깁니다.</li>
+          <li>낯간지러우면 <b>배역을 바꿔서</b> 다시 해보세요.</li>
+        </ul>
+      </div>
+
+      <div class="footer-actions">
+        <button class="btn" id="startBtn">🎬 장면 뽑기</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ② 뽑기 + ③ 배역 배정 -->
+  <section class="screen" id="s-draw">
+    <div class="draw-stage" id="drawStage">
+      <div class="reel" id="reel"><div class="reel-text" id="reelText">오늘의 장면은?</div></div>
+      <p class="draw-hint" id="drawHint">버튼을 누르면 장면 하나가 뽑힙니다.<br>한 번 나온 장면은 다시 나오지 않아요.</p>
+      <button class="btn" id="drawBtn">🎬 장면 뽑기</button>
+    </div>
+    <div id="sceneReveal" style="display:none; flex:1; flex-direction:column;">
+      <div class="card pop" id="sceneCard">
+        <div class="card-head">
+          <span class="tag" id="scTag"></span><span class="no" id="scNo"></span>
+        </div>
+        <h2 class="movie" id="scTitle"></h2>
+        <p class="situation" id="scSit"></p>
+        <div class="roles">
+          <div class="role rA"><span class="who" id="roleAWho">🅰</span><span id="roleAName"></span></div>
+          <div class="role rB"><span class="who" id="roleBWho">🅱</span><span id="roleBName"></span></div>
+        </div>
+        <button class="swapbtn" id="swapBtn">🔄 배역 바꾸기</button>
+      </div>
+      <p class="draw-hint" id="roleHint" style="margin:auto 0; padding:20px 6px; text-align:center;"></p>
+      <div class="footer-actions">
+        <div class="btn-row">
+          <button class="btn ghost" id="redrawBtn">🎲 다시 뽑기</button>
+          <button class="btn" id="actBtn">🎙 연기 시작</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ 연기 -->
+  <section class="screen" id="s-act">
+    <div class="stagebox" id="stagebox">
+      <div class="act-top">
+        <span class="mini-title" id="actTitle"></span>
+        <div class="dots" id="dots"></div>
+      </div>
+      <p class="mini-sit" id="actSit"></p>
+      <div class="turn" id="turn"><span class="mark">🅰</span><span id="turnName"></span><span class="role-of" id="turnRole"></span></div>
+      <div class="linebox">
+        <div class="say" id="say" aria-live="polite"></div>
+        <div class="dir none" id="dir"></div>
+      </div>
+    </div>
+    <div class="act-tools">
+      <button class="iconbtn" id="starBtn">☆ 명장면 저장</button>
+      <div class="sizes">
+        <button class="iconbtn" data-size="0">작게</button>
+        <button class="iconbtn sel" data-size="1">보통</button>
+        <button class="iconbtn" data-size="2">크게</button>
+      </div>
+    </div>
+    <div class="footer-actions">
+      <div class="btn-row">
+        <button class="btn ghost" id="prevBtn">↩ 이전 줄</button>
+        <button class="btn" id="nextBtn">다음 →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ 케미 평가 -->
+  <section class="screen" id="s-rate">
+    <div class="rate-stage">
+      <div style="font-size:44px">🔥</div>
+      <h2 class="rate-q">이 장면, 어땠어요?</h2>
+      <p class="rate-sub" id="rateSub"></p>
+      <div class="chem-btns">
+        <button class="cb" data-score="100"><span class="em">😳</span><span class="cl">심쿵</span></button>
+        <button class="cb" data-score="78"><span class="em">😂</span><span class="cl">웃참 실패</span></button>
+        <button class="cb" data-score="42"><span class="em">😐</span><span class="cl">어색</span></button>
+      </div>
+      <button class="btn ghost" id="againBtn" style="margin-top:6px">🔄 배역 바꿔 한 번 더 읽기</button>
+    </div>
+  </section>
+
+  <!-- ⑥ 결과 -->
+  <section class="screen" id="s-result">
+    <div class="report">
+      <div class="badge" id="repBadge">🔥</div>
+      <h2 class="rep-title grad" id="repTitle"></h2>
+      <p class="rep-verdict" id="repVerdict"></p>
+      <div class="stat-row">
+        <div class="stat"><div class="sv" id="stScenes">0</div><div class="sl">연기한 장면</div></div>
+        <div class="stat"><div class="sv" id="stChem">0%</div><div class="sl">우리 케미</div></div>
+        <div class="stat"><div class="sv" id="stGenre">—</div><div class="sl">잘 맞은 장르</div></div>
+      </div>
+      <div class="starlist" id="starList"></div>
+      <div class="footer-actions">
+        <button class="btn" id="moreBtn">🎬 5장면 더 하기</button>
+        <div class="btn-row" style="margin-top:9px">
+          <button class="btn ghost" id="shareBtn">🔥 결과 공유</button>
+          <button class="btn ghost" id="restartBtn">🔁 처음부터</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p class="disclaimer">모든 장면과 대사는 <b>미미팩토리 창작</b>입니다. 영화 제목·지문까지 전부 지어낸 것이며, 실제 영화 대본이나 실존 인물과는 아무 관련이 없습니다.</p>
+
+  <div class="footer">
+    <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+    <div class="mf-logo">미미팩토리</div>
+    <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =============== 데이터 : 창작 장면 50개 ===============
+   m=영화 제목(창작), g=장르 태그, gc=장르 분류, s=상황,
+   ra/rb=배역, ln=대사 4줄 {r:'a'|'b', t:대사, d:지문(선택)}
+   ※ 전부 미미팩토리 창작. 실제 영화·대본이 아님. */
+const SCENES=[
+{n:1,m:"골목의 결투",g:"🔥 액션",gc:"액션",s:"비 내리는 뒷골목. 오랜 원한의 두 사람이 마주 선다.",ra:"쫓던 자",rb:"쫓기던 자",ln:[
+ {"r": "a", "t": "3년을 기다렸다. 도망은 여기까지야.", "d": "주먹을 천천히 쥔다"},
+ {"r": "b", "t": "기다린 건 나도 마찬가지야. 후회할 준비는 됐고?"},
+ {"r": "a", "t": "후회는 이긴 놈이 하는 거지.", "d": "한 발 앞으로 내딛는다"},
+ {"r": "b", "t": "그럼… 오늘 밤엔 둘 다 후회하겠네.", "d": "빗물을 훔치며 자세를 낮춘다"}]},
+{n:2,m:"수상한 하숙집",g:"😂 코미디",gc:"코미디",s:"하숙집 부엌. 몰래 라면을 끓이다 딱 걸린 두 사람.",ra:"딱 걸린 쪽",rb:"잡은 쪽",ln:[
+ {"r": "a", "t": "이건… 이건 라면이 아니라, 그냥 물을 끓이고 있었어요.", "d": "냄비를 등 뒤로 숨긴다"},
+ {"r": "b", "t": "물에서 계란이랑 파가 자라나요?"},
+ {"r": "a", "t": "요즘 물이 좋아서요. 유기농.", "d": "태연한 척 젓가락을 든다"},
+ {"r": "b", "t": "…한 젓가락만. 딱 한 젓가락만 줘요.", "d": "슬그머니 앉는다"}]},
+{n:3,m:"형사의 밤",g:"🕶️ 느와르",gc:"느와르",s:"취조실. 마주 앉은 형사와 용의자. 담배 연기가 오간다.",ra:"형사",rb:"용의자",ln:[
+ {"r": "a", "t": "거짓말은 세 번까지만 참아. 벌써 두 번 했고.", "d": "서류를 탁 덮는다"},
+ {"r": "b", "t": "그럼 마지막 한 번은 아껴둬야겠네요, 형사님."},
+ {"r": "a", "t": "머리는 좋은데, 그 머리가 널 여기까지 데려왔어.", "d": "몸을 앞으로 기울인다"},
+ {"r": "b", "t": "…아니면, 당신을 여기까지 데려온 걸 수도.", "d": "입꼬리를 올린다"}]},
+{n:4,m:"바닷가 그 여름",g:"🌊 청춘",gc:"청춘",s:"밤바다, 모래사장. 스무 살의 두 친구가 별을 센다.",ra:"꿈이 큰 쪽",rb:"겁이 많은 쪽",ln:[
+ {"r": "a", "t": "나 서울 갈 거야. 여기선 내 별이 안 보여."},
+ {"r": "b", "t": "…그럼 나는? 나는 어떡하고."},
+ {"r": "a", "t": "같이 가자, 바보야. 왜 널 두고 가.", "d": "어깨를 툭 친다"},
+ {"r": "b", "t": "진짜지? 나중에 딴소리하기 없기.", "d": "새끼손가락을 내민다"}]},
+{n:5,m:"궁의 그림자",g:"🏯 사극",gc:"사극",s:"깊은 밤 궁궐. 금지된 사이인 두 사람이 몰래 만난다.",ra:"신분 높은 쪽",rb:"신분 낮은 쪽",ln:[
+ {"r": "a", "t": "이 시각에 예까지 오다니, 목이 몇 개인 줄 아느냐.", "d": "낮게 속삭이며 주위를 살핀다"},
+ {"r": "b", "t": "목이 하나뿐이라 더 아까워, 이렇게라도 뵙는 것이."},
+ {"r": "a", "t": "…담을 넘어라. 아무도 모르는 길이 있다.", "d": "소매 안에서 열쇠를 쥐여준다"},
+ {"r": "b", "t": "어디로든 가겠사옵니다. 그 손만 놓지 않으신다면.", "d": "고개를 숙이며 손을 감싼다"}]},
+{n:6,m:"옥탑방 전쟁",g:"😂 코미디",gc:"코미디",s:"좁은 옥탑방. 리모컨 하나를 두고 벌어지는 신경전.",ra:"드라마파",rb:"축구파",ln:[
+ {"r": "a", "t": "오늘은 내 차례야. 지난주에 양보했잖아.", "d": "리모컨을 낚아챈다"},
+ {"r": "b", "t": "연장전이라고! 인생이 걸린 경기야!"},
+ {"r": "a", "t": "내 드라마도 오늘 결혼식이라고!", "d": "리모컨을 등 뒤로 숨긴다"},
+ {"r": "b", "t": "…가위바위보. 진 사람이 치킨 사기.", "d": "주먹을 내민다"}]},
+{n:7,m:"녹음실의 밤",g:"🎤 음악",gc:"음악",s:"작은 녹음실, 새벽 3시. 완성 못 한 곡을 두고 다투는 두 사람.",ra:"작곡가",rb:"보컬",ln:[
+ {"r": "a", "t": "한 번만 더. 이 소절, 네 목소리가 아니면 안 돼."},
+ {"r": "b", "t": "목이 다 쉬었어. 이게 정말 그렇게 중요해?"},
+ {"r": "a", "t": "중요해. 이 노래, 너 들으라고 만든 거니까.", "d": "헤드폰을 벗어 내려놓는다"},
+ {"r": "b", "t": "…뭐? 방금 뭐라고 했어.", "d": "마이크 앞에서 멈춘다"}]},
+{n:8,m:"골키퍼의 여름",g:"⚽ 스포츠",gc:"스포츠",s:"승부차기 직전. 벤치에서 서로에게 마지막 말을 건넨다.",ra:"주장",rb:"막내 골키퍼",ln:[
+ {"r": "a", "t": "떨지 마. 넣고 못 넣고는 쟤들 몫이고, 막는 건 네 몫이야."},
+ {"r": "b", "t": "형, 저 실수하면 어떡해요. 저 때문에 지면…"},
+ {"r": "a", "t": "지면 같이 지는 거야. 넌 혼자 뛰는 게 아니야.", "d": "장갑을 고쳐 끼워준다"},
+ {"r": "b", "t": "…네. 한 개는 무조건 막을게요.", "d": "골대 앞으로 걸어간다"}]},
+{n:9,m:"옥상 위 담판",g:"🕶️ 느와르",gc:"느와르",s:"고층 빌딩 옥상, 바람이 세다. 배신의 진실을 마주하는 밤.",ra:"의심하는 쪽",rb:"의심받는 쪽",ln:[
+ {"r": "a", "t": "네가 넘겼지. 그 명단, 너밖에 아는 사람이 없었어.", "d": "난간을 붙잡는다"},
+ {"r": "b", "t": "내가 넘겼으면, 지금 여기 왜 서 있겠어."},
+ {"r": "a", "t": "…그럼 누구야. 나한테 거짓말할 거면 지금 뛰어내려.", "d": "멱살을 잡는다"},
+ {"r": "b", "t": "뛰어내려도 되는데, 그 전에 이거 하나만 봐.", "d": "품에서 사진을 꺼낸다"}]},
+{n:10,m:"운동장의 마지막 종",g:"🏫 청춘",gc:"청춘",s:"졸업식 후 텅 빈 운동장. 3년을 함께한 두 사람.",ra:"고백 못 한 쪽",rb:"모르던 쪽",ln:[
+ {"r": "a", "t": "3년 내내 하고 싶은 말 있었는데, 오늘 아니면 영영 못 할 거 같아서."},
+ {"r": "b", "t": "…뭔데. 왜 이제 와서 그런 얼굴을 해."},
+ {"r": "a", "t": "좋아했어. 1학년 봄부터, 지금까지 계속.", "d": "운동화 코로 땅을 판다"},
+ {"r": "b", "t": "바보. 나도 계속 여기서 널 기다렸잖아.", "d": "손을 내민다"}]},
+{n:11,m:"밤샘 연구실",g:"🔬 청춘",gc:"청춘",s:"불 꺼진 연구실, 실험 실패 직후. 지친 두 동료.",ra:"포기하려는 쪽",rb:"붙잡는 쪽",ln:[
+ {"r": "a", "t": "이번에도 안 됐어. 나 그만할래. 재능이 없어.", "d": "의자에 무너지듯 앉는다"},
+ {"r": "b", "t": "재능? 3년째 매일 나온 사람이 할 소리야?"},
+ {"r": "a", "t": "…네가 왜 여기 있는지 모르겠어. 나 같은 애 옆에."},
+ {"r": "b", "t": "네가 포기 안 하는 걸 보려고. 그거 하나 보려고 여기 있어.", "d": "커피를 건넨다"}]},
+{n:12,m:"동네 목욕탕",g:"😂 코미디",gc:"코미디",s:"목욕탕 탈의실. 서로 등 밀어주다 벌어진 실랑이.",ra:"세게 미는 쪽",rb:"참는 쪽",ln:[
+ {"r": "a", "t": "가만있어봐. 이 정도는 밀어야 때가 나오지.", "d": "때수건에 힘을 준다"},
+ {"r": "b", "t": "아파! 살까지 밀 셈이야?!"},
+ {"r": "a", "t": "인생이 원래 아픈 거야. 등도, 인생도.", "d": "태연히 계속 민다"},
+ {"r": "b", "t": "…철학은 됐고, 살살! 살살 좀!", "d": "몸을 배배 꼰다"}]},
+{n:13,m:"산장의 하룻밤",g:"🏔️ 스릴러",gc:"스릴러",s:"눈 갇힌 산장. 정전된 밤, 서로를 의심하기 시작한다.",ra:"먼저 온 쪽",rb:"나중에 온 쪽",ln:[
+ {"r": "a", "t": "당신… 아까 밖에서 뭐 하고 있었어. 발자국이 왜 두 개야.", "d": "촛불을 든 채 뒷걸음친다"},
+ {"r": "b", "t": "발자국? 난 나간 적 없는데."},
+ {"r": "a", "t": "…그럼 저 창밖에 서 있는 건 누구야.", "d": "목소리가 떨린다"},
+ {"r": "b", "t": "움직이지 마. 불 끄고, 숨죽여.", "d": "촛불을 확 끈다"}]},
+{n:14,m:"빗속의 오토바이",g:"🏍️ 청춘",gc:"청춘",s:"폭우 속 오토바이 한 대. 뒷자리에 매달린 채.",ra:"운전하는 쪽",rb:"뒤에 탄 쪽",ln:[
+ {"r": "a", "t": "꽉 잡아! 이 비에 손 놓으면 큰일 나!"},
+ {"r": "b", "t": "이보다 더 꽉 잡을 수도 없어!", "d": "허리를 두 팔로 감는다"},
+ {"r": "a", "t": "무서우면 눈 감아. 도착하면 깨워줄게.", "d": "속도를 늦춘다"},
+ {"r": "b", "t": "…안 무서워. 그냥, 이대로 좀 더 가자.", "d": "등에 이마를 댄다"}]},
+{n:15,m:"골목 슈퍼 앞",g:"👦 성장",gc:"성장",s:"동네 슈퍼 평상. 어린 시절 친구와 어른이 되어 마주 앉다.",ra:"고향 지킨 쪽",rb:"돌아온 쪽",ln:[
+ {"r": "a", "t": "야, 너 진짜 오랜만이다. 서울 가더니 코빼기도 안 비치고."},
+ {"r": "b", "t": "…미안하다. 사는 게 뭐라고, 그게."},
+ {"r": "a", "t": "됐어. 왔으면 됐지. 이 평상 아직 안 없앴다, 네 자리.", "d": "음료수를 던져준다"},
+ {"r": "b", "t": "…이 슈퍼도, 너도, 하나도 안 변했네.", "d": "평상에 벌러덩 눕는다"}]},
+{n:16,m:"면접장 복도",g:"💼 성장",gc:"성장",s:"대기업 면접장 복도. 같은 자리를 두고 만난 두 경쟁자.",ra:"긴장한 쪽",rb:"여유로운 쪽",ln:[
+ {"r": "a", "t": "…손이 계속 떨려요. 이 자리, 저한텐 마지막 기회라서."},
+ {"r": "b", "t": "경쟁자한테 그런 말 해도 돼요?"},
+ {"r": "a", "t": "경쟁자라도, 누군가한테는 말하고 싶었어요.", "d": "물병을 만지작거린다"},
+ {"r": "b", "t": "…이거 받아요. 손 떨릴 땐 사탕이 최고예요.", "d": "주머니에서 사탕을 꺼내 준다"}]},
+{n:17,m:"교실 창가 오후",g:"📚 청춘",gc:"청춘",s:"방과 후 텅 빈 교실. 청소 당번으로 남은 두 사람.",ra:"짝사랑하는 쪽",rb:"눈치 없는 쪽",ln:[
+ {"r": "a", "t": "…이 창가 자리, 네 자리라서 내가 청소 바꿨어."},
+ {"r": "b", "t": "어? 왜? 여기 햇빛 세서 다들 싫어하는데."},
+ {"r": "a", "t": "네가 앉는 자리라서. 그 이유면 안 돼?", "d": "빗자루를 만지작거린다"},
+ {"r": "b", "t": "…야. 그런 말 하면 내가 청소 못 하잖아.", "d": "얼굴이 빨개진다"}]},
+{n:18,m:"엘리베이터 정전",g:"😂 코미디",gc:"코미디",s:"멈춘 엘리베이터. 갇힌 두 낯선 사람.",ra:"침착한 척하는 쪽",rb:"패닉인 쪽",ln:[
+ {"r": "a", "t": "괜찮아요. 곧 올 거예요. …아마도."},
+ {"r": "b", "t": "아마도?! 아마도라뇨! 저 폐소공포증이에요!", "d": "벽을 두드린다"},
+ {"r": "a", "t": "자, 제 손 잡아요. 숫자 같이 셀게요. 하나, 둘…", "d": "손을 내민다"},
+ {"r": "b", "t": "…셋까지 세면 진짜 괜찮아지는 거죠?", "d": "손을 꽉 잡는다"}]},
+{n:19,m:"연습실 거울",g:"💃 청춘",gc:"청춘",s:"댄스 연습실. 데뷔 오디션을 앞둔 두 연습생.",ra:"흔들리는 쪽",rb:"버티게 하는 쪽",ln:[
+ {"r": "a", "t": "나 이번에도 떨어지면, 진짜 집에 내려갈 거야."},
+ {"r": "b", "t": "…5년을 버텼는데, 마지막에 그런 소리를 해?"},
+ {"r": "a", "t": "버틴 게 아니라, 네가 옆에 있어서 버텨진 거였어.", "d": "거울 속 서로를 본다"},
+ {"r": "b", "t": "그럼 이번에도 버텨. 딱 한 번만 더.", "d": "손을 맞잡고 자세를 잡는다"}]},
+{n:20,m:"장독대 위 달",g:"🌕 사극",gc:"사극",s:"양반집 담벼락 안. 달밤에 마주친 도령과 규수.",ra:"담을 넘은 쪽",rb:"기다린 쪽",ln:[
+ {"r": "a", "t": "이 담이 이리 높을 줄이야. 낭자 보려다 다리가 부러질 뻔했소.", "d": "옷매무새를 턴다"},
+ {"r": "b", "t": "누가 넘어오라 하였습니까. …그래도, 와줘서."},
+ {"r": "a", "t": "천 리를 담이 막아도 넘었을 것이오.", "d": "소매 속 서찰을 건넨다"},
+ {"r": "b", "t": "…이 밤이 새지 않았으면 좋겠습니다.", "d": "달을 올려다본다"}]},
+{n:21,m:"동창회 화장실",g:"😂 코미디",gc:"코미디",s:"20년 만의 동창회. 화장실에서 마주친 옛 라이벌.",ra:"허세 부리는 쪽",rb:"현실적인 쪽",ln:[
+ {"r": "a", "t": "야, 나 요즘 사업이 대박이야. 차도 새로 뽑고. 봤지?"},
+ {"r": "b", "t": "…그 차, 밖에서 봤는데 렌트카 스티커 붙어 있던데?"},
+ {"r": "a", "t": "…그, 그건 정비 맡겨서 잠깐 빌린 거고.", "d": "넥타이를 고쳐 맨다"},
+ {"r": "b", "t": "됐고, 우리 20년 만인데 그냥 술이나 먹자. 허세 빼고.", "d": "어깨동무를 한다"}]},
+{n:22,m:"옥탑방 별밤",g:"⭐ 청춘",gc:"청춘",s:"옥탑방 지붕. 취업도 연애도 막막한 두 백수의 밤.",ra:"낙천적인 쪽",rb:"비관적인 쪽",ln:[
+ {"r": "a", "t": "봐봐, 저 별. 몇 광년 전 빛이 지금 오는 거래. 우리도 그럴 거야."},
+ {"r": "b", "t": "…뭔 소리야. 우리 빛은 언제 도착하는데."},
+ {"r": "a", "t": "조금 늦는 거지, 안 오는 게 아니야. 기다려보자.", "d": "캔맥주를 부딪친다"},
+ {"r": "b", "t": "…너 옆에 있으면, 늦는 것도 견딜 만하네.", "d": "지붕에 벌러덩 눕는다"}]},
+{n:23,m:"첫 출근 지하철",g:"🚇 성장",gc:"성장",s:"만원 지하철. 첫 출근길, 우연히 부딪힌 두 사람.",ra:"긴장한 신입",rb:"베테랑 직장인",ln:[
+ {"r": "a", "t": "…죄송해요. 첫 출근이라 어디서 내려야 할지도 모르겠어요."},
+ {"r": "b", "t": "티 나요. 넥타이 삐뚤어진 것부터. …이리 줘봐요.", "d": "넥타이를 바로잡아준다"},
+ {"r": "a", "t": "감사해요. 회사 가는 게 이렇게 무서운 건 줄 몰랐어요."},
+ {"r": "b", "t": "다 그래요. 3년 지나면 이 지옥철도 그리워져요. 내려요, 여기.", "d": "어깨를 툭 친다"}]},
+{n:24,m:"고시원 복도",g:"🚪 청춘",gc:"청춘",s:"좁은 고시원 복도. 벽 하나 사이 이웃이 처음 마주치다.",ra:"먼저 산 쪽",rb:"새로 온 쪽",ln:[
+ {"r": "a", "t": "밤에 우는 소리 들리던데. …아니, 뭐라 하는 거 아니고."},
+ {"r": "b", "t": "…죄송해요. 벽이 얇은 걸 깜빡했어요."},
+ {"r": "a", "t": "괜찮아요. 저도 처음엔 매일 울었어요. 이거 드세요.", "d": "컵라면을 문 앞에 놓는다"},
+ {"r": "b", "t": "…모르는 사람한테 이렇게 잘해줘도 돼요?", "d": "라면을 조심스레 든다"}]},
+{n:25,m:"비상계단의 담판",g:"💼 스릴러",gc:"스릴러",s:"회사 비상계단. 부정을 알게 된 동료 둘의 은밀한 대화.",ra:"고발하려는 쪽",rb:"말리는 쪽",ln:[
+ {"r": "a", "t": "봤잖아. 그 서류. 우리가 입 다물면 공범이야."},
+ {"r": "b", "t": "…터뜨리면 우리 둘 다 끝이야. 알잖아, 이 회사가 어떤지."},
+ {"r": "a", "t": "끝나도, 옳은 게 옳은 거야. 너 나랑 같이 갈래, 말래.", "d": "USB를 손에 쥔다"},
+ {"r": "b", "t": "…혼자 보내진 않아. 같이 가. 대신, 계획부터 세우자.", "d": "주위를 살핀다"}]},
+{n:26,m:"학원 옥상",g:"📐 청춘",gc:"청춘",s:"입시 학원 옥상. 성적표를 받아든 재수생 둘.",ra:"위로하는 쪽",rb:"무너진 쪽",ln:[
+ {"r": "a", "t": "성적표가 네 인생표는 아니야. 그냥 종이 한 장이라고."},
+ {"r": "b", "t": "…1년을 갈아 넣었는데, 겨우 이거야. 나 진짜 안 되나 봐."},
+ {"r": "a", "t": "안 되면, 옆에서 내가 될 때까지 같이 있을게.", "d": "옥상 난간에 나란히 선다"},
+ {"r": "b", "t": "…너는 왜 나한테 이렇게까지 해.", "d": "성적표를 구긴다"}]},
+{n:27,m:"이삿짐 트럭 조수석",g:"🚚 성장",gc:"성장",s:"이사 가는 날, 트럭 조수석. 정든 동네를 떠나는 남매.",ra:"의젓한 척하는 형/누나",rb:"우는 동생",ln:[
+ {"r": "a", "t": "울지 마. 새 동네 가면 더 좋은 거 많아. 형/누나가 다 보여줄게."},
+ {"r": "b", "t": "…근데 친구들은. 여기 두고 가잖아."},
+ {"r": "a", "t": "친구는 또 사귀면 돼. 나는 안 두고 가잖아, 네 옆에 있잖아.", "d": "머리를 헝클어뜨린다"},
+ {"r": "b", "t": "…형/누나는 진짜 안 갈 거지? 나 두고.", "d": "소매를 붙잡는다"}]},
+{n:28,m:"경찰서 유치장",g:"🚔 느와르",gc:"느와르",s:"유치장 철창을 사이에 두고. 형제 같던 두 사람.",ra:"밖에 있는 쪽",rb:"안에 있는 쪽",ln:[
+ {"r": "a", "t": "…왜 다 뒤집어썼어. 그거 네가 한 거 아니잖아."},
+ {"r": "b", "t": "…누군가는 여기 들어와야 했어. 너는 밖에 있어야 하고."},
+ {"r": "a", "t": "바보야. 누가 너더러 그러래. 내가 다 밝힐 거야.", "d": "철창을 붙잡는다"},
+ {"r": "b", "t": "…밝히지 마. 그냥, 나 대신 잘 살아. 그거면 돼.", "d": "등을 돌린다"}]},
+{n:29,m:"산 정상 표지석",g:"⛰️ 우정",gc:"우정",s:"힘겹게 오른 산 정상. 표지석 앞에 나란히 선 두 친구.",ra:"먼저 오른 쪽",rb:"겨우 따라온 쪽",ln:[
+ {"r": "a", "t": "봐, 다 왔잖아. 죽는다고 하더니. 이 경치 값어치 하지?"},
+ {"r": "b", "t": "…헉헉. 다신 안 와. 근데 네가 끌어줘서 온 거야, 이거."},
+ {"r": "a", "t": "인생도 이래. 혼자면 못 와도, 둘이면 오게 돼.", "d": "어깨동무를 한다"},
+ {"r": "b", "t": "…야, 사진이나 찍자. 이 고생 증거는 남겨야지.", "d": "표지석에 손을 얹는다"}]},
+{n:30,m:"골목 떡볶이집",g:"🌶️ 청춘",gc:"청춘",s:"학교 앞 떡볶이집. 마지막 시험 끝난 오후.",ra:"고백 준비한 쪽",rb:"눈치 없는 쪽",ln:[
+ {"r": "a", "t": "…이 떡볶이집, 우리 3년 내내 왔잖아. 오늘이 마지막이네."},
+ {"r": "b", "t": "졸업해도 또 오면 되지. 왜 그런 슬픈 표정을 해."},
+ {"r": "a", "t": "…그때도 너랑 오고 싶으니까. 졸업해도, 계속.", "d": "어묵 국물만 젓는다"},
+ {"r": "b", "t": "…그거 지금 고백한 거야? 떡볶이집에서?", "d": "떡을 떨어뜨린다"}]},
+{n:31,m:"눈 쌓인 초소",g:"❄️ 우정",gc:"우정",s:"한겨울 야간 초소. 함께 밤을 새는 두 초병.",ra:"고참",rb:"신참",ln:[
+ {"r": "a", "t": "손 시렵지. 이거 껴. 나 손 안 시려, 원래.", "d": "장갑을 벗어 건넨다"},
+ {"r": "b", "t": "…아닙니다. 김 병장님이 끼십시오."},
+ {"r": "a", "t": "명령이야. 껴. 너 손 얼면 내가 안 편해.", "d": "억지로 손에 끼운다"},
+ {"r": "b", "t": "…이런 밤은, 나중에 그리워질 거 같습니다.", "d": "입김을 분다"}]},
+{n:32,m:"옥상 텐트",g:"⛺ 청춘",gc:"청춘",s:"옥상에 친 텐트 안. 가출한 두 친구의 하룻밤.",ra:"먼저 나온 쪽",rb:"따라 나온 쪽",ln:[
+ {"r": "a", "t": "집 나오니까 좋지? 아무도 우리한테 뭐라 안 해."},
+ {"r": "b", "t": "…좋긴 한데, 엄마가 밥 먹었냐고 문자 왔어."},
+ {"r": "a", "t": "…우리 엄마도. …야, 우리 그냥 하루만 있다 들어갈까?", "d": "핸드폰을 만지작거린다"},
+ {"r": "b", "t": "…응. 하루만. 근데 이 밤은 우리끼리 비밀이다.", "d": "새끼손가락을 건다"}]},
+{n:33,m:"경기장 라커룸",g:"🥊 스포츠",gc:"스포츠",s:"경기 직전 라커룸. 마지막 시합을 앞둔 노장과 코치.",ra:"코치",rb:"노장 선수",ln:[
+ {"r": "a", "t": "…무리하지 마. 이번이 마지막인 거, 관중도 다 알아. 즐겨."},
+ {"r": "b", "t": "…코치님. 저 마지막이니까, 딱 한 번만 이기고 싶어요."},
+ {"r": "a", "t": "…그럼 이겨. 20년 함께한 나를 위해서라도.", "d": "글러브를 조여준다"},
+ {"r": "b", "t": "…네. 오늘은, 우리 둘을 위해 뜁니다.", "d": "주먹을 맞댄다"}]},
+{n:34,m:"낚싯배 위 새벽",g:"🎣 우정",gc:"우정",s:"동틀 무렵 낚싯배. 큰 다툼 뒤 화해하는 두 친구.",ra:"먼저 사과하는 쪽",rb:"토라진 쪽",ln:[
+ {"r": "a", "t": "…어제 그 말, 미안했다. 홧김에 나온 거야. 진심 아니야."},
+ {"r": "b", "t": "…30년 친구한테 그런 말을 하냐. 나 진짜 서운했어."},
+ {"r": "a", "t": "알아. 그래서 새벽부터 널 이 배에 끌고 온 거야. 화 풀라고.", "d": "보온병 커피를 따라준다"},
+ {"r": "b", "t": "…해 뜬다. 야, 저거 봐라. …화 풀어줄게, 이번 한 번만.", "d": "수평선을 가리킨다"}]},
+{n:35,m:"동네 태권도장",g:"🥋 성장",gc:"성장",s:"저녁 태권도장. 겁 많은 아이와 무뚝뚝한 관장.",ra:"관장",rb:"겁 많은 아이",ln:[
+ {"r": "a", "t": "주먹은 남 때리려고 배우는 게 아니야. 널 지키려고 배우는 거야."},
+ {"r": "b", "t": "…근데 저 맨날 지는데요. 형들한테."},
+ {"r": "a", "t": "오늘 안 도망친 것부터가 이긴 거야. 그게 진짜 용기야.", "d": "머리에 손을 얹는다"},
+ {"r": "b", "t": "…관장님. 저 진짜 강해질 수 있어요?", "d": "주먹을 꽉 쥔다"}]},
+{n:36,m:"등굣길 언덕",g:"🎒 청춘",gc:"청춘",s:"매일 오르던 등굣길 언덕. 졸업을 앞둔 두 친구.",ra:"먼저 고백하는 쪽",rb:"듣는 쪽",ln:[
+ {"r": "a", "t": "이 언덕, 3년 내내 너 기다렸다가 같이 올라갔잖아."},
+ {"r": "b", "t": "…맞아. 매일 저 편의점 앞에 서 있었지, 너."},
+ {"r": "a", "t": "…졸업하면 이 언덕 안 오를 텐데. 그래도 널 기다리고 싶어.", "d": "발끝으로 땅을 찬다"},
+ {"r": "b", "t": "…그럼 다른 언덕이라도 만들자. 우리가 오를 언덕.", "d": "손을 잡는다"}]},
+{n:37,m:"새벽 피시방",g:"😂 코미디",gc:"코미디",s:"새벽 세 시 피시방. 마지막 한 판을 지고 서로를 탓하는 두 친구.",ra:"남 탓하는 쪽",rb:"억울한 쪽",ln:[
+ {"r": "a", "t": "야, 네가 뒤에서 안 왔잖아! 나 혼자 다 막았어!", "d": "헤드셋을 확 벗어 던진다"},
+ {"r": "b", "t": "나 그때 라면 국물 엎었다고! 키보드가 지금 짜!"},
+ {"r": "a", "t": "라면이 이기냐 우정이 이기냐, 지금 그게 중요해?", "d": "모니터를 손가락으로 찍는다"},
+ {"r": "b", "t": "중요하지. 이 키보드 값 네가 낼 거 아니면.", "d": "젖은 키보드를 들어 보인다"}]},
+{n:38,m:"시험장 앞 아침",g:"🏫 청춘",gc:"청춘",s:"수능 날 새벽 시험장 정문. 얼어붙은 수험생과 밀어주는 친구.",ra:"도망치려는 쪽",rb:"끝까지 밀어주는 쪽",ln:[
+ {"r": "a", "t": "나 못 들어가겠어. 1년을 했는데 머리가 하얘.", "d": "가방끈을 붙잡고 선다"},
+ {"r": "b", "t": "하얘도 들어가. 손이 알아서 풀어, 네 손 내가 알아."},
+ {"r": "a", "t": "…떨어지면? 또 이 앞에 서야 되잖아, 내년에.", "d": "운동화 코로 땅을 문지른다"},
+ {"r": "b", "t": "서면 또 내가 밀어줄게. 그러니까 오늘은 들어가.", "d": "등을 힘껏 민다"}]},
+{n:39,m:"내무반 야식전",g:"😂 코미디",gc:"코미디",s:"소등된 내무반. 몰래 끓인 봉지라면 하나를 두고 벌어진 신경전.",ra:"라면 끓인 고참",rb:"냄새 맡고 온 신참",ln:[
+ {"r": "a", "t": "이건 내 거야. 두 시간을 참았다가 끓인 거라고.", "d": "냄비를 관물대 뒤로 숨긴다"},
+ {"r": "b", "t": "김 병장님, 저 이미 봤습니다. 온 내무반이 다 봤습니다."},
+ {"r": "a", "t": "봤다고 나눠 먹는 건 아니지. 군대는 그런 데가 아니야."},
+ {"r": "b", "t": "그럼 당직사관님도 곧 보시겠네요. 냄새가 복도까지 갑니다.", "d": "문 쪽을 슬쩍 가리킨다"}]},
+{n:40,m:"헬스장 벤치 전쟁",g:"😂 코미디",gc:"코미디",s:"저녁 헬스장. 벤치 하나를 두고 마주 선 두 사람.",ra:"먼저 수건 올려둔 쪽",rb:"먼저 누워버린 쪽",ln:[
+ {"r": "a", "t": "여기 제 수건 있었잖아요. 물 뜨러 간 3분 사이에요.", "d": "수건을 흔들어 보인다"},
+ {"r": "b", "t": "수건이 운동합니까? 사람이 운동하지."},
+ {"r": "a", "t": "그럼 저도 눕죠. 세트 쉬는 사이에 제가 들어갈게요.", "d": "바벨 반대편을 붙잡는다"},
+ {"r": "b", "t": "좋아요. 대신 제 무게 그대로 가는 겁니다.", "d": "원판을 하나 더 끼운다"}]},
+{n:41,m:"소개팅 첫 삼분",g:"😂 코미디",gc:"코미디",s:"카페 소개팅 자리. 마주 앉은 지 삼 분 만에 사진이 들통난다.",ra:"사진과 다른 쪽",rb:"대조하는 쪽",ln:[
+ {"r": "a", "t": "아, 사진이요? 그거 작년… 아니, 재작년 여름 거예요.", "d": "물을 벌컥 들이켠다"},
+ {"r": "b", "t": "재작년 여름에 머리숱이 그렇게 많으셨어요?"},
+ {"r": "a", "t": "조명이요. 그 카페 조명이 사람을 살려주더라고요."},
+ {"r": "b", "t": "여기 조명도 밝은데요. 지금도 살아 계세요?", "d": "천장을 올려다본다"}]},
+{n:42,m:"시장 골목 추격",g:"🚔 느와르",gc:"느와르",s:"문 닫은 시장 골목. 좁은 통로 끝에서 형사와 마주 선 밤.",ra:"쫓던 형사",rb:"도망치던 쪽",ln:[
+ {"r": "a", "t": "이 골목 끝은 막혔어. 나도 알고, 너도 알아.", "d": "숨을 고르며 길을 막는다"},
+ {"r": "b", "t": "알아서 여기로 왔어요. 형사님 혼자인 것도 알고."},
+ {"r": "a", "t": "혼자라 다행인 줄 알아. 둘이었으면 벌써 끝났어.", "d": "수갑을 천천히 꺼낸다"},
+ {"r": "b", "t": "그럼 셋은 어떨까요. 형사님 뒤에도 한 명 있는데.", "d": "턱으로 등 뒤를 가리킨다"}]},
+{n:43,m:"나룻배의 밀서",g:"🏯 사극",gc:"사극",s:"동트기 전 강 한복판. 밀서를 품은 자와 노를 젓는 사공.",ra:"밀서를 지닌 쪽",rb:"사공",ln:[
+ {"r": "a", "t": "노를 더 빨리 저으시오. 강 건너에 사람 목숨이 달렸소.", "d": "품을 자꾸 여민다"},
+ {"r": "b", "t": "품에 든 게 무엇이오. 아까부터 그것만 만지시는구려.", "d": "노를 멈추고 돌아본다"},
+ {"r": "a", "t": "모르는 편이 나으시오. 알면 사공도 이 강을 못 건너오."},
+ {"r": "b", "t": "이 강은 내가 삼십 년을 건넜소. 무엇이든 오늘도 건네 드리리다.", "d": "노에 힘을 준다"}]},
+{n:44,m:"저잣거리 내기",g:"🌕 사극",gc:"사극",s:"한낮 저잣거리 씨름판. 판을 벌인 장정 앞에 낯선 자가 나선다.",ra:"판을 벌인 장정",rb:"정체를 숨긴 쪽",ln:[
+ {"r": "a", "t": "이 판에서 날 넘긴 자가 없소. 손목이나 성히 가시오.", "d": "샅바를 툭 던진다"},
+ {"r": "b", "t": "넘긴 자가 없는 게 아니라, 아무도 안 붙어본 것이겠지요."},
+ {"r": "a", "t": "말은 잘하는군. 그 입으로 나를 한번 넘겨보시오."},
+ {"r": "b", "t": "입이 아니라 다리로 하리다. 자, 잡으시오.", "d": "소매를 걷어 올린다"}]},
+{n:45,m:"죽도의 여름",g:"🥊 스포츠",gc:"스포츠",s:"한여름 검도장. 스승과 제자가 처음으로 정식으로 맞선다.",ra:"스승",rb:"처음 도전하는 제자",ln:[
+ {"r": "a", "t": "오늘은 봐주지 않는다. 나를 넘어서고 싶다며.", "d": "죽도를 천천히 든다"},
+ {"r": "b", "t": "봐주시면 저도 안 뜁니다. 3년을 기다린 판입니다."},
+ {"r": "a", "t": "눈은 좋아졌구나. 근데 어깨에 힘이 잔뜩 들어갔어."},
+ {"r": "b", "t": "이 한 판만은, 힘 좀 주고 하겠습니다.", "d": "죽도 끝을 스승 가슴에 겨눈다"}]},
+{n:46,m:"풋살장 연장전",g:"⚽ 스포츠",gc:"스포츠",s:"야간 풋살장, 동점인 채 남은 마지막 1분. 숨이 턱까지 찬 둘.",ra:"지친 주장",rb:"다리가 풀린 후배",ln:[
+ {"r": "a", "t": "1분 남았다. 딱 한 번만 더 뛰어. 딱 한 번만.", "d": "유니폼으로 땀을 훔친다"},
+ {"r": "b", "t": "형, 다리가 안 올라와요. 감각이 없어요, 진짜로.", "d": "무릎에 손을 짚는다"},
+ {"r": "a", "t": "다리 말고 머리로 뛰어. 내가 열 테니 너는 밀어 넣기만 해."},
+ {"r": "b", "t": "그럼 왼쪽으로 주세요. 왼쪽은 아직 살아 있어요.", "d": "신발끈을 다시 조인다"}]},
+{n:47,m:"오디션 대기번호",g:"🎤 음악",gc:"음악",s:"오디션장 복도. 같은 곡을 준비해 온 앞뒤 번호가 마주친다.",ra:"앞 번호",rb:"뒷 번호",ln:[
+ {"r": "a", "t": "그 악보… 저랑 같은 곡이네요. 하필 바로 앞뒤라니.", "d": "악보를 접어 감춘다"},
+ {"r": "b", "t": "바꾸실 거예요? 앞에서 부르시면 제가 불리한데."},
+ {"r": "a", "t": "안 바꿔요. 같은 곡이어야 누가 진짜인지 나오니까."},
+ {"r": "b", "t": "좋아요. 그럼 심사위원 귀에 마지막까지 남는 건 접니다.", "d": "목을 풀며 일어선다"}]},
+{n:48,m:"벽을 오르는 둘",g:"⛰️ 우정",gc:"우정",s:"실내 클라이밍장 꼭대기 홀드 앞. 한 발이 떨어지지 않는 순간.",ra:"먼저 오른 쪽",rb:"중간에 굳은 쪽",ln:[
+ {"r": "a", "t": "손 뻗어. 거기서 딱 한 뼘이야. 내가 보고 있어.", "d": "위에서 손을 내민다"},
+ {"r": "b", "t": "못 잡아. 떨어지면 어떡해. 나 그냥 내려갈래.", "d": "팔이 부들부들 떨린다"},
+ {"r": "a", "t": "떨어져도 줄이 잡아. 줄이 못 잡으면 내가 잡고."},
+ {"r": "b", "t": "…야, 진짜 잡아라. 하나, 둘…", "d": "눈을 질끈 감고 손을 뻗는다"}]},
+{n:49,m:"경매장의 손짓",g:"🕶️ 느와르",gc:"느와르",s:"늦은 밤 비공개 경매장. 마지막 물건 앞에서 마주친 두 사람.",ra:"반드시 사야 하는 쪽",rb:"값을 올리는 쪽",ln:[
+ {"r": "a", "t": "손 내려. 필요도 없으면서 나 엿먹이려고 올리는 거잖아.", "d": "낮게 속삭인다"},
+ {"r": "b", "t": "필요는 없지. 근데 네가 필요하다니까 갖고 싶어지네."},
+ {"r": "a", "t": "그거 우리 아버지 물건이야. 값 매길 물건이 아니라고.", "d": "주먹을 꽉 쥔다"},
+ {"r": "b", "t": "그럼 지금부터 매겨보자고. 네가 어디까지 가나.", "d": "팻말을 다시 든다"}]},
+{n:50,m:"기숙사 소등 후",g:"⛺ 청춘",gc:"청춘",s:"소등된 기숙사 방. 창문을 넘어 나가려는 밤.",ra:"나가자는 쪽",rb:"말리는 쪽",ln:[
+ {"r": "a", "t": "딱 한 시간이야. 저 언덕에서 별만 보고 바로 들어와.", "d": "창틀에 발을 올린다"},
+ {"r": "b", "t": "걸리면 둘 다 벌점이야. 나 장학금 걸려 있다고."},
+ {"r": "a", "t": "안 걸려. 그리고 3학년 되면 이런 밤 다시는 없어."},
+ {"r": "b", "t": "…야, 잠깐. 신발은 신고 넘어야지.", "d": "운동화를 창밖으로 던진다"}]}
+];
+
+/* =============== 상태 =============== */
+const GOAL_STEP=5;
+let genre='전체';
+let pool=[];             // 아직 안 뽑은 장면
+let used=new Set();      // 이미 나온 장면 번호
+let nameA='🅰', nameB='🅱';
+let cur=null;            // 현재 장면
+let swapped=false;       // true면 🅰가 rb역
+let li=0;                // 현재 대사 줄
+let played=0, goal=GOAL_STEP, inPlay=false;
+let scores=[];           // {gc,score}
+let stars=[];            // 저장한 명장면
+let sizeIdx=1;
+const SIZES=['24px','30px','37px'];   // 둘이 같이 보는 앱 — 기본을 크게
+const $=id=>document.getElementById(id);
+
+function vibrate(p){ if(navigator.vibrate) try{navigator.vibrate(p);}catch(e){} }
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+let _tt; function toast(m){ const t=$('toast'); t.innerHTML=m; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2400); }
+function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); $(id).classList.add('on'); window.scrollTo({top:0,behavior:'smooth'}); }
+function repop(el){ el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+
+/* 점층 테마 : 장면을 거듭할수록 골목 불빛이 뜨거워진다 */
+const THEMES=[
+ {bg1:'#0a0f1a',bg2:'#0c1c26',a1:'#3ee0c4',a2:'#ffd84d'},
+ {bg1:'#090f1c',bg2:'#0d2028',a1:'#3ce6c8',a2:'#ffcb3a'},
+ {bg1:'#08101f',bg2:'#0f2229',a1:'#39eccc',a2:'#ffbb2b'},
+ {bg1:'#071022',bg2:'#12262b',a1:'#35f2d0',a2:'#ffa91d'},
+ {bg1:'#061025',bg2:'#15292d',a1:'#30f8d4',a2:'#ff9612'}
+];
+function applyTheme(i){
+  const t=THEMES[Math.min(i,THEMES.length-1)], r=document.documentElement.style;
+  r.setProperty('--bg1',t.bg1); r.setProperty('--bg2',t.bg2);
+  r.setProperty('--accent1',t.a1); r.setProperty('--accent2',t.a2);
+}
+
+/* =============== 장르 칩 =============== */
+const GENRES=['전체'].concat([...new Set(SCENES.map(s=>s.gc))]);
+const GEMO={'전체':'🎬','액션':'🔥','코미디':'😂','느와르':'🕶️','청춘':'🌊','사극':'🏯','음악':'🎤','스포츠':'⚽','스릴러':'🌀','성장':'🌱','우정':'🤝'};
+function buildChips(){
+  const box=$('genreChips'); box.innerHTML='';
+  GENRES.forEach(g=>{
+    const n = g==='전체' ? SCENES.length : SCENES.filter(s=>s.gc===g).length;
+    const b=document.createElement('button');
+    b.className='chip'+(g===genre?' sel':''); b.type='button';
+    b.innerHTML=(GEMO[g]||'🎞')+' '+g+' <span style="opacity:.6">'+n+'</span>';
+    b.onclick=()=>{ genre=g; buildChips(); refillPool(true); vibrate(14); };
+    box.appendChild(b);
+  });
+}
+function filtered(){ return genre==='전체'?SCENES:SCENES.filter(s=>s.gc===genre); }
+function refillPool(silent){
+  const list=filtered().filter(s=>!used.has(s.n));
+  if(list.length===0){
+    filtered().forEach(s=>used.delete(s.n));
+    pool=shuffle(filtered().slice());
+    if(!silent) toast('🎞 이 장르 장면을 다 돌았어요!<br>처음부터 다시 섞을게요.');
+  } else pool=shuffle(list);
+}
+
+/* =============== 진행 표시 =============== */
+function chemPct(){ return scores.length? Math.round(scores.reduce((a,b)=>a+b.score,0)/scores.length) : 0; }
+function updateBar(){
+  $('progLabel').textContent='장면 '+(inPlay?Math.min(played+1,goal):played)+' / '+goal;
+  $('chemVal').textContent = scores.length? ('🔥 케미 '+chemPct()+'%') : '🔥 케미 —';
+  $('gauge').style.width=Math.min(100,played/goal*100)+'%';
+}
+
+/* =============== 시작 =============== */
+$('startBtn').onclick=()=>{
+  nameA=($('nameA').value||'').trim()||'🅰';
+  nameB=($('nameB').value||'').trim()||'🅱';
+  $('topbar').classList.remove('hide');
+  refillPool(true); updateBar();
+  show('s-draw'); vibrate(20);
+  setTimeout(draw,120);
+};
+
+/* =============== 뽑기 =============== */
+const REEL_WORDS=['슬레이트, 액션!','골목에 불이 켜진다','숨 고르고…','오늘의 장면은?','심장 뛸 준비 됐나?','자, 큐 사인!'];
+let drawing=false;
+function draw(){
+  if(drawing) return; drawing=true;
+  $('drawStage').style.display='flex'; $('sceneReveal').style.display='none';
+  $('drawBtn').disabled=true;
+  const reel=$('reel'), rt=$('reelText');
+  reel.classList.add('spin');
+  const cand=filtered();
+  let tick=0;
+  const iv=setInterval(()=>{ rt.textContent = (tick++%2===0) ? cand[Math.floor(Math.random()*cand.length)].m : REEL_WORDS[Math.floor(Math.random()*REEL_WORDS.length)]; },70);
+  vibrate(28);
+  setTimeout(()=>{
+    clearInterval(iv); reel.classList.remove('spin');
+    if(pool.length===0) refillPool(false);
+    cur=pool.pop(); used.add(cur.n); swapped=false; li=0;
+    rt.textContent=cur.m;
+    $('drawBtn').disabled=false; drawing=false;
+    inPlay=true; updateBar();
+    renderScene();
+    setTimeout(()=>{ $('drawStage').style.display='none'; $('sceneReveal').style.display='flex'; repop($('sceneCard')); vibrate(18); },220);
+  },820);
+}
+function roleOf(who){ // who:'a'|'b' 사람 → 배역 이름
+  if(who==='a') return swapped?cur.rb:cur.ra;
+  return swapped?cur.ra:cur.rb;
+}
+function readerOf(lineR){ // 대사의 r('a'=ra역) → 읽을 사람
+  const isA = swapped ? (lineR==='b') : (lineR==='a');
+  return isA?{mark:'🅰',name:nameA,color:'var(--rA)',who:'a'}:{mark:'🅱',name:nameB,color:'var(--rB)',who:'b'};
+}
+const TIPS=[
+ '🎙 자기 차례의 대사만 소리 내어 읽으세요.<br>괄호 안 지문은 읽지 말고 몸으로!',
+ '🔥 이 편은 기세 싸움입니다.<br>세게, 빠르게, 지지 말고 받아치세요.',
+ '📢 작게 웅얼거리면 아무 일도 안 일어나요.<br>크게 질러야 심장이 뜁니다.',
+ '🔄 낯간지러우면 배역을 바꿔서 한 번 더.<br>완전히 다른 맛이 납니다.',
+ '👀 눈을 마주치고 읽으면 난이도가 두 배가 됩니다.',
+ '🎬 잘 읽는 게 목적이 아닙니다.<br>둘이 빵 터지는 그 순간이 목적이에요.',
+ '🔤 글씨가 작으면 아래 「크게」를 누르세요.<br>같이 보는 사람이 있으니까요.'
+];
+function renderScene(){
+  $('roleHint').innerHTML=TIPS[Math.floor(Math.random()*TIPS.length)];
+  $('scTag').textContent=cur.g;
+  $('scNo').textContent='장면 #'+cur.n;
+  $('scTitle').textContent='〈'+cur.m+'〉';
+  $('scSit').textContent=cur.s;
+  $('roleAWho').textContent='🅰 '+nameA;
+  $('roleBWho').textContent='🅱 '+nameB;
+  $('roleAName').textContent=roleOf('a');
+  $('roleBName').textContent=roleOf('b');
+}
+$('drawBtn').onclick=draw;
+$('redrawBtn').onclick=()=>{ used.delete(cur.n); pool.push(cur); draw(); };
+$('swapBtn').onclick=()=>{ swapped=!swapped; renderScene(); repop($('sceneCard')); vibrate(16); toast('🔄 배역을 맞바꿨어요'); };
+$('actBtn').onclick=()=>{ li=0; show('s-act'); renderLine(); vibrate(20); };
+
+/* =============== 연기 =============== */
+function renderLine(){
+  const l=cur.ln[li], rd=readerOf(l.r);
+  document.documentElement.style.setProperty('--now',rd.color);
+  $('actTitle').textContent='〈'+cur.m+'〉 '+cur.g;
+  $('actSit').textContent=cur.s;
+  $('turn').querySelector('.mark').textContent=rd.mark;
+  $('turnName').textContent=rd.name+' 차례';
+  $('turnRole').textContent='· '+roleOf(rd.who);
+  const say=$('say'); say.textContent='"'+l.t+'"';
+  say.style.animation='none'; void say.offsetWidth; say.style.animation='';
+  const dir=$('dir');
+  if(l.d){ dir.innerHTML='<span class="dirtag">🎬 지문 · 읽지 말고 몸으로</span>'+l.d; dir.classList.remove('none'); }
+  else dir.classList.add('none');
+  let dots=''; for(let i=0;i<cur.ln.length;i++) dots+='<div class="dot'+(i<=li?' on':'')+'"></div>';
+  $('dots').innerHTML=dots;
+  $('prevBtn').disabled = li===0;
+  $('nextBtn').textContent = li===cur.ln.length-1 ? '컷! 다 읽었어요 🎬' : '다음 →';
+  const st=stars.some(s=>s.n===cur.n);
+  $('starBtn').textContent = st?'★ 명장면 저장됨':'☆ 명장면 저장';
+  $('starBtn').classList.toggle('starred',st);
+  vibrate(12);
+}
+$('nextBtn').onclick=()=>{
+  if(li<cur.ln.length-1){ li++; renderLine(); }
+  else{
+    $('rateSub').innerHTML='〈'+cur.m+'〉 '+cur.g+'<br>'+nameA+' · '+nameB+' 두 사람의 케미는?';
+    show('s-rate'); vibrate([20,40,20]);
+  }
+};
+$('prevBtn').onclick=()=>{ if(li>0){ li--; renderLine(); } };
+$('starBtn').onclick=()=>{
+  const i=stars.findIndex(s=>s.n===cur.n);
+  if(i>=0){ stars.splice(i,1); toast('☆ 저장을 해제했어요'); }
+  else{ stars.push({n:cur.n,m:cur.m,g:cur.g}); toast('★ 명장면으로 저장!'); vibrate([15,30,15]); }
+  renderLine();
+};
+document.querySelectorAll('.sizes .iconbtn').forEach(b=>{
+  b.onclick=()=>{
+    sizeIdx=+b.dataset.size;
+    document.documentElement.style.setProperty('--dial',SIZES[sizeIdx]);
+    document.querySelectorAll('.sizes .iconbtn').forEach(x=>x.classList.toggle('sel',x===b));
+    vibrate(12);
+  };
+});
+
+/* =============== 케미 평가 =============== */
+$('againBtn').onclick=()=>{ swapped=!swapped; li=0; show('s-act'); renderLine(); toast('🔄 배역을 바꿨어요. 완전히 다른 맛!'); vibrate(18); };
+document.querySelectorAll('.cb').forEach(b=>{
+  b.onclick=()=>{
+    scores.push({gc:cur.gc,score:+b.dataset.score});
+    played++; inPlay=false; updateBar(); applyTheme(played-1); vibrate(28);
+    if(+b.dataset.score===100 && played<goal) toast('😳 심쿵 적립! 케미 게이지 상승');
+    if(played>=goal){ setTimeout(showReport,400); }
+    else{ toast('🎬 '+played+'번째 장면 완료! 다음 장면으로'); show('s-draw'); setTimeout(draw,260); }
+  };
+});
+
+/* =============== 결과 =============== */
+function bestGenre(){
+  const m={}; scores.forEach(s=>{ m[s.gc]=m[s.gc]||[0,0]; m[s.gc][0]+=s.score; m[s.gc][1]++; });
+  let best='—',bv=-1;
+  Object.keys(m).forEach(k=>{ const avg=m[k][0]/m[k][1]; if(avg>bv||(avg===bv&&m[k][1]>1)){ bv=avg; best=k; } });
+  return best;
+}
+function showReport(){
+  const p=chemPct();
+  let badge='🔥',title='',verdict='';
+  if(p>=92){ badge='⚡'; title='불붙은 두 사람'; verdict='대사를 읽은 게 아니라 서로에게 던졌죠. 이 정도 기세면 골목에서 마주쳐도 둘 중 누구도 안 물러설 겁니다.'; }
+  else if(p>=76){ badge='🔥'; title='기세 싸움 만점 콤비'; verdict='받아치는 타이밍이 착착 맞았습니다. 짜릿한 장면은 대사보다 리듬이에요. 두 분은 그 리듬을 찾았습니다.'; }
+  else if(p>=58){ badge='😂'; title='웃참 실패한 사이'; verdict='진지하게 노려보려다 매번 무너진 두 사람. 어색함이 웃음으로 바뀌는 게 이 게임의 목적입니다.'; }
+  else{ badge='🎬'; title='이제 막 마주 선 사이'; verdict='어색한 게 정상입니다. 배역을 바꿔 한 번 더 읽어보세요. 두 번째부터 목소리가 완전히 달라집니다.'; }
+  $('repBadge').textContent=badge;
+  $('repTitle').textContent=title;
+  $('repVerdict').textContent=verdict;
+  $('stScenes').textContent=played;
+  $('stChem').textContent=p+'%';
+  $('stGenre').textContent=bestGenre();
+  $('starList').innerHTML = stars.length
+    ? '<span class="st-h">★ 우리가 고른 명장면 '+stars.length+'개</span>'+stars.map(s=>'· <b>〈'+s.m+'〉</b> '+s.g).join('<br>')
+    : '<span class="st-h">★ 저장한 명장면 없음</span>연기 화면의 「☆ 명장면 저장」을 누르면 마음에 든 장면이 여기 모입니다.';
+  show('s-result'); vibrate([60,80,60,80,120]);
+}
+$('moreBtn').onclick=()=>{ goal+=GOAL_STEP; updateBar(); show('s-draw'); setTimeout(draw,180); toast('🎬 '+goal+'장면까지 이어서!'); };
+$('restartBtn').onclick=()=>{
+  played=0; goal=GOAL_STEP; inPlay=false; scores=[]; stars=[]; used=new Set(); refillPool(true);
+  applyTheme(0); updateBar(); $('topbar').classList.add('hide'); show('s-intro');
+};
+$('shareBtn').onclick=async()=>{
+  const txt='🎬 영화속 주인공되기 · 🔥짜릿편\n'+nameA+' × '+nameB+' — '+played+'장면 연기, 케미 '+chemPct()+'%\n가장 잘 맞은 장르: '+bestGenre()+'\n\n둘이 나란히 앉아 대사 읽는 친해지기 게임\nhttps://mimifactory.vibekr.com/apps/영화속_주인공되기_짜릿편_friend.html';
+  try{
+    if(navigator.share){ await navigator.share({title:'영화속 주인공되기 · 짜릿편',text:txt}); }
+    else{ await navigator.clipboard.writeText(txt); toast('📋 결과를 복사했어요!'); }
+  }catch(e){ toast('📋 복사에 실패했어요. 화면을 캡처해 주세요!'); }
+};
+
+/* =============== 초기화 =============== */
+buildChips(); applyTheme(0); updateBar();
+document.documentElement.style.setProperty('--dial',SIZES[sizeIdx]);
+document.documentElement.style.setProperty('--now','var(--rA)');
+</script>
+</body>
+</html>
