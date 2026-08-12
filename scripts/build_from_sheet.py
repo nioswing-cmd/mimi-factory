@@ -608,6 +608,13 @@ def register_platform(item, entry):
 def localize_new(entry):
     """신작을 즉시 3개 언어(ja/en/zh-TW)로 로컬라이즈 — i18n/batch.py 단건 모드.
     저작권 규칙: 책 퀴즈는 티저만 다국어화(풀버전 금지). 실패해도 생산은 성공으로 유지."""
+    # 🔴 잠금장치 (2026-08-12 사장님 지시 「돈 새고 있는 것 당장 막아」).
+    #    번역이 실패해도 호출값은 그대로 나간다 — 신작 한 편마다 $0.5~0.9 를 쓰고 결과물 0개였다.
+    #    원인을 고칠 때까지 여기서 아예 막는다. 되살리려면 MMF_SKIP_I18N 을 지우면 된다.
+    if os.environ.get("MMF_SKIP_I18N", "").strip().lower() in ("1", "true", "y", "yes"):
+        log("🌏 다국어화 건너뜀 — MMF_SKIP_I18N 이 켜져 있습니다 "
+            "(번역이 실패하면서 호출값만 나가던 문제를 고치는 중)")
+        return
     if not os.path.isdir(os.path.join(ROOT, "i18n")):
         return
     if entry["type"] == "quiz":
