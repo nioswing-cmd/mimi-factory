@@ -113,7 +113,11 @@ def pick_waiting(tabs):
             return row[j].strip() if 0 <= j < len(row) else ""
 
         for i, row in enumerate(rows[1:], start=2):  # i = 시트 기준 행 번호
-            title = cell(row, "title")
+            # 🔴 시트에 제목을 `백틱`·"따옴표"로 감싸 적는 일이 흔하다 (2026-08-12 실제로 6줄이 그랬다).
+            #    제목은 **자료 파일을 찾는 열쇠**라서(load_material) 감싼 기호 하나에 자료가 통째로 빠진다.
+            #    그런데 화면엔 「생산 완료」로 뜬다 — 자료도 없고 「지어내지 마라」 규칙도 같이 빠진 채로.
+            #    여기 한 곳만 벗겨내면 자료탐색·apps.json·커밋메시지·홍보초안까지 전부 따라온다.
+            title = cell(row, "title").strip("`'\"").strip()
             if not title:
                 continue
             parsed.append({"row": i, "gid": gid, "type": cat, "title": title,
@@ -269,6 +273,12 @@ def load_material(item, slug):
         if files:
             log(f"제공 자료 폴더 사용: {title}/ ({len(files)}개 파일)")
             return {"files": files}
+    # 🔴 조용히 넘어가면 안 된다. 자료가 없으면 「지어내지 마라」 규칙(ground_rule)도 같이 빠져서
+    #    AI 가 자유롭게 창작한 앱이 나오는데, 화면에는 그냥 「생산 완료」로 뜬다.
+    #    자료를 넣었다고 생각하는 사람은 이걸 영영 모른다 — 그러니 로그에서 소리가 나게 한다.
+    log(f"⚠️ 자료를 찾지 못했습니다: 「{title}」 — {MATERIAL_DIR} 안에 "
+        f"'{title}.md' 도, 같은 이름 폴더도 없습니다. "
+        f"**자료 없이(AI 창작으로) 생산합니다.** 제목이 시트와 파일명이 정확히 같은지 확인하세요.")
     return None
 
 
