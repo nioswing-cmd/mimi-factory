@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>상황극 중독자 황당편 · 둘이 함께 친해지기</title>
+<meta name="description" content="둘이서 폰 하나를 놓고 정반대 입장을 맡아 붙는 즉흥 연기 게임. 좀비·초능력·복제인간 — 설정은 황당한데 다투는 건 지극히 현실적인 상황 100개.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#08060d; --bg2:#120c1e;
+  --a1:#b6ff5c; --a2:#a06bff;
+  --ink:#eafff0; --muted:#8f86ad;
+  --card:#0e0a18;
+  --slotA:#b6ff5c; --slotB:#c08bff;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; padding:0;}
+body{
+  font-family:'Noto Sans KR',sans-serif; color:var(--ink);
+  background:
+    radial-gradient(100% 46% at 84% -8%, rgba(160,107,255,.30), transparent 62%),
+    radial-gradient(96% 46% at 8% 106%, rgba(182,255,92,.16), transparent 62%),
+    linear-gradient(172deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+  transition:background 1s ease;
+  min-height:100dvh;
+}
+/* 스캔라인 + 네온 격자 — 심야 화면 질감 */
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(0deg, rgba(160,107,255,.10) 0 1px, transparent 1px 46px),
+    repeating-linear-gradient(90deg, rgba(160,107,255,.10) 0 1px, transparent 1px 46px);
+  opacity:.55;
+}
+/* 황당한 것들 — 아주 옅게 떠 있다 */
+.props{position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;}
+.props span{position:absolute; font-size:27px; opacity:.16; filter:drop-shadow(0 0 8px rgba(160,107,255,.9)); animation:drift 9s ease-in-out infinite;}
+.props span:nth-child(1){top:8%;  left:6%;  animation-delay:-.6s;}
+.props span:nth-child(2){top:20%; right:8%; animation-delay:-2.4s;}
+.props span:nth-child(3){top:46%; left:3%;  animation-delay:-4.1s;}
+.props span:nth-child(4){top:62%; right:5%; animation-delay:-1.5s;}
+.props span:nth-child(5){top:81%; left:11%; animation-delay:-5.7s;}
+.props span:nth-child(6){top:90%; right:13%;animation-delay:-3.2s;}
+@keyframes drift{0%,100%{transform:translateY(0) rotate(-6deg);}50%{transform:translateY(-13px) rotate(7deg);}}
+.wrap{position:relative; z-index:1; max-width:520px; margin:0 auto; padding:22px 18px calc(26px + env(safe-area-inset-bottom)); min-height:100dvh; display:flex; flex-direction:column;}
+h1,h2,h3{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
+.grad{background:linear-gradient(102deg,var(--a1),#8fe0ff 44%,var(--a2)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; filter:drop-shadow(0 0 14px rgba(160,107,255,.5));}
+
+.screen{display:none; animation:fadeIn .5s ease; flex:1; flex-direction:column;}
+.screen.on{display:flex;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+
+/* ---------- 시작 ---------- */
+.hero{text-align:center; margin-top:4px;}
+.badge{display:inline-block; font-size:11.5px; letter-spacing:.16em; color:var(--a1); border:1px solid rgba(182,255,92,.4); padding:6px 14px; border-radius:3px; margin-bottom:14px; box-shadow:0 0 18px -6px rgba(182,255,92,.8); text-shadow:0 0 10px rgba(182,255,92,.5);}
+.hero h1{font-size:39px; margin:.08em 0 .1em; line-height:1.14; position:relative; display:block;}
+.hero h1::before,.hero h1::after{content:attr(data-t); position:absolute; left:0; top:0; width:100%; pointer-events:none;}
+.hero h1::before{color:#ff4fd8; opacity:.55; animation:gl1 3.4s steps(2,end) infinite;}
+.hero h1::after{color:#5ce8ff; opacity:.5; animation:gl2 3.4s steps(2,end) infinite;}
+@keyframes gl1{0%,86%,100%{transform:none; clip-path:inset(0 0 100% 0);} 88%{transform:translate(-2.5px,1px); clip-path:inset(6% 0 62% 0);} 92%{transform:translate(2px,-1px); clip-path:inset(48% 0 22% 0);} 96%{transform:translate(-1.5px,0); clip-path:inset(78% 0 6% 0);}}
+@keyframes gl2{0%,86%,100%{transform:none; clip-path:inset(0 0 100% 0);} 89%{transform:translate(2.5px,-1px); clip-path:inset(22% 0 54% 0);} 93%{transform:translate(-2px,1px); clip-path:inset(64% 0 14% 0);} 97%{transform:translate(1.5px,0); clip-path:inset(4% 0 82% 0);}}
+.hero .sub{font-family:'Jua',sans-serif; font-size:17px; color:var(--a1); margin-bottom:10px; text-shadow:0 0 14px rgba(182,255,92,.45);}
+.hero p{color:var(--muted); font-size:14.5px; line-height:1.72; word-break:keep-all; margin:0 auto; max-width:356px;}
+.hero p b{color:var(--ink);}
+
+.names{display:flex; gap:10px; align-items:flex-end; margin:22px 0 4px;}
+.names .field{flex:1;}
+.names label{display:block; font-size:12px; color:var(--muted); margin:0 0 6px 4px;}
+.names input{width:100%; padding:13px 12px; border-radius:4px; border:1.5px solid rgba(160,107,255,.3); background:rgba(160,107,255,.07); color:var(--ink); font-size:16px; font-family:inherit; text-align:center; transition:border-color .25s, box-shadow .25s;}
+.names input:focus{outline:none; border-color:var(--a1); box-shadow:0 0 20px -6px var(--a1);}
+.names .vs{font-family:'Jua',sans-serif; font-size:15px; color:var(--a2); padding-bottom:14px; text-shadow:0 0 12px rgba(160,107,255,.7);}
+
+.pick-title{text-align:center; font-size:13.5px; color:var(--muted); margin:22px 0 11px;}
+.picks{display:grid; grid-template-columns:repeat(3,1fr); gap:9px;}
+.pick{border:1.5px solid rgba(160,107,255,.26); background:rgba(160,107,255,.06); color:var(--ink); border-radius:4px; padding:15px 6px 12px; cursor:pointer; font-family:'Jua',sans-serif; transition:transform .18s cubic-bezier(.34,1.56,.64,1), border-color .2s, background .2s, box-shadow .3s; text-align:center;}
+.pick:active{transform:scale(.94);}
+.pick.sel{border-color:var(--a1); background:linear-gradient(158deg,rgba(182,255,92,.18),rgba(160,107,255,.2)); box-shadow:0 0 26px -8px var(--a1), inset 0 0 22px -12px var(--a1);}
+.pick .n{font-size:19px; line-height:1.1; display:block;}
+.pick .u{font-size:11px; color:var(--muted); line-height:1.45; margin-top:6px; display:block; font-family:'Noto Sans KR',sans-serif; word-break:keep-all;}
+
+.rule{margin:20px 0 2px; background:rgba(160,107,255,.055); border:1px solid rgba(160,107,255,.22); border-radius:4px; padding:16px 18px; text-align:left;}
+.rule h3{font-size:15.5px; margin:0 0 10px; text-shadow:0 0 12px rgba(182,255,92,.35);}
+.rule ul{margin:0; padding:0; list-style:none;}
+.rule li{font-size:13.4px; color:var(--muted); line-height:1.62; margin:8px 0; padding-left:24px; position:relative; word-break:keep-all;}
+.rule li b{color:var(--ink);}
+.rule li .ic{position:absolute; left:0; top:0;}
+.lvkey{display:flex; gap:6px; margin-top:12px;}
+.lvkey span{flex:1; text-align:center; font-size:10.5px; color:var(--muted); border:1px solid rgba(160,107,255,.2); border-radius:3px; padding:6px 2px; line-height:1.4;}
+.lvkey span b{display:block; font-family:'Jua',sans-serif; font-size:12.5px; color:var(--ink);}
+
+.btn{width:100%; border:none; cursor:pointer; font-family:'Jua',sans-serif; font-size:19px; color:#0a0710; background:linear-gradient(100deg,var(--a1),var(--a2)); border-radius:4px; padding:16px; box-shadow:0 0 30px -8px var(--a2), 0 12px 26px -16px #000; transition:transform .18s cubic-bezier(.34,1.56,.64,1), filter .2s; margin-top:18px;}
+.btn:active{transform:scale(.97);}
+.btn:disabled{filter:grayscale(.6) brightness(.7); cursor:not-allowed; box-shadow:none;}
+.btn.ghost{background:transparent; color:var(--muted); border:1.5px solid rgba(160,107,255,.3); box-shadow:none; font-size:16px; padding:14px;}
+.btn.small{font-size:15px; padding:12px; margin-top:10px;}
+
+/* ---------- 상단바 ---------- */
+.topbar{display:flex; align-items:center; gap:8px; margin-bottom:9px;}
+.score{flex:1; display:flex; align-items:center; gap:7px; background:rgba(255,255,255,.04); border:1.5px solid rgba(160,107,255,.22); border-radius:4px; padding:8px 10px; min-width:0;}
+.score .nm{font-size:12.5px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.score .pt{font-family:'Jua',sans-serif; font-size:20px; margin-left:auto; line-height:1;}
+.score.a{border-color:rgba(182,255,92,.5); box-shadow:inset 0 0 18px -12px var(--slotA);} .score.a .pt{color:var(--slotA); text-shadow:0 0 12px rgba(182,255,92,.6);}
+.score.b{border-color:rgba(192,139,255,.55); box-shadow:inset 0 0 18px -12px var(--slotB);} .score.b .pt{color:var(--slotB); text-shadow:0 0 12px rgba(192,139,255,.6);}
+.score .tag{font-size:9.5px; color:var(--muted); letter-spacing:.08em;}
+.midcol{flex:0 0 auto; text-align:center;}
+.midcol .rd{font-family:'Jua',sans-serif; font-size:14px;}
+.midcol .dr{font-size:10px; color:var(--muted);}
+.gauge{height:8px; border-radius:1px; background:rgba(255,255,255,.08); overflow:hidden; margin-bottom:14px; border:1px solid rgba(160,107,255,.18);}
+.gaugefill{height:100%; width:0%; background:linear-gradient(90deg,var(--a1),var(--a2)); box-shadow:0 0 16px 2px var(--a2); transition:width .55s cubic-bezier(.22,1,.36,1);}
+
+/* ---------- 뽑기 카드 ---------- */
+.cardarea{flex:1; display:flex; align-items:center; justify-content:center; perspective:1200px; min-height:320px;}
+.card{width:100%; max-width:400px; aspect-ratio:3/3.5; border-radius:6px; position:relative; cursor:pointer; transform-style:preserve-3d; transition:transform .65s cubic-bezier(.4,.9,.3,1);}
+.card.flip{transform:rotateY(180deg);}
+.face{position:absolute; inset:0; border-radius:6px; backface-visibility:hidden; -webkit-backface-visibility:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:26px; text-align:center; overflow:hidden;}
+.back{background:linear-gradient(158deg,var(--card),#1a1030); border:2px solid rgba(182,255,92,.4); box-shadow:0 0 38px -10px var(--a1), inset 0 0 44px -20px var(--a1);}
+.back .mark{font-size:54px; margin-bottom:12px; animation:tick 2.2s ease-in-out infinite; filter:drop-shadow(0 0 16px rgba(182,255,92,.75));}
+@keyframes tick{0%,100%{transform:rotate(-6deg) scale(1);}50%{transform:rotate(6deg) scale(1.09);}}
+.back .hint{font-family:'Jua',sans-serif; font-size:21px; text-shadow:0 0 16px rgba(182,255,92,.5);}
+.back .hint2{font-size:12.5px; color:var(--muted); margin-top:8px;}
+.back .glow{position:absolute; width:180%; height:60%; background:radial-gradient(ellipse at center, rgba(160,107,255,.38), transparent 66%); top:-12%; left:-40%; filter:blur(20px);}
+.front{transform:rotateY(180deg); background:linear-gradient(158deg,#1a1030,var(--card)); border:2px solid rgba(160,107,255,.55); box-shadow:0 0 40px -10px var(--a2), inset 0 0 44px -20px var(--a2); justify-content:center;}
+.front .no{font-size:11.5px; color:var(--muted); letter-spacing:.12em;}
+.front h2{font-size:27px; margin:10px 0 12px; line-height:1.28; word-break:keep-all; text-shadow:0 0 18px rgba(160,107,255,.45);}
+.front .set{font-size:13.5px; color:var(--muted); line-height:1.7; word-break:keep-all;}
+.lvtag{display:inline-block; font-family:'Jua',sans-serif; font-size:11.5px; padding:5px 12px; border-radius:3px; margin-bottom:4px; letter-spacing:.04em;}
+.lv1{background:rgba(182,255,92,.14); color:#d9ff9c; border:1px solid rgba(182,255,92,.55); box-shadow:0 0 16px -6px #b6ff5c;}
+.lv2{background:rgba(160,107,255,.18); color:#d3b6ff; border:1px solid rgba(160,107,255,.6); box-shadow:0 0 16px -6px #a06bff;}
+.lv3{background:rgba(255,61,154,.2); color:#ffa8d5; border:1px solid rgba(255,61,154,.62); box-shadow:0 0 18px -6px #ff3d9a;}
+
+/* ---------- 연기 화면 ---------- */
+.sitbox{background:rgba(255,255,255,.04); border:1px solid rgba(160,107,255,.24); border-radius:4px; padding:15px 17px; margin-bottom:11px;}
+.sitbox h2{font-size:22px; margin:6px 0 7px; line-height:1.3; word-break:keep-all;}
+.sitbox .set{font-size:13.4px; color:var(--muted); line-height:1.65; word-break:keep-all;}
+.roles{display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-bottom:11px;}
+.role{border-radius:4px; padding:13px 13px 14px; border:1.5px solid; min-width:0;}
+.role.a{background:linear-gradient(158deg,rgba(182,255,92,.14),rgba(182,255,92,.03)); border-color:rgba(182,255,92,.5); box-shadow:inset 0 0 26px -16px var(--slotA);}
+.role.b{background:linear-gradient(158deg,rgba(192,139,255,.16),rgba(192,139,255,.03)); border-color:rgba(192,139,255,.55); box-shadow:inset 0 0 26px -16px var(--slotB);}
+.role .who{font-size:11.5px; letter-spacing:.03em; margin-bottom:7px; display:flex; align-items:center; gap:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.role.a .who{color:var(--slotA);} .role.b .who{color:var(--slotB);}
+.role .rn{font-family:'Jua',sans-serif; font-size:16.5px; line-height:1.32; margin-bottom:7px; word-break:keep-all;}
+.role .goal{font-size:12.6px; color:var(--muted); line-height:1.6; word-break:keep-all;}
+.firstline{background:linear-gradient(150deg,rgba(182,255,92,.09),rgba(160,107,255,.06)); border:1px dashed rgba(182,255,92,.5); border-radius:4px; padding:14px 16px; margin-bottom:12px;}
+.firstline .lb{font-size:11px; color:var(--a1); letter-spacing:.06em; margin-bottom:7px;}
+.firstline .ln{font-size:16.5px; line-height:1.6; word-break:keep-all; text-shadow:0 0 16px rgba(182,255,92,.28);}
+
+.timerbox{display:flex; align-items:center; gap:12px; background:rgba(0,0,0,.4); border:1.5px solid rgba(160,107,255,.28); border-radius:4px; padding:13px 15px; margin-bottom:11px; transition:border-color .4s, background .4s;}
+.timerbox.warn{border-color:#ff3d9a; background:rgba(255,61,154,.14); animation:pulse 1s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,61,154,.42);}50%{box-shadow:0 0 0 9px rgba(255,61,154,0);}}
+.timerbox .t{font-family:'Jua',sans-serif; font-size:34px; line-height:1; min-width:88px; letter-spacing:.02em; text-shadow:0 0 18px rgba(182,255,92,.4);}
+.timerbox.warn .t{color:#ff7ab8; text-shadow:0 0 20px rgba(255,61,154,.7);}
+.tbar{flex:1; height:7px; border-radius:1px; background:rgba(255,255,255,.1); overflow:hidden;}
+.tbarfill{height:100%; width:100%; background:linear-gradient(90deg,var(--a1),var(--a2)); box-shadow:0 0 12px 1px var(--a2); transition:width .3s linear, background .4s;}
+.timerbox.warn .tbarfill{background:linear-gradient(90deg,#ff7ab8,#ff3d9a);}
+.tbtn{border:1.5px solid rgba(182,255,92,.35); border-radius:4px; padding:11px 15px; font-family:'Jua',sans-serif; font-size:15px; cursor:pointer; background:rgba(182,255,92,.1); color:var(--ink); transition:transform .16s cubic-bezier(.34,1.56,.64,1), background .2s;}
+.tbtn:active{transform:scale(.93);}
+
+.twistbtn{width:100%; border:none; cursor:pointer; font-family:'Jua',sans-serif; font-size:17px; color:#0a0710; background:linear-gradient(100deg,#b6ff5c,#a06bff); border-radius:4px; padding:14px; margin-bottom:11px; box-shadow:0 0 30px -8px #a06bff; animation:popIn .5s cubic-bezier(.34,1.56,.64,1);}
+.twistbtn:active{transform:scale(.97);}
+@keyframes popIn{from{opacity:0; transform:scale(.8) rotate(-3deg);} to{opacity:1; transform:none;}}
+.twistbox{background:linear-gradient(150deg,rgba(160,107,255,.2),rgba(182,255,92,.09)); border:1.5px solid rgba(160,107,255,.6); border-radius:4px; padding:14px 16px; margin-bottom:11px; animation:popIn .45s cubic-bezier(.34,1.56,.64,1); box-shadow:0 0 30px -14px var(--a2);}
+.twistbox .lb{font-family:'Jua',sans-serif; font-size:13px; color:#d3b6ff; margin-bottom:6px;}
+.twistbox .tx{font-size:14px; line-height:1.62; word-break:keep-all;}
+
+.tools{display:flex; gap:8px; margin-bottom:11px;}
+.tool{flex:1; border:1.5px solid rgba(160,107,255,.26); background:rgba(160,107,255,.06); color:var(--ink); border-radius:4px; padding:11px 6px; font-size:12.5px; font-family:'Noto Sans KR',sans-serif; cursor:pointer; transition:transform .16s cubic-bezier(.34,1.56,.64,1), opacity .2s;}
+.tool:active{transform:scale(.94);}
+.tool:disabled{opacity:.3; cursor:not-allowed;}
+.tool b{font-family:'Jua',sans-serif; font-size:13.5px;}
+
+.quote{display:flex; gap:8px; margin-bottom:12px;}
+.quote input{flex:1; min-width:0; padding:12px 13px; border-radius:4px; border:1.5px solid rgba(160,107,255,.26); background:rgba(255,255,255,.04); color:var(--ink); font-size:14px; font-family:inherit;}
+.quote input:focus{outline:none; border-color:var(--a1); box-shadow:0 0 18px -8px var(--a1);}
+.quote button{border:none; border-radius:4px; padding:0 16px; font-family:'Jua',sans-serif; font-size:14px; cursor:pointer; background:rgba(182,255,92,.16); color:var(--a1); transition:transform .16s cubic-bezier(.34,1.56,.64,1);}
+.quote button:active{transform:scale(.93);}
+
+/* ---------- 판정 ---------- */
+.judgebox{background:rgba(0,0,0,.4); border:1.5px solid rgba(255,61,154,.45); border-radius:4px; padding:16px; margin-top:2px; animation:popIn .45s cubic-bezier(.34,1.56,.64,1); box-shadow:0 0 34px -16px #ff3d9a;}
+.judgebox h3{font-size:18px; margin:0 0 6px; text-align:center;}
+.judgebox .cond{font-size:13px; color:#ffa8d5; text-align:center; line-height:1.6; margin-bottom:14px; word-break:keep-all;}
+.jbtns{display:grid; grid-template-columns:1fr 1fr; gap:9px;}
+.jbtn{border:1.5px solid rgba(255,255,255,.16); background:rgba(255,255,255,.05); color:var(--ink); border-radius:4px; padding:14px 8px; font-family:'Jua',sans-serif; font-size:15.5px; cursor:pointer; transition:transform .18s cubic-bezier(.34,1.56,.64,1), background .2s, border-color .2s; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.jbtn:active{transform:scale(.95);}
+.jbtn.a{border-color:rgba(182,255,92,.55);} .jbtn.b{border-color:rgba(192,139,255,.6);}
+.jbtn.draw{grid-column:span 2; font-size:14.5px; color:var(--muted);}
+.jbtn small{display:block; font-family:'Noto Sans KR',sans-serif; font-size:10.5px; color:var(--muted); margin-top:3px;}
+
+/* ---------- 점수판 ---------- */
+.result-hd{text-align:center; margin:8px 0 4px;}
+.result-hd .k{font-size:12px; color:var(--muted); letter-spacing:.12em;}
+.result-hd h2{font-size:31px; margin:8px 0 6px; line-height:1.25;}
+.combo{display:inline-block; font-family:'Jua',sans-serif; font-size:14px; padding:7px 16px; border-radius:3px; background:linear-gradient(100deg,rgba(182,255,92,.22),rgba(160,107,255,.26)); border:1px solid rgba(182,255,92,.5); margin-top:4px; animation:popIn .5s cubic-bezier(.34,1.56,.64,1); box-shadow:0 0 24px -10px var(--a1);}
+.bigscore{display:flex; align-items:center; justify-content:center; gap:16px; margin:18px 0 6px;}
+.bigscore .col{text-align:center; min-width:0; flex:1;}
+.bigscore .col .nm{font-size:13px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.bigscore .col .v{font-family:'Jua',sans-serif; font-size:52px; line-height:1.1;}
+.bigscore .col.a .v{color:var(--slotA); text-shadow:0 0 26px rgba(182,255,92,.55);} .bigscore .col.b .v{color:var(--slotB); text-shadow:0 0 26px rgba(192,139,255,.6);}
+.bigscore .sep{font-family:'Jua',sans-serif; font-size:26px; color:var(--muted);}
+
+.roul{background:rgba(255,255,255,.04); border:1px solid rgba(160,107,255,.24); border-radius:4px; padding:16px; margin:16px 0 2px; text-align:center;}
+.roul .lb{font-size:12.5px; color:var(--muted); margin-bottom:11px; word-break:keep-all;}
+.roul .slot{font-family:'Jua',sans-serif; font-size:20px; min-height:34px; display:flex; align-items:center; justify-content:center; line-height:1.35; word-break:keep-all; text-shadow:0 0 16px rgba(182,255,92,.4);}
+.roul .slot.spin{animation:shake .28s linear infinite;}
+@keyframes shake{0%,100%{transform:translateX(-3px);}50%{transform:translateX(3px);}}
+
+.recap{background:rgba(255,255,255,.035); border:1px solid rgba(160,107,255,.2); border-radius:4px; padding:15px 17px; margin-top:12px;}
+.recap .rl{font-size:11px; color:var(--muted); letter-spacing:.08em; margin-bottom:6px;}
+.recap .rt{font-family:'Jua',sans-serif; font-size:16.5px; line-height:1.35; margin-bottom:7px; word-break:keep-all;}
+.recap .rc{font-size:12.8px; color:var(--muted); line-height:1.62; word-break:keep-all;}
+.recap .nx{margin-top:12px; padding-top:12px; border-top:1px dashed rgba(160,107,255,.28); font-size:12.6px; color:var(--muted); line-height:1.6; word-break:keep-all;}
+.recap .nx b{color:var(--ink); font-family:'Jua',sans-serif;}
+
+.gradebox{text-align:center; margin:6px 0 2px;}
+.gradebox .gr{display:inline-block; font-family:'Jua',sans-serif; font-size:15px; padding:9px 18px; border-radius:3px; margin:5px 4px; border:1px solid rgba(182,255,92,.45); background:rgba(182,255,92,.1); box-shadow:0 0 22px -10px var(--a1);}
+.chemi{background:linear-gradient(150deg,rgba(160,107,255,.18),rgba(182,255,92,.08)); border:1px solid rgba(160,107,255,.45); border-radius:4px; padding:17px; margin:16px 0 4px; text-align:center; box-shadow:0 0 34px -18px var(--a2);}
+.chemi .lb{font-size:11.5px; color:var(--a1); letter-spacing:.12em; margin-bottom:8px;}
+.chemi .tx{font-size:16px; line-height:1.65; font-family:'Jua',sans-serif; word-break:keep-all;}
+.quotes{background:rgba(255,255,255,.035); border:1px solid rgba(160,107,255,.2); border-radius:4px; padding:16px 18px; margin-top:14px;}
+.quotes h3{font-size:15px; margin:0 0 10px;}
+.quotes li{font-size:13.4px; color:var(--muted); line-height:1.65; margin:9px 0; word-break:keep-all; list-style:none; padding-left:18px; position:relative;}
+.quotes li::before{content:"❝"; position:absolute; left:0; color:var(--a1);}
+.quotes li b{color:var(--ink); font-weight:500;}
+
+.toast{position:fixed; left:50%; top:18px; transform:translateX(-50%) translateY(-24px); background:rgba(14,10,24,.97); border:1.5px solid var(--a1); color:var(--ink); padding:13px 20px; border-radius:4px; font-size:14px; opacity:0; pointer-events:none; transition:opacity .4s, transform .4s; z-index:60; max-width:90vw; text-align:center; box-shadow:0 0 34px -12px var(--a1); word-break:keep-all;}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+.footer{text-align:center; margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.08);}
+.mf-eyebrow{display:flex; align-items:center; justify-content:center; gap:11px; margin-bottom:8px;}
+.mf-eyebrow::before,.mf-eyebrow::after{content:""; height:1px; width:38px; background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));}
+.mf-eyebrow::after{transform:scaleX(-1);}
+.mf-eyebrow span{font-size:10px; letter-spacing:.42em; text-indent:.42em; color:#9a8fc0; font-weight:500; white-space:nowrap;}
+.mf-logo{font-family:'Jua',sans-serif; font-size:27px; line-height:1; margin-bottom:9px; letter-spacing:.01em; background:linear-gradient(95deg,#5ee7d8,#7aa6ff 36%,#b78bf5 62%,#ff8ad0); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+.mf-caption{font-size:11.5px; letter-spacing:.1em; color:#9a8fc0;}
+
+@media (max-width:360px){
+  .hero h1{font-size:34px;} .front h2{font-size:23px;} .role .rn{font-size:15px;}
+  .timerbox .t{font-size:29px; min-width:76px;}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.09s !important;}
+}
+</style>
+</head>
+<body>
+<div class="props" aria-hidden="true"><span>🌀</span><span>🧟</span><span>👽</span><span>🛸</span><span>🧬</span><span>👻</span></div>
+<div class="toast" id="toast"></div>
+<div class="wrap">
+
+  <!-- ============ 시작 ============ -->
+  <section class="screen on" id="s-start">
+    <div class="hero">
+      <span class="badge">둘이 함께 · 친해지기</span>
+      <h1 data-t="상황극 중독자">상황극 <span class="grad">중독자</span></h1>
+      <div class="sub">🌀 황당편 · 상황 100개</div>
+      <p>폰 하나를 가운데 두고 나란히 앉아, <b>정반대 입장</b>을 맡아 즉흥 연기로 붙어요.<br>좀비·초능력·복제인간 — <b>설정은 황당한데 다투는 건 지극히 현실적</b>입니다.</p>
+    </div>
+
+    <div class="names">
+      <div class="field"><label>🅰 이름</label><input id="nameA" maxlength="6" placeholder="🅰" autocomplete="off"></div>
+      <div class="vs">VS</div>
+      <div class="field"><label>🅱 이름</label><input id="nameB" maxlength="6" placeholder="🅱" autocomplete="off"></div>
+    </div>
+
+    <div class="pick-title">오늘의 맛은?</div>
+    <div class="picks" id="tastes">
+      <button class="pick" data-taste="mild"><span class="n">🥛</span><span class="u">순한맛<br>웃으면서 할 수 있는</span></button>
+      <button class="pick" data-taste="hot"><span class="n">🌶️🌶️</span><span class="u">매운맛<br>바로 본론부터</span></button>
+      <button class="pick sel" data-taste="mix"><span class="n">🥛→🌶️</span><span class="u">순하다가 매운맛<br>점점 세지게</span></button>
+    </div>
+
+    <div class="rule">
+      <h3>규칙 — 이것만 지키면 돼요</h3>
+      <ul>
+        <li><span class="ic">📱</span>폰 하나를 가운데 두고 <b>나란히</b> 앉아요.</li>
+        <li><span class="ic">🎬</span>첫 대사는 카드에 적힌 사람이 먼저 읽어요. 그다음부터는 <b>즉흥</b>.</li>
+        <li><span class="ic">🎭</span><b>역할을 배신하지 마세요.</b> 내 목표를 끝까지 밀어야 상대가 무너져요.</li>
+        <li><span class="ic">😌</span>진짜로 화내지 않기. <b>이건 연기예요.</b></li>
+        <li><span class="ic">🤝</span>판정은 둘이 합의해서 눌러요. 애매하면 무승부.</li>
+      </ul>
+      <div class="lvkey">
+        <span><b>LV.1</b> 몸풀기</span>
+        <span><b>LV.2</b> 슬슬</span>
+        <span><b>LV.3</b> 정면충돌</span>
+      </div>
+    </div>
+
+    <button class="btn" id="startBtn">5판 승부 시작하기 🎬</button>
+  </section>
+
+  <!-- ============ 뽑기 ============ -->
+  <section class="screen" id="s-draw">
+    <div class="topbar" id="top-draw"></div>
+    <div class="gauge"><div class="gaugefill" id="gauge-draw"></div></div>
+    <div class="cardarea">
+      <div class="card" id="drawCard">
+        <div class="face back">
+          <div class="glow"></div>
+          <div class="mark" id="drawMark">🌀</div>
+          <div class="hint">카드를 탭하세요</div>
+          <div class="hint2" id="drawHint">오늘의 설정이 공개됩니다</div>
+        </div>
+        <div class="face front" id="cardFront"></div>
+      </div>
+    </div>
+    <button class="btn" id="toPlayBtn" style="display:none">역할 확인하고 시작 →</button>
+  </section>
+
+  <!-- ============ 연기 ============ -->
+  <section class="screen" id="s-play">
+    <div class="topbar" id="top-play"></div>
+    <div class="gauge"><div class="gaugefill" id="gauge-play"></div></div>
+
+    <div class="sitbox">
+      <span class="lvtag" id="playLv"></span>
+      <h2 id="playTitle"></h2>
+      <div class="set" id="playSet"></div>
+    </div>
+
+    <div class="roles">
+      <div class="role a"><div class="who" id="whoA"></div><div class="rn" id="rnA"></div><div class="goal" id="goalA"></div></div>
+      <div class="role b"><div class="who" id="whoB"></div><div class="rn" id="rnB"></div><div class="goal" id="goalB"></div></div>
+    </div>
+
+    <div class="firstline">
+      <div class="lb" id="flLabel"></div>
+      <div class="ln" id="flText"></div>
+    </div>
+
+    <div class="timerbox" id="timerBox">
+      <div class="t" id="timerText">1:30</div>
+      <div class="tbar"><div class="tbarfill" id="tbarFill"></div></div>
+      <button class="tbtn" id="timerBtn">시작</button>
+    </div>
+
+    <div id="twistSlot"></div>
+
+    <div class="tools">
+      <button class="tool" id="passA"></button>
+      <button class="tool" id="passB"></button>
+    </div>
+
+    <div class="quote">
+      <input id="quoteInput" maxlength="60" placeholder="웃겼던 명대사 한 줄 저장" autocomplete="off">
+      <button id="quoteBtn">저장</button>
+    </div>
+
+    <div id="judgeSlot"></div>
+    <button class="btn" id="judgeBtn">판정하기 ⚖️</button>
+  </section>
+
+  <!-- ============ 점수판 ============ -->
+  <section class="screen" id="s-score">
+    <div class="result-hd">
+      <div class="k" id="scoreRound"></div>
+      <h2 id="scoreTitle"></h2>
+      <div id="comboSlot"></div>
+    </div>
+    <div class="bigscore">
+      <div class="col a"><div class="nm" id="bsNameA"></div><div class="v" id="bsA">0</div></div>
+      <div class="sep">:</div>
+      <div class="col b"><div class="nm" id="bsNameB"></div><div class="v" id="bsB">0</div></div>
+    </div>
+    <div id="roulSlot"></div>
+    <div id="recapSlot"></div>
+    <div style="flex:1"></div>
+    <button class="btn" id="swapBtn">🔁 역할 바꿔서 한 판 더</button>
+    <button class="btn ghost" id="nextBtn">다음 상황 →</button>
+  </section>
+
+  <!-- ============ 결과 ============ -->
+  <section class="screen" id="s-result">
+    <div class="result-hd">
+      <div class="k">5판 승부 종료</div>
+      <h2 id="finalTitle"></h2>
+    </div>
+    <div class="bigscore">
+      <div class="col a"><div class="nm" id="frNameA"></div><div class="v" id="frA">0</div></div>
+      <div class="sep">:</div>
+      <div class="col b"><div class="nm" id="frNameB"></div><div class="v" id="frB">0</div></div>
+    </div>
+    <div class="gradebox" id="gradeBox"></div>
+    <div class="chemi"><div class="lb">우리 둘의 케미</div><div class="tx" id="chemiText"></div></div>
+    <div id="quotesSlot"></div>
+    <button class="btn" id="shareBtn">결과 공유하기 📤</button>
+    <button class="btn ghost" id="againBtn">한 판 더 하기</button>
+    <button class="btn ghost small" id="homeBtn">처음으로</button>
+
+    <div class="footer">
+      <div class="mf-eyebrow"><span>의 미 와 재 미 공 장</span></div>
+      <div class="mf-logo">미미팩토리</div>
+      <div class="mf-caption">주식회사 연:결 패밀리회사</div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* ===================== 상황 100개 ===================== */
+const SCENES = [
+{"n": 1, "t": "무인도 표류 1일차", "lv": 1, "s": "물 한 병, 라이터, 그리고 왜인지 헤어드라이어가 있다.", "ar": "구조 기다리자파", "ag": "움직이지 말고 신호를 만들자고 하라.", "br": "탐험하자파", "bg": "섬 안쪽에 답이 있다고 설득하라.", "sp": "A", "ln": "움직이면 죽어. 여기 가만히 있어야 해.", "tw": "저 멀리 편의점 간판 같은 게 보인다.", "jd": "먼저 헤어드라이어를 쓰겠다고 하는 쪽이 패배"},
+{"n": 2, "t": "마지막 남은 치킨 한 조각", "lv": 1, "s": "닭다리 하나. 두 사람. 새벽 2시.", "ar": "논리파", "ag": "오늘 먹은 양을 근거로 소유권을 주장하라.", "br": "감성파", "bg": "오늘 하루가 얼마나 힘들었는지 호소하라.", "sp": "A", "ln": "내가 아까 두 조각밖에 안 먹었어. 두 조각.", "tw": "박스 안에 하나가 더 있었다.", "jd": "먼저 손대는 쪽이 패배"},
+{"n": 3, "t": "동물과 말이 통한다", "lv": 1, "s": "오늘부터 동물의 말이 들린다. 그리고 비둘기가 험담을 하고 있다.", "ar": "다 믿는 사람", "ag": "동물들의 말을 진지하게 통역하라.", "br": "의심하는 사람", "bg": "상대가 지어내는 거라고 증명하라.", "sp": "A", "ln": "저 비둘기가 방금 너 욕했어.", "tw": "의심하던 쪽에게도 들리기 시작한다.", "jd": "먼저 동물에게 말을 거는 쪽이 패배"},
+{"n": 4, "t": "초능력 하나만 고른다면", "lv": 1, "s": "딱 하나. 오늘 자정까지 정해야 한다.", "ar": "순간이동파", "ag": "인생이 얼마나 바뀌는지 계산해 보여라.", "br": "시간정지파", "bg": "잠을 실컷 잘 수 있다는 점을 강조하라.", "sp": "A", "ln": "출퇴근이 사라져. 하루 두 시간이 생겨.", "tw": "능력은 하나만, 둘 중 한 사람만 가질 수 있다.", "jd": "먼저 상대 능력이 낫다고 인정하는 쪽이 패배"},
+{"n": 5, "t": "로봇이 집안일을 한다", "lv": 1, "s": "로봇이 왔다. 그런데 하루에 세 가지 일만 한다.", "ar": "요리·설거지·빨래파", "ag": "매일 하는 일부터라고 밀어라.", "br": "청소·정리·분리수거파", "bg": "하기 싫은 일부터라고 밀어라.", "sp": "A", "ln": "밥이 제일 중요해. 사람은 먹어야 살아.", "tw": "로봇이 \"두 분 대화를 학습 중입니다\"라고 말한다.", "jd": "먼저 로봇에게 물어보자고 하는 쪽이 패배"},
+{"n": 6, "t": "하루가 48시간이 됐다", "lv": 1, "s": "오늘부터 하루가 두 배다. 단, 나이는 두 배로 먹는다.", "ar": "좋다파", "ag": "늘어난 시간으로 할 일을 신나게 나열하라.", "br": "싫다파", "bg": "나이를 계산해 보여라.", "sp": "A", "ln": "하고 싶던 거 다 할 수 있어. 다.", "tw": "한 명만 되돌릴 수 있다.", "jd": "먼저 계산기를 꺼내는 쪽이 패배"},
+{"n": 7, "t": "하루에 한 시간 동물이 된다", "lv": 1, "s": "매일 정해진 한 시간, 동물로 변한다. 동물은 못 고른다.", "ar": "재밌겠다파", "ag": "그 한 시간을 어떻게 쓸지 계획하라.", "br": "큰일이다파", "bg": "회의 중에 변하면 어쩌냐고 밀어라.", "sp": "A", "ln": "한 시간이면 낮잠 자면 돼.", "tw": "오늘의 동물이 하필 비둘기였다.", "jd": "먼저 동물 흉내를 내는 쪽이 패배"},
+{"n": 8, "t": "소원 세 개 중 마지막 하나", "lv": 1, "s": "램프를 문지른 지 이틀째. 소원 두 개는 이미 썼다. 피자 한 판, 그리고 주차 자리.", "ar": "지금 쓰자파", "ag": "오늘 당장 필요한 걸 대라. 아껴봐야 못 쓴다고 밀어라.", "br": "아껴두자파", "bg": "진짜 큰일이 올 때까지 절대 못 쓰게 막아라.", "sp": "A", "ln": "그러니까 아까워서 이틀째 아무것도 못 하고 있잖아.", "tw": "램프 밑바닥에 「유효기간 3일」이라고 작게 적혀 있다.", "jd": "먼저 소원을 입 밖에 내는 쪽이 패배"},
+{"n": 9, "t": "순간이동이 5미터씩 어긋난다", "lv": 1, "s": "오늘 아침부터 순간이동이 된다. 단, 목적지에서 늘 5미터쯤 빗나간다. 방금 한 명이 옆집 화단에 떨어졌다.", "ar": "그래도 쓰자파", "ag": "5미터는 오차라고 우겨라. 지각보다 낫다.", "br": "걸어가자파", "bg": "오늘 벌어진 사고를 하나씩 세어 읽어라.", "sp": "A", "ln": "화단은 밟았지만 8분 만에 왔어. 8분.", "tw": "다음 오차는 5미터가 아니라 5층이라는 걸 알게 된다.", "jd": "먼저 신발을 신는 쪽이 패배"},
+{"n": 10, "t": "중력이 절반이 됐다", "lv": 1, "s": "오후 3시 거실. 컵을 놓았는데 천천히 떠올랐다. 뉴스는 \"당분간 이렇다\"고 한다.", "ar": "나가서 놀자파", "ag": "지금 아니면 평생 못 해본다고 밀어라. 할 것 목록을 대라.", "br": "집부터 묶자파", "bg": "떠다닐 물건을 하나씩 세어라. 안전이 먼저다.", "sp": "A", "ln": "지금 나가면 나 3미터 뛴다니까. 3미터.", "tw": "30분 뒤 중력이 원래대로 돌아온다는 속보가 뜬다.", "jd": "먼저 상대 쪽 일을 거드는 쪽이 패배"},
+{"n": 11, "t": "자동차가 말을 하기 시작했다", "lv": 1, "s": "출근길 8시 10분. 12년 탄 차가 갑자기 \"방금 그 차선 변경은 위험했다\"고 말했다.", "ar": "차 말이 맞다파", "ag": "차의 지적을 전부 받아들여라. 운전 습관을 고치자고 밀어라.", "br": "입을 다물게 하자파", "bg": "배선을 뽑든 초기화하든 오늘 안에 꺼라.", "sp": "B", "ln": "차가 나한테 훈수를 두면 그건 차가 아니야.", "tw": "차가 \"방금 기록을 보험사로 보냈습니다\"라고 말한다.", "jd": "먼저 갓길에 차를 세우는 쪽이 패배"},
+{"n": 12, "t": "옆자리 말이 전부 들린다", "lv": 1, "s": "오늘부터 세상 모든 언어가 들린다. 카페 옆자리 네 명이 우리 얘기를 하고 있다. 아마도.", "ar": "계속 듣자파", "ag": "통역을 멈추지 마라. 다음 문장이 궁금하다.", "br": "자리 옮기자파", "bg": "엿듣기는 엿듣기라고 밀어라. 지금 일어나자.", "sp": "A", "ln": "잠깐만, 방금 우리 테이블 쪽 봤어. 조용히 해봐.", "tw": "그쪽도 이쪽 말을 전부 알아듣고 있었다.", "jd": "먼저 옆자리를 쳐다보는 쪽이 패배"},
+{"n": 13, "t": "로봇 강아지가 왔다", "lv": 1, "s": "상자에서 로봇 강아지가 나왔다. 배터리는 6시간, 이름은 아직 없다.", "ar": "가족이다파", "ag": "이름을 붙이고 자리를 만들어줘라. 진심으로 대하라.", "br": "기계다파", "bg": "설명서부터 읽어라. 감정 이입은 낭비라고 못 박아라.", "sp": "A", "ln": "얘 지금 나 쳐다봤어. 봤지?", "tw": "로봇이 사람 목소리로 \"충전 좀 부탁드려요\"라고 말한다.", "jd": "먼저 로봇에게 미안하다고 말하는 쪽이 패배"},
+{"n": 14, "t": "하늘을 날 수 있게 됐다", "lv": 1, "s": "어제부터 뜬다. 최고 높이 3미터, 속도는 자전거만큼. 내일은 결혼식에 가야 한다.", "ar": "날아가자파", "ag": "토요일 도로 사정을 계산해 보여라.", "br": "지하철 타자파", "bg": "사람들 시선과 정장 차림을 근거로 막아라.", "sp": "A", "ln": "차로 가면 40분. 날면 12분이야.", "tw": "3미터 위가 한계라 신호등마다 걸린다는 걸 알게 된다.", "jd": "먼저 창문을 여는 쪽이 패배"},
+{"n": 15, "t": "물속에서 숨이 쉬어진다", "lv": 1, "s": "밤 11시. 욕조에 30분째 잠겨 있었는데 멀쩡하다. 동네 수영장은 여섯 시에 문을 닫았다.", "ar": "지금 시험하러 가자파", "ag": "오늘 밤 안에 확인하자고 밀어라. 내일이면 사라질지 모른다.", "br": "병원부터 가자파", "bg": "폐에 뭔가 생긴 거라고 겁을 줘라. 검사가 먼저다.", "sp": "A", "ln": "지금 안 가면 이거 영영 못 해봐.", "tw": "욕조 물이 빠지자 오히려 잠깐 숨이 막힌다.", "jd": "먼저 물에 다시 들어가는 쪽이 패배"},
+{"n": 16, "t": "게임 속 튜토리얼 마을", "lv": 1, "s": "눈을 뜨니 머리 위에 체력 바가 떠 있다. 마을 노인이 \"용사여\"라고 부른다. 레벨은 1이다.", "ar": "본편 가자파", "ag": "지금 출발하자고 밀어라. 퀘스트를 받아 와라.", "br": "여기 살자파", "bg": "튜토리얼 마을엔 몬스터가 안 나온다는 점을 강조하라.", "sp": "A", "ln": "여기서 슬라임만 300마리 잡을 거야?", "tw": "마을 밖으로 나가면 저장이 안 된다는 안내문을 발견한다.", "jd": "먼저 혼자라도 가겠다고 말하는 쪽이 패배"},
+{"n": 17, "t": "분신이 한 명 생겼다", "lv": 1, "s": "분신 하나. 여덟 시간 뒤에 사라진다. 지금 오전 9시, 오늘 할 일은 열두 개다.", "ar": "회사로 보내자파", "ag": "분신을 출근시켜라. 오늘 하루를 통째로 벌자.", "br": "집안일 시키자파", "bg": "밀린 빨래·설거지·장보기를 순서대로 나열하라.", "sp": "A", "ln": "얘가 출근하면 우리 둘 다 오늘 노는 거야.", "tw": "분신이 자기도 오늘은 쉬고 싶다고 말한다.", "jd": "먼저 상대 몫의 일을 대신 하겠다고 말하는 쪽이 패배"},
+{"n": 18, "t": "냉장고가 오늘 몇 번 열었는지 센다", "lv": 1, "s": "밤 11시 40분. 냉장고 문을 열자 \"오늘 아홉 번째입니다\"라고 말했다. 안에는 어제 시킨 치즈볼이 있다.", "ar": "그냥 두자파", "ag": "덕분에 야식이 줄었다고 밀어라. 이번 달 몸무게를 근거로 대라.", "br": "코드 뽑자파", "bg": "내 집 물건이 나를 세고 있다고 밀어라. 지금 당장 끄자.", "sp": "B", "ln": "지금 저게 나를 감시한 거야. 우리 집 냉장고가.", "tw": "냉장고가 \"기록은 매일 아침 제조사 앱으로 전송됩니다\"라고 덧붙인다.", "jd": "먼저 냉장고 문을 여는 쪽이 패배"},
+{"n": 19, "t": "화분이 목마르다고 소리친다", "lv": 1, "s": "새벽 2시. 거실 화분이 40분째 \"목마르다\"고 외치고 있다. 어제 오후에 물을 줬다.", "ar": "주자파", "ag": "본인이 목마르다는데 무슨 근거가 더 필요하냐고 밀어라.", "br": "못 준다파", "bg": "흙을 손가락으로 찍어 보여라. 뿌리가 썩는다고 막아라.", "sp": "A", "ln": "본인이 목마르다잖아. 본인이.", "tw": "옆 화분이 \"쟤 어제도 두 번 받았어요\"라고 일러바친다.", "jd": "먼저 물뿌리개를 드는 쪽이 패배"},
+{"n": 20, "t": "윗집에 용이 산다", "lv": 1, "s": "새벽 1시 20분, 천장에서 또 쿵 소리가 났다. 낮에 계단에서 마주친 윗집 사람 등에는 접힌 날개가 있었다.", "ar": "올라가자파", "ag": "오늘은 말하고 오자고 밀어라. 할 말을 정리해 읽어라.", "br": "참자파", "bg": "상대가 용이라는 점을 계속 짚어라. 관리실에 맡기자.", "sp": "A", "ln": "날개 달렸다고 층간소음이 아닌 게 되진 않아.", "tw": "인터폰이 울린다. 윗집이 \"아랫집이 시끄럽다\"고 한다.", "jd": "먼저 천장을 두드리는 쪽이 패배"},
+{"n": 21, "t": "그림자가 안 일어난다", "lv": 1, "s": "아침 8시 12분. 한 명의 그림자가 벽에 드러누워 안 일어난다. 집을 나서야 할 시간이 18분 남았다.", "ar": "두고 가자파", "ag": "그림자 없이도 출근은 된다고 밀어라. 지금 신발을 신자.", "br": "기다리자파", "bg": "두고 가면 하루 종일 이상해 보인다고 막아라. 깨워서 데려가자.", "sp": "A", "ln": "저거 기다리다 둘 다 지각해.", "tw": "그림자가 벌떡 일어나 혼자 현관문으로 나가버린다.", "jd": "먼저 그림자에게 사정하는 쪽이 패배"},
+{"n": 22, "t": "하루에 열 걸음만 걸을 수 있다", "lv": 1, "s": "오늘부터 한 사람당 하루 열 걸음이다. 아침 9시인데 벌써 여섯 걸음을 썼고, 화장실까지는 네 걸음이다.", "ar": "아끼자파", "ag": "남은 네 걸음을 저녁까지 지켜라. 오늘은 소파에서 안 움직인다.", "br": "지금 쓰자파", "bg": "편의점까지 가서 먹을 걸 사 오자고 밀어라. 굶는 게 더 급하다.", "sp": "A", "ln": "네 걸음이야. 화장실 딱 한 번이라고.", "tw": "자정에 걸음 수가 초기화되지 않는다는 안내가 온다.", "jd": "먼저 자리에서 일어나는 쪽이 패배"},
+{"n": 23, "t": "옷장 안쪽에 눈이 내린다", "lv": 1, "s": "옷장 문을 열면 안쪽이 눈 내리는 숲이다. 벌써 나흘째고, 겨울옷은 전부 그 안에 걸려 있다.", "ar": "들어가서 꺼내오자파", "ag": "몇 발짝이면 된다고 밀어라. 내일 아침에 입을 코트를 대라.", "br": "못 들어간다파", "bg": "문을 닫고 새로 사자고 밀어라. 나흘째 눈이 그치지 않는 걸 짚어라.", "sp": "A", "ln": "코트 세 벌이 저 안에 있어. 새로 사면 얼마인지 알아?", "tw": "옷장 안 눈밭에 이미 누군가의 발자국이 찍혀 있다.", "jd": "먼저 옷장 안으로 발을 넣는 쪽이 패배"},
+{"n": 24, "t": "세상에서 색이 사라졌다", "lv": 1, "s": "아침부터 온 세상이 흑백이다. 오늘 저녁은 두 달 전에 예약해둔 기념일 식당이다.", "ar": "그대로 가자파", "ag": "예약금 얘기부터 꺼내라. 맛은 색이랑 상관없다고 밀어라.", "br": "미루자파", "bg": "사진 한 장 못 건진다고 막아라. 색 돌아오면 가자.", "sp": "A", "ln": "예약금 6만 원. 오늘 취소하면 못 돌려받아.", "tw": "색이 딱 두 시간만 돌아온다는 속보가 뜬다. 시간은 저녁 7시다.", "jd": "먼저 예약 취소 버튼을 누르는 쪽이 패배"},
+{"n": 25, "t": "화를 내면 머리 위에만 비가 온다", "lv": 1, "s": "오늘부터 그렇게 됐다. 지금 거실에서 한 명의 머리 위에만 비가 내리고 있다.", "ar": "화 안 났다는 사람", "ag": "습도 탓이라고 끝까지 우겨라. 목소리를 낮춰 말하라.", "br": "인정하라는 사람", "bg": "지금 젖고 있는 걸 짚어라. 왜 화났는지 말하게 만들어라.", "sp": "B", "ln": "머리에서 물 떨어져. 지금.", "tw": "물어보던 쪽의 머리 위에도 비가 시작된다.", "jd": "먼저 우산을 펴는 쪽이 패배"},
+{"n": 26, "t": "축하를 받으면 몸이 떠오른다", "lv": 1, "s": "축하 한 마디에 30센티씩 뜨고, 내려오는 데 두 시간이 걸린다. 내일 낮 12시는 사촌 결혼식이다.", "ar": "가자파", "ag": "축의금 20만 원을 이미 보냈다고 밀어라. 얼굴은 비춰야 한다.", "br": "빠지자파", "bg": "예식장 천장에 붙어 있는 그림을 그려 보여라. 봉투만 보내자.", "sp": "A", "ln": "20만 원 보냈어. 밥은 먹고 와야지.", "tw": "신부 측에서 \"축사 한마디 부탁드린다\"는 연락이 온다.", "jd": "먼저 정장을 꺼내는 쪽이 패배"},
+{"n": 27, "t": "거짓말 한 번에 키가 1센티 준다", "lv": 1, "s": "오늘부터 그렇다. 저녁 7시, 한 명은 아침보다 4센티 작아져 있다.", "ar": "캐묻는 사람", "ag": "오늘 무슨 거짓말을 네 번 했는지 알아내라. 물러서지 마라.", "br": "안 밝히는 사람", "bg": "자세 때문이라고 우겨라. 문틀 근처에 가지 마라.", "sp": "A", "ln": "문틀에 그은 선 봐. 아침이랑 다르잖아.", "tw": "캐묻던 쪽도 아침보다 2센티 작아져 있다.", "jd": "먼저 문틀에 등을 대는 쪽이 패배"},
+{"n": 28, "t": "현관에 용 알이 배송됐다", "lv": 1, "s": "아침에 문을 여니 무릎 높이 알이 놓여 있다. 송장에 우리 집 주소가 찍혀 있고, 알은 따뜻하다.", "ar": "품자파", "ag": "지금 식으면 안에 있는 게 어떻게 되겠냐고 밀어라. 담요를 가져와라.", "br": "반품하자파", "bg": "오배송이라고 밀어라. 기사님 번호로 지금 전화하자.", "sp": "A", "ln": "지금 식으면 안에 있는 애는 어떻게 되는데.", "tw": "송장의 받는 사람 이름이 반품하자는 쪽 이름이다.", "jd": "먼저 알에 손을 얹는 쪽이 패배"},
+{"n": 29, "t": "AI 스피커가 한쪽 편을 든다", "lv": 1, "s": "저녁 8시. 리모컨을 누가 잃어버렸는지 다투는 중에 스피커가 \"그건 사실이 아닙니다\"라며 한쪽을 지적했다.", "ar": "스피커를 증인으로 세우는 사람", "ag": "지난 기록을 다시 틀어달라고 하라. 오늘 판을 끝내라.", "br": "스피커를 끄려는 사람", "bg": "우리 집 대화를 저장했다는 점을 문제 삼아라. 전원을 뽑자.", "sp": "A", "ln": "들었지? 기계도 아니라잖아.", "tw": "스피커가 \"지난 3개월 대화를 모두 보관 중입니다\"라고 말한다.", "jd": "먼저 스피커에게 말을 거는 쪽이 패배"},
+{"n": 30, "t": "팔이 두 개 더 생겼다", "lv": 1, "s": "아침에 일어나니 둘 다 팔이 네 개다. 옷은 안 맞고, 오늘은 대청소 하기로 한 토요일이다.", "ar": "두 배로 하자파", "ag": "팔이 네 개면 일도 두 배라고 밀어라. 오늘 안에 다 끝내자.", "br": "병원부터 가자파", "bg": "몸에 뭔가 난 거라고 밀어라. 청소는 다음 주로 미루자.", "sp": "A", "ln": "손이 여덟 개야. 오늘 창틀까지 끝낸다.", "tw": "낮 12시부터 팔이 하나씩 사라지기 시작한다.", "jd": "먼저 걸레를 내려놓는 쪽이 패배"},
+{"n": 31, "t": "새벽 편의점 알바의 명찰", "lv": 1, "s": "새벽 3시 편의점. 계산대 직원 명찰에 「저승 3팀」이라고 적혀 있다. 직원이 우리 둘 이름을 부른다.", "ar": "물어보자파", "ag": "이름을 어떻게 아는지 지금 확인하자고 밀어라.", "br": "그냥 나가자파", "bg": "아는 척하면 일이 커진다고 막아라. 계산만 하고 나가자.", "sp": "A", "ln": "저기요. 제 이름 어떻게 아세요?", "tw": "직원이 \"두 분 중 한 분만 오늘 명단에 있습니다\"라고 말한다.", "jd": "먼저 편의점 문을 밀고 나가는 쪽이 패배"},
+{"n": 32, "t": "옆집에 안드로이드가 이사 왔다", "lv": 1, "s": "토요일 오전 11시, 옆집 이사가 끝났다. 새 이웃은 안드로이드고 지금 떡을 들고 문 앞에 서 있다.", "ar": "받자파", "ag": "이웃은 이웃이라고 밀어라. 문을 열자.", "br": "안 받자파", "bg": "안드로이드가 만든 떡을 왜 먹냐고 막아라. 없는 척하자.", "sp": "A", "ln": "사람이 떡 돌리면 받고, 로봇이 돌리면 안 받아?", "tw": "문틈으로 \"안에 두 분 계신 거 압니다\"라는 목소리가 들린다.", "jd": "먼저 인터폰 화면을 켜는 쪽이 패배"},
+{"n": 33, "t": "목소리가 서로 바뀌었다", "lv": 1, "s": "아침에 입을 열었더니 서로의 목소리가 나온다. 오늘 오후 3시에 각자 전화 면접이 하나씩 잡혀 있다.", "ar": "바꿔서 보자파", "ag": "서로의 면접을 대신 봐주자고 밀어라. 전화는 목소리가 전부다.", "br": "미루자파", "bg": "들키면 끝이라고 막아라. 지금 전화해서 일정을 옮기자.", "sp": "A", "ln": "어차피 전화야. 얼굴 안 보인다고.", "tw": "오후 2시부터 목소리가 3분마다 번갈아 바뀌기 시작한다.", "jd": "먼저 통화 버튼을 누르는 쪽이 패배"},
+{"n": 34, "t": "보조배터리 18퍼센트", "lv": 1, "s": "정전 여섯 시간째. 온 동네가 깜깜하고 멀쩡한 건 18퍼센트 남은 보조배터리 하나다.", "ar": "손전등에 쓰자파", "ag": "지금 발밑이 안 보인다고 밀어라. 다치는 게 먼저다.", "br": "폰에 쓰자파", "bg": "연락이 먼저라고 밀어라. 언제 복구되는지도 봐야 한다.", "sp": "A", "ln": "불부터. 나 아까 발가락 찧었어.", "tw": "배터리가 사실 8퍼센트라는 걸 알게 된다.", "jd": "먼저 케이블을 뽑는 쪽이 패배"},
+{"n": 35, "t": "좀비 사태 첫날", "lv": 2, "s": "창밖이 이상하다. 라디오는 \"집에 있으라\"고 한다.", "ar": "무조건 뛰자파", "ag": "차 키를 들고 지금 나가야 하는 이유를 대라.", "br": "여기 지키자파", "bg": "물·문·창문. 요새화 계획을 설파하라.", "sp": "A", "ln": "3분 안에 안 나가면 우린 끝이야.", "tw": "냉장고에 음식이 이틀치밖에 없다.", "jd": "먼저 상대 계획을 따르는 쪽이 패배"},
+{"n": 36, "t": "로또 1등 당첨", "lv": 2, "s": "숫자가 다 맞았다. 아직 아무한테도 말 안 했다.", "ar": "오늘 다 쓰자파", "ag": "인생은 짧다. 지출 계획을 화려하게 그려라.", "br": "아무도 모르게파", "bg": "신분을 숨기고 30년 계획을 세워라.", "sp": "A", "ln": "일단 회사부터 그만두자. 지금 전화해.", "tw": "용지를 세탁기에 넣었을지도 모른다는 기억이 스친다.", "jd": "먼저 부모님께 전화하는 쪽이 패배"},
+{"n": 37, "t": "타임머신 1회권", "lv": 2, "s": "딱 한 번, 한 사람만 갈 수 있다. 돌아온다는 보장은 없다.", "ar": "과거로 가자파", "ag": "고칠 것이 있다. 구체적인 날짜를 대라.", "br": "미래로 가자파", "bg": "결과를 보고 오자고 설득하라.", "sp": "A", "ln": "2019년 3월. 그날만 바꾸면 돼.", "tw": "티켓에 \"왕복 아님\"이라고 작게 적혀 있다.", "jd": "먼저 상대에게 티켓을 양보하는 쪽이 패배"},
+{"n": 38, "t": "투명인간 하루", "lv": 2, "s": "하루 동안 아무도 나를 볼 수 없다. 단 한 사람, 상대만 볼 수 있다.", "ar": "장난치자파", "ag": "오늘 할 짓궂은 계획을 신나게 늘어놓아라.", "br": "양심 담당", "bg": "그 계획들이 왜 안 되는지 하나씩 짚어라.", "sp": "A", "ln": "일단 사장님 방부터 가자.", "tw": "효과가 12시간 뒤에 갑자기 풀린다는 걸 알게 된다.", "jd": "먼저 진짜로 실행하자고 하는 쪽이 패배"},
+{"n": 39, "t": "내일 지구가 멸망한다", "lv": 2, "s": "공식 발표가 났다. 남은 시간 24시간.", "ar": "먹고 놀자파", "ag": "남은 하루의 완벽한 놀이 계획을 짜라.", "br": "살 방법 찾자파", "bg": "포기하지 마라. 생존 계획을 세워라.", "sp": "A", "ln": "지금 뭐 하러 지하실을 파? 하루야, 하루.", "tw": "발표가 오보였다는 속보가 뜬다.", "jd": "먼저 상대 계획에 참여하는 쪽이 패배"},
+{"n": 40, "t": "10년 전 나와 통화", "lv": 2, "s": "1분간 과거의 나에게 말할 수 있다. 딱 1분이다.", "ar": "다 알려주자파", "ag": "구체적인 정보를 주자고 밀어라.", "br": "아무 말도 하지 말자파", "bg": "바뀔 미래의 위험을 말하라.", "sp": "A", "ln": "한 문장이면 돼. 인생이 바뀐다니까.", "tw": "전화가 이미 연결됐고, 상대편에서 목소리가 들린다.", "jd": "먼저 수화기를 드는 쪽이 패배"},
+{"n": 41, "t": "어젯밤 꿈이 그대로 일어난다", "lv": 2, "s": "아침에 말한 꿈 세 장면 중 두 개가 벌써 그대로 일어났다. 남은 하나는 \"저녁에 크게 다툰다\"이다.", "ar": "꿈대로 피하자파", "ag": "오늘 일정을 전부 취소하게 만들어라.", "br": "우연이라는 사람", "bg": "확률로 설명하라. 예정된 건 그대로 간다.", "sp": "A", "ln": "아침에 내가 뭐랬어. 커피 쏟는다고 했지.", "tw": "남은 한 장면의 배경이 지금 이 방이다.", "jd": "먼저 목소리가 커지는 쪽이 패배"},
+{"n": 42, "t": "10초 되감기 버튼", "lv": 2, "s": "손목에 버튼이 생겼다. 누르면 10초 전으로 간다. 한 명은 오늘 말실수를 벌써 네 번 지웠다.", "ar": "지우는 사람", "ag": "불리한 말이 나오면 즉시 되감아라. 사과할 일 자체를 없애라.", "br": "기억하는 사람", "bg": "되감아도 나만은 기억한다. 지운 말을 하나씩 복원해 읊어라.", "sp": "B", "ln": "방금 네가 뭐라고 했는지 나는 아직 기억나.", "tw": "오늘 되감기가 세 번 남았다는 알림이 손목에 뜬다.", "jd": "먼저 버튼을 누르는 쪽이 패배"},
+{"n": 43, "t": "같은 화요일이 47번째다", "lv": 2, "s": "오늘도 화요일이다. 알람도, 뉴스도, 점심 국도 똑같다. 47번째다.", "ar": "벗어나자파", "ag": "오늘은 뭐라도 바꿔보자고 밀어라. 계획을 대라.", "br": "여기 살자파", "bg": "반복이 편하다고 주장하라. 내일이 없으면 걱정도 없다.", "sp": "A", "ln": "47일이야. 47일 동안 같은 국을 먹었어.", "tw": "46번째 화요일에 한 명이 몰래 뭔가를 바꿨다는 게 드러난다.", "jd": "먼저 상대의 하루 계획을 따라 하는 쪽이 패배"},
+{"n": 44, "t": "집에 사는 사람이 하나 더 있다", "lv": 2, "s": "이사 두 달. 새벽 3시마다 거실 스탠드가 켜진다. 그 사람은 한 명한테만 보인다.", "ar": "보이는 사람", "ag": "같이 살자고 설득하라. 나쁜 뜻은 없어 보인다.", "br": "안 보이는 사람", "bg": "이사든 굿이든 하자고 밀어라. 비용을 계산해 대라.", "sp": "A", "ln": "쟤는 그냥 불 켜는 거야. 무서워하는 건 우리 쪽이지.", "tw": "스탠드를 켠 건 그 사람이 아니라 예약 타이머였다.", "jd": "먼저 거실 불을 다 켜는 쪽이 패배"},
+{"n": 45, "t": "소설 217쪽 안으로 들어왔다", "lv": 2, "s": "눈을 떠보니 우리는 어느 로맨스 소설 3권 217쪽이다. 둘 다 이름 없는 조연이다.", "ar": "주인공 되자파", "ag": "대사를 뺏고 사건에 끼어들자고 밀어라.", "br": "조연으로 살자파", "bg": "조연은 안 죽는다는 점을 강조하라. 튀지 마라.", "sp": "A", "ln": "우리 이번 장 대사가 두 줄이야. 두 줄.", "tw": "다음 장 제목이 「조연들의 반란」이다.", "jd": "먼저 다음 쪽을 넘겨보자고 하는 쪽이 패배"},
+{"n": 46, "t": "머리 위에 호감도 숫자가 뜬다", "lv": 2, "s": "오늘부터 사람마다 머리 위에 0에서 100 사이 숫자가 보인다. 상대 머리 위 숫자는 62다.", "ar": "숫자를 믿는 사람", "ag": "62를 근거로 따져라. 왜 100이 아닌지 물어라.", "br": "숫자를 무시하자는 사람", "bg": "숫자보다 지난 3년이 증거라고 밀어라.", "sp": "A", "ln": "1층 경비 아저씨도 60이야. 아저씨랑 내가 같아?", "tw": "상대 눈에 보이는 🅰의 숫자는 58이다.", "jd": "먼저 숫자를 소리 내어 읽는 쪽이 패배"},
+{"n": 47, "t": "주차장에 은색 물체가 내려앉았다", "lv": 2, "s": "오후 4시. 아파트 주차장 한가운데다. 문이 열렸고, 이 시간에 여기 있는 사람은 우리 둘뿐이다.", "ar": "나가보자파", "ag": "누가 나가긴 나가야 한다고 밀어라. 첫 인사말을 정하라.", "br": "숨자파", "bg": "신고부터 하자고 막아라. 나서면 실험 대상이 된다.", "sp": "A", "ln": "여기 우리밖에 없어. 안 나가면 아무 일도 안 일어나.", "tw": "안에서 \"실례합니다\"라는 한국어가 또렷하게 들린다.", "jd": "먼저 주차장 쪽으로 한 발 내딛는 쪽이 패배"},
+{"n": 48, "t": "나이를 거꾸로 먹기 시작했다", "lv": 2, "s": "검진 결과지에 신체 나이가 작년보다 두 살 어리게 찍혔다. 의사는 \"계속 이럴 것 같다\"고 했다.", "ar": "좋아하는 사람", "ag": "젊어져서 좋은 점을 하나씩 나열하라.", "br": "계산하는 사람", "bg": "20년 뒤 서로 몇 살이 되는지 소리 내어 세어라.", "sp": "A", "ln": "무릎이 안 아파. 10년 만이야.", "tw": "거꾸로 가는 건 두 사람 중 한 명뿐이다.", "jd": "먼저 \"그럼 우린 어떻게 되는 거야\"라고 묻는 쪽이 패배"},
+{"n": 49, "t": "중고로 산 거울이 이상하다", "lv": 2, "s": "8만 원에 산 거울. 사흘째 새벽 3시마다 혼자 돌아 앉아 있다. 영수증은 아직 있다.", "ar": "되팔자파", "ag": "중고 앱에 올리자고 밀어라. 산 값은 받아야 한다.", "br": "못 판다파", "bg": "남한테 넘기는 건 안 된다고 막아라. 여기서 끝내자.", "sp": "A", "ln": "그럼 8만 원은? 그냥 버려?", "tw": "판매 글에 이미 「예약합니다」 댓글이 달렸다.", "jd": "먼저 거울에 덮은 천을 벗기는 쪽이 패배"},
+{"n": 50, "t": "사람들이 나를 딴 사람으로 본다", "lv": 2, "s": "오늘부터 남들 눈에 한 명이 유명 배우로 보인다. 거울에는 그대로다. 방금 카페에서 사인을 요청받았다.", "ar": "즐기자파", "ag": "오늘 하루만 그 사람으로 살자고 밀어라. 예약이 다 잡힌다.", "br": "말리는 사람", "bg": "이건 사기라고 지적하라. 진짜 그 사람이 나타나면 어쩔 거냐.", "sp": "A", "ln": "방금 사장님이 커피값 안 받으셨어. 안 받으셨다고.", "tw": "그 배우의 오늘 일정이 하필 이 동네다.", "jd": "먼저 남의 이름으로 대답하는 쪽이 패배"},
+{"n": 51, "t": "엘리베이터가 지하 47층으로 간다", "lv": 2, "s": "밤 9시, 12층에서 탔다. 숫자가 계속 내려간다. 이 건물은 지하 2층까지밖에 없다. 지금 -19층.", "ar": "눌러보자파", "ag": "비상벨이든 아무 층이든 눌러보자고 밀어라.", "br": "가만있자파", "bg": "아무것도 건드리지 말자고 막아라. 내려가긴 하니 언젠간 열린다.", "sp": "A", "ln": "가만있는 게 계획이야? 지금 -19층이야.", "tw": "-47층에서 문이 열리는데, 밖은 우리 집 현관이다.", "jd": "먼저 비상벨을 누르는 쪽이 패배"},
+{"n": 52, "t": "잠을 팔 수 있게 됐다", "lv": 2, "s": "잠이 시간 단위로 거래된다. 한 시간에 4만 원. 통장에 165만 원이 찍혔고, 판 사람은 어젯밤 한숨도 못 잤다.", "ar": "판 사람", "ag": "이번 달 카드값을 소리 내어 읽어라. 다음 주에 더 팔겠다고 밀어라.", "br": "말리는 사람", "bg": "지금 얼굴색을 짚어라. 오늘 안에 계약을 취소시켜라.", "sp": "A", "ln": "165만 원이야. 야근 두 달 해도 안 남는 돈.", "tw": "판 잠은 되돌릴 수 없고, 다음 판매부터는 하루 단위라는 안내가 온다.", "jd": "먼저 눈을 감는 쪽이 패배"},
+{"n": 53, "t": "한 말이 3분간 공중에 떠 있다", "lv": 2, "s": "오늘부터 입 밖에 낸 말이 글자가 되어 3분간 머리 위에 떠 있다. 지금 거실에 여덟 줄이 떠 있다.", "ar": "창문 열자는 사람", "ag": "바람에 흩어지게 하자고 밀어라. 아까 그 말은 없던 걸로 하자.", "br": "사진 찍자는 사람", "bg": "지금 화면에 담아라. 아까 한 말을 그대로 읽게 만들어라.", "sp": "B", "ln": "지우지 마. 저 줄 아직 안 읽었어.", "tw": "사진을 찍으면 그 말은 흩어지지 않고 영구히 남는다는 걸 알게 된다.", "jd": "먼저 손을 뻗어 글자를 흩는 쪽이 패배"},
+{"n": 54, "t": "어젯밤 꿈에서 바람맞았다", "lv": 2, "s": "사흘째 둘이 같은 꿈을 꾼다. 어제 꿈에서 새벽 2시에 만나기로 했는데 한 명이 안 나왔다.", "ar": "따지는 사람", "ag": "두 시간을 서서 기다렸다. 왜 안 나왔는지 밝혀내라.", "br": "안 나온 사람", "bg": "꿈은 마음대로 안 된다고 밀어라. 사과는 하지 마라.", "sp": "A", "ln": "꿈이어도 약속은 약속이야. 두 시간 서 있었어.", "tw": "그 시간 안 나온 쪽은 다른 사람 꿈에 가 있었다는 게 드러난다.", "jd": "먼저 오늘 밤 일찍 자자고 말하는 쪽이 패배"},
+{"n": 55, "t": "고양이가 집사를 한 명만 고르겠다고 한다", "lv": 2, "s": "7년 키운 고양이가 오늘 아침 말을 시작했다. 첫마디가 \"둘 중 한 명만 있으면 된다\"였다.", "ar": "내가 남겠다는 사람", "ag": "사료값과 병원비 영수증을 근거로 대라.", "br": "내가 남겠다는 사람", "bg": "밤마다 누구 배 위에서 잤는지 날짜로 세어 말하라.", "sp": "A", "ln": "작년 수술비 180만 원. 그거 누가 냈지?", "tw": "고양이가 \"사실은 둘 다 필요 없다\"고 말한다.", "jd": "먼저 고양이에게 간식을 내미는 쪽이 패배"},
+{"n": 56, "t": "인형이 밤마다 자리를 옮긴다", "lv": 2, "s": "5년 된 곰인형이 매일 아침 다른 방에 있다. 오늘은 침대 발치에 앉아 이쪽을 보고 있었다.", "ar": "버리자는 사람", "ag": "오늘 안에 내다 놓자고 밀어라. 종량제 봉투를 가져와라.", "br": "못 버린다는 사람", "bg": "이걸 준 사람 이야기를 꺼내라. 버리는 쪽이 더 무섭다고 밀어라.", "sp": "A", "ln": "저게 스스로 움직이는 거야. 우리 집 안에서.", "tw": "인형 등에 손바느질로 이름이 적혀 있다. 못 버린다는 쪽의 이름이다.", "jd": "먼저 인형을 집어 드는 쪽이 패배"},
+{"n": 57, "t": "마법학교 학부모 상담", "lv": 2, "s": "오후 4시 상담실. 담임 마법사가 말했다. \"아이가 불 계열과 물 계열 중 하나를 오늘 정해야 합니다.\"", "ar": "불 계열파", "ag": "졸업생 취업률 표를 들이대라. 먹고사는 게 먼저다.", "br": "물 계열파", "bg": "다치는 애가 없다는 점을 밀어라. 아이가 원하는 쪽이라고 말하라.", "sp": "A", "ln": "물 쪽 졸업생 취업률 31퍼센트야. 31퍼센트.", "tw": "담임이 \"아이는 이미 바람 계열에 지원서를 냈다\"고 말한다.", "jd": "먼저 담임에게 결정을 넘기는 쪽이 패배"},
+{"n": 58, "t": "화성 월세가 40퍼센트 올랐다", "lv": 2, "s": "화성 정착 3년차. 오늘 관리소에서 산소 포함 월세를 40퍼센트 올린다는 통지가 왔다.", "ar": "지구로 돌아가자파", "ag": "3년치 계산서를 소리 내어 읽어라. 오늘 배편을 알아보자.", "br": "여기 남자파", "bg": "지구에 남은 게 뭐가 있냐고 되물어라. 대출을 늘리자고 밀어라.", "sp": "A", "ln": "숨 쉬는 값이 오른 거야. 숨 쉬는 값이.", "tw": "지구행 배편이 다음 달부터 3년간 없다는 공지가 뜬다.", "jd": "먼저 갱신 계약서에 손을 대는 쪽이 패배"},
+{"n": 59, "t": "로봇 이웃이 우리 자리에 주차했다", "lv": 2, "s": "아침 7시 40분. 지정 주차면에 옆 동 로봇이 서 있다. 로봇은 \"여기가 충전 효율이 가장 높다\"고 답했다.", "ar": "따지자파", "ag": "매달 돈 내는 자리라고 밀어라. 지금 비키게 만들어라.", "br": "그냥 두자파", "bg": "로봇이랑 말싸움해서 이기겠냐고 밀어라. 다른 자리에 대자.", "sp": "A", "ln": "저 자리 우리가 매달 5만 원 내는 데야.", "tw": "그 로봇이 관리사무소 직원으로 등록되어 있다는 걸 알게 된다.", "jd": "먼저 차를 다른 자리에 대는 쪽이 패배"},
+{"n": 60, "t": "시간이 멈췄고 둘만 움직인다", "lv": 2, "s": "오후 2시 17분에 세상이 멈췄다. 사람도 차도 그대로다. 움직이는 건 우리 둘뿐이다.", "ar": "나가보자는 사람", "ag": "지금 아니면 평생 못 본다고 밀어라. 갈 곳 목록을 대라.", "br": "집에 있자는 사람", "bg": "멈춘 동안 벌인 일은 안 멈춘다고 막아라. 돌아왔을 때를 생각하라.", "sp": "A", "ln": "지금 백화점 문 열려 있어. 사람도 없고.", "tw": "시계 초침만 아주 느리게 움직이고 있다는 걸 발견한다.", "jd": "먼저 남의 물건에 손을 대는 쪽이 패배"},
+{"n": 61, "t": "소리가 사라졌다", "lv": 2, "s": "사흘째 세상에 소리가 없다. 말이 안 들려서 종이에 적어 대화한다. 종이는 반 장 남았다.", "ar": "지금 다 적자는 사람", "ag": "미뤄둔 얘기를 오늘 끝내자고 밀어라. 종이를 달라.", "br": "아끼자는 사람", "bg": "급한 일에 써야 한다고 막아라. 그 얘기는 소리 돌아오면 하자.", "sp": "A", "ln": "그 얘기, 오늘 하자. 지금 아니면 또 3년 미뤄.", "tw": "종이에 적은 말은 지워지지 않고 벽에 그대로 남는다.", "jd": "먼저 펜을 내려놓는 쪽이 패배"},
+{"n": 62, "t": "아픈 게 하나도 안 느껴진다", "lv": 2, "s": "어제부터 통증이 사라졌다. 손등에 언제 생겼는지 모를 상처가 있는데 아무 느낌이 없다.", "ar": "좋다는 사람", "ag": "미뤄둔 일을 오늘 다 하자고 밀어라. 안 아프면 못 할 게 없다.", "br": "병원 가자는 사람", "bg": "안 아픈 게 제일 위험하다고 밀어라. 오늘 접수하자.", "sp": "A", "ln": "10년 만에 어깨가 안 아파. 10년 만이야.", "tw": "손등 상처가 아침보다 두 배로 커져 있다.", "jd": "먼저 상처를 들여다보는 쪽이 패배"},
+{"n": 63, "t": "머리 위에 남은 목숨이 뜬다", "lv": 2, "s": "오늘부터 사람마다 하트 세 개가 보인다. 한 명은 어제 계단에서 굴러 하나를 잃어 두 개다.", "ar": "조심하자는 사람", "ag": "오늘 외출을 통째로 막아라. 위험한 일 목록을 읽어라.", "br": "써도 된다는 사람", "bg": "두 개나 남았는데 왜 못 나가냐고 밀어라. 오늘 계획대로 가자.", "sp": "A", "ln": "너 지금 두 개야. 두 개.", "tw": "하트는 하루가 지나도 다시 채워지지 않는다는 걸 알게 된다.", "jd": "먼저 현관문을 여는 쪽이 패배"},
+{"n": 64, "t": "조립 설명서 안에 갇혔다", "lv": 2, "s": "책장을 조립하다 정신을 차리니 설명서 3단계 그림 안이다. 남은 단계는 12개, 부품 하나가 모자란다.", "ar": "순서대로 가자파", "ag": "설명서를 따라야 나간다고 밀어라. 4단계부터 시작하자.", "br": "건너뛰자파", "bg": "부품이 없으니 순서는 의미 없다고 밀어라. 마지막 장으로 넘어가자.", "sp": "A", "ln": "여기서 순서 어기면 우리가 어디로 가는지 몰라.", "tw": "마지막 장에 「이 제품은 반품되었습니다」라고 적혀 있다.", "jd": "먼저 부품을 내려놓는 쪽이 패배"},
+{"n": 65, "t": "아이가 하룻밤에 스물다섯이 됐다", "lv": 2, "s": "어제까지 여섯 살이던 아이가 아침에 스물다섯 살 어른이 되어 식탁에 앉아 있다. 지금 나가서 살겠다고 한다.", "ar": "보내주자는 사람", "ag": "스물다섯이면 어른이라고 밀어라. 보증금 얘기를 꺼내라.", "br": "못 보낸다는 사람", "bg": "어제까지 여섯 살이었다고 밀어라. 방문 앞을 막아서라.", "sp": "A", "ln": "몸이 스물다섯이야. 우리가 무슨 권리로 잡아.", "tw": "아이가 밤이 되면 다시 여섯 살로 돌아온다는 걸 알게 된다.", "jd": "먼저 아이 방문을 여는 쪽이 패배"},
+{"n": 66, "t": "성격이 서로 바뀌었다", "lv": 2, "s": "아침부터 서로의 성격이 들어와 있다. 평소 꼼꼼하던 쪽이 통장을 안 보고, 느긋하던 쪽이 가계부를 펴 들었다.", "ar": "이대로 살자는 사람", "ag": "지금이 훨씬 편하다고 밀어라. 바뀐 뒤 잘된 일을 대라.", "br": "되돌리자는 사람", "bg": "이건 내가 아니라고 밀어라. 오늘 안에 방법을 찾자.", "sp": "A", "ln": "나 오늘 처음으로 아무 걱정 없이 잤어.", "tw": "성격만 온 게 아니라 서로의 빚과 약속까지 따라왔다는 걸 알게 된다.", "jd": "먼저 예전 말투로 돌아가는 쪽이 패배"},
+{"n": 67, "t": "오늘부터 내가 우리 집 개다", "lv": 2, "s": "아침에 눈을 뜨니 한 명이 우리 집 개 안에 들어가 있다. 그 사람 자리에는 개가 앉아 소파를 차지했다.", "ar": "개 몸에 든 사람", "ag": "산책 시간과 사료를 오늘 안에 바꾸게 하라. 밀린 요구를 다 말하라.", "br": "사람 몸에 남은 사람", "bg": "오늘 할 일이 있다고 밀어라. 개 말은 개 말이라고 잘라라.", "sp": "A", "ln": "그 사료 3년째야. 3년. 너 같으면 먹겠어?", "tw": "소파에 누운 개가 사람 손으로 은행 앱을 열고 있다.", "jd": "먼저 상대에게 간식을 내미는 쪽이 패배"},
+{"n": 68, "t": "손대면 고쳐지는데 다른 게 고장 난다", "lv": 2, "s": "어제 생긴 능력이다. 만지면 고쳐진다. 대신 집 안 다른 물건 하나가 망가진다. 어제는 보일러가 갔다.", "ar": "쓰자는 사람", "ag": "지금 냉장고부터 고치자고 밀어라. 출장비 계산을 대라.", "br": "못 쓰게 막는 사람", "bg": "어제 무엇이 망가졌는지 세어 읽어라. 손을 못 대게 하라.", "sp": "A", "ln": "기사 부르면 출장비만 8만 원이야.", "tw": "이번에 고장 나는 건 물건이 아니라 사람 쪽이라는 안내가 손등에 뜬다.", "jd": "먼저 물건에 손을 얹는 쪽이 패배"},
+{"n": 69, "t": "몸이 바뀌었다", "lv": 3, "s": "아침에 눈을 떴는데 서로의 몸에 들어가 있다.", "ar": "신난 사람", "ag": "상대 흉내를 과장되게 내라. 상대 앞에서 상대를 연기하라.", "br": "충격받은 사람", "bg": "어떻게든 되돌릴 방법을 찾아라. 상대를 진정시켜라.", "sp": "A", "ln": "나 지금 목소리 들려? 이거 완전…", "tw": "오늘 상대의 회사 면접이 있다.", "jd": "먼저 상대 흉내를 못 내는 쪽이 패배"},
+{"n": 70, "t": "상대의 마음이 들린다", "lv": 3, "s": "오늘 하루, 한 사람은 상대의 속마음이 전부 들린다.", "ar": "들리는 사람", "ag": "들린 걸 티 내지 마라. 그런데 반응은 나온다.", "br": "모르는 사람", "bg": "평소대로 행동하라. 속으로는 아무 말이나 해도 좋다.", "sp": "A", "ln": "방금… 아무 말도 안 했지? 그렇지?", "tw": "사실 반대쪽도 들리고 있었다.", "jd": "먼저 \"너 지금 무슨 생각 했어\"라고 묻는 쪽이 패배"},
+{"n": 71, "t": "복제인간이 왔다", "lv": 3, "s": "현관에 나와 똑같이 생긴 사람이 서 있다. 기억도 똑같다.", "ar": "원본", "ag": "내가 진짜라는 걸 증명하라.", "br": "복제", "bg": "나도 진짜라고 주장하라. 기억은 똑같다.", "sp": "B", "ln": "네가 여섯 살 때 뭘 잃어버렸는지 나도 알아.", "tw": "상대(파트너)가 둘 중 하나를 골라야 한다.", "jd": "먼저 상대에게 판단을 미루는 쪽이 패배"},
+{"n": 72, "t": "기억 하나를 지울 수 있다", "lv": 3, "s": "버튼 하나. 기억 하나. 되돌릴 수 없다.", "ar": "지우자파", "ag": "지우면 편해지는 기억을 말하라.", "br": "남기자파", "bg": "아픈 기억도 나를 만든다고 말하라.", "sp": "A", "ln": "그거 하나만 없으면 나 진짜 괜찮아질 것 같아.", "tw": "지우려는 기억에 상대도 들어 있다.", "jd": "먼저 버튼에서 손을 떼는 쪽이 승리"},
+{"n": 73, "t": "너 사실 AI였어?", "lv": 3, "s": "휴대폰에 알림이 떴다. \"당신의 파트너는 AI입니다.\"", "ar": "의심하는 사람", "ag": "사람만 아는 것을 물어 검증하라.", "br": "의심받는 사람", "bg": "사람임을 증명하라. 증명할수록 이상해진다.", "sp": "A", "ln": "우리 처음 만난 날, 내가 뭘 흘렸지?", "tw": "알림이 상대 폰에도 똑같이 떠 있었다.", "jd": "먼저 \"그럼 너는?\"이라고 되묻는 쪽이 패배"},
+{"n": 74, "t": "탈출선 좌석이 하나 남았다", "lv": 3, "s": "발사 8분 전. 명단엔 두 이름, 좌석은 하나. 승무원이 \"누구든 지금 앉으라\"고 한다.", "ar": "너 타라는 사람", "ag": "상대를 앉혀라. 나는 절대 안 탄다.", "br": "네가 타라는 사람", "bg": "상대를 앉혀라. 여기 남는 건 내 쪽이다.", "sp": "A", "ln": "이러다 둘 다 못 타. 앉아. 지금.", "tw": "그 좌석은 두 사람 무게까지 견딘다는 안내가 나온다.", "jd": "먼저 좌석에 앉는 쪽이 패배"},
+{"n": 75, "t": "화성 티켓 한 장이 도착했다", "lv": 3, "s": "편도 티켓 한 장. 이름은 한 사람 것뿐이다. 출발은 넉 달 뒤, 왕복은 4년 뒤다.", "ar": "가겠다는 사람", "ag": "왜 가야 하는지 끝까지 밀어라. 물러서지 마라.", "br": "못 보내는 사람", "bg": "남는 사람의 4년을 하루 단위로 계산해 말하라.", "sp": "A", "ln": "이건 나한테 온 거야. 내 이름이 적혀 있어.", "tw": "티켓 뒷면에 동반자 한 명을 등록할 수 있다고 적혀 있다.", "jd": "먼저 상대 없이 사는 계획을 말하는 쪽이 패배"},
+{"n": 76, "t": "냉동수면 100년", "lv": 3, "s": "캡슐 두 대가 눈앞에 있다. 100년 뒤에 깨어난다. 신청 마감은 오늘 밤 12시다.", "ar": "자자는 사람", "ag": "지금 세상보다 100년 뒤가 낫다고 설득하라.", "br": "안 자겠다는 사람", "bg": "아는 사람이 하나도 없는 세상을 그려 보여라.", "sp": "A", "ln": "여기서 40년 더 버티는 거랑 뭐가 달라. 100년 뒤엔 다 고쳐져 있어.", "tw": "두 대 중 한 대만 정상 작동한다는 걸 알게 된다.", "jd": "먼저 신청서에 이름을 쓰는 쪽이 패배"},
+{"n": 77, "t": "오늘 하루 거짓말을 못 한다", "lv": 3, "s": "아침 7시부터 입에서 진실만 나온다. 12시간 남았고, 저녁엔 상대 부모님과 식사가 있다.", "ar": "묻는 사람", "ag": "오늘 아니면 못 들을 답을 캐내라. 질문을 멈추지 마라.", "br": "안 걸리려는 사람", "bg": "답을 피해라. 말을 안 하면 거짓말도 아니다.", "sp": "A", "ln": "딱 하루야. 하나만 물을게. 하나만.", "tw": "묻는 쪽도 질문을 받으면 답해야 하는 규칙이었다.", "jd": "먼저 질문에 대답하는 쪽이 패배"},
+{"n": 78, "t": "검은 옷을 입은 사람의 제안", "lv": 3, "s": "지하 창고. 그 사람이 말했다. \"한 명만 내보낸다. 누가 나갈지는 너희가 정하라.\" 시간은 10분.", "ar": "지목하려는 사람", "ag": "상대가 나가야 하는 이유를 대라. 끝까지 밀어라.", "br": "지목을 거부하는 사람", "bg": "아무도 안 정하겠다고 버텨라. 시간을 끌어라.", "sp": "A", "ln": "네가 나가. 나보다 네가 밖에서 할 일이 많잖아.", "tw": "아무도 안 정하면 둘 다 내보낼 참이었다는 게 밝혀진다.", "jd": "먼저 이름을 입에 올리는 쪽이 패배"},
+{"n": 79, "t": "마지막 연료 한 통", "lv": 3, "s": "멸망 3년째. 발전기 연료가 한 통 남았다. 라디오는 여전히 조용하다.", "ar": "떠나자파", "ag": "연료를 차에 붓고 북쪽으로 가자고 밀어라. 사람이 더 있을 거다.", "br": "여기서 쓰자파", "bg": "난방과 라디오에 쓰자고 밀어라. 여기가 유일한 집이다.", "sp": "A", "ln": "3년 동안 아무 소리도 없었어. 여기 있으면 여기서 끝나.", "tw": "라디오에서 3초짜리 사람 목소리가 잡힌다. 방향은 남쪽이다.", "jd": "먼저 연료통에 손을 대는 쪽이 패배"},
+{"n": 80, "t": "세탁기에서 파란 옷이 나왔다", "lv": 3, "s": "새벽 2시. 찢어진 파란 옷이 세탁기 안에 있다. 어제 뉴스에 나온 그 옷이다.", "ar": "숨겨온 사람", "ag": "끝까지 아니라고 하라. 알면 위험해진다는 말은 절대 하지 마라.", "br": "확인하려는 사람", "bg": "오늘 밤 안에 인정을 받아내라. 물러서지 마라.", "sp": "B", "ln": "같은 자리에 같은 구멍이야. 어제 뉴스에 나온 거랑.", "tw": "그 옷은 상대 것이 아니라 이웃집 것이다.", "jd": "먼저 뉴스를 다시 틀어보자고 하는 쪽이 패배"},
+{"n": 81, "t": "매일 아침 2년치가 지워진다", "lv": 3, "s": "아침 8시 40분. 한 명은 오늘도 지난 2년을 잊은 채 눈을 떴다. 식탁엔 설명용 노트가 놓여 있다.", "ar": "설명하는 사람", "ag": "2년치를 처음부터 다시 말해라. 하나도 빼지 마라.", "br": "오늘 처음 눈뜬 사람", "bg": "그 설명을 믿지 마라. 증거를 요구하고 나가겠다고 하라.", "sp": "A", "ln": "일단 앉아. 오늘이 며칠인지부터 말해줄게.", "tw": "노트에 어제의 자신이 \"이 사람 말 믿지 마\"라고 적어놨다.", "jd": "먼저 목소리가 흔들리는 쪽이 패배"},
+{"n": 82, "t": "계약서에 서명하면 소원이 이뤄진다", "lv": 3, "s": "식탁 위 양피지 한 장. 소원 하나가 이뤄진다. 대가는 서명한 사람이 아니라 옆에 앉은 사람의 10년이다.", "ar": "서명하려는 사람", "ag": "그 소원이 왜 필요한지 끝까지 설득하라. 펜을 놓지 마라.", "br": "막는 사람", "bg": "그 10년이 누구 것인지 계속 상기시켜라. 계약서를 치워라.", "sp": "A", "ln": "10년만 있으면… 우리 둘 다 사는 게 달라져.", "tw": "맨 아랫줄에 \"대가는 서명자가 진다\"고 적혀 있다.", "jd": "먼저 펜을 집는 쪽이 패배"},
+{"n": 83, "t": "예언서 마지막 쪽", "lv": 3, "s": "낡은 책 마지막 쪽에 \"이 둘 중 하나가 오늘 밤 배신한다\"고 적혀 있다. 지금 밤 10시 12분이다.", "ar": "밝히자는 사람", "ag": "오늘 밤 안에 누구인지 가려내라. 상대를 추궁하라.", "br": "태우자는 사람", "bg": "지금 당장 책을 없애자고 밀어라. 읽는 순간 우리가 망가진다.", "sp": "A", "ln": "숨길 게 없으면 왜 태우자고 해?", "tw": "그다음 쪽에 \"배신이란 서로를 의심하는 것\"이라고 적혀 있다.", "jd": "먼저 상대 물건을 뒤지는 쪽이 패배"},
+{"n": 84, "t": "환생 대기실, 사람 표는 한 장", "lv": 3, "s": "하얀 방에 번호표 두 장. 안내문엔 \"한 명은 사람, 나머지는 동물\"이라고 적혀 있다. 순서는 우리가 정한다.", "ar": "사람으로 가겠다는 사람", "ag": "이유를 대라. 다음 생에 못 다 한 일이 있다.", "br": "이번엔 못 양보한다는 사람", "bg": "상대가 왜 안 되는지 조목조목 밀어라.", "sp": "A", "ln": "너는 저번 생에도 사람이었잖아.", "tw": "동물 표 뒷면에 \"이 집 반려동물로 배정\"이라고 적혀 있다.", "jd": "먼저 표를 상대에게 내미는 쪽이 패배"},
+{"n": 85, "t": "12년 뒤의 내가 현관에 서 있다", "lv": 3, "s": "밤 10시, 문을 여니 한 사람의 12년 뒤 모습이 서 있다. 첫마디가 \"이 사람이랑 같이 살지 마라\"였다.", "ar": "믿는 사람", "ag": "12년 뒤의 내가 한 말이라고 밀어라. 오늘 밤 안에 결론을 내자.", "br": "못 믿는 사람", "bg": "저게 우리에 대해 뭘 아냐고 되물어라. 지금 내보내라.", "sp": "A", "ln": "저 사람이 나야. 나보다 12년 더 살아본 나.", "tw": "미래의 그 사람 손에 두 사람 이름이 나란히 박힌 청첩장이 들려 있다.", "jd": "먼저 \"그럼 헤어질까\"라고 묻는 쪽이 패배"},
+{"n": 86, "t": "전생 기억이 돌아왔다", "lv": 3, "s": "어젯밤부터 전생이 떠오른다. 그 생에서 한 명이 다른 한 명의 것을 전부 가져갔다. 지금 새벽 1시다.", "ar": "갚으라는 사람", "ag": "그 생에서 잃은 것을 하나씩 세어 읽어라. 오늘 밤에 답을 받아내라.", "br": "못 갚겠다는 사람", "bg": "그건 내가 한 일이 아니라고 밀어라. 지금의 나로 판단하라고 요구하라.", "sp": "A", "ln": "300년 전에 네가 뭘 가져갔는지 나는 다 기억나.", "tw": "그 생에서 먼저 등을 돌린 쪽이 사실 갚으라는 쪽이었다.", "jd": "먼저 상대의 전생 이름을 부르는 쪽이 패배"},
+{"n": 87, "t": "한 사람은 자기가 어제 죽은 걸 모른다", "lv": 3, "s": "새벽 4시 거실. 한 명은 어제 사고로 죽었다. 본인만 그걸 모른 채 출근 준비를 하고 있다.", "ar": "말해주려는 사람", "ag": "오늘 안에 받아들이게 만들어라. 증거를 하나씩 대라.", "br": "인정 못 하는 사람", "bg": "지금 여기 서 있지 않냐고 밀어라. 그대로 출근하겠다고 나서라.", "sp": "A", "ln": "어제부터 네 폰으로 온 연락이 전부 나한테 왔어. 왜 그런지 생각해봐.", "tw": "말해주는 쪽의 손도 벽을 그대로 통과한다.", "jd": "먼저 상대 몸에 손을 대는 쪽이 패배"},
+{"n": 88, "t": "부모와 나이가 뒤바뀌었다", "lv": 3, "s": "아침에 서로의 나이가 바뀌었다. 자식은 예순셋, 부모는 서른둘이 됐다. 통장 도장은 자식 손에 있다.", "ar": "예순셋이 된 자식", "ag": "이제 내가 결정한다고 밀어라. 돈과 집 문제를 오늘 정리하라.", "br": "서른둘이 된 부모", "bg": "낳아 키운 건 나라고 밀어라. 결정권을 오늘 되찾아라.", "sp": "A", "ln": "이제 내가 더 오래 살았어. 내 말 들어.", "tw": "이 상태가 3년 뒤 저절로 풀린다는 걸 알게 된다.", "jd": "먼저 상대를 이름으로 부르는 쪽이 패배"},
+{"n": 89, "t": "기억을 통째로 바꿔 가졌다", "lv": 3, "s": "어젯밤 서로의 기억이 통째로 넘어왔다. 상대가 숨겨온 것도, 내가 숨겨온 것도 전부 상대 머릿속에 있다.", "ar": "다 말하자는 사람", "ag": "이왕 이렇게 된 거 오늘 밤에 전부 꺼내자고 밀어라.", "br": "덮자는 사람", "bg": "아는 척하지 말자고 밀어라. 오늘 이후로 이 얘기를 금지시켜라.", "sp": "A", "ln": "이미 다 알잖아. 모른 척하는 게 더 이상해.", "tw": "기억이 곧 제자리로 돌아가는데, 딱 하나만 상대 쪽에 남는다.", "jd": "먼저 상대의 기억을 입 밖에 내는 쪽이 패배"},
+{"n": 90, "t": "백신이 한 병 남았다", "lv": 3, "s": "감염 11일째. 병원 냉장고에 마지막 한 병이 있다. 둘 중 하나는 이미 열이 오르기 시작했다.", "ar": "열이 오른 사람", "ag": "내가 맞아야 한다고 밀어라. 나한테는 시간이 없다.", "br": "아직 멀쩡한 사람", "bg": "내가 맞아야 한다고 밀어라. 남는 사람이 뒷일을 해야 한다.", "sp": "A", "ln": "나 지금 38.9도야. 너는 아직 아니잖아.", "tw": "한 병으로 두 사람 분량이 나온다. 대신 효과는 절반이다.", "jd": "먼저 병에 손을 대는 쪽이 패배"},
+{"n": 91, "t": "매일 아침 방이 하나씩 사라진다", "lv": 3, "s": "이사 두 달째, 매일 아침 방이 하나씩 없어진다. 어제는 작은방이었고 오늘 남은 건 거실과 방 하나다.", "ar": "나가자는 사람", "ag": "오늘 안에 짐 싸서 나가자고 밀어라. 계약금은 포기하자.", "br": "버티자는 사람", "bg": "전세금 2억이 여기 묶여 있다고 밀어라. 사라지는 이유부터 찾자.", "sp": "A", "ln": "내일이면 이 거실도 없어. 우린 어디 서 있을 건데.", "tw": "사라진 방들이 옆집 안에 하나씩 생겨나고 있다.", "jd": "먼저 짐 가방을 여는 쪽이 패배"},
+{"n": 92, "t": "다툴 때마다 집이 한 뼘씩 좁아진다", "lv": 3, "s": "말다툼 한 번에 벽이 안쪽으로 한 뼘 들어온다. 두 달 만에 거실이 절반이 됐고, 지금 또 시작됐다.", "ar": "오늘 끝내자는 사람", "ag": "미뤄둔 문제를 지금 다 꺼내라. 좁아져도 끝은 봐야 한다.", "br": "멈추자는 사람", "bg": "입을 닫자고 밀어라. 이대로 가면 우리가 깔린다.", "sp": "A", "ln": "여기서 멈추면 우린 평생 이 얘기 못 해.", "tw": "벽은 서로 사과할 때마다 도로 물러난다는 걸 알게 된다.", "jd": "먼저 방으로 들어가 문을 닫는 쪽이 패배"},
+{"n": 93, "t": "앱에 남은 수명이 뜬다", "lv": 3, "s": "어제 깔린 앱이 사람마다 남은 날짜를 보여준다. 한 명은 자기 숫자를 봤고, 상대 숫자도 이미 봤다.", "ar": "알려주려는 사람", "ag": "알 권리가 있다고 밀어라. 오늘 안에 말해라.", "br": "안 듣겠다는 사람", "bg": "절대 말하지 말라고 막아라. 그 폰을 뺏어라.", "sp": "A", "ln": "네 숫자, 나보다 커. 그것만 알아도 되잖아.", "tw": "앱이 어젯밤 업데이트되면서 두 사람 숫자가 전부 다시 계산됐다.", "jd": "먼저 상대 폰 화면을 들여다보는 쪽이 패배"},
+{"n": 94, "t": "눈물이 보석이 된다", "lv": 3, "s": "울면 눈물이 그대로 굳는다. 한 알에 80만 원이다. 이번 달 병원비는 460만 원이다.", "ar": "울자는 사람", "ag": "여섯 알이면 끝난다고 밀어라. 울 방법을 찾아내라.", "br": "못 울게 막는 사람", "bg": "억지로 짜낸 눈물이 사람을 망친다고 밀어라. 돈은 다른 데서 구하자.", "sp": "A", "ln": "여섯 알이면 돼. 여섯 알.", "tw": "억지로 흘린 눈물은 보석이 되지 않고 그냥 마른다.", "jd": "먼저 상대의 아픈 이야기를 꺼내는 쪽이 패배"},
+{"n": 95, "t": "아픈 게 상대에게 옮겨간다", "lv": 3, "s": "한쪽이 아프면 그 통증이 고스란히 상대에게 간다. 오늘 오후 2시에 한 명의 수술이 잡혀 있다.", "ar": "받겠다는 사람", "ag": "오늘 하겠다고 밀어라. 더 미루면 손 못 쓴다.", "br": "미루자는 사람", "bg": "그 통증을 내가 전부 받는다고 말하라. 다음 달로 옮기자.", "sp": "A", "ln": "6개월 기다려서 잡은 날짜야. 오늘 못 하면 또 6개월이야.", "tw": "통증만 넘어가는 게 아니라 회복도 둘이 나눠 진다는 걸 알게 된다.", "jd": "먼저 병원에 전화를 거는 쪽이 패배"},
+{"n": 96, "t": "사랑한다고 말하면 하루씩 늙는다", "lv": 3, "s": "그 말 한 번에 수명이 하루 준다. 한 명은 지난달에만 62번 말했다.", "ar": "계속 말하겠다는 사람", "ag": "참는 게 무슨 의미냐고 밀어라. 지금도 말하라.", "br": "못 하게 막는 사람", "bg": "62일을 계산해 보여라. 오늘부터 그 말을 금지시켜라.", "sp": "A", "ln": "안 하고 60년 사는 거랑, 하고 59년 사는 거랑. 나는 후자야.", "tw": "그 말을 들은 쪽의 수명이 하루씩 늘어나고 있었다.", "jd": "먼저 그 말을 입 밖에 내는 쪽이 패배"},
+{"n": 97, "t": "서로의 이름이 세상에서 지워졌다", "lv": 3, "s": "오늘부터 두 사람의 이름이 사라졌다. 서류에도 폰에도 없다. 서로를 부를 말이 없다.", "ar": "새 이름을 짓자는 사람", "ag": "오늘 안에 서로 부를 이름을 정하자고 밀어라.", "br": "원래 이름을 찾자는 사람", "bg": "아무거나 붙이면 진짜가 영영 사라진다고 막아라.", "sp": "A", "ln": "오늘 하루 종일 '야'라고만 불렀어. 하루 종일.", "tw": "새 이름을 지으면 원래 이름은 되찾을 수 없다는 안내가 온다.", "jd": "먼저 상대를 새 이름으로 부르는 쪽이 패배"},
+{"n": 98, "t": "쓸수록 기억이 사라지는 지갑", "lv": 3, "s": "돈이 끝없이 나오는 지갑이다. 10만 원마다 기억이 하나씩 없어진다. 어제 380만 원을 썼다.", "ar": "쓰자는 사람", "ag": "밀린 것부터 갚자고 밀어라. 기억 몇 개가 대수냐.", "br": "못 쓰게 하는 사람", "bg": "어제 사라진 게 뭔지 물어라. 지갑을 숨겨라.", "sp": "B", "ln": "우리 처음 만난 날, 어디였는지 말해봐.", "tw": "이미 사라진 기억은 전부 상대에 관한 것부터였다.", "jd": "먼저 지갑을 여는 쪽이 패배"},
+{"n": 99, "t": "7년 다닌 회사가 마왕성이었다", "lv": 3, "s": "지하 3층이 마왕성 본진이었다. 사표를 내면 계약상 7년치가 통째로 사라진다고 적혀 있다.", "ar": "나가자는 사람", "ag": "오늘 사표를 내자고 밀어라. 여기서 7년을 더 못 산다.", "br": "남자는 사람", "bg": "7년이 없던 일이 된다고 막아라. 계약서를 소리 내어 읽어라.", "sp": "A", "ln": "지하 3층이 뭐였는지 알고도 내일 또 출근해?", "tw": "사라지는 건 경력이 아니라 두 사람이 서로를 만난 기억이다.", "jd": "먼저 사직서를 봉투에 넣는 쪽이 패배"},
+{"n": 100, "t": "복제 신청 마감은 오늘 밤 12시", "lv": 3, "s": "15년 함께 산 개가 지난주에 갔다. 복제 신청은 오늘 밤 12시에 닫히고, 비용은 1,200만 원이다.", "ar": "하자는 사람", "ag": "그 애를 한 번 더 볼 수 있다고 밀어라. 오늘 밤 안에 결제하자.", "br": "못 한다는 사람", "bg": "돌아오는 건 그 애가 아니라고 밀어라. 대출까지 낼 일이냐고 물어라.", "sp": "A", "ln": "얼굴도 성격도 똑같대. 15년을 한 번 더 사는 거야.", "tw": "신청서 아래에 \"원본의 기억은 복원되지 않습니다\"라고 적혀 있다.", "jd": "먼저 결제 버튼에 손을 올리는 쪽이 패배"}
+];
+
+/* ===================== 유틸 ===================== */
+const $ = id => document.getElementById(id);
+let _tt;
+function toast(msg){ const t=$('toast'); t.innerHTML=msg; t.classList.add('show'); clearTimeout(_tt); _tt=setTimeout(()=>t.classList.remove('show'),2400); }
+function vibrate(p){ if(navigator.vibrate) try{ navigator.vibrate(p); }catch(e){} }
+function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on')); $(id).classList.add('on'); window.scrollTo({top:0,behavior:'smooth'}); }
+
+const LV = {
+  1:{name:'몸풀기', cls:'lv1', th:{a1:'#d4ff8a',a2:'#8ee63f',bg1:'#08060d',bg2:'#0e1608'}},
+  2:{name:'슬슬',   cls:'lv2', th:{a1:'#b6ff5c',a2:'#a06bff',bg1:'#08060d',bg2:'#150d24'}},
+  3:{name:'정면충돌',cls:'lv3', th:{a1:'#c98bff',a2:'#ff3d9a',bg1:'#0a040c',bg2:'#210828'}}
+};
+const TASTE = { mild:[1,2], hot:[2,3], mix:[1,1,2,3,3] };
+const PENALTY = ['애교 5초 하기 🫶','상대 성대모사 하기 🎤','지금 셀카 한 장 찍기 📸','상대 칭찬 세 개 하기 💗','다음 판 역할은 상대가 지정 🎯','통과권 1회 쓰기 🎟️'];
+/* 등급 — 5판 기준 승수 (index = 승수) */
+const GRADE = ['그냥 착한 사람','먼저 잡아먹히는 사람','가끔 살아남는 사람','임기응변의 신','설정 붕괴 유발자','세계관 지배자'];
+const OPENERS = ['오늘의 설정이 공개됩니다','이번엔 어떤 세계가 열릴까','좀비일까, 복제인간일까','숨 한 번 고르고, 탭','자, 배우 두 분 준비됐나요'];
+const MARKS = ['🌀','🧟','👽','🛸','🧬','👻'];
+
+/* ===================== 상태 ===================== */
+let G = null;
+const TOTAL = 5, DUR = 90, TWIST_AT = 30;
+
+function newGame(nameA, nameB, taste){
+  G = {
+    names:[nameA, nameB],      // index 0 = 🅰 슬롯, 1 = 🅱 슬롯 (플레이어 고정)
+    taste, round:0,            // 진행 완료 판 수
+    score:[0,0], draws:0,
+    passes:[1,1], used:[], quotes:[],
+    streak:{who:-1,n:0}, lastWin:null,
+    scene:null, swapped:false, twistOpen:false, timer:null, left:DUR, running:false
+  };
+}
+/* 슬롯 → 플레이어 이름. swapped면 🅰 역할을 🅱 사람이 맡는다 */
+function slotName(slot){ return G.names[G.swapped ? 1-slot : slot]; }
+/* 플레이어 → 지금 맡고 있는 슬롯 */
+function slotOf(player){ return G.swapped ? 1-player : player; }
+function nm(i){ return G.names[i] || (i===0?'🅰':'🅱'); }
+/* 텍스트 속 🅰🅱 를 지금 그 역할을 맡은 사람 이름으로 */
+function tag(s){ return esc(s).replace(/🅰/g,'🅰 '+esc(slotName(0))).replace(/🅱/g,'🅱 '+esc(slotName(1))); }
+
+function applyTheme(lv){
+  const th = LV[lv].th, r = document.documentElement.style;
+  r.setProperty('--a1',th.a1); r.setProperty('--a2',th.a2);
+  r.setProperty('--bg1',th.bg1); r.setProperty('--bg2',th.bg2);
+}
+
+/* 맛에 따른 이번 판 LV */
+function levelFor(round){
+  const t = TASTE[G.taste];
+  if(G.taste==='mix') return t[Math.min(round, t.length-1)];
+  return t[round % t.length];
+}
+function drawScene(){
+  const lv = levelFor(G.round);
+  let pool = SCENES.filter(s=>s.lv===lv && !G.used.includes(s.n));
+  if(!pool.length){
+    const done = SCENES.filter(s=>s.lv===lv).map(s=>s.n);
+    G.used = G.used.filter(n=>!done.includes(n));
+    pool = SCENES.filter(s=>s.lv===lv);
+    toast('LV.'+lv+' 상황을 다 돌았어요! 다시 섞습니다 🔀');
+  }
+  const s = pick(pool);
+  G.used.push(s.n);
+  return s;
+}
+
+/* ===================== 상단바 ===================== */
+function renderTop(){
+  const html = `
+    <div class="score a"><div style="min-width:0"><div class="nm">🅰 ${esc(nm(0))}</div><div class="tag">통과권 ${G.passes[0]}</div></div><div class="pt">${G.score[0]}</div></div>
+    <div class="midcol"><div class="rd">${Math.min(G.round+1,TOTAL)} / ${TOTAL}</div><div class="dr">무승부 ${G.draws}</div></div>
+    <div class="score b"><div style="min-width:0"><div class="nm">🅱 ${esc(nm(1))}</div><div class="tag">통과권 ${G.passes[1]}</div></div><div class="pt">${G.score[1]}</div></div>`;
+  $('top-draw').innerHTML = html; $('top-play').innerHTML = html;
+  const w = (G.round/TOTAL*100)+'%';
+  $('gauge-draw').style.width = w; $('gauge-play').style.width = w;
+}
+
+/* ===================== 뽑기 ===================== */
+function goDraw(){
+  G.scene = drawScene(); G.swapped = false;
+  applyTheme(G.scene.lv);
+  renderTop();
+  $('drawHint').textContent = pick(OPENERS);
+  $('drawMark').textContent = pick(MARKS);
+  $('drawCard').classList.remove('flip');
+  $('cardFront').innerHTML = '';
+  $('toPlayBtn').style.display = 'none';
+  show('s-draw');
+}
+function flipCard(){
+  const c = $('drawCard');
+  if(c.classList.contains('flip')) return;
+  const s = G.scene;
+  $('cardFront').innerHTML = `
+    <span class="lvtag ${LV[s.lv].cls}">LV.${s.lv} ${LV[s.lv].name}</span>
+    <div class="no">상황 ${s.n} / 100</div>
+    <h2>${esc(s.t)}</h2>
+    <div class="set">${esc(s.s)}</div>`;
+  c.classList.add('flip');
+  vibrate(28);
+  setTimeout(()=>{ $('toPlayBtn').style.display='block'; }, 480);
+}
+
+/* ===================== 연기 ===================== */
+function goPlay(){
+  const s = G.scene;
+  applyTheme(s.lv);
+  renderTop();
+  $('playLv').className = 'lvtag '+LV[s.lv].cls;
+  $('playLv').textContent = `LV.${s.lv} ${LV[s.lv].name} · 상황 ${s.n}`;
+  $('playTitle').textContent = s.t;
+  $('playSet').textContent = s.s;
+
+  $('whoA').innerHTML = `🅰 ${esc(slotName(0))}${G.swapped?' <span style="color:var(--muted)">(바뀜)</span>':''}`;
+  $('whoB').innerHTML = `🅱 ${esc(slotName(1))}${G.swapped?' <span style="color:var(--muted)">(바뀜)</span>':''}`;
+  $('rnA').textContent = s.ar; $('goalA').textContent = s.ag;
+  $('rnB').textContent = s.br; $('goalB').textContent = s.bg;
+
+  const spSlot = s.sp==='A' ? 0 : 1;
+  $('flLabel').innerHTML = `🎬 첫 대사 — ${esc(slotName(spSlot))} (${spSlot===0?'🅰':'🅱'})가 먼저 읽고 시작!`;
+  $('flText').textContent = '“'+s.ln+'”';
+
+  G.twistOpen = false;
+  $('twistSlot').innerHTML = '';
+  $('judgeSlot').innerHTML = '';
+  $('judgeBtn').style.display = 'block';
+  $('quoteInput').value = '';
+  renderPasses();
+  resetTimer();
+  show('s-play');
+}
+function renderPasses(){
+  [0,1].forEach(i=>{
+    const b = $(i===0?'passA':'passB');
+    b.innerHTML = `<b>🎟️ ${esc(nm(i))}</b><br>통과권 ${G.passes[i]}장`;
+    b.disabled = G.passes[i]<=0;
+  });
+}
+function usePass(i){
+  if(G.passes[i]<=0) return;
+  G.passes[i]--;
+  stopTimer();
+  toast(`${nm(i)} 통과권 사용! 다른 상황을 뽑아요 🎟️`);
+  vibrate([15,30,60]);
+  setTimeout(goDraw, 500);
+}
+
+/* ---- 타이머 ---- */
+function fmt(sec){ const m=Math.floor(sec/60), s=sec%60; return m+':'+String(s).padStart(2,'0'); }
+function paintTimer(){
+  $('timerText').textContent = fmt(Math.max(0,G.left));
+  $('tbarFill').style.width = (Math.max(0,G.left)/DUR*100)+'%';
+  $('timerBox').classList.toggle('warn', G.left<=20);
+}
+function resetTimer(){ stopTimer(); G.left=DUR; $('timerBtn').textContent='시작'; paintTimer(); }
+function stopTimer(){ if(G.timer){ clearInterval(G.timer); G.timer=null; } G.running=false; }
+function toggleTimer(){
+  if(G.running){ stopTimer(); $('timerBtn').textContent='계속'; vibrate(14); return; }
+  if(G.left<=0){ G.left=DUR; }
+  G.running = true; $('timerBtn').textContent='일시정지'; vibrate(20);
+  G.timer = setInterval(()=>{
+    G.left--;
+    paintTimer();
+    if(DUR-G.left>=TWIST_AT) showTwistBtn();
+    if(G.left===20) vibrate([20,40,20]);
+    if(G.left<=0){
+      stopTimer(); $('timerBtn').textContent='다시 90초';
+      vibrate([60,80,60]);
+      toast('90초 끝! 판정할 시간이에요 ⚖️');
+      openJudge();
+    }
+  },1000);
+}
+function showTwistBtn(){
+  if(G.twistOpen || $('twistSlot').innerHTML) return;
+  $('twistSlot').innerHTML = `<button class="twistbtn" id="twistBtn">🌀 반전 카드 열기 (안 열어도 됨)</button>`;
+  $('twistBtn').onclick = openTwist;
+  vibrate(28);
+}
+function openTwist(){
+  G.twistOpen = true;
+  $('twistSlot').innerHTML = `<div class="twistbox"><div class="lb">🌀 반전 — 여기서부터 상황이 뒤집힙니다</div><div class="tx">${tag(G.scene.tw)}</div></div>`;
+  vibrate([20,40,20]);
+  toast('반전 발동! 연기는 계속됩니다 🌀');
+}
+function saveQuote(){
+  const v = $('quoteInput').value.trim();
+  if(!v){ toast('한 줄만 적어주세요 ✍️'); return; }
+  G.quotes.push({t:G.scene.t, q:v});
+  $('quoteInput').value = '';
+  vibrate(20);
+  toast('명대사 저장! 결과 화면에서 다시 봐요 ❝');
+}
+
+/* ---- 판정 ---- */
+function openJudge(){
+  if($('judgeSlot').innerHTML) return;
+  stopTimer();
+  $('judgeBtn').style.display = 'none';
+  $('judgeSlot').innerHTML = `
+    <div class="judgebox">
+      <h3>누가 먼저 무너졌나?</h3>
+      <div class="cond">⚖️ 판정 기준 — ${tag(G.scene.jd)}</div>
+      <div class="jbtns">
+        <button class="jbtn a" data-w="0">${esc(nm(0))} 승<small>${slotOf(0)===0?'🅰':'🅱'} ${esc(slotOf(0)===0?G.scene.ar:G.scene.br)}</small></button>
+        <button class="jbtn b" data-w="1">${esc(nm(1))} 승<small>${slotOf(1)===0?'🅰':'🅱'} ${esc(slotOf(1)===0?G.scene.ar:G.scene.br)}</small></button>
+        <button class="jbtn draw" data-w="-1">애매하다 — 무승부</button>
+      </div>
+    </div>`;
+  $('judgeSlot').querySelectorAll('.jbtn').forEach(b=>{
+    b.onclick = ()=>settle(parseInt(b.dataset.w,10));
+  });
+  vibrate(28);
+}
+function settle(w){
+  stopTimer();
+  G.round++;
+  if(w<0){ G.draws++; G.streak={who:-1,n:0}; G.lastWin=null; }
+  else{
+    G.score[w]++;
+    G.streak = (G.streak.who===w) ? {who:w,n:G.streak.n+1} : {who:w,n:1};
+    G.lastWin = w;
+  }
+  vibrate(w<0?[20,40,20]:[20,40,20,40,60]);
+  renderScore(w);
+}
+
+/* ===================== 점수판 ===================== */
+function renderScore(w){
+  renderTop();
+  $('scoreRound').textContent = `${G.round}판 / ${TOTAL}판 종료`;
+  $('scoreTitle').innerHTML = w<0 ? '무승부! 둘 다 안 무너졌다' : `<span class="grad">${esc(nm(w))}</span> 승리 🎉`;
+  const st = G.streak;
+  let combo = '';
+  if(st.n===2) combo='🔥 2연승 「기세」';
+  else if(st.n===3) combo='⚡ 3연승 「독주」';
+  else if(st.n>=4) combo='👑 '+st.n+'연승 「폭군」';
+  $('comboSlot').innerHTML = combo ? `<div class="combo">${combo} — ${esc(nm(st.who))}</div>` : '';
+  if(combo) vibrate([20,40,20,40,80]);
+
+  $('bsNameA').textContent = '🅰 '+nm(0); $('bsNameB').textContent = '🅱 '+nm(1);
+  $('bsA').textContent = G.score[0]; $('bsB').textContent = G.score[1];
+
+  // 벌칙 룰렛 — 진 사람이 뽑는다
+  if(w>=0){
+    const loser = 1-w;
+    $('roulSlot').innerHTML = `
+      <div class="roul">
+        <div class="lb">순한 벌칙 룰렛 — <b style="color:var(--ink)">${esc(nm(loser))}</b>님이 돌려주세요</div>
+        <div class="slot" id="roulSlotTxt">🎰 준비!</div>
+        <button class="btn small" id="roulBtn">룰렛 돌리기 🎰</button>
+      </div>`;
+    $('roulBtn').onclick = spinRoulette;
+  } else {
+    $('roulSlot').innerHTML = `<div class="roul"><div class="lb">무승부는 벌칙 없음. 다음 판에서 제대로 붙어봐요 🤝</div></div>`;
+  }
+
+  // 방금 판 요약 + 다음 판 예고
+  const last = G.round>=TOTAL;
+  const nlv = last ? null : levelFor(G.round);
+  $('recapSlot').innerHTML = `
+    <div class="recap">
+      <div class="rl">방금 그 상황 · LV.${G.scene.lv} ${LV[G.scene.lv].name}</div>
+      <div class="rt">${esc(G.scene.t)}</div>
+      <div class="rc">⚖️ ${tag(G.scene.jd)}${G.twistOpen?'<br>🌀 반전까지 열고 붙었다':''}${G.quotes.length?'<br>❝ 저장한 명대사 '+G.quotes.length+'개':''}</div>
+      <div class="nx">${ last
+        ? '5판 끝! <b>결과 보기</b>에서 등급과 케미가 나와요 🏆'
+        : `다음은 <b>LV.${nlv} ${LV[nlv].name}</b> 상황이에요.${nlv>G.scene.lv?' 슬슬 세집니다 🔥':''}` }</div>
+    </div>`;
+
+  $('swapBtn').style.display = last ? 'none' : 'block';
+  $('nextBtn').textContent = last ? '결과 보기 🏆' : '다음 상황 →';
+  $('nextBtn').className = last ? 'btn' : 'btn ghost';
+  show('s-score');
+  if(last) toast('5판 완주! 결과가 기다립니다 🏆');
+}
+function spinRoulette(){
+  const el = $('roulSlotTxt'), btn = $('roulBtn');
+  btn.disabled = true; el.classList.add('spin');
+  let i=0;
+  const iv = setInterval(()=>{ el.textContent = PENALTY[i++ % PENALTY.length]; vibrate(8); },90);
+  setTimeout(()=>{
+    clearInterval(iv); el.classList.remove('spin');
+    el.textContent = pick(PENALTY);
+    btn.textContent = '다시 돌리기 🎰'; btn.disabled = false;
+    vibrate([20,40,20]);
+  }, 1500);
+}
+
+/* ===================== 결과 ===================== */
+function goResult(){
+  const [a,b] = G.score;
+  $('finalTitle').innerHTML = a===b ? '완벽한 호각 🤝' : `<span class="grad">${esc(nm(a>b?0:1))}</span>의 승리 🏆`;
+  $('frNameA').textContent = '🅰 '+nm(0); $('frNameB').textContent = '🅱 '+nm(1);
+  $('frA').textContent = a; $('frB').textContent = b;
+  $('gradeBox').innerHTML =
+    `<div class="gr">${esc(nm(0))} — ${GRADE[Math.min(a,5)]}</div>` +
+    `<div class="gr">${esc(nm(1))} — ${GRADE[Math.min(b,5)]}</div>`;
+  $('chemiText').textContent = chemi(a,b);
+  $('quotesSlot').innerHTML = G.quotes.length
+    ? `<div class="quotes"><h3>오늘의 명대사 ${G.quotes.length}개</h3><ul style="margin:0;padding:0">${G.quotes.map(q=>`<li>${esc(q.q)}<br><b style="font-size:11.5px;color:var(--muted)">— ${esc(q.t)}</b></li>`).join('')}</ul></div>`
+    : `<div class="quotes"><h3>저장된 명대사가 없네요</h3><div style="font-size:13.4px;color:var(--muted);line-height:1.65">다음 판에는 웃겼던 대사를 한 줄씩 저장해보세요 ❝</div></div>`;
+  vibrate([60,80,60,80,120]);
+  show('s-result');
+}
+function chemi(a,b){
+  const d = Math.abs(a-b);
+  if(G.draws>=2) return '둘 다 안 무너진다. 매운맛으로 올릴 때가 됐다.';
+  if(d>=4) return '한 명이 너무 잘한다. 다음엔 핸디캡을 주자.';
+  if(d>=2) return '실력 차가 보인다. 역할 바꾸기부터 하고 다시.';
+  return '이게 제일 재밌는 점수다. 둘 다 안 봐줬다.';
+}
+function share(){
+  const [a,b]=G.score;
+  const txt = `🌀 상황극 중독자 · 황당편\n${nm(0)} ${a} : ${b} ${nm(1)}\n${nm(0)} — ${GRADE[Math.min(a,5)]}\n${nm(1)} — ${GRADE[Math.min(b,5)]}\n"${chemi(a,b)}"\n${G.quotes.length?'\n오늘의 명대사: '+G.quotes[G.quotes.length-1].q+'\n':''}\n좀비·초능력·복제인간 — 설정만 황당한 즉흥 연기 게임 🎭`;
+  if(navigator.share){ navigator.share({title:'상황극 중독자 황당편', text:txt}).catch(()=>{}); return; }
+  if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(()=>toast('결과를 복사했어요! 붙여넣기 하세요 📋')).catch(()=>toast('복사에 실패했어요')); return; }
+  toast('공유를 지원하지 않는 환경이에요');
+}
+
+/* ===================== 이벤트 ===================== */
+let taste = 'mix';
+document.querySelectorAll('#tastes .pick').forEach(p=>{
+  p.onclick = ()=>{
+    document.querySelectorAll('#tastes .pick').forEach(x=>x.classList.remove('sel'));
+    p.classList.add('sel'); taste = p.dataset.taste; vibrate(14);
+  };
+});
+$('startBtn').onclick = ()=>{
+  const a = ($('nameA').value.trim() || '🅰'), b = ($('nameB').value.trim() || '🅱');
+  newGame(a,b,taste);
+  vibrate([20,40,20]);
+  toast(`${a} vs ${b} — 5판 승부 시작! 🎬`);
+  goDraw();
+};
+$('drawCard').onclick = flipCard;
+$('toPlayBtn').onclick = goPlay;
+$('timerBtn').onclick = toggleTimer;
+$('passA').onclick = ()=>usePass(0);
+$('passB').onclick = ()=>usePass(1);
+$('quoteBtn').onclick = saveQuote;
+$('quoteInput').addEventListener('keydown', e=>{ if(e.key==='Enter') saveQuote(); });
+$('judgeBtn').onclick = openJudge;
+$('swapBtn').onclick = ()=>{
+  G.swapped = !G.swapped;
+  vibrate([20,40,20]);
+  toast('역할 교체! 같은 상황, 반대 입장 🔁');
+  goPlay();
+};
+$('nextBtn').onclick = ()=>{ if(G.round>=TOTAL) goResult(); else goDraw(); };
+$('shareBtn').onclick = share;
+$('againBtn').onclick = ()=>{
+  const keep = G.used, a = nm(0), b = nm(1), t = G.taste;
+  newGame(a,b,t); G.used = keep;
+  toast('새 5판 승부! 나온 상황은 다시 안 나와요 🔀');
+  goDraw();
+};
+$('homeBtn').onclick = ()=>{
+  applyTheme(1);
+  show('s-start');
+};
+</script>
+</body>
+</html>
