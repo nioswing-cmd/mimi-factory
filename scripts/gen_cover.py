@@ -35,6 +35,16 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APPS_JSON = os.path.join(ROOT, "apps.json")
 COVERS = os.path.join(ROOT, "covers")
 
+# 🔴 2026-08-13 이후 이 주소는 죽어 있다 (404 Not Found).
+#    헤르메스 무료 이미지 프록시(Nous 통로)가 막혔다. 그 뒤로 이 스크립트는 신작마다
+#    조용히 실패했고, 로그에 「성공 0 / 실패 1」 만 찍혀 3일 동안 아무도 몰랐다.
+#    지금은 build_from_sheet.py 의 cover_alert() 가 그 실패를 텔레그램으로 알린다.
+#
+#    대안: 표지는 힉스필드 MCP(gpt_image_2 · quality=medium · resolution=1k · 2:3)로 만든다.
+#          단 MCP 는 클로드 세션에서만 부를 수 있어 서버 크론이 직접 못 쓴다 —
+#          알림을 받으면 클로디 세션에서 그려 covers/<id>.webp 로 넣고
+#          scripts/inject_cover_bg.py 까지 돌려야 끝난다.
+#    되살리는 법: 쓸 수 있는 이미지 API 가 생기면 MMF_IMAGE_API / MMF_IMAGE_MODEL 로 지정한다.
 API = os.environ.get("MMF_IMAGE_API", "http://127.0.0.1:8645/v1/chat/completions")
 MODEL = os.environ.get("MMF_IMAGE_MODEL", "google/gemini-3-pro-image")
 HDRS = {"Authorization": "Bearer local", "Content-Type": "application/json"}

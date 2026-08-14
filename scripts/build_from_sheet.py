@@ -642,6 +642,32 @@ COVER_BG_ENV = {           # 2026-08-01 사장님 승인 세기 — 바꾸지 �
     "MMF_GK": "0.40", "MMF_SK": "0.70", "MMF_IMGOP": "0.70", "MMF_SM": "1.5",
 }
 
+# 🔴 2026-08-14: 표지 실패가 로그에만 찍혀 3일 동안 아무도 몰랐다(신작 3편 표지 누락).
+#    표지는 생산을 멈추지 않는 부가 기능이라 조용히 넘어가도 티가 안 난다 —
+#    그래서 실패하면 반드시 텔레그램으로 알린다.
+ALERT = "/home/mimi/mimi_alert.py"
+# 표지 전용 상태파일. 생산 실패/복구 상태기계와 같은 파일을 쓰면
+# run_daily.sh 끝의 "복구" 알림이 표지 실패 상태를 곧바로 지워버린다.
+COVER_ALERT_STATE = "/home/mimi/.mimi_cover_alert_state.json"
+
+
+def cover_alert(entry, reason):
+    """표지 단계 실패를 연우팀장 봇으로 알린다. 알림 자체가 실패해도 생산은 계속한다."""
+    if not os.path.exists(ALERT):
+        log("표지 실패 알림 생략: mimi_alert.py 가 없다")
+        return
+    detail = (f"「{entry.get('title') or entry.get('id')}」 표지를 만들지 못했습니다.\n"
+              f"까닭: {reason}\n\n"
+              "※ gen_cover.py 가 부르는 무료 이미지 프록시(127.0.0.1:8645)는 2026-08-13 에 막혔습니다.\n"
+              "  서버 크론은 힉스필드 MCP 를 못 부릅니다 — 클로디 세션에서 표지를 만들어 붙여야 합니다.")
+    try:
+        subprocess.run([sys.executable, ALERT, "실패", detail],
+                       env=dict(os.environ, MIMI_ALERT_STATE=COVER_ALERT_STATE),
+                       capture_output=True, text=True, timeout=60)
+        log("표지 실패 알림 발송")
+    except Exception as e:
+        log(f"표지 실패 알림 자체가 실패: {e}")
+
 
 def make_cover(entry):
     """신작 1개의 표지를 만들고 첫 화면 배경으로 깐다."""
@@ -655,11 +681,17 @@ def make_cover(entry):
         sys.stdout.write(r.stdout or "")
         if r.returncode != 0:
             log(f"표지 생성 실패(생산은 계속): {(r.stderr or '')[-500:]}")
+            cover_alert(entry, f"gen_cover.py 가 종료코드 {r.returncode} 로 끝났습니다. "
+                               f"{(r.stderr or '')[-300:]}")
             return
 
         cov = os.path.join(ROOT, "covers", aid + ".webp")
         if not os.path.exists(cov):
+            # gen_cover.py 는 표지가 다 실패해도 종료코드 0 을 돌려준다(생산을 막지 않으려고).
+            # 그래서 '파일이 생겼는가' 가 실질적인 유일한 성공 판정이다.
             log("표지 파일이 생기지 않았다 — 배경 주입 생략")
+            cover_alert(entry, f"gen_cover.py 는 끝났는데 covers/{aid}.webp 가 생기지 않았습니다. "
+                               "로그의 [표지] 줄을 확인하세요.")
             return
 
         targets = [entry[k] for k in ("teaser", "premium") if entry.get(k)]
@@ -671,10 +703,13 @@ def make_cover(entry):
         sys.stdout.write(r2.stdout or "")
         if r2.returncode != 0:
             log(f"표지배경 주입 실패(생산은 계속): {(r2.stderr or '')[-500:]}")
+            cover_alert(entry, "표지는 만들었지만 배경 주입(inject_cover_bg.py)이 실패했습니다. "
+                               f"{(r2.stderr or '')[-300:]}")
             return
         log("🎨 표지 + 배경 주입 완료")
     except Exception as e:
         log(f"표지 단계 예외(생산은 정상): {e}")
+        cover_alert(entry, f"표지 단계에서 예외가 났습니다: {type(e).__name__} {e}")
 
 
 def publish_korean(entry):
