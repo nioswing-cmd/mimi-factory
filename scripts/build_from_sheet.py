@@ -658,13 +658,23 @@ def cover_alert(entry, reason):
         return
     detail = (f"「{entry.get('title') or entry.get('id')}」 표지를 만들지 못했습니다.\n"
               f"까닭: {reason}\n\n"
-              "※ gen_cover.py 가 부르는 무료 이미지 프록시(127.0.0.1:8645)는 2026-08-13 에 막혔습니다.\n"
-              "  서버 크론은 힉스필드 MCP 를 못 부릅니다 — 클로디 세션에서 표지를 만들어 붙여야 합니다.")
+              "※ 표지 그림은 사장님 PC 를 거쳐 만들어집니다(힉스필드).\n"
+              "  PC 가 꺼져 있으면 15분 뒤 시간초과가 납니다 — 그때는 요청을 살려두고\n"
+              "  `gen_cover.py --pickup` 이 나중에 도착한 그림을 주워 담습니다.")
     try:
-        subprocess.run([sys.executable, ALERT, "실패", detail],
-                       env=dict(os.environ, MIMI_ALERT_STATE=COVER_ALERT_STATE),
-                       capture_output=True, text=True, timeout=60)
-        log("표지 실패 알림 발송")
+        # 🔴 2026-08-26: 예전에는 결과를 안 보고 무조건 「발송」이라고 적었다.
+        #    그래서 로그만 보면 알림이 실제로 갔는지 알 수가 없었다 —
+        #    사장님이 "알림이 안 왔다"고 하셔도 로그는 갔다고 우긴다.
+        r = subprocess.run([sys.executable, ALERT, "실패", detail],
+                           env=dict(os.environ, MIMI_ALERT_STATE=COVER_ALERT_STATE),
+                           capture_output=True, text=True, timeout=60)
+        if r.returncode == 0:
+            log("표지 실패 알림 발송 성공")
+        elif r.returncode == 4:
+            log("표지 실패 알림 생략(같은 실패 6시간 침묵 규칙)")
+        else:
+            log(f"🔴 표지 실패 알림을 못 보냈다(코드 {r.returncode}) "
+                f"{(r.stderr or '').strip()[-200:]}")
     except Exception as e:
         log(f"표지 실패 알림 자체가 실패: {e}")
 

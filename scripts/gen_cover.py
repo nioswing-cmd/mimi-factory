@@ -28,6 +28,8 @@
 """
 import base64, io, json, os, re, subprocess, sys, time
 
+import re
+import shutil
 import requests
 from PIL import Image, ImageOps
 
@@ -146,7 +148,10 @@ def make_scene(app):
     if model:
         cmd += ["--model", model]
     try:
-        r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, timeout=600)
+        # 🔴 stdin 을 막아둔다. 안 그러면 claude 가 «파이프로 뭔가 들어오나» 기다리다
+        #    "no stdin data received in 3s" 로 헛돌고 종료코드 1 로 죽는다(2026-08-26).
+        r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, timeout=600,
+                           stdin=subprocess.DEVNULL)
     except subprocess.TimeoutExpired:
         log(f"  장면 묘사 시간초과: {app.get('id')}")
         return None, None
@@ -178,7 +183,82 @@ def make_scene(app):
 
 
 # ── 2. 이미지 생성 ────────────────────────────────────────────────────────
-def gen_image(prompt, timeout=300):
+# 🔴 2026-08-26: 사장님 PC 가 41시간 꺼져 있는 동안 표지 요청 6건이 전부 시간초과로
+#    버려졌다. 그런데 PC 가 켜지자 밀린 그림을 **실제로 만들어 갖다 놨다** —
+#    받을 쪽이 이미 포기하고 임시폴더를 지운 뒤라 그림만 버려진 것이다.
+#    그래서 ① 임시폴더를 지우지 않고 ② 「누구의 어떤 요청이었는지」를 적어두고
+#    ③ `--pickup` 으로 나중에 도착한 그림을 주워 담는다.
+PENDING = os.path.join(ROOT, ".tmp", "cover_pending.json")
+
+
+def _pending_load():
+    try:
+        with open(PENDING, encoding="utf-8") as fh:
+            return json.load(fh)
+    except (OSError, ValueError):
+        return {}
+
+
+def _pending_save(d):
+    os.makedirs(os.path.dirname(PENDING), exist_ok=True)
+    tmp = PENDING + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as fh:
+        json.dump(d, fh, ensure_ascii=False, indent=1)
+    os.replace(tmp, PENDING)
+
+
+def _older_than_days(stamp, days):
+    """장부에 적어둔 시각이 며칠 넘었나. 시각을 못 읽으면 «오래됐다»로 본다."""
+    try:
+        t = time.mktime(time.strptime(stamp, "%Y-%m-%d %H:%M:%S"))
+    except (ValueError, TypeError):
+        return True
+    return (time.time() - t) > days * 86400
+
+
+def _imgq():
+    import sys as _sys
+    if "/opt/shared" not in _sys.path:
+        _sys.path.insert(0, "/opt/shared")
+    import imgq
+    return imgq
+
+
+def _gen_image_via_pc(prompt, aid=None, style=None):
+    """서버는 «그림 주세요» 쪽지만 남기고 사장님 PC 가 힉스필드로 만들어 갖다 놓는다.
+    (2026-08-23~ · 옛 무료 통로 8645 는 2026-08-13 에 막혔다)"""
+    imgq = _imgq()
+    dest = os.path.join(ROOT, ".tmp", "covers", aid or "unknown")
+    os.makedirs(dest, exist_ok=True)
+    rid = imgq.submit(who="mimifactory", prompt=prompt, raw=True, n=1,
+                      dest_dir=dest, aspect="2:3")
+    log(f"  PC 에 표지 요청 {rid} (최대 15분)")
+    try:
+        files = imgq.wait(rid, timeout_s=int(os.environ.get("IMGQ_WAIT_SECONDS", "900")))
+    except TimeoutError:
+        # 🔴 여기서 포기하되 **요청은 살려둔다.** imgq.wait 은 시간초과를 error 로
+        #    표시해 버리는데, 그러면 PC 가 켜져도 그 요청을 다시 안 본다.
+        imgq.update(rid, status="pending", error="")
+        d = _pending_load()
+        d[aid or rid] = {"rid": rid, "dest": dest, "style": style,
+                         "since": time.strftime("%Y-%m-%d %H:%M:%S")}
+        _pending_save(d)
+        log(f"  PC 가 아직 안 만들었다 — 요청 {rid} 은 살려뒀다. "
+            f"나중에 `gen_cover.py --pickup` 이 주워 담는다")
+        raise
+    with open(files[0], "rb") as fh:
+        blob = fh.read()
+    shutil.rmtree(dest, ignore_errors=True)
+    return blob
+
+
+def gen_image(prompt, timeout=300, aid=None, style=None):
+    # ① 먼저 PC 요청함. 안 되면 예전 통로로 내려간다(그쪽은 지금 401 로 죽어 있다).
+    if os.environ.get("MMF_IMAGE_BACKEND", "pc").lower() in ("pc", "auto", "queue"):
+        try:
+            return _gen_image_via_pc(prompt, aid=aid, style=style)
+        except Exception as e:                                   # noqa: BLE001
+            log(f"  PC 요청함 실패 → 옛 통로로: {str(e)[:160]}")
     body = {"model": MODEL, "messages": [{"role": "user", "content": prompt}]}
     r = requests.post(API, headers=HDRS, json=body, timeout=timeout)
     r.raise_for_status()
@@ -209,6 +289,74 @@ def needs_cover(app):
     return not (os.path.exists(out) and os.path.getsize(out) > 800)
 
 
+def _write_apps(data, note=""):
+    """🔴 성공할 때마다 즉시 적는다. 예전에는 13편을 다 돌린 **뒤에야** 한 번 적었는데,
+    중간에 죽으면 만들어 놓은 표지까지 통째로 잃었다(2026-08-26 실제로 그랬다)."""
+    tmp = APPS_JSON + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+    os.replace(tmp, APPS_JSON)
+    if note:
+        log(note)
+
+
+def pickup():
+    """PC 가 늦게 갖다 놓은 표지를 주워 담는다. 반환: 새로 챙긴 개수.
+
+    🔴 apps.json 은 **여기서 다시 읽는다.** 20분마다 도는 크론이라 생산 스크립트와
+       겹칠 수 있는데, 오래전에 읽어둔 사본을 통째로 덮어쓰면 그 사이 나온 신작이
+       조용히 사라진다. 챙긴 표지 항목만 얹는다."""
+    d = _pending_load()
+    if not d:
+        # 🔴 20분마다 도는 크론이다 — 할 일이 없을 땐 **아무것도 적지 않는다.**
+        #    안 그러면 생산 로그가 «주워 담을 것 없음» 으로 뒤덮여
+        #    진짜 오류를 찾는 점검기가 눈이 먼다.
+        return 0
+    imgq = _imgq()
+    picked = {}                        # aid → style (표지 파일은 이미 저장돼 있다)
+    got, still = 0, {}
+    for aid, info in d.items():
+        r = imgq.get(info.get("rid", ""))
+        files = [f for f in (r.get("files") or []) if os.path.exists(f)]
+        if r.get("status") != "done" or not files:
+            # 요청함은 끝난 요청을 3일만 보관한다(imgq.KEEP_DAYS). 그보다 오래된
+            # 쪽지는 영영 안 온다 — 붙들고 있으면 장부가 계속 불어난다.
+            if not r and _older_than_days(info.get("since"), 4):
+                log(f"  {aid}: 요청이 사라졌고 오래돼서 장부에서 뺀다 ({info.get('since')})")
+                shutil.rmtree(info.get("dest") or "", ignore_errors=True)
+                continue
+            still[aid] = info
+            log(f"  {aid}: 아직 안 왔다 (상태 {r.get('status') or '요청이 사라짐'})")
+            continue
+        try:
+            with open(files[0], "rb") as fh:
+                blob = fh.read()
+            out = os.path.join(COVERS, aid + ".webp")
+            size = save_webp(blob, out)
+            picked[aid] = info.get("style")
+            got += 1
+            log(f"  ✅ {aid}: 늦게 도착한 표지를 챙겼다 ({size//1024}KB)")
+            shutil.rmtree(info.get("dest") or "", ignore_errors=True)
+        except Exception as e:                                   # noqa: BLE001
+            still[aid] = info
+            log(f"  {aid}: 챙기다 실패 — {type(e).__name__} {str(e)[:120]}")
+    _pending_save(still)
+    if picked:
+        with open(APPS_JSON, encoding="utf-8") as f:   # 지금 것을 다시 읽는다
+            fresh = json.load(f)
+        by_id = {a["id"]: a for a in fresh["apps"]}
+        for aid, style in picked.items():
+            if aid not in by_id:
+                log(f"  {aid}: apps.json 에 없다 — 표지 파일만 두고 넘어간다")
+                continue
+            by_id[aid]["cover"] = "covers/" + aid + ".webp"
+            if style:
+                by_id[aid]["cover_style"] = style
+        _write_apps(fresh, f"apps.json 갱신: 늦게 온 표지 {got}개")
+    return got
+
+
 def main():
     args = sys.argv[1:]
     dry = "--dry-run" in args
@@ -217,6 +365,10 @@ def main():
         only = [a for a in args[args.index("--only") + 1:] if not a.startswith("--")]
 
     os.makedirs(COVERS, exist_ok=True)
+    if "--pickup" in args:
+        pickup()                       # apps.json 은 pickup 이 직접 다시 읽는다
+        return 0                       # 주워 담을 게 없어도 실패가 아니다
+
     with open(APPS_JSON, encoding="utf-8") as f:
         data = json.load(f)
     apps = data["apps"]
@@ -248,14 +400,15 @@ def main():
         out = os.path.join(COVERS, aid + ".webp")
         for attempt in (1, 2):
             try:
-                blob = gen_image(prompt)
+                blob = gen_image(prompt, aid=aid, style=style)
                 if len(blob) < 10000:
                     raise RuntimeError(f"이미지가 너무 작다 ({len(blob)}B)")
                 size = save_webp(blob, out)
                 a["cover"] = "covers/" + aid + ".webp"
                 a["cover_style"] = style
-                log(f"[{i}/{len(todo)}] OK  {aid} {size//1024}KB {time.time()-t0:.0f}초")
                 ok += 1
+                _write_apps(data)          # 한 장 될 때마다 바로 적는다
+                log(f"[{i}/{len(todo)}] OK  {aid} {size//1024}KB {time.time()-t0:.0f}초")
                 break
             except Exception as e:
                 log(f"[{i}/{len(todo)}] {'재시도' if attempt == 1 else '실패'} {aid}: "
@@ -266,9 +419,6 @@ def main():
                     time.sleep(5)
 
     if ok and not dry:
-        with open(APPS_JSON, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-            f.write("\n")
         log(f"apps.json 갱신: cover 항목 {ok}개 추가")
 
     log(f"===== 완료: 성공 {ok} / 실패 {len(fail)} =====")
