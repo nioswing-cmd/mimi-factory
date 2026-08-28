@@ -30,6 +30,18 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APPS_DIR = os.path.join(ROOT, "apps")
 MANIFEST = os.path.join(ROOT, "apps.json")
 OUT_DIR = os.path.join(ROOT, "output")   # Claude가 결과물을 두는 작업 폴더
+# 조사 결과를 남겨 두는 곳 (2026-08-28 신설).
+#   실패해서 재시도할 때 여기 있는 것을 다시 쓰면 조사를 처음부터 안 해도 된다.
+#   실증: 블랙스완 8/24 첫 시도 145.6M(서브에이전트 44개) 실패 → 8/25 재시도 4.2M(0개) 성공.
+#   .gitignore 에 넣어 두었다 — 추적되면 git pull --rebase 가 깨진다.
+SCRATCH_DIR = os.path.join(ROOT, ".build-scratch")
+
+
+def research_dir(slug):
+    """이 책의 조사 결과 보관함. 없으면 만든다."""
+    d = os.path.join(SCRATCH_DIR, slug, "research")
+    os.makedirs(d, exist_ok=True)
+    return d
 
 # 카드 색 팔레트 (book-palette-12 느낌의 그라디언트 페어를 순환 사용)
 PALETTES = [
@@ -282,7 +294,7 @@ def load_material(item, slug):
     return None
 
 
-def make_prompt(item):
+def make_prompt(item, retry=False):
     slug = slugify(item["title"])
     cat = category_of(item["type"])
     if cat == "quiz":
@@ -356,6 +368,30 @@ def make_prompt(item):
             "PDF는 pages 파라미터로 20쪽씩 나눠 끝까지 읽고, 이미지는 한 장씩 읽어라. "
             + ground_rule
             + f"\n\n[제공 자료 파일]\n{flist}"
+        )
+
+    # ── 토큰 절감 규칙 (2026-08-28 신설) ─────────────────────────
+    #   자료가 없는 책은 모델이 웹에서 통째로 복원하려고 서브에이전트를 30~45개 뿌렸다.
+    #   조사 자체를 막을 수는 없으니 ① 결과를 남기게 하고 ② 중복·헛턴을 줄인다.
+    rdir = research_dir(slug)
+    p += (
+        f"\n\n[생산 규칙 — 반드시 지켜라]\n"
+        f"· 조사한 내용은 그때그때 {rdir}/ 아래에 주제별 .md 파일로 저장해라. "
+        f"저장하지 않으면 실패했을 때 처음부터 다시 조사해야 한다.\n"
+        f"· 조사를 시작하기 전에 {rdir}/ 를 먼저 살펴보고, "
+        f"이미 저장된 주제는 다시 조사하지 마라.\n"
+        f"· 조사용 서브에이전트는 이 작업 전체에서 최대 10개까지만 써라. "
+        f"같은 주제를 여러 에이전트에 나눠 던지지 마라 — 관련 질문은 한 에이전트에 묶어서 보낸다.\n"
+        f"· 다음 사이트는 이 서버에서 막혀 있다. 시도하지 마라(실패에 턴만 쓴다): "
+        f"nytimes.com, ft.com, newyorker.com, web.archive.org, books.googleapis.com\n"
+        f"· PDF 를 읽어야 하면 python3 의 pypdf 를 써라. "
+        f"PyPDF2 · fitz · pdfminer 는 이 서버에 없다. 명령줄은 pdftotext 를 쓸 수 있다."
+    )
+    if retry:
+        p += (
+            f"\n\n🔴 이번은 재시도다. 앞선 시도가 {rdir}/ 에 조사 결과를 남겨 두었다. "
+            f"작업을 시작하기 전에 그 폴더의 파일을 전부 읽고, "
+            f"모자란 것만 새로 조사해라. 처음부터 다시 조사하지 마라."
         )
     return p, slug
 
@@ -765,9 +801,11 @@ def main():
         publish_korean(entry)
         localize_new(entry)
     else:
-        # 1회 재시도
-        log("⚠️ 실패 — 1회 재시도합니다.")
-        if run_claude(prompt):
+        # 1회 재시도 — 앞선 시도가 남긴 조사 결과를 재사용하는 프롬프트로 바꿔 넣는다.
+        #   (같은 프롬프트로 다시 돌리면 조사를 통째로 다시 해서 토큰이 두 배로 든다)
+        log("⚠️ 실패 — 1회 재시도합니다. (앞선 조사 결과 재사용)")
+        retry_prompt, _ = make_prompt(item, retry=True)
+        if run_claude(retry_prompt):
             entry = collect(item, slug)
         if entry:
             notify(item, "완료", entry["teaser"]); log("✅ 재시도 성공!")

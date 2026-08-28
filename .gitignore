@@ -21,3 +21,9 @@ _archive/cover-backup-*/
 # Claude 작업 폴더 — 추적하지 않는다. 이게 남아 원격과 이름이 겹치면
 # git pull --rebase 가 abort 하고 생산이 조용히 멈춘다 (2026-07-27 7일 장애)
 output/
+
+# Claude 조사·작업 임시 폴더 — 추적하지 않는다.
+#   여기에 조사 결과를 남겨 두면 실패 재시도가 처음부터 다시 조사하지 않는다(토큰 23% 절감).
+#   output/ 과 같은 이유로 반드시 무시해야 한다 — 원격과 이름이 겹치면
+#   git pull --rebase 가 abort 하고 생산이 조용히 멈춘다.
+.build-scratch/
