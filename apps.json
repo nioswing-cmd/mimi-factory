@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-29",
+  "updated": "2026-08-30",
   "apps": [
     {
       "id": "삼체",
@@ -1777,6 +1777,20 @@
       "premium": "apps/성공하는_사람들의_7가지_습관_quiz.html",
       "desc": "스티븐 코비 『성공하는 사람들의 7가지 습관』을 30문항 도파민 퀴즈로 익히는 학습 웹앱 — 성품 윤리와 패러다임 전환에서 시작해 주도성·자기 ",
       "cover": "covers/성공하는_사람들의_7가지_습관.webp",
+      "cover_style": "2-미니멀"
+    },
+    {
+      "id": "그릿",
+      "type": "quiz",
+      "title": "그릿",
+      "author": "앤절라 더크워스",
+      "date": "2026-08-30",
+      "color1": "#5ee7d8",
+      "color2": "#7aa6ff",
+      "teaser": "apps/그릿_teaser.html",
+      "premium": "apps/그릿_quiz.html",
+      "desc": "웨스트포인트를 견딘 사람과 그만둔 사람을 가른 것은 재능이 아니었다 — 앤절라 더크워스 『그릿』의 핵심을 30문항 반복 마스터 퀴즈로 익히고, ",
+      "cover": "covers/그릿.webp",
       "cover_style": "2-미니멀"
     }
   ]
