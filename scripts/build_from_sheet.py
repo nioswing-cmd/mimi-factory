@@ -380,8 +380,9 @@ def make_prompt(item, retry=False):
         f"저장하지 않으면 실패했을 때 처음부터 다시 조사해야 한다.\n"
         f"· 조사를 시작하기 전에 {rdir}/ 를 먼저 살펴보고, "
         f"이미 저장된 주제는 다시 조사하지 마라.\n"
-        f"· 조사용 서브에이전트는 이 작업 전체에서 최대 10개까지만 써라. "
-        f"같은 주제를 여러 에이전트에 나눠 던지지 마라 — 관련 질문은 한 에이전트에 묶어서 보낸다.\n"
+        f"· 조사용 서브에이전트(Task 도구)는 이 작업에서 꺼져 있다. 쓰려고 하지 마라. "
+        f"조사가 필요하면 WebSearch · WebFetch 로 직접 해라. "
+        f"같은 주제를 두 번 조사하지 말고, 문항 출제에 실제로 필요한 것만 조사해라.\n"
         f"· 다음 사이트는 이 서버에서 막혀 있다. 시도하지 마라(실패에 턴만 쓴다): "
         f"nytimes.com, ft.com, newyorker.com, web.archive.org, books.googleapis.com\n"
         f"· PDF 를 읽어야 하면 python3 의 pypdf 를 써라. "
@@ -402,11 +403,24 @@ def slugify(title):
 
 
 # ── 3. Claude Code 실행 ──────────────────────────────────
+# 🔴 2026-08-29 사장님 승인 — 조사용 서브에이전트(Task 도구)를 하버스 차원에서 막는다.
+#   8/28 에 「최대 10개까지만 써라」를 지시문에 적었는데 다음 날 첫 실행이 40개를 썼다
+#   (8/29 01:00 「성공하는 사람들의 7가지 습관」 1억 874만 토큰 · 12시간 사용량의 76%).
+#   프롬프트 문장은 부탁이지 강제가 아니다. --disallowedTools 는 모델이 무시할 수 없다.
+#   자료가 있는 앱(상황극·영화)은 원래 서브에이전트 0개로 끝나므로 손해가 없다.
+DISALLOWED_TOOLS = "Task"
+
+# 구독 한도에 걸린 것을 알아보는 표시. 이때는 재시도가 100% 실패라 하지 않는다.
+LIMIT_MARKERS = ("session limit", "usage limit", "limit reached", "rate_limit_error")
+
+
 def run_claude(prompt):
+    """(성공했나, 구독 한도에 걸렸나) 를 돌려준다."""
     os.makedirs(OUT_DIR, exist_ok=True)
     log("Claude Code 실행 시작 (수 분 소요)…")
     cmd = ["claude", "-p", prompt, "--dangerously-skip-permissions",
-           "--max-turns", "150"]
+           "--max-turns", "150",
+           "--disallowedTools", DISALLOWED_TOOLS]
     model = os.environ.get("CLAUDE_MODEL", "").strip()
     if model:
         cmd += ["--model", model]
@@ -417,12 +431,39 @@ def run_claude(prompt):
         )
     except subprocess.TimeoutExpired:
         log("Claude 실행이 1시간을 초과해 중단되었습니다.")
-        return False
+        return False, False
     log(f"Claude 종료 코드: {r.returncode}")
+    blob = ((r.stdout or "") + "\n" + (r.stderr or "")).lower()
+    limit_hit = any(m in blob for m in LIMIT_MARKERS)
     if r.returncode != 0:
         log(f"stderr: {r.stderr[-2000:]}")
         log(f"stdout: {r.stdout[-2000:]}")
-    return r.returncode == 0
+        if limit_hit:
+            log("🔴 구독 한도에 걸려 중단됐다 — 같은 한도라 재시도는 하지 않는다.")
+    return r.returncode == 0, limit_hit
+
+
+def looks_complete(slug, cat):
+    """종료코드가 실패여도 산출물이 온전하면 수거한다 (2026-08-29 신설).
+
+    8/29 01:00 「성공하는 사람들의 7가지 습관」은 퀴즈앱·티저·소개문·홍보문을 다 만들어
+    놓고 마지막에 한도에 걸려 종료코드 1 로 끝났다. 그런데 main() 이 종료코드만 보고
+    수거를 건너뛰어 완성품 1MB 짜리 두 개가 output/ 에 그대로 버려졌다.
+    ─ 실패 판정 전에 «산출물이 있는가»를 먼저 본다.
+    """
+    main_html = os.path.join(OUT_DIR, f"{slug}_{cat}.html")
+    if not os.path.exists(main_html):
+        return False
+    try:
+        t = open(main_html, encoding="utf-8").read()
+    except Exception as e:
+        log(f"산출물을 읽지 못했다({e}) — 미완성으로 본다"); return False
+    if len(t) < 100_000:
+        log(f"산출물이 너무 작다({len(t):,}자) — 미완성으로 본다"); return False
+    if "</html>" not in t[-2000:]:
+        log("산출물이 </html> 로 끝나지 않는다 — 쓰다 만 것으로 본다"); return False
+    log(f"종료코드는 실패지만 산출물이 온전하다({len(t):,}자) — 수거를 진행한다")
+    return True
 
 
 # ── 4. 산출물 수거 + apps.json 갱신 ──────────────────────
@@ -788,8 +829,11 @@ def main():
         return
     log(f"오늘의 생산: [{item['type']}] {item['title']} — {item['author']}")
 
+    cat = category_of(item["type"])
     prompt, slug = make_prompt(item)
-    ok = run_claude(prompt)
+    ok, limit_hit = run_claude(prompt)
+    if not ok and looks_complete(slug, cat):
+        ok = True                       # 한도에 걸렸어도 다 만들어 놨으면 살린다
     entry = collect(item, slug) if ok else None
 
     if entry:
@@ -800,12 +844,20 @@ def main():
         make_cover(entry)
         publish_korean(entry)
         localize_new(entry)
+    elif limit_hit:
+        # 🔴 2026-08-29 사장님 승인 — 구독 한도로 죽었으면 재시도하지 않는다.
+        #   8/29 01:00 실행은 한도에 걸려 실패한 뒤 곧바로 재시도해 또 같은 한도에 걸렸다.
+        #   한도는 시간이 지나야 풀리므로 재시도는 100% 실패다. 다음 정기 실행에 맡긴다.
+        notify(item, "실패")
+        log("❌ 구독 한도 초과로 중단 — 재시도하지 않는다. 다음 정기 실행 때 다시 시도한다.")
+        sys.exit(1)
     else:
         # 1회 재시도 — 앞선 시도가 남긴 조사 결과를 재사용하는 프롬프트로 바꿔 넣는다.
         #   (같은 프롬프트로 다시 돌리면 조사를 통째로 다시 해서 토큰이 두 배로 든다)
         log("⚠️ 실패 — 1회 재시도합니다. (앞선 조사 결과 재사용)")
         retry_prompt, _ = make_prompt(item, retry=True)
-        if run_claude(retry_prompt):
+        ok2, _ = run_claude(retry_prompt)
+        if ok2 or looks_complete(slug, cat):
             entry = collect(item, slug)
         if entry:
             notify(item, "완료", entry["teaser"]); log("✅ 재시도 성공!")
