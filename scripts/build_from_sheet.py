@@ -19,9 +19,14 @@
   WEBHOOK_URL          Apps Script 웹앱 주소 (선택 — 시트 상태/URL 자동 기록용)
 """
 
-import csv, html, http.cookiejar, io, json, os, re, subprocess, sys, tempfile
+import csv, html, http.cookiejar, io, json, os, re, signal, subprocess, sys, tempfile
+import threading, time
 import urllib.request, urllib.parse
 from datetime import datetime, timezone, timedelta
+
+# 토큰 상한 «강제» 장치 (2026-08-30 사장님 지시). 같은 scripts/ 폴더에 있다.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import token_guard
 
 KST = timezone(timedelta(hours=9))
 TODAY = datetime.now(KST).strftime("%Y-%m-%d")
@@ -414,10 +419,52 @@ DISALLOWED_TOOLS = "Task"
 LIMIT_MARKERS = ("session limit", "usage limit", "limit reached", "rate_limit_error")
 
 
-def run_claude(prompt):
-    """(성공했나, 구독 한도에 걸렸나) 를 돌려준다."""
+MAX_SECONDS = int(os.environ.get("MMF_MAX_SECONDS", "3600"))
+
+
+def _kill_tree(proc, why):
+    """생산 프로세스를 «실제로» 죽인다. claude 가 띄운 자식까지 통째로.
+
+    start_new_session=True 로 띄웠으므로 프로세스 그룹 하나만 잡으면 된다.
+    TERM 을 주고 10초 기다렸다가 안 죽으면 KILL.
+    """
+    log(f"🛑 생산 중단 — {why}")
+    try:
+        pgid = os.getpgid(proc.pid)
+    except OSError:
+        pgid = None
+    for sig, wait in ((signal.SIGTERM, 10), (signal.SIGKILL, 5)):
+        if proc.poll() is not None:
+            return
+        try:
+            if pgid is not None:
+                os.killpg(pgid, sig)
+            else:
+                proc.send_signal(sig)
+        except OSError:
+            pass
+        try:
+            proc.wait(timeout=wait)
+            return
+        except subprocess.TimeoutExpired:
+            continue
+
+
+def run_claude(prompt, budget=None):
+    """(성공했나, 구독한도, 토큰상한, 토큰통계) 를 돌려준다.
+
+    🔴 2026-08-30 사장님 지시 — 「토큰을 너무 잡아먹는 작업이 있으면 작업을 멈추고
+       보고해. 그 앱 안 만들어도 되니까.」
+       그래서 생산이 도는 «동안» 20초마다 토큰을 세고, 상한을 넘으면 그 자리에서
+       프로세스를 죽인다. 지시문에 적는 부탁이 아니라 코드가 거부하는 자리다
+       (8/28 에 프롬프트로 「10개 상한」을 적었더니 다음 날 40개를 썼다).
+    """
     os.makedirs(OUT_DIR, exist_ok=True)
+    budget = int(budget or token_guard.BUDGET)
+    warn_at = min(token_guard.WARN, int(budget * 0.7))
     log("Claude Code 실행 시작 (수 분 소요)…")
+    log(f"토큰 상한 {token_guard.human(budget)} "
+        f"(경고 {token_guard.human(warn_at)}) — 넘으면 즉시 중단한다")
     cmd = ["claude", "-p", prompt, "--dangerously-skip-permissions",
            "--max-turns", "150",
            "--disallowedTools", DISALLOWED_TOOLS]
@@ -425,22 +472,76 @@ def run_claude(prompt):
     if model:
         cmd += ["--model", model]
         log(f"생산 모델: {model}")
+
+    guard = token_guard.TokenGuard()      # 이 시점 이후 새로 생기는 세션만 센다
+    started = time.time()
+    proc = subprocess.Popen(cmd, cwd=ROOT, stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE, text=True,
+                            start_new_session=True)
+
+    # 파이프를 안 비우면 버퍼가 차서 claude 가 멈춘다 — 읽는 실을 따로 둔다.
+    out, err = [], []
+
+    def _drain(stream, sink):
+        try:
+            for line in stream:
+                sink.append(line)
+        except Exception:
+            pass
+
+    threads = [threading.Thread(target=_drain, args=(proc.stdout, out), daemon=True),
+               threading.Thread(target=_drain, args=(proc.stderr, err), daemon=True)]
+    for t in threads:
+        t.start()
+
+    stats = {"total": 0, "main": 0, "sub": 0, "sub_files": 0, "responses": 0}
+    budget_hit = warned = timed_out = False
+    while proc.poll() is None:
+        time.sleep(token_guard.POLL_SECONDS)
+        try:
+            stats = guard.poll()
+        except Exception as e:                 # 계수기 고장이 생산을 죽이면 안 된다
+            log(f"토큰 계수 실패(생산은 계속): {e}")
+            continue
+        if stats["total"] >= budget:
+            budget_hit = True
+            _kill_tree(proc, f"토큰 {token_guard.human(stats['total'])} 로 상한 "
+                             f"{token_guard.human(budget)} 초과")
+            break
+        if not warned and stats["total"] >= warn_at:
+            warned = True
+            log(f"⚠️ 토큰 {token_guard.human(stats['total'])} — 경고선을 넘었다 "
+                f"(상한 {token_guard.human(budget)} 에서 중단)")
+        if time.time() - started > MAX_SECONDS:
+            timed_out = True
+            _kill_tree(proc, f"{MAX_SECONDS//60}분 초과")
+            break
+
+    proc.wait()
+    for t in threads:
+        t.join(timeout=10)
     try:
-        r = subprocess.run(
-            cmd, cwd=ROOT, capture_output=True, text=True, timeout=3600,
-        )
-    except subprocess.TimeoutExpired:
-        log("Claude 실행이 1시간을 초과해 중단되었습니다.")
-        return False, False
-    log(f"Claude 종료 코드: {r.returncode}")
-    blob = ((r.stdout or "") + "\n" + (r.stderr or "")).lower()
+        stats = guard.poll()                   # 마지막까지 쓴 것을 다시 센다
+    except Exception:
+        pass
+    stats["seconds"] = int(time.time() - started)
+
+    stdout, stderr = "".join(out), "".join(err)
+    log(f"Claude 종료 코드: {proc.returncode}")
+    log(f"이번 생산 토큰: {token_guard.human(stats['total'])} "
+        f"(본세션 {token_guard.human(stats['main'])} · "
+        f"조사 {token_guard.human(stats['sub'])} · 조사 에이전트 {stats['sub_files']}개 · "
+        f"{stats['seconds']//60}분)")
+    blob = (stdout + "\n" + stderr).lower()
     limit_hit = any(m in blob for m in LIMIT_MARKERS)
-    if r.returncode != 0:
-        log(f"stderr: {r.stderr[-2000:]}")
-        log(f"stdout: {r.stdout[-2000:]}")
+    if timed_out:
+        log(f"Claude 실행이 {MAX_SECONDS//60}분을 초과해 중단되었습니다.")
+    if proc.returncode != 0 and not budget_hit:
+        log(f"stderr: {stderr[-2000:]}")
+        log(f"stdout: {stdout[-2000:]}")
         if limit_hit:
             log("🔴 구독 한도에 걸려 중단됐다 — 같은 한도라 재시도는 하지 않는다.")
-    return r.returncode == 0, limit_hit
+    return (proc.returncode == 0 and not budget_hit), limit_hit, budget_hit, stats
 
 
 def looks_complete(slug, cat):
@@ -820,6 +921,32 @@ def publish_korean(entry):
         log(f"선발행 실패(run_daily 최종 커밋이 보완): {e}")
 
 
+def report_overrun(item, tok, entry, attempt):
+    """🔴 토큰 상한에 걸려 멈췄다 — 사장님께 «직접» 알린다 (2026-08-30 지시).
+
+    지시 원문: "토큰을 너무 잡아먹는 작업이 있으면, 작업을 멈추고 나에게 보고하도록 해."
+    연우팀장 봇은 자주 놓치신다고 하셔서 클로디 봇으로 보낸다.
+    """
+    tail = ("\n\n※ 다행히 산출물은 완성돼 있어 앱은 살렸습니다."
+            if entry else
+            "\n\n※ 이 앱은 포기했습니다. (사장님 지시 — 「그 앱 안 만들어도 되니까」)\n"
+            "  재시도하지 않습니다. 같은 책은 또 넘칠 가능성이 큽니다.")
+    text = (
+        f"🛑 [미미팩토리] 토큰 상한 초과로 생산을 멈췄습니다\n\n"
+        f"책 : 「{item['title']}」 ({item.get('type','')})\n"
+        f"쓴 토큰 : {token_guard.human(tok['total'])}"
+        f"  (상한 {token_guard.human(token_guard.BUDGET)})\n"
+        f"  · 본세션 {token_guard.human(tok['main'])}\n"
+        f"  · 조사 {token_guard.human(tok['sub'])} · 조사 에이전트 {tok['sub_files']}개\n"
+        f"걸린 시간 : {tok.get('seconds',0)//60}분 ({attempt})\n"
+        f"{tail}\n\n"
+        f"장부 : {token_guard.LEDGER}\n"
+        f"상한을 바꾸시려면 mimi-factory.env 의 MMF_TOKEN_BUDGET"
+    )
+    sent, who = token_guard.alert_boss(text)
+    log(f"토큰초과 보고 발송: {'성공(' + who + ' 봇)' if sent else '🔴 실패 — 통로가 둘 다 막혔다'}")
+
+
 def main():
     tabs = read_sheet()
     sync_platforms(tabs)   # 시트 '플랫폼' 열 → 플랫폼 매니페스트 동기화 (생산과 무관하게 매 실행)
@@ -831,10 +958,20 @@ def main():
 
     cat = category_of(item["type"])
     prompt, slug = make_prompt(item)
-    ok, limit_hit = run_claude(prompt)
+    ok, limit_hit, budget_hit, tok = run_claude(prompt)
+    salvaged = False
     if not ok and looks_complete(slug, cat):
         ok = True                       # 한도에 걸렸어도 다 만들어 놨으면 살린다
+        salvaged = True
     entry = collect(item, slug) if ok else None
+
+    # 장부 — 성공이든 실패든 «한 권에 얼마 들었나»를 한 줄 남긴다. (항시 가동의 근거자료)
+    token_guard.record(item["title"], cat, tok,
+                       "완료" if entry else ("토큰초과중단" if budget_hit else "실패"),
+                       tok.get("seconds", 0),
+                       note="산출물 구제" if salvaged else "")
+    if budget_hit:
+        report_overrun(item, tok, entry, "1차 시도")
 
     if entry:
         site = os.environ.get("SITE_URL", "").rstrip("/")
@@ -844,6 +981,12 @@ def main():
         make_cover(entry)
         publish_korean(entry)
         localize_new(entry)
+    elif budget_hit:
+        # 🔴 2026-08-30 사장님 지시 — 토큰을 너무 먹으면 멈추고 보고. 앱은 포기해도 된다.
+        #   재시도하면 같은 책이 같은 이유로 또 넘친다(8/29 실증: 재시도가 23%를 태웠다).
+        notify(item, "실패")
+        log("❌ 토큰 상한 초과로 중단 — 재시도하지 않는다. 사장님께 보고했다.")
+        sys.exit(1)
     elif limit_hit:
         # 🔴 2026-08-29 사장님 승인 — 구독 한도로 죽었으면 재시도하지 않는다.
         #   8/29 01:00 실행은 한도에 걸려 실패한 뒤 곧바로 재시도해 또 같은 한도에 걸렸다.
@@ -854,11 +997,28 @@ def main():
     else:
         # 1회 재시도 — 앞선 시도가 남긴 조사 결과를 재사용하는 프롬프트로 바꿔 넣는다.
         #   (같은 프롬프트로 다시 돌리면 조사를 통째로 다시 해서 토큰이 두 배로 든다)
-        log("⚠️ 실패 — 1회 재시도합니다. (앞선 조사 결과 재사용)")
+        # 🔴 재시도는 «남은 예산»만 쓴다. 안 그러면 1차+2차로 상한의 두 배가 나간다.
+        left = token_guard.BUDGET - tok.get("total", 0)
+        if left < token_guard.MIN_RETRY_BUDGET:
+            notify(item, "실패")
+            log(f"❌ 재시도 안 함 — 1차에서 {token_guard.human(tok['total'])} 를 써서 "
+                f"남은 예산이 {token_guard.human(max(left, 0))} 뿐이다.")
+            report_overrun(item, tok, None, "1차 실패 · 예산 부족으로 재시도 포기")
+            sys.exit(1)
+        log(f"⚠️ 실패 — 1회 재시도합니다. (앞선 조사 결과 재사용 · "
+            f"남은 예산 {token_guard.human(left)})")
         retry_prompt, _ = make_prompt(item, retry=True)
-        ok2, _ = run_claude(retry_prompt)
+        ok2, _, budget_hit2, tok2 = run_claude(retry_prompt, budget=left)
         if ok2 or looks_complete(slug, cat):
             entry = collect(item, slug)
+        merged = {k: tok.get(k, 0) + tok2.get(k, 0)
+                  for k in ("total", "main", "sub", "sub_files", "seconds")}
+        merged["responses"] = tok.get("responses", 0) + tok2.get("responses", 0)
+        token_guard.record(item["title"], cat, merged,
+                           "완료" if entry else ("토큰초과중단" if budget_hit2 else "실패"),
+                           merged["seconds"], note="재시도 합산")
+        if budget_hit2:
+            report_overrun(item, merged, entry, "재시도까지 합산")
         if entry:
             notify(item, "완료", entry["teaser"]); log("✅ 재시도 성공!")
             register_platform(item, entry)
