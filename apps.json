@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-30",
+  "updated": "2026-08-31",
   "apps": [
     {
       "id": "삼체",
@@ -1805,6 +1805,20 @@
       "premium": "apps/마인드셋_quiz.html",
       "desc": "네 살 아이가 쉬운 퍼즐과 어려운 퍼즐 앞에서 이미 갈라선다 — 캐럴 드웩 『마인드셋』의 핵심을 30문항 반복 마스터 퀴즈로 익히고, 완독 인포",
       "cover": "covers/마인드셋.webp",
+      "cover_style": "2-미니멀"
+    },
+    {
+      "id": "딥_워크",
+      "type": "quiz",
+      "title": "딥 워크",
+      "author": "칼 뉴포트",
+      "date": "2026-08-31",
+      "color1": "#ffd36e",
+      "color2": "#ff8a5c",
+      "teaser": "apps/딥_워크_teaser.html",
+      "premium": "apps/딥_워크_quiz.html",
+      "desc": "하루 종일 바빴는데 남은 게 없다면 — 칼 뉴포트 『딥 워크』의 핵심을 시간×강도 공식부터 네 가지 집중 방식·마무리 의식·SNS 30일 실험·",
+      "cover": "covers/딥_워크.webp",
       "cover_style": "2-미니멀"
     }
   ]
