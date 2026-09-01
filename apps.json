@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-31",
+  "updated": "2026-09-01",
   "apps": [
     {
       "id": "삼체",
@@ -1819,6 +1819,20 @@
       "premium": "apps/딥_워크_quiz.html",
       "desc": "하루 종일 바빴는데 남은 게 없다면 — 칼 뉴포트 『딥 워크』의 핵심을 시간×강도 공식부터 네 가지 집중 방식·마무리 의식·SNS 30일 실험·",
       "cover": "covers/딥_워크.webp",
+      "cover_style": "2-미니멀"
+    },
+    {
+      "id": "타이탄의_도구들",
+      "type": "quiz",
+      "title": "타이탄의 도구들",
+      "author": "팀 페리스",
+      "date": "2026-09-01",
+      "color1": "#8affc1",
+      "color2": "#5ee7d8",
+      "teaser": "apps/타이탄의_도구들_teaser.html",
+      "premium": "apps/타이탄의_도구들_quiz.html",
+      "desc": "팀 페리스가 세계 최고 성과자 200명에게서 뽑아낸 습관·질문·훈련을 30문항 퀴즈로 익히고, 승리하는 아침·두려움 설정·1,000명의 팬부터 ",
+      "cover": "covers/타이탄의_도구들.webp",
       "cover_style": "2-미니멀"
     }
   ]
