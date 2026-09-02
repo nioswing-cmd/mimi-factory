@@ -610,6 +610,52 @@ def inject_promo_banner(path):
         log(f"프로모션 배너 주입 실패(무시): {e}")
 
 
+# ── 탭 아이콘(파비콘) 주입 ────────────────────────────────
+# 🔴 사장님은 탭을 열 개씩 띄워 놓고 일하신다. 아이콘이 없으면 전부 흰 종이라
+#    어느 탭이 무엇인지 못 찾으신다. 그래서 새 앱은 «반드시» 아이콘을 달고 나간다.
+#    프롬프트에 적는 것으로는 강제가 안 되므로 수거 단계의 코드에서 직접 끼운다.
+#    (규칙: +VScode/CLAUDE.md 「탭 아이콘 없이는 앱이 «완성»이 아니다」)
+#    그림 원본은 리포의 /icons/ 에 있다 (관: 밤보라달 · 실험실: 주황플라스크 · 피크닉: 초록두원)
+ICON_COLOR = {"quiz": "#2e2a6b", "test": "#ff7a1a", "friend": "#1eaa5c"}
+
+
+def favicon_block(cat):
+    key = cat if cat in ICON_COLOR else "mimifactory"
+    color = ICON_COLOR.get(cat, "#ff4f9a")
+    return (
+        f'\n<link rel="icon" href="/icons/{key}.svg?v=1" type="image/svg+xml">'
+        f'\n<link rel="alternate icon" href="/icons/{key}-32.png?v=1"'
+        f' sizes="32x32" type="image/png">'
+        f'\n<link rel="apple-touch-icon" href="/icons/{key}-180.png?v=1">'
+        f'\n<meta name="theme-color" content="{color}">'
+    )
+
+
+def inject_favicon(path, cat):
+    """생성된 앱 HTML 의 <head> 에 탭 아이콘 4줄을 넣는다 (멱등 — 이미 있으면 스킵)."""
+    try:
+        t = open(path, encoding="utf-8").read()
+        if 'rel="icon"' in t:
+            return
+        low = t.lower()
+        j = low.find("</title>")
+        i = j + len("</title>") if j >= 0 else -1
+        if i < 0:
+            j = low.find("<head")
+            k = low.find(">", j) if j >= 0 else -1
+            i = k + 1 if k >= 0 else -1
+        if i < 0:
+            log("head 를 찾지 못해 탭 아이콘을 못 넣었다"); return
+        blk = favicon_block(cat)
+        if "theme-color" in t:
+            blk = blk.rsplit("\n", 1)[0]
+        with open(path, "w", encoding="utf-8", newline="") as f:
+            f.write(t[:i] + blk + t[i:])
+        log(f"탭 아이콘 주입 완료 ({os.path.basename(path)} · {cat})")
+    except Exception as e:
+        log(f"탭 아이콘 주입 실패(무시): {e}")
+
+
 def collect(item, slug):
     cat = category_of(item["type"])
     main = os.path.join(OUT_DIR, f"{slug}_{cat}.html")
@@ -622,11 +668,13 @@ def collect(item, slug):
     os.makedirs(APPS_DIR, exist_ok=True)
     final_main = os.path.join(APPS_DIR, os.path.basename(main))
     os.replace(main, final_main)
+    inject_favicon(final_main, cat)
     final_teaser = None
     if os.path.exists(teaser):
         final_teaser = os.path.join(APPS_DIR, os.path.basename(teaser))
         os.replace(teaser, final_teaser)
         inject_promo_banner(final_teaser)
+        inject_favicon(final_teaser, cat)
 
     desc = ""
     if os.path.exists(desc_f):
