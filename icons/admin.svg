@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="미미팩토리 관리자">
+  <!-- 미미팩토리 관리자 화면 — 짙은 회색 바탕에 흰 조절손잡이(슬라이더) 셋. 16px 에서 줄무늬로 보인다. -->
+  <rect width="64" height="64" rx="15" fill="#4b5563"/>
+  <rect x="11" y="17" width="42" height="6" rx="3" fill="#ffffff"/>
+  <rect x="11" y="29" width="42" height="6" rx="3" fill="#ffffff"/>
+  <rect x="11" y="41" width="42" height="6" rx="3" fill="#ffffff"/>
+  <circle cx="42" cy="20" r="6.5" fill="#ffffff" stroke="#4b5563" stroke-width="3.4"/>
+  <circle cx="22" cy="32" r="6.5" fill="#ffffff" stroke="#4b5563" stroke-width="3.4"/>
+  <circle cx="36" cy="44" r="6.5" fill="#ffffff" stroke="#4b5563" stroke-width="3.4"/>
+</svg>

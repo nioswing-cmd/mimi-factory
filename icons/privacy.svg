@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="미미팩토리 개인정보처리방침">
+  <!-- 개인정보처리방침 — 청회색 바탕에 굵은 흰 자물쇠. -->
+  <rect width="64" height="64" rx="15" fill="#64748b"/>
+  <path d="M32 10c-8 0-13.5 5.6-13.5 13.2V29h9v-5.8c0-2.7 1.9-4.6 4.5-4.6s4.5 1.9 4.5 4.6V29h9v-5.8C45.5 15.6 40 10 32 10z" fill="#ffffff"/>
+  <rect x="14" y="28" width="36" height="26" rx="6" fill="#ffffff"/>
+  <circle cx="32" cy="41" r="5.2" fill="#64748b"/>
+</svg>
