@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-02",
+  "updated": "2026-09-03",
   "apps": [
     {
       "id": "삼체",
@@ -1847,6 +1847,20 @@
       "premium": "apps/세이노의_가르침_quiz.html",
       "desc": "736쪽에 7,200원, 인세도 안 받은 책 『세이노의 가르침』을 30문항 퀴즈로 익히는 앱 — 10분 규칙·분노의 쓸모·자격증이라는 족쇄·크로",
       "cover": "covers/세이노의_가르침.webp",
+      "cover_style": "2-미니멀"
+    },
+    {
+      "id": "역행자",
+      "type": "quiz",
+      "title": "역행자",
+      "author": "자청",
+      "date": "2026-09-03",
+      "color1": "#7aa6ff",
+      "color2": "#b78bf5",
+      "teaser": "apps/역행자_teaser.html",
+      "premium": "apps/역행자_quiz.html",
+      "desc": "자청 『역행자』의 7단계 모델 — 자의식 해체·정체성 만들기·유전자 오작동·22전략·기버 이론·확률게임부터 성공팔이 논란까지, 30문항을 다 맞",
+      "cover": "covers/역행자.webp",
       "cover_style": "2-미니멀"
     }
   ]
