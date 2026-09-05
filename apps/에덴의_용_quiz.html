@@ -817,12 +817,12 @@ const QUESTIONS = [
 
 /* ===================== 출처 (실제 확인된 URL) ===================== */
 const SOURCES = {
-  ko:   {label:"위키백과 「총, 균, 쇠」", url:"https://ko.wikipedia.org/wiki/%EC%B4%9D,_%EA%B7%A0,_%EC%87%A0"},
-  en:   {label:"Wikipedia “Guns, Germs, and Steel”", url:"https://en.wikipedia.org/wiki/Guns,_Germs,_and_Steel"},
-  ak:   {label:"Wikipedia “Anna Karenina principle”", url:"https://en.wikipedia.org/wiki/Anna_Karenina_principle"},
-  lit9: {label:"LitCharts · 9장(가축화 6조건)", url:"https://www.litcharts.com/lit/guns-germs-and-steel/chapter-9-zebras-unhappy-marriages-and-the-anna-karenina-principle"},
-  namu: {label:"나무위키 「총, 균, 쇠」(비판 포함)", url:"https://namu.wiki/w/%EC%B4%9D,%20%EA%B7%A0,%20%EC%87%A0"},
-
+  ko: {label:"위키백과 「칼 세이건」", url:"https://ko.wikipedia.org/wiki/%EC%B9%BC_%EC%84%B8%EC%9D%B4%EA%B1%B4"},
+  en: {label:"Wikipedia “The Dragons of Eden”", url:"https://en.wikipedia.org/wiki/The_Dragons_of_Eden"},
+  sagan: {label:"Wikipedia “Carl Sagan”", url:"https://en.wikipedia.org/wiki/Carl_Sagan"},
+  triune: {label:"Wikipedia “Triune brain”", url:"https://en.wikipedia.org/wiki/Triune_brain"},
+  maclean: {label:"Wikipedia “Paul D. MacLean”", url:"https://en.wikipedia.org/wiki/Paul_D._MacLean"},
+  books: {label:"교보문고 검색 「에덴의 용 칼 세이건」", url:"https://search.kyobobook.co.kr/search?keyword=%EC%97%90%EB%8D%B4%EC%9D%98%20%EC%9A%A9%20%EC%B9%BC%20%EC%84%B8%EC%9D%B4%EA%B1%B4"}
 };
 
 /* 문항별 부연설명(틀렸을 때 집중 복습용) + 관련 출처 키 */
@@ -1182,7 +1182,8 @@ function openReport(){
   // EBS 심화 링크
   const ebs = SOURCES.ebs;
   const a = document.getElementById('ebsLink');
-  a.href = ebs.url; a.textContent = ebs.label;
+  if(ebs){ a.href = ebs.url; a.textContent = ebs.label; }
+  else if(a && a.parentElement){ a.parentElement.style.display = 'none'; }   /* 2026-09-05: no EBS source for this book */
 
   show('report');
 }
