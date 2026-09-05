@@ -881,6 +881,7 @@ const CONCEPTS = [{title:"개성화(Individuation)",desc:"다양한 모습의 �
 
 function srcLink(key){
   const s = SOURCES[key];
+  if(!s) return '';   /* 2026-09-05: missing source key must not break the report */
   return `<a class="src" href="${s.url}" target="_blank" rel="noopener">${s.label}</a>`;
 }
 

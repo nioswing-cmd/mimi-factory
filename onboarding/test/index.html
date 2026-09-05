@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko" class="dl-onboarding">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>도파민 실험실 — 실험 개시</title>
+<meta name="description" content="나도 몰랐던 나를 측정하는 3분 실험. 도파민 실험실 사용법 5장 — 실험 고르기, 실시간 게이지, 결과 카드.">
+<meta name="theme-color" content="#071726">
+<meta name="robots" content="noindex">
+<link rel="icon" href="https://mimifactory.vibekr.com/icons/test.svg?v=1" type="image/svg+xml">
+<link rel="alternate icon" href="https://mimifactory.vibekr.com/icons/test-32.png?v=1" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="https://mimifactory.vibekr.com/icons/test-180.png?v=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+KR:wght@400;500;700;800&display=swap">
+<style>
+/* ═══ 도파민 실험실 온보딩 (안드로이드 · 세로) — 2026-09-05
+   테스트관(test.html)의 팔레트 그대로: 검은 바다색 그라데이션 + 네온 시안·마젠타 + 모노 라벨. 실제 앱(애착유형·MBTI) 캡처 사용. */
+:root{
+  --bg:#071726; --panel:rgba(14,26,44,.86); --line:rgba(0,240,255,.18);
+  --ink:#eef2ff; --sub:#b9c0dc; --mute:#7d84a3;
+  --cyan:#00f0ff; --mag:#ff2ec4; --lime:#b6ff3d; --ink-dark:#06121c;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace; --sans:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --safe-b:env(safe-area-inset-bottom,0px); --safe-t:env(safe-area-inset-top,0px);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow:hidden;word-break:keep-all;overscroll-behavior:none;
+  background:linear-gradient(180deg,#04303a 0%,#0c1030 46%,#26073a 100%) fixed}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+.grid{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:linear-gradient(rgba(0,240,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(0,240,255,.07) 1px,transparent 1px);background-size:28px 28px}
+.top{position:fixed;left:0;right:0;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:calc(12px + var(--safe-t)) 16px 8px 20px}
+.seg{display:flex;gap:6px}
+.seg i{width:22px;height:4px;border-radius:2px;background:rgba(238,242,255,.16);transition:background .3s}
+.seg i.on{background:var(--cyan);box-shadow:0 0 10px rgba(0,240,255,.6)}
+.skip{appearance:none;border:0;background:transparent;color:var(--sub);font-size:15px;font-weight:500;min-height:44px;padding:0 10px;border-radius:999px;cursor:pointer;font-family:var(--mono)}
+.track{position:fixed;inset:0;z-index:1;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.track::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;height:100%;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;padding:calc(64px + var(--safe-t)) 22px calc(150px + var(--safe-b));overflow-y:auto;scrollbar-width:none}
+.slide::-webkit-scrollbar{display:none}
+.k{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.16em;color:var(--cyan);margin:0 0 10px;text-transform:uppercase}
+h1,h2{font-weight:800;margin:0 0 12px;color:var(--ink);text-wrap:balance;letter-spacing:-.02em}
+h1{font-size:33px;line-height:1.22}
+h2{font-size:26px;line-height:1.28}
+.neon{background:linear-gradient(90deg,var(--mag),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lead{margin:0 0 16px;font-size:17px;color:var(--sub)}
+.lead b{color:var(--cyan);font-weight:700}
+.art{position:relative;flex:1 1 auto;min-height:200px;overflow:hidden;display:flex;align-items:flex-start;justify-content:center;margin-top:14px}
+.shot{position:relative;border-radius:22px;overflow:hidden;background:#0a1120;border:1px solid var(--line);box-shadow:0 30px 60px -30px rgba(0,0,0,.9),0 0 0 6px rgba(0,240,255,.05)}
+.shot img{display:block;width:100%;height:auto}
+.shot.tall{width:78%}
+.tag{position:absolute;left:12px;top:12px;z-index:2;display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;background:rgba(7,23,38,.88);border:1px solid var(--line);color:var(--cyan);font-family:var(--mono);font-size:12px;font-weight:600;backdrop-filter:blur(6px)}
+.callout{position:absolute;z-index:3;padding:10px 14px;border-radius:14px;background:var(--cyan);color:var(--ink-dark);font-size:14.5px;font-weight:700;line-height:1.4;box-shadow:0 12px 26px -10px rgba(0,240,255,.8);max-width:78%}
+.callout::after{content:"";position:absolute;left:22px;bottom:-8px;border:8px solid transparent;border-top-color:var(--cyan);border-bottom:0}
+.hero-art{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;margin-top:8px}
+.hero-art svg{width:min(60vw,240px);height:auto}
+.bub{animation:rise 3.2s ease-in-out infinite}
+.bub.b2{animation-delay:1s}.bub.b3{animation-delay:2s}
+@keyframes rise{0%{transform:translateY(0);opacity:0}30%{opacity:1}100%{transform:translateY(-46px);opacity:0}}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:8px 13px;border-radius:999px;background:rgba(0,240,255,.08);border:1px solid var(--line);color:var(--sub);font-size:14px}
+.pill b{color:var(--cyan)}
+.steps{display:flex;flex-direction:column;gap:12px;margin-top:4px}
+.step{display:flex;gap:14px;align-items:center;padding:12px 12px 12px 14px;border-radius:18px;background:var(--panel);border:1px solid rgba(255,255,255,.06)}
+.step .n{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--mag),var(--cyan));color:var(--ink-dark);font-weight:800;font-size:17px;font-family:var(--mono)}
+.step .t{flex:1;min-width:0}
+.step h3{margin:0 0 3px;font-size:17px;font-weight:700;color:var(--ink)}
+.step p{margin:0;font-size:14.5px;color:var(--sub);line-height:1.5}
+.thumb{flex:none;width:64px;height:92px;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#0a1120}
+.thumb img{width:100%;height:100%;object-fit:cover;object-position:top}
+.duo{position:relative;width:100%;height:100%;min-height:300px}
+.duo .shot{position:absolute;width:64%}
+.duo .a{left:0;top:4px;transform:rotate(-3deg)}
+.duo .b{right:0;top:56px;transform:rotate(3deg);z-index:2}
+ul.why,ul.checks{padding:0;margin:0 0 4px;display:grid;gap:9px}
+.why li,.checks li{list-style:none;display:flex;gap:10px;align-items:flex-start;font-size:15.5px;color:var(--sub)}
+.why b,.checks b{color:var(--ink)}
+.why .ic,.checks .ic{flex:none;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:rgba(0,240,255,.12);color:var(--cyan);font-family:var(--mono);font-size:12px;font-weight:600;margin-top:2px}
+.count{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:6px 0 4px}
+.count b{font-family:var(--mono);font-size:72px;line-height:1;color:var(--cyan);text-shadow:0 0 22px rgba(0,240,255,.5)}
+.count span{font-size:18px;color:var(--sub)}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:5;padding:14px 20px calc(16px + var(--safe-b));background:linear-gradient(180deg,rgba(7,23,38,0) 0%,rgba(7,23,38,.92) 34%,#0a1030 100%)}
+.dots{display:flex;justify-content:center;gap:7px;margin-bottom:12px}
+.dots i{width:7px;height:7px;border-radius:50%;background:rgba(238,242,255,.22);transition:all .3s}
+.dots i.on{width:22px;border-radius:4px;background:var(--cyan)}
+.btn{appearance:none;border:0;width:100%;min-height:56px;border-radius:16px;font-size:17px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s}
+.btn:active{transform:scale(.985)}
+.btn-neon{background:linear-gradient(90deg,var(--mag),var(--cyan));color:var(--ink-dark);box-shadow:0 14px 30px -12px rgba(0,240,255,.7)}
+.btn-ghost{background:transparent;color:var(--sub);min-height:44px;font-weight:500;font-size:15px;margin-top:4px}
+.hidden{display:none!important}
+@media(prefers-reduced-motion:reduce){.bub{animation:none}.track{scroll-behavior:auto}}
+@media(min-width:600px){.track,.top,.bar{left:50%;right:auto;width:430px;transform:translateX(-50%)}body{background:#03101a}}
+</style>
+</head>
+<body>
+<div class="grid" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="seg" id="seg" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+  <button class="skip" id="skip" type="button">SKIP</button>
+</header>
+
+<main class="track" id="track" aria-label="도파민 실험실 사용 설명서">
+
+  <!-- 1장 -->
+  <section class="slide" data-i="0">
+    <p class="k">MIMI-LAB · Dopamine Division</p>
+    <h1>3분이면,<br><span class="neon">나도 몰랐던 나</span>가<br>측정됩니다.</h1>
+    <p class="lead">피실험자: <b>당신</b>. 누를 때마다 게이지가 움직이고, 마지막에 결과 카드가 뜹니다.</p>
+    <div class="art">
+      <div class="hero-art">
+        <svg viewBox="0 0 240 240" aria-hidden="true">
+          <defs>
+            <linearGradient id="liq" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff2ec4"/><stop offset="1" stop-color="#00f0ff"/></linearGradient>
+            <radialGradient id="glow" cx=".5" cy=".6" r=".5"><stop offset="0" stop-color="#00f0ff" stop-opacity=".45"/><stop offset="1" stop-color="#00f0ff" stop-opacity="0"/></radialGradient>
+          </defs>
+          <circle cx="120" cy="130" r="100" fill="url(#glow)"/>
+          <!-- 플라스크 -->
+          <path d="M96 40 h48 v14 h-8 v50 l44 76 c6 10 -1 22 -13 22 h-94 c-12 0 -19 -12 -13 -22 l44 -76 v-50 h-8 z" fill="rgba(238,242,255,.08)" stroke="rgba(238,242,255,.55)" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M84 146 l-20 34 c-4 7 1 14 9 14 h94 c8 0 13 -7 9 -14 l-20 -34 z" fill="url(#liq)" opacity=".85"/>
+          <g fill="#eef2ff">
+            <circle class="bub" cx="106" cy="170" r="4"/><circle class="bub b2" cx="128" cy="180" r="3"/><circle class="bub b3" cx="144" cy="166" r="2.5"/>
+          </g>
+          <rect x="92" y="34" width="56" height="10" rx="3" fill="rgba(238,242,255,.7)"/>
+        </svg>
+        <div class="pill-row">
+          <span class="pill">🧪 <b>3분</b> 완성 진단</span>
+          <span class="pill">📊 <b>실시간</b> 게이지</span>
+          <span class="pill">🃏 결과 카드 <b>공유·비교</b></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2장 -->
+  <section class="slide" data-i="1">
+    <p class="k">Protocol · 실험 절차</p>
+    <h2>세 단계면<br>결과가 나옵니다.</h2>
+    <p class="lead">고르고 → 누르고 → 받기. 실제 화면입니다.</p>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><div class="t"><h3>실험 고르기</h3><p>애착유형 · MBTI · 번아웃 신호등 · 회복탄력성 … 20가지. 문항 수도 고릅니다.</p></div><div class="thumb"><img src="assets/lab_home.webp" alt="실험 시작 화면"></div></div>
+      <div class="step"><span class="n">2</span><div class="t"><h3>더 '나' 같은 쪽 누르기</h3><p>12~28문항. 정답은 없고, 누를 때마다 게이지가 움직입니다.</p></div><div class="thumb"><img src="assets/lab_quiz.webp" alt="문항 화면"></div></div>
+      <div class="step"><span class="n">3</span><div class="t"><h3>결과 카드 받기</h3><p>유형 이름 · 한 줄 · 이유. 복사해서 친구와 비교.</p></div><div class="thumb"><img src="assets/lab_result.webp" alt="결과 화면"></div></div>
+    </div>
+  </section>
+
+  <!-- 3장 -->
+  <section class="slide" data-i="2">
+    <p class="k">Live Gauge · 실시간 게이지</p>
+    <h2>누를 때마다<br>점이 움직입니다.</h2>
+    <p class="lead">정답은 없어요. 점이 움직이는 방향은 <b>힌트일 뿐</b>.</p>
+    <ul class="why">
+      <li><span class="ic">01</span><span><b>조작 방지</b> — 어느 선택이 어느 유형으로 가는지 숨겼어요. 솔직한 마음으로만.</span></li>
+      <li><span class="ic">02</span><span><b>즉시 반응</b> — 누를 때마다 색종이·진동. 절반에서 「절반 왔어요!」</span></li>
+      <li><span class="ic">03</span><span><b>코드 잠금 해제</b> — MBTI는 코드 4칸이 요동치다 마지막에 하나로 잠깁니다.</span></li>
+    </ul>
+    <div class="art">
+      <div class="duo">
+        <div class="shot a"><span class="tag">● 마음 좌표 추적 중</span><img src="assets/lab_quiz.webp" alt="레이더 위 점이 움직이는 애착유형 문항 화면"></div>
+        <div class="shot b"><span class="tag">🧬 코드 해독 중</span><img src="assets/lab_mbti_quiz.webp" alt="MBTI 코드 4칸이 요동치는 문항 화면"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4장 -->
+  <section class="slide" data-i="3">
+    <p class="k">Result · 결과가 한눈에</p>
+    <h2>유형 하나, 한 줄,<br>그리고 이유.</h2>
+    <p class="lead">이름 · 한 줄 요약 · 축 막대 · 해설 4칸이 <b>한 화면</b>에.</p>
+    <ul class="checks">
+      <li><span class="ic">✓</span><span><b>유형 이름 + 한 줄</b> — 「안정형 · 가까워질수록 편안해지는 사람」</span></li>
+      <li><span class="ic">✓</span><span><b>두 축 막대</b> — 안심↔불안 40% · 친밀↔회피 50% 처럼 내 위치가 숫자로</span></li>
+      <li><span class="ic">✓</span><span><b>해설 4칸</b> — 가까워질 때 나오는 나 · 빛나는 점 · 살펴볼 점 · 이렇게 하면 더 편안</span></li>
+      <li><span class="ic">✓</span><span><b>MBTI</b> — 코드 4칸 + 별명 + 「결과 문구 복사하기」</span></li>
+    </ul>
+    <div class="art">
+      <div class="duo">
+        <div class="shot a"><span class="tag">🌳 안정형</span><img src="assets/lab_result.webp" alt="애착유형 결과 화면 — 안정형, 두 축 막대, 해설"></div>
+        <div class="shot b"><span class="tag">🛡️ ISFJ</span><img src="assets/lab_mbti_result.webp" alt="MBTI 결과 화면 — 코드 4칸과 별명, 해설"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5장 -->
+  <section class="slide" data-i="4">
+    <p class="k">Start · 실험 개시</p>
+    <h2>오늘은<br>어떤 나를 잴까요?</h2>
+    <p class="lead">결과 카드는 <b>복사·공유</b>해서 친구와 비교. 같은 실험, 다른 결과가 대화가 됩니다.</p>
+    <div class="art">
+      <div class="hero-art">
+        <div class="count"><b id="labCount">20</b><span>가지 실험 대기 중</span></div>
+        <p class="lead" style="text-align:center;margin-top:6px">애착유형 · MBTI · 번아웃 신호등 · 회복탄력성 · 퍼스널컬러 · 타로 심리카드 · AI 신인류 …</p>
+        <div class="pill-row"><span class="pill">⏱ 3분</span><span class="pill">📊 게이지</span><span class="pill">🃏 결과 카드</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="bar">
+  <div class="dots" id="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+  <button class="btn btn-neon" id="next" type="button">다음</button>
+  <a class="btn btn-ghost" id="wiki" href="https://blog.naver.com/4u_doumi?utm_source=dopaminelab&utm_medium=onboarding" target="_blank" rel="noopener" style="display:none">⚗️ 새 실험 소식 받기 — 독서위키</a>
+</footer>
+
+<script>
+(function(){
+  var track=document.getElementById('track'), slides=[].slice.call(track.querySelectorAll('.slide'));
+  var dots=document.getElementById('dots').children, segs=document.getElementById('seg').children;
+  var next=document.getElementById('next'), skip=document.getElementById('skip'), wiki=document.getElementById('wiki');
+  var N=slides.length, cur=0, START='/test.html';
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function goTo(i){ i=Math.max(0,Math.min(N-1,i)); track.scrollTo({left:i*track.clientWidth, behavior:reduce?'auto':'smooth'}); }
+  function render(){
+    for(var k=0;k<N;k++){ dots[k].classList.toggle('on',k===cur); segs[k].classList.toggle('on',k<=cur); }
+    var last=cur===N-1;
+    next.textContent = last ? '⚗️ 실험 시작' : '다음';
+    skip.classList.toggle('hidden', last);
+    wiki.style.display = last ? 'inline-flex' : 'none';
+  }
+  var t; track.addEventListener('scroll', function(){ clearTimeout(t); t=setTimeout(function(){ cur=Math.round(track.scrollLeft/track.clientWidth); render(); },60); }, {passive:true});
+  next.addEventListener('click', function(){ if(cur===N-1){ finish(); } else { goTo(cur+1); } });
+  skip.addEventListener('click', finish);
+  function finish(){ try{ localStorage.setItem('dl_onboarded', new Date().toISOString()); }catch(e){} location.href = START + (/[?&]app=1/.test(location.search) ? '?app=1' : ''); }
+  window.addEventListener('resize', function(){ goTo(cur); });
+  /* 실험 수: 미미팩토리 안에서 열릴 때만 apps.json 으로 갱신(다른 주소는 CORS). 미리보기는 2026-09-05 기준 20 고정 */
+  if (location.hostname === 'mimifactory.vibekr.com') {
+    fetch('/apps.json?v='+Date.now()).then(function(r){return r.json();}).then(function(j){
+      var n=(j.apps||[]).filter(function(a){return a.type==='test';}).length; if(n>0) document.getElementById('labCount').textContent=n;
+    }).catch(function(){});
+  }
+  render();
+})();
+</script>
+</body>
+</html>

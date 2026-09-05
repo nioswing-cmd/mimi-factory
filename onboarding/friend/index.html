@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko" class="pk-onboarding">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>둘의 피크닉 — 돗자리 펴기</title>
+<meta name="description" content="같이 놀수록 가까워지는 둘만의 돗자리. 둘의 피크닉 노는 법 5장 — 우리 사이 고르기, 번갈아 답하기, 궁합 %와 실천 미션.">
+<meta name="theme-color" content="#fdf6ec">
+<meta name="robots" content="noindex">
+<link rel="icon" href="https://mimifactory.vibekr.com/icons/friend.svg?v=1" type="image/svg+xml">
+<link rel="alternate icon" href="https://mimifactory.vibekr.com/icons/friend-32.png?v=1" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="https://mimifactory.vibekr.com/icons/friend-180.png?v=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* ═══ 둘의 피크닉 온보딩 (안드로이드 · 세로) — 2026-09-05
+   친해지기관(friend.html)의 팔레트 그대로: 크림 바탕 + 피치·민트·레몬 + 손글씨(Gaegu). 실제 앱(MBTI 궁합) 캡처 사용. */
+:root{
+  --bg:#fdf6ec; --card:#ffffff; --line:rgba(74,63,53,.1);
+  --ink:#4a3f35; --sub:#7d6e60; --mute:#a08d7a;
+  --peach:#ffb59e; --peach2:#ff8f70; --mint:#a8e6cf; --lemon:#ffe3a3; --ink-dark:#3d2b1f;
+  --hand:'Gaegu','Nanum Pen Script',cursive; --sans:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --safe-b:env(safe-area-inset-bottom,0px); --safe-t:env(safe-area-inset-top,0px);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow:hidden;word-break:keep-all;overscroll-behavior:none}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+:focus-visible{outline:3px solid var(--peach2);outline-offset:2px}
+/* 돗자리 체크무늬 — 바닥에 은은하게 */
+.blanket{position:fixed;left:0;right:0;bottom:0;height:34%;z-index:0;pointer-events:none;opacity:.55;
+  background-image:linear-gradient(rgba(168,230,207,.35) 2px,transparent 2px),linear-gradient(90deg,rgba(255,181,158,.35) 2px,transparent 2px);background-size:34px 34px;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 60%);mask-image:linear-gradient(180deg,transparent,#000 60%)}
+.top{position:fixed;left:0;right:0;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:calc(12px + var(--safe-t)) 16px 8px 20px}
+.seg{display:flex;gap:6px}
+.seg i{width:22px;height:4px;border-radius:2px;background:rgba(74,63,53,.12);transition:background .3s}
+.seg i.on{background:var(--peach2)}
+.skip{appearance:none;border:0;background:transparent;color:var(--sub);font-size:15px;font-weight:500;min-height:44px;padding:0 10px;border-radius:999px;cursor:pointer}
+.track{position:fixed;inset:0;z-index:1;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.track::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;height:100%;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;padding:calc(64px + var(--safe-t)) 22px calc(150px + var(--safe-b));overflow-y:auto;scrollbar-width:none}
+.slide::-webkit-scrollbar{display:none}
+.k{font-family:var(--hand);font-size:19px;font-weight:700;color:var(--peach2);margin:0 0 6px;letter-spacing:.02em}
+h1,h2{font-family:var(--hand);font-weight:700;margin:0 0 12px;color:var(--ink);text-wrap:balance;letter-spacing:0}
+h1{font-size:44px;line-height:1.15}
+h2{font-size:36px;line-height:1.2}
+.lead{margin:0 0 16px;font-size:17px;color:var(--sub)}
+.lead b{color:var(--peach2);font-weight:700}
+.art{position:relative;flex:1 1 auto;min-height:200px;overflow:hidden;display:flex;align-items:flex-start;justify-content:center;margin-top:14px}
+.shot{position:relative;border-radius:22px;overflow:hidden;background:#1a1230;border:4px solid #fff;box-shadow:0 24px 50px -24px rgba(74,63,53,.5)}
+.shot img{display:block;width:100%;height:auto}
+.shot.tall{width:78%}
+.tag{position:absolute;left:12px;top:12px;z-index:2;display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--ink);font-size:12.5px;font-weight:700;box-shadow:0 6px 16px -8px rgba(74,63,53,.5)}
+.callout{position:absolute;z-index:3;padding:10px 14px;border-radius:14px;background:var(--lemon);color:var(--ink-dark);font-family:var(--hand);font-size:19px;font-weight:700;line-height:1.3;box-shadow:0 12px 26px -10px rgba(255,143,112,.7);max-width:78%}
+.callout::after{content:"";position:absolute;left:22px;bottom:-8px;border:8px solid transparent;border-top-color:var(--lemon);border-bottom:0}
+.hero-art{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;margin-top:4px}
+.hero-art svg{width:min(66vw,260px);height:auto}
+.sway{transform-origin:50% 100%;animation:sway 4s ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(-2deg)}to{transform:rotate(2deg)}}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:8px 13px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--sub);font-size:14px;box-shadow:0 4px 12px -8px rgba(74,63,53,.4)}
+.pill b{color:var(--ink)}
+.steps{display:flex;flex-direction:column;gap:12px;margin-top:4px}
+.step{display:flex;gap:14px;align-items:center;padding:12px 12px 12px 14px;border-radius:18px;background:var(--card);border:1px solid var(--line);box-shadow:0 8px 20px -14px rgba(74,63,53,.5)}
+.step .n{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--peach);color:var(--ink-dark);font-weight:700;font-size:22px;font-family:var(--hand)}
+.step .t{flex:1;min-width:0}
+.step h3{margin:0 0 3px;font-size:17px;font-weight:700;color:var(--ink)}
+.step p{margin:0;font-size:14.5px;color:var(--sub);line-height:1.5}
+.thumb{flex:none;width:64px;height:92px;border-radius:10px;overflow:hidden;border:2px solid #fff;background:#1a1230;box-shadow:0 4px 10px -6px rgba(0,0,0,.4)}
+.thumb img{width:100%;height:100%;object-fit:cover;object-position:top}
+ul.why,ul.checks{padding:0;margin:0 0 4px;display:grid;gap:9px}
+.why li,.checks li{list-style:none;display:flex;gap:10px;align-items:flex-start;font-size:15.5px;color:var(--sub)}
+.why b,.checks b{color:var(--ink)}
+.ic{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--mint);color:var(--ink-dark);font-size:13px;font-weight:700;margin-top:1px}
+.count{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:6px 0 4px}
+.count b{font-family:var(--hand);font-size:84px;line-height:1;color:var(--peach2)}
+.count span{font-size:18px;color:var(--sub)}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:5;padding:14px 20px calc(16px + var(--safe-b));background:linear-gradient(180deg,rgba(253,246,236,0) 0%,rgba(253,246,236,.94) 34%,#fdf6ec 100%)}
+.dots{display:flex;justify-content:center;gap:7px;margin-bottom:12px}
+.dots i{width:7px;height:7px;border-radius:50%;background:rgba(74,63,53,.18);transition:all .3s}
+.dots i.on{width:22px;border-radius:4px;background:var(--peach2)}
+.btn{appearance:none;border:0;width:100%;min-height:56px;border-radius:16px;font-size:17px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s}
+.btn:active{transform:scale(.985)}
+.btn-peach{background:linear-gradient(180deg,var(--peach),var(--peach2));color:#fff;box-shadow:0 14px 30px -12px rgba(255,143,112,.8)}
+.btn-ghost{background:transparent;color:var(--sub);min-height:44px;font-weight:500;font-size:15px;margin-top:4px}
+.hidden{display:none!important}
+@media(prefers-reduced-motion:reduce){.sway{animation:none}.track{scroll-behavior:auto}}
+@media(min-width:600px){.track,.top,.bar,.blanket{left:50%;right:auto;width:430px;transform:translateX(-50%)}body{background:#f1e6d6}}
+</style>
+</head>
+<body>
+<div class="blanket" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="seg" id="seg" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+  <button class="skip" id="skip" type="button">건너뛰기</button>
+</header>
+
+<main class="track" id="track" aria-label="둘의 피크닉 노는 법">
+
+  <!-- 1장 -->
+  <section class="slide" data-i="0">
+    <p class="k">둘의 피크닉 · 노는 법</p>
+    <h1>같이 놀수록,<br>가까워집니다.</h1>
+    <p class="lead"><b>폰 하나</b>로 둘이. 질문 카드·밸런스 게임·궁합 — 오늘은 누구랑 돗자리를 펼까요?</p>
+    <div class="art">
+      <div class="hero-art">
+        <svg viewBox="0 0 260 200" aria-hidden="true">
+          <!-- 돗자리 -->
+          <path d="M20 150 L80 100 H180 L240 150 Z" fill="#a8e6cf"/>
+          <path d="M20 150 L80 100 H180 L240 150 Z" fill="none" stroke="#8fd3b8" stroke-width="2"/>
+          <g stroke="#ffb59e" stroke-width="5" opacity=".8"><path d="M60 117 L214 117"/><path d="M45 130 L228 130"/><path d="M120 100 L88 150"/><path d="M160 100 L192 150"/></g>
+          <!-- 바구니 -->
+          <g class="sway">
+            <path d="M92 118 h50 l-6 32 h-38 z" fill="#e0a56a"/>
+            <path d="M96 128 h42 M95 138 h44" stroke="#c98a4e" stroke-width="3"/>
+            <path d="M104 118 c0 -22 34 -22 34 0" fill="none" stroke="#c98a4e" stroke-width="5" stroke-linecap="round"/>
+          </g>
+          <!-- 컵 둘 -->
+          <path d="M150 122 h16 l-3 22 h-10 z" fill="#fff" stroke="#ffb59e" stroke-width="2"/>
+          <path d="M172 126 h16 l-3 22 h-10 z" fill="#fff" stroke="#a8e6cf" stroke-width="2"/>
+          <!-- 하트 -->
+          <path d="M130 62 c-8 -14 -30 -8 -26 8 c3 12 18 20 26 28 c8 -8 23 -16 26 -28 c4 -16 -18 -22 -26 -8 z" fill="#ff8f70"/>
+          <circle cx="70" cy="70" r="4" fill="#ffe3a3"/><circle cx="196" cy="58" r="3" fill="#a8e6cf"/><circle cx="210" cy="86" r="4" fill="#ffb59e"/>
+        </svg>
+        <div class="pill-row">
+          <span class="pill">🧺 <b>폰 하나</b>로 둘이</span>
+          <span class="pill">💌 <b>번갈아</b> 답하기</span>
+          <span class="pill">🌈 궁합 <b>%</b></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2장 -->
+  <section class="slide" data-i="1">
+    <p class="k">노는 법</p>
+    <h2>세 걸음이면<br>궁합이 나옵니다.</h2>
+    <p class="lead">고르고 → 번갈아 답하고 → 함께 보기. 실제 화면입니다.</p>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><div class="t"><h3>우리 사이 고르기</h3><p>친구 · 연인 · 가족 중 하나, 이름 둘. 2분이면 끝.</p></div><div class="thumb"><img src="assets/pk_home.webp" alt="우리 사이 고르기 화면"></div></div>
+      <div class="step"><span class="n">2</span><div class="t"><h3>번갈아 답하기</h3><p>폰을 주고받으며 12문항씩. 답할 때마다 게이지가 움직여요.</p></div><div class="thumb"><img src="assets/pk_question.webp" alt="문항 화면"></div></div>
+      <div class="step"><span class="n">3</span><div class="t"><h3>궁합 % + 실천 미션</h3><p>두 사람 유형 카드, 닮은 점, 조율법, 오늘부터 할 미션까지.</p></div><div class="thumb"><img src="assets/pk_result_full.webp" alt="궁합 결과 화면"></div></div>
+    </div>
+  </section>
+
+  <!-- 3장 -->
+  <section class="slide" data-i="2">
+    <p class="k">번갈아 답하기</p>
+    <h2>서로 훔쳐보지 말고,<br>마음 가는 대로.</h2>
+    <p class="lead">선택지엔 <b>정답 단서를 숨겼어요</b>. 그래서 솔직해집니다.</p>
+    <ul class="why">
+      <li><span class="ic">🙋</span><span><b>차례 알림</b> — 「지민의 차례!」 화면이 뜨면 폰을 건네요.</span></li>
+      <li><span class="ic">📊</span><span><b>실시간 게이지</b> — 답할 때마다 4축이 움직이고, 절반에서 「절반 통과!」</span></li>
+      <li><span class="ic">🎊</span><span><b>색종이·진동</b> — 누르는 맛이 있어야 끝까지 갑니다.</span></li>
+    </ul>
+    <div class="art">
+      <div class="shot tall"><span class="tag">🙋 지민 · 2 / 12</span><img src="assets/pk_question.webp" alt="문항 화면 — 4축 게이지와 선택지 두 개">
+        <div class="callout" style="left:8%;top:40%">폰을 건네면<br>다음 사람 차례</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4장 -->
+  <section class="slide" data-i="3">
+    <p class="k">결과가 한눈에</p>
+    <h2>숫자 하나로 터지고,<br>이유로 깊어집니다.</h2>
+    <p class="lead">유형 카드 둘 → <b>궁합 %</b> → 닮은 점·조율법 → 오늘부터 실천 미션.</p>
+    <ul class="checks">
+      <li><span class="ic">✓</span><span><b>큰 숫자 + 등급</b> — 「99% 천생연분 🌈」 처럼 한눈에</span></li>
+      <li><span class="ic">✓</span><span><b>두 사람 카드</b> — ENFP 재기발랄한 활동가 × INFJ 선의의 옹호자</span></li>
+      <li><span class="ic">✓</span><span><b>닮은 점 · 조율법 · 조언</b> — 대화가 이어지는 거리</span></li>
+      <li><span class="ic">✓</span><span><b>친밀도 미션</b> — 체크할수록 친밀도 게이지가 찹니다</span></li>
+    </ul>
+    <div class="art">
+      <div class="shot tall"><span class="tag">💞 연애 궁합 · 지민 × 서연</span><img src="assets/pk_result.webp" alt="궁합 결과 화면 — 99% 천생연분, ENFP × INFJ, 닮은 점"></div>
+    </div>
+  </section>
+
+  <!-- 5장 -->
+  <section class="slide" data-i="4">
+    <p class="k">돗자리 펴기</p>
+    <h2>오늘은<br>누구랑 펼까요?</h2>
+    <p class="lead">궁합 말고도 <b>놀이 15가지</b>가 준비돼 있어요. 하고 나면 더 가까워지는 것들만.</p>
+    <div class="art">
+      <div class="hero-art">
+        <div class="count"><b id="pkCount">15</b><span>가지 놀이</span></div>
+        <p class="lead" style="text-align:center;margin-top:6px">MBTI 궁합 · 진실게임 · 옆자리 질문 100 · 마음을 여는 36가지 질문 · 영화속 주인공되기 · 손병호게임 · 상황극 중독자 …</p>
+        <div class="pill-row"><span class="pill">🧺 폰 하나</span><span class="pill">⏱ 2분 컷</span><span class="pill">🌈 궁합 %</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="bar">
+  <div class="dots" id="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+  <button class="btn btn-peach" id="next" type="button">다음</button>
+  <a class="btn btn-ghost" id="wiki" href="https://blog.naver.com/4u_doumi?utm_source=picnic&utm_medium=onboarding" target="_blank" rel="noopener" style="display:none">🧺 새 놀이 소식 받기 — 독서위키</a>
+</footer>
+
+<script>
+(function(){
+  var track=document.getElementById('track'), slides=[].slice.call(track.querySelectorAll('.slide'));
+  var dots=document.getElementById('dots').children, segs=document.getElementById('seg').children;
+  var next=document.getElementById('next'), skip=document.getElementById('skip'), wiki=document.getElementById('wiki');
+  var N=slides.length, cur=0, START='/friend.html';
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function goTo(i){ i=Math.max(0,Math.min(N-1,i)); track.scrollTo({left:i*track.clientWidth, behavior:reduce?'auto':'smooth'}); }
+  function render(){
+    for(var k=0;k<N;k++){ dots[k].classList.toggle('on',k===cur); segs[k].classList.toggle('on',k<=cur); }
+    var last=cur===N-1;
+    next.textContent = last ? '🧺 돗자리 펴기' : '다음';
+    skip.classList.toggle('hidden', last);
+    wiki.style.display = last ? 'inline-flex' : 'none';
+  }
+  var t; track.addEventListener('scroll', function(){ clearTimeout(t); t=setTimeout(function(){ cur=Math.round(track.scrollLeft/track.clientWidth); render(); },60); }, {passive:true});
+  next.addEventListener('click', function(){ if(cur===N-1){ finish(); } else { goTo(cur+1); } });
+  skip.addEventListener('click', finish);
+  function finish(){ try{ localStorage.setItem('pk_onboarded', new Date().toISOString()); }catch(e){} location.href = START + (/[?&]app=1/.test(location.search) ? '?app=1' : ''); }
+  window.addEventListener('resize', function(){ goTo(cur); });
+  /* 놀이 수: 미미팩토리 안에서 열릴 때만 apps.json 으로 갱신(다른 주소는 CORS). 미리보기는 2026-09-05 기준 15 고정 */
+  if (location.hostname === 'mimifactory.vibekr.com') {
+    fetch('/apps.json?v='+Date.now()).then(function(r){return r.json();}).then(function(j){
+      var n=(j.apps||[]).filter(function(a){return a.type==='friend';}).length; if(n>0) document.getElementById('pkCount').textContent=n;
+    }).catch(function(){});
+  }
+  render();
+})();
+</script>
+</body>
+</html>

@@ -2,6 +2,8 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<script>/* first-launch onboarding 2026-09-05: installed app (?app=1) sees the guide once; ?noonb=1 skips */
+(function(){try{var p=new URLSearchParams(location.search);if(p.get('noonb')==='1')return;var app=p.get('app')==='1'||localStorage.getItem('mf_app_quiz')==='1';if(app&&!localStorage.getItem('nl_onboarded')){location.replace('/onboarding/quiz/?app=1');}}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>퀴즈로읽는책 · 밤의 서재</title>
 <link rel="icon" href="/icons/quiz.svg?v=1" type="image/svg+xml">

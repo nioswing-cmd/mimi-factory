@@ -874,6 +874,7 @@ const CONCEPTS = [
 
 function srcLink(key){
   const s = SOURCES[key];
+  if(!s) return '';   /* 2026-09-05: missing source key must not break the report */
   return `<a class="src" href="${s.url}" target="_blank" rel="noopener">${s.label}</a>`;
 }
 

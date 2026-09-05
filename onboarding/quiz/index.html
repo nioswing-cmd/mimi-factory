@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ko" class="nl-onboarding">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>밤의 서재 — 시작하기</title>
+<meta name="description" content="하루 10분, 퀴즈로 한 권을 완독하는 서재. 밤의 서재 사용법 6장 — 오늘의 책, 즉시 해설 퀴즈, 도파민 장치, 완독 리포트.">
+<meta name="theme-color" content="#0d1526">
+<meta name="robots" content="noindex">
+<link rel="icon" href="https://mimifactory.vibekr.com/icons/quiz.svg?v=1" type="image/svg+xml">
+<link rel="alternate icon" href="https://mimifactory.vibekr.com/icons/quiz-32.png?v=1" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="https://mimifactory.vibekr.com/icons/quiz-180.png?v=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* ═══ 밤의 서재 온보딩 (안드로이드 · 세로) — 2026-09-05
+   쉬운 사용설명서 6장. 실제 앱 화면(삼체 편) 캡처를 그대로 넣었다.
+   참고: Mobbin — Hatch Sleep(1·2·3 단계) · Superpower(단계 옆 실제 썸네일) · Noom(리포트를 먼저 보여주기) · Numo(즉시 보상) */
+:root{
+  --bg:#0d1526; --bg2:#141d33; --card:#16203a; --line:rgba(232,180,95,.22);
+  --ink:#f5efe6; --sub:#c9cfe0; --mute:#8f99b5;
+  --gold:#e8b45f; --gold2:#ffd166; --gold-ink:#3a2a08;
+  --mint:#5ee7d8; --coral:#ff8a5c;
+  --serif:'Gowun Batang','Nanum Myeongjo','Apple SD Gothic Neo',serif;
+  --sans:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --safe-b:env(safe-area-inset-bottom,0px); --safe-t:env(safe-area-inset-top,0px);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow:hidden;word-break:keep-all;overscroll-behavior:none;
+  background:radial-gradient(120% 70% at 50% 110%,#2a2458 0%,#1a2140 40%,#0d1526 75%) fixed}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+
+/* 별 몇 개 (은은하게) */
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0}
+.stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#e4d9e6;opacity:.5;animation:tw 5s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.25}50%{opacity:.8}}
+
+/* 상단: 진행 + 건너뛰기 */
+.top{position:fixed;left:0;right:0;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;
+  padding:calc(12px + var(--safe-t)) 16px 8px 20px}
+.seg{display:flex;gap:6px}
+.seg i{width:22px;height:4px;border-radius:2px;background:rgba(245,239,230,.18);transition:background .3s,width .3s}
+.seg i.on{background:var(--gold)}
+.skip{appearance:none;border:0;background:transparent;color:var(--sub);font-size:15px;font-weight:500;min-height:44px;padding:0 10px;border-radius:999px;cursor:pointer}
+.skip:active{background:rgba(255,255,255,.08)}
+
+/* 슬라이드 트랙: 가로 스크롤 스냅 (손가락으로 넘김) */
+.track{position:fixed;inset:0;z-index:1;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.track::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;height:100%;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;
+  padding:calc(64px + var(--safe-t)) 22px calc(150px + var(--safe-b));overflow-y:auto;scrollbar-width:none}
+.slide::-webkit-scrollbar{display:none}
+.k{font-size:12.5px;font-weight:700;letter-spacing:.18em;color:var(--gold);margin:0 0 10px}
+h1,h2{font-family:var(--serif);font-weight:700;margin:0 0 12px;color:var(--ink);text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:34px;line-height:1.25}
+h2{font-size:27px;line-height:1.3}
+.lead{margin:0 0 18px;font-size:17px;color:var(--sub)}
+.lead b{color:var(--gold2);font-weight:700}
+/* 그림은 글 아래 남는 공간을 채우고, 넘치면 아래쪽이 잘린다(폰 화면 캡처라 잘려도 자연스럽다). 글은 절대 가리지 않는다 */
+.art{position:relative;flex:1 1 auto;min-height:200px;overflow:hidden;display:flex;align-items:flex-start;justify-content:center;margin-top:14px}
+
+/* 폰 화면 캡처 틀 */
+.shot{position:relative;border-radius:22px;overflow:hidden;background:#0a1120;border:1px solid var(--line);
+  box-shadow:0 30px 60px -30px rgba(0,0,0,.9),0 0 0 6px rgba(232,180,95,.06)}
+.shot img{display:block;width:100%;height:auto}
+.tag{position:absolute;left:12px;top:12px;z-index:2;display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;
+  background:rgba(13,21,38,.85);border:1px solid var(--line);color:var(--gold2);font-size:12.5px;font-weight:700;backdrop-filter:blur(6px)}
+.callout{position:absolute;z-index:3;padding:10px 14px;border-radius:14px;background:var(--gold);color:var(--gold-ink);font-size:14.5px;font-weight:700;line-height:1.4;
+  box-shadow:0 12px 26px -10px rgba(232,180,95,.8);max-width:78%}
+.callout::after{content:"";position:absolute;left:22px;bottom:-8px;border:8px solid transparent;border-top-color:var(--gold);border-bottom:0}
+.callout.up::after{bottom:auto;top:-8px;border-top:0;border-bottom:8px solid var(--gold)}
+
+/* 1장: 촛불·책 */
+.hero-art{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;margin-top:8px}
+.hero-art svg{width:min(62vw,250px);height:auto}
+.flame{transform-origin:50% 100%;animation:flk 2.2s ease-in-out infinite alternate}
+@keyframes flk{from{transform:scaleY(1) rotate(-2deg)}to{transform:scaleY(1.08) rotate(2deg)}}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:8px 13px;border-radius:999px;background:rgba(232,180,95,.1);border:1px solid var(--line);color:var(--sub);font-size:14px}
+.pill b{color:var(--gold2)}
+
+/* 2장: 1·2·3 단계 + 썸네일 */
+.steps{display:flex;flex-direction:column;gap:12px;margin-top:4px}
+.step{display:flex;gap:14px;align-items:center;padding:12px 12px 12px 14px;border-radius:18px;background:rgba(22,32,58,.85);border:1px solid rgba(255,255,255,.06)}
+.step .n{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:var(--gold-ink);font-weight:700;font-size:18px;font-family:var(--serif)}
+.step .t{flex:1;min-width:0}
+.step h3{margin:0 0 3px;font-size:17px;font-weight:700;color:var(--ink)}
+.step p{margin:0;font-size:14.5px;color:var(--sub);line-height:1.5}
+.thumb{flex:none;width:64px;height:92px;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#0a1120}
+.thumb img{width:100%;height:100%;object-fit:cover;object-position:top}
+
+/* 3·4·5장: 두 캡처 겹치기 */
+.duo{position:relative;width:100%;height:100%;min-height:300px}
+.duo .shot{position:absolute;width:64%}
+.duo .a{left:0;top:4px;transform:rotate(-3deg)}
+.duo .b{right:0;top:56px;transform:rotate(3deg);z-index:2}
+.shot.tall{width:78%}
+
+/* 왜 이해가 깊어지나 */
+.why{display:grid;grid-template-columns:1fr;gap:8px;margin-top:14px}
+.why li{list-style:none;display:flex;gap:10px;align-items:flex-start;font-size:15.5px;color:var(--sub)}
+.why svg{flex:none;margin-top:4px}
+.why b{color:var(--ink)}
+ul.why{padding:0;margin:14px 0 0}
+
+/* 4장: 도파민 장치 칩 */
+.dopa{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.dopa div{padding:12px 12px;border-radius:14px;background:rgba(22,32,58,.85);border:1px solid rgba(255,255,255,.06)}
+.dopa b{display:block;font-size:22px;font-family:var(--serif);color:var(--gold2);line-height:1.1;margin-bottom:4px}
+.dopa span{font-size:13.5px;color:var(--sub);line-height:1.45;display:block}
+
+/* 5장: 리포트 체크 */
+.checks{margin:14px 0 0;padding:0;display:grid;gap:9px}
+.checks li{list-style:none;display:flex;gap:10px;align-items:flex-start;font-size:15.5px;color:var(--ink)}
+.checks svg{flex:none;margin-top:3px}
+
+/* 6장 */
+.count{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:6px 0 4px}
+.count b{font-family:var(--serif);font-size:72px;line-height:1;color:var(--gold2)}
+.count span{font-size:18px;color:var(--sub)}
+
+/* 하단 바 */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:5;padding:14px 20px calc(16px + var(--safe-b));
+  background:linear-gradient(180deg,rgba(13,21,38,0) 0%,rgba(13,21,38,.92) 34%,#0d1526 100%)}
+.dots{display:flex;justify-content:center;gap:7px;margin-bottom:12px}
+.dots i{width:7px;height:7px;border-radius:50%;background:rgba(245,239,230,.25);transition:all .3s}
+.dots i.on{width:22px;border-radius:4px;background:var(--gold)}
+.btn{appearance:none;border:0;width:100%;min-height:56px;border-radius:16px;font-size:17px;font-weight:700;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,box-shadow .2s,background .2s}
+.btn:active{transform:scale(.985)}
+.btn-gold{background:linear-gradient(180deg,#ffd166,#e8b45f);color:var(--gold-ink);box-shadow:0 14px 30px -12px rgba(232,180,95,.8)}
+.btn-ghost{background:transparent;color:var(--sub);min-height:44px;font-weight:500;font-size:15px;margin-top:4px}
+.hidden{display:none!important}
+@media(prefers-reduced-motion:reduce){.flame,.stars i{animation:none}.track{scroll-behavior:auto}}
+@media(min-width:600px){ /* 태블릿·PC 로 열면 폰 폭으로 가운데 */
+  .track,.top,.bar{left:50%;right:auto;width:430px;transform:translateX(-50%)}
+  body{background:#070b14}
+}
+</style>
+</head>
+<body>
+<div class="stars" aria-hidden="true">
+  <i style="left:8%;top:12%"></i><i style="left:22%;top:6%;animation-delay:1s"></i><i style="left:41%;top:14%;animation-delay:2s"></i>
+  <i style="left:63%;top:8%;animation-delay:.5s"></i><i style="left:78%;top:18%;animation-delay:1.6s"></i><i style="left:91%;top:9%;animation-delay:2.4s"></i>
+  <i style="left:14%;top:30%;animation-delay:3s"></i><i style="left:86%;top:34%;animation-delay:.8s"></i>
+</div>
+
+<header class="top">
+  <div class="seg" id="seg" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+  <button class="skip" id="skip" type="button">건너뛰기</button>
+</header>
+
+<main class="track" id="track" aria-label="밤의 서재 사용 설명서">
+
+  <!-- 1장 -->
+  <section class="slide" data-i="0">
+    <p class="k">밤의 서재 · 사용 설명서</p>
+    <h1>밤이 오면,<br>서재가 열립니다.</h1>
+    <p class="lead"><b>하루 10분</b>, 퀴즈로 한 권을 완독합니다. 매일 밤 새 책이 꽂힙니다.</p>
+    <div class="art">
+      <div class="hero-art">
+        <svg viewBox="0 0 240 240" aria-hidden="true">
+          <defs>
+            <radialGradient id="g1" cx=".5" cy=".55" r=".5"><stop offset="0" stop-color="#ffd166" stop-opacity=".55"/><stop offset="1" stop-color="#ffd166" stop-opacity="0"/></radialGradient>
+            <linearGradient id="fl" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff8a5c"/><stop offset=".6" stop-color="#ffd166"/><stop offset="1" stop-color="#fff3d6"/></linearGradient>
+          </defs>
+          <circle cx="120" cy="96" r="88" fill="url(#g1)"/>
+          <!-- 책 더미 -->
+          <rect x="44" y="172" width="152" height="18" rx="4" fill="#3b4a78"/>
+          <rect x="52" y="154" width="136" height="18" rx="4" fill="#5a4a78"/>
+          <rect x="60" y="136" width="120" height="18" rx="4" fill="#2f6f6a"/>
+          <rect x="60" y="136" width="120" height="18" rx="4" fill="none" stroke="rgba(255,255,255,.12)"/>
+          <rect x="72" y="142" width="48" height="4" rx="2" fill="#a8e6cf" opacity=".8"/>
+          <rect x="66" y="160" width="60" height="4" rx="2" fill="#ffb59e" opacity=".8"/>
+          <rect x="58" y="178" width="70" height="4" rx="2" fill="#7aa6ff" opacity=".8"/>
+          <!-- 초 -->
+          <rect x="106" y="92" width="28" height="46" rx="5" fill="#f3e3c3"/>
+          <rect x="106" y="92" width="28" height="8" rx="4" fill="#e8d3ac"/>
+          <rect x="119" y="80" width="2.5" height="14" fill="#3a2a08"/>
+          <g class="flame">
+            <path d="M120 44 C 132 60, 134 72, 120 84 C 106 72, 108 60, 120 44 Z" fill="url(#fl)"/>
+            <path d="M120 60 C 126 68, 126 74, 120 80 C 114 74, 114 68, 120 60 Z" fill="#fff8e6" opacity=".9"/>
+          </g>
+        </svg>
+        <div class="pill-row">
+          <span class="pill">📖 매일 <b>새 책 한 권</b></span>
+          <span class="pill">🔁 도파민 <b>반복 퀴즈</b></span>
+          <span class="pill">📜 <b>완독 리포트</b></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2장 -->
+  <section class="slide" data-i="1">
+    <p class="k">어떻게 읽히나요</p>
+    <h2>세 걸음이면<br>한 권이 끝납니다.</h2>
+    <p class="lead">읽고 → 풀고 → 한 장으로 남기기. 실제 화면입니다.</p>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><div class="t"><h3>오늘의 책 펼치기</h3><p>책 소개와 핵심 키워드를 1분 안에 훑습니다.</p></div><div class="thumb"><img src="assets/home.webp" alt="오늘의 책 화면"></div></div>
+      <div class="step"><span class="n">2</span><div class="t"><h3>30문항, 쉬운 것부터 깊어지게</h3><p>답을 누르면 바로 정답과 쉬운 해설. 틀린 문제는 다시 나옵니다.</p></div><div class="thumb"><img src="assets/quiz_correct.webp" alt="퀴즈 화면"></div></div>
+      <div class="step"><span class="n">3</span><div class="t"><h3>완독 리포트 받기</h3><p>책 전체를 한눈에, 내가 틀린 부분만 모아 복습. PDF로 저장.</p></div><div class="thumb"><img src="assets/report_top.webp" alt="완독 리포트 화면"></div></div>
+    </div>
+  </section>
+
+  <!-- 3장 -->
+  <section class="slide" data-i="2">
+    <p class="k">책 이해가 깊어지는 이유</p>
+    <h2>답을 누르는 순간,<br>이해가 남습니다.</h2>
+    <p class="lead">읽기만 하면 흘러가지만, <b>문제로 꺼내 보면</b> 머리에 새겨집니다.</p>
+    <ul class="why" style="margin-top:0">
+      <li><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="rgba(232,180,95,.18)"/><path d="M6 10.2l2.6 2.6L14 7.4" fill="none" stroke="#ffd166" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>즉시 해설</b> — 정답이든 오답이든 «왜»를 바로 읽습니다.</span></li>
+      <li><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="rgba(232,180,95,.18)"/><path d="M6 10.2l2.6 2.6L14 7.4" fill="none" stroke="#ffd166" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>쉬운 것부터 깊어지게</b> — 30문항이 책의 뼈대 순서로 쌓입니다.</span></li>
+      <li><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="rgba(232,180,95,.18)"/><path d="M6 10.2l2.6 2.6L14 7.4" fill="none" stroke="#ffd166" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>틀린 것만 반복</b> — 아는 건 넘기고, 모르는 것만 다시 만납니다.</span></li>
+    </ul>
+    <div class="art">
+      <div class="duo">
+        <div class="shot a"><span class="tag">🎯 정답!</span><img src="assets/quiz_correct.webp" alt="정답을 누르면 바로 해설이 펼쳐지는 화면"></div>
+        <div class="shot b"><span class="tag">✕ 다시 도전!</span><img src="assets/quiz_wrong.webp" alt="틀리면 해설이 나오고 다시 출제되는 화면"></div>
+        <div class="callout up" style="right:4%;top:44%">틀린 문제는 <u>완전히 이해할 때까지</u><br>다시 나옵니다</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4장 -->
+  <section class="slide" data-i="3">
+    <p class="k">도파민 장치</p>
+    <h2>풀 때마다 터지고,<br>끝나면 등급이 뜹니다.</h2>
+    <p class="lead">공부 같지 않게 만드는 네 가지 장치 — 그리고 결과 카드.</p>
+    <div class="dopa" style="margin-top:0">
+      <div><b>+점수</b><span>정답마다 점수, 첫 시도 정답률 따로 집계</span></div>
+      <div><b>연속 정답</b><span>콤보가 이어질수록 멈추기 어렵습니다</span></div>
+      <div><b>해독도 %</b><span>게이지가 차오르고 챕터 마일스톤이 켜집니다</span></div>
+      <div><b>등급</b><span>완독하면 책마다 다른 칭호 — 색종이와 함께</span></div>
+    </div>
+    <div class="art">
+      <div class="shot tall"><span class="tag">🏆 완독 결과</span><img src="assets/result.webp" alt="등급과 점수, 정답률, 연속 정답이 뜨는 결과 화면">
+        <div class="callout" style="left:8%;top:14%">등급 · 점수 · 연속 정답<br>결과 카드로 바로 자랑</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5장 -->
+  <section class="slide" data-i="4">
+    <p class="k">완독 리포트</p>
+    <h2>한 권이<br>한 장으로 남습니다.</h2>
+    <p class="lead">다 풀면 자동으로 만들어집니다. <b>책 전체 사슬</b>과 <b>내가 틀린 부분</b>만 골라서.</p>
+    <ul class="checks" style="margin-top:0">
+      <li><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="rgba(232,180,95,.18)"/><path d="M6 10.2l2.6 2.6L14 7.4" fill="none" stroke="#ffd166" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>책 전체 흐름을 «사슬» 하나로 — 출발점에서 결말까지</li>
+      <li><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="rgba(232,180,95,.18)"/><path d="M6 10.2l2.6 2.6L14 7.4" fill="none" stroke="#ffd166" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>핵심 개념 8개 · 목차별 요약 · 생각해 볼 질문</li>
+      <li><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="rgba(232,180,95,.18)"/><path d="M6 10.2l2.6 2.6L14 7.4" fill="none" stroke="#ffd166" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>내가 틀린 부분만 모아 «집중 복습»</li>
+      <li><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="rgba(232,180,95,.18)"/><path d="M6 10.2l2.6 2.6L14 7.4" fill="none" stroke="#ffd166" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>PDF로 저장 — 다음 책 읽기 전에 한 번 더</li>
+    </ul>
+    <div class="art">
+      <div class="duo">
+        <div class="shot a"><span class="tag">📜 한눈에 보기</span><img src="assets/report_top.webp" alt="책 전체 흐름을 사슬로 보여주는 완독 리포트"></div>
+        <div class="shot b"><span class="tag">🔁 틀린 부분 복습</span><img src="assets/report_weak.webp" alt="내가 틀린 문항만 모아 정답과 해설을 다시 보여주는 화면"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6장 -->
+  <section class="slide" data-i="5">
+    <p class="k">시작할 준비 끝</p>
+    <h2>매일 밤,<br>새 책이 꽂힙니다.</h2>
+    <p class="lead">오늘 한 권을 끝내면 <b>결과 카드</b>가 남습니다. 내일 밤엔 새 책.</p>
+    <div class="art">
+      <div class="hero-art">
+        <div class="count"><b id="bookCount">99</b><span>권이 서가에</span></div>
+        <p class="lead" style="text-align:center;margin-top:6px">삼체 · 데미안 · 1984 · 노인과 바다 · 넛지 · 돈의 심리학 …<br>오늘 밤엔 어느 책부터?</p>
+        <div class="pill-row">
+          <span class="pill">⏱ 10분</span><span class="pill">🎯 30문항</span><span class="pill">📜 리포트 1장</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="bar">
+  <div class="dots" id="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+  <button class="btn btn-gold" id="next" type="button">다음</button>
+  <a class="btn btn-ghost" id="wiki" href="https://blog.naver.com/4u_doumi?utm_source=quizbook&utm_medium=onboarding" target="_blank" rel="noopener" style="display:none">🕯️ 매일 밤 새 책 소식 받기 — 독서위키</a>
+</footer>
+
+<script>
+(function(){
+  var track=document.getElementById('track'), slides=[].slice.call(track.querySelectorAll('.slide'));
+  var dots=document.getElementById('dots').children, segs=document.getElementById('seg').children;
+  var next=document.getElementById('next'), skip=document.getElementById('skip'), wiki=document.getElementById('wiki');
+  var N=slides.length, cur=0, START='/quiz.html';
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function goTo(i){ i=Math.max(0,Math.min(N-1,i)); track.scrollTo({left:i*track.clientWidth, behavior:reduce?'auto':'smooth'}); }
+  function render(){
+    for(var k=0;k<N;k++){ dots[k].classList.toggle('on',k===cur); segs[k].classList.toggle('on',k<=cur); }
+    var last=cur===N-1;
+    next.textContent = last ? '🕯️ 오늘의 책 펼치기' : '다음';
+    skip.classList.toggle('hidden', last);
+    wiki.style.display = last ? 'inline-flex' : 'none';
+  }
+  var t; track.addEventListener('scroll', function(){ clearTimeout(t); t=setTimeout(function(){ cur=Math.round(track.scrollLeft/track.clientWidth); render(); },60); }, {passive:true});
+  next.addEventListener('click', function(){ if(cur===N-1){ finish(); } else { goTo(cur+1); } });
+  skip.addEventListener('click', finish);
+  function finish(){
+    try{ localStorage.setItem('nl_onboarded', new Date().toISOString()); }catch(e){}
+    location.href = START + (/[?&]app=1/.test(location.search) ? '?app=1' : '');
+  }
+  window.addEventListener('resize', function(){ goTo(cur); });
+  /* 서가 권수: 미미팩토리 안에서 열릴 때만 실제 목록(apps.json)에서 읽어온다.
+     다른 주소(미리보기·file)에서는 CORS 로 막히므로 적어둔 값(2026-09-05 기준 99권)을 그대로 쓴다. */
+  if (location.hostname === 'mimifactory.vibekr.com') {
+    fetch('/apps.json?v='+Date.now()).then(function(r){return r.json();}).then(function(j){
+      var n=(j.apps||[]).filter(function(a){return a.type==='quiz';}).length; if(n>0) document.getElementById('bookCount').textContent=n;
+    }).catch(function(){});
+  }
+  render();
+})();
+</script>
+</body>
+</html>
