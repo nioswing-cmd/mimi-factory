@@ -56,6 +56,11 @@ button{font-family:inherit}
 @keyframes breath{from{opacity:.75;transform:translate3d(-1%,0,0)}to{opacity:1;transform:translate3d(1%,1%,0)}}
 .vignette{position:fixed;inset:0;pointer-events:none;z-index:2;
   background:radial-gradient(ellipse at 50% 42%,transparent 44%,rgba(6,4,20,.55) 100%)}
+/* 폰 화면을 뚫는 순간의 섬광 (2026-09-06 msg 4477 «폰을 통해 사람의 마음에 들어가는 느낌») */
+.flash{position:fixed;inset:0;z-index:5;pointer-events:none;opacity:0;
+  background:radial-gradient(60% 60% at 50% 50%,rgba(255,255,255,.96),rgba(205,188,245,.72) 38%,rgba(255,138,208,.25) 62%,rgba(255,138,208,0) 80%)}
+.flash.on{animation:flash 1s ease-out both}
+@keyframes flash{0%{opacity:0}16%{opacity:.96}100%{opacity:0}}
 
 /* ── 상단: 표식 + 정거장 목록 ── */
 .top{position:fixed;top:0;left:0;right:0;z-index:8;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
@@ -317,6 +322,7 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
 <canvas id="space" aria-hidden="true"></canvas>
 <div class="mist" aria-hidden="true"></div>
 <div class="vignette" aria-hidden="true"></div>
+<div class="flash" id="flash" aria-hidden="true"></div>
 <div id="tags" aria-hidden="true"></div>
 
 <header class="top">
@@ -337,7 +343,7 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
     <h1>미미팩토리</h1>
     <div class="sig"><i></i><span><b>MIMI FACTORY</b> · 마음속 여행</span><i></i></div>
     <p class="lead">폰 하나로 떠나는, <em>마음속 여행</em>.</p>
-    <p class="side">AI 시대, 인간에게 꼭 필요한 깊이 있는 지식을 도파민 터지게 즐기는 곳. 폰 화면을 지나면 세 개의 방이 기다립니다.</p>
+    <p class="side">AI 시대, 인간에게 꼭 필요한 깊이 있는 지식을 도파민 터지게 즐기는 곳. 폰 화면을 지나면 한 사람의 마음속, 세 개의 방이 기다립니다.</p>
     <div class="cta">
       <button class="pill primary" id="enter" type="button"><span>마음속으로 들어가기</span><i>→</i></button>
       <button class="pill" id="enter-map" type="button">마음 지도 보기</button>
@@ -475,6 +481,7 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
   var N = STOPS.length;
   var ZMAX = -STOPS[N - 1].p[2];
   var OVERVIEW = -1;
+  var INTRO = -2;                          // 도입 비행의 출발 자세(멀리서 사람과 폰에게 다가온다)
   var HALL_LABEL = { quiz: '📚 독서퀴즈관', test: '🎯 테스트관', friend: '💞 친해지기관' };
   var CNT_UNIT = { quiz: '권의 책이', test: '개의 실험이', friend: '개의 놀이가' };
   var HALL_STOP = { quiz: 2, test: 3, friend: 4 };
@@ -482,7 +489,7 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
   var $ = function (s) { return document.querySelector(s); };
   var canvas = $('#space');
   var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
-  var tagsEl = $('#tags'), ovEl = $('#ov'), hudEl = $('#hud'), backBtn = $('#back');
+  var tagsEl = $('#tags'), ovEl = $('#ov'), hudEl = $('#hud'), backBtn = $('#back'), flashEl = $('#flash');
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isMobile = function () { return window.innerWidth < 760; };
 
@@ -853,6 +860,13 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
       var ang = rnd() * Math.PI * 2, rad = 20 + rnd() * 62;
       nodes.push(new THREE.Vector3(base.x + Math.cos(ang) * rad * 1.3, base.y + Math.sin(ang) * rad * 0.75, base.z + (rnd() - 0.5) * 30));
     }
+    /* 사람의 머릿속(아래 실루엣의 머리 안)에 생각 매듭을 더 촘촘히 — 폰 화면을 지나 이 안으로 들어간다 (2026-09-06 msg 4477) */
+    var HEAD = new THREE.Vector3(0, 9.5, -18), HEAD_R = 8.5;
+    for (i = 0; i < 18; i++) {
+      var ra = rnd() * Math.PI * 2, rr = Math.sqrt(rnd()) * HEAD_R * 0.8;
+      nodes.push(new THREE.Vector3(HEAD.x + Math.cos(ra) * rr, HEAD.y + Math.sin(ra) * rr * 0.9, HEAD.z + (rnd() - 0.5) * 5));
+    }
+    nodeN = nodes.length;
     var edges = [], seenE = {};
     for (i = 0; i < nodeN; i++) {
       var ds = [];
@@ -1033,6 +1047,35 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
       for (var k = 0; k < roomDots.length; k++) { var b = roomDots[k].userData.b; roomDots[k].position.set(b[0] + Math.sin(time * 0.7 + b[2]) * 0.25, b[1] + Math.cos(time * 0.5 + b[2]) * 0.3, roomDots[k].position.z); }
     }
 
+    /* ── 사람: 폰을 들여다보는 사람의 실루엣(머리·목·어깨, 빛 알갱이 + 옅은 선) · 머릿속엔 숨쉬는 생각의 빛.
+         폰은 이 사람의 얼굴 아래(턱 높이)에 떠 있고, 폰 화면을 지나면 곧장 이 사람의 머릿속으로 들어간다 (2026-09-06 msg 4477) ── */
+    var silXYZ = [], silCol = [];
+    function addSil(x, y, z, warm) {
+      silXYZ.push(x + (rnd() - 0.5) * 0.6, y + (rnd() - 0.5) * 0.6, z + (rnd() - 0.5) * 1.6);
+      var c = warm ? [1, 0.72, 0.88] : [0.86, 0.82, 0.98];
+      silCol.push(c[0], c[1], c[2]);
+    }
+    for (i = 0; i < 150; i++) { var sa = i / 150 * Math.PI * 2; addSil(HEAD.x + Math.cos(sa) * HEAD_R, HEAD.y + Math.sin(sa) * HEAD_R * 1.08, HEAD.z, i % 5 === 0); }
+    var SHOULDER = [[3.3, 1.5], [3.9, -2.4], [8.5, -4.6], [16, -7.5], [24, -11.5], [31, -18]];
+    var silLines = [];
+    [-1, 1].forEach(function (sgn) {
+      var cs = new THREE.CatmullRomCurve3(SHOULDER.map(function (p) { return new THREE.Vector3(sgn * p[0], p[1], HEAD.z); }));
+      cs.getSpacedPoints(80).forEach(function (q, k) { addSil(q.x, q.y, q.z, k % 6 === 0); });
+      silLines.push(cs.getSpacedPoints(60));
+    });
+    var silN = silXYZ.length / 3, silSz = new Float32Array(silN), silPh = new Float32Array(silN);
+    for (i = 0; i < silN; i++) { silSz[i] = 1.0 + rnd() * 1.3; silPh[i] = rnd() * 6.28; }
+    scene.add(pointsOf(new Float32Array(silXYZ), silSz, silPh, new Float32Array(silCol), 1.25));
+    var silMat = new THREE.LineBasicMaterial({ color: 0xcdbcf5, transparent: true, opacity: 0.2, blending: THREE.AdditiveBlending, depthWrite: false });
+    var headRing = [];
+    for (i = 0; i < 96; i++) { var ha = i / 96 * Math.PI * 2; headRing.push(new THREE.Vector3(HEAD.x + Math.cos(ha) * HEAD_R, HEAD.y + Math.sin(ha) * HEAD_R * 1.08, HEAD.z)); }
+    var headLoop = new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(headRing), silMat); headLoop.frustumCulled = false; scene.add(headLoop);
+    silLines.forEach(function (pts) { var ln = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), silMat); ln.frustumCulled = false; scene.add(ln); });
+    var mindGlow = new THREE.Sprite(new THREE.SpriteMaterial({ map: texHalo, color: new THREE.Color(0xb78bf5), transparent: true, opacity: 0.32, blending: THREE.AdditiveBlending, depthWrite: false }));
+    mindGlow.scale.set(30, 30, 1); mindGlow.position.copy(HEAD); scene.add(mindGlow);
+    var mindCore = new THREE.Sprite(new THREE.SpriteMaterial({ map: texCore, color: new THREE.Color(0xf4d7ff), transparent: true, opacity: 0.55, blending: THREE.AdditiveBlending, depthWrite: false }));
+    mindCore.scale.set(4, 4, 1); mindCore.position.copy(HEAD); scene.add(mindCore);
+
     /* ── 워프 줄기 (nio 2026-09-06 판: 카메라에 붙은 5조각 폴리라인 · 진행 방향(uVel) · 회전(uTurn) 따라 휜다) ── */
     var stN = mobile ? 110 : 190, stK = 5, stV = stN * 2 * stK;
     var spos = new Float32Array(stV * 3), send = new Float32Array(stV), sseed = new Float32Array(stV);
@@ -1076,7 +1119,7 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
     window.__mf = { stUni: stUni, streaks: streaks, camera: camera, scene: scene, renderer: renderer, phone: phone };
 
     /* ── 카메라 자세 ── */
-    var poses = [], ovPose = null, center = new THREE.Vector3(2, 1, -ZMAX / 2);
+    var poses = [], ovPose = null, introPose = null, center = new THREE.Vector3(2, 1, -ZMAX / 2);
     function lookQ(C, T) { return new THREE.Quaternion().setFromRotationMatrix(new THREE.Matrix4().lookAt(C, T, UP)); }
     function computePoses() {
       var mob = isMobile();
@@ -1093,6 +1136,9 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
           /* 입구: 폰 정면. 폰(세로 15)이 화면의 절반쯤 차도록 물러선다 — 카드가 폰(모바일)은 아래, PC 는 왼쪽 아래 */
           C = new THREE.Vector3(0, 0.6, mob ? 27 : 24).add(S);
           T = mob ? S.clone().add(new THREE.Vector3(0, -8.5, 0)) : S.clone().add(new THREE.Vector3(-2.2, -0.8, 0));
+          /* 도입: 멀리 위에서 폰을 든 사람에게 다가온다 (2026-09-06 msg 4477) */
+          var IC = C.clone().add(new THREE.Vector3(mob ? 4 : 10, 7, mob ? 58 : 64));
+          introPose = { pos: IC, quat: lookQ(IC, T.clone().add(new THREE.Vector3(0, 4, 0))) };
         } else if (k === N - 1) {
           C = S.clone().sub(fwd.clone().multiplyScalar(D * 0.95)).add(up.clone().multiplyScalar(D * 0.12));
           T = mob ? S.clone().sub(up.clone().multiplyScalar(6.5)) : S.clone().sub(up.clone().multiplyScalar(4.2));
@@ -1110,7 +1156,7 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
       ovPose = { pos: C0, quat: lookQ(C0, T0), off: off, target: T0 };
     }
     computePoses();
-    function poseOf(i) { return i === OVERVIEW ? ovPose : poses[i]; }
+    function poseOf(i) { return i === OVERVIEW ? ovPose : (i === INTRO ? introPose : poses[i]); }
 
     /* ── 비행: 3차 베지어(출발 자세의 정면으로 나가서, 도착 자세의 정면으로 들어온다).
          입구에서 떠날 땐 정면 손잡이를 길게 잡아 카메라가 폰 화면을 그대로 뚫고 나간다 ── */
@@ -1142,13 +1188,14 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
       var a = poseOf(from), b = poseOf(to);
       var len = a.pos.distanceTo(b.pos);
       var fA = FWD.clone().applyQuaternion(a.quat), fB = FWD.clone().applyQuaternion(b.quat);
-      var ov = (from === OVERVIEW || to === OVERVIEW);
-      var k1 = len * (from === 0 ? 0.45 : 0.3), k2 = len * (from === 0 ? 0.2 : 0.3);
+      var ov = (from === OVERVIEW || to === OVERVIEW), intro = (from === INTRO);
+      var k1 = len * (from === 0 ? 0.45 : (intro ? 0.2 : 0.3)), k2 = len * (from === 0 ? 0.2 : (intro ? 0.35 : 0.3));
       var c1 = a.pos.clone().add(fA.multiplyScalar(k1));
       var c2 = b.pos.clone().sub(fB.multiplyScalar(k2));
       if (ov) { var lift = Math.min(60, len * 0.22); c1.add(UP.clone().multiplyScalar(lift * 0.5)); c2.add(UP.clone().multiplyScalar(lift * 0.5)); }
-      var dur = reduced ? 0 : (len > 200 ? 2600 : 2100);
-      flight = { a: a.pos, c1: c1, c2: c2, b: b.pos, qa: a.quat, qb: b.quat, t0: performance.now(), dur: dur, arrived: false, cb: cb, to: to };
+      var dur = reduced ? 0 : (intro ? 3600 : (len > 200 ? 2600 : 2100));
+      /* warp: 도입 비행은 줄기 없이 조용히 다가온다(0) · 입구에서 폰을 뚫고 나갈 땐 섬광(flash) */
+      flight = { a: a.pos, c1: c1, c2: c2, b: b.pos, qa: a.quat, qb: b.quat, t0: performance.now(), dur: dur, arrived: false, cb: cb, to: to, from: from, warp: intro ? 0 : 1, flashed: false };
       qPrev.copy(camera.quaternion); omegaS.set(0, 0, 0);
       if (reduced) {
         camera.position.copy(b.pos); camera.quaternion.copy(b.quat);
@@ -1173,10 +1220,15 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
         var w = Math.pow(Math.sin(Math.PI * t), 1.3) * 0.8;
         camera.quaternion.copy(qBase).slerp(qTravel, w);
       } else camera.quaternion.copy(qBase);
-      var sp = Math.pow(Math.max(0, Math.sin(Math.PI * t)), 1.5);
+      var sp = Math.pow(Math.max(0, Math.sin(Math.PI * t)), 1.5) * flight.warp;
       camera.fov = baseFov + 16 * sp * sp; camera.updateProjectionMatrix();
       stUni.uSpeed.value = sp;
       stUni.uScroll.value += sp * dt * 90;
+      /* 입구에서 떠나 폰 화면(z=0)을 뚫는 순간 — 섬광 한 번 (2026-09-06 msg 4477) */
+      if (flight.from === 0 && !flight.flashed && camera.position.z < 0.8) {
+        flight.flashed = true; window.__mfFlashed = (window.__mfFlashed || 0) + 1;
+        flashEl.classList.remove('on'); void flashEl.offsetWidth; flashEl.classList.add('on');
+      }
       qInv.copy(camera.quaternion).invert();
       if (hasDir) velL.copy(vTmp).applyQuaternion(qInv); else velL.set(0, 0, -1);
       if (!(velL.lengthSq() > 1e-6) || !isFinite(velL.x + velL.y + velL.z)) velL.set(0, 0, -1);
@@ -1298,6 +1350,10 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
         }
       }
       for (k = 0; k < nebulas.length; k++) nebulas[k].material.rotation += nebulas[k].userData.spin * dt;
+      /* 머릿속 빛이 숨을 쉰다(느린 맥박) */
+      var beat = 0.5 + 0.5 * Math.pow(Math.max(0, Math.sin(time * 1.05)), 3);
+      mindGlow.material.opacity = 0.24 + 0.16 * beat; var mgs = 28 + 6 * beat; mindGlow.scale.set(mgs, mgs, 1);
+      mindCore.material.opacity = 0.4 + 0.35 * beat;
       if (flight) { if ((tagTick++ & 7) === 0) updateTags(); }
       else if ((tagTick++ & 1) === 0) updateTags();
       renderer.render(scene, camera);
@@ -1319,7 +1375,13 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
     camera.position.copy(poses[0].pos); camera.quaternion.copy(poses[0].quat);
     renderer.render(scene, camera);
     canvas.classList.add('on');
-    return { fly: fly, kind: 'webgl' };
+    /* 도입 비행: 멀리서 폰을 든 사람에게 다가와 입구 자세에 멈춘다(3.6초). 카드는 도착(80%)에 떠오른다 */
+    function intro(cb) {
+      camera.position.copy(introPose.pos); camera.quaternion.copy(introPose.quat);
+      var t0 = performance.now();
+      fly(INTRO, 0, { onArrive: cb.onArrive, onEnd: function () { window.__mfIntro = { played: true, ms: Math.round(performance.now() - t0) }; cb.onEnd(); } });
+    }
+    return { fly: fly, kind: 'webgl', intro: intro };
   }
 
   /* ───────────────────────── 2D 대체 (WebGL 이 없을 때) ───────────────────────── */
@@ -1403,9 +1465,22 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
     if (!engine) engine = init2D();
     buildMap();
     var hash = (location.hash || '').replace('#', '');   // updateHud(0) «전에» 읽는다 — replaceState 가 해시를 지운다
-    showCard(0); updateHud(0);
-    if (hash === 'map') setTimeout(function () { go(OVERVIEW); }, 600);
-    else { var h = parseInt(hash, 10); if (h >= 2 && h <= N) setTimeout(function () { go(h - 1); }, 600); }
+    var h = parseInt(hash, 10);
+    var deep = (hash === 'map') || (h >= 2 && h <= N);
+    var wantIntro = !!engine.intro && !reduced && !deep;      // 도입 비행: WebGL · 움직임 줄이기 아님 · 딥링크 아님
+    updateHud(0);
+    if (wantIntro) {
+      showCard(-9);                                           // 도착할 때까지 카드 없음
+      flying = true; tagsEl.classList.add('hide');
+      engine.intro({
+        onArrive: function () { showCard(0); },
+        onEnd: function () { flying = false; lockUntil = performance.now() + 200; tagsEl.classList.remove('hide'); }
+      });
+    } else {
+      showCard(0);
+      if (hash === 'map') setTimeout(function () { go(OVERVIEW); }, 600);
+      else if (h >= 2 && h <= N) setTimeout(function () { go(h - 1); }, 600);
+    }
     document.documentElement.setAttribute('data-engine', engine.kind);
   }
   function start() {
