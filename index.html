@@ -1082,6 +1082,69 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
       '  float lit = 0.15 + 0.85*smoothstep(-0.15, 0.45, dot(Nn, L));',
       '  gl_FragColor = vec4(vec3(lit), a*0.9);',
       '}'].join('\n');
+    /* ── 🧱 레고 블록 지구 (2026-09-06 msg 4540 `!!!` "이 화면(마음의 중심)의 별이 좀더 장난감공장 같지만, 레고블럭같은 느낌의 지구였으면"):
+         마지막 정거장의 행성은 작은 큐브(복셀) 껍질로 조립한 지구 — 큐브마다 바깥쪽에 스터드(돌기) 하나 · 알록달록 장난감 색 ·
+         플라스틱 광택(Phong + 조명) · 흰 블록 판 구름 몇 장 · 적도에 색색 벽돌 고리. InstancedMesh 두 개(큐브·스터드)라 그리기는 싸다 ── */
+    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+    var sun = new THREE.DirectionalLight(0xffffff, 0.95); sun.position.set(3, 5, 4); scene.add(sun);   // Phong 재질만 받는다(나머지는 Basic/Shader)
+    var LEGO = { ocean: 0x2a7de1, deep: 0x1b5fc4, land: 0x3cb44b, hill: 0x2e8b3a, sand: 0xf2c94c, ice: 0xf5f5f5 };
+    var LEGO_RING = [0xe53935, 0xfdd835, 0x1e88e5, 0x43a047, 0xfb8c00, 0xf5f5f5, 0x8e24aa];
+    function legoEarth(r) {
+      var s = r / 8, half = s / 2, studR = s * 0.28, studH = s * 0.2;
+      var big = makeNoise(7, 4, 4), fine = makeNoise(11, 16, 2);
+      var cells = [], nR = Math.ceil(r / s) + 1;
+      for (var ix = -nR; ix <= nR; ix++) for (var iy = -nR; iy <= nR; iy++) for (var iz = -nR; iz <= nR; iz++) {
+        var cx = ix * s, cy = iy * s, cz = iz * s, d = Math.sqrt(cx * cx + cy * cy + cz * cz);
+        if (d > r || d < r - s * 1.05 || d < 1e-6) continue;                       // 껍질 한 겹만
+        var dx = cx / d, dy = cy / d, dz = cz / d;
+        var u = Math.atan2(dz, dx) / (Math.PI * 2) + 0.5, v = 0.5 - Math.asin(dy) / Math.PI, lat = Math.abs(dy), fn = fine(u, v);
+        var n = big(u, v) + (fn - 0.5) * 0.15, land = n - 0.545, col;
+        if (land < 0) col = land < -0.1 ? LEGO.deep : LEGO.ocean;
+        else { col = land > 0.13 ? LEGO.hill : LEGO.land; if (lat < 0.38 && fn > 0.56) col = LEGO.sand; }
+        if (lat > 0.84 || (land >= 0 && lat > 0.74)) col = LEGO.ice;
+        var ax = Math.abs(dx) >= Math.abs(dy) && Math.abs(dx) >= Math.abs(dz) ? [Math.sign(dx), 0, 0] : (Math.abs(dy) >= Math.abs(dz) ? [0, Math.sign(dy), 0] : [0, 0, Math.sign(dz)]);
+        cells.push({ p: [cx, cy, cz], c: col, ax: ax });
+      }
+      var g = new THREE.Group();
+      var plastic = new THREE.MeshPhongMaterial({ color: 0xffffff, shininess: 70, specular: 0x555555 });
+      var cubes = new THREE.InstancedMesh(new THREE.BoxGeometry(s * 0.98, s * 0.98, s * 0.98), plastic, cells.length);
+      var studs = new THREE.InstancedMesh(new THREE.CylinderGeometry(studR, studR, studH, 10), plastic, cells.length);
+      var m = new THREE.Matrix4(), q = new THREE.Quaternion(), Y = new THREE.Vector3(0, 1, 0), one = new THREE.Vector3(1, 1, 1), pos = new THREE.Vector3(), col3 = new THREE.Color(), axv = new THREE.Vector3();
+      cells.forEach(function (c, i) {
+        pos.set(c.p[0], c.p[1], c.p[2]);
+        m.compose(pos, q.identity(), one); cubes.setMatrixAt(i, m); cubes.setColorAt(i, col3.setHex(c.c));
+        axv.set(c.ax[0], c.ax[1], c.ax[2]);
+        q.setFromUnitVectors(Y, axv);
+        pos.addScaledVector(axv, half + studH / 2);
+        m.compose(pos, q, one); studs.setMatrixAt(i, m); studs.setColorAt(i, col3.setHex(c.c));
+      });
+      cubes.instanceMatrix.needsUpdate = true; studs.instanceMatrix.needsUpdate = true;
+      g.add(cubes); g.add(studs);
+      /* 흰 블록 판 구름 */
+      var cloudMat = new THREE.MeshPhongMaterial({ color: 0xfafafa, shininess: 60, specular: 0x444444 });
+      for (var ci = 0; ci < 7; ci++) {
+        var th = rnd() * Math.PI * 2, ph = (rnd() - 0.5) * 2.2, rr = r + s * 1.3;
+        var dir = new THREE.Vector3(Math.cos(ph) * Math.cos(th), Math.sin(ph), Math.cos(ph) * Math.sin(th));
+        var plate = new THREE.Mesh(new THREE.BoxGeometry(s * (1.6 + rnd() * 1.4), s * 0.45, s * (1.0 + rnd() * 0.8)), cloudMat);
+        plate.position.copy(dir).multiplyScalar(rr); plate.quaternion.setFromUnitVectors(Y, dir); plate.rotateY(rnd() * 3);
+        g.add(plate);
+      }
+      g.userData.cellCount = cells.length;
+      return g;
+    }
+    function legoRing(R) {
+      var N2 = 48, s = 0.2, plastic = new THREE.MeshPhongMaterial({ color: 0xffffff, shininess: 70, specular: 0x555555 });
+      var bricks = new THREE.InstancedMesh(new THREE.BoxGeometry(s * 1.1, s * 0.4, s * 0.7), plastic, N2);
+      var m = new THREE.Matrix4(), q = new THREE.Quaternion(), pos = new THREE.Vector3(), one = new THREE.Vector3(1, 1, 1), col3 = new THREE.Color();
+      for (var i = 0; i < N2; i++) {
+        var a = i / N2 * Math.PI * 2;
+        pos.set(Math.cos(a) * R, 0, Math.sin(a) * R); q.setFromAxisAngle(new THREE.Vector3(0, 1, 0), -a);
+        m.compose(pos, q, one); bricks.setMatrixAt(i, m); bricks.setColorAt(i, col3.setHex(LEGO_RING[i % LEGO_RING.length]));
+      }
+      bricks.instanceMatrix.needsUpdate = true;
+      var g = new THREE.Group(); g.add(bricks); g.rotation.x = 0.18; g.rotation.z = 0.12;
+      return g;
+    }
     var SS = mobile ? 0.78 : 1;
     var cores = [], halos = [], orbits = [];
     STOPS.forEach(function (s, k) {
@@ -1095,8 +1158,13 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
       var grp = new THREE.Group(); grp.position.copy(stopPos[k]);
       grp.rotation.set(-0.6 + (k % 2) * 0.1, 0, (k % 2 ? 0.22 : -0.18));   // 궤도면을 위에서 내려다보게(달들이 카메라 쪽으로 튀어나오지 않게 충분히 눕힌다)
       var isEarth = (k === 1);   // 첫 행성(밤의 서재) = 지구 (msg 4533)
+      var isLego = (k === N - 1);   // 마음의 중심 = 레고 블록 지구 (msg 4540)
       var planet, ring = null, clouds = null;
-      if (isEarth) {
+      if (isLego) {
+        planet = legoEarth(1.35); planet.rotation.z = 0.41; grp.add(planet);
+        ring = legoRing(2.3); grp.add(ring);
+        halo.material.color.set(0x9fd8ff);
+      } else if (isEarth) {
         planet = new THREE.Mesh(new THREE.SphereGeometry(1.35, 40, 28), new THREE.ShaderMaterial({
           uniforms: { uMap: { value: earthTex() } }, vertexShader: planetVert, fragmentShader: earthFrag }));
         planet.rotation.z = 0.41; grp.add(planet);                                                     // 자전축 23.4°
@@ -1145,7 +1213,7 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
       }
       var dust = pointsOf(op, os, oph, oc, 1.3); grp.add(dust);
       var ssk = SS * (k === N - 1 ? 0.72 : 1);   // 마음의 중심은 글이 바로 아래 오므로 작게
-      grp.userData = { planet: planet, ring: ring, clouds: clouds, earth: isEarth, moons: moons, dust: dust, icons: icons.slice(), ss: ssk };
+      grp.userData = { planet: planet, ring: ring, clouds: clouds, earth: isEarth, lego: isLego, moons: moons, dust: dust, icons: icons.slice(), ss: ssk };
       grp.scale.set(ssk, ssk, ssk);
       scene.add(grp); orbits.push(grp);
     });
@@ -1550,6 +1618,7 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
           var g = orbits[k], ud = g.userData, spd = on ? 1.5 : 1;
           ud.planet.rotation.y += dt * 0.2;
           if (ud.clouds) ud.clouds.rotation.y += dt * 0.27;   // 지구의 구름은 땅보다 조금 빨리
+          if (ud.lego && ud.ring) ud.ring.rotation.y -= dt * 0.08;   // 레고 벽돌 고리는 반대로 천천히
           for (var mI = 0; mI < ud.moons.length; mI++) { var mo = ud.moons[mI]; mo.th += mo.w * dt * spd; mo.obj.position.set(Math.cos(mo.th) * mo.R, 0, Math.sin(mo.th) * mo.R); }
           ud.dust.rotation.y += dt * 0.1 * spd;
           var gs = (on ? 1.12 : 1) * ud.ss; g.scale.set(gs, gs, gs);
