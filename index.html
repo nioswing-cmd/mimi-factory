@@ -217,8 +217,17 @@ button{font-family:inherit}
 .mark .eb::before,.mark .eb::after{content:"";height:1px;width:38px;background:linear-gradient(90deg,transparent,rgba(167,139,250,.6))}
 .mark .eb::after{transform:scaleX(-1)}
 .mark .eb span{font-size:11px;letter-spacing:.42em;text-indent:.42em;color:var(--sub);font-weight:500;white-space:nowrap}
-.mark .m{font-family:var(--disp);font-size:clamp(64px,13vw,190px);font-weight:400;letter-spacing:.01em;line-height:1;display:block;
-  background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 40px rgba(183,139,245,.35))}
+/* 「미미팩토리」 큰 글자 — 시인성 (2026-09-06 msg 4545 "글씨가 너무 배경에 묻혀"): 글자 뒤 어두운 판 + 흰빛 글로우 층 + 얇은 외곽선.
+   🔴 background-clip:text 글자엔 text-shadow 를 못 준다(투명 채움 뒤로 비쳐 검게 된다) — 그래서 글로우는 같은 글자를 겹친 «투명 글자 + text-shadow» 층(.m-g)이 맡는다 */
+.mark .mwrap{position:relative;display:block;font-family:var(--disp);font-size:clamp(64px,13vw,190px);font-weight:400;letter-spacing:.01em;line-height:1}
+.mark .mwrap::before{content:"";position:absolute;inset:-14% -6%;z-index:0;pointer-events:none;border-radius:50%;
+  background:radial-gradient(55% 62% at 50% 50%,rgba(8,5,30,.66),rgba(8,5,30,.35) 45%,rgba(8,5,30,0) 74%);filter:blur(12px)}
+.mark .m-g{position:absolute;inset:0;z-index:1;display:block;font:inherit;line-height:inherit;letter-spacing:inherit;color:transparent;pointer-events:none;user-select:none;
+  text-shadow:0 0 16px rgba(255,255,255,.9),0 0 42px rgba(214,196,255,.85),0 0 90px rgba(183,139,245,.6),0 6px 26px rgba(4,2,16,1)}
+.mark .m-g::before{content:attr(data-t)}
+.mark .m{position:relative;z-index:2;font:inherit;line-height:inherit;letter-spacing:inherit;display:block;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.45);
+  filter:drop-shadow(0 0 40px rgba(183,139,245,.35))}
 .mark .m,.mark .ask-t{text-shadow:none}   /* background-clip:text 글자에 그림자를 주면 투명 채움 뒤로 그림자가 비쳐 글자가 검게 된다 */
 .mark .cap{font-size:12px;letter-spacing:.1em;color:var(--sub);margin-top:12px}
 .mark .foot{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-top:20px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
@@ -314,7 +323,7 @@ button{font-family:inherit}
   .ov h2{font-size:28px;margin-bottom:8px}
   .ov p{font-size:15px}
   .back{font-size:10px}
-  .mark .m{font-size:clamp(56px,18vw,110px)}
+  .mark .mwrap{font-size:clamp(56px,18vw,110px)}
   .mark .ask{margin-top:22px;font-size:19px}
   .guides a{height:38px;font-size:13px;padding:0 12px}
   .status{display:none}
@@ -441,7 +450,8 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
   <!-- ◎ 5 · 마음의 중심 · 귀환한 메인 — 오늘의 신작 + 온보딩 안내 3종 (msg 4514 ②) · 푸터 브랜드 규칙 문구 그대로 -->
   <section class="card mark" data-stop="4" aria-label="마음의 중심 · 신작과 안내">
     <div class="eb"><span>의 미 와 재 미 공 장</span></div>
-    <span class="m">미미팩토리</span>
+    <!-- msg 4545: 글씨가 배경에 묻혀 — 뒤에 어두운 판(mwrap::before) + 흰빛 글로우 층(m-g) + 얇은 외곽선(.m) -->
+    <span class="mwrap"><span class="m-g" data-t="미미팩토리" aria-hidden="true"></span><span class="m">미미팩토리</span></span>
     <div class="cap">주식회사 연:결 패밀리회사</div>
     <div class="foot"><span>© 2026 MIMI FACTORY</span><span>세 개의 관 · 세 가지 재미</span></div>
     <div class="today" id="today-body" aria-label="오늘의 신작">
