@@ -1014,6 +1014,74 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
       '}'].join('\n');
     var ringVert = 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }';
     var ringFrag = 'uniform vec3 uC; varying vec2 vUv; void main(){ float r = length(vUv-0.5)*2.0; float a = smoothstep(0.6,0.68,r)*smoothstep(1.0,0.9,r); a *= 0.55 + 0.45*sin(r*70.0); gl_FragColor = vec4(uC, a*0.5); }';
+    /* ── 지구 (2026-09-06 msg 4533 "첫 행성은 지구면 좋겠다.. 넘 사이버틱해"): 밤의 서재의 행성은 지구 —
+         값노이즈(fBm)로 바다·대륙·사막·설산·극지 얼음 텍스처와 구름 텍스처를 캔버스에 그린다(외부 이미지 없음).
+         셰이더는 낮/밤 명암 + 푸른 대기 프레넬. 구름 구는 1.025 배로 따로 돈다 ── */
+    function makeNoise(seed, base, octaves) {
+      var r0 = mulberry(seed), lats = [];
+      for (var o = 0; o < octaves; o++) { var n = base << o, arr = new Float32Array(n * (n + 1)); for (var i = 0; i < arr.length; i++) arr[i] = r0(); lats.push({ n: n, a: arr }); }
+      function sm(t) { return t * t * (3 - 2 * t); }
+      return function (u, v) {   // u 0~1(가로로 이어짐) · v 0~1
+        var sum = 0, amp = 1, norm = 0;
+        for (var o = 0; o < lats.length; o++) {
+          var n = lats[o].n, a = lats[o].a, gx = u * n, gy = v * n, ix = Math.floor(gx), iy = Math.floor(gy), fx = sm(gx - ix), fy = sm(gy - iy);
+          var x0 = ix % n, x1 = (ix + 1) % n, y0 = Math.min(n, iy), y1 = Math.min(n, iy + 1);
+          sum += ((a[y0 * n + x0] * (1 - fx) + a[y0 * n + x1] * fx) * (1 - fy) + (a[y1 * n + x0] * (1 - fx) + a[y1 * n + x1] * fx) * fy) * amp;
+          norm += amp; amp *= 0.5;
+        }
+        return sum / norm;
+      };
+    }
+    function earthTex() {
+      var W = 512, H = 256, c = document.createElement('canvas'); c.width = W; c.height = H; var g = c.getContext('2d');
+      var im = g.createImageData(W, H), d = im.data, big = makeNoise(7, 4, 6), fine = makeNoise(11, 16, 4);
+      for (var y = 0; y < H; y++) for (var x = 0; x < W; x++) {
+        var u = x / W, v = y / H, lat = Math.abs(v - 0.5) * 2, fn = fine(u, v);
+        var n = big(u, v) + (fn - 0.5) * 0.18, land = n - 0.545, r, gg, b;
+        if (land < 0) { var deep = Math.min(1, -land * 7); r = 46 - 20 * deep; gg = 118 - 46 * deep; b = 205 - 55 * deep; }            // 얕은 바다 → 깊은 바다
+        else {
+          var h = Math.min(1, land * 6);
+          r = 66 + 96 * h; gg = 128 - 26 * h; b = 52 + 12 * h;                                                                          // 초원 → 산
+          if (lat < 0.38 && fn > 0.56) { r = 196; gg = 172; b = 112; }                                                                 // 저위도 사막
+          if (h > 0.8) { r = 232; gg = 236; b = 240; }                                                                                  // 설산
+        }
+        var ice = Math.min(1, Math.max(0, (lat - 0.84) / 0.16) + (land >= 0 ? Math.max(0, (lat - 0.74) / 0.26) * 0.7 : 0));
+        r += (236 - r) * ice; gg += (241 - gg) * ice; b += (246 - b) * ice;
+        var i = (y * W + x) * 4; d[i] = r; d[i + 1] = gg; d[i + 2] = b; d[i + 3] = 255;
+      }
+      g.putImageData(im, 0, 0);
+      var t = new THREE.CanvasTexture(c); t.wrapS = THREE.RepeatWrapping; return t;
+    }
+    function cloudTex() {
+      var W = 512, H = 256, c = document.createElement('canvas'); c.width = W; c.height = H; var g = c.getContext('2d');
+      var im = g.createImageData(W, H), d = im.data, nz = makeNoise(23, 6, 5);
+      for (var y = 0; y < H; y++) for (var x = 0; x < W; x++) {
+        var u = x / W, v = y / H, lat = Math.abs(v - 0.5) * 2;
+        var a = Math.min(1, Math.max(0, (nz(u, v) - 0.53) / 0.22)) * (0.95 - lat * 0.25);
+        var i = (y * W + x) * 4; d[i] = 255; d[i + 1] = 255; d[i + 2] = 255; d[i + 3] = Math.round(a * 255);
+      }
+      g.putImageData(im, 0, 0);
+      var t = new THREE.CanvasTexture(c); t.wrapS = THREE.RepeatWrapping; return t;
+    }
+    var earthFrag = [
+      'uniform sampler2D uMap; varying vec3 vN; varying vec3 vP; varying vec2 vUv;',
+      'void main(){',
+      '  vec3 Nn = normalize(vN); vec3 V = normalize(-vP); vec3 L = normalize(vec3(0.45,0.7,0.6));',
+      '  vec3 tex = texture2D(uMap, vUv).rgb;',
+      '  float dl = dot(Nn, L);',
+      '  float lit = 0.12 + 0.88*smoothstep(-0.15, 0.45, dl);',
+      '  float fr = pow(1.0 - max(0.0, dot(Nn, V)), 3.0);',
+      '  vec3 col = tex*lit + vec3(0.35,0.6,1.0)*fr*(0.45 + 0.55*max(0.0,dl))*1.25;',
+      '  gl_FragColor = vec4(col, 1.0);',
+      '}'].join('\n');
+    var cloudFrag = [
+      'uniform sampler2D uMap; varying vec3 vN; varying vec3 vP; varying vec2 vUv;',
+      'void main(){',
+      '  vec3 Nn = normalize(vN); vec3 L = normalize(vec3(0.45,0.7,0.6));',
+      '  float a = texture2D(uMap, vUv).a;',
+      '  float lit = 0.15 + 0.85*smoothstep(-0.15, 0.45, dot(Nn, L));',
+      '  gl_FragColor = vec4(vec3(lit), a*0.9);',
+      '}'].join('\n');
     var SS = mobile ? 0.78 : 1;
     var cores = [], halos = [], orbits = [];
     STOPS.forEach(function (s, k) {
@@ -1026,19 +1094,31 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
       var c1 = hexRGB(s.c), c2 = hexRGB(s.c2);
       var grp = new THREE.Group(); grp.position.copy(stopPos[k]);
       grp.rotation.set(-0.6 + (k % 2) * 0.1, 0, (k % 2 ? 0.22 : -0.18));   // 궤도면을 위에서 내려다보게(달들이 카메라 쪽으로 튀어나오지 않게 충분히 눕힌다)
-      /* 행성 */
-      var planet = new THREE.Mesh(new THREE.SphereGeometry(1.35, 28, 20), new THREE.ShaderMaterial({
-        uniforms: { uC1: { value: new THREE.Vector3(c1[0], c1[1], c1[2]) }, uC2: { value: new THREE.Vector3(c2[0], c2[1], c2[2]) }, uTime: uni.uTime, uSeed: { value: k * 1.7 } },
-        vertexShader: planetVert, fragmentShader: planetFrag, transparent: true }));
-      planet.rotation.z = 0.3; grp.add(planet);
-      /* 토성 고리 */
-      var ring = new THREE.Mesh(new THREE.PlaneGeometry(5.6, 5.6, 1, 1), new THREE.ShaderMaterial({
-        uniforms: { uC: { value: new THREE.Vector3(c2[0], c2[1], c2[2]) } }, vertexShader: ringVert, fragmentShader: ringFrag,
-        transparent: true, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending }));
-      ring.rotation.x = Math.PI / 2 + 0.18; ring.rotation.y = 0.25; grp.add(ring);
+      var isEarth = (k === 1);   // 첫 행성(밤의 서재) = 지구 (msg 4533)
+      var planet, ring = null, clouds = null;
+      if (isEarth) {
+        planet = new THREE.Mesh(new THREE.SphereGeometry(1.35, 40, 28), new THREE.ShaderMaterial({
+          uniforms: { uMap: { value: earthTex() } }, vertexShader: planetVert, fragmentShader: earthFrag }));
+        planet.rotation.z = 0.41; grp.add(planet);                                                     // 자전축 23.4°
+        clouds = new THREE.Mesh(new THREE.SphereGeometry(1.385, 40, 28), new THREE.ShaderMaterial({
+          uniforms: { uMap: { value: cloudTex() } }, vertexShader: planetVert, fragmentShader: cloudFrag, transparent: true, depthWrite: false }));
+        clouds.rotation.z = 0.41; grp.add(clouds);
+        halo.material.color.set(0x8fbfff);                                                             // 대기 빛은 연푸른색
+      } else {
+        /* 행성 (띠무늬 가스 행성) */
+        planet = new THREE.Mesh(new THREE.SphereGeometry(1.35, 28, 20), new THREE.ShaderMaterial({
+          uniforms: { uC1: { value: new THREE.Vector3(c1[0], c1[1], c1[2]) }, uC2: { value: new THREE.Vector3(c2[0], c2[1], c2[2]) }, uTime: uni.uTime, uSeed: { value: k * 1.7 } },
+          vertexShader: planetVert, fragmentShader: planetFrag, transparent: true }));
+        planet.rotation.z = 0.3; grp.add(planet);
+        /* 토성 고리 */
+        ring = new THREE.Mesh(new THREE.PlaneGeometry(5.6, 5.6, 1, 1), new THREE.ShaderMaterial({
+          uniforms: { uC: { value: new THREE.Vector3(c2[0], c2[1], c2[2]) } }, vertexShader: ringVert, fragmentShader: ringFrag,
+          transparent: true, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending }));
+        ring.rotation.x = Math.PI / 2 + 0.18; ring.rotation.y = 0.25; grp.add(ring);
+      }
       /* 궤도 3개 + 달(아이콘) + 빛 알갱이 */
       var moons = [], icons = s.icons || [];
-      var lineMat = new THREE.LineBasicMaterial({ color: cc, transparent: true, opacity: 0.22, blending: THREE.AdditiveBlending, depthWrite: false });
+      var lineMat = new THREE.LineBasicMaterial({ color: isEarth ? new THREE.Color(0xbfd8ff) : cc, transparent: true, opacity: 0.22, blending: THREE.AdditiveBlending, depthWrite: false });
       [[2.9, 0.36, [0]], [3.9, -0.24, [1, 3]], [4.9, 0.17, [2]]].forEach(function (o, oi) {
         var R = o[0], w = o[1];
         var og = new THREE.Group(); og.rotation.x = (oi - 1) * 0.16; og.rotation.z = (oi % 2 ? -0.1 : 0.12); grp.add(og);
@@ -1065,7 +1145,7 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
       }
       var dust = pointsOf(op, os, oph, oc, 1.3); grp.add(dust);
       var ssk = SS * (k === N - 1 ? 0.72 : 1);   // 마음의 중심은 글이 바로 아래 오므로 작게
-      grp.userData = { planet: planet, ring: ring, moons: moons, dust: dust, icons: icons.slice(), ss: ssk };
+      grp.userData = { planet: planet, ring: ring, clouds: clouds, earth: isEarth, moons: moons, dust: dust, icons: icons.slice(), ss: ssk };
       grp.scale.set(ssk, ssk, ssk);
       scene.add(grp); orbits.push(grp);
     });
@@ -1469,6 +1549,7 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
           /* 태양계: 행성 자전 · 달(아이콘)들이 제 궤도를 돈다 · 먼지 띠 공전 — 머무는 정거장은 1.5배 빠르고 조금 크게 */
           var g = orbits[k], ud = g.userData, spd = on ? 1.5 : 1;
           ud.planet.rotation.y += dt * 0.2;
+          if (ud.clouds) ud.clouds.rotation.y += dt * 0.27;   // 지구의 구름은 땅보다 조금 빨리
           for (var mI = 0; mI < ud.moons.length; mI++) { var mo = ud.moons[mI]; mo.th += mo.w * dt * spd; mo.obj.position.set(Math.cos(mo.th) * mo.R, 0, Math.sin(mo.th) * mo.R); }
           ud.dust.rotation.y += dt * 0.1 * spd;
           var gs = (on ? 1.12 : 1) * ud.ss; g.scale.set(gs, gs, gs);
