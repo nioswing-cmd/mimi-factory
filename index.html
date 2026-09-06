@@ -4,7 +4,9 @@
 <meta charset="utf-8">
 <!-- 미미팩토리 첫 화면 «폰을 통해 마음속을 여행하는» 3D 판 (2026-09-06 msg 4458).
      nio.vibekr.com 의 3D 항해(Three.js r149 · 정거장 비행 · 워프 줄기) 방식을 그대로 가져와 «마음속» 세계로 바꿨다.
-     옛 첫 화면은 classic.html(일반 화면). 온보딩 3종(/onboarding/quiz|test|friend/)으로 가는 «안내» 단추가 관마다 붙어 있다. -->
+     옛 첫 화면은 classic.html(일반 화면). 온보딩 3종(/onboarding/quiz|test|friend/)으로 가는 «안내» 단추가 관마다 붙어 있다.
+     2026-09-06 msg 4514: 정거장마다 작은 태양계(행성·고리·궤도를 도는 관 아이콘) · 첫 정거장은 밤의 서재, 신작·안내는 마지막 «마음의 중심»에 ·
+     관 카드는 「1분 안내」가 먼저(왼쪽·강조), 「바로 입장」은 오른쪽 · 입구 단추 「의미와재미공장 탐방」 -->
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>미미팩토리 — 의미와재미공장 · 마음속 여행</title>
 <meta name="description" content="폰 하나로 떠나는 마음속 여행. AI시대 인간에게 꼭 필요한 깊이 있는 지식을 도파민 터지게 — 밤의 서재(독서퀴즈관) · 도파민 실험실(테스트관) · 둘의 피크닉(친해지기관)">
@@ -170,6 +172,17 @@ button{font-family:inherit}
 .glink.new{color:var(--ink);border-style:solid;border-color:var(--c,var(--acc));background:rgba(255,255,255,.05)}
 .glink.new::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c,var(--acc));box-shadow:0 0 0 0 var(--c,var(--acc));animation:ping 1.8s ease-out infinite}
 @keyframes ping{0%{box-shadow:0 0 0 0 var(--c,var(--acc));opacity:1}100%{box-shadow:0 0 0 9px transparent;opacity:1}}
+/* 2026-09-06 msg 4514 ③: 관 카드는 «1분 안내»가 먼저(왼쪽·강조 단추), «바로 입장»은 오른쪽에 조용히 */
+.cta.guide-first{justify-content:space-between}
+.cta.guide-first .glink{padding:0 8px 0 18px;gap:10px;font-weight:700;font-size:15px;color:var(--ink);border:1px solid var(--c,var(--acc));background:rgba(255,255,255,.07)}
+.cta.guide-first .glink em{font-style:normal;color:var(--c,var(--acc));margin-right:2px}
+.cta.guide-first .glink i{width:32px;height:32px;border-radius:50%;background:var(--c,var(--acc));color:#1a1030;display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-weight:700;transition:transform .35s var(--ease)}
+.cta.guide-first .glink:hover i{transform:translateX(3px)}
+.cta.guide-first .glink.new{box-shadow:0 0 26px -8px var(--c,var(--acc))}
+.cta.guide-first .plink.go{margin-left:auto;padding:0 16px;gap:8px;background:transparent;border-color:rgba(255,255,255,.24);color:var(--sub);font-weight:600}
+.cta.guide-first .plink.go i{width:auto;height:auto;background:transparent;color:var(--c,var(--acc));font-size:15px}
+.cta.guide-first .plink.go:hover{color:var(--ink);border-color:rgba(255,255,255,.45);background:rgba(255,255,255,.06)}
+.cta.guide-first .plink.go:hover i{transform:translate(2px,-2px)}
 
 /* 첫 정거장: 유리판 없이 마음속 위의 제목 */
 .card.hero{left:max(24px,7vw);bottom:max(60px,12vh);width:min(760px,86vw);--ty:0px;text-shadow:0 2px 28px rgba(6,4,20,.95)}
@@ -184,13 +197,19 @@ button{font-family:inherit}
 .hero .side{font-size:16px;color:var(--dim);margin:0 0 26px;max-width:560px;line-height:1.65;word-break:keep-all}
 .hero .cta{margin:0}
 
-/* 오늘의 신작 */
-.today .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.14em;padding:4px 12px;border-radius:999px;background:var(--grad);color:#12101f;
-  animation:pulse 1.8s ease-in-out infinite;margin:0 0 14px}
+/* 오늘의 신작 — 마지막 정거장(마음의 중심)에 한 줄 카드로 (2026-09-06 msg 4514 ②: «마지막 돌아온 메인페이지에 신작과 온보딩페이지가 보이게») */
+.mark .today{margin:22px auto 0;max-width:600px;pointer-events:auto;display:flex;flex-direction:column;align-items:center;gap:6px;text-shadow:none}
+.tline{display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"b t i" "b s i";align-items:center;gap:2px 14px;padding:10px 16px 10px 10px;border-radius:18px;text-decoration:none;text-align:left;
+  background:rgba(16,12,44,.7);border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 34px -12px rgba(122,166,255,.6);transition:transform .3s var(--pop),background .3s}
+.tline:hover{background:rgba(34,26,78,.82);transform:translateY(-1px)}
+.tline .badge{grid-area:b;display:inline-block;font-size:11px;font-weight:700;letter-spacing:.14em;padding:5px 12px;border-radius:999px;background:var(--tc,var(--grad));color:#12101f;white-space:nowrap;
+  animation:pulse 1.8s ease-in-out infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(122,166,255,.5)}50%{box-shadow:0 0 0 9px rgba(122,166,255,0)}}
-.today .meta{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--sub);margin:0 0 12px}
-.today .desc{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
-.today .cover{width:100%;height:6px;border-radius:999px;background:var(--tc,var(--grad));opacity:.9;margin:0 0 18px}
+.tline b{grid-area:t;font-size:16px;font-weight:700;letter-spacing:-.01em;line-height:1.3;word-break:keep-all;color:var(--ink)}
+.tline small{grid-area:s;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tline i{grid-area:i;font-style:normal;font-size:13px;font-weight:700;color:var(--mint);white-space:nowrap}
+.tgo{appearance:none;border:0;background:transparent;color:var(--dim);font-family:inherit;font-size:12.5px;cursor:pointer;padding:2px 6px;text-decoration:underline dotted;text-underline-offset:3px}
+.tgo:hover{color:var(--ink)}
 
 /* 마지막 정거장: 미미팩토리 표식 */
 .card.mark{left:0;right:0;top:50%;--ty:-44%;text-align:center;pointer-events:none;padding:0 20px;text-shadow:0 1px 14px rgba(6,4,20,.95),0 0 30px rgba(6,4,20,.7)}
@@ -250,7 +269,7 @@ button{font-family:inherit}
 .where .n{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--sub)}
 .where .name{font-size:15px;font-weight:700;letter-spacing:-.01em;margin-top:4px}
 .where .bar{margin-top:7px;width:132px;height:2px;background:rgba(255,255,255,.14);border-radius:2px;overflow:hidden}
-.where .bar i{display:block;height:100%;background:var(--grad);transform-origin:left;transform:scaleX(.166);transition:transform 1s var(--ease)}
+.where .bar i{display:block;height:100%;background:var(--grad);transform-origin:left;transform:scaleX(.2);transition:transform 1s var(--ease)}
 
 .map{position:fixed;right:22px;bottom:22px;z-index:7;width:200px;padding:10px 10px 6px;
   border-radius:18px;background:rgba(16,12,44,.5);border:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
@@ -283,6 +302,14 @@ button{font-family:inherit}
   .feat{padding:10px 4px;font-size:10.5px}
   .plink{height:44px;font-size:14px}
   .glink{height:44px;font-size:13px;padding:0 14px}
+  .cta.guide-first .glink{font-size:14px;padding:0 6px 0 14px}
+  .cta.guide-first .glink em{display:none}          /* 폰에선 «처음이세요?» 를 접어 두 단추가 한 줄에 */
+  .cta.guide-first .glink i{width:30px;height:30px}
+  .cta.guide-first .plink.go{padding:0 13px}
+  .mark .today{margin-top:16px}
+  .tline{grid-template-columns:auto 1fr;grid-template-areas:"b t" "b s";padding:9px 12px;gap:2px 10px}
+  .tline i{display:none}
+  .tline b{font-size:14.5px}
   .ov{left:18px;right:18px;top:calc(64px + env(safe-area-inset-top));bottom:auto}
   .ov h2{font-size:28px;margin-bottom:8px}
   .ov p{font-size:15px}
@@ -312,7 +339,7 @@ button{font-family:inherit}
   .card.active .scroll>*{animation:none;opacity:1;transform:none}
   .mist{animation:none}
   .where .bar i{transition:none}
-  .ask-g,.ask-t,.today .badge,.glink.new::before{animation:none}
+  .ask-g,.ask-t,.tline .badge,.glink.new::before{animation:none}
 }
 noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;background:#0f0c24;padding:24px;text-align:center;font-size:18px;line-height:1.6}
 </style>
@@ -345,25 +372,16 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
     <p class="lead">폰 하나로 떠나는, <em>마음속 여행</em>.</p>
     <p class="side">AI 시대, 인간에게 꼭 필요한 깊이 있는 지식을 도파민 터지게 즐기는 곳. 폰 화면을 지나면 한 사람의 마음속, 세 개의 방이 기다립니다.</p>
     <div class="cta">
-      <button class="pill primary" id="enter" type="button"><span>마음속으로 들어가기</span><i>→</i></button>
+      <button class="pill primary" id="enter" type="button"><span>의미와재미공장 탐방</span><i>→</i></button>
       <button class="pill" id="enter-map" type="button">마음 지도 보기</button>
     </div>
   </section>
 
-  <!-- ◎ 2 · 오늘의 신작 (apps.json 에서 채운다) -->
-  <section class="card glass today" data-stop="1" aria-label="오늘의 신작">
-    <div class="shell"><div class="pane"><div class="scroll" id="today-body">
-      <p class="eyebrow">TODAY — 01 · 오늘 마음에 새로 꽂힌 것</p>
-      <h2>오늘의 신작을 <em>찾는 중</em>…</h2>
-      <p class="sub">매일 밤 새 책·새 실험·새 놀이가 마음속에 하나씩 꽂힙니다.</p>
-    </div></div></div>
-  </section>
-
-  <!-- ◎ 3 · 밤의 서재 (독서퀴즈관) -->
-  <section class="card glass hall-quiz" data-stop="2" aria-label="밤의 서재">
+  <!-- ◎ 2 · 밤의 서재 (독서퀴즈관) — 첫 별 (msg 4514 ②) -->
+  <section class="card glass hall-quiz" data-stop="1" aria-label="밤의 서재">
     <div class="shell"><div class="pane"><div class="scroll">
       <span class="deco" aria-hidden="true">🕯️</span>
-      <p class="eyebrow">독서퀴즈관 — 02 · 퀴즈로 읽는 책</p>
+      <p class="eyebrow">독서퀴즈관 — 01 · 퀴즈로 읽는 책</p>
       <h2>밤의 서재</h2>
       <p class="sub">책 한 권을 도파민 반복 퀴즈로 완독. 매일 밤, 서가에 새 책이 꽂힙니다.</p>
       <div class="feats">
@@ -372,18 +390,19 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
         <div class="feat"><span>📜</span>완독 인포그래픽<br>리포트</div>
       </div>
       <p class="cnt" data-cnt="quiz"></p>
-      <div class="cta">
-        <a class="plink" href="quiz.html"><span>서재로 입장하기</span><i>→</i></a>
-        <a class="glink" data-onb="nl_onboarded" href="/onboarding/quiz/">처음이세요? 1분 안내</a>
+      <!-- msg 4514 ③: 안내가 먼저·왼쪽, 바로 입장은 오른쪽 -->
+      <div class="cta guide-first">
+        <a class="glink" data-onb="nl_onboarded" href="/onboarding/quiz/"><span><em>처음이세요?</em> 1분 안내 먼저</span><i>→</i></a>
+        <a class="plink go" href="quiz.html"><span>바로 입장</span><i>↗</i></a>
       </div>
     </div></div></div>
   </section>
 
-  <!-- ◎ 4 · 도파민 실험실 (테스트관) -->
-  <section class="card glass hall-test" data-stop="3" aria-label="도파민 실험실">
+  <!-- ◎ 3 · 도파민 실험실 (테스트관) -->
+  <section class="card glass hall-test" data-stop="2" aria-label="도파민 실험실">
     <div class="shell"><div class="pane"><div class="scroll">
       <span class="deco" aria-hidden="true">⚗️</span>
-      <p class="eyebrow">테스트관 — 03 · MIMI-LAB · DOPAMINE DIVISION</p>
+      <p class="eyebrow">테스트관 — 02 · MIMI-LAB · DOPAMINE DIVISION</p>
       <h2>도파민 실험실</h2>
       <p class="sub">나도 몰랐던 나를 측정하는 3분 실험. 피실험자: 당신.</p>
       <div class="feats">
@@ -392,18 +411,18 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
         <div class="feat"><span>🃏</span>결과 카드<br>공유·비교</div>
       </div>
       <p class="cnt" data-cnt="test"></p>
-      <div class="cta">
-        <a class="plink" href="test.html"><span>실험 개시</span><i>→</i></a>
-        <a class="glink" data-onb="dl_onboarded" href="/onboarding/test/">처음이세요? 1분 안내</a>
+      <div class="cta guide-first">
+        <a class="glink" data-onb="dl_onboarded" href="/onboarding/test/"><span><em>처음이세요?</em> 1분 안내 먼저</span><i>→</i></a>
+        <a class="plink go" href="test.html"><span>바로 입장</span><i>↗</i></a>
       </div>
     </div></div></div>
   </section>
 
-  <!-- ◎ 5 · 둘의 피크닉 (친해지기관) -->
-  <section class="card glass hall-friend" data-stop="4" aria-label="둘의 피크닉">
+  <!-- ◎ 4 · 둘의 피크닉 (친해지기관) -->
+  <section class="card glass hall-friend" data-stop="3" aria-label="둘의 피크닉">
     <div class="shell"><div class="pane"><div class="scroll">
       <span class="deco" aria-hidden="true">🧺</span>
-      <p class="eyebrow">친해지기관 — 04 · 둘이서</p>
+      <p class="eyebrow">친해지기관 — 03 · 둘이서</p>
       <h2>둘의 피크닉</h2>
       <p class="sub">같이 하면 더 재밌고, 하고 나면 더 가까워지는 둘만의 놀이 돗자리.</p>
       <div class="feats">
@@ -412,19 +431,22 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
         <div class="feat"><span>🍑</span>취향 대결<br>케미 확인</div>
       </div>
       <p class="cnt" data-cnt="friend"></p>
-      <div class="cta">
-        <a class="plink" href="friend.html"><span>놀러가기</span><i>→</i></a>
-        <a class="glink" data-onb="pk_onboarded" href="/onboarding/friend/">처음이세요? 1분 안내</a>
+      <div class="cta guide-first">
+        <a class="glink" data-onb="pk_onboarded" href="/onboarding/friend/"><span><em>처음이세요?</em> 1분 안내 먼저</span><i>→</i></a>
+        <a class="plink go" href="friend.html"><span>바로 입장</span><i>↗</i></a>
       </div>
     </div></div></div>
   </section>
 
-  <!-- ◎ 6 · 마음의 중심 · 귀환 (푸터 브랜드 규칙 문구 그대로) -->
-  <section class="card mark" data-stop="5" aria-label="마음의 중심">
+  <!-- ◎ 5 · 마음의 중심 · 귀환한 메인 — 오늘의 신작 + 온보딩 안내 3종 (msg 4514 ②) · 푸터 브랜드 규칙 문구 그대로 -->
+  <section class="card mark" data-stop="4" aria-label="마음의 중심 · 신작과 안내">
     <div class="eb"><span>의 미 와 재 미 공 장</span></div>
     <span class="m">미미팩토리</span>
     <div class="cap">주식회사 연:결 패밀리회사</div>
     <div class="foot"><span>© 2026 MIMI FACTORY</span><span>세 개의 관 · 세 가지 재미</span></div>
+    <div class="today" id="today-body" aria-label="오늘의 신작">
+      <a class="tline" id="today-go" href="quiz.html"><span class="badge">✨ 오늘의 신작</span><b id="today-title">오늘의 신작을 찾는 중…</b><small>apps.json</small><i>지금 바로 도전 →</i></a>
+    </div>
     <p class="ask"><span class="ask-w"><span class="ask-g" data-t="어느 마음부터 열어볼까요?" aria-hidden="true"></span><span class="ask-t">어느 마음부터 열어볼까요?</span></span></p>
     <div class="guides" aria-label="처음 오신 분을 위한 1분 안내">
       <a href="/onboarding/quiz/" style="--gc:#f5d491">🕯️ 서재 안내</a>
@@ -439,13 +461,13 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
 <!-- 마음 지도(조감) 안내 -->
 <div class="ov" id="ov" aria-live="polite">
   <p class="eyebrow">마음 지도</p>
-  <h2>여섯 정거장, 하나의 마음길.</h2>
+  <h2>다섯 정거장, 하나의 마음길.</h2>
   <p>빛나는 점을 누르면 그곳으로 날아갑니다. 입구부터 중심까지, 이어진 길을 따라가도 좋습니다.</p>
 </div>
 
 <div class="status" id="status" aria-hidden="true">
   <b id="st-line">정거장 01 · 입구</b>
-  <span id="st-seen">방문 1 / 6</span> · <a href="classic.html">일반 화면 ↗</a>
+  <span id="st-seen">방문 1 / 5</span> · <a href="classic.html">일반 화면 ↗</a>
 </div>
 
 <div class="map" aria-label="마음 지도 (누르면 그 정거장으로 이동)">
@@ -456,7 +478,7 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
 <nav class="hud off" id="hud" aria-label="정거장 이동">
   <button class="pill" id="prev" type="button" aria-label="이전 정거장으로" title="이전 정거장으로 (↑)">←</button>
   <div class="where" aria-live="polite">
-    <span class="n" id="where-n">1 / 6</span>
+    <span class="n" id="where-n">1 / 5</span>
     <span class="name" id="where-name">입구</span>
     <span class="bar" aria-hidden="true"><i id="where-bar"></i></span>
   </div>
@@ -468,15 +490,15 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
   'use strict';
 
   /* ───────────────────────── 마음속 정거장 ─────────────────────────
-     정거장마다 제 빛깔(c)과 곁빛(c2) — 이름표·목록·카드 강조색·궤도 알갱이에 같은 색을 쓴다.
-     0 입구(폰) → 1 오늘의 신작 → 2 밤의 서재 → 3 도파민 실험실 → 4 둘의 피크닉 → 5 마음의 중심 */
+     정거장마다 제 빛깔(c)과 곁빛(c2) — 이름표·목록·카드 강조색·행성·궤도에 같은 색을 쓴다. icons = 그 정거장 궤도를 도는 «달»(msg 4514 ④).
+     0 입구(폰) → 1 밤의 서재 → 2 도파민 실험실 → 3 둘의 피크닉 → 4 마음의 중심(신작 + 안내)
+     (2026-09-06 msg 4514 ②: 첫 별은 오늘의 신작이 아니라 밤의 서재 — 신작은 마지막 돌아온 메인에) */
   var STOPS = [
-    { name: '입구',         sub: '폰',        p: [  0,  0,    0], c: '#cdbcf5', c2: '#7aa6ff' },
-    { name: '오늘의 신작',  sub: 'Today',     p: [ 10,  3,  -64], c: '#ff8ad0', c2: '#b78bf5' },
-    { name: '밤의 서재',    sub: '독서퀴즈관', p: [-16, -3, -126], c: '#f5d491', c2: '#e8b45f' },
-    { name: '도파민 실험실', sub: '테스트관',  p: [ 18,  6, -188], c: '#00f0ff', c2: '#ff2ec4' },
-    { name: '둘의 피크닉',  sub: '친해지기관', p: [-12,  2, -250], c: '#ffb59e', c2: '#a8e6cf' },
-    { name: '마음의 중심',  sub: '귀환',      p: [  2, -1, -312], c: '#5ee7d8', c2: '#7aa6ff' }
+    { name: '입구',         sub: '폰',         p: [  0,  0,    0], c: '#cdbcf5', c2: '#7aa6ff', icons: [] },
+    { name: '밤의 서재',    sub: '독서퀴즈관',  p: [-14, -3,  -70], c: '#f5d491', c2: '#e8b45f', icons: ['📖', '📚', '🔖', '🕯️'] },
+    { name: '도파민 실험실', sub: '테스트관',   p: [ 18,  6, -138], c: '#00f0ff', c2: '#ff2ec4', icons: ['🧪', '📊', '🎯', '⚗️'] },
+    { name: '둘의 피크닉',  sub: '친해지기관',  p: [-12,  2, -206], c: '#ffb59e', c2: '#a8e6cf', icons: ['💌', '🌷', '💞', '🧺'] },
+    { name: '마음의 중심',  sub: '신작 · 안내', p: [  2, -1, -272], c: '#5ee7d8', c2: '#7aa6ff', icons: ['📖', '🧪', '💞', '✨'] }
   ];
   var N = STOPS.length;
   var ZMAX = -STOPS[N - 1].p[2];
@@ -484,7 +506,7 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
   var INTRO = -2;                          // 도입 비행의 출발 자세(멀리서 사람과 폰에게 다가온다)
   var HALL_LABEL = { quiz: '📚 독서퀴즈관', test: '🎯 테스트관', friend: '💞 친해지기관' };
   var CNT_UNIT = { quiz: '권의 책이', test: '개의 실험이', friend: '개의 놀이가' };
-  var HALL_STOP = { quiz: 2, test: 3, friend: 4 };
+  var HALL_STOP = { quiz: 1, test: 2, friend: 3 };
 
   var $ = function (s) { return document.querySelector(s); };
   var canvas = $('#space');
@@ -503,28 +525,27 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
   Array.prototype.forEach.call(document.querySelectorAll('.glink[data-onb]'), function (a) {
     var seen = false;
     try { seen = !!localStorage.getItem(a.getAttribute('data-onb')); } catch (e) {}
-    if (!seen) a.classList.add('new'); else a.textContent = '사용법 다시 보기';
+    if (!seen) a.classList.add('new');
+    else { var sp = a.querySelector('span'); if (sp) sp.textContent = '사용법 다시 보기'; else a.textContent = '사용법 다시 보기'; }
   });
 
   /* ───────────────────────── 오늘의 신작 + 관별 개수 (apps.json) ───────────────────────── */
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]; }); }
+  /* 마지막 정거장(마음의 중심)의 한 줄 신작 카드 — msg 4514 ② */
   function renderToday(a) {
     var box = $('#today-body');
     if (!a) {
-      box.innerHTML = '<p class="eyebrow">TODAY — 01 · 오늘 마음에 새로 꽂힌 것</p><h2>오늘의 신작을 <em>불러오지 못했어요</em></h2>' +
-        '<p class="sub">잠시 뒤 다시 열어 보시거나, 서재부터 둘러보세요.</p><div class="cta"><a class="plink" href="quiz.html"><span>서재 둘러보기</span><i>→</i></a></div>';
+      box.innerHTML = '<a class="tline" id="today-go" href="quiz.html"><span class="badge">✨ 오늘의 신작</span><b id="today-title">오늘의 신작을 불러오지 못했어요</b><small>서재부터 둘러보세요</small><i>서재로 →</i></a>';
       return;
     }
     var href = a.teaser || a.premium || 'quiz.html';
     var tc = 'linear-gradient(135deg,' + (a.color1 || '#7aa6ff') + ',' + (a.color2 || '#b78bf5') + ')';
-    box.innerHTML = '<p class="eyebrow">TODAY — 01 · 오늘 마음에 새로 꽂힌 것</p>' +
+    box.innerHTML = '<a class="tline" id="today-go" href="' + esc(href) + '" style="--tc:' + tc + '" title="' + esc(a.desc) + '">' +
       '<span class="badge">✨ 오늘의 신작</span>' +
-      '<h2>' + esc(a.title) + '</h2>' +
-      '<p class="meta">' + esc(a.author) + ' · ' + (HALL_LABEL[a.type] || '') + ' · ' + esc(a.date) + '</p>' +
-      '<div class="cover" style="--tc:' + tc + '"></div>' +
-      '<p class="desc">' + esc(a.desc) + '</p>' +
-      '<div class="cta"><a class="plink" id="today-go" href="' + esc(href) + '"><span>지금 바로 도전</span><i>→</i></a>' +
-      (HALL_STOP[a.type] != null ? '<button class="glink" type="button" data-go="' + HALL_STOP[a.type] + '">이 관 둘러보기</button>' : '') + '</div>';
+      '<b id="today-title">' + esc(a.title) + '</b>' +
+      '<small>' + esc(a.author) + ' · ' + (HALL_LABEL[a.type] || '') + ' · ' + esc(a.date) + '</small>' +
+      '<i>지금 바로 도전 →</i></a>' +
+      (HALL_STOP[a.type] != null ? '<button class="tgo" type="button" data-go="' + HALL_STOP[a.type] + '">이 관 둘러보기</button>' : '');
     var go = $('#today-go'); if (go) go.addEventListener('click', function () { if (navigator.vibrate) navigator.vibrate(28); });
     var b = box.querySelector('[data-go]'); if (b) b.addEventListener('click', function () { go2(parseInt(b.getAttribute('data-go'), 10)); });
   }
@@ -915,13 +936,12 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
     }
     var nebCols = [['183,139,245', 0.26], ['255,138,208', 0.2], ['94,231,216', 0.2], ['122,166,255', 0.22], ['255,205,215', 0.14]];
     for (i = 0; i < 7; i++) { var nc = nebCols[i % nebCols.length]; addNebula(nc[0], nc[1], [(rnd() * 2 - 1) * 220, (rnd() * 2 - 1) * 100, -40 - rnd() * 420], 180 + rnd() * 160, 100 + i); }
-    /* 관마다 — 서재: 호박·남색 촛불빛 / 실험실: 시안·마젠타 / 피크닉: 피치·민트 / 신작: 분홍·보라 / 중심: 민트·하늘 */
+    /* 관마다 — 서재: 호박·남색 촛불빛 / 실험실: 시안·마젠타 / 피크닉: 피치·민트 / 중심: 민트·하늘 (신작 정거장은 msg 4514 로 중심에 합쳐짐) */
     var HALL_NEB = [
-      [1, ['255,138,208', 0.24], ['183,139,245', 0.2]],
-      [2, ['232,180,95', 0.26], ['42,63,110', 0.3]],
-      [3, ['0,240,255', 0.2], ['255,46,196', 0.2]],
-      [4, ['255,181,158', 0.24], ['168,230,207', 0.22]],
-      [5, ['94,231,216', 0.14], ['122,166,255', 0.12]]   // 중심은 글이 가운데 오므로 옅게
+      [1, ['232,180,95', 0.26], ['42,63,110', 0.3]],
+      [2, ['0,240,255', 0.2], ['255,46,196', 0.2]],
+      [3, ['255,181,158', 0.24], ['168,230,207', 0.22]],
+      [4, ['94,231,216', 0.14], ['122,166,255', 0.12]]   // 중심은 글이 가운데 오므로 옅게
     ];
     HALL_NEB.forEach(function (h, k) {
       var s = STOPS[h[0]];
@@ -954,9 +974,37 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
       scene.add(pl);
     });
 
-    /* ── 정거장 (핵 + 후광 + 도는 궤도 알갱이 두 고리 · 정거장마다 제 빛깔) ── */
+    /* ── 정거장 = 작은 태양계 (2026-09-06 msg 4514 ①④):
+         가운데 행성(띠 무늬 + 가장자리 빛) · 토성 고리 · 궤도 3개 · 궤도를 도는 «달» = 그 관의 아이콘
+         (서재: 책·책갈피·촛불 / 실험실: 시험관·차트·과녁 / 피크닉: 편지·꽃·마음 / 중심: 셋 다 + 별) + 작은 빛 알갱이 · 먼지 띠(소행성대).
+         정거장마다 제 빛깔. 폰에선 0.78 배(화면 폭 9 단위 안에 들어오게) ── */
     var texCore = glowTex(128, [[0, 'rgba(255,255,255,1)'], [0.08, 'rgba(255,255,255,.95)'], [0.2, 'rgba(255,255,255,.35)'], [0.45, 'rgba(255,255,255,.08)'], [1, 'rgba(255,255,255,0)']]);
     var texHalo = glowTex(128, [[0, 'rgba(255,255,255,.35)'], [0.3, 'rgba(255,255,255,.12)'], [0.7, 'rgba(255,255,255,.03)'], [1, 'rgba(255,255,255,0)']]);
+    function iconTex(ch, rgb) {
+      var S = 96, c = document.createElement('canvas'); c.width = c.height = S; var g = c.getContext('2d');
+      var r = g.createRadialGradient(S / 2, S / 2, 4, S / 2, S / 2, S / 2);
+      r.addColorStop(0, 'rgba(' + rgb + ',.5)'); r.addColorStop(0.55, 'rgba(' + rgb + ',.16)'); r.addColorStop(1, 'rgba(' + rgb + ',0)');
+      g.fillStyle = r; g.fillRect(0, 0, S, S);
+      g.font = '50px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
+      g.fillText(ch, S / 2, S / 2 + 3);
+      var t = new THREE.CanvasTexture(c); t.minFilter = THREE.LinearFilter; return t;
+    }
+    var planetVert = 'varying vec3 vN; varying vec3 vP; varying vec2 vUv; void main(){ vN = normalize(normalMatrix * normal); vec4 mv = modelViewMatrix * vec4(position,1.0); vP = mv.xyz; vUv = uv; gl_Position = projectionMatrix * mv; }';
+    var planetFrag = [
+      'uniform vec3 uC1; uniform vec3 uC2; uniform float uTime; uniform float uSeed; varying vec3 vN; varying vec3 vP; varying vec2 vUv;',
+      'void main(){',
+      '  float bands = sin(vUv.y*14.0 + uSeed + sin(vUv.x*6.2832 + uTime*0.12)*0.9)*0.5 + 0.5;',
+      '  bands = smoothstep(0.15, 0.85, bands);',
+      '  vec3 col = mix(uC1, uC2, bands*0.65);',
+      '  vec3 V = normalize(-vP); vec3 Nn = normalize(vN);',
+      '  float fr = pow(1.0 - max(0.0, dot(Nn, V)), 2.4);',
+      '  float lit = 0.5 + 0.5*max(0.0, dot(Nn, normalize(vec3(0.45,0.8,0.65))));',
+      '  col = col*(0.35 + 0.75*lit) + uC1*fr*1.3;',
+      '  gl_FragColor = vec4(col, 0.94 + fr*0.06);',
+      '}'].join('\n');
+    var ringVert = 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }';
+    var ringFrag = 'uniform vec3 uC; varying vec2 vUv; void main(){ float r = length(vUv-0.5)*2.0; float a = smoothstep(0.6,0.68,r)*smoothstep(1.0,0.9,r); a *= 0.55 + 0.45*sin(r*70.0); gl_FragColor = vec4(uC, a*0.5); }';
+    var SS = mobile ? 0.78 : 1;
     var cores = [], halos = [], orbits = [];
     STOPS.forEach(function (s, k) {
       var cc = new THREE.Color(s.c);
@@ -965,19 +1013,51 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
       var halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: texHalo, color: cc, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending, depthWrite: false }));
       halo.scale.set(9, 9, 1); halo.position.copy(stopPos[k]); scene.add(halo); halos.push(halo);
       if (k === 0) { orbits.push(null); return; }          // 입구는 폰이 대신한다
-      var ringN = mobile ? 70 : 110, c1 = hexRGB(s.c), c2 = hexRGB(s.c2);
-      var op = new Float32Array(ringN * 3), os = new Float32Array(ringN), oph = new Float32Array(ringN), oc = new Float32Array(ringN * 3);
-      for (var q = 0; q < ringN; q++) {
-        var ring = q % 2, r = ring ? 6.4 : 4.4, a = rnd() * Math.PI * 2, tilt = ring ? 0.9 : -0.5;
-        var x = Math.cos(a) * r, y = Math.sin(a) * r * 0.35, z = Math.sin(a) * r * 0.9;
-        op[q * 3] = x; op[q * 3 + 1] = y * Math.cos(tilt) - z * Math.sin(tilt) * 0.3; op[q * 3 + 2] = z * Math.cos(tilt) + y * Math.sin(tilt);
-        os[q] = 0.9 + rnd() * 1.4; oph[q] = rnd() * 6.28;
-        var cc2 = (q % 3 === 0) ? c2 : c1;
-        oc[q * 3] = cc2[0]; oc[q * 3 + 1] = cc2[1]; oc[q * 3 + 2] = cc2[2];
-      }
+      var c1 = hexRGB(s.c), c2 = hexRGB(s.c2);
+      var rgbS = Math.round(c1[0] * 255) + ',' + Math.round(c1[1] * 255) + ',' + Math.round(c1[2] * 255);
       var grp = new THREE.Group(); grp.position.copy(stopPos[k]);
-      grp.add(pointsOf(op, os, oph, oc, 1.5));
-      grp.userData.spin = 0.25 + rnd() * 0.2;
+      grp.rotation.set(-0.6 + (k % 2) * 0.1, 0, (k % 2 ? 0.22 : -0.18));   // 궤도면을 위에서 내려다보게(달들이 카메라 쪽으로 튀어나오지 않게 충분히 눕힌다)
+      /* 행성 */
+      var planet = new THREE.Mesh(new THREE.SphereGeometry(1.35, 28, 20), new THREE.ShaderMaterial({
+        uniforms: { uC1: { value: new THREE.Vector3(c1[0], c1[1], c1[2]) }, uC2: { value: new THREE.Vector3(c2[0], c2[1], c2[2]) }, uTime: uni.uTime, uSeed: { value: k * 1.7 } },
+        vertexShader: planetVert, fragmentShader: planetFrag, transparent: true }));
+      planet.rotation.z = 0.3; grp.add(planet);
+      /* 토성 고리 */
+      var ring = new THREE.Mesh(new THREE.PlaneGeometry(5.6, 5.6, 1, 1), new THREE.ShaderMaterial({
+        uniforms: { uC: { value: new THREE.Vector3(c2[0], c2[1], c2[2]) } }, vertexShader: ringVert, fragmentShader: ringFrag,
+        transparent: true, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending }));
+      ring.rotation.x = Math.PI / 2 + 0.18; ring.rotation.y = 0.25; grp.add(ring);
+      /* 궤도 3개 + 달(아이콘) + 빛 알갱이 */
+      var moons = [], icons = s.icons || [];
+      var lineMat = new THREE.LineBasicMaterial({ color: cc, transparent: true, opacity: 0.22, blending: THREE.AdditiveBlending, depthWrite: false });
+      [[2.9, 0.36, [0]], [3.9, -0.24, [1, 3]], [4.9, 0.17, [2]]].forEach(function (o, oi) {
+        var R = o[0], w = o[1];
+        var og = new THREE.Group(); og.rotation.x = (oi - 1) * 0.16; og.rotation.z = (oi % 2 ? -0.1 : 0.12); grp.add(og);
+        var pts = []; for (var q = 0; q <= 96; q++) { var a = q / 96 * Math.PI * 2; pts.push(new THREE.Vector3(Math.cos(a) * R, 0, Math.sin(a) * R)); }
+        var ln = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), lineMat); ln.frustumCulled = false; og.add(ln);
+        o[2].forEach(function (idx, mi) {
+          var ch = icons[idx] || icons[idx % Math.max(1, icons.length)] || '✨';
+          var sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: iconTex(ch, rgbS), transparent: true, depthWrite: false }));
+          var sc = oi === 2 ? 1.2 : 1.05; sp.scale.set(sc, sc, 1);
+          og.add(sp); moons.push({ obj: sp, R: R, th: rnd() * 6.28 + mi * Math.PI, w: w });
+        });
+        var dot = new THREE.Sprite(new THREE.SpriteMaterial({ map: texCore, color: cc.clone().lerp(new THREE.Color(0xffffff), 0.5), transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
+        dot.scale.set(0.6, 0.6, 1); og.add(dot); moons.push({ obj: dot, R: R, th: rnd() * 6.28, w: w * 1.6 });
+      });
+      /* 먼지 띠 (소행성대 · 둘째와 셋째 궤도 사이) */
+      var dustN = mobile ? 40 : 70;
+      var op = new Float32Array(dustN * 3), os = new Float32Array(dustN), oph = new Float32Array(dustN), oc = new Float32Array(dustN * 3);
+      for (var q2 = 0; q2 < dustN; q2++) {
+        var a2 = rnd() * Math.PI * 2, r2 = 4.4 + (rnd() - 0.5) * 0.5;
+        op[q2 * 3] = Math.cos(a2) * r2; op[q2 * 3 + 1] = (rnd() - 0.5) * 0.3; op[q2 * 3 + 2] = Math.sin(a2) * r2;
+        os[q2] = 0.7 + rnd() * 1.1; oph[q2] = rnd() * 6.28;
+        var cc2 = (q2 % 3 === 0) ? c2 : c1;
+        oc[q2 * 3] = cc2[0]; oc[q2 * 3 + 1] = cc2[1]; oc[q2 * 3 + 2] = cc2[2];
+      }
+      var dust = pointsOf(op, os, oph, oc, 1.3); grp.add(dust);
+      var ssk = SS * (k === N - 1 ? 0.72 : 1);   // 마음의 중심은 글이 바로 아래 오므로 작게
+      grp.userData = { planet: planet, ring: ring, moons: moons, dust: dust, icons: icons.slice(), ss: ssk };
+      grp.scale.set(ssk, ssk, ssk);
       scene.add(grp); orbits.push(grp);
     });
 
@@ -1116,7 +1196,7 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
     var streaks = new THREE.LineSegments(stGeo, stMat); streaks.frustumCulled = false;
     camera.add(streaks);
 
-    window.__mf = { stUni: stUni, streaks: streaks, camera: camera, scene: scene, renderer: renderer, phone: phone };
+    window.__mf = { stUni: stUni, streaks: streaks, camera: camera, scene: scene, renderer: renderer, phone: phone, solar: orbits };
 
     /* ── 카메라 자세 ── */
     var poses = [], ovPose = null, introPose = null, center = new THREE.Vector3(2, 1, -ZMAX / 2);
@@ -1345,8 +1425,12 @@ noscript .ns{position:fixed;inset:0;z-index:20;display:grid;place-items:center;b
           halos[k].material.opacity = on ? (lastK ? 0.55 : 0.8) : 0.5;
           var cs = (on ? (lastK ? 1.8 : 2.6) : 2.0) * (1 + Math.sin(time * 1.3 + k * 1.3) * 0.05);
           cores[k].scale.set(cs, cs, 1);
-          var g = orbits[k]; g.rotation.y += g.userData.spin * dt * (on ? 1.6 : 1); g.rotation.z = Math.sin(time * 0.2 + k) * 0.25;
-          var gs = on ? 1.15 : 1; g.scale.set(gs, gs, gs);
+          /* 태양계: 행성 자전 · 달(아이콘)들이 제 궤도를 돈다 · 먼지 띠 공전 — 머무는 정거장은 1.5배 빠르고 조금 크게 */
+          var g = orbits[k], ud = g.userData, spd = on ? 1.5 : 1;
+          ud.planet.rotation.y += dt * 0.2;
+          for (var mI = 0; mI < ud.moons.length; mI++) { var mo = ud.moons[mI]; mo.th += mo.w * dt * spd; mo.obj.position.set(Math.cos(mo.th) * mo.R, 0, Math.sin(mo.th) * mo.R); }
+          ud.dust.rotation.y += dt * 0.1 * spd;
+          var gs = (on ? 1.12 : 1) * ud.ss; g.scale.set(gs, gs, gs);
         }
       }
       for (k = 0; k < nebulas.length; k++) nebulas[k].material.rotation += nebulas[k].userData.spin * dt;
