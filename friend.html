@@ -62,6 +62,10 @@
     transition:transform .35s var(--pop);
   }
   .hero .cta:active{transform:scale(.95)}
+  .hero .guide{display:block;width:max-content;margin:12px auto 0;font-size:12.5px;font-weight:500;color:inherit;opacity:.78;text-decoration:none;border:1px dashed rgba(128,128,128,.55);border-radius:999px;padding:7px 14px}
+  .hero .guide.new{opacity:1;border-style:solid}
+  .hero .guide.new::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:7px;vertical-align:1px;animation:guidePing 1.8s ease-out infinite}
+  @keyframes guidePing{0%{box-shadow:0 0 0 0 currentColor}100%{box-shadow:0 0 0 8px transparent}}
   .feats{display:flex;gap:8px;margin-top:18px}
   .feat{
     flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;
@@ -174,6 +178,9 @@
     <h1>둘의 피크닉</h1>
     <p>같이 놀수록 가까워지는 둘만의 돗자리.<br>오늘은 누구랑 펼칠까요?</p>
     <a class="cta" id="heroCta" href="#">🧺 돗자리 펴기 →</a>
+    <!-- 온보딩 안내(2026-09-06): 웹 방문자도 사용법을 볼 수 있게. 처음 온 사람(안내 기록 없음)이면 불이 켜진다 -->
+    <a class="guide" id="heroGuide" href="/onboarding/friend/">📖 처음이세요? 1분 사용법 안내</a>
+    <script>try{if(!localStorage.getItem('pk_onboarded'))document.getElementById('heroGuide').classList.add('new');else document.getElementById('heroGuide').textContent='📖 사용법 다시 보기';}catch(e){}</script>
     <div class="feats">
       <div class="feat"><span>💌</span>둘이 함께 하는<br>질문 놀이</div>
       <div class="feat"><span>🌷</span>대화가 깊어지는<br>단계별 카드</div>

@@ -75,6 +75,10 @@
     transition:transform .35s var(--pop);
   }
   .hero .cta:active{transform:scale(.95)}
+  .hero .guide{display:block;width:max-content;margin:12px auto 0;font-size:12.5px;font-weight:500;color:inherit;opacity:.78;text-decoration:none;border:1px dashed rgba(128,128,128,.55);border-radius:999px;padding:7px 14px}
+  .hero .guide.new{opacity:1;border-style:solid}
+  .hero .guide.new::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:7px;vertical-align:1px;animation:guidePing 1.8s ease-out infinite}
+  @keyframes guidePing{0%{box-shadow:0 0 0 0 currentColor}100%{box-shadow:0 0 0 8px transparent}}
   .feats{display:flex;gap:8px;margin-top:20px}
   .feat{
     flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;
@@ -206,6 +210,9 @@
     <h1>도파민 실험실</h1>
     <p>나도 몰랐던 나를 측정하는 3분 실험.<br>피실험자: 당신.</p>
     <a class="cta" id="heroCta" href="#">⚗️ 실험 시작 →</a>
+    <!-- 온보딩 안내(2026-09-06): 웹 방문자도 사용법을 볼 수 있게. 처음 온 사람(안내 기록 없음)이면 불이 켜진다 -->
+    <a class="guide" id="heroGuide" href="/onboarding/test/">📖 처음이세요? 1분 사용법 안내</a>
+    <script>try{if(!localStorage.getItem('dl_onboarded'))document.getElementById('heroGuide').classList.add('new');else document.getElementById('heroGuide').textContent='📖 사용법 다시 보기';}catch(e){}</script>
     <div class="feats">
       <div class="feat"><span>🧪</span>3분 완성<br>진단 실험</div>
       <div class="feat"><span>📊</span>실시간 게이지<br>도파민 리듬</div>
