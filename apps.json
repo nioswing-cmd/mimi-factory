@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-05",
+  "updated": "2026-09-06",
   "apps": [
     {
       "id": "삼체",
@@ -1889,6 +1889,20 @@
       "premium": "apps/21세기를_위한_21가지_제언_quiz.html",
       "desc": "유발 하라리 『21세기를 위한 21가지 제언』의 21개 주제를 30문항 반복 마스터 퀴즈로 익히고, 사라진 세 이야기부터 무용계급·데이터 소유권",
       "cover": "covers/21세기를_위한_21가지_제언.webp",
+      "cover_style": "2-미니멀"
+    },
+    {
+      "id": "팩트풀니스",
+      "type": "quiz",
+      "title": "팩트풀니스",
+      "author": "한스 로슬링",
+      "date": "2026-09-06",
+      "color1": "#ffd36e",
+      "color2": "#ff8a5c",
+      "teaser": "apps/팩트풀니스_teaser.html",
+      "premium": "apps/팩트풀니스_quiz.html",
+      "desc": "침팬지보다 낮은 점수로 시작해 열 가지 본능을 하나씩 잡아내는 『팩트풀니스』 30문항 반복 마스터 퀴즈 — 4단계 소득 수준·세계의 PIN 코드",
+      "cover": "covers/팩트풀니스.webp",
       "cover_style": "2-미니멀"
     }
   ]
