@@ -3,11 +3,11 @@
   "lang": "en",
   "note": "BuzzFeed quiz tone · curly apostrophes only · glossary locked · balanced answer lengths"
  },
- "title_001": "IQ Brain Test — Dopamine Lab",
- "meta_001": "IQ Brain Test — 15 questions, full-throttle brain",
+ "title_001": "Brain Quickness Test — Dopamine Lab",
+ "meta_001": "Brain Quickness Test — 15 questions, full-throttle brain",
  "meta_002": "15 questions across sequences, logic, patterns, and words — plus an analysis of where your brain is strongest.",
  "html_001": "🧪 Dopamine Lab · Brain Series",
- "html_002": "IQ Brain",
+ "html_002": "Brain Quickness",
  "html_003": "Test",
  "html_004": "Sequences · Logic · Patterns · Words — 15 questions.",
  "html_005": "The more you get right, the harder it gets — it’s a",
@@ -116,7 +116,7 @@
  "js_079": "⏱ Time <b>",
  "js_080": "m",
  "js_081": "s</b> · Top area: <b>",
- "js_082": "🧠 IQ Brain Test\\n",
+ "js_082": "🧠 Brain Quickness Test\\n",
  "js_083": "/15 correct (",
  "js_084": "s)\\nTop area:",
  "js_085": "\\n\\nTake the full-throttle brain test → https://mimifactory.vibekr.com/en/apps/iq-brain-test.html",
@@ -125,7 +125,7 @@
  "_app": {
   "id": "iq_두뇌_테스트_test",
   "file": "iq-brain-test",
-  "title": "IQ Brain Test",
+  "title": "Brain Quickness Test",
   "desc": "15 questions in sequences, logic, patterns & words — plus your brain’s strongest area"
  }
 }

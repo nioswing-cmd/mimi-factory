@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>IQ頭脳テスト — ドーパミン実験室</title>
+<title>頭の回転スピードテスト — ドーパミン実験室</title>
 <link rel="icon" href="/icons/mimifactory.svg?v=1" type="image/svg+xml">
 <link rel="alternate icon" href="/icons/mimifactory-32.png?v=1" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/icons/mimifactory-180.png?v=1">
 <meta name="theme-color" content="#ff4f9a">
-<meta property="og:title" content="IQ頭脳テスト — 15問で頭脳フル回転">
+<meta property="og:title" content="頭の回転スピードテスト — 15問で頭脳フル回転">
 <meta property="og:description" content="数列·論理·パターン·言語の15問。あなたの頭脳の強み領域まで分析します。">
 <style id="i18nFonts">
 /* self-hosted subset fonts (OFL) — reuse original family names */
@@ -127,7 +127,7 @@ h1{font-family:'Jua',sans-serif;font-weight:400;}
   <section id="scHome" class="screen on">
     <div class="hero">
       <span class="badge">🧪 ドーパミン実験室 · 頭脳シリーズ</span>
-      <h1>🧠 <span class="grad">IQ 頭脳</span> テスト</h1>
+      <h1>🧠 <span class="grad">頭の回転スピード</span> テスト</h1>
       <p class="sub">数列 · 論理 · パターン · 言語、15問。<br>正解するほど難しくなる <b>頭脳フル回転コース</b>です。</p>
     </div>
     <div class="pitch">
@@ -295,7 +295,7 @@ function showResult(){
   setTimeout(()=>{Object.keys(DOM_NAME).forEach((d,i)=>{const f=$('dcf'+i);f.style.width=f.dataset.w+"%";});},150);
   const best=Object.keys(DOM_NAME).sort((a,b)=>(domScore[b]/domTotal[b])-(domScore[a]/domTotal[a]))[0];
   $('timeBox').innerHTML="⏱ タイム <b>"+(mm? mm+"分 ":"")+ss+"秒</b> · 最強領域: <b>"+DOM_NAME[best]+"</b>";
-  window._resText="🧠 IQ頭脳テスト\n"+tier[1]+" — "+score+"/15 正解 ("+(mm?mm+"分 ":"")+ss+"秒)\n最強領域: "+DOM_NAME[best]+"\n\n頭脳フル回転に挑戦 → https://mimifactory.vibekr.com/ja/apps/iq-brain-test.html";
+  window._resText="🧠 頭の回転スピードテスト\n"+tier[1]+" — "+score+"/15 正解 ("+(mm?mm+"分 ":"")+ss+"秒)\n最強領域: "+DOM_NAME[best]+"\n\n頭脳フル回転に挑戦 → https://mimifactory.vibekr.com/ja/apps/iq-brain-test.html";
 }
 function copyResult(){
   if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("コピー完了! 友だちに挑戦状 📋")); }

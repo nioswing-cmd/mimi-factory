@@ -4,11 +4,11 @@
   "slug": "adhd_테스트_test"
  },
  "title_001": {
-  "t": "ADHD 성향 테스트 — 내 집중력의 지금 상태는?",
+  "t": "집중력 산만 성향 테스트 — 내 집중력의 지금 상태는?",
   "ctx": "<title>"
  },
  "html_001": {
-  "t": "ADHD 성향",
+  "t": "집중력 산만",
   "ctx": "moji\">🧠</div>     <h1><span class=\"grad\""
  },
  "html_002": {
@@ -424,7 +424,7 @@
   "ctx": "ion shareResult(name, pct){   const url="
  },
  "js_073": {
-  "t": "ADHD 성향 테스트",
+  "t": "집중력 산만 성향 테스트",
   "ctx": "avigator.share){ navigator.share({title:"
  },
  "js_074": {
@@ -469,7 +469,7 @@
  },
  "jst_010": {
   "t": "점",
-  "ctx": "h2>       <div class= >ADHD 성향 지수 ${pct}"
+  "ctx": "h2>       <div class= >집중력 산만 성향 지수 ${pct}"
  },
  "jst_011": {
   "t": "지금 당신은",
@@ -508,16 +508,16 @@
   "ctx": "r>일상이 오래 힘들었다면 정신건강의학과의 정식 평가를 받아보세요. ☎ "
  },
  "jst_020": {
-  "t": "ADHD 성향 테스트 결과",
+  "t": "집중력 산만 성향 테스트 결과",
   "ctx": "t){   const url= ;   const text=`🧠 ADHD "
  },
  "jst_021": {
   "t": "지수",
-  "ctx": " const text=`🧠 ADHD 성향 테스트 결과: ${name} ("
+  "ctx": " const text=`🧠 집중력 산만 성향 테스트 결과: ${name} ("
  },
  "jst_022": {
   "t": "내 집중력의 지금 상태는? 나도 확인하기",
-  "ctx": "🧠 ADHD 성향 테스트 결과: ${name} (지수 ${pct}점)\\n"
+  "ctx": "🧠 집중력 산만 성향 테스트 결과: ${name} (지수 ${pct}점)\\n"
  },
  "jst_023": {
   "t": "클릭 위치 작은 폭죽",

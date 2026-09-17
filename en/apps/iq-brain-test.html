@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>IQ Brain Test — Dopamine Lab</title>
+<title>Brain Quickness Test — Dopamine Lab</title>
 <link rel="icon" href="/icons/mimifactory.svg?v=1" type="image/svg+xml">
 <link rel="alternate icon" href="/icons/mimifactory-32.png?v=1" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/icons/mimifactory-180.png?v=1">
 <meta name="theme-color" content="#ff4f9a">
-<meta property="og:title" content="IQ Brain Test — 15 questions, full-throttle brain">
+<meta property="og:title" content="Brain Quickness Test — 15 questions, full-throttle brain">
 <meta property="og:description" content="15 questions across sequences, logic, patterns, and words — plus an analysis of where your brain is strongest.">
 <style id="i18nFonts">
 /* self-hosted subset fonts (OFL) — reuse original family names */
@@ -127,7 +127,7 @@ h1{font-family:'Jua',sans-serif;font-weight:400;}
   <section id="scHome" class="screen on">
     <div class="hero">
       <span class="badge">🧪 Dopamine Lab · Brain Series</span>
-      <h1>🧠 <span class="grad">IQ Brain</span> Test</h1>
+      <h1>🧠 <span class="grad">Brain Quickness</span> Test</h1>
       <p class="sub">Sequences · Logic · Patterns · Words — 15 questions.<br>The more you get right, the harder it gets — it’s a <b>full-throttle brain course</b>.</p>
     </div>
     <div class="pitch">
@@ -295,7 +295,7 @@ function showResult(){
   setTimeout(()=>{Object.keys(DOM_NAME).forEach((d,i)=>{const f=$('dcf'+i);f.style.width=f.dataset.w+"%";});},150);
   const best=Object.keys(DOM_NAME).sort((a,b)=>(domScore[b]/domTotal[b])-(domScore[a]/domTotal[a]))[0];
   $('timeBox').innerHTML="⏱ Time <b>"+(mm? mm+"m ":"")+ss+"s</b> · Top area: <b>"+DOM_NAME[best]+"</b>";
-  window._resText="🧠 IQ Brain Test\n"+tier[1]+" — "+score+"/15 correct ("+(mm?mm+"m ":"")+ss+"s)\nTop area: "+DOM_NAME[best]+"\n\nTake the full-throttle brain test → https://mimifactory.vibekr.com/en/apps/iq-brain-test.html";
+  window._resText="🧠 Brain Quickness Test\n"+tier[1]+" — "+score+"/15 correct ("+(mm?mm+"m ":"")+ss+"s)\nTop area: "+DOM_NAME[best]+"\n\nTake the full-throttle brain test → https://mimifactory.vibekr.com/en/apps/iq-brain-test.html";
 }
 function copyResult(){
   if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("Copied! Challenge a friend 📋")); }

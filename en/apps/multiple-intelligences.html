@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Multiple Intelligence Test — Dopamine Lab</title>
+<title>Find Your Strongest Intelligence — Dopamine Lab</title>
 <link rel="icon" href="/icons/mimifactory.svg?v=1" type="image/svg+xml">
 <link rel="alternate icon" href="/icons/mimifactory-32.png?v=1" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/icons/mimifactory-180.png?v=1">
 <meta name="theme-color" content="#ff4f9a">
-<meta property="og:title" content="Multiple Intelligence Test — My map of 8 intelligences">
+<meta property="og:title" content="Find Your Strongest Intelligence — My map of 8 intelligences">
 <meta property="og:description" content="One IQ score can’t sum you up. Map your mind with Gardner’s 8 intelligences.">
 <style id="i18nFonts">
 /* self-hosted subset fonts (OFL) — reuse original family names */
@@ -121,11 +121,11 @@ h1{font-family:'Jua',sans-serif;font-weight:400;}
   <section id="scHome" class="screen on">
     <div class="hero">
       <span class="badge">🧪 Dopamine Lab · Brain Series</span>
-      <h1>🗺️ <span class="grad">Multiple Intelligence</span> Test</h1>
+      <h1>🗺️ Find Your <span class="grad">Strongest Intelligence</span></h1>
       <p class="sub">One IQ score can’t sum you up.<br>You have <b>8 kinds of intelligence</b>,<br>and everyone carries a map that’s all their own.</p>
     </div>
     <div class="pitch">
-      <b>The 8 intelligences we measure</b><br>
+      <b>The 8 intelligences we map</b><br>
       💬 Verbal · 🔢 Logic-Math · 🧭 Spatial · 🎵 Musical<br>
       🏃 Bodily · 🤝 Interpersonal · 🪞 Intrapersonal · 🌿 Naturalist<br>
       When the 24 questions are done, we’ll even reveal <b>the activities that match your top intelligence combo</b>.
@@ -165,7 +165,7 @@ h1{font-family:'Jua',sans-serif;font-weight:400;}
     <div class="srcbox">📖 <b>Theory source</b> — Howard Gardner, 『Frames of Mind: The Theory of Multiple Intelligences』(1983).
     His idea that “intelligence isn’t one thing but many, and everyone’s mix is different” — this test borrows those 8 categories to observe your tendencies.</div>
     <button class="btn" onclick="copyResult()">📋 Copy my result to share</button>
-    <button class="btn ghost" onclick="location.reload()">Test again</button>
+    <button class="btn ghost" onclick="location.reload()">Try again</button>
   </section>
 
   <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/en/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 Dopamine Lab — more tests this way →</a></div>
@@ -280,7 +280,7 @@ function showResult(){
     "<div class='row'><b>"+t1.emo+"  Play to your lead strength</b> — where  "+t1.name+" shines:  "+t1.act+".</div>"+
     "<div class='row'><b>"+t2.emo+"  The power of the combo</b> — pairing it with  "+t2.name+" creates real synergy. Finding activities where the two intelligences meet is your best growth strategy.</div>"+
     "<div class='row'><b>"+low.emo+"  Low isn’t a weakness</b> — a low  "+low.name+" isn’t a deficit; it just means “a place you don’t spend energy.” Borrow it only when you actually need it.</div>";
-  window._resText="🗺️ Multiple Intelligence Test (Gardner’s 8)\nTop intelligences:  "+t1.name+" "+t1.emo+" × "+t2.name+" "+t2.emo+"\nMap:  "+KEYS.map(k=>INTEL[k].emo+score[k]).join(" ")+"\n\nDraw your intelligence map → https://mimifactory.vibekr.com/en/apps/multiple-intelligences.html";
+  window._resText="🗺️ Find Your Strongest Intelligence (Gardner’s 8)\nTop intelligences:  "+t1.name+" "+t1.emo+" × "+t2.name+" "+t2.emo+"\nMap:  "+KEYS.map(k=>INTEL[k].emo+score[k]).join(" ")+"\n\nDraw your intelligence map → https://mimifactory.vibekr.com/en/apps/multiple-intelligences.html";
 }
 function copyResult(){
   if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("Copied! Paste it anywhere 📋")); }

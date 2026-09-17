@@ -1,5 +1,5 @@
 {
- "title_001": "Love Languages — My Type & Compatibility",
+ "title_001": "Discover Your Love Language — My Type & Compatibility",
  "html_001": "What’s your",
  "html_002": "Love Language",
  "html_003": "?",
@@ -247,7 +247,7 @@
  "_app": {
   "id": "사랑의_언어_진단_test",
   "file": "love-languages",
-  "title": "Love Languages: My Type & Compatibility",
+  "title": "Discover Your Love Language: My Type & Compatibility",
   "desc": "Find your love language, then check your compatibility with someone special."
  }
 }

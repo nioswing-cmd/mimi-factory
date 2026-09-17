@@ -4,12 +4,12 @@
   "slug": "iq_두뇌_테스트_test"
  },
  "title_001": {
-  "t": "IQ 두뇌 테스트 — 도파민 실험실",
+  "t": "두뇌 순발력 테스트 — 도파민 실험실",
   "ctx": "<title>"
  },
  "meta_001": {
-  "t": "IQ 두뇌 테스트 — 15문항 두뇌 풀가동",
-  "ctx": "<meta property=\"og:title\" content=\"IQ 두뇌 테스트 — 15문"
+  "t": "두뇌 순발력 테스트 — 15문항 두뇌 풀가동",
+  "ctx": "<meta property=\"og:title\" content=\"두뇌 순발력 테스트 — 15문"
  },
  "meta_002": {
   "t": "수열·논리·패턴·언어 15문항. 당신의 두뇌 강점 영역까지 분석해드립니다.",
@@ -20,7 +20,7 @@
   "ctx": " class=\"hero\">       <span class=\"badge\""
  },
  "html_002": {
-  "t": "IQ 두뇌",
+  "t": "두뇌 순발력",
   "ctx": "리즈</span>       <h1>🧠 <span class=\"grad\""
  },
  "html_003": {
@@ -456,12 +456,12 @@
   "ctx": "erHTML=\"⏱ 소요시간 <b>\"+(mm? mm+\"분 \":\"\")+ss+"
  },
  "js_082": {
-  "t": "🧠 IQ 두뇌 테스트\\n",
+  "t": "🧠 두뇌 순발력 테스트\\n",
   "ctx": "OM_NAME[best]+\"</b>\";   window._resText="
  },
  "js_083": {
   "t": "/15 정답 (",
-  "ctx": "ext=\"🧠 IQ 두뇌 테스트\\n\"+tier[1]+\" — \"+score+"
+  "ctx": "ext=\"🧠 두뇌 순발력 테스트\\n\"+tier[1]+\" — \"+score+"
  },
  "js_084": {
   "t": "초)\\n최강 영역:",

@@ -15,7 +15,7 @@
   {
    "id": "adhd-test",
    "type": "test",
-   "title": "ADHD 傾向測驗",
+   "title": "專注力與分心傾向測驗",
    "author": "MIMI FACTORY",
    "date": "2026-08-07",
    "color1": "#7aa6ff",
@@ -51,7 +51,7 @@
   {
    "id": "iq-brain-test",
    "type": "test",
-   "title": "IQ 頭腦測驗",
+   "title": "腦力反應速度測驗",
    "author": "MIMI FACTORY",
    "date": "2026-08-07",
    "color1": "#7aa6ff",
@@ -63,7 +63,7 @@
   {
    "id": "mbti-test",
    "type": "test",
-   "title": "MBTI測驗",
+   "title": "MBTI 性格傾向測驗",
    "author": "MIMI FACTORY",
    "date": "2026-08-07",
    "color1": "#7aa6ff",
@@ -243,7 +243,7 @@
   {
    "id": "multiple-intelligences",
    "type": "test",
-   "title": "多元智能測驗",
+   "title": "找出你的強項智能",
    "author": "MIMI FACTORY",
    "date": "2026-08-07",
    "color1": "#7aa6ff",
@@ -375,7 +375,7 @@
   {
    "id": "love-languages",
    "type": "test",
-   "title": "愛的語言診斷測驗",
+   "title": "認識你的愛之語",
    "author": "MIMI FACTORY",
    "date": "2026-08-07",
    "color1": "#7aa6ff",
@@ -639,7 +639,7 @@
   {
    "id": "personal-color",
    "type": "test",
-   "title": "個人色彩自我診斷",
+   "title": "找出你的個人色彩",
    "author": "MIMI FACTORY",
    "date": "2026-08-07",
    "color1": "#7aa6ff",

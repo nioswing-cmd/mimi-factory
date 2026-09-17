@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MBTI Test — Decode Your Personality Code</title>
+<title>MBTI Personality Test — Decode Your Personality Code</title>
 <link rel="icon" href="/icons/mimifactory.svg?v=1" type="image/svg+xml">
 <link rel="alternate icon" href="/icons/mimifactory-32.png?v=1" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/icons/mimifactory-180.png?v=1">
@@ -170,7 +170,7 @@
     <div class="card">
       <div class="hero-emoji">🧬</div>
       <h1>Your <span class="grad">Personality Code</span>,<br>decoded.</h1>
-      <p class="sub">Every tap sends an unknown code spinning —<br>a dopamine-rush MBTI test.<br>At the end, one single type unlocks: yours.</p>
+      <p class="sub">Every tap sends an unknown code spinning —<br>a dopamine-rush MBTI personality test.<br>At the end, one single type unlocks: yours.</p>
       <div class="lock-note">🔒 To keep it honest, <b>scores stay hidden</b>. You can’t see which choice leads where — so only your most honest answers come out.</div>
       <div class="len-label">Pick how many questions</div>
       <div class="lens" id="lens">
@@ -501,7 +501,7 @@ function showResult(){
 }
 function shareResult(){
   const T=TYPE[myType];
-  const txt=`My personality code is ${myType} · ${T.name} ${T.e}\n"${T.tag}"\n\nMBTI take the test → https://mimifactory.vibekr.com/apps/mbti_test_test.html`;
+  const txt=`My personality code is ${myType} · ${T.name} ${T.e}\n"${T.tag}"\n\nTake the MBTI Personality Test → https://mimifactory.vibekr.com/apps/mbti_test_test.html`;
   const done=()=>toast('📋 Copied your result!');
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done));}
   else fallbackCopy(txt,done);

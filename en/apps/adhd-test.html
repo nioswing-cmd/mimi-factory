@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ADHD Tendency Test — How’s your focus right now?</title>
+<title>Focus &amp; Distraction Tendency Test — How’s your focus right now?</title>
 <link rel="icon" href="/icons/mimifactory.svg?v=1" type="image/svg+xml">
 <link rel="alternate icon" href="/icons/mimifactory-32.png?v=1" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/icons/mimifactory-180.png?v=1">
@@ -175,7 +175,7 @@ h1{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
   
   <section id="home" class="home fade">
     <div class="sig-emoji">🧠</div>
-    <h1><span class="grad">ADHD Tendency</span> Test</h1>
+    <h1><span class="grad">Focus &amp; Distraction</span> Tendency Test</h1>
     <p class="sub">Being scattered isn’t about being lazy —<br><b>your brain may simply be built this way</b>.<br>Let’s take an honest look at where your focus is right now.</p>
     <div class="chips">
       <span class="chip">📊 Live tendency gauge</span>
@@ -448,7 +448,7 @@ function finish(){
     <div class="rlight fade" style="background:${bg}; border-color:${L.a2}55;">
       <div class="big">${L.emoji}</div>
       <h2 style="color:${L.a1}">${L.name}</h2>
-      <div class="pct">ADHD Tendency score ${pct} pts / 100 · ${L.tag}</div>
+      <div class="pct">Focus &amp; distraction score ${pct} pts / 100 · ${L.tag}</div>
     </div>
     <div class="rblock fade"><h3>🔎 Where you are now</h3><p>${L.now}</p></div>
     <div class="rblock fade"><h3>🧩 Signals by area</h3><div class="dims">${dimBars}</div>
@@ -477,8 +477,8 @@ function restart(){ show('home'); setAccent(LEVELS.low); }
 
 function shareResult(name, pct){
   const url='https://mimifactory.vibekr.com/en/apps/adhd-test.html';
-  const text=`🧠 ADHD Tendency Test result: ${name} (score ${pct} pts)\nHow’s my focus right now? Check yours too 👉`;
-  if(navigator.share){ navigator.share({title:'ADHD Tendency Test', text, url}).catch(()=>{}); }
+  const text=`🧠 Focus & Distraction Tendency Test result: ${name} (score ${pct} pts)\nHow’s my focus right now? Check yours too 👉`;
+  if(navigator.share){ navigator.share({title:'Focus & Distraction Tendency Test', text, url}).catch(()=>{}); }
   else{
     const t=text+'\n'+url;
     if(navigator.clipboard){ navigator.clipboard.writeText(t).then(()=>toast('📋 Result copied!')).catch(()=>toast(t)); }

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MBTI診断 — あなたの性格コードを解読</title>
+<title>MBTI性格タイプテスト — あなたの性格コードを解読</title>
 <link rel="icon" href="/icons/mimifactory.svg?v=1" type="image/svg+xml">
 <link rel="alternate icon" href="/icons/mimifactory-32.png?v=1" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/icons/mimifactory-180.png?v=1">
@@ -170,7 +170,7 @@
     <div class="card">
       <div class="hero-emoji">🧬</div>
       <h1>あなたの <span class="grad">性格コード</span>を<br>解読します</h1>
-      <p class="sub">タップするたび、正体不明のコードが揺れ動く<br>ドーパミンが弾けるMBTI診断。<br>最後にただひとつ、あなたのタイプが解錠されます。</p>
+      <p class="sub">タップするたび、正体不明のコードが揺れ動く<br>ドーパミンが弾けるMBTI性格タイプテスト。<br>最後にただひとつ、あなたのタイプが解錠されます。</p>
       <div class="lock-note">🔒 操作防止のため <b>スコアや数値は非公開</b>。どの選択がどこへ向かうか分からないように隠すから、正直な答えだけが出てきます。</div>
       <div class="len-label">問題数を選んでください</div>
       <div class="lens" id="lens">
@@ -217,7 +217,7 @@
       <div class="hide-note">🔒 軸ごとの正確な数値は公開しません。<br>数字に振り回されず、あなたのタイプの「持ち味」に目を向けてみてください。</div>
       <button class="btn" style="margin-top:20px" onclick="shareResult()">結果をコピー 📋</button>
       <button class="btn ghost" onclick="resetAll()">最初からやり直す</button>
-      <div class="footnote">遊び感覚の診断です。どんなコードでも、あなたはそれ以上に立体的な人ですよ 🤍</div>
+      <div class="footnote">遊び感覚のテストです。どんなコードでも、あなたはそれ以上に立体的な人ですよ 🤍</div>
     </div>
   </section>
 
@@ -501,7 +501,7 @@ function showResult(){
 }
 function shareResult(){
   const T=TYPE[myType];
-  const txt=`私の性格コードは ${myType} · ${T.name} ${T.e}\n"${T.tag}"\n\nMBTI 診断を受ける → https://mimifactory.vibekr.com/apps/mbti_test_test.html`;
+  const txt=`私の性格コードは ${myType} · ${T.name} ${T.e}\n"${T.tag}"\n\nMBTI性格タイプテストへ → https://mimifactory.vibekr.com/apps/mbti_test_test.html`;
   const done=()=>toast('📋 結果をコピーしました!');
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done));}
   else fallbackCopy(txt,done);

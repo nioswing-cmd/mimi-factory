@@ -39,7 +39,7 @@
   {
    "id": "adhd-test",
    "type": "test",
-   "title": "ADHD傾向テスト",
+   "title": "集中力・注意散漫タイプテスト",
    "author": "MIMI FACTORY",
    "date": "2026-08-07",
    "color1": "#7aa6ff",
@@ -75,7 +75,7 @@
   {
    "id": "iq-brain-test",
    "type": "test",
-   "title": "IQ頭脳テスト",
+   "title": "頭の回転スピードテスト",
    "author": "MIMI FACTORY",
    "date": "2026-08-07",
    "color1": "#7aa6ff",
@@ -87,14 +87,14 @@
   {
    "id": "mbti-test",
    "type": "test",
-   "title": "MBTI診断",
+   "title": "MBTI性格タイプテスト",
    "author": "MIMI FACTORY",
    "date": "2026-08-07",
    "color1": "#7aa6ff",
    "color2": "#b78bf5",
    "teaser": "apps/mbti-test.html",
    "premium": "apps/mbti-test.html",
-   "desc": "タップするたび揺れるコード — 最後にあなただけのタイプが解錠される診断"
+   "desc": "タップするたび揺れるコード — 最後にあなただけのタイプが解錠されるテスト"
   },
   {
    "id": "mbti-match",
@@ -351,7 +351,7 @@
   {
    "id": "multiple-intelligences",
    "type": "test",
-   "title": "多重知能テスト",
+   "title": "自分の強み知能を見つけよう",
    "author": "MIMI FACTORY",
    "date": "2026-08-07",
    "color1": "#7aa6ff",
@@ -531,7 +531,7 @@
   {
    "id": "love-languages",
    "type": "test",
-   "title": "愛の言語",
+   "title": "愛の言語を知ろう",
    "author": "MIMI FACTORY",
    "date": "2026-08-07",
    "color1": "#7aa6ff",
@@ -915,7 +915,7 @@
   {
    "id": "personal-color",
    "type": "test",
-   "title": "パーソナルカラー セルフ診断",
+   "title": "パーソナルカラーを見つけよう",
    "author": "MIMI FACTORY",
    "date": "2026-08-07",
    "color1": "#7aa6ff",

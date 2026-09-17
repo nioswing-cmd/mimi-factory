@@ -27,7 +27,7 @@
   {
    "id": "adhd-test",
    "type": "test",
-   "title": "ADHD Tendency Test",
+   "title": "Focus & Distraction Tendency Test",
    "author": "MIMI FACTORY",
    "date": "2026-08-07",
    "color1": "#7aa6ff",
@@ -63,7 +63,7 @@
   {
    "id": "iq-brain-test",
    "type": "test",
-   "title": "IQ Brain Test",
+   "title": "Brain Quickness Test",
    "author": "MIMI FACTORY",
    "date": "2026-08-07",
    "color1": "#7aa6ff",
@@ -75,7 +75,7 @@
   {
    "id": "mbti-test",
    "type": "test",
-   "title": "MBTI Test",
+   "title": "MBTI Personality Test",
    "author": "MIMI FACTORY",
    "date": "2026-08-07",
    "color1": "#7aa6ff",
@@ -267,7 +267,7 @@
   {
    "id": "multiple-intelligences",
    "type": "test",
-   "title": "Multiple Intelligence Test",
+   "title": "Find Your Strongest Intelligence",
    "author": "MIMI FACTORY",
    "date": "2026-08-07",
    "color1": "#7aa6ff",
@@ -399,7 +399,7 @@
   {
    "id": "love-languages",
    "type": "test",
-   "title": "Love Languages: My Type & Compatibility",
+   "title": "Discover Your Love Language: My Type & Compatibility",
    "author": "MIMI FACTORY",
    "date": "2026-08-07",
    "color1": "#7aa6ff",
@@ -699,7 +699,7 @@
   {
    "id": "personal-color",
    "type": "test",
-   "title": "Personal Color Self-Check",
+   "title": "Find Your Personal Color",
    "author": "MIMI FACTORY",
    "date": "2026-08-07",
    "color1": "#7aa6ff",

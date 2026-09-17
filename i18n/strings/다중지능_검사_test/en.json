@@ -3,8 +3,8 @@
   "lang": "en",
   "note": "BuzzFeed quiz tone · curly apostrophes only · glossary locked"
  },
- "title_001": "Multiple Intelligence Test — Dopamine Lab",
- "meta_001": "Multiple Intelligence Test — My map of 8 intelligences",
+ "title_001": "Find Your Strongest Intelligence — Dopamine Lab",
+ "meta_001": "Find Your Strongest Intelligence — My map of 8 intelligences",
  "meta_002": "One IQ score can’t sum you up. Map your mind with Gardner’s 8 intelligences.",
  "html_001": "🧪 Dopamine Lab · Brain Series",
  "html_002": "Multiple Intelligence",
@@ -14,7 +14,7 @@
  "html_006": "8 kinds of intelligence",
  "html_007": ",",
  "html_008": "and everyone carries a map that’s all their own.",
- "html_009": "The 8 intelligences we measure",
+ "html_009": "The 8 intelligences we map",
  "html_010": "💬 Verbal · 🔢 Logic-Math · 🧭 Spatial · 🎵 Musical",
  "html_011": "🏃 Bodily · 🤝 Interpersonal · 🪞 Intrapersonal · 🌿 Naturalist",
  "html_012": "When the 24 questions are done, we’ll even reveal",
@@ -30,7 +30,7 @@
  "html_022": "Theory source",
  "html_023": "— Howard Gardner, 『Frames of Mind: The Theory of Multiple Intelligences』(1983).\n    His idea that “intelligence isn’t one thing but many, and everyone’s mix is different” — this test borrows those 8 categories to observe your tendencies.",
  "html_024": "📋 Copy my result to share",
- "html_025": "Test again",
+ "html_025": "Try again",
  "html_026": "🧪 Dopamine Lab — more tests this way →",
  "html_027": "The Meaning & Fun Factory",
  "html_028": "MIMI FACTORY",
@@ -96,7 +96,7 @@
  "js_059": " creates real synergy. Finding activities where the two intelligences meet is your best growth strategy.</div>",
  "js_060": " Low isn’t a weakness</b> — a low ",
  "js_061": " isn’t a deficit; it just means “a place you don’t spend energy.” Borrow it only when you actually need it.</div>",
- "js_062": "🗺️ Multiple Intelligence Test (Gardner’s 8)\\nTop intelligences: ",
+ "js_062": "🗺️ Find Your Strongest Intelligence (Gardner’s 8)\\nTop intelligences: ",
  "js_063": "\\nMap: ",
  "js_064": "\\n\\nDraw your intelligence map → https://mimifactory.vibekr.com/en/apps/multiple-intelligences.html",
  "js_065": "Copied! Paste it anywhere 📋",
@@ -104,7 +104,7 @@
  "_app": {
   "id": "다중지능_검사_test",
   "file": "multiple-intelligences",
-  "title": "Multiple Intelligence Test",
+  "title": "Find Your Strongest Intelligence",
   "desc": "One IQ score can’t sum you up — map your 8 intelligences with Gardner."
  }
 }

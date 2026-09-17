@@ -4,12 +4,12 @@
   "slug": "다중지능_검사_test"
  },
  "title_001": {
-  "t": "다중지능 검사 — 도파민 실험실",
+  "t": "나의 강점 지능 찾기 — 도파민 실험실",
   "ctx": "<title>"
  },
  "meta_001": {
-  "t": "다중지능 검사 — 나의 8가지 지능 지도",
-  "ctx": "<meta property=\"og:title\" content=\"다중지능 검사 — 나의 8가"
+  "t": "나의 강점 지능 찾기 — 나의 8가지 지능 지도",
+  "ctx": "<meta property=\"og:title\" content=\"나의 강점 지능 찾기 — 나의 8가"
  },
  "meta_002": {
   "t": "IQ 하나로는 나를 설명할 수 없다. 가드너의 8가지 지능 이론으로 그리는 내 두뇌 지도.",
@@ -20,7 +20,7 @@
   "ctx": " class=\"hero\">       <span class=\"badge\""
  },
  "html_002": {
-  "t": "다중지능",
+  "t": "나의 강점 지능",
   "ctx": "즈</span>       <h1>🗺️ <span class=\"grad\""
  },
  "html_003": {
@@ -76,16 +76,16 @@
   "ctx": "button class=\"btn\" onclick=\"startQuiz()\""
  },
  "html_016": {
-  "t": "※ 하버드대 하워드 가드너의 다중지능 이론(1983, 『Frames of Mind』)의 분류를 빌린\n    자기보고식 참고 검사입니다. 능력 측정이 아니라",
+  "t": "※ 하버드대 하워드 가드너의 다중지능 이론(1983, 『Frames of Mind』)의 분류를 빌린\n    자기보고식 참고 결과입니다. 능력 측정이 아니라",
   "ctx": "내 지능 지도 그리기</button>     <p class=\"note\""
  },
  "html_017": {
   "t": "성향 지도",
-  "ctx": "분류를 빌린     자기보고식 참고 검사입니다. 능력 측정이 아니라 <b"
+  "ctx": "분류를 빌린     자기보고식 참고 결과입니다. 능력 측정이 아니라 <b"
  },
  "html_018": {
   "t": "에 가깝습니다.",
-  "ctx": "  자기보고식 참고 검사입니다. 능력 측정이 아니라 <b>성향 지도</b"
+  "ctx": "  자기보고식 참고 결과입니다. 능력 측정이 아니라 <b>성향 지도</b"
  },
  "html_019": {
   "t": "여덟 개의 지능 기둥이 자랍니다 — 어떤 기둥이 무엇인지는 결과에서 공개!",
@@ -104,7 +104,7 @@
   "ctx": "ips\"></div>     <div class=\"srcbox\">📖 <b"
  },
  "html_023": {
-  "t": "— 하워드 가드너(Howard Gardner), 『Frames of Mind: The Theory of Multiple Intelligences』(1983).\n    \"지능은 하나가 아니라 여러 개이며, 사람마다 조합이 다르다\"는 이론으로, 이 검사는 그 8가지 분류를 성향 관찰에 빌려 썼습니다.",
+  "t": "— 하워드 가드너(Howard Gardner), 『Frames of Mind: The Theory of Multiple Intelligences』(1983).\n    \"지능은 하나가 아니라 여러 개이며, 사람마다 조합이 다르다\"는 이론으로, 이 앱은 그 8가지 분류를 성향 관찰에 빌려 썼습니다.",
   "ctx": "v>     <div class=\"srcbox\">📖 <b>이론 출처</b"
  },
  "html_024": {
@@ -112,7 +112,7 @@
   "ctx": "utton class=\"btn\" onclick=\"copyResult()\""
  },
  "html_025": {
-  "t": "다시 검사하기",
+  "t": "다시 해보기",
   "ctx": "=\"btn ghost\" onclick=\"location.reload()\""
  },
  "html_026": {
@@ -376,7 +376,7 @@
   "ctx": "\"+low.emo+\" 낮다고 약점은 아님</b> — \"+low.name+"
  },
  "js_062": {
-  "t": "🗺️ 다중지능 검사 (가드너 8지능)\\n대표 지능:",
+  "t": "🗺️ 나의 강점 지능 찾기 (가드너 8지능)\\n대표 지능:",
   "ctx": "때만 빌려 쓰면 됩니다.</div>\";   window._resText="
  },
  "js_063": {

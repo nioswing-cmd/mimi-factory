@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>IQ 頭腦測驗 — 多巴胺實驗室</title>
+<title>腦力反應速度測驗 — 多巴胺實驗室</title>
 <link rel="icon" href="/icons/mimifactory.svg?v=1" type="image/svg+xml">
 <link rel="alternate icon" href="/icons/mimifactory-32.png?v=1" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/icons/mimifactory-180.png?v=1">
 <meta name="theme-color" content="#ff4f9a">
-<meta property="og:title" content="IQ 頭腦測驗 — 15 題頭腦全開">
+<meta property="og:title" content="腦力反應速度測驗 — 15 題頭腦全開">
 <meta property="og:description" content="數列·邏輯·圖形·語文共 15 題，還會分析你頭腦最強的領域。">
 <style id="i18nFonts">
 /* self-hosted subset fonts (OFL) — reuse original family names */
@@ -127,7 +127,7 @@ h1{font-family:'Jua',sans-serif;font-weight:400;}
   <section id="scHome" class="screen on">
     <div class="hero">
       <span class="badge">🧪 多巴胺實驗室 · 頭腦系列</span>
-      <h1>🧠 <span class="grad">IQ 頭腦</span> 測驗</h1>
+      <h1>🧠 <span class="grad">腦力反應速度</span> 測驗</h1>
       <p class="sub">數列 · 邏輯 · 圖形 · 語文，15 題。<br>答對愈多、難度愈高的 <b>頭腦全開課程</b>。</p>
     </div>
     <div class="pitch">
@@ -295,7 +295,7 @@ function showResult(){
   setTimeout(()=>{Object.keys(DOM_NAME).forEach((d,i)=>{const f=$('dcf'+i);f.style.width=f.dataset.w+"%";});},150);
   const best=Object.keys(DOM_NAME).sort((a,b)=>(domScore[b]/domTotal[b])-(domScore[a]/domTotal[a]))[0];
   $('timeBox').innerHTML="⏱ 花費時間 <b>"+(mm? mm+"分 ":"")+ss+"秒</b> · 最強領域: <b>"+DOM_NAME[best]+"</b>";
-  window._resText="🧠 IQ 頭腦測驗\n"+tier[1]+" — "+score+"/15 題答對 ("+(mm?mm+"分 ":"")+ss+"秒)\n最強領域: "+DOM_NAME[best]+"\n\n挑戰頭腦全開 → https://mimifactory.vibekr.com/zh-tw/apps/iq-brain-test.html";
+  window._resText="🧠 腦力反應速度測驗\n"+tier[1]+" — "+score+"/15 題答對 ("+(mm?mm+"分 ":"")+ss+"秒)\n最強領域: "+DOM_NAME[best]+"\n\n挑戰頭腦全開 → https://mimifactory.vibekr.com/zh-tw/apps/iq-brain-test.html";
 }
 function copyResult(){
   if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("複製完成! 向朋友下戰帖 📋")); }

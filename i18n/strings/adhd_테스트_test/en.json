@@ -3,8 +3,8 @@
   "lang": "en",
   "note": "BuzzFeed quiz tone · curly apostrophes only · glossary locked"
  },
- "title_001": "ADHD Tendency Test — How’s your focus right now?",
- "html_001": "ADHD Tendency",
+ "title_001": "Focus & Distraction Tendency Test — How’s your focus right now?",
+ "html_001": "Focus & Distraction",
  "html_002": "Test",
  "html_003": "Being scattered isn’t about being lazy —",
  "html_004": "your brain may simply be built this way",
@@ -108,7 +108,7 @@
  "js_070": "⚡ It’s not your fault — it’s just how your brain works",
  "js_071": "🌀 You’ve made it this far — that took real effort",
  "js_072": "https://mimifactory.vibekr.com/en/apps/adhd-test.html",
- "js_073": "ADHD Tendency Test",
+ "js_073": "Focus & Distraction Tendency Test",
  "js_074": "📋 Result copied!",
  "jst_001": "Area-balanced ordering",
  "jst_002": "Selected question count",
@@ -129,14 +129,14 @@
  "jst_017": "This test isn’t a medical diagnosis — it’s a self-check tool for reflecting on yourself.",
  "jst_018": "If daily life has been hard for a long time, get a proper evaluation from a mental health professional.",
  "jst_019": "988 Suicide & Crisis Lifeline",
- "jst_020": "ADHD Tendency Test result",
+ "jst_020": "Focus & Distraction Tendency Test result",
  "jst_021": "score",
  "jst_022": "How’s my focus right now? Check yours too",
  "jst_023": "Small burst at click point",
  "_app": {
   "id": "adhd_테스트_test",
   "file": "adhd-test",
-  "title": "ADHD Tendency Test",
+  "title": "Focus & Distraction Tendency Test",
   "desc": "Being scattered isn’t laziness — a gentle check-in on where your focus is now"
  }
 }

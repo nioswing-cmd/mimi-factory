@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>多重知能テスト — ドーパミン実験室</title>
+<title>自分の強み知能を見つけよう — ドーパミン実験室</title>
 <link rel="icon" href="/icons/mimifactory.svg?v=1" type="image/svg+xml">
 <link rel="alternate icon" href="/icons/mimifactory-32.png?v=1" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/icons/mimifactory-180.png?v=1">
 <meta name="theme-color" content="#ff4f9a">
-<meta property="og:title" content="多重知能テスト — 私の8つの知能マップ">
+<meta property="og:title" content="自分の強み知能を見つけよう — 私の8つの知能マップ">
 <meta property="og:description" content="IQひとつでは私を語れない。ガードナーの8つの知能理論で描く、私の脳の地図。">
 <style id="i18nFonts">
 /* self-hosted subset fonts (OFL) — reuse original family names */
@@ -121,11 +121,11 @@ h1{font-family:'Jua',sans-serif;font-weight:400;}
   <section id="scHome" class="screen on">
     <div class="hero">
       <span class="badge">🧪 ドーパミン実験室 · 脳シリーズ</span>
-      <h1>🗺️ <span class="grad">多重知能</span> テスト</h1>
+      <h1>🗺️ 自分の<span class="grad">強み知能</span>を見つけよう</h1>
       <p class="sub">IQのスコアひとつでは、あなたを語りきれません。<br>人には <b>8種類の知能</b>があり、<br>誰もが自分だけの知能マップを持っています。</p>
     </div>
     <div class="pitch">
-      <b>測定する8つの知能</b><br>
+      <b>見つける8つの知能</b><br>
       💬 言語 · 🔢 論理数学 · 🧭 空間 · 🎵 音楽<br>
       🏃 身体運動 · 🤝 対人 · 🪞 内省 · 🌿 博物<br>
       24問が終わると <b>あなたの代表的な知能の組み合わせに合う活動</b>まで教えてくれます。
@@ -165,7 +165,7 @@ h1{font-family:'Jua',sans-serif;font-weight:400;}
     <div class="srcbox">📖 <b>理論の出典</b> — ハワード・ガードナー(Howard Gardner)、『Frames of Mind: The Theory of Multiple Intelligences』(1983)。
     「知能はひとつではなく複数あり、人によって組み合わせが違う」という理論で、このテストはその8分類を傾向の観察に借りました。</div>
     <button class="btn" onclick="copyResult()">📋 結果をコピーして共有</button>
-    <button class="btn ghost" onclick="location.reload()">もう一度検査する</button>
+    <button class="btn ghost" onclick="location.reload()">もう一度やってみる</button>
   </section>
 
   <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/ja/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 ドーパミン実験室 — ほかのテストを見る →</a></div>
@@ -280,7 +280,7 @@ function showResult(){
     "<div class='row'><b>"+t1.emo+"  代表知能を活かす</b> —  "+t1.name+"が輝く活動： "+t1.act+".</div>"+
     "<div class='row'><b>"+t2.emo+"  組み合わせの力</b> —  "+t2.name+"と一緒に使うと相乗効果が大きくなります。二つの知能が出会う活動を探すことが、最高の成長戦略です。</div>"+
     "<div class='row'><b>"+low.emo+"  低くても弱点ではない</b> —  "+low.name+"が低いのは欠如ではなく「エネルギーを使っていない場所」という意味。必要なときだけ借りて使えば大丈夫です。</div>";
-  window._resText="🗺️ 多重知能テスト（ガードナーの8知能）\n代表知能:  "+t1.name+" "+t1.emo+" × "+t2.name+" "+t2.emo+"\nマップ:  "+KEYS.map(k=>INTEL[k].emo+score[k]).join(" ")+"\n\n私の知能マップを描く → https://mimifactory.vibekr.com/ja/apps/multiple-intelligences.html";
+  window._resText="🗺️ 自分の強み知能を見つけよう（ガードナーの8知能）\n代表知能:  "+t1.name+" "+t1.emo+" × "+t2.name+" "+t2.emo+"\nマップ:  "+KEYS.map(k=>INTEL[k].emo+score[k]).join(" ")+"\n\n私の知能マップを描く → https://mimifactory.vibekr.com/ja/apps/multiple-intelligences.html";
 }
 function copyResult(){
   if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("コピーしました！どこにでも貼り付けてください 📋")); }

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ADHD傾向テスト — いまの集中力、どんな状態？</title>
+<title>集中力・注意散漫タイプテスト — いまの集中力、どんな状態？</title>
 <link rel="icon" href="/icons/mimifactory.svg?v=1" type="image/svg+xml">
 <link rel="alternate icon" href="/icons/mimifactory-32.png?v=1" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/icons/mimifactory-180.png?v=1">
@@ -175,7 +175,7 @@ h1{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
   
   <section id="home" class="home fade">
     <div class="sig-emoji">🧠</div>
-    <h1><span class="grad">ADHD傾向</span> テスト</h1>
+    <h1><span class="grad">集中力・注意散漫</span> タイプテスト</h1>
     <p class="sub">気が散るのは、なまけているからではなく、<br><b>脳がもともとそういうつくりだから</b>かもしれません。<br>いまの集中力の状態を、正直にのぞいてみましょう。</p>
     <div class="chips">
       <span class="chip">📊 リアルタイム傾向ゲージ</span>
@@ -448,7 +448,7 @@ function finish(){
     <div class="rlight fade" style="background:${bg}; border-color:${L.a2}55;">
       <div class="big">${L.emoji}</div>
       <h2 style="color:${L.a1}">${L.name}</h2>
-      <div class="pct">ADHD傾向 指数 ${pct}点 / 100 · ${L.tag}</div>
+      <div class="pct">集中力・注意散漫 指数 ${pct}点 / 100 · ${L.tag}</div>
     </div>
     <div class="rblock fade"><h3>🔎 いまのあなたは</h3><p>${L.now}</p></div>
     <div class="rblock fade"><h3>🧩 領域ごとのサイン</h3><div class="dims">${dimBars}</div>
@@ -477,8 +477,8 @@ function restart(){ show('home'); setAccent(LEVELS.low); }
 
 function shareResult(name, pct){
   const url='https://mimifactory.vibekr.com/ja/apps/adhd-test.html';
-  const text=`🧠 ADHD傾向テスト結果: ${name} (指数 ${pct}点)\nいまの私の集中力、どんな状態？私も確認する 👉`;
-  if(navigator.share){ navigator.share({title:'ADHD傾向テスト', text, url}).catch(()=>{}); }
+  const text=`🧠 集中力・注意散漫タイプテスト結果: ${name} (指数 ${pct}点)\nいまの私の集中力、どんな状態？私も確認する 👉`;
+  if(navigator.share){ navigator.share({title:'集中力・注意散漫タイプテスト', text, url}).catch(()=>{}); }
   else{
     const t=text+'\n'+url;
     if(navigator.clipboard){ navigator.clipboard.writeText(t).then(()=>toast('📋 結果をコピーしました！')).catch(()=>toast(t)); }

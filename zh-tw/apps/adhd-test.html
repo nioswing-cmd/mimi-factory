@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ADHD 傾向測驗 — 你現在的專注力狀態如何？</title>
+<title>專注力與分心傾向測驗 — 你現在的專注力狀態如何？</title>
 <link rel="icon" href="/icons/mimifactory.svg?v=1" type="image/svg+xml">
 <link rel="alternate icon" href="/icons/mimifactory-32.png?v=1" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/icons/mimifactory-180.png?v=1">
@@ -175,7 +175,7 @@ h1{font-family:'Jua',sans-serif; font-weight:400; letter-spacing:.01em;}
   
   <section id="home" class="home fade">
     <div class="sig-emoji">🧠</div>
-    <h1><span class="grad">ADHD 傾向</span> 測驗</h1>
+    <h1><span class="grad">專注力與分心</span> 傾向測驗</h1>
     <p class="sub">分心不是因為懶惰，<br><b>而是大腦本來就是這樣長的</b>，也說不定。<br>誠實地看看，你現在的專注力狀態。</p>
     <div class="chips">
       <span class="chip">📊 即時傾向儀表</span>
@@ -240,7 +240,7 @@ const DIMS = {
 const POOL = {
   I:[
     "就算想專心做該做的事，也很快就飄到別的念頭上。",
-    "常出小差錯（打錯字·漏東西），得回頭再檢查一遍。",
+    "常出小差錯（打錯字·漏東西），得回頭再確認一遍。",
     "鑰匙·錢包·手機這類東西，常常想不起來放哪了。",
     "聊天或開會到一半會漏掉內容，心想「剛剛講到哪了？」",
     "無聊卻重要的事（文件·整理），特別遲遲下不了手、一直拖。",
@@ -448,7 +448,7 @@ function finish(){
     <div class="rlight fade" style="background:${bg}; border-color:${L.a2}55;">
       <div class="big">${L.emoji}</div>
       <h2 style="color:${L.a1}">${L.name}</h2>
-      <div class="pct">ADHD 傾向 指數 ${pct}分 / 100 · ${L.tag}</div>
+      <div class="pct">專注力與分心 指數 ${pct}分 / 100 · ${L.tag}</div>
     </div>
     <div class="rblock fade"><h3>🔎 現在的你</h3><p>${L.now}</p></div>
     <div class="rblock fade"><h3>🧩 各領域的訊號</h3><div class="dims">${dimBars}</div>
@@ -477,8 +477,8 @@ function restart(){ show('home'); setAccent(LEVELS.low); }
 
 function shareResult(name, pct){
   const url='https://mimifactory.vibekr.com/zh-tw/apps/adhd-test.html';
-  const text=`🧠 ADHD 傾向測驗結果: ${name} (指數 ${pct}分)\n我現在的專注力狀態如何？你也來測測 👉`;
-  if(navigator.share){ navigator.share({title:'ADHD 傾向測驗', text, url}).catch(()=>{}); }
+  const text=`🧠 專注力與分心傾向測驗結果: ${name} (指數 ${pct}分)\n我現在的專注力狀態如何？你也來測測 👉`;
+  if(navigator.share){ navigator.share({title:'專注力與分心傾向測驗', text, url}).catch(()=>{}); }
   else{
     const t=text+'\n'+url;
     if(navigator.clipboard){ navigator.clipboard.writeText(t).then(()=>toast('📋 結果已複製！')).catch(()=>toast(t)); }

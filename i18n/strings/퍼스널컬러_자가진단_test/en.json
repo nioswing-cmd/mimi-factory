@@ -3,12 +3,12 @@
   "lang": "en",
   "note": "BuzzFeed quiz tone · curly apostrophes only · glossary locked"
  },
- "title_001": "Personal Color Self-Check — Dopamine Lab",
- "meta_001": "Personal Color Self-Check — Which season am I?",
+ "title_001": "Find Your Personal Color — Dopamine Lab",
+ "meta_001": "Find Your Personal Color — Which season am I?",
  "meta_002": "One look in the mirror, 12 questions. Spring Warm · Summer Cool · Autumn Warm · Winter Cool — find the color your face loves.",
  "html_001": "🧪 Dopamine Lab · The Viral Test",
  "html_002": "Personal Color",
- "html_003": "Self-Check",
+ "html_003": "Finder",
  "html_004": "One look in the mirror and you’re ready.",
  "html_005": "In 12 questions, find",
  "html_006": "the color your face loves",
@@ -17,8 +17,8 @@
  "html_009": "① Get a mirror or a selfie ready in natural light (by a window).",
  "html_010": "② A bare, makeup-free face and wrist give the truest read.",
  "html_011": "③ If you’re torn, just pick the one that’s ‘a little closer’.",
- "html_012": "🎨 Start the 12-question check",
- "html_013": "※ This is a reference self-check based on self-observation. Results can shift with lighting or screen settings,\n    so for an accurate read we recommend a professional draping test.",
+ "html_012": "🎨 Start the 12 questions",
+ "html_013": "※ This is a reference result based on self-observation. Results can shift with lighting or screen settings,\n    so for an accurate read we recommend a professional draping test.",
  "html_014": "Two secret axes move in real time — what they measure is revealed at the end!",
  "html_015": "👉 Pick whichever is closer",
  "html_016": "🌡 Temperature",
@@ -27,7 +27,7 @@
  "html_019": "🙅 Colors that wash you out (avoid)",
  "html_020": "📋 Copy my result to share",
  "html_021": "Take it again",
- "html_022": "※ This is a self-check for reference. Even within the same season, everyone’s finer tones differ.",
+ "html_022": "※ This is a self-observation result for reference. Even within the same season, everyone’s finer tones differ.",
  "html_023": "🧪 Dopamine Lab — more tests this way →",
  "html_024": "The Meaning & Fun Factory",
  "html_025": "MIMI FACTORY",
@@ -129,7 +129,7 @@
  "_app": {
   "id": "퍼스널컬러_자가진단_test",
   "file": "personal-color",
-  "title": "Personal Color Self-Check",
+  "title": "Find Your Personal Color",
   "desc": "One look in the mirror, 12 questions — find the season your face lives in."
  }
 }

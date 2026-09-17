@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MBTI測驗 — 解讀你的性格代碼</title>
+<title>MBTI 性格傾向測驗 — 解讀你的性格代碼</title>
 <link rel="icon" href="/icons/mimifactory.svg?v=1" type="image/svg+xml">
 <link rel="alternate icon" href="/icons/mimifactory-32.png?v=1" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/icons/mimifactory-180.png?v=1">
@@ -170,7 +170,7 @@
     <div class="card">
       <div class="hero-emoji">🧬</div>
       <h1>你的 <span class="grad">性格代碼</span><br>就此解讀</h1>
-      <p class="sub">每點一下，看不見的代碼就劇烈跳動<br>多巴胺狂飆的MBTI測驗。<br>最後只有一個，你的類型會被解鎖。</p>
+      <p class="sub">每點一下，看不見的代碼就劇烈跳動<br>多巴胺狂飆的 MBTI 性格傾向測驗。<br>最後只有一個，你的類型會被解鎖。</p>
       <div class="lock-note">🔒 為了防止操弄， <b>分數與數值不公開</b>。哪個選擇會通往哪裡，全都藏起來，所以只會跑出你最誠實的答案。</div>
       <div class="len-label">選擇題目數量</div>
       <div class="lens" id="lens">
@@ -283,7 +283,7 @@ const QBANK = {
     {a:{k:"J",txt:"我的空間整齊我才舒服"}, b:{k:"P",txt:"有點亂我也不太在意"}},
     {a:{k:"J",txt:"計畫突然改變我會很慌"}, b:{k:"P",txt:"計畫變了反而覺得新鮮又有趣"}},
     {a:{k:"J",txt:"我會快點做決定然後收尾"}, b:{k:"P",txt:"我會保留選項，從容地慢慢來"}},
-    {a:{k:"J",txt:"我照著檢查清單一項項推進"}, b:{k:"P",txt:"我看心情彈性地進行"}},
+    {a:{k:"J",txt:"我照著清單一項項推進"}, b:{k:"P",txt:"我看心情彈性地進行"}},
     {a:{k:"J",txt:"約好的地方我總是提早到"}, b:{k:"P",txt:"約定的時間我常常都很趕"}},
     {a:{k:"J",txt:"既定的框架給我安定感"}, b:{k:"P",txt:"我覺得框架可以看情況調整"}},
     {a:{k:"J",txt:"週末我照計畫行動"}, b:{k:"P",txt:"週末我看心情隨興過"}}
@@ -501,7 +501,7 @@ function showResult(){
 }
 function shareResult(){
   const T=TYPE[myType];
-  const txt=`我的性格代碼是 ${myType} · ${T.name} ${T.e}\n"${T.tag}"\n\nMBTI 測驗開始 → https://mimifactory.vibekr.com/apps/mbti_test_test.html`;
+  const txt=`我的性格代碼是 ${myType} · ${T.name} ${T.e}\n"${T.tag}"\n\nMBTI 性格傾向測驗開始 → https://mimifactory.vibekr.com/apps/mbti_test_test.html`;
   const done=()=>toast('📋 結果文字已複製!');
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done));}
   else fallbackCopy(txt,done);

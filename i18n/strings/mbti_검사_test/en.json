@@ -3,13 +3,13 @@
   "lang": "en",
   "note": "BuzzFeed quiz tone · curly apostrophes only · glossary locked"
  },
- "title_001": "MBTI Test — Decode Your Personality Code",
+ "title_001": "MBTI Personality Test — Decode Your Personality Code",
  "html_001": "Your",
  "html_002": "Personality Code",
  "html_003": ",",
  "html_004": "decoded.",
  "html_005": "Every tap sends an unknown code spinning —",
- "html_006": "a dopamine-rush MBTI test.",
+ "html_006": "a dopamine-rush MBTI personality test.",
  "html_007": "At the end, one single type unlocks: yours.",
  "html_008": "🔒 To keep it honest,",
  "html_009": "scores stay hidden",
@@ -203,7 +203,7 @@
  "_app": {
   "id": "mbti_검사_test",
   "file": "mbti-test",
-  "title": "MBTI Test",
+  "title": "MBTI Personality Test",
   "desc": "An unknown code spins with every tap — one single type unlocks at the end: yours."
  }
 }

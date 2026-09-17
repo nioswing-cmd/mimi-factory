@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>個人色彩自我診斷 — 多巴胺實驗室</title>
+<title>找出你的個人色彩 — 多巴胺實驗室</title>
 <link rel="icon" href="/icons/mimifactory.svg?v=1" type="image/svg+xml">
 <link rel="alternate icon" href="/icons/mimifactory-32.png?v=1" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/icons/mimifactory-180.png?v=1">
 <meta name="theme-color" content="#ff4f9a">
-<meta property="og:title" content="個人色彩自我診斷 — 我是哪個季節？">
+<meta property="og:title" content="找出你的個人色彩 — 我是哪個季節？">
 <meta property="og:description" content="照一次鏡子，12 題。春暖·夏冷·秋暖·冬冷 — 找出最適合你的顏色。">
 <style id="i18nFonts">
 /* self-hosted subset fonts (OFL) — reuse original family names */
@@ -128,19 +128,19 @@ h1{font-family:'Jua',sans-serif; font-weight:400;}
   <section id="scHome" class="screen on">
     <div class="hero">
       <span class="badge">🧪 多巴胺實驗室 · 人氣測驗</span>
-      <h1><span class="grad">個人色彩</span><br>自我診斷</h1>
+      <h1>找出你的<br><span class="grad">個人色彩</span></h1>
       <div class="dots">🌸☀️🍂❄️</div>
       <p class="sub">照一次鏡子就準備好了。<br>12 題就能找出 <b>最適合你的顏色</b>。</p>
     </div>
     <div class="pitch">
-      <b>診斷前 30 秒準備</b><br>
+      <b>開始前 30 秒準備</b><br>
       ① 在自然光（窗邊）準備好鏡子或自拍。<br>
       ② 沒上妝的素顏·手腕最準確。<br>
       ③ 猶豫的話，選「比較接近的那個」就好。
     </div>
-    <button class="btn" onclick="startQuiz()">🎨 開始 12 題診斷</button>
-    <p class="note">※ 這是以自我觀察為基礎的參考用診斷。結果會因光線或螢幕設定而不同，
-    精準的診斷建議找專家做垂布測試。</p>
+    <button class="btn" onclick="startQuiz()">🎨 開始 12 題</button>
+    <p class="note">※ 這是以自我觀察為基礎的參考結果。結果會因光線或螢幕設定而不同，
+    精準的結果建議找專家做垂布測試。</p>
   </section>
 
   
@@ -176,8 +176,8 @@ h1{font-family:'Jua',sans-serif; font-weight:400;}
     <div class="swatches" id="worstSw"></div>
     <div class="tips" id="tips"></div>
     <button class="btn" onclick="copyResult()">📋 複製結果分享</button>
-    <button class="btn ghost" onclick="location.reload()">再測一次</button>
-    <p class="note">※ 這是自我診斷的參考結果。就算是同一個季節，每個人的細節色調也不一樣。</p>
+    <button class="btn ghost" onclick="location.reload()">再玩一次</button>
+    <p class="note">※ 這是自我觀察的參考結果。就算是同一個季節，每個人的細節色調也不一樣。</p>
   </section>
 
   <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/zh-tw/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 多巴胺實驗室 — 看看其他測驗 →</a></div>
@@ -281,7 +281,7 @@ function showResult(){
   const ws=$('worstSw'); ws.innerHTML="";
   T.worst.forEach(([n,c],i)=>{ const d=document.createElement('div'); d.className="sw badx"; d.style.background=c; d.style.opacity=".8"; d.style.animationDelay=(i*.05)+"s"; d.innerHTML="<span>"+n+"</span>"; ws.appendChild(d); });
   $('tips').innerHTML=T.tip;
-  window._resText="🎨 個人色彩自我診斷結果\n我是「"+T.name+"」 "+T.emo+"\n"+T.tag+"\n\n去找我的季節 → https://mimifactory.vibekr.com/zh-tw/apps/personal-color.html";
+  window._resText="🎨 我的個人色彩結果\n我是「"+T.name+"」 "+T.emo+"\n"+T.tag+"\n\n去找我的季節 → https://mimifactory.vibekr.com/zh-tw/apps/personal-color.html";
 }
 function copyResult(){
   const t=window._resText||"";
