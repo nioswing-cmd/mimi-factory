@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>IQ 두뇌 테스트 — 도파민 실험실</title>
+<title>두뇌 순발력 테스트 — 도파민 실험실</title>
 <link rel="icon" href="/icons/test.svg?v=1" type="image/svg+xml">
 <link rel="alternate icon" href="/icons/test-32.png?v=1" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/icons/test-180.png?v=1">
 <meta name="theme-color" content="#ff7a1a">
-<meta property="og:title" content="IQ 두뇌 테스트 — 15문항 두뇌 풀가동">
+<meta property="og:title" content="두뇌 순발력 테스트 — 15문항 두뇌 풀가동">
 <meta property="og:description" content="수열·논리·패턴·언어 15문항. 당신의 두뇌 강점 영역까지 분석해드립니다.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -349,7 +349,7 @@ html.mmf-cover-on #mmf-cover-bg{opacity:0.70;}
   <section id="scHome" class="screen on">
     <div class="hero">
       <span class="badge">🧪 도파민 실험실 · 두뇌 시리즈</span>
-      <h1>🧠 <span class="grad">IQ 두뇌</span> 테스트</h1>
+      <h1>🧠 <span class="grad">두뇌 순발력</span> 테스트</h1>
       <p class="sub">수열 · 논리 · 패턴 · 언어, 15문항.<br>맞힐수록 어려워지는 <b>두뇌 풀가동 코스</b>입니다.</p>
     </div>
     <div class="pitch">
@@ -517,7 +517,7 @@ function showResult(){
   setTimeout(()=>{Object.keys(DOM_NAME).forEach((d,i)=>{const f=$('dcf'+i);f.style.width=f.dataset.w+"%";});},150);
   const best=Object.keys(DOM_NAME).sort((a,b)=>(domScore[b]/domTotal[b])-(domScore[a]/domTotal[a]))[0];
   $('timeBox').innerHTML="⏱ 소요시간 <b>"+(mm? mm+"분 ":"")+ss+"초</b> · 최강 영역: <b>"+DOM_NAME[best]+"</b>";
-  window._resText="🧠 IQ 두뇌 테스트\n"+tier[1]+" — "+score+"/15 정답 ("+(mm?mm+"분 ":"")+ss+"초)\n최강 영역: "+DOM_NAME[best]+"\n\n두뇌 풀가동 도전 → https://mimifactory.vibekr.com/apps/iq_두뇌_테스트_test.html";
+  window._resText="🧠 두뇌 순발력 테스트\n"+tier[1]+" — "+score+"/15 정답 ("+(mm?mm+"분 ":"")+ss+"초)\n최강 영역: "+DOM_NAME[best]+"\n\n두뇌 풀가동 도전 → https://mimifactory.vibekr.com/apps/iq_두뇌_테스트_test.html";
 }
 function copyResult(){
   if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("복사 완료! 친구에게 도전장 📋")); }

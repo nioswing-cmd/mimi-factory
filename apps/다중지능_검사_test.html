@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>다중지능 검사 — 도파민 실험실</title>
+<title>나의 강점 지능 찾기 — 도파민 실험실</title>
 <link rel="icon" href="/icons/test.svg?v=1" type="image/svg+xml">
 <link rel="alternate icon" href="/icons/test-32.png?v=1" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/icons/test-180.png?v=1">
 <meta name="theme-color" content="#ff7a1a">
-<meta property="og:title" content="다중지능 검사 — 나의 8가지 지능 지도">
+<meta property="og:title" content="나의 강점 지능 찾기 — 나의 8가지 지능 지도">
 <meta property="og:description" content="IQ 하나로는 나를 설명할 수 없다. 가드너의 8가지 지능 이론으로 그리는 내 두뇌 지도.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -343,7 +343,7 @@ html.mmf-cover-on #mmf-cover-bg{opacity:0.70;}
   <section id="scHome" class="screen on">
     <div class="hero">
       <span class="badge">🧪 도파민 실험실 · 두뇌 시리즈</span>
-      <h1>🗺️ <span class="grad">다중지능</span> 검사</h1>
+      <h1>🗺️ 나의 <span class="grad">강점 지능</span> 찾기</h1>
       <p class="sub">IQ 점수 하나로 나를 설명할 수 없습니다.<br>사람에게는 <b>8가지 종류의 지능</b>이 있고,<br>누구나 자기만의 지능 지도를 갖고 있어요.</p>
     </div>
     <div class="pitch">
@@ -354,10 +354,10 @@ html.mmf-cover-on #mmf-cover-bg{opacity:0.70;}
     </div>
     <button class="btn" onclick="startQuiz()">🗺️ 내 지능 지도 그리기</button>
     <p class="note">※ 하버드대 하워드 가드너의 다중지능 이론(1983, 『Frames of Mind』)의 분류를 빌린
-    자기보고식 참고 검사입니다. 능력 측정이 아니라 <b>성향 지도</b>에 가깝습니다.</p>
+    자기보고식 참고 결과입니다. 능력 측정이 아니라 <b>성향 지도</b>에 가깝습니다.</p>
   </section>
 
-  <!-- 검사 -->
+  <!-- 탐색 -->
   <section id="scQuiz" class="screen">
     <div class="pillars">
       <div class="prow" id="prow"></div>
@@ -385,9 +385,9 @@ html.mmf-cover-on #mmf-cover-bg{opacity:0.70;}
     </div>
     <div class="tips" id="tips"></div>
     <div class="srcbox">📖 <b>이론 출처</b> — 하워드 가드너(Howard Gardner), 『Frames of Mind: The Theory of Multiple Intelligences』(1983).
-    "지능은 하나가 아니라 여러 개이며, 사람마다 조합이 다르다"는 이론으로, 이 검사는 그 8가지 분류를 성향 관찰에 빌려 썼습니다.</div>
+    "지능은 하나가 아니라 여러 개이며, 사람마다 조합이 다르다"는 이론으로, 이 앱은 그 8가지 분류를 성향 관찰에 빌려 썼습니다.</div>
     <button class="btn" onclick="copyResult()">📋 결과 복사해서 공유</button>
-    <button class="btn ghost" onclick="location.reload()">다시 검사하기</button>
+    <button class="btn ghost" onclick="location.reload()">다시 해보기</button>
   </section>
 
   <div class="hall-nav" style="text-align:center;margin:22px 0 4px"><a href="https://mimifactory.vibekr.com/test.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border:1px solid rgba(128,128,128,.45);border-radius:999px;color:inherit;text-decoration:none;font-size:.92rem;opacity:.85">🧪 도파민 실험실 — 다른 테스트 보러가기 →</a></div>
@@ -502,7 +502,7 @@ function showResult(){
     "<div class='row'><b>"+t1.emo+" 대표 지능 살리기</b> — "+t1.name+"이 빛나는 활동: "+t1.act+".</div>"+
     "<div class='row'><b>"+t2.emo+" 조합의 힘</b> — "+t2.name+"과 함께 쓰면 시너지가 큽니다. 두 지능이 만나는 활동을 찾는 게 최고의 성장 전략이에요.</div>"+
     "<div class='row'><b>"+low.emo+" 낮다고 약점은 아님</b> — "+low.name+"이 낮은 건 결핍이 아니라 '에너지를 안 쓰는 곳'이라는 뜻. 필요할 때만 빌려 쓰면 됩니다.</div>";
-  window._resText="🗺️ 다중지능 검사 (가드너 8지능)\n대표 지능: "+t1.name+" "+t1.emo+" × "+t2.name+" "+t2.emo+"\n지도: "+KEYS.map(k=>INTEL[k].emo+score[k]).join(" ")+"\n\n내 지능 지도 그리기 → https://mimifactory.vibekr.com/apps/다중지능_검사_test.html";
+  window._resText="🗺️ 나의 강점 지능 찾기 (가드너 8지능)\n대표 지능: "+t1.name+" "+t1.emo+" × "+t2.name+" "+t2.emo+"\n지도: "+KEYS.map(k=>INTEL[k].emo+score[k]).join(" ")+"\n\n내 지능 지도 그리기 → https://mimifactory.vibekr.com/apps/다중지능_검사_test.html";
 }
 function copyResult(){
   if(navigator.clipboard){ navigator.clipboard.writeText(window._resText||"").then(()=>toast("복사 완료! 어디든 붙여넣기 📋")); }

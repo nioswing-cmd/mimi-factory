@@ -130,7 +130,7 @@
     {
       "id": "사랑의_언어_진단",
       "type": "test",
-      "title": "사랑의 언어 진단",
+      "title": "사랑의 언어 알아보기",
       "author": "미미팩토리 오리지널",
       "date": "2026-07-07",
       "color1": "#ffd36e",
@@ -291,7 +291,7 @@
       "color2": "#5ee7d8",
       "teaser": "apps/mbti_궁합_friend.html",
       "premium": "apps/mbti_궁합_friend.html",
-      "desc": "폰 하나로 둘이 번갈아 MBTI를 진단하고, 친구·연인·가족 관계에 맞춘 궁합 %와 오늘부터 친해지는 실천 미션까지 함께 즐기는 도파민 궁합 앱",
+      "desc": "폰 하나로 둘이 번갈아 MBTI를 알아보고, 친구·연인·가족 관계에 맞춘 궁합 %와 오늘부터 친해지는 실천 미션까지 함께 즐기는 도파민 궁합 앱",
       "cover_style": "콜라주",
       "cover": "covers/mbti_궁합.webp"
     },
@@ -319,7 +319,7 @@
       "color2": "#b78bf5",
       "teaser": "apps/나의_극혐버튼_test.html",
       "premium": "apps/나의_극혐버튼_test.html",
-      "desc": "내 인간관계 손절 성향을 진단하는 체험형 웹앱 — 약속 파기·뒷담화·연락 두절·돈 문제 등 15가지 관계 상황에 답하는 동안 점수는 철저히 숨겨",
+      "desc": "내 인간관계 손절 성향을 알아보는 체험형 웹앱 — 약속 파기·뒷담화·연락 두절·돈 문제 등 15가지 관계 상황에 답하는 동안 점수는 철저히 숨겨",
       "cover_style": "2-미니멀",
       "cover": "covers/나의_극혐버튼.webp"
     },
@@ -333,14 +333,14 @@
       "color2": "#ff8a5c",
       "teaser": "apps/그_사람_손절할까_말까_test.html",
       "premium": "apps/그_사람_손절할까_말까_test.html",
-      "desc": "마음속 그 사람 한 명을 정해 15가지 실제 행동으로 진단하는 '손절 신호등' 테스트 — 상단 신호등 게이지가 실시간으로 🟢→🟡→🔴 차오르고, ",
+      "desc": "마음속 그 사람 한 명을 정해 15가지 실제 행동으로 살펴보는 '손절 신호등' 테스트 — 상단 신호등 게이지가 실시간으로 🟢→🟡→🔴 차오르고, ",
       "cover_style": "2-미니멀",
       "cover": "covers/그_사람_손절할까_말까.webp"
     },
     {
       "id": "mbti_검사",
       "type": "test",
-      "title": "MBTI 검사",
+      "title": "MBTI 성향 테스트",
       "author": "미미팩토리 오리지널",
       "date": "2026-07-10",
       "color1": "#5ee7d8",
@@ -438,7 +438,7 @@
     {
       "id": "퍼스널컬러_자가진단",
       "type": "test",
-      "title": "퍼스널컬러 자가진단",
+      "title": "퍼스널컬러 찾기",
       "author": "미미팩토리 오리지널",
       "date": "2026-07-11",
       "color1": "#ffc2a8",
@@ -494,7 +494,7 @@
     {
       "id": "iq_두뇌_테스트",
       "type": "test",
-      "title": "IQ 두뇌 테스트",
+      "title": "두뇌 순발력 테스트",
       "author": "미미팩토리 오리지널",
       "date": "2026-07-11",
       "color1": "#ffd166",
@@ -515,7 +515,7 @@
       "color2": "#e8c98d",
       "teaser": "apps/eq_감정지능_테스트_test.html",
       "premium": "apps/eq_감정지능_테스트_test.html",
-      "desc": "자기인식·조절·공감·표현 — 마음을 다루는 기술 4종 진단",
+      "desc": "자기인식·조절·공감·표현 — 마음을 다루는 기술 4종 탐색",
       "cover_style": "2-미니멀",
       "cover": "covers/eq_감정지능_테스트.webp"
     },
@@ -529,14 +529,14 @@
       "color2": "#ffd166",
       "teaser": "apps/sq_사회지능_테스트_test.html",
       "premium": "apps/sq_사회지능_테스트_test.html",
-      "desc": "눈치·대화·선긋기·화해 — 관계머리 4종 진단",
+      "desc": "눈치·대화·선긋기·화해 — 관계머리 4종 탐색",
       "cover_style": "2-미니멀",
       "cover": "covers/sq_사회지능_테스트.webp"
     },
     {
       "id": "다중지능_검사",
       "type": "test",
-      "title": "다중지능 검사",
+      "title": "나의 강점 지능 찾기",
       "author": "미미팩토리 오리지널",
       "date": "2026-07-11",
       "color1": "#ffd93d",
@@ -648,14 +648,14 @@
     {
       "id": "adhd_테스트",
       "type": "test",
-      "title": "ADHD 테스트",
+      "title": "집중력 산만 성향 테스트",
       "author": "미미팩토리 오리지널",
       "date": "2026-07-15",
       "color1": "#8affc1",
       "color2": "#5ee7d8",
       "teaser": "apps/adhd_테스트_test.html",
       "premium": "apps/adhd_테스트_test.html",
-      "desc": "10·20·30문항 중 골라 푸는 성인 ADHD 성향 자가진단 — 답할 때마다 실시간 게이지가 차오르고, 부주의·과잉행동·충동성·실행기능 4영역",
+      "desc": "10·20·30문항 중 골라 푸는 성인 ADHD 성향 자가점검 — 답할 때마다 실시간 게이지가 차오르고, 부주의·과잉행동·충동성·실행기능 4영역",
       "cover_style": "2-미니멀",
       "cover": "covers/adhd_테스트.webp"
     },

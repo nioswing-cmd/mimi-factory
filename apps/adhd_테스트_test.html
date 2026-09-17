@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ADHD 성향 테스트 — 내 집중력의 지금 상태는?</title>
+<title>집중력 산만 성향 테스트 — 내 집중력의 지금 상태는?</title>
 <link rel="icon" href="/icons/test.svg?v=1" type="image/svg+xml">
 <link rel="alternate icon" href="/icons/test-32.png?v=1" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/icons/test-180.png?v=1">
@@ -397,7 +397,7 @@ html.mmf-cover-on #mmf-cover-bg{opacity:0.70;}
   <!-- ===== 홈 ===== -->
   <section id="home" class="home fade">
     <div class="sig-emoji">🧠</div>
-    <h1><span class="grad">ADHD 성향</span> 테스트</h1>
+    <h1><span class="grad">집중력 산만</span> 성향 테스트</h1>
     <p class="sub">산만한 게 게을러서가 아니라,<br><b>뇌가 원래 그렇게 생겼기 때문</b>일 수 있어요.<br>지금 내 집중력의 상태를 솔직하게 들여다봐요.</p>
     <div class="chips">
       <span class="chip">📊 실시간 성향 게이지</span>
@@ -416,7 +416,7 @@ html.mmf-cover-on #mmf-cover-bg{opacity:0.70;}
     <p class="note">답할 때마다 위쪽 게이지가 실시간으로 차오릅니다.<br>정답은 없어요. 최근 <b>6개월</b>의 나를 떠올리며 솔직하게만.</p>
   </section>
 
-  <!-- ===== 진단 ===== -->
+  <!-- ===== 테스트 ===== -->
   <section id="quiz" class="hidden">
     <div class="topbar">
       <div class="tl-row">
@@ -670,7 +670,7 @@ function finish(){
     <div class="rlight fade" style="background:${bg}; border-color:${L.a2}55;">
       <div class="big">${L.emoji}</div>
       <h2 style="color:${L.a1}">${L.name}</h2>
-      <div class="pct">ADHD 성향 지수 ${pct}점 / 100 · ${L.tag}</div>
+      <div class="pct">집중력 산만 성향 지수 ${pct}점 / 100 · ${L.tag}</div>
     </div>
     <div class="rblock fade"><h3>🔎 지금 당신은</h3><p>${L.now}</p></div>
     <div class="rblock fade"><h3>🧩 영역별 신호</h3><div class="dims">${dimBars}</div>
@@ -699,8 +699,8 @@ function restart(){ show('home'); setAccent(LEVELS.low); }
 
 function shareResult(name, pct){
   const url='https://mimifactory.vibekr.com/apps/adhd_테스트_test.html';
-  const text=`🧠 ADHD 성향 테스트 결과: ${name} (지수 ${pct}점)\n내 집중력의 지금 상태는? 나도 확인하기 👉`;
-  if(navigator.share){ navigator.share({title:'ADHD 성향 테스트', text, url}).catch(()=>{}); }
+  const text=`🧠 집중력 산만 성향 테스트 결과: ${name} (지수 ${pct}점)\n내 집중력의 지금 상태는? 나도 확인하기 👉`;
+  if(navigator.share){ navigator.share({title:'집중력 산만 성향 테스트', text, url}).catch(()=>{}); }
   else{
     const t=text+'\n'+url;
     if(navigator.clipboard){ navigator.clipboard.writeText(t).then(()=>toast('📋 결과가 복사됐어요!')).catch(()=>toast(t)); }
