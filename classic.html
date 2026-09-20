@@ -79,16 +79,25 @@
     transition:transform .35s var(--pop),box-shadow .35s;
     animation:up .5s var(--pop) backwards;
   }
-  .hall:nth-of-type(1){animation-delay:.05s}.hall:nth-of-type(2){animation-delay:.12s}.hall:nth-of-type(3){animation-delay:.19s}
+  .hall.quiz{animation-delay:.05s}.hall.test{animation-delay:.12s}.hall.friend{animation-delay:.19s}
+  .hall{cursor:pointer}.hall:focus-visible{outline:2px solid #fff;outline-offset:2px}
   @keyframes up{from{opacity:0;transform:translateY(16px)}}
   .hall:hover{transform:translateY(-4px)}
   .hall:active{transform:scale(.97)}
   .hall .k{font-size:10.5px;letter-spacing:.3em;text-indent:.3em;opacity:.75}
   .hall h2{font-size:29px;margin-top:8px;line-height:1.15}
   .hall .d{font-size:12.5px;margin-top:8px;line-height:1.6;opacity:.85}
-  .hall .row{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
-  .hall .cnt{font-size:11.5px;opacity:.8}
-  .hall .in{font-size:13px;font-weight:700;padding:8px 16px;border-radius:999px}
+  .hall .row{display:flex;align-items:center;justify-content:space-between;margin-top:14px;gap:8px}
+  .hall .cnt{font-size:11.5px;opacity:.8;flex:1 1 auto}
+  .hall .btns{display:flex;align-items:center;gap:8px;flex:0 0 auto}
+  .hall .in{font-size:13px;font-weight:700;padding:8px 16px;border-radius:999px;text-decoration:none;white-space:nowrap}
+  /* 앱 소개 단추 (2026-09-20 사장님 지시 msg 5602): 관마다 하나씩, 1분 안내(온보딩)로 간다 */
+  .hall .intro{font-size:12.5px;font-weight:700;padding:7px 13px;border-radius:999px;text-decoration:none;white-space:nowrap;
+    border:1px solid currentColor;opacity:.9;background:rgba(255,255,255,.06);transition:opacity .2s,transform .35s var(--pop)}
+  .hall .intro:hover{opacity:1;transform:translateY(-1px)}
+  .hall .intro .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-right:6px;vertical-align:1px;animation:pulse 1.8s ease-in-out infinite}
+  .hall .intro.seen .dot{animation:none;opacity:.5}
+  @media (max-width:380px){.hall .row{flex-wrap:wrap}.hall .cnt{flex-basis:100%}}
   /* 온보딩 안내 줄 + 3D 첫 화면 링크 (2026-09-06) */
   .guides{text-align:center;font-size:12.5px;color:var(--sub);margin:4px 0 0;line-height:2}
   .guides a{color:var(--ink);text-decoration:none;border-bottom:1px dashed rgba(255,255,255,.3);padding-bottom:1px}
@@ -111,6 +120,7 @@
   .hall.quiz h2{font-family:'Gowun Batang',serif;color:#f5d491;text-shadow:0 0 20px rgba(232,180,95,.3)}
   .hall.quiz .d,.hall.quiz .cnt{color:#8fa1c0}
   .hall.quiz .in{background:#e8b45f;color:#0d1526}
+  .hall.quiz .intro{color:#f5d491}
   .hall.quiz .deco{position:absolute;right:18px;top:20px;font-size:26px}
 
   /* 테스트관 미니 프리뷰: 도파민 실험실 */
@@ -130,6 +140,7 @@
   .hall.test h2{text-shadow:0 0 14px rgba(0,240,255,.5), 1.5px 0 0 rgba(255,46,196,.5), -1.5px 0 0 rgba(0,240,255,.5)}
   .hall.test .d,.hall.test .cnt{color:#7d84a3}
   .hall.test .in{background:transparent;color:#00f0ff;border:1px solid #00f0ff;box-shadow:0 0 12px rgba(0,240,255,.25)}
+  .hall.test .intro{color:#b6ff3d;background:rgba(182,255,61,.06)}
   .hall.test .deco{position:absolute;right:18px;top:20px;font-size:26px}
 
   /* 친해지기관 미니 프리뷰: 둘의 피크닉 */
@@ -147,6 +158,7 @@
   .hall.friend h2{font-family:'Gaegu',cursive;font-size:34px;color:#ff8f70;text-shadow:1.5px 1.5px 0 rgba(168,230,207,.6)}
   .hall.friend .d,.hall.friend .cnt{color:#a08d7a}
   .hall.friend .in{background:#ff8f70;color:#fff}
+  .hall.friend .intro{color:#ff8f70;background:rgba(255,143,112,.08)}
   .hall.friend .deco{position:absolute;right:18px;top:20px;font-size:26px;transform:rotate(8deg)}
 
   /* ── 푸터 (브랜드 규칙: 수정 금지) ── */
@@ -176,29 +188,33 @@
 
   <div class="halls-label">— 세 개의 관, 세 가지 재미 —</div>
 
-  <a class="hall quiz" href="quiz.html">
+  <!-- 관 카드: 카드 전체를 누르면 입장, 「앱 소개」 단추는 1분 안내(온보딩)로. a 안에 a 를 못 넣어 div + data-href (2026-09-20) -->
+  <div class="hall quiz" data-href="quiz.html" role="link" tabindex="0">
     <span class="deco">🕯️</span>
     <span class="k">퀴 즈 로 읽 는 책</span>
     <h2>밤의 서재</h2>
     <div class="d">책 한 권을 도파민 반복 퀴즈로 완독.<br>매일 새벽, 서가에 새 책이 꽂힙니다.</div>
-    <div class="row"><span class="cnt" data-cnt="quiz"></span><span class="in">입장하기 →</span></div>
-  </a>
+    <div class="row"><span class="cnt" data-cnt="quiz"></span>
+      <span class="btns"><a class="intro" data-onb="nl_onboarded" href="/onboarding/quiz/"><span class="dot"></span>앱 소개</a><a class="in" href="quiz.html">입장하기 →</a></span></div>
+  </div>
 
-  <a class="hall test" href="test.html">
+  <div class="hall test" data-href="test.html" role="link" tabindex="0">
     <span class="deco">⚗️</span>
     <span class="k">TEST · LAB</span>
     <h2>도파민 실험실</h2>
     <div class="d">나도 몰랐던 나를 측정하는 진단·유형 테스트.<br>피실험자: 당신.</div>
-    <div class="row"><span class="cnt" data-cnt="test"></span><span class="in">실험 개시 →</span></div>
-  </a>
+    <div class="row"><span class="cnt" data-cnt="test"></span>
+      <span class="btns"><a class="intro" data-onb="dl_onboarded" href="/onboarding/test/"><span class="dot"></span>앱 소개</a><a class="in" href="test.html">실험 개시 →</a></span></div>
+  </div>
 
-  <a class="hall friend" href="friend.html">
+  <div class="hall friend" data-href="friend.html" role="link" tabindex="0">
     <span class="deco">🧺</span>
     <span class="k">친 해 지 기 관</span>
     <h2>둘의 피크닉</h2>
     <div class="d">같이 하면 더 재밌고, 하고 나면 더 가까워지는<br>둘만의 놀이 돗자리.</div>
-    <div class="row"><span class="cnt" data-cnt="friend"></span><span class="in">놀러가기 →</span></div>
-  </a>
+    <div class="row"><span class="cnt" data-cnt="friend"></span>
+      <span class="btns"><a class="intro" data-onb="pk_onboarded" href="/onboarding/friend/"><span class="dot"></span>앱 소개</a><a class="in" href="friend.html">놀러가기 →</a></span></div>
+  </div>
 
   <div class="guides">처음이세요? 1분 안내 → <a href="/onboarding/quiz/">🕯️ 서재</a> · <a href="/onboarding/test/">⚗️ 실험실</a> · <a href="/onboarding/friend/">🧺 피크닉</a></div>
   <a class="to3d" href="index.html">✨ 3D 마음속 여행으로 보기 →</a>
@@ -254,6 +270,17 @@ function renderToday(a){
 }
 
 load();
+
+/* 관 카드(div) 전체 클릭 = 입장. 안의 링크(앱 소개·입장)는 제 갈 길로 (2026-09-20) */
+document.querySelectorAll(".hall[data-href]").forEach(card=>{
+  const go = ()=>{ if(navigator.vibrate) navigator.vibrate(28); location.href = card.dataset.href; };
+  card.addEventListener("click", e=>{ if(e.target.closest("a")) return; go(); });
+  card.addEventListener("keydown", e=>{ if(e.target===card && (e.key==="Enter"||e.key===" ")){ e.preventDefault(); go(); } });
+});
+/* 앱 소개(온보딩)를 이미 본 사람은 불(점)을 끈다 — 3D 홈과 같은 열쇠 nl_/dl_/pk_onboarded */
+document.querySelectorAll(".intro[data-onb]").forEach(a=>{
+  try{ if(localStorage.getItem(a.dataset.onb)) a.classList.add("seen"); }catch(e){}
+});
 </script>
 </body>
 </html>
