@@ -1,0 +1,35 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.mimifactory.library",
+      "sha256_cert_fingerprints": [
+        "9B:56:EB:55:30:A6:77:AE:38:3F:F2:B3:40:2B:9E:8F:ED:8C:1D:B3:D1:A4:84:A5:9E:FD:BC:5F:D8:5F:FD:8C",
+        "5D:C0:B5:BE:C5:53:BA:B6:FB:09:B9:A0:D5:6A:55:04:41:C2:AE:A3:61:F1:A0:7C:BD:FD:08:EF:C9:2F:49:B0"
+      ]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.mimifactory.picnic",
+      "sha256_cert_fingerprints": [
+        "A6:08:F5:CC:E0:E9:87:81:1D:81:EB:C7:D9:65:16:B0:CA:D6:ED:FD:4D:E6:1F:60:5C:8E:C3:6D:98:CA:85:03",
+        "6E:76:B1:BB:EF:F0:A8:DC:08:B6:F2:9C:98:CE:59:4C:7D:C8:47:3E:7B:13:5D:FC:7A:A3:0E:C5:38:10:3C:7F"
+      ]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.mimifactory.lab",
+      "sha256_cert_fingerprints": [
+        "81:18:67:D1:9F:56:0D:D4:D7:27:C2:7D:E7:9A:B1:C4:71:96:04:05:7C:29:DE:DE:D3:30:D9:85:91:9B:51:AB",
+        "EE:49:9B:A0:48:68:56:46:7D:F4:7F:BF:68:47:E0:24:FA:91:8E:42:FD:ED:4A:69:66:0A:D2:7A:34:58:B3:1A"
+      ]
+    }
+  }
+]
