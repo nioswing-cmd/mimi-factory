@@ -2226,6 +2226,20 @@
       "desc": "유령은 1막에 이미 진실을 말했는데 왕자는 5막까지 망설인다 — 셰익스피어 『햄릿』 5막 20장의 사건·명대사·판본·비평사를 쉬움에서 어려움 순",
       "cover": "covers/햄릿.webp",
       "cover_style": "3-인쇄질감"
+    },
+    {
+      "id": "자본론",
+      "type": "quiz",
+      "title": "자본론",
+      "author": "카를 마르크스",
+      "date": "2026-10-07",
+      "color1": "#ffd36e",
+      "color2": "#ff8a5c",
+      "teaser": "apps/자본론_teaser.html",
+      "premium": "apps/자본론_quiz.html",
+      "desc": "가격표 뒤에 숨은 노동시간을 보는 눈 — 상품 한 개에서 시초축적까지, 카를 마르크스 『자본론』의 뼈대를 30문항 반복 마스터 퀴즈와 완독 인포",
+      "cover": "covers/자본론.webp",
+      "cover_style": "2-미니멀"
     }
   ]
 }
