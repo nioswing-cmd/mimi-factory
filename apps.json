@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-28",
+  "updated": "2026-10-07",
   "apps": [
     {
       "id": "삼체",
@@ -2211,6 +2211,20 @@
       "premium": "apps/연금술사_quiz.html",
       "desc": "양치기 산티아고가 두 번 꾼 꿈을 좇아 사막을 건너 다시 출발점으로 돌아오기까지 — 『연금술사』(파울로 코엘료)의 자아의 신화·마크툽·표지·바람",
       "cover": "covers/연금술사.webp",
+      "cover_style": "3-인쇄질감"
+    },
+    {
+      "id": "햄릿",
+      "type": "quiz",
+      "title": "햄릿",
+      "author": "윌리엄 셰익스피어",
+      "date": "2026-10-07",
+      "color1": "#ff8ad0",
+      "color2": "#b78bf5",
+      "teaser": "apps/햄릿_teaser.html",
+      "premium": "apps/햄릿_quiz.html",
+      "desc": "유령은 1막에 이미 진실을 말했는데 왕자는 5막까지 망설인다 — 셰익스피어 『햄릿』 5막 20장의 사건·명대사·판본·비평사를 쉬움에서 어려움 순",
+      "cover": "covers/햄릿.webp",
       "cover_style": "3-인쇄질감"
     }
   ]
