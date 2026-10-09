@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-08",
+  "updated": "2026-10-09",
   "apps": [
     {
       "id": "삼체",
@@ -2267,6 +2267,20 @@
       "premium": "apps/동물농장_quiz.html",
       "desc": "조지 오웰 『동물농장』의 반란부터 \"어떤 동물은 더 평등하다\"까지를 30문항 반복 마스터 퀴즈와 완독 인포그래픽 리포트로 익히는 단일 HTML ",
       "cover": "covers/동물농장.webp",
+      "cover_style": "3-인쇄질감"
+    },
+    {
+      "id": "돈키호테",
+      "type": "quiz",
+      "title": "돈키호테",
+      "author": "미겔 데 세르반테스",
+      "date": "2026-10-09",
+      "color1": "#7aa6ff",
+      "color2": "#b78bf5",
+      "teaser": "apps/돈키호테_teaser.html",
+      "premium": "apps/돈키호테_quiz.html",
+      "desc": "풍차가 거인이 되고 놋대야가 투구가 되는 『돈키호테』의 두 권을, 30문항 반복 마스터 퀴즈와 완독 인포그래픽 리포트로 끝까지 익히는 웹앱.",
+      "cover": "covers/돈키호테.webp",
       "cover_style": "3-인쇄질감"
     }
   ]
