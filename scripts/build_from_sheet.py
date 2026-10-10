@@ -915,37 +915,47 @@ def make_cover(entry):
         r = subprocess.run([sys.executable, "scripts/gen_cover.py", "--only", aid],
                            cwd=ROOT, capture_output=True, text=True, timeout=1800)
         sys.stdout.write(r.stdout or "")
+        import gen_cover                  # 같은 scripts/ 폴더 (맨 위 sys.path)
         if r.returncode != 0:
             log(f"표지 생성 실패(생산은 계속): {(r.stderr or '')[-500:]}")
             cover_alert(entry, f"gen_cover.py 가 종료코드 {r.returncode} 로 끝났습니다. "
                                f"{(r.stderr or '')[-300:]}")
-            return
-
-        cov = os.path.join(ROOT, "covers", aid + ".webp")
-        if not os.path.exists(cov):
+        elif not gen_cover._has_valid_cover(aid):
             # gen_cover.py 는 표지가 다 실패해도 종료코드 0 을 돌려준다(생산을 막지 않으려고).
-            # 그래서 '파일이 생겼는가' 가 실질적인 유일한 성공 판정이다.
-            log("표지 파일이 생기지 않았다 — 배경 주입 생략")
-            cover_alert(entry, f"gen_cover.py 는 끝났는데 covers/{aid}.webp 가 생기지 않았습니다. "
-                               "로그의 [표지] 줄을 확인하세요.")
-            return
-
-        targets = [entry[k] for k in ("teaser", "premium") if entry.get(k)]
-        if not targets:
-            return
-        env = dict(os.environ, **COVER_BG_ENV)
-        r2 = subprocess.run([sys.executable, "scripts/inject_cover_bg.py", "--only"] + targets,
-                            cwd=ROOT, capture_output=True, text=True, timeout=600, env=env)
-        sys.stdout.write(r2.stdout or "")
-        if r2.returncode != 0:
-            log(f"표지배경 주입 실패(생산은 계속): {(r2.stderr or '')[-500:]}")
-            cover_alert(entry, "표지는 만들었지만 배경 주입(inject_cover_bg.py)이 실패했습니다. "
-                               f"{(r2.stderr or '')[-300:]}")
-            return
-        log("🎨 표지 + 배경 주입 완료")
+            # 그래서 '쓸 수 있는 표지 파일이 생겼는가(끝까지 풀리는가)' 가 실질적인 성공 판정이다.
+            log("표지 파일이 없거나 깨졌다 — 이 책 표지 배경은 못 깐다")
+            cover_alert(entry, f"gen_cover.py 는 끝났는데 covers/{aid}.webp 가 없거나 깨져서 "
+                               "읽을 수 없습니다. 로그의 [표지] 줄을 확인하세요.")
     except Exception as e:
         log(f"표지 단계 예외(생산은 정상): {e}")
         cover_alert(entry, f"표지 단계에서 예외가 났습니다: {type(e).__name__} {e}")
+    # 🔴 2026-10-11: 배경 단계는 표지가 실패·시간초과여도 **반드시** 돈다.
+    #    생산 때 앞 책 HTML 을 틀로 베끼면 남의 표지 배경 블록이 따라온다(오만과 편견에
+    #    돈키호테 표지). inject_cover_bg.py 는 블록이 있으면 건너뛰므로 예전엔 그대로 남았다.
+    #    표지가 있으면 남의 블록을 --force 로 이 책 표지로 바꾸고, 없으면 남의 블록을 걷어낸다
+    #    (늦게 온 표지는 gen_cover.py --pickup 이 그때 깐다).
+    targets = [entry[k] for k in ("teaser", "premium") if entry.get(k)]
+    if not targets:
+        return
+    try:
+        import gen_cover                  # 같은 scripts/ 폴더 (맨 위 sys.path)
+        bad = gen_cover.fix_cover_bg(aid, targets, env=COVER_BG_ENV)
+    except Exception as e:
+        log(f"표지배경 점검 예외(생산은 계속): {e}")
+        cover_alert(entry, f"표지배경 점검·교정 중 예외가 났습니다: {type(e).__name__} {e}")
+        return
+    if bad:
+        log(f"표지배경 교정 실패(생산은 계속): {bad}")
+        cover_alert(entry, f"첫 화면 표지 배경이 이 책 표지가 아닙니다: {bad}")
+        return
+    if gen_cover._has_valid_cover(aid):
+        log("🎨 표지 + 배경 주입 완료 (이 책 자기 표지 확인)")
+        try:
+            gen_cover.finish_cover(aid)   # 배경까지 확인됐다 — 표지 장부의 «반영 대기» 줄 정리
+        except Exception as e:
+            log(f"표지 장부 정리 실패(--pickup 이 나중에 정리): {e}")
+    else:
+        log("🎨 표지는 아직 없음 — 남의 표지 배경은 없는 것 확인")
 
 
 def publish_korean(entry):
