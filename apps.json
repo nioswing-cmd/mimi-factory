@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-10",
+  "updated": "2026-10-11",
   "apps": [
     {
       "id": "삼체",
@@ -2295,6 +2295,20 @@
       "premium": "apps/오만과_편견_quiz.html",
       "desc": "무도회 한 번에 굳은 첫인상이 틀렸다는 걸 아는 데 소설 한 권이 걸린다 — 제인 오스틴 『오만과 편견』 세 권 61장의 사건·인물·돈·명장면과",
       "cover": "covers/오만과_편견.webp",
+      "cover_style": "3-인쇄질감"
+    },
+    {
+      "id": "변신",
+      "type": "quiz",
+      "title": "변신",
+      "author": "프란츠 카프카",
+      "date": "2026-10-11",
+      "color1": "#ff8ad0",
+      "color2": "#b78bf5",
+      "teaser": "apps/변신_teaser.html",
+      "premium": "apps/변신_quiz.html",
+      "desc": "어느 아침 벌레가 된 외판원 그레고르 잠자 — 카프카 『변신』의 인물·상징·결말을 30문항 반복 마스터 퀴즈와 완독 인포그래픽 리포트로 익히는 ",
+      "cover": "covers/변신.webp",
       "cover_style": "3-인쇄질감"
     }
   ]
