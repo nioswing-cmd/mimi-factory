@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-14",
+  "updated": "2026-10-15",
   "apps": [
     {
       "id": "삼체",
@@ -2352,6 +2352,18 @@
       "desc": "괴테의 『젊은 베르테르의 슬픔』을 30문항 반복 마스터 퀴즈로 익히고, 편지 1년 8개월의 흐름을 인과의 사슬·개념 카드·목차 요약·베르테르 열",
       "cover": "covers/젊은_베르테르의_슬픔.webp",
       "cover_style": "3-인쇄질감"
+    },
+    {
+      "id": "페스트",
+      "type": "quiz",
+      "title": "페스트",
+      "author": "알베르 카뮈",
+      "date": "2026-10-15",
+      "color1": "#7aa6ff",
+      "color2": "#b78bf5",
+      "teaser": "apps/페스트_teaser.html",
+      "premium": "apps/페스트_quiz.html",
+      "desc": "페스트 — 미미팩토리 신작"
     }
   ]
 }
