@@ -2363,7 +2363,9 @@
       "color2": "#b78bf5",
       "teaser": "apps/페스트_teaser.html",
       "premium": "apps/페스트_quiz.html",
-      "desc": "페스트 — 미미팩토리 신작"
+      "desc": "페스트 — 미미팩토리 신작",
+      "cover": "covers/페스트.webp",
+      "cover_style": "3-인쇄질감"
     },
     {
       "id": "자기만의_방",
