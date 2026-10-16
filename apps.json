@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-15",
+  "updated": "2026-10-16",
   "apps": [
     {
       "id": "삼체",
@@ -2364,6 +2364,20 @@
       "teaser": "apps/페스트_teaser.html",
       "premium": "apps/페스트_quiz.html",
       "desc": "페스트 — 미미팩토리 신작"
+    },
+    {
+      "id": "자기만의_방",
+      "type": "quiz",
+      "title": "자기만의 방",
+      "author": "버지니아 울프",
+      "date": "2026-10-16",
+      "color1": "#5ee7d8",
+      "color2": "#7aa6ff",
+      "teaser": "apps/자기만의_방_teaser.html",
+      "premium": "apps/자기만의_방_quiz.html",
+      "desc": "여성이 픽션을 쓰려면 돈과 자기만의 방이 있어야 한다 — 버지니아 울프 『자기만의 방』의 논증·인물·쟁점을 30문항 반복 마스터 퀴즈와 완독 인",
+      "cover": "covers/자기만의_방.webp",
+      "cover_style": "3-인쇄질감"
     }
   ]
 }
