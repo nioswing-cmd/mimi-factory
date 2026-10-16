@@ -156,7 +156,10 @@ def make_scene(app):
         log(f"  장면 묘사 시간초과: {app.get('id')}")
         return None, None
     if r.returncode != 0:
-        log(f"  장면 묘사 실패(코드 {r.returncode}): {r.stderr[-300:]}")
+        # 🔴 2026-10-16: claude 는 한도 초과(«You've hit your weekly limit»)를 stderr 가 아니라
+        #    stdout 에 쓴다. stderr 만 찍어서 10/15 「페스트」 표지 실패 원인이 로그에 빈칸이었다.
+        why = (r.stderr or "").strip()[-300:] or (r.stdout or "").strip()[-300:]
+        log(f"  장면 묘사 실패(코드 {r.returncode}): {why}")
         return None, None
 
     out = (r.stdout or "").strip()
