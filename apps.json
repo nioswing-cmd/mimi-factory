@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-17",
+  "updated": "2026-10-18",
   "apps": [
     {
       "id": "삼체",
@@ -2393,6 +2393,20 @@
       "premium": "apps/고도를_기다리며_quiz.html",
       "desc": "시골길의 나무 한 그루 아래 두 번의 저녁 — 『고도를 기다리며』의 인물·상징·주제를 30문항 반복 마스터 퀴즈와 완독 인포그래픽 리포트로 익히",
       "cover": "covers/고도를_기다리며.webp",
+      "cover_style": "3-인쇄질감"
+    },
+    {
+      "id": "모순",
+      "type": "quiz",
+      "title": "모순",
+      "author": "양귀자",
+      "date": "2026-10-18",
+      "color1": "#ffd36e",
+      "color2": "#ff8a5c",
+      "teaser": "apps/모순_teaser.html",
+      "premium": "apps/모순_quiz.html",
+      "desc": "얼굴이 똑같은 쌍둥이 자매의 갈라진 삶부터 스물다섯의 선택까지 — 양귀자 『모순』의 인물·사건·주제를 30문항 반복 마스터 퀴즈와 완독 인포그래",
+      "cover": "covers/모순.webp",
       "cover_style": "3-인쇄질감"
     }
   ]
