@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-21",
+  "updated": "2026-10-22",
   "apps": [
     {
       "id": "삼체",
@@ -2449,6 +2449,20 @@
       "premium": "apps/인간_실격_quiz.html",
       "desc": "사진 세 장과 수첩 세 권으로 남은 부끄럼 많은 생애 — 다자이 오사무 『인간 실격』의 인물·장면·문장을 30문항 반복 마스터 퀴즈와 완독 인포",
       "cover": "covers/인간_실격.webp",
+      "cover_style": "3-인쇄질감"
+    },
+    {
+      "id": "설국",
+      "type": "quiz",
+      "title": "설국",
+      "author": "가와바타 야스나리",
+      "date": "2026-10-22",
+      "color1": "#5ee7d8",
+      "color2": "#7aa6ff",
+      "teaser": "apps/설국_teaser.html",
+      "premium": "apps/설국_quiz.html",
+      "desc": "가와바타 야스나리의 노벨문학상 수상작 『설국』을 긴 터널에서 은하수까지 30문항으로 익히는 반복 마스터 퀴즈 — 틀린 문제는 맞힐 때까지 다시 ",
+      "cover": "covers/설국.webp",
       "cover_style": "3-인쇄질감"
     }
   ]
