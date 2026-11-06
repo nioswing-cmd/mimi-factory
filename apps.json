@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-05",
+  "updated": "2026-11-06",
   "apps": [
     {
       "id": "삼체",
@@ -2645,6 +2645,20 @@
       "premium": "apps/싯다르타_quiz.html",
       "desc": "헤르만 헤세 『싯다르타』의 열두 장을 30문항 반복 마스터 퀴즈로 익히고, 인과의 사슬·핵심 개념 8·목차 요약·생각해볼 사례·약점 집중 복습까",
       "cover": "covers/싯다르타.webp",
+      "cover_style": "3-인쇄질감"
+    },
+    {
+      "id": "백야",
+      "type": "quiz",
+      "title": "백야",
+      "author": "표도르 도스토옙스키",
+      "date": "2026-11-06",
+      "color1": "#ffd36e",
+      "color2": "#ff8a5c",
+      "teaser": "apps/백야_teaser.html",
+      "premium": "apps/백야_quiz.html",
+      "desc": "어두워지지 않는 네 번의 밤, 한 몽상가가 평생의 사랑을 만나고 잃는 도스토옙스키 『백야』를 30문항 반복 마스터 퀴즈와 완독 인포그래픽 리포트",
+      "cover": "covers/백야.webp",
       "cover_style": "3-인쇄질감"
     }
   ]
