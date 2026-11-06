@@ -1,0 +1,56 @@
+/* 행동 룰렛 — 토큰만 쓴다 */
+.ro-stage{position:relative;width:min(100%,400px);aspect-ratio:1;margin:8px auto 18px}
+.ro-wheel{position:absolute;inset:0;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+.ro-wheel.grab{cursor:grabbing}
+.ro-lights,.ro-disc{position:absolute;inset:0;width:100%;height:100%}
+.ro-disc{will-change:transform}
+.ro-lights circle{fill:var(--ink-4);transition:fill .08s}
+.ro-lights circle.on{fill:var(--acc);filter:drop-shadow(0 0 4px var(--acc))}
+.ro-lights .rim{fill:var(--ink-2);stroke:var(--line-2);stroke-width:2}
+.ro-seg-a{fill:var(--acc)}
+.ro-seg-b{fill:var(--ink-3)}
+.ro-lab{font:700 15px var(--font);dominant-baseline:middle}
+.ro-lab.a{fill:var(--acc-ink)}
+.ro-lab.b{fill:var(--text)}
+.ro-sep{stroke:var(--ink);stroke-width:3}
+.ro-peg{fill:var(--text)}
+.ro-flap{position:absolute;left:50%;top:-6px;width:40px;height:52px;margin-left:-20px;transform-origin:20px 18px;z-index:3;filter:drop-shadow(0 3px 0 #05070A)}
+.ro-flap svg{width:100%;height:100%;display:block}
+.ro-flap path{fill:var(--text)}
+.ro-flap circle{fill:var(--ink)}
+.ro-flap.kick{transition:none}
+.ro-flap.back{transition:transform .14s cubic-bezier(.3,1.6,.5,1)}
+.ro-hub{position:absolute;left:50%;top:50%;width:25%;aspect-ratio:1;transform:translate(-50%,-50%);z-index:4;border-radius:50%;border:4px solid var(--ink);background:var(--text);color:var(--ink);
+  font:700 clamp(14px,4vw,19px)/1 var(--num);letter-spacing:.12em;cursor:pointer;box-shadow:0 5px 0 #05070A,0 0 0 2px var(--line-2);transition:transform .08s,box-shadow .08s}
+.ro-hub:active{transform:translate(-50%,calc(-50% + 3px));box-shadow:0 2px 0 #05070A,0 0 0 2px var(--line-2)}
+.ro-hub[disabled]{opacity:.7;cursor:wait}
+.ro-hint{text-align:center;margin:14px 0 0}
+.ro-hint b{color:var(--text)}
+#ro-coach{margin-top:14px}
+.ro-stage.win .ro-lights circle{animation:ro-win .32s steps(2) 4}
+@keyframes ro-win{50%{fill:var(--acc)}}
+
+.ro-result{padding-top:4px}
+.ro-card{position:relative;margin:4px 0 14px;padding:22px 20px;border-radius:18px;border:1px solid var(--acc-line);background:var(--acc-soft);box-shadow:0 6px 0 #05070A;overflow:hidden}
+.ro-card::after{content:"";position:absolute;right:-40px;top:-40px;width:140px;height:140px;border-radius:50%;border:14px solid color-mix(in srgb,var(--acc) 22%,transparent)}
+.ro-res-t{font:400 clamp(28px,8vw,38px)/1.2 var(--head);margin:6px 0 8px;max-width:14ch}
+.ro-res-t:focus{outline:none}
+.ro-res-m{margin:0;font:700 15px/1.4 var(--num);color:var(--acc)}
+.ro-card.pop-in{animation:ro-in .5s var(--pop)}
+@keyframes ro-in{0%{transform:translateY(16px) scale(.94);opacity:0}100%{transform:none;opacity:1}}
+
+.ro-edit summary{cursor:pointer;list-style:none;min-height:44px;display:flex;align-items:center}
+.ro-edit summary::-webkit-details-marker{display:none}
+.ro-edit summary .z-h2{width:100%}
+.ro-edit summary .z-h2::before{content:"+";font:700 18px/1 var(--num);color:var(--acc);margin-right:2px}
+.ro-edit[open] summary .z-h2::before{content:"–"}
+.ro-items{list-style:none;margin:8px 0 14px;padding:0;display:grid;gap:6px}
+.ro-items li{display:flex;align-items:center;gap:8px;padding:6px 6px 6px 12px;border-radius:10px;background:var(--ink);border:1px solid var(--line)}
+.ro-items li .t{flex:1;min-width:0}
+.ro-items li .m{font:500 12.5px var(--num);color:var(--dim)}
+.ro-items li .z-btn{min-height:40px;min-width:44px;padding:0 10px}
+.ro-add{display:grid;gap:4px;padding-top:12px;border-top:1px dashed var(--line-2)}
+.ro-add .z-btn{justify-self:start}
+.ro-sub{font-weight:700;font-size:14px;margin:18px 0 6px}
+
+.ro-res-t{word-spacing:-.2em}

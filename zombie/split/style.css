@@ -1,0 +1,75 @@
+/* 미션 쪼개기 — 토큰만 쓴다 */
+.sp-q{display:block;font:400 22px/1.3 var(--head);margin:0 0 12px}
+.sp-q em{font-style:normal;color:var(--acc)}
+.sp-task{font-size:18px;min-height:56px;font-weight:700}
+.sp-ex{margin:12px 0 2px}
+.sp-ex .z-chip{font-weight:500}
+.sp-level{margin-top:16px;display:grid;gap:8px}
+.sp-knives{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.sp-knife{display:grid;justify-items:center;gap:6px;padding:12px 6px 10px;border-radius:12px;border:1px solid var(--line-2);background:var(--ink);cursor:pointer;min-height:76px}
+.sp-knife .cuts{display:flex;gap:3px;height:16px;align-items:stretch}
+.sp-knife .cuts i{width:7px;border-radius:2px;background:var(--ink-4)}
+.sp-knife b{font-size:14px}
+.sp-knife span{font:500 12px/1 var(--num);color:var(--dim)}
+.sp-knife[aria-checked="true"]{border-color:var(--acc);background:var(--acc-soft)}
+.sp-knife[aria-checked="true"] .cuts i{background:var(--acc)}
+.sp-knife[aria-checked="true"] span{color:var(--muted)}
+.sp-new .z-btn.big{margin-top:6px}
+#sp-coach{margin-top:14px}
+
+.sp-active{margin-top:22px}
+.sp-missions{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.sp-mi{display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:center;padding:14px;border-radius:var(--r);background:var(--ink-2);border:1px solid var(--line)}
+.sp-mi b{font-size:16px}
+.sp-mi .z-bar{grid-column:1/-1}
+.sp-mi .m{font:500 12.5px/1 var(--num);color:var(--dim)}
+
+/* 조각 목록(편집) */
+.sp-pieces,.sp-board{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;counter-reset:p}
+.sp-p{position:relative;display:flex;align-items:center;gap:8px;padding:8px 8px 8px 6px;border-radius:12px;background:var(--ink-2);border:1px solid var(--line);counter-increment:p;touch-action:pan-y}
+.sp-p .grip{flex:none;width:32px;min-height:44px;display:grid;place-items:center;color:var(--dim);cursor:grab;touch-action:none;border:0;background:none;padding:0}
+.sp-p .grip svg{width:16px;height:16px}
+.sp-p .no{flex:none;font:700 12px/1 var(--num);color:var(--acc);width:22px;text-align:center}
+.sp-p .no::before{content:counter(p,decimal-leading-zero)}
+.sp-p input{flex:1;min-width:0;min-height:44px;border:0;background:transparent;color:var(--text);font-size:15.5px;padding:0 4px;border-radius:8px}
+.sp-p input:focus{outline:none;background:var(--ink);box-shadow:0 0 0 2px var(--acc-line)}
+.sp-p .tools{flex:none;display:flex;gap:4px}
+.sp-p .tb{min-width:36px;min-height:44px;border-radius:8px;border:1px solid var(--line);background:var(--ink);color:var(--muted);font:700 13px/1 var(--num);cursor:pointer;padding:0 6px}
+.sp-p .tb:hover{color:var(--text);border-color:var(--line-2)}
+.sp-p .tb.cut{color:var(--acc);border-color:var(--acc-line);font-family:var(--font);font-size:12.5px}
+.sp-p.dragging{z-index:5;border-color:var(--acc);box-shadow:0 10px 30px rgba(0,0,0,.5);background:var(--ink-3)}
+.sp-p.new{animation:sp-new .4s var(--out)}
+@keyframes sp-new{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+.sp-add{display:flex;gap:8px;margin:10px 0 0}
+.sp-add .z-input{flex:1;min-width:0}
+.sp-tip{margin:16px 0;padding:12px 14px;border-radius:12px;border:1px dashed var(--line-2);font-size:14px;color:var(--muted)}
+.sp-tip b{color:var(--acc);font:700 11px/1 var(--num);letter-spacing:.16em;display:block;margin-bottom:6px}
+
+/* 실행 */
+.sp-run-t{margin:0 0 10px}
+.sp-now{margin:16px 0 8px;padding:18px;border-radius:18px;border:1px solid var(--acc-line);background:var(--acc-soft);box-shadow:0 6px 0 #05070A}
+.sp-now-k{font:700 11px/1 var(--num);letter-spacing:.18em;color:var(--acc)}
+.sp-now-t{font:400 clamp(22px,6.4vw,28px)/1.3 var(--head);margin:10px 0 14px}
+.sp-now-t:focus{outline:none}
+.sp-now .z-timer{padding:0 0 10px}
+.sp-now .z-ring{width:min(160px,44vw)}
+.sp-now .z-ring .lbl b{font-size:38px}
+.sp-swipe-hint{margin:14px 2px 0}
+.sp-b{position:relative;overflow:hidden;border-radius:12px;background:var(--ink-2);border:1px solid var(--line);touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.sp-b .trail{position:absolute;inset:0;width:0;background:var(--acc);opacity:.9;pointer-events:none}
+.sp-b .trail::after{content:"해치움 ✓";position:absolute;left:14px;top:50%;transform:translateY(-50%);font-weight:700;color:var(--acc-ink);white-space:nowrap;opacity:var(--o,0)}
+.sp-b .row{position:relative;display:flex;align-items:center;gap:10px;padding:8px 10px;min-height:56px;transform:translateX(var(--dx,0));background:var(--ink-2)}
+.sp-b.snap .row{transition:transform .28s var(--out)}
+.sp-b .z-check{border:0;background:transparent;padding:4px;min-height:44px;flex:1}
+.sp-b .no{font:700 12px/1 var(--num);color:var(--dim);width:22px;flex:none}
+.sp-b.now{border-color:var(--acc)}
+.sp-b.now .no{color:var(--acc)}
+.sp-b.now .lb{font-weight:700}
+.sp-b .nowtag{font:700 10.5px/1 var(--num);letter-spacing:.14em;color:var(--acc-ink);background:var(--acc);padding:4px 5px;border-radius:4px;flex:none}
+.sp-b.did{opacity:.7}
+.sp-b.zap{animation:sp-zap .5s var(--out)}
+@keyframes sp-zap{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--acc) 70%,transparent)}100%{box-shadow:0 0 0 14px transparent}}
+
+.sp-sub{font-weight:700;font-size:14px;margin:18px 0 6px}
+
+.sp-q,.sp-now-t{word-spacing:-.2em}

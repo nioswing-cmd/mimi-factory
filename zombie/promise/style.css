@@ -1,0 +1,83 @@
+/* 미래의 나와 약속 — 토큰만 쓴다 */
+.pr-trust{margin-top:6px}
+.pr-trust-row{display:flex;gap:16px;align-items:center}
+.pr-ring{flex:none;width:96px;height:96px}
+.pr-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.pr-ring .trk{stroke:var(--ink-4)}
+.pr-ring .fil{stroke:var(--acc);transition:stroke-dashoffset .8s var(--out)}
+.pr-ring text{font:700 26px var(--num);fill:var(--text)}
+.pr-trust-tx{flex:1;min-width:0}
+.pr-trust-big{font:400 19px/1.4 var(--head);margin:0 0 10px}
+.pr-trust-big b{color:var(--acc);font-family:var(--num);font-weight:700}
+.pr-line{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(14,1fr);gap:3px;max-width:300px}
+.pr-line li{aspect-ratio:1;border-radius:3px;border:1.5px solid var(--line-2)}
+.pr-line li.k{background:var(--acc);border-color:var(--acc)}
+.pr-line li.p{background:linear-gradient(135deg,var(--acc) 50%,transparent 50%);border-color:var(--acc-line)}
+.pr-line li.m{border-color:var(--dim);background:repeating-linear-gradient(45deg,transparent 0 3px,var(--line-2) 3px 4px)}
+
+.pr-c-h{font:400 22px/1.3 var(--head);margin:0 0 14px}
+.pr-c-h em{font-style:normal;color:var(--acc)}
+.pr-what{min-height:84px;font-size:17px;font-weight:700}
+.pr-ex{margin-top:4px}
+.pr-ex .z-chip{font-weight:500;text-align:left}
+.pr-custom{margin-top:8px}
+.pr-custom .z-input{max-width:300px}
+
+/* ===== 핵심 인터랙션: 꾹 눌러 봉인 ===== */
+.pr-seal-wrap{display:grid;justify-items:center;gap:8px;margin:20px 0 4px}
+.pr-seal{position:relative;width:148px;height:148px;border-radius:50%;border:0;background:transparent;cursor:pointer;display:grid;place-items:center;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;padding:0}
+.pr-seal-ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.pr-seal-ring circle{fill:none;stroke-width:8}
+.pr-seal-ring .trk{stroke:var(--ink-4)}
+.pr-seal-ring .fil{stroke:var(--acc);stroke-dasharray:339.3;stroke-dashoffset:339.3;filter:drop-shadow(0 0 6px color-mix(in srgb,var(--acc) 60%,transparent))}
+.pr-seal-face{position:absolute;inset:18px;display:grid;place-items:center;border-radius:50%;background:var(--ink-3);border:1px solid var(--line-2);box-shadow:0 6px 0 #05070A;transition:transform .12s,box-shadow .12s,background-color .2s}
+.pr-seal-face svg{width:58%;height:58%;fill:var(--acc);opacity:.14;transition:opacity .2s,transform .2s}
+.pr-seal-t{position:relative;font-weight:700;font-size:16px;text-shadow:0 1px 0 var(--ink);color:var(--text);pointer-events:none;margin-top:2px}
+.pr-seal.hold .pr-seal-face{transform:translateY(4px) scale(.97);box-shadow:0 2px 0 #05070A;background:var(--acc-soft)}
+.pr-seal.hold .pr-seal-face svg{opacity:.4;transform:rotate(12deg)}
+.pr-seal.sealed .pr-seal-face{background:var(--acc)}
+.pr-seal.sealed .pr-seal-face svg{fill:var(--acc-ink);opacity:.22}
+.pr-seal.sealed .pr-seal-t{color:var(--acc-ink)}
+.pr-seal.stamp .pr-seal-face{animation:pr-stamp .5s cubic-bezier(.3,1.7,.5,1)}
+@keyframes pr-stamp{0%{transform:scale(1.35)}100%{transform:scale(1)}}
+.pr-seal-hint{text-align:center;max-width:36ch;margin:0}
+.pr-nonoti{margin-top:16px}
+.pr-shake{animation:pr-shake .36s}
+@keyframes pr-shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+
+/* 봉투 */
+.pr-due,.pr-sealed{margin:22px 0 6px}
+.pr-envs{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.pr-env{position:relative;border-radius:16px;background:var(--ink-2);border:1px solid var(--line);overflow:hidden;box-shadow:0 5px 0 #05070A}
+.pr-env-top{position:relative;height:74px;background:var(--ink-3);overflow:hidden}
+.pr-env-top::before,.pr-env-top::after{content:"";position:absolute;top:0;width:51%;height:100%;background:var(--ink-4)}
+.pr-env-top::before{left:0;clip-path:polygon(0 0,100% 100%,0 100%)}
+.pr-env-top::after{right:0;clip-path:polygon(100% 0,100% 100%,0 100%)}
+.pr-env-flap{position:absolute;left:0;right:0;top:0;height:74px;background:var(--line-2);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:50% 0;transition:transform .5s var(--out)}
+.pr-env-seal{position:absolute;left:50%;top:48px;width:52px;height:52px;margin-left:-26px;z-index:2;display:grid;place-items:center}
+.pr-env-seal svg{width:100%;height:100%;fill:var(--acc);filter:drop-shadow(0 3px 0 var(--acc-deep))}
+.pr-env-seal b{position:absolute;font:700 11px/1 var(--num);color:var(--acc-ink);letter-spacing:.06em}
+.pr-env-body{padding:34px 16px 16px;display:grid;gap:8px}
+.pr-tape{justify-self:start;font:700 11.5px/1 var(--num);letter-spacing:.14em;padding:6px 8px;border-radius:4px;background:var(--ink);border:1px dashed var(--line-2);color:var(--muted)}
+.pr-env-t{margin:0;font-weight:700}
+.pr-env-t.locked{color:var(--dim);letter-spacing:.02em}
+.pr-left{font:700 14px/1.4 var(--num);color:var(--acc)}
+.pr-env .z-row{margin-top:4px}
+.pr-env.due{border-color:var(--acc)}
+.pr-env.due .pr-env-seal{animation:pr-pulse 1.6s ease-in-out infinite}
+@keyframes pr-pulse{50%{transform:scale(1.12)}}
+.pr-env.open .pr-env-flap{transform:rotateX(180deg) translateY(-2px);background:var(--ink-4)}
+.pr-env.open .pr-env-seal{animation:pr-break .5s var(--out) forwards}
+@keyframes pr-break{to{transform:translateY(-30px) rotate(-25deg) scale(.6);opacity:0}}
+.pr-letter{margin:4px 0 0;padding:14px 14px 12px;border-radius:10px;background:var(--ink);border:1px solid var(--acc-line);animation:pr-rise .55s var(--out) .15s both}
+@keyframes pr-rise{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+.pr-letter .from{font:700 12px/1.3 var(--num);letter-spacing:.08em;color:var(--acc);margin:0 0 8px}
+.pr-letter .what{font:400 20px/1.4 var(--head);margin:0 0 8px}
+.pr-letter .why{color:var(--muted);margin:0}
+.pr-res{display:grid;gap:8px;margin-top:12px}
+.pr-res .z-btn{justify-content:flex-start;padding-left:16px}
+
+.pr-hist-tag{flex:none}
+.pr-sub{font-weight:700;font-size:14px;margin:16px 0 6px}
+
+.pr-c-h,.pr-trust-big,.pr-letter .what{word-spacing:-.2em}

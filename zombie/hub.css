@@ -1,0 +1,46 @@
+/* 좀비탈출 처음 화면 — 토큰만 쓴다 */
+.h-wrap{max-width:720px}
+.h-hero{padding-top:34px}
+.h-title{font-size:clamp(42px,12vw,72px);line-height:1.02;margin-bottom:14px}
+.h-today{border-color:var(--acc-line)}
+.h-meter{display:flex;align-items:flex-end;gap:16px;margin-bottom:14px}
+.h-big b{display:block;font:700 clamp(64px,20vw,96px)/.9 var(--num);color:var(--acc);letter-spacing:-.03em;text-shadow:0 0 26px color-mix(in srgb,var(--acc) 40%,transparent)}
+.h-big span{font-weight:700;color:var(--muted);font-size:14px}
+.h-side{margin-left:auto;text-align:right;padding-bottom:4px}
+.h-streak{margin:0;font-weight:700}
+.h-streak b{font-size:24px;margin-right:2px}
+.h-side .z-small{margin:2px 0 0;max-width:22ch}
+.h-zh{display:flex;justify-content:space-between;font:700 11px/1 var(--num);letter-spacing:.22em;color:var(--dim);margin:0 0 6px}
+.h-zh span:last-child{color:var(--acc)}
+.h-lights{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(56px,1fr));gap:6px;margin:14px 0 16px;padding:0}
+.h-lights li{display:flex;align-items:center;justify-content:center;gap:5px;font:700 12px/1 var(--num);letter-spacing:.08em;color:var(--dim);padding:7px 9px;border-radius:6px;border:1px solid var(--line);background:var(--ink)}
+.h-lights li i{width:9px;height:9px;border-radius:2px;background:var(--ink-4)}
+.h-lights li.on{color:var(--text);border-color:color-mix(in srgb,var(--c) 50%,var(--line))}
+.h-lights li.on i{background:var(--c);box-shadow:0 0 8px var(--c)}
+.h-go{margin-top:2px}
+
+.h-cat{margin:34px 0 8px}
+.h-cat-h .z-big{font-size:clamp(24px,6.6vw,32px);margin:0 0 4px}
+.h-cat-line{margin:0 0 14px;color:var(--muted);font-weight:700;font-size:15px}
+.h-cat-h .z-big .z-muted{font-family:var(--font);font-size:.5em;font-weight:700;display:block;margin-top:4px;letter-spacing:0}
+.h-apps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.h-app-a{display:flex;align-items:center;gap:14px;padding:14px;border-radius:var(--r);background:var(--ink-2);border:1px solid var(--line);color:var(--text);text-decoration:none;position:relative;overflow:hidden;
+  box-shadow:0 4px 0 #05070A;transition:transform .1s ease,box-shadow .1s ease,border-color .2s}
+.h-app-a::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--acc)}
+.h-app-a:hover{border-color:var(--acc-line)}
+.h-app-a:active{transform:translateY(3px);box-shadow:0 1px 0 #05070A}
+.h-ic{flex:none;width:56px;height:56px;border-radius:14px}
+.h-tx{flex:1;min-width:0;display:grid;gap:2px}
+.h-code{font:700 11px/1 var(--num);letter-spacing:.16em;color:var(--acc)}
+.h-tx b{font:400 20px/1.25 var(--head)}
+.h-tag{color:var(--muted);font-size:14px;line-height:1.45}
+.h-meta{flex:none;font:700 13px/1 var(--num);color:var(--dim);text-align:right;min-width:44px}
+.h-meta.on{color:var(--acc)}
+@media (min-width:720px){.h-apps{grid-template-columns:1fr 1fr}.h-apps li:first-child{grid-column:1/-1}}
+
+.h-timeline .who{flex:none;font:700 11px/1 var(--num);letter-spacing:.1em;padding:4px 6px;border-radius:4px;background:var(--c);color:var(--acc-ink);margin-top:3px}
+.h-offline{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line-2)}
+.h-off-row{display:flex;gap:8px}
+.h-off-row .z-input{flex:1;min-width:0}
+
+.h-tx b{word-spacing:-.2em}

@@ -1,0 +1,61 @@
+/* 도파민 스위치 — 토큰만 쓴다 */
+.sw-tally{margin:4px 0 12px;font-weight:700;color:var(--muted)}
+.sw-tally b{font-family:var(--num);color:var(--acc);font-size:1.15em}
+
+/* ===== 핵심 인터랙션: 좀비→사람 스위치 ===== */
+.sw-switch-wrap{margin:18px 0 6px}
+.sw-switch{--x:0px;position:relative;display:block;width:100%;height:92px;padding:0;border-radius:20px;border:1px solid var(--line-2);background:var(--ink-3);cursor:pointer;touch-action:none;overflow:hidden;
+  box-shadow:0 6px 0 #05070A,inset 0 2px 0 rgba(255,255,255,.03);user-select:none;-webkit-user-select:none}
+.sw-switch:focus-visible{outline-offset:4px}
+.sw-fill{position:absolute;left:0;top:0;bottom:0;width:calc(var(--x) + 92px);background:linear-gradient(90deg,transparent,var(--acc-soft) 40%);border-right:0;pointer-events:none}
+.sw-lab{position:absolute;top:50%;transform:translateY(-50%);font:700 15px/1 var(--num);letter-spacing:.28em;pointer-events:none}
+.sw-lab.l{left:112px;color:var(--dim)}
+.sw-lab.r{right:22px;color:var(--acc);opacity:.85}
+.sw-knob{position:absolute;left:6px;top:6px;width:80px;height:78px;border-radius:15px;background:var(--acc);color:var(--acc-ink);display:grid;place-items:center;
+  transform:translateX(var(--x));box-shadow:0 4px 0 var(--acc-deep),0 0 22px color-mix(in srgb,var(--acc) 45%,transparent);pointer-events:none}
+.sw-knob svg{width:34px;height:34px}
+.sw-switch.anim .sw-knob,.sw-switch.anim .sw-fill{transition:transform .36s cubic-bezier(.3,1.5,.5,1),width .36s cubic-bezier(.3,1.5,.5,1)}
+.sw-switch.on{border-color:var(--acc);background:var(--acc-soft)}
+.sw-switch.on .sw-lab.l{opacity:0}
+.sw-switch.on .sw-lab.r{opacity:0}
+.sw-switch.on::after{content:"사람 모드 ON";position:absolute;left:24px;top:50%;transform:translateY(-50%);font:400 22px/1 var(--head);color:var(--text)}
+.sw-switch:not(.on):not(.drag) .sw-knob{animation:sw-nudge 2.8s ease-in-out 1.2s infinite}
+@keyframes sw-nudge{0%,70%,100%{translate:0 0}80%{translate:14px 0}90%{translate:0 0}}
+.sw-hint{text-align:center;color:var(--muted);font-size:14px;margin:14px 0 0}
+.sw-hint b{color:var(--text)}
+
+/* 단계 화면 */
+.sw-stage{padding:4px 0}
+.sw-stage .z-eyebrow{margin-top:4px}
+.sw-breath{text-align:center;display:grid;gap:12px}
+.sw-breath .z-eyebrow{justify-content:center}
+.sw-orb{width:min(220px,56vw);aspect-ratio:1;margin:6px auto 4px;border-radius:50%;border:2px solid var(--acc-line);display:grid;place-items:center}
+.sw-orb i{width:38%;aspect-ratio:1;border-radius:50%;background:var(--acc);box-shadow:0 0 40px color-mix(in srgb,var(--acc) 60%,transparent);animation:sw-breath 6s ease-in-out infinite}
+@keyframes sw-breath{0%,100%{transform:scale(.7);opacity:.75}45%,55%{transform:scale(2.3);opacity:1}}
+.sw-breath-t{font:400 24px/1.3 var(--head);margin:0}
+
+.sw-card{position:relative;background:var(--ink-2);border:1px solid var(--acc-line);border-radius:18px;padding:22px 20px 26px;margin:6px 0 16px;overflow:hidden;
+  box-shadow:0 6px 0 #05070A}
+.sw-card::before{content:"";position:absolute;inset:0 auto 0 0;width:6px;background:var(--acc)}
+.sw-card-t{font:400 clamp(26px,7.4vw,34px)/1.25 var(--head);margin:14px 0 10px;max-width:15ch}
+.sw-card-d{color:var(--muted);margin:0;max-width:30ch}
+.sw-card::after{content:"30s";position:absolute;right:14px;bottom:6px;font:700 64px/1 var(--num);color:color-mix(in srgb,var(--acc) 18%,transparent);letter-spacing:-.03em;pointer-events:none}
+.sw-card.flip{animation:sw-flip .42s var(--pop)}
+@keyframes sw-flip{0%{transform:perspective(700px) rotateY(-70deg) scale(.96);opacity:.2}100%{transform:none;opacity:1}}
+
+.sw-run{text-align:center}
+.sw-run .z-eyebrow{justify-content:center}
+.sw-run-t{margin:0 0 4px}
+
+.sw-feel{display:grid;gap:10px;margin-top:10px}
+.sw-f{flex-direction:column;align-items:flex-start;gap:2px;min-height:68px;text-align:left;padding:12px 16px}
+.sw-f b{font-size:17px}
+.sw-f span{font-weight:400;font-size:13.5px;color:var(--muted)}
+.sw-f[data-f="2"]{--b-bd:var(--acc-line)}
+.sw-end .z-row{margin-top:16px}
+
+/* 통계 */
+.sw-top li .z-tag{margin-right:6px}
+.sw-sub{font-weight:700;font-size:14px;margin:18px 0 6px}
+
+.sw-card-t,.sw-breath-t,.sw-switch.on::after{word-spacing:-.2em}

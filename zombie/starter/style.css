@@ -1,0 +1,71 @@
+/* 3초 스타터 — 토큰만 쓴다 */
+.st-card{margin-top:6px}
+.st-q{display:block;font:400 22px/1.3 var(--head);margin:0 0 12px}
+.st-q em{font-style:normal;color:var(--acc)}
+.st-task{font-size:18px;min-height:56px;font-weight:700}
+.st-recent{margin:12px 0 4px}
+.st-recent .z-chip{font-weight:500}
+.st-more{margin:12px 0 4px;border-top:1px dashed var(--line-2);padding-top:6px}
+.st-more summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:6px;font-weight:700;list-style:none}
+.st-more summary::-webkit-details-marker{display:none}
+.st-more summary::before{content:"+";font:700 18px/1 var(--num);color:var(--acc);width:16px}
+.st-more[open] summary::before{content:"–"}
+.st-more .z-field{margin-top:6px}
+.st-dur{margin-top:14px;display:grid;gap:8px}
+.st-go{margin-top:6px}
+.st-why{margin:14px 2px 0}
+
+/* 실행 화면 */
+.st-run{padding:6px 0 4px;text-align:center}
+.st-run .z-eyebrow{justify-content:center}
+.st-run-t{font-size:clamp(26px,7vw,36px);margin:0 0 8px}
+.st-first-pill{display:inline-block;margin:0 0 6px;padding:8px 14px;border-radius:999px;border:1px solid var(--acc-line);background:var(--acc-soft);font-weight:700;font-size:15px}
+.st-first-pill b{color:var(--acc);font-family:var(--num);letter-spacing:.08em;font-size:12px;margin-right:6px}
+.st-live-dot{animation:st-blink 1.2s steps(2,start) infinite}
+@keyframes st-blink{to{opacity:.15}}
+.st-watch-n{font:700 clamp(56px,18vw,88px)/1 var(--num);margin:18px 0 6px;color:var(--acc);font-variant-numeric:tabular-nums}
+
+/* 끝 화면 */
+.st-end-card{text-align:center}
+.st-end-card .z-eyebrow{justify-content:center}
+.st-end-sub{color:var(--muted);margin:0 0 16px}
+.st-end-q{display:grid;gap:10px;margin-top:6px}
+.st-end-q .z-label{margin:0}
+.st-end-after{margin-top:10px}
+
+/* 통계 */
+.st-insight{font:400 19px/1.45 var(--head);margin:4px 0 14px}
+.st-insight b{color:var(--acc);font-family:var(--num);font-weight:700}
+.st-top li .z-tag{margin-right:4px}
+
+/* ===== 핵심 인터랙션: 3·2·1 카운트다운 ===== */
+.st-cd{position:fixed;inset:0;z-index:80;display:grid;place-items:center;background:var(--ink);overflow:hidden;
+  background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:28px 28px}
+.st-cd::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--acc)}
+.st-cd-glow{position:absolute;width:120vmin;height:120vmin;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--acc) 22%,transparent),transparent 70%);transform:scale(.6);opacity:.0;pointer-events:none}
+.st-cd-glow.hit{animation:st-glow .85s var(--out)}
+@keyframes st-glow{0%{transform:scale(.55);opacity:1}100%{transform:scale(1.15);opacity:0}}
+.st-cd-ring{position:relative;width:min(82vw,420px);aspect-ratio:1}
+.st-cd-ring svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.st-cd-ring .seg{fill:none;stroke:var(--ink-4);stroke-width:7;transition:stroke .15s}
+.st-cd-ring .seg.on{stroke:var(--acc);filter:drop-shadow(0 0 8px color-mix(in srgb,var(--acc) 70%,transparent))}
+.st-cd-num{position:absolute;inset:0;display:grid;place-items:center}
+.st-cd-num b{grid-area:1/1;font:700 min(56vw,270px)/1 var(--num);color:var(--text);letter-spacing:-.04em;font-variant-numeric:tabular-nums;will-change:transform,opacity,filter}
+.st-cd-num b.in{animation:st-in .62s cubic-bezier(.16,1.3,.3,1) both}
+.st-cd-num b.out{animation:st-out .3s ease-in both}
+.st-cd-num b.go{font:400 min(30vw,150px)/1 var(--head);color:var(--acc);text-shadow:0 0 36px color-mix(in srgb,var(--acc) 60%,transparent)}
+@keyframes st-in{0%{transform:scale(1.7) translateY(-4%);opacity:0;filter:blur(10px)}55%{opacity:1;filter:blur(0)}100%{transform:scale(1);opacity:1}}
+@keyframes st-out{to{transform:scale(.7) translateY(10%);opacity:0;filter:blur(6px)}}
+.st-cd-task{position:absolute;left:16px;right:16px;bottom:max(11vh,72px);text-align:center;margin:0}
+.st-cd-task b{display:block;font:400 clamp(22px,6vw,30px)/1.3 var(--head)}
+.st-cd-task span{color:var(--muted);font-weight:700;font-size:14.5px}
+.st-cd-x{position:absolute;top:calc(14px + env(safe-area-inset-top));right:14px}
+.st-cd.wipe{animation:st-wipe .42s cubic-bezier(.7,0,.84,0) forwards}
+@keyframes st-wipe{to{clip-path:inset(0 0 100% 0)}}
+.st-cd{clip-path:inset(0 0 0 0)}
+.st-shake{animation:st-shake .36s}
+@keyframes st-shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+
+.st-coach{margin-top:14px}
+
+.st-q,.st-cd-task b,.st-insight{word-spacing:-.2em}

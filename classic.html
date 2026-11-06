@@ -98,6 +98,15 @@
   .hall .intro .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-right:6px;vertical-align:1px;animation:pulse 1.8s ease-in-out infinite}
   .hall .intro.seen .dot{animation:none;opacity:.5}
   @media (max-width:380px){.hall .row{flex-wrap:wrap}.hall .cnt{flex-basis:100%}}
+  /* 도파민 좀비탈출 — 새 관 (2026-11-06 msg 11426) */
+  .hall.zombie{background:#0A0C11;color:#EEF1F6;border-color:rgba(198,255,61,.55);box-shadow:0 0 26px rgba(198,255,61,.18);
+    background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:22px 22px}
+  .hall.zombie .k{font-family:'IBM Plex Mono',monospace;color:#C6FF3D}
+  .hall.zombie h2{color:#EEF1F6}
+  .hall.zombie h2 em{font-style:normal;color:#C6FF3D}
+  .hall.zombie .d,.hall.zombie .cnt{color:#A6AFBF}
+  .hall.zombie .in{background:#C6FF3D;color:#0A0C11;box-shadow:0 3px 0 #5f7a1d}
+  .hall.zombie .deco{position:absolute;right:18px;top:18px;font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#0A0C11;background:#C6FF3D;padding:5px 7px;border-radius:4px}
   /* 온보딩 안내 줄 + 3D 첫 화면 링크 (2026-09-06) */
   .guides{text-align:center;font-size:12.5px;color:var(--sub);margin:4px 0 0;line-height:2}
   .guides a{color:var(--ink);text-decoration:none;border-bottom:1px dashed rgba(255,255,255,.3);padding-bottom:1px}
@@ -186,7 +195,7 @@
 
   <div id="today"></div>
 
-  <div class="halls-label">— 세 개의 관, 세 가지 재미 —</div>
+  <div class="halls-label">— 네 개의 관, 네 가지 재미 —</div>
 
   <!-- 관 카드: 카드 전체를 누르면 입장, 「앱 소개」 단추는 1분 안내(온보딩)로. a 안에 a 를 못 넣어 div + data-href (2026-09-20) -->
   <div class="hall quiz" data-href="quiz.html" role="link" tabindex="0">
@@ -214,6 +223,15 @@
     <div class="d">같이 하면 더 재밌고, 하고 나면 더 가까워지는<br>둘만의 놀이 돗자리.</div>
     <div class="row"><span class="cnt" data-cnt="friend"></span>
       <span class="btns"><a class="intro" data-onb="pk_onboarded" href="/onboarding/friend/"><span class="dot"></span>앱 소개</a><a class="in" href="friend.html">놀러가기 →</a></span></div>
+  </div>
+
+  <div class="hall zombie" data-href="/zombie/" role="link" tabindex="0">
+    <span class="deco">NEW</span>
+    <span class="k">ZOMBIE · ESCAPE</span>
+    <h2>도파민 <em>좀비탈출</em></h2>
+    <div class="d">쇼츠 대신 30초, 미루기 대신 3초.<br>스스로 시작하게 돕는 작은 앱 5개.</div>
+    <div class="row"><span class="cnt">행동 개시 앱 5개 · 무료 · 가입 없음</span>
+      <span class="btns"><a class="in" href="/zombie/">탈출 시작 →</a></span></div>
   </div>
 
   <div class="guides">처음이세요? 1분 안내 → <a href="/onboarding/quiz/">🕯️ 서재</a> · <a href="/onboarding/test/">⚗️ 실험실</a> · <a href="/onboarding/friend/">🧺 피크닉</a></div>
