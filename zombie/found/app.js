@@ -61,7 +61,7 @@
     const strip = w => String(w || '').replace(/^(힘|지혜|체력|매력|의지) · /, '');
     if (!L.length) return out;
     const first = L[0], fm = new Date(first.t).getHours();
-    if (fm < 9) out.push({ k: 'grit', w: '아침 ' + timeLabel(first.t) + '에 첫 행동을 시작했어요', src: code(first.m) + ' ' + timeLabel(first.t) });
+    if (fm >= 5 && fm < 9) out.push({ k: 'grit', w: '아침 ' + timeLabel(first.t) + '에 첫 행동을 시작했어요', src: code(first.m) + ' ' + timeLabel(first.t) });
     const st = L.filter(e => e.m === 'starter');
     if (st.length) { const m = /^시작: (.+?)(?: \(\d+분\))?$/.exec(st[0].w || ''); out.push({ k: kindOf(st[0]), w: '미루던 ' + q(m ? m[1] : '일') + ' 3초 만에 시작했어요', src: code('starter') + ' ' + timeLabel(st[0].t) }); }
     const sw = L.filter(e => e.m === 'switch').length;
