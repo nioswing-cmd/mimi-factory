@@ -1,0 +1,76 @@
+/* B-08 도파민 저금통 — 토큰만 쓴다 */
+.bk-jarcard{border-color:var(--acc-line)}
+.bk-jarrow{display:flex;gap:14px;align-items:flex-end}
+.bk-jarwrap{flex:none;width:min(46%,190px)}
+.bk-jar{display:block;width:100%;height:auto;overflow:visible}
+.bk-glass{fill:rgba(255,255,255,.025);stroke:var(--line-2);stroke-width:2.5}
+.bk-level{fill:color-mix(in srgb,var(--acc) 12%,transparent);transition:y .8s var(--out)}
+.bk-line{stroke:color-mix(in srgb,var(--acc) 55%,transparent);stroke-width:1.5;stroke-dasharray:5 5}
+.bk-shine{fill:none;stroke:rgba(255,255,255,.09);stroke-width:5;stroke-linecap:round}
+.bk-lid{fill:var(--ink-4);stroke:var(--line-2);stroke-width:1.5}
+.bk-slot{fill:#05070A}
+.bk-jartxt{font:700 13px var(--font);fill:var(--dim)}
+.bk-c .face{fill:var(--acc)}
+.bk-c .side{fill:color-mix(in srgb,var(--acc) 45%,#05070A)}
+.bk-c .rim{fill:none;stroke:color-mix(in srgb,var(--acc) 40%,#0A0C11);stroke-width:1.3}
+.bk-c.auto .face{fill:#C9D1DE}
+.bk-c.auto .side{fill:#6C7891}
+.bk-c.auto .rim{stroke:#8590A3}
+.bk-c.hide{opacity:0}
+.bk-totals{flex:1;min-width:0;padding-bottom:6px}
+.bk-k{margin:0 0 4px;font:700 12px/1.2 var(--num);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.bk-big{margin:0 0 12px;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.bk-big b{font-size:clamp(34px,10vw,48px);line-height:1;color:var(--acc);text-shadow:0 0 22px color-mix(in srgb,var(--acc) 40%,transparent);letter-spacing:-.02em}
+.bk-big span{font-weight:700;color:var(--muted)}
+.bk-mini{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.bk-mini li{display:flex;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:8px;background:var(--ink);border:1px solid var(--line);font-size:13.5px}
+.bk-mini span{color:var(--muted)}
+.bk-mini b{font-family:var(--num)}
+#bk-fill{margin-top:14px}
+.bk-shelf{list-style:none;margin:12px 0 0;padding:12px 0 0;border-top:1px dashed var(--line-2);display:flex;flex-wrap:wrap;gap:8px}
+.bk-shelf li{display:flex;align-items:center;gap:8px;padding:6px 10px 6px 6px;border-radius:10px;background:var(--ink);border:1px solid var(--acc-line);font-size:12.5px}
+.bk-shelf b{font-size:13px}
+.bk-shelf span:last-child{color:var(--muted)}
+.bk-mj{width:16px;height:20px;border-radius:3px 3px 5px 5px;background:var(--acc);box-shadow:inset 0 4px 0 color-mix(in srgb,var(--acc) 50%,#000)}
+
+.bk-n{display:inline-grid;place-items:center;width:22px;height:22px;margin-right:8px;border-radius:5px;background:var(--acc);color:var(--acc-ink);font:700 12.5px/1 var(--num);vertical-align:1px}
+.bk-add .z-field{margin-bottom:16px}
+.bk-add .z-input{margin-top:8px}
+.bk-won summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:6px;font-weight:700;font-size:14px;color:var(--muted)}
+.bk-won .z-input{max-width:220px}
+
+/* ===== 핵심 인터랙션: 동전 ===== */
+.bk-dock{display:grid;justify-items:center;gap:10px;padding:18px 12px 20px;margin-top:4px;border-radius:14px;border:1px dashed var(--line-2);background:var(--ink)}
+.bk-dock-t{margin:0;text-align:center;font-weight:700;font-size:14px;color:var(--muted)}
+.bk-coin{--sz:84px;position:relative;width:var(--sz);height:var(--sz);border-radius:50%;border:0;padding:0;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;
+  display:grid;place-content:center;gap:0;color:var(--acc-ink);
+  background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--acc) 55%,#fff),var(--acc) 42%,color-mix(in srgb,var(--acc) 70%,#000) 100%);
+  box-shadow:0 6px 0 color-mix(in srgb,var(--acc) 40%,#05070A),inset 0 0 0 5px color-mix(in srgb,var(--acc) 70%,#0A0C11),inset 0 0 0 7px color-mix(in srgb,var(--acc) 80%,#fff);
+  filter:saturate(.25) brightness(.7);transition:filter .25s,transform .12s}
+.bk-coin[data-size="s"]{--sz:70px}.bk-coin[data-size="l"]{--sz:96px}.bk-coin[data-size="xl"]{--sz:108px}
+.bk-coin .v{font:700 26px/1 var(--num);letter-spacing:-.02em}
+.bk-coin .u{font:700 12px/1 var(--font)}
+.bk-coin.ready{filter:none;animation:bk-idle 2.4s ease-in-out infinite}
+.bk-coin.grab{cursor:grabbing;animation:none;transform:scale(1.06)}
+.bk-coin.spent{opacity:0;transform:scale(.4)!important;transition:none}
+.bk-coin:focus-visible{outline-offset:6px;border-radius:50%}
+@keyframes bk-idle{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.bk-shake{animation:bk-shake .36s!important}
+@keyframes bk-shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.bk-fly{position:fixed;z-index:89;pointer-events:none;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font:700 22px/1 var(--num);color:var(--acc-ink);
+  background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--acc) 55%,#fff),var(--acc) 45%,color-mix(in srgb,var(--acc) 70%,#000));box-shadow:0 0 22px color-mix(in srgb,var(--acc) 60%,transparent)}
+
+.bk-sw{margin:0;line-height:1.7}
+.bk-sw b{color:var(--acc)}
+.bk-tops{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bk-top{list-style:none;margin:0;padding:10px;border-radius:12px;background:var(--ink);border:1px solid var(--line);display:grid;gap:6px;align-content:start}
+.bk-top .cap{font:700 11.5px/1.2 var(--num);letter-spacing:.14em;color:var(--muted)}
+.bk-top li:not(.cap):not(.z-empty){display:flex;align-items:center;gap:8px;font-size:14px}
+.bk-top .rk{flex:none;width:20px;height:20px;border-radius:4px;display:grid;place-items:center;font:700 11.5px/1 var(--num);background:var(--ink-4);color:var(--text)}
+.bk-top li:nth-child(2) .rk{background:var(--acc);color:var(--acc-ink)}
+.bk-top .t{flex:1;min-width:0}
+.bk-top b{font-size:13px;color:var(--muted)}
+.bk-sub{margin:16px 0 4px;font-size:14px}
+.bk-dot{flex:none;width:12px;height:12px;margin-top:5px;border-radius:50%;background:var(--acc)}
+.bk-dot.auto{background:#C9D1DE}
+@media (max-width:380px){.bk-tops{grid-template-columns:1fr}}

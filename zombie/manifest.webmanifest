@@ -2,7 +2,7 @@
  "id": "/zombie/",
  "name": "도파민 좀비탈출 — 미미팩토리",
  "short_name": "좀비탈출",
- "description": "쇼츠·알림을 기다리는 대신 스스로 동기를 만들고 바로 움직이게 돕는 작은 앱 모음. 첫 관은 «행동 개시» 앱 5개 — 가입 없이 무료로 쓰고, 기록은 내 폰에만 남습니다.",
+ "description": "쇼츠·알림을 기다리는 대신 스스로 동기를 만들고 바로 움직이게 돕는 작은 앱 모음. «행동 개시» 5개와 «성취» 5개 — 가입 없이 무료로 쓰고, 기록은 내 폰에만 남습니다.",
  "lang": "ko",
  "dir": "ltr",
  "start_url": "/zombie/?from=home",
@@ -38,6 +38,19 @@
  ],
  "shortcuts": [
   {
+   "name": "3초 스타터",
+   "short_name": "3초 스타터",
+   "description": "미루고 싶을 때 3·2·1, 그냥 시작.",
+   "url": "/zombie/starter/?from=shortcut",
+   "icons": [
+    {
+     "src": "starter/icon-192.png?v=1",
+     "sizes": "192x192",
+     "type": "image/png"
+    }
+   ]
+  },
+  {
    "name": "도파민 스위치",
    "short_name": "도파민 스위치",
    "description": "쇼츠 켜고 싶을 때, 30초만 다른 걸 해요.",
@@ -51,13 +64,26 @@
    ]
   },
   {
-   "name": "3초 스타터",
-   "short_name": "3초 스타터",
-   "description": "미루고 싶을 때 3·2·1, 그냥 시작.",
-   "url": "/zombie/starter/?from=shortcut",
+   "name": "도파민 RPG",
+   "short_name": "도파민 RPG",
+   "description": "현실에서 한 일이 캐릭터의 경험치가 돼요.",
+   "url": "/zombie/rpg/?from=shortcut",
    "icons": [
     {
-     "src": "starter/icon-192.png?v=1",
+     "src": "rpg/icon-192.png?v=1",
+     "sizes": "192x192",
+     "type": "image/png"
+    }
+   ]
+  },
+  {
+   "name": "성장 시각화",
+   "short_name": "성장 시각화",
+   "description": "해낸 만큼 나무가 자라고 도시에 불이 켜져요.",
+   "url": "/zombie/grow/?from=shortcut",
+   "icons": [
+    {
+     "src": "grow/icon-192.png?v=1",
      "sizes": "192x192",
      "type": "image/png"
     }
@@ -77,13 +103,13 @@
    ]
   },
   {
-   "name": "행동 룰렛",
-   "short_name": "행동 룰렛",
-   "description": "고르기 귀찮을 땐 돌려서 나온 걸 해요.",
-   "url": "/zombie/roulette/?from=shortcut",
+   "name": "도파민 저금통",
+   "short_name": "저금통",
+   "description": "참은 즉각 보상을 동전처럼 저금해요.",
+   "url": "/zombie/bank/?from=shortcut",
    "icons": [
     {
-     "src": "roulette/icon-192.png?v=1",
+     "src": "bank/icon-192.png?v=1",
      "sizes": "192x192",
      "type": "image/png"
     }

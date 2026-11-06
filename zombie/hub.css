@@ -44,3 +44,12 @@
 .h-off-row .z-input{flex:1;min-width:0}
 
 .h-tx b{word-spacing:-.2em}
+
+/* «성취» 분류 머리의 지금 성장 줄 (2차) */
+.h-cat-sum:empty{display:none}
+.h-sum{list-style:none;margin:0 0 14px;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.h-sum a{display:grid;gap:3px;min-height:58px;padding:9px 10px 8px;border-radius:10px;border:1px solid var(--line);border-top:3px solid var(--c);background:var(--ink);color:var(--text);text-decoration:none}
+.h-sum a:hover{border-color:color-mix(in srgb,var(--c) 50%,var(--line));border-top-color:var(--c)}
+.h-sum b{font-size:16px;line-height:1.15;color:var(--c);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.h-sum span{font-size:11.5px;line-height:1.3;color:var(--muted)}
+@media (max-width:420px){.h-sum{grid-template-columns:repeat(2,minmax(0,1fr))}}

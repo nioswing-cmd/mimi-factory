@@ -21,7 +21,11 @@
 
   /* ---------- 저장소 ---------- */
   const DEF_SET = { sound: true, vib: true, fx: 'auto', motion: 'system' };
-  function blank() { return { v: 1, created: dayKey(), log: [], mods: {}, set: Object.assign({}, DEF_SET) }; }
+  /* 형식 번호: v 는 1 그대로(1차 코드가 v===1 만 읽으므로 올리면 옛 창이 기록을 빈 것으로 본다 — 절대 바꾸지 않는다).
+     rev = 개정 번호(추가만 한 변경). rev 2 = 2차 성취 앱 모듈 칸 추가. 옛 기록·옛 백업(rev 없음)은 그대로 읽고 rev 2 로 올린다. */
+  const REV = 2;
+  function blank() { return { v: 1, rev: REV, gen: uid(), created: dayKey(), log: [], mods: {}, set: Object.assign({}, DEF_SET) }; }
+  /* gen = 세대 표 — 모두 지우기·백업 교체 때마다 새로. 다른 창이 옛 세대 기록을 들고 저장하면 합치지 않고 멈춘다(지운 기록이 되살아나지 않게) */
   function valid(s) { return s && typeof s === 'object' && s.v === 1 && Array.isArray(s.log) && s.mods && typeof s.mods === 'object'; }
   /* 모듈 자료 모양 — 불러올 때·가져올 때 같은 규칙으로 검사(F3) */
   const str = x => typeof x === 'string';
@@ -31,11 +35,19 @@
     starter: { recent: str, starts: o => str(o.task) },
     split: { missions: m => str(m.title) && Array.isArray(m.pieces) && m.pieces.length > 0 && m.pieces.every(p => p && str(p.t)), history: o => str(o.title) },
     roulette: { items: it => str(it.name) && it.name.trim().length > 0, spins: o => str(o.name) },
-    promise: { active: o => str(o.what) && num(Number(o.due)), hist: o => str(o.what) && num(Number(o.due)) }
+    promise: { active: o => str(o.what) && num(Number(o.due)), hist: o => str(o.what) && num(Number(o.due)) },
+    /* 2차 «성취» (2026-11-06 msg 11476) — 모듈 칸만 더했다. 공통 기록 줄(log) 모양은 그대로 */
+    rpg: { acts: o => str(o.w) && str(o.k) },
+    bank: { coins: o => str(o.what) && num(o.min) },
+    beat: { recs: o => str(o.d) && num(o.v) },
+    found: { stars: o => str(o.w) && str(o.k) }
   };
   const isObj = x => x && typeof x === 'object' && !Array.isArray(x);
   function normalize(s, strict) {
     if (!valid(s)) throw new Error('shape');
+    s.rev = Math.max(REV, num(s.rev) ? Math.floor(s.rev) : 1);
+    if (typeof s.gen !== 'string' || !s.gen) s.gen = 'g0';   // 1차 기록(세대 표 없음)은 모두 같은 세대로 본다
+    if (typeof s.created !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(s.created)) s.created = dayKey();
     s.set = Object.assign({}, DEF_SET, isObj(s.set) ? s.set : {});
     s.seen = isObj(s.seen) ? s.seen : {};
     const validLog = e => isObj(e) && typeof e.m === 'string' && num(e.t) && (e.w === undefined || str(e.w));
@@ -62,6 +74,7 @@
     s.mods = mods;
     return s;
   }
+  let locked = false;   // 망가진 원문을 보관하지 못했으면 true — 덮어쓰지 않는다
   let S = load();
   let saveOk = true;
   function load() {
@@ -69,7 +82,17 @@
       const raw = localStorage.getItem(KEY);
       if (!raw) return blank();
       return normalize(JSON.parse(raw), false);
-    } catch (e) { return blank(); }
+    } catch (e) { if (!keepBroken()) locked = true; return blank(); }
+  }
+  /* 읽을 수 없는 저장본은 덮어쓰기 전에 원문을 따로 남긴다(zb:v1:broken, 이미 다른 원문이 있으면 시각을 붙인 새 칸) — 고칠 수 있게.
+     남기지 못하면(저장 공간 부족 등) 덮어쓰지 않고 저장을 멈춘다 */
+  function keepBroken() {
+    try {
+      const raw = localStorage.getItem(KEY); if (!raw) return true;
+      const old = localStorage.getItem(KEY + ':broken');
+      if (old === raw) return true;
+      localStorage.setItem(old ? KEY + ':broken:' + Date.now() : KEY + ':broken', raw); return true;
+    } catch (e) { return false; }
   }
   /* 🔴 여러 창(허브·앱·홈 화면 아이콘)이 같은 저장소를 쓴다 — 통째로 덮지 않고 «최신 저장본 + 이 창에서 바꾼 것»을 합쳐 쓴다(F2).
      기록 줄은 id 로 합치고, 모듈 자료는 이 창이 바꾼 모듈만 내 것으로, 설정은 바꿨을 때만 내 것으로. 한 번의 동기 실행 안에서 읽고-합치고-쓴다. */
@@ -77,8 +100,9 @@
   const lkey = e => e.id || (e.t + '|' + e.m + '|' + e.w);
   function merged() {
     let latest = null;
-    try { const raw = localStorage.getItem(KEY); latest = raw ? normalize(JSON.parse(raw), false) : null; } catch (e) { latest = null; }
+    try { const raw = localStorage.getItem(KEY); latest = raw ? normalize(JSON.parse(raw), false) : null; } catch (e) { if (!keepBroken()) { const err = new Error('broken'); err.broken = true; throw err; } latest = null; }
     if (!latest) return JSON.parse(JSON.stringify(S));
+    if (latest.gen !== S.gen) { const err = new Error('gen'); err.gen = true; err.latest = latest; throw err; }
     const out = latest;
     const map = new Map(out.log.map(e => [lkey(e), e]));
     S.log.forEach(e => { const k = lkey(e); if (!map.has(k) || dirty.log.has(k)) map.set(k, e); });
@@ -90,8 +114,17 @@
   }
   function save(replace) {
     let next;
-    try { next = replace ? S : merged(); localStorage.setItem(KEY, JSON.stringify(next)); }
-    catch (e) { if (saveOk) toast('기록이 저장되지 않았어요. 저장 공간이나 사생활 보호 모드를 확인해 주세요.', 4200); saveOk = false; return false; }
+    try { if (locked && !keepBroken()) { const err = new Error('broken'); err.broken = true; throw err; } locked = false; next = replace ? S : merged(); localStorage.setItem(KEY, JSON.stringify(next)); }
+    catch (e) {
+      if (e && e.broken) { toast('저장된 기록 파일이 망가져 따로 보관하려 했지만 공간이 없어요. 덮어쓰지 않았어요 — 저장 공간을 비운 뒤 다시 열어 주세요', 5200); return false; }
+      if (e && e.gen) {   // 다른 창에서 모두 지우기·백업 교체가 있었다 — 옛 기록으로 덮지 않고 새 상태를 불러온다
+        S = e.latest; dirty.mods.clear(); dirty.set = false; dirty.log.clear(); applyMotion();
+        toast('다른 창에서 기록이 바뀌었어요(지우기·백업). 방금 것은 저장하지 않았어요 — 한 번 더 해 주세요', 4600);
+        setTimeout(() => { emit('change', { remote: true }); renderRecord(); }, 0);
+        return false;
+      }
+      if (saveOk) toast('기록이 저장되지 않았어요. 저장 공간이나 사생활 보호 모드를 확인해 주세요.', 4200); saveOk = false; return false;
+    }
     if (next !== S) S = JSON.parse(JSON.stringify(next));
     dirty.mods.clear(); dirty.set = false; dirty.log.clear(); saveOk = true; return true;
   }
@@ -101,7 +134,7 @@
   window.addEventListener('storage', e => { if (e.key === KEY) { S = load(); applyMotion(); emit('change', { remote: true }); renderRecord(); } });
 
   function store(slug) { slug = slug || META.slug; const v = S.mods[slug]; return v && typeof v === 'object' ? JSON.parse(JSON.stringify(v)) : {}; }
-  function saveStore(slug, obj) { if (typeof slug === 'object') { obj = slug; slug = META.slug; } const prev = S.mods[slug], wasDirty = dirty.mods.has(slug); S.mods[slug] = JSON.parse(JSON.stringify(obj)); dirty.mods.add(slug); if (!save()) { S.mods[slug] = prev; if (!wasDirty) dirty.mods.delete(slug); return false; } emit('change', { remote: false }); return true; }
+  function saveStore(slug, obj) { if (typeof slug === 'object') { obj = slug; slug = META.slug; } const prev = S.mods[slug], wasDirty = dirty.mods.has(slug); S.mods[slug] = JSON.parse(JSON.stringify(obj)); dirty.mods.add(slug); const S0 = S; if (!save()) { if (S === S0) { S.mods[slug] = prev; if (!wasDirty) dirty.mods.delete(slug); } return false; } emit('change', { remote: false }); return true; }
   function log(slug) { const L = S.log.slice(); return slug ? L.filter(e => e.m === slug) : L; }
   function countOn(day, slug) { return S.log.reduce((n, e) => n + (e.d === day && (!slug || e.m === slug) ? 1 : 0), 0); }
   function activeDays() { return new Set(S.log.map(e => e.d)).size; }
@@ -112,19 +145,73 @@
     return n;
   }
 
+  /* ---------- 성장 기록 읽기 (2차 «성취» 앱 공용 · 읽기만, 기록 형식은 그대로) ----------
+     모든 기록 줄을 «현실 행동의 종류» 다섯으로 나눈다 — 낱말 규칙만(AI 없음). 색은 1차 다섯 앱 신호색을 그대로 빌린다.
+     ① 글 맨 앞이 «힘 · » 처럼 능력치 이름이면 그 종류(도파민 RPG 가 이렇게 적는다)
+     ② 저금통·약속 지킴 = 의지  ③ 낱말 규칙(몸 → 관계 → 배움 → 생활 → 의지 순)  ④ 그래도 없으면 앱마다 정한 기본값 */
+  const KINDS = [
+    { k: 'body', name: '힘', en: 'STR', what: '몸·운동', color: '#FF8A5C' },
+    { k: 'mind', name: '지혜', en: 'INT', what: '배움·일·창작', color: '#3DE8FF' },
+    { k: 'life', name: '체력', en: 'VIT', what: '생활·돌봄·회복', color: '#C6FF3D' },
+    { k: 'people', name: '매력', en: 'CHA', what: '관계·도움', color: '#FF7AC0' },
+    { k: 'grit', name: '의지', en: 'WIL', what: '참기·시작·약속', color: '#FFC23D' }
+  ];
+  const KIND = {}; KINDS.forEach(x => { KIND[x.k] = x; });
+  const KIND_BY_NAME = {}; KINDS.forEach(x => { KIND_BY_NAME[x.name] = x.k; });
+  const KW = [
+    ['body', /운동|걷기|걸었|걸어|산책|뛰었|뛰기|달리|러닝|조깅|스트레칭|스쿼트|팔굽|푸시업|플랭크|요가|계단|헬스|자전거|수영|춤|체조|줄넘기|등산|윗몸|턱걸이|맨손/],
+    ['people', /연락|전화|문자|카톡|고마|감사|인사|도와|도움|돕|친구|가족|엄마|아빠|부모|동료|대화|칭찬|안부|선물|함께|사과했|들어 ?줬|들어 ?줌/],
+    ['mind', /책(?!상)|독서|읽|공부|배우|배움|강의|단어|외우|일기|글쓰기|글 ?쓰|기획|보고서|과제|코딩|문서|업무|작업|그림|악기|연습|복습|메모|강좌|외국어|영어|집중/],
+    ['life', /물 ?한|물 ?마|물을|물 ?\d+ ?잔|물 ?잔|잠|일찍 ?자|잤|식사|밥|요리|청소|정리|설거지|빨래|샤워|씻|양치|장보|분리수거|이불|환기|창문|약 ?먹|비타민|과일|채소|햇볕|햇빛|낮잠|쉬었/],
+    ['grit', /참았|참기|참음|안 ?보|미루|약속|시작|충동|끊|버티|버텼|쇼츠|SNS|유튜브|릴스|게임|폰을|폰 ?내려|배달|야식|과자|술/]
+  ];
+  const SLUG_KIND = { switch: 'grit', starter: 'grit', split: 'mind', roulette: 'life', promise: 'grit', hub: 'life', rpg: 'grit', grow: 'life', bank: 'grit', beat: 'body', found: 'mind' };
+  function kindOf(e) {
+    const w = String((e && e.w) || '');
+    const m = /^(힘|지혜|체력|매력|의지) · /.exec(w); if (m) return KIND_BY_NAME[m[1]];
+    if (e.m === 'bank' || e.m === 'switch' || /^약속 (지킴|절반)/.test(w)) return 'grit';
+    for (const [k, re] of KW) if (re.test(w)) return k;
+    return SLUG_KIND[e.m] || 'grit';
+  }
+  /* 경험치 — 하루 10번째 행동까지는 10(+해 본 분 5분마다 1, 최대 +6), 11번째부터는 2(몰아서 쌓기 막기 · 보상 줄이기).
+     다음 레벨까지 필요한 양은 레벨마다 25% 늘어난다(60 → 75 → 95 …). */
+  const XP_FULL = 10;
+  function xpOf(e, nth) { return nth > XP_FULL ? 2 : 10 + Math.min(6, Math.floor((e.n || 0) / 5)); }
+  function needXp(L) { return Math.max(5, Math.round(60 * Math.pow(1.25, L - 1) / 5) * 5); }
+  function levelOf(xp) { let L = 1, rest = xp; while (rest >= needXp(L) && L < 999) { rest -= needXp(L); L++; } return { level: L, into: rest, need: needXp(L) }; }
+  function sortedLog() { return S.log.slice().sort((a, b) => a.t - b.t); }
+  /* 지금까지(또는 그 날까지)의 성장 — 줄마다 몇 경험치였는지도 돌려준다 */
+  function growth(upTo) {
+    const per = {}, stats = {}, kinds = {}; KINDS.forEach(x => { stats[x.k] = 0; kinds[x.k] = 0; });
+    let xp = 0, n = 0; const rows = [];
+    sortedLog().forEach(e => {
+      if (upTo && e.d > upTo) return;
+      const nth = (per[e.d] = (per[e.d] || 0) + 1); const x = xpOf(e, nth); const k = kindOf(e);
+      xp += x; n++; stats[k] += x; kinds[k]++; rows.push({ e, xp: x, k, nth });
+    });
+    return Object.assign({ xp, n, stats, kinds, rows, days: Object.keys(per).length }, levelOf(xp));
+  }
+  /* 하루 요약 — 그 날(또는 그 날 hh:mm 까지)의 행동 수·종류 수·해 본 분·앱 수 */
+  function daySum(day, untilMinOfDay) {
+    const L = S.log.filter(e => e.d === day && (untilMinOfDay == null || (new Date(e.t).getHours() * 60 + new Date(e.t).getMinutes()) <= untilMinOfDay));
+    const ks = {}; L.forEach(e => { const k = kindOf(e); ks[k] = (ks[k] || 0) + 1; });
+    return { n: L.length, kinds: Object.keys(ks).length, byKind: ks, min: Math.round(L.reduce((a, e) => a + (e.n || 0), 0) * 10) / 10, apps: new Set(L.map(e => e.m)).size, list: L.slice().sort((a, b) => a.t - b.t) };
+  }
+
   /* ---------- 오늘 한 일 기록 (모든 모듈 공통 입구) ---------- */
   function done(slug, what, opt) {
     if (typeof slug !== 'string' || !META.mods || !(slug in (META.mods || {}))) { opt = what; what = slug; slug = META.slug; }
     opt = opt || {};
     const t = Date.now();
-    const e = { t, d: dayKey(t), m: slug, w: String(what || '').slice(0, 160), id: uid() };
+    const e = { t, d: dayKey(t), m: slug, w: String(what || '').slice(0, 160), id: typeof opt.id === 'string' && opt.id ? opt.id.slice(0, 40) : uid() };   // id 를 미리 정해 모듈 자료에 함께 담을 수 있게(2차)
     if (typeof opt.min === 'number' && isFinite(opt.min) && opt.min > 0) e.n = Math.round(opt.min * 10) / 10;
     const prevMod = S.mods[slug];
     const wasDirty = dirty.mods.has(slug);
     if (opt.data !== undefined) { S.mods[slug] = JSON.parse(JSON.stringify(opt.data)); dirty.mods.add(slug); }   // 모듈 기록과 공통 기록을 한 번에 저장
     S.log.push(e); dirty.log.add(lkey(e));
     if (S.log.length > MAX_LOG) S.log = S.log.slice(-MAX_LOG);
-    if (!save()) { S.log = S.log.filter(x => x !== e); dirty.log.delete(lkey(e)); if (opt.data !== undefined) { S.mods[slug] = prevMod; if (!wasDirty) dirty.mods.delete(slug); } return { entry: null, failed: true, today: countOn(dayKey(), slug), all: countOn(dayKey()) }; }
+    const S0 = S;
+    if (!save()) { if (S === S0) { S.log = S.log.filter(x => x !== e); dirty.log.delete(lkey(e)); if (opt.data !== undefined) { S.mods[slug] = prevMod; if (!wasDirty) dirty.mods.delete(slug); } } return { entry: null, failed: true, today: countOn(dayKey(), slug), all: countOn(dayKey()) }; }
     const today = countOn(e.d, slug), all = countOn(e.d);
     if (!opt.quiet) celebrate(opt.anchor || null, { big: opt.big !== false, label: opt.label });
     announce((opt.say || '기록했어요') + ' — 오늘 ' + all + '번째 행동');
@@ -133,12 +220,20 @@
   }
 
   /* 같은 기록 한 줄을 고친다(계속해서 늘어난 시간 등) — 새 줄을 만들지 않는다(F9) */
-  function amend(id, patch) {
+  /* 2차: opt.data 를 주면 모듈 자료와 그 줄을 «한 번에» 저장(따로 저장하다 하나만 실패해 어긋나는 일 막기).
+     min 이 0 이면 해 본 시간을 지운다(undefined 는 그대로 둠). 실패하면 메모리도 되돌린다. */
+  function amend(id, patch, opt) {
     const e = S.log.find(x => x.id === id); if (!e) return false;
-    if (patch && typeof patch.w === 'string') e.w = patch.w.slice(0, 160);
-    if (patch && typeof patch.min === 'number' && isFinite(patch.min) && patch.min > 0) e.n = Math.round(patch.min * 10) / 10;
-    dirty.log.add(lkey(e)); if (!save()) return false; renderRecord(); emit('change', { remote: false }); return true;
+    patch = patch || {}; opt = opt || {};
+    const before = Object.assign({}, e), slug = opt.slug || META.slug, prevMod = S.mods[slug], wasDirty = dirty.mods.has(slug);
+    if (typeof patch.w === 'string') e.w = patch.w.slice(0, 160);
+    if (typeof patch.min === 'number' && isFinite(patch.min)) { if (patch.min > 0) e.n = Math.round(patch.min * 10) / 10; else delete e.n; }
+    if (opt.data !== undefined) { S.mods[slug] = JSON.parse(JSON.stringify(opt.data)); dirty.mods.add(slug); }
+    dirty.log.add(lkey(e)); const S0 = S;
+    if (!save()) { if (S === S0) { Object.keys(e).forEach(k => { delete e[k]; }); Object.assign(e, before); if (opt.data !== undefined) { S.mods[slug] = prevMod; if (!wasDirty) dirty.mods.delete(slug); } } return false; }
+    renderRecord(); emit('change', { remote: false }); return true;
   }
+  function hasLog(id) { return S.log.some(x => x.id === id); }
 
   /* ---------- 접근성: 화면 읽기 알림 ---------- */
   function announce(msg) { const el = doc.getElementById('sr-live'); if (!el) return; el.textContent = ''; setTimeout(() => { el.textContent = msg; }, 40); }
@@ -215,6 +310,14 @@
     body().appendChild(p); setTimeout(() => p.remove(), 950);
   }
   function popEl(el) { if (!el || reduced()) return; el.classList.remove('z-pop'); void el.offsetWidth; el.classList.add('z-pop'); }
+  /* 숫자 굴려 올리기(2차 공용) — 움직임 줄이기면 바로 끝값 */
+  function countUp(el, from, to, ms, fmtFn) {
+    if (!el) return; const f = fmtFn || (v => String(Math.round(v)));
+    if (el._cu) cancelAnimationFrame(el._cu);
+    if (reduced() || from === to || !ms) { el.textContent = f(to); return; }
+    const t0 = performance.now();
+    (function fr(t) { const p = Math.min(1, (t - t0) / ms), e = 1 - Math.pow(1 - p, 3); el.textContent = f(from + (to - from) * e); if (p < 1) el._cu = requestAnimationFrame(fr); else el._cu = 0; })(t0);
+  }
 
   /* ---------- DOM 도우미 ---------- */
   function h(tag, attrs) {
@@ -223,7 +326,7 @@
       const v = attrs[k]; if (v == null || v === false) continue;
       if (k === 'class') el.className = v; else if (k === 'text') el.textContent = v; else if (k === 'html') el.innerHTML = v;
       else if (k.startsWith('on') && typeof v === 'function') el.addEventListener(k.slice(2), v);
-      else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v);
+      else if (k === 'style' && typeof v === 'object') { for (const p in v) { if (p.startsWith('--')) el.style.setProperty(p, v[p]); else el.style[p] = v[p]; } }   // --변수도 들어가게(Object.assign 은 --c 를 버린다)
       else el.setAttribute(k, v === true ? '' : v);
     }
     for (let i = 2; i < arguments.length; i++) add(el, arguments[i]);
@@ -419,7 +522,7 @@
       const fr = new FileReader();
       fr.onload = async () => {
         let cand;
-        try { cand = JSON.parse(fr.result); delete cand.app; delete cand.exported; cand = normalize(cand, true); }
+        try { cand = JSON.parse(fr.result); delete cand.app; delete cand.exported; cand = normalize(cand, true); cand.gen = uid(); }
         catch (e) { toast('이 파일은 좀비탈출 백업이 아니거나 망가졌어요. 지금 기록은 그대로예요', 3600); res(false); return; }
         const ok = await confirmBox('백업으로 바꿀까요?', '지금 이 폰의 모든 앱 기록·하던 미션·봉인한 약속이 백업 파일 내용(기록 ' + cand.log.length + '개)으로 «바뀌어요». 지금 기록을 남기려면 먼저 «백업 파일 저장»을 하세요.', '백업으로 바꾸기');
         if (!ok) { toast('불러오기를 취소했어요'); res(false); return; }
@@ -472,7 +575,7 @@
     return { close, el: box };
   }
   function seen(key) { S.seen = S.seen || {}; return !!S.seen[key]; }
-  function markSeen(key, v) { S.seen = S.seen || {}; if (v === false) delete S.seen[key]; else S.seen[key] = 1; save(); }
+  function markSeen(key, v) { S.seen = S.seen || {}; S.seen[key] = v === false ? 0 : 1; save(); }   // 지우지 않고 0 — 합칠 때 저장본의 1 을 덮게(F9)
 
   /* ---------- 시작 ---------- */
   function boot() {
@@ -485,8 +588,10 @@
 
   window.Z = {
     meta: META, base: BASE, dayKey, addDays, dayLabel, timeLabel, fmt,
-    store, save: saveStore, log, countOn, activeDays, streak, done, amend, on, emit,
-    celebrate, confetti, popEl, sound, buzz, tone: (f, t0, d, ty, v) => { if (S.set.sound) try { tone(f, t0 || 0, d || 0.1, ty, v); } catch (e) { } }, toast, announce, reduced, fxLevel,
+    store, save: saveStore, log, countOn, activeDays, streak, done, amend, hasLog, on, emit,
+    kinds: KINDS.map(x => Object.assign({}, x)), kind: k => Object.assign({}, KIND[k] || KIND.grit), kindOf, growth, daySum, levelOf, needXp, xpOf,
+    get created() { return S.created; },
+    celebrate, confetti, popEl, countUp, sound, buzz, tone: (f, t0, d, ty, v) => { if (S.set.sound) try { tone(f, t0 || 0, d || 0.1, ty, v); } catch (e) { } }, toast, announce, reduced, fxLevel,
     h, esc, $, $$, shuffle, pick, daily, hash, uid, icon: ICON,
     sheet, confirm: confirmBox, timer, countdown, bars, week, wake,
     settings: openSettings, install, coach, seen, markSeen, isStandalone, renderRecord,

@@ -1,0 +1,76 @@
+/* B-10 성취 발견기 — 토큰만 쓴다 */
+.fd-main{border-color:var(--acc-line);overflow-x:clip}   /* 밀어 넘긴 카드가 화면 밖 가로 스크롤을 만들지 않게 */
+.fd-lead{margin:0 0 12px;color:var(--muted)}
+.fd-lead b{color:var(--text)}
+.fd-clues{list-style:none;margin:0 0 16px;padding:12px;border-radius:12px;border:1px dashed var(--line-2);background:var(--ink);display:grid;gap:8px}
+.fd-clues li{display:flex;gap:8px;align-items:flex-start;font-size:14.5px}
+.fd-clues .z-kind{margin-top:2px;flex:none}
+.fd-ccap{font:700 11.5px/1.2 var(--num);letter-spacing:.14em;color:var(--acc)}
+
+.fd-tray{list-style:none;margin:0 0 12px;padding:0;display:flex;gap:8px;align-items:center;justify-content:center}
+.fd-tray li{width:34px;height:34px;border-radius:9px;border:1.5px dashed var(--line-2);display:grid;place-items:center}
+.fd-tray li svg{width:20px;height:20px;fill:var(--ink-4)}
+.fd-tray li.on{border-style:solid;border-color:color-mix(in srgb,var(--k) 60%,var(--line));background:color-mix(in srgb,var(--k) 14%,var(--ink))}
+.fd-tray li.on svg{fill:var(--k);filter:drop-shadow(0 0 5px var(--k))}
+.fd-tray li.more{border:0;width:auto;font:700 13px/1 var(--num);color:var(--muted)}
+
+/* ===== 핵심 인터랙션: 질문 카드 ===== */
+.fd-deck{position:relative;height:250px;margin:4px 0 6px;border-radius:18px;outline-offset:6px}
+.fd-card{--d:0;--yes:0;--no:0;position:absolute;inset:0;display:grid;align-content:start;gap:12px;padding:20px 18px;border-radius:18px;background:var(--ink-3);
+  border:1px solid color-mix(in srgb,var(--k) 40%,var(--line-2));box-shadow:0 6px 0 #05070A;
+  transform:translateY(calc(var(--d) * 12px)) scale(calc(1 - var(--d) * .05));transition:transform .3s var(--out),opacity .3s;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.fd-card.d1{background:color-mix(in srgb,var(--ink-3) 82%,var(--ink))}
+.fd-card.d2{background:var(--ink-2)}
+.fd-card.d1>*{opacity:.32}
+.fd-card.d2>*{opacity:0}
+.fd-card.top{cursor:grab;z-index:3;background:linear-gradient(160deg,color-mix(in srgb,var(--k) 12%,var(--ink-3)),var(--ink-3) 55%)}
+.fd-card.grab{cursor:grabbing;transition:none}
+.fd-card .z-kind{justify-self:start}
+.fd-q{margin:6px 0 0;font:400 clamp(21px,5.8vw,26px)/1.4 var(--head);word-spacing:-.2em}
+.fd-no-n{position:absolute;left:18px;bottom:14px;margin:0;font:700 12px/1 var(--num);letter-spacing:.18em;color:var(--dim)}
+.fd-stamp{position:absolute;top:70px;font:700 26px/1 var(--num);padding:6px 12px;border-radius:8px;border:4px solid;transform:rotate(-12deg);pointer-events:none}
+.fd-stamp.yes{left:16px;color:var(--acc);border-color:var(--acc);opacity:var(--yes);font-family:var(--font)}
+.fd-stamp.no{right:16px;color:#A6AFBF;border-color:#A6AFBF;opacity:var(--no);transform:rotate(12deg);font-family:var(--font);font-size:22px}
+.fd-hint{text-align:center;margin:6px 0 10px}
+.fd-yn{display:grid;grid-template-columns:1fr 1.3fr;gap:10px}
+.fd-yn .z-btn{min-height:56px;font-size:16.5px}
+.fd-answer{display:grid;gap:8px;padding:16px;border-radius:16px;background:var(--ink);border:1px solid var(--acc-line);animation:z-in .3s var(--out)}
+.fd-aq{margin:0 0 4px;font:400 18px/1.4 var(--head);word-spacing:-.2em;color:var(--muted)}
+.fd-sugg .z-chip{font-weight:500}
+.fd-kind{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:2px 0 6px}
+
+/* 결과 증명 카드 */
+.fd-ticket{position:relative;padding:20px 18px 16px;border-radius:16px;background:var(--ink);border:1px solid var(--acc-line);box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 10%,transparent);outline:none;overflow:hidden}
+.fd-ticket::before,.fd-ticket::after{content:"";position:absolute;top:58px;width:18px;height:18px;border-radius:50%;background:var(--ink-3);border:1px solid var(--acc-line)}
+.fd-ticket::before{left:-10px}.fd-ticket::after{right:-10px}
+.fd-rk{margin:0 0 6px;font:700 11.5px/1 var(--num);letter-spacing:.22em;color:var(--acc)}
+.fd-rt{margin:0 0 16px;padding-bottom:14px;border-bottom:1.5px dashed var(--line-2);font:400 24px/1.25 var(--head);word-spacing:-.2em}
+.fd-rlist{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.fd-rlist li{display:flex;gap:12px;align-items:flex-start;animation:fd-in .5s var(--pop) both;animation-delay:calc(var(--i,0) * .18s + .1s)}
+@keyframes fd-in{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
+.fd-rs{flex:none;width:30px;height:30px}
+.fd-rs svg{width:100%;height:100%;fill:var(--k);filter:drop-shadow(0 0 6px var(--k))}
+.fd-rb{flex:1;min-width:0}
+.fd-rw{margin:0 0 4px;font-weight:700;font-size:16.5px;line-height:1.45}
+.fd-rsrc{margin:0;font-size:12.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center}
+.fd-ract{margin-top:12px}
+
+/* 별자리 */
+.fd-sky{position:relative;aspect-ratio:100/62;border-radius:12px;overflow:hidden;background:#07090E;border:1px solid var(--line);
+  background-image:radial-gradient(1px 1px at 12% 22%,rgba(255,255,255,.35),transparent),radial-gradient(1px 1px at 68% 14%,rgba(255,255,255,.3),transparent),radial-gradient(1px 1px at 84% 70%,rgba(255,255,255,.25),transparent),radial-gradient(1px 1px at 30% 80%,rgba(255,255,255,.3),transparent),radial-gradient(1px 1px at 50% 45%,rgba(255,255,255,.2),transparent)}
+.fd-lines{position:absolute;inset:0;width:100%;height:100%}
+.fd-lines line{stroke:color-mix(in srgb,var(--acc) 45%,transparent);stroke-width:.25;stroke-dasharray:.8 .8}
+.fd-star{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;padding:11px;border:0;background:none;cursor:pointer;border-radius:50%}
+.fd-star svg{width:100%;height:100%;fill:var(--k);filter:drop-shadow(0 0 4px var(--k));transition:transform .2s var(--pop)}
+.fd-star:hover svg,.fd-star.sel svg{transform:scale(1.45)}
+.fd-star.recent svg{animation:fd-tw 2.6s ease-in-out infinite}
+.fd-star.new svg{animation:fd-born .9s var(--pop) both;animation-delay:calc(var(--i,0) * .18s + .2s)}
+@keyframes fd-tw{50%{opacity:.55;transform:scale(.85)}}
+@keyframes fd-born{0%{transform:scale(0) rotate(-90deg);opacity:0}60%{transform:scale(1.9) rotate(10deg);opacity:1}100%{transform:none}}
+.fd-empty{position:absolute;inset:0;width:auto;height:auto;margin:0;display:grid;place-items:center;padding:16px;text-align:center;color:var(--dim);font-size:14px;cursor:default}
+.fd-starinfo{margin:10px 0 8px;min-height:24px;font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center}
+.fd-starinfo b{color:var(--text)}
+.fd-kinds{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.fd-extra{margin-top:14px;padding-top:12px;border-top:1.5px dashed var(--line-2);display:grid;gap:6px}
+.fd-xcap{margin:0;font:700 11.5px/1.3 var(--num);letter-spacing:.12em;color:var(--muted)}
+.fd-x{margin:0;font-size:14.5px;display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}

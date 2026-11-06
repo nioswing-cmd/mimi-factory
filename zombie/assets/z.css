@@ -17,7 +17,7 @@
   --line:#272E3D; --line-2:#36405A;
   --text:#EEF1F6; --muted:#A6AFBF; --dim:#8590A3;
   /* 분류 신호색 6 (먹색 위 대비 AA 이상) */
-  --c-start:#C6FF3D; --c-achieve:#FFC23D; --c-curious:#3DE8FF; --c-create:#FF8A5C; --c-focus:#9DB4FF; --c-real:#FF7AC0;
+  --c-start:#C6FF3D; --c-achieve:#B49CFF; --c-curious:#3DE8FF; --c-create:#FF8A5C; --c-focus:#9DB4FF; --c-real:#FF7AC0;
   /* 모듈색 — 페이지마다 <html style="--acc:…"> 로 바뀐다 */
   --acc:#C6FF3D; --acc-ink:#0A0C11;
   --acc-deep:color-mix(in srgb,var(--acc) 50%,#000);
@@ -309,3 +309,12 @@ html.z-reduce *,html.z-reduce *::before,html.z-reduce *::after{animation-duratio
 
 /* Orbit 글꼴은 낱말 사이가 넓다 — 제목류는 조금 좁힌다 */
 .z-title,.z-big,.z-sheet h2,.z-ring .lbl span{word-spacing:-.2em}
+
+/* ---------- 행동 종류 꼬리표 (2차 성취 앱 공용 — Z.kinds 다섯 색 = 1차 앱 신호색을 빌림) ---------- */
+.z-kind{--k:var(--acc);display:inline-flex;align-items:center;gap:5px;font:700 11.5px/1 var(--num);letter-spacing:.08em;padding:4px 7px 4px 6px;border-radius:4px;border:1px solid color-mix(in srgb,var(--k) 55%,var(--line));color:var(--k);background:color-mix(in srgb,var(--k) 10%,var(--ink));white-space:nowrap}
+.z-kind::before{content:"";width:7px;height:7px;border-radius:2px;background:var(--k)}
+.z-kind b{font-family:var(--font);font-weight:700;letter-spacing:0;color:var(--text)}
+/* 성취 앱이 읽어 온 다른 앱 기록 줄의 앱 번호표 */
+.z-src{flex:none;font:700 10.5px/1 var(--num);letter-spacing:.08em;padding:4px 5px;border-radius:4px;background:var(--c,var(--ink-4));color:var(--acc-ink);margin-top:3px}
+/* 큰 숫자가 굴러 올라갈 때 자리 흔들림 막기 */
+.z-tnum{font-variant-numeric:tabular-nums}

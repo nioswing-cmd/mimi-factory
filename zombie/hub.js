@@ -35,6 +35,23 @@
       const m = MODS[e.m] || MODS.hub;
       tl.appendChild(h('li', null, h('span', { class: 'who', style: { '--c': m.color, background: m.color }, text: m.code }), h('span', { class: 't', text: e.w || m.name }), h('span', { class: 'm', text: timeLabel(e.t) })));
     });
+    // «성취» 분류 머리 — 모든 앱 기록에서 읽은 지금 성장(레벨·잎·저금·어제 대비). 빈 칸 없이: 기록이 없어도 «Lv 1 · 잎 0» 으로 보인다
+    const sum = document.querySelector('[data-cat-sum="achieve"]');
+    if (sum) {
+      const g = Z.growth();
+      const bank = (Z.store('bank').coins || []).reduce((a, c) => a + (Number(c.min) || 0), 0) + Z.log('switch').length;   // 저금통과 같은 셈: 스위치로 넘긴 충동 = 1분 은빛 동전
+      const y = Z.daySum(Z.addDays(today, -1)).n;
+      const items = [
+        ['rpg', 'Lv ' + g.level, '도파민 RPG 레벨'],
+        ['grow', '잎 ' + g.n, '성장 시각화 잎 수'],
+        ['bank', bank >= 60 ? Math.floor(bank / 60) + '시간 ' + (bank % 60 ? Math.round(bank % 60) + '분' : '') : Math.round(bank) + '분', '저금통에 모은 시간'],
+        ['beat', n + ' : ' + y, n > y ? '오늘 : 어제 — 이기는 중' : '오늘 : 어제의 나']
+      ];
+      sum.innerHTML = '';
+      const ul = h('ul', { class: 'h-sum', 'aria-label': '지금 내 성장' });
+      items.forEach(([s, v, t]) => { const m = MODS[s]; if (!m) return; ul.appendChild(h('li', { style: { '--c': m.color } }, h('a', { href: s + '/' }, h('b', { class: 'z-num', text: v.trim() }), h('span', { text: t })))); });
+      sum.appendChild(ul);
+    }
     // 7일
     const wk = week(null);
     bars($('#h-week-chart'), wk, { title: '최근 7일 모든 앱 행동 수', unit: '번' });

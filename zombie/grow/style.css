@@ -1,0 +1,37 @@
+/* B-07 성장 시각화 — 토큰만 쓴다 */
+.gr-stage{border-color:var(--acc-line);padding:16px 14px}
+.gr-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.gr-k{margin:0 0 4px;font:700 11.5px/1 var(--num);letter-spacing:.18em;color:var(--acc)}
+.gr-title{margin:0;font:400 26px/1.2 var(--head);word-spacing:-.2em}
+.gr-mode .z-chip{min-width:64px}
+.gr-cv-wrap{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#0B0E15}
+.gr-cv-wrap canvas{display:block;width:100%;touch-action:manipulation;cursor:pointer}
+.gr-tip{position:absolute;z-index:3;max-width:min(260px,86%);padding:8px 10px;border-radius:8px;background:var(--ink-3);border:1px solid color-mix(in srgb,var(--k,var(--acc)) 60%,var(--line));box-shadow:0 8px 24px rgba(0,0,0,.5);font-size:13px;line-height:1.4;pointer-events:none}
+.gr-tip b{display:block;font:700 11.5px/1.3 var(--num);letter-spacing:.06em;color:var(--k,var(--acc));margin-bottom:2px}
+.gr-count{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;margin:12px 2px 6px}
+.gr-count b{font-size:40px;line-height:1;color:var(--acc);text-shadow:0 0 22px color-mix(in srgb,var(--acc) 40%,transparent)}
+.gr-count>span:not(.gr-rest){font-weight:700;color:var(--muted)}
+.gr-rest{flex-basis:100%;font-size:13.5px;color:var(--muted)}
+.gr-time{display:flex;align-items:center;gap:10px;margin:6px 0 10px}
+.gr-play{flex:none}
+.gr-play svg{width:14px;height:14px;color:var(--acc)}
+.gr-slide{flex:1;min-width:0;display:flex;align-items:center;gap:8px}
+.gr-slide output{flex:none;min-width:58px;text-align:right;font:700 13px/1 var(--num);color:var(--muted)}
+.gr-legend{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+
+.gr-form{display:grid;gap:8px}
+.gr-ex .z-chip{font-weight:500}
+.gr-guess{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;margin:2px 0}
+.gr-kbtn{min-height:44px;padding:0 10px;border:0;background:none;color:var(--acc);font-weight:700;font-size:13px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.gr-go svg{width:20px;height:20px}
+
+.gr-ms-row{list-style:none;margin:0 0 12px;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.gr-ms-row li{display:grid;gap:2px;padding:9px 8px;border-radius:10px;border:1px dashed var(--line-2);text-align:center}
+.gr-ms-row li b{font-size:18px;color:var(--dim)}
+.gr-ms-row li span{font-size:11.5px;color:var(--dim)}
+.gr-ms-row li.on{border-style:solid;border-color:var(--acc-line);background:var(--acc-soft)}
+.gr-ms-row li.on b{color:var(--acc)}
+.gr-ms-row li.on span{color:var(--text)}
+.gr-dist{position:absolute;left:8px;top:8px;z-index:2;display:flex;align-items:center;gap:4px;padding:2px;border-radius:10px;background:color-mix(in srgb,var(--ink) 85%,transparent);border:1px solid var(--line-2);font:700 12px/1 var(--num);color:var(--muted)}
+.gr-dbtn{min-width:44px;min-height:44px;border:0;background:none;color:var(--text);font:700 20px/1 var(--num);cursor:pointer;border-radius:8px}
+.gr-dbtn:disabled{opacity:.3;cursor:default}

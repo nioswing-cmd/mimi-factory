@@ -1,0 +1,39 @@
+{
+ "id": "/zombie/grow/",
+ "name": "성장 시각화 · 좀비탈출",
+ "short_name": "성장 시각화",
+ "description": "좀비탈출 앱에서 해낸 행동 하나하나가 나무의 잎과 도시의 불빛이 됩니다. 날짜를 되감아 자라 온 모습을 보고, 오늘 잘한 일 한 줄로 물을 줄 수 있어요. 쉰 날은 시들지 않고 그대로 기다립니다.",
+ "lang": "ko",
+ "dir": "ltr",
+ "start_url": "/zombie/grow/?from=home",
+ "scope": "/zombie/grow/",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#0A0C11",
+ "theme_color": "#0A0C11",
+ "categories": [
+  "lifestyle",
+  "productivity",
+  "health"
+ ],
+ "icons": [
+  {
+   "src": "icon-192.png?v=1",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icon-512.png?v=1",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icon-maskable-512.png?v=1",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}
