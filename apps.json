@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-08",
+  "updated": "2026-11-09",
   "apps": [
     {
       "id": "삼체",
@@ -2687,6 +2687,20 @@
       "premium": "apps/새의_선물_quiz.html",
       "desc": "1969년 남도의 소읍, 열두 살 진희가 자신을 ‘보여지는 나’와 ‘바라보는 나’로 쪼개고 어른들의 연애와 비밀을 전부 지켜본 은희경 『새의 선",
       "cover": "covers/새의_선물.webp",
+      "cover_style": "3-인쇄질감"
+    },
+    {
+      "id": "원미동_사람들",
+      "type": "quiz",
+      "title": "원미동 사람들",
+      "author": "양귀자",
+      "date": "2026-11-09",
+      "color1": "#7aa6ff",
+      "color2": "#b78bf5",
+      "teaser": "apps/원미동_사람들_teaser.html",
+      "premium": "apps/원미동_사람들_quiz.html",
+      "desc": "1987년 양귀자의 연작소설 『원미동 사람들』 열한 편을 30문항 반복 마스터 퀴즈로 익히고, 인과의 사슬·개념 카드·편별 요약·약점 복습까지 ",
+      "cover": "covers/원미동_사람들.webp",
       "cover_style": "3-인쇄질감"
     }
   ]
