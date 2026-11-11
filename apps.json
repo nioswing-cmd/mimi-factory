@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-10",
+  "updated": "2026-11-11",
   "apps": [
     {
       "id": "삼체",
@@ -2729,6 +2729,20 @@
       "premium": "apps/달과_6펜스_quiz.html",
       "desc": "마흔의 주식 중개인이 쪽지 한 장만 남기고 가족을 버린 뒤 런던·파리·타히티를 거쳐 걸작을 그리고 스스로 태우기까지, 서머싯 몸 『달과 6펜스』",
       "cover": "covers/달과_6펜스.webp",
+      "cover_style": "3-인쇄질감"
+    },
+    {
+      "id": "수레바퀴_아래서",
+      "type": "quiz",
+      "title": "수레바퀴 아래서",
+      "author": "헤르만 헤세",
+      "date": "2026-11-11",
+      "color1": "#ffd36e",
+      "color2": "#ff8a5c",
+      "teaser": "apps/수레바퀴_아래서_teaser.html",
+      "premium": "apps/수레바퀴_아래서_quiz.html",
+      "desc": "주 전체 2등으로 수도원 신학교에 들어간 소년이 왜 2년 뒤 가을 강물에서 발견되는가 — 헤르만 헤세 『수레바퀴 아래서』 전 7장을 30문항 반",
+      "cover": "covers/수레바퀴_아래서.webp",
       "cover_style": "3-인쇄질감"
     }
   ]
