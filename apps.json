@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-11",
+  "updated": "2026-11-12",
   "apps": [
     {
       "id": "삼체",
@@ -2743,6 +2743,20 @@
       "premium": "apps/수레바퀴_아래서_quiz.html",
       "desc": "주 전체 2등으로 수도원 신학교에 들어간 소년이 왜 2년 뒤 가을 강물에서 발견되는가 — 헤르만 헤세 『수레바퀴 아래서』 전 7장을 30문항 반",
       "cover": "covers/수레바퀴_아래서.webp",
+      "cover_style": "3-인쇄질감"
+    },
+    {
+      "id": "희랍어_시간",
+      "type": "quiz",
+      "title": "희랍어 시간",
+      "author": "한강",
+      "date": "2026-11-12",
+      "color1": "#8affc1",
+      "color2": "#5ee7d8",
+      "teaser": "apps/희랍어_시간_teaser.html",
+      "premium": "apps/희랍어_시간_quiz.html",
+      "desc": "말을 잃은 여자와 빛을 잃어가는 남자가 고대 희랍어 교실에서 만나 손바닥 글씨로 닿기까지 — 한강 『희랍어 시간』의 침묵·중간태·상실을 30문항",
+      "cover": "covers/희랍어_시간.webp",
       "cover_style": "3-인쇄질감"
     }
   ]
