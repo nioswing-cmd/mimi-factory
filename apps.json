@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-12",
+  "updated": "2026-11-13",
   "apps": [
     {
       "id": "삼체",
@@ -2757,6 +2757,20 @@
       "premium": "apps/희랍어_시간_quiz.html",
       "desc": "말을 잃은 여자와 빛을 잃어가는 남자가 고대 희랍어 교실에서 만나 손바닥 글씨로 닿기까지 — 한강 『희랍어 시간』의 침묵·중간태·상실을 30문항",
       "cover": "covers/희랍어_시간.webp",
+      "cover_style": "3-인쇄질감"
+    },
+    {
+      "id": "체호프_단편선",
+      "type": "quiz",
+      "title": "체호프 단편선",
+      "author": "안톤 파블로비치 체호프",
+      "date": "2026-11-13",
+      "color1": "#c3a1ff",
+      "color2": "#ff8ad0",
+      "teaser": "apps/체호프_단편선_teaser.html",
+      "premium": "apps/체호프_단편선_quiz.html",
+      "desc": "재채기 한 번에 죽는 관리부터 15년을 독방에서 보낸 변호사까지, 민음사판 『체호프 단편선』 10편의 핵심을 30문항 반복 마스터 퀴즈와 완독 ",
+      "cover": "covers/체호프_단편선.webp",
       "cover_style": "3-인쇄질감"
     }
   ]
