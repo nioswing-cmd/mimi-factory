@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-16",
+  "updated": "2026-11-17",
   "apps": [
     {
       "id": "삼체",
@@ -2812,6 +2812,20 @@
       "teaser": "apps/나는_소망한다_내게_금지된_것을_teaser.html",
       "premium": "apps/나는_소망한다_내게_금지된_것을_quiz.html",
       "desc": "법이 응징하지 못한 폭력 앞에서 스스로 ‘신의 대리인’을 자처한 여자 — 양귀자 『나는 소망한다 내게 금지된 것을』의 인물·구조·논쟁을 30문항"
+    },
+    {
+      "id": "스토너",
+      "type": "quiz",
+      "title": "스토너",
+      "author": "존 윌리엄스",
+      "date": "2026-11-17",
+      "color1": "#ffd36e",
+      "color2": "#ff8a5c",
+      "teaser": "apps/스토너_teaser.html",
+      "premium": "apps/스토너_quiz.html",
+      "desc": "농가의 아들이 소네트 한 편에 붙들려 평생 조교수로 머문 생애 — 존 윌리엄스 『스토너』의 인물·구조·상징·논쟁을 30문항 반복 마스터 퀴즈와 ",
+      "cover": "covers/스토너.webp",
+      "cover_style": "3-인쇄질감"
     }
   ]
 }
