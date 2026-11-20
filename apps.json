@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19",
+  "updated": "2026-11-20",
   "apps": [
     {
       "id": "삼체",
@@ -2853,6 +2853,20 @@
       "premium": "apps/너무_시끄러운_고독_quiz.html",
       "desc": "35년간 지하실에서 폐지를 압축해 온 한탸의 이야기 — 보후밀 흐라발 『너무 시끄러운 고독』의 인물·상징·논쟁을 30문항 반복 마스터 퀴즈와 완",
       "cover": "covers/너무_시끄러운_고독.webp",
+      "cover_style": "3-인쇄질감"
+    },
+    {
+      "id": "인생",
+      "type": "quiz",
+      "title": "인생",
+      "author": "위화",
+      "date": "2026-11-20",
+      "color1": "#7aa6ff",
+      "color2": "#b78bf5",
+      "teaser": "apps/인생_teaser.html",
+      "premium": "apps/인생_quiz.html",
+      "desc": "가산을 날린 도련님이 일곱 번의 장례를 치르고 늙은 소 한 마리와 남는 이야기 — 위화 『인생』의 인물·사건·역사·논쟁을 30문항 반복 마스터 ",
+      "cover": "covers/인생.webp",
       "cover_style": "3-인쇄질감"
     }
   ]
