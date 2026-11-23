@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-22",
+  "updated": "2026-11-23",
   "apps": [
     {
       "id": "삼체",
@@ -2895,6 +2895,20 @@
       "premium": "apps/픽션들_quiz.html",
       "desc": "보르헤스 『픽션들』 열일곱 편의 미로 — 가짜 백과사전부터 무한한 도서관까지, 30문항 반복 마스터 퀴즈와 완독 인포그래픽 리포트로 익히는 단일",
       "cover": "covers/픽션들.webp",
+      "cover_style": "3-인쇄질감"
+    },
+    {
+      "id": "고래",
+      "type": "quiz",
+      "title": "고래",
+      "author": "천명관",
+      "date": "2026-11-23",
+      "color1": "#ffd36e",
+      "color2": "#ff8a5c",
+      "teaser": "apps/고래_teaser.html",
+      "premium": "apps/고래_quiz.html",
+      "desc": "산골 소녀가 본 고래 한 마리에서 폐허의 벽돌공장까지 — 천명관 『고래』의 세 여인과 그 서사를 30문항 반복 마스터 퀴즈와 완독 인포그래픽 리",
+      "cover": "covers/고래.webp",
       "cover_style": "3-인쇄질감"
     }
   ]
