@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-24",
+  "updated": "2026-11-25",
   "apps": [
     {
       "id": "삼체",
@@ -2921,7 +2921,23 @@
       "color2": "#5ee7d8",
       "teaser": "apps/비행운_teaser.html",
       "premium": "apps/비행운_quiz.html",
-      "desc": "김애란 소설집 『비행운』 여덟 편의 인물·사건·논쟁을 30문항 반복 마스터 퀴즈로 익히고, 인과의 사슬·핵심 개념 8·수록작별 요약까지 완독 인"
+      "desc": "김애란 소설집 『비행운』 여덟 편의 인물·사건·논쟁을 30문항 반복 마스터 퀴즈로 익히고, 인과의 사슬·핵심 개념 8·수록작별 요약까지 완독 인",
+      "cover": "covers/비행운.webp",
+      "cover_style": "3-인쇄질감"
+    },
+    {
+      "id": "담론",
+      "type": "quiz",
+      "title": "담론",
+      "author": "신영복",
+      "date": "2026-11-25",
+      "color1": "#c3a1ff",
+      "color2": "#ff8ad0",
+      "teaser": "apps/담론_teaser.html",
+      "premium": "apps/담론_quiz.html",
+      "desc": "신영복의 마지막 강의 『담론』 25강을 — 손때 묻은 그릇(주역)부터 함께 맞는 비, 씨 과실을 남기는 석과불식까지 — 30문항 반복 마스터 퀴",
+      "cover": "covers/담론.webp",
+      "cover_style": "3-인쇄질감"
     }
   ]
 }
