@@ -2952,6 +2952,20 @@
       "desc": "행복은 삶의 목적이 아니라 생존을 위한 도구였다 — 서은국 『행복의 기원』의 9장 논증을 다윈에서 오컴까지 30문항으로 따라가며, 쾌감의 두 기",
       "cover": "covers/행복의_기원.webp",
       "cover_style": "2-미니멀"
+    },
+    {
+      "id": "빛과_실",
+      "type": "quiz",
+      "title": "빛과 실",
+      "author": "한강",
+      "date": "2026-11-27",
+      "color1": "#5ee7d8",
+      "color2": "#7aa6ff",
+      "teaser": "apps/빛과_실_teaser.html",
+      "premium": "apps/빛과_실_quiz.html",
+      "desc": "한강의 노벨문학상 수상 강연문과 열두 편의 글을 담은 산문집 『빛과 실』을, 구두 상자 속 여덟 살의 시부터 금실까지 30문항으로 익히고 완독 ",
+      "cover": "covers/빛과_실.webp",
+      "cover_style": "3-인쇄질감"
     }
   ]
 }
