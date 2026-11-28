@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-27",
+  "updated": "2026-11-28",
   "apps": [
     {
       "id": "삼체",
@@ -2965,6 +2965,20 @@
       "premium": "apps/빛과_실_quiz.html",
       "desc": "한강의 노벨문학상 수상 강연문과 열두 편의 글을 담은 산문집 『빛과 실』을, 구두 상자 속 여덟 살의 시부터 금실까지 30문항으로 익히고 완독 ",
       "cover": "covers/빛과_실.webp",
+      "cover_style": "3-인쇄질감"
+    },
+    {
+      "id": "가호",
+      "type": "quiz",
+      "title": "가호",
+      "author": "무라카미 하루키",
+      "date": "2026-11-28",
+      "color1": "#ff8ad0",
+      "color2": "#b78bf5",
+      "teaser": "apps/가호_teaser.html",
+      "premium": "apps/가호_quiz.html",
+      "desc": "무라카미 하루키가 처음으로 여성을 단독 주인공으로 세운 2026년 장편 『가호』 — 소개팅 자리의 모욕에서 마루 밑 개미핥기, 어머니에게 빙의한",
+      "cover": "covers/가호.webp",
       "cover_style": "3-인쇄질감"
     }
   ]
